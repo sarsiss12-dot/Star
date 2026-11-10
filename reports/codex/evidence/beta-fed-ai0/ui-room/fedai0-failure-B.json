@@ -1,0 +1,233 @@
+{
+  "feds": [
+    {
+      "id": 1,
+      "name": "Kutupyıldızı Ortak Cephe",
+      "type": "bilimsel",
+      "charter": {
+        "defense": "vote",
+        "offense": "vote",
+        "admission": "allies",
+        "ballot": "equal"
+      },
+      "leader": 0,
+      "founder": 0,
+      "members": [
+        1,
+        0,
+        2
+      ],
+      "laws": {},
+      "fund": {
+        "ala": 0,
+        "ene": 0
+      },
+      "treasury": 0,
+      "founded": 900,
+      "typeSince": 900,
+      "dutySince": {
+        "defense": 0,
+        "offense": 0
+      },
+      "invites": {},
+      "decisions": {},
+      "dutyConsent": {},
+      "cohesion": 70,
+      "nextVote": 1080,
+      "politicsVersion": 96,
+      "agenda": {
+        "v": 1,
+        "next": 3,
+        "items": [
+          {
+            "id": 1,
+            "by": 2,
+            "kind": "law",
+            "law": "arastirma",
+            "options": {
+              "repeal": false
+            },
+            "key": "[\"law\",\"arastirma\",false,\"\",null,null,null,null,null]",
+            "created": 900,
+            "expires": 1260,
+            "status": "waiting",
+            "position": 1
+          },
+          {
+            "id": 2,
+            "by": 1,
+            "kind": "law",
+            "law": "ticaret",
+            "options": {
+              "repeal": false
+            },
+            "key": "[\"law\",\"ticaret\",false,\"\",null,null,null,null,null]",
+            "created": 900,
+            "expires": 1260,
+            "status": "waiting",
+            "position": 2
+          }
+        ],
+        "history": []
+      },
+      "vote": {
+        "id": 1,
+        "kind": "basic",
+        "law": "savunma",
+        "repeal": false,
+        "opened": 900,
+        "expires": 990,
+        "proposer": 1,
+        "yes": [],
+        "no": [],
+        "eligible": [
+          1,
+          0,
+          2
+        ],
+        "ballotSnapshot": {
+          "mode": "equal",
+          "modern": true,
+          "source": "opened",
+          "weights": {
+            "0": 1,
+            "1": 1,
+            "2": 1
+          }
+        }
+      },
+      "lastVote": null,
+      "identityType": "bilimsel",
+      "emblem": {
+        "v": 1,
+        "shape": "ring",
+        "symbol": "orbit",
+        "pattern": "rays",
+        "primary": "#5cf5d6",
+        "secondary": "#f5c25c",
+        "federation": true
+      }
+    }
+  ],
+  "proposals": {
+    "v": 1,
+    "next": 2,
+    "proposals": [
+      {
+        "id": 1,
+        "by": 0,
+        "type": "askeri",
+        "ballot": "equal",
+        "members": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "opened": 900,
+        "expires": 1050,
+        "status": "founded",
+        "replies": {
+          "0": {
+            "status": "accepted",
+            "terms": "askeri|equal|0,1,2,3,4,6|r1",
+            "day": 900,
+            "why": "Güncel kuruluş şartlarını önerdi"
+          },
+          "1": {
+            "terms": "askeri|equal|0,1,2,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "Kuruluş şartlarını açıkça kabul etti"
+          },
+          "2": {
+            "terms": "askeri|equal|0,1,2,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "Kuruluş şartlarını açıkça kabul etti"
+          },
+          "3": {
+            "terms": "askeri|equal|0,1,2,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+          },
+          "4": {
+            "terms": "askeri|equal|0,1,2,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+          },
+          "6": {
+            "terms": "askeri|equal|0,1,2,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+          }
+        },
+        "revision": 1,
+        "revisions": [
+          {
+            "revision": 0,
+            "type": "askeri",
+            "ballot": "equal",
+            "members": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "replies": {
+              "0": {
+                "status": "accepted",
+                "terms": "askeri|equal|0,1,2,3,4,5",
+                "day": 900,
+                "why": "Kuruluş şartlarını önerdi"
+              },
+              "1": {
+                "terms": "askeri|equal|0,1,2,3,4,5",
+                "status": "accepted",
+                "day": 900,
+                "why": "Kuruluş şartlarını açıkça kabul etti"
+              },
+              "2": {
+                "terms": "askeri|equal|0,1,2,3,4,5",
+                "status": "accepted",
+                "day": 900,
+                "why": "Kuruluş şartlarını açıkça kabul etti"
+              },
+              "3": {
+                "terms": "askeri|equal|0,1,2,3,4,5",
+                "status": "accepted",
+                "day": 900,
+                "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+              },
+              "4": {
+                "terms": "askeri|equal|0,1,2,3,4,5",
+                "status": "accepted",
+                "day": 900,
+                "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+              },
+              "5": {
+                "status": "rejected",
+                "terms": "askeri|equal|0,1,2,3,4,5",
+                "day": 900,
+                "why": "Kontrollü AI ret senaryosu"
+              }
+            },
+            "day": 900
+          }
+        ],
+        "fid": 1,
+        "finished": 900
+      }
+    ]
+  },
+  "pane": "🏛 FEDERASYON\n✕\nGENEL\nÜYELER\nOYLAMALAR\nYASALAR\nASKERÎ\nYÖNETİM\n\nSavunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir.\n\nFederal donanma\n0 filo · 0 gemi\nYönetim: Saf Akıl Ağı. Savaş sonrası yeni vassalların bağımsız cepheleri ve sözleşmeleri ilgili devletin Vassal Yönetimi bölümünde görünür.\nOrtak savaş kararları\n⚔ Ortak askerî koordinasyon",
+  "modal": "",
+  "own": 0
+}

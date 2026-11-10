@@ -1,0 +1,139 @@
+{
+  "frames": [
+    {
+      "at": 70636.89999997616,
+      "same": true,
+      "connected": true,
+      "rect": [
+        -407,
+        888.203125,
+        444,
+        44
+      ]
+    },
+    {
+      "at": 70729.09999996424,
+      "same": true,
+      "connected": true,
+      "rect": [
+        348.9085693359375,
+        888.203125,
+        444,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 70865.5,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        888.203125,
+        444,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 70916.39999997616,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        888.203125,
+        444,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 70983.80000001192,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        888.203125,
+        444,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 71085.39999997616,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        888.203125,
+        444,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 71158.39999997616,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        888.203125,
+        444,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 71247.80000001192,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        888.203125,
+        444,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 71350.5,
+      "same": false,
+      "connected": true,
+      "rect": [
+        -407,
+        881.140625,
+        444,
+        44
+      ]
+    },
+    {
+      "at": 71445.39999997616,
+      "same": false,
+      "connected": true,
+      "rect": [
+        -407,
+        881.140625,
+        444,
+        44
+      ]
+    }
+  ],
+  "events": [
+    {
+      "t": "pointerdown",
+      "at": 71310,
+      "target": "dealSend"
+    },
+    {
+      "t": "pointerup",
+      "at": 71311.69999998808,
+      "target": "dealSend"
+    },
+    {
+      "t": "click",
+      "at": 71311.80000001192,
+      "target": "dealSend"
+    }
+  ],
+  "mutations": 2
+}

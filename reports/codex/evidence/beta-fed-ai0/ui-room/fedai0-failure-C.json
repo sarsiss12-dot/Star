@@ -1,0 +1,233 @@
+{
+  "feds": [
+    {
+      "id": 1,
+      "name": "Kutupyıldızı Ortak Cephe",
+      "type": "bilimsel",
+      "charter": {
+        "defense": "vote",
+        "offense": "vote",
+        "admission": "allies",
+        "ballot": "equal"
+      },
+      "leader": 1,
+      "founder": 1,
+      "members": [
+        2,
+        1,
+        0
+      ],
+      "laws": {},
+      "fund": {
+        "ala": 0,
+        "ene": 0
+      },
+      "treasury": 0,
+      "founded": 900,
+      "typeSince": 900,
+      "dutySince": {
+        "defense": 0,
+        "offense": 0
+      },
+      "invites": {},
+      "decisions": {},
+      "dutyConsent": {},
+      "cohesion": 70,
+      "nextVote": 1080,
+      "politicsVersion": 96,
+      "agenda": {
+        "v": 1,
+        "next": 3,
+        "items": [
+          {
+            "id": 1,
+            "by": 0,
+            "kind": "law",
+            "law": "arastirma",
+            "options": {
+              "repeal": false
+            },
+            "key": "[\"law\",\"arastirma\",false,\"\",null,null,null,null,null]",
+            "created": 900,
+            "expires": 1260,
+            "status": "waiting",
+            "position": 1
+          },
+          {
+            "id": 2,
+            "by": 2,
+            "kind": "law",
+            "law": "ticaret",
+            "options": {
+              "repeal": false
+            },
+            "key": "[\"law\",\"ticaret\",false,\"\",null,null,null,null,null]",
+            "created": 900,
+            "expires": 1260,
+            "status": "waiting",
+            "position": 2
+          }
+        ],
+        "history": []
+      },
+      "vote": {
+        "id": 1,
+        "kind": "basic",
+        "law": "savunma",
+        "repeal": false,
+        "opened": 900,
+        "expires": 990,
+        "proposer": 2,
+        "yes": [],
+        "no": [],
+        "eligible": [
+          2,
+          1,
+          0
+        ],
+        "ballotSnapshot": {
+          "mode": "equal",
+          "modern": true,
+          "source": "opened",
+          "weights": {
+            "0": 1,
+            "1": 1,
+            "2": 1
+          }
+        }
+      },
+      "lastVote": null,
+      "identityType": "bilimsel",
+      "emblem": {
+        "v": 1,
+        "shape": "ring",
+        "symbol": "orbit",
+        "pattern": "rays",
+        "primary": "#5cf5d6",
+        "secondary": "#f5c25c",
+        "federation": true
+      }
+    }
+  ],
+  "proposals": {
+    "v": 1,
+    "next": 2,
+    "proposals": [
+      {
+        "id": 1,
+        "by": 1,
+        "type": "askeri",
+        "ballot": "equal",
+        "members": [
+          1,
+          2,
+          0,
+          3,
+          4,
+          6
+        ],
+        "opened": 900,
+        "expires": 1050,
+        "status": "founded",
+        "replies": {
+          "0": {
+            "terms": "askeri|equal|1,2,0,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "Kuruluş şartlarını açıkça kabul etti"
+          },
+          "1": {
+            "status": "accepted",
+            "terms": "askeri|equal|1,2,0,3,4,6|r1",
+            "day": 900,
+            "why": "Karar kaydedildi"
+          },
+          "2": {
+            "terms": "askeri|equal|1,2,0,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "Karar kaydedildi"
+          },
+          "3": {
+            "terms": "askeri|equal|1,2,0,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "Karar kaydedildi"
+          },
+          "4": {
+            "terms": "askeri|equal|1,2,0,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "Karar kaydedildi"
+          },
+          "6": {
+            "terms": "askeri|equal|1,2,0,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "Karar kaydedildi"
+          }
+        },
+        "revision": 1,
+        "revisions": [
+          {
+            "revision": 0,
+            "type": "askeri",
+            "ballot": "equal",
+            "members": [
+              1,
+              2,
+              0,
+              3,
+              4,
+              5
+            ],
+            "replies": {
+              "0": {
+                "terms": "askeri|equal|1,2,0,3,4,5",
+                "status": "accepted",
+                "day": 900,
+                "why": "Kuruluş şartlarını açıkça kabul etti"
+              },
+              "1": {
+                "status": "accepted",
+                "terms": "askeri|equal|1,2,0,3,4,5",
+                "day": 900,
+                "why": "Geçmiş karar kaydedildi"
+              },
+              "2": {
+                "terms": "askeri|equal|1,2,0,3,4,5",
+                "status": "accepted",
+                "day": 900,
+                "why": "Geçmiş karar kaydedildi"
+              },
+              "3": {
+                "terms": "askeri|equal|1,2,0,3,4,5",
+                "status": "accepted",
+                "day": 900,
+                "why": "Geçmiş karar kaydedildi"
+              },
+              "4": {
+                "terms": "askeri|equal|1,2,0,3,4,5",
+                "status": "accepted",
+                "day": 900,
+                "why": "Geçmiş karar kaydedildi"
+              },
+              "5": {
+                "status": "rejected",
+                "terms": "askeri|equal|1,2,0,3,4,5",
+                "day": 900,
+                "why": "Geçmiş karar kaydedildi"
+              }
+            },
+            "day": 900
+          }
+        ],
+        "fid": 1,
+        "finished": 900
+      }
+    ]
+  },
+  "pane": "\n      🏛 FEDERASYON\n        ✕\n      \n      FEDERASYON KURULUŞUİki açık rızalı insan yeterlidir. Tek insanlı oyunda en az iki AI ortak gerekir. Yalnız seçtiğin ortaklar davet edilir; ücret son onayda bir kez kesilir.Askerî Federasyon · Eşit Temsil · BEKLİYORÖneren: Saf Akıl Ağı · 5 ay · 220 Etki · yalnız kurucudanYeni saldırılara ortak savunma yükümlülüğü. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Üyeler arasında ittifak oluşur. Önceki savaşlar sessizce kapatılmaz.Saf Akıl Ağı — KABUL EDİLDİ · Karar kaydedildiKızıl Muhafız — KABUL EDİLDİ · Karar kaydedildiOkyanus Ticaret Birliği — KABUL EDİLDİ · Kuruluş şartlarını açıkça kabul ettiAlros Hanedanı — KABUL EDİLDİ · Karar kaydedildiAlleis Uzlaşısı — KABUL EDİLDİ · Karar kaydedildiKhelvava Hegemonyası — KABUL EDİLDİ · Karar kaydedildiŞart sürümü 1; önceki kabuller değişen kadroyu onaylamaz. Sürüm 0: acceptedTÜR🛡 Askerî Federasyon🔬 Bilimsel Federasyon🤝 Ticaret Federasyonu⚔ Yağmacı FederasyonOY REJİMİEşit TemsilHegemonikEkonomik TemsilKarma Konsey+12 filo kapasitesi; bakım +4 yüzde puan. Varsayılan ortak savunma; saldırı için ayrı karar. Her üye 1 oy. Küçük devletleri korur; büyük katkıya ek oy vermez. Yeni saldırılara ortak savunma yükümlülüğü. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Kuruluşta seçilen üyeler birbirleriyle ittifak kurar. Açık taslak düzenlenebilir. Kadro/tür/oy rejimi değişirse eski kabuller geçmişte kalır; güncel rıza yeniden gerekir. Süre uzatılmaz.KURUCU ORTAKLAR · 0 SEÇİLİ☐ Kızıl Muhafızİnsan — açık yanıt gerekli · İlişki 90 · Yapısal olarak uygun☐ Saf Akıl Ağıİnsan — açık yanıt gerekli · İlişki 90 · Yapısal olarak uygun☐ Alros HanedanıAI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygunTür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11☐ Alleis UzlaşısıAI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygunTür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11☐ Qalriar MuhafızlığıAI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygunTür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11☐ Khelvava HegemonyasıAI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygunTür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11☐ Oranon LoncasıAI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygunTür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11Tek insanlı kuruluşta en az iki AI ortak gerekli · 220 ◈KURULUŞ DAVETLERİNİ GÖNDER",
+  "modal": "",
+  "own": 0
+}

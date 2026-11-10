@@ -1,0 +1,138 @@
+{
+  "feds": [
+    {
+      "id": 1,
+      "name": "Vega Gözlemevleri Ağı",
+      "type": "bilimsel",
+      "charter": {
+        "defense": "vote",
+        "offense": "vote",
+        "admission": "allies",
+        "ballot": "equal"
+      },
+      "leader": 1,
+      "founder": 1,
+      "members": [
+        1,
+        0,
+        2
+      ],
+      "laws": {},
+      "fund": {
+        "ala": 0,
+        "ene": 0
+      },
+      "treasury": 0,
+      "founded": 12.030879999999984,
+      "typeSince": 12.030879999999984,
+      "dutySince": {
+        "defense": 0,
+        "offense": 0
+      },
+      "invites": {},
+      "decisions": {},
+      "dutyConsent": {},
+      "cohesion": 70,
+      "nextVote": 72.03087999999998,
+      "politicsVersion": 96,
+      "vote": null,
+      "lastVote": null,
+      "identityType": "bilimsel",
+      "emblem": {
+        "v": 1,
+        "shape": "hex",
+        "symbol": "orbit",
+        "pattern": "ring",
+        "primary": "#5cf5d6",
+        "secondary": "#d65cf5",
+        "federation": true
+      }
+    }
+  ],
+  "inbox": [
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 0,
+        "defender": 3,
+        "rootAttacker": 0,
+        "rootDefender": 3,
+        "front": 1,
+        "campaign": 1,
+        "reason": "declaration",
+        "sponsor": null,
+        "day": 900,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Saf Akıl Ağı → Draxroen Filosu · Yeni savaş ilanı",
+      "key": "war:1",
+      "uid": 14,
+      "born": 900
+    },
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 0,
+        "defender": 4,
+        "rootAttacker": 0,
+        "rootDefender": 4,
+        "front": 3,
+        "campaign": 3,
+        "reason": "declaration",
+        "sponsor": null,
+        "day": 900,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Saf Akıl Ağı → Varira Karargâhı · Yeni savaş ilanı",
+      "key": "war:3",
+      "uid": 15,
+      "born": 900
+    },
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 0,
+        "defender": 5,
+        "rootAttacker": 0,
+        "rootDefender": 5,
+        "front": 5,
+        "campaign": 4,
+        "reason": "promise",
+        "sponsor": 1,
+        "day": 900,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Saf Akıl Ağı → Maron Krallığı · Savaş taahhüdü · Çağıran: Kızıl Muhafız",
+      "key": "war:5",
+      "uid": 16,
+      "born": 900
+    },
+    {
+      "kind": "fedfoundResult",
+      "data": 1,
+      "key": "fedfound-result:1:founded:accepted,accepted,accepted",
+      "ico": "🏛",
+      "pause": false,
+      "title": "FEDERASYON KURULDU — Vega Gözlemevleri Ağı",
+      "sub": "Bilimsel Federasyon · 3 kurucu · Eşit Temsil · Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. · Lider: Kızıl Muhafız",
+      "uid": 18,
+      "born": 12.030879999999984
+    }
+  ],
+  "modal": ""
+}

@@ -1,0 +1,20 @@
+PASS gerçek dördüncü tür; AI stratejik tercihi → gerçek davet → bir ay sonra final
+PASS yalnız doktrin yetmez: ittifaksız/ekonomisi kritik AI kuramaz
+FAIL gerçek fetih ganimeti düşman stokundan; aynı koloni/Save8 tekrarı ve cephe tavanı güvenli
+diplomacy.js:10570
+ if(f.raidLoot===undefined)return true;const rows=f.raidLoot;if(!rows||typeof rows!=='object'||Array.isArray(rows)||Object.keys(rows).length>2)return false;
+      ^
+
+TypeError: Cannot read properties of null (reading 'raidLoot')
+    at fedRaiderLootValid (diplomacy.js:10570:7)
+    at evalmachine.<anonymous>:1:1
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_fed_ai0_raider_test.cjs:7:844
+    at test (/workspace/Star/tests/beta_fed_ai0_raider_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_raider_test.cjs:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+PASS insan kurucu AI tarafından otomatik kabul edilmez; yeni tür eski tür alanlarını değiştirmez
+GEÇEN: 3 KALAN: 1

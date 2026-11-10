@@ -1,0 +1,65 @@
+FAIL gerçek aiTurn zayıf bölgesel hedefte sıfırdan hazırlık ve gerçek AI rızası üretir
+evalmachine.<anonymous>:1
+setupGame({...CFG,seed:23,size:'orta',aiCount:5});G.autoSave=false;G.council=null;G.feds=[];G.day=900;for(const e of G.emps){e.ai=false;e.civics=[];e.factions=null;e.mizac='militarist';e.overlord=null;e.war={};e.ally={};e.nap={};e.peaceAt={};e.aiTalk={};e.trade={links:[]};for(const r of Object.keys(e.res))e.res[r]=10000;e.intel={};for(const o of G.emps)if(!o.wild&&o!==e){e.contact[o.id]=true;e.intel[o.id]=3;e.rel[o.id]=80;}e.aiStrategy={objective:{kind:'regional',nextReview:99999,holdUntil:99999},plan:{stage:'arm',enemy:2,target:G.emps[2].home,build:['dokum'],focus:'military',forceNeed:99999,partner:null,diplomacy:null}};}for(const s of G.sys){s.x*=.03;s.y*=.03;s.seen=G.emps.map(e=>e.id);s.surv=s.seen.slice();}G.fleets=G.fleets.filter(f=>![1,2,3].includes(f.e)||!isArmed(f));var A=G.emps[1],B=G.emps[2],C=G.emps[3];A.ai=C.ai=true;A.ally[3]=C.ally[1]=true;A.rel[2]=C.rel[2]=-80;newFleet(A,A.home,Array.from({length:6},()=>({c:'kor'})),'Hazırlık');newFleet(B,B.home,Array.from({length:16},()=>({c:'kor'})),'Hedef');newFleet(C,C.home,Array.from({length:30},()=>({c:'kor'})),'Destek');for(const e of G.emps){recalcMods(e);aiObserve(e);e.aiIntel.systems=Object.fromEntries(G.sys.map(s=>[s.id,{owner:s.owner,day:G.day,defense:sysDefense(s),colonies:s.planets.filter(p=>p.col).length}]));}remember(A,2,'sistemAldi');G.vis=humanVisionContext(G.p).visible;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+TypeError: Cannot set properties of undefined (setting 'systems')
+    at evalmachine.<anonymous>:1:1159
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at exports.world (/workspace/Star/tests/helpers/beta-fed-ai0-world.cjs:3:40)
+    at /workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:4:103
+    at test (/workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:4:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+FAIL AI insanın savaşına ücretli destek önerir; açık yanıt olmadan katılmaz; kabulde tek bedel
+evalmachine.<anonymous>:1
+setupGame({...CFG,seed:23,size:'orta',aiCount:5});G.autoSave=false;G.council=null;G.feds=[];G.day=900;for(const e of G.emps){e.ai=false;e.civics=[];e.factions=null;e.mizac='militarist';e.overlord=null;e.war={};e.ally={};e.nap={};e.peaceAt={};e.aiTalk={};e.trade={links:[]};for(const r of Object.keys(e.res))e.res[r]=10000;e.intel={};for(const o of G.emps)if(!o.wild&&o!==e){e.contact[o.id]=true;e.intel[o.id]=3;e.rel[o.id]=80;}e.aiStrategy={objective:{kind:'regional',nextReview:99999,holdUntil:99999},plan:{stage:'arm',enemy:2,target:G.emps[2].home,build:['dokum'],focus:'military',forceNeed:99999,partner:null,diplomacy:null}};}for(const s of G.sys){s.x*=.03;s.y*=.03;s.seen=G.emps.map(e=>e.id);s.surv=s.seen.slice();}G.fleets=G.fleets.filter(f=>![1,2,3].includes(f.e)||!isArmed(f));var A=G.emps[1],B=G.emps[2],C=G.emps[3];A.ai=C.ai=true;A.ally[3]=C.ally[1]=true;A.rel[2]=C.rel[2]=-80;newFleet(A,A.home,Array.from({length:6},()=>({c:'kor'})),'Hazırlık');newFleet(B,B.home,Array.from({length:16},()=>({c:'kor'})),'Hedef');newFleet(C,C.home,Array.from({length:30},()=>({c:'kor'})),'Destek');for(const e of G.emps){recalcMods(e);aiObserve(e);e.aiIntel.systems=Object.fromEntries(G.sys.map(s=>[s.id,{owner:s.owner,day:G.day,defense:sysDefense(s),colonies:s.planets.filter(p=>p.col).length}]));}remember(A,2,'sistemAldi');G.vis=humanVisionContext(G.p).visible;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+TypeError: Cannot set properties of undefined (setting 'systems')
+    at evalmachine.<anonymous>:1:1159
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at exports.world (/workspace/Star/tests/helpers/beta-fed-ai0-world.cjs:3:40)
+    at /workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:5:111
+    at test (/workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+FAIL ret aynı koşullarda yeniden teklif üretmez; ekonomi krizi macerayı engeller
+evalmachine.<anonymous>:1
+setupGame({...CFG,seed:23,size:'orta',aiCount:5});G.autoSave=false;G.council=null;G.feds=[];G.day=900;for(const e of G.emps){e.ai=false;e.civics=[];e.factions=null;e.mizac='militarist';e.overlord=null;e.war={};e.ally={};e.nap={};e.peaceAt={};e.aiTalk={};e.trade={links:[]};for(const r of Object.keys(e.res))e.res[r]=10000;e.intel={};for(const o of G.emps)if(!o.wild&&o!==e){e.contact[o.id]=true;e.intel[o.id]=3;e.rel[o.id]=80;}e.aiStrategy={objective:{kind:'regional',nextReview:99999,holdUntil:99999},plan:{stage:'arm',enemy:2,target:G.emps[2].home,build:['dokum'],focus:'military',forceNeed:99999,partner:null,diplomacy:null}};}for(const s of G.sys){s.x*=.03;s.y*=.03;s.seen=G.emps.map(e=>e.id);s.surv=s.seen.slice();}G.fleets=G.fleets.filter(f=>![1,2,3].includes(f.e)||!isArmed(f));var A=G.emps[1],B=G.emps[2],C=G.emps[3];A.ai=C.ai=true;A.ally[3]=C.ally[1]=true;A.rel[2]=C.rel[2]=-80;newFleet(A,A.home,Array.from({length:6},()=>({c:'kor'})),'Hazırlık');newFleet(B,B.home,Array.from({length:16},()=>({c:'kor'})),'Hedef');newFleet(C,C.home,Array.from({length:30},()=>({c:'kor'})),'Destek');for(const e of G.emps){recalcMods(e);aiObserve(e);e.aiIntel.systems=Object.fromEntries(G.sys.map(s=>[s.id,{owner:s.owner,day:G.day,defense:sysDefense(s),colonies:s.planets.filter(p=>p.col).length}]));}remember(A,2,'sistemAldi');G.vis=humanVisionContext(G.p).visible;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+TypeError: Cannot set properties of undefined (setting 'systems')
+    at evalmachine.<anonymous>:1:1159
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at exports.world (/workspace/Star/tests/helpers/beta-fed-ai0-world.cjs:3:40)
+    at /workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:6:97
+    at test (/workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+FAIL koşullu AI planı Save8de aynı kalır; katılımcı savaştan önce çekilirse ilan yok
+evalmachine.<anonymous>:1
+setupGame({...CFG,seed:23,size:'orta',aiCount:5});G.autoSave=false;G.council=null;G.feds=[];G.day=900;for(const e of G.emps){e.ai=false;e.civics=[];e.factions=null;e.mizac='militarist';e.overlord=null;e.war={};e.ally={};e.nap={};e.peaceAt={};e.aiTalk={};e.trade={links:[]};for(const r of Object.keys(e.res))e.res[r]=10000;e.intel={};for(const o of G.emps)if(!o.wild&&o!==e){e.contact[o.id]=true;e.intel[o.id]=3;e.rel[o.id]=80;}e.aiStrategy={objective:{kind:'regional',nextReview:99999,holdUntil:99999},plan:{stage:'arm',enemy:2,target:G.emps[2].home,build:['dokum'],focus:'military',forceNeed:99999,partner:null,diplomacy:null}};}for(const s of G.sys){s.x*=.03;s.y*=.03;s.seen=G.emps.map(e=>e.id);s.surv=s.seen.slice();}G.fleets=G.fleets.filter(f=>![1,2,3].includes(f.e)||!isArmed(f));var A=G.emps[1],B=G.emps[2],C=G.emps[3];A.ai=C.ai=true;A.ally[3]=C.ally[1]=true;A.rel[2]=C.rel[2]=-80;newFleet(A,A.home,Array.from({length:6},()=>({c:'kor'})),'Hazırlık');newFleet(B,B.home,Array.from({length:16},()=>({c:'kor'})),'Hedef');newFleet(C,C.home,Array.from({length:30},()=>({c:'kor'})),'Destek');for(const e of G.emps){recalcMods(e);aiObserve(e);e.aiIntel.systems=Object.fromEntries(G.sys.map(s=>[s.id,{owner:s.owner,day:G.day,defense:sysDefense(s),colonies:s.planets.filter(p=>p.col).length}]));}remember(A,2,'sistemAldi');G.vis=humanVisionContext(G.p).visible;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+TypeError: Cannot set properties of undefined (setting 'systems')
+    at evalmachine.<anonymous>:1:1159
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at exports.world (/workspace/Star/tests/helpers/beta-fed-ai0-world.cjs:3:40)
+    at /workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:7:101
+    at test (/workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+GEÇEN: 0 KALAN: 4

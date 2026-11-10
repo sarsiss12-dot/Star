@@ -1,0 +1,12 @@
+[
+  {
+    "action": "pr-create",
+    "exit": 1,
+    "output": "Post \"https://api.github.com/graphql\": Forbidden\n"
+  },
+  {
+    "action": "board-write",
+    "exit": 1,
+    "output": "Post \"https://api.github.com/graphql\": Forbidden\n"
+  }
+]

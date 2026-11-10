@@ -1,0 +1,89 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Evrensel Konsey",
+    "founder": 0,
+    "members": [
+      0,
+      1,
+      2,
+      4,
+      7,
+      3,
+      6,
+      5
+    ],
+    "laws": {
+      "ticaretStd": true
+    },
+    "targeted": {},
+    "treasury": 0,
+    "president": 0,
+    "terms": {
+      "0": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": null,
+    "lastVote": {
+      "key": "ticaretStd",
+      "target": null,
+      "appliedTarget": null,
+      "opened": 4.805800000000006,
+      "ended": 8.440360000000009,
+      "yes": [
+        4,
+        6,
+        0,
+        1
+      ],
+      "no": [
+        7,
+        3,
+        5,
+        2
+      ],
+      "passed": true,
+      "expired": false,
+      "weight": {
+        "yes": 34.567863114217076,
+        "no": 24.296198640259178
+      },
+      "eventKey": "council:ticaretStd:8.440360000000009"
+    },
+    "campaign": null
+  },
+  "inbox": [
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 3,
+        "defender": 0,
+        "rootAttacker": 3,
+        "rootDefender": 0,
+        "front": 1,
+        "campaign": 1,
+        "reason": "declaration",
+        "sponsor": null,
+        "day": 900,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Alros Hanedanı → Saf Akıl Ağı · Yeni savaş ilanı",
+      "key": "war:1",
+      "uid": 14,
+      "born": 900
+    }
+  ],
+  "modal": "",
+  "pane": "<div class=\"dpBox dcBox fedBox\">\n      <div class=\"dpHd\"><span>🏛 FEDERASYON</span>\n        <button class=\"riX\" data-a=\"closeFed\">✕</button></div>\n      <nav class=\"fedTabs\" aria-label=\"Federasyon bölümleri\"><button class=\"abtn \" data-a=\"fedTab\" data-x=\"general\" aria-pressed=\"false\">GENEL</button><button class=\"abtn \" data-a=\"fedTab\" data-x=\"members\" aria-pressed=\"false\">ÜYELER</button><button class=\"abtn \" data-a=\"fedTab\" data-x=\"votes\" aria-pressed=\"false\">OYLAMALAR</button><button class=\"abtn \" data-a=\"fedTab\" data-x=\"laws\" aria-pressed=\"false\">YASALAR</button><button class=\"abtn pri\" data-a=\"fedTab\" data-x=\"military\" aria-pressed=\"true\">ASKERÎ</button><button class=\"abtn \" data-a=\"fedTab\" data-x=\"manage\" aria-pressed=\"false\">YÖNETİM</button></nav>\n      <div class=\"dpBody dcBody fedTabBody\" data-fed-tab=\"military\"><p class=\"mini\">Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir.</p><div class=\"row\"><span>Federal donanma</span><b>0 filo · 0 gemi</b></div><div class=\"mini\">Yönetim: Saf Akıl Ağı. Savaş sonrası yeni vassalların bağımsız cepheleri ve sözleşmeleri ilgili devletin Vassal Yönetimi bölümünde görünür.</div><details class=\"dcDetails\"><summary>Ortak savaş kararları</summary><div class=\"mini\">Onay savaş başlatmaz. Yalnız evet oyu veren üyeler uygulama listesine girer; uygulamada antlaşma, Konsey, vasallık ve hedef yeniden denetlenir.</div><div class=\"box\"><b>Alros Hanedanı</b><button class=\"abtn\" data-a=\"fedMotion\" data-x=\"joinWar:3:0\">Saf Akıl Ağı savaşına destek öner</button></div><div class=\"box\"><b>Alleis Uzlaşısı</b><button class=\"abtn\" data-a=\"fedMotion\" data-x=\"newWar:4\">Ortak savaş izni öner</button></div><div class=\"box\"><b>Qalriar Muhafızlığı</b><button class=\"abtn\" data-a=\"fedMotion\" data-x=\"newWar:5\">Ortak savaş izni öner</button></div><div class=\"box\"><b>Khelvava Hegemonyası</b><button class=\"abtn\" data-a=\"fedMotion\" data-x=\"newWar:6\">Ortak savaş izni öner</button></div><div class=\"box\"><b>Oranon Loncası</b><button class=\"abtn\" data-a=\"fedMotion\" data-x=\"newWar:7\">Ortak savaş izni öner</button></div></details><details class=\"dcDetails jointOps\" data-surface=\"fed\" data-recipient=\"\" style=\"overflow-wrap:anywhere;max-width:100%\"><summary style=\"min-height:44px;padding:10px 0\">⚔ Ortak askerî koordinasyon</summary>\n      <div class=\"mini\">Bu emirler destek talebidir; yabancı filoların kontrolü müttefikte kalır. 1. Haritadan kendi savaş filonu veya bilinen sistemi seç. 2. Aşağıdan müttefik ve talep türünü seç. 3. Hedefi incele ve talebi gönder. Müttefik yalnız aynı kabul edilmiş savaş seferinde, savunması ve ikmali uygunsa katılır.</div>\n      <button class=\"abtn\" data-a=\"jointChooseTarget\">HARİTADAN FİLO / SİSTEM SEÇ</button>\n      <div class=\"box\"><b>Alleis Uzlaşısı</b><div class=\"mini\">Aynı geçerli savaş seferinde değil; talep gönderilemez.</div></div><div class=\"box\"><b>Qalriar Muhafızlığı</b><div class=\"mini\">Aynı geçerli savaş seferinde değil; talep gönderilemez.</div></div><div class=\"box\"><b>Khelvava Hegemonyası</b><div class=\"mini\">Aynı geçerli savaş seferinde değil; talep gönderilemez.</div></div><div class=\"box\"><b>Oranon Loncası</b><div class=\"mini\">Aynı geçerli savaş seferinde değil; talep gönderilemez.</div></div></details></div></div>"
+}

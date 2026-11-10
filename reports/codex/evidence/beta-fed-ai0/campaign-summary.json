@@ -1,0 +1,22 @@
+{
+  "raiderFoundingDay": 960,
+  "raiderMilitaryWarDay": 1320,
+  "raiderMembers": [
+    1,
+    3,
+    4
+  ],
+  "raiderFronts": [
+    1,
+    2,
+    3
+  ],
+  "coalitionPreparedDay": 930,
+  "coalitionLaunchDay": 960,
+  "strictArmedDestination": 23,
+  "negative": "500 corvette target; no forced war",
+  "campaignMonths": [
+    18,
+    8
+  ]
+}

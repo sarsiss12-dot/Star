@@ -1,0 +1,5975 @@
+[
+  {
+    "day": 930,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      },
+      {
+        "id": 20,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      },
+      {
+        "id": 22,
+        "e": 3,
+        "path": [
+          7,
+          18,
+          25,
+          1
+        ],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      }
+    ],
+    "history": [
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_reaktor",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_tarim",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_robot",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 930,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 930,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 6,
+        "to": 3
+      }
+    ],
+    "month": 1,
+    "ms": 1163.717161
+  },
+  {
+    "day": 960,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      },
+      {
+        "id": 20,
+        "e": 1,
+        "path": [
+          30,
+          28,
+          42,
+          1
+        ],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      }
+    ],
+    "history": [
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_reaktor",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_tarim",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_robot",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 930,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 930,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 6,
+        "to": 3
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_lazer1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_doktrin",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_zirh1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 960,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 20,
+        "to": 1
+      }
+    ],
+    "month": 2,
+    "ms": 390.4538
+  },
+  {
+    "day": 990,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      }
+    ],
+    "history": [
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_reaktor",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_tarim",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_robot",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 930,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 930,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 6,
+        "to": 3
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_lazer1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_doktrin",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_zirh1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 960,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 20,
+        "to": 1
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_kalkan1",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_muhrip",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 990,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 26,
+        "to": 44
+      }
+    ],
+    "month": 3,
+    "ms": 894.310577
+  },
+  {
+    "day": 1020,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      }
+    ],
+    "history": [
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_reaktor",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_tarim",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_robot",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 930,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 930,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 6,
+        "to": 3
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_lazer1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_doktrin",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_zirh1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 960,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 20,
+        "to": 1
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_kalkan1",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_muhrip",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 990,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 26,
+        "to": 44
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      }
+    ],
+    "month": 4,
+    "ms": 262.25564799999984
+  },
+  {
+    "day": 1050,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      }
+    ],
+    "history": [
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_reaktor",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_tarim",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_robot",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 930,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 930,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 6,
+        "to": 3
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_lazer1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_doktrin",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_zirh1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 960,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 20,
+        "to": 1
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_kalkan1",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_muhrip",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 990,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 26,
+        "to": 44
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "maden",
+        "wanted": "dokum"
+      },
+      {
+        "day": 1050,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 32,
+        "to": 19
+      }
+    ],
+    "month": 5,
+    "ms": 90.06646699999965
+  },
+  {
+    "day": 1080,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      }
+    ],
+    "history": [
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_reaktor",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_tarim",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_robot",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 930,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 930,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 6,
+        "to": 3
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_lazer1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_doktrin",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_zirh1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 960,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 20,
+        "to": 1
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_kalkan1",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_muhrip",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 990,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 26,
+        "to": 44
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "maden",
+        "wanted": "dokum"
+      },
+      {
+        "day": 1050,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 32,
+        "to": 19
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      }
+    ],
+    "month": 6,
+    "ms": 917.1748960000004
+  },
+  {
+    "day": 1110,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      },
+      {
+        "id": 35,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      }
+    ],
+    "history": [
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_reaktor",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_tarim",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_robot",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 930,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 930,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 6,
+        "to": 3
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_lazer1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_doktrin",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_zirh1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 960,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 20,
+        "to": 1
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_kalkan1",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_muhrip",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 990,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 26,
+        "to": 44
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "maden",
+        "wanted": "dokum"
+      },
+      {
+        "day": 1050,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 32,
+        "to": 19
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 34,
+        "to": 4
+      }
+    ],
+    "month": 7,
+    "ms": 316.0333760000003
+  },
+  {
+    "day": 1140,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      },
+      {
+        "id": 35,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      }
+    ],
+    "history": [
+      {
+        "day": 930,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_robot",
+        "source": "research"
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 930,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 930,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 6,
+        "to": 3
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_lazer1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_doktrin",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_zirh1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 960,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 20,
+        "to": 1
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_kalkan1",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_muhrip",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 990,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 26,
+        "to": 44
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "maden",
+        "wanted": "dokum"
+      },
+      {
+        "day": 1050,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 32,
+        "to": 19
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 34,
+        "to": 4
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 36,
+        "to": 38
+      }
+    ],
+    "month": 8,
+    "ms": 219.19686600000023
+  },
+  {
+    "day": 1170,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      },
+      {
+        "id": 35,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 38,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      }
+    ],
+    "history": [
+      {
+        "day": 930,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 930,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 930,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 6,
+        "to": 3
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_lazer1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_doktrin",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_zirh1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 960,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 20,
+        "to": 1
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_kalkan1",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_muhrip",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 990,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 26,
+        "to": 44
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "maden",
+        "wanted": "dokum"
+      },
+      {
+        "day": 1050,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 32,
+        "to": 19
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 34,
+        "to": 4
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 36,
+        "to": 38
+      },
+      {
+        "day": 1170,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1170,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      }
+    ],
+    "month": 9,
+    "ms": 153.1829770000004
+  },
+  {
+    "day": 1200,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      },
+      {
+        "id": 35,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 38,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      }
+    ],
+    "history": [
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_lazer1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "t_doktrin",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_zirh1",
+        "source": "research"
+      },
+      {
+        "day": 960,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 960,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 20,
+        "to": 1
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_kalkan1",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_muhrip",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 990,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 26,
+        "to": 44
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "maden",
+        "wanted": "dokum"
+      },
+      {
+        "day": 1050,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 32,
+        "to": 19
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 34,
+        "to": 4
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 36,
+        "to": 38
+      },
+      {
+        "day": 1170,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1170,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      }
+    ],
+    "month": 10,
+    "ms": 126.28995400000076
+  },
+  {
+    "day": 1230,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      },
+      {
+        "id": 35,
+        "e": 3,
+        "path": [
+          7,
+          18,
+          25,
+          1
+        ],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 38,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      }
+    ],
+    "history": [
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "f_kalkan1",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "research-completed",
+        "objective": "federation",
+        "stage": "arm",
+        "tech": "m_muhrip",
+        "source": "research"
+      },
+      {
+        "day": 990,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 990,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 26,
+        "to": 44
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "maden",
+        "wanted": "dokum"
+      },
+      {
+        "day": 1050,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 32,
+        "to": 19
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 34,
+        "to": 4
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 36,
+        "to": 38
+      },
+      {
+        "day": 1170,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1170,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 42,
+        "to": 30
+      }
+    ],
+    "month": 11,
+    "ms": 211.05047399999967
+  },
+  {
+    "day": 1260,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      },
+      {
+        "id": 38,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      }
+    ],
+    "history": [
+      {
+        "day": 1020,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1020,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "maden",
+        "wanted": "dokum"
+      },
+      {
+        "day": 1050,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 32,
+        "to": 19
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 34,
+        "to": 4
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 36,
+        "to": 38
+      },
+      {
+        "day": 1170,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1170,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 42,
+        "to": 30
+      },
+      {
+        "day": 1260,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "dokum",
+        "wanted": "fabrika"
+      },
+      {
+        "day": 1260,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      }
+    ],
+    "month": 12,
+    "ms": 308.3375759999999
+  },
+  {
+    "day": 1290,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      },
+      {
+        "id": 38,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      },
+      {
+        "id": 48,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      }
+    ],
+    "history": [
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1080,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1110,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 34,
+        "to": 4
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 36,
+        "to": 38
+      },
+      {
+        "day": 1170,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1170,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 42,
+        "to": 30
+      },
+      {
+        "day": 1260,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "dokum",
+        "wanted": "fabrika"
+      },
+      {
+        "day": 1260,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      }
+    ],
+    "month": 13,
+    "ms": 129.45953699999973
+  },
+  {
+    "day": 1320,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [
+          20,
+          7,
+          18,
+          25,
+          1
+        ],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      },
+      {
+        "id": 38,
+        "e": 1,
+        "path": [
+          30,
+          28,
+          42,
+          8
+        ],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      },
+      {
+        "id": 48,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 52,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      }
+    ],
+    "history": [
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 1140,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 36,
+        "to": 38
+      },
+      {
+        "day": 1170,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1170,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 42,
+        "to": 30
+      },
+      {
+        "day": 1260,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "dokum",
+        "wanted": "fabrika"
+      },
+      {
+        "day": 1260,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 30,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 30,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 38,
+        "to": 8
+      }
+    ],
+    "month": 14,
+    "ms": 387.4637010000006
+  },
+  {
+    "day": 1350,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 1
+      },
+      {
+        "id": 48,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 52,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 56,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 57,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 3
+      },
+      {
+        "id": 58,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      },
+      {
+        "id": 59,
+        "e": 4,
+        "path": [
+          7,
+          18,
+          25,
+          1
+        ],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      }
+    ],
+    "history": [
+      {
+        "day": 1140,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 36,
+        "to": 38
+      },
+      {
+        "day": 1170,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1170,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 42,
+        "to": 30
+      },
+      {
+        "day": 1260,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "dokum",
+        "wanted": "fabrika"
+      },
+      {
+        "day": 1260,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 30,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 30,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 38,
+        "to": 8
+      },
+      {
+        "day": 1350,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1350,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1350,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      }
+    ],
+    "month": 15,
+    "ms": 155.01242900000034
+  },
+  {
+    "day": 1380,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [
+          25,
+          18,
+          7,
+          20,
+          41
+        ],
+        "mv": null,
+        "combat": 0,
+        "sys": 1
+      },
+      {
+        "id": 48,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 52,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 56,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 57,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 3
+      },
+      {
+        "id": 58,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      },
+      {
+        "id": 61,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 3
+      },
+      {
+        "id": 62,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      },
+      {
+        "id": 63,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 3
+      }
+    ],
+    "history": [
+      {
+        "day": 1200,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 1200,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 42,
+        "to": 30
+      },
+      {
+        "day": 1260,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "dokum",
+        "wanted": "fabrika"
+      },
+      {
+        "day": 1260,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 30,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 30,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 38,
+        "to": 8
+      },
+      {
+        "day": 1350,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1350,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1350,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1380,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "lab",
+        "paid": {
+          "min": 190
+        }
+      },
+      {
+        "day": 1380,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "maden",
+        "paid": {
+          "min": 120
+        }
+      },
+      {
+        "day": 1380,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1380,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      }
+    ],
+    "month": 16,
+    "ms": 332.80301000000054
+  },
+  {
+    "day": 1410,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      },
+      {
+        "id": 48,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 52,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 56,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 57,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 3
+      },
+      {
+        "id": 58,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      },
+      {
+        "id": 61,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 3
+      },
+      {
+        "id": 62,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      },
+      {
+        "id": 63,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 3
+      }
+    ],
+    "history": [
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 42,
+        "to": 30
+      },
+      {
+        "day": 1260,
+        "kind": "building-replacement",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "removed": "dokum",
+        "wanted": "fabrika"
+      },
+      {
+        "day": 1260,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 30,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 30,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 38,
+        "to": 8
+      },
+      {
+        "day": 1350,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1350,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1350,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1380,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "lab",
+        "paid": {
+          "min": 190
+        }
+      },
+      {
+        "day": 1380,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "maden",
+        "paid": {
+          "min": 120
+        }
+      },
+      {
+        "day": 1380,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1380,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1410,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 30,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1410,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1410,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      }
+    ],
+    "month": 17,
+    "ms": 214.5912500000004
+  },
+  {
+    "day": 1440,
+    "feds": [],
+    "wars": [],
+    "ships": [
+      {
+        "id": 14,
+        "e": 4,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 41
+      },
+      {
+        "id": 48,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 52,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 56,
+        "e": 3,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 20
+      },
+      {
+        "id": 57,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 3
+      },
+      {
+        "id": 58,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      },
+      {
+        "id": 61,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 3
+      },
+      {
+        "id": 62,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      },
+      {
+        "id": 63,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 3
+      },
+      {
+        "id": 65,
+        "e": 1,
+        "path": [
+          23,
+          12,
+          19
+        ],
+        "mv": null,
+        "combat": 0,
+        "sys": 6
+      },
+      {
+        "id": 67,
+        "e": 1,
+        "path": [],
+        "mv": null,
+        "combat": 0,
+        "sys": 3
+      }
+    ],
+    "history": [
+      {
+        "day": 1260,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1260,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1290,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 30,
+        "planet": 0,
+        "key": "liman",
+        "paid": {
+          "min": 180
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 19,
+        "planet": 2,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 38,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 30,
+        "planet": 0,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1320,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 38,
+        "to": 8
+      },
+      {
+        "day": 1350,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "fabrika",
+        "paid": {
+          "min": 170
+        }
+      },
+      {
+        "day": 1350,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1350,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1380,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "lab",
+        "paid": {
+          "min": 190
+        }
+      },
+      {
+        "day": 1380,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 4,
+        "planet": 2,
+        "key": "maden",
+        "paid": {
+          "min": 120
+        }
+      },
+      {
+        "day": 1380,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1380,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1410,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 30,
+        "planet": 0,
+        "key": "tersane",
+        "paid": {
+          "min": 260,
+          "ala": 45
+        }
+      },
+      {
+        "day": 1410,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1410,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1440,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "planet": 1,
+        "key": "lab",
+        "paid": {
+          "min": 190
+        }
+      },
+      {
+        "day": 1440,
+        "kind": "building-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 44,
+        "planet": 0,
+        "key": "lab",
+        "paid": {
+          "min": 190
+        }
+      },
+      {
+        "day": 1440,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1440,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 6,
+        "cls": "muh",
+        "paid": {
+          "ala": 72
+        }
+      },
+      {
+        "day": 1440,
+        "kind": "ship-paid",
+        "objective": "federation",
+        "stage": "arm",
+        "system": 3,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 1440,
+        "kind": "fleet-order",
+        "objective": "federation",
+        "stage": "arm",
+        "fleet": 65,
+        "to": 19
+      }
+    ],
+    "month": 18,
+    "ms": 161.2263979999998
+  },
+  {
+    "negative": true,
+    "assessment": {
+      "score": 0.02,
+      "factors": [
+        {
+          "n": "Gündem çıkarı",
+          "v": -0.48
+        }
+      ],
+      "why": "Ret · Gündem çıkarı -0.48"
+    }
+  }
+]

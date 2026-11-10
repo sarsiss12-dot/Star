@@ -1,0 +1,67 @@
+{
+  "feds": [],
+  "proposals": {
+    "v": 1,
+    "next": 2,
+    "proposals": [
+      {
+        "id": 1,
+        "by": 0,
+        "type": "askeri",
+        "ballot": "equal",
+        "members": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "opened": 900,
+        "expires": 1050,
+        "status": "pending",
+        "replies": {
+          "0": {
+            "status": "accepted",
+            "terms": "askeri|equal|0,1,2,3,4,5",
+            "day": 900,
+            "why": "Kuruluş şartlarını önerdi"
+          },
+          "1": {
+            "status": "pending",
+            "terms": "askeri|equal|0,1,2,3,4,5",
+            "day": 900,
+            "why": "İnsan yanıtı bekleniyor"
+          },
+          "2": {
+            "status": "pending",
+            "terms": "askeri|equal|0,1,2,3,4,5",
+            "day": 900,
+            "why": "İnsan yanıtı bekleniyor"
+          },
+          "3": {
+            "status": "accepted",
+            "terms": "askeri|equal|0,1,2,3,4,5",
+            "day": 900,
+            "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+          },
+          "4": {
+            "status": "accepted",
+            "terms": "askeri|equal|0,1,2,3,4,5",
+            "day": 900,
+            "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+          },
+          "5": {
+            "status": "accepted",
+            "terms": "askeri|equal|0,1,2,3,4,5",
+            "day": 900,
+            "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+          }
+        }
+      }
+    ]
+  },
+  "pane": "🏛 FEDERASYON\n✕\nFEDERASYON KURULUŞU\nİki açık rızalı insan yeterlidir. Tek insanlı oyunda en az iki AI ortak gerekir. Yalnız seçtiğin ortaklar davet edilir; ücret son onayda bir kez kesilir.\nAskerî Federasyon · Eşit Temsil · BEKLİYOR\nÖneren: Saf Akıl Ağı · 5 ay · 220 Etki · yalnız kurucudan\nYeni saldırılara ortak savunma yükümlülüğü. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Üyeler arasında ittifak oluşur. Önceki savaşlar sessizce kapatılmaz.\nSaf Akıl Ağı — KABUL EDİLDİ · Kuruluş şartlarını önerdi\nKızıl Muhafız — BEKLİYOR · İnsan yanıtı bekleniyor\nOkyanus Ticaret Birliği — BEKLİYOR · İnsan yanıtı bekleniyor\nLiiron Konfederasyonu — KABUL EDİLDİ · İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11\nQeles Hegemonyası — KABUL EDİLDİ · İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11\nOrres Örgütü — KABUL EDİLDİ · İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11\nTASLAĞI DÜZENLESON KURULUŞ ONAYI · 220 ◈SÜRECİ İPTAL ET\nTÜR\n🛡 Askerî Federasyon🔬 Bilimsel Federasyon🤝 Ticaret Federasyonu⚔ Yağmacı Federasyon\nOY REJİMİ\nEşit TemsilHegemonikEkonomik TemsilKarma Konsey\n\n+12 filo kapasitesi; bakım +4 yüzde puan. Varsayılan ortak savunma; saldırı için ayrı karar. Her üye 1 oy. Küçük devletleri korur; büyük katkıya ek oy vermez. Yeni saldırılara ortak savunma yükümlülüğü. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Kuruluşta seçilen üyeler birbirleriyle ittifak kurar. Açık taslak düzenlenebilir. Kadro/tür/oy rejimi değişirse eski kabuller geçmişte kalır; güncel rıza yeniden gerekir. Süre uzatılmaz.\n\nKURUCU ORTAKLAR · 5 SEÇİLİ\n☑ Kızıl Muhafız\nİnsan — açık yanıt gerekli · İlişki 90 · Yapısal olarak uygun\n☑ Okyanus Ticaret Birliği\nİnsan — açık yanıt gerekli · İlişki 90 · Yapısal olarak uygun\n☑ Liiron Konfederasyonu\nAI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun\nTür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11\n☑ Qeles Hegemonyası\nAI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun\nTür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11\n☑ Orres Örgütü\nAI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun\nTür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11\n☐ Alaar Krallığı\nAI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun\nTür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11\n☐ Elanen Komutanlığı\nAI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun\nTür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11\nSeçilen şartlar davete uygun · 220 ◈\nKURULUŞ DAVETLERİNİ GÖNDER",
+  "modal": "",
+  "own": 0
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "guestOwnList": true,
+    "rightPanel": true
+  },
+  {
+    "nativeRemote": true,
+    "travel": true,
+    "task": 1,
+    "realCost": {
+      "min": 212,
+      "ala": 39
+    },
+    "completed": true,
+    "duplicateRejected": true,
+    "CPrivate": true
+  },
+  {
+    "reconnect": true
+  },
+  {
+    "guestSpyTarget": true
+  }
+]

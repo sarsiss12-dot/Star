@@ -1,0 +1,14 @@
+PASS aktif yasa sırasında iki insan FIFO önerisi; sıraya girince maliyet/RNG/etki yok; tekrar engeli
+PASS savaş yardımı kuyrukta etki uygulamaz; biten savaş sıra geldiğinde gerekçeyle geçersiz
+PASS kendi önerisini geri çekme; başka üye yetkisiz; sıra ve ham Save8 yüklemede korunur
+PASS üye oylaması bütün üyelerle ittifak gerektirmez; adayın ayrı rızası ve bir kez katılım
+PASS aday savaşa girerse rıza yetmez; kuyruk yalnız üyelere ve π ile görünür
+PASS kuyruk açılışında bütçe, süre ve üyelik yeniden doğrulanır; bedelsiz iptal
+PASS aynı ağ paketi ikinci kuyruk/ödeme üretmez; bozuk satırlar yüklemede güvenle elenir
+PASS açılışta motor hatası ücret ve RNG geri alınır, öneri açık gerekçeyle kapanır
+PASS eski doğrudan davet ittifak koşulu korunur; ret ve değişen şart kabulü engeller
+PASS dış başvuru kendi sahibine ait; yalnız kendi kuyruğunu görür/geri çeker, ücret yok
+PASS AI mevcut stratejik değerlendirmeyle sıraya önerir; aktif oy değişmez ve spam yok
+PASS aynı adayın farklı aracıdan başvurusu tek sıra; farklı üyelerin savaş izni ayrı yetki
+PASS kesirli gerçek oyun gününde 360 günlük kuyruk Save8 yüklemede korunur
+GEÇEN: 13 KALAN: 0

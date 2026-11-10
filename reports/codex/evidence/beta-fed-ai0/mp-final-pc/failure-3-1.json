@@ -1,0 +1,119 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Evrensel Divanı",
+    "founder": 0,
+    "members": [
+      0,
+      1,
+      2,
+      5,
+      6,
+      3,
+      7,
+      4
+    ],
+    "laws": {
+      "ticaretStd": true
+    },
+    "targeted": {},
+    "treasury": 0,
+    "president": 0,
+    "terms": {
+      "0": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": null,
+    "lastVote": {
+      "key": "ticaretStd",
+      "target": null,
+      "appliedTarget": null,
+      "opened": 5.159999999999999,
+      "ended": 9.226560000000001,
+      "yes": [
+        5,
+        6,
+        3,
+        7,
+        0,
+        1
+      ],
+      "no": [
+        4,
+        2
+      ],
+      "passed": true,
+      "expired": false,
+      "weight": {
+        "yes": 44.28479812437088,
+        "no": 13.0893923430769
+      },
+      "eventKey": "council:ticaretStd:9.226560000000001"
+    },
+    "campaign": null
+  },
+  "inbox": [
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 3,
+        "defender": 0,
+        "rootAttacker": 3,
+        "rootDefender": 0,
+        "front": 1,
+        "campaign": 1,
+        "reason": "declaration",
+        "sponsor": null,
+        "day": 900,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Draxuro Karargâhı → Saf Akıl Ağı · Yeni savaş ilanı",
+      "key": "war:1",
+      "uid": 19,
+      "born": 900
+    },
+    {
+      "kind": "aideal",
+      "data": {
+        "from": 3,
+        "to": 0,
+        "give": [
+          {
+            "t": "pact"
+          }
+        ],
+        "want": [
+          {
+            "t": "res",
+            "r": "min",
+            "v": 50
+          }
+        ],
+        "born": 900,
+        "expires": 1440
+      },
+      "ico": "📜",
+      "cls": "sci",
+      "pause": false,
+      "uid": 25,
+      "born": 900,
+      "rec": 1,
+      "title": "Teklif — Draxuro Karargâhı",
+      "sub": "Çok oyunculu teklif · ◆ 50 Mineral istiyor",
+      "key": "mp71:1"
+    }
+  ],
+  "modal": "",
+  "pane": "<div class=\"dpBox dcBox fedBox\">\n      <div class=\"dpHd\"><span>🏛 FEDERASYON</span>\n        <button class=\"riX\" data-a=\"closeFed\">✕</button></div>\n      <nav class=\"fedTabs\" aria-label=\"Federasyon bölümleri\"><button class=\"abtn \" data-a=\"fedTab\" data-x=\"general\" aria-pressed=\"false\">GENEL</button><button class=\"abtn \" data-a=\"fedTab\" data-x=\"members\" aria-pressed=\"false\">ÜYELER</button><button class=\"abtn pri\" data-a=\"fedTab\" data-x=\"votes\" aria-pressed=\"true\">OYLAMALAR</button><button class=\"abtn \" data-a=\"fedTab\" data-x=\"laws\" aria-pressed=\"false\">YASALAR</button><button class=\"abtn \" data-a=\"fedTab\" data-x=\"military\" aria-pressed=\"false\">ASKERÎ</button><button class=\"abtn \" data-a=\"fedTab\" data-x=\"manage\" aria-pressed=\"false\">YÖNETİM</button></nav>\n      <div class=\"dpBody dcBody fedTabBody\" data-fed-tab=\"votes\"><div class=\"ph\">GÜNDEM KUYRUĞU</div><p class=\"mini\">Tek aktif oylama; olağan öneriler FIFO. Gerçek acil savunma sırayı öne alır; aktif oy kesilmez. Olağan öneri beklerken en fazla iki acil açılış; sonra olağan sıra. En fazla 12 öneri, kişi başına 3. Bekleme sınırı 360 gün. Kuyrukta bedel kesilmez; sıra geldiğinde koşullar ve bütçe yeniden denetlenir. Savaş kararı ayrıca yetkili uygulama gerektirir.</p><div class=\"box\"><b>1. 🚨 ACİL SAVUNMA · Mevcut Savaşa Katılma</b><div class=\"mini\">Kaynak cephe #1 · Öneren: Sen · Hedef: Draxuro Karargâhı · 360 gün · Açılış bedeli 0 ◈</div><button class=\"abtn\" data-a=\"fedAgendaWithdraw\" data-x=\"1:3\">ÖNERİYİ GERİ ÇEK</button></div><div class=\"box\"><b>2. Ortak Araştırma Fonu</b><div class=\"mini\">Öneren: Okyanus Ticaret Birliği · 360 gün · Açılış bedeli 60 ◈</div></div><div class=\"box\"><b>3. Ticaret Birliği</b><div class=\"mini\">Öneren: Kızıl Muhafız · 360 gün · Açılış bedeli 60 ◈</div></div><div class=\"box fedPolitics\"><b>Eşit Temsil</b><div class=\"mini\">Her üye 1 oy. Küçük devletleri korur; büyük katkıya ek oy vermez.</div><div class=\"mini\">Bu gündemin ağırlıkları açılışta sabitlendi.</div><div class=\"row\"><span>Kızıl Muhafız</span><b>1 oy BEKLİYOR</b></div><div class=\"row\"><span>Saf Akıl Ağı · SEN</span><b>1 oy EVET</b></div><div class=\"row\"><span>Okyanus Ticaret Birliği</span><b>1 oy EVET</b></div><div class=\"mini\">Mutlak üye çoğunluğu (2/3) ve toplam oy ağırlığının yarısından fazlası. Süre sonunda eksik oy çekimserdir.</div><div class=\"mini\">Senin oyun: Kullanıldı.</div></div><div class=\"ph\">OYLAMA</div><div class=\"box\" style=\"border-color:#ff9b3d\">\n          <div class=\"bt\"><span>🛡 Savunma Paktı</span><span class=\"tag e\">AÇIK</span></div>\n          <div class=\"bd\">Bir üyeye savaş açılırsa tüm üyeler otomatik savaşa girer.</div><div class=\"box\"><b>KABUL EDİLİRSE</b><p class=\"mini\">Bir üyeye savaş açılırsa tüm üyeler otomatik savaşa girer.</p><div class=\"mini\">Öneren: Kızıl Muhafız · Federasyon: Orion Ortak Cephe</div><div class=\"mini\">Hayır oyu öneriye karşıdır; sonuç mevcut çoğunluk hesabıyla belirlenir. Oy kullanmak için ek kaynak bedeli yoktur; öneri bedeli önerenden alınmıştır.</div><div class=\"mini\">Mutlak üye çoğunluğu (2/3) ve toplam oy ağırlığının yarısından fazlası. Süre sonunda eksik oy çekimserdir.</div><div class=\"mini\">Destekleyenler: Saf Akıl Ağı, Okyanus Ticaret Birliği · Karşı çıkanlar: yok · Beklenen: Kızıl Muhafız</div></div><div class=\"mini\">Mutlak üye çoğunluğu (2/3) ve toplam oy ağırlığının yarısından fazlası. Süre sonunda eksik oy çekimserdir.</div>\n          <div class=\"row\"><span>Ağırlıklı oylar</span><b><span style=\"color:#65e08a\">2 evet</span>\n            · <span style=\"color:#ff5f6d\">0 hayır</span></b></div>\n          <div class=\"mini\">1 üyenin oyu bekleniyor ·\n            90 gün kaldı</div>\n          <div class=\"act2\"><button class=\"abtn pri\" data-a=\"fedVoteNow\" data-x=\"1\">OY KULLAN</button></div></div></div></div>"
+}

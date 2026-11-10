@@ -1,0 +1,30 @@
+FAIL gerçek aiTurn zayıf bölgesel hedefte sıfırdan hazırlık ve gerçek AI rızası üretir
+AssertionError [ERR_ASSERTION]: no autonomous preparation
+    at /workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:4:221
+    at test (/workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:4:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+PASS AI insanın savaşına ücretli destek önerir; açık yanıt olmadan katılmaz; kabulde tek bedel
+PASS ret aynı koşullarda yeniden teklif üretmez; ekonomi krizi macerayı engeller
+FAIL koşullu AI planı Save8de aynı kalır; katılımcı savaştan önce çekilirse ilan yok
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(h.run('!!p'))
+
+    at /workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:7:194
+    at test (/workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_coalition_test.cjs:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 2 KALAN: 2

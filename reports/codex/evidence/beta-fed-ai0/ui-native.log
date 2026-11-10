@@ -1,0 +1,24 @@
+FAIL FAI0 misafir taslak düzenleme ve üç insan acil savunma sırası
+page.evaluate: ReferenceError: serialize is not defined
+    at eval (eval at evaluate (:311:30), <anonymous>:1:5)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at module.exports (/workspace/Star/tests/helpers/beta-fed-ai0-browser.cjs:4:33)
+    at /workspace/Star/tests/browser-mp73.cjs:250:182
+    at test (/workspace/Star/tests/browser-mp73.cjs:13:13)
+    at /workspace/Star/tests/browser-mp73.cjs:250:37
+FAIL sayfa hataları yok
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   'host2: G is not defined',
++   'B2: G is not defined',
++   'C2: G is not defined'
++ ]
+- []
+
+    at /workspace/Star/tests/browser-mp73.cjs:254:52
+    at test (/workspace/Star/tests/browser-mp73.cjs:13:13)
+    at /workspace/Star/tests/browser-mp73.cjs:254:9
+GEÇEN: 0 KALAN: 2

@@ -1,0 +1,10 @@
+✓ saflık: ayna üretmek host Save8 ve RNG'yi değiştirmez; aynı durumda aynı ayna (deterministik); tohum yerine kozmetik tohum
+✓ misafir tarafında motorun kendi deserialize'ı: G.p = misafirin devleti (0); kaynak, koloni, filo, araştırma host'taki gerçeğiyle aynı; bilinen/görünen sistem kümesi birebir aynı
+✓ yeniden numaralandırma: yalnız misafir ↔ 0 yer değiştirir; sistem/gezegen sahibi, filo sahibi ve ilişki haritaları buna göre; host'un devleti misafirin numarasında
+✓ gizlilik (beyaz liste): başka devletin kaynak/teknoloji/araştırma/AI planı yok; host günlüğü yok; bilinmeyen sistemde ad/yıldız/gezegen/sahip yok; yabancı koloni ayrıntısı ve yabancı filo rotası yok; temassız devlet adı yok
+✓ fark/uygulama: 20 gün sonraki ayna = önceki ayna + fark (bayt bayt); fark tam aynadan çok küçük
+✓ çekirdek: misafir "ui:stars" isteyince ayna (tam, sonra fark) gönderilir; bozuk istek ve devletsiz bağlantı reddedilir; yeniden bağlanmada ve resync'te tam ayna; host Save8/RNG değişmez
+✓ misafir sayfası (/mp/play): aynı index.html + <base href="/"> + lobi/ayna betikleri; runtime baytları değişmez; CSP katı (yalnız index'in kendi satır içi betiği ve tam ekran işleyicisi özetle)
+   45 sistem: ayna 28 KB, host üretimi 3 ms, misafir yüklemesi 185 ms · 60 sistem: ayna 33 KB, host üretimi 2 ms, misafir yüklemesi 258 ms · 100 sistem: ayna 43 KB, host üretimi 3 ms, misafir yüklemesi 295 ms
+✓ performans: 45 / 60 / 100 sistemde ayna boyutu, host üretim süresi, misafir deserialize süresi
+GEÇEN: 8 KALAN: 0

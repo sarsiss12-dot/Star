@@ -1,0 +1,137 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Evrensel Konsey",
+    "founder": 0,
+    "members": [
+      0,
+      1,
+      2,
+      6,
+      7,
+      5,
+      3,
+      4
+    ],
+    "laws": {
+      "ticaretStd": true
+    },
+    "targeted": {},
+    "treasury": 0,
+    "president": 0,
+    "terms": {
+      "0": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": null,
+    "lastVote": {
+      "key": "ticaretStd",
+      "target": null,
+      "appliedTarget": null,
+      "opened": 4.820399999999996,
+      "ended": 10.25495999999998,
+      "yes": [
+        6,
+        7,
+        5,
+        4,
+        0,
+        1
+      ],
+      "no": [
+        3,
+        2
+      ],
+      "passed": true,
+      "expired": false,
+      "weight": {
+        "yes": 46.01103056526851,
+        "no": 14.35051177665153
+      },
+      "eventKey": "council:ticaretStd:10.25495999999998"
+    },
+    "campaign": null
+  },
+  "inbox": [
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 0,
+        "defender": 3,
+        "rootAttacker": 0,
+        "rootDefender": 3,
+        "front": 1,
+        "campaign": 1,
+        "reason": "declaration",
+        "sponsor": null,
+        "day": 900,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Saf Akıl Ağı → Draxroen Filosu · Yeni savaş ilanı",
+      "key": "war:1",
+      "uid": 14,
+      "born": 900
+    },
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 0,
+        "defender": 4,
+        "rootAttacker": 0,
+        "rootDefender": 4,
+        "front": 3,
+        "campaign": 3,
+        "reason": "declaration",
+        "sponsor": null,
+        "day": 900,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Saf Akıl Ağı → Varira Karargâhı · Yeni savaş ilanı",
+      "key": "war:3",
+      "uid": 15,
+      "born": 900
+    },
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 0,
+        "defender": 5,
+        "rootAttacker": 0,
+        "rootDefender": 5,
+        "front": 5,
+        "campaign": 4,
+        "reason": "promise",
+        "sponsor": 1,
+        "day": 900,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Saf Akıl Ağı → Maron Krallığı · Savaş taahhüdü · Çağıran: Kızıl Muhafız",
+      "key": "war:5",
+      "uid": 16,
+      "born": 900
+    }
+  ],
+  "modal": "",
+  "pane": "<div class=\"dpBox\"><div class=\"dpHd\"><span>GEZEGENLER / HABİTATLAR · 1</span><button class=\"riX\" data-a=\"closeDiplo\">✕</button></div><div class=\"dpBody\"><div class=\"mini\">Yerel koloni neti; devletin ortak giderleri ve genel çarpanları ayrı bilançodadır. İnşa bedeli aylık gider değildir. Tablo yatay kaydırılır; sağdaki mevcut yönetim paneli korunur.</div><div class=\"colonySort\"><button class=\"abtn\" data-a=\"colonySort\" data-x=\"name\">Ad ▴</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"pop\">Nüfus</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"stab\">İstikrar</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"build\">İnşa</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"min\">Maden</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"ene\">Enerji</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"ala\">Alaşım</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"ara\">Bilim</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"yiy\">Gıda</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"tuk\">Tüketim</button><button class=\"abtn\" data-a=\"colonySort\" data-x=\"etk\">Etki</button></div><div id=\"colonyTable\" class=\"colonyTable\"><table><thead><tr><th>Koloni / Tür</th><th>Nüfus</th><th>İstikrar</th><th>İnşa / Otomasyon</th><th>Yerel aylık net</th></tr></thead><tbody><tr class=\"selected\"><td><button data-a=\"colonySelect\" data-x=\"22:1\">Ulvenar II</button><small>Okyanus</small><button data-a=\"colonyMap\" data-x=\"22:1\">Haritada Gör</button></td><td>12.0</td><td>60</td><td>Boş<small>KAPALI · Manuel</small></td><td><span class=\"p\">◆ +3,3</span> · <span class=\"n\">⚡ -2,6</span> · <span class=\"p\">❋ +28,3</span> · <span class=\"p\">▰ +6,1</span> · <span class=\"p\">✦ +12,7</span> · <span class=\"p\">◈ +2</span> · <span class=\"p\">❖ +16,7</span></td></tr></tbody></table></div><button class=\"abtn\" data-a=\"colonyDetails\">SEÇİLİ KOLONİ EKONOMİSİ</button></div></div>"
+}

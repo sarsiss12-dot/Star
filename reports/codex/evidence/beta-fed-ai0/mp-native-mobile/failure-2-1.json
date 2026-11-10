@@ -1,0 +1,64 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Büyük Forumu",
+    "founder": 0,
+    "members": [
+      0,
+      1,
+      2,
+      3,
+      6,
+      4,
+      7,
+      5
+    ],
+    "laws": {
+      "ticaretStd": true
+    },
+    "targeted": {},
+    "treasury": 0,
+    "president": 0,
+    "terms": {
+      "0": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": null,
+    "lastVote": {
+      "key": "ticaretStd",
+      "target": null,
+      "appliedTarget": null,
+      "opened": 5.906199999999994,
+      "ended": 11.91955999999993,
+      "yes": [
+        3,
+        4,
+        5,
+        0,
+        1
+      ],
+      "no": [
+        6,
+        7,
+        2
+      ],
+      "passed": true,
+      "expired": false,
+      "weight": {
+        "yes": 38.346401208125044,
+        "no": 20.395767664977296
+      },
+      "eventKey": "council:ticaretStd:11.91955999999993"
+    },
+    "campaign": null
+  },
+  "inbox": [],
+  "modal": "",
+  "pane": "<div class=\"dpBox dcBox fedBox\">\n      <div class=\"dpHd\"><span>🏛 FEDERASYON</span>\n        <button class=\"riX\" data-a=\"closeFed\">✕</button></div>\n      \n      <div class=\"dpBody dcBody \" data-fed-tab=\"general\"><div class=\"ph\">FEDERASYON KURULUŞU</div><div class=\"mini\">İki açık rızalı insan yeterlidir. Tek insanlı oyunda en az iki AI ortak gerekir. Yalnız seçtiğin ortaklar davet edilir; ücret son onayda bir kez kesilir.</div><div class=\"box fedFoundation\" data-founding=\"1\"><b>Askerî Federasyon · Eşit Temsil · BEKLİYOR</b><div class=\"mini\">Öneren: Saf Akıl Ağı · 5 ay · 220 Etki · yalnız kurucudan</div><div class=\"mini\">Yeni saldırılara ortak savunma yükümlülüğü. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Üyeler arasında ittifak oluşur. Önceki savaşlar sessizce kapatılmaz.</div><div class=\"mini\">Saf Akıl Ağı — KABUL EDİLDİ · Kuruluş şartlarını önerdi</div><div class=\"mini\">Kızıl Muhafız — BEKLİYOR · İnsan yanıtı bekleniyor</div><div class=\"mini\">Okyanus Ticaret Birliği — BEKLİYOR · İnsan yanıtı bekleniyor</div><div class=\"mini\">Liiron Konfederasyonu — KABUL EDİLDİ · İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div><div class=\"mini\">Qeles Hegemonyası — KABUL EDİLDİ · İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div><div class=\"mini\">Orres Örgütü — KABUL EDİLDİ · İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div><button class=\"abtn\" data-a=\"fedFoundEdit\" data-x=\"1\">TASLAĞI DÜZENLE</button><button class=\"abtn pri\" data-a=\"fedFoundFinish\" data-x=\"1\" disabled=\"\">SON KURULUŞ ONAYI · 220 ◈</button><button class=\"abtn\" data-a=\"fedFoundCancel\" data-x=\"1\">SÜRECİ İPTAL ET</button></div><div class=\"ph\">TÜR</div><button class=\"abtn pri\" data-a=\"fedFoundType\" data-x=\"askeri\">🛡 Askerî Federasyon</button><button class=\"abtn \" data-a=\"fedFoundType\" data-x=\"bilimsel\">🔬 Bilimsel Federasyon</button><button class=\"abtn \" data-a=\"fedFoundType\" data-x=\"ticaret\">🤝 Ticaret Federasyonu</button><button class=\"abtn \" data-a=\"fedFoundType\" data-x=\"yagmaci\">⚔ Yağmacı Federasyon</button><div class=\"ph\">OY REJİMİ</div><button class=\"abtn pri\" data-a=\"fedBallot\" data-x=\"equal\">Eşit Temsil</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"hegemonic\">Hegemonik</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"economic\">Ekonomik Temsil</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"mixed\">Karma Konsey</button><p class=\"mini\">+12 filo kapasitesi; bakım +4 yüzde puan. Varsayılan ortak savunma; saldırı için ayrı karar. Her üye 1 oy. Küçük devletleri korur; büyük katkıya ek oy vermez. Yeni saldırılara ortak savunma yükümlülüğü. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Kuruluşta seçilen üyeler birbirleriyle ittifak kurar. Açık taslak düzenlenebilir. Kadro/tür/oy rejimi değişirse eski kabuller geçmişte kalır; güncel rıza yeniden gerekir. Süre uzatılmaz.</p><div class=\"ph\">KURUCU ORTAKLAR · 5 SEÇİLİ</div><div class=\"box\"><button class=\"abtn pri\" data-a=\"fedFoundSelect\" data-x=\"1\" aria-pressed=\"true\">☑ Kızıl Muhafız</button><div class=\"mini\">İnsan — açık yanıt gerekli · İlişki 90 · Yapısal olarak uygun</div></div><div class=\"box\"><button class=\"abtn pri\" data-a=\"fedFoundSelect\" data-x=\"2\" aria-pressed=\"true\">☑ Okyanus Ticaret Birliği</button><div class=\"mini\">İnsan — açık yanıt gerekli · İlişki 90 · Yapısal olarak uygun</div></div><div class=\"box\"><button class=\"abtn pri\" data-a=\"fedFoundSelect\" data-x=\"3\" aria-pressed=\"true\">☑ Liiron Konfederasyonu</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun</div><div class=\"mini\">Tür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div></div><div class=\"box\"><button class=\"abtn pri\" data-a=\"fedFoundSelect\" data-x=\"4\" aria-pressed=\"true\">☑ Qeles Hegemonyası</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun</div><div class=\"mini\">Tür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div></div><div class=\"box\"><button class=\"abtn pri\" data-a=\"fedFoundSelect\" data-x=\"5\" aria-pressed=\"true\">☑ Orres Örgütü</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun</div><div class=\"mini\">Tür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"6\" aria-pressed=\"false\">☐ Alaar Krallığı</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun</div><div class=\"mini\">Tür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"7\" aria-pressed=\"false\">☐ Elanen Komutanlığı</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun</div><div class=\"mini\">Tür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div></div><div class=\"mini\" role=\"status\">Seçilen şartlar davete uygun · 220 ◈</div><button class=\"abtn pri\" data-a=\"fedFoundStart\">KURULUŞ DAVETLERİNİ GÖNDER</button></div></div>"
+}

@@ -1,0 +1,123 @@
+[
+  {
+    "kind": "prepare",
+    "plan": 1,
+    "front": 1,
+    "payment": 600,
+    "actorOtherSpend": 365,
+    "history": [
+      {
+        "day": 900,
+        "kind": "coalition-prepare",
+        "objective": "regional",
+        "stage": "arm",
+        "plan": 1,
+        "target": 2,
+        "why": "Mevcut bölgesel hedef için tek başına yetersiz, bilinen müttefik desteği erişilebilir"
+      },
+      {
+        "day": 900,
+        "kind": "coalition-offer",
+        "objective": "regional",
+        "stage": "arm",
+        "plan": 1,
+        "other": 3,
+        "result": "kabul",
+        "applied": true
+      },
+      {
+        "day": 900,
+        "kind": "building-paid",
+        "objective": "regional",
+        "stage": "arm",
+        "system": 6,
+        "planet": 0,
+        "key": "dokum",
+        "paid": {
+          "min": 210
+        }
+      },
+      {
+        "day": 900,
+        "kind": "ship-paid",
+        "objective": "regional",
+        "stage": "arm",
+        "system": 6,
+        "cls": "kol",
+        "paid": {
+          "ala": 60,
+          "min": 265
+        }
+      },
+      {
+        "day": 900,
+        "kind": "fleet-order",
+        "objective": "regional",
+        "stage": "arm",
+        "fleet": 6,
+        "to": 3
+      },
+      {
+        "day": 930,
+        "kind": "war-started",
+        "objective": "regional",
+        "stage": "arm",
+        "other": 2,
+        "support": false
+      },
+      {
+        "day": 930,
+        "kind": "coalition-launch",
+        "objective": "regional",
+        "stage": "arm",
+        "plan": 1,
+        "front": 1,
+        "ok": true,
+        "why": "Geçerli CB, güncel rıza ve ortak kuvvet"
+      }
+    ]
+  },
+  {
+    "kind": "military",
+    "fleets": [
+      {
+        "id": 12,
+        "path": [],
+        "mv": null,
+        "combat": 0
+      },
+      {
+        "id": 13,
+        "path": [
+          27,
+          39,
+          34,
+          16,
+          40,
+          3
+        ],
+        "mv": null,
+        "combat": 0
+      },
+      {
+        "id": 22,
+        "path": [],
+        "mv": null,
+        "combat": 0
+      }
+    ]
+  },
+  {
+    "kind": "paid",
+    "offer": 1,
+    "front": 1,
+    "payment": 240
+  },
+  {
+    "kind": "human-invite",
+    "offer": 1,
+    "plan": 1,
+    "front": 1,
+    "noImplicitHumanConsent": true
+  }
+]

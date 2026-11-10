@@ -1,0 +1,527 @@
+{
+ "results": [
+  {
+   "name": "R0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 8 AI, orta, seed 11; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 13098
+  },
+  {
+   "name": "R1 2 ay kampanya + bekleyen insan teklifi (C → B), savaş, federasyon/konsey denemeleri; senkron",
+   "status": "FAIL",
+   "error": "page.evaluate: TypeError: Cannot set properties of undefined (setting '1')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:297)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at exports.prepare (/workspace/Star/tests/helpers/beta-fed-ai0-resume.cjs:6:11)\n    at async /workspace/Star/tests/browser-mp8.cjs:275:50\n    at async test (/workspace/Star/tests/browser-mp8.cjs:24:162)\n    at async /workspace/Star/tests/browser-mp8.cjs:271:5"
+  },
+  {
+   "name": "R2 kayıt: OYUNU KAYDET (IndexedDB); Save8/RNG değişmez; misafir cihazında kayıt kimliği; tüm tarayıcı süreçleri + relay süreci kapanır",
+   "status": "PASS",
+   "ms": 1919
+  },
+  {
+   "name": "R3 devam: yeni host süreci aynı profil → KAYITLI OYUNA DEVAM ET → yeni oda; misafirler yeni kodla gerçek STARS arayüzünden döner → aynı devletler; dünya, teklifler, savaşlar, federasyon, konsey, hız aynı",
+   "status": "PASS",
+   "ms": 42670
+  },
+  {
+   "name": "R4 devam eden oyun: bekleyen teklif B tarafından tam bir kez kabul edilir; 6 ay daha kampanya + senkron",
+   "status": "FAIL",
+   "error": "TypeError: Cannot read properties of undefined (reading 'length')\n    at /workspace/Star/tests/browser-mp8.cjs:313:24\n    at test (/workspace/Star/tests/browser-mp8.cjs:24:168)\n    at /workspace/Star/tests/browser-mp8.cjs:311:11"
+  }
+ ],
+ "metrics": {
+  "scen": "R",
+  "conf": {
+   "size": "orta",
+   "ai": 8,
+   "seed": 11,
+   "months": 2,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     3,
+     3
+    ],
+    "mirrorEq": true,
+    "revMs": 291,
+    "buildMs": 368,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     3,
+     3
+    ],
+    "mirrorEq": true,
+    "revMs": 448,
+    "buildMs": 488,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m2",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     10,
+     10
+    ],
+    "mirrorEq": true,
+    "revMs": 904,
+    "buildMs": 958,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m2",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     10,
+     10
+    ],
+    "mirrorEq": true,
+    "revMs": 1020,
+    "buildMs": 1105,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "resume",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     1,
+     1
+    ],
+    "mirrorEq": true,
+    "revMs": 258,
+    "buildMs": 264,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "resume",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     1,
+     1
+    ],
+    "mirrorEq": true,
+    "revMs": 273,
+    "buildMs": 279,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [
+   {
+    "label": "m2",
+    "who": "H",
+    "k": "offerHuman",
+    "status": "ok",
+    "before": 0,
+    "after": 1,
+    "res": true
+   },
+   {
+    "label": "m2",
+    "who": "B",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 55,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m2",
+    "who": "B",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 97,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m2",
+    "who": "B",
+    "k": "build",
+    "status": "ok",
+    "code": null,
+    "ms": 34,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m2",
+    "who": "B",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 64,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m2",
+    "who": "B",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 83,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m2",
+    "who": "B",
+    "k": "respond",
+    "status": "ok",
+    "code": null,
+    "ms": 57,
+    "before": "pending",
+    "after": "accepted"
+   },
+   {
+    "label": "m2",
+    "who": "B",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m2",
+    "who": "B",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   },
+   {
+    "label": "m2",
+    "who": "C",
+    "k": "research",
+    "status": "ok",
+    "code": null,
+    "ms": 57,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m2",
+    "who": "C",
+    "k": "move",
+    "status": "ok",
+    "code": null,
+    "ms": 49,
+    "before": false,
+    "after": true
+   },
+   {
+    "label": "m2",
+    "who": "C",
+    "k": "build",
+    "status": "ok",
+    "code": null,
+    "ms": 54,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m2",
+    "who": "C",
+    "k": "ship",
+    "status": "ok",
+    "code": null,
+    "ms": 53,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m2",
+    "who": "C",
+    "k": "offerHuman",
+    "status": "ok",
+    "code": null,
+    "ms": 228,
+    "before": 0,
+    "after": 1
+   },
+   {
+    "label": "m2",
+    "who": "C",
+    "k": "respond",
+    "status": "skip",
+    "why": "none"
+   },
+   {
+    "label": "m2",
+    "who": "C",
+    "k": "fedFound",
+    "status": "skip",
+    "why": "fed"
+   },
+   {
+    "label": "m2",
+    "who": "C",
+    "k": "councilVote",
+    "status": "skip",
+    "why": "no-council"
+   }
+  ],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 8.5,
+      "p95": 8.5,
+      "max": 8.5
+     },
+     "longtask": {
+      "n": 4,
+      "med": 67,
+      "p95": 75,
+      "max": 75
+     },
+     "heapMB": 17,
+     "dom": 740,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 3,
+       "med": 19.2,
+       "p95": 53.1,
+       "max": 53.1
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.2,
+       "p95": 2.2,
+       "max": 2.2
+      },
+      "longtask": {
+       "n": 1,
+       "med": 53,
+       "p95": 53,
+       "max": 53
+      },
+      "builds": 3,
+      "deltas": 2,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 723,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 28,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 3,
+       "med": 16.1,
+       "p95": 120.7,
+       "max": 120.7
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.8,
+       "p95": 2.8,
+       "max": 2.8
+      },
+      "longtask": {
+       "n": 1,
+       "med": 50,
+       "p95": 50,
+       "max": 50
+      },
+      "builds": 3,
+      "deltas": 2,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 724,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 24,
+      "joinErrors": 0
+     }
+    }
+   },
+   {
+    "label": "m2",
+    "month": 2,
+    "host": {
+     "monthTick": {
+      "n": 2,
+      "med": 260.8,
+      "p95": 260.8,
+      "max": 260.8
+     },
+     "publish": {
+      "n": 63,
+      "med": 8.7,
+      "p95": 42.6,
+      "max": 55
+     },
+     "longtask": {
+      "n": 20,
+      "med": 64,
+      "p95": 121,
+      "max": 121
+     },
+     "heapMB": 23,
+     "dom": 763,
+     "intervals": 2,
+     "timeouts": 5,
+     "offers": 3,
+     "notes": 0,
+     "inbox": 2,
+     "log": 7,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 7,
+       "med": 14.2,
+       "p95": 23.9,
+       "max": 23.9
+      },
+      "refresh": {
+       "n": 11,
+       "med": 5.2,
+       "p95": 42.9,
+       "max": 42.9
+      },
+      "longtask": {
+       "n": 24,
+       "med": 57,
+       "p95": 79,
+       "max": 122
+      },
+      "builds": 10,
+      "deltas": 9,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 13,
+      "dom": 755,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 6,
+      "packets": 119,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 7,
+       "med": 10.9,
+       "p95": 30.7,
+       "max": 30.7
+      },
+      "refresh": {
+       "n": 11,
+       "med": 3.7,
+       "p95": 45.5,
+       "max": 45.5
+      },
+      "longtask": {
+       "n": 17,
+       "med": 59,
+       "p95": 87,
+       "max": 87
+      },
+      "builds": 10,
+      "deltas": 9,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 19,
+      "dom": 764,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 5,
+      "packets": 114,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {
+   "pkgBytes": 166531,
+   "after": {
+    "day": 62,
+    "r": "-1080759427",
+    "offers": "1:accepted:0>1,2:pending:1>0,3:pending:2>0",
+    "wars": "0:|1:|2:",
+    "feds": "",
+    "council": "",
+    "vassal": "",
+    "humans": "0:Kızıl Muhafız:ai=false:col=1:fl=3|1:Saf Akıl Ağı:ai=false:col=1:fl=3|2:Yeşil Birlik:ai=false:col=1:fl=3",
+    "speed": 0,
+    "inbox": 2
+   },
+   "before": {
+    "day": 62,
+    "r": "-1080759427",
+    "offers": "1:accepted:0>1,2:pending:1>0,3:pending:2>0",
+    "wars": "0:|1:|2:",
+    "feds": "",
+    "council": "",
+    "vassal": "",
+    "humans": "0:Kızıl Muhafız:ai=false:col=1:fl=3|1:Saf Akıl Ağı:ai=false:col=1:fl=3|2:Yeşil Birlik:ai=false:col=1:fl=3",
+    "speed": 0,
+    "inbox": 2
+   }
+  },
+  "relayPid1": 696212,
+  "actualWorld": {
+   "seed": 11,
+   "size": "orta",
+   "systems": 45,
+   "states": 11
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "relayPid2": 696693,
+  "errors": []
+ }
+}

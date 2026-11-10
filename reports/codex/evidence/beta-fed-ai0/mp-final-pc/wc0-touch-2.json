@@ -1,0 +1,125 @@
+{
+  "frames": [
+    {
+      "at": 130478.19999998808,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        1169.203125,
+        444,
+        44
+      ]
+    },
+    {
+      "at": 130713.09999996424,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        1169.203125,
+        444,
+        44
+      ]
+    },
+    {
+      "at": 131000.30000001192,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        1169.203125,
+        444,
+        44
+      ]
+    },
+    {
+      "at": 131493.5,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        866.203125,
+        444,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 131573.09999996424,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        866.203125,
+        444,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 131619.5,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        866.203125,
+        444,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 131707.80000001192,
+      "same": true,
+      "connected": true,
+      "rect": [
+        513,
+        866.203125,
+        444,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 131811.69999998808,
+      "same": false,
+      "connected": true,
+      "rect": [
+        -407,
+        881.140625,
+        444,
+        44
+      ]
+    },
+    {
+      "at": 131899.69999998808,
+      "same": false,
+      "connected": true,
+      "rect": [
+        -407,
+        881.140625,
+        444,
+        44
+      ]
+    }
+  ],
+  "events": [
+    {
+      "t": "pointerdown",
+      "at": 131778.39999997616,
+      "target": "dealSend"
+    },
+    {
+      "t": "pointerup",
+      "at": 131783.69999998808,
+      "target": "dealSend"
+    },
+    {
+      "t": "click",
+      "at": 131784.09999996424,
+      "target": "dealSend"
+    }
+  ],
+  "mutations": 2
+}

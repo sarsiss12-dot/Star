@@ -1,0 +1,23 @@
+{
+  "selector": "[data-a=\"fedFoundStart\"]",
+  "url": "/mp/play",
+  "who": "Saf Akıl Ağı",
+  "box": [
+    12,
+    596.953125,
+    176.9375,
+    44
+  ],
+  "connected": true,
+  "top": null,
+  "viewport": [
+    800,
+    360
+  ],
+  "scroll": [
+    0,
+    0
+  ],
+  "focus": "",
+  "modal": "hidden"
+}

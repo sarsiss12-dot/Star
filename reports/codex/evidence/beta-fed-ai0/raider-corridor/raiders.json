@@ -1,0 +1,36 @@
+[
+  {
+    "kind": "found",
+    "proposal": 1,
+    "fed": 1,
+    "members": [
+      1,
+      3,
+      4
+    ],
+    "aiReason": [
+      {
+        "day": 900,
+        "kind": "raider-founding",
+        "objective": "federation",
+        "stage": "arm",
+        "proposal": 1,
+        "members": [
+          3,
+          4
+        ],
+        "why": "Uygun müttefikler, gerçek davet ve bağımsız yanıtlar"
+      },
+      {
+        "day": 930,
+        "kind": "raider-founded",
+        "objective": "federation",
+        "stage": "arm",
+        "proposal": 1,
+        "ok": true,
+        "fed": 1,
+        "why": "Bütün güncel rızalar alındı"
+      }
+    ]
+  }
+]

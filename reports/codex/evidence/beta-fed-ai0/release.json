@@ -1,0 +1,239 @@
+{
+  "file": "releases/stars-faz96h10p19.zip",
+  "bytes": 823384,
+  "sha256": "501d4e27e2435402adf3b88ef43095d95946af9ca0278860bf7ea01bac220583",
+  "crc32": "76c91ab4",
+  "deterministic_rebuild": true,
+  "members": [
+    {
+      "file": "RELEASE-MANIFEST.json",
+      "bytes": 2091,
+      "crc32": "9dbf9f36"
+    },
+    {
+      "file": "ai.js",
+      "bytes": 295318,
+      "crc32": "12527f52"
+    },
+    {
+      "file": "archive-ui.js",
+      "bytes": 38567,
+      "crc32": "92f16014"
+    },
+    {
+      "file": "audio.js",
+      "bytes": 20197,
+      "crc32": "8e4ebbb4"
+    },
+    {
+      "file": "combat.js",
+      "bytes": 16353,
+      "crc32": "60f044a8"
+    },
+    {
+      "file": "commerce-ui.js",
+      "bytes": 11105,
+      "crc32": "1d6711a6"
+    },
+    {
+      "file": "commerce.js",
+      "bytes": 29743,
+      "crc32": "8c20977c"
+    },
+    {
+      "file": "construction.js",
+      "bytes": 8982,
+      "crc32": "b8616443"
+    },
+    {
+      "file": "diplomacy.js",
+      "bytes": 553698,
+      "crc32": "10e6a8d1"
+    },
+    {
+      "file": "economic-ledger.js",
+      "bytes": 17942,
+      "crc32": "a513ee94"
+    },
+    {
+      "file": "economy-ui.js",
+      "bytes": 28944,
+      "crc32": "ae0913b6"
+    },
+    {
+      "file": "economy.js",
+      "bytes": 215022,
+      "crc32": "56de1370"
+    },
+    {
+      "file": "inbox.js",
+      "bytes": 13237,
+      "crc32": "aae98968"
+    },
+    {
+      "file": "index.html",
+      "bytes": 96807,
+      "crc32": "e25c9f30"
+    },
+    {
+      "file": "main.js",
+      "bytes": 498381,
+      "crc32": "a2d6f6c2"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 1922,
+      "crc32": "641ae79b"
+    },
+    {
+      "file": "map.js",
+      "bytes": 147220,
+      "crc32": "7355dcc7"
+    },
+    {
+      "file": "news.js",
+      "bytes": 6039,
+      "crc32": "a13ff379"
+    },
+    {
+      "file": "sw.js",
+      "bytes": 2804,
+      "crc32": "198a5cb7"
+    },
+    {
+      "file": "ui.js",
+      "bytes": 584782,
+      "crc32": "ca441b22"
+    }
+  ],
+  "fileHashes": {
+    "ai.js": {
+      "before": "f75d2b961b7d996ddcc43e42f48aadaed0f87860dbeb7d37621b801a5d029c1e",
+      "after": "6d0a7800f0423b95212a8dbaf70009b0da4514cc3959d83f21e89511e0046f5c",
+      "changed": true
+    },
+    "archive-ui.js": {
+      "before": "83ef4b95ab1b503c17e8b655745487fa693dc5501632b633b3df4bf5cf9f966d",
+      "after": "83ef4b95ab1b503c17e8b655745487fa693dc5501632b633b3df4bf5cf9f966d",
+      "changed": false
+    },
+    "audio.js": {
+      "before": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "after": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "changed": false
+    },
+    "combat.js": {
+      "before": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+      "after": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
+      "changed": false
+    },
+    "commerce-ui.js": {
+      "before": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+      "after": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+      "changed": false
+    },
+    "commerce.js": {
+      "before": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+      "after": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+      "changed": false
+    },
+    "construction.js": {
+      "before": "19244de7be9ad0d0aaf5bf67cbccd85bd4f2988cd9d670bbe2a7dd4a91905bf5",
+      "after": "19244de7be9ad0d0aaf5bf67cbccd85bd4f2988cd9d670bbe2a7dd4a91905bf5",
+      "changed": false
+    },
+    "diplomacy.js": {
+      "before": "094704840a38ea2d1b277e7b56df81507410f3fe7e51ea82802392a1db50b6c5",
+      "after": "3b813073136181fd82c94560618fb29355d59dbab28b3f6e95b6005048d8dd10",
+      "changed": true
+    },
+    "economic-ledger.js": {
+      "before": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
+      "after": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
+      "changed": false
+    },
+    "economy-ui.js": {
+      "before": "bf782df67a41afbb28314fbeb5d6e92cd5c8b76a42c5b7fd1291fa54d4842254",
+      "after": "bf782df67a41afbb28314fbeb5d6e92cd5c8b76a42c5b7fd1291fa54d4842254",
+      "changed": false
+    },
+    "economy.js": {
+      "before": "8392cf97c2d1d1b3f346c74a8c0cbe3bfaf4d671257cbd925f9a3ee7d04eab7b",
+      "after": "8392cf97c2d1d1b3f346c74a8c0cbe3bfaf4d671257cbd925f9a3ee7d04eab7b",
+      "changed": false
+    },
+    "inbox.js": {
+      "before": "67acb5a714504e83708cc388c36e0995e425ee278930abff26c0939f71666208",
+      "after": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
+      "changed": true
+    },
+    "index.html": {
+      "before": "a9cfced642ea6bfd8141ed27d21d671bd0645ba31b0a4177a08b06e072a8146e",
+      "after": "a9cfced642ea6bfd8141ed27d21d671bd0645ba31b0a4177a08b06e072a8146e",
+      "changed": false
+    },
+    "main.js": {
+      "before": "d0a1814eda8df37c975d82d669a9afd43116347caf9d8542137e674ad8c73111",
+      "after": "7550752f7c6bba96f031c346d8211861b3f9cc115038c49086f01a9147f33149",
+      "changed": true
+    },
+    "manifest.json": {
+      "before": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "after": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "changed": false
+    },
+    "map.js": {
+      "before": "400dbc524750443528b88bfbd0d82aa301fd7b1f12b03d8ea5fa3d73c07603fc",
+      "after": "400dbc524750443528b88bfbd0d82aa301fd7b1f12b03d8ea5fa3d73c07603fc",
+      "changed": false
+    },
+    "news.js": {
+      "before": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "after": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "changed": false
+    },
+    "sw.js": {
+      "before": "cb0e882abefa87c2042bff80b61ae93ef4e025205ac037f75b12a917e084f64e",
+      "after": "e39e93c15060fa5feba5caab5baad7becfc4c750b7b66173e5fb9b27718ee845",
+      "changed": true
+    },
+    "ui.js": {
+      "before": "e33323e11f09e38217b5f71759b27d5763e948ba6d855f2e6ec1af45d3f19db3",
+      "after": "7889c7fdf3fbb7670ca16d1db02c84b1d342572669d7b79edc9b319f60f0e12b",
+      "changed": true
+    },
+    "research/mp0/mp-core.js": {
+      "before": "9f7dda832dd99363539b82b0083d91572d0d32e0bfec546ff688e0e75c265340",
+      "after": "18c10a99c2b55bf045fff0628f65107cd279a4b842895388b7c24004b7a26dd6",
+      "changed": true
+    },
+    "research/mp6/mirror.js": {
+      "before": "e25752b9f7676b146c22bee9609a215f502506314c7a4b174b1d6f31d7bbf7e6",
+      "after": "5b2c6ac008404e32ef9554ec45227f59c7b262fd9b864e0c2e9bda6c37aba122",
+      "changed": true
+    },
+    "research/mp6/client/guest-stars.js": {
+      "before": "8280dbfb1c0217883f1a642e3a1c1ba5fa56b6646dc41ab95fc3444ff5d0f065",
+      "after": "67720177a25fa4c61d3dc40050fd87e4a3f7fb743157c63d55a681dcffa672ce",
+      "changed": true
+    },
+    "research/mp1/client/mp1-host.js": {
+      "before": "c51e44ae76f9814708b8456edb96b32ecbf1c6cbac7a630aa96464b5ebd08e88",
+      "after": "58355968ecef766e4dfefd77bd4df42d2283386d86edd219a41df832fde87447",
+      "changed": true
+    },
+    "research/mp1/client/view.js": {
+      "before": "fabe5a036301637959cbab2ffda27ac6ba9714e449db25cb9bc42c5089f95be0",
+      "after": "9f14cf54909dbd8246807520c3791a8d3b81fad7cdcbecf7a502f36a1be55637",
+      "changed": true
+    },
+    "research/mp1/server/relay.js": {
+      "before": "574b21b98728079db2b79397e8c059c371db105d5a0f13939f67bd177e85215a",
+      "after": "c132430f96bb625426f26a00f5d09076f090fbe482db9a018d536f001d9811c9",
+      "changed": true
+    }
+  },
+  "mpPackage": 4,
+  "protocol": 1,
+  "save": 8
+}

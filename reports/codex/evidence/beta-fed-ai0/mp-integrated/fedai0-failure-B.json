@@ -1,0 +1,274 @@
+{
+  "feds": [
+    {
+      "id": 1,
+      "name": "Ufuk Yıldız Kalkanı",
+      "type": "bilimsel",
+      "charter": {
+        "defense": "vote",
+        "offense": "vote",
+        "admission": "allies",
+        "ballot": "equal"
+      },
+      "leader": 0,
+      "founder": 0,
+      "members": [
+        1,
+        0,
+        2
+      ],
+      "laws": {
+        "savunma": {
+          "since": 0,
+          "by": 0
+        }
+      },
+      "fund": {
+        "ala": 0,
+        "ene": 0
+      },
+      "treasury": 0,
+      "founded": 900,
+      "typeSince": 900,
+      "dutySince": {
+        "defense": 0,
+        "offense": 0
+      },
+      "invites": {},
+      "decisions": {},
+      "dutyConsent": {},
+      "cohesion": 70,
+      "nextVote": 1080,
+      "politicsVersion": 96,
+      "agenda": {
+        "emergencyStreak": 1,
+        "v": 1,
+        "next": 4,
+        "items": [
+          {
+            "id": 1,
+            "by": 2,
+            "kind": "law",
+            "law": "arastirma",
+            "options": {
+              "repeal": false
+            },
+            "key": "[\"law\",\"arastirma\",false,\"\",null,null,null,null,null]",
+            "created": 900,
+            "expires": 1260,
+            "status": "waiting",
+            "position": 1
+          },
+          {
+            "id": 2,
+            "by": 1,
+            "kind": "law",
+            "law": "ticaret",
+            "options": {
+              "repeal": false
+            },
+            "key": "[\"law\",\"ticaret\",false,\"\",null,null,null,null,null]",
+            "created": 900,
+            "expires": 1260,
+            "status": "waiting",
+            "position": 2
+          }
+        ],
+        "history": [
+          {
+            "defenseFront": 1,
+            "id": 3,
+            "by": 0,
+            "kind": "motion",
+            "law": "motion",
+            "options": {
+              "target": 3,
+              "sponsor": 0,
+              "kind": "joinWar"
+            },
+            "key": "[\"motion\",\"motion\",false,\"joinWar\",3,0,null,null,null]",
+            "created": 900,
+            "expires": 1260,
+            "status": "active",
+            "why": "Sıra geldi; oylama açıldı",
+            "updated": 900,
+            "vote": "2"
+          }
+        ]
+      },
+      "vote": {
+        "id": 2,
+        "kind": "motion",
+        "law": "motion",
+        "motion": "joinWar",
+        "repeal": false,
+        "opened": 900,
+        "expires": 990,
+        "defenseFront": 1,
+        "proposer": 0,
+        "target": 3,
+        "sponsor": 0,
+        "yes": [],
+        "no": [],
+        "eligible": [
+          1,
+          0,
+          2
+        ],
+        "ballotSnapshot": {
+          "mode": "equal",
+          "modern": true,
+          "source": "opened",
+          "weights": {
+            "0": 1,
+            "1": 1,
+            "2": 1
+          }
+        }
+      },
+      "lastVote": {
+        "id": "1",
+        "law": "savunma",
+        "kind": "basic",
+        "passed": true,
+        "day": 900,
+        "why": "Gerekli üye ve oy çoğunluğu sağlandı",
+        "rule": "Mutlak üye çoğunluğu (2/3) ve toplam oy ağırlığının yarısından fazlası. Süre sonunda eksik oy çekimserdir.",
+        "yes": 3,
+        "no": 0,
+        "abstain": 0
+      },
+      "identityType": "bilimsel",
+      "emblem": {
+        "v": 1,
+        "shape": "shield",
+        "symbol": "orbit",
+        "pattern": "plain",
+        "primary": "#5cf5d6",
+        "secondary": "#492453",
+        "federation": true
+      }
+    }
+  ],
+  "proposals": {
+    "v": 1,
+    "next": 2,
+    "proposals": [
+      {
+        "id": 1,
+        "by": 0,
+        "type": "askeri",
+        "ballot": "equal",
+        "members": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "opened": 900,
+        "expires": 1050,
+        "status": "founded",
+        "replies": {
+          "0": {
+            "status": "accepted",
+            "terms": "askeri|equal|0,1,2,3,4,6|r1",
+            "day": 900,
+            "why": "Güncel kuruluş şartlarını önerdi"
+          },
+          "1": {
+            "terms": "askeri|equal|0,1,2,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "Kuruluş şartlarını açıkça kabul etti"
+          },
+          "2": {
+            "terms": "askeri|equal|0,1,2,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "Kuruluş şartlarını açıkça kabul etti"
+          },
+          "3": {
+            "terms": "askeri|equal|0,1,2,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+          },
+          "4": {
+            "terms": "askeri|equal|0,1,2,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+          },
+          "6": {
+            "terms": "askeri|equal|0,1,2,3,4,6|r1",
+            "status": "accepted",
+            "day": 900,
+            "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+          }
+        },
+        "revision": 1,
+        "revisions": [
+          {
+            "revision": 0,
+            "type": "askeri",
+            "ballot": "equal",
+            "members": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "replies": {
+              "0": {
+                "status": "accepted",
+                "terms": "askeri|equal|0,1,2,3,4,5",
+                "day": 900,
+                "why": "Kuruluş şartlarını önerdi"
+              },
+              "1": {
+                "terms": "askeri|equal|0,1,2,3,4,5",
+                "status": "accepted",
+                "day": 900,
+                "why": "Kuruluş şartlarını açıkça kabul etti"
+              },
+              "2": {
+                "terms": "askeri|equal|0,1,2,3,4,5",
+                "status": "accepted",
+                "day": 900,
+                "why": "Kuruluş şartlarını açıkça kabul etti"
+              },
+              "3": {
+                "terms": "askeri|equal|0,1,2,3,4,5",
+                "status": "accepted",
+                "day": 900,
+                "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+              },
+              "4": {
+                "terms": "askeri|equal|0,1,2,3,4,5",
+                "status": "accepted",
+                "day": 900,
+                "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+              },
+              "5": {
+                "status": "rejected",
+                "terms": "askeri|equal|0,1,2,3,4,5",
+                "day": 900,
+                "why": "Kontrollü AI ret senaryosu"
+              }
+            },
+            "day": 900
+          }
+        ],
+        "fid": 1,
+        "finished": 900
+      }
+    ]
+  },
+  "pane": "\n      🏛 FEDERASYON\n        ✕\n      GENELÜYELEROYLAMALARYASALARASKERÎYÖNETİM\n      GÜNDEM KUYRUĞUTek aktif oylama; olağan öneriler FIFO. Gerçek acil savunma sırayı öne alır; aktif oy kesilmez. Olağan öneri beklerken en fazla iki acil açılış; sonra olağan sıra. En fazla 12 öneri, kişi başına 3. Bekleme sınırı 360 gün. Kuyrukta bedel kesilmez; sıra geldiğinde koşullar ve bütçe yeniden denetlenir. Savaş kararı ayrıca yetkili uygulama gerektirir.1. 🚨 ACİL SAVUNMA · Mevcut Savaşa KatılmaKaynak cephe #1 · Öneren: Sen · Hedef: Dravvoon Halkası · 360 gün · Açılış bedeli 0 ◈ÖNERİYİ GERİ ÇEK2. Ortak Araştırma FonuÖneren: Okyanus Ticaret Birliği · 360 gün · Açılış bedeli 60 ◈3. Ticaret BirliğiÖneren: Kızıl Muhafız · 360 gün · Açılış bedeli 60 ◈Eşit TemsilHer üye 1 oy. Küçük devletleri korur; büyük katkıya ek oy vermez.Bu gündemin ağırlıkları açılışta sabitlendi.Kızıl Muhafız1 oy BEKLİYORSaf Akıl Ağı · SEN1 oy EVETOkyanus Ticaret Birliği1 oy EVETMutlak üye çoğunluğu (2/3) ve toplam oy ağırlığının yarısından fazlası. Süre sonunda eksik oy çekimserdir.Senin oyun: Kullanıldı.OYLAMA\n          🛡 Savunma PaktıAÇIK\n          Bir üyeye savaş açılırsa tüm üyeler otomatik savaşa girer.KABUL EDİLİRSEBir üyeye savaş açılırsa tüm üyeler otomatik savaşa girer.Öneren: Kızıl Muhafız · Federasyon: Ufuk Yıldız KalkanıHayır oyu öneriye karşıdır; sonuç mevcut çoğunluk hesabıyla belirlenir. Oy kullanmak için ek kaynak bedeli yoktur; öneri bedeli önerenden alınmıştır.Mutlak üye çoğunluğu (2/3) ve toplam oy ağırlığının yarısından fazlası. Süre sonunda eksik oy çekimserdir.Destekleyenler: Saf Akıl Ağı, Okyanus Ticaret Birliği · Karşı çıkanlar: yok · Beklenen: Kızıl MuhafızMutlak üye çoğunluğu (2/3) ve toplam oy ağırlığının yarısından fazlası. Süre sonunda eksik oy çekimserdir.\n          Ağırlıklı oylar2 evet\n            · 0 hayır\n          1 üyenin oyu bekleniyor ·\n            90 gün kaldı\n          OY KULLAN",
+  "modal": "",
+  "own": 0
+}

@@ -1,0 +1,8 @@
+PASS gerçek aiTurn zayıf bölgesel hedefte sıfırdan hazırlık ve gerçek AI rızası üretir
+PASS AI insanın savaşına ücretli destek önerir; açık yanıt olmadan katılmaz; kabulde tek bedel
+PASS ret aynı koşullarda yeniden teklif üretmez; ekonomi krizi macerayı engeller
+PASS koşullu AI planı Save8de aynı kalır; katılımcı savaştan önce çekilirse ilan yok
+PASS AI insanı hazırlığa davet eder; yanıt vermeyen insan son savaşta otomatik taraf olmaz
+PASS bilinen erişilebilir rota yoksa yeni koalisyon planı ve ücretli vaat oluşmaz
+PASS bilinmeyen üçüncü taraf savaşı AI ücretli destek fırsatına dönüşmez
+GEÇEN: 7 KALAN: 0

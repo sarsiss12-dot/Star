@@ -1,0 +1,22 @@
+{
+  "results": [
+    {
+      "name": "FAI0 misafir taslak düzenleme ve üç insan acil savunma sırası",
+      "status": "FAIL",
+      "error": "page.evaluate: ReferenceError: serialize is not defined\n    at eval (eval at evaluate (:311:30), <anonymous>:1:5)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at module.exports (/workspace/Star/tests/helpers/beta-fed-ai0-browser.cjs:4:33)\n    at /workspace/Star/tests/browser-mp73.cjs:250:182\n    at test (/workspace/Star/tests/browser-mp73.cjs:13:13)\n    at /workspace/Star/tests/browser-mp73.cjs:250:37"
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'host2: G is not defined',\n+   'B2: G is not defined',\n+   'C2: G is not defined'\n+ ]\n- []\n\n    at /workspace/Star/tests/browser-mp73.cjs:254:52\n    at test (/workspace/Star/tests/browser-mp73.cjs:13:13)\n    at /workspace/Star/tests/browser-mp73.cjs:254:9"
+    }
+  ],
+  "errors": [
+    "host2: G is not defined",
+    "B2: G is not defined",
+    "C2: G is not defined"
+  ],
+  "metrics": {},
+  "pass": 0,
+  "fail": 2
+}

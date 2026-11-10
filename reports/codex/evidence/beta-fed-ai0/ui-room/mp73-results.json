@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 23890
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 4147
+    },
+    {
+      "name": "FAI0 misafir taslak düzenleme ve üç insan acil savunma sırası",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"fedMotion\"][data-x=\"joinWar:3:0\"]').first()\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"abtn\" data-a=\"fedMotion\" data-x=\"joinWar:3:0\">Saf Akıl Ağı savaşına destek öner</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    10 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at tap (/workspace/Star/tests/browser-mp73.cjs:20:150)\n    at async module.exports (/workspace/Star/tests/helpers/beta-fed-ai0-browser.cjs:25:138)\n    at async /workspace/Star/tests/browser-mp73.cjs:250:131\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:250:31"
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ]
+  },
+  "pass": 3,
+  "fail": 1
+}

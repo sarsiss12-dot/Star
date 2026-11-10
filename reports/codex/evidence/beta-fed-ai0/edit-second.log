@@ -1,0 +1,81 @@
+FAIL beş davet/dört kabul/ret → yeni aday; eski rıza bayat, tek final ve tek ücret
+evalmachine.<anonymous>:1
+setupGame({...CFG,seed:23,size:'orta',aiCount:9});G.autoSave=false;G.feds=[];G.council=null;G.day=900;for(const e of G.emps){e.ai=false;e.civics=[];e.overlord=null;e.war={};e.nap={};e._fedLeaveUntil=0;e.res.etk=10000;for(const b of G.emps)if(e!==b){e.ally[b.id]=true;e.contact[b.id]=true;e.rel[b.id]=80;}}var x=fedFoundPropose(G.p,'bilimsel','equal',[1,2,3,4,5]);if(!x.ok)throw Error(x.why);var id=x.id;for(const i of [1,2,3,4])if(!fedFoundReply(G.emps[i],id,true).ok)throw Error('accept');if(!fedFoundReply(G.emps[5],id,false).ok)throw Error('reject');var stock=G.p.res.etk,expires=fedFoundGet(id).expires;
+                                                                                                                                                                                                                                                                                                                                                                                    ^
+
+Error: Rynenn Muhafızlığı: Bağımsız, yaşayan ve uygun ortak gerekli
+    at evalmachine.<anonymous>:1:379
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at world (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:4:38)
+    at /workspace/Star/tests/beta_fed_ai0_edit_test.cjs:5:99
+    at test (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+FAIL ret veren çıkarılır, daha küçük geçerli kadroyla yeniden rıza sonrası kuruluş
+evalmachine.<anonymous>:1
+setupGame({...CFG,seed:23,size:'orta',aiCount:9});G.autoSave=false;G.feds=[];G.council=null;G.day=900;for(const e of G.emps){e.ai=false;e.civics=[];e.overlord=null;e.war={};e.nap={};e._fedLeaveUntil=0;e.res.etk=10000;for(const b of G.emps)if(e!==b){e.ally[b.id]=true;e.contact[b.id]=true;e.rel[b.id]=80;}}var x=fedFoundPropose(G.p,'bilimsel','equal',[1,2,3,4,5]);if(!x.ok)throw Error(x.why);var id=x.id;for(const i of [1,2,3,4])if(!fedFoundReply(G.emps[i],id,true).ok)throw Error('accept');if(!fedFoundReply(G.emps[5],id,false).ok)throw Error('reject');var stock=G.p.res.etk,expires=fedFoundGet(id).expires;
+                                                                                                                                                                                                                                                                                                                                                                                    ^
+
+Error: Rynenn Muhafızlığı: Bağımsız, yaşayan ve uygun ortak gerekli
+    at evalmachine.<anonymous>:1:379
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at world (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:4:38)
+    at /workspace/Star/tests/beta_fed_ai0_edit_test.cjs:6:99
+    at test (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+FAIL yetkisiz/gecikmiş/aynı içerikli güncelleme ücret veya yeni sürüm üretmez
+evalmachine.<anonymous>:1
+setupGame({...CFG,seed:23,size:'orta',aiCount:9});G.autoSave=false;G.feds=[];G.council=null;G.day=900;for(const e of G.emps){e.ai=false;e.civics=[];e.overlord=null;e.war={};e.nap={};e._fedLeaveUntil=0;e.res.etk=10000;for(const b of G.emps)if(e!==b){e.ally[b.id]=true;e.contact[b.id]=true;e.rel[b.id]=80;}}var x=fedFoundPropose(G.p,'bilimsel','equal',[1,2,3,4,5]);if(!x.ok)throw Error(x.why);var id=x.id;for(const i of [1,2,3,4])if(!fedFoundReply(G.emps[i],id,true).ok)throw Error('accept');if(!fedFoundReply(G.emps[5],id,false).ok)throw Error('reject');var stock=G.p.res.etk,expires=fedFoundGet(id).expires;
+                                                                                                                                                                                                                                                                                                                                                                                    ^
+
+Error: Rynenn Muhafızlığı: Bağımsız, yaşayan ve uygun ortak gerekli
+    at evalmachine.<anonymous>:1:379
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at world (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:4:38)
+    at /workspace/Star/tests/beta_fed_ai0_edit_test.cjs:7:94
+    at test (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+FAIL güncel yeni aday reddi, kurucular arasında yeni savaş ve son tarih finali engeller
+evalmachine.<anonymous>:1
+setupGame({...CFG,seed:23,size:'orta',aiCount:9});G.autoSave=false;G.feds=[];G.council=null;G.day=900;for(const e of G.emps){e.ai=false;e.civics=[];e.overlord=null;e.war={};e.nap={};e._fedLeaveUntil=0;e.res.etk=10000;for(const b of G.emps)if(e!==b){e.ally[b.id]=true;e.contact[b.id]=true;e.rel[b.id]=80;}}var x=fedFoundPropose(G.p,'bilimsel','equal',[1,2,3,4,5]);if(!x.ok)throw Error(x.why);var id=x.id;for(const i of [1,2,3,4])if(!fedFoundReply(G.emps[i],id,true).ok)throw Error('accept');if(!fedFoundReply(G.emps[5],id,false).ok)throw Error('reject');var stock=G.p.res.etk,expires=fedFoundGet(id).expires;
+                                                                                                                                                                                                                                                                                                                                                                                    ^
+
+Error: Rynenn Muhafızlığı: Bağımsız, yaşayan ve uygun ortak gerekli
+    at evalmachine.<anonymous>:1:379
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at world (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:4:38)
+    at /workspace/Star/tests/beta_fed_ai0_edit_test.cjs:8:151
+    at test (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:8:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+FAIL Save8 güncel kadro/sürüm/eski rıza geçmişini saklar; iptal edilmiş süreç düzenlenemez
+evalmachine.<anonymous>:1
+setupGame({...CFG,seed:23,size:'orta',aiCount:9});G.autoSave=false;G.feds=[];G.council=null;G.day=900;for(const e of G.emps){e.ai=false;e.civics=[];e.overlord=null;e.war={};e.nap={};e._fedLeaveUntil=0;e.res.etk=10000;for(const b of G.emps)if(e!==b){e.ally[b.id]=true;e.contact[b.id]=true;e.rel[b.id]=80;}}var x=fedFoundPropose(G.p,'bilimsel','equal',[1,2,3,4,5]);if(!x.ok)throw Error(x.why);var id=x.id;for(const i of [1,2,3,4])if(!fedFoundReply(G.emps[i],id,true).ok)throw Error('accept');if(!fedFoundReply(G.emps[5],id,false).ok)throw Error('reject');var stock=G.p.res.etk,expires=fedFoundGet(id).expires;
+                                                                                                                                                                                                                                                                                                                                                                                    ^
+
+Error: Rynenn Muhafızlığı: Bağımsız, yaşayan ve uygun ortak gerekli
+    at evalmachine.<anonymous>:1:379
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at world (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:4:38)
+    at /workspace/Star/tests/beta_fed_ai0_edit_test.cjs:9:107
+    at test (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:9:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+GEÇEN: 0 KALAN: 5

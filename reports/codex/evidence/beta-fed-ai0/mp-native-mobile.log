@@ -1,0 +1,21 @@
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+PASS B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir
+FAIL FAI0 misafir taslak düzenleme ve üç insan acil savunma sırası
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="fedFoundStart"]').first()[22m
+[2m    - locator resolved to <button class="abtn pri" data-a="fedFoundStart">KURULUŞ DAVETLERİNİ GÖNDER</button>[22m
+[2m  - attempting tap action[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - performing tap action[22m
+
+    at tap (/workspace/Star/tests/browser-mp73.cjs:20:185)
+    at async module.exports (/workspace/Star/tests/helpers/beta-fed-ai0-browser.cjs:15:81)
+    at async /workspace/Star/tests/browser-mp73.cjs:250:131
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:250:31
+PASS sayfa hataları yok
+GEÇEN: 3 KALAN: 1

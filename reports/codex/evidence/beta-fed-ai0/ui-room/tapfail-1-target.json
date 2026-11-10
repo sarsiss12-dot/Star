@@ -1,0 +1,23 @@
+{
+  "selector": "[data-a=\"fedMotion\"][data-x=\"joinWar:3:0\"]",
+  "url": "/mp/play",
+  "who": "Saf Akıl Ağı",
+  "box": [
+    132.078125,
+    266.171875,
+    221.890625,
+    44
+  ],
+  "connected": true,
+  "top": "SUMMARY",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "scroll": [
+    0,
+    0
+  ],
+  "focus": "",
+  "modal": "hidden"
+}

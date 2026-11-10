@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 13977
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 3085
+    },
+    {
+      "name": "FAI0 misafir taslak düzenleme ve üç insan acil savunma sırası",
+      "status": "PASS",
+      "ms": 19808
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "fedAI0": [
+      {
+        "guestFounder": true,
+        "fiveInvitations": true,
+        "fourAcceptedOneRejected": true,
+        "replacedCandidate": true,
+        "revision": 1,
+        "allHumanConsentRenewed": true,
+        "oneFee": 220,
+        "originalExpiry": 1050
+      },
+      {
+        "threeHumans": true,
+        "activeVoteNotInterrupted": true,
+        "normalQueue": 2,
+        "defenseFirst": true,
+        "sourceIdentityMirrored": true
+      },
+      {
+        "aiIndependentPaidOffer": 1,
+        "actualAiTurn": true,
+        "nativeHumanConsent": true,
+        "price": 185,
+        "realWarParticipation": true,
+        "thirdPlayerPrivate": true
+      }
+    ]
+  },
+  "pass": 4,
+  "fail": 0
+}

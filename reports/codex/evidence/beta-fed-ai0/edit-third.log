@@ -1,0 +1,22 @@
+PASS beş davet/dört kabul/ret → yeni aday; eski rıza bayat, tek final ve tek ücret
+PASS ret veren çıkarılır, daha küçük geçerli kadroyla yeniden rıza sonrası kuruluş
+PASS yetkisiz/gecikmiş/aynı içerikli güncelleme ücret veya yeni sürüm üretmez
+PASS güncel yeni aday reddi, kurucular arasında yeni savaş ve son tarih finali engeller
+FAIL Save8 güncel kadro/sürüm/eski rıza geçmişini saklar; iptal edilmiş süreç düzenlenemez
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '{"v":1,"next":2,"proposals":[{"id":1,"by":0,"type":"askeri","ballot":"mixed","members":[0,1,2,3,4],"opened":900,"expires":1050,"status":"pending","replies":{"0":{"status":"accepted","terms":"askeri|mixed|0,1,2,3,4|r1","day":900,"why":"Güncel kuruluş şartlarını önerdi"},"1":{"status":"pending","terms":"askeri|mixed|0,1,2,3,4|r1","day":900,"why":"Kadro/tür/rejim değişti; yeni açık onay gerekli"},"2":{"status":"pending","terms":"askeri|mixed|0,1,2,3,4|r1","day":900,"why":"Kadro/tür/rejim değişti; yeni açık onay gerekli"},"3":{"status":"pending","terms":"askeri|mixed|0,1,2,3,4|r1","day":900,"why":"Kadro/tür/rejim değişti; yeni açık onay gerekli"},"4":{"status":"pending","terms":"askeri|mixed|0,1,2,3,4|r1","day":900,"why":"Kadro/tür/rejim değişti; yeni açık onay gerekli"}},"revision":1,"revisions":[{"revision":0,"type":"bilimsel","ballot":"equal","members":[0,1,2,3,4,5],"replies":{"0":{"status":"accepted","terms":"bilimsel|equal|0,1,2,3,4,5","day":900,"why":"Kuruluş şartlarını önerdi"},"1":{"status":"accepted","terms":"bilimsel|equal|0,1,2,3,4,5","day":900,"why":"Kuruluş şartlarını açıkça kabul etti"},"2":{"status":"accepted","terms":"bilimsel|equal|0,1,2,3,4,5","day":900,"why":"Kuruluş şartlarını açıkça kabul etti"},"3":{"status":"accepted","terms":"bilimsel|equal|0,1,2,3,4,5","day":900,"why":"Kuruluş şartlarını açıkça kabul etti"},"4":{"status":"accepted","terms":"bilimsel|equal|0,1,2,3,4,5","day":900,"why":"Kuruluş şartlarını açıkça kabul etti"},"5":{"status":"rejected","terms":"bilimsel|equal|0,1,2,3,4,5","day":900,"why":"Kuruluş davetini reddetti"}},"day":900}]}]}'
+- '{"v":1,"next":2,"proposals":[{"id":1,"by":0,"type":"askeri","ballot":"mixed","members":[0,1,2,3,4],"opened":900,"expires":1050,"status":"pending","replies":{"0":{"status":"accepted","terms":"askeri|mixed|0,1,2,3,4|r1","day":900,"why":"Güncel kuruluş şartlarını önerdi"},"1":{"terms":"askeri|mixed|0,1,2,3,4|r1","status":"pending","day":900,"why":"Kadro/tür/rejim değişti; yeni açık onay gerekli"},"2":{"terms":"askeri|mixed|0,1,2,3,4|r1","status":"pending","day":900,"why":"Kadro/tür/rejim değişti; yeni açık onay gerekli"},"3":{"terms":"askeri|mixed|0,1,2,3,4|r1","status":"pending","day":900,"why":"Kadro/tür/rejim değişti; yeni açık onay gerekli"},"4":{"terms":"askeri|mixed|0,1,2,3,4|r1","status":"pending","day":900,"why":"Kadro/tür/rejim değişti; yeni açık onay gerekli"}},"revision":1,"revisions":[{"revision":0,"type":"bilimsel","ballot":"equal","members":[0,1,2,3,4,5],"replies":{"0":{"status":"accepted","terms":"bilimsel|equal|0,1,2,3,4,5","day":900,"why":"Kuruluş şartlarını önerdi"},"1":{"terms":"bilimsel|equal|0,1,2,3,4,5","status":"accepted","day":900,"why":"Kuruluş şartlarını açıkça kabul etti"},"2":{"terms":"bilimsel|equal|0,1,2,3,4,5","status":"accepted","day":900,"why":"Kuruluş şartlarını açıkça kabul etti"},"3":{"terms":"bilimsel|equal|0,1,2,3,4,5","status":"accepted","day":900,"why":"Kuruluş şartlarını açıkça kabul etti"},"4":{"terms":"bilimsel|equal|0,1,2,3,4,5","status":"accepted","day":900,"why":"Kuruluş şartlarını açıkça kabul etti"},"5":{"terms":"bilimsel|equal|0,1,2,3,4,5","status":"rejected","day":900,"why":"Kuruluş davetini reddetti"}},"day":900}]}]}'
+
+    at /workspace/Star/tests/beta_fed_ai0_edit_test.cjs:9:305
+    at test (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:9:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 4 KALAN: 1

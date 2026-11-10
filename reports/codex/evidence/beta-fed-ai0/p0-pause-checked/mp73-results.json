@@ -1,0 +1,393 @@
+{
+  "results": [
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 18989
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 4557
+    },
+    {
+      "name": "P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket",
+      "status": "PASS",
+      "ms": 40073
+    },
+    {
+      "name": "WC0 üç insan koşullu koalisyon, karşı teklif, ücret ve savaş merkezi",
+      "status": "PASS",
+      "ms": 42791
+    },
+    {
+      "name": "BD2 koloni paneli ve yetkili uzaktan inşa",
+      "status": "PASS",
+      "ms": 16450
+    },
+    {
+      "name": "BD1 federasyon FIFO, savaş yardımı, geri çekme ve ayrı aday rızası",
+      "status": "FAIL",
+      "error": "page.waitForFunction: Timeout 15000ms exceeded.\n    at wait (/workspace/Star/tests/helpers/beta-board1-browser.cjs:4:24)\n    at setup (/workspace/Star/tests/helpers/beta-board1-browser.cjs:7:898)\n    at async module.exports (/workspace/Star/tests/helpers/beta-board1-browser.cjs:10:10)\n    at async /workspace/Star/tests/browser-mp73.cjs:252:136\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:252:31"
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "p0": [
+      {
+        "visibility": true,
+        "shared": 0,
+        "habitat": true,
+        "foreignHull": 0.42,
+        "ownHull": 0.55,
+        "privacy": true
+      },
+      {
+        "kind": "anomaly",
+        "decision": 1,
+        "before": {
+          "a": 0,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 150,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "event",
+        "decision": 2,
+        "before": {
+          "a": 150,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 410,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "chain",
+        "decision": 3,
+        "before": {
+          "a": 410,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 410,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "CDecision": 1,
+        "CResearch": 180,
+        "BUnchanged": true
+      },
+      {
+        "foundingNotification": "NOT RUN: no founded proposal in this filtered case"
+      },
+      {
+        "shareEndedLiveRemoved": true,
+        "discoveryRetained": true
+      },
+      {
+        "routes": [
+          {
+            "role": "military",
+            "id": 4,
+            "path": [
+              40
+            ]
+          },
+          {
+            "role": "bilim",
+            "id": 5,
+            "path": [
+              40
+            ]
+          },
+          {
+            "role": "koloni",
+            "id": 6,
+            "path": [
+              40
+            ]
+          },
+          {
+            "role": "insaat",
+            "id": 26,
+            "path": [
+              40
+            ]
+          }
+        ]
+      },
+      {
+        "motion": [
+          {
+            "x": 1631.9444056616971,
+            "y": 4093.55377554388,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1629.6195872891099,
+            "y": 4093.0705634634664,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1626.1604619309462,
+            "y": 4092.351586368121,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1623.3400229358326,
+            "y": 4091.7653598436846,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1620.7750584902026,
+            "y": 4091.232233548498,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1617.729801898487,
+            "y": 4090.5992788237645,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1613.8670267551238,
+            "y": 4089.7964033668245,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1609.145857138165,
+            "y": 4088.815111142238,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1603.8984099518887,
+            "y": 4087.7244324459416,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1601.65534343538,
+            "y": 4087.2582124389387,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1598.6918386966972,
+            "y": 4086.642249786983,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1594.517384608507,
+            "y": 4085.7745920515104,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1589.7553390635087,
+            "y": 4084.7848037902186,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1586.8327102498197,
+            "y": 4084.177337174335,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1583.3275994745156,
+            "y": 4083.448802038092,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1581.0283285565722,
+            "y": 4082.9708999805403,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1578.9692037116715,
+            "y": 4082.5429121377615,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1574.5035086411506,
+            "y": 4081.614720141792,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1571.7341645553247,
+            "y": 4081.0391136630788,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1569.0108058927303,
+            "y": 4080.47306522653,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1563.5794170348458,
+            "y": 4079.3441543660088,
+            "actualX": 1560.2122625109637,
+            "actualY": 4078.6442933524586
+          },
+          {
+            "x": 1560.4342747466226,
+            "y": 4078.690438460195,
+            "actualX": 1483.7580721667975,
+            "actualY": 4062.7533365327163
+          },
+          {
+            "x": 1558.0220978956527,
+            "y": 4078.1890689733455,
+            "actualX": 1483.7580721667975,
+            "actualY": 4062.7533365327163
+          },
+          {
+            "x": 1552.1119971807184,
+            "y": 4076.96065814539,
+            "actualX": 1483.7580721667975,
+            "actualY": 4062.7533365327163
+          },
+          {
+            "x": 1547.9134188447695,
+            "y": 4076.087986199738,
+            "actualX": 1483.7580721667975,
+            "actualY": 4062.7533365327163
+          },
+          {
+            "x": 1545.5012419906118,
+            "y": 4075.5866167122263,
+            "actualX": 1483.7580721667975,
+            "actualY": 4062.7533365327163
+          },
+          {
+            "x": 1541.9337875325514,
+            "y": 4074.8451234795566,
+            "actualX": 1483.7580721667975,
+            "actualY": 4062.7533365327163
+          },
+          {
+            "x": 1538.3074994914384,
+            "y": 4074.0914017225427,
+            "actualX": 1483.7580721667975,
+            "actualY": 4062.7533365327163
+          },
+          {
+            "x": 1535.3604718970355,
+            "y": 4073.4788638349733,
+            "actualX": 1483.7580721667975,
+            "actualY": 4062.7533365327163
+          },
+          {
+            "x": 1531.0763174408623,
+            "y": 4072.5884049449414,
+            "actualX": 1483.7580721667975,
+            "actualY": 4062.7533365327163
+          }
+        ]
+      },
+      {
+        "reconnect": true
+      }
+    ],
+    "warCenter": [
+      {
+        "conditionalAccepted": true,
+        "noWar": true,
+        "noPayment": true,
+        "thirdPartyPrivate": true
+      },
+      {
+        "front": 1,
+        "campaign": 1,
+        "realPayment": 150,
+        "joined": true
+      },
+      {
+        "immediateDeclaration": true,
+        "optionalInvite": true,
+        "rejectDoesNotUndoWar": true
+      },
+      {
+        "knownThirdPartyWar": true,
+        "nativeVoluntaryOffer": true,
+        "nativeHostAccept": true
+      },
+      {
+        "reconnected": true,
+        "tabs": true
+      }
+    ],
+    "board2": [
+      {
+        "guestOwnList": true,
+        "rightPanel": true
+      },
+      {
+        "nativeRemote": true,
+        "travel": true,
+        "task": 1,
+        "realCost": {
+          "min": 212,
+          "ala": 39
+        },
+        "completed": true,
+        "duplicateRejected": true,
+        "CPrivate": true
+      },
+      {
+        "reconnect": true
+      },
+      {
+        "guestSpyTarget": true
+      }
+    ]
+  },
+  "pass": 6,
+  "fail": 1
+}

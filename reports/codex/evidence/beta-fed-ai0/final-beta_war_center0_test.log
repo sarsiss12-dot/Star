@@ -1,0 +1,8 @@
+PASS kimlik bağlı ücretli katılım aynı sefere girer, ödeme ve gerçek geçiş bir kez
+PASS barış ve aynı çiftin yeni savaşı eski katılım teklifini geçerli yapmaz
+PASS katılım veya ödeme sonrası hata bütün grafiği ve RNGyi geri alır
+PASS kaynak, yetki, çakışan taraf, NAP ve temas kapıları korunur
+PASS Save8 ve teklif codec cephe kimliğini korur, geçmiş yeni savaşa bağlanmaz
+PASS Savaş Merkezi bilinen/özel bilgi filtresi; salt okuma
+PASS geçiş maddesi gerçek askerî rota motorunu açar; üçüncü sınırı açmaz
+GEÇEN: 7 KALAN: 0

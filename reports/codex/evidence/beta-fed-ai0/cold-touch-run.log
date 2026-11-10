@@ -1,0 +1,4 @@
+START cold-final
+{"name": "cold-final", "command": "MP8_SCEN=R MP8_MONTHS=2 FEDAI0_R=1 STARS_OUTPUT=reports/codex/evidence/beta-fed-ai0/cold-final STARS_CHROMIUM_PATH=/usr/bin/chromium node tests/browser-mp8.cjs", "exit": 0, "seconds": 73.21}
+START mp-touch-audit
+{"name": "mp-touch-audit", "command": "FEDAI0=1 FEDAI0_AUDIT=1 MPP0_REVERSE=1 MP73_ONLY=B1 |B2 |FAI0 |sayfa STARS_OUTPUT=reports/codex/evidence/beta-fed-ai0/mp-touch-audit STARS_CHROMIUM_PATH=/usr/bin/chromium node tests/browser-mp73.cjs", "exit": 0, "seconds": 43.17}

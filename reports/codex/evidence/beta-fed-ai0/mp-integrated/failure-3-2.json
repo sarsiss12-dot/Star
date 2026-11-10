@@ -1,0 +1,64 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Yıldızlar Meclis",
+    "founder": 1,
+    "members": [
+      1,
+      2,
+      0,
+      3,
+      4,
+      7,
+      6,
+      5
+    ],
+    "laws": {
+      "ticaretStd": true
+    },
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": null,
+    "lastVote": {
+      "key": "ticaretStd",
+      "target": null,
+      "appliedTarget": null,
+      "opened": 3.9600000000000026,
+      "ended": 7.685200000000014,
+      "yes": [
+        3,
+        4,
+        7,
+        6,
+        5,
+        1,
+        2
+      ],
+      "no": [
+        0
+      ],
+      "passed": true,
+      "expired": false,
+      "weight": {
+        "yes": 46.01542840145535,
+        "no": 9.105255888325765
+      },
+      "eventKey": "council:ticaretStd:7.685200000000014"
+    },
+    "campaign": null
+  },
+  "inbox": [],
+  "modal": "",
+  "pane": "<div class=\"dpBox dcBox fedBox\">\n      <div class=\"dpHd\"><span>🏛 FEDERASYON</span>\n        <button class=\"riX\" data-a=\"closeFed\">✕</button></div>\n      <nav class=\"fedTabs\" aria-label=\"Federasyon bölümleri\"><button class=\"abtn pri\" data-a=\"fedTab\" data-x=\"general\" aria-pressed=\"true\">GENEL</button><button class=\"abtn \" data-a=\"fedTab\" data-x=\"members\" aria-pressed=\"false\">ÜYELER</button><button class=\"abtn \" data-a=\"fedTab\" data-x=\"votes\" aria-pressed=\"false\">OYLAMALAR</button><button class=\"abtn \" data-a=\"fedTab\" data-x=\"laws\" aria-pressed=\"false\">YASALAR</button><button class=\"abtn \" data-a=\"fedTab\" data-x=\"military\" aria-pressed=\"false\">ASKERÎ</button><button class=\"abtn \" data-a=\"fedTab\" data-x=\"manage\" aria-pressed=\"false\">YÖNETİM</button></nav>\n      <div class=\"dpBody dcBody fedTabBody\" data-fed-tab=\"general\"><div class=\"envRow\"><span>Ufuk Yıldız Kalkanı · Askerî Federasyon</span><b>6 üye</b></div><div class=\"mini\">Başkan: Saf Akıl Ağı · Oy rejimi: Eşit Temsil</div><p class=\"mini\">Yeni saldırılara ortak savunma yükümlülüğü. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir.</p><div class=\"mini\">Üyelik: üye oylaması ve adayın ayrı rızası; önce bütün üyelerle ittifak gerekmez. Eski doğrudan davet koşulu: ortak müttefikler · savunma otomatik · saldırı oylama.</div><button class=\"abtn\" data-a=\"fedTab\" data-x=\"votes\">Oylamalar ve son karar</button><div class=\"ph\">AKTİF SAVAŞLAR</div><div class=\"mini\">Yok</div><div class=\"ph\">FEDERAL FON</div><div class=\"box\" style=\"border-color:#65e08a\">\n            <div class=\"bt\"><span>⚙ Rezerv</span>\n              <b style=\"color:#65e08a\">0 ala · 0 ene</b></div>\n            <div class=\"bd\">Aylık bakım <b>0</b> enerji ·\n              federal donanma yok\n              </div></div></div></div>"
+}

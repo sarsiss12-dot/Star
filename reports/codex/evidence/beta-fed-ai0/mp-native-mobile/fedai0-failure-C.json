@@ -1,0 +1,67 @@
+{
+  "feds": [],
+  "proposals": {
+    "v": 1,
+    "next": 2,
+    "proposals": [
+      {
+        "id": 1,
+        "by": 1,
+        "type": "askeri",
+        "ballot": "equal",
+        "members": [
+          1,
+          2,
+          0,
+          3,
+          4,
+          5
+        ],
+        "opened": 900,
+        "expires": 1050,
+        "status": "pending",
+        "replies": {
+          "0": {
+            "status": "pending",
+            "terms": "askeri|equal|1,2,0,3,4,5",
+            "day": 900,
+            "why": "İnsan yanıtı bekleniyor"
+          },
+          "1": {
+            "status": "accepted",
+            "terms": "askeri|equal|1,2,0,3,4,5",
+            "day": 900,
+            "why": "Karar kaydedildi"
+          },
+          "2": {
+            "status": "pending",
+            "terms": "askeri|equal|1,2,0,3,4,5",
+            "day": 900,
+            "why": "Karar kaydedildi"
+          },
+          "3": {
+            "status": "accepted",
+            "terms": "askeri|equal|1,2,0,3,4,5",
+            "day": 900,
+            "why": "Karar kaydedildi"
+          },
+          "4": {
+            "status": "accepted",
+            "terms": "askeri|equal|1,2,0,3,4,5",
+            "day": 900,
+            "why": "Karar kaydedildi"
+          },
+          "5": {
+            "status": "accepted",
+            "terms": "askeri|equal|1,2,0,3,4,5",
+            "day": 900,
+            "why": "Karar kaydedildi"
+          }
+        }
+      }
+    ]
+  },
+  "pane": "\n      🌐 GALAKTİK KONSEY\n        ✕\n      Büyük Forumu\n        8 üyeBaşkan\n        Saf Akıl AğıBaşkanlık dönemin0 / 3Oy ağırlığın9.1Oy ağırlığı toprak, etki ve pasifist ideolojiyle artar.\n        3 dönem başkanlık = Konsey Hâkimiyeti zaferi.SON OYLAMA · Evrensel Ticaret Standardı · KABULGün 11EVET (38.3): Liiron Konfederasyonu · Qeles Hegemonyası · Orres Örgütü · Saf Akıl Ağı · Kızıl MuhafızHAYIR (20.4): Alaar Krallığı · Elanen Komutanlığı · SenSonraki oylama2 ay sonraDİPLOMATİK AĞIRLIĞINOy ağırlığı\n          9.1🏛 KONSEY BAŞKANLIĞI\n          Saf Akıl Ağı\n            DÖNEM BAŞKANI\n          Seçime 15 yıl (180 ay) ·\n               dönem 1📜 TASARI SUNKonseye kendi tasarını sun (120 ◈).\n            Risk: reddedilirse prestij kaybedersin\n            ve 5 yıl boyunca konseydeki ağırlığın azalır.\n                💱 Galaktik Borsayı Kur\n                ⚖ Piyasa Regülasyonu\n                🔍 Casusluk Şeffaflığı\n                🕊 Silahsızlanma Antlaş\n                🤝 Serbest Ticaret Bölg\n                🔬 Bilim Ortaklığı\n                🚫 Savaş Yasağı\n                hedef seç\n                ⛔ Yaptırım\n                hedef seç\n                🚪 Konseyden İhraç\n                hedef seçYÜRÜRLÜKTEKİ KARARLAR\n          ⚖ Evrensel Ticaret StandardıYÜRÜRLÜKTE\n          Ortak ölçüler, ortak limanlar, tek muhasebe dili. Tüm üyelerin ticaret geliri %10 artar.ÜYELER\n          \n          Okyanus Ticaret Birliği (sen)\n          Megakorporasyon · Tüccar · oy ağırlığı 9.1\n          \n          \n          Liiron Konfederasyonu\n          Barışçıl · Demokratik · oy ağırlığı 2.6\n          \n          \n          Saf Akıl Ağı\n          Bilimsel · Liyakat · oy ağırlığı 2.4\n          BAŞKAN\n          \n          Alaar Krallığı\n          Bilimci · Kâşif · oy ağırlığı 1.8\n          \n          \n          Kızıl Muhafız\n          Militarist · Yayılmacı · oy ağırlığı 1.0\n          \n          \n          Qeles Hegemonyası\n          Kovan Zihni · Yayılmacı · oy ağırlığı 1.0\n          \n          \n          Elanen Komutanlığı\n          Militarist · Yayılmacı · oy ağırlığı 1.0\n          \n          \n          Orres Örgütü\n          Ruhaniyetçi · Teokratik · oy ağırlığı 0.7\n          KONSEYDEN AYRIL",
+  "modal": "",
+  "own": 0
+}

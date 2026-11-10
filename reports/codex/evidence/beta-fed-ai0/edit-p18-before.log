@@ -1,0 +1,81 @@
+FAIL beş davet/dört kabul/ret → yeni aday; eski rıza bayat, tek final ve tek ücret
+evalmachine.<anonymous>:1
+fedFoundUpdate(G.p,id,0,'bilimsel','equal',[1,2,3,4,6]).ok
+^
+
+ReferenceError: fedFoundUpdate is not defined
+    at evalmachine.<anonymous>:1:1
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_fed_ai0_edit_test.cjs:5:116
+    at test (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL ret veren çıkarılır, daha küçük geçerli kadroyla yeniden rıza sonrası kuruluş
+evalmachine.<anonymous>:1
+fedFoundUpdate(G.p,id,0,'bilimsel','equal',[1,2,3,4]).ok
+^
+
+ReferenceError: fedFoundUpdate is not defined
+    at evalmachine.<anonymous>:1:1
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_fed_ai0_edit_test.cjs:6:116
+    at test (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL yetkisiz/gecikmiş/aynı içerikli güncelleme ücret veya yeni sürüm üretmez
+evalmachine.<anonymous>:1
+fedFoundUpdate(G.emps[1],id,0,'askeri','equal',[2,3]).ok
+^
+
+ReferenceError: fedFoundUpdate is not defined
+    at evalmachine.<anonymous>:1:1
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_fed_ai0_edit_test.cjs:7:157
+    at test (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:7:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL güncel yeni aday reddi, kurucular arasında yeni savaş ve son tarih finali engeller
+evalmachine.<anonymous>:1
+fedFoundUpdate(G.p,id,0,'bilimsel','equal',[1,2,3,4,6]).ok
+^
+
+ReferenceError: fedFoundUpdate is not defined
+    at evalmachine.<anonymous>:1:1
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_fed_ai0_edit_test.cjs:8:168
+    at test (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:8:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+FAIL Save8 güncel kadro/sürüm/eski rıza geçmişini saklar; iptal edilmiş süreç düzenlenemez
+evalmachine.<anonymous>:1
+fedFoundUpdate(G.p,id,0,'askeri','mixed',[1,2,3,4]).ok
+^
+
+ReferenceError: fedFoundUpdate is not defined
+    at evalmachine.<anonymous>:1:1
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_fed_ai0_edit_test.cjs:9:124
+    at test (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:3:24)
+    at Object.<anonymous> (/workspace/Star/tests/beta_fed_ai0_edit_test.cjs:9:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+GEÇEN: 0 KALAN: 5

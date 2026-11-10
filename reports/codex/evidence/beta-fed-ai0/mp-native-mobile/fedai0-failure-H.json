@@ -1,0 +1,67 @@
+{
+  "feds": [],
+  "proposals": {
+    "v": 1,
+    "next": 2,
+    "proposals": [
+      {
+        "id": 1,
+        "by": 1,
+        "type": "askeri",
+        "ballot": "equal",
+        "members": [
+          1,
+          0,
+          2,
+          3,
+          4,
+          5
+        ],
+        "opened": 900,
+        "expires": 1050,
+        "status": "pending",
+        "replies": {
+          "0": {
+            "terms": "askeri|equal|1,0,2,3,4,5",
+            "status": "pending",
+            "day": 900,
+            "why": "İnsan yanıtı bekleniyor"
+          },
+          "1": {
+            "status": "accepted",
+            "terms": "askeri|equal|1,0,2,3,4,5",
+            "day": 900,
+            "why": "Kuruluş şartlarını önerdi"
+          },
+          "2": {
+            "terms": "askeri|equal|1,0,2,3,4,5",
+            "status": "pending",
+            "day": 900,
+            "why": "İnsan yanıtı bekleniyor"
+          },
+          "3": {
+            "terms": "askeri|equal|1,0,2,3,4,5",
+            "status": "accepted",
+            "day": 900,
+            "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+          },
+          "4": {
+            "terms": "askeri|equal|1,0,2,3,4,5",
+            "status": "accepted",
+            "day": 900,
+            "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+          },
+          "5": {
+            "terms": "askeri|equal|1,0,2,3,4,5",
+            "status": "accepted",
+            "day": 900,
+            "why": "İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11"
+          }
+        }
+      }
+    ]
+  },
+  "pane": "\n      🌐 GALAKTİK KONSEY\n        ✕\n      Büyük Forumu\n        8 üyeBaşkan\n        Saf Akıl AğıBaşkanlık dönemin0 / 3Oy ağırlığın9.1Oy ağırlığı toprak, etki ve pasifist ideolojiyle artar.\n        3 dönem başkanlık = Konsey Hâkimiyeti zaferi.SON OYLAMA · Evrensel Ticaret Standardı · KABULGün 11EVET (38.3): Liiron Konfederasyonu · Qeles Hegemonyası · Orres Örgütü · Saf Akıl Ağı · SenHAYIR (20.4): Alaar Krallığı · Elanen Komutanlığı · Okyanus Ticaret BirliğiSonraki oylama2 ay sonraDİPLOMATİK AĞIRLIĞINOy ağırlığı\n          9.1🏛 KONSEY BAŞKANLIĞI\n          Saf Akıl Ağı\n            DÖNEM BAŞKANI\n          Seçime 15 yıl (180 ay) ·\n               dönem 1📜 TASARI SUNKonseye kendi tasarını sun (120 ◈).\n            Risk: reddedilirse prestij kaybedersin\n            ve 5 yıl boyunca konseydeki ağırlığın azalır.\n                💱 Galaktik Borsayı Kur\n                ⚖ Piyasa Regülasyonu\n                🔍 Casusluk Şeffaflığı\n                🕊 Silahsızlanma Antlaş\n                🤝 Serbest Ticaret Bölg\n                🔬 Bilim Ortaklığı\n                🚫 Savaş Yasağı\n                hedef seç\n                ⛔ Yaptırım\n                hedef seç\n                🚪 Konseyden İhraç\n                hedef seçYÜRÜRLÜKTEKİ KARARLAR\n          ⚖ Evrensel Ticaret StandardıYÜRÜRLÜKTE\n          Ortak ölçüler, ortak limanlar, tek muhasebe dili. Tüm üyelerin ticaret geliri %10 artar.ÜYELER\n          \n          Saf Akıl Ağı\n          Bilimsel · Liyakat · oy ağırlığı 13.4\n          BAŞKAN\n          \n          Kızıl Muhafız (sen)\n          Militarist · Yayılmacı · oy ağırlığı 9.1\n          \n          \n          Okyanus Ticaret Birliği\n          Megakorporasyon · Tüccar · oy ağırlığı 9.1\n          \n          \n          Liiron Konfederasyonu\n          Barışçıl · Demokratik · oy ağırlığı 6.8\n          \n          \n          Alaar Krallığı\n          Bilimci · Kâşif · oy ağırlığı 6.0\n          \n          \n          Qeles Hegemonyası\n          Kovan Zihni · Yayılmacı · oy ağırlığı 5.2\n          \n          \n          Elanen Komutanlığı\n          Militarist · Yayılmacı · oy ağırlığı 5.2\n          \n          \n          Orres Örgütü\n          Ruhaniyetçi · Teokratik · oy ağırlığı 3.8\n          KONSEYDEN AYRIL",
+  "modal": "",
+  "own": 0
+}

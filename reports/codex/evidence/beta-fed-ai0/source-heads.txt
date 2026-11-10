@@ -1,0 +1,12 @@
+9173b6726cfe84cb035e80cd1acfbafcc947e328	refs/heads/codex/stars-beta-board1-federation-stability-ux
+10ab6f9c7f4d030f3df055f1b2c326f499e2f0b0	refs/heads/codex/stars-beta-board2-colony-politics-ux
+bf26491828ceb65f9103ecb2def23fe832a3c454	refs/heads/codex/stars-beta-fed-found0-founder-invites-events
+71b282ec2972b0872f207449d23006b88d1315f0	refs/heads/codex/stars-beta-p01-critical
+3fd07944b6764ca6e71f6e8dc8b81404d5c8cfbd	refs/heads/codex/stars-beta-p02-mp-acceptance
+731c8df9900e446d7e7de25cc5701e05a1071647	refs/heads/codex/stars-beta-scale0-galaxy-ai-colonies
+fec9a8b4345b14cca9fa5c2eb496fc84e24f7ad2	refs/heads/codex/stars-beta-setup0-pirates
+66ea8d700bc66b1fdb5f75d3a0f5d8f87251e9a8	refs/heads/codex/stars-beta-setup1-galaxy-options
+eea55b2ddfae7de8f631eb43eb606585224f64d6	refs/heads/codex/stars-beta-ux0-names
+8f5e3886c132ee3cc45e333f8630c395854360ed	refs/heads/codex/stars-beta-war-center0-coalitions
+4ef02795042528d82a7e59c484ccff3c6c10875f	refs/heads/codex/stars-beta-war-fix0-peace-notices
+4296ad2d43fedce6264020b3761f50f1839fd836	refs/heads/main

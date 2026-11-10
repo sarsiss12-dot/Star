@@ -1,0 +1,30 @@
+{
+  "feds": [],
+  "inbox": [
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 0,
+        "defender": 3,
+        "rootAttacker": 0,
+        "rootDefender": 3,
+        "front": 2,
+        "campaign": 1,
+        "reason": "promise",
+        "sponsor": 1,
+        "day": 900,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Okyanus Ticaret Birliği → Draxroen Filosu · Savaş taahhüdü · Çağıran: Saf Akıl Ağı",
+      "key": "war:2",
+      "uid": 12,
+      "born": 900
+    }
+  ],
+  "modal": "GALAKTİK HABER AĞI\n✕\nHaberler · 2\nGelen kutusu · 0\nGönderilen · 0\nKARAR · Teklif — Saf Akıl Ağı\n2210.01 · gün 900 · Saf Akıl Ağı · Diplomatik teklif · Reddedildi\n\nÇok oyunculu teklif · tur 1\n\nKARARIN ETKİSİ\n\nÇok oyunculu teklif. Kabul: hükümler host'ta mevcut işlem motoruyla (dealQuote / executeDeal) uygulanır; imza Etkisini gönderen öder, senden istenenler kabulde stokundan alınır. Ret: kaynak aktarımı veya anlaşma olmaz; gönderene \"reddedildi\" bildirimi gider. Karşı teklif: teklif \"Karşı teklif gönderildi\" olur, yeni şartlar gönderenin gelen kutusuna düşer (en çok 6 tur). Karşı tarafın stoğu sana gösterilmez; kabulde host denetler.\n\nSANA VERİYOR\nSENDEN İSTİYOR\n\n⚔ Cephe #3 · Varira Karargâhı karşısında destek\n\nİmza maliyeti: 0 Etki · gönderen öder\n540 gün · son gün 1440\n\nTeklif sonuçlandı\n\nDevleti incele · teklif saklanır\nListeye dön\nHaritaya dön"
+}

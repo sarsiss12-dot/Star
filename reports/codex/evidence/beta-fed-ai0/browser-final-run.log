@@ -1,0 +1,8 @@
+START mp-accepted-pc
+{"name": "mp-accepted-pc", "command": "MPP0_DESKTOP=1 FEDAI0=1 WAR_CENTER0=1 BOARD1=1 BOARD2=1 MPP0=1 MP73_ONLY=B1 |B2 |FAI0 |WC0 |P0 |BD1 |BD2 |sayfa STARS_OUTPUT=reports/codex/evidence/beta-fed-ai0/mp-accepted-pc STARS_CHROMIUM_PATH=/usr/bin/chromium node tests/browser-mp73.cjs", "exit": 0, "seconds": 248.44}
+START cold-first
+{"name": "cold-first", "command": "MP8_SCEN=R MP8_MONTHS=2 FEDAI0_R=1 STARS_OUTPUT=reports/codex/evidence/beta-fed-ai0/cold-first STARS_CHROMIUM_PATH=/usr/bin/chromium node tests/browser-mp8.cjs", "exit": 1, "seconds": 69.01}
+START sp-native
+{"name": "sp-native", "command": " STARS_OUTPUT=reports/codex/evidence/beta-fed-ai0/sp-native STARS_CHROMIUM_PATH=/usr/bin/chromium node tests/browser-beta-fed-ai0-sp.cjs", "exit": 0, "seconds": 15.58}
+START mp-native-mobile
+{"name": "mp-native-mobile", "command": "FEDAI0=1 MPP0_REVERSE=1 MP73_ONLY=B1 |B2 |FAI0 |sayfa STARS_OUTPUT=reports/codex/evidence/beta-fed-ai0/mp-native-mobile STARS_CHROMIUM_PATH=/usr/bin/chromium node tests/browser-mp73.cjs", "exit": 1, "seconds": 105.6}

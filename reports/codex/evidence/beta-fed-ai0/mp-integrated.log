@@ -1,0 +1,22 @@
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+PASS B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir
+PASS P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket
+FAIL FAI0 misafir taslak düzenleme ve üç insan acil savunma sırası
+page.evaluate: TypeError: Cannot set properties of undefined (setting '0')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:235)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at module.exports (/workspace/Star/tests/helpers/beta-fed-ai0-browser.cjs:28:35)
+    at async /workspace/Star/tests/browser-mp73.cjs:250:131
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:250:31
+WC0 fixture pause {"ok":false,"code":"rules:same"}
+WC0 koşullu karşı teklif kabul edildi; savaş ve ödeme yok
+WC0 son onay: gerçek cephe ve tek ödeme doğrulandı
+PASS WC0 üç insan koşullu koalisyon, karşı teklif, ücret ve savaş merkezi
+PASS BD2 koloni paneli ve yetkili uzaktan inşa
+BD1 fixture ready
+BD1 two native proposals queued
+PASS BD1 federasyon FIFO, savaş yardımı, geri çekme ve ayrı aday rızası
+PASS sayfa hataları yok
+GEÇEN: 7 KALAN: 1

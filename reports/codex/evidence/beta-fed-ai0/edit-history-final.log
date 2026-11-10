@@ -1,0 +1,7 @@
+PASS beş davet/dört kabul/ret → yeni aday; eski rıza bayat, tek final ve tek ücret
+PASS ret veren çıkarılır, daha küçük geçerli kadroyla yeniden rıza sonrası kuruluş
+PASS yetkisiz/gecikmiş/aynı içerikli güncelleme ücret veya yeni sürüm üretmez
+PASS güncel yeni aday reddi, kurucular arasında yeni savaş ve son tarih finali engeller
+PASS Save8 güncel kadro/sürüm/eski rıza geçmişini saklar; iptal edilmiş süreç düzenlenemez
+PASS on iki izinli düzenlemenin bütün rıza geçmişi kalır; on üçüncü ve süre uzatma reddedilir
+GEÇEN: 6 KALAN: 0
