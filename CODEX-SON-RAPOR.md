@@ -1,3 +1,16 @@
+# Son Codex raporu — p22 gerçek Save8 kabulü
+
+[Tek parça Türkçe kabul raporu](reports/codex/P22-GERCEK-SAVE8-KABUL-SONUC.md).
+
+- Gerçek üç ek açıldı; Save8 SHA/CRC/boyut ve300/23,253 filo,34/44 oyuncu,112 yetim,117 sipariş/11.805 makbuz envanteri tamamen eşleşti.
+- Gerçek kopyada759 toplam/44 oyuncu gemisinin sınıf ve gövdeleri, bütün kaynaklar/iş makbuzları/ilerleme/RNG korundu.27 kruvazör aynı sistemde birleştirildi;117 iş ID1884'e yönlendirildi. İlk20K filo nedeni BELİRLENEMEDİ.
+- AI85 kayıp hedefi giderildi (81 hareket,4 teslim); tam stratejik kampanya veya varış garantisi değildir.
+- Gerçek kayıt Chromium H/B/C kabulü3/0; mevcut motor10/0 ve MP3/0 regresyonu. Gerçek dosyayla soğuk yeni oda, fiziksel PC/Android ve Render NOT RUN.
+- Runtime/ZIP değişmedi: p22 / stars-v96h10p22 / MP.8.9b17, Save8v8/paket4/protokol1. Yeni p22.1 gerekmedi. Dal codex/stars-beta-stability-ai0-save-fleet-recovery, başlangıç109f4d997d79c914d030ac7234fc47c5f3874c49.
+- Özgün ve kurtarılan özel .sav GitHub'a commit edilmedi. Main/Render/force-push yok; fiziksel kullanıcı kabulü bekliyor.
+
+## Önceki p22 geliştirme teslimi (tarihsel)
+
 # Son Codex raporu — BETA-STABILITY-AI.0 / p22
 
 - [Tek parça Türkçe sonuç raporu](reports/codex/BETA-STABILITY-AI0-SONUC.md), [görev envanteri](reports/codex/BETA-STABILITY-AI0-ENVANTER.md), [kanıt indeksi](reports/codex/evidence/beta-stability-ai0/EVIDENCE-MANIFEST.json).

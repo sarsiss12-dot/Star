@@ -2,6 +2,12 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
+## Son kabul — p22 gerçek kullanıcı Save8
+
+- Ayrıntı: `reports/codex/P22-GERCEK-SAVE8-KABUL-SONUC.md`. Gerçek ek artık alındı; önceki dosya-yok notları tarihsel kalır.
+- Beklenen SHA37fc6db0…/CRCDCE544EB ve bütün112/27/85/117/11.805 envanteri doğrulandı.759 toplam/44 oyuncu gemisinin sınıf/gövdesi, tüm ücretli iş ilerlemeleri/kaynak/RNG korundu; gerçek kopya kurtarıldı. İlk20K filo nedeni hâlâ BELİRLENEMEDİ.
+- Gerçek kayıt H/B/C native3/0, motor10/0 ve MP3/0. Runtime ve p22 ZIP'i değişmedi; p22.1 yok. Gerçek dosyayla soğuk oda ve fiziksel/Render kabulü NOT RUN. Özgün/onarılmış .sav özel tutulur, GitHub'a eklenmez.
+
 ## Son teslim — BETA-STABILITY-AI.0 (p22, 10 Kasım 2026)
 
 - Güncel geliştirme zinciri: `codex/stars-beta-stability-ai0-save-fleet-recovery`, kod/paket `b6dd2c6ab570debc29e02e5e60b48eb591fc9a23`; p21 `838f2c3` tabanlı. Son ayrıntı `CODEX-SON-RAPOR.md` ve `reports/codex/BETA-STABILITY-AI0-SONUC.md`.

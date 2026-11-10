@@ -1,0 +1,74 @@
+{
+  "recovery.json": {
+    "bytes": 1447,
+    "sha256": "765a5c83ebd9b551239f66dc88567336f96d166a09f73e33b0c30f9330eac035"
+  },
+  "engine-final.log": {
+    "bytes": 468,
+    "sha256": "32a6c07fc97b21cc070acfe879fe6af32f8ea12d26aba99ee42ce1771e8ce8ae"
+  },
+  "browser.log": {
+    "bytes": 478,
+    "sha256": "4b0d4c62b1e22c39ccb52f572b69a1915bd5180e7614b68ee0a46b7586162d1c"
+  },
+  "engine-first.log": {
+    "bytes": 391,
+    "sha256": "7372a91582513eeb2152925ccb959d53745a934d8f7ac6d30e5fd5f8696a8286"
+  },
+  "location-check-first-fail.log": {
+    "bytes": 1241,
+    "sha256": "41b4ea3ec6a26f5cfaeb036c213744d1d247e512169dc5d8b4e89068805bbe1b"
+  },
+  "private-copy-integrity.json": {
+    "bytes": 148,
+    "sha256": "ce198ec69d66e22651b095d0f8ad7758fb9048b4ac26ad548097c74c3e4fa4cf"
+  },
+  "input-integrity.json": {
+    "bytes": 470,
+    "sha256": "70b920a68f3147cee51589c0e5269760c82506ea85b6576841af8ad8a98131dc"
+  },
+  "package.json": {
+    "bytes": 175,
+    "sha256": "7daab2eafcc7c77ce09cc3b66f5d712ca089bcd8776ee699dca3b4b4a3422ba0"
+  },
+  "regression-fleet.log": {
+    "bytes": 700,
+    "sha256": "c980814795b39dfc28ae18af9ecda778dc46310d9a64c71368c7d0d912c830cf"
+  },
+  "regression-mp.log": {
+    "bytes": 248,
+    "sha256": "1f974e7be045ecd608dbced6e2360eb4f6ee27c9c4d9395f9502ff453a21c33b"
+  },
+  "package-verify.log": {
+    "bytes": 271,
+    "sha256": "baf920c9cfdaee1998285fee3a67329e3410cd6febda2e8e794cd8ab4913d9af"
+  },
+  "audit.json": {
+    "bytes": 871,
+    "sha256": "8ea8fc43571ff09d0f2bd9625cb30c271f2317be7f4da1a5346144938c4808aa"
+  },
+  "browser/mp73-results.json": {
+    "bytes": 1765,
+    "sha256": "b0bdc6f76e8dd51116f3263a556a9b4daaeca65f582a117f814a995d0a00d69c"
+  },
+  "browser/b1-b-council-vote.png": {
+    "bytes": 324452,
+    "sha256": "23b130f3246273b1c9e714e170f0ea4b5625f52ce604e304275d3cf14d110bc2"
+  },
+  "browser/room-lobby-2.png": {
+    "bytes": 88109,
+    "sha256": "ffc99b0ed85151dd71936bdc14e43fa89dbdf9aa88e65e36d525d3eef091fed9"
+  },
+  "browser/room-lobby-1.png": {
+    "bytes": 90336,
+    "sha256": "2705dce6ba308a5893b7088de8f7438e4d742dd26df4661a085010235c6fa21e"
+  },
+  "browser/a1-guest-diag.png": {
+    "bytes": 429959,
+    "sha256": "c05d9d95b3b35fe7df22fe56ff4a823f2238f966d54d1bb08f8d32a6d2ed431c"
+  },
+  "browser/real-save-browser.json": {
+    "bytes": 410,
+    "sha256": "1028c926321f0218ef6c726a702214ecf52f0b6fe2b46737bb48b209c289e081"
+  }
+}

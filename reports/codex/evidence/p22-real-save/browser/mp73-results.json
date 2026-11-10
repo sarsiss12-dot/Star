@@ -1,0 +1,66 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 23533
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 34239
+    },
+    {
+      "name": "RS22 gerçek Save8 host/misafir kurtarma ve gizlilik",
+      "status": "PASS",
+      "ms": 17745
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b17",
+      "build": "96h10p22",
+      "files": {
+        "mp-core.js": "fb2324e86b48",
+        "relay.js": "35974ba78c75",
+        "mp1-host.js": "58355968ecef",
+        "join.js": "bc2732493741",
+        "mirror.js": "0be83dc59fd8",
+        "guest-stars.js": "27e779c107d5",
+        "mp71-dip.js": "791d18e17978",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b17 · oyun 96h10p22 · misafir · host bağlı · aşama: ready · ayna r11 17:05:54 · kurulum 40 ms · son komut: yok · son hata: yok"
+  },
+  "pass": 3,
+  "fail": 0
+}

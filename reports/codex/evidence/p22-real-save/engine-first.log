@@ -1,0 +1,2 @@
+PASS real Save8 inventory / 27 hulls / 117 jobs / AI recovery / replay / reload / original SHA
+{"before":{"fleets":253,"ships":759,"playerFleets":34,"playerShips":44,"groups":[{"id":1,"shipments":27,"jobs":4},{"id":1945,"shipments":0,"jobs":113}],"locations":{"Verrus":14,"Pyraeran":13}},"after":{"fleets":228,"ships":759,"playerFleets":9,"playerShips":44,"aiOrphans":0,"jobsToTarget":117}}

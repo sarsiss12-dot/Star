@@ -1,0 +1,45 @@
+{
+  "bytes": 3122149,
+  "sha256": "37fc6db0579c891d508a4251613aea92cb7a6ba797ca2f459711899070964ffe",
+  "crc32": "DCE544EB",
+  "expectedSha256": "37fc6db0579c891d508a4251613aea92cb7a6ba797ca2f459711899070964ffe",
+  "shaMatches": true,
+  "version": 8,
+  "day": 5332.963709997218,
+  "year": 2224,
+  "month": 10,
+  "seed": 982390288,
+  "systems": 300,
+  "empires": 23,
+  "fleets": 253,
+  "owner": 0,
+  "ownerFleets": 34,
+  "ownerShips": 44,
+  "missingTargets": {
+    "total": 112,
+    "byOwner": {
+      "0": 27,
+      "1": 8,
+      "2": 1,
+      "3": 10,
+      "4": 19,
+      "6": 1,
+      "7": 21,
+      "9": 2,
+      "10": 8,
+      "12": 7,
+      "14": 8
+    }
+  },
+  "missingIds": {
+    "1": true,
+    "1945": true
+  },
+  "orphanJobs": 117,
+  "jobTargets": {
+    "1": 4,
+    "1945": 113
+  },
+  "recordedPaidAlloy": 11805,
+  "historicalMainFleetCause": "BELIRLENEMEDI"
+}

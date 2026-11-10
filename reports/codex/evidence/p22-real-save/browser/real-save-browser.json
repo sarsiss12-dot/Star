@@ -1,0 +1,19 @@
+{
+  "realSave": true,
+  "systems": 300,
+  "empires": 23,
+  "hostSavedPlayer": true,
+  "guestOriginalEmpire": 1,
+  "thirdOriginalEmpire": 2,
+  "nativeHost27Recovery": true,
+  "nativeGuestHostAck": true,
+  "replayRejected": true,
+  "playerShips": 44,
+  "paidJobs": 117,
+  "sameResources": true,
+  "sameProgress": true,
+  "sameRng": true,
+  "privacy": true,
+  "inProcessReload": true,
+  "coldNewRoom": "NOT RUN"
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "file": "STARS_2224_10_filo_hata_inceleme.md",
+    "bytes": 4495,
+    "sha256": "f56a283defba2968b1fdb1c267c7909261dc96a96baf70b933a7d9f871e67885"
+  },
+  {
+    "file": "stars-2224-10.sav",
+    "bytes": 3122149,
+    "sha256": "37fc6db0579c891d508a4251613aea92cb7a6ba797ca2f459711899070964ffe"
+  },
+  {
+    "file": "stars_2224_10_orphan_manifest_1_.json",
+    "bytes": 1172,
+    "sha256": "dcc8c93e5a2912d3ab8fb01c45557072f5d7feab9c5d044f150547cba1c9b678"
+  }
+]

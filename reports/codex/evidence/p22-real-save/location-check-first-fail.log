@@ -1,0 +1,42 @@
+node:assert:152
+  throw new AssertionError(obj);
+  ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
+    {
+      n: 14,
+      sys: 27,
+      x: 9614.672080739676,
+      y: 3771.082031034741
+    },
+-   {
+-     n: 13,
+-     sys: 95,
+-     x: 9041.714656893706,
+-     y: 4012.5378627205464
+-   }
+  ]
+
+    at Object.<anonymous> (/workspace/Star/tests/p22_real_save_acceptance.cjs:17:8)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [ { sys: 27, n: 14, x: 9614.672080739676, y: 3771.082031034741 } ],
+  expected: [
+    { sys: 27, n: 14, x: 9614.672080739676, y: 3771.082031034741 },
+    { sys: 95, n: 13, x: 9041.714656893706, y: 4012.5378627205464 }
+  ],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.1
