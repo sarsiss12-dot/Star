@@ -97,7 +97,7 @@ const VIEW=new Set(['warCenter','warCenterTab','warCenterDetail','warCenterSuppo
   /* MP.6.3 — federasyon kararları ve bağımsızlık desteği: motor işlevi MP komutuna iner */
   'fedExecute','fedGrant','supIndep',
   /* MP.6.4 — casusluk: ağ, standart operasyonlar (onay ekranı → host), özel operasyonlar; son çağrılar MP komutuna iner */
-  'spy','spySel','spyOpen','spyClear','ops','opDone','runop','opAsk','opGo','saboPick','saboCancel','saboGo','incite','deepInv','ffTarget','ffPatsy','ffGo','stealTech',
+  'internalColonyGo','internalRisk','crisisManage','internalPolicyAsk','internalPolicyGo','spyTargetSet','intelCategory','spy','spySel','spyOpen','spyClear','ops','opDone','runop','opAsk','opGo','saboPick','saboCancel','saboGo','incite','deepInv','ffTarget','ffPatsy','ffGo','stealTech',
   /* MP.6.4 — Galaktik Borsa (seçim görünüm, TAKAS ET → 'market') */
   'mktTrade',
   /* MP.6.4 — kalan filo / koloni işlemleri (motor işlevi MP komutuna iner) */
@@ -338,18 +338,22 @@ function gate(){
   /* MP.6.4 — casusluk. Aynada hedefin kabuğu var (teknoloji/stok/koloni gizli): onay ekranının değerleri (maliyet, ifşa yüzdesi,
      seviye, uygunluk) host'un opQuote'undan (spyQuote, salt okuma, önbellekli); zar ve sonuç yalnız host'ta (spyOp / spySpecial).
      Sonuç gelince GERÇEK STARS sonuç penceresi host'un sonucuyla çizilir (opExecute yeniden çağrılır, runOp önbellekten döner). */
+  const internalCards0=UI.internalCards.bind(UI);UI.internalCards=function(){if((S.on||S.building)&&!loadNoticePrefs())return;return internalCards0();};
+  InternalUI.request=function(sid,pid,kind){const tag=String(++this.serial);UI.openModal('<div class="mhd">Müdahale denetleniyor</div><div class="mbd" id="internalLoading" data-token="'+tag+'">Host önizlemesi bekleniyor…<button class="abtn" data-a="closem">VAZGEÇ</button></div>','sci');const cid=send({kind:'internalQuote',sys:sid,planet:pid,policy:kind});if(cid)waits[cid]=res=>{if(doc.getElementById('internalLoading')?.dataset.token!==tag)return;if(res.status==='ok')InternalUI.preview(sid,pid,kind,res.extra);else toast(why(res),true);};};
+  InternalUI.commit=function(token){const d=UI._riskDecision;if(!d||d.token!==token)return;UI._riskDecision=null;const cid=send({kind:'internalPolicy',sys:d.sid,planet:d.pid,policy:d.kind,stamp:d.stamp});const button=doc.querySelector('[data-a="internalPolicyGo"][data-x="'+token+'"]');if(button){button.disabled=true;button.textContent='HOST YANITI BEKLENİYOR';}if(cid)waits[cid]=res=>{toast(res.status==='ok'?'Müdahale host tarafından uygulandı':why(res),res.status!=='ok');const b=doc.querySelector('[data-a="internalPolicyGo"][data-x="'+token+'"]');if(b)b.textContent=res.status==='ok'?'UYGULANDI':why(res);};};
   wrap('assignSpy',(o,e,id)=>{if(!mine(e))return o(e,id);return !!send({kind:'spyAssign',target:real(+id)});});
   wrap('opQuote',(o,e,t,key)=>{const q=o(e,t,key);if(!mine(e)||!t||!q||!q.op)return q;const h=spyQ(t.id),x=h&&h.ops[key];
     if(!x)return {...q,ok:false,why:'Host operasyonu denetliyor…'};
     return {...q,ok:x.ok,why:x.why,cost:x.cost,riskPct:x.riskPct,risk:x.riskPct/100,lvlHave:x.lvlHave,afford:x.afford,viable:x.viable,viableDesc:x.viableDesc};});
   const oe0=UI.opExecute.bind(UI);UI.opExecute=function(...a){if(S.on)SPY.pend=this._opPending;return oe0(...a);};
   wrap('runOp',(o,e,t,key)=>{if(!mine(e)||!t)return o(e,t,key);const k=t.id+':'+key;if(SPY.res[k]){const r=SPY.res[k];delete SPY.res[k];return r;}
-    const q=opQuote(e,t,key),pend=SPY.pend;SPY.pend=null;
+    const q=opQuote(e,t,key),epoch=UI._spyEpoch||0,pend=SPY.pend;SPY.pend=null;
     const cid=send({kind:'spyOp',target:real(t.id),op:String(key),cost:JSON.stringify(q.cost||{}),riskPct:q.riskPct|0});if(!cid)return {ok:false,msg:'Host bağlı değil; operasyon gönderilmedi.'};
     waits[cid]=res=>{if(res.status!=='ok'){toast('Host reddetti: '+why(res),true);delete SPY.q[t.id];return;}
       SPY.res[k]={ok:true,msg:res.extra.msg,caught:!!res.extra.caught,key,target:t.id};
-      if(pend){const tq=opQuote(G.p,G.emps[pend.id],key);UI._opPending={...pend,actor:G.p,target:G.emps[pend.id],emps:G.emps,systems:G.sys,cost:JSON.stringify(tq.cost),risk:tq.risk};
+      if(pend&&UI.spyTarget===pend.id&&(UI._spyEpoch||0)===epoch&&UI.cur==='intel'&&doc.getElementById('modal').classList.contains('hidden')){const tq=opQuote(G.p,G.emps[pend.id],key);UI._opPending={...pend,actor:G.p,target:G.emps[pend.id],emps:G.emps,systems:G.sys,cost:JSON.stringify(tq.cost),risk:tq.risk};
         try{UI.opExecute(pend.id,pend.key,pend.token);}catch{}}
+      else toast(res.extra.msg||'Operasyon host tarafından uygulandı',!!res.extra.caught);
       delete SPY.res[k];delete SPY.q[t.id];};
     return {ok:false,msg:'Operasyon host\'a gönderildi — sonuç birazdan gelecek.'};});
   wrap('canSabotage',(o,e,t,tur)=>{if(!mine(e)||!t)return o(e,t,tur);const h=spyQ(t.id),x=h&&h.sabo[tur];
@@ -549,7 +553,7 @@ function rebuild(){
   /* MP.7.5: kullanıcı dokunurken / kaydırırken (STARS yüzey işaretçisi) ayna uygulanmaz — düğmeler parmağın altında yer değiştirmesin */
   if(S.started&&UI._surfacePointers&&(UI._surfacePointers.size||Date.now()<(UI._surfaceUntil||0))){S.stats.touchHeld=(S.stats.touchHeld||0)+1;S.timer=setTimeout(rebuild,200);return;}
   const initialWorld=!S.started;
-  const warCards=initialWorld?[]:(G.inbox||[]).filter(n=>n.kind==='warstart'||n.kind==='wardec'),warUid=initialWorld?0:G.inboxUid||0,cardIds=new Map((initialWorld?[]:G.inbox||[]).filter(n=>n.key).map(n=>[n.key,n.uid]));
+  const warCards=initialWorld?[]:(G.inbox||[]).filter(n=>n.kind==='internalrisk'||n.kind==='warstart'||n.kind==='wardec'),warUid=initialWorld?0:G.inboxUid||0,cardIds=new Map((initialWorld?[]:G.inbox||[]).filter(n=>n.key).map(n=>[n.key,n.uid]));
   const cardOrder=new Map((G.inbox||[]).filter(n=>n.key).map((n,i)=>[n.key,i]));
   const oldEmps=typeof G!=='undefined'&&G?G.emps:null;
   const t0=performance.now();S.building=true;let ok=false;

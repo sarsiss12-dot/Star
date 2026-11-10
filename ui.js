@@ -367,7 +367,7 @@ const UI = {
       try { AUDIO.play('tap'); } catch(err){}
     }
     switch(a){
-      case 'tab': this.tab(x); break;
+      case 'tab': if($('diploPane').classList.contains('show'))this.act('closeDiplo');this.tab(x); break;
       case 'spd': this.setSpeed(+x); break;
       case 'full': forceFullscreen(); break;   // FAZ 54: senkron yol
       case 'cameraReset': View.resetCamera(); this.saveMenu(); break;
@@ -1513,7 +1513,7 @@ const UI = {
       /* FAZ 86A: opsMenu ikinci bir katalog ÜRETMEZ — kanonik komuta
          merkezine yönlendirir (aynı opsCatalog renderer'ı kullanılır). */
       case 'ops': {
-        this.spyTarget = +x;
+        this._spyEpoch=(this._spyEpoch||0)+1;this._opPending=null;this.spyTarget = +x;
         this.intelView = 'operations';
         this.keepScroll = false;
         this.tab('intel');
@@ -1527,7 +1527,7 @@ const UI = {
         this.refresh();
         break;
       }
-      case 'intelView': {
+      case 'intelView': {this._spyEpoch=(this._spyEpoch||0)+1;this._opPending=null;
         this.intelView = String(x);
         this.keepScroll = false;
         this.refresh();
@@ -1540,8 +1540,10 @@ const UI = {
         this.refresh();
         break;
       }
+      case 'spyTargetSet': {this._spyEpoch=(this._spyEpoch||0)+1;this._opPending=null;this.spyTarget=+x;this.keepScroll=false;this.refresh();break;}
+      case 'intelCategory':this.intelCategory=x;this.refresh();break;
       case 'spySel': {
-        this.spyTarget = +x;
+        this._spyEpoch=(this._spyEpoch||0)+1;this._opPending=null;this.spyTarget = +x;
         this.intelView = 'operations';
         this.keepScroll = false;
         this.refresh();
@@ -2009,13 +2011,8 @@ const UI = {
     if(typeof upheavalActive==='function'&&upheavalActive()){
       const U=upheavalInfo();add(U.ico+' '+U.n+' · '+G.upheaval.left+' tur','upInfo');
     }
-    const colonies=new Set();
-    for(const c of e.colonies||[]){
-      const s=G.sys[c.s],p=s?.planets[c.p],key=c.s+':'+c.p;
-      if(!p?.col||p.owner!==e.id||!(p.col.secede>0)||colonies.has(key))continue;
-      colonies.add(key);const frozen=p.martial_law>0||p.recent_conquest>0;
-      add('⚠ '+p.name+' · ayrılıkçı isyan · '+(frozen?'sayaç donduruldu':Math.max(0,SECESSION_LIMIT-p.col.secede)+' ay'),'selsys',1,String(s.id));
-    }
+    const risk=internalRiskSummary(e),n=risk.colonies.length;
+    if(n||risk.schism.counter||risk.subjects.length||risk.ownVassal?.anger>=50)add('⚠ '+n+' KOLONİDE İSYAN RİSKİ · İç istikrar','internalRisk',Math.max(1,n));
     if(e.crisis)add('⚠ '+e.crisis.toUpperCase()+' KRİZİ');
     if(e.shortage)add('⚠ Mal kıtlığı · ekonomi / kaynak üretimini kontrol et');
     // Navigation survives, ordinary galactic news is never an urgent count.
@@ -2041,11 +2038,12 @@ const UI = {
     const e=G.p,r=e.res,inc=e.inc,{count,minimized,wars,battles}=this.topStatusItems();
     const previous=$('resourceStrip'),left=previous?previous.scrollLeft:0;
     const cell=k=>{const d=RES[k],v=inc[k]||0;return `<div class="res" title="${d.n}"><em style="color:${d.c}">${d.ico}</em><u style="color:${d.c}">${d.k}</u><b>${fmt(r[k])}</b><s class="${v>=0?'p':'n'}">${sgn(v)}</s></div>`;};
+    const risk=internalRiskSummary(e),riskCount=risk.colonies.length+Number(risk.schism.counter>0)+risk.subjects.length+Number(risk.ownVassal?.anger>=50);
     const html=`<div id="resourceStrip" aria-label="Kaynaklar; yatay kaydırılabilir" tabindex="0">`+
       ['min','ene','yiy','tuk','ala','etk'].map(cell).join('<div class="tsep"></div>')+
       `<div class="tsep"></div><div class="res" title="Aylık araştırma: ${inc.ara}"><em style="color:${RES.ara.c}">${RES.ara.ico}</em><u>ARŞ</u><b>${fmt(inc.ara)}</b><s>/ay</s></div>
       <div class="tsep"></div><div class="res" title="Filo kapasitesi"><em>⛴</em><u>FİLO</u><b>${fleetUsage(e)}/${Math.round(e.cap)}</b></div></div>
-      <button id="topStatusBtn" class="topStatusBtn ${wars||battles?'hot':''} ${minimized?'hasMinimized':''}" data-a="topStatus" aria-label="${count} önemli durum${minimized?'; küçültülen olayı geri aç':'; listeyi aç'}" title="Savaş, olay ve kriz listesi">${wars||battles?'⚔':'☰'} +${count}</button>`;
+      <button id="topStatusBtn" class="topStatusBtn ${wars||battles?'hot':''} ${minimized?'hasMinimized':''}" data-a="topStatus" aria-label="${count} önemli durum${minimized?'; küçültülen olayı geri aç':'; listeyi aç'}" title="Savaş, olay ve kriz listesi">${riskCount?'⚠ '+riskCount+' KRİZ':(wars||battles?'⚔':'☰')+' +'+count}</button>`;
     const bar=$('topbar');if(bar._topHTML!==html||!bar.querySelector('#topStatusBtn')){bar.innerHTML=html;bar._topHTML=html;}
     $('resourceStrip').scrollLeft=left;
   },
@@ -2485,12 +2483,12 @@ const UI = {
                 <b style="color:${renk}">${sc}/${lim}</b></div>
               <div class="mini" style="grid-column:1/-1;margin:2px 0 0;color:${renk}">
                 AYRILIKÇI İSYAN — ${donmus
-                  ? 'sıkıyönetim sayacı donduruyor'
-                  : lim - sc + ' ay içinde kopabilir'}</div>
+                  ? 'mevcut sıkıyönetim/fetih koruması: ayda −2'
+                  : 'normal ilerlemede '+Math.max(0,lim-sc)+' sayaç adımı kaldı; koşullar değişebilir'}</div>
               <div class="mini" style="grid-column:1/-1;margin:1px 0 0">
                 ${(e.hitLog||[]).some(w=>w.k==='kiskirt'&&!w.known&&w.sys===s.id&&w.pi===pl.i)?'🔍 DIŞ MÜDAHALE ŞÜPHESİ — İstihbarattan Derin Soruşturma yap.<br>':''}
                 İstikrarı ${typeof SECESSION_STAB !== 'undefined' ? SECESSION_STAB : 40}
-                üstüne çıkar ya da sıkıyönetim ilan et — istikrar düzelirse sayaç ayda −3 geriler.</div>
+                üstüne çıkar; mevcut müdahale seçeneklerini incele. İşlenen sağlıklı ayda sayaç −2 geriler.</div>
             </div>`;
           }
 
@@ -4082,7 +4080,8 @@ const UI = {
     if (V === 'operations')  h += this.intelOperations();
     else if (V === 'files')  h += this.intelFiles();
     else                     h += this.intelNetworks();
-    return h;
+    const e=G.p,known=G.emps.filter(o=>spyTargetCheck(e,o).ok),side=known.map(o=>'<button class="ivRow '+(this.spyTarget===o.id?'on':'')+'" data-a="spyTargetSet" data-x="'+o.id+'">'+esc(o.name)+'<br><small>Ağ '+intelOf(e,o.id)+'/3 · '+(e.spy?.[o.id]?'Casus sahada':'Casus yok')+'</small></button>').join('');
+    return '<div class="spyWorkspace"><aside aria-label="İstihbarat hedefleri">'+side+'</aside><main>'+h+'</main></div>';
   },
   intelNav(){
     const V = this.intelView || 'networks';
@@ -4106,29 +4105,14 @@ const UI = {
     h += `<div class="ph">TEMAS KURULAN DEVLETLER (${tanidiklar.length})</div>`;
     if (!tanidiklar.length)
       h += `<div class="mini">Henüz kimseyle temas kurmadın.</div>`;
-    for (const o of tanidiklar){
-      const lv = (typeof intelOf === 'function') ? intelOf(e, o.id) : 0;
-      const pr = (e.intelP && e.intelP[o.id]) || 0;
-      const yuzde = Math.min(100, Math.round((pr % 12) / 12 * 100));
-      const cs = !!(e.spy && e.spy[o.id]);
-      const sec = (this.spyTarget === o.id);
-      h += `<button class="ivRow ${sec?'on':''}" data-a="spySel" data-x="${o.id}">
-        <div class="ivTop"><span style="color:${o.col}">${esc(o.name.slice(0,22))}</span>
-          <b class="tag ${lv>=2?'p':'b'}">${'●'.repeat(lv)}${'○'.repeat(3-lv)}</b></div>
-        <div class="ivSub">ilişki <b>${Math.round(e.rel[o.id]||0)}</b>
-          · ${cs?'<b style="color:#6ff2c8">casus atandı</b>':'casus yok'}
-          ${lv<3?`· sonraki seviye %${yuzde}`:'· <b>tam ağ</b>'}</div></button>`;
-    }
-    h += `<div class="mini">Bir devlete dokun: dosyası açılır ve OPERASYONLAR
-      görünümünde hedef olur. Ağ seviyesi casus atayarak ve temasta kalarak
-      yükselir.</div>`;
+    h+='<p>Soldan tek hedef seç; seçimin Ağlar, Operasyonlar ve Dosyalar arasında korunur. Operasyon etkisi ve ifşa riski ayrı gösterilir.</p>';
     h += this.intelDossier();
     h += this.intelAgents();
     return h;
   },
   intelOperations(){
     const e = G.p;
-    let h = '<div class="ph">HEDEFİ DEĞİŞTİR</div><div class="spyQuickTargets">'+G.emps.filter(o=>spyTargetCheck(e,o).ok).map(o=>`<button class="abtn ${this.spyTarget===o.id?'pri':''}" data-a="spySel" data-x="${o.id}">${esc(o.name)}</button>`).join('')+'</div>';
+    let h = '';
 
     const id = this.spyTarget;
     const o  = (id !== undefined && id !== null) ? G.emps[id] : null;
@@ -4178,7 +4162,8 @@ const UI = {
       <div class="mini">Bu 12 operasyon onayda hemen uygulanır; bekleyen görev
       kuyruğu yoktur. İfşa yüzdesi başarı şansı değildir. Özel operasyonların
       başarı koşulları aşağıdaki ayrı gruplardadır.</div>`;
-    for (const k in OPS){
+    const categories={all:'Tümü',economy:'Ekonomi / lojistik',politics:'Siyasi baskı',intel:'Bilgi / teknoloji'};h+='<div class="spyCategories">'+Object.entries(categories).map(([k,n])=>'<button class="abtn" data-a="intelCategory" data-x="'+k+'">'+n+'</button>').join('')+'</div>';
+    for (const k in OPS){const category=['isyan','suikast','sahteKanit'].includes(k)?'politics':['calTech','yalan','filoPlan','sorusturma'].includes(k)?'intel':'economy';if(this.intelCategory&&this.intelCategory!=='all'&&this.intelCategory!==category)continue;
       const q = (typeof opQuote === 'function') ? opQuote(e, o, k) : null;
       if (!q || !q.op) continue;
       const cost = Object.keys(q.cost).map(r =>
@@ -7666,6 +7651,7 @@ const UI = {
     this._openNote = it;               // geri koyabilmek için sakla
     this.drawInbox();
     switch(it.kind){
+      case 'internalrisk': InternalUI.risks();break;
       case 'chain':   this.chainOpen(it.data); break;
       case 'event':   this.eventOpen(it.data); break;
       case 'anomaly': this.anomalyOpen(it.data.a, it.data.sys); break;
@@ -7822,7 +7808,7 @@ const UI = {
 
   openModal(html, cls, stashable, art){
     const modalSurface=$('modal');if(modalSurface._surfaceTimer)clearTimeout(modalSurface._surfaceTimer);modalSurface._surfaceTimer=null;modalSurface._surfacePending=null;modalSurface._surfaceKey=null;modalSurface._surfaceHTML=null;
-    this._demolitionToken=null;
+    this._demolitionToken=null;this._riskDecision=null;
     this._warPreview=null;
     this._amountToken=null;this._jointSendToken=null;
     this._shipCancelPending=null;
@@ -7988,7 +7974,7 @@ const UI = {
 
   closeModal(){
     const modalSurface=$('modal');if(modalSurface._surfaceTimer)clearTimeout(modalSurface._surfaceTimer);modalSurface._surfaceTimer=null;modalSurface._surfacePending=null;modalSurface._surfaceKey=null;modalSurface._surfaceHTML=null;
-    this._demolitionToken=null;
+    this._demolitionToken=null;this._riskDecision=null;
     this._warPreview=null;
     this._amountToken=null;this._jointSendToken=null;
     // 94D.1: acknowledged war/retired incident cards must not be saved as still open.

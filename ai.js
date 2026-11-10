@@ -1617,7 +1617,7 @@ function aiTurn(e){
   if (e.dead) return;
   if (e.crisisSide){ crisisFleetTurn(e); return; }
   if (e.wild){ wildTurn(e); return; }
-  aiObserve(e);aiCivicActions(e);aiUpdateStrategy(e);aiStrategicDiplomacy(e);aiCoalitionDiplomacy(e);
+  aiObserve(e);aiInternalCrisis(e);aiCivicActions(e);aiUpdateStrategy(e);aiStrategicDiplomacy(e);aiCoalitionDiplomacy(e);
   const race = RACES[e.race];
   const prof = aiProfile(e);
   const my = G.sys.filter(s => s.owner === e.id);

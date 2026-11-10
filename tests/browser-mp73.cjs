@@ -247,6 +247,7 @@ let relay,px,base,tls,bH,bB,bC;
   if(process.env.FEDFOUND0_THREE==='1')await test('FD3 üç insan, misafir kurucu, özel davet ret/iptal, yeniden bağlantı ve karma oy',async()=>{metrics.fd3=await require('./helpers/beta-fed-found0-three.cjs')(H2,B2,C2,out);});
   if(process.env.FEDAI0_AUDIT==='1')await require('./helpers/beta-fed-ai0-input.cjs').start([H2,B2,C2]);
   if(process.env.MPP0==='1')await test('P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket',async()=>{metrics.p0=await require('./helpers/mp-p0-guest-browser.cjs')(H2,B2,C2,out);});
+  if(process.env.ER0==='1')await test('ER0 katılımcı casusluk, hedef güvenliği ve gerçek isyan müdahalesi',async()=>{metrics.er0=await require('./helpers/beta-er0-browser.cjs')(H2,B2,C2,out,{tap,wait});});
   if(process.env.FEDAI0==='1')await test('FAI0 misafir taslak düzenleme ve üç insan acil savunma sırası',async()=>{metrics.fedAI0=await require('./helpers/beta-fed-ai0-browser.cjs')(H2,B2,C2,out,{tap,wait});});
   if(process.env.WAR_CENTER0==='1')await test('WC0 üç insan koşullu koalisyon, karşı teklif, ücret ve savaş merkezi',async()=>{metrics.warCenter=await require('./helpers/beta-war-center0-browser.cjs')(H2,B2,C2,out,{tap,wait,openCard,addRes});});
   if(process.env.BOARD2==='1')await test('BD2 koloni paneli ve yetkili uzaktan inşa',async()=>{metrics.board2=await require('./helpers/beta-board2-browser.cjs')(H2,B2,C2,out);});

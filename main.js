@@ -4722,7 +4722,7 @@ function territoryOwnerSet(place, owner){
     const s=G.sys.find(s=>s===place||s.planets.includes(place));
     if(s)recordNews({category:'territory',empires:[place.owner,owner].filter(id=>id>=0),system:s.id,...(s!==place?{planet:place.i}:{}),key:'territory:'+s.id+':'+(s===place?'sys':place.i)+':'+((place.shareRev||0)+1),title:'Sahiplik değişti',text:(place.name||s.name)+' — '+(G.emps[place.owner]?.name||'Önceki yönetim')+' → '+(G.emps[owner]?.name||'Sahipsiz bölge')});
   }
-  if (place.owner !== owner){place.shareRev = (place.shareRev || 0) + 1;if(typeof DIPLO_MAP_CACHE!=='undefined')DIPLO_MAP_CACHE=null;}
+  if (place.owner !== owner){place.shareRev = (place.shareRev || 0) + 1;if(place.col&&!G._newsSetup&&!(typeof _loadTxActive!=='undefined'&&_loadTxActive)){delete place.col.crisisPolicy;delete place.col.internalWarning;}if(typeof DIPLO_MAP_CACHE!=='undefined')DIPLO_MAP_CACHE=null;}
   if(place.owner!==owner&&owner>=0&&place.col&&typeof place.col==='object'&&!G._newsSetup&&!(typeof _loadTxActive!=='undefined'&&_loadTxActive))initializeColonyAutomation(place.col);
   place.owner = owner;
 }
@@ -8028,6 +8028,7 @@ function validSaveEnvelope(d){
   if (!d.emps.every((e,i) => e && Number.isInteger(e.id) && e.id === i &&
       record(e.res) && Object.keys(RES).every(k => Number.isFinite(e.res[k])) &&
       Array.isArray(e.colonies))) return false;
+  if(!validInternalWarnings(d)||!d.sys.every(s=>s.p.every(p=>validInternalPolicy(p.col?.crisisPolicy,d.emps.length))))return false;
   const fleetIds = new Set();
   return d.fl.every(f => {
     if (!record(f) || !Number.isInteger(f.id) || fleetIds.has(f.id) ||
@@ -8500,7 +8501,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p19';
+const BUILD_ID = '96h10p20';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -9355,6 +9356,7 @@ function monthTick(){
     /* Ölen imparatorluğun arkasında öksüz veri bırakma */
     if (typeof purgeEmpire === 'function') purgeEmpire(e);
   }
+  internalWarningTick();
   if (!G.p.colonies.length && !G.over){
     G.over = {e:G.p, txt:'Son kolonin de düştü. Hanedanın sona erdi.', win:false};
     UI.gameOver();

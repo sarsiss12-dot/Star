@@ -134,6 +134,7 @@ function colonyOutput(e, sys, pl, report=null){
      formül karmaşıklaşmıyor. */
   if (pl.martial_law > 0) for (const k in o) o[k] *= .50;
   if(trace)trace('İşgal / sıkıyönetim üretim kaybı');
+  if(col.crisisPolicy?.owner===e.id&&col.crisisPolicy.kind==='autonomy'&&col.crisisPolicy.until>G.day){for(const k in o)o[k]*=.85;if(trace)trace('Yerel özerklik üretim bedeli');}
   return {o, use};
 }
 
@@ -575,56 +576,7 @@ function economyTick(init){
       const hab = habOf(e, pl);
       col.cap = pl.hab ? 7 : Math.max(4, Math.round(pl.sz * hab/100 * 1.5) + 3);
       const hive = !!physioOf(e).kovan || (RACES[e.race].win === 'kolonizasyon' && RACES[e.race].dip === 0);
-      let target = 50 + hab*.25 + e.mods.stab + (e.home===sys.id?12:0) - (e.crisis?22:0);
-      let pen = 0;
-      if (e.shortage && !hasPerk(e,'faith')) pen += 26;   // Kutsal Düzen kıtlığa dayanır
-      if (hasPerk(e,'ironWill')) pen *= .5;               // Demir İrade cezaları yarıya indirir
-      target -= pen;
-      if (typeof planetTrait === 'function'){
-        const pt = planetTrait(col);
-        if (pt) target += pt.stab || 0;
-      }
-      /* FAZ 42: kışkırtılmış halk — istikrar hedefi baskılanır */
-      if (col.unrest){
-        col.unrest.left--;
-        target -= col.unrest.hit || 25;
-        if (col.unrest.left <= 0) delete col.unrest;
-      }
-      /* FAZ 42: dış kışkırtma — istikrar hedefi 12 ay boyunca düşük
-         tutulur, halk yatışmaz. */
-      if (col.incited !== undefined){
-        if (col.incited > (G.memAge || 0)){
-          target -= (typeof INCITE_STAB !== 'undefined' ? INCITE_STAB : 25);
-        } else {
-          delete col.incited; delete col.inciteBy;
-        }
-      }
-      /* ═══ FAZ 74: YIKIMIN İZLERİ ARTIK GEÇİCİ ═══
-         Faz 73'te ceza KALICIYDI (tavan 30) — bu, alınan gezegeni
-         sonsuza dek işe yaramaz kılıyordu ve oyuncuyu yıkıcı
-         bombardımandan tamamen caydırıyordu. Artık yara zamanla
-         kapanıyor: yılda ~1.8 puan siliniyor, bombardıman
-         sürmediği sürece birkaç on yılda tamamen geçiyor. */
-      if (col.scorched){
-        target -= col.scorched;
-        if (!col.bombed || col.bombed < (G.memAge || 0))
-          col.scorched = Math.max(0, col.scorched - .15);   // ~1.8/yıl
-        if (col.scorched <= 0) delete col.scorched;
-      }
-      /* FAZ 78B: "İlham Verici" vali istikrar hedefini yükseltir */
-      if (col.leader !== undefined && typeof leaderOf === 'function'){
-        const _LV = leaderOf(e, col.leader);
-        if (_LV && LEADER_TRAITS[_LV.trait] && LEADER_TRAITS[_LV.trait].e &&
-            LEADER_TRAITS[_LV.trait].e.stab)
-          target += LEADER_TRAITS[_LV.trait].e.stab * (1 + _LV.rank * .10) *
-                    ((typeof disgraceMul === 'function') ? disgraceMul(_LV) : 1);
-        /* FAZ 79: ifşa edilmiş vali istikrarı ayrıca düşürür */
-        if (_LV && _LV.disgraced && _LV.disgraced > (G.memAge || 0))
-          target -= 12;
-      }
-      if (hasCivic(e,'oneparty')) target = Math.max(target, 35);
-      if (hasPerk(e,'zeal')) target = Math.max(target, 60);
-      if (hive) target = Math.max(target, 92);   // tek irade: moral sorunu olmaz
+      const target=colonyStabilityTarget(e,sys,pl,true);
       /* FAZ 63: bombardıman altındaki koloni toparlanamaz —
          yalnız düşüş yönünde hareket eder. */
       if (col.bombed && col.bombed >= (G.memAge || 0)){
@@ -2694,7 +2646,7 @@ function secessionTick(){
         /* Sayaç tavanı: kışkırtma üst üste binerse şişmesin */
         col.secede = Math.min(SECESSION_LIMIT + 4, (col.secede || 0) + 1);
         /* Oyuncuya uyarı — müdahale şansı */
-        if (!e.ai && col.secede >= Math.round(SECESSION_LIMIT * .5) && col.secessionNotice!==e.id){
+        if (!e.ai && col.secede >= Math.round(SECESSION_LIMIT * .5) && col.secede < 24 && col.secessionNotice!==e.id){
           col.secessionNotice=e.id;
           const text='⚠ AYRILIKÇI HAREKET — '+(col.name||pl.name)+' halkı kopmaktan söz ediyor. İstikrarı düzelt!';
           if(e.id===0)say(text,'war');
@@ -3147,11 +3099,7 @@ function schismTick(){
 
     if (ort < SCHISM_STAB){
       e.schism = (e.schism || 0) + 1 + Math.min(2, kiskirtma);
-      /* Oyuncuya yarı yolda uyarı */
-      if (e.id === 0 && e.schism === Math.round(SCHISM_MONTHS * .5))
-        say('⚠ İMPARATORLUK BÖLÜNMENİN EŞİĞİNDE — halkın yarısı ' +
-            'yönetimi reddediyor. İstikrarı toparlamazsan ideolojik ' +
-            'bir kopuş yaşanacak.', 'war');
+
     } else {
       e.schism = Math.max(0, (e.schism || 0) - 2);
       continue;
@@ -4624,3 +4572,110 @@ function disgraceTick(){
     }
   }
 }
+
+function colonyStabilityTarget(e,sys,pl,mutate=false,report=null){
+ const col=pl.col,hab=habOf(e,pl),hive=!!physioOf(e).kovan||(RACES[e.race].win==='kolonizasyon'&&RACES[e.race].dip===0);
+ let prior=0;const mark=label=>{if(report){report.push({label,delta:target-prior});prior=target;}};
+ let target = 50 + hab*.25 + e.mods.stab + (e.home===sys.id?12:0) - (e.crisis?22:0);
+      mark('Temel, yaşanabilirlik, devlet etkileri, başkent ve kaynak krizi');
+      let pen = 0;
+      if (e.shortage && !hasPerk(e,'faith')) pen += 26;   // Kutsal Düzen kıtlığa dayanır
+      if (hasPerk(e,'ironWill')) pen *= .5;               // Demir İrade cezaları yarıya indirir
+      target -= pen;mark('Tüketim malı kıtlığı / dayanıklılık');
+      if (typeof planetTrait === 'function'){
+        const pt = planetTrait(col);
+        if (pt) target += pt.stab || 0;
+      }
+      mark('Gezegen karakteri');
+      /* FAZ 42: kışkırtılmış halk — istikrar hedefi baskılanır */
+      if (col.unrest){
+        if(mutate)col.unrest.left--;
+        target -= col.unrest.hit || 25;
+        if (mutate && col.unrest.left <= 0) delete col.unrest;
+      }
+      /* FAZ 42: dış kışkırtma — istikrar hedefi 12 ay boyunca düşük
+         tutulur, halk yatışmaz. */
+      if (col.incited !== undefined){
+        if (col.incited > (G.memAge || 0)){
+          target -= (typeof INCITE_STAB !== 'undefined' ? INCITE_STAB : 25);
+        } else {
+          if(mutate){delete col.incited; delete col.inciteBy;}
+        }
+      }
+      mark('Yerel huzursuzluk ve siyasi baskı (fail açıklanmaz)');
+      /* ═══ FAZ 74: YIKIMIN İZLERİ ARTIK GEÇİCİ ═══
+         Faz 73'te ceza KALICIYDI (tavan 30) — bu, alınan gezegeni
+         sonsuza dek işe yaramaz kılıyordu ve oyuncuyu yıkıcı
+         bombardımandan tamamen caydırıyordu. Artık yara zamanla
+         kapanıyor: yılda ~1.8 puan siliniyor, bombardıman
+         sürmediği sürece birkaç on yılda tamamen geçiyor. */
+      if (col.scorched){
+        target -= col.scorched;
+        if (mutate && (!col.bombed || col.bombed < (G.memAge || 0)))
+          col.scorched = Math.max(0, col.scorched - .15);   // ~1.8/yıl
+        if (mutate && col.scorched <= 0) delete col.scorched;
+      }
+      mark('Bombardıman izleri');
+      /* FAZ 78B: "İlham Verici" vali istikrar hedefini yükseltir */
+      if (col.leader !== undefined && typeof leaderOf === 'function'){
+        const _LV = leaderOf(e, col.leader);
+        if (_LV && LEADER_TRAITS[_LV.trait] && LEADER_TRAITS[_LV.trait].e &&
+            LEADER_TRAITS[_LV.trait].e.stab)
+          target += LEADER_TRAITS[_LV.trait].e.stab * (1 + _LV.rank * .10) *
+                    ((typeof disgraceMul === 'function') ? disgraceMul(_LV) : 1);
+        /* FAZ 79: ifşa edilmiş vali istikrarı ayrıca düşürür */
+        if (_LV && _LV.disgraced && _LV.disgraced > (G.memAge || 0))
+          target -= 12;
+      }
+      mark('Vali yeteneği / itibar kaybı');
+      if (hasCivic(e,'oneparty')) target = Math.max(target, 35);
+      if (hasPerk(e,'zeal')) target = Math.max(target, 60);
+      if (hive) target = Math.max(target, 92);   // tek irade: moral sorunu olmaz
+
+ mark('Yönetim alt sınırları');const policy=col.crisisPolicy;if(policy?.owner===e.id&&policy.until>G.day)target+=policy.kind==='relief'?10:12;mark('Etkin yerel müdahale');return target;
+}
+
+/* BETA-ESPIONAGE-REBELLION.0: two bounded, owner-scoped decisions using
+   the existing stability/output/secession engine. Quotes never write state. */
+const INTERNAL_POLICIES={relief:{n:'Halkı yatıştır',cost:{min:160,yiy:80,etk:25},days:180,cooldown:360,d:'İstikrar +6 şimdi; hedef +10 / 180 gün. Kaynak krizi devam edebilir.'},autonomy:{n:'Yerel özerklik',cost:{etk:80},days:360,cooldown:720,d:'İstikrar hedefi +12 / 360 gün; aynı sürede yerel üretim −%15. Bütçe ve siyasi taviz.'}};
+function internalPolicyQuote(e,s,p,kind){
+ const policy=INTERNAL_POLICIES[kind],no=why=>({ok:false,why});if(!policy||!e||G.emps[e.id]!==e||e.dead||!s||G.sys[s.id]!==s||s.planets[p?.i]!==p||p.owner!==e.id||!p.col)return no('Yalnız kendi mevcut kolonini yönetebilirsin');
+ if(kind==='autonomy'&&(isPurifier(e)||physioOf(e).kovan))return no('Bu yönetim yerel siyasi özerkliğe izin vermiyor');
+ const prior=p.col.crisisPolicy;if(prior?.owner===e.id&&prior.after>G.day)return no('Önceki müdahalenin bekleme süresi: '+Math.ceil(prior.after-G.day)+' gün');
+ if(p.col.stab>=60&&!(p.col.secede>0))return no('Müdahale gerektiren huzursuzluk yok');
+ if(Object.entries(policy.cost).some(([k,v])=>!Number.isFinite(e.res[k])||e.res[k]<v))return no('Yetersiz kaynak');
+ return {ok:true,why:'',kind,cost:{...policy.cost},days:policy.days,cooldown:policy.cooldown,description:policy.d,stamp:JSON.stringify([e.id,s.id,p.i,kind,p.shareRev||0,prior||null])};
+}
+function applyInternalPolicy(e,s,p,kind,stamp){
+ const q=internalPolicyQuote(e,s,p,kind);if(!q.ok||q.stamp!==stamp)return {ok:false,why:q.why||'Önizleme değişti; yeniden onayla'};
+ for(const[k,v]of Object.entries(q.cost))e.res[k]-=v;
+ p.col.crisisPolicy={v:1,owner:e.id,kind,started:G.day,until:G.day+q.days,after:G.day+q.cooldown};
+ if(kind==='relief')p.col.stab=clamp(p.col.stab+6,0,100);
+ recordNews({category:'colony',scope:'player',empires:[e.id],system:s.id,planet:p.i,key:'internal-policy:'+e.id+':'+s.id+':'+p.i+':'+G.day,title:INTERNAL_POLICIES[kind].n,text:q.description});return {ok:true,why:'Müdahale uygulandı',cost:q.cost,until:p.col.crisisPolicy.until};
+}
+function validInternalPolicy(x,n){return x===undefined||!!(x&&Object.keys(x).every(k=>['v','owner','kind','started','until','after'].includes(k))&&x.v===1&&Number.isInteger(x.owner)&&x.owner>=0&&x.owner<n&&Object.hasOwn(INTERNAL_POLICIES,x.kind)&&[x.started,x.until,x.after].every(Number.isFinite)&&x.started>=0&&x.until-x.started===INTERNAL_POLICIES[x.kind].days&&x.after-x.started===INTERNAL_POLICIES[x.kind].cooldown);}
+function internalRiskSummary(e){return ColonyInfo.read(()=>internalRiskRaw(e));}
+function internalRiskRaw(e){
+ const n=G.sys.filter(s=>s.owner===e.id).length,smallPassive=n<6&&!e.colonies.some(c=>G.sys[c.s]?.planets[c.p]?.col?.unrest),colonies=[];let total=0,count=0;
+ for(const c of e.colonies||[]){const s=G.sys[c.s],p=s?.planets[c.p];if(p?.owner!==e.id||!p.col)continue;total+=p.col.stab;count++;if(p.col.secede>0&&e.home!==s.id)colonies.push({system:s.id,planet:p.i,name:p.col.name||p.name,stability:p.col.stab,counter:p.col.secede,stage:p.col.secede>=24?'KRİTİK':p.col.secede>=15?'CİDDİ':p.col.secede>=5?'ERKEN UYARI':'BAŞLANGIÇ',direction:smallPassive?'bekliyor (küçük devlet; ay işlenmiyor)':p.martial_law>0||p.recent_conquest>0||p.col.stab>=40||n<6&&!p.col.unrest?'azalıyor (işlenen sağlıklı ayda −2)':'artıyor (normal ayda +1)'});}
+ const average=count?total/count:100,schism={counter:e.schism||0,average,low:count?e.colonies.filter(c=>{const p=G.sys[c.s]?.planets[c.p];return p?.owner===e.id&&p.col?.stab<25;}).length:0,eligible:n>=4};
+ const subjects=e.mpInternalSubjects||vassalsOf(e).filter(v=>v.vassalAnger>=50).map(v=>({id:v.id,name:v.name,anger:v.vassalAnger,loyalty:vassalLoyalty(v),note:'70 öfke ve senyör gücü oranı 1.35 altındaysa AI için aylık isyan ihtimali oluşur; kesin tarih değildir.'}));
+ return {colonies,schism,subjects,ownVassal:e.mpInternalSelf||(isVassal(e)?{anger:e.vassalAnger||0,loyalty:vassalLoyalty(e)}:null)};
+}
+function internalWarningTick(){
+ for(const e of G.emps){if(e.ai||e.dead||e.wild||e.crisisSide)continue;const risk=internalRiskSummary(e);
+  const emit=(key,title,text,system,planet)=>recordNews({important:true,category:'colony',scope:'player',empires:[e.id],system,planet,key,title,text});
+  for(const c of e.colonies||[]){const s=G.sys[c.s],p=s?.planets[c.p];if(!p?.col||p.owner!==e.id)continue;const counter=p.col.secede||0;if(e.home===s.id)continue;const stage=counter>=24?24:counter>=15?15:counter>=5?5:0,old=p.col.internalWarning;
+   if(!counter){if(old)delete p.col.internalWarning;continue;}if(stage&&(!old||old.owner!==e.id||stage>old.stage)){const episode=old?.owner===e.id?old.episode:G.day;p.col.internalWarning={owner:e.id,stage,episode};if(stage!==15)emit('internal-secession:'+e.id+':'+s.id+':'+p.i+':'+episode+':'+stage,'AYRILIKÇI KRİZ · '+stage+'/30',(p.col.name||p.name)+' · Sayaç '+counter+'/30. Mevcut koşullara bağlı; ani dış müdahale hızlandırabilir.',s.id,p.i);}}
+  for(const v of [...risk.subjects,...(risk.ownVassal&&risk.ownVassal.anger>=50?[{id:e.id,name:e.name,...risk.ownVassal}]:[])]){const tier=v.anger>=70?70:50,old=e.internalVassalWarnings?.[v.id];if(!old||tier>old.stage){e.internalVassalWarnings=e.internalVassalWarnings||{};const episode=old?.episode??G.day;e.internalVassalWarnings[v.id]={stage:tier,episode};emit('internal-vassal:'+e.id+':'+v.id+':'+episode+':'+tier,'VASAL BAĞIMSIZLIK RİSKİ',v.name+' · öfke '+Math.round(v.anger)+' · sadakat '+Math.round(v.loyalty)+'. Gerçek güç ve sözleşme şartlarına bağlı.');}}
+  if(e.internalVassalWarnings){const ids=new Set([...risk.subjects.map(v=>v.id),...(risk.ownVassal&&risk.ownVassal.anger>=50?[e.id]:[])]);for(const id of Object.keys(e.internalVassalWarnings))if(!ids.has(+id))delete e.internalVassalWarnings[id];if(!Object.keys(e.internalVassalWarnings).length)delete e.internalVassalWarnings;}
+  const stage=risk.schism.counter>=40?40:risk.schism.counter>=24?24:risk.schism.counter>=12?12:0;
+  if(stage&&stage>(e.schismWarning?.stage||0)){e.schismWarning={stage,episode:e.schismWarning?.episode??G.day};emit('internal-schism:'+e.id+':'+e.schismWarning.episode+':'+stage,'İDEOLOJİK BÖLÜNME RİSKİ',risk.schism.counter+'/48 · Ortalama istikrar '+Math.round(risk.schism.average));}else if(!risk.schism.counter&&e.schismWarning)delete e.schismWarning;
+ }
+}
+function aiInternalCrisis(e){
+ if(!e.ai||e.dead||e.wild||e.crisisSide||aiEconomyPlan(e).critical)return;
+ const risk=internalRiskSummary(e),candidates=risk.colonies.filter(c=>c.counter>=5&&c.stability<40);if(risk.schism.counter>=12)for(const c of e.colonies){const p=G.sys[c.s]?.planets[c.p];if(p?.owner===e.id&&p.col?.stab<25&&!candidates.some(r=>r.system===c.s&&r.planet===c.p))candidates.push({system:c.s,planet:c.p,counter:p.col.secede||0,stability:p.col.stab});}const rows=candidates.sort((a,b)=>b.counter-a.counter||a.system-b.system);for(const r of rows){const s=G.sys[r.system],p=s.planets[r.planet],prefer=(e.ethics?.aut||0)<1?'autonomy':'relief';for(const kind of[prefer,prefer==='relief'?'autonomy':'relief']){const q=internalPolicyQuote(e,s,p,kind);if(q.ok){const result=applyInternalPolicy(e,s,p,kind,q.stamp);if(result.ok)aiPlanEvent(e,'internal-crisis',{system:s.id,planet:p.i,kind,paid:q.cost,counter:p.col.secede,stability:p.col.stab});return;}}}
+}
+
+function validInternalWarnings(d){const mark=(x,stages,owner)=>x===undefined||!!(x&&typeof x==='object'&&!Array.isArray(x)&&Object.keys(x).every(k=>['stage','episode',...(owner?['owner']:[])].includes(k))&&stages.includes(x.stage)&&Number.isFinite(x.episode)&&x.episode>=0&&(!owner||Number.isInteger(x.owner)&&x.owner>=0&&x.owner<d.emps.length));return d.sys.every(s=>s.p.every(p=>mark(p.col?.internalWarning,[5,15,24],true)))&&d.emps.every(e=>mark(e.schismWarning,[12,24,40])&&(e.internalVassalWarnings===undefined||e.internalVassalWarnings&&typeof e.internalVassalWarnings==='object'&&!Array.isArray(e.internalVassalWarnings)&&Object.keys(e.internalVassalWarnings).length<=d.emps.length&&Object.entries(e.internalVassalWarnings).every(([id,x])=>/^\d+$/.test(id)&&+id<d.emps.length&&mark(x,[50,70]))));}

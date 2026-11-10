@@ -14,7 +14,7 @@
 const J=x=>x===undefined?undefined:JSON.parse(JSON.stringify(x));
 const EMP_MAPS=['rel','war','ally','contact','nap','pact','embargo','envoy','exh','giftAt','intel','intelP','mem','smuggle','spy','spynet','visionFrom','shareVis','warPend',
   /* MP.6.2: devlet kimliğiyle anahtarlı diğer haritalar (MP.6'da yeniden numaralandırılmıyordu: host'la savaş başka devlete görünürdü) */
-  'peaceAt','passage','warCause','warSince','warStart','wg','warDefense','coldWar','lastOffer','offerRefused','proxyWar','tradeFlow','routeIntel','fleetIntel','fakeTo','responses','lastSwap'];
+  'internalVassalWarnings','peaceAt','passage','warCause','warSince','warStart','wg','warDefense','coldWar','lastOffer','offerRefused','proxyWar','tradeFlow','routeIntel','fleetIntel','fakeTo','responses','lastSwap'];
 /* kabukta misafirle ikili kamu durumları (savaş başlangıcı, savunma tarafı, barış, geçiş, soğuk savaş, ambargo) */
 const SHELL_PAIR=['warSince','warStart','warDefense','peaceAt','passage','coldWar','embargo'];
 const STRIP_ME=['aiIntel','aiStrategy','aiShipPlan','aiTalk','aiLastOp','_aiSpyNext','_prof','_trCache','_trSig','_press','_pressAt','_powC','_powAt','_trAt','_persAt'];
@@ -38,7 +38,7 @@ function build(meId,o={}){
     if(surv||mine)x.p=s.planets.map(p=>{
       const q={i:p.i,t:p.t,dep:p.dep,sz:p.sz,seed:p.seed,name:p.name,owner:-1};
       if(v||mine){q.owner=piN(p.owner);if(p.col){
-        if(p.owner===meId){q.col=J(p.col);delete q.col.inciteBy;if(q.col.unrest)delete q.col.unrest.by;if(Number.isInteger(q.col.secessionNotice))q.col.secessionNotice=piN(q.col.secessionNotice);if(q.col.conflictNotice&&Number.isInteger(q.col.conflictNotice.owner))q.col.conflictNotice.owner=piN(q.col.conflictNotice.owner);}
+        if(p.owner===meId){q.col=J(p.col);if(q.col.crisisPolicy)q.col.crisisPolicy.owner=piN(q.col.crisisPolicy.owner);if(q.col.internalWarning)q.col.internalWarning.owner=piN(q.col.internalWarning.owner);delete q.col.inciteBy;if(q.col.unrest)delete q.col.unrest.by;if(Number.isInteger(q.col.secessionNotice))q.col.secessionNotice=piN(q.col.secessionNotice);if(q.col.conflictNotice&&Number.isInteger(q.col.conflictNotice.owner))q.col.conflictNotice.owner=piN(q.col.conflictNotice.owner);}
         else q.col={...(me.war[p.owner]&&G.fleets.some(f=>f.e===meId&&f.sys===s.id&&!f.mv)?{siege:p.col.siege||0}:{}),pop:Math.round(p.col.pop||0),stab:0,grow:0,b:{},cap:p.col.cap||0,name:p.col.name||p.name,f:null,fcd:0,shield:p.col.shield||0,
           garrisonBase:p.col.garrisonBase||0,garrison:p.col.garrison||0,auto:false,hist:{peace:0,own:0,flips:0,sieges:0,crises:0},q:[]};}}
       return q;});
@@ -72,7 +72,7 @@ function build(meId,o={}){
     x.history=(x.history||[]).map(h=>({...h,by:piN(h.by)}));x.paid=remapKeys(x.paid||{});
     if(x.disclosedWars)x.disclosedWars=Object.fromEntries(Object.entries(x.disclosedWars).map(([id,fr])=>[String(piN(+id)),(fr||[]).map(piN)]));return x;};
   const party=q=>!!q&&(q.lord===meId||q.sub===meId);
-  const mine=J(me);for(const k of STRIP_ME)delete mine[k];
+  const mine=J(me);const risk=internalRiskSummary(me);if(risk.ownVassal)mine.mpInternalSelf=J(risk.ownVassal);if(risk.subjects.length)mine.mpInternalSubjects=risk.subjects.map(v=>({...v,id:piN(v.id)}));for(const k of STRIP_ME)delete mine[k];
   mine.mapHabitats=knowledge.habitats;mine.mapOwners=Object.fromEntries(Object.entries(knowledge.owners).map(([id,owner])=>[id,piN(owner)]));
   mine.id=0;mine.ai=false;for(const k of EMP_MAPS)if(mine[k])mine[k]=remapKeys(mine[k]);
   /* MP.6.4 gizlilik: mağdur kaydında fail yalnız BİLİNİYORSA (yakalandı / soruşturmayla çözüldü) gider; tespit edilmemiş

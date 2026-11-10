@@ -1,14 +1,14 @@
 {
-  "phase": "BETA-FED-AI.0",
-  "build": "96h10p19",
+  "phase": "BETA-ESPIONAGE-REBELLION.0",
+  "build": "96h10p20",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p19",
-  "parent_commit": "8f5e3886c132ee3cc45e333f8630c395854360ed",
-  "parent_zip_sha256": "6bb4d0c2714a98f816615217aeb8e418faaea06a41d5aaa81dc294b43e9c2d88",
+  "pwa_cache": "stars-v96h10p20",
+  "parent_commit": "6648bf90a5c7226fa93d0e1cc6703776425d62cd",
+  "parent_zip_sha256": "501d4e27e2435402adf3b88ef43095d95946af9ca0278860bf7ea01bac220583",
   "file_count": 19,
   "files": {
-    "ai.js": "6d0a7800f0423b95212a8dbaf70009b0da4514cc3959d83f21e89511e0046f5c",
+    "ai.js": "61d4666ad045b4bd2af6f2a2564545be2450dcdfbd6b30bb76ad7bdf867fd0be",
     "archive-ui.js": "83ef4b95ab1b503c17e8b655745487fa693dc5501632b633b3df4bf5cf9f966d",
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "b4e21fcdb6fdaaa93da07313131470de3e8a3c28b5650226a9c4a2713bde73a5",
@@ -17,16 +17,16 @@
     "construction.js": "19244de7be9ad0d0aaf5bf67cbccd85bd4f2988cd9d670bbe2a7dd4a91905bf5",
     "diplomacy.js": "3b813073136181fd82c94560618fb29355d59dbab28b3f6e95b6005048d8dd10",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
-    "economy-ui.js": "bf782df67a41afbb28314fbeb5d6e92cd5c8b76a42c5b7fd1291fa54d4842254",
-    "economy.js": "8392cf97c2d1d1b3f346c74a8c0cbe3bfaf4d671257cbd925f9a3ee7d04eab7b",
+    "economy-ui.js": "797431b367504c669c91dda97a1fc7524f42a77d8f10f92a24fd10153457dbcd",
+    "economy.js": "b4c7c9cdc6bbe8bec1b4478d77cfdea743550ac41bfcda95530d03b482394a7b",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
-    "index.html": "a9cfced642ea6bfd8141ed27d21d671bd0645ba31b0a4177a08b06e072a8146e",
-    "main.js": "7550752f7c6bba96f031c346d8211861b3f9cc115038c49086f01a9147f33149",
+    "index.html": "2c828257cb3a797f8abdfebb804db3e95b9c3ab772531e222a98adf7042601ff",
+    "main.js": "54c04efa7908c8a0bc0e876a7ec55907dbda38704f1e33a03817a18d5e70e58a",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "400dbc524750443528b88bfbd0d82aa301fd7b1f12b03d8ea5fa3d73c07603fc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "e39e93c15060fa5feba5caab5baad7becfc4c750b7b66173e5fb9b27718ee845",
-    "ui.js": "7889c7fdf3fbb7670ca16d1db02c84b1d342572669d7b79edc9b319f60f0e12b"
+    "sw.js": "6156d50e9f1e5174b9d58a658992d65fc542a68c3f01ce9d579411a3240edce0",
+    "ui.js": "ac13e2cc27084a0c0e005c30175400bae9b7a49583198243297699dae662c443"
   },
-  "description": "Stratejik AI koalisyonları, Yağmacı Federasyon, sürümlü kurucu rızası ve acil savunma gündemi."
+  "description": "Ortak casusluk çalışma alanı; gerçek iç riskler, kalıcı erken uyarı ve sınırlı maliyetli kriz müdahaleleri."
 }
