@@ -1,0 +1,56 @@
+[
+  {
+    "name": "motor",
+    "command": "node tests/beta_espionage_rebellion0_test.cjs > reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/core-after.log 2>&1",
+    "evidence": "reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/core-after.log",
+    "result": "12/0"
+  },
+  {
+    "name": "mp",
+    "command": "node tests/beta_espionage_rebellion0_mp_test.cjs > reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/mp-after.log 2>&1",
+    "evidence": "reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/mp-after.log",
+    "result": "6/0"
+  },
+  {
+    "name": "AI tanı",
+    "command": "STARS_OUTPUT=reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/ai-trace node tests/beta_er0_stress_trace.cjs > reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/ai-trace.log 2>&1",
+    "evidence": "reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/ai-trace.log",
+    "result": "1/0"
+  },
+  {
+    "name": "p20 kontrol",
+    "command": "STARS_CONTROL_COMMIT=3aacf7d648fcea9603e2c57232f2689c0feabfb4 STARS_OUTPUT=reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/p20-compat-final node tests/beta_er0_equivalence.cjs > reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/p20-compat-final.log 2>&1",
+    "evidence": "reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/p20-compat-final.log",
+    "result": "6/0"
+  },
+  {
+    "name": "mobil kabul",
+    "command": "STARS_CHROMIUM_PATH=/usr/bin/chromium STARS_OUTPUT=reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/accept-after ER0_ACCEPT=1 MP73_ONLY='B1 |B2 |ERA |sayfa' node tests/browser-mp73.cjs > reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/accept-after.log 2>&1",
+    "evidence": "reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/accept-after.log",
+    "result": "4/0"
+  },
+  {
+    "name": "PC kabul",
+    "command": "STARS_CHROMIUM_PATH=/usr/bin/chromium STARS_OUTPUT=reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/accept-desktop ER0_ACCEPT=1 MPP0_DESKTOP=1 MP73_ONLY='B1 |B2 |ERA |sayfa' node tests/browser-mp73.cjs > reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/accept-desktop.log 2>&1",
+    "evidence": "reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/accept-desktop.log",
+    "result": "4/0"
+  },
+  {
+    "name": "SP",
+    "command": "STARS_OUTPUT=reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/sp node tests/browser-beta-er0-sp.cjs > reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/sp.log 2>&1",
+    "evidence": "reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/sp.log",
+    "result": "5/0"
+  },
+  {
+    "name": "soğuk kayıt",
+    "command": "STARS_CHROMIUM_PATH=/usr/bin/chromium STARS_OUTPUT=reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/cold ER0_R=1 MP8_SCEN=R MP8_MONTHS=6 node tests/browser-mp8.cjs > reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/cold.log 2>&1",
+    "evidence": "reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/cold.log",
+    "result": "5/0"
+  },
+  {
+    "name": "giriş/kimlik",
+    "command": "STARS_CHROMIUM_PATH=/usr/bin/chromium STARS_OUTPUT=reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/identity-current MP73_ONLY='A1 |sayfa' node tests/browser-mp73.cjs > reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/identity-current.log 2>&1",
+    "evidence": "reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/identity-current.log",
+    "result": "2/0"
+  }
+]

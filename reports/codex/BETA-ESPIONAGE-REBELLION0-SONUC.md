@@ -1,26 +1,26 @@
 # BETA-ESPIONAGE-REBELLION.0 — tek parça sonuç raporu
 
-10 Kasım 2026. **p20 geliştirici adayıdır. Gerçek kullanıcı kabulü yapılmadı; fazın bütünü ve görevler TAMAMLANDI değildir.** Casusluk çalışma alanı, ayrıştırılmış iç risk uyarıları, iki gerçek maliyetli müdahale ve AI kullanımı uygulanıp hedefli test edildi. Özgün aralıklı selfleet/dealSend/fedFoundStart hatasının kesin kökü hâlâ açık. İlk FAIL kayıtları korunur.
+10 Kasım 2026. **Güncel teslim p21 geliştirici adayıdır. Gerçek kullanıcı kabulü yapılmadı; fazın bütünü ve görevler TAMAMLANDI değildir.** Casusluk çalışma alanı, ayrıştırılmış iç risk uyarıları, iki gerçek maliyetli müdahale ve AI kullanımı uygulanıp hedefli test edildi. Özgün aralıklı selfleet/dealSend/fedFoundStart hatasının kesin kökü hâlâ açık. İlk FAIL kayıtları korunur. Önceki p20 teslimi tekrar yazılmadı; bu devamda yanlış tek-tip risk etiketi düzeltildi, M5/M6 native kabulü ve AI stres kök nedeni tamamlandı. İlk p20 kanıtları sürümüne göre aşağıda korunur; p21 son kontrolleri bölüm20’dedir.
 
 ## 1. Kanonik kaynak ve bitiş
 
-- Depo: `sarsiss12-dot/Star`. Doğrulanmış uzak p19 başlangıç/rapor HEAD: `6648bf90a5c7226fa93d0e1cc6703776425d62cd`. Önceki kod/paket: `b72dd0c0a362ba95d05b577be30388d787632ecd`.
-- Başlangıç ve teslim öncesi uzak kontrol aynı p19 HEAD'i gösterdi. Eski main `4296ad2d43fedce6264020b3761f50f1839fd836` kaynak alınmadı. Kanıt: `source-heads.txt`, `source-heads-final.txt`.
-- Dal: `codex/stars-beta-espionage-rebellion0-ux`.
-- Yeni runtime/paket commit: **`96a1797df1914328ea3f9b032e849466416e7a4c`**.
-- Son MP kaynak düzeltmesi ve doğrulanmış kod HEAD: **`c20bd181addd66318bbfba804109197cf1aa69e8`**. `remote-runtime-head.txt` uzak doğrulamasıdır. ZIP runtime içeriği bu MP düzeltmesinde değişmedi; son MP kaynakları ayrıca gerekir.
-- Rapor ve son ek test commit'inin nihai SHA'sı son yanıtta bildirilir; belge kendi SHA'sını yazmak için yeni commit zinciri oluşturmaz.
-- Oyun **96h10p20**, PWA **stars-v96h10p20**, MP **MP.8.9b15**. Save8 **v8**, MP paket **4**, protokol **1** korunur. Yeni komutlar aynı katı zarf/yetki modelini kullanır; canlı roller aynı p20 kaynaklarını kullanmalıdır. Gerçek p19 paketi p20'de açıldı; p20 kaydını eski sürüme düşürme veya karışık canlı istemci uyumu iddia edilmez.
+- Depo `sarsiss12-dot/Star`; dal `codex/stars-beta-espionage-rebellion0-ux`.
+- Fazın ilk doğrulanmış p19 başlangıç/rapor HEAD'i `6648bf90a5c7226fa93d0e1cc6703776425d62cd`; p19 kod/paket `b72dd0c0a362ba95d05b577be30388d787632ecd`.
+- Bu devam isteğinde GitHub yeniden kontrol edildi. Aynı fazın daha yeni **p20 HEAD'i `3aacf7d648fcea9603e2c57232f2689c0feabfb4`** kanonik devam tabanı alındı. p19'a dönülmedi ve p20 özellikleri tekrar geliştirilmedi. Eski main `4296ad2d43fedce6264020b3761f50f1839fd836` değişmedi.
+- Korunan p20 runtime/paket `96a1797df1914328ea3f9b032e849466416e7a4c`; p20 son MP kaynak `c20bd181addd66318bbfba804109197cf1aa69e8`.
+- **Güncel p21 kod/paket HEAD'i `257d01dd06cec92b981abeccc6e5419b8a0c421a`**, uzak doğrulaması `continuation-3aacf7d/remote-code-head.txt`.
+- Rapor/kanıt commit'inin nihai SHA'sı son yanıtta bildirilir; belge kendi SHA'sını yazmak için yeni commit zinciri oluşturmaz.
+- Oyun **96h10p21**, PWA **stars-v96h10p21**, MP **MP.8.9b16**. Save8 **v8**, MP paket **4**, protokol **1** korunur. Tek ürün değişikliği salt-okunur risk etiketidir; sürüm/PWA/MP kimlikleri birlikte güncellendi. p20 paket kabulü mevcut katı bütünlük/yetki kontrolleri korunarak açıkça eklendi. Canlı roller aynı p21 kaynaklarını kullanmalıdır; karışık canlı istemci uyumu veya eski sürüme dönüş iddia edilmez.
 
 ## 2. Başlangıç envanteri ve korunan işler
 
-[Başlangıç envanteri](BETA-ESPIONAGE-REBELLION0-ENVANTER.md) mevcut kod ile yeni kapsamı ayırır. p19 rapor/envanter, p17/p18 raporları, ilk dokunma kayıtları, mevcut casusluk ve isyan testleri okundu. Issue #33 okuma denemesi `Forbidden` döndürdü; güncel pano metni doğrulanamadı. Önceki doğrulanmış raporlar kanıt olarak kullanıldı; bunlar kullanıcı onayı sayılmadı.
+[Başlangıç envanteri](BETA-ESPIONAGE-REBELLION0-ENVANTER.md) mevcut kod ile yeni kapsamı ayırır. İlk teslimde p19 rapor/envanter, p17/p18 raporları, ilk dokunma kayıtları ve mevcut testler okundu. Bu devamda p20 raporu/kod/kanıtlar karşılaştırıldı. İlk teslimdeki Issue #33 okuma denemesi `Forbidden` döndürdü; aynı oturumdaki engel için tekrar yetki arama döngüsü başlatılmadı; güncel pano metni doğrulanamadı. Önceki doğrulanmış raporlar kanıt olarak kullanıldı; bunlar kullanıcı onayı sayılmadı.
 
 p15 görüş/sensör/sağlık/olay/rota; p16 federasyon FIFO/hız; p17 koloni çalışma alanı, isyan açıklaması ve uzaktan inşa; p18 Savaş Merkezi/koalisyon; p19 Yağmacı, bağımsız AI koalisyonu, düzenlenebilir kuruluş ve acil savunma yeniden geliştirilmedi. İlgili koruma testlerine alındı.
 
 ## 3. P0 etkileşim kusurları: kanıt ve belirsizlik
 
-**Özgün aralıklı vakalar açık.** Başlangıçtaki gerçek üç Chromium/mobil koşusu6/0 ve aday birleşik mobil7/0/PC7/0 sonuçları, tarihsel timeout'ların kesin çözüldüğü anlamına gelmez. Timeout artırılmadı; force-click, DOM üzerinden JS click veya assertion kaldırma kullanılmadı.
+**Özgün aralıklı vakalar açık.** Aşağıdaki panel/ACK ve birleşik6/7 sonuçları ilk p20 tesliminin kanıtlarıdır; p21 native ek kabulü bölüm20’de ayrıdır. Başlangıçtaki gerçek üç Chromium/mobil koşusu6/0 ve aday birleşik mobil7/0/PC7/0 sonuçları, tarihsel timeout'ların kesin çözüldüğü anlamına gelmez. Timeout artırılmadı; force-click, DOM üzerinden JS click veya assertion kaldırma kullanılmadı.
 
 Ayrı, somut bir kusur yeniden üretildi: federasyon/diplomasi yüzeyi açıkken gerçek `UI.act('tab','intel')` eylemi eski `diploPane.show` katmanını bırakıyordu. Casusluk hedefi görünürken eski katman pointer'ı tutabiliyordu. `panel-before.log` FAIL ve ilk native `mp-ui-first.log`3/1 bunu gösterir. `case 'tab'` yalnız açık kullanıcı sekme geçişinde mevcut `closeDiplo` yolunu çalıştırır; eski taslak saklama davranışı korunur. Programatik `UI.tab`/arka plan refresh yeniden yazılmadı. `panel-after.log` ve `mp-panel-fixed.log`4/0 sonrasını gösterir.
 
@@ -55,7 +55,7 @@ Ek tanıdaki ilk masaüstü5/2, testin var olmayan `#toast` elemanını okuması
 
 Koloninin hedef istikrar hesabı `economyTick` içinden **aynı formül/sıra korunarak** `colonyStabilityTarget` içine alındı. Normal motor `mutate=true` kullanır; salt-okunur açıklama mevcut huzursuzluk/savaş izi süresini azaltmaz. Temel/yaşanabilirlik, kaynak krizi, tüketim malı kıtlığı, karakter, yerel baskı, bombardıman izi, vali/itibar, yönetim alt sınırları ve etkin müdahale aynı gerçek hesap üzerinden gösterilir. Yeni paralel istikrar hesabı yoktur. Açıklama dış müdahale failini söylemez.
 
-Eski “ayda−3” metni **−2** yapıldı. “Kesin X ayda kopuş” yerine mevcut normal ilerlemede kalan sayaç adımı ve koşulların değişebileceği yazılır. Koruma sayaç dondurma olarak sunulmaz; gerçek mevcut−2 davranışı anlatılır. Yeni manuel sıkıyönetim düğmesi bulunmaz.
+Eski “ayda−3” metni **−2** yapıldı. “Kesin X ayda kopuş” yerine mevcut normal ilerlemede kalan sayaç adımı ve koşulların değişebileceği yazılır. Koruma sayaç dondurma olarak sunulmaz; gerçek mevcut−2 davranışı anlatılır. Yeni manuel sıkıyönetim düğmesi bulunmaz. p21 ayrıca yalnız schism/vasal riski varken “0 kolonide isyan riski” yazan listeyi gerçek risk türleriyle etiketler; üç motorun sayaçları değişmez.
 
 ## 6. Kalıcı erken uyarı ve kişisel bildirimler
 
@@ -92,7 +92,7 @@ Mevcut aylık `aiTurn` içinde, gözlemden sonra bir sınırlı kriz değerlendi
 
 **Gerçek aylık kampanya:** seed23, aktörAI3, orta galaksi/8AI başlangıcı; kontrollü koşulda diğer normal AI kararları pasiftir. Sekiz ay gerçek `dailyTick`/`monthTick`/`aiTurn` çalışır. AI930/960/990 günlerinde üç koloniye özerklik verir (3×80 etki, normal diğer ekonomik hareketlerden ayrı politika bedeli). İstikrar28→52, ayrılık sayacı5→9→1; toplam stok/aylık ölçüler `ai-controlled-eight/campaign.json` içindedir. Bütün sayaç değişimini yalnız politikaya bağlama iddiası yoktur; normal toparlanma da işler. Politikanın ayrı katkısı mikro kontrolle ölçülür.
 
-**İlk başarısızlıklar korunur:** tam etkin AI'lı altı aylık deneyde istikrarın dördüncü ay12 düşmesi görüldü ve kurtarma assertion'ı FAIL oldu (`ai-all-active-diagnostic.json`, `ai-campaign-first-fail.log`). Bu ölçümde ani düşüşün faili kesin kanıtlanmadı; evrensel AI kurtarma başarısı sayılmaz. Diğer AI'lar pasifken altı ay sonunda sayaç9'dan5'e dönüp başlangıca eşit kaldığı için kurtarma assertion'ı yine FAIL oldu. Normal istikrarın ayda en fazla3 toparlanması nedeniyle iki ay daha ölçüldü; assertion gevşetilmedi, motor değiştirilmedi. Sekiz ay sonucu1'dir. Müdahale başarısız kalırsa normal isyan motoru durdurulmaz.
+**İlk başarısızlıklar korunur:** tam etkin AI'lı altı aylık deneyde istikrarın dördüncü ay37’den28’e düşmesi (normal+3 toparlanmaya karşı12 puanlık şok) görüldü ve kurtarma assertion'ı FAIL oldu (`ai-all-active-diagnostic.json`, `ai-campaign-first-fail.log`). İlk raporda bu düşüşün kaynağı kanıtlanamamıştı. Bu devamda aynı seed23/8AI dünyası ikiz VM ile ölçüldü: **AI3,1007. günde sistem35’te kalıntıyı uyandırıp +520 mineral alırken mevcut doSurvey kuralıyla bütün kolonilerinde−12 istikrar kaybetti.** Ölçüm sarmalı ile kontrolün ham Save8/RNG’si altı ay her ay birebir eşit; `continuation-3aacf7d/ai-trace/trace.json` ve `ai-trace.log` kanıttır. Bu mevcut keşif riski değiştirilmedi. İlk kurtarma assertion’ının FAIL kaydı korunur; evrensel AI kurtarma başarısı olarak sayılmaz. Diğer AI'lar pasifken altı ay sonunda sayaç9'dan5'e dönüp başlangıca eşit kaldığı için kurtarma assertion'ı yine FAIL oldu. Normal istikrarın ayda en fazla3 toparlanması nedeniyle iki ay daha ölçüldü; assertion gevşetilmedi, motor değiştirilmedi. Sekiz ay sonucu1'dir. Müdahale başarısız kalırsa normal isyan motoru durdurulmaz.
 
 ## 9. Host / katılımcı / gizlilik
 
@@ -106,16 +106,16 @@ B kendi politikası ve uyarı owner'ınıπ0 görür. C'nin aynasında B'nin giz
 | M2 hedef değişimi / eski onay / geç gerçek ACK | PASS; eski komut gönderilmez, yeni modal korunur |
 | M3 B'nin kalıcı risk HUD'si, C gizliliği | PASS hedefli native/model kapsamı |
 | M4 gerçek müdahale ve tekrar reddi | PASS; relief native MP, autonomy native SP + MP motor |
-| M5 yeni native dış kışkırtma → gizli fail zinciri | NOT RUN; mevcut özel operasyon motoru regresyonu ve yeni mirror fail filtresi ayrı PASS |
-| M6 schism artışı ve özel12/24/40/yükleme | PASS motor/MP; üç tarayıcıda48 aylık gerçek kopuş NOT RUN |
+| M5 native dış kışkırtma → gizli fail zinciri | p21 PASS: H gerçek düğmeden120 etki öder, B’de−25 istikrar/+10 sayaç; B’de fail bilinmiyor, C’de özel veri yok |
+| M6 schism artışı ve özel12/24/40/yükleme | p21 PASS kontrollü native: ayrı12/48 ekranı, gerçek motor47’de bölünmez/48’de bölünür, yerel sayaçlar0; doğal48ay kampanya NOT RUN |
 | M7 AI müdahalesi ve risk sonucu | PASS kontrollü mikro/8ay; tüm etkin AI6ay kurtarma FAIL |
-| M8 tüm tarayıcı/relay kapat → yeni oda → aynı oyuncular | PASS R0–R4; önceki kart/ödeme tekrarlanmadı |
+| M8 tüm tarayıcı/relay kapat → yeni oda → aynı oyuncular | p20 ve p21 ayrı R0–R4 PASS5/0; önceki kart/ödeme tekrarlanmadı |
 
 Bu fazda yeni casusluk/kriz ekranlarının bütün host↔B↔C rol değişimi kombinasyonları denenmedi. B/C ayrı oturum ve yetki kontrolleri vardır; tam fiziksel kabul yoktur.
 
 ## 10. Save8, RNG ve salt-okunur yollar
 
-Beş seed **11/23/42/99/404**, gerçek p19 kontrol runtime’ının ürettiği Save8 kayıtlarından üçer ay: aday ve p19 kontrolünde **ham serialize baytları ve RND_STATE** her ay eşit. Yeni mekanikler kullanılmayan kontrol içindir; meşru politika uygulandıktan sonra kaydın eski sürümle aynı olması beklenmez.
+İlk p20 tesliminde beş seed **11/23/42/99/404**, gerçek p19 kontrol runtime’ının ürettiği Save8 kayıtlarından üçer ay: aday ve p19 kontrolünde **ham serialize baytları ve RND_STATE** her ay eşit. Yeni mekanikler kullanılmayan kontrol içindir; meşru politika uygulandıktan sonra kaydın eski sürümle aynı olması beklenmez. p21 için aynı beş seed×üç ay p20 kontrolüyle yeniden ham Save8/RNG eşitliği doğrulandı; gerçek p20 paketi p21’de açıldı, bozuk bütünlük reddedildi. Kontrol revizyonu `continuation-3aacf7d/p20-compat-final/control.json` içindedir.
 
 Yeni alanları olmayan eski kayıt güvenle okunur; boş alanlar bütün eski dünyalara doldurulmaz. Bozuk politika/uyarı yüklemesi mevcut dünya/RNG'ye dokunmadan reddedilir. Gerçek risk/quote/istikrar sorguları **ve InternalUI risk/koloni ekranlarının açılıp kapanması** ham Save8/RNG'yi değiştirmez. Bildirimi okuma/gizleme tercihleri mevcut UI kayıt davranışıdır; siyasi etki veya RNG üretmez. Manuel SP modalı mevcut modal duraklatma davranışını kullanır; otomatik uyarı `pause:false` gönderir, MP'de ortak hızı zorlamaz.
 
@@ -123,7 +123,7 @@ Gerçek soğuk MP paket/yeni oda akışında politika `started900/until1080/afte
 
 ## 11. Hedefli komutlar ve kanıtlar
 
-Aşağıdaki yolların kökü `reports/codex/evidence/beta-espionage-rebellion0/`dir. `STARS_OUTPUT` belirtilen alt klasördür. Tarayıcı komutlarında `STARS_CHROMIUM_PATH=/usr/bin/chromium` kullanıldı; timeout'lar mevcut8s/30s değerlerinde kaldı.
+Aşağıdaki yolların kökü `reports/codex/evidence/beta-espionage-rebellion0/`dir. `STARS_OUTPUT` belirtilen alt klasördür. Aşağıdaki ilk geniş koşular p20 tesliminin kayıtlarıdır; yeni p21 komutları bölüm20’de listelenir. Tarayıcı komutlarında `STARS_CHROMIUM_PATH=/usr/bin/chromium` kullanıldı; timeout'lar mevcut8s/30s değerlerinde kaldı.
 
 | Gerçek komut / koşul | Sonuç | Kanıt |
 |---|---|---|
@@ -131,9 +131,9 @@ Aşağıdaki yolların kökü `reports/codex/evidence/beta-espionage-rebellion0/
 | `node tests/beta_espionage_rebellion0_mp_test.cjs` |6/0 | `mp-core-release.log` |
 | `STARS_OUTPUT=.../equivalence-release node tests/beta_er0_equivalence.cjs` |6/0 | `equivalence-release.log`, `equivalence-release/compat.json` |
 | `STARS_OUTPUT=.../sp-final node tests/browser-beta-er0-sp.cjs` |5/0 | `sp-final.log`, `sp-final/results.json` |
-| `ER0=1 FEDAI0=1 MPP0=1 WAR_CENTER0=1 MP73_ONLY='B1 |B2 |P0 |ER0 |FAI0 |WC0 |sayfa' node tests/browser-mp73.cjs` | mobil7/0 | `mp-mobile-final.log` |
+| `ER0=1 FEDAI0=1 MPP0=1 WAR_CENTER0=1 MP73_ONLY='B1 \|B2 \|P0 \|ER0 \|FAI0 \|WC0 \|sayfa' node tests/browser-mp73.cjs` | mobil7/0 | `mp-mobile-final.log` |
 | Önceki satır + `MPP0_DESKTOP=1` | PC7/0 | `mp-desktop-corrected.log`, `mp-desktop-corrected/er0-ui.json` |
-| `ER0=1 MP73_ONLY='B1 |B2 |ER0 |sayfa' node tests/browser-mp73.cjs` | son kaynak/koruma4/0 | `mp-protection-release.log` |
+| `ER0=1 MP73_ONLY='B1 \|B2 \|ER0 \|sayfa' node tests/browser-mp73.cjs` | son kaynak/koruma4/0 | `mp-protection-release.log` |
 | `ER0_R=1 MP8_SCEN=R MP8_MONTHS=6 node tests/browser-mp8.cjs` |5/0 | `cold.log`, `cold/R/mp8-R.json` |
 | `STARS_OUTPUT=.../ai-controlled-eight node tests/beta_er0_campaign.cjs` |1/0 | `ai-controlled-eight.log`, kampanya JSON |
 | `python tools/package-release.py` ve `--out /tmp/stars-p20-repeat.zip` | iki üretim aynı | `package-first.json`, `package-repeat.json`, `release-verified.json` |
@@ -187,7 +187,7 @@ Son tekrarların tek tek komutları ve exit kodları `regression-final/results.j
 
 ## 13. UI / ekran görüntüleri
 
-SP Chromium **1920×1080,800×360,915×412,960×540**; her birinde UI Scale **%80/%100/%125**, gerçek fare/dokunma, üç sekmede hedef koruma, gerçek operasyon, iki gerçek müdahale, kapanabilir modal. Sayfa hatası yok. MP üç ayrı Chromium süreci/oturum, yerel TLS relay; PC ve yatay mobil viewport native etkileşimleri kullanıldı.
+p20 ve p21’de ayrı çalıştırılan SP Chromium **1920×1080,800×360,915×412,960×540**; her birinde UI Scale **%80/%100/%125**, gerçek fare/dokunma, üç sekmede hedef koruma, gerçek operasyon, iki gerçek müdahale, kapanabilir modal. Sayfa hatası yok. MP üç ayrı Chromium süreci/oturum, yerel TLS relay; PC ve yatay mobil viewport native etkileşimleri kullanıldı.
 
 Örnek görseller:
 
@@ -196,7 +196,7 @@ SP Chromium **1920×1080,800×360,915×412,960×540**; her birinde UI Scale **%8
 - [PC host sonucu](evidence/beta-espionage-rebellion0/mp-desktop-corrected/er0-spy-ack.png)
 - [Katılımcı kriz listesi](evidence/beta-espionage-rebellion0/mp-protection-release/er0-risk-list.png)
 
-Bu emülasyon gerçek Android veya iki fiziksel PC kullanıcı testi değildir. Uzun hedef/koloni listelerinin uç500sistem kabulü bu fazda yapılmadı.
+p21’in yeni görselleri `continuation-3aacf7d/sp/`, `accept-after/era-incite-private.png`, `accept-after/era-schism12.png` ve `accept-desktop/` altındadır. Bu emülasyon gerçek Android veya iki fiziksel PC kullanıcı testi değildir. Uzun hedef/koloni listelerinin uç500sistem kabulü bu fazda yapılmadı.
 
 ## 14. Performans
 
@@ -214,38 +214,38 @@ MP: `research/mp0/mp-core.js` (iki yetkili komut, eski paket kabulü); `research
 
 Yeni testler `beta_espionage_rebellion0_*`, `beta_er0_campaign/equivalence`, `browser-beta-er0-sp`, `helpers/beta-er0-*`; mevcut MP73/MP8 runner'larına opt-in ER0 senaryosu ve eski sıkı kaynak koruma zincirine tam hunk/hash pimi eklendi. Pimli karşılaştırma eski tam kaynağı doğrular; serbest normalizasyonla stratejik fark gizlenmez. Son rapor commit'inde ek salt-okunur ekran assertion'ı da vardır.
 
-## 16. Paket ve tam hashler
+## 16. Güncel paket ve tam hashler
 
-- ZIP: **`releases/stars-faz96h10p20.zip`**, **829619 bayt**.
-- SHA256: **`8cbb9aa19d66ff5a415db3e4ebf8a5e699c5f9817e4602a31eb2bf2e1f6594ad`**.
-- CRC32: **`5F4F1B84`**.
-- İki üretim bayt bayt eşit; ZIP içi CRC/20 üye/manifest/19 runtime SHA256 doğrulandı. `RELEASE-MANIFEST.json` p19 kanonik ebeveyni gösterir.
-- Oyun ZIP'i relay/MP istemci kaynaklarını içermez. MP kaynakları son kod dalıyla birlikte gerekir. Önceki sürüm paketleri silinmedi.
+- ZIP **`releases/stars-faz96h10p21.zip`**, **829701 bayt**.
+- SHA256 **`5d195fb46363a874d278d6198473d9bc76e1025d98e938bd5a139843a8abd8cf`**.
+- CRC32 **`70277191`**.
+- İki üretim bayt bayt eşit; ZIP içiCRC/20üye/manifest/19runtime SHA256 doğrulandı. Manifest ebeveyni bu devamın kanonik p20 raporHEAD’i3aacf7d’dir.
+- Önceki `releases/stars-faz96h10p20.zip`829619bayt, SHA256`8cbb9aa19d66ff5a415db3e4ebf8a5e699c5f9817e4602a31eb2bf2e1f6594ad`, CRC32`5F4F1B84` **korundu**; üzerine yazılmadı.
+- Oyun ZIP’i relay/MP istemci kaynaklarını içermez. Güncel MPb16 kaynakları aynı dalda ayrıca gerekir.
+- Güncel manifest SHA256`5e5b6d59e0d106de81dcbccc1be43b85efcfaf12f15d24b93355bf77fcb889ed`. Makine verisi `continuation-3aacf7d/release-verified.json`: `changed` p20→p21, `phaseChanged` ilk p19→p21 tam faz farkıdır.
 
-Tüm değişen runtime ve MP dosyalarının tam önce/sonra SHA256 değerleri:
+Tam fazda değişen runtime ve MP dosyalarının SHA256 karşılaştırması:
 
-| Dosya | p19 SHA256 | p20 SHA256 |
+| Dosya | p19 SHA256 | Güncel p21 SHA256 |
 |---|---|---|
 | `ai.js` | `6d0a7800f0423b95212a8dbaf70009b0da4514cc3959d83f21e89511e0046f5c` | `61d4666ad045b4bd2af6f2a2564545be2450dcdfbd6b30bb76ad7bdf867fd0be` |
 | `economy-ui.js` | `bf782df67a41afbb28314fbeb5d6e92cd5c8b76a42c5b7fd1291fa54d4842254` | `797431b367504c669c91dda97a1fc7524f42a77d8f10f92a24fd10153457dbcd` |
 | `economy.js` | `8392cf97c2d1d1b3f346c74a8c0cbe3bfaf4d671257cbd925f9a3ee7d04eab7b` | `b4c7c9cdc6bbe8bec1b4478d77cfdea743550ac41bfcda95530d03b482394a7b` |
 | `index.html` | `a9cfced642ea6bfd8141ed27d21d671bd0645ba31b0a4177a08b06e072a8146e` | `2c828257cb3a797f8abdfebb804db3e95b9c3ab772531e222a98adf7042601ff` |
-| `main.js` | `7550752f7c6bba96f031c346d8211861b3f9cc115038c49086f01a9147f33149` | `54c04efa7908c8a0bc0e876a7ec55907dbda38704f1e33a03817a18d5e70e58a` |
-| `sw.js` | `e39e93c15060fa5feba5caab5baad7becfc4c750b7b66173e5fb9b27718ee845` | `6156d50e9f1e5174b9d58a658992d65fc542a68c3f01ce9d579411a3240edce0` |
-| `ui.js` | `7889c7fdf3fbb7670ca16d1db02c84b1d342572669d7b79edc9b319f60f0e12b` | `ac13e2cc27084a0c0e005c30175400bae9b7a49583198243297699dae662c443` |
-| `research/mp0/mp-core.js` | `18c10a99c2b55bf045fff0628f65107cd279a4b842895388b7c24004b7a26dd6` | `4deb5f2593f4a5c389945c38ae12618aaf608c0b45b86aa40e92aeef648758fd` |
-| `research/mp6/client/guest-stars.js` | `67720177a25fa4c61d3dc40050fd87e4a3f7fb743157c63d55a681dcffa672ce` | `e7804ee1c639e11b5c8cf9fe028e73313914ebcd4e3f32103c4fc4fe52d1d204` |
+| `main.js` | `7550752f7c6bba96f031c346d8211861b3f9cc115038c49086f01a9147f33149` | `98daa67073372c785c6b81f70846564276d431e6763e56b90673ac5372f18443` |
+| `sw.js` | `e39e93c15060fa5feba5caab5baad7becfc4c750b7b66173e5fb9b27718ee845` | `2e94486166f427586c73c577167e307fdee9776fd8c0c02fcf7ef8a56a9e6496` |
+| `ui.js` | `7889c7fdf3fbb7670ca16d1db02c84b1d342572669d7b79edc9b319f60f0e12b` | `ff6e035e2586dd65da7ec62471902915d14cf54b13ec398ff6668acc42468f1f` |
+| `research/mp0/mp-core.js` | `18c10a99c2b55bf045fff0628f65107cd279a4b842895388b7c24004b7a26dd6` | `6d6e5adf283e5208c7d2ab5b139a6e73713823673af8f4a2ee6eddbfd2f67e8d` |
+| `research/mp1/client/view.js` | `9f14cf54909dbd8246807520c3791a8d3b81fad7cdcbecf7a502f36a1be55637` | `95e44e7e8c6743bc6cd2f88971f2f4b43eca2a0359c6fdf16f213d7715039435` |
+| `research/mp1/server/relay.js` | `c132430f96bb625426f26a00f5d09076f090fbe482db9a018d536f001d9811c9` | `419082626658b262fa15fe194b5c7212753ccd6bff23cedeff0b9093e487e80c` |
 | `research/mp6/mirror.js` | `5b2c6ac008404e32ef9554ec45227f59c7b262fd9b864e0c2e9bda6c37aba122` | `c52e826b49e33be566055bcf10a2135e79fd5b157108cbc0755643c829b26349` |
-| `research/mp1/client/view.js` | `9f14cf54909dbd8246807520c3791a8d3b81fad7cdcbecf7a502f36a1be55637` | `61312a5719fe800a46cff123ca7daedd5483b19a796ac826ed95a07001a2ca4e` |
-| `research/mp1/server/relay.js` | `c132430f96bb625426f26a00f5d09076f090fbe482db9a018d536f001d9811c9` | `be72b0e8020172c69afa6a3c970fa2dedb61da5ee330762c15ae0422acbf5ac9` |
-
-Aynı bilgiler makine tarafından denetlenebilir `release-verified.json` içindedir. Kanıt klasöründeki eski ara sonuçlar son paket hashinin yerine geçmez.
+| `research/mp6/client/guest-stars.js` | `67720177a25fa4c61d3dc40050fd87e4a3f7fb743157c63d55a681dcffa672ce` | `e7804ee1c639e11b5c8cf9fe028e73313914ebcd4e3f32103c4fc4fe52d1d204` |
 
 ## 17. GitHub ve pano gerçek durumu
 
-Kod/paket dalına push başarılı; uzak SHA kayıtları `remote-code-head.txt`, `remote-runtime-head.txt` içindedir. Rapor/kanıt son push'u ayrıca doğrulanıp nihai SHA son yanıtta bildirilir.
+p20 kod/paket dalına push kayıtları `remote-code-head.txt`, `remote-runtime-head.txt` içindedir. Yeni p21 kod/paket257d01d push’u da doğrulandı: `continuation-3aacf7d/push-code.log`, `remote-code-head.txt`. Rapor/kanıt son push'u ayrıca doğrulanıp nihai SHA son yanıtta bildirilir.
 
-Taslak PR açma ve Issue #33'e yalnız bu kapsamı yazma **birer deneme**: ikisi de `Post "https://api.github.com/graphql": Forbidden`. PR oluşmadı; pano yazılmadı; yetki aşma/tekrarlayan araştırma yapılmadı. Kanıt `pr-attempt.log`, `board-write.log`; pano okuma da aynı engeli verdi. Diğer görevlerin metni, tarihi ve durumu değiştirilmedi.
+İlk p20 tesliminde taslak PR açma ve Issue #33'e yalnız bu kapsamı yazma **birer deneme**: ikisi de `Post "https://api.github.com/graphql": Forbidden`. PR oluşmadı; pano yazılmadı. p21 devamında aynı bilinen engel için yeniden yetki arama/tekrarlayan yazma denemesi yapılmadı; yeni PR veya pano güncellemesi varmış gibi sunulmaz. Kanıt `pr-attempt.log`, `board-write.log`; pano okuma da aynı engeli verdi. Diğer görevlerin metni, tarihi ve durumu değiştirilmedi.
 
 [Kaynak p19'a karşı compare](https://github.com/sarsiss12-dot/Star/compare/codex/stars-beta-fed-ai0-raiders-coalitions...codex/stars-beta-espionage-rebellion0-ux?expand=1). Main merge/rebase/force-push, Render deploy/restart ve kullanıcı kaydı silme/dönüştürüp üzerine yazma yapılmadı.
 
@@ -256,10 +256,10 @@ Taslak PR açma ve Issue #33'e yalnız bu kapsamı yazma **birer deneme**: ikisi
 | P0 selfleet/dealSend/fedFoundStart | Aralıklı kök açık | Kanıtlanan açık eski panel katmanı düzeltildi; spy geç ACK sınırı | Birleşik PC/mobil, native negatif ACK | Kanıtlı alt kusur PASS; özgün vaka AÇIK | Yapılmadı; TEST BEKLİYOR |
 | Pano içi #33 Casusluk UX | p17 hedef şeridi, mevcut3bölüm | Tek korunan hedef, kategoriler, aynı host onayı | SP5/0, MP6/0 ve native | Ana testli akış PASS; bütün özel akış matrisi NOT RUN | Yapılmadı; RAPOR GELDİ / TEST BEKLİYOR |
 | Koloni erken uyarısı | p17 bir defa15 |5/15/24, kişisel kart, kalıcıHUD | Motor11/0, native, cold5/0 | PASS testli kapsam | Yapılmadı; KULLANICI ONAYI BEKLİYOR |
-| İdeolojik bölünme | Ayrı eski48motor | Ayrı ortalama/sayaç ve12/24/40 | MP özel aşama/yükleme | Motor/MP PASS; native48ay NOT RUN | Yapılmadı |
+| İdeolojik bölünme | Ayrı eski48motor | Ayrı ortalama/sayaç ve12/24/40; p21 doğru liste etiketi | MP özel aşama/yükleme; native47/48 sınırı | Kontrollü motor/UI PASS; doğal48ay NOT RUN | Yapılmadı |
 | Vasal riskleri | Öfke/sadakat eski motor | İlgili oyuncuya gerçek host özeti/uyarı | Pure/privacy/π testleri | PASS motor; tam native isyan NOT RUN | Yapılmadı |
 | Ekonomik destek / özerklik | Yeni manuel eylem yoktu | İki bedelli, süreli, cooldown ve sahiplik damgalı karar | NativeSP/MP, duplicate/load/cost | PASS | Yapılmadı; KULLANICI ONAYI BEKLİYOR |
-| AI iç kriz | Yeni politikalar yoktu | Mevcut aylık akıştan aynı gerçek kapı | Mikro18/27, gerçek8ay | Kontrollü PASS; tümAI6ay kurtarma FAIL | Yapılmadı; geniş stres kabulü açık |
+| AI iç kriz | Yeni politikalar yoktu | Mevcut aylık akıştan aynı gerçek kapı; kalıntı düşüşünün nedeni kanıtlandı | Mikro18/27, gerçek8ay, ikiz6ay tanı | Kontrollü PASS; tümAI6ay kurtarma FAIL korunur | Yapılmadı; geniş stres kabulü açık |
 | Yeni güvenlik/sıkıyönetim düğmesi | Mevcut koruma motoru | Üçüncü yeni mekanik eklenmedi | — | NOT RUN / YAPILMADI | Bekleyen kapsam |
 | Politik doktrin/etik propaganda dönüşümü | Tam motor yok | Desteklenen siyasi operasyonlar gösterildi; sahte buton yok | Mevcutspy regresyonu | Yeni dönüşüm YAPILMADI | Sonraki siyasi faz |
 | p15–p19 korumaları | Önceden geliştirildi | Yeni iş sayılmadı |21 paket + ilgili son tekrarlar/native | PASS testli kapsam | Önceki kabul durumları korunur |
@@ -277,4 +277,41 @@ Kullanıcı kabulünde:
 2. Riskli kendi kolonisinde HUD→İç istikrar→koloniye gidin. Gerçek neden, ayrı schism/vasal durumu,5/15/24 aşamaları ve mevcut fetih/sıkıyönetim korumasının yönü doğru olsun. Kartı kapatınca HUD sürsün. Üçüncü kişi özel bilgi görmesin.
 3. Ayrı kolonilerde destek ve özerkliği maliyet/önizlemeyle uygulayın. Kaynak bir kez kesilsin; cooldown ve−%15 üretim bedeli görülsün. Kaydedip yeni odada aynı devletlere dönün: süre/bedel/kart tekrarlanmasın.
 
-Sonraki öncelikler: özgün aralıklı P0 gerçek kullanıcı kaydı/tanısı; tüm özel casusluk ve ters rol matrisi; gerçek dış kışkırtma/schism/vasal olaylarının native kabulü ve geniş AI stresinde neden analizi. Sonrasında ayrı siyasi propaganda/etik dönüşüm tasarımı, #51 Konsey reformu; #30/#36 arma ve genel #44 bu faza eklenmedi. Kullanıcı izni olmadan yayımlama veya TAMAMLANDI yoktur.
+Sonraki öncelikler: özgün aralıklı P0 gerçek kullanıcı kaydı/tanısı; tüm özel casusluk ve ters rol matrisi; daha geniş/ters rollü özel operasyon ve doğal uzun schism/vasal kampanyalarının kabulü. H→B dış kışkırtma, kontrollü schism48 sınırı ve özgün AI düşüşü bu devamda kanıtlandı; genel AI kurtarma garantisi verilmedi. Sonrasında ayrı siyasi propaganda/etik dönüşüm tasarımı, #51 Konsey reformu; #30/#36 arma ve genel #44 bu faza eklenmedi. Kullanıcı izni olmadan yayımlama veya TAMAMLANDI yoktur.
+
+## 20. p20 tesliminden devam: yeni kanıt, tek minimal ürün düzeltmesi
+
+Bu tekrar verilen promptta geliştirilmiş p20 mekanikleri yeniden yazılmadı. Uzak p20HEAD3aacf7d kaynak alındı; yalnız doğru risk türünü adlandıran HUD/liste düzeltmesi ve buna bağlı sürüm/uyumluluk değişti. Ekonomi/AI/diplomasi/savaş/başarı hesapları ve Save8 veri modeli p20 ile aynıdır.
+
+**İlk yeni FAIL’ler:** `continuation-3aacf7d/accept-before.log`3/1: kurulan laboratuvar kolonilerinin yabancı sınır komşusu yoktu; motor doğru biçimde “Kışkırtılabilecek sınır dünyası yok” dedi. Test fixture’ında mevcut komşu boş sistemin sahipliği host’a verilerek gerçek sınır koşulu kuruldu; kapı gevşetilmedi. `accept-border-fixed.log`3/1: M5 bütün bedel/etki/gizlilik assertion’larını geçti; M6’da salt ideolojik riskin0kolonide isyan diye etiketlenmesi gerçek ürün FAIL’i oldu. Ayrı `hud-before.log`11/1 bunu salt-okunur motor testinde de yeniden üretti.
+
+**Düzeltme:** `UI.topStatusItems` artık yalnız mevcut risk türlerini listeler: gerçek yerel koloni sayısı, ideolojik bölünme, vasal bağımsızlığı. Sıfır yerel koloni için yanlış etiket yoktur. Koloni/schism/vasal sayaçları ve sonuç eşikleri değişmedi. p21/newcache/b16 kimlikleri birlikte arttı; önceki p20 paketi korunur.
+
+**Yeni M5/M6 kabulü:** üç ayrı gerçek Chromium süreci, H/B/C ve5AI; mobil H844×390/B800×360/C915×412 ve ayrı1920×1080 masaüstü koşusu. H mevcut özel operasyon grubundaki gerçek Kışkırt düğmesine basar. Fixture’ın RNG başlangıcı23’tür; normal `rnd`/olasılık/host motoru kullanılır, sonuç veya zar taklit edilmez.120 etki yalnız bir kez kesilir, B’de−25/+10 oluşur. B’nin Dosyalar ekranı “FAİL BİLİNMİYOR” yazar; `unrest.by`/bilinmeyen `hitLog.by` B’ye ve özel huzursuzluk C’ye aktarılmaz. Sonraki bağımsız laboratuvar senaryosunda düşük ortalama tutulur ve gerçek `schismTick`48 kez çalıştırılır: yerel sayaçlar0;12/48 ekranı ayrı;47’de bölünme yok,48’de `schismOf:1` yeni devlet oluşur. **Bu48aylık doğal ekonomi kampanyası değildir.** C özel schism uyarısı almaz.
+
+| Gerçek p21 komutu | Sonuç | Kanıt (`continuation-3aacf7d/`) |
+|---|---|---|
+| `node tests/beta_espionage_rebellion0_test.cjs` |12/0 | `core-after.log` |
+| `node tests/beta_espionage_rebellion0_mp_test.cjs` |6/0 | `mp-after.log` |
+| `STARS_OUTPUT=.../ai-trace node tests/beta_er0_stress_trace.cjs` |1/0; ikiz6ay hamSave/RNG eşit | `ai-trace.log`, `ai-trace/trace.json` |
+| `STARS_CONTROL_COMMIT=3aacf7d648fcea9603e2c57232f2689c0feabfb4 STARS_OUTPUT=.../p20-compat-final node tests/beta_er0_equivalence.cjs` |6/0; p20 kontrol/paket | `p20-compat-final.log`, `p20-compat-final/control.json`, `p20-compat-final/compat.json` |
+| `ER0_ACCEPT=1 MP73_ONLY='B1 \|B2 \|ERA \|sayfa' node tests/browser-mp73.cjs` |mobil4/0 | `accept-after.log`, `accept-after/era-acceptance.json` |
+| Önceki satır + `MPP0_DESKTOP=1` |PC4/0 | `accept-desktop.log` |
+| `STARS_OUTPUT=.../sp node tests/browser-beta-er0-sp.cjs` |dört viewport×üç UI ölçeği5/0 | `sp.log`, `sp/results.json` |
+| `ER0_R=1 MP8_SCEN=R MP8_MONTHS=6 node tests/browser-mp8.cjs` |soğuk yeni oda5/0 | `cold.log`, `cold/R/mp8-R.json`, `cold/R/er0-cold.json` |
+| `node tests/mp6_mirror_test.js` |8/0 | `regression/mp6_mirror_test.js.log` |
+| `node tests/mp74_notice_test.js` |6/0 | `regression/mp74_notice_test.js.log` |
+| `node tests/mp75_war_test.js` |5/0 | `regression/mp75_war_test.js.log` |
+| `node tests/perf2_equivalence_test.js` |5/0 | `regression/perf2_equivalence_test.js.log` |
+| `MP73_ONLY='A1 \|sayfa' node tests/browser-mp73.cjs` |2/0; gerçek giriş ve kimlik | `identity-current.log` |
+| `python tools/package-release.py`, `--out /tmp/stars-p21-repeat.zip`, `python tools/verify-release.py` |eşitZIP/CRC/19runtime PASS | `package-first.json`, `package-repeat.json`, `release-verified.json`, `manifest.log` |
+
+Chromium komutlarında `STARS_CHROMIUM_PATH=/usr/bin/chromium` kullanıldı. MP sahne kurma dışındaki kararlar native fare/touch düğmeleridir; `force-click`, JS click, uzatılmış timeout veya kaldırılmış assertion yoktur. Fixture/risk eşik kontrolü host motorunda açıkça kurulur. p20 ilk birleşik7/0 sonuçları tarihsel kanıttır; p21’de bu büyük birleşik koşu gereksiz yere tekrar edilmedi, yukarıdaki etkilenebilir akışlar çalıştırıldı.
+
+p20 kontrol/p21 aday küçük kontrol ay adımı medyanları112.6/100.8ms; tek yerel örnek ve hız kazancı iddiası değildir. p21 soğuk devamda host monthTick medyan161.8ms/p951229ms ölçüldü; uzun görevler vardır. Fonksiyonel5/0 veya PERF2 eşdeğerliği genel akıcılık/FPS kabulü olarak sunulmaz. Gerçek cihaz performansı hâlâ NOT RUN.
+
+**Son durum:** yeni risk etiketi PASS, M5 native PASS, M6 kontrollü native eşik PASS, özgün AI istikrar düşüşü kök neden tanısı PASS. Özgün aralıklı selfleet/dealSend/fedFoundStart kesin kökü hâlâ AÇIK. Tam etkin AI6ay kurtarma FAIL kaydı korunur. Yeni manuel sıkıyönetim, politik etik dönüşümü ve bütün özel operasyon/ters rol matrisi eklenmedi. Kullanıcı kabulü, fiziksel Android/PC, gerçekLAN/internet/Render NOT RUN; hiçbir görev TAMAMLANDI değildir.
+
+Ek kimlik denetiminde `identity-before.log`1/1, oyundaki arıza değil eski testteki sabit `MP.8.9b12` beklentisiydi; sunucu `MP.8.9b16` verdi. Ara yama uygulanmadan başlatılan tekrar (`identity-after.log`) aynı eski testle FAIL kaldı. Test artık kaynakta ilan edilen MP sürümüyle **tam eşitliği**, build/çubuk/diagnostic uyumunu ve önceki bütün destek/yetki assertion’larını korur; gerçek giriş/touch kimlik koşusu `identity-current.log`2/0 geçti. Beklenti kaldırılmadı veya timeout yükseltilmedi. Bu test altyapısı düzeltmesi runtime/ZIP’i değiştirmez.
+
+Bu devamın kısaltılmamış çevre değişkenleri, stdout yönlendirmeleri ve tam kanıt yolları [commands.json](evidence/beta-espionage-rebellion0/continuation-3aacf7d/commands.json) içindedir; ilgili dört Node regresyonunun komutları ayrıca `continuation-3aacf7d/regression/results.json` içindedir.

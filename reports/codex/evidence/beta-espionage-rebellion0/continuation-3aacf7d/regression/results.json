@@ -1,0 +1,22 @@
+[
+  {
+    "command": "node tests/mp6_mirror_test.js",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/regression/mp6_mirror_test.js.log"
+  },
+  {
+    "command": "node tests/mp74_notice_test.js",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/regression/mp74_notice_test.js.log"
+  },
+  {
+    "command": "node tests/mp75_war_test.js",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/regression/mp75_war_test.js.log"
+  },
+  {
+    "command": "node tests/perf2_equivalence_test.js",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/continuation-3aacf7d/regression/perf2_equivalence_test.js.log"
+  }
+]

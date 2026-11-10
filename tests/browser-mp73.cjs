@@ -9,6 +9,7 @@ const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{exe
 const root=path.resolve(__dirname,'..'),out=path.resolve(process.env.STARS_OUTPUT||path.join(root,'../evidence/mp73'));fs.mkdirSync(out,{recursive:true});
 const relayMod=require('../research/mp1/server/relay.js'),{selfSigned,startProxy}=require('./helpers/mp11-tls-proxy.js');
 const BUILD=JSON.parse(fs.readFileSync(path.join(root,'RELEASE-MANIFEST.json'),'utf8')).build;const results=[],errors=[],metrics={},auditPages=new Set();
+const EXPECTED_MP=fs.readFileSync(path.join(root,'research/mp1/client/view.js'),'utf8').match(/const MP_VERSION='([^']+)';/)[1],MP_RE=EXPECTED_MP.split('.').join('[.]');
 async function test(name,fn){if(process.env.MP73_ONLY&&!new RegExp(process.env.MP73_ONLY).test(name))return;const t0=Date.now();
   try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
   catch(e){for(const p of auditPages){try{const tag='failure-'+results.length+'-'+[...auditPages].indexOf(p);await p.screenshot({path:path.join(out,tag+'.png')});fs.writeFileSync(path.join(out,tag+'.json'),JSON.stringify(await p.evaluate(()=>({url:location.pathname,vote:typeof G!=='undefined'?G.council:null,inbox:typeof G!=='undefined'?G.inbox:null,modal:document.getElementById('modal')?.innerHTML,pane:document.getElementById('diploPane')?.innerHTML})),null,2));}catch{}}results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1800)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}finally{if(process.env.FEDAI0_AUDIT==='1')await require('./helpers/beta-fed-ai0-input.cjs').dump([...auditPages],out,String(results.length));}}
@@ -118,16 +119,16 @@ let relay,px,base,tls,bH,bB,bC;
     if(process.env.SETUP0_AUDIT){metrics.setup0=[];for(const [who,p] of [['host',H],['guest',Bp]]){await wait(p,()=>G.cfg.pirates===false);const row=await p.evaluate(()=>({cfg:typeof MP1Join==='undefined'?CFG.pirates:null,game:G.cfg.pirates,nests:(G.nests||[]).length,pirateFleets:G.fleets.filter(f=>f.name==='Korsan Muhafızı'||f.name==='Korsan Akıncısı').length,ownName:G.p.name,ownId:G.p.id}));assert.equal(row.game,false);assert.equal(row.nests+row.pirateFleets,0);metrics.setup0.push({who,...row});}assert.equal(metrics.setup0[0].cfg,false);}
     for(const p of [H,Bp])assert.equal(await p.evaluate(()=>!!document.getElementById('map')&&!document.getElementById('game').classList.contains('hidden')),true);
     const v=await Bp.evaluate(async()=>{const r=await fetch('/mp/version',{cache:'no-store'});return {s:r.status,j:await r.json(),b:BUILD_ID,line:MP1View.verLine(),chip:(document.getElementById('mp1Mini')||{}).title||''};});
-    metrics.version=v.j;assert.equal(v.s,200);assert.match(v.j.mp,/^MP\.8\.9b12$/);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp('MP\\.8\\.9b12 · oyun '+BUILD+'$'));   /* PERF.2: build manifestten (sabit liste yerine) */assert.match(v.chip,/MP\.8\.9b12/);
+    metrics.version=v.j;assert.equal(v.s,200);assert.equal(v.j.mp,EXPECTED_MP);assert.equal(v.j.build,v.b);assert.match(v.line,new RegExp(MP_RE+' · oyun '+BUILD+'$'));assert.match(v.chip,new RegExp(MP_RE));
     assert.equal(Object.values(v.j.files).every(x=>/^[0-9a-f]{12}$/.test(x)),true);
     await wait(Bp,()=>MP6Stars.S.unsupported&&MP6Stars.S.unsupported.length>0);metrics.unsupported=await Bp.evaluate(()=>MP6Stars.S.unsupported);
     for(const a of ['bill','billPick','billTarget','cncFound','cncJoin','cncLeave','cncNo','cncPane','cncYes','permanent','reform','throneBuild','veto','bribe','blackmail','bmGo','fundSep','panoptRetarget','revolt','revoltConfirm','whisperBlame','whisperGo','whisperMenu','whisperPick','devour','devourConfirm','colFire'])
       assert(!metrics.unsupported.includes(a),a+' still unsupported');
     assert.equal(metrics.unsupported.length,18,JSON.stringify(metrics.unsupported));
     await tap(Bp,'#mp6Conn');await wait(Bp,()=>document.getElementById('mpVer')&&document.getElementById('mpVer').offsetParent);   // telefonda görünür tanı satırı
-    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,new RegExp('MP\\.8\\.9b12 · oyun '+BUILD+'( · misafir)? · host bağlı .*son hata: ')   /* MP.8: rol + ayna + son komut eklendi */);
+    metrics.guestDiag=await Bp.evaluate(()=>document.getElementById('mpVer').textContent);assert.match(metrics.guestDiag,new RegExp(MP_RE+' · oyun '+BUILD+'( · misafir)? · host bağlı .*son hata: '));
     assert.doesNotMatch(metrics.guestDiag,/tok|key|anahtar/i);await shot(Bp,'a1-guest-diag');await tap(Bp,'#mp6Conn');
-    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;try{document.querySelector('[data-g="toggle"]')&&0;}catch{}return MP1View.verLine();}),/MP\.8\.9b12/);
+    assert.match(await H.evaluate(()=>{MP1Host.miniOpen=true;return MP1View.verLine();}),new RegExp(MP_RE));
   });
   if(process.env.BETA02_TOUCH_REPEAT)await test('T02 mp6Conn sınırlı gerçek dokunma tekrarı',async()=>{
     for(let i=0;i<Number(process.env.BETA02_TOUCH_REPEAT);i++){

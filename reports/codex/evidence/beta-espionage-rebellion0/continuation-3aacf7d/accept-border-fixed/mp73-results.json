@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 34657
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 4053
+    },
+    {
+      "name": "ERA gerçek dış kışkırtma ve ayrı ideolojik bölünme kabulü",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Yalnız schism riski, sıfır kolonide yerel isyan diye etiketlenmemeli\n    at module.exports (/workspace/Star/tests/helpers/beta-er0-acceptance.cjs:26:10)\n    at async /workspace/Star/tests/browser-mp73.cjs:250:138\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:250:35"
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 0
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ]
+  },
+  "pass": 3,
+  "fail": 1
+}

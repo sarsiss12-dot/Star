@@ -1,0 +1,35 @@
+[
+  {
+    "case": "M5",
+    "actualNativeIncite": true,
+    "paid": 120,
+    "stabilityDelta": -25,
+    "counterDelta": 10,
+    "unknownActorHidden": true,
+    "thirdPartyHidden": true
+  },
+  {
+    "case": "M6",
+    "realSchismTicks": 48,
+    "normalEconomyCampaign": false,
+    "separateLocalCounters": true,
+    "threshold47NoSplit": true,
+    "threshold48Split": {
+      "newEmpires": [
+        {
+          "id": 9,
+          "schismOf": 1
+        }
+      ],
+      "counter": 0,
+      "localCounters": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "privateWarnings": true
+  }
+]

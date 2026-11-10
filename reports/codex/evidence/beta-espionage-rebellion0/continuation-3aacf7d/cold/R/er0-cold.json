@@ -1,0 +1,19 @@
+{
+  "policy": {
+    "v": 1,
+    "owner": 1,
+    "kind": "relief",
+    "started": 900,
+    "until": 1080,
+    "after": 1260
+  },
+  "warning": {
+    "owner": 1,
+    "stage": 5,
+    "episode": 900
+  },
+  "sameResources": true,
+  "ownerPi": true,
+  "noRepeatedCards": true,
+  "noHiddenActor": true
+}

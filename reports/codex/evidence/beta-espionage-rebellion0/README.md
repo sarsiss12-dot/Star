@@ -20,3 +20,19 @@ Tek sonuç raporu: [BETA-ESPIONAGE-REBELLION0-SONUC.md](../../BETA-ESPIONAGE-REB
 - `board-read.log`, `board-write.log`, `pr-attempt.log`: tek denemelik GraphQL Forbidden; pano/PR yazıldı olarak gösterilmez.
 
 Büyük JSON tanıları `compressed-evidence.json` içindeki orijinal yol, SHA256 ve byte sayısı korunarak deterministik gzip yapıldı. `gzip -dc dosya.json.gz` ile orijinal baytlar okunur. Fiziksel kullanıcı kabulü, LAN/internet/Android/Render testi değildir. Önceki sürüm paketlerine ve gerçek kullanıcı kayıtlarına dokunulmadı.
+
+## p21 devamı: continuation-3aacf7d/
+
+Bu alt klasör p20 raporHEAD3aacf7d'den devamın kanıtıdır. İlk p20 klasörleri değiştirilmedi.
+
+- `hud-before.log`11/1 ve `accept-border-fixed.log`3/1: gerçek yanlış risk etiketi; M5 bu koşuda geçti, M6 etiketi FAIL.
+- `accept-before.log`3/1: sınır komşusu bulunmayan test fixture'ı motor tarafından doğru reddedildi; gerçek sınır koşulu kuruldu, kapı gevşetilmedi.
+- `core-after.log`12/0, `mp-after.log`6/0; `accept-after/`, `accept-desktop/`4/0: gerçek120etki/−25/+10/gizli fail ve ayrı12/48,47/48 eşik kontrolü. Kontrol48 motor çağrısıdır, doğal48ay kampanya değildir.
+- `ai-trace/trace.json`: gerçek doSurvey kalıntı şoku AI3/gün1007/sistem35, +520min ve−12istikrar. İkiz kontrolle altı ay serialize/RNG birebir. İlk6ay kurtarmaFAIL geçmişi silinmedi.
+- `p20-compat-final/`: açıkça pinli p20 kontrolünden beş seed×üç ay6/0 ve gerçek p20 paketi/bütünlük; önceki `p20-compat.log` konsolunda eski p19 etiketi kalmıştı, JSON kontrolü p20'ydi; son koşu ikisini de doğru adlandırır.
+- `sp/`5/0, `cold/R/`5/0; bütün tarayıcılar/relay kapatılıp yeni odada aynalar ve kaynaklar doğrulandı.
+- `identity-before.log` ve `identity-after.log`: eski b12 test beklentisi FAIL; ikincisi ara yama uygulanmadan eski testle açılan tekrar. Kaynak ilanıyla tam eşitlik kullanan gerçek düzeltme `identity-current.log`2/0. Önceki yetki/assertion'lar korunur.
+- `regression/`: ilgiliMP6/MP74/MP75/PERF2 exit0. `release-verified.json`: güncelp21 ZIP SHA/CRC, manifest SHA, p20→p21 ve tümfaz p19→p21 runtime+MP dosya hashleri.
+- `remote-code-head.txt` ve `push-code.log`:257d01d uzak doğrulaması. Önceki GitHubForbidden tekrar yetki arama döngüsüne çevrilmedi.
+
+Fiziksel kabul ve özgün aralıklı P0 hâlâ açık; ayrıntılı tek sonuç raporunun20.bölümü son komutları listeler.

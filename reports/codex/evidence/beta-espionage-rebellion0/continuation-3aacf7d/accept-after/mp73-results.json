@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 37867
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 15725
+    },
+    {
+      "name": "ERA gerçek dış kışkırtma ve ayrı ideolojik bölünme kabulü",
+      "status": "PASS",
+      "ms": 19835
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 4
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "er0Acceptance": [
+      {
+        "case": "M5",
+        "actualNativeIncite": true,
+        "paid": 120,
+        "stabilityDelta": -25,
+        "counterDelta": 10,
+        "unknownActorHidden": true,
+        "thirdPartyHidden": true
+      },
+      {
+        "case": "M6",
+        "realSchismTicks": 48,
+        "normalEconomyCampaign": false,
+        "separateLocalCounters": true,
+        "threshold47NoSplit": true,
+        "threshold48Split": {
+          "newEmpires": [
+            {
+              "id": 9,
+              "schismOf": 1
+            }
+          ],
+          "counter": 0,
+          "localCounters": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "privateWarnings": true
+      }
+    ]
+  },
+  "pass": 4,
+  "fail": 0
+}

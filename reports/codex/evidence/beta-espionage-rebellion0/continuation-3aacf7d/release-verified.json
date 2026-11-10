@@ -1,0 +1,104 @@
+{
+  "file": "releases/stars-faz96h10p21.zip",
+  "bytes": 829701,
+  "sha256": "5d195fb46363a874d278d6198473d9bc76e1025d98e938bd5a139843a8abd8cf",
+  "crc32": "70277191",
+  "base": "3aacf7d648fcea9603e2c57232f2689c0feabfb4",
+  "deterministic": true,
+  "changed": [
+    {
+      "file": "main.js",
+      "before": "54c04efa7908c8a0bc0e876a7ec55907dbda38704f1e33a03817a18d5e70e58a",
+      "after": "98daa67073372c785c6b81f70846564276d431e6763e56b90673ac5372f18443"
+    },
+    {
+      "file": "sw.js",
+      "before": "6156d50e9f1e5174b9d58a658992d65fc542a68c3f01ce9d579411a3240edce0",
+      "after": "2e94486166f427586c73c577167e307fdee9776fd8c0c02fcf7ef8a56a9e6496"
+    },
+    {
+      "file": "ui.js",
+      "before": "ac13e2cc27084a0c0e005c30175400bae9b7a49583198243297699dae662c443",
+      "after": "ff6e035e2586dd65da7ec62471902915d14cf54b13ec398ff6668acc42468f1f"
+    },
+    {
+      "file": "research/mp0/mp-core.js",
+      "before": "4deb5f2593f4a5c389945c38ae12618aaf608c0b45b86aa40e92aeef648758fd",
+      "after": "6d6e5adf283e5208c7d2ab5b139a6e73713823673af8f4a2ee6eddbfd2f67e8d"
+    },
+    {
+      "file": "research/mp1/client/view.js",
+      "before": "61312a5719fe800a46cff123ca7daedd5483b19a796ac826ed95a07001a2ca4e",
+      "after": "95e44e7e8c6743bc6cd2f88971f2f4b43eca2a0359c6fdf16f213d7715039435"
+    },
+    {
+      "file": "research/mp1/server/relay.js",
+      "before": "be72b0e8020172c69afa6a3c970fa2dedb61da5ee330762c15ae0422acbf5ac9",
+      "after": "419082626658b262fa15fe194b5c7212753ccd6bff23cedeff0b9093e487e80c"
+    }
+  ],
+  "phaseBase": "6648bf90a5c7226fa93d0e1cc6703776425d62cd",
+  "phaseChanged": [
+    {
+      "file": "ai.js",
+      "before": "6d0a7800f0423b95212a8dbaf70009b0da4514cc3959d83f21e89511e0046f5c",
+      "after": "61d4666ad045b4bd2af6f2a2564545be2450dcdfbd6b30bb76ad7bdf867fd0be"
+    },
+    {
+      "file": "economy-ui.js",
+      "before": "bf782df67a41afbb28314fbeb5d6e92cd5c8b76a42c5b7fd1291fa54d4842254",
+      "after": "797431b367504c669c91dda97a1fc7524f42a77d8f10f92a24fd10153457dbcd"
+    },
+    {
+      "file": "economy.js",
+      "before": "8392cf97c2d1d1b3f346c74a8c0cbe3bfaf4d671257cbd925f9a3ee7d04eab7b",
+      "after": "b4c7c9cdc6bbe8bec1b4478d77cfdea743550ac41bfcda95530d03b482394a7b"
+    },
+    {
+      "file": "index.html",
+      "before": "a9cfced642ea6bfd8141ed27d21d671bd0645ba31b0a4177a08b06e072a8146e",
+      "after": "2c828257cb3a797f8abdfebb804db3e95b9c3ab772531e222a98adf7042601ff"
+    },
+    {
+      "file": "main.js",
+      "before": "7550752f7c6bba96f031c346d8211861b3f9cc115038c49086f01a9147f33149",
+      "after": "98daa67073372c785c6b81f70846564276d431e6763e56b90673ac5372f18443"
+    },
+    {
+      "file": "sw.js",
+      "before": "e39e93c15060fa5feba5caab5baad7becfc4c750b7b66173e5fb9b27718ee845",
+      "after": "2e94486166f427586c73c577167e307fdee9776fd8c0c02fcf7ef8a56a9e6496"
+    },
+    {
+      "file": "ui.js",
+      "before": "7889c7fdf3fbb7670ca16d1db02c84b1d342572669d7b79edc9b319f60f0e12b",
+      "after": "ff6e035e2586dd65da7ec62471902915d14cf54b13ec398ff6668acc42468f1f"
+    },
+    {
+      "file": "research/mp0/mp-core.js",
+      "before": "18c10a99c2b55bf045fff0628f65107cd279a4b842895388b7c24004b7a26dd6",
+      "after": "6d6e5adf283e5208c7d2ab5b139a6e73713823673af8f4a2ee6eddbfd2f67e8d"
+    },
+    {
+      "file": "research/mp1/client/view.js",
+      "before": "9f14cf54909dbd8246807520c3791a8d3b81fad7cdcbecf7a502f36a1be55637",
+      "after": "95e44e7e8c6743bc6cd2f88971f2f4b43eca2a0359c6fdf16f213d7715039435"
+    },
+    {
+      "file": "research/mp1/server/relay.js",
+      "before": "c132430f96bb625426f26a00f5d09076f090fbe482db9a018d536f001d9811c9",
+      "after": "419082626658b262fa15fe194b5c7212753ccd6bff23cedeff0b9093e487e80c"
+    },
+    {
+      "file": "research/mp6/mirror.js",
+      "before": "5b2c6ac008404e32ef9554ec45227f59c7b262fd9b864e0c2e9bda6c37aba122",
+      "after": "c52e826b49e33be566055bcf10a2135e79fd5b157108cbc0755643c829b26349"
+    },
+    {
+      "file": "research/mp6/client/guest-stars.js",
+      "before": "67720177a25fa4c61d3dc40050fd87e4a3f7fb743157c63d55a681dcffa672ce",
+      "after": "e7804ee1c639e11b5c8cf9fe028e73313914ebcd4e3f32103c4fc4fe52d1d204"
+    }
+  ],
+  "manifestSha256": "5e5b6d59e0d106de81dcbccc1be43b85efcfaf12f15d24b93355bf77fcb889ed"
+}

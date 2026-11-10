@@ -1,0 +1,179 @@
+◆
+MİN
+3000
++3.3
+⚡
+ENJ
+2000
+-19
+❋
+YİY
+180
++15
+❖
+TÜK
+150
++9.5
+▰
+ALŞ
+220
++3.8
+◈
+ETK
+4880
++8.0
+✦
+ARŞ
+10
+/ay
+⛴
+FİLO
+6/46
+☰ +2
+⛶
+⌂
+✧
+▤
+🗺
+🌐
+👑
+👥 3
+🌐
+GALAKTİK KONSEY KURULDU
+Saf Akıl Ağı galaksiyi masaya çağırdı
+›
+🌐
+KONSEY OYLAMASI
+Evrensel Ticaret Standardı
+›
+🔥 İSYAN KIŞKIRTILDI — Risk Kolonisi 0 halkı ayaklandı · istikrar −25, ayrılıkçı sayaç 15
+2210.01
+⏸
+▸
+▸▸
+▸▸▸
+▸▸▸▸
+›
+SİSTEM
+FİLO
+İSTİHBARAT
+Saf Akıl Ağı
+Ağ 3/3 · Casus yok
+Okyanus Ticaret Birliği
+Ağ 0/3 · Casus yok
+Elaareth Konsorsiyumu
+Ağ 0/3 · Casus yok
+Zorar Ordusu
+Ağ 0/3 · Casus yok
+Valalis Federasyonu
+Ağ 0/3 · Casus yok
+Mirraor Ortaklığı
+Ağ 0/3 · Casus yok
+Meira Krallığı
+Ağ 0/3 · Casus yok
+🕸
+AĞLAR
+🎯
+OPERASYONLAR
+📁
+DOSYALAR
+🎯 HEDEF: Saf Akıl Ağı
+İstihbarat ağı
+SIZILMIŞ
+Savaş planlarını, kaynak durumunu ve hedeflerini görürsün.
+🕵 CASUS ATA
+Sahada 0 / 1 · Casus ağ seviyesini zamanla yükseltir; operasyon ayrıca onaylanır.
+SÜRELİ KAZANIMLARIN
+Bu hedefte aktif süreli kazanım yok. Anlık sonuçlar DOSYALAR bölümündedir.
+DOĞRUDAN OPERASYONLAR
+Bu 12 operasyon onayda hemen uygulanır; bekleyen görev kuyruğu yoktur. İfşa yüzdesi başarı şansı değildir. Özel operasyonların başarı koşulları aşağıdaki ayrı gruplardadır.
+Tümü
+Ekonomi / lojistik
+Siyasi baskı
+Bilgi / teknoloji
+✦ Teknoloji Çal
+◈60
+Rastgele bir teknolojisini kopyalar.
+Gereken: İZLENİYOR · İfşa riski %35
+🔒 Çalınacak yeni teknolojisi yok
+💥 Tersane Sabotajı
+◈50 ▰120
+Bir sistemindeki üretim kuyruğunu ve savunmasını felç eder.
+Gereken: İZLENİYOR · İfşa riski %40
+🔒 Sabote edilecek tesisi yok
+🔥 İsyan Kışkırt
+◈110
+Bir kolonisinin istikrarını çökertir.
+Gereken: SIZILMIŞ · İfşa riski %50 · 7 kışkırtılabilir koloni
+🎭 Sahte İstihbarat
+◈70
+Gücünü olduğundan farklı gösterir; AI kararlarını buna göre alır.
+Gereken: İZLENİYOR · İfşa riski %25 · hedef uygun
+🚚 Kervan İstihbaratı
+◈40
+Ticaret rotalarını öğrenirsin; yağma şansın belirgin artar.
+Gereken: TANIDIK · İfşa riski %20 · hedef uygun
+💰 Hazine Baskını
+◈55
+Hedefin kaynak stoğunun bir kısmını çalar. Zengin düşmanı fakirleştirir.
+Gereken: İZLENİYOR · İfşa riski %38 · 3 yağmalanabilir stok
+📡 Filo Planlarını Çal
+◈65
+Filolarının konumu ve gücü 5 yıl boyunca sana açık kalır; muharebede ilk atışı sen yaparsın.
+Gereken: İZLENİYOR · İfşa riski %30 · hedef uygun
+🗡 Suikast
+◈130
+Bir fraksiyon liderini ortadan kaldırır: hedefin iç siyaseti kaosa sürüklenir, istikrar ve etki üretimi çöker.
+Gereken: SIZILMIŞ · İfşa riski %58 · 3 fraksiyon lideri
+📦 Ambargo Kaçakçılığı
+◈45
+Sana uygulanan ambargolardan birini 4 yıl boyunca delersin; o hattan ticaret yeniden akar.
+Gereken: TANIDIK · İfşa riski %22
+🔒 Bu devlet sana ambargo uygulamıyor
+🔎 Derin Soruşturma
+◈70
+HEDEFİN üstüne yıkılmış bir iftirayı çöz. Gerçek fail ortaya çıkarsa kin ona döner ve hedefle aran düzelir. Kendi açık dosyalarını da aydınlatabilir.
+Gereken: TANIDIK · İfşa riski %10
+🔒 Çözülecek iftira dosyası bulunamadı
+🎭 Sahte Kanıt Yerleştir
+◈85
+Galakside faili meçhul kalmış eski bir operasyonun suçunu HEDEFİN üstüne yık. Mağdur devlet hedefe kin duyar ve savaş nedeni kazanır. İfşa olursa üç devlet birden sana düşman kesilir.
+Gereken: İZLENİYOR · İfşa riski %42
+🔒 Üstüne yıkılacak açık dosya yok
+🦠 Tersane Virüsü
+◈95 ▰80
+Gemi inşa hızını 3 yıl boyunca yarıya düşürür. Savaş öncesi hazırlığı çökertmenin en sessiz yolu.
+Gereken: SIZILMIŞ · İfşa riski %45 · hedef uygun
+TEKNOLOJİ HIRSIZLIĞI
+2. seviye istihbarat ve bizde olmayan teknolojisi olan bir hedef gerekir.
+ÖZEL OPERASYONLAR
+🏛 SİYASİ VE LOJİSTİK
+▸
+🗡 DOĞRUDAN VE ÇOK HEDEFLİ
+▾
+🎭 İTİBAR SUİKASTI
+Rakip komutanı öldürmezsin — itibarını bitirirsin. İfşa olmuş ama görevde kalan bir lider birimini %25 zayıflatır, 36 ay boyunca. (110 Etki · 450 Enerji)
+Görevde, ifşa edilmemiş lideri yok
+🕯 AYRILIKÇILARI FONLA
+Rakibinin vasalına gizlice para akıt. Sadakati sıfırlanırsa isyan eder ve senyörüne savaş açar — sen hiç savaşa girmeden arkasını yakarsın. (70 Etki · 300 Enerji)
+Tanıdığın devletlerin vasalı yok.
+⚓ TERSANEYİ SABOTE ET
+Hedef sistemde gemi üretimi 12 ay durur, tezgâhtaki siparişler iptal olur. (110 ◈)
+Görebildiğin, sabote edilmemiş tersanesi yok
+📦 LOJİSTİK AĞI HACKLE
+Hedef sistemin ikmal hattı 6 ay çöker; oradaki filolar %40 güçte kalır. (130 ◈)
+Saf Akıl Ağı
+1 hedef
+HEDEF SEÇ
+🔥 İSYANI KIŞKIRT
+Hedefin en zayıf sınır dünyasında huzursuzluk körükle: istikrar −25, ayrılıkçı sayaç +10 ay · huzursuzluk 12 ay sürer. İfşa olursan konsey seni kınar ve savaş nedeni doğar. (120 ◈)
+Saf Akıl Ağı
+ZEMİN HAZIR
+hedef: Risk Kolonisi 0 · istikrar 10
+🔥 İSYANI KIŞKIRT
+🔎 DERİN SORUŞTURMA
+Şüpheli dosyan yok. Sana komplo kurulduğunda burada belirir.
+🎭 SAHTE BAYRAK
+Hedefe saldırırken suçu üçüncü bir devlete yık. Başarırsan ikisi birbirine düşer. Suçüstü yakalanırsan Galaktik Parya olursun — konseyden atılır, sınırların kapanır, sınır kalkanların yarıya düşer. (140 ◈)
+HEDEF (saldırılacak):
+Saf Akıl Ağı

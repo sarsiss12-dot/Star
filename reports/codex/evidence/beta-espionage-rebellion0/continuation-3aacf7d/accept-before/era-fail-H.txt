@@ -1,0 +1,251 @@
+◆
+MİN
+3000
++3.3
+⚡
+ENJ
+2000
+-19
+❋
+YİY
+180
++15
+❖
+TÜK
+150
++9.5
+▰
+ALŞ
+220
++3.8
+◈
+ETK
+5000
++8.0
+✦
+ARŞ
+10
+/ay
+⛴
+FİLO
+6/46
+☰ +2
+⛶
+⌂
+✧
+▤
+🗺
+🌐
+👑
+👥 3
+🌐
+GALAKTİK KONSEY KURULDU
+Saf Akıl Ağı galaksiyi masaya çağırdı
+›
+🌐
+KONSEY OYLAMASI
+Evrensel Ticaret Standardı
+›
+2210.01
+⏸
+▸
+▸▸
+▸▸▸
+▸▸▸▸
+›
+SİSTEM
+FİLO
+İSTİHBARAT
+⚔ Ortak askerî koordinasyon
+Aratar
+Yıldız
+G Sarı
+Sistem hâkimiyeti
+Kızıl Muhafız
+Hiper yol
+3 bağlantı
+📦 Lojistik ağ
+Kapsamda — dost toprak (%100)
+Harita: ◇ uygun boş dünya · ■ yerleşilmiş uygun dünya. Son taranmış gözlem; güncel görünmeyen durum değişebilir.
+Savunma
+270
+GEZEGENLER
+KOLONİLEŞTİRME KOŞULLARI
+Aratar I
+Toksik · boyut 12
+FETİH / KUŞATMA VE KOLONİ DURUMU
+⚠ İÇ İSTİKRAR / MÜDAHALELER
+▾
+Aratar II
+Çöl · yaşanabilirlik %78 · boyut 18
+Koloni sahibi: Kızıl Muhafız
+≋ Vakum İpeği — Endüstriyel dokuma: +%10 mineral, +%8 alaşım
+◈ Bereketli Ovalar (+5 Yiyecek)
+Nüfus
+12 / 16
+İstikrar / moral
+60
+ODAK — 🏛 Yönetim
+🏛
+Yönetim
+⚒
+Sanayi
+🔬
+Araştırma
+🌾
+Tarım
+⚔
+Garnizon
+Etki +1.5/ay, tüm çıktı −%5. Başkent tipi koloni.
+İşgücü
+12 / 12 iş
+💤 OTOMATİK DONANMA UYKUDA — Kasa alaşımı 220 (500 altı). Elle inşa serbest.
+👤 VALİ
+Boşta vali yok.
+🏗 Otomatik inşa
+KAPALI · Manuel yönetim
+Açarsan boş yapı alanları Yönetim planına göre kendiliğinden dolar. Kaynak azalırsa duraklar.
+🏗 OTOMATİK İNŞAYI AÇ
+⬡
+0/64
+⚔
+0
+Kalkan yörüngeden çıkarmayı engeller · Garnizon yüzeyde savaşır
+YAPILAR 12/12
+⚠ Yapı slotu dolu — nüfus arttıkça açılır (her 2.2 nüfus = 1 slot)
+Maden
+2/6
+◆120
+⌫
+Santral
+2/6
+◆110
+⌫
+Çiftlik
+2/5
+◆110
+⌫
+Laboratuvar
+1/6
+◆190
+⌫
+Dökümhane
+1/6
+◆210
+⌫
+Tersane
+1/3
+◆260
+▰45
+⌫
+Savunma
+1/4
+◆138
+▰42
+⌫
+Arşiv
+0/1
+◆280
+▰40
+Klinik
+0/1
+◆230
+Termal Kuyu
+0/4
+◆200
+Uzay Asansörü
+0/1
+◆520
+▰140
+Habitat
+0/1
+◆340
+▰90
+Tüketim
+2/5
+◆170
+⌫
+Ticaret Limanı
+0/3
+◆180
+🔒 İktisat
+0/1
+◆300
+▰45
+🔒 Sinod Evi
+0/1
+◆310
+▰50
+🔒 Otomasyon
+0/1
+◆280
+▰50
+🔒 Birlik
+0/1
+◆270
+▰35
+🔒 Üretim Hücresi
+0/1
+◆320
+▰60
+🔒 Sinaps
+0/1
+◆270
+▰40
+🔒 Derin Sondaj
+0/1
+◆280
+▰50
+🔒 Biyom
+0/1
+◆260
+▰35
+Terraform için İklim Mühendisliği araştır.
+TERSANE
+📍 RALLİ NOKTASI
+Bu tersaneden çıkan askeri gemiler şu an genel üretimde yerinde kalır. Filo şablonu / takviye siparişleri hedef filosuna otomatik gider; her tersaneye ralli ataman gerekmez.
+📍 RALLİ NOKTASI SEÇ
+KRV
+▰32
+MHR
+KİLİTLİ
+KRV2
+KİLİTLİ
+ZRH
+KİLİTLİ
+BLM
+▰24
+KLN
+▰60 ◆265
+İNŞ
+▰45 ◆90
+ORD
+▰70 ◆120
+CLS
+KİLİTLİ
+ESK
+KİLİTLİ
+UZAY YAPILARI
+Uzay yapısı için İnşaat Gemisi gerekir (tersanede İNŞ).
+YÖRÜNGEDE
+1. Muhafız Filosu
+3 gemi · 431 güç
+BEKLİYOR
+Yerleşim Konvoyu
+1 gemi · sivil
+BOŞTA · HEDEF BEKLİYOR
+🌐 GALAKTİK KONSEY
+✕
+DURUM
+KONSEY YOK
+Galaktik Konsey, tüm galaksiyi bağlayan kararlar alan bir meclistir: silahsızlanma, serbest ticaret, yaptırım, savaş yasağı. Yalnızca Pasifist 2 veya üstü bir devlet kurabilir — barışı savunanlar masayı kurar.
+Senin askerî duruşun
+MİLİTARİST 2
+Kuruluş bedeli
+350 ◈
+Etkin
+5000 ◈
+Konseyi yalnızca Pasifist 2 veya üstü bir devlet kurabilir.
+🌐 KONSEYİ KUR
+Kurulduğunda barış hâlindeki tüm tanıdıkların kurucu üye olur. İdeolojini Pasifist'e çekmek için DEVLET panelindeki reformu kullanabilirsin.
+ÇOK OYUNCULU · bağlı · 2/2 misafir · ⏸ duraklatıldı

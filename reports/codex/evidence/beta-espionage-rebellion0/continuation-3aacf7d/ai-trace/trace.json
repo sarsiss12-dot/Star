@@ -1,0 +1,420 @@
+{
+  "seed": 23,
+  "ai": 8,
+  "sameSaveRngAllMonths": true,
+  "trace": [
+    {
+      "day": 929,
+      "actor": 5,
+      "system": 2,
+      "kind": "kalinti",
+      "rngBefore": 1454159533,
+      "rngAfter": 822323863,
+      "mineralChange": 520,
+      "changes": [
+        {
+          "s": 2,
+          "p": 0,
+          "stab": 60,
+          "after": 48
+        }
+      ]
+    },
+    {
+      "day": 929,
+      "actor": 1,
+      "system": 29,
+      "kind": "kalinti",
+      "rngBefore": -1641077620,
+      "rngAfter": 2022054006,
+      "mineralChange": 520,
+      "changes": [
+        {
+          "s": 29,
+          "p": 0,
+          "stab": 60,
+          "after": 48
+        }
+      ]
+    },
+    {
+      "day": 1007,
+      "actor": 3,
+      "system": 35,
+      "kind": "kalinti",
+      "rngBefore": -904088456,
+      "rngAfter": -1535924126,
+      "mineralChange": 520,
+      "changes": [
+        {
+          "s": 12,
+          "p": 0,
+          "stab": 69,
+          "after": 57
+        },
+        {
+          "s": 0,
+          "p": 0,
+          "stab": 37,
+          "after": 25
+        },
+        {
+          "s": 4,
+          "p": 0,
+          "stab": 37,
+          "after": 25
+        },
+        {
+          "s": 5,
+          "p": 0,
+          "stab": 37,
+          "after": 25
+        },
+        {
+          "s": 6,
+          "p": 0,
+          "stab": 37,
+          "after": 25
+        },
+        {
+          "s": 7,
+          "p": 0,
+          "stab": 37,
+          "after": 25
+        },
+        {
+          "s": 8,
+          "p": 0,
+          "stab": 37,
+          "after": 25
+        },
+        {
+          "s": 5,
+          "p": 1,
+          "stab": 56,
+          "after": 44
+        }
+      ]
+    }
+  ],
+  "samples": [
+    {
+      "month": 1,
+      "day": 930,
+      "colonies": [
+        {
+          "s": 12,
+          "p": 0,
+          "stab": 63,
+          "counter": 0
+        },
+        {
+          "s": 0,
+          "p": 0,
+          "stab": 31,
+          "counter": 6
+        },
+        {
+          "s": 4,
+          "p": 0,
+          "stab": 31,
+          "counter": 6
+        },
+        {
+          "s": 5,
+          "p": 0,
+          "stab": 31,
+          "counter": 6
+        },
+        {
+          "s": 6,
+          "p": 0,
+          "stab": 31,
+          "counter": 6
+        },
+        {
+          "s": 7,
+          "p": 0,
+          "stab": 31,
+          "counter": 6
+        },
+        {
+          "s": 8,
+          "p": 0,
+          "stab": 31,
+          "counter": 6
+        }
+      ]
+    },
+    {
+      "month": 2,
+      "day": 960,
+      "colonies": [
+        {
+          "s": 12,
+          "p": 0,
+          "stab": 66,
+          "counter": 0
+        },
+        {
+          "s": 0,
+          "p": 0,
+          "stab": 34,
+          "counter": 7
+        },
+        {
+          "s": 4,
+          "p": 0,
+          "stab": 34,
+          "counter": 7
+        },
+        {
+          "s": 5,
+          "p": 0,
+          "stab": 34,
+          "counter": 7
+        },
+        {
+          "s": 6,
+          "p": 0,
+          "stab": 34,
+          "counter": 7
+        },
+        {
+          "s": 7,
+          "p": 0,
+          "stab": 34,
+          "counter": 7
+        },
+        {
+          "s": 8,
+          "p": 0,
+          "stab": 34,
+          "counter": 7
+        },
+        {
+          "s": 5,
+          "p": 1,
+          "stab": 53,
+          "counter": 0
+        }
+      ]
+    },
+    {
+      "month": 3,
+      "day": 990,
+      "colonies": [
+        {
+          "s": 12,
+          "p": 0,
+          "stab": 69,
+          "counter": 0
+        },
+        {
+          "s": 0,
+          "p": 0,
+          "stab": 37,
+          "counter": 8
+        },
+        {
+          "s": 4,
+          "p": 0,
+          "stab": 37,
+          "counter": 8
+        },
+        {
+          "s": 5,
+          "p": 0,
+          "stab": 37,
+          "counter": 8
+        },
+        {
+          "s": 6,
+          "p": 0,
+          "stab": 37,
+          "counter": 8
+        },
+        {
+          "s": 7,
+          "p": 0,
+          "stab": 37,
+          "counter": 8
+        },
+        {
+          "s": 8,
+          "p": 0,
+          "stab": 37,
+          "counter": 8
+        },
+        {
+          "s": 5,
+          "p": 1,
+          "stab": 56,
+          "counter": 0
+        }
+      ]
+    },
+    {
+      "month": 4,
+      "day": 1020,
+      "colonies": [
+        {
+          "s": 12,
+          "p": 0,
+          "stab": 60,
+          "counter": 0
+        },
+        {
+          "s": 0,
+          "p": 0,
+          "stab": 28,
+          "counter": 9
+        },
+        {
+          "s": 4,
+          "p": 0,
+          "stab": 28,
+          "counter": 9
+        },
+        {
+          "s": 5,
+          "p": 0,
+          "stab": 28,
+          "counter": 9
+        },
+        {
+          "s": 6,
+          "p": 0,
+          "stab": 28,
+          "counter": 9
+        },
+        {
+          "s": 7,
+          "p": 0,
+          "stab": 28,
+          "counter": 9
+        },
+        {
+          "s": 8,
+          "p": 0,
+          "stab": 28,
+          "counter": 9
+        },
+        {
+          "s": 5,
+          "p": 1,
+          "stab": 47,
+          "counter": 0
+        }
+      ]
+    },
+    {
+      "month": 5,
+      "day": 1050,
+      "colonies": [
+        {
+          "s": 12,
+          "p": 0,
+          "stab": 63,
+          "counter": 0
+        },
+        {
+          "s": 0,
+          "p": 0,
+          "stab": 31,
+          "counter": 10
+        },
+        {
+          "s": 4,
+          "p": 0,
+          "stab": 31,
+          "counter": 10
+        },
+        {
+          "s": 5,
+          "p": 0,
+          "stab": 31,
+          "counter": 10
+        },
+        {
+          "s": 6,
+          "p": 0,
+          "stab": 31,
+          "counter": 10
+        },
+        {
+          "s": 7,
+          "p": 0,
+          "stab": 31,
+          "counter": 10
+        },
+        {
+          "s": 8,
+          "p": 0,
+          "stab": 31,
+          "counter": 10
+        },
+        {
+          "s": 5,
+          "p": 1,
+          "stab": 50,
+          "counter": 0
+        }
+      ]
+    },
+    {
+      "month": 6,
+      "day": 1080,
+      "colonies": [
+        {
+          "s": 12,
+          "p": 0,
+          "stab": 66,
+          "counter": 0
+        },
+        {
+          "s": 0,
+          "p": 0,
+          "stab": 34,
+          "counter": 11
+        },
+        {
+          "s": 4,
+          "p": 0,
+          "stab": 34,
+          "counter": 11
+        },
+        {
+          "s": 5,
+          "p": 0,
+          "stab": 34,
+          "counter": 11
+        },
+        {
+          "s": 6,
+          "p": 0,
+          "stab": 34,
+          "counter": 11
+        },
+        {
+          "s": 7,
+          "p": 0,
+          "stab": 34,
+          "counter": 11
+        },
+        {
+          "s": 8,
+          "p": 0,
+          "stab": 34,
+          "counter": 11
+        },
+        {
+          "s": 5,
+          "p": 1,
+          "stab": 53,
+          "counter": 0
+        }
+      ]
+    }
+  ]
+}
