@@ -1,0 +1,128 @@
+[
+  {
+    "command": "node tests/mp64_spy_test.js",
+    "exit": 0,
+    "seconds": 1.733,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/mp64_spy_test.js.log"
+  },
+  {
+    "command": "node tests/beta_board2_privacy_test.cjs",
+    "exit": 0,
+    "seconds": 0.364,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/beta_board2_privacy_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_board2_colony_test.cjs",
+    "exit": 0,
+    "seconds": 1.268,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/beta_board2_colony_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_board2_rebellion_test.cjs",
+    "exit": 0,
+    "seconds": 0.389,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/beta_board2_rebellion_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_board2_remote_test.cjs",
+    "exit": 0,
+    "seconds": 0.798,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/beta_board2_remote_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_board2_ack_test.cjs",
+    "exit": 0,
+    "seconds": 0.046,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/beta_board2_ack_test.cjs.log"
+  },
+  {
+    "command": "node tests/mp6_mirror_test.js",
+    "exit": 0,
+    "seconds": 12.749,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/mp6_mirror_test.js.log"
+  },
+  {
+    "command": "node tests/mp_p0_guest_test.cjs",
+    "exit": 0,
+    "seconds": 3.024,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/mp_p0_guest_test.cjs.log"
+  },
+  {
+    "command": "node tests/mp_p0_decisions_test.cjs",
+    "exit": 0,
+    "seconds": 2.843,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/mp_p0_decisions_test.cjs.log"
+  },
+  {
+    "command": "node tests/mp_p0_motion_test.cjs",
+    "exit": 0,
+    "seconds": 0.087,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/mp_p0_motion_test.cjs.log"
+  },
+  {
+    "command": "node tests/mp_p0_notice_test.cjs",
+    "exit": 0,
+    "seconds": 0.892,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/mp_p0_notice_test.cjs.log"
+  },
+  {
+    "command": "node tests/mp73_council_test.js",
+    "exit": 0,
+    "seconds": 28.556,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/mp73_council_test.js.log"
+  },
+  {
+    "command": "node tests/beta_war_fix0_test.cjs",
+    "exit": 0,
+    "seconds": 4.647,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/beta_war_fix0_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_fed_ai0_coalition_test.cjs",
+    "exit": 0,
+    "seconds": 2.664,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/beta_fed_ai0_coalition_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_fed_ai0_raider_test.cjs",
+    "exit": 0,
+    "seconds": 1.604,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/beta_fed_ai0_raider_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_fed_ai0_edit_test.cjs",
+    "exit": 0,
+    "seconds": 2.176,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/beta_fed_ai0_edit_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_fed_ai0_emergency_test.cjs",
+    "exit": 0,
+    "seconds": 4.078,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/beta_fed_ai0_emergency_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_fed_ai0_mp_test.cjs",
+    "exit": 0,
+    "seconds": 2.68,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/beta_fed_ai0_mp_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_fed_ai0_campaign_test.cjs",
+    "exit": 0,
+    "seconds": 6.004,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/beta_fed_ai0_campaign_test.cjs.log"
+  },
+  {
+    "command": "node tests/perf1_equivalence_test.js",
+    "exit": 0,
+    "seconds": 6.106,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/perf1_equivalence_test.js.log"
+  },
+  {
+    "command": "node tests/perf2_equivalence_test.js",
+    "exit": 0,
+    "seconds": 6.648,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression/perf2_equivalence_test.js.log"
+  }
+]

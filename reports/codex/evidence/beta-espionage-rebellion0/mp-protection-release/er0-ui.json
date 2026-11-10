@@ -1,0 +1,27 @@
+[
+  {
+    "spyNative": true,
+    "target": 3,
+    "authoritativeCost": 70
+  },
+  {
+    "oldPreviewInvalid": true,
+    "newTarget": 4,
+    "noOldCommand": true
+  },
+  {
+    "lateRealHostAck": true,
+    "newTarget": 3,
+    "otherModalPreserved": true
+  },
+  {
+    "ownRisk": true,
+    "realPolicy": "relief",
+    "actualCosts": {
+      "min": 160,
+      "yiy": 80,
+      "etk": 25
+    },
+    "thirdPartyPrivate": true
+  }
+]

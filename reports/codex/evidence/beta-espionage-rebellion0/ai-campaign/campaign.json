@@ -1,0 +1,618 @@
+{
+  "seed": 23,
+  "actor": 3,
+  "initial": [
+    {
+      "s": 12,
+      "p": 0,
+      "stab": 60,
+      "counter": 0
+    },
+    {
+      "s": 0,
+      "p": 0,
+      "stab": 28,
+      "counter": 5
+    },
+    {
+      "s": 4,
+      "p": 0,
+      "stab": 28,
+      "counter": 5
+    },
+    {
+      "s": 5,
+      "p": 0,
+      "stab": 28,
+      "counter": 5
+    },
+    {
+      "s": 6,
+      "p": 0,
+      "stab": 28,
+      "counter": 5
+    },
+    {
+      "s": 7,
+      "p": 0,
+      "stab": 28,
+      "counter": 5
+    },
+    {
+      "s": 8,
+      "p": 0,
+      "stab": 28,
+      "counter": 5
+    }
+  ],
+  "months": [
+    {
+      "month": 1,
+      "ms": 200.21633299999996,
+      "resources": {
+        "min": 2520.767720369231,
+        "ene": 5036.800938707693,
+        "yiy": 4930.749244430769,
+        "ala": 4838.662248269231,
+        "ara": 0,
+        "tuk": 4960.34549528,
+        "etk": 4935.010961538462
+      },
+      "colonies": [
+        {
+          "s": 12,
+          "p": 0,
+          "stab": 63,
+          "counter": 0,
+          "policy": null
+        },
+        {
+          "s": 0,
+          "p": 0,
+          "stab": 31,
+          "counter": 6,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 930,
+            "until": 1290,
+            "after": 1650
+          }
+        },
+        {
+          "s": 4,
+          "p": 0,
+          "stab": 31,
+          "counter": 6,
+          "policy": null
+        },
+        {
+          "s": 5,
+          "p": 0,
+          "stab": 31,
+          "counter": 6,
+          "policy": null
+        },
+        {
+          "s": 6,
+          "p": 0,
+          "stab": 31,
+          "counter": 6,
+          "policy": null
+        },
+        {
+          "s": 7,
+          "p": 0,
+          "stab": 31,
+          "counter": 6,
+          "policy": null
+        },
+        {
+          "s": 8,
+          "p": 0,
+          "stab": 31,
+          "counter": 6,
+          "policy": null
+        }
+      ]
+    },
+    {
+      "month": 2,
+      "ms": 109.78774900000002,
+      "resources": {
+        "min": 2510.2271607846155,
+        "ene": 5076.589325876924,
+        "yiy": 4861.635247933846,
+        "ala": 4799.598523846154,
+        "ara": 0,
+        "tuk": 4916.92776992,
+        "etk": 4863.178461538461
+      },
+      "colonies": [
+        {
+          "s": 12,
+          "p": 0,
+          "stab": 66,
+          "counter": 0,
+          "policy": null
+        },
+        {
+          "s": 0,
+          "p": 0,
+          "stab": 34,
+          "counter": 7,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 930,
+            "until": 1290,
+            "after": 1650
+          }
+        },
+        {
+          "s": 4,
+          "p": 0,
+          "stab": 34,
+          "counter": 7,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 960,
+            "until": 1320,
+            "after": 1680
+          }
+        },
+        {
+          "s": 5,
+          "p": 0,
+          "stab": 34,
+          "counter": 7,
+          "policy": null
+        },
+        {
+          "s": 6,
+          "p": 0,
+          "stab": 34,
+          "counter": 7,
+          "policy": null
+        },
+        {
+          "s": 7,
+          "p": 0,
+          "stab": 34,
+          "counter": 7,
+          "policy": null
+        },
+        {
+          "s": 8,
+          "p": 0,
+          "stab": 34,
+          "counter": 7,
+          "policy": null
+        },
+        {
+          "s": 5,
+          "p": 1,
+          "stab": 53,
+          "counter": 0,
+          "policy": null
+        }
+      ]
+    },
+    {
+      "month": 3,
+      "ms": 187.63099699999998,
+      "resources": {
+        "min": 2291.229861117949,
+        "ene": 5116.293142851283,
+        "yiy": 4794.823868527596,
+        "ala": 4723.1883038942315,
+        "ara": 0,
+        "tuk": 4874.11026242,
+        "etk": 4792.090961538462
+      },
+      "colonies": [
+        {
+          "s": 12,
+          "p": 0,
+          "stab": 69,
+          "counter": 0,
+          "policy": null
+        },
+        {
+          "s": 0,
+          "p": 0,
+          "stab": 37,
+          "counter": 8,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 930,
+            "until": 1290,
+            "after": 1650
+          }
+        },
+        {
+          "s": 4,
+          "p": 0,
+          "stab": 37,
+          "counter": 8,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 960,
+            "until": 1320,
+            "after": 1680
+          }
+        },
+        {
+          "s": 5,
+          "p": 0,
+          "stab": 37,
+          "counter": 8,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 990,
+            "until": 1350,
+            "after": 1710
+          }
+        },
+        {
+          "s": 6,
+          "p": 0,
+          "stab": 37,
+          "counter": 8,
+          "policy": null
+        },
+        {
+          "s": 7,
+          "p": 0,
+          "stab": 37,
+          "counter": 8,
+          "policy": null
+        },
+        {
+          "s": 8,
+          "p": 0,
+          "stab": 37,
+          "counter": 8,
+          "policy": null
+        },
+        {
+          "s": 5,
+          "p": 1,
+          "stab": 56,
+          "counter": 0,
+          "policy": null
+        }
+      ]
+    },
+    {
+      "month": 4,
+      "ms": 150.51582600000006,
+      "resources": {
+        "min": 2272.7003568615387,
+        "ene": 5145.1387540307705,
+        "yiy": 4723.756382615095,
+        "ala": 4651.168303653847,
+        "ara": 0,
+        "tuk": 4829.93244632,
+        "etk": 4720.868461538462
+      },
+      "colonies": [
+        {
+          "s": 12,
+          "p": 0,
+          "stab": 60,
+          "counter": 0,
+          "policy": null
+        },
+        {
+          "s": 0,
+          "p": 0,
+          "stab": 28,
+          "counter": 9,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 930,
+            "until": 1290,
+            "after": 1650
+          }
+        },
+        {
+          "s": 4,
+          "p": 0,
+          "stab": 28,
+          "counter": 9,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 960,
+            "until": 1320,
+            "after": 1680
+          }
+        },
+        {
+          "s": 5,
+          "p": 0,
+          "stab": 28,
+          "counter": 9,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 990,
+            "until": 1350,
+            "after": 1710
+          }
+        },
+        {
+          "s": 6,
+          "p": 0,
+          "stab": 28,
+          "counter": 9,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 1020,
+            "until": 1380,
+            "after": 1740
+          }
+        },
+        {
+          "s": 7,
+          "p": 0,
+          "stab": 28,
+          "counter": 9,
+          "policy": null
+        },
+        {
+          "s": 8,
+          "p": 0,
+          "stab": 28,
+          "counter": 9,
+          "policy": null
+        },
+        {
+          "s": 5,
+          "p": 1,
+          "stab": 47,
+          "counter": 0,
+          "policy": null
+        }
+      ]
+    },
+    {
+      "month": 5,
+      "ms": 147.194122,
+      "resources": {
+        "min": 956.9641815692312,
+        "ene": 5243.612333434498,
+        "yiy": 4652.7828265025955,
+        "ala": 4538.796036634616,
+        "ara": 0,
+        "tuk": 4785.73819124,
+        "etk": 4652.309793846154
+      },
+      "colonies": [
+        {
+          "s": 12,
+          "p": 0,
+          "stab": 63,
+          "counter": 0,
+          "policy": null
+        },
+        {
+          "s": 0,
+          "p": 0,
+          "stab": 31,
+          "counter": 10,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 930,
+            "until": 1290,
+            "after": 1650
+          }
+        },
+        {
+          "s": 4,
+          "p": 0,
+          "stab": 31,
+          "counter": 10,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 960,
+            "until": 1320,
+            "after": 1680
+          }
+        },
+        {
+          "s": 5,
+          "p": 0,
+          "stab": 31,
+          "counter": 10,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 990,
+            "until": 1350,
+            "after": 1710
+          }
+        },
+        {
+          "s": 6,
+          "p": 0,
+          "stab": 31,
+          "counter": 10,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 1020,
+            "until": 1380,
+            "after": 1740
+          }
+        },
+        {
+          "s": 7,
+          "p": 0,
+          "stab": 31,
+          "counter": 10,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 1050,
+            "until": 1410,
+            "after": 1770
+          }
+        },
+        {
+          "s": 8,
+          "p": 0,
+          "stab": 31,
+          "counter": 10,
+          "policy": null
+        },
+        {
+          "s": 5,
+          "p": 1,
+          "stab": 50,
+          "counter": 0,
+          "policy": null
+        }
+      ]
+    },
+    {
+      "month": 6,
+      "ms": 159.138058,
+      "resources": {
+        "min": 1032.3242629230774,
+        "ene": 5341.116038609883,
+        "yiy": 4582.859897802596,
+        "ala": 4510.5877625,
+        "ara": 0,
+        "tuk": 4742.0140292,
+        "etk": 4583.8143615384615
+      },
+      "colonies": [
+        {
+          "s": 12,
+          "p": 0,
+          "stab": 66,
+          "counter": 0,
+          "policy": null
+        },
+        {
+          "s": 0,
+          "p": 0,
+          "stab": 34,
+          "counter": 11,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 930,
+            "until": 1290,
+            "after": 1650
+          }
+        },
+        {
+          "s": 4,
+          "p": 0,
+          "stab": 34,
+          "counter": 11,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 960,
+            "until": 1320,
+            "after": 1680
+          }
+        },
+        {
+          "s": 5,
+          "p": 0,
+          "stab": 34,
+          "counter": 11,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 990,
+            "until": 1350,
+            "after": 1710
+          }
+        },
+        {
+          "s": 6,
+          "p": 0,
+          "stab": 34,
+          "counter": 11,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 1020,
+            "until": 1380,
+            "after": 1740
+          }
+        },
+        {
+          "s": 7,
+          "p": 0,
+          "stab": 34,
+          "counter": 11,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 1050,
+            "until": 1410,
+            "after": 1770
+          }
+        },
+        {
+          "s": 8,
+          "p": 0,
+          "stab": 34,
+          "counter": 11,
+          "policy": {
+            "v": 1,
+            "owner": 3,
+            "kind": "autonomy",
+            "started": 1080,
+            "until": 1440,
+            "after": 1800
+          }
+        },
+        {
+          "s": 5,
+          "p": 1,
+          "stab": 53,
+          "counter": 0,
+          "policy": null
+        }
+      ]
+    }
+  ],
+  "aiUsed": 6,
+  "realMonthTick": true
+}

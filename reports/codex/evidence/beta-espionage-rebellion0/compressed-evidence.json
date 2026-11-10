@@ -1,0 +1,86 @@
+[
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-5-0.json",
+    "bytes": 298304,
+    "sha256": "44f423659d0054d3d2cff5b8b987a6e3f7b50455ca694def2a234b7a8cc141f3",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-5-0.json.gz"
+  },
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-wc0-0.json",
+    "bytes": 279359,
+    "sha256": "7742db4a775080f1b8d55c22647f720278144c9f97b0a0c75c8ed7edc31223a1",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-wc0-0.json.gz"
+  },
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-6-1.json",
+    "bytes": 2637653,
+    "sha256": "48808cecc086a824fd58098a8368e914a522223174c58c9470dcc932290664a1",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-6-1.json.gz"
+  },
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-4-1.json",
+    "bytes": 3602803,
+    "sha256": "3ddba9c4c9e9f23f60a02559cfe17d01f71256c0767f3d4881c286a13051fda3",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-4-1.json.gz"
+  },
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-4-2.json",
+    "bytes": 2439474,
+    "sha256": "69ad18ba6e9d79442ee058b2c80595c429489258f2d160ede3d6f619038c91ff",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-4-2.json.gz"
+  },
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-wc0-2.json",
+    "bytes": 1802084,
+    "sha256": "c3141c8f273a18e94e4f041f0eb971e73a9623698dd319304ac489489664fb28",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-wc0-2.json.gz"
+  },
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-3-1.json",
+    "bytes": 1358994,
+    "sha256": "69bcd913a283e2e0d6e869d048fb4549c128ac6a20cbefb7770b554108b835cb",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-3-1.json.gz"
+  },
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-wc0-1.json",
+    "bytes": 2301093,
+    "sha256": "a39e6526f494acfa59b235cedd6d1731b160787e3986cd73036bdf433a48a203",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-wc0-1.json.gz"
+  },
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-5-2.json",
+    "bytes": 1873899,
+    "sha256": "fb8293333b8c033f92bda7971b006b3c1a244310ee031be4f6a8487dcf9b0497",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-5-2.json.gz"
+  },
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-6-0.json",
+    "bytes": 313856,
+    "sha256": "5ea3d529bcc3d2fe5d1a4fa132d50c6c0665d943cf89c9e62a74d091d0094cea",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-6-0.json.gz"
+  },
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-3-2.json",
+    "bytes": 889971,
+    "sha256": "3084c19ac7c873ca4cae7d90f1f4bb7c1622b90ef11b5bcf35738b042f44b309",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-3-2.json.gz"
+  },
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-5-1.json",
+    "bytes": 2514007,
+    "sha256": "de3b3c4864fec25259af224952a0eb3f8be4fac27bd5157e5a1229e26fbf6db8",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-5-1.json.gz"
+  },
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-4-0.json",
+    "bytes": 412592,
+    "sha256": "063a00b10f904e597cf2a9ba9dc7105449e7e87e5f21c757888344d0541bf308",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-4-0.json.gz"
+  },
+  {
+    "original": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-6-2.json",
+    "bytes": 1924239,
+    "sha256": "8c16192b6486f8028e5624adc2f4708e2fb2c62861c791c2b400d038cbaac0ea",
+    "compressed": "reports/codex/evidence/beta-espionage-rebellion0/p0-before/p0-audit-6-2.json.gz"
+  }
+]

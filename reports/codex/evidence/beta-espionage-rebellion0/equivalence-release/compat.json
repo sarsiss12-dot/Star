@@ -1,0 +1,141 @@
+[
+  {
+    "name": "p19 SP seed 11 3 ay ham Save8/RNG",
+    "status": "PASS",
+    "samples": [
+      {
+        "month": 1,
+        "controlMs": 134.94782199999997,
+        "candidateMs": 108.23595999999998,
+        "sha256": "8be753ca5547991b1136e7a598fc3b5ae9c230ec422604d8bd60e6912f3f61a9",
+        "rng": 822323883
+      },
+      {
+        "month": 2,
+        "controlMs": 106.47510000000011,
+        "candidateMs": 87.46332399999983,
+        "sha256": "3268de78dae4a3043c7a78584077c8083f8c4e7d7e79d79e900ccb087af273f9",
+        "rng": 1262335962
+      },
+      {
+        "month": 3,
+        "controlMs": 83.41146000000003,
+        "candidateMs": 89.3133929999999,
+        "sha256": "8b5801ed341a0eb12bdfaa0806b5daec902fb6ca306da18d9f823ad88501b7fe",
+        "rng": -824994639
+      }
+    ]
+  },
+  {
+    "name": "p19 SP seed 23 3 ay ham Save8/RNG",
+    "status": "PASS",
+    "samples": [
+      {
+        "month": 1,
+        "controlMs": 251.03941299999997,
+        "candidateMs": 73.66395999999986,
+        "sha256": "3401c2cd1e733be08c3547167ea71c174f730922f6782a25412236c7115724a0",
+        "rng": 1958112809
+      },
+      {
+        "month": 2,
+        "controlMs": 60.63149199999998,
+        "candidateMs": 61.244279000000006,
+        "sha256": "987062e7cfbe6a367d9cd76b8c7a875afd68032ec49863375ae9ba4a7b4f8f0e",
+        "rng": 566559075
+      },
+      {
+        "month": 3,
+        "controlMs": 81.07891999999993,
+        "candidateMs": 72.87528699999984,
+        "sha256": "9693dda714a67ab59c5c7f486e7b2d2fe48e0469b50e65683ee364ab11502af1",
+        "rng": -824994659
+      }
+    ]
+  },
+  {
+    "name": "p19 SP seed 42 3 ay ham Save8/RNG",
+    "status": "PASS",
+    "samples": [
+      {
+        "month": 1,
+        "controlMs": 64.69634399999995,
+        "candidateMs": 66.18924399999969,
+        "sha256": "0a6524bcb98f1345cab12b97c255d84a3c403534bf1c07f1eb0f3045da64f353",
+        "rng": -441347424
+      },
+      {
+        "month": 2,
+        "controlMs": 54.13869399999976,
+        "candidateMs": 63.87386100000003,
+        "sha256": "8120fa6f1282084ae3d19f489152a5055fa785bae7dce1d52b32c954687082c4",
+        "rng": -569229818
+      },
+      {
+        "month": 3,
+        "controlMs": 68.68659900000011,
+        "candidateMs": 78.25648999999976,
+        "sha256": "6bddd936476ee926ec17bccb09dfef7677d6e5ea06fde822b0e64abe6b374ff5",
+        "rng": -1960783552
+      }
+    ]
+  },
+  {
+    "name": "p19 SP seed 99 3 ay ham Save8/RNG",
+    "status": "PASS",
+    "samples": [
+      {
+        "month": 1,
+        "controlMs": 63.31424200000038,
+        "candidateMs": 73.1302310000001,
+        "sha256": "cadfe074e26f9d06527e36dbdc75b25ab534064aabc9bd27b2f26ad0d93b841b",
+        "rng": 1958112917
+      },
+      {
+        "month": 2,
+        "controlMs": 70.43786100000034,
+        "candidateMs": 69.33000899999934,
+        "sha256": "9bfba54d9d877aed167d06639eda7fca947d989718b5ffb82aa4b20f4dc80b35",
+        "rng": -1328947827
+      },
+      {
+        "month": 3,
+        "controlMs": 83.66515400000026,
+        "candidateMs": 90.31939499999953,
+        "sha256": "c47ce6e6d2748e3db559628d1e4db6cd036ccba04f1f5a1d5c6a2bbee6aa46f5",
+        "rng": 1382642144
+      }
+    ]
+  },
+  {
+    "name": "p19 SP seed 404 3 ay ham Save8/RNG",
+    "status": "PASS",
+    "samples": [
+      {
+        "month": 1,
+        "controlMs": 66.39809500000047,
+        "candidateMs": 62.048439000000144,
+        "sha256": "7de1002b1cb84918e4b61036893c7d4009a47218a0b0792592fe0cc33ff1b829",
+        "rng": 758382793
+      },
+      {
+        "month": 2,
+        "controlMs": 71.62064100000043,
+        "candidateMs": 74.86823400000048,
+        "sha256": "2d7e13dfe45d3ad818ab40eeceaf3b48cb9affca8afb3aaa715aec2cdc3450a4",
+        "rng": -697112138
+      },
+      {
+        "month": 3,
+        "controlMs": 83.9752469999994,
+        "candidateMs": 81.84994199999983,
+        "sha256": "e471ec52234e2719dec2902bcf34618e9b3187927ddc417f8b035b56620cf30a",
+        "rng": 310794414
+      }
+    ]
+  },
+  {
+    "name": "gerçek p19 MP paket uyumu / bozuk bütünlük reddi",
+    "status": "PASS"
+  }
+]

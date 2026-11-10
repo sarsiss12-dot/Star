@@ -1,0 +1,37 @@
+[
+  {
+    "command": "node tests/mp74_notice_test.js",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/protection-regression/mp74_notice_test.js.log"
+  },
+  {
+    "command": "node tests/mp74_lobby_test.js",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/protection-regression/mp74_lobby_test.js.log"
+  },
+  {
+    "command": "node tests/mp75_war_test.js",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/protection-regression/mp75_war_test.js.log"
+  },
+  {
+    "command": "node tests/beta_setup0_pirates_test.cjs",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/protection-regression/beta_setup0_pirates_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_setup1_gates_test.cjs",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/protection-regression/beta_setup1_gates_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_ux0_names_test.cjs",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/protection-regression/beta_ux0_names_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_scale0_colony_test.cjs",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/protection-regression/beta_scale0_colony_test.cjs.log"
+  }
+]

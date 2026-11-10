@@ -1,0 +1,36 @@
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+PASS B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir
+PASS P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket
+FAIL ER0 katılımcı casusluk, hedef güvenliği ve gerçek isyan müdahalesi
+page.waitForFunction: TypeError: Cannot read properties of null (reading 'innerText')
+    at eval (eval at predicate (eval at evaluate (:311:30)), <anonymous>:1:37)
+    at predicate (eval at evaluate (:311:30), <anonymous>:7:27)
+    at next (eval at evaluate (:311:30), <anonymous>:29:33)
+    at eval (eval at evaluate (:311:30), <anonymous>:42:13)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at wait (/workspace/Star/tests/browser-mp73.cjs:17:40)
+    at module.exports (/workspace/Star/tests/helpers/beta-er0-browser.cjs:6:440)
+    at async /workspace/Star/tests/browser-mp73.cjs:250:130
+    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)
+    at async /workspace/Star/tests/browser-mp73.cjs:250:28
+PASS FAI0 misafir taslak düzenleme ve üç insan acil savunma sırası
+WC0 fixture pause {"ok":false,"code":"rules:same"}
+WC0 koşullu karşı teklif kabul edildi; savaş ve ödeme yok
+WC0 son onay: gerçek cephe ve tek ödeme doğrulandı
+PASS WC0 üç insan koşullu koalisyon, karşı teklif, ücret ve savaş merkezi
+FAIL sayfa hataları yok
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   "B2: Cannot read properties of null (reading 'innerText')"
++ ]
+- []
+
+    at /workspace/Star/tests/browser-mp73.cjs:255:52
+    at test (/workspace/Star/tests/browser-mp73.cjs:13:13)
+    at /workspace/Star/tests/browser-mp73.cjs:255:9
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:541:9)
+GEÇEN: 5 KALAN: 2

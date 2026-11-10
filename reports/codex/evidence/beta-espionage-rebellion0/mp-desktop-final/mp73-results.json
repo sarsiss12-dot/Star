@@ -1,0 +1,399 @@
+{
+  "results": [
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 15573
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 4463
+    },
+    {
+      "name": "P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket",
+      "status": "PASS",
+      "ms": 35306
+    },
+    {
+      "name": "ER0 katılımcı casusluk, hedef güvenliği ve gerçek isyan müdahalesi",
+      "status": "FAIL",
+      "error": "page.waitForFunction: TypeError: Cannot read properties of null (reading 'innerText')\n    at eval (eval at predicate (eval at evaluate (:311:30)), <anonymous>:1:37)\n    at predicate (eval at evaluate (:311:30), <anonymous>:7:27)\n    at next (eval at evaluate (:311:30), <anonymous>:29:33)\n    at eval (eval at evaluate (:311:30), <anonymous>:42:13)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at wait (/workspace/Star/tests/browser-mp73.cjs:17:40)\n    at module.exports (/workspace/Star/tests/helpers/beta-er0-browser.cjs:6:440)\n    at async /workspace/Star/tests/browser-mp73.cjs:250:130\n    at async test (/workspace/Star/tests/browser-mp73.cjs:13:7)\n    at async /workspace/Star/tests/browser-mp73.cjs:250:28"
+    },
+    {
+      "name": "FAI0 misafir taslak düzenleme ve üç insan acil savunma sırası",
+      "status": "PASS",
+      "ms": 26197
+    },
+    {
+      "name": "WC0 üç insan koşullu koalisyon, karşı teklif, ücret ve savaş merkezi",
+      "status": "PASS",
+      "ms": 33405
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   \"B2: Cannot read properties of null (reading 'innerText')\"\n+ ]\n- []\n\n    at /workspace/Star/tests/browser-mp73.cjs:255:52\n    at test (/workspace/Star/tests/browser-mp73.cjs:13:13)\n    at /workspace/Star/tests/browser-mp73.cjs:255:9\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at process.processImmediate (node:internal/timers:541:9)"
+    }
+  ],
+  "errors": [
+    "B2: Cannot read properties of null (reading 'innerText')"
+  ],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "p0": [
+      {
+        "visibility": true,
+        "shared": 0,
+        "habitat": true,
+        "foreignHull": 0.42,
+        "ownHull": 0.55,
+        "privacy": true
+      },
+      {
+        "kind": "anomaly",
+        "decision": 1,
+        "before": {
+          "a": 0,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 130,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "event",
+        "decision": 2,
+        "before": {
+          "a": 130,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 390,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "chain",
+        "decision": 3,
+        "before": {
+          "a": 390,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 390,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "CDecision": 1,
+        "CResearch": 180,
+        "BUnchanged": true
+      },
+      {
+        "foundingNotification": "NOT RUN: no founded proposal in this filtered case"
+      },
+      {
+        "shareEndedLiveRemoved": true,
+        "discoveryRetained": true
+      },
+      {
+        "routes": [
+          {
+            "role": "military",
+            "id": 4,
+            "path": [
+              1
+            ]
+          },
+          {
+            "role": "bilim",
+            "id": 5,
+            "path": [
+              1
+            ]
+          },
+          {
+            "role": "koloni",
+            "id": 6,
+            "path": [
+              1
+            ]
+          },
+          {
+            "role": "insaat",
+            "id": 30,
+            "path": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "motion": [
+          {
+            "x": 1384.3564621471241,
+            "y": 3749.539201942786,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1388.1525422175375,
+            "y": 3749.816375181148,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1393.3259107042447,
+            "y": 3750.1941120228644,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1397.5033061596964,
+            "y": 3750.49912725037,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1403.5872785606944,
+            "y": 3750.9433524250794,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1405.863788346421,
+            "y": 3751.1095732575614,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1407.9240297052177,
+            "y": 3751.260003111156,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1410.3769690006952,
+            "y": 3751.4391060582543,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1414.4917604356824,
+            "y": 3751.7395502127674,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1416.7284313042298,
+            "y": 3751.9028621809784,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1418.9024981455282,
+            "y": 3752.061603075702,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1419.9269275491051,
+            "y": 3752.1364024503187,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1423.0912761526222,
+            "y": 3752.3674494075676,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1426.8645911197507,
+            "y": 3752.642960437209,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1429.1411009054773,
+            "y": 3752.8091812696907,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1431.542818732133,
+            "y": 3752.984544248158,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1434.3713821436122,
+            "y": 3753.191073632715,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1436.4543885989092,
+            "y": 3753.343165694535,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1436.4543885989092,
+            "y": 3753.343165694535,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1436.4543885989092,
+            "y": 3753.343165694535,
+            "actualX": 1436.4543885989092,
+            "actualY": 3753.343165694535
+          },
+          {
+            "x": 1437.41165595996,
+            "y": 3753.4130611892347,
+            "actualX": 1509.462721197708,
+            "actualY": 3758.6739162578706
+          },
+          {
+            "x": 1439.8938724770069,
+            "y": 3753.594301831577,
+            "actualX": 1509.462721197708,
+            "actualY": 3758.6739162578706
+          },
+          {
+            "x": 1456.2954242540532,
+            "y": 3754.791871728914,
+            "actualX": 1509.462721197708,
+            "actualY": 3758.6739162578706
+          },
+          {
+            "x": 1462.5009655599397,
+            "y": 3755.2449733357394,
+            "actualX": 1509.462721197708,
+            "actualY": 3758.6739162578706
+          },
+          {
+            "x": 1470.359462714084,
+            "y": 3755.818766581527,
+            "actualX": 1509.462721197708,
+            "actualY": 3758.6739162578706
+          },
+          {
+            "x": 1472.5522728244337,
+            "y": 3755.978876028147,
+            "actualX": 1509.462721197708,
+            "actualY": 3758.6739162578706
+          },
+          {
+            "x": 1479.7262125031855,
+            "y": 3756.5026858676897,
+            "actualX": 1509.462721197708,
+            "actualY": 3758.6739162578706
+          },
+          {
+            "x": 1483.633199049994,
+            "y": 3756.787957014064,
+            "actualX": 1509.462721197708,
+            "actualY": 3758.6739162578706
+          },
+          {
+            "x": 1486.5996147567907,
+            "y": 3757.0045517730073,
+            "actualX": 1509.462721197708,
+            "actualY": 3758.6739162578706
+          },
+          {
+            "x": 1489.9667470348727,
+            "y": 3757.25040511124,
+            "actualX": 1509.462721197708,
+            "actualY": 3758.6739162578706
+          }
+        ]
+      },
+      {
+        "reconnect": true
+      }
+    ],
+    "fedAI0": [
+      {
+        "federationType": "yagmaci",
+        "guestFounder": true,
+        "fiveInvitations": true,
+        "fourAcceptedOneRejected": true,
+        "replacedCandidate": true,
+        "revision": 1,
+        "allHumanConsentRenewed": true,
+        "oneFee": 220,
+        "originalExpiry": 1050
+      },
+      {
+        "threeHumans": true,
+        "activeVoteNotInterrupted": true,
+        "normalQueue": 2,
+        "defenseFirst": true,
+        "sourceIdentityMirrored": true
+      },
+      {
+        "aiIndependentPaidOffer": 1,
+        "actualAiTurn": true,
+        "nativeHumanConsent": true,
+        "price": 224,
+        "realWarParticipation": true,
+        "thirdPlayerPrivate": true
+      }
+    ],
+    "warCenter": [
+      {
+        "conditionalAccepted": true,
+        "noWar": true,
+        "noPayment": true,
+        "thirdPartyPrivate": true
+      },
+      {
+        "front": 1,
+        "campaign": 1,
+        "realPayment": 150,
+        "joined": true
+      },
+      {
+        "immediateDeclaration": true,
+        "optionalInvite": true,
+        "rejectDoesNotUndoWar": true
+      },
+      {
+        "knownThirdPartyWar": true,
+        "nativeVoluntaryOffer": true,
+        "nativeHostAccept": true
+      },
+      {
+        "reconnected": true,
+        "tabs": true
+      }
+    ]
+  },
+  "pass": 5,
+  "fail": 2
+}

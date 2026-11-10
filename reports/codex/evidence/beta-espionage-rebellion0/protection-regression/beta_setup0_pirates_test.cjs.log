@@ -1,0 +1,11 @@
+PASS seed 11 KAPALI başlangıçta sıfır korsan; teknik kimlik ve kalıntılar korunur
+PASS seed 99 KAPALI başlangıçta sıfır korsan; teknik kimlik ve kalıntılar korunur
+PASS seed 404 KAPALI başlangıçta sıfır korsan; teknik kimlik ve kalıntılar korunur
+PASS AÇIK yuva zamanlayıcısı akıncı üretir; KAPALI aynı yol üretmez
+PASS KAPALI uzay canavarı doğar ve hareket eder; wildId silinmez
+PASS KAPALI kalıntı savunması ve kriz devleti ayrı kalır; normal kriminal AI wild değildir
+PASS eski hatalı KAPALI kayıtta yalnız korsan varlıkları onarılır; canavar/kalıntı/ID kalır
+PASS KAPALI isyan yeni normal devlet üretir; korsan yuvası/filosu üretmez
+PASS KAPALI Korsan Çağı seçilemez; kalıntı bekleme etiketi korsan demez
+PASS ret edilen Save8 yüklemesi korsan onarımını da atomik geri alır
+GEÇEN: 10 KALAN: 0

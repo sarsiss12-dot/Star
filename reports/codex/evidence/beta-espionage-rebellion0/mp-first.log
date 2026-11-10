@@ -1,0 +1,19 @@
+PASS B host önizlemesi/kararı, tek gerçek bedel; C başka koloniyi yönetemez
+FAIL own politika π0; gizli fail ve yabancı siyasi politika C aynasına sızmaz
+evalmachine.<anonymous>:1
+c.sys[S.id].p[P.i].col?.crisisPolicy
+                   ^
+
+TypeError: Cannot read properties of undefined (reading 'col')
+    at evalmachine.<anonymous>:1:20
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_espionage_rebellion0_mp_test.cjs:4:399
+    at test (/workspace/Star/tests/beta_espionage_rebellion0_mp_test.cjs:1:157)
+    at Object.<anonymous> (/workspace/Star/tests/beta_espionage_rebellion0_mp_test.cjs:4:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+PASS aynı policy kararı Save8 yüklemesinde tekrar uygulanmaz; oyuncu taklidi reddedilir
+GEÇEN: 2 KALAN: 1

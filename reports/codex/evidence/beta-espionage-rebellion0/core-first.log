@@ -1,0 +1,21 @@
+PASS salt okunur gerçek hedef/risk/quote Save8 ve RNG değiştirmez
+PASS iki farklı müdahale gerçek bedel ve etki; tekrar, yetersiz kaynak ve yabancı sahip reddi
+FAIL 5/15/24 uyarı ve sıfırda yeni bölüm; aynı aşama/yükleme spam üretmez
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at /workspace/Star/tests/beta_espionage_rebellion0_test.cjs:5:375
+    at test (/workspace/Star/tests/beta_espionage_rebellion0_test.cjs:1:132)
+    at Object.<anonymous> (/workspace/Star/tests/beta_espionage_rebellion0_test.cjs:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+PASS schism48 ve ayrılık30 ayrı; iyileşme −2, koruma ve başkent kuralları korunur
+PASS AI gerçek kaynak öder, istikrar yükselir; yoksul AI bedel üretemez
+PASS bozuk yeni politika yüklemesi mevcut dünya/RNGye dokunmadan reddedilir
+GEÇEN: 5 KALAN: 1

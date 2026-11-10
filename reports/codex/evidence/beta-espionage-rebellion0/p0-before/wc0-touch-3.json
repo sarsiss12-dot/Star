@@ -1,0 +1,372 @@
+{
+  "frames": [
+    {
+      "at": 98656.90000009537,
+      "same": true,
+      "connected": true,
+      "rect": [
+        -536.7892456054688,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98668.10000002384,
+      "same": true,
+      "connected": true,
+      "rect": [
+        -343.0367126464844,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98682.40000009537,
+      "same": true,
+      "connected": true,
+      "rect": [
+        -213.55677795410156,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98698.10000002384,
+      "same": true,
+      "connected": true,
+      "rect": [
+        -130.59864807128906,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98720.40000009537,
+      "same": true,
+      "connected": true,
+      "rect": [
+        -78.29119873046875,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98746.10000002384,
+      "same": true,
+      "connected": true,
+      "rect": [
+        -43.9994010925293,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98762.30000007153,
+      "same": true,
+      "connected": true,
+      "rect": [
+        -21.55080795288086,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98780.60000002384,
+      "same": true,
+      "connected": true,
+      "rect": [
+        2.6870603561401367,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98816.90000009537,
+      "same": true,
+      "connected": true,
+      "rect": [
+        11.165239334106445,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98841.10000002384,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98859.30000007153,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98880.40000009537,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98902,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98914.40000009537,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98932.70000004768,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 98949.5,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 99007.10000002384,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 99044.90000009537,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        897,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 99078,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 99104.60000002384,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 99132.10000002384,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 99159.10000002384,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 99182.40000009537,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 99212.60000002384,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 99238.60000002384,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 99261.30000007153,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 99292.30000007153,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 99313.5,
+      "same": true,
+      "connected": true,
+      "rect": [
+        12,
+        218,
+        384.5,
+        44
+      ],
+      "top": "dealSend"
+    },
+    {
+      "at": 99410.40000009537,
+      "same": false,
+      "connected": true,
+      "rect": [
+        -788,
+        317.9375,
+        384.5,
+        44
+      ]
+    },
+    {
+      "at": 99462.30000007153,
+      "same": false,
+      "connected": true,
+      "rect": [
+        -788,
+        317.9375,
+        384.5,
+        44
+      ]
+    }
+  ],
+  "events": [
+    {
+      "t": "pointerdown",
+      "at": 99312.40000009537,
+      "target": "dealSend"
+    },
+    {
+      "t": "touchstart",
+      "at": 99312.70000004768,
+      "target": "dealSend"
+    },
+    {
+      "t": "pointerup",
+      "at": 99312.70000004768,
+      "target": "dealSend"
+    },
+    {
+      "t": "touchend",
+      "at": 99312.80000007153,
+      "target": "dealSend"
+    },
+    {
+      "t": "click",
+      "at": 99349.80000007153,
+      "target": "dealSend"
+    }
+  ],
+  "mutations": 2
+}

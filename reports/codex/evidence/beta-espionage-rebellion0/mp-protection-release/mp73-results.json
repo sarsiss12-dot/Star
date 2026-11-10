@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 14278
+    },
+    {
+      "name": "B2 C (915×412) HAYIR verir; oylama host oy verene kadar açık; host kendi Konsey ekranından EVET → motor kapatır; tekrar oy reddedilir",
+      "status": "PASS",
+      "ms": 2475
+    },
+    {
+      "name": "ER0 katılımcı casusluk, hedef güvenliği ve gerçek isyan müdahalesi",
+      "status": "PASS",
+      "ms": 11514
+    },
+    {
+      "name": "sayfa hataları yok",
+      "status": "PASS",
+      "ms": 1
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "er0": [
+      {
+        "spyNative": true,
+        "target": 3,
+        "authoritativeCost": 70
+      },
+      {
+        "oldPreviewInvalid": true,
+        "newTarget": 4,
+        "noOldCommand": true
+      },
+      {
+        "lateRealHostAck": true,
+        "newTarget": 3,
+        "otherModalPreserved": true
+      },
+      {
+        "ownRisk": true,
+        "realPolicy": "relief",
+        "actualCosts": {
+          "min": 160,
+          "yiy": 80,
+          "etk": 25
+        },
+        "thirdPartyPrivate": true
+      }
+    ]
+  },
+  "pass": 4,
+  "fail": 0
+}

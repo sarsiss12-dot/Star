@@ -1,0 +1,137 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Evrensel Divanı",
+    "founder": 0,
+    "members": [
+      0,
+      1,
+      2,
+      5,
+      4,
+      6,
+      7,
+      3
+    ],
+    "laws": {
+      "ticaretStd": true
+    },
+    "targeted": {},
+    "treasury": 0,
+    "president": 0,
+    "terms": {
+      "0": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": null,
+    "lastVote": {
+      "key": "ticaretStd",
+      "target": null,
+      "appliedTarget": null,
+      "opened": 4.613748000000012,
+      "ended": 8.712388000000011,
+      "yes": [
+        5,
+        4,
+        6,
+        7,
+        3,
+        0,
+        1
+      ],
+      "no": [
+        2
+      ],
+      "passed": true,
+      "expired": false,
+      "weight": {
+        "yes": 48.721744391781094,
+        "no": 9.105255888325765
+      },
+      "eventKey": "council:ticaretStd:8.712388000000011"
+    },
+    "campaign": null
+  },
+  "inbox": [
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 3,
+        "defender": 0,
+        "rootAttacker": 3,
+        "rootDefender": 0,
+        "front": 1,
+        "campaign": 1,
+        "reason": "declaration",
+        "sponsor": null,
+        "day": 900,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Torvion Şebekesi → Saf Akıl Ağı · Yeni savaş ilanı",
+      "key": "war:1",
+      "uid": 26,
+      "born": 900
+    },
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 0,
+        "defender": 4,
+        "rootAttacker": 0,
+        "rootDefender": 4,
+        "front": 3,
+        "campaign": 3,
+        "reason": "declaration",
+        "sponsor": null,
+        "day": 900,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Saf Akıl Ağı → Skarux Taburları · Yeni savaş ilanı",
+      "key": "war:3",
+      "uid": 35,
+      "born": 900
+    },
+    {
+      "kind": "warstart",
+      "data": {
+        "attacker": 0,
+        "defender": 5,
+        "rootAttacker": 0,
+        "rootDefender": 5,
+        "front": 5,
+        "campaign": 4,
+        "reason": "promise",
+        "sponsor": 1,
+        "day": 900,
+        "year": 2210,
+        "month": 1
+      },
+      "ico": "⚔",
+      "cls": "war",
+      "pause": true,
+      "title": "SAVAŞA DAHİLSİN",
+      "sub": "Saf Akıl Ağı → Alyn Birliği · Savaş taahhüdü · Çağıran: Kızıl Muhafız",
+      "key": "war:5",
+      "uid": 36,
+      "born": 900
+    }
+  ],
+  "modal": "",
+  "pane": "<div class=\"dpBox dcBox\"><div class=\"dpHd\"><span>DİPLOMASİ · <canvas class=\"identityBadge\" data-identity=\"state\" data-id=\"1\" width=\"28\" height=\"28\"></canvas> Kızıl Muhafız</span>\n      <button class=\"riX\" data-a=\"closeDiplo\" aria-label=\"Diplomasiyi kapat\">✕</button></div>\n      <div class=\"dcNav\" role=\"tablist\" aria-label=\"Diplomasi bölümleri\"><button role=\"tab\" aria-selected=\"false\" class=\"\" data-a=\"diploNav\" data-x=\"states\">DEVLETLER</button><button role=\"tab\" aria-selected=\"false\" class=\"\" data-a=\"diploNav\" data-x=\"relation\">İLİŞKİ</button><button role=\"tab\" aria-selected=\"true\" class=\"on\" data-a=\"diploNav\" data-x=\"deal\">MÜZAKERE</button></div><div class=\"dpBody dcBody\" role=\"tabpanel\"><div class=\"mini\">Taslak bu oturumda saklanır; sekme değiştirirken kaybolmaz.\n      Yalnız TEKLİFİ SUN düğmesi karşı tarafa gönderir.</div><div class=\"mini\">Teklif hazır değil; tutum tahmini yapılmadı.</div><div class=\"envRow wrapRow\" style=\"border-color:#ff5f6d\"><span>UYGULANABİLİRLİK</span>\n        <b style=\"color:#ff5f6d\">Teklif boş — hiçbir madde yok</b></div><div class=\"mini\" style=\"color:#ff9b3d;margin-bottom:8px\">Teklif host'a gönderildi; yanıt gelen kutuna ve bildirimlere düşer.</div><div class=\"dealCols\"><div class=\"dealCol\"><div class=\"ph\">SEN VERİYORSUN</div><div class=\"mini\">— boş —</div><div class=\"act2\">\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"give:res\">◆ Kaynak</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"give:tech\">✦ Teknoloji</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"give:sys\">★ Sistem</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"give:tribute\">⏳ Haraç</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"give:lux\">❖ Lüks mal</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"give:intel\">👁 İstihbarat</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"give:warOn\">⚔ Savaş sözü</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"give:peaceWith\">🤲 Barıştırma</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"give:passage\">🚪 Geçiş izni</button>\n    </div></div><div class=\"dealCol\"><div class=\"ph\">SEN İSTİYORSUN</div><div class=\"mini\">— boş —</div><div class=\"act2\">\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"want:res\">◆ Kaynak</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"want:tech\">✦ Teknoloji</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"want:sys\">★ Sistem</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"want:tribute\">⏳ Haraç</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"want:lux\">❖ Lüks mal</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"want:intel\">👁 İstihbarat</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"want:warOn\">⚔ Savaş sözü</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"want:peaceWith\">🤲 Barıştırma</button>\n      <button class=\"abtn\" data-a=\"dealAdd\" data-x=\"want:passage\">🚪 Geçiş izni</button>\n    </div></div></div><div class=\"ph\">ANLAŞMA MADDELERİ</div><div class=\"act2\"><button class=\"abtn dis\" data-a=\"dealPact\" data-x=\"peace\">🕊 Barış</button><button class=\"abtn \" data-a=\"dealPact\" data-x=\"nap\">🛡 Saldırmazlık</button><button class=\"abtn \" data-a=\"dealPact\" data-x=\"pact\">🤝 Ticaret</button><button class=\"abtn \" data-a=\"dealPact\" data-x=\"ally\">⚑ İttifak</button><button class=\"abtn \" data-a=\"dealPact\" data-x=\"spynet\">🕸 Casusluk ağı</button></div><div class=\"mini\">Simetrik antlaşmalar iki tarafı da bağlar ve\n      teklifte TEK madde olarak durur.</div><div class=\"mini\" style=\"color:#ff5f6d\">🔒 Barış: Bütün maddeler zaten yürürlükte — yeni etki yok</div><div class=\"ph\">TEKLİF ÖZETİ</div><div class=\"row\"><span>İmzalama maliyeti</span>\n        <b style=\"color:#65e08a\">0 ◈</b></div><div class=\"mini\">Maliyet YALNIZ imza gerçekleşirse ve teklifi\n        GÖNDEREN taraftan (sen) tek kez düşer. Ret, iptal ve karşı teklifte\n        Etki harcanmaz. Çok maddeli teklifte <b>en pahalı benzersiz\n        antlaşma ücreti tam, diğerlerinin %25'i</b> eklenir; toplam en\n        fazla <b>160 ◈</b>. Zaten yürürlükteki maddeler ücretlendirilmez.</div><div class=\"mini\" style=\"color:#ff5f6d\">🔒 Teklif boş — hiçbir madde yok</div><div class=\"act2\" style=\"margin-top:14px\">\n      <button class=\"abtn pri\" data-a=\"dealSend\" disabled=\"\">TEKLİFİ SUN</button>\n      <button class=\"abtn\" data-a=\"dealDiscard\">TASLAĞI TEMİZLE</button></div><div id=\"mp71DealBox\" class=\"box mp71-deal\"><b>ÇOK OYUNCULU</b><div class=\"mini\">Bu devleti bir insan oyuncu yönetiyor. TEKLİFİ SUN teklifini onun gelen kutusuna gönderir; kararı o verir, host uygular. Karşı tarafın stoğu sana gösterilmez; kabulde host denetler.</div><button class=\"abtn\" data-mp71=\"sentOpen\">Gönderilen teklifler · durum ve geçmiş</button></div></div></div>"
+}

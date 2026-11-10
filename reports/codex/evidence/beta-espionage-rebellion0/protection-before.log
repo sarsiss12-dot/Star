@@ -1,0 +1,21 @@
+PASS B host önizlemesi/kararı, tek gerçek bedel; C başka koloniyi yönetemez
+PASS own politika π0; gizli fail ve yabancı siyasi politika C aynasına sızmaz
+PASS aynı policy kararı Save8 yüklemesinde tekrar uygulanmaz; oyuncu taklidi reddedilir
+PASS vasal/senyör risk DTO gerçek sadakati taşır; üçüncü kişiye açmaz ve okuma saftır
+PASS misafir ideolojik bölünme12/24/40 ayrı ve özel; tekrar/yükleme aynı aşamayı üretmez
+FAIL kendi kolonisinin gerçek fetih/sıkıyönetim koruması aynada korunur; yabancıya açılmaz
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+undefined !== 3
+
+    at /workspace/Star/tests/beta_espionage_rebellion0_mp_test.cjs:8:217
+    at test (/workspace/Star/tests/beta_espionage_rebellion0_mp_test.cjs:1:157)
+    at Object.<anonymous> (/workspace/Star/tests/beta_espionage_rebellion0_mp_test.cjs:8:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 5 KALAN: 1

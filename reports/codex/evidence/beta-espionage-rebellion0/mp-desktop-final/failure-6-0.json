@@ -1,0 +1,87 @@
+{
+  "url": "/",
+  "vote": {
+    "name": "Evrensel Divanı",
+    "founder": 1,
+    "members": [
+      1,
+      0,
+      2,
+      5,
+      4,
+      6,
+      7,
+      3
+    ],
+    "laws": {
+      "ticaretStd": true
+    },
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "vote": null,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "lastVote": {
+      "key": "ticaretStd",
+      "target": null,
+      "opened": 4.613748000000012,
+      "yes": [
+        5,
+        4,
+        6,
+        7,
+        3,
+        1,
+        0
+      ],
+      "no": [
+        2
+      ],
+      "expired": false,
+      "appliedTarget": null,
+      "ended": 8.712388000000011,
+      "passed": true,
+      "weight": {
+        "yes": 48.721744391781094,
+        "no": 9.105255888325765
+      },
+      "eventKey": "council:ticaretStd:8.712388000000011"
+    }
+  },
+  "inbox": [
+    {
+      "uid": 1,
+      "kind": "cncnew",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "GALAKTİK KONSEY KURULDU",
+      "sub": "Saf Akıl Ağı galaksiyi masaya çağırdı",
+      "key": "cncnew",
+      "born": 4.613748000000012,
+      "data": 1
+    },
+    {
+      "uid": 2,
+      "kind": "cncvote",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "cnc4.613748000000012",
+      "born": 4.613748000000012,
+      "data": "ticaretStd"
+    }
+  ],
+  "modal": "",
+  "pane": "<div class=\"dpBox dcBox fedBox\">\n      <div class=\"dpHd\"><span>🏛 FEDERASYON</span>\n        <button class=\"riX\" data-a=\"closeFed\">✕</button></div>\n      \n      <div class=\"dpBody dcBody \" data-fed-tab=\"general\"><div class=\"ph\">FEDERASYON KURULUŞU</div><div class=\"mini\">İki açık rızalı insan yeterlidir. Tek insanlı oyunda en az iki AI ortak gerekir. Yalnız seçtiğin ortaklar davet edilir; ücret son onayda bir kez kesilir.</div><div class=\"box fedFoundation\" data-founding=\"1\"><b>Yağmacı Federasyon · Eşit Temsil · BEKLİYOR</b><div class=\"mini\">Öneren: Saf Akıl Ağı · 5 ay · 220 Etki · yalnız kurucudan</div><div class=\"mini\">Savunma yardımı oylamayla. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Üyeler arasında ittifak oluşur. Önceki savaşlar sessizce kapatılmaz.</div><div class=\"mini\">Saf Akıl Ağı — KABUL EDİLDİ · Güncel kuruluş şartlarını önerdi</div><div class=\"mini\">Kızıl Muhafız — KABUL EDİLDİ · Kuruluş şartlarını açıkça kabul etti</div><div class=\"mini\">Okyanus Ticaret Birliği — KABUL EDİLDİ · Kuruluş şartlarını açıkça kabul etti</div><div class=\"mini\">Torvion Şebekesi — KABUL EDİLDİ · İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div><div class=\"mini\">Skarux Taburları — KABUL EDİLDİ · İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div><div class=\"mini\">İllear Odası — KABUL EDİLDİ · İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div><div class=\"mini\">Şart sürümü 1; önceki kabuller değişen kadroyu onaylamaz. Sürüm 0: accepted</div></div><div class=\"ph\">TÜR</div><button class=\"abtn pri\" data-a=\"fedFoundType\" data-x=\"askeri\">🛡 Askerî Federasyon</button><button class=\"abtn \" data-a=\"fedFoundType\" data-x=\"bilimsel\">🔬 Bilimsel Federasyon</button><button class=\"abtn \" data-a=\"fedFoundType\" data-x=\"ticaret\">🤝 Ticaret Federasyonu</button><button class=\"abtn \" data-a=\"fedFoundType\" data-x=\"yagmaci\">⚔ Yağmacı Federasyon</button><div class=\"ph\">OY REJİMİ</div><button class=\"abtn pri\" data-a=\"fedBallot\" data-x=\"equal\">Eşit Temsil</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"hegemonic\">Hegemonik</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"economic\">Ekonomik Temsil</button><button class=\"abtn \" data-a=\"fedBallot\" data-x=\"mixed\">Karma Konsey</button><p class=\"mini\">+12 filo kapasitesi; bakım +4 yüzde puan. Varsayılan ortak savunma; saldırı için ayrı karar. Her üye 1 oy. Küçük devletleri korur; büyük katkıya ek oy vermez. Yeni saldırılara ortak savunma yükümlülüğü. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir. Kuruluşta seçilen üyeler birbirleriyle ittifak kurar. Açık taslak düzenlenebilir. Kadro/tür/oy rejimi değişirse eski kabuller geçmişte kalır; güncel rıza yeniden gerekir. Süre uzatılmaz.</p><div class=\"ph\">KURUCU ORTAKLAR · 0 SEÇİLİ</div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"1\" aria-pressed=\"false\">☐ Saf Akıl Ağı</button><div class=\"mini\">İnsan — açık yanıt gerekli · İlişki 90 · Yapısal olarak uygun</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"2\" aria-pressed=\"false\">☐ Okyanus Ticaret Birliği</button><div class=\"mini\">İnsan — açık yanıt gerekli · İlişki 90 · Yapısal olarak uygun</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"3\" aria-pressed=\"false\">☐ Torvion Şebekesi</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun</div><div class=\"mini\">Tür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"4\" aria-pressed=\"false\">☐ Skarux Taburları</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun</div><div class=\"mini\">Tür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"5\" aria-pressed=\"false\">☐ Alyn Birliği</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun</div><div class=\"mini\">Tür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"6\" aria-pressed=\"false\">☐ İllear Odası</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun</div><div class=\"mini\">Tür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div></div><div class=\"box\"><button class=\"abtn \" data-a=\"fedFoundSelect\" data-x=\"7\" aria-pressed=\"false\">☐ Skares Filosu</button><div class=\"mini\">AI — stratejik karar davette verilir · İlişki 90 · Yapısal olarak uygun</div><div class=\"mini\">Tür / oy rejimi yaklaşımı: Tür: Olumlu · Oy rejimi: Olumlu · Genel kabul eğilimi: İlişki, çıkar ve bilinen erişim uygun · Olumlu: İlişki +0.60 · Antlaşmalar +0.12 · Ekonomik / bilimsel çıkar +0.11</div></div><div class=\"mini\" role=\"status\">Tek insanlı kuruluşta en az iki AI ortak gerekli · 220 ◈</div><button class=\"abtn pri\" data-a=\"fedFoundStart\" disabled=\"\">KURULUŞ DAVETLERİNİ GÖNDER</button></div></div>"
+}

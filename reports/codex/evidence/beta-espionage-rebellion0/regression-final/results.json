@@ -1,0 +1,32 @@
+[
+  {
+    "command": "node tests/beta_board2_colony_test.cjs",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression-final/beta_board2_colony_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_board2_rebellion_test.cjs",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression-final/beta_board2_rebellion_test.cjs.log"
+  },
+  {
+    "command": "node tests/beta_fed_ai0_raider_test.cjs",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression-final/beta_fed_ai0_raider_test.cjs.log"
+  },
+  {
+    "command": "node tests/perf1_equivalence_test.js",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression-final/perf1_equivalence_test.js.log"
+  },
+  {
+    "command": "node tests/perf2_equivalence_test.js",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression-final/perf2_equivalence_test.js.log"
+  },
+  {
+    "command": "node tests/mp_p0_cold_notice_test.cjs",
+    "exit": 0,
+    "log": "reports/codex/evidence/beta-espionage-rebellion0/regression-final/mp_p0_cold_notice_test.cjs.log"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "federationType": "yagmaci",
+    "guestFounder": true,
+    "fiveInvitations": true,
+    "fourAcceptedOneRejected": true,
+    "replacedCandidate": true,
+    "revision": 1,
+    "allHumanConsentRenewed": true,
+    "oneFee": 220,
+    "originalExpiry": 1050
+  },
+  {
+    "threeHumans": true,
+    "activeVoteNotInterrupted": true,
+    "normalQueue": 2,
+    "defenseFirst": true,
+    "sourceIdentityMirrored": true
+  },
+  {
+    "aiIndependentPaidOffer": 1,
+    "actualAiTurn": true,
+    "nativeHumanConsent": true,
+    "price": 214,
+    "realWarParticipation": true,
+    "thirdPlayerPrivate": true
+  }
+]

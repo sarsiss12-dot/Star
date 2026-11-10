@@ -1,0 +1,75 @@
+[
+  {
+    "name": "1920x1080",
+    "status": "PASS",
+    "trusted": "mouse",
+    "scales": [
+      80,
+      100,
+      125
+    ],
+    "spyOperation": "yalan",
+    "spyCost": 70,
+    "policies": [
+      "relief",
+      "autonomy"
+    ],
+    "stableTarget": true
+  },
+  {
+    "name": "800x360",
+    "status": "PASS",
+    "trusted": "touch",
+    "scales": [
+      80,
+      100,
+      125
+    ],
+    "spyOperation": "yalan",
+    "spyCost": 70,
+    "policies": [
+      "relief",
+      "autonomy"
+    ],
+    "stableTarget": true
+  },
+  {
+    "name": "915x412",
+    "status": "PASS",
+    "trusted": "touch",
+    "scales": [
+      80,
+      100,
+      125
+    ],
+    "spyOperation": "yalan",
+    "spyCost": 70,
+    "policies": [
+      "relief",
+      "autonomy"
+    ],
+    "stableTarget": true
+  },
+  {
+    "name": "960x540",
+    "status": "PASS",
+    "trusted": "touch",
+    "scales": [
+      80,
+      100,
+      125
+    ],
+    "spyOperation": "yalan",
+    "spyCost": 70,
+    "policies": [
+      "relief",
+      "autonomy"
+    ],
+    "stableTarget": true
+  },
+  {
+    "name": "page errors",
+    "status": "PASS",
+    "errors": []
+  }
+]
