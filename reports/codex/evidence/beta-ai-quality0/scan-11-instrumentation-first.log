@@ -1,0 +1,6 @@
+PROGRESS 11 12/60
+PROGRESS 11 24/60
+PROGRESS 11 36/60
+PROGRESS 11 48/60
+PROGRESS 11 60/60
+{"seed":11,"months":60,"size":"ulu","ai":9,"initialHash":"dd5f9265cf3d2f01a0a80c0375c8e655e8eef3d65511e7b689fc2eab5933bf75","ms":11767,"initialSystems":100,"actualInitialAI":9,"crisisByResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":0,"ara":0,"etk":0},"criticalEmpireMonths":0,"zeroStockMonths":0,"initialColonies":9,"finalColonies":21,"finalShips":121,"finalTechs":29,"deadAI":0,"vassals":0,"planSwitches":18,"plansCompleted":13,"plansFailed":3,"firstInvalid":null,"heapMB":156.62574005126953,"counts":{},"timing":{},"finalSHA":"4f9403025f09d748b36b7651d4e26f095c5be70242101e0a5b6d5dabefe3cc38","finalRNG":614691638}

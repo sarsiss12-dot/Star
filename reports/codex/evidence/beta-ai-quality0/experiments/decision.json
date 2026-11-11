@@ -1,0 +1,28 @@
+{
+  "candidate": "food-critical",
+  "status": "REJECTED",
+  "reason": "Long-plan food urgency metadata improves but no actual recovery or strategic outcome benefit; do not ship a cosmetic success counter change",
+  "sameInitialSave": true,
+  "sameMonthlySubstantiveFields": true,
+  "sameFinalRng": true,
+  "criticalEmpireMonths": [
+    78,
+    78
+  ],
+  "plansFailed": [
+    7,
+    6
+  ],
+  "colonies": [
+    28,
+    28
+  ],
+  "ships": [
+    241,
+    241
+  ],
+  "techs": [
+    84,
+    84
+  ]
+}

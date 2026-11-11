@@ -1,0 +1,26 @@
+✓ haracguzar legacy defaults, conservation, stock limits and same month guard
+✓ bekci legacy defaults, conservation, stock limits and same month guard
+✓ akademik legacy defaults, conservation, stock limits and same month guard
+✓ custom voluntary offer does not establish or transfer until explicit recipient approval
+✓ rejection and cooldown produce no relationship or transfer
+✓ counter fee once, bounded rounds, player never answered by AI driver
+✓ pending offer expiration after Save8 stays unapplied
+✓ renewal waits for date, preserves current tax during offer, prevents second monthly payment
+✓ peaceful independence needs assent and does not start a war
+✓ release refusal can return a real renewal counteroffer rather than freeing subject
+✓ fixed term expires through existing freeVassal without erasing ongoing wars
+✓ all custom resource types transfer actual stock exactly once
+✓ legacy science edict cannot create research from an empty subject stock
+✓ injected apply failure rolls back fee, clauses, resources, RNG and pending talk
+✓ invalid clause, free-until and changed world cannot apply or double charge
+✓ AI reasons use own budget and permitted knowledge, not other private stocks or plans
+✓ contract sensors use native sharing and stop when contract ends
+✓ custom autonomy blocks unsanctioned offensive war and free autonomy permits it
+✓ non-defense clause does not summon lord; mandatory guard defense retains war authority
+✓ player independence UI requires explicit second confirmation; stale confirmation is rejected
+✓ new talk Save8 reload produces the same next decision and stock as uninterrupted state
+✓ default forced tribute retains the existing paid war-call edict
+✓ offer discloses only the proposing party own fronts, not the recipient hidden wars
+✓ active extra-tax and science orders are included in the monthly preview without creating stock
+✓ peaceful release cannot be followed by a same-pair reverse submission that evades cooldown
+GEÇEN: 25 KALAN: 0

@@ -1,0 +1,6 @@
+PASS aktif oy kesilmez; acil savunma iki olağan tekliften önce açılır; beklerken ücret/RNG yok
+PASS barış eski savunma kimliğini geçersiz kılar; yeni savaş eski acil talebi canlandırmaz
+PASS saldırı savaşı acil sayılamaz; otomatik savunma gereksiz ikinci oy açmaz
+PASS iki acil açılıştan sonra olağan FIFOya sıra gelir; Save8 aynı sıra/kimliği korur
+PASS AI saldırıya uğrarsa aynı kuyrukta acil önerge verir; insan adına oy verilmez
+GEÇEN: 5 KALAN: 0

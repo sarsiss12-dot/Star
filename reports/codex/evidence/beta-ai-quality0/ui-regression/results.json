@@ -1,0 +1,122 @@
+[
+  {
+    "name": "pregame 360x800",
+    "status": "PASS"
+  },
+  {
+    "name": "pregame 390x844",
+    "status": "PASS"
+  },
+  {
+    "name": "pregame 412x915",
+    "status": "PASS"
+  },
+  {
+    "name": "pregame 800x360",
+    "status": "PASS"
+  },
+  {
+    "name": "pregame 915x412",
+    "status": "PASS"
+  },
+  {
+    "name": "colony 800",
+    "status": "PASS"
+  },
+  {
+    "name": "planet-access 800",
+    "status": "PASS"
+  },
+  {
+    "name": "fleet 800",
+    "status": "PASS"
+  },
+  {
+    "name": "event-spy 800",
+    "status": "PASS"
+  },
+  {
+    "name": "yard 800",
+    "status": "PASS"
+  },
+  {
+    "name": "colony 844",
+    "status": "PASS"
+  },
+  {
+    "name": "fleet 844",
+    "status": "PASS"
+  },
+  {
+    "name": "event-spy 844",
+    "status": "PASS"
+  },
+  {
+    "name": "yard 844",
+    "status": "PASS"
+  },
+  {
+    "name": "colony 915",
+    "status": "PASS"
+  },
+  {
+    "name": "fleet 915",
+    "status": "PASS"
+  },
+  {
+    "name": "event-spy 915",
+    "status": "PASS"
+  },
+  {
+    "name": "yard 915",
+    "status": "PASS"
+  },
+  {
+    "name": "colony 960",
+    "status": "PASS"
+  },
+  {
+    "name": "fleet 960",
+    "status": "PASS"
+  },
+  {
+    "name": "event-spy 960",
+    "status": "PASS"
+  },
+  {
+    "name": "yard 960",
+    "status": "PASS"
+  },
+  {
+    "name": "colony 1280",
+    "status": "PASS"
+  },
+  {
+    "name": "fleet 1280",
+    "status": "PASS"
+  },
+  {
+    "name": "event-spy 1280",
+    "status": "PASS"
+  },
+  {
+    "name": "yard 1280",
+    "status": "PASS"
+  },
+  {
+    "name": "colony 1920",
+    "status": "PASS"
+  },
+  {
+    "name": "fleet 1920",
+    "status": "PASS"
+  },
+  {
+    "name": "event-spy 1920",
+    "status": "PASS"
+  },
+  {
+    "name": "yard 1920",
+    "status": "PASS"
+  }
+]

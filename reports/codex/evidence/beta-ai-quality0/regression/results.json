@@ -1,0 +1,122 @@
+[
+  {
+    "script": "faz95a_strategic_ai_test.js",
+    "exit": 0,
+    "seconds": 7.95
+  },
+  {
+    "script": "faz96g1_contract_test.js",
+    "exit": 0,
+    "seconds": 6.33
+  },
+  {
+    "script": "faz96h3_vassal_budget_test.js",
+    "exit": 0,
+    "seconds": 3.77
+  },
+  {
+    "script": "beta_fed_ai0_coalition_test.cjs",
+    "exit": 0,
+    "seconds": 1.83
+  },
+  {
+    "script": "beta_fed_ai0_raider_test.cjs",
+    "exit": 0,
+    "seconds": 1.29
+  },
+  {
+    "script": "beta_fed_ai0_edit_test.cjs",
+    "exit": 0,
+    "seconds": 1.76
+  },
+  {
+    "script": "beta_fed_ai0_emergency_test.cjs",
+    "exit": 0,
+    "seconds": 2.11
+  },
+  {
+    "script": "beta_fed_ai0_mp_test.cjs",
+    "exit": 0,
+    "seconds": 1.39
+  },
+  {
+    "script": "beta_fed_ai0_campaign_test.cjs",
+    "exit": 0,
+    "seconds": 3.43
+  },
+  {
+    "script": "beta_board1_agenda_test.cjs",
+    "exit": 0,
+    "seconds": 4.8
+  },
+  {
+    "script": "beta_war_center0_test.cjs",
+    "exit": 0,
+    "seconds": 1.6
+  },
+  {
+    "script": "beta_war_center0_mp_test.cjs",
+    "exit": 0,
+    "seconds": 2.02
+  },
+  {
+    "script": "beta_board2_colony_test.cjs",
+    "exit": 0,
+    "seconds": 0.79
+  },
+  {
+    "script": "beta_board2_remote_test.cjs",
+    "exit": 0,
+    "seconds": 0.58
+  },
+  {
+    "script": "beta_espionage_rebellion0_test.cjs",
+    "exit": 0,
+    "seconds": 3.08
+  },
+  {
+    "script": "beta_espionage_rebellion0_mp_test.cjs",
+    "exit": 0,
+    "seconds": 2.05
+  },
+  {
+    "script": "beta_stability0_fleet_test.cjs",
+    "exit": 0,
+    "seconds": 2.39
+  },
+  {
+    "script": "beta_stability0_mp_test.cjs",
+    "exit": 0,
+    "seconds": 0.74
+  },
+  {
+    "script": "beta_ui_refinement0_test.cjs",
+    "exit": 0,
+    "seconds": 0.38
+  },
+  {
+    "script": "beta_ui23_preservation.cjs",
+    "exit": 0,
+    "seconds": 1.24
+  },
+  {
+    "script": "mp_p0_decisions_test.cjs",
+    "exit": 0,
+    "seconds": 1.61
+  },
+  {
+    "script": "mp75_war_test.js",
+    "exit": 0,
+    "seconds": 0.95
+  },
+  {
+    "script": "perf1_equivalence_test.js",
+    "exit": 0,
+    "seconds": 2.78
+  },
+  {
+    "script": "perf2_equivalence_test.js",
+    "exit": 0,
+    "seconds": 3.53
+  }
+]

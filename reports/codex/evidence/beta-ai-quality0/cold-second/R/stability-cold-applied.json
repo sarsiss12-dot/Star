@@ -1,0 +1,9 @@
+{
+  "realColdRoomNativeRecovery": true,
+  "reinforcements": 27,
+  "totalWithTarget": 28,
+  "paidOrders": 2,
+  "sameResources": true,
+  "replayStatus": "rejected",
+  "replayCode": "rules:engine"
+}

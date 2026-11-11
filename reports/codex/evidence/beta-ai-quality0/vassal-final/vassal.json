@@ -1,0 +1,184 @@
+[
+  {
+    "name": "weak AI independently seeks reachable strong AI; recipient terms decide",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: {\"q\":null,\"overlord\":null,\"weakInfluence\":1000,\"lordInfluence\":1000,\"weakPower\":110,\"lordPower\":2512,\"access\":{\"ok\":false,\"why\":\"Bilinen açık askerî yardım rotası yok\"}}\n    at /workspace/Star/tests/ai-quality0-vassal.cjs:15:145\n    at test (/workspace/Star/tests/ai-quality0-vassal.cjs:13:53)\n    at Object.<anonymous> (/workspace/Star/tests/ai-quality0-vassal.cjs:15:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "AI -> human request remains pending; cooldown prevents duplicate fee/inbox",
+    "status": "FAIL",
+    "error": "evalmachine.<anonymous>:1\nW.vassalTalk.status===\"pending\"&&!isVassal(W)\n             ^\n\nTypeError: Cannot read properties of undefined (reading 'status')\n    at evalmachine.<anonymous>:1:14\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)\n    at /workspace/Star/tests/ai-quality0-vassal.cjs:16:223\n    at test (/workspace/Star/tests/ai-quality0-vassal.cjs:13:53)\n    at Object.<anonymous> (/workspace/Star/tests/ai-quality0-vassal.cjs:16:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)"
+  },
+  {
+    "name": "safe weak state stays independent without a known threat",
+    "status": "PASS",
+    "q": null,
+    "overlord": null,
+    "weakInfluence": 1000,
+    "lordInfluence": 1000,
+    "weakPower": 110,
+    "lordPower": 2512,
+    "access": {
+      "ok": false,
+      "why": "Bilinen açık askerî yardım rotası yok"
+    }
+  },
+  {
+    "name": "no route -> no protection request; unknown stronger fleet does not grant access",
+    "status": "PASS",
+    "q": null,
+    "overlord": null,
+    "weakInfluence": 1000,
+    "lordInfluence": 1000,
+    "weakPower": 110,
+    "lordPower": 2512,
+    "access": {
+      "ok": false,
+      "why": "Bilinen açık askerî yardım rotası yok"
+    }
+  },
+  {
+    "name": "wartime refugee -> actual defense obligation brings protector into existing war",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(h.run('!!W.vassalTalk&&isVassal(W)&&W.overlord===L.id'))\n\n    at /workspace/Star/tests/ai-quality0-vassal.cjs:19:192\n    at test (/workspace/Star/tests/ai-quality0-vassal.cjs:13:53)\n    at Object.<anonymous> (/workspace/Star/tests/ai-quality0-vassal.cjs:19:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "burdensome contract rejected by existing assessment at final round",
+    "status": "PASS",
+    "assessment": {
+      "decision": "reject",
+      "score": -2.145,
+      "goal": "regional",
+      "recovery": true,
+      "reasons": [
+        {
+          "value": 0.65,
+          "why": "Bilinen koruyucu güç"
+        },
+        {
+          "value": 0,
+          "why": "Kendi mevcut tehdidi"
+        },
+        {
+          "value": -0.22,
+          "why": "Diplomatik hafıza ve güven"
+        },
+        {
+          "value": -0.75,
+          "why": "Gerçek gelirden istenen vergi ve bilim payı"
+        },
+        {
+          "value": -0.5,
+          "why": "Altı aylık kendi rezervi yükü karşılamıyor"
+        },
+        {
+          "value": -0.4,
+          "why": "Senyörün koruma yükümlülüğü"
+        },
+        {
+          "value": -0.5,
+          "why": "Askerî yükümlülük ve hazırlık"
+        },
+        {
+          "value": -0.15,
+          "why": "Diplomatik özerklik"
+        },
+        {
+          "value": 0,
+          "why": "Askerî kişilik"
+        },
+        {
+          "value": -0.12,
+          "why": "Uzun vadeli bağımsız güç hedefi"
+        },
+        {
+          "value": -0.15,
+          "why": "Bağımsızlığın siyasi değeri"
+        }
+      ]
+    }
+  },
+  {
+    "name": "real counteroffer uses contract engine, bounds rounds and charges20 once",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(h.run('W.vassalTalk.history.some(x=>x.action===\"counter\")'))\n\n    at /workspace/Star/tests/ai-quality0-vassal.cjs:21:355\n    at test (/workspace/Star/tests/ai-quality0-vassal.cjs:13:53)\n    at Object.<anonymous> (/workspace/Star/tests/ai-quality0-vassal.cjs:21:1)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  {
+    "name": "strong initiator engine path works, but autonomous caller absence is recorded",
+    "status": "PASS",
+    "autonomous": false,
+    "engineOffer": {
+      "q": {
+        "v": 1,
+        "id": "1:1",
+        "lord": 0,
+        "sub": 1,
+        "kind": "new",
+        "mode": "demand",
+        "type": "bekci",
+        "terms": {
+          "tax": {
+            "ene": 0,
+            "min": 0,
+            "ala": 0,
+            "yiy": 0,
+            "tuk": 0
+          },
+          "science": 0,
+          "defense": true,
+          "war": "all",
+          "autonomy": "consent",
+          "duration": 0,
+          "renegotiate": 24,
+          "sensors": false
+        },
+        "from": 0,
+        "to": 1,
+        "born": 1200,
+        "expires": 1380,
+        "round": 1,
+        "status": "pending",
+        "disclosedWars": {
+          "0": []
+        },
+        "paid": {
+          "0": 160
+        },
+        "history": [
+          {
+            "day": 1200,
+            "by": 0,
+            "action": "offer",
+            "why": "Açık sözleşme teklifi",
+            "terms": {
+              "tax": {
+                "ene": 0,
+                "min": 0,
+                "ala": 0,
+                "yiy": 0,
+                "tuk": 0
+              },
+              "science": 0,
+              "defense": true,
+              "war": "all",
+              "autonomy": "consent",
+              "duration": 0,
+              "renegotiate": 24,
+              "sensors": false
+            }
+          }
+        ]
+      },
+      "overlord": null,
+      "weakInfluence": 1000,
+      "lordInfluence": 840,
+      "weakPower": 110,
+      "lordPower": 2512,
+      "access": {
+        "ok": false,
+        "why": "Bilinen açık askerî yardım rotası yok"
+      }
+    },
+    "interpretation": "Engine capability is not proof of independent strong-AI initiative"
+  }
+]

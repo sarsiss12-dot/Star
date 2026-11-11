@@ -1,0 +1,8 @@
+{
+  "sameResources": true,
+  "samePaidQueue": true,
+  "sameHulls": true,
+  "sameAudit": true,
+  "ownRecovery": true,
+  "thirdPartyPrivate": true
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "checkpoint": "p23-11-24-s200-16-final.sav",
+    "fleets": 96,
+    "ships": 202,
+    "problems": []
+  },
+  {
+    "checkpoint": "p23-11-60-ulu-9-final.sav",
+    "fleets": 62,
+    "ships": 179,
+    "problems": []
+  },
+  {
+    "checkpoint": "p23-23-60-ulu-9-final.sav",
+    "fleets": 54,
+    "ships": 170,
+    "problems": []
+  },
+  {
+    "checkpoint": "p23-404-120-ulu-9-final.sav",
+    "fleets": 75,
+    "ships": 302,
+    "problems": []
+  },
+  {
+    "checkpoint": "p23-404-60-ulu-9-final.sav",
+    "fleets": 66,
+    "ships": 202,
+    "problems": []
+  },
+  {
+    "checkpoint": "p23-42-120-ulu-9-final.sav",
+    "fleets": 73,
+    "ships": 355,
+    "problems": []
+  },
+  {
+    "checkpoint": "p23-42-60-ulu-9-final.sav",
+    "fleets": 60,
+    "ships": 151,
+    "problems": []
+  },
+  {
+    "checkpoint": "p23-99-60-ulu-9-final.sav",
+    "fleets": 53,
+    "ships": 192,
+    "problems": []
+  }
+]

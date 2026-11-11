@@ -1,0 +1,18 @@
+FAIL weak AI independently seeks reachable strong AI; recipient terms decide The expression evaluated to a falsy value:
+
+  assert(h.run('!!W.vassalTalk'))
+
+FAIL AI -> human request remains pending; cooldown prevents duplicate fee/inbox Cannot read properties of undefined (reading 'status')
+PASS safe weak state stays independent without a known threat
+PASS no route -> no protection request; unknown stronger fleet does not grant access
+FAIL wartime refugee -> actual defense obligation brings protector into existing war The expression evaluated to a falsy value:
+
+  assert(h.run('!!W.vassalTalk&&isVassal(W)&&W.overlord===L.id'))
+
+PASS burdensome contract rejected by existing assessment at final round
+FAIL real counteroffer uses contract engine, bounds rounds and charges20 once The expression evaluated to a falsy value:
+
+  assert(h.run('W.vassalTalk.history.some(x=>x.action==="counter")'))
+
+PASS strong initiator engine path works, but autonomous caller absence is recorded
+{"pass":4,"fail":4}

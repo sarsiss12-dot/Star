@@ -1,0 +1,510 @@
+[
+  {
+    "name": "weak AI independently seeks reachable strong AI; recipient terms decide",
+    "status": "PASS",
+    "q": {
+      "v": 1,
+      "id": "1:1",
+      "lord": 0,
+      "sub": 1,
+      "kind": "new",
+      "mode": "seek",
+      "type": "bekci",
+      "terms": {
+        "tax": {
+          "ene": 0,
+          "min": 0,
+          "ala": 0,
+          "yiy": 0,
+          "tuk": 0
+        },
+        "science": 0,
+        "defense": true,
+        "war": "all",
+        "autonomy": "consent",
+        "duration": 0,
+        "renegotiate": 24,
+        "sensors": false
+      },
+      "from": 1,
+      "to": 0,
+      "born": 1200,
+      "expires": 1380,
+      "round": 1,
+      "status": "accepted",
+      "disclosedWars": {
+        "1": []
+      },
+      "paid": {
+        "1": 90
+      },
+      "history": [
+        {
+          "day": 1200,
+          "by": 1,
+          "action": "offer",
+          "why": "Açık sözleşme teklifi",
+          "terms": {
+            "tax": {
+              "ene": 0,
+              "min": 0,
+              "ala": 0,
+              "yiy": 0,
+              "tuk": 0
+            },
+            "science": 0,
+            "defense": true,
+            "war": "all",
+            "autonomy": "consent",
+            "duration": 0,
+            "renegotiate": 24,
+            "sensors": false
+          }
+        },
+        {
+          "day": 1200,
+          "by": 0,
+          "action": "accept",
+          "why": "Güven ve diplomatik hafıza: 0.18 · Himayenin stratejik değeri: 0.25 · Müttefik askerî yükümlülük: 0.28 · Sözleşmenin gelir ve bilim faydası: 0 · Kendi koruma hazırlığı ve toparlanma ihtiyacı: -0.12 · Bilinen / teklifte bildirilen koruma cephesi yükü: 0 · Kişilik ve askerî amaç: -0.1"
+        }
+      ],
+      "finished": 1200,
+      "why": "Güven ve diplomatik hafıza: 0.18 · Himayenin stratejik değeri: 0.25 · Müttefik askerî yükümlülük: 0.28 · Sözleşmenin gelir ve bilim faydası: 0 · Kendi koruma hazırlığı ve toparlanma ihtiyacı: -0.12 · Bilinen / teklifte bildirilen koruma cephesi yükü: 0 · Kişilik ve askerî amaç: -0.1"
+    },
+    "overlord": 0,
+    "weakInfluence": 910,
+    "lordInfluence": 1000,
+    "weakPower": 110,
+    "lordPower": 2512,
+    "access": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+    }
+  },
+  {
+    "name": "AI -> human request remains pending; cooldown prevents duplicate fee/inbox",
+    "status": "PASS",
+    "q": {
+      "v": 1,
+      "id": "1:1",
+      "lord": 0,
+      "sub": 1,
+      "kind": "new",
+      "mode": "seek",
+      "type": "bekci",
+      "terms": {
+        "tax": {
+          "ene": 0,
+          "min": 0,
+          "ala": 0,
+          "yiy": 0,
+          "tuk": 0
+        },
+        "science": 0,
+        "defense": true,
+        "war": "all",
+        "autonomy": "consent",
+        "duration": 0,
+        "renegotiate": 24,
+        "sensors": false
+      },
+      "from": 1,
+      "to": 0,
+      "born": 1200,
+      "expires": 1380,
+      "round": 1,
+      "status": "pending",
+      "disclosedWars": {
+        "1": []
+      },
+      "paid": {
+        "1": 90
+      },
+      "history": [
+        {
+          "day": 1200,
+          "by": 1,
+          "action": "offer",
+          "why": "Açık sözleşme teklifi",
+          "terms": {
+            "tax": {
+              "ene": 0,
+              "min": 0,
+              "ala": 0,
+              "yiy": 0,
+              "tuk": 0
+            },
+            "science": 0,
+            "defense": true,
+            "war": "all",
+            "autonomy": "consent",
+            "duration": 0,
+            "renegotiate": 24,
+            "sensors": false
+          }
+        }
+      ]
+    },
+    "overlord": null,
+    "weakInfluence": 910,
+    "lordInfluence": 1000,
+    "weakPower": 110,
+    "lordPower": 2512,
+    "access": {
+      "ok": true,
+      "eta": 1.8812709030100336,
+      "ratio": 22.836363636363636,
+      "why": "Açık yardım rotası ve yeterli tahmini güç"
+    }
+  },
+  {
+    "name": "safe weak state stays independent without a known threat",
+    "status": "PASS",
+    "q": null,
+    "overlord": null,
+    "weakInfluence": 1000,
+    "lordInfluence": 1000,
+    "weakPower": 110,
+    "lordPower": 2512,
+    "access": {
+      "ok": true,
+      "eta": 1.8812709030100336,
+      "ratio": 22.836363636363636,
+      "why": "Açık yardım rotası ve yeterli tahmini güç"
+    }
+  },
+  {
+    "name": "no route -> no protection request; unknown stronger fleet does not grant access",
+    "status": "PASS",
+    "q": null,
+    "overlord": null,
+    "weakInfluence": 1000,
+    "lordInfluence": 1000,
+    "weakPower": 110,
+    "lordPower": 2512,
+    "access": {
+      "ok": false,
+      "why": "Bilinen açık askerî yardım rotası yok"
+    }
+  },
+  {
+    "name": "wartime refugee -> actual defense obligation brings protector into existing war",
+    "status": "PASS",
+    "q": {
+      "v": 1,
+      "id": "1:1",
+      "lord": 0,
+      "sub": 1,
+      "kind": "new",
+      "mode": "seek",
+      "type": "bekci",
+      "terms": {
+        "tax": {
+          "ene": 0,
+          "min": 0,
+          "ala": 0,
+          "yiy": 0,
+          "tuk": 0
+        },
+        "science": 0,
+        "defense": true,
+        "war": "all",
+        "autonomy": "consent",
+        "duration": 0,
+        "renegotiate": 24,
+        "sensors": false
+      },
+      "from": 1,
+      "to": 0,
+      "born": 1200,
+      "expires": 1380,
+      "round": 1,
+      "status": "accepted",
+      "disclosedWars": {
+        "1": [
+          2
+        ]
+      },
+      "paid": {
+        "1": 90
+      },
+      "history": [
+        {
+          "day": 1200,
+          "by": 1,
+          "action": "offer",
+          "why": "Açık sözleşme teklifi",
+          "terms": {
+            "tax": {
+              "ene": 0,
+              "min": 0,
+              "ala": 0,
+              "yiy": 0,
+              "tuk": 0
+            },
+            "science": 0,
+            "defense": true,
+            "war": "all",
+            "autonomy": "consent",
+            "duration": 0,
+            "renegotiate": 24,
+            "sensors": false
+          }
+        },
+        {
+          "day": 1200,
+          "by": 0,
+          "action": "accept",
+          "why": "Güven ve diplomatik hafıza: 0.18 · Himayenin stratejik değeri: 0.25 · Müttefik askerî yükümlülük: 0.28 · Sözleşmenin gelir ve bilim faydası: 0 · Kendi koruma hazırlığı ve toparlanma ihtiyacı: -0.12 · Bilinen / teklifte bildirilen koruma cephesi yükü: -0.06 · Kişilik ve askerî amaç: -0.1"
+        }
+      ],
+      "finished": 1200,
+      "why": "Güven ve diplomatik hafıza: 0.18 · Himayenin stratejik değeri: 0.25 · Müttefik askerî yükümlülük: 0.28 · Sözleşmenin gelir ve bilim faydası: 0 · Kendi koruma hazırlığı ve toparlanma ihtiyacı: -0.12 · Bilinen / teklifte bildirilen koruma cephesi yükü: -0.06 · Kişilik ve askerî amaç: -0.1"
+    },
+    "overlord": 0,
+    "weakInfluence": 910,
+    "lordInfluence": 1000,
+    "weakPower": 110,
+    "lordPower": 2512,
+    "access": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+    }
+  },
+  {
+    "name": "burdensome contract rejected by existing assessment at final round",
+    "status": "PASS",
+    "assessment": {
+      "decision": "reject",
+      "score": -2.145,
+      "goal": "regional",
+      "recovery": true,
+      "reasons": [
+        {
+          "value": 0.65,
+          "why": "Bilinen koruyucu güç"
+        },
+        {
+          "value": 0,
+          "why": "Kendi mevcut tehdidi"
+        },
+        {
+          "value": -0.22,
+          "why": "Diplomatik hafıza ve güven"
+        },
+        {
+          "value": -0.75,
+          "why": "Gerçek gelirden istenen vergi ve bilim payı"
+        },
+        {
+          "value": -0.5,
+          "why": "Altı aylık kendi rezervi yükü karşılamıyor"
+        },
+        {
+          "value": -0.4,
+          "why": "Senyörün koruma yükümlülüğü"
+        },
+        {
+          "value": -0.5,
+          "why": "Askerî yükümlülük ve hazırlık"
+        },
+        {
+          "value": -0.15,
+          "why": "Diplomatik özerklik"
+        },
+        {
+          "value": 0,
+          "why": "Askerî kişilik"
+        },
+        {
+          "value": -0.12,
+          "why": "Uzun vadeli bağımsız güç hedefi"
+        },
+        {
+          "value": -0.15,
+          "why": "Bağımsızlığın siyasi değeri"
+        }
+      ]
+    }
+  },
+  {
+    "name": "real counteroffer uses contract engine, bounds rounds and charges20 once",
+    "status": "PASS",
+    "q": {
+      "v": 1,
+      "id": "1:1",
+      "lord": 0,
+      "sub": 1,
+      "kind": "new",
+      "mode": "demand",
+      "type": "haracguzar",
+      "terms": {
+        "tax": {
+          "ene": 0.15000000000000002,
+          "min": 0.15000000000000002,
+          "ala": 0.15000000000000002,
+          "yiy": 0.15000000000000002,
+          "tuk": 0.15000000000000002
+        },
+        "science": 0,
+        "defense": true,
+        "war": "defense",
+        "autonomy": "free",
+        "duration": 0,
+        "renegotiate": 24,
+        "sensors": false
+      },
+      "from": 1,
+      "to": 0,
+      "born": 1200,
+      "expires": 1380,
+      "round": 2,
+      "status": "pending",
+      "disclosedWars": {
+        "0": [],
+        "1": []
+      },
+      "paid": {
+        "0": 160,
+        "1": 20
+      },
+      "history": [
+        {
+          "day": 1200,
+          "by": 0,
+          "action": "offer",
+          "why": "Açık sözleşme teklifi",
+          "terms": {
+            "tax": {
+              "ene": 0.2,
+              "min": 0.2,
+              "ala": 0.2,
+              "yiy": 0.2,
+              "tuk": 0.2
+            },
+            "science": 0,
+            "defense": true,
+            "war": "all",
+            "autonomy": "consent",
+            "duration": 0,
+            "renegotiate": 24,
+            "sensors": false
+          }
+        },
+        {
+          "day": 1200,
+          "by": 1,
+          "action": "counter",
+          "why": "Bilinen koruyucu güç: 0.65 · Kendi mevcut tehdidi: 0 · Diplomatik hafıza ve güven: -0.02 · Gerçek gelirden istenen vergi ve bilim payı: -0.5 · Senyörün koruma yükümlülüğü: 0.2 · Askerî yükümlülük ve hazırlık: -0.22 · Diplomatik özerklik: -0.15 · Askerî kişilik: 0 · Uzun vadeli bağımsız güç hedefi: 0 · Bağımsızlığın siyasi değeri: -0.15",
+          "terms": {
+            "tax": {
+              "ene": 0.15000000000000002,
+              "min": 0.15000000000000002,
+              "ala": 0.15000000000000002,
+              "yiy": 0.15000000000000002,
+              "tuk": 0.15000000000000002
+            },
+            "science": 0,
+            "defense": true,
+            "war": "defense",
+            "autonomy": "free",
+            "duration": 0,
+            "renegotiate": 24,
+            "sensors": false
+          }
+        }
+      ]
+    },
+    "overlord": null,
+    "weakInfluence": 980,
+    "lordInfluence": 840,
+    "weakPower": 110,
+    "lordPower": 2512,
+    "access": {
+      "ok": true,
+      "eta": 1.8812709030100336,
+      "ratio": 22.836363636363636,
+      "why": "Açık yardım rotası ve yeterli tahmini güç"
+    }
+  },
+  {
+    "name": "strong initiator engine path works, but autonomous caller absence is recorded",
+    "status": "PASS",
+    "autonomous": false,
+    "engineOffer": {
+      "q": {
+        "v": 1,
+        "id": "1:1",
+        "lord": 0,
+        "sub": 1,
+        "kind": "new",
+        "mode": "demand",
+        "type": "bekci",
+        "terms": {
+          "tax": {
+            "ene": 0,
+            "min": 0,
+            "ala": 0,
+            "yiy": 0,
+            "tuk": 0
+          },
+          "science": 0,
+          "defense": true,
+          "war": "all",
+          "autonomy": "consent",
+          "duration": 0,
+          "renegotiate": 24,
+          "sensors": false
+        },
+        "from": 0,
+        "to": 1,
+        "born": 1200,
+        "expires": 1380,
+        "round": 1,
+        "status": "pending",
+        "disclosedWars": {
+          "0": []
+        },
+        "paid": {
+          "0": 160
+        },
+        "history": [
+          {
+            "day": 1200,
+            "by": 0,
+            "action": "offer",
+            "why": "Açık sözleşme teklifi",
+            "terms": {
+              "tax": {
+                "ene": 0,
+                "min": 0,
+                "ala": 0,
+                "yiy": 0,
+                "tuk": 0
+              },
+              "science": 0,
+              "defense": true,
+              "war": "all",
+              "autonomy": "consent",
+              "duration": 0,
+              "renegotiate": 24,
+              "sensors": false
+            }
+          }
+        ]
+      },
+      "overlord": null,
+      "weakInfluence": 1000,
+      "lordInfluence": 840,
+      "weakPower": 110,
+      "lordPower": 2512,
+      "access": {
+        "ok": true,
+        "eta": 1.8812709030100336,
+        "ratio": 22.836363636363636,
+        "why": "Açık yardım rotası ve yeterli tahmini güç"
+      }
+    },
+    "interpretation": "Engine capability is not proof of independent strong-AI initiative"
+  }
+]

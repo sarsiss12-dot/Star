@@ -1,0 +1,11 @@
+--- a/ai.js
++++ b/ai.js
+@@ -525,7 +525,7 @@
+  const measure={systems:own.length,colonies:e.colonies.length,techs:Object.keys(e.techs||{}).length,power,ports:buildings.liman||0,fort,
+   production:['ene','min','ala','ara','tuk'].reduce((n,k)=>n+Math.max(0,e.inc[k]||0),0),deliveries:G.commerce?.stats?.[e.id]?.deliveries||0,
+   pacts:Object.keys(e.pact||{}).filter(id=>e.pact?.[id]).length,allies:Object.keys(e.ally||{}).filter(id=>e.ally[id]).length,federated:!!findFed(e)};
+- const severe=['ene','min','tuk','ala'].filter(k=>findFed(e)?economy.rows[k].net<0&&economy.rows[k].stock/-economy.rows[k].net<3:(e.inc[k]||0)<0&&(e.res[k]||0)/-(e.inc[k]||0)<3);
++ const severe=['ene','min','tuk','ala','yiy'].filter(k=>findFed(e)?economy.rows[k].net<0&&economy.rows[k].stock/-economy.rows[k].net<3:(e.inc[k]||0)<0&&(e.res[k]||0)/-(e.inc[k]||0)<3);
+  // Only this empire's own recorded war outcome is consulted. A declaration
+  // or an unfinished front cannot manufacture a defeat or expose foreign data.
+  const lastDefeat=(G.warLedger?.fronts||[]).reduce((latest,front)=>{

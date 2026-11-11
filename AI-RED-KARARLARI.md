@@ -33,6 +33,11 @@ Ortak ders: yerel bir göstergede kazanç (tek seed, tek kaynak, tek devlet) gen
 | 96H.11 aday BM2 (B1 + her sanayi açığı) | 96H.11 | Herhangi bir ene/min/ala/tuk geliri negatifse Sanayi | Her seed'de tetikleniyor; 8 × 120 kritik ay 14 → 25, teknoloji 336 → 328 (seed11 0 → 13 kritik ay) | `research/96h11/candidate-BM2-industrial-deficit-REJECTED.patch` |
 | 96H.11 aday BM4 (B1 + acil sanayi kaynağı) | 96H.11 | `aiEconomicOrder` aciliyet ölçütü ene/min/ala/tuk'u acil sayınca Sanayi | Kriz 7/8 seed'de eşit ya da düşük, seed42 düzeliyor. Ticaret koruması geçmiyor: seed11 240 ay teslimat medyanı 288 → 95, seed7 120 ay 104 → 52. seed404 dünya gücü bant altında; değişiklik geniş | `research/96h11/candidate-BM4-urgent-industry-REJECTED.patch` |
 
+## BETA-AI-QUALITY.0 araştırması (11 Kasım 2026)
+
+- Gıda aciliyetini `aiStrategicFacts.severe` listesine ekleyen tek satırlık deney üretime alınmadı. Aynı p23 Save8/404/100sistem9AI/120ayda kritik devlet-ay78→78, koloniler28→28, gemiler241→241, teknoloji84→84. Plan başarısız sayacı7→6 olsa da her aylık gerçek kaynak/koloni/filo/istikrar sonucu ve sonRNG aynı kaldı; bu kozmetik sayaç farkı kalite kazancı değildir.
+- Deney yalnız test runtime'ına yüklendi; oyun dosyaları ve p23paketi değişmedi. [RET kararı ve yama](reports/codex/evidence/beta-ai-quality0/experiments/decision.json), [rapor](reports/codex/BETA-AI-QUALITY0-SONUC.md).
+
 ## Açık kalan gerçek sorunlar (çözülmedi)
 
 - ~~Sefer bekleme kilidi~~ → **96H.8'de çözüldü**: bekleme düzeltmesi, sevk bakımı kapısı, müfreze ve geri çağırma ile birlikte (`AI-SEFER-VERIMLILIGI-96H8.md`). 96H.7 yaması tek başına hâlâ reddedilmiş durumda.

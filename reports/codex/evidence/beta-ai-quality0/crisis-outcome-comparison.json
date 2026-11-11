@@ -1,0 +1,29 @@
+[
+  {
+    "mode": "off",
+    "lowStabilityColonyMonths": 18,
+    "counterArea": 492,
+    "newPolicies": 0,
+    "paidInfluence": 0,
+    "finalColonies": 8,
+    "schism": 0
+  },
+  {
+    "mode": "p21",
+    "lowStabilityColonyMonths": 18,
+    "counterArea": 492,
+    "newPolicies": 2,
+    "paidInfluence": 160,
+    "finalColonies": 8,
+    "schism": 0
+  },
+  {
+    "mode": "candidate",
+    "lowStabilityColonyMonths": 18,
+    "counterArea": 492,
+    "newPolicies": 2,
+    "paidInfluence": 160,
+    "finalColonies": 8,
+    "schism": 0
+  }
+]

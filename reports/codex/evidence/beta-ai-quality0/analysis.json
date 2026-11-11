@@ -1,0 +1,5502 @@
+[
+  {
+    "summary": {
+      "seed": 11,
+      "months": 24,
+      "size": "s200",
+      "ai": 16,
+      "initialHash": "0d99ee394f78707af8da0c398f777a2979799af1cc1354778e728de4343b260f",
+      "ms": 16729,
+      "initialSystems": 200,
+      "actualInitialAI": 16,
+      "crisisByResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 7,
+        "ara": 0,
+        "etk": 0
+      },
+      "criticalEmpireMonths": 7,
+      "zeroStockMonths": 4,
+      "initialColonies": 16,
+      "finalColonies": 35,
+      "finalShips": 144,
+      "finalTechs": 13,
+      "deadAI": 0,
+      "vassals": 0,
+      "planSwitches": 11,
+      "plansCompleted": 12,
+      "plansFailed": 0,
+      "firstInvalid": null,
+      "heapMB": 102.12432861328125,
+      "counts": {
+        "queueShip:ok": 169,
+        "fleetLost:disband": 10,
+        "shipsLost:disband:1": 1,
+        "hullsRemoved:disband": 10,
+        "shipsLost:disband:4": 1,
+        "shipsLost:disband:5": 1,
+        "shipsLost:disband:8": 1,
+        "shipsLost:disband:9": 1,
+        "shipsLost:disband:14": 1,
+        "queueBuilding:ok": 123,
+        "queueBuilding:false": 182,
+        "orderMove:ok": 369,
+        "aiMove:ok": 109,
+        "fleetLost:colonization": 19,
+        "shipsLost:colonization:13": 1,
+        "hullsRemoved:colonization": 19,
+        "shipsLost:colonization:11": 1,
+        "shipsLost:colonization:6": 2,
+        "shipsLost:colonization:15": 1,
+        "shipsLost:disband:11": 1,
+        "shipsLost:disband:13": 1,
+        "shipsLost:colonization:5": 1,
+        "startStruct:ok": 25,
+        "shipsLost:colonization:8": 2,
+        "shipsLost:colonization:2": 1,
+        "shipsLost:colonization:1": 1,
+        "shipsLost:colonization:4": 1,
+        "fleetLost:combat": 21,
+        "shipsLost:combat:6": 5,
+        "hullsRemoved:combat": 21,
+        "shipsLost:colonization:14": 2,
+        "shipsLost:colonization:9": 1,
+        "shipsLost:colonization:7": 1,
+        "shipsLost:colonization:12": 1,
+        "shipsLost:colonization:10": 1,
+        "shipsLost:combat:11": 1,
+        "shipsLost:combat:3": 1,
+        "shipsLost:disband:2": 1,
+        "queueDemolish:ok": 2,
+        "aiNegotiate:kabul": 29,
+        "shipsLost:combat:4": 2,
+        "aiNegotiate:bekle": 18,
+        "shipsLost:colonization:16": 1,
+        "shipsLost:disband:6": 1,
+        "shipsLost:colonization:3": 1,
+        "shipsLost:combat:10": 4,
+        "shipsLost:combat:1": 5,
+        "aiNegotiate:red": 1,
+        "fleetLost:rule": 17,
+        "shipsLost:rule:17": 17,
+        "hullsRemoved:rule": 33,
+        "shipsLost:combat:5": 1,
+        "shipsLost:combat:0": 2,
+        "startStruct:false": 4,
+        "declareWar:true": 1
+      },
+      "timing": {
+        "aiEconomyPlan": {
+          "n": 6717,
+          "ms": 870.5213280000206,
+          "max": 12.460124999999607
+        },
+        "aiOpsTick": {
+          "n": 24,
+          "ms": 23.484085999994704,
+          "max": 5.350694000000203
+        },
+        "aiSubmitTick": {
+          "n": 24,
+          "ms": 9.71008100000222,
+          "max": 1.5072890000010375
+        },
+        "aiFederationPolitics": {
+          "n": 24,
+          "ms": 160.61819000000116,
+          "max": 11.48265899999933
+        },
+        "aiCoalitionDiplomacy": {
+          "n": 384,
+          "ms": 108.29263799998341,
+          "max": 10.594325000000026
+        },
+        "aiShipProduction": {
+          "n": 384,
+          "ms": 835.8372000000049,
+          "max": 32.29582299999993
+        },
+        "aiTurn": {
+          "n": 408,
+          "ms": 4074.9454419999915,
+          "max": 136.80174100000022
+        },
+        "monthTick": {
+          "n": 24,
+          "ms": 6139.926315999997,
+          "max": 507.20984599999974
+        },
+        "aiNegotiate": {
+          "n": 48,
+          "ms": 1206.2937599999968,
+          "max": 122.31434499999978
+        },
+        "aiMilitaryCampaign": {
+          "n": 2,
+          "ms": 3.042660999999498,
+          "max": 2.553853999997955
+        }
+      },
+      "finalSHA": "1dd355633f5956d1a6d25d777168511458e250b46256ef564367ddd7b049c9bc",
+      "finalRNG": 911996750
+    },
+    "byEmpire": {
+      "1": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 0,
+        "ships": 5,
+        "goal": "security",
+        "progress": 0,
+        "stats": {
+          "switches": 1,
+          "completed": 0,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 10,
+            "fleet-order": 2,
+            "preparation-stage": 2,
+            "ship-paid": 13
+          }
+        }
+      },
+      "2": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 0,
+        "ships": 12,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 1,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "fleet-order": 4,
+            "preparation-stage": 1,
+            "building-paid": 8,
+            "ship-paid": 10,
+            "milestone-complete": 1,
+            "diplomatic-proposal": 2
+          }
+        }
+      },
+      "3": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 3,
+        "ships": 15,
+        "goal": "science",
+        "progress": 1,
+        "stats": {
+          "switches": 0,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 1,
+            "building-paid": 3,
+            "fleet-order": 4,
+            "preparation-stage": 1,
+            "ship-paid": 13,
+            "research-completed": 3,
+            "milestone-complete": 1
+          }
+        }
+      },
+      "4": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 0,
+        "ships": 8,
+        "goal": "security",
+        "progress": 0.5,
+        "stats": {
+          "switches": 1,
+          "completed": 0,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 8,
+            "fleet-order": 7,
+            "preparation-stage": 2,
+            "ship-paid": 12
+          }
+        }
+      },
+      "5": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 3,
+        "ships": 10,
+        "goal": "science",
+        "progress": 1,
+        "stats": {
+          "switches": 0,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 1,
+            "ship-paid": 10,
+            "building-paid": 5,
+            "preparation-stage": 1,
+            "research-completed": 3,
+            "milestone-complete": 1,
+            "fleet-order": 2
+          }
+        }
+      },
+      "6": {
+        "criticalMonths": 7,
+        "longestCriticalRun": 7,
+        "run": 7,
+        "zeroMonths": 4,
+        "resources": {
+          "tuk": 7
+        },
+        "colonies": 3,
+        "techs": 0,
+        "ships": 3,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 2,
+          "completed": 0,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 3,
+            "building-paid": 5,
+            "fleet-order": 3,
+            "preparation-stage": 5,
+            "ship-paid": 8
+          }
+        }
+      },
+      "7": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 0,
+        "ships": 12,
+        "goal": "economy",
+        "progress": 1,
+        "stats": {
+          "switches": 0,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 1,
+            "building-paid": 10,
+            "fleet-order": 7,
+            "ship-paid": 8,
+            "milestone-complete": 1
+          }
+        }
+      },
+      "8": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 0,
+        "ships": 10,
+        "goal": "influence",
+        "progress": 1,
+        "stats": {
+          "switches": 0,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 1,
+            "building-paid": 11,
+            "ship-paid": 11,
+            "fleet-order": 10,
+            "building-replacement": 1,
+            "milestone-complete": 1
+          }
+        }
+      },
+      "9": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 0,
+        "ships": 8,
+        "goal": "science",
+        "progress": 0,
+        "stats": {
+          "switches": 0,
+          "completed": 0,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 1,
+            "building-paid": 7,
+            "fleet-order": 3,
+            "ship-paid": 9,
+            "preparation-stage": 1,
+            "war-started": 1
+          }
+        }
+      },
+      "10": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 1,
+        "ships": 1,
+        "goal": "security",
+        "progress": 0,
+        "stats": {
+          "switches": 1,
+          "completed": 0,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 6,
+            "fleet-order": 1,
+            "preparation-stage": 1,
+            "ship-paid": 10,
+            "research-completed": 1
+          }
+        }
+      },
+      "11": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 0,
+        "ships": 12,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 1,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 6,
+            "fleet-order": 3,
+            "preparation-stage": 1,
+            "ship-paid": 14,
+            "milestone-complete": 1
+          }
+        }
+      },
+      "12": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 0,
+        "ships": 10,
+        "goal": "economy",
+        "progress": 1,
+        "stats": {
+          "switches": 0,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 1,
+            "building-paid": 9,
+            "fleet-order": 6,
+            "ship-paid": 6,
+            "milestone-complete": 1
+          }
+        }
+      },
+      "13": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 3,
+        "ships": 5,
+        "goal": "security",
+        "progress": 0,
+        "stats": {
+          "switches": 4,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 5,
+            "building-paid": 4,
+            "fleet-order": 6,
+            "ship-paid": 9,
+            "preparation-stage": 4,
+            "diplomatic-proposal": 1,
+            "milestone-complete": 2,
+            "research-completed": 3
+          }
+        }
+      },
+      "14": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 3,
+        "ships": 9,
+        "goal": "influence",
+        "progress": 1,
+        "stats": {
+          "switches": 0,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 1,
+            "building-paid": 12,
+            "ship-paid": 12,
+            "fleet-order": 3,
+            "diplomatic-proposal": 1,
+            "milestone-complete": 1,
+            "research-completed": 3
+          }
+        }
+      },
+      "15": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 0,
+        "ships": 12,
+        "goal": "economy",
+        "progress": 1,
+        "stats": {
+          "switches": 0,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 1,
+            "building-paid": 10,
+            "ship-paid": 8,
+            "fleet-order": 2,
+            "milestone-complete": 1
+          }
+        }
+      },
+      "16": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 0,
+        "ships": 12,
+        "goal": "influence",
+        "progress": 1,
+        "stats": {
+          "switches": 0,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 1,
+            "building-paid": 9,
+            "fleet-order": 2,
+            "ship-paid": 8,
+            "milestone-complete": 1
+          }
+        }
+      }
+    },
+    "wars": [
+      {
+        "id": 1,
+        "sides": [
+          9,
+          12
+        ],
+        "ended": null,
+        "reason": "declaration",
+        "metrics": [
+          {
+            "rounds": 0,
+            "shipsLost": 0,
+            "shipsDestroyed": 0,
+            "damageDealt": 0,
+            "damageTaken": 0,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [],
+            "planets": []
+          },
+          {
+            "rounds": 0,
+            "shipsLost": 0,
+            "shipsDestroyed": 0,
+            "damageDealt": 0,
+            "damageTaken": 0,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [],
+            "planets": []
+          }
+        ]
+      }
+    ],
+    "federations": [],
+    "commerce": {},
+    "subjects": [],
+    "finalResources": {
+      "min": 1881.0310655138755,
+      "ene": 10903.711118895097,
+      "yiy": 9487.83726097695,
+      "ala": 1505.1181826130771,
+      "tuk": 6583.317512004585,
+      "etk": 3948.6959917099507
+    }
+  },
+  {
+    "summary": {
+      "seed": 11,
+      "months": 60,
+      "size": "ulu",
+      "ai": 9,
+      "initialHash": "dd5f9265cf3d2f01a0a80c0375c8e655e8eef3d65511e7b689fc2eab5933bf75",
+      "ms": 22541,
+      "initialSystems": 100,
+      "actualInitialAI": 9,
+      "crisisByResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 0,
+        "ara": 0,
+        "etk": 0
+      },
+      "criticalEmpireMonths": 0,
+      "zeroStockMonths": 0,
+      "initialColonies": 9,
+      "finalColonies": 21,
+      "finalShips": 121,
+      "finalTechs": 29,
+      "deadAI": 0,
+      "vassals": 0,
+      "planSwitches": 18,
+      "plansCompleted": 13,
+      "plansFailed": 3,
+      "firstInvalid": null,
+      "heapMB": 132.45401763916016,
+      "counts": {
+        "queueShip:ok": 242,
+        "fleetLost:disband": 5,
+        "shipsLost:disband:3": 1,
+        "hullsRemoved:disband": 5,
+        "shipsLost:disband:8": 1,
+        "shipsLost:disband:9": 1,
+        "queueBuilding:ok": 182,
+        "orderMove:ok": 833,
+        "aiMove:ok": 122,
+        "fleetLost:colonization": 12,
+        "shipsLost:colonization:2": 1,
+        "hullsRemoved:colonization": 12,
+        "shipsLost:disband:1": 1,
+        "queueBuilding:false": 318,
+        "startStruct:ok": 17,
+        "shipsLost:colonization:6": 2,
+        "shipsLost:colonization:5": 1,
+        "shipsLost:colonization:7": 1,
+        "fleetLost:combat": 36,
+        "shipsLost:combat:2": 10,
+        "hullsRemoved:combat": 36,
+        "shipsLost:disband:5": 1,
+        "shipsLost:colonization:8": 1,
+        "shipsLost:colonization:4": 1,
+        "shipsLost:colonization:3": 1,
+        "shipsLost:combat:4": 8,
+        "shipsLost:combat:1": 10,
+        "shipsLost:colonization:1": 1,
+        "shipsLost:colonization:9": 3,
+        "queueDemolish:ok": 20,
+        "aiNegotiate:bekle": 12,
+        "aiNegotiate:kabul": 16,
+        "shipsLost:combat:7": 6,
+        "declareWar:false": 2,
+        "declareWar:true": 1,
+        "shipsLost:combat:3": 2,
+        "fleetLost:rule": 9,
+        "shipsLost:rule:10": 9,
+        "hullsRemoved:rule": 17
+      },
+      "timing": {
+        "aiEconomyPlan": {
+          "n": 9940,
+          "ms": 2357.5439159999964,
+          "max": 47.33395500000006
+        },
+        "aiOpsTick": {
+          "n": 60,
+          "ms": 26.637699000004886,
+          "max": 2.770784999999705
+        },
+        "aiSubmitTick": {
+          "n": 60,
+          "ms": 83.0622699999983,
+          "max": 37.598816000000625
+        },
+        "aiFederationPolitics": {
+          "n": 60,
+          "ms": 514.2361870000007,
+          "max": 129.92473699999937
+        },
+        "aiCoalitionDiplomacy": {
+          "n": 577,
+          "ms": 196.91144899998494,
+          "max": 11.966739999999845
+        },
+        "aiShipProduction": {
+          "n": 540,
+          "ms": 1602.6660699999923,
+          "max": 49.73817799999961
+        },
+        "aiTurn": {
+          "n": 600,
+          "ms": 5851.645489999984,
+          "max": 99.55335100000048
+        },
+        "monthTick": {
+          "n": 60,
+          "ms": 11199.95544500001,
+          "max": 534.815964999998
+        },
+        "aiNegotiate": {
+          "n": 28,
+          "ms": 514.75169799999,
+          "max": 72.45870699999796
+        },
+        "aiMilitaryCampaign": {
+          "n": 52,
+          "ms": 27.476316999998744,
+          "max": 5.5988519999991695
+        }
+      },
+      "finalSHA": "4f9403025f09d748b36b7651d4e26f095c5be70242101e0a5b6d5dabefe3cc38",
+      "finalRNG": 614691638
+    },
+    "byEmpire": {
+      "1": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 3,
+        "ships": 3,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 3,
+          "completed": 1,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 17,
+            "preparation-stage": 4,
+            "fleet-order": 3,
+            "ship-paid": 34,
+            "milestone-complete": 1,
+            "research-completed": 3,
+            "building-replacement": 2,
+            "plan-reassessed": 1
+          }
+        }
+      },
+      "2": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 5,
+        "ships": 1,
+        "goal": "science",
+        "progress": 0.3333333333333333,
+        "stats": {
+          "switches": 3,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 11,
+            "fleet-order": 3,
+            "ship-paid": 24,
+            "preparation-stage": 4,
+            "research-completed": 5,
+            "milestone-complete": 1
+          }
+        }
+      },
+      "3": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 4,
+        "ships": 17,
+        "goal": "regional",
+        "progress": 0,
+        "stats": {
+          "switches": 3,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 23,
+            "fleet-order": 6,
+            "ship-paid": 26,
+            "milestone-complete": 2,
+            "research-completed": 4,
+            "preparation-stage": 4,
+            "building-replacement": 1,
+            "campaign-reassessed": 1
+          }
+        }
+      },
+      "4": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 2,
+        "ships": 25,
+        "goal": "economy",
+        "progress": 1,
+        "stats": {
+          "switches": 0,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 1,
+            "building-paid": 14,
+            "fleet-order": 6,
+            "ship-paid": 37,
+            "building-replacement": 2,
+            "research-completed": 2,
+            "milestone-complete": 1
+          }
+        }
+      },
+      "5": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 4,
+        "ships": 16,
+        "goal": "trade",
+        "progress": 0,
+        "stats": {
+          "switches": 3,
+          "completed": 1,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 19,
+            "fleet-order": 5,
+            "preparation-stage": 3,
+            "ship-paid": 16,
+            "milestone-complete": 1,
+            "research-completed": 4,
+            "plan-reassessed": 1
+          }
+        }
+      },
+      "6": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 0,
+        "ships": 14,
+        "goal": "economy",
+        "progress": 1,
+        "stats": {
+          "switches": 2,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 3,
+            "building-paid": 30,
+            "fleet-order": 10,
+            "ship-paid": 12,
+            "preparation-stage": 2,
+            "diplomatic-proposal": 1,
+            "milestone-complete": 2,
+            "building-replacement": 3
+          }
+        }
+      },
+      "7": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 6,
+        "ships": 2,
+        "goal": "science",
+        "progress": 0,
+        "stats": {
+          "switches": 2,
+          "completed": 1,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 3,
+            "building-paid": 11,
+            "fleet-order": 20,
+            "preparation-stage": 4,
+            "ship-paid": 33,
+            "research-completed": 6,
+            "milestone-complete": 1,
+            "war-started": 1,
+            "building-replacement": 1,
+            "plan-reassessed": 1
+          }
+        }
+      },
+      "8": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 2,
+        "ships": 13,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 1,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 22,
+            "fleet-order": 6,
+            "diplomatic-proposal": 1,
+            "milestone-complete": 2,
+            "building-replacement": 6,
+            "ship-paid": 22,
+            "preparation-stage": 1,
+            "research-completed": 2
+          }
+        }
+      },
+      "9": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 4,
+        "techs": 3,
+        "ships": 30,
+        "goal": "regional",
+        "progress": 1,
+        "stats": {
+          "switches": 1,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 35,
+            "ship-paid": 31,
+            "fleet-order": 10,
+            "milestone-complete": 2,
+            "preparation-stage": 1,
+            "building-replacement": 4,
+            "research-completed": 3
+          }
+        }
+      }
+    },
+    "wars": [
+      {
+        "id": 1,
+        "sides": [
+          7,
+          3
+        ],
+        "ended": null,
+        "reason": "declaration",
+        "metrics": [
+          {
+            "rounds": 19,
+            "shipsLost": 15,
+            "shipsDestroyed": 8,
+            "damageDealt": 661.9756019952554,
+            "damageTaken": 906.5197590025195,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [],
+            "planets": []
+          },
+          {
+            "rounds": 19,
+            "shipsLost": 8,
+            "shipsDestroyed": 15,
+            "damageDealt": 906.5197590025195,
+            "damageTaken": 661.9756019952554,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [],
+            "planets": []
+          }
+        ]
+      }
+    ],
+    "federations": [
+      {
+        "id": 1,
+        "type": "bilimsel",
+        "members": [
+          2,
+          6,
+          8
+        ],
+        "history": [
+          {
+            "day": 1140,
+            "year": 2213,
+            "month": 3,
+            "event": "founded",
+            "type": "bilimsel",
+            "ballot": "economic"
+          },
+          {
+            "day": 1170,
+            "year": 2213,
+            "month": 4,
+            "event": "vote",
+            "kind": "inner",
+            "law": "savasOnay",
+            "passed": true,
+            "yes": 5.761,
+            "no": 0
+          },
+          {
+            "day": 1230,
+            "year": 2213,
+            "month": 6,
+            "event": "vote",
+            "kind": "inner",
+            "law": "refah",
+            "passed": true,
+            "yes": 5.792,
+            "no": 0
+          },
+          {
+            "day": 1410,
+            "year": 2213,
+            "month": 12,
+            "event": "vote",
+            "kind": "basic",
+            "law": "ticaret",
+            "passed": true,
+            "yes": 5.531,
+            "no": 0
+          },
+          {
+            "day": 1590,
+            "year": 2214,
+            "month": 6,
+            "event": "vote",
+            "kind": "basic",
+            "law": "filo",
+            "passed": false,
+            "yes": 0,
+            "no": 5.487,
+            "retry": {
+              "context": "[[2,6,8],\"bilimsel\",\"[\\\"bilimsel\\\",{\\\"defense\\\":\\\"vote\\\",\\\"offense\\\":\\\"vote\\\",\\\"admission\\\":\\\"allies\\\",\\\"ballot\\\":\\\"economic\\\"},[\\\"refah\\\",\\\"savasOnay\\\",\\\"ticaret\\\"]]\",[\"refah\",\"savasOnay\",\"ticaret\"]]",
+              "modern": true,
+              "eligible": [
+                2,
+                6,
+                8
+              ],
+              "yes": [],
+              "no": [
+                2,
+                6,
+                8
+              ],
+              "reasons": {
+                "2": "Ret · Kişilik ve yasa yararı +0.12 · Önerene güven · Birlik uyumu +0.05 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.41 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "6": "Ret · Kişilik ve yasa yararı +0.04 · Önerene güven · Birlik uyumu +0.05 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.31 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "8": "Ret · Kişilik ve yasa yararı +0.06 · Önerene güven · Birlik uyumu +0.05 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.26 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "commerce": {
+      "2": {
+        "loaded": {
+          "min": 112,
+          "tuk": 29.8
+        },
+        "sent": {
+          "min": 112,
+          "tuk": 14.9
+        },
+        "received": {
+          "ala": 45,
+          "tuk": 61.6,
+          "min": 15.9
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 8,
+        "lastDay": 1751
+      },
+      "6": {
+        "loaded": {
+          "ene": 64,
+          "ala": 76.2
+        },
+        "sent": {
+          "ene": 64,
+          "ala": 64.3
+        },
+        "received": {
+          "ala": 32,
+          "min": 63.2,
+          "yiy": 15.9
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 9,
+        "lastDay": 1763
+      },
+      "8": {
+        "loaded": {
+          "ala": 77,
+          "tuk": 61.6,
+          "min": 95.00000000000001,
+          "yiy": 31.8
+        },
+        "sent": {
+          "ala": 77,
+          "tuk": 61.6,
+          "min": 79.10000000000001,
+          "yiy": 15.9
+        },
+        "received": {
+          "ene": 64,
+          "min": 112,
+          "ala": 64.3,
+          "tuk": 14.9
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 17,
+        "lastDay": 1763
+      }
+    },
+    "subjects": [],
+    "finalResources": {
+      "min": 5140.430723719576,
+      "ene": 23589.736557616907,
+      "yiy": 9509.860127953987,
+      "ala": 623.6488393504128,
+      "tuk": 8729.92710919944,
+      "etk": 4472.588209905796
+    }
+  },
+  {
+    "summary": {
+      "seed": 23,
+      "months": 60,
+      "size": "ulu",
+      "ai": 9,
+      "initialHash": "39756d329614ae397a2271631f740c5aed3b309eb3dfc0d973d043203caa4ab0",
+      "ms": 9397,
+      "initialSystems": 100,
+      "actualInitialAI": 9,
+      "crisisByResource": {
+        "ene": 1,
+        "min": 3,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 0,
+        "ara": 0,
+        "etk": 0
+      },
+      "criticalEmpireMonths": 4,
+      "zeroStockMonths": 0,
+      "initialColonies": 9,
+      "finalColonies": 18,
+      "finalShips": 134,
+      "finalTechs": 27,
+      "deadAI": 0,
+      "vassals": 0,
+      "planSwitches": 22,
+      "plansCompleted": 13,
+      "plansFailed": 3,
+      "firstInvalid": null,
+      "heapMB": 98.16720581054688,
+      "counts": {
+        "queueShip:ok": 269,
+        "fleetLost:disband": 7,
+        "shipsLost:disband:3": 1,
+        "hullsRemoved:disband": 7,
+        "shipsLost:disband:6": 1,
+        "shipsLost:disband:7": 2,
+        "queueBuilding:ok": 126,
+        "aiMove:ok": 122,
+        "queueBuilding:false": 294,
+        "shipsLost:disband:9": 2,
+        "orderMove:ok": 752,
+        "queueDemolish:ok": 19,
+        "startStruct:ok": 19,
+        "fleetLost:colonization": 9,
+        "shipsLost:colonization:3": 1,
+        "hullsRemoved:colonization": 9,
+        "shipsLost:disband:4": 1,
+        "aiNegotiate:kabul": 12,
+        "shipsLost:colonization:1": 1,
+        "shipsLost:colonization:6": 1,
+        "shipsLost:colonization:7": 1,
+        "shipsLost:colonization:9": 2,
+        "fleetLost:combat": 21,
+        "shipsLost:combat:4": 6,
+        "hullsRemoved:combat": 21,
+        "shipsLost:combat:9": 3,
+        "shipsLost:colonization:5": 1,
+        "shipsLost:colonization:2": 1,
+        "shipsLost:colonization:8": 1,
+        "shipsLost:combat:7": 1,
+        "shipsLost:combat:3": 6,
+        "orderMove:false": 2,
+        "shipsLost:combat:2": 2,
+        "shipsLost:combat:0": 1,
+        "aiMove:false": 13,
+        "declareWar:true": 1,
+        "aiNegotiate:karsi-kabul": 2,
+        "shipsLost:combat:6": 1,
+        "shipsLost:combat:1": 1,
+        "aiNegotiate:karsi-red": 2
+      },
+      "timing": {
+        "aiEconomyPlan": {
+          "n": 9391,
+          "ms": 491.6740289999825,
+          "max": 4.5256030000000464
+        },
+        "aiOpsTick": {
+          "n": 60,
+          "ms": 15.037016999999878,
+          "max": 1.5787650000002031
+        },
+        "aiSubmitTick": {
+          "n": 60,
+          "ms": 31.549805999994987,
+          "max": 2.5657309999987774
+        },
+        "aiFederationPolitics": {
+          "n": 60,
+          "ms": 243.30782400000157,
+          "max": 8.744808000000148
+        },
+        "aiCoalitionDiplomacy": {
+          "n": 577,
+          "ms": 59.516147000019146,
+          "max": 1.0514119999998002
+        },
+        "aiShipProduction": {
+          "n": 540,
+          "ms": 582.181811000012,
+          "max": 8.100999000000229
+        },
+        "aiTurn": {
+          "n": 600,
+          "ms": 2256.5198480000145,
+          "max": 30.859330999999656
+        },
+        "monthTick": {
+          "n": 60,
+          "ms": 4313.597740999998,
+          "max": 214.3114720000001
+        },
+        "aiNegotiate": {
+          "n": 16,
+          "ms": 277.83553999999754,
+          "max": 27.59411099999852
+        },
+        "aiMilitaryCampaign": {
+          "n": 47,
+          "ms": 21.688012000001436,
+          "max": 3.336779999999635
+        }
+      },
+      "finalSHA": "394bcc4e6ad0d57e25296bc6ad3b1b5c870de8575a898f6559cc8055db17b347",
+      "finalRNG": 1930482352
+    },
+    "byEmpire": {
+      "1": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 3,
+        "ships": 21,
+        "goal": "regional",
+        "progress": 0,
+        "stats": {
+          "switches": 3,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 11,
+            "ship-paid": 23,
+            "fleet-order": 6,
+            "research-completed": 3,
+            "preparation-stage": 5,
+            "diplomatic-proposal": 4,
+            "milestone-complete": 1,
+            "building-replacement": 1
+          }
+        }
+      },
+      "2": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 1,
+        "ships": 29,
+        "goal": "economy",
+        "progress": 0.5023325599999993,
+        "stats": {
+          "switches": 2,
+          "completed": 1,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 3,
+            "building-paid": 23,
+            "fleet-order": 7,
+            "ship-paid": 26,
+            "milestone-complete": 1,
+            "preparation-stage": 2,
+            "building-replacement": 5,
+            "research-completed": 1,
+            "plan-reassessed": 1
+          }
+        }
+      },
+      "3": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 2,
+        "ships": 16,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 3,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "ship-paid": 38,
+            "fleet-order": 12,
+            "building-replacement": 2,
+            "building-paid": 15,
+            "preparation-stage": 5,
+            "milestone-complete": 2,
+            "war-started": 1,
+            "research-completed": 2
+          }
+        }
+      },
+      "4": {
+        "criticalMonths": 1,
+        "longestCriticalRun": 1,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {
+          "min": 1
+        },
+        "colonies": 1,
+        "techs": 4,
+        "ships": 0,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 4,
+          "completed": 2,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 5,
+            "building-paid": 8,
+            "preparation-stage": 4,
+            "research-completed": 4,
+            "ship-paid": 33,
+            "milestone-complete": 2,
+            "plan-reassessed": 1,
+            "diplomatic-proposal": 2
+          }
+        }
+      },
+      "5": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 5,
+        "ships": 3,
+        "goal": "recovery",
+        "progress": 0,
+        "stats": {
+          "switches": 3,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 16,
+            "ship-paid": 39,
+            "fleet-order": 11,
+            "milestone-complete": 2,
+            "preparation-stage": 5,
+            "research-completed": 5
+          }
+        }
+      },
+      "6": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 3,
+        "ships": 4,
+        "goal": "recovery",
+        "progress": 0,
+        "stats": {
+          "switches": 3,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "ship-paid": 27,
+            "fleet-order": 8,
+            "building-paid": 19,
+            "diplomatic-proposal": 6,
+            "preparation-stage": 3,
+            "milestone-complete": 1,
+            "research-completed": 3,
+            "building-replacement": 3
+          }
+        }
+      },
+      "7": {
+        "criticalMonths": 3,
+        "longestCriticalRun": 2,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {
+          "ene": 1,
+          "min": 2
+        },
+        "colonies": 2,
+        "techs": 3,
+        "ships": 5,
+        "goal": "science",
+        "progress": 1,
+        "stats": {
+          "switches": 1,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 7,
+            "fleet-order": 4,
+            "ship-paid": 9,
+            "preparation-stage": 4,
+            "milestone-complete": 2,
+            "research-completed": 3
+          }
+        }
+      },
+      "8": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 4,
+        "ships": 25,
+        "goal": "science",
+        "progress": 1,
+        "stats": {
+          "switches": 0,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 1,
+            "building-paid": 11,
+            "ship-paid": 21,
+            "fleet-order": 10,
+            "preparation-stage": 1,
+            "research-completed": 4,
+            "milestone-complete": 1,
+            "building-replacement": 2
+          }
+        }
+      },
+      "9": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 2,
+        "ships": 31,
+        "goal": "economy",
+        "progress": 0,
+        "stats": {
+          "switches": 3,
+          "completed": 1,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 4,
+            "preparation-stage": 3,
+            "building-replacement": 1,
+            "fleet-order": 19,
+            "building-paid": 16,
+            "ship-paid": 48,
+            "milestone-complete": 1,
+            "research-completed": 2,
+            "plan-reassessed": 1
+          }
+        }
+      }
+    },
+    "wars": [
+      {
+        "id": 1,
+        "sides": [
+          3,
+          1
+        ],
+        "ended": null,
+        "reason": "declaration",
+        "metrics": [
+          {
+            "rounds": 13,
+            "shipsLost": 10,
+            "shipsDestroyed": 2,
+            "damageDealt": 318.3872821330697,
+            "damageTaken": 785.742005771972,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [],
+            "planets": []
+          },
+          {
+            "rounds": 13,
+            "shipsLost": 2,
+            "shipsDestroyed": 10,
+            "damageDealt": 785.742005771972,
+            "damageTaken": 318.3872821330697,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [],
+            "planets": []
+          }
+        ]
+      }
+    ],
+    "federations": [],
+    "commerce": {
+      "5": {
+        "loaded": {
+          "min": 39.2,
+          "ala": 97.70000000000002
+        },
+        "sent": {
+          "min": 39.2,
+          "ala": 97.70000000000002
+        },
+        "received": {
+          "ene": 63.6,
+          "min": 111.30000000000001
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 11,
+        "lastDay": 1784.5
+      },
+      "7": {
+        "loaded": {
+          "ene": 63.6,
+          "min": 111.30000000000001
+        },
+        "sent": {
+          "ene": 63.6,
+          "min": 111.30000000000001
+        },
+        "received": {
+          "min": 39.2,
+          "ala": 97.70000000000002
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 11,
+        "lastDay": 1784
+      }
+    },
+    "subjects": [],
+    "finalResources": {
+      "min": 1578.6228492783473,
+      "ene": 23005.65949764635,
+      "yiy": 8367.432734565655,
+      "ala": 1026.9841441353933,
+      "tuk": 7506.18323249991,
+      "etk": 5258.9489197830635
+    }
+  },
+  {
+    "summary": {
+      "seed": 404,
+      "months": 120,
+      "size": "ulu",
+      "ai": 9,
+      "initialHash": "2f9beac638dd7f3624f98baacd691a2965c98a64517fb741967e1433e0db9f0c",
+      "ms": 42508,
+      "initialSystems": 100,
+      "actualInitialAI": 9,
+      "crisisByResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 15,
+        "ala": 2,
+        "tuk": 63,
+        "ara": 0,
+        "etk": 0
+      },
+      "criticalEmpireMonths": 78,
+      "zeroStockMonths": 70,
+      "initialColonies": 9,
+      "finalColonies": 28,
+      "finalShips": 241,
+      "finalTechs": 84,
+      "deadAI": 1,
+      "vassals": 0,
+      "planSwitches": 42,
+      "plansCompleted": 26,
+      "plansFailed": 7,
+      "firstInvalid": null,
+      "heapMB": 123.6880874633789,
+      "counts": {
+        "queueShip:ok": 628,
+        "fleetLost:disband": 5,
+        "shipsLost:disband:2": 1,
+        "hullsRemoved:disband": 5,
+        "shipsLost:disband:3": 1,
+        "shipsLost:disband:7": 1,
+        "queueBuilding:ok": 336,
+        "aiMove:ok": 297,
+        "queueBuilding:false": 951,
+        "orderMove:ok": 2360,
+        "fleetLost:colonization": 19,
+        "shipsLost:colonization:3": 3,
+        "hullsRemoved:colonization": 19,
+        "shipsLost:colonization:4": 2,
+        "shipsLost:colonization:2": 1,
+        "shipsLost:colonization:9": 3,
+        "shipsLost:colonization:6": 2,
+        "shipsLost:colonization:7": 1,
+        "startStruct:ok": 60,
+        "shipsLost:colonization:1": 2,
+        "shipsLost:colonization:5": 2,
+        "aiNegotiate:kabul": 70,
+        "shipsLost:colonization:8": 3,
+        "fleetLost:combat": 37,
+        "shipsLost:combat:7": 9,
+        "hullsRemoved:combat": 37,
+        "shipsLost:disband:4": 2,
+        "shipsLost:combat:4": 1,
+        "aiNegotiate:bekle": 82,
+        "shipsLost:combat:2": 13,
+        "queueDemolish:ok": 54,
+        "shipsLost:combat:9": 2,
+        "aiNegotiate:red": 9,
+        "fleetLost:rule": 58,
+        "shipsLost:rule:10": 53,
+        "hullsRemoved:rule": 107,
+        "aiMove:false": 35,
+        "declareWar:false": 3,
+        "declareWar:true": 4,
+        "shipsLost:combat:1": 3,
+        "shipsLost:combat:0": 1,
+        "orderMove:false": 29,
+        "shipsLost:combat:8": 2,
+        "applyInternalPolicy:ok": 6,
+        "fleetLost:attrition": 2,
+        "shipsLost:attrition:7": 1,
+        "hullsRemoved:attrition": 2,
+        "shipsLost:combat:5": 2,
+        "shipsLost:combat:3": 4,
+        "shipsLost:rule:3": 1,
+        "shipsLost:rule:7": 1,
+        "makePeace": 1,
+        "shipsLost:rule:1": 3,
+        "shipsLost:attrition:9": 1
+      },
+      "timing": {
+        "aiEconomyPlan": {
+          "n": 21549,
+          "ms": 4741.918176000358,
+          "max": 128.79657200000293
+        },
+        "aiOpsTick": {
+          "n": 120,
+          "ms": 54.63467200001742,
+          "max": 5.0341389999994135
+        },
+        "aiSubmitTick": {
+          "n": 120,
+          "ms": 307.8817419999981,
+          "max": 225.7405859999999
+        },
+        "aiFederationPolitics": {
+          "n": 120,
+          "ms": 832.8324419999993,
+          "max": 82.8388470000009
+        },
+        "aiCoalitionDiplomacy": {
+          "n": 1240,
+          "ms": 200.3845849999651,
+          "max": 15.834599000001617
+        },
+        "aiShipProduction": {
+          "n": 1116,
+          "ms": 2873.894715999989,
+          "max": 80.71594600000026
+        },
+        "aiTurn": {
+          "n": 1236,
+          "ms": 14260.525573000028,
+          "max": 742.257276999997
+        },
+        "monthTick": {
+          "n": 120,
+          "ms": 23224.877790999974,
+          "max": 1084.4319670000004
+        },
+        "aiNegotiate": {
+          "n": 161,
+          "ms": 4277.263924000003,
+          "max": 526.4462289999974
+        },
+        "aiMilitaryCampaign": {
+          "n": 142,
+          "ms": 105.3581719999911,
+          "max": 7.976889999998093
+        }
+      },
+      "finalSHA": "388196cfe0f0860b3e643ddbc3199e8d236c80ee8223da5ca4d715634f677fd2",
+      "finalRNG": -1458142310
+    },
+    "byEmpire": {
+      "1": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 0,
+        "techs": 8,
+        "ships": 0,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 5,
+          "completed": 4,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 6,
+            "building-paid": 40,
+            "fleet-order": 21,
+            "diplomatic-proposal": 2,
+            "ship-paid": 63,
+            "research-completed": 8,
+            "milestone-complete": 4,
+            "building-replacement": 4,
+            "preparation-stage": 5,
+            "emergency-defense": 1
+          }
+        }
+      },
+      "2": {
+        "criticalMonths": 63,
+        "longestCriticalRun": 63,
+        "run": 63,
+        "zeroMonths": 60,
+        "resources": {
+          "tuk": 63,
+          "yiy": 2
+        },
+        "colonies": 2,
+        "techs": 5,
+        "ships": 0,
+        "goal": "recovery",
+        "progress": 0,
+        "stats": {
+          "switches": 3,
+          "completed": 0,
+          "failed": 3,
+          "actions": {
+            "objective-selected": 4,
+            "ship-paid": 21,
+            "preparation-stage": 3,
+            "research-completed": 5,
+            "building-paid": 6,
+            "plan-reassessed": 3
+          }
+        }
+      },
+      "3": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 5,
+        "techs": 10,
+        "ships": 50,
+        "goal": "regional",
+        "progress": 1,
+        "stats": {
+          "switches": 5,
+          "completed": 3,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 6,
+            "building-paid": 64,
+            "fleet-order": 35,
+            "ship-paid": 86,
+            "milestone-complete": 3,
+            "research-completed": 10,
+            "preparation-stage": 5,
+            "plan-reassessed": 1,
+            "building-replacement": 22,
+            "war-started": 1
+          }
+        }
+      },
+      "4": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 5,
+        "ships": 22,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 6,
+          "completed": 2,
+          "failed": 2,
+          "actions": {
+            "objective-selected": 7,
+            "building-paid": 38,
+            "fleet-order": 16,
+            "diplomatic-proposal": 1,
+            "preparation-stage": 6,
+            "ship-paid": 41,
+            "milestone-complete": 2,
+            "plan-reassessed": 2,
+            "research-completed": 5,
+            "building-replacement": 1
+          }
+        }
+      },
+      "5": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 14,
+        "ships": 20,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 5,
+          "completed": 4,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 6,
+            "building-paid": 35,
+            "fleet-order": 22,
+            "preparation-stage": 6,
+            "ship-paid": 91,
+            "research-completed": 14,
+            "milestone-complete": 4,
+            "building-replacement": 4
+          }
+        }
+      },
+      "6": {
+        "criticalMonths": 2,
+        "longestCriticalRun": 2,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {
+          "ala": 2
+        },
+        "colonies": 3,
+        "techs": 8,
+        "ships": 36,
+        "goal": "economy",
+        "progress": 0,
+        "stats": {
+          "switches": 4,
+          "completed": 4,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 5,
+            "building-paid": 22,
+            "fleet-order": 23,
+            "ship-paid": 60,
+            "milestone-complete": 4,
+            "research-completed": 8,
+            "preparation-stage": 4
+          }
+        }
+      },
+      "7": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 4,
+        "techs": 11,
+        "ships": 49,
+        "goal": "regional",
+        "progress": 1,
+        "stats": {
+          "switches": 4,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 5,
+            "building-paid": 39,
+            "fleet-order": 27,
+            "ship-paid": 93,
+            "preparation-stage": 11,
+            "building-replacement": 6,
+            "war-started": 3,
+            "research-completed": 11,
+            "milestone-complete": 2,
+            "campaign-reassessed": 1,
+            "internal-crisis": 1
+          }
+        }
+      },
+      "8": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 5,
+        "ships": 46,
+        "goal": "regional",
+        "progress": 0,
+        "stats": {
+          "switches": 3,
+          "completed": 3,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 50,
+            "ship-paid": 45,
+            "fleet-order": 15,
+            "milestone-complete": 3,
+            "building-replacement": 14,
+            "preparation-stage": 3,
+            "research-completed": 5,
+            "internal-crisis": 5,
+            "diplomatic-proposal": 5
+          }
+        }
+      },
+      "9": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 4,
+        "techs": 18,
+        "ships": 18,
+        "goal": "influence",
+        "progress": 0,
+        "stats": {
+          "switches": 6,
+          "completed": 3,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 7,
+            "building-paid": 39,
+            "fleet-order": 51,
+            "ship-paid": 122,
+            "preparation-stage": 6,
+            "research-completed": 18,
+            "milestone-complete": 3,
+            "building-replacement": 2
+          }
+        }
+      },
+      "11": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 1,
+        "techs": 0,
+        "ships": 0,
+        "goal": "economy",
+        "progress": 1,
+        "stats": {
+          "switches": 0,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 1,
+            "building-paid": 3,
+            "milestone-complete": 1
+          }
+        }
+      },
+      "12": {
+        "criticalMonths": 13,
+        "longestCriticalRun": 13,
+        "run": 13,
+        "zeroMonths": 10,
+        "resources": {
+          "yiy": 13
+        },
+        "colonies": 1,
+        "techs": 0,
+        "ships": 0,
+        "goal": "economy",
+        "progress": 0,
+        "stats": {
+          "switches": 1,
+          "completed": 0,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 2,
+            "preparation-stage": 1,
+            "plan-reassessed": 1
+          }
+        }
+      }
+    },
+    "wars": [
+      {
+        "id": 1,
+        "sides": [
+          7,
+          1
+        ],
+        "ended": 2010,
+        "reason": "declaration",
+        "metrics": [
+          {
+            "rounds": 93,
+            "shipsLost": 22,
+            "shipsDestroyed": 43,
+            "damageDealt": 2889.796504552535,
+            "damageTaken": 1640.2978174886696,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [
+              "43"
+            ],
+            "planets": []
+          },
+          {
+            "rounds": 93,
+            "shipsLost": 43,
+            "shipsDestroyed": 22,
+            "damageDealt": 1640.2978174886696,
+            "damageTaken": 2889.796504552535,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [],
+            "planets": []
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "sides": [
+          3,
+          1
+        ],
+        "ended": 2490,
+        "reason": "declaration",
+        "metrics": [
+          {
+            "rounds": 151,
+            "shipsLost": 4,
+            "shipsDestroyed": 16,
+            "damageDealt": 1155,
+            "damageTaken": 263.66937287726216,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [
+              "31",
+              "8"
+            ],
+            "planets": [
+              "8:0"
+            ]
+          },
+          {
+            "rounds": 151,
+            "shipsLost": 16,
+            "shipsDestroyed": 4,
+            "damageDealt": 263.66937287726216,
+            "damageTaken": 1155,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [],
+            "planets": []
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "sides": [
+          7,
+          1
+        ],
+        "ended": 2580,
+        "reason": "declaration",
+        "metrics": [
+          {
+            "rounds": 124,
+            "shipsLost": 2,
+            "shipsDestroyed": 1,
+            "damageDealt": 70,
+            "damageTaken": 46.664721750106246,
+            "groundLost": 0.6867155167486914,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 3.588,
+            "systems": [
+              "25",
+              "33"
+            ],
+            "planets": [
+              "25:0",
+              "33:4"
+            ]
+          },
+          {
+            "rounds": 124,
+            "shipsLost": 1,
+            "shipsDestroyed": 2,
+            "damageDealt": 46.664721750106246,
+            "damageTaken": 70,
+            "groundLost": 0,
+            "groundDestroyed": 0.6867155167486914,
+            "garrisonLost": 3.588,
+            "garrisonReduced": 0,
+            "systems": [],
+            "planets": []
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "sides": [
+          7,
+          3
+        ],
+        "ended": null,
+        "reason": "declaration",
+        "metrics": [
+          {
+            "rounds": 6,
+            "shipsLost": 5,
+            "shipsDestroyed": 2,
+            "damageDealt": 178.27863060336577,
+            "damageTaken": 402.5,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [],
+            "planets": []
+          },
+          {
+            "rounds": 6,
+            "shipsLost": 2,
+            "shipsDestroyed": 5,
+            "damageDealt": 402.5,
+            "damageTaken": 178.27863060336577,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [],
+            "planets": []
+          }
+        ]
+      }
+    ],
+    "federations": [
+      {
+        "id": 1,
+        "type": "bilimsel",
+        "members": [
+          9,
+          4,
+          2,
+          5
+        ],
+        "history": [
+          {
+            "day": 1620,
+            "year": 2214,
+            "month": 7,
+            "event": "founded",
+            "type": "bilimsel",
+            "ballot": "economic"
+          },
+          {
+            "day": 1650,
+            "year": 2214,
+            "month": 8,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": true,
+            "yes": 3.349,
+            "no": 2
+          },
+          {
+            "day": 1650,
+            "year": 2214,
+            "month": 8,
+            "event": "join",
+            "target": 2
+          },
+          {
+            "day": 1650,
+            "year": 2214,
+            "month": 8,
+            "event": "motion",
+            "kind": "admit",
+            "target": 2
+          },
+          {
+            "day": 1680,
+            "year": 2214,
+            "month": 9,
+            "event": "vote",
+            "kind": "inner",
+            "law": "serbest",
+            "passed": true,
+            "yes": 6.557,
+            "no": 0
+          },
+          {
+            "day": 1710,
+            "year": 2214,
+            "month": 10,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": false,
+            "yes": 3.951,
+            "no": 2.619
+          },
+          {
+            "day": 1800,
+            "year": 2215,
+            "month": 1,
+            "event": "vote",
+            "kind": "inner",
+            "law": "savasOnay",
+            "passed": true,
+            "yes": 6.623,
+            "no": 0
+          },
+          {
+            "day": 1800,
+            "year": 2215,
+            "month": 1,
+            "event": "vote",
+            "kind": "inner",
+            "law": "refah",
+            "passed": true,
+            "yes": 6.623,
+            "no": 0
+          },
+          {
+            "day": 1980,
+            "year": 2215,
+            "month": 7,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": true,
+            "yes": 5.445,
+            "no": 1.092
+          },
+          {
+            "day": 1980,
+            "year": 2215,
+            "month": 7,
+            "event": "join",
+            "target": 5
+          },
+          {
+            "day": 1980,
+            "year": 2215,
+            "month": 7,
+            "event": "motion",
+            "kind": "admit",
+            "target": 5
+          },
+          {
+            "day": 2010,
+            "year": 2215,
+            "month": 8,
+            "event": "vote",
+            "kind": "inner",
+            "law": "sivilFon",
+            "passed": true,
+            "yes": 8.48,
+            "no": 0
+          },
+          {
+            "day": 2190,
+            "year": 2216,
+            "month": 2,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": false,
+            "yes": 2,
+            "no": 6.335
+          },
+          {
+            "day": 2370,
+            "year": 2216,
+            "month": 8,
+            "event": "vote",
+            "kind": "basic",
+            "law": "filo",
+            "passed": false,
+            "yes": 0,
+            "no": 8.523,
+            "retry": {
+              "context": "[[1,2,4,5,9],\"bilimsel\",\"[\\\"bilimsel\\\",{\\\"defense\\\":\\\"vote\\\",\\\"offense\\\":\\\"vote\\\",\\\"admission\\\":\\\"allies\\\",\\\"ballot\\\":\\\"economic\\\"},[\\\"refah\\\",\\\"savasOnay\\\",\\\"serbest\\\",\\\"sivilFon\\\"]]\",[\"refah\",\"savasOnay\",\"serbest\",\"sivilFon\"]]",
+              "modern": true,
+              "eligible": [
+                9,
+                1,
+                4,
+                2,
+                5
+              ],
+              "yes": [],
+              "no": [
+                9,
+                1,
+                4,
+                2,
+                5
+              ],
+              "reasons": {
+                "1": "Ret · Kişilik ve yasa yararı +0.00 · Önerene güven · Birlik uyumu +0.09 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.28 · Altı aylık bütçe karşılanabilir · Δenerji -3.85 · Δalaşım -4.00 · Δbilim 0.00",
+                "2": "Ret · Kişilik ve yasa yararı +0.11 · Önerene güven · Birlik uyumu +0.09 · Gerçek ekonomik hazırlık -0.30 · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.58 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "4": "Ret · Kişilik ve yasa yararı +0.06 · Önerene güven · Birlik uyumu +0.09 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.36 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "5": "Ret · Kişilik ve yasa yararı +0.03 · Önerene güven · Birlik uyumu +0.09 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.24 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "9": "Ret · Kişilik ve yasa yararı +0.00 · Önerene güven · Birlik uyumu +0.09 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.21 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00"
+              }
+            }
+          },
+          {
+            "day": 2730,
+            "year": 2217,
+            "month": 8,
+            "event": "vote",
+            "kind": "basic",
+            "law": "ticaret",
+            "passed": true,
+            "yes": 6.666,
+            "no": 0
+          },
+          {
+            "day": 2880,
+            "year": 2218,
+            "month": 1,
+            "event": "vote",
+            "kind": "inner",
+            "law": "uyumProgrami",
+            "passed": true,
+            "yes": 5.508,
+            "no": 1.036
+          },
+          {
+            "day": 3060,
+            "year": 2218,
+            "month": 7,
+            "event": "vote",
+            "kind": "basic",
+            "law": "savunma",
+            "passed": false,
+            "yes": 2,
+            "no": 4.647,
+            "retry": {
+              "context": "[[2,4,5,9],\"bilimsel\",\"[\\\"bilimsel\\\",{\\\"defense\\\":\\\"vote\\\",\\\"offense\\\":\\\"vote\\\",\\\"admission\\\":\\\"allies\\\",\\\"ballot\\\":\\\"economic\\\"},[\\\"refah\\\",\\\"savasOnay\\\",\\\"serbest\\\",\\\"sivilFon\\\",\\\"ticaret\\\",\\\"uyumProgrami\\\"]]\",[\"refah\",\"savasOnay\",\"serbest\",\"sivilFon\",\"ticaret\",\"uyumProgrami\"]]",
+              "modern": true,
+              "eligible": [
+                9,
+                4,
+                2,
+                5
+              ],
+              "yes": [
+                5
+              ],
+              "no": [
+                9,
+                4,
+                2
+              ],
+              "reasons": {
+                "2": "Ret · Kişilik ve yasa yararı +0.12 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Toparlanma planı: yeni otomatik savaş yükümlülüğü -0.35 · Yeni savunma görevi için altı aylık sefer bütçesi yetersiz -0.40",
+                "4": "Ret · Kişilik ve yasa yararı +0.06 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Toparlanma planı: yeni otomatik savaş yükümlülüğü -0.35",
+                "5": "Destek · Kişilik ve yasa yararı +0.03 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef",
+                "9": "Ret · Kişilik ve yasa yararı +0.00 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Toparlanma planı: yeni otomatik savaş yükümlülüğü -0.35"
+              }
+            }
+          },
+          {
+            "day": 3090,
+            "year": 2218,
+            "month": 8,
+            "event": "vote",
+            "kind": "inner",
+            "law": "patentOzerk",
+            "passed": true,
+            "yes": 5.57,
+            "no": 1.035
+          },
+          {
+            "day": 3270,
+            "year": 2219,
+            "month": 2,
+            "event": "vote",
+            "kind": "basic",
+            "law": "savunma",
+            "passed": false,
+            "yes": 1.818,
+            "no": 4.793,
+            "retry": {
+              "context": "[[2,4,5,9],\"bilimsel\",\"[\\\"bilimsel\\\",{\\\"defense\\\":\\\"vote\\\",\\\"offense\\\":\\\"vote\\\",\\\"admission\\\":\\\"allies\\\",\\\"ballot\\\":\\\"economic\\\"},[\\\"patentOzerk\\\",\\\"refah\\\",\\\"savasOnay\\\",\\\"serbest\\\",\\\"sivilFon\\\",\\\"ticaret\\\",\\\"uyumProgrami\\\"]]\",[\"patentOzerk\",\"refah\",\"savasOnay\",\"serbest\",\"sivilFon\",\"ticaret\",\"uyumProgrami\"]]",
+              "modern": true,
+              "eligible": [
+                9,
+                4,
+                2,
+                5
+              ],
+              "yes": [
+                9
+              ],
+              "no": [
+                4,
+                2,
+                5
+              ],
+              "reasons": {
+                "2": "Ret · Kişilik ve yasa yararı +0.12 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Toparlanma planı: yeni otomatik savaş yükümlülüğü -0.35 · Yeni savunma görevi için altı aylık sefer bütçesi yetersiz -0.40",
+                "4": "Ret · Kişilik ve yasa yararı +0.06 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Toparlanma planı: yeni otomatik savaş yükümlülüğü -0.35",
+                "5": "Ret · Kişilik ve yasa yararı +0.03 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Toparlanma planı: yeni otomatik savaş yükümlülüğü -0.35",
+                "9": "Destek · Kişilik ve yasa yararı +0.00 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef"
+              }
+            }
+          },
+          {
+            "day": 3450,
+            "year": 2219,
+            "month": 8,
+            "event": "vote",
+            "kind": "basic",
+            "law": "arastirma",
+            "passed": true,
+            "yes": 6.58,
+            "no": 0
+          }
+        ]
+      }
+    ],
+    "commerce": {
+      "3": {
+        "loaded": {
+          "min": 344.4000000000001,
+          "ala": 42
+        },
+        "sent": {
+          "min": 344.4000000000001,
+          "ala": 42
+        },
+        "received": {
+          "ala": 284.8,
+          "ene": 159.00000000000003
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 28,
+        "lastDay": 3587
+      },
+      "5": {
+        "loaded": {
+          "ala": 284.8,
+          "ene": 159.00000000000003
+        },
+        "sent": {
+          "ala": 284.8,
+          "ene": 159.00000000000003
+        },
+        "received": {
+          "min": 344.4000000000001,
+          "ala": 42
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 28,
+        "lastDay": 3587
+      }
+    },
+    "subjects": [],
+    "finalResources": {
+      "min": 18041.26921771331,
+      "ene": 73064.53939671112,
+      "yiy": 17644.575731849163,
+      "ala": 2327.2359119926496,
+      "tuk": 15012.591278612092,
+      "etk": 4807.796684445266
+    }
+  },
+  {
+    "summary": {
+      "seed": 404,
+      "months": 60,
+      "size": "ulu",
+      "ai": 9,
+      "initialHash": "2f9beac638dd7f3624f98baacd691a2965c98a64517fb741967e1433e0db9f0c",
+      "ms": 13588,
+      "initialSystems": 100,
+      "actualInitialAI": 9,
+      "crisisByResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "ala": 2,
+        "tuk": 3,
+        "ara": 0,
+        "etk": 0
+      },
+      "criticalEmpireMonths": 5,
+      "zeroStockMonths": 0,
+      "initialColonies": 9,
+      "finalColonies": 25,
+      "finalShips": 146,
+      "finalTechs": 34,
+      "deadAI": 0,
+      "vassals": 0,
+      "planSwitches": 18,
+      "plansCompleted": 13,
+      "plansFailed": 2,
+      "firstInvalid": null,
+      "heapMB": 93.42855072021484,
+      "counts": {
+        "queueShip:ok": 263,
+        "fleetLost:disband": 5,
+        "shipsLost:disband:2": 1,
+        "hullsRemoved:disband": 5,
+        "shipsLost:disband:3": 1,
+        "shipsLost:disband:7": 1,
+        "queueBuilding:ok": 164,
+        "aiMove:ok": 129,
+        "queueBuilding:false": 242,
+        "orderMove:ok": 985,
+        "fleetLost:colonization": 16,
+        "shipsLost:colonization:3": 2,
+        "hullsRemoved:colonization": 16,
+        "shipsLost:colonization:4": 2,
+        "shipsLost:colonization:2": 1,
+        "shipsLost:colonization:9": 2,
+        "shipsLost:colonization:6": 2,
+        "shipsLost:colonization:7": 1,
+        "startStruct:ok": 20,
+        "shipsLost:colonization:1": 2,
+        "shipsLost:colonization:5": 1,
+        "aiNegotiate:kabul": 26,
+        "shipsLost:colonization:8": 3,
+        "fleetLost:combat": 25,
+        "shipsLost:combat:7": 6,
+        "hullsRemoved:combat": 25,
+        "shipsLost:disband:4": 2,
+        "shipsLost:combat:4": 1,
+        "aiNegotiate:bekle": 38,
+        "shipsLost:combat:2": 10,
+        "queueDemolish:ok": 14,
+        "shipsLost:combat:9": 2,
+        "aiNegotiate:red": 3,
+        "fleetLost:rule": 20,
+        "shipsLost:rule:10": 20,
+        "hullsRemoved:rule": 38,
+        "aiMove:false": 8,
+        "declareWar:false": 2,
+        "declareWar:true": 1,
+        "shipsLost:combat:1": 3,
+        "shipsLost:combat:0": 1,
+        "orderMove:false": 7,
+        "shipsLost:combat:8": 2,
+        "applyInternalPolicy:ok": 1
+      },
+      "timing": {
+        "aiEconomyPlan": {
+          "n": 10630,
+          "ms": 926.3685029999494,
+          "max": 55.03152399999999
+        },
+        "aiOpsTick": {
+          "n": 60,
+          "ms": 26.599008000001277,
+          "max": 5.906642999999349
+        },
+        "aiSubmitTick": {
+          "n": 60,
+          "ms": 46.12878400000284,
+          "max": 6.960217000000739
+        },
+        "aiFederationPolitics": {
+          "n": 60,
+          "ms": 415.8246819999988,
+          "max": 68.10833999999886
+        },
+        "aiCoalitionDiplomacy": {
+          "n": 612,
+          "ms": 87.05890000000056,
+          "max": 1.42656899999929
+        },
+        "aiShipProduction": {
+          "n": 540,
+          "ms": 785.299175000026,
+          "max": 10.504942999999912
+        },
+        "aiTurn": {
+          "n": 600,
+          "ms": 3534.347109000005,
+          "max": 142.51550999999927
+        },
+        "monthTick": {
+          "n": 60,
+          "ms": 6225.862048999997,
+          "max": 418.55992700000024
+        },
+        "aiNegotiate": {
+          "n": 67,
+          "ms": 748.4750439999979,
+          "max": 139.04191999999966
+        },
+        "aiMilitaryCampaign": {
+          "n": 48,
+          "ms": 18.146114999999554,
+          "max": 2.4075510000002396
+        }
+      },
+      "finalSHA": "7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74",
+      "finalRNG": -1632327835
+    },
+    "byEmpire": {
+      "1": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 5,
+        "ships": 24,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 1,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 30,
+            "fleet-order": 16,
+            "diplomatic-proposal": 2,
+            "ship-paid": 39,
+            "research-completed": 5,
+            "milestone-complete": 2,
+            "building-replacement": 3,
+            "preparation-stage": 1
+          }
+        }
+      },
+      "2": {
+        "criticalMonths": 3,
+        "longestCriticalRun": 3,
+        "run": 3,
+        "zeroMonths": 0,
+        "resources": {
+          "tuk": 3
+        },
+        "colonies": 2,
+        "techs": 3,
+        "ships": 0,
+        "goal": "recovery",
+        "progress": 0,
+        "stats": {
+          "switches": 3,
+          "completed": 0,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 4,
+            "ship-paid": 16,
+            "preparation-stage": 3,
+            "research-completed": 3,
+            "building-paid": 3,
+            "plan-reassessed": 1
+          }
+        }
+      },
+      "3": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 5,
+        "ships": 29,
+        "goal": "economy",
+        "progress": 0.16422305294797432,
+        "stats": {
+          "switches": 2,
+          "completed": 1,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 3,
+            "building-paid": 30,
+            "fleet-order": 13,
+            "ship-paid": 29,
+            "milestone-complete": 1,
+            "research-completed": 5,
+            "preparation-stage": 2,
+            "plan-reassessed": 1,
+            "building-replacement": 1
+          }
+        }
+      },
+      "4": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 0,
+        "ships": 4,
+        "goal": "security",
+        "progress": 0,
+        "stats": {
+          "switches": 3,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 7,
+            "fleet-order": 7,
+            "diplomatic-proposal": 1,
+            "preparation-stage": 3,
+            "ship-paid": 8,
+            "milestone-complete": 1
+          }
+        }
+      },
+      "5": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 6,
+        "ships": 19,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 1,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 13,
+            "fleet-order": 6,
+            "preparation-stage": 2,
+            "ship-paid": 34,
+            "research-completed": 6,
+            "milestone-complete": 2,
+            "building-replacement": 1
+          }
+        }
+      },
+      "6": {
+        "criticalMonths": 2,
+        "longestCriticalRun": 2,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {
+          "ala": 2
+        },
+        "colonies": 3,
+        "techs": 3,
+        "ships": 12,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 1,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 13,
+            "fleet-order": 6,
+            "ship-paid": 5,
+            "milestone-complete": 2,
+            "research-completed": 3,
+            "preparation-stage": 1
+          }
+        }
+      },
+      "7": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 2,
+        "ships": 21,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 3,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 19,
+            "fleet-order": 5,
+            "ship-paid": 45,
+            "preparation-stage": 6,
+            "building-replacement": 1,
+            "war-started": 1,
+            "research-completed": 2,
+            "milestone-complete": 1
+          }
+        }
+      },
+      "8": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 4,
+        "techs": 3,
+        "ships": 28,
+        "goal": "regional",
+        "progress": 1,
+        "stats": {
+          "switches": 1,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 31,
+            "ship-paid": 28,
+            "fleet-order": 7,
+            "milestone-complete": 2,
+            "building-replacement": 7,
+            "preparation-stage": 1,
+            "research-completed": 3,
+            "internal-crisis": 1
+          }
+        }
+      },
+      "9": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 7,
+        "ships": 9,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 3,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 18,
+            "fleet-order": 20,
+            "ship-paid": 53,
+            "preparation-stage": 3,
+            "research-completed": 7,
+            "milestone-complete": 2,
+            "building-replacement": 1
+          }
+        }
+      }
+    },
+    "wars": [
+      {
+        "id": 1,
+        "sides": [
+          7,
+          1
+        ],
+        "ended": null,
+        "reason": "declaration",
+        "metrics": [
+          {
+            "rounds": 29,
+            "shipsLost": 13,
+            "shipsDestroyed": 18,
+            "damageDealt": 1139.7965045525352,
+            "damageTaken": 910.0000000000001,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [
+              "43"
+            ],
+            "planets": []
+          },
+          {
+            "rounds": 29,
+            "shipsLost": 18,
+            "shipsDestroyed": 13,
+            "damageDealt": 910.0000000000001,
+            "damageTaken": 1139.7965045525352,
+            "groundLost": 0,
+            "groundDestroyed": 0,
+            "garrisonLost": 0,
+            "garrisonReduced": 0,
+            "systems": [],
+            "planets": []
+          }
+        ]
+      }
+    ],
+    "federations": [
+      {
+        "id": 1,
+        "type": "bilimsel",
+        "members": [
+          9,
+          1,
+          4,
+          2
+        ],
+        "history": [
+          {
+            "day": 1620,
+            "year": 2214,
+            "month": 7,
+            "event": "founded",
+            "type": "bilimsel",
+            "ballot": "economic"
+          },
+          {
+            "day": 1650,
+            "year": 2214,
+            "month": 8,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": true,
+            "yes": 3.349,
+            "no": 2
+          },
+          {
+            "day": 1650,
+            "year": 2214,
+            "month": 8,
+            "event": "join",
+            "target": 2
+          },
+          {
+            "day": 1650,
+            "year": 2214,
+            "month": 8,
+            "event": "motion",
+            "kind": "admit",
+            "target": 2
+          },
+          {
+            "day": 1680,
+            "year": 2214,
+            "month": 9,
+            "event": "vote",
+            "kind": "inner",
+            "law": "serbest",
+            "passed": true,
+            "yes": 6.557,
+            "no": 0
+          },
+          {
+            "day": 1710,
+            "year": 2214,
+            "month": 10,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": false,
+            "yes": 3.951,
+            "no": 2.619
+          },
+          {
+            "day": 1800,
+            "year": 2215,
+            "month": 1,
+            "event": "vote",
+            "kind": "inner",
+            "law": "savasOnay",
+            "passed": true,
+            "yes": 6.623,
+            "no": 0
+          },
+          {
+            "day": 1800,
+            "year": 2215,
+            "month": 1,
+            "event": "vote",
+            "kind": "inner",
+            "law": "refah",
+            "passed": true,
+            "yes": 6.623,
+            "no": 0
+          }
+        ]
+      }
+    ],
+    "commerce": {
+      "3": {
+        "loaded": {
+          "min": 157.6
+        },
+        "sent": {
+          "min": 141.6
+        },
+        "received": {
+          "ala": 143.10000000000002
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 9,
+        "lastDay": 1748.5
+      },
+      "5": {
+        "loaded": {
+          "ala": 159.00000000000003
+        },
+        "sent": {
+          "ala": 143.10000000000002
+        },
+        "received": {
+          "min": 141.6
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 9,
+        "lastDay": 1748.5
+      }
+    },
+    "subjects": [],
+    "finalResources": {
+      "min": 5029.320018951996,
+      "ene": 28798.684122428705,
+      "yiy": 10433.39390037385,
+      "ala": 548.3891314703053,
+      "tuk": 5933.07746989422,
+      "etk": 3364.1161231073343
+    }
+  },
+  {
+    "summary": {
+      "seed": 42,
+      "months": 120,
+      "size": "ulu",
+      "ai": 9,
+      "initialHash": "0f02c66d65c8a978c1d391f57e1a641ce609473f3082ae99a45e498d00708a43",
+      "ms": 52049,
+      "initialSystems": 100,
+      "actualInitialAI": 9,
+      "crisisByResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 0,
+        "ara": 0,
+        "etk": 0
+      },
+      "criticalEmpireMonths": 0,
+      "zeroStockMonths": 0,
+      "initialColonies": 9,
+      "finalColonies": 23,
+      "finalShips": 338,
+      "finalTechs": 97,
+      "deadAI": 0,
+      "vassals": 1,
+      "planSwitches": 41,
+      "plansCompleted": 29,
+      "plansFailed": 0,
+      "firstInvalid": null,
+      "heapMB": 62.002593994140625,
+      "counts": {
+        "queueShip:ok": 798,
+        "fleetLost:disband": 4,
+        "shipsLost:disband:2": 1,
+        "hullsRemoved:disband": 4,
+        "shipsLost:disband:5": 1,
+        "queueBuilding:false": 1362,
+        "queueBuilding:ok": 281,
+        "orderMove:ok": 1470,
+        "aiMove:ok": 452,
+        "fleetLost:colonization": 14,
+        "shipsLost:colonization:2": 2,
+        "hullsRemoved:colonization": 14,
+        "shipsLost:colonization:8": 1,
+        "shipsLost:colonization:9": 2,
+        "shipsLost:disband:3": 1,
+        "queueDemolish:ok": 73,
+        "startStruct:ok": 114,
+        "shipsLost:colonization:3": 2,
+        "shipsLost:colonization:4": 1,
+        "aiNegotiate:kabul": 88,
+        "shipsLost:colonization:7": 1,
+        "shipsLost:colonization:6": 2,
+        "fleetLost:combat": 25,
+        "shipsLost:combat:3": 3,
+        "hullsRemoved:combat": 25,
+        "shipsLost:disband:6": 1,
+        "aiNegotiate:bekle": 17,
+        "shipsLost:colonization:5": 1,
+        "shipsLost:combat:2": 5,
+        "shipsLost:colonization:1": 2,
+        "shipsLost:combat:4": 3,
+        "shipsLost:combat:5": 4,
+        "shipsLost:combat:6": 4,
+        "aiMove:false": 12,
+        "shipsLost:combat:9": 3,
+        "shipsLost:combat:7": 1,
+        "aiNegotiate:karsi-red": 1,
+        "aiNegotiate:karsi-kabul": 1,
+        "vassalOffer:ok": 1,
+        "seekProtection:ok": 1,
+        "shipsLost:combat:1": 2
+      },
+      "timing": {
+        "aiEconomyPlan": {
+          "n": 20464,
+          "ms": 5091.014389000317,
+          "max": 12.988539999998466
+        },
+        "aiOpsTick": {
+          "n": 120,
+          "ms": 39.249152000034655,
+          "max": 2.3084490000037476
+        },
+        "aiSubmitTick": {
+          "n": 120,
+          "ms": 210.57102799998052,
+          "max": 137.73531999999977
+        },
+        "aiFederationPolitics": {
+          "n": 120,
+          "ms": 1636.1862660000133,
+          "max": 238.07324599999993
+        },
+        "aiCoalitionDiplomacy": {
+          "n": 1203,
+          "ms": 238.68295200002353,
+          "max": 7.197562000001199
+        },
+        "aiShipProduction": {
+          "n": 1080,
+          "ms": 3478.9254879999944,
+          "max": 64.98934000000008
+        },
+        "aiTurn": {
+          "n": 1200,
+          "ms": 14914.69121799989,
+          "max": 433.81568400000106
+        },
+        "monthTick": {
+          "n": 120,
+          "ms": 24518.444027999976,
+          "max": 1189.8456710000028
+        },
+        "aiNegotiate": {
+          "n": 107,
+          "ms": 4433.079280999995,
+          "max": 215.05248299999948
+        }
+      },
+      "finalSHA": "36eaa8d844b0260046bf92a4fd2602291bb2f5a098f1ddc77c089d16070b0112",
+      "finalRNG": 1207075081
+    },
+    "byEmpire": {
+      "1": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 8,
+        "ships": 38,
+        "goal": "economy",
+        "progress": 1,
+        "stats": {
+          "switches": 2,
+          "completed": 3,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 3,
+            "ship-paid": 70,
+            "building-paid": 30,
+            "fleet-order": 27,
+            "milestone-complete": 3,
+            "building-replacement": 10,
+            "research-completed": 8,
+            "preparation-stage": 2
+          }
+        }
+      },
+      "2": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 8,
+        "ships": 56,
+        "goal": "regional",
+        "progress": 1,
+        "stats": {
+          "switches": 3,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 33,
+            "fleet-order": 26,
+            "ship-paid": 74,
+            "preparation-stage": 3,
+            "diplomatic-proposal": 1,
+            "milestone-complete": 2,
+            "research-completed": 8,
+            "building-replacement": 9
+          }
+        }
+      },
+      "3": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 16,
+        "ships": 25,
+        "goal": "recovery",
+        "progress": 0,
+        "stats": {
+          "switches": 8,
+          "completed": 3,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 9,
+            "building-paid": 38,
+            "preparation-stage": 9,
+            "fleet-order": 46,
+            "ship-paid": 98,
+            "milestone-complete": 3,
+            "diplomatic-proposal": 1,
+            "research-completed": 16,
+            "building-replacement": 5
+          }
+        }
+      },
+      "4": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 9,
+        "ships": 13,
+        "goal": "security",
+        "progress": 0.5,
+        "stats": {
+          "switches": 7,
+          "completed": 4,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 8,
+            "building-paid": 33,
+            "fleet-order": 38,
+            "ship-paid": 97,
+            "milestone-complete": 4,
+            "preparation-stage": 13,
+            "diplomatic-proposal": 2,
+            "research-completed": 9,
+            "building-replacement": 11
+          }
+        }
+      },
+      "5": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 16,
+        "ships": 40,
+        "goal": "science",
+        "progress": 1,
+        "stats": {
+          "switches": 4,
+          "completed": 4,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 5,
+            "building-paid": 17,
+            "ship-paid": 93,
+            "preparation-stage": 5,
+            "fleet-order": 38,
+            "research-completed": 16,
+            "milestone-complete": 4,
+            "building-replacement": 2
+          }
+        }
+      },
+      "6": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 6,
+        "ships": 53,
+        "goal": "regional",
+        "progress": 0.5,
+        "stats": {
+          "switches": 5,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 6,
+            "building-paid": 47,
+            "ship-paid": 112,
+            "fleet-order": 62,
+            "preparation-stage": 6,
+            "research-completed": 6,
+            "milestone-complete": 2,
+            "building-replacement": 17
+          }
+        }
+      },
+      "7": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 16,
+        "ships": 29,
+        "goal": "science",
+        "progress": 0,
+        "stats": {
+          "switches": 4,
+          "completed": 4,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 5,
+            "building-paid": 23,
+            "ship-paid": 92,
+            "fleet-order": 38,
+            "research-completed": 16,
+            "milestone-complete": 4,
+            "preparation-stage": 5,
+            "building-replacement": 7
+          }
+        }
+      },
+      "8": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 10,
+        "ships": 42,
+        "goal": "economy",
+        "progress": 1,
+        "stats": {
+          "switches": 2,
+          "completed": 3,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 3,
+            "building-paid": 31,
+            "fleet-order": 24,
+            "ship-paid": 71,
+            "milestone-complete": 3,
+            "research-completed": 10,
+            "building-replacement": 5,
+            "preparation-stage": 2
+          }
+        }
+      },
+      "9": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 8,
+        "ships": 42,
+        "goal": "economy",
+        "progress": 1,
+        "stats": {
+          "switches": 6,
+          "completed": 4,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 7,
+            "fleet-order": 33,
+            "building-replacement": 6,
+            "ship-paid": 86,
+            "building-paid": 29,
+            "preparation-stage": 6,
+            "diplomatic-proposal": 1,
+            "research-completed": 8,
+            "milestone-complete": 4
+          }
+        }
+      }
+    },
+    "wars": [],
+    "federations": [
+      {
+        "id": 1,
+        "type": "bilimsel",
+        "members": [
+          3,
+          6,
+          7,
+          4,
+          1,
+          5,
+          9,
+          8
+        ],
+        "history": [
+          {
+            "day": 1050,
+            "year": 2212,
+            "month": 12,
+            "event": "vote",
+            "kind": "inner",
+            "law": "ortakDon",
+            "passed": true,
+            "yes": 7.403,
+            "no": 0
+          },
+          {
+            "day": 1170,
+            "year": 2213,
+            "month": 4,
+            "event": "vote",
+            "kind": "inner",
+            "law": "patentOzerk",
+            "passed": true,
+            "yes": 7.372,
+            "no": 0
+          },
+          {
+            "day": 1290,
+            "year": 2213,
+            "month": 8,
+            "event": "vote",
+            "kind": "inner",
+            "law": "savasOnay",
+            "passed": true,
+            "yes": 7.09,
+            "no": 0
+          },
+          {
+            "day": 1470,
+            "year": 2214,
+            "month": 2,
+            "event": "vote",
+            "kind": "basic",
+            "law": "arastirma",
+            "passed": true,
+            "yes": 7.394,
+            "no": 0
+          },
+          {
+            "day": 1650,
+            "year": 2214,
+            "month": 8,
+            "event": "vote",
+            "kind": "basic",
+            "law": "ticaret",
+            "passed": true,
+            "yes": 7.467,
+            "no": 0
+          },
+          {
+            "day": 1830,
+            "year": 2215,
+            "month": 2,
+            "event": "vote",
+            "kind": "basic",
+            "law": "filo",
+            "passed": false,
+            "yes": 3.657,
+            "no": 3.473,
+            "retry": {
+              "context": "[[3,4,6,7],\"bilimsel\",\"[\\\"bilimsel\\\",{\\\"defense\\\":\\\"vote\\\",\\\"offense\\\":\\\"vote\\\",\\\"admission\\\":\\\"allies\\\",\\\"ballot\\\":\\\"mixed\\\"},[\\\"arastirma\\\",\\\"ortakDon\\\",\\\"patentOzerk\\\",\\\"savasOnay\\\",\\\"serbest\\\",\\\"ticaret\\\"]]\",[\"arastirma\",\"ortakDon\",\"patentOzerk\",\"savasOnay\",\"serbest\",\"ticaret\"]]",
+              "modern": true,
+              "eligible": [
+                3,
+                6,
+                7,
+                4
+              ],
+              "yes": [
+                6,
+                4
+              ],
+              "no": [
+                3,
+                7
+              ],
+              "reasons": {
+                "3": "Ret · Kişilik ve yasa yararı +0.15 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.30 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "4": "Destek · Kişilik ve yasa yararı +0.25 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.25 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "6": "Destek · Kişilik ve yasa yararı +0.42 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.22 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "7": "Ret · Kişilik ve yasa yararı +0.04 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.21 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00"
+              }
+            }
+          },
+          {
+            "day": 2130,
+            "year": 2215,
+            "month": 12,
+            "event": "vote",
+            "kind": "inner",
+            "law": "uyumProgrami",
+            "passed": true,
+            "yes": 7.176,
+            "no": 0
+          },
+          {
+            "day": 2130,
+            "year": 2215,
+            "month": 12,
+            "event": "vote",
+            "kind": "inner",
+            "law": "ortakDoktrin",
+            "passed": true,
+            "yes": 7.176,
+            "no": 0
+          },
+          {
+            "day": 2250,
+            "year": 2216,
+            "month": 4,
+            "event": "vote",
+            "kind": "inner",
+            "law": "refah",
+            "passed": true,
+            "yes": 7.391,
+            "no": 0
+          },
+          {
+            "day": 2430,
+            "year": 2216,
+            "month": 10,
+            "event": "vote",
+            "kind": "basic",
+            "law": "filo",
+            "passed": false,
+            "yes": 3.471,
+            "no": 3.679,
+            "retry": {
+              "context": "[[3,4,6,7],\"bilimsel\",\"[\\\"bilimsel\\\",{\\\"defense\\\":\\\"vote\\\",\\\"offense\\\":\\\"vote\\\",\\\"admission\\\":\\\"allies\\\",\\\"ballot\\\":\\\"mixed\\\"},[\\\"arastirma\\\",\\\"ortakDoktrin\\\",\\\"ortakDon\\\",\\\"patentOzerk\\\",\\\"refah\\\",\\\"savasOnay\\\",\\\"serbest\\\",\\\"ticaret\\\",\\\"uyumProgrami\\\"]]\",[\"arastirma\",\"ortakDoktrin\",\"ortakDon\",\"patentOzerk\",\"refah\",\"savasOnay\",\"serbest\",\"ticaret\",\"uyumProgrami\"]]",
+              "modern": true,
+              "eligible": [
+                3,
+                6,
+                7,
+                4
+              ],
+              "yes": [
+                6,
+                4
+              ],
+              "no": [
+                3,
+                7
+              ],
+              "reasons": {
+                "3": "Ret · Kişilik ve yasa yararı +0.01 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.22 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "4": "Destek · Kişilik ve yasa yararı +0.25 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.21 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "6": "Destek · Kişilik ve yasa yararı +0.42 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.25 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "7": "Ret · Kişilik ve yasa yararı +0.04 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.28 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00"
+              }
+            }
+          },
+          {
+            "day": 2490,
+            "year": 2216,
+            "month": 12,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": false,
+            "yes": 3.624,
+            "no": 3.494
+          },
+          {
+            "day": 2490,
+            "year": 2216,
+            "month": 12,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": false,
+            "yes": 3.624,
+            "no": 3.494
+          },
+          {
+            "day": 2550,
+            "year": 2217,
+            "month": 2,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": false,
+            "yes": 1.898,
+            "no": 5.283
+          },
+          {
+            "day": 2580,
+            "year": 2217,
+            "month": 3,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": false,
+            "yes": 1.918,
+            "no": 5.348
+          },
+          {
+            "day": 2730,
+            "year": 2217,
+            "month": 8,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": true,
+            "yes": 7.491,
+            "no": 0
+          },
+          {
+            "day": 2730,
+            "year": 2217,
+            "month": 8,
+            "event": "join",
+            "target": 1
+          },
+          {
+            "day": 2730,
+            "year": 2217,
+            "month": 8,
+            "event": "motion",
+            "kind": "admit",
+            "target": 1
+          },
+          {
+            "day": 2850,
+            "year": 2217,
+            "month": 12,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": true,
+            "yes": 7.358,
+            "no": 1.622
+          },
+          {
+            "day": 2850,
+            "year": 2217,
+            "month": 12,
+            "event": "join",
+            "target": 5
+          },
+          {
+            "day": 2850,
+            "year": 2217,
+            "month": 12,
+            "event": "motion",
+            "kind": "admit",
+            "target": 5
+          },
+          {
+            "day": 2850,
+            "year": 2217,
+            "month": 12,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": true,
+            "yes": 10.699,
+            "no": 0
+          },
+          {
+            "day": 2850,
+            "year": 2217,
+            "month": 12,
+            "event": "join",
+            "target": 9
+          },
+          {
+            "day": 2850,
+            "year": 2217,
+            "month": 12,
+            "event": "motion",
+            "kind": "admit",
+            "target": 9
+          },
+          {
+            "day": 2880,
+            "year": 2218,
+            "month": 1,
+            "event": "vote",
+            "kind": "inner",
+            "law": "ikmalStandardi",
+            "passed": true,
+            "yes": 12.488,
+            "no": 0
+          },
+          {
+            "day": 2880,
+            "year": 2218,
+            "month": 1,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": false,
+            "yes": 3.51,
+            "no": 8.978
+          },
+          {
+            "day": 2940,
+            "year": 2218,
+            "month": 3,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": true,
+            "yes": 10.649,
+            "no": 1.818
+          },
+          {
+            "day": 2940,
+            "year": 2218,
+            "month": 3,
+            "event": "join",
+            "target": 8
+          },
+          {
+            "day": 2940,
+            "year": 2218,
+            "month": 3,
+            "event": "motion",
+            "kind": "admit",
+            "target": 8
+          },
+          {
+            "day": 3120,
+            "year": 2218,
+            "month": 9,
+            "event": "vote",
+            "kind": "basic",
+            "law": "savunma",
+            "passed": true,
+            "yes": 9.124,
+            "no": 5.155
+          },
+          {
+            "day": 3240,
+            "year": 2219,
+            "month": 1,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": false,
+            "yes": 3.602,
+            "no": 10.752
+          },
+          {
+            "day": 3420,
+            "year": 2219,
+            "month": 7,
+            "event": "vote",
+            "kind": "basic",
+            "law": "filo",
+            "passed": false,
+            "yes": 3.511,
+            "no": 10.838,
+            "retry": {
+              "context": "[[1,3,4,5,6,7,8,9],\"bilimsel\",\"[\\\"bilimsel\\\",{\\\"defense\\\":\\\"vote\\\",\\\"offense\\\":\\\"vote\\\",\\\"admission\\\":\\\"allies\\\",\\\"ballot\\\":\\\"mixed\\\"},[\\\"arastirma\\\",\\\"ikmalStandardi\\\",\\\"ortakDoktrin\\\",\\\"ortakDon\\\",\\\"patentOzerk\\\",\\\"refah\\\",\\\"savasOnay\\\",\\\"savunma\\\",\\\"serbest\\\",\\\"ticaret\\\",\\\"uyumProgrami\\\"]]\",[\"arastirma\",\"ikmalStandardi\",\"ortakDoktrin\",\"ortakDon\",\"patentOzerk\",\"refah\",\"savasOnay\",\"savunma\",\"serbest\",\"ticaret\",\"uyumProgrami\"]]",
+              "modern": true,
+              "eligible": [
+                3,
+                6,
+                7,
+                4,
+                1,
+                5,
+                9,
+                8
+              ],
+              "yes": [
+                6,
+                4
+              ],
+              "no": [
+                3,
+                7,
+                1,
+                5,
+                9,
+                8
+              ],
+              "reasons": {
+                "1": "Ret · Kişilik ve yasa yararı +0.00 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.22 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "3": "Ret · Kişilik ve yasa yararı +0.01 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef +0.08 · Gerçek aylık maliyet ve üretim farkı -0.24 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "4": "Destek · Kişilik ve yasa yararı +0.25 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef +0.08 · Gerçek aylık maliyet ve üretim farkı -0.24 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "5": "Ret · Kişilik ve yasa yararı +0.09 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.25 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "6": "Destek · Kişilik ve yasa yararı +0.42 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef +0.08 · Gerçek aylık maliyet ve üretim farkı -0.20 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "7": "Ret · Kişilik ve yasa yararı +0.04 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.25 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "8": "Ret · Kişilik ve yasa yararı +0.07 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.22 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "9": "Ret · Kişilik ve yasa yararı +0.05 · Önerene güven · Birlik uyumu +0.10 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.23 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00"
+              }
+            }
+          },
+          {
+            "day": 3600,
+            "year": 2220,
+            "month": 1,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": false,
+            "yes": 7.095,
+            "no": 7.042
+          }
+        ]
+      }
+    ],
+    "commerce": {
+      "3": {
+        "loaded": {
+          "ala": 485.1999999999998,
+          "yiy": 16
+        },
+        "sent": {
+          "ala": 472.79999999999984,
+          "yiy": 16
+        },
+        "received": {
+          "tuk": 82.39999999999999,
+          "min": 332.80000000000007,
+          "ala": 8.7
+        },
+        "lost": {
+          "ala": 12.4
+        },
+        "destroyed": {
+          "ala": 7.4399999999999995
+        },
+        "plundered": {
+          "ala": 4.960000000000001
+        },
+        "lootReceived": {},
+        "deliveries": 32,
+        "lastDay": 3594
+      },
+      "4": {
+        "loaded": {
+          "min": 335.20000000000005,
+          "tuk": 41.2,
+          "ene": 187.80000000000004,
+          "ala": 43
+        },
+        "sent": {
+          "min": 335.20000000000005,
+          "tuk": 41.2,
+          "ene": 187.80000000000004,
+          "ala": 34.4
+        },
+        "received": {
+          "ala": 610.7999999999996,
+          "tuk": 63.2
+        },
+        "lost": {
+          "ala": 8.6
+        },
+        "destroyed": {
+          "ala": 5.16
+        },
+        "plundered": {
+          "ala": 3.44
+        },
+        "lootReceived": {},
+        "deliveries": 44,
+        "lastDay": 3127.5
+      },
+      "5": {
+        "loaded": {
+          "yiy": 256,
+          "ala": 78.80000000000001,
+          "ene": 64
+        },
+        "sent": {
+          "yiy": 256,
+          "ala": 78.80000000000001,
+          "ene": 64
+        },
+        "received": {
+          "min": 155.60000000000002,
+          "ala": 194.40000000000003
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 28,
+        "lastDay": 3593.5
+      },
+      "6": {
+        "loaded": {
+          "tuk": 41.2,
+          "min": 168.00000000000006,
+          "ala": 8.7
+        },
+        "sent": {
+          "tuk": 41.2,
+          "min": 168.00000000000006,
+          "ala": 8.7
+        },
+        "received": {
+          "ala": 243.60000000000002,
+          "yiy": 16
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 17,
+        "lastDay": 3594
+      },
+      "7": {
+        "loaded": {
+          "ala": 381.5999999999999,
+          "tuk": 79
+        },
+        "sent": {
+          "ala": 381.5999999999999,
+          "tuk": 63.2
+        },
+        "received": {
+          "min": 170.39999999999998,
+          "ene": 187.80000000000004,
+          "ala": 34.4
+        },
+        "lost": {
+          "tuk": 15.8
+        },
+        "destroyed": {
+          "tuk": 9.48
+        },
+        "plundered": {
+          "tuk": 6.32
+        },
+        "lootReceived": {},
+        "deliveries": 28,
+        "lastDay": 3127.5
+      },
+      "9": {
+        "loaded": {
+          "min": 155.60000000000002,
+          "ala": 194.40000000000003
+        },
+        "sent": {
+          "min": 155.60000000000002,
+          "ala": 194.40000000000003
+        },
+        "received": {
+          "yiy": 256,
+          "ala": 78.80000000000001,
+          "ene": 64
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 28,
+        "lastDay": 3593.5
+      },
+      "10": {
+        "loaded": {},
+        "sent": {},
+        "received": {},
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {
+          "ala": 8.4,
+          "tuk": 6.32
+        },
+        "deliveries": 0,
+        "lastDay": null
+      }
+    },
+    "subjects": [
+      {
+        "id": 4,
+        "lord": 3,
+        "anger": 33.21836512201713,
+        "contract": {
+          "v": 1,
+          "lord": 3,
+          "sub": 4,
+          "type": "bekci",
+          "terms": {
+            "tax": {
+              "ene": 0.05,
+              "min": 0.05,
+              "ala": 0.05,
+              "yiy": 0,
+              "tuk": 0
+            },
+            "science": 0,
+            "defense": true,
+            "war": "defense",
+            "autonomy": "consent",
+            "duration": 0,
+            "renegotiate": 24,
+            "sensors": false
+          },
+          "started": 1410,
+          "expires": null,
+          "status": "active",
+          "source": "voluntary",
+          "revision": 1
+        },
+        "talk": {
+          "v": 1,
+          "id": "4:1",
+          "lord": 3,
+          "sub": 4,
+          "kind": "new",
+          "mode": "seek",
+          "type": "bekci",
+          "terms": {
+            "tax": {
+              "ene": 0.05,
+              "min": 0.05,
+              "ala": 0.05,
+              "yiy": 0,
+              "tuk": 0
+            },
+            "science": 0,
+            "defense": true,
+            "war": "defense",
+            "autonomy": "consent",
+            "duration": 0,
+            "renegotiate": 24,
+            "sensors": false
+          },
+          "from": 3,
+          "to": 4,
+          "born": 1410,
+          "expires": 1590,
+          "round": 2,
+          "status": "accepted",
+          "disclosedWars": {
+            "3": [],
+            "4": []
+          },
+          "paid": {
+            "3": 20,
+            "4": 90
+          },
+          "history": [
+            {
+              "day": 1410,
+              "by": 4,
+              "action": "offer",
+              "why": "Açık sözleşme teklifi",
+              "terms": {
+                "tax": {
+                  "ene": 0,
+                  "min": 0,
+                  "ala": 0,
+                  "yiy": 0,
+                  "tuk": 0
+                },
+                "science": 0,
+                "defense": true,
+                "war": "all",
+                "autonomy": "consent",
+                "duration": 0,
+                "renegotiate": 24,
+                "sensors": false
+              }
+            },
+            {
+              "day": 1410,
+              "by": 3,
+              "action": "counter",
+              "why": "Güven ve diplomatik hafıza: 0.2 · Himayenin stratejik değeri: 0.25 · Müttefik askerî yükümlülük: 0.28 · Sözleşmenin gelir ve bilim faydası: 0 · Kendi koruma hazırlığı ve toparlanma ihtiyacı: -0.5 · Bilinen / teklifte bildirilen koruma cephesi yükü: 0 · Kişilik ve askerî amaç: -0.1",
+              "terms": {
+                "tax": {
+                  "ene": 0.05,
+                  "min": 0.05,
+                  "ala": 0.05,
+                  "yiy": 0,
+                  "tuk": 0
+                },
+                "science": 0,
+                "defense": true,
+                "war": "defense",
+                "autonomy": "consent",
+                "duration": 0,
+                "renegotiate": 24,
+                "sensors": false
+              }
+            },
+            {
+              "day": 1410,
+              "by": 4,
+              "action": "accept",
+              "why": "Bilinen koruyucu güç: 0.65 · Kendi mevcut tehdidi: 0 · Diplomatik hafıza ve güven: -0.02 · Gerçek gelirden istenen vergi ve bilim payı: -0.08 · Senyörün koruma yükümlülüğü: 0.2 · Askerî yükümlülük ve hazırlık: -0.08 · Diplomatik özerklik: -0.15 · Askerî kişilik: 0 · Uzun vadeli bağımsız güç hedefi: -0.12 · Bağımsızlığın siyasi değeri: -0.15"
+            }
+          ],
+          "finished": 1410,
+          "why": "Bilinen koruyucu güç: 0.65 · Kendi mevcut tehdidi: 0 · Diplomatik hafıza ve güven: -0.02 · Gerçek gelirden istenen vergi ve bilim payı: -0.08 · Senyörün koruma yükümlülüğü: 0.2 · Askerî yükümlülük ve hazırlık: -0.08 · Diplomatik özerklik: -0.15 · Askerî kişilik: 0 · Uzun vadeli bağımsız güç hedefi: -0.12 · Bağımsızlığın siyasi değeri: -0.15"
+        }
+      }
+    ],
+    "finalResources": {
+      "min": 39792.749258557,
+      "ene": 119750.54874342181,
+      "yiy": 17843.239419478075,
+      "ala": 730.3133808559636,
+      "tuk": 14841.89185161797,
+      "etk": 6193.179573145066
+    }
+  },
+  {
+    "summary": {
+      "seed": 42,
+      "months": 60,
+      "size": "ulu",
+      "ai": 9,
+      "initialHash": "0f02c66d65c8a978c1d391f57e1a641ce609473f3082ae99a45e498d00708a43",
+      "ms": 15680,
+      "initialSystems": 100,
+      "actualInitialAI": 9,
+      "crisisByResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 0,
+        "ara": 0,
+        "etk": 0
+      },
+      "criticalEmpireMonths": 0,
+      "zeroStockMonths": 0,
+      "initialColonies": 9,
+      "finalColonies": 20,
+      "finalShips": 129,
+      "finalTechs": 42,
+      "deadAI": 0,
+      "vassals": 1,
+      "planSwitches": 19,
+      "plansCompleted": 14,
+      "plansFailed": 0,
+      "firstInvalid": null,
+      "heapMB": 82.46732330322266,
+      "counts": {
+        "queueShip:ok": 342,
+        "fleetLost:disband": 4,
+        "shipsLost:disband:2": 1,
+        "hullsRemoved:disband": 4,
+        "shipsLost:disband:5": 1,
+        "queueBuilding:false": 324,
+        "queueBuilding:ok": 165,
+        "orderMove:ok": 694,
+        "aiMove:ok": 191,
+        "fleetLost:colonization": 11,
+        "shipsLost:colonization:2": 1,
+        "hullsRemoved:colonization": 11,
+        "shipsLost:colonization:8": 1,
+        "shipsLost:colonization:9": 1,
+        "shipsLost:disband:3": 1,
+        "queueDemolish:ok": 16,
+        "startStruct:ok": 38,
+        "shipsLost:colonization:3": 2,
+        "shipsLost:colonization:4": 1,
+        "aiNegotiate:kabul": 33,
+        "shipsLost:colonization:7": 1,
+        "shipsLost:colonization:6": 2,
+        "fleetLost:combat": 23,
+        "shipsLost:combat:3": 3,
+        "hullsRemoved:combat": 23,
+        "shipsLost:disband:6": 1,
+        "aiNegotiate:bekle": 16,
+        "shipsLost:colonization:5": 1,
+        "shipsLost:combat:2": 5,
+        "shipsLost:colonization:1": 1,
+        "shipsLost:combat:4": 3,
+        "shipsLost:combat:5": 4,
+        "shipsLost:combat:6": 4,
+        "aiMove:false": 5,
+        "shipsLost:combat:9": 3,
+        "shipsLost:combat:7": 1,
+        "aiNegotiate:karsi-red": 1,
+        "aiNegotiate:karsi-kabul": 1,
+        "vassalOffer:ok": 1,
+        "seekProtection:ok": 1
+      },
+      "timing": {
+        "aiEconomyPlan": {
+          "n": 9919,
+          "ms": 1504.5779149999576,
+          "max": 30.336029000000053
+        },
+        "aiOpsTick": {
+          "n": 60,
+          "ms": 13.571123000000114,
+          "max": 1.364846999999827
+        },
+        "aiSubmitTick": {
+          "n": 60,
+          "ms": 126.11371999999841,
+          "max": 88.88348900000165
+        },
+        "aiFederationPolitics": {
+          "n": 60,
+          "ms": 301.9977439999973,
+          "max": 81.29954999999973
+        },
+        "aiCoalitionDiplomacy": {
+          "n": 578,
+          "ms": 109.85048999999907,
+          "max": 7.017879999999423
+        },
+        "aiShipProduction": {
+          "n": 540,
+          "ms": 1038.2679840000133,
+          "max": 37.19876599999952
+        },
+        "aiTurn": {
+          "n": 600,
+          "ms": 3849.74576799999,
+          "max": 96.94366799999989
+        },
+        "monthTick": {
+          "n": 60,
+          "ms": 7098.277999999995,
+          "max": 747.41057
+        },
+        "aiNegotiate": {
+          "n": 51,
+          "ms": 912.6274439999966,
+          "max": 112.76295399999981
+        }
+      },
+      "finalSHA": "de39ae176eae9dcd43a8acb58bed021dc3369616fe8639637b3ddaecd1186e06",
+      "finalRNG": -1239603042
+    },
+    "byEmpire": {
+      "1": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 3,
+        "ships": 5,
+        "goal": "recovery",
+        "progress": 0,
+        "stats": {
+          "switches": 1,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "ship-paid": 19,
+            "building-paid": 16,
+            "fleet-order": 9,
+            "milestone-complete": 1,
+            "building-replacement": 2,
+            "research-completed": 3,
+            "preparation-stage": 1
+          }
+        }
+      },
+      "2": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 4,
+        "ships": 27,
+        "goal": "regional",
+        "progress": 0.5,
+        "stats": {
+          "switches": 3,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 17,
+            "fleet-order": 11,
+            "ship-paid": 45,
+            "preparation-stage": 3,
+            "diplomatic-proposal": 1,
+            "milestone-complete": 1,
+            "research-completed": 4,
+            "building-replacement": 1
+          }
+        }
+      },
+      "3": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 6,
+        "ships": 24,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 4,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 5,
+            "building-paid": 18,
+            "preparation-stage": 5,
+            "fleet-order": 27,
+            "ship-paid": 48,
+            "milestone-complete": 2,
+            "diplomatic-proposal": 1,
+            "research-completed": 6,
+            "building-replacement": 1
+          }
+        }
+      },
+      "4": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 3,
+        "ships": 19,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 2,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 3,
+            "building-paid": 19,
+            "fleet-order": 16,
+            "ship-paid": 36,
+            "milestone-complete": 2,
+            "preparation-stage": 5,
+            "diplomatic-proposal": 1,
+            "research-completed": 3,
+            "building-replacement": 2
+          }
+        }
+      },
+      "5": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 9,
+        "ships": 8,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 1,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 11,
+            "ship-paid": 43,
+            "preparation-stage": 2,
+            "fleet-order": 10,
+            "research-completed": 9,
+            "milestone-complete": 2,
+            "building-replacement": 1
+          }
+        }
+      },
+      "6": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 3,
+        "ships": 8,
+        "goal": "science",
+        "progress": 0.3333333333333333,
+        "stats": {
+          "switches": 3,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 31,
+            "ship-paid": 49,
+            "fleet-order": 19,
+            "preparation-stage": 4,
+            "research-completed": 3,
+            "milestone-complete": 1,
+            "building-replacement": 4
+          }
+        }
+      },
+      "7": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 6,
+        "ships": 11,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 1,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 13,
+            "ship-paid": 47,
+            "fleet-order": 16,
+            "research-completed": 6,
+            "milestone-complete": 2,
+            "preparation-stage": 2,
+            "building-replacement": 1
+          }
+        }
+      },
+      "8": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 3,
+        "ships": 20,
+        "goal": "economy",
+        "progress": 1,
+        "stats": {
+          "switches": 0,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 1,
+            "building-paid": 21,
+            "fleet-order": 9,
+            "ship-paid": 16,
+            "milestone-complete": 1,
+            "research-completed": 3,
+            "building-replacement": 1
+          }
+        }
+      },
+      "9": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 5,
+        "ships": 7,
+        "goal": "economy",
+        "progress": 0,
+        "stats": {
+          "switches": 4,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 5,
+            "fleet-order": 12,
+            "building-replacement": 2,
+            "ship-paid": 34,
+            "building-paid": 19,
+            "preparation-stage": 4,
+            "diplomatic-proposal": 1,
+            "research-completed": 5,
+            "milestone-complete": 2
+          }
+        }
+      }
+    },
+    "wars": [],
+    "federations": [
+      {
+        "id": 1,
+        "type": "bilimsel",
+        "members": [
+          3,
+          6,
+          7,
+          4
+        ],
+        "history": [
+          {
+            "day": 1020,
+            "year": 2212,
+            "month": 11,
+            "event": "founded",
+            "type": "bilimsel",
+            "ballot": "mixed"
+          },
+          {
+            "day": 1020,
+            "year": 2212,
+            "month": 11,
+            "event": "vote",
+            "kind": "motion",
+            "law": "motion",
+            "passed": true,
+            "yes": 5.591,
+            "no": 0
+          },
+          {
+            "day": 1020,
+            "year": 2212,
+            "month": 11,
+            "event": "join",
+            "target": 4
+          },
+          {
+            "day": 1020,
+            "year": 2212,
+            "month": 11,
+            "event": "motion",
+            "kind": "admit",
+            "target": 4
+          },
+          {
+            "day": 1050,
+            "year": 2212,
+            "month": 12,
+            "event": "vote",
+            "kind": "inner",
+            "law": "serbest",
+            "passed": true,
+            "yes": 7.403,
+            "no": 0
+          },
+          {
+            "day": 1050,
+            "year": 2212,
+            "month": 12,
+            "event": "vote",
+            "kind": "inner",
+            "law": "ortakDon",
+            "passed": true,
+            "yes": 7.403,
+            "no": 0
+          },
+          {
+            "day": 1170,
+            "year": 2213,
+            "month": 4,
+            "event": "vote",
+            "kind": "inner",
+            "law": "patentOzerk",
+            "passed": true,
+            "yes": 7.372,
+            "no": 0
+          },
+          {
+            "day": 1290,
+            "year": 2213,
+            "month": 8,
+            "event": "vote",
+            "kind": "inner",
+            "law": "savasOnay",
+            "passed": true,
+            "yes": 7.09,
+            "no": 0
+          },
+          {
+            "day": 1470,
+            "year": 2214,
+            "month": 2,
+            "event": "vote",
+            "kind": "basic",
+            "law": "arastirma",
+            "passed": true,
+            "yes": 7.394,
+            "no": 0
+          },
+          {
+            "day": 1650,
+            "year": 2214,
+            "month": 8,
+            "event": "vote",
+            "kind": "basic",
+            "law": "ticaret",
+            "passed": true,
+            "yes": 7.467,
+            "no": 0
+          }
+        ]
+      }
+    ],
+    "commerce": {
+      "3": {
+        "loaded": {
+          "ala": 176
+        },
+        "sent": {
+          "ala": 160
+        },
+        "received": {
+          "tuk": 82.39999999999999,
+          "min": 28
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 10,
+        "lastDay": 1794
+      },
+      "4": {
+        "loaded": {
+          "min": 105.2,
+          "tuk": 41.2,
+          "ene": 47.7
+        },
+        "sent": {
+          "min": 91,
+          "tuk": 41.2,
+          "ene": 31.8
+        },
+        "received": {
+          "ala": 207.20000000000002
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 13,
+        "lastDay": 1757.5
+      },
+      "5": {
+        "loaded": {
+          "yiy": 64,
+          "ala": 71.60000000000001
+        },
+        "sent": {
+          "yiy": 64,
+          "ala": 64.4
+        },
+        "received": {
+          "min": 136.8
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 10,
+        "lastDay": 1761.5
+      },
+      "6": {
+        "loaded": {
+          "tuk": 41.2,
+          "min": 13.8
+        },
+        "sent": {
+          "tuk": 41.2,
+          "min": 13.8
+        },
+        "received": {
+          "ala": 80
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 5,
+        "lastDay": 1794
+      },
+      "7": {
+        "loaded": {
+          "ala": 143.10000000000002
+        },
+        "sent": {
+          "ala": 127.20000000000002
+        },
+        "received": {
+          "min": 76.8,
+          "ene": 31.8
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 8,
+        "lastDay": 1757.5
+      },
+      "9": {
+        "loaded": {
+          "min": 146.20000000000002
+        },
+        "sent": {
+          "min": 136.8
+        },
+        "received": {
+          "yiy": 64,
+          "ala": 64.4
+        },
+        "lost": {},
+        "destroyed": {},
+        "plundered": {},
+        "lootReceived": {},
+        "deliveries": 10,
+        "lastDay": 1766
+      }
+    },
+    "subjects": [
+      {
+        "id": 4,
+        "lord": 3,
+        "anger": 5.347760958519764,
+        "contract": {
+          "v": 1,
+          "lord": 3,
+          "sub": 4,
+          "type": "bekci",
+          "terms": {
+            "tax": {
+              "ene": 0.05,
+              "min": 0.05,
+              "ala": 0.05,
+              "yiy": 0,
+              "tuk": 0
+            },
+            "science": 0,
+            "defense": true,
+            "war": "defense",
+            "autonomy": "consent",
+            "duration": 0,
+            "renegotiate": 24,
+            "sensors": false
+          },
+          "started": 1410,
+          "expires": null,
+          "status": "active",
+          "source": "voluntary",
+          "revision": 1
+        },
+        "talk": {
+          "v": 1,
+          "id": "4:1",
+          "lord": 3,
+          "sub": 4,
+          "kind": "new",
+          "mode": "seek",
+          "type": "bekci",
+          "terms": {
+            "tax": {
+              "ene": 0.05,
+              "min": 0.05,
+              "ala": 0.05,
+              "yiy": 0,
+              "tuk": 0
+            },
+            "science": 0,
+            "defense": true,
+            "war": "defense",
+            "autonomy": "consent",
+            "duration": 0,
+            "renegotiate": 24,
+            "sensors": false
+          },
+          "from": 3,
+          "to": 4,
+          "born": 1410,
+          "expires": 1590,
+          "round": 2,
+          "status": "accepted",
+          "disclosedWars": {
+            "3": [],
+            "4": []
+          },
+          "paid": {
+            "3": 20,
+            "4": 90
+          },
+          "history": [
+            {
+              "day": 1410,
+              "by": 4,
+              "action": "offer",
+              "why": "Açık sözleşme teklifi",
+              "terms": {
+                "tax": {
+                  "ene": 0,
+                  "min": 0,
+                  "ala": 0,
+                  "yiy": 0,
+                  "tuk": 0
+                },
+                "science": 0,
+                "defense": true,
+                "war": "all",
+                "autonomy": "consent",
+                "duration": 0,
+                "renegotiate": 24,
+                "sensors": false
+              }
+            },
+            {
+              "day": 1410,
+              "by": 3,
+              "action": "counter",
+              "why": "Güven ve diplomatik hafıza: 0.2 · Himayenin stratejik değeri: 0.25 · Müttefik askerî yükümlülük: 0.28 · Sözleşmenin gelir ve bilim faydası: 0 · Kendi koruma hazırlığı ve toparlanma ihtiyacı: -0.5 · Bilinen / teklifte bildirilen koruma cephesi yükü: 0 · Kişilik ve askerî amaç: -0.1",
+              "terms": {
+                "tax": {
+                  "ene": 0.05,
+                  "min": 0.05,
+                  "ala": 0.05,
+                  "yiy": 0,
+                  "tuk": 0
+                },
+                "science": 0,
+                "defense": true,
+                "war": "defense",
+                "autonomy": "consent",
+                "duration": 0,
+                "renegotiate": 24,
+                "sensors": false
+              }
+            },
+            {
+              "day": 1410,
+              "by": 4,
+              "action": "accept",
+              "why": "Bilinen koruyucu güç: 0.65 · Kendi mevcut tehdidi: 0 · Diplomatik hafıza ve güven: -0.02 · Gerçek gelirden istenen vergi ve bilim payı: -0.08 · Senyörün koruma yükümlülüğü: 0.2 · Askerî yükümlülük ve hazırlık: -0.08 · Diplomatik özerklik: -0.15 · Askerî kişilik: 0 · Uzun vadeli bağımsız güç hedefi: -0.12 · Bağımsızlığın siyasi değeri: -0.15"
+            }
+          ],
+          "finished": 1410,
+          "why": "Bilinen koruyucu güç: 0.65 · Kendi mevcut tehdidi: 0 · Diplomatik hafıza ve güven: -0.02 · Gerçek gelirden istenen vergi ve bilim payı: -0.08 · Senyörün koruma yükümlülüğü: 0.2 · Askerî yükümlülük ve hazırlık: -0.08 · Diplomatik özerklik: -0.15 · Askerî kişilik: 0 · Uzun vadeli bağımsız güç hedefi: -0.12 · Bağımsızlığın siyasi değeri: -0.15"
+        }
+      }
+    ],
+    "finalResources": {
+      "min": 6763.554333233387,
+      "ene": 36504.61149439047,
+      "yiy": 8725.833372271487,
+      "ala": 1510.2965253490665,
+      "tuk": 7325.592459730377,
+      "etk": 3989.5853820632738
+    }
+  },
+  {
+    "summary": {
+      "seed": 99,
+      "months": 60,
+      "size": "ulu",
+      "ai": 9,
+      "initialHash": "2101c6bf251bde1776755a8944b72b01f4585e0edfc7948ef3c2f3787b9a4a2f",
+      "ms": 17140,
+      "initialSystems": 100,
+      "actualInitialAI": 9,
+      "crisisByResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "ala": 3,
+        "tuk": 0,
+        "ara": 0,
+        "etk": 0
+      },
+      "criticalEmpireMonths": 3,
+      "zeroStockMonths": 0,
+      "initialColonies": 9,
+      "finalColonies": 18,
+      "finalShips": 169,
+      "finalTechs": 30,
+      "deadAI": 0,
+      "vassals": 0,
+      "planSwitches": 19,
+      "plansCompleted": 11,
+      "plansFailed": 4,
+      "firstInvalid": null,
+      "heapMB": 177.40257263183594,
+      "counts": {
+        "queueShip:ok": 278,
+        "fleetLost:disband": 4,
+        "shipsLost:disband:3": 1,
+        "hullsRemoved:disband": 4,
+        "shipsLost:disband:8": 1,
+        "queueBuilding:ok": 159,
+        "aiMove:ok": 211,
+        "orderMove:ok": 524,
+        "queueBuilding:false": 356,
+        "fleetLost:colonization": 9,
+        "shipsLost:colonization:8": 2,
+        "hullsRemoved:colonization": 9,
+        "shipsLost:disband:5": 1,
+        "shipsLost:colonization:2": 1,
+        "startStruct:ok": 19,
+        "shipsLost:colonization:1": 1,
+        "shipsLost:colonization:7": 1,
+        "shipsLost:disband:7": 1,
+        "shipsLost:colonization:3": 1,
+        "queueDemolish:ok": 17,
+        "fleetLost:combat": 11,
+        "shipsLost:combat:8": 1,
+        "hullsRemoved:combat": 11,
+        "shipsLost:colonization:6": 1,
+        "shipsLost:colonization:4": 1,
+        "shipsLost:combat:6": 1,
+        "shipsLost:colonization:9": 1,
+        "shipsLost:combat:1": 2,
+        "aiNegotiate:kabul": 21,
+        "aiNegotiate:bekle": 14,
+        "shipsLost:combat:0": 2,
+        "shipsLost:combat:9": 2,
+        "aiNegotiate:red": 1,
+        "shipsLost:combat:3": 2,
+        "shipsLost:combat:7": 1,
+        "aiNegotiate:karsi-red": 4,
+        "aiMove:false": 12,
+        "fleetLost:attrition": 1,
+        "shipsLost:attrition:5": 1,
+        "hullsRemoved:attrition": 1
+      },
+      "timing": {
+        "aiEconomyPlan": {
+          "n": 10024,
+          "ms": 1193.490968000056,
+          "max": 7.8768549999986135
+        },
+        "aiOpsTick": {
+          "n": 60,
+          "ms": 19.147410999995486,
+          "max": 1.9036030000006576
+        },
+        "aiSubmitTick": {
+          "n": 60,
+          "ms": 76.64880699999776,
+          "max": 3.2968849999997474
+        },
+        "aiFederationPolitics": {
+          "n": 60,
+          "ms": 224.72545100000139,
+          "max": 33.00049099999978
+        },
+        "aiCoalitionDiplomacy": {
+          "n": 655,
+          "ms": 181.365023999992,
+          "max": 2.192879999998695
+        },
+        "aiShipProduction": {
+          "n": 540,
+          "ms": 953.5580250000032,
+          "max": 10.63314100000025
+        },
+        "aiTurn": {
+          "n": 600,
+          "ms": 3755.052115999986,
+          "max": 49.81795599999987
+        },
+        "monthTick": {
+          "n": 60,
+          "ms": 6539.909144999989,
+          "max": 198.87975199999983
+        },
+        "aiNegotiate": {
+          "n": 40,
+          "ms": 508.3333470000034,
+          "max": 40.37475900000027
+        }
+      },
+      "finalSHA": "19a70258c03e424af82ebd6879b11412bd8f9a437ec10b21866e489fff074e60",
+      "finalRNG": 122560253
+    },
+    "byEmpire": {
+      "1": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 2,
+        "ships": 39,
+        "goal": "economy",
+        "progress": 0,
+        "stats": {
+          "switches": 3,
+          "completed": 1,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 16,
+            "fleet-order": 10,
+            "preparation-stage": 5,
+            "ship-paid": 45,
+            "diplomatic-proposal": 4,
+            "milestone-complete": 1,
+            "research-completed": 2,
+            "plan-reassessed": 1
+          }
+        }
+      },
+      "2": {
+        "criticalMonths": 3,
+        "longestCriticalRun": 3,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {
+          "ala": 3
+        },
+        "colonies": 2,
+        "techs": 3,
+        "ships": 5,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 2,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 3,
+            "building-paid": 23,
+            "ship-paid": 16,
+            "milestone-complete": 2,
+            "fleet-order": 10,
+            "preparation-stage": 4,
+            "research-completed": 3,
+            "building-replacement": 1
+          }
+        }
+      },
+      "3": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 3,
+        "ships": 18,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 3,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 21,
+            "fleet-order": 11,
+            "preparation-stage": 6,
+            "ship-paid": 41,
+            "research-completed": 3,
+            "building-replacement": 3,
+            "milestone-complete": 1
+          }
+        }
+      },
+      "4": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 3,
+        "ships": 8,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 2,
+          "completed": 2,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 3,
+            "building-paid": 24,
+            "ship-paid": 36,
+            "fleet-order": 11,
+            "preparation-stage": 3,
+            "plan-reassessed": 1,
+            "research-completed": 3,
+            "milestone-complete": 2,
+            "building-replacement": 3
+          }
+        }
+      },
+      "5": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 1,
+        "techs": 2,
+        "ships": 18,
+        "goal": "regional",
+        "progress": 0.5,
+        "stats": {
+          "switches": 2,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 3,
+            "preparation-stage": 3,
+            "building-replacement": 5,
+            "building-paid": 9,
+            "milestone-complete": 1,
+            "ship-paid": 16,
+            "diplomatic-proposal": 2,
+            "fleet-order": 7,
+            "research-completed": 2
+          }
+        }
+      },
+      "6": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 9,
+        "ships": 11,
+        "goal": "recovery",
+        "progress": 1,
+        "stats": {
+          "switches": 1,
+          "completed": 2,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 15,
+            "ship-paid": 50,
+            "preparation-stage": 4,
+            "building-replacement": 2,
+            "fleet-order": 18,
+            "research-completed": 9,
+            "milestone-complete": 2
+          }
+        }
+      },
+      "7": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 3,
+        "ships": 29,
+        "goal": "trade",
+        "progress": 0,
+        "stats": {
+          "switches": 3,
+          "completed": 1,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 4,
+            "building-paid": 19,
+            "fleet-order": 9,
+            "preparation-stage": 3,
+            "ship-paid": 28,
+            "milestone-complete": 1,
+            "diplomatic-proposal": 5,
+            "research-completed": 3,
+            "building-replacement": 2,
+            "plan-reassessed": 1
+          }
+        }
+      },
+      "8": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 3,
+        "techs": 3,
+        "ships": 15,
+        "goal": "science",
+        "progress": 0,
+        "stats": {
+          "switches": 2,
+          "completed": 0,
+          "failed": 1,
+          "actions": {
+            "objective-selected": 3,
+            "building-paid": 14,
+            "fleet-order": 9,
+            "preparation-stage": 3,
+            "ship-paid": 16,
+            "plan-reassessed": 1,
+            "research-completed": 3
+          }
+        }
+      },
+      "9": {
+        "criticalMonths": 0,
+        "longestCriticalRun": 0,
+        "run": 0,
+        "zeroMonths": 0,
+        "resources": {},
+        "colonies": 2,
+        "techs": 2,
+        "ships": 26,
+        "goal": "regional",
+        "progress": 1,
+        "stats": {
+          "switches": 1,
+          "completed": 1,
+          "failed": 0,
+          "actions": {
+            "objective-selected": 2,
+            "building-paid": 17,
+            "preparation-stage": 3,
+            "ship-paid": 26,
+            "fleet-order": 9,
+            "diplomatic-proposal": 1,
+            "research-completed": 2,
+            "milestone-complete": 1
+          }
+        }
+      }
+    },
+    "wars": [],
+    "federations": [
+      {
+        "id": 1,
+        "type": "bilimsel",
+        "members": [
+          6,
+          8,
+          9
+        ],
+        "history": [
+          {
+            "day": 870,
+            "year": 2212,
+            "month": 6,
+            "event": "founded",
+            "type": "bilimsel",
+            "ballot": "economic"
+          },
+          {
+            "day": 900,
+            "year": 2212,
+            "month": 7,
+            "event": "vote",
+            "kind": "inner",
+            "law": "ortakDon",
+            "passed": true,
+            "yes": 5.511,
+            "no": 0
+          },
+          {
+            "day": 990,
+            "year": 2212,
+            "month": 10,
+            "event": "vote",
+            "kind": "inner",
+            "law": "savasOnay",
+            "passed": true,
+            "yes": 5.448,
+            "no": 0
+          },
+          {
+            "day": 1170,
+            "year": 2213,
+            "month": 4,
+            "event": "vote",
+            "kind": "basic",
+            "law": "savunma",
+            "passed": true,
+            "yes": 3.667,
+            "no": 2
+          },
+          {
+            "day": 1350,
+            "year": 2213,
+            "month": 10,
+            "event": "vote",
+            "kind": "basic",
+            "law": "ticaret",
+            "passed": true,
+            "yes": 5.51,
+            "no": 0
+          },
+          {
+            "day": 1530,
+            "year": 2214,
+            "month": 4,
+            "event": "vote",
+            "kind": "basic",
+            "law": "arastirma",
+            "passed": true,
+            "yes": 5.584,
+            "no": 0
+          },
+          {
+            "day": 1710,
+            "year": 2214,
+            "month": 10,
+            "event": "vote",
+            "kind": "basic",
+            "law": "filo",
+            "passed": false,
+            "yes": 0,
+            "no": 5.501,
+            "retry": {
+              "context": "[[6,8,9],\"bilimsel\",\"[\\\"bilimsel\\\",{\\\"defense\\\":\\\"vote\\\",\\\"offense\\\":\\\"vote\\\",\\\"admission\\\":\\\"allies\\\",\\\"ballot\\\":\\\"economic\\\"},[\\\"arastirma\\\",\\\"ortakDon\\\",\\\"savasOnay\\\",\\\"savunma\\\",\\\"ticaret\\\"]]\",[\"arastirma\",\"ortakDon\",\"savasOnay\",\"savunma\",\"ticaret\"]]",
+              "modern": true,
+              "eligible": [
+                6,
+                8,
+                9
+              ],
+              "yes": [],
+              "no": [
+                6,
+                8,
+                9
+              ],
+              "reasons": {
+                "6": "Ret · Kişilik ve yasa yararı +0.06 · Önerene güven · Birlik uyumu +0.07 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.33 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "8": "Ret · Kişilik ve yasa yararı +0.15 · Önerene güven · Birlik uyumu +0.07 · Gerçek ekonomik hazırlık · Uzun vadeli hedef · Gerçek aylık maliyet ve üretim farkı -0.25 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00",
+                "9": "Ret · Kişilik ve yasa yararı +0.42 · Önerene güven · Birlik uyumu +0.07 · Gerçek ekonomik hazırlık · Uzun vadeli hedef +0.08 · Gerçek aylık maliyet ve üretim farkı -0.52 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -4.00 · Δbilim 0.00"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "commerce": {},
+    "subjects": [],
+    "finalResources": {
+      "min": 9564.768599697813,
+      "ene": 28960.506309489232,
+      "yiy": 14217.986133019203,
+      "ala": 888.677710089132,
+      "tuk": 6586.155824290447,
+      "etk": 4753.200654532358
+    }
+  }
+]

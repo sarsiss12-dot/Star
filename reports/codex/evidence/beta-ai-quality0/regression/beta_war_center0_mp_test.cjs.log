@@ -1,0 +1,10 @@
+PASS iki misafir teklif/karşı teklif, gerçek katılım ve tek ödeme, üçüncü oyuncudan gizli
+PASS barışta bekleyen katılım kapanır, yeni savaş eski teklifi canlandırmaz
+PASS host salt-okunur savaş DTOsu ve yetki/gizlilik, paket tekrarında çift etki yok
+PASS ret ve geri çekme savaşı/ödemeyi başlatmaz
+PASS MP koşullu karşı teklif: kabul savaş/ödeme üretmez, yalnız sahibi son onay verir
+PASS bilinmeyen üçüncü savaşın kimliği tahminle teklif/quote üzerinden yoklanamaz
+PASS başarısız toplu ilan özel MP haber kanalına hayalet savaş kaydı bırakmaz
+PASS iki karşı teklif turunda yalnız son şart ve aynı hazırlık uygulanır
+PASS AI yardım çağrısı uzak insanın gelen kutusuna gider; AI misafir adına kabul etmez
+GEÇEN: 9 KALAN: 0

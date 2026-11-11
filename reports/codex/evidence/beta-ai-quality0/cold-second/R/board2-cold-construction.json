@@ -1,0 +1,134 @@
+{
+  "before": {
+    "v": 1,
+    "next": 4,
+    "queues": {
+      "30": [
+        {
+          "id": 2,
+          "fleet": 30,
+          "empire": 5,
+          "system": 39,
+          "systemName": "Athaeven",
+          "key": "karakol",
+          "state": "building",
+          "born": 90.419948,
+          "attempts": 0,
+          "next": 90.419948,
+          "why": "Maliyet bir kez ödendi; mevcut yapı motoru çalışıyor"
+        }
+      ],
+      "34": [
+        {
+          "id": 1,
+          "fleet": 34,
+          "empire": 3,
+          "system": 36,
+          "systemName": "Verrus-49",
+          "key": "maden_ist",
+          "state": "building",
+          "born": 90.419948,
+          "attempts": 0,
+          "next": 90.419948,
+          "why": "Maliyet bir kez ödendi; mevcut yapı motoru çalışıyor"
+        }
+      ],
+      "43": [
+        {
+          "id": 3,
+          "fleet": 43,
+          "empire": 1,
+          "system": 12,
+          "systemName": "Cynnar",
+          "key": "bilim_ist",
+          "state": "queued",
+          "born": 181.419948,
+          "attempts": 0,
+          "next": 181.419948,
+          "why": "Sırada; kaynaklar henüz harcanmadı"
+        }
+      ]
+    },
+    "history": [],
+    "metrics": {
+      "ordered": 3,
+      "started": 2,
+      "completed": 0,
+      "failed": 0,
+      "aiOrdered": 2,
+      "aiStarted": 2,
+      "aiCompleted": 0,
+      "routeSearches": 2
+    },
+    "aiBuilders": [
+      34,
+      30
+    ]
+  },
+  "after": {
+    "v": 1,
+    "next": 4,
+    "queues": {
+      "30": [
+        {
+          "id": 2,
+          "fleet": 30,
+          "empire": 5,
+          "system": 39,
+          "systemName": "Athaeven",
+          "key": "karakol",
+          "state": "building",
+          "born": 90.419948,
+          "attempts": 0,
+          "next": 90.419948,
+          "why": "Maliyet bir kez ödendi; mevcut yapı motoru çalışıyor"
+        }
+      ],
+      "34": [
+        {
+          "id": 1,
+          "fleet": 34,
+          "empire": 3,
+          "system": 36,
+          "systemName": "Verrus-49",
+          "key": "maden_ist",
+          "state": "building",
+          "born": 90.419948,
+          "attempts": 0,
+          "next": 90.419948,
+          "why": "Maliyet bir kez ödendi; mevcut yapı motoru çalışıyor"
+        }
+      ],
+      "43": [
+        {
+          "id": 3,
+          "fleet": 43,
+          "empire": 1,
+          "system": 12,
+          "systemName": "Cynnar",
+          "key": "bilim_ist",
+          "state": "queued",
+          "born": 181.419948,
+          "attempts": 0,
+          "next": 181.419948,
+          "why": "Sırada; kaynaklar henüz harcanmadı"
+        }
+      ]
+    },
+    "history": [],
+    "metrics": {
+      "ordered": 3,
+      "started": 2,
+      "completed": 0,
+      "failed": 0,
+      "aiOrdered": 2,
+      "aiStarted": 2,
+      "aiCompleted": 0,
+      "routeSearches": 2
+    },
+    "aiBuilders": [
+      34,
+      30
+    ]
+  }
+}
