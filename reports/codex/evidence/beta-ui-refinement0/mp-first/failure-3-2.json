@@ -1,0 +1,93 @@
+{
+  "url": "/",
+  "vote": {
+    "name": "Evrensel Forumu",
+    "founder": 1,
+    "members": [
+      1,
+      0,
+      2,
+      6,
+      4,
+      3,
+      5,
+      7
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "vote": {
+      "key": "ticaretStd",
+      "target": null,
+      "opened": 6.953400000000016,
+      "yes": [
+        6,
+        4,
+        3,
+        7,
+        1
+      ],
+      "no": [
+        5
+      ],
+      "speeches": [
+        {
+          "id": 6,
+          "txt": "Geleceği anlayan onu yönetir.",
+          "yes": true
+        },
+        {
+          "id": 5,
+          "txt": "Barış güzeldir ama sınırlarımız kanla çizildi.",
+          "yes": false
+        },
+        {
+          "id": 7,
+          "txt": "Galaksi savaşla değil sözle birleşir.",
+          "yes": true
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {}
+  },
+  "inbox": [
+    {
+      "uid": 1,
+      "kind": "cncnew",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "GALAKTİK KONSEY KURULDU",
+      "sub": "Saf Akıl Ağı galaksiyi masaya çağırdı",
+      "key": "cncnew",
+      "born": 6.953400000000016,
+      "data": 1
+    },
+    {
+      "uid": 2,
+      "kind": "cncvote",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": true,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "cnc6.953400000000016",
+      "born": 6.953400000000016,
+      "data": "ticaretStd"
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

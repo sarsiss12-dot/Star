@@ -1,0 +1,84 @@
+FAIL pregame 360x800 Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   '48 · deneysel'
++ ]
+- []
+
+FAIL pregame 390x844 Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   '48 · deneysel'
++ ]
+- []
+
+FAIL pregame 412x915 Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   '48 · deneysel'
++ ]
+- []
+
+PASS pregame 800x360
+PASS pregame 915x412
+FAIL colony 800 Expected values to be strictly equal:
+
+0 !== 1
+
+PASS fleet 800
+FAIL event-spy 800 Expected values to be strictly equal:
+
+1 !== 3
+
+FAIL colony 844 Expected values to be strictly equal:
+
+0 !== 1
+
+FAIL fleet 844 The expression evaluated to a falsy value:
+
+  assert(boxes.off||boxes.tag.right<=boxes.side.left+1)
+
+FAIL event-spy 844 Expected values to be strictly equal:
+
+1 !== 3
+
+FAIL colony 915 Expected values to be strictly equal:
+
+0 !== 1
+
+PASS fleet 915
+FAIL event-spy 915 Expected values to be strictly equal:
+
+1 !== 3
+
+FAIL colony 960 Expected values to be strictly equal:
+
+0 !== 1
+
+PASS fleet 960
+FAIL event-spy 960 Expected values to be strictly equal:
+
+1 !== 3
+
+FAIL colony 1280 Expected values to be strictly equal:
+
+0 !== 1
+
+PASS fleet 1280
+FAIL event-spy 1280 Expected values to be strictly equal:
+
+1 !== 3
+
+FAIL colony 1920 Expected values to be strictly equal:
+
+0 !== 1
+
+PASS fleet 1920
+FAIL event-spy 1920 Expected values to be strictly equal:
+
+1 !== 3
+
+TOTAL 7/16

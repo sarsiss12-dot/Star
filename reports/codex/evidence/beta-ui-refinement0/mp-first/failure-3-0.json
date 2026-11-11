@@ -1,0 +1,105 @@
+{
+  "url": "/",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "chain",
+      "data": "lab1",
+      "ico": "📖",
+      "cls": "sci",
+      "pause": true,
+      "title": "Yörüngedeki Laboratuvar",
+      "sub": "{SISTEM} sisteminde, hâlâ enerji üreten kapalı bir araştırma ist…",
+      "key": "chain:lab1",
+      "uid": 1,
+      "born": 30.005599999999916
+    },
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a7",
+          "k": "dogal",
+          "n": "Boşluk Balinası İskeleti",
+          "t": "Kilometrelerce uzunlukta, uzayda yüzerek ölmüş bir canlının kalıntısı.",
+          "ch": [
+            {
+              "t": "Kemik yapısını incele",
+              "d": "+240 araştırma"
+            },
+            {
+              "t": "Cesedi hasat et",
+              "d": "+200 yiyecek, +90 mineral"
+            }
+          ]
+        },
+        "sys": {
+          "id": 24,
+          "x": 2658.386288937379,
+          "y": 320.0225839007121,
+          "name": "Draven",
+          "star": {
+            "n": "F Beyaz-Sarı",
+            "c": "#fff6e0",
+            "r": 6,
+            "w": 12
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tro",
+              "dep": null,
+              "sz": 10,
+              "seed": 3147,
+              "owner": -1,
+              "col": null,
+              "name": "Draven I",
+              "lux": "filiz"
+            },
+            {
+              "i": 1,
+              "t": "sav",
+              "dep": "bereket",
+              "sz": 19,
+              "seed": 3164,
+              "owner": -1,
+              "col": null,
+              "name": "Draven II"
+            }
+          ],
+          "lanes": [
+            3,
+            10,
+            42
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "def": 0,
+          "queue": [],
+          "anom": false,
+          "pulsar": false,
+          "nebulaS": false,
+          "anomK": "dogal",
+          "_reach": 0,
+          "_shat": false,
+          "cr": 0
+        }
+      },
+      "ico": "🔬",
+      "cls": "sci",
+      "pause": true,
+      "title": "Anomali — Draven",
+      "sub": "Boşluk Balinası İskeleti",
+      "key": "an:24",
+      "uid": 2,
+      "born": 33.44279999999997
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

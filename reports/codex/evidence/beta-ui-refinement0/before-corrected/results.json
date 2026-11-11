@@ -1,0 +1,110 @@
+[
+  {
+    "name": "pregame 360x800",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   '48 · deneysel'\n+ ]\n- []\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:8:755\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:8:361"
+  },
+  {
+    "name": "pregame 390x844",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   '48 · deneysel'\n+ ]\n- []\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:8:755\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:8:361"
+  },
+  {
+    "name": "pregame 412x915",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   '48 · deneysel'\n+ ]\n- []\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:8:755\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:8:361"
+  },
+  {
+    "name": "pregame 800x360",
+    "status": "PASS"
+  },
+  {
+    "name": "pregame 915x412",
+    "status": "PASS"
+  },
+  {
+    "name": "colony 800",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:10:41\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:10:1"
+  },
+  {
+    "name": "fleet 800",
+    "status": "PASS"
+  },
+  {
+    "name": "event-spy 800",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 3\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:12:168\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:12:1"
+  },
+  {
+    "name": "colony 844",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:10:41\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:10:1"
+  },
+  {
+    "name": "fleet 844",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(boxes.off||boxes.tag.right<=boxes.side.left+1)\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:11:643\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:11:1"
+  },
+  {
+    "name": "event-spy 844",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 3\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:12:168\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:12:1"
+  },
+  {
+    "name": "colony 915",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:10:41\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:10:1"
+  },
+  {
+    "name": "fleet 915",
+    "status": "PASS"
+  },
+  {
+    "name": "event-spy 915",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 3\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:12:168\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:12:1"
+  },
+  {
+    "name": "colony 960",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:10:41\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:10:1"
+  },
+  {
+    "name": "fleet 960",
+    "status": "PASS"
+  },
+  {
+    "name": "event-spy 960",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 3\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:12:168\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:12:1"
+  },
+  {
+    "name": "colony 1280",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:10:41\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:10:1"
+  },
+  {
+    "name": "fleet 1280",
+    "status": "PASS"
+  },
+  {
+    "name": "event-spy 1280",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 3\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:12:168\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:12:1"
+  },
+  {
+    "name": "colony 1920",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:10:41\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:10:1"
+  },
+  {
+    "name": "fleet 1920",
+    "status": "PASS"
+  },
+  {
+    "name": "event-spy 1920",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 3\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:12:168\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:12:1"
+  }
+]

@@ -1,0 +1,395 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 10278
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 19860
+    },
+    {
+      "name": "P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket",
+      "status": "PASS",
+      "ms": 43778
+    },
+    {
+      "name": "UI23 misafir gezegen menüsü ve küçültme",
+      "status": "PASS",
+      "ms": 9334
+    },
+    {
+      "name": "ER0 katılımcı casusluk, hedef güvenliği ve gerçek isyan müdahalesi",
+      "status": "PASS",
+      "ms": 21377
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b18",
+      "build": "96h10p23",
+      "files": {
+        "mp-core.js": "e9832e667a6f",
+        "relay.js": "2b3b60a77075",
+        "mp1-host.js": "58355968ecef",
+        "join.js": "bc2732493741",
+        "mirror.js": "0be83dc59fd8",
+        "guest-stars.js": "27e779c107d5",
+        "mp71-dip.js": "791d18e17978",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b18 · oyun 96h10p23 · misafir · host bağlı · aşama: ready · ayna r4 03:36:08 · kurulum 6 ms · son komut: yok · son hata: yok",
+    "p0": [
+      {
+        "visibility": true,
+        "shared": 0,
+        "habitat": true,
+        "foreignHull": 0.42,
+        "ownHull": 0.55,
+        "privacy": true
+      },
+      {
+        "kind": "anomaly",
+        "decision": 1,
+        "before": {
+          "a": 0,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 150,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "event",
+        "decision": 2,
+        "before": {
+          "a": 150,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 410,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "chain",
+        "decision": 3,
+        "before": {
+          "a": 410,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 410,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "CDecision": 1,
+        "CResearch": 180,
+        "BUnchanged": true
+      },
+      {
+        "foundingNotification": "NOT RUN: no founded proposal in this filtered case"
+      },
+      {
+        "shareEndedLiveRemoved": true,
+        "discoveryRetained": true
+      },
+      {
+        "routes": [
+          {
+            "role": "military",
+            "id": 4,
+            "path": [
+              32
+            ]
+          },
+          {
+            "role": "bilim",
+            "id": 5,
+            "path": [
+              32
+            ]
+          },
+          {
+            "role": "koloni",
+            "id": 6,
+            "path": [
+              32
+            ]
+          },
+          {
+            "role": "insaat",
+            "id": 28,
+            "path": [
+              32
+            ]
+          }
+        ]
+      },
+      {
+        "motion": [
+          {
+            "x": 2030.923346661975,
+            "y": 2463.4188241211023,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2035.5691698320004,
+            "y": 2465.5778116000456,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2037.3918504606916,
+            "y": 2466.424840105316,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2039.0707865605223,
+            "y": 2467.2050682553813,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2040.0080008859502,
+            "y": 2467.640606570042,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2041.3534496747122,
+            "y": 2468.2658578941214,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2042.4574076591016,
+            "y": 2468.778884623368,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2043.831605353636,
+            "y": 2469.4174960184887,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2047.4424679158665,
+            "y": 2471.0955209399576,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2048.575174806028,
+            "y": 2471.621907740245,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2049.9493725005623,
+            "y": 2472.2605191353655,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2051.44431560071,
+            "y": 2472.9552428294946,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2052.191787150784,
+            "y": 2473.3026046765594,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2053.3359935991416,
+            "y": 2473.834335503352,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2054.2732079314237,
+            "y": 2474.2698738211984,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2055.5611589086416,
+            "y": 2474.8684050031957,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2058.9822786955183,
+            "y": 2476.458253457069,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2060.235730984439,
+            "y": 2477.04075255318,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2061.6961754031436,
+            "y": 2477.719444164609,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2062.938128127014,
+            "y": 2478.296599231029,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2063.955839394087,
+            "y": 2478.769545747153,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2064.97355066116,
+            "y": 2479.2424922632767,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2066.020010827151,
+            "y": 2479.7287988472563,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2069.751618794995,
+            "y": 2481.4629360677345,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2071.1200667138583,
+            "y": 2482.098875451195,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2072.5575120024623,
+            "y": 2482.766879003242,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2073.787965168136,
+            "y": 2483.338690043158,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2075.09316549293,
+            "y": 2483.945237269691,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2076.956094585589,
+            "y": 2484.8109698725075,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          },
+          {
+            "x": 2078.215296657035,
+            "y": 2485.396140983464,
+            "actualX": 2086.322488091614,
+            "actualY": 2489.163681020197
+          }
+        ]
+      },
+      {
+        "reconnect": true
+      }
+    ],
+    "er0": [
+      {
+        "spyNative": true,
+        "target": 3,
+        "authoritativeCost": 70
+      },
+      {
+        "oldPreviewInvalid": true,
+        "newTarget": 4,
+        "noOldCommand": true
+      },
+      {
+        "lateRealHostAck": true,
+        "newTarget": 3,
+        "otherModalPreserved": true
+      },
+      {
+        "ownRisk": true,
+        "realPolicy": "relief",
+        "actualCosts": {
+          "min": 160,
+          "yiy": 80,
+          "etk": 25
+        },
+        "thirdPartyPrivate": true
+      }
+    ]
+  },
+  "pass": 5,
+  "fail": 0
+}

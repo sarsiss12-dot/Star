@@ -1335,6 +1335,46 @@ html[data-ui-scaled] #menu .mwrap{max-width:min(860px,calc((100vw - 16px) / var(
 #diploPane.colonyWorkspace .dpBox{pointer-events:auto;width:100%;height:100%;max-height:100%;border-radius:0;min-width:0}
 .colonyTable{overflow:auto;max-height:52vh;overscroll-behavior:contain}.colonyTable table{border-collapse:collapse;min-width:650px;width:100%;font-size:11px}.colonyTable td,.colonyTable th{border-bottom:1px solid var(--line);padding:7px;text-align:left}.colonyTable small{display:block;color:var(--muted)}.colonyTable button{color:var(--cyan);min-height:30px;text-align:left}.colonyTable .selected{background:#18323a}.colonySort{display:flex;flex-wrap:wrap;gap:3px}.colonySort button{min-height:30px}.colonyExplanation{font-size:11px;padding:7px;border:1px solid var(--line);overflow-wrap:anywhere}.colonyExplanation summary{cursor:pointer;color:var(--ember)}
  .spyWorkspace{display:grid;grid-template-columns:minmax(110px,27%) minmax(0,1fr);gap:8px;align-items:start}.spyWorkspace aside{position:sticky;top:0;max-height:65vh;overflow:auto}.spyWorkspace main{min-width:0}.spyWorkspace .ivNav{position:sticky;top:0;z-index:2;background:#0c1424}.spyCategories{display:flex;gap:4px;flex-wrap:wrap}
+/* BETA-UI-REFINEMENT.0: intrinsic widths and responsive content, scoped to existing surfaces. */
+#setup .grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,125px),1fr))}
+#setup .grid>*,#setup .btnrow>*{min-width:0;overflow-wrap:anywhere}
+#setup .btnrow{flex-wrap:wrap}
+#setup .btnrow>*{flex:1 1 72px;width:auto;letter-spacing:.04em}
+#setup .card .cn,#setup .sect h2{font-family:var(--mono)}
+#setup .card .cd,#setup .opt small{font-family:var(--sans);line-height:1.45}
+#setup .steps{max-width:100%;overflow-x:auto}
+.colonyTable{container-type:inline-size;overflow-x:visible}
+.colonyTable table{min-width:0;table-layout:fixed}
+.colonyTable td,.colonyTable th{overflow-wrap:anywhere;min-width:0}
+.colonyTable td:last-child span{display:inline-block}
+.colonyTable [data-a="colonyMap"]{display:block;font-size:11px;min-height:36px;padding:4px}
+.colonySort button{flex:0 1 auto;padding:5px}
+#colonyRestoreChip{position:fixed;left:62px;top:64px;max-width:calc(100vw - 80px);z-index:42;min-height:44px;background:var(--hull);border:1px solid var(--cyan)}
+@container(max-width:560px){
+ .colonyTable thead{display:none}.colonyTable tbody,.colonyTable table{display:block}
+ .colonyTable tr{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);padding:3px}
+ .colonyTable td{border:0;padding:3px;font-size:11px}
+ .colonyTable td:first-child,.colonyTable td:last-child{grid-column:1/-1}
+ .colonyTable td:first-child>button:first-child{font-size:12px;font-weight:600;max-width:100%}
+ .colonyTable td:nth-child(2)::before{content:'Nüfus · ';color:var(--muted)}
+ .colonyTable td:nth-child(3)::before{content:'İstikrar · ';color:var(--muted)}
+ .colonyTable td:nth-child(4){grid-column:1/-1}
+ .colonyTable [data-a="colonyMap"]{display:inline-block;margin-left:8px}
+ .colonyTable small{display:inline;margin-left:5px}
+}
+#seltag{box-sizing:border-box;display:flex;flex-wrap:wrap;gap:4px;padding:5px;white-space:normal}
+#seltag>span{flex:1 1 100px;white-space:nowrap;min-width:0}
+#seltag button{min-height:38px;padding:5px;min-width:38px}
+#seltag [data-a="route"]{min-width:68px}
+.spyWorkspace .ivNav{display:flex;flex-wrap:wrap}
+.spyWorkspace .ivTab{flex:1 1 88px;min-width:0;min-height:44px;white-space:normal}
+.spyWorkspace .ivTab span{white-space:normal;overflow:visible;text-overflow:clip;font-size:10px}
+@media(max-width:1100px){
+ .spyWorkspace{grid-template-columns:minmax(0,1fr)}
+ .spyWorkspace aside{position:static;display:flex;gap:4px;max-height:110px;overflow:auto;flex-wrap:wrap}
+ .spyWorkspace aside button{flex:1 1 110px;min-width:0;overflow-wrap:anywhere}
+}
+
 </style>
 </head>
 <body>

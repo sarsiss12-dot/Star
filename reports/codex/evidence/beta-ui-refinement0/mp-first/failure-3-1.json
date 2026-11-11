@@ -1,0 +1,109 @@
+{
+  "url": "/mp/play",
+  "vote": null,
+  "inbox": [
+    {
+      "kind": "anomaly",
+      "data": {
+        "a": {
+          "id": "a3",
+          "k": "sinyal",
+          "n": "Sessiz Sinyal",
+          "t": "Gezegenin çekirdeğinden ritmik bir darbe geliyor. Hiçbir dile benzemiyor.",
+          "ch": [
+            {
+              "t": "Sinyali yanıtla",
+              "d": "Riskli: bilinmeyen sonuç",
+              "uncertain": true
+            },
+            {
+              "t": "Kayıt al ve uzaklaş",
+              "d": "+90 araştırma"
+            }
+          ]
+        },
+        "sys": {
+          "id": 15,
+          "x": 4114.945545325629,
+          "y": 2930.4770677778383,
+          "name": "Draeidor",
+          "star": {
+            "n": "K Turuncu",
+            "c": "#ffab5c",
+            "r": 5,
+            "w": 22
+          },
+          "planets": [
+            {
+              "i": 0,
+              "t": "tok",
+              "dep": null,
+              "sz": 12,
+              "seed": 1968,
+              "name": "Draeidor I",
+              "owner": -1
+            },
+            {
+              "i": 1,
+              "t": "tro",
+              "dep": null,
+              "sz": 15,
+              "seed": 1985,
+              "name": "Draeidor II",
+              "owner": -1
+            },
+            {
+              "i": 2,
+              "t": "buz",
+              "dep": null,
+              "sz": 18,
+              "seed": 2002,
+              "name": "Draeidor III",
+              "owner": -1
+            },
+            {
+              "i": 3,
+              "t": "ast",
+              "dep": null,
+              "sz": 0,
+              "seed": 2019,
+              "name": "Draeidor IV",
+              "owner": -1
+            }
+          ],
+          "lanes": [
+            22,
+            13
+          ],
+          "owner": -1,
+          "surv": [
+            0
+          ],
+          "seen": [
+            0
+          ],
+          "queue": [],
+          "anom": false,
+          "anomK": "sinyal",
+          "def": 0,
+          "pulsar": false,
+          "nebulaS": false,
+          "_reach": 0,
+          "_shat": false
+        }
+      },
+      "decisionId": 1,
+      "uid": 1,
+      "key": "personal:1",
+      "born": 61.705600000000516,
+      "pause": false,
+      "ico": "🔬",
+      "cls": "sci",
+      "title": "Sessiz Sinyal",
+      "sub": "Gezegenin çekirdeğinden ritmik bir darbe geliyor. Hiçbir dile benzemiyor.",
+      "hidden": false
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

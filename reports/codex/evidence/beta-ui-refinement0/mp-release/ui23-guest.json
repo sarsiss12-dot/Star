@@ -1,0 +1,8 @@
+{
+  "own32Colonies": true,
+  "outEmpNative": true,
+  "minimizeRestoreNative": true,
+  "noHorizontalOverflow": true,
+  "thirdPartyPrivate": true,
+  "hostResourcesShipsRngUnchanged": true
+}

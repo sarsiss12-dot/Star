@@ -243,6 +243,7 @@ const UI = {
          <div class="grpOut" id="outEmp">
            <button class="tool" id="impBtn" data-a="globalPane" data-x="imp"
              title="Devlet">👑<span>Devlet</span></button>
+           <button class="tool" id="coloniesBtn" data-a="colonies" title="Gezegenler / Habitatlar">🌍<span>Gezegenler / Habitatlar</span></button>
            <button class="tool" id="bilimBtn" data-a="globalPane" data-x="bilim"
              title="Bilim">✦<span>Bilim</span></button>
            <button class="tool" data-a="news" title="Galaktik Haberler">📰<span>Haberler</span></button>
@@ -2188,9 +2189,13 @@ const UI = {
     this.surfaceRender(t,html,'selection:'+f.id,true);
     // Screen rectangles and UI-local CSS pixels must use the same zoom conversion.
     const zoom=this.getUIScale?this.getUIScale().effective/100:1,side=$('sidebar'),sr=side?.getBoundingClientRect(),pod=$('timepod')?.getBoundingClientRect();
-    const right=side&&!side.classList.contains('off')&&sr?.width>0?Math.min(window.innerWidth,sr.left):window.innerWidth;
-    t.style.left=(Math.max(1,right)/2/zoom)+'px';t.style.maxWidth=(Math.max(1,right-20)/zoom)+'px';
-    t.style.bottom=(pod?.height>0?window.innerHeight-pod.top+6:6)/zoom+'px';
+    const right=side&&!side.classList.contains('off')&&sr?.width>0?Math.min(window.innerWidth,sr.left,window.innerWidth-sr.width):window.innerWidth;
+    const left=pod?.width>0?Math.max(8,pod.right+8):8,available=right-left-8;
+    // Prefer the space beside the time controls. On a very narrow map use a second row above them.
+    const narrow=available<230,L=narrow?8:left,R=Math.max(L+1,right-8),width=(R-L)/zoom;
+    t.style.width=width+'px';t.style.maxWidth=width+'px';t.style.left=((L+R)/2/zoom)+'px';
+    t.style.bottom=(narrow&&pod?.height>0?window.innerHeight-pod.top+8:8)/zoom+'px';
+
   },
 
   /* =============== SİSTEM =============== */
@@ -2352,7 +2357,6 @@ const UI = {
       const dep = pl.dep ? DEPOSITS.find(d=>d.id===pl.dep) : null;
       const mine = pl.owner === 0;
       h += `<div class="box" data-colony-planet="${s.id}:${pl.i}">`;
-      if(typeof ColonyUI!=='undefined')h+=ColonyUI.planet(e,s,pl);
       if(hasCivic(e,'devourer')){const q=canDevour(e,s,pl);h+=`<button class="abtn dgr" data-a="devour" data-x="${s.id}:${pl.i}" ${q.ok?'':'disabled'}>🌟 Gezegeni Tüket</button><div class="mini">${esc(q.ok?'Kalıcı işlem; onay ekranında kayıpları incele.':q.why)}</div>`;}
       if(pl.col){
         const folded=folds.has(s.id+':'+pl.i),owner=territoryOwnerInfo(pl.owner);
@@ -2377,6 +2381,7 @@ const UI = {
       }
       h += `<div class="bt"><span>${pl.col?'':esc(pl.name)}${sym}</span>${!pl.col&&pl.owner>=0?`<span class="flag" style="background:${G.emps[pl.owner].col}"></span>`:''}</div>`;
       h += `<div class="bd">${def.n}${def.k==='hab'?` · yaşanabilirlik <b style="color:${hab>=60?'#65e08a':hab>=35?'#ff9b3d':'#ff5f6d'}">%${hab}</b>`:''}${pl.sz?` · boyut ${pl.sz}`:''}</div>`;
+      if(typeof ColonyUI!=='undefined')h+=ColonyUI.planet(e,s,pl);
       if(pl.col){
         const colonyOwner=territoryOwnerInfo(pl.owner);
         h += `<div class="mini">Koloni sahibi: <b style="color:${colonyOwner?colonyOwner.col:'#8b98ad'}">${colonyOwner?esc(colonyOwner.name):'Bilinmiyor'}</b></div>`;
@@ -2430,6 +2435,7 @@ const UI = {
         h += `<div class="bar"><i style="width:${clamp(c.pop/c.cap*100,0,100)}%"></i></div>`;
         h += `<div class="row"><span>İstikrar / moral</span><b style="color:${c.stab>55?'#65e08a':c.stab>28?'#ff9b3d':'#ff5f6d'}">${Math.round(c.stab)}</b></div>`;
         h += `<div class="bar ${c.stab>55?'':'hp'}"><i style="width:${clamp(c.stab,0,100)}%;background:${c.stab>55?'#65e08a':c.stab>28?'#ff9b3d':'#ff5f6d'}"></i></div>`;
+        if(mine&&typeof ColonyUI!=='undefined')h+=ColonyUI.stabilityNote(e,s,pl);
         if (c.stab < 28) h += `<div class="mini" style="color:#ff5f6d">⚠ Moral çökük — kuşatma altında teslim olabilir</div>`;
         if (mine){
           const F = focusOf(c), cd = c.fcd||0;
@@ -6605,7 +6611,7 @@ const UI = {
 
   p_imp(){
     const e = G.p, race = RACES[e.race];
-    let h = `<button class="abtn pri" data-a="colonies">GEZEGENLER / HABİTATLAR TABLOSU</button><div class="ph">${esc(e.name)}</div>`;
+    let h = `<div class="ph">${esc(e.name)}</div>`;
     h += `<div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
       <canvas id="empPortrait" width="46" height="46" style="image-rendering:pixelated;flex:0 0 46px;
         background:var(--void);border:1px solid ${e.col}"></canvas>
@@ -7484,7 +7490,7 @@ const UI = {
     return null;
   },
   eventDecisionAuthority(){return true;},
-  choiceExplanation(c){if(c.next&&!c.f)return 'Sonraki bölüm · şimdi ödül uygulanmaz · Sonuç belirsiz';return (c.d||'Sonuç koşullara bağlı')+(c.uncertain||/risk|bilinmeyen|ihtimal|şans/i.test(c.d||'')?' · Sonuç belirsiz':'');},
+  choiceExplanation(c){if(c.next&&!c.f){const intent={grev2a:'Kurtarma çalışmaları öncelik kazanır.',grev2b:'Üretim öncelikli tutulur; sendikalarla sonraki karar beklenir.',grev2c:'Kazanın sorumluları araştırılır; sonraki aşamada rapora karar verilir.'}[c.next]||c.d||c.t;return intent+' · Bu aşamada kaynak/ödül uygulanmaz. '+(CHAINS[c.next]?.n||'Sonraki bölüm')+' aşamasındaki seçim sonucu belirler.';}return (c.d||'Sonuç koşullara bağlı')+(c.uncertain||/risk|bilinmeyen|ihtimal|şans/i.test(c.d||'')?' · Sonuç belirsiz':'');},
   noteChoiceMenu(it){
     const ev=this.noteChoiceData(it);if(!ev)return '';
     if(it.decisionId&&this.eventChoiceWaiting?.(it.decisionId))return '<div class="nOptions" role="status">Karar gönderildi — host yanıtı bekleniyor…</div>';

@@ -1,0 +1,16 @@
+PASS pregame 800x360
+FAIL colony 800 Expected values to be strictly equal:
+
+0 !== 1
+
+FAIL planet-access 800 locator.innerText: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-colony-planet="0:4"] .colonyAccess')[22m
+
+FAIL fleet 800 {"tag":{"x":9.9921875,"y":252,"width":512.953125,"height":58,"top":252,"right":522.9453125,"bottom":310,"left":9.9921875},"pod":{"x":6,"y":316,"width":245,"height":38,"top":316,"right":251,"bottom":354,"left":6},"side":{"x":450,"y":30,"width":350,"height":330,"top":30,"right":800,"bottom":360,"left":450},"off":false}
+FAIL event-spy 800 Expected values to be strictly equal:
+
+1 !== 3
+
+PASS yard 800
+TOTAL 2/4

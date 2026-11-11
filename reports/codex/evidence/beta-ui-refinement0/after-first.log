@@ -1,0 +1,33 @@
+PASS pregame 360x800
+PASS pregame 390x844
+PASS pregame 412x915
+PASS pregame 800x360
+PASS pregame 915x412
+PASS colony 800
+FAIL fleet 800 The expression evaluated to a falsy value:
+
+  assert(boxes.off||boxes.tag.right<=boxes.side.left+1)
+
+PASS event-spy 800
+PASS colony 844
+FAIL fleet 844 The expression evaluated to a falsy value:
+
+  assert(boxes.off||boxes.tag.right<=boxes.side.left+1)
+
+PASS event-spy 844
+PASS colony 915
+PASS fleet 915
+PASS event-spy 915
+PASS colony 960
+PASS fleet 960
+PASS event-spy 960
+PASS colony 1280
+FAIL fleet 1280 The expression evaluated to a falsy value:
+
+  assert(boxes.off||boxes.tag.right<=boxes.side.left+1)
+
+PASS event-spy 1280
+PASS colony 1920
+PASS fleet 1920
+PASS event-spy 1920
+TOTAL 20/3

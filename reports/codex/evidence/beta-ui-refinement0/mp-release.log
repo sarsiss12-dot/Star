@@ -1,0 +1,6 @@
+PASS A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı
+PASS B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek "KONSEY OYLAMASI" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır
+PASS P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket
+PASS UI23 misafir gezegen menüsü ve küçültme
+PASS ER0 katılımcı casusluk, hedef güvenliği ve gerçek isyan müdahalesi
+GEÇEN: 5 KALAN: 0

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "pregame 360x800",
+    "status": "FAIL",
+    "error": "locator.scrollIntoViewIfNeeded: Timeout 29932.001ms exceeded.\nCall log:\n\u001b[2m  - attempting scroll into view action\u001b[22m\n\u001b[2m    2 × waiting for element to be stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying scroll into view action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying scroll into view action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 × waiting for element to be stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying scroll into view action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:8:842\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:8:306"
+  },
+  {
+    "name": "pregame 390x844",
+    "status": "FAIL",
+    "error": "locator.scrollIntoViewIfNeeded: Timeout 29814.894999999997ms exceeded.\nCall log:\n\u001b[2m  - attempting scroll into view action\u001b[22m\n\u001b[2m    2 × waiting for element to be stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying scroll into view action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying scroll into view action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    55 × waiting for element to be stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying scroll into view action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:8:842\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:8:306"
+  },
+  {
+    "name": "pregame 412x915",
+    "status": "FAIL",
+    "error": "locator.scrollIntoViewIfNeeded: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - attempting scroll into view action\u001b[22m\n\u001b[2m    2 × waiting for element to be stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying scroll into view action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying scroll into view action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    44 × waiting for element to be stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying scroll into view action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:8:842\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:8:306"
+  }
+]

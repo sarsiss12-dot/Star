@@ -1,0 +1,84 @@
+{
+  "url": "/mp/play",
+  "vote": {
+    "name": "Evrensel Forumu",
+    "founder": 1,
+    "members": [
+      1,
+      2,
+      0,
+      6,
+      4,
+      3,
+      5,
+      7
+    ],
+    "laws": {},
+    "targeted": {},
+    "treasury": 0,
+    "president": 1,
+    "terms": {
+      "1": 1
+    },
+    "termAge": 0,
+    "voteIn": 2,
+    "dead": false,
+    "byConvention": true,
+    "firstLaw": null,
+    "pariahs": {},
+    "agenda": [],
+    "vote": {
+      "key": "ticaretStd",
+      "opened": 6.953400000000016,
+      "target": null,
+      "yes": [
+        6,
+        4,
+        3,
+        7,
+        1
+      ],
+      "no": [
+        5
+      ],
+      "speeches": [
+        {
+          "id": 6,
+          "txt": "Geleceği anlayan onu yönetir.",
+          "yes": true
+        },
+        {
+          "id": 5,
+          "txt": "Barış güzeldir ama sınırlarımız kanla çizildi.",
+          "yes": false
+        },
+        {
+          "id": 7,
+          "txt": "Galaksi savaşla değil sözle birleşir.",
+          "yes": true
+        }
+      ],
+      "done": false,
+      "age": 0,
+      "sponsor": null
+    },
+    "lastVote": null,
+    "campaign": null
+  },
+  "inbox": [
+    {
+      "kind": "cncvote",
+      "data": "ticaretStd",
+      "ico": "🌐",
+      "cls": "sci",
+      "pause": false,
+      "uid": 1,
+      "born": 15.02019999999997,
+      "title": "KONSEY OYLAMASI",
+      "sub": "Evrensel Ticaret Standardı",
+      "key": "mp73cnc:ticaretStd:"
+    }
+  ],
+  "modal": "",
+  "pane": ""
+}

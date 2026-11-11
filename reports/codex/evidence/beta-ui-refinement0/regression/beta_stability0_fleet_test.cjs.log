@@ -1,0 +1,26 @@
+FAIL merge references owner 0
+ui.js:2192
+    const right=side&&!side.classList.contains('off')&&sr?.width>0?Math.min(innerWidth,sr.left,innerWidth-sr.width):innerWidth;
+                                                                            ^
+
+ReferenceError: innerWidth is not defined
+    at Object.seltag (ui.js:2192:77)
+    at Object.refresh (ui.js:2173:10)
+    at Object.mergeFleets (ui.js:7156:10)
+    at evalmachine.<anonymous>:2:16
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/Star/tests/helpers/runtime.js:112:25)
+    at /workspace/Star/tests/beta_stability0_fleet_test.cjs:8:25
+    at test (/workspace/Star/tests/beta_stability0_fleet_test.cjs:5:28)
+    at Object.<anonymous> (/workspace/Star/tests/beta_stability0_fleet_test.cjs:7:68)
+PASS merge references owner 1
+PASS full split transfers references; partial keeps original
+PASS missing target holds paid orders on load without changing hulls, cost or RNG
+PASS reported-size synthetic fixture: 112 shipments, 117 paid orders preserved; no historical ships invented
+PASS AI orphan recovery uses same paid jobs and bounded monthly decision
+PASS real combat kills target once; audit and paid jobs remain
+PASS real low-supply attrition leaves reinforcements alive
+PASS ownership, stale group, foreign target and unknown system rejected atomically
+PASS bounded audit validator / old saves; pure UI does not mutate canonical state or RNG
+{"pass":9,"fail":1}

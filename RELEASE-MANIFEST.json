@@ -1,11 +1,11 @@
 {
-  "phase": "BETA-STABILITY-AI.0",
-  "build": "96h10p22",
+  "phase": "BETA-UI-REFINEMENT.0",
+  "build": "96h10p23",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p22",
-  "parent_commit": "838f2c392b2cffa9198b88388d1f905e5c744604",
-  "parent_zip_sha256": "5d195fb46363a874d278d6198473d9bc76e1025d98e938bd5a139843a8abd8cf",
+  "pwa_cache": "stars-v96h10p23",
+  "parent_commit": "80d11dacc1bb2fcf139022cd5f8a1a65a2c75a9f",
+  "parent_zip_sha256": "14271929b85ec9af6ae946b556a013b6b01579d64fe6f5129eb459f02c6e9cf9",
   "file_count": 19,
   "files": {
     "ai.js": "ac900e296e39378f9f0caab85de70b7896d9eaebd22b65d259e955cb702fb3de",
@@ -17,16 +17,16 @@
     "construction.js": "19244de7be9ad0d0aaf5bf67cbccd85bd4f2988cd9d670bbe2a7dd4a91905bf5",
     "diplomacy.js": "f425fefd492a68d49527040693cd0887293a1a6f43476106fcfbfa6f5c96b839",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
-    "economy-ui.js": "797431b367504c669c91dda97a1fc7524f42a77d8f10f92a24fd10153457dbcd",
+    "economy-ui.js": "aa9da4f84f0b63ecb8b17e54d3dd844595e98d5a8da5f6a3012de9467a12e3bf",
     "economy.js": "8f07121ff8384318cab8eea416cccddd8d82bfe22cee3857445095e60299a888",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
-    "index.html": "2c828257cb3a797f8abdfebb804db3e95b9c3ab772531e222a98adf7042601ff",
-    "main.js": "35987f196a4da4aceb7b56ff288c54fb5c6a9bc04cfdd9b76641506b4b09c59f",
+    "index.html": "d9e7a066a03e7cb13f7b87799db236f4a4798066e8016ad75e6e5dbd9020a88c",
+    "main.js": "7ec946d98b36efa06f5dedaeea78d452a96942e85379bf4a51c98ddcd73ec274",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "400dbc524750443528b88bfbd0d82aa301fd7b1f12b03d8ea5fa3d73c07603fc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "6c461b2c5b8375ab6ee46361e8d2081a84a79e77d887a3d3b898247cafdcf43c",
-    "ui.js": "885d9e9e1f1bcfe58d7bd98d9f67a9d788f90b4e851e7bf583c4ab1595d9f0d0"
+    "sw.js": "2c42d9263849b3f2bb25e2efe36264934e8f1e43ec090e362834c763e5fe5c2b",
+    "ui.js": "9cdd051664a2065fe74e25b38993684df12468f89d714bb4af37e01e7d3a3dcf"
   },
-  "description": "Filo kimlik geçişlerinde takviye referanslarının korunması; ödenmiş yetim siparişleri bekletme ve host yetkili toplu kurtarma; sınırlı filo yaşam döngüsü kaydı."
+  "description": "Mobil event açıklamaları, kompakt gezegen yönetimi, outEmp koloni erişimi, küçültülebilir responsive liste, filo çubuğu ve pregame/casusluk yerleşimi."
 }

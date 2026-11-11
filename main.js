@@ -1666,7 +1666,7 @@ const CHAINS = {
   grev2a:{n:'Kurtarma', bas:0,
     t:'Bütün ekipman sahaya sürüldü. 200 madenci kurtarıldı; haber tüm imparatorlukta yankılandı.',
     ch:[
-      {t:'Madencileri onurlandır', d:'+40 etki, kolonilerde istikrar +8',
+      {t:'Madencileri onurlandır', d:'−200 mineral, +40 etki, kolonilerde istikrar +8',
        f:g=>{ g.p.res.min -= 200; g.p.res.etk += 40;
               g.p.colonies.forEach(c=>{ const pl = g.sys[c.s].planets[c.p]; if (pl.col) pl.col.stab = clamp(pl.col.stab+8,0,100); });
               return 'Kurtarma başarılı. Halk gurur duyuyor: +40 etki, tüm kolonilerde istikrar arttı.'; }}
@@ -1678,7 +1678,7 @@ const CHAINS = {
        f:g=>{ g.p.res.min += 250;
               g.p.colonies.forEach(c=>{ const pl = g.sys[c.s].planets[c.p]; if (pl.col) pl.col.stab = clamp(pl.col.stab-14,0,100); });
               return 'Sendikalar dağıtıldı. Üretim rekor kırdı ama halk küstü.'; }},
-      {t:'Geç de olsa taviz ver', d:'−120 enerji, istikrar toparlanır',
+      {t:'Geç de olsa taviz ver', d:'−120 enerji, +150 mineral',
        f:g=>{ g.p.res.ene -= 120; g.p.res.min += 150;
               return 'Taviz kabul edildi. Kriz atlatıldı ama güven yıprandı.'; }}
     ]},
@@ -8643,7 +8643,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p22';
+const BUILD_ID = '96h10p23';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

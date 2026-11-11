@@ -1,0 +1,30 @@
+[
+  {
+    "name": "pregame 800x360",
+    "status": "PASS"
+  },
+  {
+    "name": "colony 800",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:10:178\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:10:1"
+  },
+  {
+    "name": "planet-access 800",
+    "status": "FAIL",
+    "error": "locator.innerText: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-colony-planet=\"0:4\"] .colonyAccess')\u001b[22m\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:11:358\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:11:12"
+  },
+  {
+    "name": "fleet 800",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: {\"tag\":{\"x\":9.9921875,\"y\":252,\"width\":512.953125,\"height\":58,\"top\":252,\"right\":522.9453125,\"bottom\":310,\"left\":9.9921875},\"pod\":{\"x\":6,\"y\":316,\"width\":245,\"height\":38,\"top\":316,\"right\":251,\"bottom\":354,\"left\":6},\"side\":{\"x\":450,\"y\":30,\"width\":350,\"height\":330,\"top\":30,\"right\":800,\"bottom\":360,\"left\":450},\"off\":false}\n    at /workspace/Star/tests/browser-beta-ui23.cjs:12:832\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:12:1"
+  },
+  {
+    "name": "event-spy 800",
+    "status": "FAIL",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 3\n\n    at /workspace/Star/tests/browser-beta-ui23.cjs:13:168\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at process.processImmediate (node:internal/timers:541:9)\n    at async test (/workspace/Star/tests/browser-beta-ui23.cjs:6:36)\n    at async /workspace/Star/tests/browser-beta-ui23.cjs:13:1"
+  },
+  {
+    "name": "yard 800",
+    "status": "PASS"
+  }
+]

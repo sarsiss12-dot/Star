@@ -1,0 +1,10 @@
+{
+  "colonies": 32,
+  "closedRefreshes": 100,
+  "closedHtmlBuilds": 0,
+  "openHtmlBuilds": 100,
+  "totalMs": 698.093762,
+  "averageMs": 6.98093762,
+  "pureSaveRng": true,
+  "scope": "VM HTML preparation, not Android FPS"
+}

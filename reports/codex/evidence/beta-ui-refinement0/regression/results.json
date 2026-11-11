@@ -1,0 +1,62 @@
+[
+  {
+    "command": "node tests/beta_ui_refinement0_test.cjs",
+    "exit": 0,
+    "seconds": 0.3
+  },
+  {
+    "command": "node tests/beta_stability0_fleet_test.cjs",
+    "exit": 1,
+    "seconds": 2.63
+  },
+  {
+    "command": "node tests/beta_stability0_mp_test.cjs",
+    "exit": 0,
+    "seconds": 0.66
+  },
+  {
+    "command": "node tests/beta_board2_colony_test.cjs",
+    "exit": 0,
+    "seconds": 0.85
+  },
+  {
+    "command": "node tests/beta_board2_privacy_test.cjs",
+    "exit": 0,
+    "seconds": 0.42
+  },
+  {
+    "command": "node tests/beta_board2_remote_test.cjs",
+    "exit": 0,
+    "seconds": 0.86
+  },
+  {
+    "command": "node tests/beta_espionage_rebellion0_test.cjs",
+    "exit": 0,
+    "seconds": 3.45
+  },
+  {
+    "command": "node tests/beta_espionage_rebellion0_mp_test.cjs",
+    "exit": 0,
+    "seconds": 1.75
+  },
+  {
+    "command": "node tests/mp_p0_decisions_test.cjs",
+    "exit": 0,
+    "seconds": 1.61
+  },
+  {
+    "command": "node tests/mp75_war_test.js",
+    "exit": 0,
+    "seconds": 0.86
+  },
+  {
+    "command": "node tests/perf1_equivalence_test.js",
+    "exit": 0,
+    "seconds": 1.8
+  },
+  {
+    "command": "node tests/perf2_equivalence_test.js",
+    "exit": 0,
+    "seconds": 2.68
+  }
+]

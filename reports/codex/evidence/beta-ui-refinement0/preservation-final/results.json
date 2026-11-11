@@ -1,0 +1,38 @@
+[
+  {
+    "test": "all event/anomaly/chain callbacks and transitions identical",
+    "status": "PASS"
+  },
+  {
+    "test": "p22/current seed23 three months raw Save8/RNG",
+    "status": "PASS"
+  },
+  {
+    "test": "CHAINS.grev1 pure shared descriptions",
+    "status": "PASS"
+  },
+  {
+    "test": "CHAINS.siyaset1 pure shared descriptions",
+    "status": "PASS"
+  },
+  {
+    "test": "ANOMALIES[0] pure shared descriptions",
+    "status": "PASS"
+  },
+  {
+    "test": "ANOMALIES[2] pure shared descriptions",
+    "status": "PASS"
+  },
+  {
+    "test": "EVENTS[0] pure shared descriptions",
+    "status": "PASS"
+  },
+  {
+    "test": "CHAINS.grev2a pure shared descriptions",
+    "status": "PASS"
+  },
+  {
+    "test": "CHAINS.grev2b pure shared descriptions",
+    "status": "PASS"
+  }
+]

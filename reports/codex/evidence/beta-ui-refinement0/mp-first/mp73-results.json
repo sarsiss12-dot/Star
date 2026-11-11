@@ -1,0 +1,395 @@
+{
+  "results": [
+    {
+      "name": "A1 rehber 1–8: oda, iki farklı devlet, hazır, başlat; iki ekranda galaksi; sürüm işareti lobi / başlangıç / MP çubuğunda ve /mp/version oyun build'iyle aynı",
+      "status": "PASS",
+      "ms": 11216
+    },
+    {
+      "name": "B1 konsey motorun kendi yoluyla kurulur (fikstür: temas); AI insanlar adına oy / sponsor yazmaz; B gerçek \"KONSEY OYLAMASI\" kartından Konsey ekranını açar ve EVET (dokunma) → host kaydeder, oylama açık kalır",
+      "status": "PASS",
+      "ms": 28600
+    },
+    {
+      "name": "P0 katılımcı görüş, sağlık, özel kararlar, rota ve görsel hareket",
+      "status": "PASS",
+      "ms": 42715
+    },
+    {
+      "name": "UI23 misafir gezegen menüsü ve küçültme",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n    res: '[{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000},{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000},{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000},{\"min\":400,\"ene\":300,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":70},{\"min\":500,\"ene\":375,\"yiy\":225,\"ala\":275,\"ara\":0,\"tuk\":188,\"etk\":88},{\"min\":400,\"ene\":300,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":70},{\"min\":400,\"ene\":300,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":70},{\"min\":400,\"ene\":300,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":70},{\"min\":400,\"ene\":300,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":70}]',\n+   rng: -37966306,\n+   ships: '[{\"id\":1,\"e\":0,\"sys\":7,\"x\":3199.677851434881,\"y\":600.0459387897165,\"ships\":[{\"c\":\"kor\",\"h\":1},{\"c\":\"kor\",\"h\":1},{\"c\":\"kor\",\"h\":1}],\"path\":[],\"mv\":null,\"ord\":null,\"name\":\"1. Muhafız Filosu\",\"stance\":\"agresif\",\"combat\":0,\"surv\":0},{\"id\":2,\"e\":0,\"sys\":37,\"x\":3032.030691033458,\"y\":151.5241344061851,\"ships\":[{\"c\":\"bil\",\"h\":1}],\"path\":[],\"mv\":null,\"ord\":null,\"name\":\"Kâşif Vela\",\"stance\":\"agresif\",\"combat\":0,\"surv\":16.346239999999973,\"auto\":true,\"explore\":{\"target\":37,\"status\":\"travel\",\"next\":5.506600000000011,\"review\":12.12}},{\"id\":3,\"e\":0,\"sys\":7,\"x\":3199.677851434881,\"y\":600.0459387897165,\"ships\":[{\"c\":\"kol\",\"h\":1}],\"path\":[],\"mv\":null,\"ord\":null,\"name\":\"Yerleşim Konvoyu\",\"stance\":\"agresif\",\"combat\":0,\"surv\":0},{\"id\":4,\"e\":1,\"sys\":1,\"x\":1455.1053816693468,\"y\":4002.268713282939,\"ships\":[{\"c\":\"kor\",\"h\":1},{\"c\":\"kor\",\"h\":1},{\"c\":\"kor\",\"h\":1}],\"path\":[],\"mv\":null,\"ord\":null,\"name\":\"Çok Uzun Muhafız Filosu Türkçe Adı\",\"stance\":\"agresif\",\"combat\":0,\"surv\":0},{\"id\":5,\"e\":1,\"sys\":16,\"x\":1804.1705863619818,\"y\":3717.506"
+    },
+    {
+      "name": "ER0 katılımcı casusluk, hedef güvenliği ve gerçek isyan müdahalesi",
+      "status": "PASS",
+      "ms": 19174
+    }
+  ],
+  "errors": [],
+  "metrics": {
+    "startModal": [
+      "🛰 DANIŞMAN",
+      "",
+      "🛰 DANIŞMAN",
+      "",
+      ""
+    ],
+    "version": {
+      "mp": "MP.8.9b17",
+      "build": "96h10p22",
+      "files": {
+        "mp-core.js": "fb2324e86b48",
+        "relay.js": "35974ba78c75",
+        "mp1-host.js": "58355968ecef",
+        "join.js": "bc2732493741",
+        "mirror.js": "0be83dc59fd8",
+        "guest-stars.js": "27e779c107d5",
+        "mp71-dip.js": "791d18e17978",
+        "mp7-setup.js": "48c0f282a254"
+      }
+    },
+    "unsupported": [
+      "autoEvent",
+      "diagCopy",
+      "joinRebel",
+      "leaveRebel",
+      "mapFix",
+      "physio",
+      "restart",
+      "rollName",
+      "sandbox",
+      "sitPick",
+      "stashNote",
+      "survey",
+      "terra",
+      "toTitle",
+      "tplDel",
+      "tplLoad",
+      "tplSave",
+      "trigCrisis"
+    ],
+    "guestDiag": "STARS MP.8.9b17 · oyun 96h10p22 · misafir · host bağlı · aşama: ready · ayna r4 03:32:12 · kurulum 5 ms · son komut: yok · son hata: yok",
+    "p0": [
+      {
+        "visibility": true,
+        "shared": 2,
+        "habitat": true,
+        "foreignHull": 0.42,
+        "ownHull": 0.55,
+        "privacy": true
+      },
+      {
+        "kind": "anomaly",
+        "decision": 1,
+        "before": {
+          "a": 0,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 130,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "event",
+        "decision": 2,
+        "before": {
+          "a": 130,
+          "m": 3000,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 390,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "kind": "chain",
+        "decision": 3,
+        "before": {
+          "a": 390,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "after": {
+          "a": 390,
+          "m": 2850,
+          "host": "{\"min\":3000,\"ene\":2000,\"yiy\":180,\"ala\":220,\"ara\":0,\"tuk\":150,\"etk\":3000}",
+          "p": 0
+        },
+        "replay": "rejected"
+      },
+      {
+        "CDecision": 1,
+        "CResearch": 180,
+        "BUnchanged": true
+      },
+      {
+        "foundingNotification": "NOT RUN: no founded proposal in this filtered case"
+      },
+      {
+        "shareEndedLiveRemoved": true,
+        "discoveryRetained": true
+      },
+      {
+        "routes": [
+          {
+            "role": "military",
+            "id": 4,
+            "path": [
+              16
+            ]
+          },
+          {
+            "role": "bilim",
+            "id": 5,
+            "path": [
+              16
+            ]
+          },
+          {
+            "role": "koloni",
+            "id": 6,
+            "path": [
+              16
+            ]
+          },
+          {
+            "role": "insaat",
+            "id": 28,
+            "path": [
+              16
+            ]
+          }
+        ]
+      },
+      {
+        "motion": [
+          {
+            "x": 1507.9188711397098,
+            "y": 3959.1841829552923,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1509.57280206576,
+            "y": 3957.8349284777364,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1511.294134569358,
+            "y": 3956.430688704925,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1512.7717844573726,
+            "y": 3955.225241913731,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1517.7387619732087,
+            "y": 3951.173248842191,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1519.4912028905571,
+            "y": 3949.74363124623,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1521.990245861531,
+            "y": 3947.7049457938433,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1523.6908394143877,
+            "y": 3946.3176245765208,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1527.024624954915,
+            "y": 3943.5979674270475,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1528.3674716940147,
+            "y": 3942.5024912213216,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1529.534037395079,
+            "y": 3941.550822701958,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1531.3590646276602,
+            "y": 3940.06199017187,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1533.2255697493629,
+            "y": 3938.539320540888,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1534.755067001869,
+            "y": 3937.291577371056,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1537.0726441909412,
+            "y": 3935.4009292489454,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1538.316980938743,
+            "y": 3934.3858161616245,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1540.5878955071894,
+            "y": 3932.533234774238,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1541.2826501901427,
+            "y": 3931.966463301492,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1542.0136980307122,
+            "y": 3931.370084361682,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1543.0817537342975,
+            "y": 3930.4987789657653,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1544.020191032834,
+            "y": 3929.733214511402,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1544.8290099201413,
+            "y": 3929.0733910036347,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1548.292413865717,
+            "y": 3926.2479929126075,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1549.5626742957647,
+            "y": 3925.211731635967,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1550.3300152939507,
+            "y": 3924.585745229094,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1551.0144005015334,
+            "y": 3924.027433034092,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1551.6469383508047,
+            "y": 3923.5114172126873,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1553.233467705488,
+            "y": 3922.217148025344,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1554.5659449692173,
+            "y": 3921.130131097363,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          },
+          {
+            "x": 1557.9930557633572,
+            "y": 3918.3343404683574,
+            "actualX": 1567.7144366117386,
+            "actualY": 3910.403769468618
+          }
+        ]
+      },
+      {
+        "reconnect": true
+      }
+    ],
+    "er0": [
+      {
+        "spyNative": true,
+        "target": 3,
+        "authoritativeCost": 70
+      },
+      {
+        "oldPreviewInvalid": true,
+        "newTarget": 4,
+        "noOldCommand": true
+      },
+      {
+        "lateRealHostAck": true,
+        "newTarget": 3,
+        "otherModalPreserved": true
+      },
+      {
+        "ownRisk": true,
+        "realPolicy": "relief",
+        "actualCosts": {
+          "min": 160,
+          "yiy": 80,
+          "etk": 25
+        },
+        "thirdPartyPrivate": true
+      }
+    ]
+  },
+  "pass": 4,
+  "fail": 1
+}
