@@ -2,6 +2,10 @@
 
 Son güncelleme: 2026-11-11. Depo `sarsiss12-dot/Star`.
 
+## Son araştırma — BETA-AI-QUALITY.0
+
+p23 `b35f8cb` üzerinden `codex/stars-beta-ai-quality0`; test/araştırma007b9d0. [Son rapor](reports/codex/BETA-AI-QUALITY0-SONUC.md). p23soğuk oda5/0 veUI30/0, kapsamlı AI baz ölçümleri ve reddedilen dar deney. Yeni AI kalite kazancı kanıtlanmadığı için oyun kodu/ZIP değişmedi, p24build yok. Güçlü AI himaye başlangıcı ve ekonomik darboğazlar açık.
+
 ## Güncel geliştirme adayı — p23
 
 `codex/stars-beta-ui-refinement0-mobile`, kod/paket `183c3ca635c6a65ae0d4320284c2e6ab026efb96`; p22 `80d11da` zincirinden. Oyun96h10p23/PWA23/MP.8.9b18, Save8v8/paket4/protokol1. [Son rapor](reports/codex/BETA-UI-REFINEMENT0-SONUC.md). Dokuz mobil UI alanı geliştirildi; SP29/0, son kaynak native6/0, H/B/C MP5/0 ve p22 gerçek Save8 kurtarma regresyonu PASS. Fiziksel Android/Render ve eski aralıklı etkileşim vakaları için gerçek kullanıcı kabulü bekleniyor. Main veya canlı dağıtım değişmedi.

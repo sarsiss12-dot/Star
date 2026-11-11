@@ -2,6 +2,13 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
+## Son denetim — BETA-AI-QUALITY.0
+
+- Rapor `reports/codex/BETA-AI-QUALITY0-SONUC.md`. p23b35f8cb tabanı; araştırma/test007b9d0, dal `codex/stars-beta-ai-quality0`. Oyun/MP değişmedi; p24runtime yok.
+- Soğuk H/B/C5/0 ve6+6ay; native UI30/0;24regresyon script'i geçti. İlk fikstür/ölçer FAIL'leri korunur. Fiziksel/Render ve eski aralıklı vakalar açık.
+- Beşseed60ay,42/404120ay,200/16/24ay.40478kritikay;420. Vasallık10gözlem ve gerçek koruyucu filo varışı. Güçlü AI yeni demand çağrısı yok, teklif öncesi60ay bekleme kalite sorusu açık.
+- Gıda severe tek satır adayı gerçek sonuç vermedi, RET. p21şok aynen;160etki müdahalesinin bu örnekte kurtarma/sayaç ek yararı yok. AI-RED-KARARLARI güncel.
+
 ## Son teslim — BETA-UI-REFINEMENT.0 / p23
 
 - Ayrıntı: `reports/codex/BETA-UI-REFINEMENT0-SONUC.md`. p22 80d11da tabanı, kod/paket183c3ca, dal `codex/stars-beta-ui-refinement0-mobile`.
