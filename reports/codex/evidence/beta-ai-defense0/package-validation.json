@@ -1,0 +1,112 @@
+{
+  "build": "96h10p23",
+  "bytes": 836950,
+  "sha256": "af6eb03aade38327e48ee290029377e638b40167ff87742a57be82cec5bd7d1d",
+  "crc32": "13718624",
+  "manifestFiles": 19,
+  "members": [
+    {
+      "name": "RELEASE-MANIFEST.json",
+      "bytes": 2157,
+      "crc32": "12B4EEDA"
+    },
+    {
+      "name": "ai.js",
+      "bytes": 295404,
+      "crc32": "79D4A1DA"
+    },
+    {
+      "name": "archive-ui.js",
+      "bytes": 38567,
+      "crc32": "92F16014"
+    },
+    {
+      "name": "audio.js",
+      "bytes": 20197,
+      "crc32": "8E4EBBB4"
+    },
+    {
+      "name": "combat.js",
+      "bytes": 16382,
+      "crc32": "2689E464"
+    },
+    {
+      "name": "commerce-ui.js",
+      "bytes": 11105,
+      "crc32": "1D6711A6"
+    },
+    {
+      "name": "commerce.js",
+      "bytes": 29743,
+      "crc32": "8C20977C"
+    },
+    {
+      "name": "construction.js",
+      "bytes": 8982,
+      "crc32": "B8616443"
+    },
+    {
+      "name": "diplomacy.js",
+      "bytes": 553733,
+      "crc32": "20D5D9F1"
+    },
+    {
+      "name": "economic-ledger.js",
+      "bytes": 17942,
+      "crc32": "A513EE94"
+    },
+    {
+      "name": "economy-ui.js",
+      "bytes": 36358,
+      "crc32": "2C6220B8"
+    },
+    {
+      "name": "economy.js",
+      "bytes": 224301,
+      "crc32": "814DB129"
+    },
+    {
+      "name": "inbox.js",
+      "bytes": 13237,
+      "crc32": "AAE98968"
+    },
+    {
+      "name": "index.html",
+      "bytes": 99734,
+      "crc32": "A06AD9BB"
+    },
+    {
+      "name": "main.js",
+      "bytes": 510332,
+      "crc32": "4EC092E2"
+    },
+    {
+      "name": "manifest.json",
+      "bytes": 1922,
+      "crc32": "641AE79B"
+    },
+    {
+      "name": "map.js",
+      "bytes": 147220,
+      "crc32": "7355DCC7"
+    },
+    {
+      "name": "news.js",
+      "bytes": 6039,
+      "crc32": "A13FF379"
+    },
+    {
+      "name": "sw.js",
+      "bytes": 2804,
+      "crc32": "ED6CD786"
+    },
+    {
+      "name": "ui.js",
+      "bytes": 591722,
+      "crc32": "0B33FA06"
+    }
+  ],
+  "testzip": "PASS",
+  "runtimeManifestSHA256": "PASS",
+  "twoRepeatsEqual": true
+}

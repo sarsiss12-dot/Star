@@ -45,6 +45,14 @@ Ortak ders: yerel bir göstergede kazanç (tek seed, tek kaynak, tek devlet) gen
 - Yeni kanıt: krizdeki başkentte13korsan filosu/3848güç ve her ay yenilenen bombardıman damgası; gerçek istikrar hedefi81,5 olsa da normal toparlanma engelleniyor. Ekonomik kilit yalnız bütçe etiketi veya170madenlik eşik değildir.
 - [Tek sonuç raporu](reports/codex/BETA-AI-RECOVERY0-SONUC.md), [karşılaştırma](reports/codex/evidence/beta-ai-recovery0/comparison.json). Bütün adaylar test runtime'ına enjekte edildi; p23oyun kodu/ZIP'i değişmedi.
 
+## BETA-AI-DEFENSE.0 araştırması (11 Kasım 2026)
+
+- Aynı404/60.ay kaydında yalnız test bombardıman izolasyonu:60→22 kritik ay, istikrar0→81,5 ve son tüketim/gıda netleri+1,43/+21,51. Bu ürün düzeltmesi değildir; korsanlar/uzay çatışmaları korunur, RNG ayrışması açıktır.
+- C1 mevcut savunma çağrı kapısı: hazır kuvvetli fikstürde gerçek emir/çatışma başarılı, fakat404'te60 kritik ay sürer; dünya73→77. RET.
+- C2 C1+işgal altındaki tersanede gövde erteleme: kaynak/gemi israfını azaltır ama kuvvet kilidi sürer;404 dünya73→79, Seed11yeni kritik ay. RET.
+- C3 C1+mevcut bağ, kendi görüşü, yedek kuvvet, rota ve bakım kapılarıyla korsan savunması: Wyndor yardım emri0,404yine60kritik ay/dünya77. RET. Yeni korsan cephesi veya insan adına rıza yaratılmadı.
+- Ürün dosyaları/p23ZIPdeğişmedi, p24build yok. [Tek rapor](reports/codex/BETA-AI-DEFENSE0-SONUC.md), [karşılaştırma](reports/codex/evidence/beta-ai-defense0/comparison.json). Sonraki dar soru kilitten önceki savunma hazırlığı ve mevcut yardım sözleşmesinin korsan kapsamıdır.
+
 ## Açık kalan gerçek sorunlar (çözülmedi)
 
 - ~~Sefer bekleme kilidi~~ → **96H.8'de çözüldü**: bekleme düzeltmesi, sevk bakımı kapısı, müfreze ve geri çağırma ile birlikte (`AI-SEFER-VERIMLILIGI-96H8.md`). 96H.7 yaması tek başına hâlâ reddedilmiş durumda.

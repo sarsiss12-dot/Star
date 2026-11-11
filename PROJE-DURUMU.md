@@ -2,7 +2,11 @@
 
 Son güncelleme: 2026-11-11. Depo `sarsiss12-dot/Star`.
 
-## Son araştırma — BETA-AI-RECOVERY.0
+## Son araştırma — BETA-AI-DEFENSE.0
+
+`codex/stars-beta-ai-defense0`, test/araştırma `05d68e45cefc06efea990f9dfce789f72adbf1d0`. [Tek rapor](reports/codex/BETA-AI-DEFENSE0-SONUC.md). Aynı404/60.ay kaydında test bombardıman izolasyonu istikrarı81,5'e ve tüketimi pozitif nete çıkardı; üç gerçek savunma adayı ise60kritik ayı azaltamadı.135/0 hedefli regresyon,60ay hamSave8/RNGsaf ölçüm, iki eşit p23paketi doğrulandı. Ürün kodu değişmedi; p24build yok. Askerî-ekonomik kurtarma açık; yeni Chromium/soğukMP/fiziksel/Render bu fazda NOT RUN.
+
+## Önceki araştırma — BETA-AI-RECOVERY.0
 
 `codex/stars-beta-ai-recovery0`, deney/testfb438a7. [Son rapor](reports/codex/BETA-AI-RECOVERY0-SONUC.md). Aynı kriz kaydında ekonomik adaylar kalıcı çıkış sağlamadı; üretime alınmadı. Başkentteki sürekli korsan bombardımanı önemli ek kök neden olarak kanıtlandı. p23oyun/MP/ZIPkorundu, p24build yok; ekonomik kurtarma görevi açık.
 

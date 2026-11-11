@@ -2,7 +2,13 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son araştırma — BETA-AI-RECOVERY.0
+## Son araştırma — BETA-AI-DEFENSE.0
+
+- Rapor `reports/codex/BETA-AI-DEFENSE0-SONUC.md`; d8e1d25 tabanı, araştırma/test05d68e4, dal `codex/stars-beta-ai-defense0`. Ürün değişikliği0; p23/PWA23/MP.8.9b18 ve ZIP aynı, p24 yok.
+-404/60.ay Save8 aynı A/B/C: yalnız testte bombardıman izolasyonu60→22 kritik ay/istikrar81,5; gerçek savunma, tersane-erteleme ve mevcut bağlı yardım adayları60 kritik ayı azaltmadı. Dünya73→77/79/77; RET. Hazır kuvvetli mikro senaryoda gerçek rota/çatışma başarılı;404kurtarma değildir.
+-135/0 hedefli regresyon;60ay saf ölçer açık/kapalı hamSave8/RNGaynı;19runtime+5MPaynı. İlk sarmalayıcı/ölçer FAIL'leri korunur.100/9 ve200/16 altıay×3 performans. Yeni Chromium/soğukMP/fiziksel/Render NOT RUN; panoForbidden. Sonraki dar soru baskı kilidinden önce savunma hazırlığı ve korsan yardım kapsamı.
+
+## Önceki araştırma — BETA-AI-RECOVERY.0
 
 - Rapor `reports/codex/BETA-AI-RECOVERY0-SONUC.md`;6f089bd tabanı, deney/testfb438a7, dal `codex/stars-beta-ai-recovery0`. Ürün kodu değişmedi/p24build yok; kalıcı kurtarma bulunamadı.
 -40460.aydan36/60ay eşit-kayıt adayları: en güçlü mal alımı+söküm60→23kritikay fakat sonunda0stok/−12,79net; başkaAI3enerji kritikay. RET. Yeni önemli tanı:13korsan filosu3848güç, sürekli bombardıman, pozitif hedefe rağmen0istikrar;8ay gerçek tekrar.
