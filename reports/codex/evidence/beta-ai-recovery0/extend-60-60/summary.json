@@ -1,0 +1,579 @@
+[
+  {
+    "mode": "base",
+    "months": 60,
+    "sourceSHA": "7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74",
+    "ms": 33254,
+    "world": {
+      "critical": 73,
+      "zero": 70,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 15,
+        "ala": 0,
+        "tuk": 60
+      }
+    },
+    "actor2": {
+      "critical": 60,
+      "zero": 60,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 2,
+        "ala": 0,
+        "tuk": 60
+      }
+    },
+    "colonies": 28,
+    "techs": 84,
+    "ships": 241,
+    "actor2Final": {
+      "id": 2,
+      "dead": false,
+      "res": {
+        "min": 22.534353234134418,
+        "ene": 584.3073237371252,
+        "yiy": 25.01295827135984,
+        "ala": 32.10506960264408,
+        "ara": 19.76370478956558,
+        "tuk": 0,
+        "etk": 682.2038874999996
+      },
+      "inc": {
+        "min": 4.550396159846979,
+        "ene": 4.070456839393429,
+        "yiy": -18.71624978219604,
+        "ala": 0,
+        "ara": 20.718087474722804,
+        "etk": 9.729065,
+        "tuk": -13.78988171290521
+      },
+      "crisis": null,
+      "shortage": true,
+      "cols": 2,
+      "techs": 5,
+      "ships": 0,
+      "wars": [],
+      "schism": 0,
+      "colonies": [
+        {
+          "s": 38,
+          "p": 0,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 2,
+            "santral": 4,
+            "ciftlik": 5,
+            "lab": 1,
+            "fabrika": 3,
+            "tersane": 1,
+            "kale": 0,
+            "liman": 0
+          },
+          "q": []
+        },
+        {
+          "s": 38,
+          "p": 2,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 1,
+            "santral": 1,
+            "ciftlik": 1
+          },
+          "q": []
+        }
+      ]
+    },
+    "rng": -1458142310,
+    "aiMs": 10967.583098000005,
+    "aiN": 636
+  },
+  {
+    "mode": "upkeep",
+    "months": 60,
+    "sourceSHA": "7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74",
+    "ms": 53635,
+    "world": {
+      "critical": 70,
+      "zero": 67,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 10,
+        "ala": 0,
+        "tuk": 60
+      }
+    },
+    "actor2": {
+      "critical": 60,
+      "zero": 60,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 60
+      }
+    },
+    "colonies": 31,
+    "techs": 88,
+    "ships": 222,
+    "actor2Final": {
+      "id": 2,
+      "dead": false,
+      "res": {
+        "min": 67.485128745389,
+        "ene": 893.7517703952939,
+        "yiy": 241.2881540359199,
+        "ala": 52.00285930641652,
+        "ara": 21.47354137649885,
+        "tuk": 0,
+        "etk": 688.2038874999996
+      },
+      "inc": {
+        "min": 0.9087117843896578,
+        "ene": 7.0673246169192625,
+        "yiy": -10.94431055438001,
+        "ala": 0,
+        "ara": 22.780516223772345,
+        "etk": 7.729065,
+        "tuk": -9.724367568852806
+      },
+      "crisis": null,
+      "shortage": true,
+      "cols": 2,
+      "techs": 6,
+      "ships": 0,
+      "wars": [],
+      "schism": 0,
+      "colonies": [
+        {
+          "s": 38,
+          "p": 0,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 2,
+            "santral": 4,
+            "ciftlik": 5,
+            "lab": 1,
+            "fabrika": 4,
+            "tersane": 1,
+            "kale": 0,
+            "liman": 0
+          },
+          "q": []
+        },
+        {
+          "s": 38,
+          "p": 2,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 1,
+            "santral": 1,
+            "ciftlik": 1
+          },
+          "q": []
+        }
+      ]
+    },
+    "rng": 1081936879,
+    "aiMs": 13888.776042000078,
+    "aiN": 626
+  },
+  {
+    "mode": "input-plan",
+    "months": 60,
+    "sourceSHA": "7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74",
+    "ms": 33440,
+    "world": {
+      "critical": 60,
+      "zero": 60,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 60
+      }
+    },
+    "actor2": {
+      "critical": 60,
+      "zero": 60,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 60
+      }
+    },
+    "colonies": 28,
+    "techs": 86,
+    "ships": 205,
+    "actor2Final": {
+      "id": 2,
+      "dead": false,
+      "res": {
+        "min": 71.99707253413668,
+        "ene": 607.1408098142588,
+        "yiy": 59.9163264773199,
+        "ala": 24.529351997272098,
+        "ara": 20.804872634636087,
+        "tuk": 0,
+        "etk": 784.2038874999996
+      },
+      "inc": {
+        "min": 2.3485647482083194,
+        "ene": 0.803515928700453,
+        "yiy": -11.243799747259999,
+        "ala": 4.379333383403546,
+        "ara": 21.29482743379769,
+        "etk": 9.729065,
+        "tuk": -16.459567493789994
+      },
+      "crisis": null,
+      "shortage": true,
+      "cols": 2,
+      "techs": 6,
+      "ships": 0,
+      "wars": [],
+      "schism": 0,
+      "colonies": [
+        {
+          "s": 38,
+          "p": 0,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 3,
+            "santral": 3,
+            "ciftlik": 5,
+            "lab": 1,
+            "dokum": 1,
+            "fabrika": 2,
+            "tersane": 1,
+            "kale": 0,
+            "liman": 0
+          },
+          "q": []
+        },
+        {
+          "s": 38,
+          "p": 2,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 1,
+            "santral": 1,
+            "ciftlik": 1
+          },
+          "q": []
+        }
+      ]
+    },
+    "rng": 1945893731,
+    "aiMs": 10986.991496000206,
+    "aiN": 636
+  },
+  {
+    "mode": "goods-trade",
+    "months": 60,
+    "sourceSHA": "7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74",
+    "ms": 42214,
+    "world": {
+      "critical": 44,
+      "zero": 38,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 3,
+        "ala": 0,
+        "tuk": 43
+      }
+    },
+    "actor2": {
+      "critical": 43,
+      "zero": 38,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 2,
+        "ala": 0,
+        "tuk": 43
+      }
+    },
+    "colonies": 28,
+    "techs": 84,
+    "ships": 241,
+    "actor2Final": {
+      "id": 2,
+      "dead": false,
+      "res": {
+        "min": 25.350963471834895,
+        "ene": 208.48553178386297,
+        "yiy": 31.425458685359214,
+        "ala": 32.10506960264408,
+        "ara": 19.763675058622965,
+        "tuk": 0,
+        "etk": 682.2038874999996
+      },
+      "inc": {
+        "min": 4.549947638737779,
+        "ene": 4.06802031600679,
+        "yiy": -18.716249782196034,
+        "ala": 0,
+        "ara": 20.716898237018274,
+        "etk": 9.729065,
+        "tuk": -13.790407586091643
+      },
+      "crisis": null,
+      "shortage": true,
+      "cols": 2,
+      "techs": 5,
+      "ships": 0,
+      "wars": [],
+      "schism": 0,
+      "colonies": [
+        {
+          "s": 38,
+          "p": 0,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 2,
+            "santral": 4,
+            "ciftlik": 5,
+            "lab": 1,
+            "fabrika": 3,
+            "tersane": 1,
+            "kale": 0,
+            "liman": 0
+          },
+          "q": []
+        },
+        {
+          "s": 38,
+          "p": 2,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 1,
+            "santral": 1,
+            "ciftlik": 1
+          },
+          "q": []
+        }
+      ]
+    },
+    "rng": -1458142310,
+    "aiMs": 15394.936631999852,
+    "aiN": 636
+  },
+  {
+    "mode": "goods-input",
+    "months": 60,
+    "sourceSHA": "7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74",
+    "ms": 40349,
+    "world": {
+      "critical": 44,
+      "zero": 38,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 3,
+        "ala": 0,
+        "tuk": 43
+      }
+    },
+    "actor2": {
+      "critical": 43,
+      "zero": 38,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 2,
+        "ala": 0,
+        "tuk": 43
+      }
+    },
+    "colonies": 28,
+    "techs": 84,
+    "ships": 241,
+    "actor2Final": {
+      "id": 2,
+      "dead": false,
+      "res": {
+        "min": 25.350963471834895,
+        "ene": 208.48553178386297,
+        "yiy": 31.425458685359214,
+        "ala": 32.10506960264408,
+        "ara": 19.763675058622965,
+        "tuk": 0,
+        "etk": 682.2038874999996
+      },
+      "inc": {
+        "min": 4.549947638737779,
+        "ene": 4.06802031600679,
+        "yiy": -18.716249782196034,
+        "ala": 0,
+        "ara": 20.716898237018274,
+        "etk": 9.729065,
+        "tuk": -13.790407586091643
+      },
+      "crisis": null,
+      "shortage": true,
+      "cols": 2,
+      "techs": 5,
+      "ships": 0,
+      "wars": [],
+      "schism": 0,
+      "colonies": [
+        {
+          "s": 38,
+          "p": 0,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 2,
+            "santral": 4,
+            "ciftlik": 5,
+            "lab": 1,
+            "fabrika": 3,
+            "tersane": 1,
+            "kale": 0,
+            "liman": 0
+          },
+          "q": []
+        },
+        {
+          "s": 38,
+          "p": 2,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 1,
+            "santral": 1,
+            "ciftlik": 1
+          },
+          "q": []
+        }
+      ]
+    },
+    "rng": -1458142310,
+    "aiMs": 12957.227841999673,
+    "aiN": 636
+  },
+  {
+    "mode": "mineral-input",
+    "months": 60,
+    "sourceSHA": "7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74",
+    "ms": 50927,
+    "world": {
+      "critical": 61,
+      "zero": 60,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 7,
+        "ala": 0,
+        "tuk": 61
+      }
+    },
+    "actor2": {
+      "critical": 60,
+      "zero": 60,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 7,
+        "ala": 0,
+        "tuk": 60
+      }
+    },
+    "colonies": 40,
+    "techs": 85,
+    "ships": 175,
+    "actor2Final": {
+      "id": 2,
+      "dead": false,
+      "res": {
+        "min": 0.04720407231090462,
+        "ene": 153.25839308287544,
+        "yiy": 0,
+        "ala": 51.386993120620936,
+        "ara": 16.379548248576135,
+        "tuk": 0,
+        "etk": 788.2038874999996
+      },
+      "inc": {
+        "min": 1.380169414149319,
+        "ene": -0.4831836855400198,
+        "yiy": -15.480438486880004,
+        "ala": 3.98683224570881,
+        "ara": 21.093753152336074,
+        "etk": 11.729065,
+        "tuk": -13.018990124446496
+      },
+      "crisis": "yiyecek",
+      "shortage": true,
+      "cols": 2,
+      "techs": 6,
+      "ships": 0,
+      "wars": [],
+      "schism": 0,
+      "colonies": [
+        {
+          "s": 38,
+          "p": 0,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 4,
+            "santral": 3,
+            "ciftlik": 4,
+            "lab": 1,
+            "dokum": 1,
+            "fabrika": 3,
+            "tersane": 1,
+            "kale": 0,
+            "liman": 0
+          },
+          "q": [
+            {
+              "key": "maden",
+              "left": 80,
+              "tot": 80,
+              "paid": {
+                "min": 120
+              },
+              "s": 38,
+              "p": 0
+            }
+          ]
+        },
+        {
+          "s": 38,
+          "p": 2,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 1,
+            "santral": 2,
+            "ciftlik": 1
+          },
+          "q": []
+        }
+      ]
+    },
+    "rng": 1790122228,
+    "aiMs": 18284.67032499978,
+    "aiN": 671
+  }
+]

@@ -1,0 +1,17 @@
+PASS all contract resources and science use gross positive income once
+PASS decision-free calls preserve raw save and RNG and repeat exactly
+PASS paid month marker does not erase recurring next-month obligation or double-charge stock
+PASS estimate nominal dues equal actual fully funded transfer and actual tick stays idempotent
+PASS insufficient stock caps real transfer while forecast retains production liability
+PASS negative and zero income never generate tax refund or add tax deficit
+PASS extra tax and science edicts are independent real monthly liabilities
+PASS legacy vassal contract matches actual default rates
+PASS expired contract forecast is clear before payment lifecycle processes expiry
+PASS independence and dead lord end forecast; third-party war alone preserves dues
+PASS renewed terms are used immediately without a stale tax cache
+PASS lord does not pre-credit unguaranteed future vassal receipts
+PASS federation and vassal percentages use the same gross base and only one deduction each
+PASS Save v8 reload preserves exact liability without mutation
+PASS tax-aware purchase gate rejects a legacy-approved runway that misses a real sixth monthly payment
+PASS a funded taxed purchase remains allowed and pays every real monthly tax without a resource grant
+GEÇEN: 16 KALAN: 0

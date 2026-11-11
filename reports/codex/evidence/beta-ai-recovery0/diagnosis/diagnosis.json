@@ -1,0 +1,328 @@
+{
+  "sourceSHA256": "7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74",
+  "result": {
+    "day": 1800,
+    "memAge": 60,
+    "marketOpen": false,
+    "resources": {
+      "min": 47.28600561040005,
+      "ene": 427.55656704609424,
+      "yiy": 446.2328904112812,
+      "ala": 44.904218892620335,
+      "ara": 0,
+      "tuk": 9.972386241397917,
+      "etk": 418.5389374999999
+    },
+    "income": {
+      "min": 2.771396969600001,
+      "ene": 6.896054714571293,
+      "yiy": 0.12156638648000567,
+      "ala": 3.7574041113179995,
+      "ara": 26.370060390448284,
+      "etk": 8.1931,
+      "tuk": -10.456537194048
+    },
+    "plan": {
+      "horizon": 6,
+      "rows": {
+        "ene": {
+          "stock": 427.55656704609424,
+          "net": 6.551251978842728,
+          "months": null,
+          "urgency": 5.448748021157272,
+          "reserve": 120
+        },
+        "min": {
+          "stock": 47.28600561040005,
+          "net": 2.771396969600001,
+          "months": null,
+          "urgency": 14.76905189877333,
+          "reserve": 120
+        },
+        "yiy": {
+          "stock": 446.2328904112812,
+          "net": 0.12156638648000567,
+          "months": null,
+          "urgency": 11.635300840559982,
+          "reserve": 60
+        },
+        "ala": {
+          "stock": 44.904218892620335,
+          "net": 3.5695339057520994,
+          "months": null,
+          "urgency": 11.053361629962225,
+          "reserve": 100
+        },
+        "tuk": {
+          "stock": 9.972386241397917,
+          "net": -10.456537194048,
+          "months": 0.9536987299269908,
+          "urgency": 66.67034850114695,
+          "reserve": 122.739223164288
+        },
+        "ara": {
+          "stock": 0,
+          "net": 26.370060390448284,
+          "months": null,
+          "urgency": 0,
+          "reserve": 0
+        },
+        "etk": {
+          "stock": 418.5389374999999,
+          "net": 8.1931,
+          "months": null,
+          "urgency": 0,
+          "reserve": 0
+        }
+      },
+      "committed": {},
+      "queued": {},
+      "federation": {
+        "ene": 0.3448027357285647,
+        "ala": 0.18787020556589998
+      },
+      "vassal": {
+        "ene": 0,
+        "min": 0,
+        "ala": 0,
+        "yiy": 0,
+        "tuk": 0,
+        "ara": 0
+      },
+      "policy": "recover",
+      "critical": true
+    },
+    "shipPlan": {
+      "month": 26581,
+      "nextScience": 1980,
+      "scienceLossStreak": 2,
+      "scienceIssued": true,
+      "reasons": [
+        "alloy-budget-reserve",
+        "science-renewal-cooldown"
+      ]
+    },
+    "ownedSystems": 1,
+    "hostile": [
+      {
+        "id": 166,
+        "owner": 10,
+        "wild": true,
+        "power": 296,
+        "ships": 2
+      },
+      {
+        "id": 175,
+        "owner": 10,
+        "wild": true,
+        "power": 296,
+        "ships": 2
+      },
+      {
+        "id": 188,
+        "owner": 10,
+        "wild": true,
+        "power": 296,
+        "ships": 2
+      },
+      {
+        "id": 189,
+        "owner": 10,
+        "wild": true,
+        "power": 296,
+        "ships": 2
+      },
+      {
+        "id": 202,
+        "owner": 10,
+        "wild": true,
+        "power": 296,
+        "ships": 2
+      },
+      {
+        "id": 224,
+        "owner": 10,
+        "wild": true,
+        "power": 296,
+        "ships": 2
+      },
+      {
+        "id": 225,
+        "owner": 10,
+        "wild": true,
+        "power": 296,
+        "ships": 2
+      },
+      {
+        "id": 250,
+        "owner": 10,
+        "wild": true,
+        "power": 296,
+        "ships": 2
+      },
+      {
+        "id": 269,
+        "owner": 10,
+        "wild": true,
+        "power": 296,
+        "ships": 2
+      },
+      {
+        "id": 276,
+        "owner": 10,
+        "wild": true,
+        "power": 296,
+        "ships": 2
+      },
+      {
+        "id": 302,
+        "owner": 10,
+        "wild": true,
+        "power": 296,
+        "ships": 2
+      },
+      {
+        "id": 303,
+        "owner": 10,
+        "wild": true,
+        "power": 296,
+        "ships": 2
+      },
+      {
+        "id": 316,
+        "owner": 10,
+        "wild": true,
+        "power": 296,
+        "ships": 2
+      }
+    ],
+    "colonies": [
+      {
+        "system": 38,
+        "planet": 0,
+        "stability": 0,
+        "target": 81.5,
+        "bombed": 60,
+        "bombKind": "hassas",
+        "passiveRecoveryBlocked": true,
+        "buildings": {
+          "maden": 2,
+          "santral": 3,
+          "ciftlik": 4,
+          "lab": 1,
+          "dokum": 1,
+          "fabrika": 2,
+          "tersane": 1,
+          "kale": 0,
+          "liman": 0
+        },
+        "jobs": [],
+        "producerCosts": {
+          "maden": {
+            "min": 120
+          },
+          "fabrika": {
+            "min": 170
+          },
+          "ciftlik": {
+            "min": 110
+          }
+        },
+        "deltas": {
+          "maden": {
+            "min": 5.790564299519998,
+            "ene": -1.5519999999999943,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "etk": 0,
+            "tuk": 0
+          },
+          "fabrika": {
+            "min": -4.48,
+            "ene": -3.103999999999996,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "etk": 0,
+            "tuk": 5.5957314029760035
+          },
+          "ciftlik": {
+            "min": 0,
+            "ene": -1.5519999999999943,
+            "yiy": 7.962025911840004,
+            "ala": 0,
+            "ara": 0,
+            "etk": 0,
+            "tuk": 0
+          }
+        }
+      },
+      {
+        "system": 38,
+        "planet": 2,
+        "stability": 0,
+        "target": 81.5,
+        "bombed": 60,
+        "bombKind": "hassas",
+        "passiveRecoveryBlocked": true,
+        "buildings": {
+          "maden": 1,
+          "santral": 1,
+          "ciftlik": 1
+        },
+        "producerCosts": {
+          "maden": {
+            "min": 120
+          },
+          "fabrika": {
+            "min": 170
+          },
+          "ciftlik": {
+            "min": 110
+          }
+        },
+        "deltas": {
+          "maden": {
+            "min": 3.9064234809599996,
+            "ene": -1.5519999999999943,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "etk": 0,
+            "tuk": 0
+          },
+          "fabrika": {
+            "min": -4.48,
+            "ene": -3.103999999999996,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 0,
+            "etk": 0,
+            "tuk": 3.7749855480480026
+          },
+          "ciftlik": {
+            "min": 0,
+            "ene": -1.5519999999999943,
+            "yiy": 5.371332286320001,
+            "ala": 0,
+            "ara": 0,
+            "etk": 0,
+            "tuk": 0
+          }
+        }
+      }
+    ]
+  },
+  "shadowStability40Income": {
+    "min": 16.2267239456,
+    "ene": 29.63846294649929,
+    "yiy": 25.723114015280007,
+    "ala": 5.859448369397999,
+    "ara": 37.49736690258719,
+    "etk": 9.129100000000001,
+    "tuk": -4.195578980928001
+  },
+  "shadowIsNotCampaign": true,
+  "originalFileUnchanged": true
+}

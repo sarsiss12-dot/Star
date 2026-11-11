@@ -1,0 +1,8 @@
+{
+  "isolatedOnly": true,
+  "chargedAtOrder": false,
+  "actualRefund": {
+    "min": 74
+  },
+  "replayAndReloadNoSecondRefund": true
+}

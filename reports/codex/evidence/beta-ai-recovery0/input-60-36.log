@@ -1,0 +1,14 @@
+PROGRESS input-plan 6/36
+PROGRESS input-plan 12/36
+PROGRESS input-plan 18/36
+PROGRESS input-plan 24/36
+PROGRESS input-plan 30/36
+PROGRESS input-plan 36/36
+{"mode":"input-plan","months":36,"sourceSHA":"7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74","ms":21266,"world":{"critical":36,"zero":36,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":36}},"actor2":{"critical":36,"zero":36,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":36}},"colonies":27,"techs":70,"ships":144,"actor2Final":{"res":{"min":103.79857848936594,"ene":571.0295350797242,"yiy":268.2114616431595,"ala":29.022368024245445,"ara":15.330032846888056,"tuk":0,"etk":607.5355874999998},"inc":{"min":3.995918535973342,"ene":1.2659792171299473,"yiy":-9.368779156599977,"ala":3.1322501878882507,"ara":21.854993084372815,"etk":8.917825,"tuk":-14.754665531061995},"cols":2,"techs":5},"rng":-171414043,"aiMs":7060.0041180000135,"aiN":372}
+PROGRESS input-upkeep 6/36
+PROGRESS input-upkeep 12/36
+PROGRESS input-upkeep 18/36
+PROGRESS input-upkeep 24/36
+PROGRESS input-upkeep 30/36
+PROGRESS input-upkeep 36/36
+{"mode":"input-upkeep","months":36,"sourceSHA":"7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74","ms":18256,"world":{"critical":36,"zero":36,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":36}},"actor2":{"critical":36,"zero":36,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":36}},"colonies":29,"techs":68,"ships":139,"actor2Final":{"res":{"min":6.7437336650672535,"ene":666.8214047218462,"yiy":421.6425344049396,"ala":52.00285930641652,"ara":16.104614315378242,"tuk":0,"etk":545.5355874999998},"inc":{"min":6.836273512601675,"ene":13.748834330852194,"yiy":-3.016160314999972,"ala":0,"ara":22.1392075574146,"etk":7.917825000000001,"tuk":-10.299399284605494},"cols":2,"techs":5},"rng":1092257297,"aiMs":5887.533466999983,"aiN":362}

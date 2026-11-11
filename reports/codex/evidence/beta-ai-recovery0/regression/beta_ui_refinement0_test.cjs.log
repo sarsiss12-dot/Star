@@ -1,0 +1,5 @@
+PASS T1 branching choices distinct and delayed
+PASS T7 queue key never undefined
+PASS T2 own colony compact
+PASS read only UI
+{"pass":4,"fail":0}

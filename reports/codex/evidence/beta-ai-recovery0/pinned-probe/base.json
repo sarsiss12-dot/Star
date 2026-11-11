@@ -1,0 +1,1955 @@
+{
+  "summary": {
+    "mode": "base",
+    "months": 1,
+    "sourceSHA": "7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74",
+    "ms": 606,
+    "world": {
+      "critical": 1,
+      "zero": 1,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 1
+      }
+    },
+    "actor2": {
+      "critical": 1,
+      "zero": 1,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 1
+      }
+    },
+    "colonies": 25,
+    "techs": 35,
+    "ships": 152,
+    "actor2Final": {
+      "id": 2,
+      "dead": false,
+      "res": {
+        "min": 49.94275909104005,
+        "ene": 433.93833691441927,
+        "yiy": 446.4923094731612,
+        "ala": 48.46190117325496,
+        "ara": 0,
+        "tuk": 0,
+        "etk": 426.73203749999993
+      },
+      "inc": {
+        "min": 2.656753480639998,
+        "ene": 6.717652492973693,
+        "yiy": 0.25941906188000136,
+        "ala": 3.7449287164574985,
+        "ara": 26.269172141033113,
+        "etk": 8.1931,
+        "tuk": -10.349695272719998
+      },
+      "crisis": null,
+      "shortage": true,
+      "cols": 2,
+      "techs": 3,
+      "ships": 0,
+      "wars": [],
+      "schism": 0,
+      "colonies": [
+        {
+          "s": 38,
+          "p": 0,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 2,
+            "santral": 3,
+            "ciftlik": 4,
+            "lab": 1,
+            "dokum": 1,
+            "fabrika": 2,
+            "tersane": 1,
+            "kale": 0,
+            "liman": 0
+          },
+          "q": []
+        },
+        {
+          "s": 38,
+          "p": 2,
+          "stab": 0,
+          "secede": 0,
+          "b": {
+            "maden": 1,
+            "santral": 1,
+            "ciftlik": 1
+          },
+          "q": []
+        }
+      ]
+    },
+    "rng": -519267789,
+    "aiMs": 161.48248499999977,
+    "aiN": 10
+  },
+  "samples": [
+    {
+      "month": 0,
+      "day": 1800,
+      "ai": [
+        {
+          "id": 1,
+          "dead": false,
+          "res": {
+            "min": 1421.9776428079717,
+            "ene": 4665.045018045227,
+            "yiy": 2250.5160328640513,
+            "ala": 45.27961090000022,
+            "ara": 0,
+            "tuk": 840.5739675782273,
+            "etk": 129.53688952564087
+          },
+          "inc": {
+            "min": 228.34058941308285,
+            "ene": 124.15553061244205,
+            "yiy": 44.94361242038463,
+            "ala": 32.29685094,
+            "ara": 96.69668991439721,
+            "etk": 14.182401025641026,
+            "tuk": 3.8996996332799894
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 3,
+          "techs": 5,
+          "ships": 24,
+          "wars": [
+            "7"
+          ],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 33,
+              "p": 4,
+              "stab": 100,
+              "secede": 0,
+              "b": {
+                "maden": 5,
+                "santral": 4,
+                "ciftlik": 2,
+                "lab": 2,
+                "dokum": 1,
+                "fabrika": 2,
+                "tersane": 1,
+                "kale": 1,
+                "liman": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 50,
+                  "tot": 80,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 33,
+                  "p": 4
+                }
+              ]
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "stab": 94,
+              "secede": 0,
+              "b": {
+                "maden": 5,
+                "santral": 2,
+                "ciftlik": 1,
+                "liman": 1,
+                "dokum": 2,
+                "kale": 1,
+                "tersane": 2
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 61,
+                  "tot": 118,
+                  "paid": {
+                    "min": 210
+                  },
+                  "s": 8,
+                  "p": 0
+                },
+                {
+                  "key": "lab",
+                  "left": 110,
+                  "tot": 110,
+                  "paid": {
+                    "min": 190
+                  },
+                  "s": 8,
+                  "p": 0
+                }
+              ]
+            },
+            {
+              "s": 25,
+              "p": 0,
+              "stab": 84,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 2,
+                "kale": 1
+              },
+              "q": [
+                {
+                  "key": "kale",
+                  "left": 24,
+                  "tot": 191,
+                  "paid": {
+                    "min": 230,
+                    "ala": 70
+                  },
+                  "s": 25,
+                  "p": 0
+                },
+                {
+                  "key": "tersane",
+                  "left": 181,
+                  "tot": 181,
+                  "paid": {
+                    "min": 260,
+                    "ala": 45
+                  },
+                  "s": 25,
+                  "p": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "dead": false,
+          "res": {
+            "min": 47.28600561040005,
+            "ene": 427.55656704609424,
+            "yiy": 446.2328904112812,
+            "ala": 44.904218892620335,
+            "ara": 0,
+            "tuk": 9.972386241397917,
+            "etk": 418.5389374999999
+          },
+          "inc": {
+            "min": 2.771396969600001,
+            "ene": 6.896054714571293,
+            "yiy": 0.12156638648000567,
+            "ala": 3.7574041113179995,
+            "ara": 26.370060390448284,
+            "etk": 8.1931,
+            "tuk": -10.456537194048
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 2,
+          "techs": 3,
+          "ships": 0,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 38,
+              "p": 0,
+              "stab": 0,
+              "secede": 0,
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "ciftlik": 4,
+                "lab": 1,
+                "dokum": 1,
+                "fabrika": 2,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 0
+              },
+              "q": []
+            },
+            {
+              "s": 38,
+              "p": 2,
+              "stab": 0,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "dead": false,
+          "res": {
+            "min": 3117.84023880687,
+            "ene": 3138.7505480237887,
+            "yiy": 2156.040819080127,
+            "ala": 65.3212212499999,
+            "ara": 0,
+            "tuk": 903.6903732935077,
+            "etk": 580.8378666666669
+          },
+          "inc": {
+            "min": 257.9786176461538,
+            "ene": 47.67598296726149,
+            "yiy": 36.66826000000002,
+            "ala": 23.4613,
+            "ara": 73.47032540769229,
+            "etk": 13.014800000000001,
+            "tuk": 17.816875304307693
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 3,
+          "techs": 5,
+          "ships": 29,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 1,
+              "p": 0,
+              "stab": 100,
+              "secede": 0,
+              "b": {
+                "maden": 6,
+                "santral": 4,
+                "ciftlik": 2,
+                "lab": 1,
+                "dokum": 1,
+                "fabrika": 3,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 1
+              },
+              "q": []
+            },
+            {
+              "s": 9,
+              "p": 1,
+              "stab": 100,
+              "secede": 0,
+              "b": {
+                "maden": 5,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 1,
+                "fabrika": 1,
+                "dokum": 2,
+                "tersane": 1,
+                "lab": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 32,
+                  "tot": 32,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 42
+                  },
+                  "s": 9,
+                  "p": 1
+                }
+              ]
+            },
+            {
+              "s": 55,
+              "p": 0,
+              "stab": 100,
+              "secede": 0,
+              "b": {
+                "maden": 6,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 1,
+                "dokum": 1,
+                "tersane": 2,
+                "lab": 1
+              },
+              "q": [
+                {
+                  "key": "lab",
+                  "left": 106,
+                  "tot": 110,
+                  "paid": {
+                    "min": 190
+                  },
+                  "s": 55,
+                  "p": 0
+                },
+                {
+                  "key": "dokum",
+                  "left": 118,
+                  "tot": 118,
+                  "paid": {
+                    "min": 210
+                  },
+                  "s": 55,
+                  "p": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "dead": false,
+          "res": {
+            "min": 142.72770773884542,
+            "ene": 2325.8495215243784,
+            "yiy": 180,
+            "ala": 44.05850000000018,
+            "ara": 0,
+            "tuk": 320.60659770681974,
+            "etk": 133.42433273298252
+          },
+          "inc": {
+            "min": 37.34613553484577,
+            "ene": 76.23805987447298,
+            "yiy": 0,
+            "ala": -0.6545,
+            "ara": 23.926977666,
+            "etk": 16.7044304199282,
+            "tuk": -0.9465080157199672
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 3,
+          "techs": 0,
+          "ships": 4,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 3,
+              "p": 2,
+              "stab": 97,
+              "secede": 0,
+              "b": {
+                "maden": 3,
+                "santral": 3,
+                "ciftlik": 1,
+                "tersane": 1,
+                "fabrika": 2
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 71,
+                  "tot": 161,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 3,
+                  "p": 2
+                }
+              ]
+            },
+            {
+              "s": 59,
+              "p": 0,
+              "stab": 91.7720420269287,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            },
+            {
+              "s": 35,
+              "p": 0,
+              "stab": 0,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "dead": false,
+          "res": {
+            "min": 31.123928622001785,
+            "ene": 7455.926231795293,
+            "yiy": 3071.1002774432336,
+            "ala": 171.98695434268447,
+            "ara": 0,
+            "tuk": 836.4878855765012,
+            "etk": 384.86690243584206
+          },
+          "inc": {
+            "min": 35.387735984166106,
+            "ene": 234.41933576967858,
+            "yiy": 57.30663682816157,
+            "ala": 57.530674011592865,
+            "ara": 137.8257905944282,
+            "etk": 11.771569575932066,
+            "tuk": 6.235538980057761
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 2,
+          "techs": 6,
+          "ships": 19,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 21,
+              "p": 0,
+              "stab": 85.79120946409449,
+              "secede": 0,
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "ciftlik": 2,
+                "lab": 3,
+                "dokum": 3,
+                "fabrika": 2,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 2
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 42,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 21,
+                  "p": 0
+                }
+              ]
+            },
+            {
+              "s": 86,
+              "p": 0,
+              "stab": 73.79120946409449,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 2,
+                "dokum": 1,
+                "lab": 2
+              },
+              "q": [
+                {
+                  "key": "lab",
+                  "left": 98,
+                  "tot": 98,
+                  "paid": {
+                    "min": 190
+                  },
+                  "s": 86,
+                  "p": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "dead": false,
+          "res": {
+            "min": 18.40461468261708,
+            "ene": 4065.415456837217,
+            "yiy": 180,
+            "ala": 40.52832360000036,
+            "ara": 0,
+            "tuk": 268.82916150504934,
+            "etk": 652.2115214731243
+          },
+          "inc": {
+            "min": 49.340773913570835,
+            "ene": 153.6769785627356,
+            "yiy": 0,
+            "ala": 17.791119000000002,
+            "ara": 68.33981535256441,
+            "etk": 10.550714284939026,
+            "tuk": 1.9492438206135745
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 3,
+          "techs": 3,
+          "ships": 12,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 32,
+              "p": 0,
+              "stab": 89.30266322473167,
+              "secede": 0,
+              "b": {
+                "maden": 2,
+                "santral": 2,
+                "ciftlik": 1,
+                "tersane": 1,
+                "fabrika": 2,
+                "liman": 2,
+                "lab": 2,
+                "dokum": 2
+              },
+              "q": [
+                {
+                  "key": "fabrika",
+                  "left": 9,
+                  "tot": 101,
+                  "paid": {
+                    "min": 170
+                  },
+                  "s": 32,
+                  "p": 0
+                },
+                {
+                  "key": "dokum",
+                  "left": 118,
+                  "tot": 118,
+                  "paid": {
+                    "min": 210
+                  },
+                  "s": 32,
+                  "p": 0
+                }
+              ]
+            },
+            {
+              "s": 80,
+              "p": 0,
+              "stab": 69.05266322473167,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 1
+              },
+              "q": []
+            },
+            {
+              "s": 24,
+              "p": 1,
+              "stab": 77.30266322473167,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "dead": false,
+          "res": {
+            "min": 159.7676419720578,
+            "ene": 1213.9949961804332,
+            "yiy": 180,
+            "ala": 40.246750014999975,
+            "ara": 0,
+            "tuk": 1689.4854627941997,
+            "etk": 301.74968
+          },
+          "inc": {
+            "min": 51.65815159999999,
+            "ene": -2.9532500423076726,
+            "yiy": 0,
+            "ala": 29.739255999999997,
+            "ara": 97.63631999999998,
+            "etk": 10.696000000000002,
+            "tuk": 24.243547679999992
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 2,
+          "techs": 2,
+          "ships": 21,
+          "wars": [
+            "1"
+          ],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 54,
+              "p": 0,
+              "stab": 100,
+              "secede": 0,
+              "b": {
+                "maden": 2,
+                "santral": 6,
+                "ciftlik": 1,
+                "lab": 4,
+                "dokum": 3,
+                "fabrika": 2,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 1
+              },
+              "q": []
+            },
+            {
+              "s": 83,
+              "p": 3,
+              "stab": 99.75,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 6,
+                "ciftlik": 1,
+                "tersane": 1,
+                "liman": 2
+              },
+              "q": [
+                {
+                  "key": "lab",
+                  "left": 52,
+                  "tot": 110,
+                  "paid": {
+                    "min": 190
+                  },
+                  "s": 83,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "dead": false,
+          "res": {
+            "min": 69.96000335598347,
+            "ene": 1221.5963052150257,
+            "yiy": 928.4339005653084,
+            "ala": 14.83125750000002,
+            "ara": 0,
+            "tuk": 532.805019648252,
+            "etk": 675.3304361064104
+          },
+          "inc": {
+            "min": 136.2536101043003,
+            "ene": -4.939973742128984,
+            "yiy": 11.964684355589753,
+            "ala": 14.10867,
+            "ara": 47.2595977082353,
+            "etk": 11.098529816666666,
+            "tuk": 16.76593736652191
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 4,
+          "techs": 3,
+          "ships": 28,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 26,
+              "p": 0,
+              "stab": 96.5,
+              "secede": 0,
+              "b": {
+                "maden": 5,
+                "santral": 3,
+                "ciftlik": 2,
+                "lab": 1,
+                "dokum": 1,
+                "fabrika": 3,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 1
+              },
+              "q": [
+                {
+                  "key": "fabrika",
+                  "left": 32,
+                  "tot": 32,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 59
+                  },
+                  "s": 26,
+                  "p": 0
+                }
+              ]
+            },
+            {
+              "s": 60,
+              "p": 2,
+              "stab": 90,
+              "secede": 0,
+              "b": {
+                "maden": 6,
+                "santral": 3,
+                "ciftlik": 1,
+                "liman": 1,
+                "dokum": 2,
+                "lab": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 35,
+                  "tot": 95,
+                  "paid": {
+                    "min": 210
+                  },
+                  "s": 60,
+                  "p": 2
+                }
+              ]
+            },
+            {
+              "s": 49,
+              "p": 3,
+              "stab": 0,
+              "secede": 8,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 1,
+                "fabrika": 3
+              },
+              "q": [
+                {
+                  "key": "santral",
+                  "left": 31,
+                  "tot": 61,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 49,
+                  "p": 3
+                },
+                {
+                  "key": "santral",
+                  "left": 61,
+                  "tot": 61,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 49,
+                  "p": 3
+                }
+              ]
+            },
+            {
+              "s": 41,
+              "p": 0,
+              "stab": 25.200000000000003,
+              "secede": 2,
+              "b": {
+                "maden": 1,
+                "santral": 2,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "dead": false,
+          "res": {
+            "min": 20.232235355249742,
+            "ene": 4284.549477761247,
+            "yiy": 1041.069980009848,
+            "ala": 81.23229496999994,
+            "ara": 0,
+            "tuk": 530.6266155502653,
+            "etk": 87.61955666666682
+          },
+          "inc": {
+            "min": 53.4654674144516,
+            "ene": 115.91987673383453,
+            "yiy": 14.025853254451151,
+            "ala": 62.55127236999999,
+            "ara": 174.99722131638387,
+            "etk": 13.59552,
+            "tuk": 18.865646612789813
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 3,
+          "techs": 7,
+          "ships": 9,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 77,
+              "p": 0,
+              "stab": 100,
+              "secede": 0,
+              "b": {
+                "maden": 2,
+                "santral": 4,
+                "ciftlik": 2,
+                "lab": 2,
+                "dokum": 2,
+                "fabrika": 3,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 47,
+                  "tot": 47,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 77,
+                  "p": 0
+                }
+              ]
+            },
+            {
+              "s": 18,
+              "p": 0,
+              "stab": 93.87147194274533,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 1,
+                "tersane": 1,
+                "lab": 5,
+                "dokum": 2,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "lab",
+                  "left": 110,
+                  "tot": 110,
+                  "paid": {
+                    "min": 190
+                  },
+                  "s": 18,
+                  "p": 0
+                }
+              ]
+            },
+            {
+              "s": 47,
+              "p": 0,
+              "stab": 99.37147194274533,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 1
+              },
+              "q": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "month": 1,
+      "day": 1830,
+      "ai": [
+        {
+          "id": 1,
+          "dead": false,
+          "res": {
+            "min": 1480.3106052563385,
+            "ene": 4780.025359509929,
+            "yiy": 2295.459645284436,
+            "ala": 43.961619293000226,
+            "ara": 0,
+            "tuk": 844.4727268857473,
+            "etk": 143.7192905512819
+          },
+          "inc": {
+            "min": 228.33296244836686,
+            "ene": 121.03193838389659,
+            "yiy": 44.94361242038463,
+            "ala": 32.29685094,
+            "ara": 96.69396082922236,
+            "etk": 14.182401025641026,
+            "tuk": 3.8987593075199944
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 3,
+          "techs": 6,
+          "ships": 24,
+          "wars": [
+            "7"
+          ],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 33,
+              "p": 4,
+              "stab": 100,
+              "secede": 0,
+              "b": {
+                "maden": 5,
+                "santral": 4,
+                "ciftlik": 2,
+                "lab": 2,
+                "dokum": 1,
+                "fabrika": 2,
+                "tersane": 1,
+                "kale": 1,
+                "liman": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 20,
+                  "tot": 80,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 33,
+                  "p": 4
+                }
+              ]
+            },
+            {
+              "s": 8,
+              "p": 0,
+              "stab": 94,
+              "secede": 0,
+              "b": {
+                "maden": 5,
+                "santral": 2,
+                "ciftlik": 1,
+                "liman": 1,
+                "dokum": 2,
+                "kale": 1,
+                "tersane": 2
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 31,
+                  "tot": 118,
+                  "paid": {
+                    "min": 210
+                  },
+                  "s": 8,
+                  "p": 0
+                },
+                {
+                  "key": "lab",
+                  "left": 110,
+                  "tot": 110,
+                  "paid": {
+                    "min": 190
+                  },
+                  "s": 8,
+                  "p": 0
+                }
+              ]
+            },
+            {
+              "s": 25,
+              "p": 0,
+              "stab": 84,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 2,
+                "kale": 2
+              },
+              "q": [
+                {
+                  "key": "tersane",
+                  "left": 175,
+                  "tot": 181,
+                  "paid": {
+                    "min": 260,
+                    "ala": 45
+                  },
+                  "s": 25,
+                  "p": 0
+                },
+                {
+                  "key": "fabrika",
+                  "left": 101,
+                  "tot": 101,
+                  "paid": {
+                    "min": 170
+                  },
+                  "s": 25,
+                  "p": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "dead": false,
+          "res": {
+            "min": 49.94275909104005,
+            "ene": 433.93833691441927,
+            "yiy": 446.4923094731612,
+            "ala": 48.46190117325496,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 426.73203749999993
+          },
+          "inc": {
+            "min": 2.656753480639998,
+            "ene": 6.717652492973693,
+            "yiy": 0.25941906188000136,
+            "ala": 3.7449287164574985,
+            "ara": 26.269172141033113,
+            "etk": 8.1931,
+            "tuk": -10.349695272719998
+          },
+          "crisis": null,
+          "shortage": true,
+          "cols": 2,
+          "techs": 3,
+          "ships": 0,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 38,
+              "p": 0,
+              "stab": 0,
+              "secede": 0,
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "ciftlik": 4,
+                "lab": 1,
+                "dokum": 1,
+                "fabrika": 2,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 0
+              },
+              "q": []
+            },
+            {
+              "s": 38,
+              "p": 2,
+              "stab": 0,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "dead": false,
+          "res": {
+            "min": 3375.808701268408,
+            "ene": 3183.010591552404,
+            "yiy": 2192.709079080127,
+            "ala": 56.01252124999989,
+            "ara": 0,
+            "tuk": 921.5059459765846,
+            "etk": 593.8526666666669
+          },
+          "inc": {
+            "min": 257.9684624615385,
+            "ene": 44.26004352861534,
+            "yiy": 36.66826000000002,
+            "ala": 22.691300000000002,
+            "ara": 79.46786307692307,
+            "etk": 13.014800000000001,
+            "tuk": 17.815572683076923
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 3,
+          "techs": 5,
+          "ships": 30,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 1,
+              "p": 0,
+              "stab": 100,
+              "secede": 0,
+              "b": {
+                "maden": 6,
+                "santral": 4,
+                "ciftlik": 2,
+                "lab": 1,
+                "dokum": 1,
+                "fabrika": 3,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 1
+              },
+              "q": []
+            },
+            {
+              "s": 9,
+              "p": 1,
+              "stab": 100,
+              "secede": 0,
+              "b": {
+                "maden": 5,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 1,
+                "fabrika": 1,
+                "dokum": 2,
+                "tersane": 1,
+                "lab": 1
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 2,
+                  "tot": 32,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 42
+                  },
+                  "s": 9,
+                  "p": 1
+                }
+              ]
+            },
+            {
+              "s": 55,
+              "p": 0,
+              "stab": 100,
+              "secede": 0,
+              "b": {
+                "maden": 6,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 1,
+                "dokum": 1,
+                "tersane": 2,
+                "lab": 1
+              },
+              "q": [
+                {
+                  "key": "lab",
+                  "left": 76,
+                  "tot": 110,
+                  "paid": {
+                    "min": 190
+                  },
+                  "s": 55,
+                  "p": 0
+                },
+                {
+                  "key": "dokum",
+                  "left": 118,
+                  "tot": 118,
+                  "paid": {
+                    "min": 210
+                  },
+                  "s": 55,
+                  "p": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "dead": false,
+          "res": {
+            "min": 0.07038722338347725,
+            "ene": 2400.930303415752,
+            "yiy": 180,
+            "ala": 44.05850000000018,
+            "ara": 0,
+            "tuk": 319.65937732309976,
+            "etk": 150.12876315291072
+          },
+          "inc": {
+            "min": 37.34267948453807,
+            "ene": 79.03240199091942,
+            "yiy": 0,
+            "ala": 0,
+            "ara": 23.92603272,
+            "etk": 16.7044304199282,
+            "tuk": -0.9472203837199658
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 3,
+          "techs": 0,
+          "ships": 3,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 3,
+              "p": 2,
+              "stab": 100,
+              "secede": 0,
+              "b": {
+                "maden": 3,
+                "santral": 3,
+                "ciftlik": 1,
+                "tersane": 1,
+                "fabrika": 2
+              },
+              "q": [
+                {
+                  "key": "maden",
+                  "left": 41,
+                  "tot": 161,
+                  "paid": {
+                    "min": 120
+                  },
+                  "s": 3,
+                  "p": 2
+                },
+                {
+                  "key": "liman",
+                  "left": 211,
+                  "tot": 211,
+                  "paid": {
+                    "min": 180
+                  },
+                  "s": 3,
+                  "p": 2
+                }
+              ]
+            },
+            {
+              "s": 59,
+              "p": 0,
+              "stab": 91.78935569071328,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            },
+            {
+              "s": 35,
+              "p": 0,
+              "stab": 0,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "dead": false,
+          "res": {
+            "min": 66.5116646061679,
+            "ene": 7686.726267564971,
+            "yiy": 3128.406914271395,
+            "ala": 196.86312835427734,
+            "ara": 0,
+            "tuk": 842.7234245565589,
+            "etk": 396.6384720117741
+          },
+          "inc": {
+            "min": 35.387735984166106,
+            "ene": 230.80003576967857,
+            "yiy": 57.30663682816157,
+            "ala": 56.876174011592866,
+            "ara": 137.8257905944282,
+            "etk": 11.771569575932066,
+            "tuk": 6.235538980057761
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 2,
+          "techs": 6,
+          "ships": 20,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 21,
+              "p": 0,
+              "stab": 85.79943978838173,
+              "secede": 0,
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "ciftlik": 2,
+                "lab": 3,
+                "dokum": 3,
+                "fabrika": 2,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 2
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 12,
+                  "tot": 42,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 21,
+                  "p": 0
+                }
+              ]
+            },
+            {
+              "s": 86,
+              "p": 0,
+              "stab": 73.79943978838173,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 2,
+                "dokum": 1,
+                "lab": 2
+              },
+              "q": [
+                {
+                  "key": "lab",
+                  "left": 68,
+                  "tot": 98,
+                  "paid": {
+                    "min": 190
+                  },
+                  "s": 86,
+                  "p": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "dead": false,
+          "res": {
+            "min": 61.44814528048686,
+            "ene": 4213.002435399952,
+            "yiy": 180,
+            "ala": 25.664942600000366,
+            "ara": 0,
+            "tuk": 290.3530272359697,
+            "etk": 662.7622357580633
+          },
+          "inc": {
+            "min": 43.04353059786978,
+            "ene": 147.5869785627356,
+            "yiy": 0,
+            "ala": 17.136619000000003,
+            "ara": 68.33981535256441,
+            "etk": 10.550714284939026,
+            "tuk": 21.52386573092037
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 3,
+          "techs": 3,
+          "ships": 13,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 32,
+              "p": 0,
+              "stab": 89.30860191893382,
+              "secede": 0,
+              "b": {
+                "maden": 2,
+                "santral": 2,
+                "ciftlik": 1,
+                "tersane": 1,
+                "fabrika": 3,
+                "liman": 2,
+                "lab": 2,
+                "dokum": 2
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 97,
+                  "tot": 118,
+                  "paid": {
+                    "min": 210
+                  },
+                  "s": 32,
+                  "p": 0
+                }
+              ]
+            },
+            {
+              "s": 80,
+              "p": 0,
+              "stab": 69.05860191893382,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 1
+              },
+              "q": []
+            },
+            {
+              "s": 24,
+              "p": 1,
+              "stab": 77.30860191893382,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1
+              },
+              "q": []
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "dead": false,
+          "res": {
+            "min": 21.425793572057785,
+            "ene": 1208.1517461381254,
+            "yiy": 180,
+            "ala": 37.331506014999974,
+            "ara": 0,
+            "tuk": 1713.7290104741996,
+            "etk": 312.44568000000004
+          },
+          "inc": {
+            "min": 51.65815159999999,
+            "ene": -5.843250042307687,
+            "yiy": 0,
+            "ala": 29.084756,
+            "ara": 97.63631999999998,
+            "etk": 10.696000000000002,
+            "tuk": 24.243547679999992
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 2,
+          "techs": 2,
+          "ships": 22,
+          "wars": [
+            "1"
+          ],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 54,
+              "p": 0,
+              "stab": 100,
+              "secede": 0,
+              "b": {
+                "maden": 2,
+                "santral": 6,
+                "ciftlik": 1,
+                "lab": 4,
+                "dokum": 3,
+                "fabrika": 2,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 1
+              },
+              "q": []
+            },
+            {
+              "s": 83,
+              "p": 3,
+              "stab": 99.75,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 6,
+                "ciftlik": 1,
+                "tersane": 1,
+                "liman": 2
+              },
+              "q": [
+                {
+                  "key": "lab",
+                  "left": 22,
+                  "tot": 110,
+                  "paid": {
+                    "min": 190
+                  },
+                  "s": 83,
+                  "p": 3
+                },
+                {
+                  "key": "lab",
+                  "left": 110,
+                  "tot": 110,
+                  "paid": {
+                    "min": 190
+                  },
+                  "s": 83,
+                  "p": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "dead": false,
+          "res": {
+            "min": 95.68961055211878,
+            "ene": 1213.3785789934113,
+            "yiy": 940.1564321152366,
+            "ala": 28.246927500000023,
+            "ara": 0,
+            "tuk": 549.642957014774,
+            "etk": 686.428965923077
+          },
+          "inc": {
+            "min": 135.7296071961353,
+            "ene": -8.217726221614356,
+            "yiy": 11.72253154992822,
+            "ala": 13.415670000000002,
+            "ara": 47.145469518811524,
+            "etk": 11.098529816666666,
+            "tuk": 16.837937366521906
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 4,
+          "techs": 3,
+          "ships": 29,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 26,
+              "p": 0,
+              "stab": 96.5,
+              "secede": 0,
+              "b": {
+                "maden": 5,
+                "santral": 3,
+                "ciftlik": 2,
+                "lab": 1,
+                "dokum": 1,
+                "fabrika": 3,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 1
+              },
+              "q": [
+                {
+                  "key": "fabrika",
+                  "left": 2,
+                  "tot": 32,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 59
+                  },
+                  "s": 26,
+                  "p": 0
+                }
+              ]
+            },
+            {
+              "s": 60,
+              "p": 2,
+              "stab": 90,
+              "secede": 0,
+              "b": {
+                "maden": 6,
+                "santral": 3,
+                "ciftlik": 1,
+                "liman": 1,
+                "dokum": 2,
+                "lab": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 5,
+                  "tot": 95,
+                  "paid": {
+                    "min": 210
+                  },
+                  "s": 60,
+                  "p": 2
+                }
+              ]
+            },
+            {
+              "s": 49,
+              "p": 3,
+              "stab": 0,
+              "secede": 9,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 1,
+                "fabrika": 3
+              },
+              "q": [
+                {
+                  "key": "santral",
+                  "left": 1,
+                  "tot": 61,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 49,
+                  "p": 3
+                },
+                {
+                  "key": "santral",
+                  "left": 61,
+                  "tot": 61,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 49,
+                  "p": 3
+                }
+              ]
+            },
+            {
+              "s": 41,
+              "p": 0,
+              "stab": 16.200000000000003,
+              "secede": 3,
+              "b": {
+                "maden": 1,
+                "santral": 2,
+                "ciftlik": 1
+              },
+              "q": [
+                {
+                  "key": "santral",
+                  "left": 61,
+                  "tot": 61,
+                  "paid": {
+                    "min": 110
+                  },
+                  "s": 41,
+                  "p": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "dead": false,
+          "res": {
+            "min": 73.69770276970135,
+            "ene": 4390.365348158389,
+            "yiy": 1055.0958332642992,
+            "ala": 75.47463122149995,
+            "ara": 0,
+            "tuk": 549.4922621630551,
+            "etk": 101.21507666666682
+          },
+          "inc": {
+            "min": 53.4654674144516,
+            "ene": 111.38512673383453,
+            "yiy": 14.025853254451151,
+            "ala": 61.307722369999986,
+            "ara": 174.99722131638387,
+            "etk": 13.59552,
+            "tuk": 18.865646612789813
+          },
+          "crisis": null,
+          "shortage": false,
+          "cols": 3,
+          "techs": 7,
+          "ships": 11,
+          "wars": [],
+          "schism": 0,
+          "colonies": [
+            {
+              "s": 77,
+              "p": 0,
+              "stab": 100,
+              "secede": 0,
+              "b": {
+                "maden": 2,
+                "santral": 4,
+                "ciftlik": 2,
+                "lab": 2,
+                "dokum": 2,
+                "fabrika": 3,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 1
+              },
+              "q": [
+                {
+                  "key": "dokum",
+                  "left": 17,
+                  "tot": 47,
+                  "dem": true,
+                  "paid": {},
+                  "refund": {
+                    "min": 74
+                  },
+                  "s": 77,
+                  "p": 0
+                }
+              ]
+            },
+            {
+              "s": 18,
+              "p": 0,
+              "stab": 93.87862016720337,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 1,
+                "tersane": 1,
+                "lab": 5,
+                "dokum": 2,
+                "fabrika": 1
+              },
+              "q": [
+                {
+                  "key": "lab",
+                  "left": 80,
+                  "tot": 110,
+                  "paid": {
+                    "min": 190
+                  },
+                  "s": 18,
+                  "p": 0
+                }
+              ]
+            },
+            {
+              "s": 47,
+              "p": 0,
+              "stab": 99.37862016720337,
+              "secede": 0,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1,
+                "liman": 1
+              },
+              "q": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "day": 1830,
+      "e": 1,
+      "kind": "build",
+      "key": "fabrika",
+      "sys": 25,
+      "planet": 0,
+      "cost": {
+        "min": 170
+      }
+    },
+    {
+      "day": 1830,
+      "e": 4,
+      "kind": "build",
+      "key": "liman",
+      "sys": 3,
+      "planet": 2,
+      "cost": {
+        "min": 180
+      }
+    },
+    {
+      "day": 1830,
+      "e": 7,
+      "kind": "build",
+      "key": "lab",
+      "sys": 83,
+      "planet": 3,
+      "cost": {
+        "min": 190
+      }
+    },
+    {
+      "day": 1830,
+      "e": 8,
+      "kind": "build",
+      "key": "santral",
+      "sys": 41,
+      "planet": 0,
+      "cost": {
+        "min": 110
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+PROGRESS goods-trade 6/36
+PROGRESS goods-trade 12/36
+PROGRESS goods-trade 18/36
+PROGRESS goods-trade 24/36
+PROGRESS goods-trade 30/36
+PROGRESS goods-trade 36/36
+{"mode":"goods-trade","months":36,"sourceSHA":"7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74","ms":18060,"world":{"critical":19,"zero":14,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":19}},"actor2":{"critical":19,"zero":14,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":19}},"colonies":27,"techs":67,"ships":140,"actor2Final":{"res":{"min":86.33497562504739,"ene":181.9998873770279,"yiy":415.2805440421988,"ala":29.073828868104055,"ara":0,"tuk":0,"etk":607.5355874999998},"inc":{"min":-0.0986869996767603,"ene":0.6752128962332711,"yiy":-12.153874565658306,"ala":3.142673007098626,"ara":21.68811050472266,"etk":8.917825,"tuk":-14.999628047799932},"cols":2,"techs":5},"rng":-171414043,"aiMs":6076.4165749999875,"aiN":372}

@@ -1,0 +1,21 @@
+PROGRESS base 6/36
+PROGRESS base 12/36
+PROGRESS base 18/36
+PROGRESS base 24/36
+PROGRESS base 30/36
+PROGRESS base 36/36
+{"mode":"base","months":36,"sourceSHA":"394bcc4e6ad0d57e25296bc6ad3b1b5c870de8575a898f6559cc8055db17b347","ms":11305,"world":{"critical":0,"zero":0,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":0}},"actor2":{"critical":0,"zero":0,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":0}},"colonies":21,"techs":49,"ships":175,"actor2Final":{"res":{"min":1569.832130796154,"ene":2425.952131786289,"yiy":3453.2645504206707,"ala":57.7196737500003,"ara":0,"tuk":1260.8558146800017,"etk":986.2794518910246},"inc":{"min":153.57579461538458,"ene":73.48072238310903,"yiy":39.19964613589744,"ala":16.124140000000008,"ara":60.973436923076925,"etk":11.335843333333333,"tuk":6.1097942400000065},"cols":3,"techs":4},"rng":897689461,"aiMs":2494.422883999992,"aiN":360}
+PROGRESS goods-trade 6/36
+PROGRESS goods-trade 12/36
+PROGRESS goods-trade 18/36
+PROGRESS goods-trade 24/36
+PROGRESS goods-trade 30/36
+PROGRESS goods-trade 36/36
+{"mode":"goods-trade","months":36,"sourceSHA":"394bcc4e6ad0d57e25296bc6ad3b1b5c870de8575a898f6559cc8055db17b347","ms":11059,"world":{"critical":0,"zero":0,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":0}},"actor2":{"critical":0,"zero":0,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":0}},"colonies":21,"techs":49,"ships":175,"actor2Final":{"res":{"min":1569.832130796154,"ene":2425.952131786289,"yiy":3453.2645504206707,"ala":57.7196737500003,"ara":0,"tuk":1260.8558146800017,"etk":986.2794518910246},"inc":{"min":153.57579461538458,"ene":73.48072238310903,"yiy":39.19964613589744,"ala":16.124140000000008,"ara":60.973436923076925,"etk":11.335843333333333,"tuk":6.1097942400000065},"cols":3,"techs":4},"rng":897689461,"aiMs":2484.045933000003,"aiN":360}
+PROGRESS mineral-input 6/36
+PROGRESS mineral-input 12/36
+PROGRESS mineral-input 18/36
+PROGRESS mineral-input 24/36
+PROGRESS mineral-input 30/36
+PROGRESS mineral-input 36/36
+{"mode":"mineral-input","months":36,"sourceSHA":"394bcc4e6ad0d57e25296bc6ad3b1b5c870de8575a898f6559cc8055db17b347","ms":19658,"world":{"critical":0,"zero":0,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":0}},"actor2":{"critical":0,"zero":0,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":0}},"colonies":21,"techs":49,"ships":175,"actor2Final":{"res":{"min":1569.832130796154,"ene":2425.952131786289,"yiy":3453.2645504206707,"ala":57.7196737500003,"ara":0,"tuk":1260.8558146800017,"etk":986.2794518910246},"inc":{"min":153.57579461538458,"ene":73.48072238310903,"yiy":39.19964613589744,"ala":16.124140000000008,"ara":60.973436923076925,"etk":11.335843333333333,"tuk":6.1097942400000065},"cols":3,"techs":4},"rng":897689461,"aiMs":4153.076562999875,"aiN":360}

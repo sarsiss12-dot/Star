@@ -1,0 +1,12 @@
+'use strict';
+const fs=require('fs'),path=require('path'),crypto=require('crypto'),assert=require('assert/strict'),{runtime}=require('./helpers/runtime');
+const file=process.argv[2]||'/tmp/aiq0-saves/p23-404-60-ulu-9-final.sav',out=process.env.STARS_OUTPUT||'/tmp/recovery-diagnose';fs.mkdirSync(out,{recursive:true});const raw=fs.readFileSync(file),h=runtime({root:require('./helpers/ai-quality0-control.cjs').root()});h.sb.saved=raw.toString();assert(h.run('deserialize(saved)'));h.run('G.autoSave=false;var e=G.emps[2];');
+const before=h.run('serialize()'),rng=h.run('RND_STATE');
+const result=JSON.parse(h.run(`JSON.stringify({day:G.day,memAge:G.memAge,marketOpen:marketOpen(),resources:e.res,income:e.inc,plan:aiEconomyPlan(e),shipPlan:e.aiShipPlan,ownedSystems:G.sys.filter(s=>s.owner===e.id).length,
+ hostile:G.fleets.filter(f=>f.sys===e.home&&hostile(e.id,f.e)).map(f=>({id:f.id,owner:f.e,wild:!!G.emps[f.e].wild,power:fleetPower(f),ships:f.ships.length})),
+ colonies:e.colonies.map(c=>{const s=G.sys[c.s],p=s.planets[c.p];return{system:s.id,planet:p.i,stability:p.col.stab,target:colonyStabilityTarget(e,s,p),bombed:p.col.bombed,bombKind:p.col.bombKip,passiveRecoveryBlocked:p.col.bombed>=G.memAge,buildings:p.col.b,jobs:p.col.q,producerCosts:Object.fromEntries(['maden','fabrika','ciftlik'].map(k=>[k,buildingCost(e,k)])),deltas:Object.fromEntries(['maden','fabrika','ciftlik'].map(k=>[k,aiBuildingDelta(e,s,p,k)]))};})})`));
+// A paper sensitivity check only, using the real calculator on synchronously restored shadows.
+// This is not a playable campaign, intervention, disappearance of pirates, or claimed rescue.
+const shadow=JSON.parse(h.run(`JSON.stringify((()=>{const originals=e.colonies.map(c=>{const p=G.sys[c.s].planets[c.p],old=p.col;p.col={...old,stab:40};return {p,old};});try{return empireIncome({...e,_trAt:-1,_trCache:null},false);}finally{for(const {p,old}of originals)p.col=old;}})())`));
+assert.equal(h.run('serialize()'),before);assert.equal(h.run('RND_STATE'),rng);
+fs.writeFileSync(path.join(out,'diagnosis.json'),JSON.stringify({sourceSHA256:crypto.createHash('sha256').update(raw).digest('hex'),result,shadowStability40Income:shadow,shadowIsNotCampaign:true,originalFileUnchanged:crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')===crypto.createHash('sha256').update(raw).digest('hex')},null,2));console.log('PASS real checkpoint / siege evidence / existing-calculator shadow is pure');

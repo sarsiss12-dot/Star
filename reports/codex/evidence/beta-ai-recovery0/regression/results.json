@@ -1,0 +1,52 @@
+[
+  {
+    "script": "faz95a_strategic_ai_test.js",
+    "exit": 0,
+    "seconds": 8.95
+  },
+  {
+    "script": "faz96h3_vassal_budget_test.js",
+    "exit": 0,
+    "seconds": 2.64
+  },
+  {
+    "script": "beta_board2_colony_test.cjs",
+    "exit": 0,
+    "seconds": 0.89
+  },
+  {
+    "script": "beta_board2_remote_test.cjs",
+    "exit": 0,
+    "seconds": 0.67
+  },
+  {
+    "script": "beta_stability0_fleet_test.cjs",
+    "exit": 0,
+    "seconds": 2.42
+  },
+  {
+    "script": "beta_stability0_mp_test.cjs",
+    "exit": 0,
+    "seconds": 0.69
+  },
+  {
+    "script": "beta_ui_refinement0_test.cjs",
+    "exit": 0,
+    "seconds": 0.33
+  },
+  {
+    "script": "beta_ui23_preservation.cjs",
+    "exit": 0,
+    "seconds": 1.35
+  },
+  {
+    "script": "perf1_equivalence_test.js",
+    "exit": 0,
+    "seconds": 2.22
+  },
+  {
+    "script": "perf2_equivalence_test.js",
+    "exit": 0,
+    "seconds": 4.26
+  }
+]

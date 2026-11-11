@@ -38,6 +38,13 @@ Ortak ders: yerel bir göstergede kazanç (tek seed, tek kaynak, tek devlet) gen
 - Gıda aciliyetini `aiStrategicFacts.severe` listesine ekleyen tek satırlık deney üretime alınmadı. Aynı p23 Save8/404/100sistem9AI/120ayda kritik devlet-ay78→78, koloniler28→28, gemiler241→241, teknoloji84→84. Plan başarısız sayacı7→6 olsa da her aylık gerçek kaynak/koloni/filo/istikrar sonucu ve sonRNG aynı kaldı; bu kozmetik sayaç farkı kalite kazancı değildir.
 - Deney yalnız test runtime'ına yüklendi; oyun dosyaları ve p23paketi değişmedi. [RET kararı ve yama](reports/codex/evidence/beta-ai-quality0/experiments/decision.json), [rapor](reports/codex/BETA-AI-QUALITY0-SONUC.md).
 
+## BETA-AI-RECOVERY.0 (araştırma, 11 Kasım 2026)
+
+-404/100sistem9AI/60.ay aynı Save8'inden biriktirme, harcama erteleme, mevcut takas, söküm ve girdi üreticisi önceliği karşılaştırıldı.36ay tarama ve güçlü adaylarda120.aya devam yapıldı. Hiçbiri sonunda tüketim krizini kalıcı kapatmadı; ürün koduna alınmadı.
+- En güçlü birleşik seçenek devlet2kritikayını60→23, sıfırstok60→6 indirdi; buna rağmen120.ayda tüketim stoku yine0/net−12,79. Diğer AI'da3kritik enerji ayı görüldü. Bu geçici, bedelli rahatlama kalıcı kurtarma değildir.
+- Yeni kanıt: krizdeki başkentte13korsan filosu/3848güç ve her ay yenilenen bombardıman damgası; gerçek istikrar hedefi81,5 olsa da normal toparlanma engelleniyor. Ekonomik kilit yalnız bütçe etiketi veya170madenlik eşik değildir.
+- [Tek sonuç raporu](reports/codex/BETA-AI-RECOVERY0-SONUC.md), [karşılaştırma](reports/codex/evidence/beta-ai-recovery0/comparison.json). Bütün adaylar test runtime'ına enjekte edildi; p23oyun kodu/ZIP'i değişmedi.
+
 ## Açık kalan gerçek sorunlar (çözülmedi)
 
 - ~~Sefer bekleme kilidi~~ → **96H.8'de çözüldü**: bekleme düzeltmesi, sevk bakımı kapısı, müfreze ve geri çağırma ile birlikte (`AI-SEFER-VERIMLILIGI-96H8.md`). 96H.7 yaması tek başına hâlâ reddedilmiş durumda.

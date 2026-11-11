@@ -1,0 +1,11 @@
+PROGRESS goods-upkeep 6/60
+PROGRESS goods-upkeep 12/60
+PROGRESS goods-upkeep 18/60
+PROGRESS goods-upkeep 24/60
+PROGRESS goods-upkeep 30/60
+PROGRESS goods-upkeep 36/60
+PROGRESS goods-upkeep 42/60
+PROGRESS goods-upkeep 48/60
+PROGRESS goods-upkeep 54/60
+PROGRESS goods-upkeep 60/60
+{"mode":"goods-upkeep","months":60,"sourceSHA":"7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74","ms":28989,"world":{"critical":26,"zero":6,"byResource":{"ene":3,"min":0,"yiy":0,"ala":0,"tuk":23}},"actor2":{"critical":23,"zero":6,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":23}},"colonies":27,"techs":85,"ships":140,"actor2Final":{"res":{"min":57.2849582583995,"ene":146.946276957961,"yiy":345.08374528551417,"ala":19.232458953418018,"ara":16.73528452999379,"tuk":0,"etk":689.2038874999996},"inc":{"min":9.819786122906653,"ene":1.3471200246246806,"yiy":-2.5662101851800116,"ala":0,"ara":24.02793512958416,"etk":7.729065,"tuk":-12.793332200241597},"cols":2,"techs":6},"rng":1921922098,"aiMs":10373.944506999982,"aiN":629}

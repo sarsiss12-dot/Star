@@ -1,0 +1,147 @@
+[
+  {
+    "mode": "goods-upkeep",
+    "months": 36,
+    "sourceSHA": "394bcc4e6ad0d57e25296bc6ad3b1b5c870de8575a898f6559cc8055db17b347",
+    "ms": 14267,
+    "world": {
+      "critical": 0,
+      "zero": 0,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 0
+      }
+    },
+    "actor2": {
+      "critical": 0,
+      "zero": 0,
+      "byResource": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "ala": 0,
+        "tuk": 0
+      }
+    },
+    "colonies": 21,
+    "techs": 49,
+    "ships": 175,
+    "actor2Final": {
+      "id": 2,
+      "dead": false,
+      "res": {
+        "min": 1569.832130796154,
+        "ene": 2425.952131786289,
+        "yiy": 3453.2645504206707,
+        "ala": 57.7196737500003,
+        "ara": 0,
+        "tuk": 1260.8558146800017,
+        "etk": 986.2794518910246
+      },
+      "inc": {
+        "min": 153.57579461538458,
+        "ene": 73.48072238310903,
+        "yiy": 39.19964613589744,
+        "ala": 16.124140000000008,
+        "ara": 60.973436923076925,
+        "etk": 11.335843333333333,
+        "tuk": 6.1097942400000065
+      },
+      "crisis": null,
+      "shortage": false,
+      "cols": 3,
+      "techs": 4,
+      "ships": 38,
+      "wars": [],
+      "schism": 0,
+      "colonies": [
+        {
+          "s": 55,
+          "p": 0,
+          "stab": 100,
+          "secede": 0,
+          "b": {
+            "maden": 5,
+            "santral": 3,
+            "ciftlik": 2,
+            "lab": 1,
+            "dokum": 2,
+            "fabrika": 2,
+            "tersane": 1,
+            "kale": 0,
+            "liman": 1
+          },
+          "q": []
+        },
+        {
+          "s": 89,
+          "p": 1,
+          "stab": 100,
+          "secede": 0,
+          "b": {
+            "maden": 3,
+            "santral": 4,
+            "ciftlik": 1,
+            "liman": 2,
+            "tersane": 1,
+            "dokum": 2,
+            "lab": 1
+          },
+          "q": [
+            {
+              "key": "dokum",
+              "left": 88,
+              "tot": 118,
+              "paid": {
+                "min": 210
+              },
+              "s": 89,
+              "p": 1
+            }
+          ]
+        },
+        {
+          "s": 1,
+          "p": 0,
+          "stab": 77,
+          "secede": 0,
+          "b": {
+            "maden": 1,
+            "santral": 1,
+            "ciftlik": 1,
+            "liman": 1
+          },
+          "q": [
+            {
+              "key": "liman",
+              "left": 32,
+              "tot": 106,
+              "paid": {
+                "min": 180
+              },
+              "s": 1,
+              "p": 0
+            },
+            {
+              "key": "tersane",
+              "left": 181,
+              "tot": 181,
+              "paid": {
+                "min": 260,
+                "ala": 45
+              },
+              "s": 1,
+              "p": 0
+            }
+          ]
+        }
+      ]
+    },
+    "rng": 897689461,
+    "aiMs": 3158.431645000004,
+    "aiN": 360
+  }
+]
