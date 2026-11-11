@@ -2,6 +2,10 @@
 
 Son güncelleme: 2026-11-11. Depo `sarsiss12-dot/Star`.
 
+## Son araştırma — BETA-AI-RECOVERY.0
+
+`codex/stars-beta-ai-recovery0`, deney/testfb438a7. [Son rapor](reports/codex/BETA-AI-RECOVERY0-SONUC.md). Aynı kriz kaydında ekonomik adaylar kalıcı çıkış sağlamadı; üretime alınmadı. Başkentteki sürekli korsan bombardımanı önemli ek kök neden olarak kanıtlandı. p23oyun/MP/ZIPkorundu, p24build yok; ekonomik kurtarma görevi açık.
+
 ## Son araştırma — BETA-AI-QUALITY.0
 
 p23 `b35f8cb` üzerinden `codex/stars-beta-ai-quality0`; test/araştırma007b9d0. [Son rapor](reports/codex/BETA-AI-QUALITY0-SONUC.md). p23soğuk oda5/0 veUI30/0, kapsamlı AI baz ölçümleri ve reddedilen dar deney. Yeni AI kalite kazancı kanıtlanmadığı için oyun kodu/ZIP değişmedi, p24build yok. Güçlü AI himaye başlangıcı ve ekonomik darboğazlar açık.

@@ -2,6 +2,12 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
+## Son araştırma — BETA-AI-RECOVERY.0
+
+- Rapor `reports/codex/BETA-AI-RECOVERY0-SONUC.md`;6f089bd tabanı, deney/testfb438a7, dal `codex/stars-beta-ai-recovery0`. Ürün kodu değişmedi/p24build yok; kalıcı kurtarma bulunamadı.
+-40460.aydan36/60ay eşit-kayıt adayları: en güçlü mal alımı+söküm60→23kritikay fakat sonunda0stok/−12,79net; başkaAI3enerji kritikay. RET. Yeni önemli tanı:13korsan filosu3848güç, sürekli bombardıman, pozitif hedefe rağmen0istikrar;8ay gerçek tekrar.
+-42/23yan kontrol36ay aynı;10hedefli regresyon PASS,74maden tamamlanma iadesi/replay/reload PASS.19runtime ve5MP/p23ZIPaynı. Geniş browser/soğukMP/fiziksel/Render bu fazda yeniden çalıştırılmadı. Sonraki dar soru mevcut askerî yardımın gerçek korsan baskısını giderip giderememesi.
+
 ## Son denetim — BETA-AI-QUALITY.0
 
 - Rapor `reports/codex/BETA-AI-QUALITY0-SONUC.md`. p23b35f8cb tabanı; araştırma/test007b9d0, dal `codex/stars-beta-ai-quality0`. Oyun/MP değişmedi; p24runtime yok.
