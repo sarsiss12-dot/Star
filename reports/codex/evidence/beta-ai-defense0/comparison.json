@@ -1,0 +1,1400 @@
+{
+  "sourceSHA": "7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74",
+  "sameInitialState": true,
+  "acceptedProductChanges": 0,
+  "build": "96h10p23",
+  "comparisons": [
+    {
+      "mode": "base",
+      "months": 60,
+      "actorCritical": 60,
+      "actorZero": 60,
+      "bombardedColonyMonths": 120,
+      "worldCritical": 73,
+      "worldZero": 70,
+      "cols": 28,
+      "techs": 84,
+      "ships": 241,
+      "actorCols": 2,
+      "actorTechs": 5,
+      "actorShips": 0,
+      "actorStability": [
+        0,
+        0
+      ],
+      "actorIncome": {
+        "min": 4.550396159846979,
+        "ene": 4.070456839393429,
+        "yiy": -18.71624978219604,
+        "ala": 0,
+        "ara": 20.718087474722804,
+        "etk": 9.729065,
+        "tuk": -13.78988171290521
+      },
+      "actorStock": {
+        "min": 22.534353234134418,
+        "ene": 584.3073237371252,
+        "yiy": 25.01295827135984,
+        "ala": 32.10506960264408,
+        "ara": 19.76370478956558,
+        "tuk": 0,
+        "etk": 682.2038874999996
+      },
+      "rng": -1458142310,
+      "firstRngDivergence": null
+    },
+    {
+      "mode": "no-bombard",
+      "months": 60,
+      "actorCritical": 22,
+      "actorZero": 22,
+      "bombardedColonyMonths": 0,
+      "worldCritical": 28,
+      "worldZero": 25,
+      "cols": 31,
+      "techs": 82,
+      "ships": 204,
+      "actorCols": 2,
+      "actorTechs": 6,
+      "actorShips": 1,
+      "actorStability": [
+        81.5,
+        81.5
+      ],
+      "actorIncome": {
+        "min": 15.16617037360533,
+        "ene": 77.86653830090543,
+        "yiy": 21.505788063381562,
+        "ala": 7.819743323208808,
+        "ara": 59.92107062054852,
+        "etk": 10.694544643999999,
+        "tuk": 1.4315390406046593
+      },
+      "actorStock": {
+        "min": 138.3563602766842,
+        "ene": 3295.376198743771,
+        "yiy": 1776.7519715026806,
+        "ala": 25.304335744344463,
+        "ara": 23.351847613327102,
+        "tuk": 154.0255520957849,
+        "etk": 757.8845825090132
+      },
+      "rng": -1356647640,
+      "firstRngDivergence": 1
+    },
+    {
+      "mode": "defense",
+      "months": 60,
+      "actorCritical": 60,
+      "actorZero": 60,
+      "bombardedColonyMonths": 120,
+      "worldCritical": 77,
+      "worldZero": 73,
+      "cols": 37,
+      "techs": 87,
+      "ships": 187,
+      "actorCols": 2,
+      "actorTechs": 6,
+      "actorShips": 0,
+      "actorStability": [
+        0,
+        0
+      ],
+      "actorIncome": {
+        "min": 8.602753903257659,
+        "ene": 0.4453752899781166,
+        "yiy": -11.043108352760008,
+        "ala": 0,
+        "ara": 21.066347901866333,
+        "etk": 9.729065,
+        "tuk": -17.3090408192218
+      },
+      "actorStock": {
+        "min": 19.58465417563257,
+        "ene": 592.9628856468698,
+        "yiy": 26.573773571223775,
+        "ala": 34.60882877006226,
+        "ara": 21.7554435705376,
+        "tuk": 0,
+        "etk": 789.2038874999996
+      },
+      "rng": 877376779,
+      "firstRngDivergence": 1
+    },
+    {
+      "mode": "safe-yard",
+      "months": 60,
+      "actorCritical": 60,
+      "actorZero": 60,
+      "bombardedColonyMonths": 120,
+      "worldCritical": 79,
+      "worldZero": 73,
+      "cols": 37,
+      "techs": 88,
+      "ships": 199,
+      "actorCols": 2,
+      "actorTechs": 6,
+      "actorShips": 0,
+      "actorStability": [
+        0,
+        0
+      ],
+      "actorIncome": {
+        "min": 4.7708853300296585,
+        "ene": 4.353690695838445,
+        "yiy": -6.472047087989999,
+        "ala": 0,
+        "ara": 25.751157771280145,
+        "etk": 8.729065,
+        "tuk": -13.405847159241903
+      },
+      "actorStock": {
+        "min": 98.0463126038786,
+        "ene": 622.913737505402,
+        "yiy": 287.4227898138733,
+        "ala": 162.58731365045645,
+        "ara": 23.59756401671335,
+        "tuk": 0,
+        "etk": 692.2038874999996
+      },
+      "rng": -514176955,
+      "firstRngDivergence": 1
+    },
+    {
+      "mode": "allied-defense",
+      "months": 60,
+      "actorCritical": 60,
+      "actorZero": 60,
+      "bombardedColonyMonths": 120,
+      "worldCritical": 77,
+      "worldZero": 73,
+      "cols": 34,
+      "techs": 86,
+      "ships": 221,
+      "actorCols": 2,
+      "actorTechs": 6,
+      "actorShips": 0,
+      "actorStability": [
+        0,
+        0
+      ],
+      "actorIncome": {
+        "min": 11.193992575708322,
+        "ene": 7.62654050833498,
+        "yiy": -2.526071906280002,
+        "ala": 0,
+        "ara": 21.15724901498637,
+        "etk": 9.729065,
+        "tuk": -16.329064107134997
+      },
+      "actorStock": {
+        "min": 77.64292708430395,
+        "ene": 772.6391350746666,
+        "yiy": 220.18032212842422,
+        "ala": 28.079293748585155,
+        "ara": 20.708143649770136,
+        "tuk": 0,
+        "etk": 708.2038874999996
+      },
+      "rng": 1253447661,
+      "firstRngDivergence": 1
+    }
+  ],
+  "seeds": {
+    "11": [
+      {
+        "mode": "base",
+        "months": 36,
+        "actorCritical": 0,
+        "actorZero": 0,
+        "bombardedColonyMonths": 15,
+        "worldCritical": 0,
+        "worldZero": 0,
+        "cols": 23,
+        "techs": 59,
+        "ships": 190,
+        "actorCols": 2,
+        "actorTechs": 10,
+        "actorShips": 5,
+        "actorStability": [
+          24.79999999999999,
+          73
+        ],
+        "actorIncome": {
+          "min": 42.96624307029229,
+          "ene": 48.49700121963207,
+          "yiy": 23.7708406201031,
+          "ala": 34.57809156407156,
+          "ara": 179.42227798928616,
+          "etk": 8.257195243076922,
+          "tuk": 7.389683278793541
+        },
+        "actorStock": {
+          "min": 211.38251981897957,
+          "ene": 5785.580867534317,
+          "yiy": 2086.2967324725414,
+          "ala": 59.58141247999025,
+          "ara": 10.16684928360971,
+          "tuk": 683.1459624205739,
+          "etk": 134.14895002838898
+        },
+        "rng": 329795008,
+        "firstRngDivergence": 0
+      },
+      {
+        "mode": "defense",
+        "months": 36,
+        "actorCritical": 0,
+        "actorZero": 0,
+        "bombardedColonyMonths": 36,
+        "worldCritical": 0,
+        "worldZero": 0,
+        "cols": 25,
+        "techs": 58,
+        "ships": 249,
+        "actorCols": 2,
+        "actorTechs": 10,
+        "actorShips": 1,
+        "actorStability": [
+          0,
+          73
+        ],
+        "actorIncome": {
+          "min": 18.228039314153836,
+          "ene": 59.77849895009823,
+          "yiy": 13.501000943523088,
+          "ala": 7.1147476793249975,
+          "ara": 158.75481416217136,
+          "etk": 7.787475323076922,
+          "tuk": 10.721363800721537
+        },
+        "actorStock": {
+          "min": 88.20279303852877,
+          "ene": 5981.338565710933,
+          "yiy": 2011.0892534282618,
+          "ala": 21.454576387013674,
+          "ara": 0,
+          "tuk": 840.4566018947825,
+          "etk": 183.59507530838906
+        },
+        "rng": 2110156133,
+        "firstRngDivergence": 0
+      },
+      {
+        "mode": "safe-yard",
+        "months": 36,
+        "actorCritical": 0,
+        "actorZero": 0,
+        "bombardedColonyMonths": 25,
+        "worldCritical": 1,
+        "worldZero": 0,
+        "cols": 26,
+        "techs": 57,
+        "ships": 257,
+        "actorCols": 2,
+        "actorTechs": 9,
+        "actorShips": 6,
+        "actorStability": [
+          25.2,
+          73
+        ],
+        "actorIncome": {
+          "min": 43.86710718169229,
+          "ene": 88.01576935347815,
+          "yiy": 23.880145605123086,
+          "ala": 34.198119157062216,
+          "ara": 103.69631710597211,
+          "etk": 8.274593723076922,
+          "tuk": 7.4606054451415345
+        },
+        "actorStock": {
+          "min": 66.154248258568,
+          "ene": 6153.649206396663,
+          "yiy": 2059.912696744162,
+          "ala": 27.126857937337896,
+          "ara": 10.88692037564185,
+          "tuk": 754.1476155004922,
+          "etk": 332.7649669083888
+        },
+        "rng": -2019047269,
+        "firstRngDivergence": 0
+      }
+    ],
+    "23": [
+      {
+        "mode": "base",
+        "months": 36,
+        "actorCritical": 0,
+        "actorZero": 0,
+        "bombardedColonyMonths": 0,
+        "worldCritical": 0,
+        "worldZero": 0,
+        "cols": 21,
+        "techs": 49,
+        "ships": 175,
+        "actorCols": 3,
+        "actorTechs": 4,
+        "actorShips": 38,
+        "actorStability": [
+          100,
+          100,
+          77
+        ],
+        "actorIncome": {
+          "min": 153.57579461538458,
+          "ene": 73.48072238310903,
+          "yiy": 39.19964613589744,
+          "ala": 16.124140000000008,
+          "ara": 60.973436923076925,
+          "etk": 11.335843333333333,
+          "tuk": 6.1097942400000065
+        },
+        "actorStock": {
+          "min": 1569.832130796154,
+          "ene": 2425.952131786289,
+          "yiy": 3453.2645504206707,
+          "ala": 57.7196737500003,
+          "ara": 0,
+          "tuk": 1260.8558146800017,
+          "etk": 986.2794518910246
+        },
+        "rng": 897689461,
+        "firstRngDivergence": 0
+      },
+      {
+        "mode": "defense",
+        "months": 36,
+        "actorCritical": 0,
+        "actorZero": 0,
+        "bombardedColonyMonths": 0,
+        "worldCritical": 0,
+        "worldZero": 0,
+        "cols": 22,
+        "techs": 49,
+        "ships": 214,
+        "actorCols": 3,
+        "actorTechs": 4,
+        "actorShips": 27,
+        "actorStability": [
+          100,
+          100,
+          100
+        ],
+        "actorIncome": {
+          "min": 111.84886721538459,
+          "ene": 130.56476823844997,
+          "yiy": 47.21136584,
+          "ala": 48.25270999999999,
+          "ara": 57.433317281538464,
+          "etk": 13.146186666666669,
+          "tuk": -0.30890633759999275
+        },
+        "actorStock": {
+          "min": 1631.224044991097,
+          "ene": 4124.983565175906,
+          "yiy": 3439.931538090672,
+          "ala": 69.33272625000009,
+          "ara": 0,
+          "tuk": 1143.1760255184,
+          "etk": 893.9631347756405
+        },
+        "rng": 737085776,
+        "firstRngDivergence": 0
+      },
+      {
+        "mode": "safe-yard",
+        "months": 36,
+        "actorCritical": 0,
+        "actorZero": 0,
+        "bombardedColonyMonths": 0,
+        "worldCritical": 0,
+        "worldZero": 0,
+        "cols": 22,
+        "techs": 49,
+        "ships": 180,
+        "actorCols": 3,
+        "actorTechs": 4,
+        "actorShips": 29,
+        "actorStability": [
+          100,
+          100,
+          100
+        ],
+        "actorIncome": {
+          "min": 119.43268110769228,
+          "ene": 63.541022947781954,
+          "yiy": 47.21136584,
+          "ala": 36.43111,
+          "ara": 53.65540997538462,
+          "etk": 12.129066666666667,
+          "tuk": -1.8099900287999944
+        },
+        "actorStock": {
+          "min": 1556.472871486856,
+          "ene": 3886.457959863987,
+          "yiy": 3439.931538090672,
+          "ala": 59.816326250000124,
+          "ara": 0,
+          "tuk": 1138.8052832736003,
+          "etk": 866.9117747756404
+        },
+        "rng": 684051676,
+        "firstRngDivergence": 0
+      }
+    ],
+    "42": [
+      {
+        "mode": "base",
+        "months": 36,
+        "actorCritical": 0,
+        "actorZero": 0,
+        "bombardedColonyMonths": 0,
+        "worldCritical": 0,
+        "worldZero": 0,
+        "cols": 21,
+        "techs": 73,
+        "ships": 210,
+        "actorCols": 2,
+        "actorTechs": 7,
+        "actorShips": 42,
+        "actorStability": [
+          100,
+          100
+        ],
+        "actorIncome": {
+          "min": 79.65578879999998,
+          "ene": 163.14845935359986,
+          "yiy": 0,
+          "ala": 50.00824704000001,
+          "ara": 52.6752,
+          "etk": 14.093344000000002,
+          "tuk": 24.58781567999999
+        },
+        "actorStock": {
+          "min": 1986.993587347231,
+          "ene": 6686.459045294709,
+          "yiy": 180,
+          "ala": 175.50748450792292,
+          "ara": 0,
+          "tuk": 2595.4662907344004,
+          "etk": 403.66129861442744
+        },
+        "rng": -1869350648,
+        "firstRngDivergence": 0
+      },
+      {
+        "mode": "defense",
+        "months": 36,
+        "actorCritical": 0,
+        "actorZero": 0,
+        "bombardedColonyMonths": 0,
+        "worldCritical": 0,
+        "worldZero": 0,
+        "cols": 20,
+        "techs": 73,
+        "ships": 226,
+        "actorCols": 2,
+        "actorTechs": 7,
+        "actorShips": 43,
+        "actorStability": [
+          100,
+          99.75
+        ],
+        "actorIncome": {
+          "min": 138.74945342153845,
+          "ene": 175.61531308498454,
+          "yiy": 0,
+          "ala": 19.18458336000001,
+          "ara": 62.55886918153846,
+          "etk": 13.456096,
+          "tuk": 24.723877967999996
+        },
+        "actorStock": {
+          "min": 1985.904493630487,
+          "ene": 5969.630095231088,
+          "yiy": 180,
+          "ala": 58.704200949635606,
+          "ara": 0,
+          "tuk": 2596.4343988464,
+          "etk": 501.8603566507908
+        },
+        "rng": 1621355490,
+        "firstRngDivergence": 0
+      },
+      {
+        "mode": "safe-yard",
+        "months": 36,
+        "actorCritical": 0,
+        "actorZero": 0,
+        "bombardedColonyMonths": 0,
+        "worldCritical": 0,
+        "worldZero": 0,
+        "cols": 21,
+        "techs": 73,
+        "ships": 237,
+        "actorCols": 2,
+        "actorTechs": 7,
+        "actorShips": 39,
+        "actorStability": [
+          100,
+          99.75
+        ],
+        "actorIncome": {
+          "min": 139.6784458830769,
+          "ene": 62.28032874149099,
+          "yiy": 0,
+          "ala": 35.852327360000004,
+          "ara": 49.63978633846153,
+          "etk": 13.456096,
+          "tuk": 24.633407231999996
+        },
+        "actorStock": {
+          "min": 2595.561441869705,
+          "ene": 5981.359248607725,
+          "yiy": 180,
+          "ala": 82.51849359621593,
+          "ara": 0,
+          "tuk": 2598.0635844624003,
+          "etk": 604.8603566507911
+        },
+        "rng": -1059929281,
+        "firstRngDivergence": 0
+      }
+    ],
+    "99": [
+      {
+        "mode": "base",
+        "months": 36,
+        "actorCritical": 0,
+        "actorZero": 0,
+        "bombardedColonyMonths": 0,
+        "worldCritical": 0,
+        "worldZero": 0,
+        "cols": 27,
+        "techs": 58,
+        "ships": 221,
+        "actorCols": 2,
+        "actorTechs": 9,
+        "actorShips": 8,
+        "actorStability": [
+          94.58348921419011,
+          94.58348921419011
+        ],
+        "actorIncome": {
+          "min": 110.99491084537104,
+          "ene": 75.80145723513019,
+          "yiy": 0,
+          "ala": 27.321105347274496,
+          "ara": 212.35577999999998,
+          "etk": 17.78554604520304,
+          "tuk": 40.93530879151388
+        },
+        "actorStock": {
+          "min": 3174.1208476896036,
+          "ene": 7156.271673045191,
+          "yiy": 180,
+          "ala": 50.17565270989428,
+          "ara": 0,
+          "tuk": 2136.130507304994,
+          "etk": 1585.5305715891382
+        },
+        "rng": 885281087,
+        "firstRngDivergence": 0
+      },
+      {
+        "mode": "defense",
+        "months": 36,
+        "actorCritical": 0,
+        "actorZero": 0,
+        "bombardedColonyMonths": 0,
+        "worldCritical": 0,
+        "worldZero": 0,
+        "cols": 25,
+        "techs": 59,
+        "ships": 227,
+        "actorCols": 2,
+        "actorTechs": 9,
+        "actorShips": 8,
+        "actorStability": [
+          94.58348921419011,
+          94.58348921419011
+        ],
+        "actorIncome": {
+          "min": 99.72063955153709,
+          "ene": 55.679283752444576,
+          "yiy": 0,
+          "ala": 37.524675347274496,
+          "ara": 229.73963999999998,
+          "etk": 17.78554604520304,
+          "tuk": 40.93530879151388
+        },
+        "actorStock": {
+          "min": 2500.8465763957697,
+          "ene": 7071.68486292165,
+          "yiy": 180,
+          "ala": 53.80564193780009,
+          "ara": 0,
+          "tuk": 2136.130507304994,
+          "etk": 1585.5305715891382
+        },
+        "rng": -577790144,
+        "firstRngDivergence": 0
+      },
+      {
+        "mode": "safe-yard",
+        "months": 36,
+        "actorCritical": 0,
+        "actorZero": 0,
+        "bombardedColonyMonths": 0,
+        "worldCritical": 0,
+        "worldZero": 0,
+        "cols": 25,
+        "techs": 59,
+        "ships": 227,
+        "actorCols": 2,
+        "actorTechs": 9,
+        "actorShips": 8,
+        "actorStability": [
+          94.58348921419011,
+          94.58348921419011
+        ],
+        "actorIncome": {
+          "min": 99.72063955153709,
+          "ene": 55.679283752444576,
+          "yiy": 0,
+          "ala": 37.524675347274496,
+          "ara": 229.73963999999998,
+          "etk": 17.78554604520304,
+          "tuk": 40.93530879151388
+        },
+        "actorStock": {
+          "min": 2500.8465763957697,
+          "ene": 7071.68486292165,
+          "yiy": 180,
+          "ala": 53.80564193780009,
+          "ara": 0,
+          "tuk": 2136.130507304994,
+          "etk": 1585.5305715891382
+        },
+        "rng": -577790144,
+        "firstRngDivergence": 0
+      }
+    ]
+  },
+  "combat": {
+    "base": {
+      "allGalaxyCombatHulls": {
+        "1": 42,
+        "2": 5,
+        "3": 6,
+        "4": 14,
+        "5": 61,
+        "6": 32,
+        "7": 16,
+        "9": 55,
+        "10": 14
+      },
+      "actorActualOrders": 5,
+      "events": [
+        {
+          "day": 1890,
+          "kind": "queueShip",
+          "e": 2,
+          "from": 38,
+          "to": "kor",
+          "resources": {
+            "min": 54.73081975892038,
+            "ene": 447.08284093355417,
+            "yiy": 446.1530098487992,
+            "ala": 23.624928288623188,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 443.0946424999999
+          }
+        },
+        {
+          "day": 1890,
+          "kind": "aiQueueMilitaryShip",
+          "e": 2,
+          "from": 38,
+          "to": "kor",
+          "item": {
+            "reserve": 22.655175257484892,
+            "maxWait": 45
+          },
+          "resources": {
+            "min": 54.73081975892038,
+            "ene": 447.08284093355417,
+            "yiy": 446.1530098487992,
+            "ala": 23.624928288623188,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 443.0946424999999
+          }
+        },
+        {
+          "day": 1921,
+          "kind": "fleet-removal",
+          "e": 2,
+          "id": 361,
+          "sys": 38,
+          "ships": 1,
+          "power": 90,
+          "reason": "combat"
+        },
+        {
+          "day": 2010,
+          "kind": "queueShip",
+          "e": 2,
+          "from": 38,
+          "to": "bil",
+          "resources": {
+            "min": 105.21850718707039,
+            "ene": 472.91326516520104,
+            "yiy": 439.8036336433992,
+            "ala": 13.246395012082004,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 435.7254724999999
+          }
+        },
+        {
+          "day": 2040,
+          "kind": "fleet-removal",
+          "e": 2,
+          "id": 389,
+          "sys": 38,
+          "ships": 1,
+          "power": 23,
+          "reason": "combat"
+        },
+        {
+          "day": 2100,
+          "kind": "queueBuilding",
+          "e": 2,
+          "from": 38,
+          "to": 0,
+          "item": "ciftlik",
+          "resources": {
+            "min": 1.8134462006824066,
+            "ene": 497.78487756777184,
+            "yiy": 433.46152190203924,
+            "ala": 24.025459133817915,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 460.1160124999999
+          }
+        },
+        {
+          "day": 2370,
+          "kind": "queueShip",
+          "e": 2,
+          "from": 38,
+          "to": "bil",
+          "resources": {
+            "min": 17.563679274485775,
+            "ene": 545.6649569691806,
+            "yiy": 447.7221080397294,
+            "ala": 31.21258877728642,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 494.86292249999985
+          }
+        },
+        {
+          "day": 2400,
+          "kind": "fleet-removal",
+          "e": 2,
+          "id": 473,
+          "sys": 38,
+          "ships": 1,
+          "power": 23,
+          "reason": "combat"
+        },
+        {
+          "day": 2670,
+          "kind": "queueShip",
+          "e": 2,
+          "from": 38,
+          "to": "kor",
+          "resources": {
+            "min": 28.113248469814522,
+            "ene": 560.2301193018425,
+            "yiy": 445.14246106414754,
+            "ala": 32.014317935033475,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 584.9456474999998
+          }
+        },
+        {
+          "day": 2670,
+          "kind": "aiQueueMilitaryShip",
+          "e": 2,
+          "from": 38,
+          "to": "kor",
+          "item": {
+            "reserve": 31.5701505032051,
+            "maxWait": 45
+          },
+          "resources": {
+            "min": 28.113248469814522,
+            "ene": 560.2301193018425,
+            "yiy": 445.14246106414754,
+            "ala": 32.014317935033475,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 584.9456474999998
+          }
+        },
+        {
+          "day": 2701.5,
+          "kind": "fleet-removal",
+          "e": 2,
+          "id": 529,
+          "sys": 38,
+          "ships": 1,
+          "power": 89,
+          "reason": "combat"
+        },
+        {
+          "day": 2730,
+          "kind": "queueShip",
+          "e": 2,
+          "from": 38,
+          "to": "bil",
+          "resources": {
+            "min": 29.31498995453387,
+            "ene": 557.1753633322967,
+            "yiy": 440.5002828339676,
+            "ala": 13.629387813968847,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 602.8678124999998
+          }
+        },
+        {
+          "day": 2760,
+          "kind": "fleet-removal",
+          "e": 2,
+          "id": 544,
+          "sys": 38,
+          "ships": 1,
+          "power": 23,
+          "reason": "combat"
+        },
+        {
+          "day": 2929.5,
+          "kind": "fleet-removal",
+          "e": 10,
+          "id": 36,
+          "sys": 96,
+          "ships": 1,
+          "power": 281,
+          "reason": "combat"
+        },
+        {
+          "day": 2970,
+          "kind": "queueBuilding",
+          "e": 2,
+          "from": 38,
+          "to": 0,
+          "item": "fabrika",
+          "resources": {
+            "min": 4.497881474237488,
+            "ene": 569.9495750468525,
+            "yiy": 367.92657632855787,
+            "ala": 32.10506960264408,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 631.2418724999998
+          }
+        },
+        {
+          "day": 3183,
+          "kind": "fleet-removal",
+          "e": 10,
+          "id": 40,
+          "sys": 91,
+          "ships": 1,
+          "power": 260,
+          "reason": "combat"
+        },
+        {
+          "day": 3327.5,
+          "kind": "fleet-removal",
+          "e": 10,
+          "id": 38,
+          "sys": 72,
+          "ships": 3,
+          "power": 627,
+          "reason": "combat"
+        },
+        {
+          "day": 3400.5,
+          "kind": "fleet-removal",
+          "e": 10,
+          "id": 37,
+          "sys": 57,
+          "ships": 1,
+          "power": 122,
+          "reason": "combat"
+        },
+        {
+          "day": 3480,
+          "kind": "queueBuilding",
+          "e": 2,
+          "from": 38,
+          "to": 0,
+          "item": "santral",
+          "resources": {
+            "min": 3.4834305511980546,
+            "ene": 579.586564513954,
+            "yiy": 99.21945730560023,
+            "ala": 32.10506960264408,
+            "ara": 18.74901739245719,
+            "tuk": 0,
+            "etk": 643.2404374999996
+          }
+        }
+      ]
+    },
+    "allied-defense": {
+      "allGalaxyCombatHulls": {
+        "1": 41,
+        "2": 5,
+        "3": 31,
+        "4": 3,
+        "5": 31,
+        "6": 56,
+        "7": 42,
+        "9": 29,
+        "12": 12
+      },
+      "actorActualOrders": 5,
+      "events": [
+        {
+          "day": 1890,
+          "kind": "queueShip",
+          "e": 2,
+          "from": 38,
+          "to": "kor",
+          "resources": {
+            "min": 54.55827159313038,
+            "ene": 446.7531818029523,
+            "yiy": 446.23817656466315,
+            "ala": 23.589651977108993,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 443.0946424999999
+          }
+        },
+        {
+          "day": 1890,
+          "kind": "aiQueueMilitaryShip",
+          "e": 2,
+          "from": 38,
+          "to": "kor",
+          "item": {
+            "reserve": 22.75229907208275,
+            "maxWait": 45
+          },
+          "resources": {
+            "min": 54.55827159313038,
+            "ene": 446.7531818029523,
+            "yiy": 446.23817656466315,
+            "ala": 23.589651977108993,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 443.0946424999999
+          }
+        },
+        {
+          "day": 1921,
+          "kind": "fleet-removal",
+          "e": 2,
+          "id": 361,
+          "sys": 38,
+          "ships": 1,
+          "power": 90,
+          "reason": "combat"
+        },
+        {
+          "day": 2010,
+          "kind": "queueShip",
+          "e": 2,
+          "from": 38,
+          "to": "bil",
+          "resources": {
+            "min": 24.631772792252384,
+            "ene": 471.7669658446746,
+            "yiy": 440.02035771022315,
+            "ala": 13.11831135926328,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 475.7254724999999
+          }
+        },
+        {
+          "day": 2040,
+          "kind": "fleet-removal",
+          "e": 2,
+          "id": 389,
+          "sys": 38,
+          "ships": 1,
+          "power": 23,
+          "reason": "combat"
+        },
+        {
+          "day": 2370,
+          "kind": "queueShip",
+          "e": 2,
+          "from": 38,
+          "to": "bil",
+          "resources": {
+            "min": 44.42732942227874,
+            "ene": 530.7609288586839,
+            "yiy": 400.62269662756336,
+            "ala": 30.64054868555972,
+            "ara": 0,
+            "tuk": 0,
+            "etk": 578.8629224999999
+          }
+        },
+        {
+          "day": 2400,
+          "kind": "fleet-removal",
+          "e": 2,
+          "id": 477,
+          "sys": 38,
+          "ships": 1,
+          "power": 23,
+          "reason": "combat"
+        },
+        {
+          "day": 2670,
+          "kind": "queueShip",
+          "e": 2,
+          "from": 38,
+          "to": "kor",
+          "resources": {
+            "min": 102.47543725220446,
+            "ene": 544.815210238499,
+            "yiy": 337.38743116014365,
+            "ala": 31.204609522328617,
+            "ara": 13.213606835536273,
+            "tuk": 0,
+            "etk": 508.94564749999984
+          }
+        },
+        {
+          "day": 2670,
+          "kind": "aiQueueMilitaryShip",
+          "e": 2,
+          "from": 38,
+          "to": "kor",
+          "item": {
+            "reserve": 31.01703586537846,
+            "maxWait": 45
+          },
+          "resources": {
+            "min": 102.47543725220446,
+            "ene": 544.815210238499,
+            "yiy": 337.38743116014365,
+            "ala": 31.204609522328617,
+            "ara": 13.213606835536273,
+            "tuk": 0,
+            "etk": 508.94564749999984
+          }
+        },
+        {
+          "day": 2701,
+          "kind": "fleet-removal",
+          "e": 2,
+          "id": 529,
+          "sys": 38,
+          "ships": 1,
+          "power": 89,
+          "reason": "combat"
+        },
+        {
+          "day": 2730,
+          "kind": "queueShip",
+          "e": 2,
+          "from": 38,
+          "to": "bil",
+          "resources": {
+            "min": 103.1927398322598,
+            "ene": 549.3899447990372,
+            "yiy": 321.1812578073437,
+            "ala": 12.777987378031334,
+            "ara": 13.24267857755367,
+            "tuk": 0,
+            "etk": 526.8678124999998
+          }
+        },
+        {
+          "day": 2760,
+          "kind": "fleet-removal",
+          "e": 2,
+          "id": 543,
+          "sys": 38,
+          "ships": 1,
+          "power": 23,
+          "reason": "combat"
+        },
+        {
+          "day": 2760,
+          "kind": "queueBuilding",
+          "e": 2,
+          "from": 38,
+          "to": 0,
+          "item": "ciftlik",
+          "resources": {
+            "min": 43.348054371670486,
+            "ene": 554.9294515572104,
+            "yiy": 312.8209376179837,
+            "ala": 15.884650846993459,
+            "ara": 13.26181234466377,
+            "tuk": 0,
+            "etk": 495.81709749999976
+          }
+        },
+        {
+          "day": 2910,
+          "kind": "queueBuilding",
+          "e": 2,
+          "from": 38,
+          "to": 2,
+          "item": "ciftlik",
+          "resources": {
+            "min": 16.87174984531387,
+            "ene": 581.958543689518,
+            "yiy": 286.3645910699838,
+            "ala": 28.079293748585155,
+            "ara": 12.855545715194632,
+            "tuk": 0,
+            "etk": 539.4455474999997
+          }
+        },
+        {
+          "day": 3150,
+          "kind": "queueBuilding",
+          "e": 2,
+          "from": 38,
+          "to": 0,
+          "item": "santral",
+          "resources": {
+            "min": 7.263761592928958,
+            "ene": 631.337560728199,
+            "yiy": 271.02202698472405,
+            "ala": 28.079293748585155,
+            "ara": 17.207227002472386,
+            "tuk": 0,
+            "etk": 606.4420874999997
+          }
+        },
+        {
+          "day": 3420,
+          "kind": "queueBuilding",
+          "e": 2,
+          "from": 38,
+          "to": 2,
+          "item": "ciftlik",
+          "resources": {
+            "min": 8.584624550428998,
+            "ene": 720.9695701913764,
+            "yiy": 239.33744093366423,
+            "ala": 28.079293748585155,
+            "ara": 19.051019529893054,
+            "tuk": 0,
+            "etk": 694.7115224999997
+          }
+        }
+      ]
+    }
+  },
+  "regressions": [
+    {
+      "name": "beta_espionage_rebellion0_mp_test.cjs.log",
+      "pass": 6,
+      "fail": 0
+    },
+    {
+      "name": "beta_fed_ai0_coalition_test.cjs.log",
+      "pass": 8,
+      "fail": 0
+    },
+    {
+      "name": "beta_fed_ai0_emergency_test.cjs.log",
+      "pass": 5,
+      "fail": 0
+    },
+    {
+      "name": "beta_stability0_fleet_test.cjs.log",
+      "pass": 10,
+      "fail": 0
+    },
+    {
+      "name": "beta_stability0_mp_test.cjs.log",
+      "pass": 3,
+      "fail": 0
+    },
+    {
+      "name": "beta_ui_refinement0_test.cjs.log",
+      "pass": 4,
+      "fail": 0
+    },
+    {
+      "name": "beta_war_center0_test.cjs.log",
+      "pass": 7,
+      "fail": 0
+    },
+    {
+      "name": "faz95a_strategic_ai_test.js.log",
+      "pass": 51,
+      "fail": 0
+    },
+    {
+      "name": "faz96g1_contract_test.js.log",
+      "pass": 25,
+      "fail": 0
+    },
+    {
+      "name": "faz96h3_vassal_budget_test.js.log",
+      "pass": 16,
+      "fail": 0
+    }
+  ],
+  "totalRegressionPass": 135,
+  "timing": [
+    {
+      "file": "p23-404-60-ulu-9-final.sav",
+      "mode": "base",
+      "aiMsPerMonth": 127.88891216666707,
+      "totalMsPerMonth": 447.14580399999977,
+      "aiCalls": [
+        60,
+        60,
+        60
+      ],
+      "aiMsPerMonthRange": [
+        122.02259949999886,
+        138.22801666666683
+      ]
+    },
+    {
+      "file": "p23-404-60-ulu-9-final.sav",
+      "mode": "defense",
+      "aiMsPerMonth": 134.2554380000006,
+      "totalMsPerMonth": 455.9442371666664,
+      "aiCalls": [
+        60,
+        60,
+        60
+      ],
+      "aiMsPerMonthRange": [
+        132.1448648333347,
+        163.57049566666743
+      ]
+    },
+    {
+      "file": "p23-404-60-ulu-9-final.sav",
+      "mode": "safe-yard",
+      "aiMsPerMonth": 133.2353611666646,
+      "totalMsPerMonth": 451.7666561666665,
+      "aiCalls": [
+        60,
+        60,
+        60
+      ],
+      "aiMsPerMonthRange": [
+        130.73559366666754,
+        133.49868866666898
+      ]
+    },
+    {
+      "file": "p23-404-60-ulu-9-final.sav",
+      "mode": "allied-defense",
+      "aiMsPerMonth": 134.05145983333327,
+      "totalMsPerMonth": 455.34164916666606,
+      "aiCalls": [
+        60,
+        60,
+        60
+      ],
+      "aiMsPerMonthRange": [
+        127.91215966666702,
+        148.22111366666527
+      ]
+    },
+    {
+      "file": "p23-11-24-s200-16-final.sav",
+      "mode": "base",
+      "aiMsPerMonth": 276.29197433331865,
+      "totalMsPerMonth": 1636.5545661666667,
+      "aiCalls": [
+        102,
+        102,
+        102
+      ],
+      "aiMsPerMonthRange": [
+        265.17347583334777,
+        279.9588915000131
+      ]
+    },
+    {
+      "file": "p23-11-24-s200-16-final.sav",
+      "mode": "defense",
+      "aiMsPerMonth": 276.03255883337505,
+      "totalMsPerMonth": 1813.7598671666685,
+      "aiCalls": [
+        102,
+        102,
+        102
+      ],
+      "aiMsPerMonthRange": [
+        248.18578716666525,
+        304.46075333333283
+      ]
+    },
+    {
+      "file": "p23-11-24-s200-16-final.sav",
+      "mode": "safe-yard",
+      "aiMsPerMonth": 304.7461210000086,
+      "totalMsPerMonth": 1847.6651853333315,
+      "aiCalls": [
+        102,
+        102,
+        102
+      ],
+      "aiMsPerMonthRange": [
+        254.7492239999956,
+        309.7988776666777
+      ]
+    },
+    {
+      "file": "p23-11-24-s200-16-final.sav",
+      "mode": "allied-defense",
+      "aiMsPerMonth": 263.2404451666953,
+      "totalMsPerMonth": 1842.8088344999996,
+      "aiCalls": [
+        102,
+        102,
+        102
+      ],
+      "aiMsPerMonthRange": [
+        244.17740116664694,
+        339.920224833324
+      ]
+    }
+  ],
+  "package": {
+    "file": "releases/stars-faz96h10p23.zip",
+    "bytes": 836950,
+    "sha256": "af6eb03aade38327e48ee290029377e638b40167ff87742a57be82cec5bd7d1d",
+    "crc32": "13718624",
+    "repeatEqual": true
+  },
+  "sourceAndObserverAudit": "PASS"
+}

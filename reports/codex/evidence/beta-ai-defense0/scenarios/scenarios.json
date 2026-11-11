@@ -1,0 +1,556 @@
+[
+  {
+    "strong": false,
+    "mode": "base",
+    "before": {
+      "friendly": 1370,
+      "hostile": 171,
+      "resources": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 100000,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "ships": 8
+    },
+    "ordered": {
+      "path": [],
+      "campaign": null,
+      "ships": 8,
+      "resources": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 99936,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "queue": [
+        {
+          "cls": "ins",
+          "e": 1,
+          "left": 30,
+          "tot": 30,
+          "paid": {
+            "ala": 45,
+            "min": 90
+          }
+        },
+        {
+          "cls": "kol",
+          "e": 1,
+          "left": 44,
+          "tot": 44,
+          "paid": {
+            "ala": 60,
+            "min": 265
+          }
+        }
+      ]
+    },
+    "after": {
+      "arrivals": 0,
+      "friendlyShips": 8,
+      "enemyShips": 1,
+      "fleetPosition": 2,
+      "journal": []
+    },
+    "recovery": {
+      "stab": 6,
+      "income": {
+        "min": 4.2097110000000075,
+        "ene": -27.631352499999995,
+        "yiy": 0,
+        "ala": -2.7841454374999985,
+        "ara": 10.525481062500003,
+        "etk": 6.797499999999999,
+        "tuk": 1.6613139000000006
+      },
+      "resources": {
+        "min": 99383.735465,
+        "ene": 99890.68392749998,
+        "yiy": 100000,
+        "ala": 99868.0216559375,
+        "ara": 0,
+        "tuk": 100016.3141431,
+        "etk": 100020.3025
+      },
+      "bombed": 0
+    }
+  },
+  {
+    "strong": false,
+    "mode": "defense",
+    "before": {
+      "friendly": 1370,
+      "hostile": 171,
+      "resources": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 100000,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "ships": 8
+    },
+    "ordered": {
+      "path": [
+        1,
+        0
+      ],
+      "campaign": null,
+      "ships": 8,
+      "resources": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 99936,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "queue": [
+        {
+          "cls": "ins",
+          "e": 1,
+          "left": 30,
+          "tot": 30,
+          "paid": {
+            "ala": 45,
+            "min": 90
+          }
+        },
+        {
+          "cls": "kol",
+          "e": 1,
+          "left": 44,
+          "tot": 44,
+          "paid": {
+            "ala": 60,
+            "min": 265
+          }
+        }
+      ]
+    },
+    "after": {
+      "arrivals": 715,
+      "friendlyShips": 8,
+      "enemyShips": 0,
+      "fleetPosition": 0,
+      "journal": [
+        {
+          "id": 1,
+          "day": 304,
+          "owner": 0,
+          "fleet": 75,
+          "reason": "combat",
+          "sys": 0,
+          "to": null,
+          "power": 171,
+          "ships": 1,
+          "classes": {
+            "kor": 1
+          },
+          "supply": null,
+          "order": null,
+          "combat": true,
+          "wars": [],
+          "shipments": 0,
+          "jobs": 0
+        }
+      ]
+    },
+    "recovery": {
+      "stab": 9,
+      "income": {
+        "min": -0.1034549999999922,
+        "ene": -29.238487499999994,
+        "yiy": 0,
+        "ala": -2.586191562499999,
+        "ara": 10.949325937500001,
+        "etk": 6.8425,
+        "tuk": 8.318841
+      },
+      "resources": {
+        "min": 99521.189133,
+        "ene": 99883.89267249998,
+        "yiy": 100000,
+        "ala": 99868.4175636875,
+        "ara": 0,
+        "tuk": 100023.4678834,
+        "etk": 100020.3925
+      },
+      "bombed": 0
+    }
+  },
+  {
+    "strong": false,
+    "mode": "safe-yard",
+    "before": {
+      "friendly": 1370,
+      "hostile": 171,
+      "resources": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 100000,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "ships": 8
+    },
+    "ordered": {
+      "path": [
+        1,
+        0
+      ],
+      "campaign": null,
+      "ships": 8,
+      "resources": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 100000,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "queue": [
+        {
+          "cls": "kol",
+          "e": 1,
+          "left": 14,
+          "tot": 44,
+          "paid": {
+            "ala": 60,
+            "min": 265
+          }
+        },
+        {
+          "cls": "ins",
+          "e": 1,
+          "left": 30,
+          "tot": 30,
+          "paid": {
+            "ala": 45,
+            "min": 90
+          }
+        },
+        {
+          "cls": "kol",
+          "e": 1,
+          "left": 44,
+          "tot": 44,
+          "paid": {
+            "ala": 60,
+            "min": 265
+          }
+        }
+      ]
+    },
+    "after": {
+      "arrivals": 715,
+      "friendlyShips": 8,
+      "enemyShips": 0,
+      "fleetPosition": 0,
+      "journal": [
+        {
+          "id": 1,
+          "day": 304,
+          "owner": 0,
+          "fleet": 75,
+          "reason": "combat",
+          "sys": 0,
+          "to": null,
+          "power": 171,
+          "ships": 1,
+          "classes": {
+            "kor": 1
+          },
+          "supply": null,
+          "order": null,
+          "combat": true,
+          "wars": [],
+          "shipments": 0,
+          "jobs": 0
+        }
+      ]
+    },
+    "recovery": {
+      "stab": 9,
+      "income": {
+        "min": -0.1034549999999922,
+        "ene": -22.43848749999999,
+        "yiy": 0,
+        "ala": -1.0461915624999998,
+        "ara": 10.949325937500001,
+        "etk": 6.8425,
+        "tuk": 8.318841
+      },
+      "resources": {
+        "min": 99006.189133,
+        "ene": 99900.1926725,
+        "yiy": 100000,
+        "ala": 99826.2675636875,
+        "ara": 0,
+        "tuk": 100023.4678834,
+        "etk": 100020.3925
+      },
+      "bombed": 0
+    }
+  },
+  {
+    "strong": true,
+    "mode": "base",
+    "before": {
+      "friendly": 1370,
+      "hostile": 55474,
+      "resources": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 100000,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "ships": 8
+    },
+    "ordered": {
+      "path": [],
+      "campaign": null,
+      "ships": 8,
+      "resources": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 99936,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "queue": [
+        {
+          "cls": "ins",
+          "e": 1,
+          "left": 30,
+          "tot": 30,
+          "paid": {
+            "ala": 45,
+            "min": 90
+          }
+        },
+        {
+          "cls": "ins",
+          "e": 1,
+          "left": 30,
+          "tot": 30,
+          "paid": {
+            "ala": 45,
+            "min": 90
+          }
+        }
+      ]
+    },
+    "after": {
+      "arrivals": 0,
+      "friendlyShips": 8,
+      "enemyShips": 30,
+      "fleetPosition": 2,
+      "journal": []
+    },
+    "recovery": {
+      "stab": 0,
+      "income": {
+        "min": -2.138260607999995,
+        "ene": -25.035823104000002,
+        "yiy": 0,
+        "ala": -1.4628965890000005,
+        "ara": 10.043328009,
+        "etk": 6.7524999999999995,
+        "tuk": 7.310281833600001
+      },
+      "resources": {
+        "min": 99723.686355784,
+        "ene": 99916.588685248,
+        "yiy": 100000,
+        "ala": 99796.6321075095,
+        "ara": 0,
+        "tuk": 100021.94697826721,
+        "etk": 100020.2575
+      },
+      "bombed": 13
+    }
+  },
+  {
+    "strong": true,
+    "mode": "defense",
+    "before": {
+      "friendly": 1370,
+      "hostile": 55474,
+      "resources": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 100000,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "ships": 8
+    },
+    "ordered": {
+      "path": [],
+      "campaign": {
+        "phase": "recon",
+        "reason": "Keşfedilmiş düşman konumu yok",
+        "until": 330
+      },
+      "ships": 8,
+      "resources": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 99936,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "queue": [
+        {
+          "cls": "ins",
+          "e": 1,
+          "left": 30,
+          "tot": 30,
+          "paid": {
+            "ala": 45,
+            "min": 90
+          }
+        },
+        {
+          "cls": "ins",
+          "e": 1,
+          "left": 30,
+          "tot": 30,
+          "paid": {
+            "ala": 45,
+            "min": 90
+          }
+        }
+      ]
+    },
+    "after": {
+      "arrivals": 0,
+      "friendlyShips": 8,
+      "enemyShips": 30,
+      "fleetPosition": 2,
+      "journal": []
+    },
+    "recovery": {
+      "stab": 0,
+      "income": {
+        "min": -2.138260607999995,
+        "ene": -25.035823104000002,
+        "yiy": 0,
+        "ala": -1.4628965890000005,
+        "ara": 10.043328009,
+        "etk": 6.7524999999999995,
+        "tuk": 7.310281833600001
+      },
+      "resources": {
+        "min": 99723.686355784,
+        "ene": 99916.588685248,
+        "yiy": 100000,
+        "ala": 99796.6321075095,
+        "ara": 0,
+        "tuk": 100021.94697826721,
+        "etk": 100020.2575
+      },
+      "bombed": 13
+    }
+  },
+  {
+    "strong": true,
+    "mode": "safe-yard",
+    "before": {
+      "friendly": 1370,
+      "hostile": 55474,
+      "resources": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 100000,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "ships": 8
+    },
+    "ordered": {
+      "path": [],
+      "campaign": {
+        "phase": "recon",
+        "reason": "Keşfedilmiş düşman konumu yok",
+        "until": 330
+      },
+      "ships": 8,
+      "resources": {
+        "min": 100000,
+        "ene": 100000,
+        "yiy": 100000,
+        "ala": 100000,
+        "ara": 100000,
+        "tuk": 100000,
+        "etk": 100000
+      },
+      "queue": [
+        {
+          "cls": "ins",
+          "e": 1,
+          "left": 30,
+          "tot": 30,
+          "paid": {
+            "ala": 45,
+            "min": 90
+          }
+        }
+      ]
+    },
+    "after": {
+      "arrivals": 0,
+      "friendlyShips": 8,
+      "enemyShips": 30,
+      "fleetPosition": 2,
+      "journal": []
+    },
+    "recovery": {
+      "stab": 0,
+      "income": {
+        "min": -2.037122999999997,
+        "ene": -24.924217499999994,
+        "yiy": 0,
+        "ala": -1.4420993125,
+        "ara": 10.1016361875,
+        "etk": 6.7524999999999995,
+        "tuk": 7.3264146
+      },
+      "resources": {
+        "min": 99723.888631,
+        "ene": 99916.79106250001,
+        "yiy": 100000,
+        "ala": 99860.67370206252,
+        "ara": 0,
+        "tuk": 100021.9792438,
+        "etk": 100020.2575
+      },
+      "bombed": 13
+    }
+  }
+]

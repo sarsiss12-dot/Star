@@ -1,0 +1,4536 @@
+{
+  "day": 1800,
+  "month": 60,
+  "seed": 404,
+  "systems": 100,
+  "name": "Orenar İmparatorluğu",
+  "home": 38,
+  "homeName": "Wyndor",
+  "resources": {
+    "min": 47.28600561040005,
+    "ene": 427.55656704609424,
+    "yiy": 446.2328904112812,
+    "ala": 44.904218892620335,
+    "ara": 0,
+    "tuk": 9.972386241397917,
+    "etk": 418.5389374999999
+  },
+  "income": {
+    "min": 2.771396969600001,
+    "ene": 6.896054714571293,
+    "yiy": 0.12156638648000567,
+    "ala": 3.7574041113179995,
+    "ara": 26.370060390448284,
+    "etk": 8.1931,
+    "tuk": -10.456537194048
+  },
+  "plan": {
+    "horizon": 6,
+    "rows": {
+      "ene": {
+        "stock": 427.55656704609424,
+        "net": 6.551251978842728,
+        "months": null,
+        "urgency": 5.448748021157272,
+        "reserve": 120
+      },
+      "min": {
+        "stock": 47.28600561040005,
+        "net": 2.771396969600001,
+        "months": null,
+        "urgency": 14.76905189877333,
+        "reserve": 120
+      },
+      "yiy": {
+        "stock": 446.2328904112812,
+        "net": 0.12156638648000567,
+        "months": null,
+        "urgency": 11.635300840559982,
+        "reserve": 60
+      },
+      "ala": {
+        "stock": 44.904218892620335,
+        "net": 3.5695339057520994,
+        "months": null,
+        "urgency": 11.053361629962225,
+        "reserve": 100
+      },
+      "tuk": {
+        "stock": 9.972386241397917,
+        "net": -10.456537194048,
+        "months": 0.9536987299269908,
+        "urgency": 66.67034850114695,
+        "reserve": 122.739223164288
+      },
+      "ara": {
+        "stock": 0,
+        "net": 26.370060390448284,
+        "months": null,
+        "urgency": 0,
+        "reserve": 0
+      },
+      "etk": {
+        "stock": 418.5389374999999,
+        "net": 8.1931,
+        "months": null,
+        "urgency": 0,
+        "reserve": 0
+      }
+    },
+    "committed": {},
+    "queued": {},
+    "federation": {
+      "ene": 0.3448027357285647,
+      "ala": 0.18787020556589998
+    },
+    "vassal": {
+      "ene": 0,
+      "min": 0,
+      "ala": 0,
+      "yiy": 0,
+      "tuk": 0,
+      "ara": 0
+    },
+    "policy": "recover",
+    "critical": true
+  },
+  "shipPlan": {
+    "month": 26581,
+    "nextScience": 1980,
+    "scienceLossStreak": 2,
+    "scienceIssued": true,
+    "reasons": [
+      "alloy-budget-reserve",
+      "science-renewal-cooldown"
+    ]
+  },
+  "inventory": {
+    "counts": {},
+    "pending": {},
+    "yards": [
+      {
+        "id": 38,
+        "x": 2263.3119162685925,
+        "y": 2302.924414064563,
+        "name": "Wyndor",
+        "star": {
+          "n": "K Turuncu",
+          "c": "#ffab5c",
+          "r": 5,
+          "w": 22
+        },
+        "planets": [
+          {
+            "i": 0,
+            "t": "kut",
+            "dep": "bereket",
+            "sz": 18,
+            "seed": 4981,
+            "owner": 2,
+            "col": {
+              "pop": 23.91999999999999,
+              "stab": 0,
+              "grow": 0.8589811591793183,
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "ciftlik": 4,
+                "lab": 1,
+                "dokum": 1,
+                "fabrika": 2,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 0
+              },
+              "cap": 24,
+              "name": "Wyndor I",
+              "f": "yonetim",
+              "fcd": 0,
+              "shield": 0,
+              "garrisonBase": 17,
+              "garrison": 0,
+              "auto": true,
+              "hist": {
+                "peace": 60,
+                "own": 60,
+                "flips": 0,
+                "sieges": 0,
+                "crises": 0
+              },
+              "q": [],
+              "truceAge": 0,
+              "bombed": 60,
+              "bombKip": "hassas",
+              "siege": 0
+            },
+            "name": "Wyndor I",
+            "shareRev": 1
+          },
+          {
+            "i": 1,
+            "t": "cor",
+            "dep": null,
+            "sz": 12,
+            "seed": 4998,
+            "owner": -1,
+            "col": null,
+            "name": "Wyndor II"
+          },
+          {
+            "i": 2,
+            "t": "alp",
+            "dep": null,
+            "sz": 12,
+            "seed": 5015,
+            "owner": 2,
+            "col": {
+              "pop": 12.160000000000004,
+              "stab": 0,
+              "grow": 0.751609878690613,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1
+              },
+              "cap": 17,
+              "name": "Wyndor III",
+              "f": "yonetim",
+              "fcd": 0,
+              "shield": 0,
+              "garrison": 0,
+              "shockTot": 36,
+              "auto": true,
+              "autoAfter": 120,
+              "garrisonBase": 9,
+              "hist": {
+                "peace": 58,
+                "own": 58,
+                "flips": 0,
+                "sieges": 0,
+                "crises": 0
+              },
+              "fSet": true,
+              "truceAge": 0,
+              "bombed": 60,
+              "bombKip": "hassas",
+              "siege": 0
+            },
+            "name": "Wyndor III",
+            "shareRev": 1
+          }
+        ],
+        "lanes": [
+          75,
+          94
+        ],
+        "owner": 2,
+        "surv": [
+          2
+        ],
+        "seen": [
+          2,
+          10,
+          9,
+          4,
+          1,
+          3,
+          5
+        ],
+        "queue": [],
+        "anom": false,
+        "anomK": "sinyal",
+        "def": 0,
+        "shareRev": 1,
+        "built": {
+          "bilim_ist": 2
+        },
+        "work": [],
+        "pulsar": false,
+        "nebulaS": false,
+        "orbitHeld": 10,
+        "battleReport": {
+          "a": 10,
+          "b": 2,
+          "at": 1650,
+          "rounds": 1,
+          "band": 3,
+          "loss": [
+            0,
+            1
+          ],
+          "retreat": [
+            0,
+            0
+          ],
+          "done": true,
+          "winner": 10,
+          "last": {
+            "ships": [
+              24,
+              1
+            ],
+            "ready": [
+              0,
+              0
+            ],
+            "dealt": [
+              0,
+              0
+            ],
+            "supply": [
+              1,
+              1
+            ]
+          },
+          "ended": 1650
+        },
+        "_reach": 623.1132301937382
+      }
+    ],
+    "combatUsage": 0,
+    "usage": 0,
+    "queuedEnergy": 0,
+    "queuedAlloy": 0
+  },
+  "observedThreat": 3848,
+  "defenseThreat": 3848,
+  "strategicFacts": {
+    "economy": {
+      "horizon": 6,
+      "rows": {
+        "ene": {
+          "stock": 427.55656704609424,
+          "net": 6.551251978842728,
+          "months": null,
+          "urgency": 5.448748021157272,
+          "reserve": 120
+        },
+        "min": {
+          "stock": 47.28600561040005,
+          "net": 2.771396969600001,
+          "months": null,
+          "urgency": 14.76905189877333,
+          "reserve": 120
+        },
+        "yiy": {
+          "stock": 446.2328904112812,
+          "net": 0.12156638648000567,
+          "months": null,
+          "urgency": 11.635300840559982,
+          "reserve": 60
+        },
+        "ala": {
+          "stock": 44.904218892620335,
+          "net": 3.5695339057520994,
+          "months": null,
+          "urgency": 11.053361629962225,
+          "reserve": 100
+        },
+        "tuk": {
+          "stock": 9.972386241397917,
+          "net": -10.456537194048,
+          "months": 0.9536987299269908,
+          "urgency": 66.67034850114695,
+          "reserve": 122.739223164288
+        },
+        "ara": {
+          "stock": 0,
+          "net": 26.370060390448284,
+          "months": null,
+          "urgency": 0,
+          "reserve": 0
+        },
+        "etk": {
+          "stock": 418.5389374999999,
+          "net": 8.1931,
+          "months": null,
+          "urgency": 0,
+          "reserve": 0
+        }
+      },
+      "committed": {},
+      "queued": {},
+      "federation": {
+        "ene": 0.3448027357285647,
+        "ala": 0.18787020556589998
+      },
+      "vassal": {
+        "ene": 0,
+        "min": 0,
+        "ala": 0,
+        "yiy": 0,
+        "tuk": 0,
+        "ara": 0
+      },
+      "policy": "recover",
+      "critical": true
+    },
+    "profile": {
+      "war": 0.382,
+      "exp": 0.65,
+      "sci": 1.2210988667983969,
+      "eco": 0.524,
+      "dip": 0.5238,
+      "turtle": 0.45,
+      "spy": 0.11500000000000002
+    },
+    "view": {
+      "day": 1800,
+      "intel": {
+        "v": 1,
+        "systems": {
+          "3": {
+            "owner": 4,
+            "defense": 0,
+            "colonies": 1,
+            "capital": true,
+            "day": 1290
+          },
+          "4": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1110
+          },
+          "7": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1800
+          },
+          "11": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1800
+          },
+          "13": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1080
+          },
+          "14": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1260
+          },
+          "15": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1110
+          },
+          "17": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1290
+          },
+          "18": {
+            "owner": 9,
+            "defense": 0,
+            "colonies": 1,
+            "capital": false,
+            "day": 1200
+          },
+          "23": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1230
+          },
+          "27": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1050
+          },
+          "28": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1800
+          },
+          "35": {
+            "owner": 4,
+            "defense": 0,
+            "colonies": 1,
+            "capital": false,
+            "day": 1290
+          },
+          "36": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 240
+          },
+          "38": {
+            "owner": 2,
+            "defense": 0,
+            "colonies": 2,
+            "capital": true,
+            "day": 1800
+          },
+          "39": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1290
+          },
+          "45": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1290
+          },
+          "47": {
+            "owner": 9,
+            "defense": 0,
+            "colonies": 1,
+            "capital": false,
+            "day": 1170
+          },
+          "48": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1290
+          },
+          "52": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1800
+          },
+          "53": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1050
+          },
+          "56": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1170
+          },
+          "59": {
+            "owner": 4,
+            "defense": 0,
+            "colonies": 1,
+            "capital": false,
+            "day": 1320
+          },
+          "62": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1260
+          },
+          "66": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 180
+          },
+          "71": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 210
+          },
+          "72": {
+            "owner": -1,
+            "defense": 238,
+            "colonies": 0,
+            "capital": false,
+            "day": 1050
+          },
+          "75": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1800
+          },
+          "77": {
+            "owner": 9,
+            "defense": 0,
+            "colonies": 1,
+            "capital": true,
+            "day": 1200
+          },
+          "78": {
+            "owner": -1,
+            "defense": 1158,
+            "colonies": 0,
+            "capital": false,
+            "day": 210
+          },
+          "94": {
+            "owner": -1,
+            "defense": 0,
+            "colonies": 0,
+            "capital": false,
+            "day": 1800
+          }
+        },
+        "powers": {
+          "4": {
+            "value": 39,
+            "day": 1770
+          },
+          "9": {
+            "value": 25,
+            "day": 1770
+          },
+          "10": {
+            "value": 3848,
+            "day": 1800
+          }
+        }
+      },
+      "ctx": {
+        "known": {},
+        "visible": {},
+        "frontier": {},
+        "blocked": {},
+        "pirates": {},
+        "gates": [],
+        "supply": {},
+        "supplyNodes": {}
+      },
+      "systems": {
+        "3": {
+          "owner": 4,
+          "defense": 0,
+          "colonies": 1,
+          "capital": true,
+          "day": 1290
+        },
+        "4": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1110
+        },
+        "7": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1800
+        },
+        "11": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1800
+        },
+        "13": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1080
+        },
+        "14": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1260
+        },
+        "15": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1110
+        },
+        "17": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1290
+        },
+        "18": {
+          "owner": 9,
+          "defense": 0,
+          "colonies": 1,
+          "capital": false,
+          "day": 1200
+        },
+        "23": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1230
+        },
+        "27": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1050
+        },
+        "28": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1800
+        },
+        "35": {
+          "owner": 4,
+          "defense": 0,
+          "colonies": 1,
+          "capital": false,
+          "day": 1290
+        },
+        "36": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 240
+        },
+        "38": {
+          "owner": 2,
+          "defense": 0,
+          "colonies": 2,
+          "capital": true,
+          "day": 1800
+        },
+        "39": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1290
+        },
+        "45": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1290
+        },
+        "47": {
+          "owner": 9,
+          "defense": 0,
+          "colonies": 1,
+          "capital": false,
+          "day": 1170
+        },
+        "48": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1290
+        },
+        "52": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1800
+        },
+        "53": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1050
+        },
+        "56": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1170
+        },
+        "59": {
+          "owner": 4,
+          "defense": 0,
+          "colonies": 1,
+          "capital": false,
+          "day": 1320
+        },
+        "62": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1260
+        },
+        "66": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 180
+        },
+        "71": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 210
+        },
+        "72": {
+          "owner": -1,
+          "defense": 238,
+          "colonies": 0,
+          "capital": false,
+          "day": 1050
+        },
+        "75": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1800
+        },
+        "77": {
+          "owner": 9,
+          "defense": 0,
+          "colonies": 1,
+          "capital": true,
+          "day": 1200
+        },
+        "78": {
+          "owner": -1,
+          "defense": 1158,
+          "colonies": 0,
+          "capital": false,
+          "day": 210
+        },
+        "94": {
+          "owner": -1,
+          "defense": 0,
+          "colonies": 0,
+          "capital": false,
+          "day": 1800
+        }
+      },
+      "fleets": [
+        {
+          "id": 1,
+          "e": 0,
+          "sys": 0,
+          "x": 1070.4038598483926,
+          "y": 4861.450270774094,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "1. Muhafız Filosu",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1
+        },
+        {
+          "id": 3,
+          "e": 0,
+          "sys": 0,
+          "x": 1070.4038598483926,
+          "y": 4861.450270774094,
+          "ships": [
+            {
+              "c": "kol",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Yerleşim Konvoyu",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1
+        },
+        {
+          "id": 4,
+          "e": 1,
+          "sys": 33,
+          "x": 5877.427445806064,
+          "y": 3206.1426181533257,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "1. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "composition": {
+            "counts": {
+              "kor": 30
+            },
+            "auto": true,
+            "next": 240,
+            "aiDesign": "kor:false"
+          },
+          "repairStarved": false
+        },
+        {
+          "id": 11,
+          "e": 3,
+          "sys": 31,
+          "x": 5880.038606944805,
+          "y": 4080.495809787278,
+          "ships": [
+            {
+              "c": "bil",
+              "h": 0.7975000000000001
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Araştırma 2",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "auto": true,
+          "explore": {
+            "target": null,
+            "status": "pirate",
+            "next": 1800.5,
+            "review": 1787.5,
+            "waitKey": "1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,21,22,23,25,27,28,30,31,33,35,36,38,39,40,41,43,45,47,48,50,51,52,53,54,55,56,59,62,63,65,66,67,68,71,72,73,75,77,78,79,83,84,86,87,89,90,92,94,96,97/30,40,72,78,96/1,6,8,9,12,16,21,22,25,31,33,43,50,55,63,65,67,84,86,87,92,97/1:maden_ist|9:bilim_ist|55:/4/",
+            "backoff": 30,
+            "retry": 1805.5
+          },
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 14,
+          "e": 4,
+          "sys": -1,
+          "x": 1963.5943132770674,
+          "y": 3005.0716521881927,
+          "ships": [
+            {
+              "c": "bil",
+              "h": 0.8042499999999998
+            }
+          ],
+          "path": [
+            71,
+            36,
+            13,
+            56,
+            77,
+            18,
+            47,
+            4,
+            79,
+            19,
+            68,
+            2,
+            6
+          ],
+          "mv": {
+            "from": 11,
+            "to": 71,
+            "t": 0.38142572604192937
+          },
+          "ord": null,
+          "name": "Araştırma 2",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "auto": true,
+          "repairing": 0,
+          "supply": 0.85,
+          "retreating": false,
+          "explore": {
+            "target": 6,
+            "status": "travel",
+            "next": 1800.5,
+            "review": 1810
+          }
+        },
+        {
+          "id": 19,
+          "e": 5,
+          "sys": 56,
+          "x": 2876.4858579208585,
+          "y": 3593.925306864646,
+          "ships": [
+            {
+              "c": "bil",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Araştırma 2",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 22,
+          "auto": true,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "repairStarved": false,
+          "explore": {
+            "target": 56,
+            "status": "travel",
+            "next": 1793,
+            "review": 1800
+          }
+        },
+        {
+          "id": 21,
+          "e": 6,
+          "sys": 80,
+          "x": 5049.949580190933,
+          "y": 665.4872624100981,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "1. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "composition": {
+            "counts": {
+              "kor": 30
+            },
+            "auto": true,
+            "next": 420,
+            "aiDesign": "kor:false"
+          }
+        },
+        {
+          "id": 22,
+          "e": 6,
+          "sys": 81,
+          "x": 5543.178946480182,
+          "y": 823.6244308426485,
+          "ships": [
+            {
+              "c": "bil",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Araştırma 2",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "auto": true,
+          "explore": {
+            "target": null,
+            "status": "pirate",
+            "next": 1801,
+            "review": 1788,
+            "waitKey": "24,32,37,44,58,70,80,81,98,99/37/24,32,44,58,70,80,81,98,99/24:|32:|80:/3/",
+            "backoff": 30,
+            "retry": 1806
+          },
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 25,
+          "e": 6,
+          "sys": 44,
+          "x": 3831.750139066621,
+          "y": 773.5422203134435,
+          "ships": [
+            {
+              "c": "bil",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Araştırma 5",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "auto": true,
+          "explore": {
+            "target": null,
+            "status": "pirate",
+            "next": 1801.5,
+            "review": 1788.5,
+            "waitKey": "24,32,37,44,58,70,80,81,98,99/37/24,32,44,58,70,80,81,98,99/24:|32:|80:/3/",
+            "backoff": 30,
+            "retry": 1806.5
+          },
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 29,
+          "e": 8,
+          "sys": 26,
+          "x": 315.98177355435473,
+          "y": 3260.7969751137452,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "1. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "composition": {
+            "counts": {
+              "kor": 30
+            },
+            "auto": true,
+            "next": 210,
+            "aiDesign": "kor:true"
+          }
+        },
+        {
+          "id": 35,
+          "e": 10,
+          "sys": 40,
+          "x": 2361.3964700853858,
+          "y": 5467.279567961925,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "muh",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Muhafızı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0
+        },
+        {
+          "id": 36,
+          "e": 10,
+          "sys": 96,
+          "x": 2586.390658182797,
+          "y": 5217.846787231792,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "muh",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Muhafızı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0
+        },
+        {
+          "id": 37,
+          "e": 10,
+          "sys": 57,
+          "x": 2037.1834149575122,
+          "y": 1531.9199913716534,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "muh",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Muhafızı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0
+        },
+        {
+          "id": 38,
+          "e": 10,
+          "sys": 72,
+          "x": 1721.7755106193574,
+          "y": 1827.4165020236567,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "muh",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Muhafızı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0
+        },
+        {
+          "id": 40,
+          "e": 10,
+          "sys": 91,
+          "x": 2488.6179220164986,
+          "y": 839.4410725985504,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "muh",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Muhafızı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0
+        },
+        {
+          "id": 41,
+          "e": 8,
+          "sys": 69,
+          "x": 534.2023704492658,
+          "y": 3681.0468476451315,
+          "ships": [
+            {
+              "c": "ins",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "4. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 42,
+          "e": 3,
+          "sys": 1,
+          "x": 5819.437657738317,
+          "y": 4694.5721753991065,
+          "ships": [
+            {
+              "c": "ins",
+              "h": 1,
+              "busy": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "2. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "building": 1
+        },
+        {
+          "id": 43,
+          "e": 4,
+          "sys": 3,
+          "x": 3728.618463091121,
+          "y": 5057.421198499665,
+          "ships": [
+            {
+              "c": "ins",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "5. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 44,
+          "e": 6,
+          "sys": 32,
+          "x": 4723.004980328284,
+          "y": 731.4964587382169,
+          "ships": [
+            {
+              "c": "ins",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "6. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 49,
+          "e": 3,
+          "sys": 55,
+          "x": 6153.347974398392,
+          "y": 5173.475217345969,
+          "ships": [
+            {
+              "c": "ins",
+              "h": 1,
+              "busy": 55
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "3. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "building": 55
+        },
+        {
+          "id": 51,
+          "e": 8,
+          "sys": 34,
+          "x": 464.75263945159986,
+          "y": 4759.257403010472,
+          "ships": [
+            {
+              "c": "ins",
+              "h": 1,
+              "busy": 34
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "4. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "building": 34
+        },
+        {
+          "id": 55,
+          "e": 9,
+          "sys": 23,
+          "x": 3805.1455551642157,
+          "y": 3505.2947852338107,
+          "ships": [
+            {
+              "c": "ins",
+              "h": 1,
+              "busy": 23
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "3. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "building": 23
+        },
+        {
+          "id": 66,
+          "e": 3,
+          "sys": 50,
+          "x": 5760.65097275987,
+          "y": 5648.77357236667,
+          "ships": [
+            {
+              "c": "bil",
+              "h": 0.9460000000000001
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Araştırma 4",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "auto": true,
+          "explore": {
+            "target": null,
+            "status": "pirate",
+            "next": 1802,
+            "review": 1789,
+            "waitKey": "1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,21,22,23,25,27,28,30,31,33,35,36,38,39,40,41,43,45,47,48,50,51,52,53,54,55,56,59,62,63,65,66,67,68,71,72,73,75,77,78,79,83,84,86,87,89,90,92,94,96,97/30,40,72,78,96/1,6,8,9,12,16,21,22,25,31,33,43,50,55,63,65,67,84,86,87,92,97/1:maden_ist|9:bilim_ist|55:/4/",
+            "backoff": 30,
+            "retry": 1807
+          },
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 73,
+          "e": 9,
+          "sys": 77,
+          "x": 3332.9313607427202,
+          "y": 3585.800991308943,
+          "ships": [
+            {
+              "c": "ins",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "4. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 76,
+          "e": 5,
+          "sys": 14,
+          "x": 3943.25437672562,
+          "y": 3947.0082989522775,
+          "ships": [
+            {
+              "c": "bil",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Araştırma 3",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 17,
+          "auto": true,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "explore": {
+            "target": 14,
+            "status": "travel",
+            "next": 1788,
+            "review": 1795
+          },
+          "repairStarved": false
+        },
+        {
+          "id": 77,
+          "e": 3,
+          "sys": 1,
+          "x": 5819.437657738317,
+          "y": 4694.5721753991065,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "5. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "composition": {
+            "counts": {
+              "kor": 30
+            },
+            "auto": true,
+            "next": 930,
+            "aiDesign": "kor:true"
+          }
+        },
+        {
+          "id": 82,
+          "e": 4,
+          "sys": -1,
+          "x": 2000.2024255035922,
+          "y": 3036.271910507799,
+          "ships": [
+            {
+              "c": "bil",
+              "h": 0.9459999999999998
+            }
+          ],
+          "path": [
+            71,
+            36,
+            13,
+            56,
+            77,
+            18,
+            47,
+            4,
+            79,
+            19,
+            68,
+            2,
+            25
+          ],
+          "mv": {
+            "from": 11,
+            "to": 71,
+            "t": 0.5085676347225725
+          },
+          "ord": null,
+          "name": "Araştırma 4",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "auto": true,
+          "explore": {
+            "target": 25,
+            "status": "travel",
+            "next": 1800.5,
+            "review": 1810
+          },
+          "repairing": 0,
+          "supply": 0.85,
+          "retreating": false
+        },
+        {
+          "id": 102,
+          "e": 7,
+          "sys": 67,
+          "x": 6161.9015117143135,
+          "y": 4502.626961767048,
+          "ships": [
+            {
+              "c": "bil",
+              "h": 0.34917441860465137
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Araştırma 2",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "auto": true,
+          "explore": {
+            "target": null,
+            "status": "threat",
+            "next": 1802.5,
+            "review": 1789.5,
+            "waitKey": "1,2,4,6,8,9,14,15,16,18,19,22,23,25,31,33,43,47,54,55,56,63,65,67,68,73,77,79,83,89,92/2,6,22,25,31,92,33,8/1,2,4,6,14,15,18,19,22,23,25,31,43,47,54,56,63,65,67,68,73,77,79,83,89,92/43:karakol,bilim_ist|54:|83:/2/",
+            "backoff": 30,
+            "retry": 1807.5
+          },
+          "repairing": 0,
+          "supply": 0.7,
+          "retreating": false
+        },
+        {
+          "id": 125,
+          "e": 9,
+          "sys": -1,
+          "x": 3816.263818422539,
+          "y": 4284.66783250919,
+          "ships": [
+            {
+              "c": "bil",
+              "h": 0.8209864603481623
+            }
+          ],
+          "path": [
+            45,
+            17,
+            35
+          ],
+          "mv": {
+            "from": 14,
+            "to": 45,
+            "t": 0.828098250970275
+          },
+          "ord": null,
+          "name": "Araştırma 4",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "auto": true,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "explore": {
+            "target": 35,
+            "status": "travel",
+            "next": 1800.5,
+            "review": 1809
+          },
+          "repairStarved": false
+        },
+        {
+          "id": 152,
+          "e": 7,
+          "sys": 1,
+          "x": 5819.437657738317,
+          "y": 4694.5721753991065,
+          "ships": [
+            {
+              "c": "bil",
+              "h": 0.16362790697674445
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Araştırma 3",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "auto": true,
+          "explore": {
+            "target": null,
+            "status": "threat",
+            "next": 1801.5,
+            "review": 1788.5,
+            "waitKey": "1,2,4,6,8,9,14,15,16,18,19,22,23,25,31,33,43,47,54,55,56,63,65,67,68,73,77,79,83,89,92/2,6,22,25,31,92,33,8/1,2,4,6,14,15,18,19,22,23,25,31,43,47,54,56,63,65,67,68,73,77,79,83,89,92/43:karakol,bilim_ist|54:|83:/2/",
+            "backoff": 30,
+            "retry": 1806.5
+          },
+          "repairing": 0,
+          "supply": 0.55,
+          "retreating": false
+        },
+        {
+          "id": 166,
+          "e": 10,
+          "sys": 38,
+          "x": 2263.3119162685925,
+          "y": 2302.924414064563,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "supply": 1,
+          "repairing": 0
+        },
+        {
+          "id": 173,
+          "e": 9,
+          "sys": 31,
+          "x": 5880.038606944805,
+          "y": 4080.495809787278,
+          "ships": [
+            {
+              "c": "bil",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Araştırma 6",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 26.5,
+          "auto": true,
+          "explore": {
+            "target": 31,
+            "status": "travel",
+            "next": 1797.5,
+            "review": 1805
+          },
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "repairStarved": false
+        },
+        {
+          "id": 175,
+          "e": 10,
+          "sys": 38,
+          "x": 2263.3119162685925,
+          "y": 2302.924414064563,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1
+        },
+        {
+          "id": 188,
+          "e": 10,
+          "sys": 38,
+          "x": 2263.3119162685925,
+          "y": 2302.924414064563,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1
+        },
+        {
+          "id": 189,
+          "e": 10,
+          "sys": 38,
+          "x": 2263.3119162685925,
+          "y": 2302.924414064563,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1
+        },
+        {
+          "id": 190,
+          "e": 1,
+          "sys": 92,
+          "x": 5711.086271792208,
+          "y": 2848.996701503616,
+          "ships": [
+            {
+              "c": "ins",
+              "h": 1,
+              "busy": 92
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "5. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "building": 92
+        },
+        {
+          "id": 197,
+          "e": 7,
+          "sys": 43,
+          "x": 5531.504061442931,
+          "y": 3290.204924997369,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "4. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "capTarget": 1,
+          "repairing": 0,
+          "supply": 1,
+          "repairStarved": false,
+          "retreating": false,
+          "composition": {
+            "counts": {
+              "kor": 1
+            },
+            "auto": true,
+            "next": 1260,
+            "aiDesign": "kor:true"
+          }
+        },
+        {
+          "id": 202,
+          "e": 10,
+          "sys": 38,
+          "x": 2263.3119162685925,
+          "y": 2302.924414064563,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1
+        },
+        {
+          "id": 204,
+          "e": 1,
+          "sys": 33,
+          "x": 5877.427445806064,
+          "y": 3206.1426181533257,
+          "ships": [
+            {
+              "c": "ord",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "4. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 208,
+          "e": 7,
+          "sys": 2,
+          "x": 5043.975941310364,
+          "y": 2702.9578181339743,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "6. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "shipment": {
+            "fleet": 197,
+            "safe": true,
+            "origin": 83,
+            "state": "paused",
+            "attempts": 4,
+            "next": 1305,
+            "reason": "Bilinen düşman tehdidi — güvenli rota yok"
+          },
+          "joinFleet": 197,
+          "rallyTo": 43
+        },
+        {
+          "id": 212,
+          "e": 7,
+          "sys": 54,
+          "x": 3989.5853695135943,
+          "y": 2203.6306113600567,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "6. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "shipment": {
+            "fleet": 197,
+            "safe": true,
+            "origin": 54,
+            "state": "paused",
+            "attempts": 4,
+            "next": 1305,
+            "reason": "Bilinen düşman tehdidi — güvenli rota yok"
+          },
+          "joinFleet": 197,
+          "rallyTo": 43
+        },
+        {
+          "id": 213,
+          "e": 7,
+          "sys": 83,
+          "x": 3790.022603347819,
+          "y": 2475.33997694781,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "7. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "shipment": {
+            "fleet": 197,
+            "safe": true,
+            "origin": 83,
+            "state": "paused",
+            "attempts": 4,
+            "next": 1305,
+            "reason": "Bilinen düşman tehdidi — güvenli rota yok"
+          },
+          "joinFleet": 197,
+          "rallyTo": 43
+        },
+        {
+          "id": 218,
+          "e": 10,
+          "sys": 35,
+          "x": 3261.125333507928,
+          "y": 4954.171150298551,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 0.8313046330754741
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1
+        },
+        {
+          "id": 219,
+          "e": 4,
+          "sys": 59,
+          "x": 3409.297565863895,
+          "y": 5355.824022723467,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [
+            35
+          ],
+          "mv": null,
+          "ord": null,
+          "name": "4. Filo",
+          "stance": "savunma",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 223,
+          "e": 10,
+          "sys": 35,
+          "x": 3261.125333507928,
+          "y": 4954.171150298551,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1
+        },
+        {
+          "id": 224,
+          "e": 10,
+          "sys": 38,
+          "x": 2263.3119162685925,
+          "y": 2302.924414064563,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1
+        },
+        {
+          "id": 225,
+          "e": 10,
+          "sys": 38,
+          "x": 2263.3119162685925,
+          "y": 2302.924414064563,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1
+        },
+        {
+          "id": 231,
+          "e": 7,
+          "sys": 54,
+          "x": 3989.5853695135943,
+          "y": 2203.6306113600567,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "7. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "composition": {
+            "counts": {
+              "kor": 30
+            },
+            "auto": true,
+            "next": 1290,
+            "aiDesign": "kor:true"
+          }
+        },
+        {
+          "id": 238,
+          "e": 5,
+          "sys": 21,
+          "x": 4767.085720659574,
+          "y": 6196.804804599578,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "3. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "composition": {
+            "counts": {
+              "kor": 30
+            },
+            "auto": true,
+            "next": 1350,
+            "aiDesign": "kor:false"
+          }
+        },
+        {
+          "id": 244,
+          "e": 5,
+          "sys": 21,
+          "x": 4767.085720659574,
+          "y": 6196.804804599578,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "4. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 250,
+          "e": 10,
+          "sys": 38,
+          "x": 2263.3119162685925,
+          "y": 2302.924414064563,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "supply": 1,
+          "repairing": 0
+        },
+        {
+          "id": 256,
+          "e": 10,
+          "sys": 35,
+          "x": 3261.125333507928,
+          "y": 4954.171150298551,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1
+        },
+        {
+          "id": 264,
+          "e": 1,
+          "sys": 31,
+          "x": 5880.038606944805,
+          "y": 4080.495809787278,
+          "ships": [
+            {
+              "c": "ins",
+              "h": 1,
+              "busy": 31
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "4. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "building": 31
+        },
+        {
+          "id": 269,
+          "e": 10,
+          "sys": 38,
+          "x": 2263.3119162685925,
+          "y": 2302.924414064563,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1
+        },
+        {
+          "id": 275,
+          "e": 10,
+          "sys": 49,
+          "x": 1564.8216895836997,
+          "y": 5375.609427764281,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "supply": 1,
+          "repairing": 0
+        },
+        {
+          "id": 276,
+          "e": 10,
+          "sys": 38,
+          "x": 2263.3119162685925,
+          "y": 2302.924414064563,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1
+        },
+        {
+          "id": 296,
+          "e": 5,
+          "sys": 21,
+          "x": 4767.085720659574,
+          "y": 6196.804804599578,
+          "ships": [
+            {
+              "c": "ord",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "5. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 302,
+          "e": 10,
+          "sys": 38,
+          "x": 2263.3119162685925,
+          "y": 2302.924414064563,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0
+        },
+        {
+          "id": 303,
+          "e": 10,
+          "sys": 38,
+          "x": 2263.3119162685925,
+          "y": 2302.924414064563,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0
+        },
+        {
+          "id": 311,
+          "e": 10,
+          "sys": 41,
+          "x": 2075.277615281344,
+          "y": 5073.092352523601,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "supply": 1,
+          "repairing": 0
+        },
+        {
+          "id": 312,
+          "e": 9,
+          "sys": 77,
+          "x": 3332.9313607427202,
+          "y": 3585.800991308943,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "6. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false,
+          "composition": {
+            "counts": {
+              "kor": 30
+            },
+            "auto": true,
+            "next": 1740,
+            "aiDesign": "kor:false"
+          }
+        },
+        {
+          "id": 316,
+          "e": 10,
+          "sys": 38,
+          "x": 2263.3119162685925,
+          "y": 2302.924414064563,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0
+        },
+        {
+          "id": 317,
+          "e": 9,
+          "sys": 77,
+          "x": 3332.9313607427202,
+          "y": 3585.800991308943,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "6. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 322,
+          "e": 10,
+          "sys": 41,
+          "x": 2075.277615281344,
+          "y": 5073.092352523601,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            },
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Korsan Akıncısı",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "repairing": 0
+        },
+        {
+          "id": 325,
+          "e": 8,
+          "sys": 26,
+          "x": 315.98177355435473,
+          "y": 3260.7969751137452,
+          "ships": [
+            {
+              "c": "bil",
+              "h": 1
+            }
+          ],
+          "path": [],
+          "mv": null,
+          "ord": null,
+          "name": "Araştırma 4",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "auto": true,
+          "explore": {
+            "target": null,
+            "status": "threat",
+            "next": 1804,
+            "review": 1811,
+            "waitKey": "0,20,26,29,34,40,41,42,46,49,60,69,74,76,93,95/40,49,41,29/0,20,26,34,41,42,46,49,60,69,74,76,93,95/26:bilim_ist|41:|49:|60:|69:karakol,tic_ist|93:karakol/3/",
+            "backoff": 30,
+            "retry": 1829
+          },
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        },
+        {
+          "id": 333,
+          "e": 3,
+          "sys": 9,
+          "x": 5701.492395671879,
+          "y": 5042.159290332211,
+          "ships": [
+            {
+              "c": "kor",
+              "h": 1
+            }
+          ],
+          "path": [
+            1
+          ],
+          "mv": null,
+          "ord": null,
+          "name": "6. Filo",
+          "stance": "agresif",
+          "combat": 0,
+          "surv": 0,
+          "shipment": {
+            "fleet": 77,
+            "safe": true,
+            "origin": 9,
+            "state": "moving",
+            "attempts": 0,
+            "next": 0
+          },
+          "joinFleet": 77,
+          "rallyTo": 1,
+          "repairing": 0,
+          "supply": 1,
+          "retreating": false
+        }
+      ],
+      "count": 66
+    },
+    "own": [
+      {
+        "id": 38,
+        "x": 2263.3119162685925,
+        "y": 2302.924414064563,
+        "name": "Wyndor",
+        "star": {
+          "n": "K Turuncu",
+          "c": "#ffab5c",
+          "r": 5,
+          "w": 22
+        },
+        "planets": [
+          {
+            "i": 0,
+            "t": "kut",
+            "dep": "bereket",
+            "sz": 18,
+            "seed": 4981,
+            "owner": 2,
+            "col": {
+              "pop": 23.91999999999999,
+              "stab": 0,
+              "grow": 0.8589811591793183,
+              "b": {
+                "maden": 2,
+                "santral": 3,
+                "ciftlik": 4,
+                "lab": 1,
+                "dokum": 1,
+                "fabrika": 2,
+                "tersane": 1,
+                "kale": 0,
+                "liman": 0
+              },
+              "cap": 24,
+              "name": "Wyndor I",
+              "f": "yonetim",
+              "fcd": 0,
+              "shield": 0,
+              "garrisonBase": 17,
+              "garrison": 0,
+              "auto": true,
+              "hist": {
+                "peace": 60,
+                "own": 60,
+                "flips": 0,
+                "sieges": 0,
+                "crises": 0
+              },
+              "q": [],
+              "truceAge": 0,
+              "bombed": 60,
+              "bombKip": "hassas",
+              "siege": 0
+            },
+            "name": "Wyndor I",
+            "shareRev": 1
+          },
+          {
+            "i": 1,
+            "t": "cor",
+            "dep": null,
+            "sz": 12,
+            "seed": 4998,
+            "owner": -1,
+            "col": null,
+            "name": "Wyndor II"
+          },
+          {
+            "i": 2,
+            "t": "alp",
+            "dep": null,
+            "sz": 12,
+            "seed": 5015,
+            "owner": 2,
+            "col": {
+              "pop": 12.160000000000004,
+              "stab": 0,
+              "grow": 0.751609878690613,
+              "b": {
+                "maden": 1,
+                "santral": 1,
+                "ciftlik": 1
+              },
+              "cap": 17,
+              "name": "Wyndor III",
+              "f": "yonetim",
+              "fcd": 0,
+              "shield": 0,
+              "garrison": 0,
+              "shockTot": 36,
+              "auto": true,
+              "autoAfter": 120,
+              "garrisonBase": 9,
+              "hist": {
+                "peace": 58,
+                "own": 58,
+                "flips": 0,
+                "sieges": 0,
+                "crises": 0
+              },
+              "fSet": true,
+              "truceAge": 0,
+              "bombed": 60,
+              "bombKip": "hassas",
+              "siege": 0
+            },
+            "name": "Wyndor III",
+            "shareRev": 1
+          }
+        ],
+        "lanes": [
+          75,
+          94
+        ],
+        "owner": 2,
+        "surv": [
+          2
+        ],
+        "seen": [
+          2,
+          10,
+          9,
+          4,
+          1,
+          3,
+          5
+        ],
+        "queue": [],
+        "anom": false,
+        "anomK": "sinyal",
+        "def": 0,
+        "shareRev": 1,
+        "built": {
+          "bilim_ist": 2
+        },
+        "work": [],
+        "pulsar": false,
+        "nebulaS": false,
+        "orbitHeld": 10,
+        "battleReport": {
+          "a": 10,
+          "b": 2,
+          "at": 1650,
+          "rounds": 1,
+          "band": 3,
+          "loss": [
+            0,
+            1
+          ],
+          "retreat": [
+            0,
+            0
+          ],
+          "done": true,
+          "winner": 10,
+          "last": {
+            "ships": [
+              24,
+              1
+            ],
+            "ready": [
+              0,
+              0
+            ],
+            "dealt": [
+              0,
+              0
+            ],
+            "supply": [
+              1,
+              1
+            ]
+          },
+          "ended": 1650
+        },
+        "_reach": 623.1132301937382
+      }
+    ],
+    "forces": [],
+    "wars": [],
+    "enemies": [],
+    "measure": {
+      "systems": 1,
+      "colonies": 2,
+      "techs": 3,
+      "power": 0,
+      "ports": 0,
+      "fort": 0,
+      "production": 39.79491618593758,
+      "deliveries": 0,
+      "pacts": 3,
+      "allies": 3,
+      "federated": true
+    },
+    "homeThreat": 3848,
+    "nearThreat": 3848,
+    "severe": [
+      "tuk"
+    ],
+    "buildings": {
+      "maden": 3,
+      "santral": 4,
+      "ciftlik": 5,
+      "lab": 1,
+      "dokum": 1,
+      "fabrika": 2,
+      "tersane": 1,
+      "kale": 0,
+      "liman": 0
+    },
+    "lastDefeat": -1
+  },
+  "strategy": {
+    "goal": "recover",
+    "since": 1710,
+    "until": 1890,
+    "needs": [
+      "tuk"
+    ],
+    "reason": "Kaynak darboğazı: tuk",
+    "stats": {
+      "switches": 3,
+      "completed": 0,
+      "failed": 1,
+      "actions": {
+        "objective-selected": 4,
+        "ship-paid": 16,
+        "preparation-stage": 3,
+        "research-completed": 3,
+        "building-paid": 3,
+        "plan-reassessed": 1
+      }
+    },
+    "objective": {
+      "kind": "recovery",
+      "since": 1740,
+      "holdUntil": 2460,
+      "reconsiderAfter": 1920,
+      "nextReview": 1890,
+      "priority": 3.21088,
+      "progress": 0,
+      "lastProgress": 1740,
+      "baseline": {
+        "systems": 1,
+        "colonies": 2,
+        "techs": 3,
+        "power": 0,
+        "ports": 0,
+        "fort": 0,
+        "production": 42.93013738498302,
+        "deliveries": 0,
+        "pacts": 3,
+        "allies": 3,
+        "federated": true
+      },
+      "reason": "Kritik stok ve üretim açığı",
+      "lastPower": 0,
+      "lastColonies": 2,
+      "lastCritical": true,
+      "lastDanger": true,
+      "lastMemoryMonth": 60,
+      "lastWarEnd": -1
+    },
+    "history": [
+      {
+        "day": 30,
+        "kind": "objective-selected",
+        "objective": "science",
+        "stage": null,
+        "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+        "previous": null
+      },
+      {
+        "day": 60,
+        "kind": "ship-paid",
+        "objective": "science",
+        "stage": "economy",
+        "system": 38,
+        "cls": "ins",
+        "paid": {
+          "ala": 45,
+          "min": 90
+        }
+      },
+      {
+        "day": 120,
+        "kind": "objective-selected",
+        "objective": "security",
+        "stage": "economy",
+        "reason": "Merkez güvenliğine ağır tehdit",
+        "previous": "science"
+      },
+      {
+        "day": 120,
+        "kind": "preparation-stage",
+        "objective": "security",
+        "stage": "defend",
+        "from": "economy",
+        "to": "defend",
+        "reason": "Güvenli sınırlar için defend"
+      },
+      {
+        "day": 120,
+        "kind": "ship-paid",
+        "objective": "security",
+        "stage": "defend",
+        "system": 38,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 120,
+        "kind": "ship-paid",
+        "objective": "security",
+        "stage": "defend",
+        "system": 38,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 180,
+        "kind": "ship-paid",
+        "objective": "security",
+        "stage": "defend",
+        "system": 38,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 180,
+        "kind": "ship-paid",
+        "objective": "security",
+        "stage": "defend",
+        "system": 38,
+        "cls": "bil",
+        "paid": {
+          "ala": 24
+        }
+      },
+      {
+        "day": 210,
+        "kind": "ship-paid",
+        "objective": "security",
+        "stage": "defend",
+        "system": 38,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 240,
+        "kind": "research-completed",
+        "objective": "security",
+        "stage": "defend",
+        "tech": "t_tarim",
+        "source": "research"
+      },
+      {
+        "day": 240,
+        "kind": "building-paid",
+        "objective": "security",
+        "stage": "defend",
+        "system": 38,
+        "planet": 0,
+        "key": "santral",
+        "paid": {
+          "min": 110
+        }
+      },
+      {
+        "day": 240,
+        "kind": "ship-paid",
+        "objective": "security",
+        "stage": "defend",
+        "system": 38,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 270,
+        "kind": "research-completed",
+        "objective": "security",
+        "stage": "defend",
+        "tech": "m_robot",
+        "source": "research"
+      },
+      {
+        "day": 330,
+        "kind": "research-completed",
+        "objective": "security",
+        "stage": "defend",
+        "tech": "f_reaktor",
+        "source": "research"
+      },
+      {
+        "day": 360,
+        "kind": "ship-paid",
+        "objective": "security",
+        "stage": "defend",
+        "system": 38,
+        "cls": "bil",
+        "paid": {
+          "ala": 24
+        }
+      },
+      {
+        "day": 480,
+        "kind": "ship-paid",
+        "objective": "security",
+        "stage": "defend",
+        "system": 38,
+        "cls": "kor",
+        "paid": {
+          "ala": 32
+        }
+      },
+      {
+        "day": 570,
+        "kind": "ship-paid",
+        "objective": "security",
+        "stage": "defend",
+        "system": 38,
+        "cls": "bil",
+        "paid": {
+          "ala": 24
+        }
+      },
+      {
+        "day": 630,
+        "kind": "building-paid",
+        "objective": "security",
+        "stage": "defend",
+        "system": 38,
+        "planet": 0,
+        "key": "ciftlik",
+        "paid": {
+          "min": 110
+        }
+      },
+      {
+        "day": 690,
+        "kind": "ship-paid",
+        "objective": "security",
+        "stage": "defend",
+        "system": 38,
+        "cls": "bil",
+        "paid": {
+          "ala": 24
+        }
+      },
+      {
+        "day": 840,
+        "kind": "objective-selected",
+        "objective": "science",
+        "stage": "defend",
+        "reason": "Kimlik, bilinen çevre ve kendi ekonomik kapasitesi",
+        "previous": "security"
+      },
+      {
+        "day": 840,
+        "kind": "preparation-stage",
+        "objective": "science",
+        "stage": "economy",
+        "from": "defend",
+        "to": "economy",
+        "reason": "Teknolojik gelişim için economy"
+      },
+      {
+        "day": 870,
+        "kind": "ship-paid",
+        "objective": "science",
+        "stage": "economy",
+        "system": 38,
+        "cls": "bil",
+        "paid": {
+          "ala": 24
+        }
+      },
+      {
+        "day": 1050,
+        "kind": "ship-paid",
+        "objective": "science",
+        "stage": "economy",
+        "system": 38,
+        "cls": "bil",
+        "paid": {
+          "ala": 24
+        }
+      },
+      {
+        "day": 1230,
+        "kind": "ship-paid",
+        "objective": "science",
+        "stage": "economy",
+        "system": 38,
+        "cls": "bil",
+        "paid": {
+          "ala": 24
+        }
+      },
+      {
+        "day": 1380,
+        "kind": "ship-paid",
+        "objective": "science",
+        "stage": "economy",
+        "system": 38,
+        "cls": "bil",
+        "paid": {
+          "ala": 24
+        }
+      },
+      {
+        "day": 1620,
+        "kind": "ship-paid",
+        "objective": "science",
+        "stage": "economy",
+        "system": 38,
+        "cls": "bil",
+        "paid": {
+          "ala": 24
+        }
+      },
+      {
+        "day": 1650,
+        "kind": "preparation-stage",
+        "objective": "science",
+        "stage": "stabilize",
+        "from": "economy",
+        "to": "stabilize",
+        "reason": "Gerçek stok/gelir açığı önce giderilmeli"
+      },
+      {
+        "day": 1680,
+        "kind": "building-paid",
+        "objective": "science",
+        "stage": "stabilize",
+        "system": 38,
+        "planet": 0,
+        "key": "ciftlik",
+        "paid": {
+          "min": 110
+        }
+      },
+      {
+        "day": 1740,
+        "kind": "plan-reassessed",
+        "objective": "science",
+        "stage": "stabilize",
+        "reason": "30 ay ölçülebilir ilerleme yok"
+      },
+      {
+        "day": 1740,
+        "kind": "objective-selected",
+        "objective": "recovery",
+        "stage": "stabilize",
+        "reason": "Kritik stok ve üretim açığı",
+        "previous": "science"
+      }
+    ],
+    "plan": {
+      "stage": "stabilize",
+      "focus": "economy",
+      "build": [
+        "santral",
+        "maden",
+        "fabrika"
+      ],
+      "diplomacy": "nap",
+      "partner": 4,
+      "enemy": null,
+      "target": null,
+      "forceNeed": 0,
+      "reason": "Gerçek stok/gelir açığı önce giderilmeli"
+    }
+  },
+  "knownPirates": [
+    {
+      "id": 166,
+      "owner": 10,
+      "wild": true,
+      "power": 296,
+      "classes": [
+        "kor",
+        "kor"
+      ]
+    },
+    {
+      "id": 175,
+      "owner": 10,
+      "wild": true,
+      "power": 296,
+      "classes": [
+        "kor",
+        "kor"
+      ]
+    },
+    {
+      "id": 188,
+      "owner": 10,
+      "wild": true,
+      "power": 296,
+      "classes": [
+        "kor",
+        "kor"
+      ]
+    },
+    {
+      "id": 189,
+      "owner": 10,
+      "wild": true,
+      "power": 296,
+      "classes": [
+        "kor",
+        "kor"
+      ]
+    },
+    {
+      "id": 202,
+      "owner": 10,
+      "wild": true,
+      "power": 296,
+      "classes": [
+        "kor",
+        "kor"
+      ]
+    },
+    {
+      "id": 224,
+      "owner": 10,
+      "wild": true,
+      "power": 296,
+      "classes": [
+        "kor",
+        "kor"
+      ]
+    },
+    {
+      "id": 225,
+      "owner": 10,
+      "wild": true,
+      "power": 296,
+      "classes": [
+        "kor",
+        "kor"
+      ]
+    },
+    {
+      "id": 250,
+      "owner": 10,
+      "wild": true,
+      "power": 296,
+      "classes": [
+        "kor",
+        "kor"
+      ]
+    },
+    {
+      "id": 269,
+      "owner": 10,
+      "wild": true,
+      "power": 296,
+      "classes": [
+        "kor",
+        "kor"
+      ]
+    },
+    {
+      "id": 276,
+      "owner": 10,
+      "wild": true,
+      "power": 296,
+      "classes": [
+        "kor",
+        "kor"
+      ]
+    },
+    {
+      "id": 302,
+      "owner": 10,
+      "wild": true,
+      "power": 296,
+      "classes": [
+        "kor",
+        "kor"
+      ]
+    },
+    {
+      "id": 303,
+      "owner": 10,
+      "wild": true,
+      "power": 296,
+      "classes": [
+        "kor",
+        "kor"
+      ]
+    },
+    {
+      "id": 316,
+      "owner": 10,
+      "wild": true,
+      "power": 296,
+      "classes": [
+        "kor",
+        "kor"
+      ]
+    }
+  ],
+  "hulls": [
+    {
+      "cls": "kor",
+      "access": {
+        "ok": true
+      },
+      "price": {
+        "ala": 32
+      },
+      "definition": {
+        "n": "Korvet",
+        "ab": "KRV",
+        "rng": 1,
+        "hull": 70,
+        "sh": 18,
+        "dmg": 16,
+        "spd": 3.2,
+        "cost": {
+          "ala": 32
+        },
+        "up": 6.8,
+        "upA": 0.77,
+        "rol": "sav",
+        "sz": 1
+      },
+      "sustainable": true
+    },
+    {
+      "cls": "esk",
+      "access": {
+        "ok": false,
+        "why": "Araştırma gerekli: Taarruz Eskortu"
+      },
+      "price": {
+        "ala": 64
+      },
+      "definition": {
+        "n": "Taarruz Eskortu",
+        "ab": "ESK",
+        "rng": 1,
+        "hull": 120,
+        "sh": 30,
+        "dmg": 32,
+        "spd": 3.3,
+        "cost": {
+          "ala": 64
+        },
+        "up": 13.8,
+        "upA": 1.5,
+        "rol": "sav",
+        "sz": 2,
+        "tech": "x_assault"
+      },
+      "sustainable": true
+    },
+    {
+      "cls": "muh",
+      "access": {
+        "ok": false,
+        "why": "Araştırma gerekli: Muhrip Gövdesi"
+      },
+      "price": {
+        "ala": 72
+      },
+      "definition": {
+        "n": "Muhrip",
+        "ab": "MHR",
+        "rng": 1,
+        "hull": 155,
+        "sh": 48,
+        "dmg": 35,
+        "spd": 2.7,
+        "cost": {
+          "ala": 72
+        },
+        "up": 15.9,
+        "upA": 1.68,
+        "rol": "sav",
+        "sz": 2,
+        "tech": "m_muhrip"
+      },
+      "sustainable": true
+    },
+    {
+      "cls": "kru",
+      "access": {
+        "ok": false,
+        "why": "Araştırma gerekli: Kruvazör Gövdesi"
+      },
+      "price": {
+        "ala": 155
+      },
+      "definition": {
+        "n": "Kruvazör",
+        "ab": "KRV2",
+        "rng": 2,
+        "hull": 340,
+        "sh": 115,
+        "dmg": 76,
+        "spd": 2.2,
+        "cost": {
+          "ala": 155
+        },
+        "up": 35.8,
+        "upA": 3.64,
+        "rol": "sav",
+        "sz": 3,
+        "tech": "m_kruvazor"
+      },
+      "sustainable": false
+    },
+    {
+      "cls": "zir",
+      "access": {
+        "ok": false,
+        "why": "Araştırma gerekli: Zırhlı Gövdesi"
+      },
+      "price": {
+        "ala": 330
+      },
+      "definition": {
+        "n": "Zırhlı",
+        "ab": "ZRH",
+        "rng": 3,
+        "hull": 740,
+        "sh": 270,
+        "dmg": 168,
+        "spd": 1.7,
+        "cost": {
+          "ala": 330
+        },
+        "up": 78.3,
+        "upA": 7.84,
+        "rol": "sav",
+        "sz": 4,
+        "tech": "m_zirhli"
+      },
+      "sustainable": false
+    },
+    {
+      "cls": "ord",
+      "access": {
+        "ok": true
+      },
+      "price": {
+        "ala": 70,
+        "min": 120
+      },
+      "definition": {
+        "n": "Taarruz Ordusu",
+        "ab": "ORD",
+        "rng": 0,
+        "hull": 120,
+        "sh": 10,
+        "dmg": 0,
+        "spd": 2,
+        "cost": {
+          "ala": 70,
+          "min": 120
+        },
+        "up": 5.2,
+        "upA": 0.6,
+        "rol": "ordu",
+        "sz": 2,
+        "ground": 55
+      },
+      "sustainable": true
+    }
+  ],
+  "colonies": [
+    {
+      "sys": 38,
+      "planet": 0,
+      "stab": 0,
+      "target": 81.5,
+      "bombed": 60,
+      "bombKip": "hassas",
+      "shield": 0,
+      "garrison": 0,
+      "buildings": {
+        "maden": 2,
+        "santral": 3,
+        "ciftlik": 4,
+        "lab": 1,
+        "dokum": 1,
+        "fabrika": 2,
+        "tersane": 1,
+        "kale": 0,
+        "liman": 0
+      },
+      "jobs": [],
+      "fortressCost": {
+        "min": 230,
+        "ala": 70
+      },
+      "fortressAffordable": false
+    },
+    {
+      "sys": 38,
+      "planet": 2,
+      "stab": 0,
+      "target": 81.5,
+      "bombed": 60,
+      "bombKip": "hassas",
+      "shield": 0,
+      "garrison": 0,
+      "buildings": {
+        "maden": 1,
+        "santral": 1,
+        "ciftlik": 1
+      },
+      "fortressCost": {
+        "min": 230,
+        "ala": 70
+      },
+      "fortressAffordable": false
+    }
+  ],
+  "federation": {
+    "id": 1,
+    "name": "Zenit Keşif Birliği",
+    "type": "bilimsel",
+    "charter": {
+      "defense": "vote",
+      "offense": "vote",
+      "admission": "allies",
+      "ballot": "economic"
+    },
+    "politicsVersion": 96,
+    "leader": 9,
+    "founder": 9,
+    "members": [
+      9,
+      1,
+      4,
+      2
+    ],
+    "laws": {
+      "serbest": {
+        "since": 56,
+        "by": 2
+      },
+      "savasOnay": {
+        "since": 60,
+        "by": 1
+      },
+      "refah": {
+        "since": 60,
+        "by": 4
+      }
+    },
+    "treasury": 0,
+    "fund": {
+      "ala": 28.807444627804504,
+      "ene": 96.90347500297167
+    },
+    "nextVote": 1980,
+    "vote": null,
+    "founded": 1620,
+    "typeSince": 1620,
+    "dutySince": {
+      "defense": 1620,
+      "offense": 1620
+    },
+    "defenseFrontCutoff": 2,
+    "dutyConsent": {
+      "1": {
+        "offense": false,
+        "since": 1620
+      },
+      "2": {
+        "offense": false,
+        "since": 1650
+      },
+      "4": {
+        "offense": false,
+        "since": 1620
+      },
+      "9": {
+        "offense": false,
+        "since": 1620
+      }
+    },
+    "invites": {},
+    "decisions": {},
+    "cohesion": 82,
+    "identityType": "bilimsel",
+    "emblem": {
+      "v": 1,
+      "shape": "ring",
+      "symbol": "orbit",
+      "pattern": "rays",
+      "primary": "#5cf5d6",
+      "secondary": "#d65cf5",
+      "federation": true
+    },
+    "representation": {
+      "month": 60,
+      "by": {
+        "1": {
+          "military": 48.425200051213004,
+          "economic": 23.364871749557512
+        },
+        "2": {
+          "military": 5,
+          "economic": 3.7885311708977905
+        },
+        "4": {
+          "military": 14.352700094407323,
+          "economic": 11.533965130328237
+        },
+        "9": {
+          "military": 27,
+          "economic": 22.593250729481134
+        }
+      }
+    },
+    "history": [
+      {
+        "day": 1620,
+        "year": 2214,
+        "month": 7,
+        "event": "founded",
+        "type": "bilimsel",
+        "ballot": "economic"
+      },
+      {
+        "day": 1650,
+        "year": 2214,
+        "month": 8,
+        "event": "vote",
+        "kind": "motion",
+        "law": "motion",
+        "passed": true,
+        "yes": 3.349,
+        "no": 2
+      },
+      {
+        "day": 1650,
+        "year": 2214,
+        "month": 8,
+        "event": "join",
+        "target": 2
+      },
+      {
+        "day": 1650,
+        "year": 2214,
+        "month": 8,
+        "event": "motion",
+        "kind": "admit",
+        "target": 2
+      },
+      {
+        "day": 1680,
+        "year": 2214,
+        "month": 9,
+        "event": "vote",
+        "kind": "inner",
+        "law": "serbest",
+        "passed": true,
+        "yes": 6.557,
+        "no": 0
+      },
+      {
+        "day": 1710,
+        "year": 2214,
+        "month": 10,
+        "event": "vote",
+        "kind": "motion",
+        "law": "motion",
+        "passed": false,
+        "yes": 3.951,
+        "no": 2.619
+      },
+      {
+        "day": 1800,
+        "year": 2215,
+        "month": 1,
+        "event": "vote",
+        "kind": "inner",
+        "law": "savasOnay",
+        "passed": true,
+        "yes": 6.623,
+        "no": 0
+      },
+      {
+        "day": 1800,
+        "year": 2215,
+        "month": 1,
+        "event": "vote",
+        "kind": "inner",
+        "law": "refah",
+        "passed": true,
+        "yes": 6.623,
+        "no": 0
+      }
+    ],
+    "requestAfter": {
+      "admit:2": 1830,
+      "admit:5": 1890
+    },
+    "voteSeq": 5,
+    "admissionResults": {
+      "1": {
+        "target": 2,
+        "status": "accepted",
+        "why": "Kabul edildi; devlet federasyona katıldı.",
+        "updated": 1650
+      },
+      "3": {
+        "target": 5,
+        "status": "rejected",
+        "why": "Üye oylaması reddetti: 3.951 evet / 2.619 hayır; mutlak üye çoğunluğu gerekli. Temas, savaş veya doktrin engeli / Temas, savaş veya doktrin engeli",
+        "updated": 1710
+      }
+    },
+    "lastVote": {
+      "id": "5",
+      "law": "refah",
+      "kind": "inner",
+      "reasons": {
+        "1": "Destek · Kişilik ve yasa yararı +0.17 · Önerene güven +0.29 · Birlik uyumu +0.06 · Gerçek ekonomik hazırlık · Uzun vadeli hedef +0.08 · Gerçek aylık maliyet ve üretim farkı +0.00 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -1.61 · Δbilim 0.00",
+        "2": "Destek · Kişilik ve yasa yararı +0.16 · Önerene güven +0.10 · Birlik uyumu +0.06 · Gerçek ekonomik hazırlık · Uzun vadeli hedef +0.08 · Gerçek aylık maliyet ve üretim farkı -0.02 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -0.19 · Δbilim 0.00",
+        "4": "Öneriyi kendi sundu; açık öneri onayı",
+        "9": "Destek · Kişilik ve yasa yararı +0.19 · Önerene güven +0.16 · Birlik uyumu +0.06 · Gerçek ekonomik hazırlık · Uzun vadeli hedef +0.08 · Gerçek aylık maliyet ve üretim farkı +0.00 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -3.13 · Δbilim 0.00"
+      },
+      "assessments": {
+        "1": {
+          "score": 1,
+          "factors": [
+            {
+              "n": "Kişilik ve yasa yararı",
+              "v": 0.17152984615384614
+            },
+            {
+              "n": "Önerene güven",
+              "v": 0.293472932581446
+            },
+            {
+              "n": "Birlik uyumu",
+              "v": 0.056
+            },
+            {
+              "n": "Gerçek ekonomik hazırlık",
+              "v": 0
+            },
+            {
+              "n": "Uzun vadeli hedef",
+              "v": 0.08
+            },
+            {
+              "n": "Gerçek aylık maliyet ve üretim farkı",
+              "v": 0.002635544454400021
+            },
+            {
+              "n": "Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -1.61 · Δbilim 0.00",
+              "v": 0
+            }
+          ],
+          "why": "Destek · Kişilik ve yasa yararı +0.17 · Önerene güven +0.29 · Birlik uyumu +0.06 · Gerçek ekonomik hazırlık · Uzun vadeli hedef +0.08 · Gerçek aylık maliyet ve üretim farkı +0.00 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -1.61 · Δbilim 0.00"
+        },
+        "2": {
+          "score": 0.829500165446247,
+          "factors": [
+            {
+              "n": "Kişilik ve yasa yararı",
+              "v": 0.1572
+            },
+            {
+              "n": "Önerene güven",
+              "v": 0.10425725423317553
+            },
+            {
+              "n": "Birlik uyumu",
+              "v": 0.056
+            },
+            {
+              "n": "Gerçek ekonomik hazırlık",
+              "v": 0
+            },
+            {
+              "n": "Uzun vadeli hedef",
+              "v": 0.08
+            },
+            {
+              "n": "Gerçek aylık maliyet ve üretim farkı",
+              "v": -0.017957088786928525
+            },
+            {
+              "n": "Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -0.19 · Δbilim 0.00",
+              "v": 0
+            }
+          ],
+          "why": "Destek · Kişilik ve yasa yararı +0.16 · Önerene güven +0.10 · Birlik uyumu +0.06 · Gerçek ekonomik hazırlık · Uzun vadeli hedef +0.08 · Gerçek aylık maliyet ve üretim farkı -0.02 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -0.19 · Δbilim 0.00"
+        },
+        "9": {
+          "score": 0.9400466381805151,
+          "factors": [
+            {
+              "n": "Kişilik ve yasa yararı",
+              "v": 0.19347711946263946
+            },
+            {
+              "n": "Önerene güven",
+              "v": 0.15656951871787567
+            },
+            {
+              "n": "Birlik uyumu",
+              "v": 0.056
+            },
+            {
+              "n": "Gerçek ekonomik hazırlık",
+              "v": 0
+            },
+            {
+              "n": "Uzun vadeli hedef",
+              "v": 0.08
+            },
+            {
+              "n": "Gerçek aylık maliyet ve üretim farkı",
+              "v": 0.00399999999999999
+            },
+            {
+              "n": "Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -3.13 · Δbilim 0.00",
+              "v": 0
+            }
+          ],
+          "why": "Destek · Kişilik ve yasa yararı +0.19 · Önerene güven +0.16 · Birlik uyumu +0.06 · Gerçek ekonomik hazırlık · Uzun vadeli hedef +0.08 · Gerçek aylık maliyet ve üretim farkı +0.00 · Altı aylık bütçe karşılanabilir · Δenerji 0.00 · Δalaşım -3.13 · Δbilim 0.00"
+        }
+      },
+      "ballotSnapshot": {
+        "mode": "economic",
+        "weights": {
+          "1": 2,
+          "2": 1.162,
+          "4": 1.494,
+          "9": 1.967
+        },
+        "modern": true,
+        "source": "opened"
+      },
+      "rule": "Mutlak üye çoğunluğu (3/4) ve toplam oy ağırlığının yarısından fazlası. Süre sonunda eksik oy çekimserdir.",
+      "proposer": 4,
+      "repeal": false,
+      "invalid": "",
+      "yesMembers": [
+        9,
+        1,
+        4,
+        2
+      ],
+      "noMembers": [],
+      "day": 1800,
+      "passed": true,
+      "yes": 6.623,
+      "no": 0,
+      "abstain": 0,
+      "why": "Gerekli üye ve oy çoğunluğu sağlandı"
+    }
+  },
+  "fronts": [],
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Voriave Konseyi",
+      "ai": true,
+      "wild": false,
+      "relation": 53.47093437115151,
+      "ally": true,
+      "pact": true,
+      "knownPower": 333,
+      "protection": {
+        "ok": false,
+        "why": "Bilinen açık askerî yardım rotası yok"
+      },
+      "binding": {
+        "kind": "fed",
+        "id": 1
+      },
+      "canDeclare": false
+    },
+    {
+      "id": 4,
+      "name": "Alora İttifakı",
+      "ai": true,
+      "wild": false,
+      "relation": 80.36436276792408,
+      "ally": true,
+      "pact": true,
+      "intel": 3,
+      "knownPower": 181,
+      "protection": {
+        "ok": true,
+        "eta": 57.82549809120708,
+        "ratio": 181,
+        "why": "Açık yardım rotası ve yeterli tahmini güç"
+      },
+      "binding": {
+        "kind": "fed",
+        "id": 1
+      },
+      "canDeclare": false
+    },
+    {
+      "id": 9,
+      "name": "Vaorri Birliği",
+      "ai": true,
+      "wild": false,
+      "relation": 63.05969576752477,
+      "ally": true,
+      "pact": true,
+      "intel": 3,
+      "knownPower": 704,
+      "protection": {
+        "ok": true,
+        "eta": 26.15791768875037,
+        "ratio": 704,
+        "why": "Açık yardım rotası ve yeterli tahmini güç"
+      },
+      "binding": {
+        "kind": "fed",
+        "id": 1
+      },
+      "canDeclare": false
+    },
+    {
+      "id": 10,
+      "name": "Kara Yıldız Korsanları",
+      "ai": true,
+      "wild": true,
+      "relation": -27.999999999999844,
+      "ally": false,
+      "pact": false,
+      "knownPower": 3719,
+      "protection": {
+        "ok": false,
+        "why": "Koruma için güven yetersiz"
+      },
+      "binding": null,
+      "canDeclare": false
+    }
+  ],
+  "legalAidReplay": {
+    "jointRequestAsAI": {
+      "ok": false,
+      "why": "Siyasi askerî destek yetkisi yok"
+    },
+    "protectionTalk": null,
+    "submitCooldown": null,
+    "resourcesUnchanged": true,
+    "rngUnchanged": true,
+    "sameIdentityPlayerGate": {
+      "ok": false,
+      "why": "Aynı geçerli savaş seferinde kabul edilmiş ortak yükümlülük yok"
+    }
+  },
+  "sourceSHA": "7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74"
+}

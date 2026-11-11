@@ -1,0 +1,31 @@
+PROGRESS base 12/36
+PROGRESS base 24/36
+PROGRESS base 36/36
+{"mode":"base","months":36,"sourceSHA":"7d1037e1da8387e5a917ec4d258c718bdfbdc26b51b6e24c867482e96a94ab74","ms":30903,"world":{"critical":36,"zero":36,"bombardedColonies":154,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":36}},"actor2":{"critical":36,"zero":36,"bombardedColonies":72,"byResource":{"ene":0,"min":0,"yiy":0,"ala":0,"tuk":36}},"cols":27,"techs":67,"ships":140,"actor2Final":{"res":{"min":80.0207615733974,"ene":561.625762577028,"yiy":407.9236408295328,"ala":29.073828868104055,"ara":0,"tuk":0,"etk":607.5355874999998},"inc":{"min":-0.0986869996767603,"ene":0.6752128962332711,"yiy":-12.153874565658306,"ala":3.142673007098626,"ara":21.688749428230484,"etk":8.917825,"tuk":-14.999628047799932},"cols":2,"stability":[0,0]},"rng":-171414043,"observations":{"removed:3:merge":24,"removedHulls:3:merge":24,"removed:4:combat":1,"removedHulls:4:combat":1,"removed:5:merge":32,"removedHulls:5:merge":32,"removed:9:merge":38,"removedHulls:9:merge":38,"removed:8:merge":13,"removedHulls:8:merge":13,"removed:7:merge":13,"removedHulls:7:merge":13,"queueBuilding:1":10,"queueShip:1":24,"aiQueueMilitaryShip:1":22,"queueShip:3":31,"aiQueueMilitaryShip:3":26,"aiMove:3":23,"queueBuilding:4":23,"queueShip:5":39,"aiQueueMilitaryShip:5":36,"aiMove:5":15,"queueShip:6":25,"aiQueueMilitaryShip:6":24,"queueBuilding:7":13,"queueShip:7":24,"aiQueueMilitaryShip:7":18,"queueBuilding:8":17,"queueShip:9":44,"aiQueueMilitaryShip:9":44,"aiMove:9":20,"removed:6:merge":22,"removedHulls:6:merge":22,"removed:1:merge":14,"removedHulls:1:merge":14,"removed:5:combat":7,"removedHulls:5:combat":8,"queueBuilding:3":20,"queueShip:4":9,"aiQueueMilitaryShip:4":9,"queueBuilding:5":13,"removed:10:rule":26,"removedHulls:10:rule":51,"removed:7:attrition":1,"removedHulls:7:attrition":1,"queueShip:2":5,"aiQueueMilitaryShip:2":2,"aiMove:6":12,"queueBuilding:6":4,"queueShip:8":14,"aiQueueMilitaryShip:8":13,"removed:2:combat":5,"removedHulls:2:combat":5,"aiMove:7":27,"aiMove:1":6,"queueBuilding:9":10,"removed:1:combat":8,"removedHulls:1:combat":12,"removed:7:combat":5,"removedHulls:7:combat":5,"removed:9:combat":7,"removedHulls:9:combat":8,"queueBuilding:2":1,"removed:3:combat":4,"removedHulls:3:combat":4,"aiMove:8":7,"removed:3:rule":1,"removedHulls:3:rule":1,"aiMove:4":6,"removed:7:rule":1,"removedHulls:7:rule":1,"removed:5:colonization":1,"removedHulls:5:colonization":1,"removed:4:merge":6,"removedHulls:4:merge":6,"queueBuilding:11":1,"removed:1:rule":3,"removedHulls:1:rule":3,"removed:3:colonization":1,"removedHulls:3:colonization":1}}
+node:assert:152
+  throw new AssertionError(obj);
+  ^
+
+AssertionError [ERR_ASSERTION]: invasionTick exact experiment seam
+
+1 !== 2
+
+    at replace (/workspace/Star/tests/helpers/ai-defense0-experiments.cjs:4:77)
+    at exports.install (/workspace/Star/tests/helpers/ai-defense0-experiments.cjs:8:3)
+    at Object.<anonymous> (/workspace/Star/tests/ai-defense0-campaign.cjs:5:130)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 2,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.1

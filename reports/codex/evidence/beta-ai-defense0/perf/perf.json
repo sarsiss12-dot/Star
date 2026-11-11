@@ -1,0 +1,218 @@
+[
+  {
+    "file": "p23-404-60-ulu-9-final.sav",
+    "mode": "base",
+    "repetition": 0,
+    "months": 6,
+    "ms": 2818.904377,
+    "aiMs": 829.3681000000009,
+    "aiCalls": 60
+  },
+  {
+    "file": "p23-404-60-ulu-9-final.sav",
+    "mode": "defense",
+    "repetition": 0,
+    "months": 6,
+    "ms": 2690.716867,
+    "aiMs": 805.5326280000036,
+    "aiCalls": 60
+  },
+  {
+    "file": "p23-404-60-ulu-9-final.sav",
+    "mode": "safe-yard",
+    "repetition": 0,
+    "months": 6,
+    "ms": 2683.902474999999,
+    "aiMs": 784.4135620000052,
+    "aiCalls": 60
+  },
+  {
+    "file": "p23-404-60-ulu-9-final.sav",
+    "mode": "allied-defense",
+    "repetition": 0,
+    "months": 6,
+    "ms": 2648.472688,
+    "aiMs": 767.4729580000021,
+    "aiCalls": 60
+  },
+  {
+    "file": "p23-404-60-ulu-9-final.sav",
+    "mode": "base",
+    "repetition": 1,
+    "months": 6,
+    "ms": 2653.5777549999984,
+    "aiMs": 732.1355969999931,
+    "aiCalls": 60
+  },
+  {
+    "file": "p23-404-60-ulu-9-final.sav",
+    "mode": "defense",
+    "repetition": 1,
+    "months": 6,
+    "ms": 3368.5556560000005,
+    "aiMs": 981.4229740000046,
+    "aiCalls": 60
+  },
+  {
+    "file": "p23-404-60-ulu-9-final.sav",
+    "mode": "safe-yard",
+    "repetition": 1,
+    "months": 6,
+    "ms": 2873.4416280000005,
+    "aiMs": 799.4121669999877,
+    "aiCalls": 60
+  },
+  {
+    "file": "p23-404-60-ulu-9-final.sav",
+    "mode": "allied-defense",
+    "repetition": 1,
+    "months": 6,
+    "ms": 2857.146332999997,
+    "aiMs": 889.3266819999917,
+    "aiCalls": 60
+  },
+  {
+    "file": "p23-404-60-ulu-9-final.sav",
+    "mode": "base",
+    "repetition": 2,
+    "months": 6,
+    "ms": 2682.8748239999986,
+    "aiMs": 767.3334730000024,
+    "aiCalls": 60
+  },
+  {
+    "file": "p23-404-60-ulu-9-final.sav",
+    "mode": "defense",
+    "repetition": 2,
+    "months": 6,
+    "ms": 2735.6654229999986,
+    "aiMs": 792.8691890000082,
+    "aiCalls": 60
+  },
+  {
+    "file": "p23-404-60-ulu-9-final.sav",
+    "mode": "safe-yard",
+    "repetition": 2,
+    "months": 6,
+    "ms": 2710.599936999999,
+    "aiMs": 800.992132000014,
+    "aiCalls": 60
+  },
+  {
+    "file": "p23-404-60-ulu-9-final.sav",
+    "mode": "allied-defense",
+    "repetition": 2,
+    "months": 6,
+    "ms": 2732.0498949999965,
+    "aiMs": 804.3087589999996,
+    "aiCalls": 60
+  },
+  {
+    "file": "p23-11-24-s200-16-final.sav",
+    "mode": "base",
+    "repetition": 0,
+    "months": 6,
+    "ms": 9819.327397000001,
+    "aiMs": 1591.0408550000866,
+    "aiCalls": 102
+  },
+  {
+    "file": "p23-11-24-s200-16-final.sav",
+    "mode": "defense",
+    "repetition": 0,
+    "months": 6,
+    "ms": 11207.062909999993,
+    "aiMs": 1826.764519999997,
+    "aiCalls": 102
+  },
+  {
+    "file": "p23-11-24-s200-16-final.sav",
+    "mode": "safe-yard",
+    "repetition": 0,
+    "months": 6,
+    "ms": 9816.640018999999,
+    "aiMs": 1528.4953439999736,
+    "aiCalls": 102
+  },
+  {
+    "file": "p23-11-24-s200-16-final.sav",
+    "mode": "allied-defense",
+    "repetition": 0,
+    "months": 6,
+    "ms": 9538.636488000004,
+    "aiMs": 1465.0644069998816,
+    "aiCalls": 102
+  },
+  {
+    "file": "p23-11-24-s200-16-final.sav",
+    "mode": "base",
+    "repetition": 1,
+    "months": 6,
+    "ms": 9776.334760999991,
+    "aiMs": 1657.751845999912,
+    "aiCalls": 102
+  },
+  {
+    "file": "p23-11-24-s200-16-final.sav",
+    "mode": "defense",
+    "repetition": 1,
+    "months": 6,
+    "ms": 9987.248175,
+    "aiMs": 1489.1147229999915,
+    "aiCalls": 102
+  },
+  {
+    "file": "p23-11-24-s200-16-final.sav",
+    "mode": "safe-yard",
+    "repetition": 1,
+    "months": 6,
+    "ms": 12158.733947999994,
+    "aiMs": 1858.793266000066,
+    "aiCalls": 102
+  },
+  {
+    "file": "p23-11-24-s200-16-final.sav",
+    "mode": "allied-defense",
+    "repetition": 1,
+    "months": 6,
+    "ms": 14334.815816000002,
+    "aiMs": 2039.5213489999442,
+    "aiCalls": 102
+  },
+  {
+    "file": "p23-11-24-s200-16-final.sav",
+    "mode": "base",
+    "repetition": 2,
+    "months": 6,
+    "ms": 11190.458772999991,
+    "aiMs": 1679.7533490000787,
+    "aiCalls": 102
+  },
+  {
+    "file": "p23-11-24-s200-16-final.sav",
+    "mode": "defense",
+    "repetition": 2,
+    "months": 6,
+    "ms": 10882.559203000012,
+    "aiMs": 1656.1953530002502,
+    "aiCalls": 102
+  },
+  {
+    "file": "p23-11-24-s200-16-final.sav",
+    "mode": "safe-yard",
+    "repetition": 2,
+    "months": 6,
+    "ms": 11085.991111999989,
+    "aiMs": 1828.4767260000517,
+    "aiCalls": 102
+  },
+  {
+    "file": "p23-11-24-s200-16-final.sav",
+    "mode": "allied-defense",
+    "repetition": 2,
+    "months": 6,
+    "ms": 11056.853006999998,
+    "aiMs": 1579.4426710001717,
+    "aiCalls": 102
+  }
+]

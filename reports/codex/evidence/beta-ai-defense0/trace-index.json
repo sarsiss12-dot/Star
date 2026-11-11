@@ -1,0 +1,194 @@
+[
+  {
+    "file": "main-36/summary.json.gz",
+    "uncompressedBytes": 55732,
+    "uncompressedSHA256": "fb8c5256a9660771bcf2a9ae5530ac5b6e2dc1baf23024c1d456fa83ff12a072",
+    "gzipSHA256": "3ef08d671dc84f40cde719798bc1cc3cd4d5c2948dc3b89a286c5daa405b53ab"
+  },
+  {
+    "file": "main-36/no-bombard.json.gz",
+    "uncompressedBytes": 1415441,
+    "uncompressedSHA256": "4b0eecf720a15770406e4c329eff4aac128319a0c854d70a51a78d3e73d97eef",
+    "gzipSHA256": "b1e09de1d614b9251010306a43ed403bbbe36a978b8179ad92b413b8d07f4a04"
+  },
+  {
+    "file": "main-36/defense.json.gz",
+    "uncompressedBytes": 1459934,
+    "uncompressedSHA256": "f7905479c8552ec1b1f33786f17be52a548b1dde86637725e825051227b74698",
+    "gzipSHA256": "17674d3a70d37c6e8eb17bf4af393b4841bbcda1af67da051ab8bee441908f5e"
+  },
+  {
+    "file": "main-36/safe-yard.json.gz",
+    "uncompressedBytes": 1432215,
+    "uncompressedSHA256": "16ac73ae9020f493ae6cc30b941b8dcf2d9be7f0492d6c5476041ef6b76e4c6a",
+    "gzipSHA256": "e44c1c63cb280d2d53bd9fe7eadf409b996123e18abf51669f33c3311654a188"
+  },
+  {
+    "file": "main-36/base.json.gz",
+    "uncompressedBytes": 1375898,
+    "uncompressedSHA256": "43d378a535e380551e3360b24b9da615679143d631d72618a9484bd66bd1c70b",
+    "gzipSHA256": "137e3fc5844b1fc374486d1035721658c951538123519c4176c23968f5251e05"
+  },
+  {
+    "file": "main-60/summary.json.gz",
+    "uncompressedBytes": 23415,
+    "uncompressedSHA256": "5e75e025552ea97eac79916b6b693fbfcae19b7aff8b6d21bd630ae5839a562f",
+    "gzipSHA256": "8c56eb790b39be4b05fe8f10e5d2264356713222835400d8dc745dc4c6029409"
+  },
+  {
+    "file": "main-60/allied-defense.json.gz",
+    "uncompressedBytes": 2581616,
+    "uncompressedSHA256": "b2ff7c62fac6eca3c071d08a49222af7214744464870b2def4facfe0b52a5ce5",
+    "gzipSHA256": "c937a6e663371d89977e4c28277f08e5bde916d556c6804c3e536ea07fcd765e"
+  },
+  {
+    "file": "main-60/no-bombard.json.gz",
+    "uncompressedBytes": 2479810,
+    "uncompressedSHA256": "145b1f95ba39f6956103ea3d3996702acd281ad742ffa34d9131a624a26c4b58",
+    "gzipSHA256": "1591f95cdc3a288c198b2b0e96757abf805970d3ab0a16ba8ad5a42c25f9cdf3"
+  },
+  {
+    "file": "main-60/defense.json.gz",
+    "uncompressedBytes": 2629017,
+    "uncompressedSHA256": "8138a6dfb27065271dcad9fb4522b5186fa9cb0b94f0ceacdb0fc036e1fa39d7",
+    "gzipSHA256": "7b763520304938624911a124fb176b035323cc938693431577821f2476d93071"
+  },
+  {
+    "file": "main-60/safe-yard.json.gz",
+    "uncompressedBytes": 2558517,
+    "uncompressedSHA256": "39974e284e6cf3dc22289390f9a57046a1df6c3df8c5b53f2c8532b86034270b",
+    "gzipSHA256": "b3f9c35f21cd1fecddd6fef9ced9ddeb2fe5e54dd5479f7f614861e6e032e53b"
+  },
+  {
+    "file": "main-60/base.json.gz",
+    "uncompressedBytes": 2326021,
+    "uncompressedSHA256": "2625033a5fa78467efb709e7409fcde07f99e50fe50643a3eed8ce1c8b604781",
+    "gzipSHA256": "54c9de9d8bdf670bceeb96fc11cc6d79acab30845d6c84b0f9d7c77839f9047f"
+  },
+  {
+    "file": "seed-42/summary.json.gz",
+    "uncompressedBytes": 137397,
+    "uncompressedSHA256": "e1f3318f972f9bb452d99c0968b21856251174067ac09c90e4fdac0af6c39be3",
+    "gzipSHA256": "8b504c5bf4613d544b2e12c463b345f1d1b91ad47ce8891f9bb87de056949c08"
+  },
+  {
+    "file": "seed-42/defense.json.gz",
+    "uncompressedBytes": 1212490,
+    "uncompressedSHA256": "b6e07bbc3e54cb6c54a7673dafa8ce0dda68c02249cbc1b092048db96499e9b6",
+    "gzipSHA256": "a72f621bc3c16eec8094584a24558e78d3b6b5e1405fc32f1f6e92a19f445d1a"
+  },
+  {
+    "file": "seed-42/safe-yard.json.gz",
+    "uncompressedBytes": 1227316,
+    "uncompressedSHA256": "6d10c36ba907f64a3ca1fcc444e14d7aa5e874ce3bb1f4b77aa78acd67110d4b",
+    "gzipSHA256": "4f0f77722430175f634b65c3442b0476fa75a987e23179c4adf313b8df4ded26"
+  },
+  {
+    "file": "seed-42/base.json.gz",
+    "uncompressedBytes": 1199104,
+    "uncompressedSHA256": "685c16174624c0f031c9586109f43d3e1014aaf9d163d0e790fe5bfa179198aa",
+    "gzipSHA256": "4dd40ccc69a7b610e0f3c8669ac8cfcaedf97c37dbe5447e5dd6ef978e96dd99"
+  },
+  {
+    "file": "seed-23/summary.json.gz",
+    "uncompressedBytes": 193374,
+    "uncompressedSHA256": "66bc984a416e3e14fad71729bed157bd3aebbc423b97cd31e7590ca60aa4f1a1",
+    "gzipSHA256": "bc11be69c56bead39585c03f759f207a4dde6a081a2f7271d5855ed0af6f35f2"
+  },
+  {
+    "file": "seed-23/defense.json.gz",
+    "uncompressedBytes": 1264062,
+    "uncompressedSHA256": "fd404fffd89cd6ed4c8606331113ca651a67d3c79591524aea28b33c4ef689f9",
+    "gzipSHA256": "a70d3e67d2bbba8f2a4d38c76b568888a130ae9dfffc213f133077e926b42563"
+  },
+  {
+    "file": "seed-23/safe-yard.json.gz",
+    "uncompressedBytes": 1272376,
+    "uncompressedSHA256": "933d6a619def4f7bcf0ea06f1013bb81c39cd768c183a9cdaa0d67a70cdca978",
+    "gzipSHA256": "d7261c0d3318eb564eaa3bec8fdde1666f3c7f7b6070cad8b42a3a5298678b97"
+  },
+  {
+    "file": "seed-23/base.json.gz",
+    "uncompressedBytes": 1206957,
+    "uncompressedSHA256": "808367f7254d14cd00af6e7e47e4bc74661d53a83eb893b3d4572a58191c7478",
+    "gzipSHA256": "ce476b9d088c1f9e2a5a3e30b7192e1ec02b00808015324c5dcc041fb2a706b0"
+  },
+  {
+    "file": "seed-11/summary.json.gz",
+    "uncompressedBytes": 126650,
+    "uncompressedSHA256": "9b776d093362b29ec872eafcd2af0fcf45c07e6cab7f966f0ffd4442db103194",
+    "gzipSHA256": "8fca327fb84991609b2c28dceff00ac2da2f0f704e6459f98e35e1b3e7ac6ad9"
+  },
+  {
+    "file": "seed-11/defense.json.gz",
+    "uncompressedBytes": 1323816,
+    "uncompressedSHA256": "cc80fbe02724e63ba7cd82e940d8662604f6a19df7dee75c2d5501eccdeee672",
+    "gzipSHA256": "f16dac31147bdba4ce3c5270d6fe011a9811f18861da2fcac13ebc1c0caf53a6"
+  },
+  {
+    "file": "seed-11/safe-yard.json.gz",
+    "uncompressedBytes": 1363001,
+    "uncompressedSHA256": "b6e359f507a339d2d1dd74934c82feed360c3a44ff37418c0260938fd3813b93",
+    "gzipSHA256": "8598d4eab8084d6e36c41d840242c833d139f343edc930754df7888460492710"
+  },
+  {
+    "file": "seed-11/base.json.gz",
+    "uncompressedBytes": 1357627,
+    "uncompressedSHA256": "554765538986e190c7b755567935df004ddfeecd698d02e222c79ca55c5d7eea",
+    "gzipSHA256": "32ed202fad44f191e12c76442b974c6ec89c9ee72173ba8ccb8b36fe956c34ba"
+  },
+  {
+    "file": "seed-99/summary.json.gz",
+    "uncompressedBytes": 190892,
+    "uncompressedSHA256": "c4f6a1bbae5dc56d8c6bfe2c34f91f9d1b27f76e5313ca9504b6e9812f3d859d",
+    "gzipSHA256": "9cae549748cb4aba9928a8bcbac2aa25d0b06071edcf1af5a9c7443d5b2f8a98"
+  },
+  {
+    "file": "seed-99/defense.json.gz",
+    "uncompressedBytes": 1262816,
+    "uncompressedSHA256": "688c3f8c1c6582b891fa673234866a505efef616b861d2602bd7b32b5e1c41a4",
+    "gzipSHA256": "c672bf6ffb4f32aa735951a998abf2e841db81e4a72e36bf2637cc630b29b049"
+  },
+  {
+    "file": "seed-99/safe-yard.json.gz",
+    "uncompressedBytes": 1262817,
+    "uncompressedSHA256": "71a60283aa98413094cdd76af25b8566ea5b471671bd64911d675c98d37610c3",
+    "gzipSHA256": "a4ca1ec64c5d3ea84dd79c3d7419b9fbfdfcaebd67c707311d72c98efb7604e4"
+  },
+  {
+    "file": "seed-99/base.json.gz",
+    "uncompressedBytes": 1260234,
+    "uncompressedSHA256": "d658f13a4e262887159ac27dcd305f1fc3e8b1e9d47c772a501133ffa9d9bfc0",
+    "gzipSHA256": "7b31778ab824ddd575dd45b123fc0221782d8772a182c8ad29650cbb7696c077"
+  },
+  {
+    "file": "combat-replay/summary.json.gz",
+    "uncompressedBytes": 44636,
+    "uncompressedSHA256": "da3eae33a1c1a8bf32c6a3df4a2497353f30aa03d8a5abf0a413526ed761d453",
+    "gzipSHA256": "2ef57c7c3fb05feabb342597646b248316d539d190d74861ecf592183dc34a8c"
+  },
+  {
+    "file": "combat-replay/allied-defense.json.gz",
+    "uncompressedBytes": 2581797,
+    "uncompressedSHA256": "0d27a0b322ed9d6c8a95cd410c72b0d80ac68913006cc37c8cd5b0d2c2215c7c",
+    "gzipSHA256": "5ddf45810d4da75f4533ca1db50d33458c5d46b04f19677dc0e67f9eb7db1d1a"
+  },
+  {
+    "file": "combat-replay/base.json.gz",
+    "uncompressedBytes": 2322657,
+    "uncompressedSHA256": "4f1e3c3619580e04e4abd7b84030d8c0aaf4a2f95037ec36e3c1b1db1f219e57",
+    "gzipSHA256": "4166dae8aa78b1144b6fe43b7a827d7c5f70d3e3695fd07740b4f769b3b41ffa"
+  },
+  {
+    "file": "pure-control/summary.json.gz",
+    "uncompressedBytes": 21049,
+    "uncompressedSHA256": "83c480ae701b06bac04f642f4dd13dbcdd70cb40480b061075fa68ed3c28e8c0",
+    "gzipSHA256": "ec88a821184a76eacca80d539cfd8b6777f50bd8a768e4c851308d74993a9854"
+  },
+  {
+    "file": "pure-control/base.json.gz",
+    "uncompressedBytes": 2322664,
+    "uncompressedSHA256": "a5315b829d4d2a7679053c5a3910d90d984b679c3c86a9d695fb5919fe766387",
+    "gzipSHA256": "8c1fc7ae94332d782b27a3f4b56cf7acb3597c16d17e3082724eff477d5ad5df"
+  }
+]

@@ -1,0 +1,199 @@
+[
+  {
+    "file": "p23-404-60-ulu-9-final.sav",
+    "day": 1800,
+    "ownPower": 0,
+    "piratePower": 3848,
+    "fronts": [],
+    "allies": [
+      {
+        "id": 1,
+        "name": "Voriave Konseyi",
+        "ownThreat": 93.5,
+        "normalWars": [
+          "7"
+        ],
+        "visible": true,
+        "known": {
+          "owner": 2,
+          "defense": 0,
+          "colonies": 2,
+          "capital": true,
+          "day": 1800
+        },
+        "observedThreat": 3848,
+        "totalPower": 2320,
+        "spareReason": "Kendi stratejik savunması veya kritik filo görevi öncelikli",
+        "sparePower": 0,
+        "routes": [],
+        "sustainable": true
+      },
+      {
+        "id": 4,
+        "name": "Alora İttifakı",
+        "ownThreat": 0,
+        "normalWars": [],
+        "visible": false,
+        "known": {
+          "owner": 2,
+          "defense": 0,
+          "colonies": 2,
+          "capital": true,
+          "day": 1620
+        },
+        "observedThreat": 0,
+        "totalPower": 181,
+        "spareReason": "Kendi stratejik savunması veya kritik filo görevi öncelikli",
+        "sparePower": 0,
+        "routes": [],
+        "sustainable": true
+      },
+      {
+        "id": 9,
+        "name": "Vaorri Birliği",
+        "ownThreat": 0,
+        "normalWars": [],
+        "visible": false,
+        "known": {
+          "owner": 2,
+          "defense": 0,
+          "colonies": 2,
+          "capital": true,
+          "day": 780
+        },
+        "observedThreat": 0,
+        "totalPower": 704,
+        "spareReason": "Ulaşılabilir uygun kuvvet yok",
+        "sparePower": 230,
+        "routes": [
+          {
+            "id": 317,
+            "power": 230,
+            "route": {
+              "path": [
+                56,
+                13,
+                36,
+                71,
+                11,
+                75,
+                38
+              ],
+              "eta": 26.15791768875037
+            }
+          }
+        ],
+        "sustainable": true
+      }
+    ]
+  },
+  {
+    "file": "allied-defense-final.sav",
+    "day": 3600,
+    "ownPower": 0,
+    "piratePower": 6270,
+    "fronts": [],
+    "allies": [
+      {
+        "id": 4,
+        "name": "Alora İttifakı",
+        "ownThreat": 0,
+        "normalWars": [],
+        "visible": false,
+        "known": {
+          "owner": 2,
+          "defense": 0,
+          "colonies": 2,
+          "capital": true,
+          "day": 3570
+        },
+        "observedThreat": 0,
+        "totalPower": 3486,
+        "spareReason": "Kendi stratejik savunması veya kritik filo görevi öncelikli",
+        "sparePower": 0,
+        "routes": [],
+        "sustainable": true
+      },
+      {
+        "id": 5,
+        "name": "Torvath Loncası",
+        "ownThreat": 0,
+        "normalWars": [],
+        "visible": false,
+        "known": {
+          "owner": 2,
+          "defense": 0,
+          "colonies": 2,
+          "capital": true,
+          "day": 3570
+        },
+        "observedThreat": 0,
+        "totalPower": 3927,
+        "spareReason": "Ulaşılabilir uygun kuvvet yok",
+        "sparePower": 546,
+        "routes": [
+          {
+            "id": 441,
+            "power": 546,
+            "route": null
+          }
+        ],
+        "sustainable": true
+      },
+      {
+        "id": 9,
+        "name": "Vaorri Birliği",
+        "ownThreat": 0,
+        "normalWars": [],
+        "visible": false,
+        "known": {
+          "owner": 2,
+          "defense": 0,
+          "colonies": 2,
+          "capital": true,
+          "day": 3570
+        },
+        "observedThreat": 0,
+        "totalPower": 5159,
+        "spareReason": "Ulaşılabilir uygun kuvvet yok",
+        "sparePower": 2902,
+        "routes": [
+          {
+            "id": 470,
+            "power": 2028,
+            "route": {
+              "path": [
+                56,
+                13,
+                36,
+                71,
+                11,
+                75,
+                38
+              ],
+              "eta": 31.001976520000436
+            }
+          },
+          {
+            "id": 472,
+            "power": 874,
+            "route": {
+              "path": [
+                77,
+                56,
+                13,
+                36,
+                71,
+                11,
+                75,
+                38
+              ],
+              "eta": 29.51004840553856
+            }
+          }
+        ],
+        "sustainable": true
+      }
+    ]
+  }
+]
