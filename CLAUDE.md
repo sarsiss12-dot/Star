@@ -2,6 +2,13 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
+## Son teslim — BETA-UI-REFINEMENT.0 / p23
+
+- Ayrıntı: `reports/codex/BETA-UI-REFINEMENT0-SONUC.md`. p22 80d11da tabanı, kod/paket183c3ca, dal `codex/stars-beta-ui-refinement0-mobile`.
+- outEmp doğrudan koloni girişi; küçük map komutu ve bağımsız geri çipi; responsive tablo/key alanı; kendi kolonisinde kompakt gerçek istikrar notu; dürüst zincir açıklamaları; DOM rect/zoom filo alanı; scoped casusluk/pregame tipografisi. Motor callback'leri değişmedi.
+- SP29/0, son kaynak native6/0, H/B/C MP5/0; koruma9PASS; ilk filo VM hatası son10/0. Gerçek özel Save8 kurtarma regresyonu PASS, özel kayıt commit edilmedi. Eski aralıklı dokunma vakaları açık; fiziksel/Render ve p23 tam soğuk oda NOT RUN.
+- p23/PWA23/MP.8.9b18; Save8v8,paket4/protokol1. ZIPSHA af6eb03aade38327e48ee290029377e638b40167ff87742a57be82cec5bd7d1d; CRC13718624. PanoForbidden; kullanıcı kabulü bekliyor.
+
 ## Son kabul — p22 gerçek kullanıcı Save8
 
 - Ayrıntı: `reports/codex/P22-GERCEK-SAVE8-KABUL-SONUC.md`. Gerçek ek artık alındı; önceki dosya-yok notları tarihsel kalır.
