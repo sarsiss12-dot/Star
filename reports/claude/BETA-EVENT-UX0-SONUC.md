@@ -66,7 +66,7 @@ Kartlar `G.inbox`'a **girmez**: Save8, `inboxUid`, RNG ve hız değişmez, durak
 | `browser-event-ux0.cjs` (tek oyunculu; S1 dört ekran boyutu, S2 bilgi kartı, S3 federasyon oyu + sonuç, S4 Konsey hızlı oy, S5 sayfa hatası) | **1 / 7** | **8 / 0** |
 | `MP8_SCEN=E` (host + 2 misafir; E1 oy kartı, E2 hızlı EVET, E3 sonuç kartı + gizlilik + hız + yeniden bağlanma, E4 Konsey üç insan, E5 P0) | **2 / 4** | **6 / 0** |
 
-Son koşu sayıları: `reports/claude/evidence/beta-event-ux0/REGRESYON.md`.
+Ayrıntı ve ekran görüntüleri: `reports/claude/evidence/beta-event-ux0/` (REGRESYON.md).
 
 ## 7. Host / misafir yetki ve gizlilik
 
@@ -77,7 +77,9 @@ Son koşu sayıları: `reports/claude/evidence/beta-event-ux0/REGRESYON.md`.
 
 ## 8. P0 regresyonu
 
-Hedefli P0 testleri ve 500 yıldızda 10 dakikalık gerçek zamanlı koşu (`MP8_SCEN=P`, host + misafir oynuyor) ile MP / tek oyunculu tarayıcı paketleri yeniden koşuldu. Sonuçlar REGRESYON.md'de.
+- `MP8_SCEN=P` (500 sistem, 16 AI + 2 insan, host + misafir gerçek dokunmayla, 45 ay + 10 dk gerçek zaman) → **8 / 0**: kalıcı donma 0, en büyük fark 24,6 gün, 13 / 13 emir aynaya yansıdı, misafir kurulumu son 21,5 ms, istisna / reddetme / yeniden bağlanma 0. P2–P7 (bozuk kart, takılı dokunma, host ayna arızası, kaybolan ayna, Takviye, kayıt → devam) PASS.
+- Chromium: mp61 13 / 0, mp72 9 / 0, mp73 8 / 0, mp74 7 / 0, mp75 6 / 0, mp8 N 9 / 0, mp8 R 5 / 0, tek oyunculu browser-96h10 27 / 0.
+- Node tam koşu: 189 paket 6190 / 278 — önceki faz tabanıyla paket paket aynı. İlk aday koşusunda 8 paket Node DOM taklidi yüzünden (`style.removeProperty` yok) düştü; korumayla giderildi, ilk FAIL REGRESYON.md'de.
 
 ## 9. Açık FAIL / NOT RUN
 
@@ -147,7 +149,10 @@ Temel: mevcut `jointOps` (ai.js `jointSelect` / `jointCreate` / `jointTick` / `j
 
 ## 14. GitHub, ZIP, manifest
 
-Commit / PR ve ZIP doğrulaması: PR açıklaması ve REGRESYON.md.
+- Dal `claude/stars-beta-event-ux0`; başlangıç `b25ba27`; commit'ler ve PR bağlantısı PR açıklamasında. `main`'e birleştirme ve Render dağıtımı yok.
+- **ZIP** `releases/stars-faz96h10p24.zip`: SHA-256 `f3e3adaf6605d72d23410191ffaef2b024aeb16a2386c5fa94acad135f9c975a`, CRC32 `327E8483`, 20 girdi. Deterministik yeniden üretim aynı SHA; çıkarılan ZIP `verify-release.py --root` ile DOĞRULANDI (19 dosya, `96h10p24`).
+- Manifest: `phase BETA-EVENT-UX.0`, `build 96h10p24`, `pwa_cache stars-v96h10p24`, `parent_commit b25ba27…`, `parent_zip_sha256 af6eb03a…`.
+- Save8 v8 / paket 4 / protokol 1 değişmedi. `validatePackage` p24 için p6–p23 paketlerini kabul eder (önceki fazlarla aynı dar uyumluluk).
 
 - Değişen runtime: `ui.js`, `index.html` (CSS bloğu `/* END BETA-EVENT-UX.0 SPY */`), `main.js` (yalnız `BUILD_ID`), `sw.js` (yalnız `CACHE`).
 - Değişen MP: `research/mp6/client/guest-stars.js`, `research/mp0/mp-core.js` (yalnız p24 için paket uyumluluk listesi), `research/mp1/client/view.js`, `research/mp1/server/relay.js` (sürüm).
