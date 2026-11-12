@@ -10,7 +10,7 @@ Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strat
 - `guest-stars`: `rebuild` = sarmalayıcı + `rebuild0`; eşitleme bekçisi `syncWatch` (dürt → `resync` → yeniden bağlan; not MP çubuğunda, kısa tutulur); bekleyen emir `S.pend`; gemi/bina bildirimi ACK'ten sonra (`acked`). Motor işlevi sarmalayıcısı gerçek düğmenin beklediği dönüş biçimini vermeli (`reinf` → `r.orders`).
 - `mp1-host`: döngü parçaları `part(...)` ile yalıtılı, 2 sn nabız; MP oyununda oyun içi "Dosyaya kaydet" `.starsmp.json` indirir; DOSYADAN AÇ `.sav` türünü açık nedenle söyler (`save8-guest`/`-single`/`-host`).
 - Test: `node tests/mp_p0_sync_test.js` (önce1/5, sonra6/0); `MP8_SCEN=P node tests/browser-mp8.cjs` (s500, 16AI, gerçek zamanlı + hedefli P2–P7; `MP8_P_FF`, `MP8_P_MIN`, `MP8_P_HOSTMONKEY=1`, `MP8_ONLY`). Tam Node koşusunda taban ve aday aynı 278 eski FAIL'i verir (54 paket; bu fazdan bağımsız, silinmedi).
-- P1 AÇIK: misafirde federasyon/Konsey üst olay kartları (oy kartı aynadan türetilmiyor). Render sürüm karşılaştırması, fiziksel PC/Android, LAN: NOT RUN. Kullanıcı kabulü/merge/deploy yok.
+- P1 AÇIK: misafirde federasyon/Konsey üst olay kartları (oy kartı aynadan türetilmiyor). Canlı Render salt okunur `/mp/version` = MP.8.9b18/p23, 8 dosya özeti b35f8cb ile aynı (taban = oynanan sürüm); Render'da oynanış, fiziksel PC/Android, LAN: NOT RUN. Kullanıcı kabulü/merge/deploy yok.
 
 ## Son teslim — BETA-UI-REFINEMENT.0 / p23
 

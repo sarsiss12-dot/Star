@@ -14,9 +14,16 @@ Dil kuralı: **PASS / FAIL / NOT RUN** ayrı yazılır. Yerel Chromium, fiziksel
 | `codex/stars-mp-p0-guest-playability` | `955c244`: tabanın 18 commit gerisinde, 0 ilerisinde (atası). İçinde bu P0'a ait onarım **yok** |
 | `codex/stars-beta-ai-quality0` / `ai-recovery0` / `ai-defense0` | tabanın 2 / 4 / 6 commit ilerisinde; yalnız rapor, kanıt ve test yardımcıları (manifest ve MP sürümü aynı). Bu faza alınmadı, dokunulmadı |
 
-## 2. Render'daki sürümle karşılaştırma — NOT RUN
+## 2. Render'daki sürümle karşılaştırma — salt okunur denetim PASS
 
-Bu ortamın ağ kuralı Render adresine çıkışa izin vermiyor (vekil 403). Dağıtılan sürümün `/mp/version` yanıtı **okunamadı**; Render'ın hangi commit'i çalıştırdığı **doğrulanmadı**. Aşağıdaki bütün sonuçlar `b35f8cb` kaynağına göredir. Doğrulama için: telefonda MP çubuğuna dokununca açılan tanı satırı (`STARS MP.… · oyun …`) ya da `node research/mp1/deploy/smoke.js https://<alan>`.
+Bu oturuma yalnız Render adresi için ağ izni verildikten sonra canlı servisin salt okunur `/mp/version` yanıtı okundu (12 Kasım 2026):
+
+- Canlı: `mp: MP.8.9b18`, `build: 96h10p23`; `sw.js` önbelleği `stars-v96h10p23`; `/healthz` 200.
+- Yanıttaki sekiz dosya özeti (`mp-core.js e9832e667a6f`, `relay.js 2b3b60a77075`, `mp1-host.js 58355968ecef`, `join.js bc2732493741`, `mirror.js 0be83dc59fd8`, `guest-stars.js 27e779c107d5`, `mp71-dip.js 791d18e17978`, `mp7-setup.js 48c0f282a254`) taban `b35f8cb` kaynaklarının SHA-256 önekleriyle **birebir aynı**.
+
+Sonuç: gerçek testte oynanan sürüm, bu çalışmanın tabanıyla aynı kaynaktır. Bu dalın dağıtımından sonra aynı adres `MP.8.9b19` ve yeni `mp-core.js` / `mp1-host.js` / `guest-stars.js` / `relay.js` özetlerini göstermelidir.
+
+Yalnız sürüm işareti okundu; canlı serviste oda açılmadı, oyun oynanmadı, dağıtım yapılmadı. **Gerçek Render oynanış testi: NOT RUN.**
 
 ## 3. Codex'ten devralınan gerçek ilerleme
 
@@ -142,7 +149,7 @@ Hepsi yerel: Node vm ya da iki ayrı Chromium + üretim kipi relay süreci + TLS
 | Gerçek zamanlı, host + misafir oynuyor (eski kod) | 404 | 45 ay + 86 sn | pencere açıkken bekleme (tasarım gereği) |
 | Gerçek zamanlı, host + misafir oynuyor (**düzeltmeli kod**) | 404 | 45 ay + 10 dk (≈ 189. aya kadar) | 935 dokunma; kalıcı donma 0; en büyük fark 20,5 gün; 13 / 13 emir misafire yansıdı; kayıt paketi 3,1 MB ile devam PASS |
 
-Fiziksel PC / Android, LAN, gerçek internet, gerçek Render: **NOT RUN**.
+Fiziksel PC / Android, LAN, gerçek internet, gerçek Render oynanışı: **NOT RUN** (Render'da yalnız sürüm işareti okundu, §2).
 
 ## 12. Korunan açık liste (federasyon donanması, Konsey Muhafızları, askerî AI)
 

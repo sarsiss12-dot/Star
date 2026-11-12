@@ -2,7 +2,9 @@
 
 Ortam: bulut konteyner, Node v22, 4 çekirdek, Chromium `/opt/pw-browsers/chromium` (Playwright). Taban = `b35f8cb` (ayrı çalışma ağacı), aday = bu dal.
 
-**NOT RUN:** fiziksel PC / Android, LAN, gerçek internet, canlı Render; `mp5_docker` / `browser-mp5` (Docker), `browser-mp0…mp3x`, `mp62–mp64`, `mp71`, `browser-96h10`, `MP8_SCEN=A/B/C` uzun kampanyaları, PERF ölçümleri (runtime değişmedi).
+**Canlı Render (salt okunur):** `/mp/version` → `MP.8.9b18` / `96h10p23`; sekiz dosya özeti taban `b35f8cb` ile aynı (PASS). Oda açılmadı, oynanmadı.
+
+**NOT RUN:** fiziksel PC / Android, LAN, gerçek internet, canlı Render'da oynanış; `mp5_docker` / `browser-mp5` (Docker), `browser-mp0…mp3x`, `mp62–mp64`, `mp71`, `browser-96h10`, `MP8_SCEN=A/B/C` uzun kampanyaları, PERF ölçümleri (runtime değişmedi).
 
 ## Hedefli (FAIL-önce)
 
