@@ -84,7 +84,7 @@ const VIEW=new Set(['warCenter','warCenterTab','warCenterDetail','warCenterSuppo
   'diploRelation','diploNav','diploFilter','bmPick','bmCancel','vsCurrent','vsInspect','vsType','vsEdit','vsBack','fleetFilter','fedTab','fedMember',
   'closeFed','closeDeal','closeMarket','closeDiplo','memTog','intelView','intelGroup','upInfo','crisInfo','selsys','selfleet','route','fedPane',
   'scienceTab','scienceNode','scienceFocus','scienceFilter','scienceMode','scienceQueue','scienceRoute','scienceMove','scienceRemove','scienceZoom',
-  'tech','build','sInfo','bInfo','showEv','minModal','restoreModal','openNote','closem','marketPane','mktSel','mute','save','diagShow','opLogMenu',
+  'tech','build','sInfo','bInfo','showEv','minModal','restoreModal','openNote','instNote','closem','marketPane','mktSel','mute','save','diagShow','opLogMenu',
   /* MP.6.1 — görünüm / taslak */
   'news','newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord',
   'inboxEmpire','inboxReturn','inboxFederation','deal','dealAdd','dealRm','dealDiscard','dealBack','peace','vsOpen','vsCancel','vsCounter','fedBallot',
@@ -480,6 +480,7 @@ function gate(){
   const decBusy=dk=>{const w=S.decWait.get(dk);return !!w&&w.gen===(S.gen|0);};
   UI.eventChoiceWaiting=id=>decBusy('eventChoice::'+id);
   UI.fedFoundWaiting=id=>decBusy('fedFoundReply::'+id);
+  UI.fedVoteWaiting=(fid,token)=>decBusy('fedVote:'+fid+':'+token);   // BETA-EVENT-UX.0: kart yeniden kurulsa da bekleyen oy görünür
   DI.gate=function(rec){if(S.on&&rec?.kind==='fedfound'&&decBusy('fedFoundReply::'+rec.note.data))return {ok:false,why:'Karar host yanıtını bekliyor'};if(S.on&&rec&&(rec._mpWait||rec.mp&&decBusy('respond:'+rec.mp+':')))return {ok:false,why:'Karar gönderildi; host yanıtı bekleniyor'};if(S.on&&rec&&rec.mpSq!==undefined){return rec.status==='pending'?{ok:true,why:''}:{ok:false,why:'Teklif sonuçlandı',terminal:true};}
     if(S.on&&rec&&rec.mp){if(rec.status!=='pending')return {ok:false,why:'Teklif sonuçlandı',terminal:true};return {ok:true,why:''};}return gate0(rec);};
   DI.resolve=function(id,yes,option,world){
@@ -685,6 +686,14 @@ function inboxOffers(){
   const nb=G.inbox.length;G.inbox=G.inbox.filter(n=>!(typeof n.key==='string'&&n.key.startsWith('mp73cnc:'))||canVote&&n.key===ckey);if(G.inbox.length!==nb)changed=true;
   if(canVote&&!G.inbox.some(n=>n.key===ckey)){G.inboxUid=(G.inboxUid||0)+1;const R=typeof RESOLUTIONS!=='undefined'&&RESOLUTIONS[cv.key];
     G.inbox.push({kind:'cncvote',data:cv.key,ico:'🌐',cls:'sci',pause:false,uid:G.inboxUid,born:G.day,title:'KONSEY OYLAMASI',sub:R?R.n:cv.key,key:ckey});changed=true;}
+  /* BETA-EVENT-UX.0: federasyon oylaması kartı. Motor kartı (UI.fedVote → notify) yalnız simülasyonu yürüten tarafta üretir; misafirde açık oy
+     aynada vardı ama üst çubukta kart doğmuyordu (MP-P0 bulgusu). Kart aynadaki oylamadan türetilir; anahtar tek oyunculuyla aynı
+     ('fed:'+id+':'+oy kimliği), kayıt motorun DiplomaticInbox.capture'ı. Karar yolu değişmedi: KABUL/RET → DiplomaticInbox.resolve → host fedVote. */
+  for(const f of G.feds||[]){if(!f.vote||!(f.members||[]).includes(0)||typeof fedVoteCounts!=='function'||!fedVoteCounts(f).waiting.includes(0))continue;
+    const key='fed:'+f.id+':'+fedVoteToken(f.vote);if(G.inbox.some(n=>n.key===key))continue;const L=typeof fedVoteLaw==='function'?fedVoteLaw(f.vote):null;
+    G.inboxUid=(G.inboxUid||0)+1;const item={kind:'fedvote',data:f.id,ico:'🏛',cls:'sci',pause:false,uid:G.inboxUid,born:Number.isFinite(f.vote.opened)?f.vote.opened:G.day,
+      title:'Federasyon oylaması — '+f.name,sub:(L?L.n:'Karar')+(f.vote.repeal?' — kaldırma':''),key};
+    if(!DiplomaticInbox.capture(item))continue;G.inbox.push(item);changed=true;}
   /* MP.7.4: kaydırılarak kapatılan kart ayna yenilenince geri gelmez (karar kaydı gelen kutusunda kalır) */
   if(S.swiped.size){const n2=G.inbox.length;G.inbox=G.inbox.filter(n=>!S.swiped.has(noteSig(n)));if(G.inbox.length!==n2)changed=true;}
   // Rebuild restores live UIDs before rendering; an intermediate draw would

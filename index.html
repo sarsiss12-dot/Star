@@ -675,6 +675,12 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
   border-left:1px solid var(--line);display:flex;flex-direction:column;
   transform:translateX(0);transition:transform .18s ease}
 #sidebar.off{transform:translateX(100%)}
+/* BETA-EVENT-UX.0 (#55): casusluk paneli genişlik kolu — yalnız İSTİHBARAT sekmesinde */
+#sbResize{display:none;position:absolute;left:-9px;top:0;bottom:0;width:18px;z-index:2;cursor:ew-resize;touch-action:none;-webkit-user-select:none;user-select:none}
+#sbResize::after{content:'';position:absolute;left:7px;top:50%;width:4px;height:56px;margin-top:-28px;border-radius:2px;background:var(--line);box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+#sbResize:hover::after,#sbResize:focus-visible::after,#sbResize.drag::after{background:var(--phos)}
+#game.spyPane #sbResize{display:block}
+/* END BETA-EVENT-UX.0 SPY */
 #tabs{display:flex;border-bottom:1px solid var(--line);flex:0 0 auto}
 .tab{flex:1;padding:8px 2px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;
   color:var(--dim);border-right:1px solid var(--line);text-align:center}

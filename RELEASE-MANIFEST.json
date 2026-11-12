@@ -1,11 +1,11 @@
 {
-  "phase": "BETA-UI-REFINEMENT.0",
-  "build": "96h10p23",
+  "phase": "BETA-EVENT-UX.0",
+  "build": "96h10p24",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p23",
-  "parent_commit": "80d11dacc1bb2fcf139022cd5f8a1a65a2c75a9f",
-  "parent_zip_sha256": "14271929b85ec9af6ae946b556a013b6b01579d64fe6f5129eb459f02c6e9cf9",
+  "pwa_cache": "stars-v96h10p24",
+  "parent_commit": "b25ba272e24c10ac8ce8fa50a91b3bdf2137fc88",
+  "parent_zip_sha256": "af6eb03aade38327e48ee290029377e638b40167ff87742a57be82cec5bd7d1d",
   "file_count": 19,
   "files": {
     "ai.js": "ac900e296e39378f9f0caab85de70b7896d9eaebd22b65d259e955cb702fb3de",
@@ -20,13 +20,13 @@
     "economy-ui.js": "aa9da4f84f0b63ecb8b17e54d3dd844595e98d5a8da5f6a3012de9467a12e3bf",
     "economy.js": "8f07121ff8384318cab8eea416cccddd8d82bfe22cee3857445095e60299a888",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
-    "index.html": "d9e7a066a03e7cb13f7b87799db236f4a4798066e8016ad75e6e5dbd9020a88c",
-    "main.js": "7ec946d98b36efa06f5dedaeea78d452a96942e85379bf4a51c98ddcd73ec274",
+    "index.html": "97ddfcb8d67ee6a86cdb42fab445c78c5df7cb393d99d1a742009a95e6f9174f",
+    "main.js": "196207c5978fd091faa03401bd620b6844d0c34a1dbf600bc372b23bc1df7cab",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "400dbc524750443528b88bfbd0d82aa301fd7b1f12b03d8ea5fa3d73c07603fc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "2c42d9263849b3f2bb25e2efe36264934e8f1e43ec090e362834c763e5fe5c2b",
-    "ui.js": "9cdd051664a2065fe74e25b38993684df12468f89d714bb4af37e01e7d3a3dcf"
+    "sw.js": "7b1741bcf99fd50517c01c83d1586f8ee52542189628dbb48a0bf4ba3a431ecb",
+    "ui.js": "0e2d11b0684af0ed85c0e14727687335a79e0318e6d74d212fd389549444cd78"
   },
-  "description": "Mobil event açıklamaları, kompakt gezegen yönetimi, outEmp koloni erişimi, küçültülebilir responsive liste, filo çubuğu ve pregame/casusluk yerleşimi."
+  "description": "Federasyon / Galaktik Konsey üst çubuk kartları (misafir federasyon oy kartı, Konsey kartında hızlı EVET/HAYIR, kalıcı olmayan bilgi kartları) ve yalnız casusluk paneli için sürüklenebilir genişlik."
 }
