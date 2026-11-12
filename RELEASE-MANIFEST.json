@@ -26,7 +26,7 @@
     "map.js": "400dbc524750443528b88bfbd0d82aa301fd7b1f12b03d8ea5fa3d73c07603fc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
     "sw.js": "ec4248f145875421dfc45ceab52a9d62db8bf1ce8029e90539066b92e1739a14",
-    "ui.js": "feb8b4fe32b1fb14fd3c43e6f8d53ed0e3a88b70c4baac855d6d363e21094ee6"
+    "ui.js": "20ad4722999383d7c1cd0488c541f1ed1105aac129ba70c2aaec05b2d717ee51"
   },
   "description": "Federasyon / Konsey bildirimlerinin tamamlanması (katılım daveti kararı, üyelik başvurusu sonucu, federasyon ve Konsey başkanı değişimi), tekrarlayan / takılı kuruluş kartlarının düzeltilmesi, gün metni gösterimi."
 }

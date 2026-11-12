@@ -79,6 +79,7 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,lanes,wait,
     await H.evaluate(()=>{const F=G.feds[0];if(F.vote){const t=fedVoteToken(F.vote);if(fedVoteCounts(F).waiting.includes(0))castFedVote(G.p,F.id,t,true);if(F.vote)finishFedVote(F);}UI.closeModal();MP1Host.host.publish();});
     const inv=await H.evaluate(c=>!!(G.feds[0].invites||{})[c],eC);M.f4inv=inv;assert(inv,'oy kabul → C\'ye davet');
     await synced(C);await C.waitForFunction(()=>document.querySelector('#inbox [data-a="instDecide"][data-x$=":y"]'),undefined,{timeout:20000});await shot(C,'f4-c-invite-card');
+    const stale=await C.evaluate(()=>[...document.querySelectorAll('#inbox .nInfo')].filter(e=>/Üyelik başvurun oylamada/.test(e.textContent)).length);M.f4staleApplied=stale;assert.equal(stale,0,'başvuru durumu değişince eski "oylamada" kartı kalkar');
     const sent0=await C.evaluate(()=>MP6Stars.S.stats.sent.fedReply|0);
     await tap(C,'#inbox [data-a="instDecide"][data-x$=":y"]');await C.evaluate(()=>{const b=document.querySelector('#inbox [data-a="instDecide"][data-x$=":y"]');if(b)UI.act('instDecide',b.dataset.x);});
     await H.waitForFunction(c=>G.feds[0].members.includes(c),eC,{timeout:20000});await synced(C);

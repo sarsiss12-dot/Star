@@ -99,8 +99,9 @@ const handle=p=>p.evaluate(()=>{const h=document.getElementById('sbResize');if(!
       const v=await p.evaluate(()=>{const F=G.feds[0];return {yes:F.vote?F.vote.yes.filter(x=>x===0).length:(F.lastVote&&F.lastVote.yesMembers||[]).filter(x=>x===0).length,open:!!F.vote};});
       assert.equal(v.yes,1,'oy tam bir kez');
       await p.evaluate(()=>{const F=G.feds[0];if(F.vote){const t=fedVoteToken(F.vote);for(const id of fedVoteCounts(F).waiting)if(id!==0)castFedVote(G.emps[id],F.id,t,true);if(F.vote)finishFedVote(F);}UI.closeModal();UI.tick();UI.tick();});
+      await p.waitForFunction(()=>{UI.drawInbox();return [...document.querySelectorAll('#inbox .nInfo')].some(e=>/oylaması sonuçlandı/.test(e.textContent));},undefined,{timeout:3000,polling:200}).catch(()=>{});   // tıklamadan hemen sonra yüzey çizimi 220 ms ertelenir
       const info=await p.evaluate(()=>[...document.querySelectorAll('#inbox .nInfo')].map(c=>c.textContent.replace(/\s+/g,' ').trim()));
-      assert(info.some(t=>/oylaması sonuçlandı/.test(t)),'sonuç kartı: '+JSON.stringify(info));
+      if(!info.some(t=>/oylaması sonuçlandı/.test(t))){const dg=await p.evaluate(()=>({lv:G.feds[0].lastVote&&{id:G.feds[0].lastVote.id,day:G.feds[0].lastVote.day},vote:!!G.feds[0].vote,day:G.day,st:UI._instInfo&&{day:UI._instInfo.day,live:UI._instInfo.live.map(r=>r.key),seen:[...UI._instInfo.seen].slice(-8)},members:G.feds[0].members}));assert.fail('sonuç kartı: '+JSON.stringify(info)+' '+JSON.stringify(dg));}
       assert.equal(await p.locator('#inbox [data-a="openNote"]').evaluateAll(es=>es.filter(e=>{const n=G.inbox.find(x=>x.uid===+e.dataset.x);return n&&n.kind==='fedvote';}).length),0,'kapanmış oy kartı yok');
       await shot(p,'s3-fedvote-result');
     }finally{await ctx.close();}});
@@ -122,19 +123,19 @@ const handle=p=>p.evaluate(()=>{const h=document.getElementById('sbResize');if(!
 
   /* ---- BETA-EVENT-UX.1 ---- */
   const FED2=FED.replace("members:[0,1,2]","members:[1,2]").replace("for(const a of F.members)for(const b of F.members)","for(const a of [0,...F.members])for(const b of [0,...F.members])");
-  await test('S6 üyelik başvurusu (gerçek requestFederation): başvurana "Üyelik başvurun …" bilgi kartı; oy kabul olursa ayrı aday rızası için KABUL / REDDET davet kartı; KABUL tam Gelen kutusu yoluyla üye yapar; Save8 kutusu / inboxUid değişmez',async()=>{
+  await test('S6 üyelik başvurusu (gerçek requestFederation): oy kabul olursa eski "oylamada" kartı yerine ayrı aday rızası için KABUL / REDDET davet kartı; KABUL tam Gelen kutusu yoluyla üye yapar; Save8 kutusu / inboxUid değişmez',async()=>{
     const {p,ctx}=await page(1280,720,false);try{
       await p.evaluate(FED2);await p.evaluate(()=>{UI.tick();});
       const r=await p.evaluate(()=>{const F=G.feds[0],uid=G.inboxUid|0,inbox=JSON.stringify(serializeEventsWorld().inbox);const q=requestFederation(G.p,G.emps[F.leader]);
         for(let i=0;i<4&&F.vote;i++){const t=fedVoteToken(F.vote);for(const id of fedVoteCounts(F).waiting)castFedVote(G.emps[id],F.id,t,true);if(F.vote)finishFedVote(F);}
         UI.closeModal();UI.tick();UI.tick();return {q:q&&(q.ok?'ok':q.why),inv:!!(F.invites&&F.invites[0]),adm:Object.values(F.admissionResults||{}).map(x=>x.status),uid0:uid,uid1:G.inboxUid|0,same:inbox===JSON.stringify(serializeEventsWorld().inbox)};});
       const info=await p.evaluate(()=>[...document.querySelectorAll('#inbox .nInfo')].map(e=>e.textContent.replace(/\s+/g,' ').trim()));
-      assert.equal(r.q,'ok','başvuru: '+JSON.stringify(r));assert(info.some(t=>/Üyelik başvurun/.test(t)),'başvuru kartı: '+JSON.stringify(info));
+      assert.equal(r.q,'ok','başvuru: '+JSON.stringify(r));assert(!info.some(t=>/başvurun oylamada/.test(t)),'oy kabul edildikten sonra eski "oylamada" kartı yok (karar davet kartında): '+JSON.stringify(info));
       assert(r.inv,'oy kabul → davet: '+JSON.stringify(r));assert.equal(r.uid1,r.uid0,'inboxUid değişmez');assert(r.same,'kayıtlı kutu değişmez');
       const k=p.locator('#inbox [data-a="instDecide"][data-x$=":y"]');await k.first().waitFor();await shot(p,'s6-invite-card');
       await k.first().click();await p.waitForTimeout(150);
       const after=await p.evaluate(()=>({member:!!(findFed(G.p)&&findFed(G.p).id===100),inv:!!(G.feds[0].invites||{})[0],rec:DiplomaticInbox.state().records.filter(r=>r.kind==='invite').map(r=>r.status)}));
-      assert(after.member,'KABUL → üye '+JSON.stringify(after));await p.evaluate(()=>UI.drawInbox());assert.equal(await p.locator('#inbox [data-a="instDecide"]').count(),0,'karar sonrası kart kalmaz');
+      assert(after.member,'KABUL → üye '+JSON.stringify(after));const gone=await p.waitForFunction(()=>{UI.drawInbox();return !document.querySelector('#inbox [data-a="instDecide"]');},undefined,{timeout:3000,polling:200}).then(()=>true,()=>false);assert(gone,'karar sonrası kart kalmaz');   // yüzey çizimi dokunmadan sonra 220 ms ertelenir
       assert.deepEqual(after.rec,['accepted'],'tek Gelen kutusu kaydı, kabul');
     }finally{await ctx.close();}});
   await test('S7 üye için üyelik başvurusu oy kartı başvuranı adıyla gösterir ("Üyelik başvurusu — X"); hızlı EVET aynı yol',async()=>{

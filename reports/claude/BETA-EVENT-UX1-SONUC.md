@@ -56,7 +56,7 @@ Hepsi oyuncunun zaten yetkili olduğu veriden türetilir; yeni siyasi karar moto
 
 **Federasyon**
 - **Katılım daveti / ayrı aday rızası (karar kartı):** motorun DiplomaticInbox'ında `invite` kaydı vardı ama üst çubukta kart **yoktu** (tek oyunculu ve misafir). Artık "FEDERASYON DAVETİ — X" kartında KABUL / REDDET. Aynı `DiplomaticInbox.resolve` yolu: tek oyunculu `acceptFedInvite` / `rejectFedInvite`, misafirde host `fedReply`. Bekleme durumu görünür. Kart Save8'e girmez; davet sürdükçe görünür.
-- **Üyelik başvurusu:**
+- **Üyelik başvurusu:** (oy kabul edilip rıza beklenince başvurunun eski "oylamada" kartı kalkar; karar davet kartındadır)
   - Üyeye: oy kartının alt yazısı "Üyelik başvurusu — <başvuran>" (tek oyunculu `UI.fedVoteSub` ve misafir aynı işlev). Öteki hedefli önergeler hedef adıyla gösterilir.
   - Başvurana: "Üyelik başvurun oylamada / kabul edildi / reddedildi / süresi doldu" bilgi kartı (motorun `admissionResults` satırı; misafire aynada yalnız kendi satırı gider). Başvuru kabul edilmiş gibi gösterilmez; rıza ayrı karttadır.
 - **Federasyon başkanı değişimi:** motor yalnız günlük satırı yazıyordu. Üyeye "Federasyon başkanı değişti — yeni başkan" kartı. Başkan seçimi önergesi, başkanın ayrılması ve ölümü aynı kaynaktan gelir; aynı değişim tek kart. Seçim önergesinin ayrıca haber kartı yapılmaz (çift olmasın).
@@ -98,11 +98,27 @@ Kod değişmedi. Sonuç §6'da. Fiziksel Android NOT RUN.
 
 | Test | Taban p24 `998e999` | Aday p25 |
 |---|---|---|
-| `MP8_SCEN=F` F1–F5 (kuruluş tekrarı, yeni karar, başvuru + davet, başkan) | **2 / 4** (F0 kurulum + F5 PASS; F1, F2, F3, F4 FAIL) | **6 / 0** |
-| `browser-event-ux0.cjs` S6–S8 (davet / başvuru / başkan / yasa kalkması / gün metni) | **NOT YET** | **NOT YET** |
-| `browser-event-ux0.cjs` tam (S1–S8 + sayfa hatası) | — | **NOT YET** |
+| `MP8_SCEN=F` F0–F5 (kuruluş tekrarı, yeni karar, başvuru + davet, başkan) | **1 / 5** (yalnız F0 kurulum PASS) | **6 / 0** |
+| `browser-event-ux0.cjs` S6–S8 (davet / başvuru / başkan / yasa kalkması / gün metni) | **0 / 3** | 3 / 0 |
+| `browser-event-ux0.cjs` tam (S1–S8 + sayfa hatası; casusluk regresyonu dahil) | — | **11 / 0** (üç ardışık koşu) |
+| `MP8_SCEN=E` (p24 kartları) | — | 6 / 0 |
+| `MP8_SCEN=P` (500 sistem / 16 AI, 3 dk gerçek zaman + P0 hedefli) | — | 8 / 0 |
+| `MP8_SCEN=R` (kayıt / devam), `N` (ağ kopmaları) | — | 5 / 0, 9 / 0 |
+| mp61 / mp73 / mp74 / mp75 | — | 13/0, 8/0, 7/0, 6/0 |
+| Tam Node | 6190 / 278 | 6190 / 278 (paket farkı yok) |
+
+İlk FAIL'ler ve nedenleri (ürün: davet gelince eski "oylamada" kartı kalıyordu → düzeltildi; test zamanlaması / fikstür: S3, S6, P6, P7) REGRESYON.md'de korunuyor.
 
 Kalan regresyon (P0, 500 yıldız, kayıt / devam, MP paketleri, Node tam koşu): `reports/claude/evidence/beta-event-ux1/REGRESYON.md`.
+
+## 6.1 Paket
+
+`releases/stars-faz96h10p25.zip`
+- SHA-256 `86720c077e46b0dfd7460286c36eb914ac7e582846b231beec7e49cd462d82fa`
+- CRC32 `ED461992`, 20 girdi
+- Deterministik; çıkarılan ZIP doğrulandı (19 dosya, `96h10p25`).
+- Manifest: `phase BETA-EVENT-UX.1`, `parent_commit 998e999…`, `parent_zip_sha256` = p24 ZIP.
+- Save8 v8 / paket 4 / protokol 1 aynı; p25, p6–p24 paketlerini kabul eder.
 
 ## 7. Değişen dosyalar
 

@@ -7604,8 +7604,9 @@ const UI = {
       out.push({key:'v:'+f.id+':'+v.id+':'+v.day,day:v.day,ico:'🏛',title:'Federasyon oylaması sonuçlandı — '+f.name,sub:(L?L.n:'Karar')+(v.repeal?' (kaldırma)':'')+': '+(v.passed?'KABUL':'RED')+(v.why?' · '+String(v.why).slice(0,80):''),fed:f.id});}
     /* BETA-EVENT-UX.1: üyelik başvurusunun sonucu başvurana (motorun admissionResults satırı; misafire aynada yalnız kendi satırı gider) */
     for(const f of G.feds||[])for(const [tok,row] of Object.entries(f.admissionResults||{})){if(!row||row.target!==p.id)continue;
+      const iv=f.invites&&f.invites[p.id];if(row.status==='pending'&&iv&&(iv.vote===undefined?iv.admission==='vote':String(iv.vote)===String(tok))){out.push({key:'a:'+f.id+':'+tok+':consent',grp:'a:'+f.id+':'+tok,day:G.day,hide:true});continue;}   // oy kabul edildi, rıza bekleniyor: karar DAVET kartında; eski "oylamada" kartı kalkar
       const lbl={pending:'oylamada',accepted:'kabul edildi',rejected:'reddedildi',expired:'süresi doldu',invalid:'geçersiz'}[row.status]||row.status;
-      out.push({key:'a:'+f.id+':'+tok+':'+row.status,day:Number.isFinite(row.updated)?row.updated:G.day,ico:'🏛',title:'Üyelik başvurun '+lbl+' — '+f.name,sub:String(row.why||'').slice(0,140),fed:f.id});}
+      out.push({key:'a:'+f.id+':'+tok+':'+row.status,grp:'a:'+f.id+':'+tok,day:Number.isFinite(row.updated)?row.updated:G.day,ico:'🏛',title:'Üyelik başvurun '+lbl+' — '+f.name,sub:String(row.why||'').slice(0,140),fed:f.id});}
     return out;
   },
   /* BETA-EVENT-UX.1: aynı başkan değişimi tek kart; federasyon başkanı (üyeye) ve Konsey başkanı (üyeye). Motor yalnız günlük satırı yazıyordu. */
@@ -7649,7 +7650,8 @@ const UI = {
     const day=G.day,sig=(G.cfg&&G.cfg.seed)+'|'+G.p.name,rows=this.instInfoRows();let st=this._instInfo;
     if(!st||st.sig!==sig||day<st.day-1||day>st.day+400){st=this._instInfo={sig,day,seen:new Set(rows.map(r=>r.key)),live:[],next:st?st.next:1,lead:new Map(),pres:undefined,dec:[]};this.instLeaderRows(st);}
     else{st.day=day;
-      for(const r of rows.concat(this.instLeaderRows(st)))if(!st.seen.has(r.key)){st.seen.add(r.key);if(r.day>=day-60)st.live.push({...r,id:'i'+(st.next++)});}
+      for(const r of rows.concat(this.instLeaderRows(st)))if(!st.seen.has(r.key)){st.seen.add(r.key);if(r.grp)st.live=st.live.filter(x=>x.grp!==r.grp);   // aynı başvurunun eski durum kartı yenisiyle değişir
+        if(r.day>=day-60&&!r.hide)st.live.push({...r,id:'i'+(st.next++)});}
       st.live=st.live.filter(r=>day-r.day<=60).slice(-3);}
     /* karar kartları: koşul sürdükçe görünür (60 gün kuralı yok); aynı anahtar tek kart, bekleme durumu korunur */
     const inv=this.instInviteRows(),old=new Map((st.dec||[]).map(d=>[d.key,d]));st.dec=inv.map(r=>old.get(r.key)||{...r,id:'i'+(st.next++)});

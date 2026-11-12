@@ -1,0 +1,212 @@
+{
+ "phases": [
+  {
+   "name": "a-kuruldu",
+   "B": {
+    "kur": 2,
+    "dom": [
+     "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2",
+     "🏛 Federasyon kurulduHelis Araştırma Konseyi — bilimsel ›"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 4,
+    "dom": [
+     "🏛 KURULUŞ SONUCU · 1/2 onayBilimsel Federasyon · 2 kurucu · Eşit Tems",
+     "🏛 KURULUŞ SONUCU · 2/2 onayBilimsel Federasyon · 2 kurucu · Eşit Tems",
+     "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2",
+     "🏛 Federasyon kurulduHelis Araştırma Konseyi — bilimsel ›"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "b-acildi",
+   "B": {
+    "kur": 2,
+    "dom": [
+     "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2",
+     "🏛 Federasyon kurulduHelis Araştırma Konseyi — bilimsel ›"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 4,
+    "dom": [
+     "🏛 KURULUŞ SONUCU · 1/2 onayBilimsel Federasyon · 2 kurucu · Eşit Tems",
+     "🏛 KURULUŞ SONUCU · 2/2 onayBilimsel Federasyon · 2 kurucu · Eşit Tems",
+     "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2",
+     "🏛 Federasyon kurulduHelis Araştırma Konseyi — bilimsel ›"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "c-5-yayin",
+   "B": {
+    "kur": 1,
+    "dom": [
+     "🏛 Federasyon kurulduHelis Araştırma Konseyi — bilimsel ›"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 4,
+    "dom": [
+     "🏛 KURULUŞ SONUCU · 1/2 onayBilimsel Federasyon · 2 kurucu · Eşit Tems",
+     "🏛 KURULUŞ SONUCU · 2/2 onayBilimsel Federasyon · 2 kurucu · Eşit Tems",
+     "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2",
+     "🏛 Federasyon kurulduHelis Araştırma Konseyi — bilimsel ›"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "d-yeniden-baglanma",
+   "B": {
+    "kur": 1,
+    "dom": [
+     "🏛 Federasyon kurulduHelis Araştırma Konseyi — bilimsel ›"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 4,
+    "dom": [
+     "🏛 KURULUŞ SONUCU · 1/2 onayBilimsel Federasyon · 2 kurucu · Eşit Tems",
+     "🏛 KURULUŞ SONUCU · 2/2 onayBilimsel Federasyon · 2 kurucu · Eşit Tems",
+     "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2",
+     "🏛 Federasyon kurulduHelis Araştırma Konseyi — bilimsel ›"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "e-sayfa-yenileme",
+   "B": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 4,
+    "dom": [
+     "🏛 KURULUŞ SONUCU · 1/2 onayBilimsel Federasyon · 2 kurucu · Eşit Tems",
+     "🏛 KURULUŞ SONUCU · 2/2 onayBilimsel Federasyon · 2 kurucu · Eşit Tems",
+     "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2",
+     "🏛 Federasyon kurulduHelis Araştırma Konseyi — bilimsel ›"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "f-host-kayit-yukleme",
+   "B": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 4,
+    "dom": [
+     "🏛 KURULUŞ SONUCU · 1/2 onayBilimsel Federasyon · 2 kurucu · Eşit Tems",
+     "🏛 KURULUŞ SONUCU · 2/2 onayBilimsel Federasyon · 2 kurucu · Eşit Tems",
+     "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2",
+     "🏛 Federasyon kurulduHelis Araştırma Konseyi — bilimsel ›"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  }
+ ],
+ "opened": {
+  "k": "note",
+  "uid": 7
+ },
+ "f3diag": {
+  "it": {
+   "key": "fed:1:1"
+  },
+  "rec": null,
+  "recs": [
+   {
+    "k": "vote:1:1",
+    "s": "pending"
+   }
+  ],
+  "html": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"7\">\n         <span class=\"nIco\">🏛</span>\n         <span class=\"nTxt\"><b>Federasyon oylaması — Helis Araştırma Konseyi</b><i>Savunma Paktı</i></span>\n         <span class=\"nGo\">›</span>\n       </button>",
+  "modal": false,
+  "defer": false,
+  "ptr": 0
+ },
+ "f4req": {
+  "status": "ok",
+  "code": null
+ }
+}
