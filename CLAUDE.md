@@ -2,6 +2,14 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
+## Son teslim — BETA-EVENT-UX.0 (p24 / MP.8.9b20, 12 Kasım 2026)
+
+- Ayrıntı: `reports/claude/BETA-EVENT-UX0-SONUC.md`, kanıt `reports/claude/evidence/beta-event-ux0/`. Dal `claude/stars-beta-event-ux0` (PR #36, #35 üstünde). 96h10p24 / stars-v96h10p24; Save8v8, paket4/protokol1 değişmedi.
+- `ui.js`: `instInfo*` kurum bilgi kartları G.inbox DIŞINDA (Save8/inboxUid/RNG/hız değişmez; haber + üye `f.lastVote`'tan; ilk taramada temel çizgi); `cncQuick`/`cncVoteOpenFor` Konsey kartında hızlı oy (cncYes/cncNo yolu, token); `spyWidth*` yalnız İSTİHBARAT'ta `--sb` ezilir (`#sbResize`, `localStorage stars:spyWidth`). `index.html` CSS `/* END BETA-EVENT-UX.0 SPY */`.
+- `guest-stars`: aynadan `fedvote` kartı (`DiplomaticInbox.capture`), `UI.fedVoteWaiting`.
+- Koruma: `beta-event-ux0-reviewed.json` + `event-ux0-reviewed.cjs` (stripReviewedUI23 önce bunu çağırır). Test: `node tests/browser-event-ux0.cjs` (STARS_ROOT ile taban), `MP8_SCEN=E node tests/browser-mp8.cjs`.
+- Donanma/Konsey Muhafız/komite AI yalnız incelendi (rapor §10–13); kodlanmadı. Render/fiziksel NOT RUN; kullanıcı kabulü yok.
+
 ## Son teslim — MP-P0 misafir donması / kayıt (MP.8.9b19, 12 Kasım 2026)
 
 - Ayrıntı: `reports/claude/MP-P0-DONMA-KAYIT-SONUC.md`, kanıt `reports/claude/evidence/mp-p0/`. Taban `codex/stars-beta-ui-refinement0-mobile` b35f8cb; dal `claude/stars-mp-p0-guest-freeze-resume`. **Runtime (19 dosya), Save8, paket4/protokol1 ve p23 ZIP'i değişmedi**; yalnız MP kaynakları.
