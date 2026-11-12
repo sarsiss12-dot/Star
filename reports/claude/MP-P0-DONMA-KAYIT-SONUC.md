@@ -122,7 +122,13 @@ Bulgu: motor oy kartını (`UI.fedVote` → `notify`) yalnız simülasyonu yür�
 | `tests/mp_p0_sync_test.js` (Node) | 1 / 5 | **6 / 0** |
 | `MP8_SCEN=P` P2–P7 (Chromium, 500 sistem) | 0 / 6 | **6 / 0** |
 
-**Regresyon:** bkz. `reports/claude/evidence/mp-p0/REGRESYON.md` (koşu sonuçları oraya yazıldı).
+**Regresyon** (ayrıntı: `reports/claude/evidence/mp-p0/REGRESYON.md`):
+
+- Tam Node koşusu: taban 188 paket 6184 / 278, aday 189 paket 6190 / 278. Tek fark yeni test. 278 başarısızlık (54 paket) tabanda da birebir aynı; bu fazdan bağımsız, gizlenmedi.
+- Chromium: mp61 13 / 0, mp7 9 / 0, mp73 8 / 0, mp74 7 / 0, mp75 6 / 0, mp8 N 9 / 0, mp8 R 5 / 0 — PASS.
+- mp6 10 / 1 ve mp4 12 / 1: aynı birer vaka **tabanda da FAIL** (bu fazdan önce var).
+- mp72: ilk koşuda A6 FAIL, sonraki 8 koşu 9 / 0; taban 3 koşu 9 / 0. Aralıklı; bu fazla ilişkisi **dışlanamadı**, AÇIK.
+- NOT RUN: Docker'lı mp5, mp0–mp3x, mp62–64, mp71, tek oyunculu browser-96h10, mp8 A/B/C uzun kampanyaları, PERF ölçümleri.
 
 ## 11. 500 yıldız ölçeği ve uzun MP koşuları
 
@@ -134,7 +140,7 @@ Hepsi yerel: Node vm ya da iki ayrı Chromium + üretim kipi relay süreci + TLS
 | Yayın / kayıt fuzz (Node) | 404, 11, 22 | 3 × 80 ay | yayın istisnası 0, misafir reddi 0, paket geçersiz 0 |
 | Gerçek zamanlı, misafir oynuyor (eski kod) | 404 | 45 ay + 10 dk (≈ 140 ay) | 1167 dokunma; kalıcı donma 0; pencere açıkken bekleme görüldü |
 | Gerçek zamanlı, host + misafir oynuyor (eski kod) | 404 | 45 ay + 86 sn | pencere açıkken bekleme (tasarım gereği) |
-| Gerçek zamanlı, düzeltmeli kod | 404 | bkz. REGRESYON.md | |
+| Gerçek zamanlı, host + misafir oynuyor (**düzeltmeli kod**) | 404 | 45 ay + 10 dk (≈ 189. aya kadar) | 935 dokunma; kalıcı donma 0; en büyük fark 20,5 gün; 13 / 13 emir misafire yansıdı; kayıt paketi 3,1 MB ile devam PASS |
 
 Fiziksel PC / Android, LAN, gerçek internet, gerçek Render: **NOT RUN**.
 
