@@ -15,7 +15,7 @@ const GUEST=`window.__p0={
     modalOpen:!!(m&&!m.classList.contains('hidden')),modalCls:m?m.className:null,modalHead:m?(m.textContent||'').trim().slice(0,90):null,
     pointers:UI._surfacePointers?[...UI._surfacePointers]:null,untilMs:(UI._surfaceUntil||0)-now,bootErr:S.boot.err,bootFails:S.boot.fails,
     stats:{mirrors:S.stats.mirrors,deltas:S.stats.deltas,builds:S.stats.builds,fail:S.stats.fail||0,held:S.stats.held,touchHeld:S.stats.touchHeld||0,resyncs:S.stats.resyncs,speedMsgs:S.stats.speedMsgs,lastBuildMs:S.stats.buildMs.slice(-1)[0]||0,minGap:S.minGap},
-    hostSpd:S.hostSpd,ws:MP1Join.ws?MP1Join.ws.readyState:-1,hostOnline:MP1Join.hostOnline,screen:MP1Join.screen,decWait:S.decWait.size,
+    syncNote:S.sync?S.sync.note:'',syncWhy:S.sync?S.sync.why:'',crash:S.stats.crash||0,touchForced:S.stats.touchForced||0,recon:S.sync?S.sync.reconnects:0,hostSpd:S.hostSpd,ws:MP1Join.ws?MP1Join.ws.readyState:-1,hostOnline:MP1Join.hostOnline,screen:MP1Join.screen,decWait:S.decWait.size,
     diagTail:(typeof DIAG!=='undefined'&&DIAG.slice?DIAG.slice(-3):[]),diplo:document.getElementById('diploPane').classList.contains('show'),mirrorAgeMs:S.mirrorAt?now-S.mirrorAt:null};},
   /* dokunulabilir adaylar: görünür, etkin, yasaklı olmayan gerçek düğmeler; en üstteki öğe kendisi olmalı (örtülü düğmeye dokunulmaz) */
   targets(sel,ban){const out=[];for(const el of document.querySelectorAll(sel)){if(el.disabled)continue;const a=el.dataset&&el.dataset.a;if(a&&ban.includes(a))continue;const r=el.getBoundingClientRect();if(r.width<8||r.height<8)continue;
@@ -49,6 +49,7 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,origin,gues
     const got=await B.waitForFunction(cid=>MP1Join.results.some(x=>x.cid===cid),r.cid,{timeout:15000,polling:100}).then(()=>true,()=>false);if(!got)return {status:'no-reply',cid:r.cid};
     return B.evaluate(cid=>{const x=MP1Join.results.filter(y=>y.cid===cid).at(-1);return {status:x.status,code:x.code||null,ms:x.ms};},r.cid);};
   const command=async(label)=>{const out={label,at:Date.now()};try{
+      await B.evaluate(()=>{try{UI.closeModal();}catch{}});   // açık pencere aynayı tasarım gereği bekletir; emir etkisi pencere kapalıyken ölçülür
       const own=await B.evaluate(()=>__p0.own());out.own={fleets:own.fleets.length,yards:own.yards.length,ala:own.ala};
       const f=own.fleets.find(x=>x.sys>=0&&!x.mv);if(f){const to=await B.evaluate(id=>G.sys[id].lanes[0],f.sys);out.fleet=f.id;out.moveTo=to;out.move=await send1({kind:'move',fleet:f.id,to});}
       const y=own.yards[0];if(y){out.yard=y.id;out.q0=y.q;out.ship=await send1({kind:'ship',sys:y.id,key:'kor'});}
@@ -75,6 +76,8 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,origin,gues
       const lag=h.day-(g.day||0);if(lag>P.maxLagDays)P.maxLagDays=Math.round(lag*10)/10;
       if(g.day!==lastGuestDay){lastGuestDay=g.day;lastGuestMove=Date.now();lastHostDayAtMove=h.day;}
       P.samples.push({t:Math.round((Date.now()-(end-MIN*60000))/1000),hd:Math.round(h.day*10)/10,gd:Math.round((g.day||0)*10)/10,hrev:h.rev,grev:g.rev,gapp:g.applied,held:g.stats&&g.stats.held,touch:g.stats&&g.stats.touchHeld,fail:g.stats&&g.stats.fail,builds:g.stats&&g.stats.builds,mo:g.modalOpen?1:0});
+      /* açık pencere = tasarım gereği bekleme (artık MP çubuğunda yazılır): donma sayılmaz; oyuncu gibi pencere kapatılır */
+      if(Date.now()-lastGuestMove>STALL&&g.modalOpen){P.windowHolds=(P.windowHolds||0)+1;P.windowNote=g.syncNote||P.windowNote||'';await B.evaluate(()=>{try{UI.closeModal();}catch{}});lastGuestMove=Date.now();continue;}
       if(Date.now()-lastGuestMove>STALL&&h.day-lastHostDayAtMove>3){stalled={afterS:Math.round((Date.now()-(end-MIN*60000))/1000),stuckMs:Date.now()-lastGuestMove,host:h,guest:g,hostDaysSince:Math.round((h.day-lastHostDayAtMove)*10)/10,lastActions:Object.keys(P.actions).slice(-12)};
         P.stalls.push(stalled);await shot(B,'p0-stall-guest');await shot(H,'p0-stall-host');console.log('  DONMA '+JSON.stringify(stalled).slice(0,1500));
         /* donma sırasında komut: host kabul ediyor mu, aynaya yansıyor mu? */

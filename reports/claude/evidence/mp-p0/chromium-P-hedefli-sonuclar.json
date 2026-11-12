@@ -1,0 +1,564 @@
+{
+ "ff": 6,
+ "minutes": 1,
+ "seed": 1,
+ "samples": [
+  {
+   "t": 0,
+   "hd": 185.5,
+   "gd": 181.1,
+   "hrev": 7,
+   "grev": 7,
+   "gapp": 7,
+   "held": 0,
+   "touch": 0,
+   "fail": 0,
+   "builds": 7,
+   "mo": 0
+  },
+  {
+   "t": 3,
+   "hd": 198.8,
+   "gd": 198.4,
+   "hrev": 10,
+   "grev": 10,
+   "gapp": 10,
+   "held": 2,
+   "touch": 3,
+   "fail": 0,
+   "builds": 9,
+   "mo": 0
+  },
+  {
+   "t": 5,
+   "hd": 217.2,
+   "gd": 208.4,
+   "hrev": 13,
+   "grev": 13,
+   "gapp": 12,
+   "held": 2,
+   "touch": 5,
+   "fail": 0,
+   "builds": 11,
+   "mo": 0
+  },
+  {
+   "t": 7,
+   "hd": 238.5,
+   "gd": 234.2,
+   "hrev": 16,
+   "grev": 16,
+   "gapp": 16,
+   "held": 2,
+   "touch": 5,
+   "fail": 0,
+   "builds": 15,
+   "mo": 0
+  },
+  {
+   "t": 9,
+   "hd": 259.6,
+   "gd": 254.9,
+   "hrev": 19,
+   "grev": 19,
+   "gapp": 19,
+   "held": 2,
+   "touch": 7,
+   "fail": 0,
+   "builds": 18,
+   "mo": 0
+  },
+  {
+   "t": 11,
+   "hd": 266.4,
+   "gd": 266.1,
+   "hrev": 22,
+   "grev": 22,
+   "gapp": 22,
+   "held": 2,
+   "touch": 7,
+   "fail": 0,
+   "builds": 21,
+   "mo": 0
+  },
+  {
+   "t": 13,
+   "hd": 285.2,
+   "gd": 282,
+   "hrev": 25,
+   "grev": 25,
+   "gapp": 25,
+   "held": 2,
+   "touch": 8,
+   "fail": 0,
+   "builds": 24,
+   "mo": 0
+  },
+  {
+   "t": 15,
+   "hd": 303.5,
+   "gd": 301.1,
+   "hrev": 28,
+   "grev": 28,
+   "gapp": 28,
+   "held": 2,
+   "touch": 8,
+   "fail": 0,
+   "builds": 27,
+   "mo": 0
+  },
+  {
+   "t": 18,
+   "hd": 328.6,
+   "gd": 322.5,
+   "hrev": 31,
+   "grev": 31,
+   "gapp": 31,
+   "held": 3,
+   "touch": 13,
+   "fail": 0,
+   "builds": 29,
+   "mo": 0
+  },
+  {
+   "t": 20,
+   "hd": 331.6,
+   "gd": 330.5,
+   "hrev": 34,
+   "grev": 34,
+   "gapp": 33,
+   "held": 4,
+   "touch": 15,
+   "fail": 0,
+   "builds": 31,
+   "mo": 1
+  },
+  {
+   "t": 22,
+   "hd": 355.7,
+   "gd": 354,
+   "hrev": 38,
+   "grev": 38,
+   "gapp": 38,
+   "held": 4,
+   "touch": 15,
+   "fail": 0,
+   "builds": 35,
+   "mo": 0
+  },
+  {
+   "t": 25,
+   "hd": 379.3,
+   "gd": 375.5,
+   "hrev": 41,
+   "grev": 41,
+   "gapp": 41,
+   "held": 4,
+   "touch": 19,
+   "fail": 0,
+   "builds": 37,
+   "mo": 0
+  },
+  {
+   "t": 27,
+   "hd": 390.9,
+   "gd": 390.6,
+   "hrev": 44,
+   "grev": 44,
+   "gapp": 44,
+   "held": 4,
+   "touch": 20,
+   "fail": 0,
+   "builds": 40,
+   "mo": 0
+  },
+  {
+   "t": 29,
+   "hd": 398.4,
+   "gd": 398,
+   "hrev": 47,
+   "grev": 47,
+   "gapp": 47,
+   "held": 4,
+   "touch": 24,
+   "fail": 0,
+   "builds": 42,
+   "mo": 0
+  },
+  {
+   "t": 32,
+   "hd": 418.5,
+   "gd": 408.4,
+   "hrev": 50,
+   "grev": 50,
+   "gapp": 49,
+   "held": 4,
+   "touch": 27,
+   "fail": 0,
+   "builds": 44,
+   "mo": 0
+  },
+  {
+   "t": 34,
+   "hd": 440.4,
+   "gd": 435.1,
+   "hrev": 53,
+   "grev": 53,
+   "gapp": 53,
+   "held": 5,
+   "touch": 30,
+   "fail": 0,
+   "builds": 47,
+   "mo": 0
+  },
+  {
+   "t": 36,
+   "hd": 462.3,
+   "gd": 454.2,
+   "hrev": 57,
+   "grev": 57,
+   "gapp": 56,
+   "held": 6,
+   "touch": 31,
+   "fail": 0,
+   "builds": 50,
+   "mo": 0
+  },
+  {
+   "t": 38,
+   "hd": 468,
+   "gd": 467.5,
+   "hrev": 59,
+   "grev": 59,
+   "gapp": 59,
+   "held": 7,
+   "touch": 32,
+   "fail": 0,
+   "builds": 52,
+   "mo": 0
+  },
+  {
+   "t": 41,
+   "hd": 488.6,
+   "gd": 480.9,
+   "hrev": 63,
+   "grev": 63,
+   "gapp": 62,
+   "held": 8,
+   "touch": 35,
+   "fail": 0,
+   "builds": 54,
+   "mo": 0
+  },
+  {
+   "t": 43,
+   "hd": 510.6,
+   "gd": 502.9,
+   "hrev": 66,
+   "grev": 66,
+   "gapp": 65,
+   "held": 10,
+   "touch": 35,
+   "fail": 0,
+   "builds": 57,
+   "mo": 1
+  },
+  {
+   "t": 45,
+   "hd": 530.7,
+   "gd": 528.5,
+   "hrev": 69,
+   "grev": 69,
+   "gapp": 69,
+   "held": 11,
+   "touch": 36,
+   "fail": 0,
+   "builds": 60,
+   "mo": 0
+  },
+  {
+   "t": 48,
+   "hd": 534.6,
+   "gd": 534.2,
+   "hrev": 72,
+   "grev": 72,
+   "gapp": 72,
+   "held": 11,
+   "touch": 39,
+   "fail": 0,
+   "builds": 63,
+   "mo": 0
+  },
+  {
+   "t": 50,
+   "hd": 554.8,
+   "gd": 548.3,
+   "hrev": 75,
+   "grev": 75,
+   "gapp": 75,
+   "held": 13,
+   "touch": 41,
+   "fail": 0,
+   "builds": 65,
+   "mo": 0
+  },
+  {
+   "t": 52,
+   "hd": 566.5,
+   "gd": 566.4,
+   "hrev": 79,
+   "grev": 79,
+   "gapp": 79,
+   "held": 15,
+   "touch": 41,
+   "fail": 0,
+   "builds": 68,
+   "mo": 0
+  },
+  {
+   "t": 55,
+   "hd": 586,
+   "gd": 578,
+   "hrev": 82,
+   "grev": 82,
+   "gapp": 81,
+   "held": 16,
+   "touch": 41,
+   "fail": 0,
+   "builds": 70,
+   "mo": 1
+  },
+  {
+   "t": 57,
+   "hd": 598.6,
+   "gd": 593,
+   "hrev": 84,
+   "grev": 84,
+   "gapp": 83,
+   "held": 18,
+   "touch": 42,
+   "fail": 0,
+   "builds": 72,
+   "mo": 1
+  },
+  {
+   "t": 59,
+   "hd": 618.8,
+   "gd": 611.1,
+   "hrev": 88,
+   "grev": 88,
+   "gapp": 87,
+   "held": 18,
+   "touch": 46,
+   "fail": 0,
+   "builds": 75,
+   "mo": 0
+  }
+ ],
+ "stalls": [],
+ "actions": {
+  "panelTap:planetFold": 20,
+  "inboxTap:noteOptions": 8,
+  "mapTap": 21,
+  "modalTap:anomch": 5,
+  "modalClose": 14,
+  "panelScroll": 12,
+  "panelTap:crisisManage": 6,
+  "topTap:grpTog": 8,
+  "topTap:home": 4,
+  "tabTap:tab": 6,
+  "modalTap:minModal": 1,
+  "topTap:fit": 3,
+  "inboxTap:openNote": 6,
+  "panelTap:intelView": 4,
+  "modalTap:closem": 5,
+  "topTap:mapMode": 1,
+  "panelTap:spyTargetSet": 1,
+  "panelTap:fleetFilter": 1,
+  "inboxTap:noteChoice": 1,
+  "modalTap:showEv": 1,
+  "inboxTap:noteQuick": 2,
+  "diploTap:dealAdd": 5,
+  "modalTap:pickOne": 3,
+  "modalTap:amountPreset": 1,
+  "diploTap:dealRm": 2,
+  "diploClose": 1,
+  "diploTap:diploNav": 4,
+  "modalTap:amountUp": 1,
+  "diploTap:diploPick": 1
+ },
+ "cmds": [
+  {
+   "label": "t+20",
+   "at": 1794495619921,
+   "own": {
+    "fleets": 3,
+    "yards": 1,
+    "ala": 278
+   },
+   "fleet": 4,
+   "moveTo": 415,
+   "move": {
+    "status": "ok",
+    "code": null,
+    "ms": 16
+   },
+   "yard": 75,
+   "q0": 0,
+   "ship": {
+    "status": "ok",
+    "code": null,
+    "ms": 38
+   },
+   "shipSeen": true
+  }
+ ],
+ "maxLagDays": 10.2,
+ "ffSeconds": 4,
+ "actionCount": 148,
+ "final": {
+  "host": {
+   "day": 630.1081200000051,
+   "speed": 4,
+   "publishes": 201,
+   "rev": 89,
+   "conn": true,
+   "paused": false,
+   "bg": false,
+   "connected": true,
+   "monthMs": 248,
+   "fleets": 103
+  },
+  "guest": {
+   "day": 625.108120000005,
+   "rev": 89,
+   "applied": 89,
+   "started": true,
+   "timer": false,
+   "mirror": true,
+   "modalOpen": false,
+   "modalCls": "hidden",
+   "modalHead": "",
+   "pointers": [],
+   "untilMs": -207,
+   "bootErr": "",
+   "bootFails": 0,
+   "stats": {
+    "mirrors": 1,
+    "deltas": 88,
+    "builds": 77,
+    "fail": 0,
+    "held": 18,
+    "touchHeld": 47,
+    "resyncs": 0,
+    "speedMsgs": 22,
+    "lastBuildMs": 5.7,
+    "minGap": 600
+   },
+   "hostSpd": 4,
+   "ws": 1,
+   "hostOnline": true,
+   "screen": "game",
+   "decWait": 0,
+   "diagTail": [
+    {
+     "t": 1794495658400,
+     "tur": "cache",
+     "m": "invalidate:load"
+    },
+    {
+     "t": 1794495659160,
+     "tur": "cache",
+     "m": "invalidate:load"
+    },
+    {
+     "t": 1794495659779,
+     "tur": "cache",
+     "m": "invalidate:load"
+    }
+   ],
+   "diplo": true,
+   "mirrorAgeMs": 718
+  }
+ },
+ "targeted": {
+  "badCard": {
+   "ok": true,
+   "ms": 2037,
+   "days": 4.29979999999955,
+   "crash": 1,
+   "clean": true
+  },
+  "stuckPointer": {
+   "ok": true,
+   "ms": 3554,
+   "days": 7.166399999999953,
+   "forced": 1
+  },
+  "hostPublish": {
+   "seen": true,
+   "g": {
+    "note": "Host bu oyuncuya dünya verisi gönderemiyor (host yayın hatası) — host'a bildir; yeniden isteniyor",
+    "chip": "ÇOK OYUNCULU · Host bu oyuncuya dünya verisi gönderemiyor (host yayın hatası) — host'a bildir; yeniden isteniyorSTARS MP.8.9b19 · oyun 96h10p23 · misafir · host bağlı · aşama: ready · ayna r98 15:01:05 · kurulum 8 ms · son komut: ok · son hata: yok · eşitleme: uygulanan r98 / host r98 · host-publish",
+    "pulse": {
+     "rev": 270,
+     "mrev": 98,
+     "day": 645,
+     "spd": 2,
+     "perr": 3,
+     "mfail": 1
+    }
+   },
+   "h": {
+    "n": 3,
+    "e": {
+     "stage": "mirror",
+     "msg": "test ayna arızası",
+     "day": 645,
+     "at": 1794495667083,
+     "seat": 1
+    },
+    "loop": 0,
+    "spd": 2
+   },
+   "back": true,
+   "lag": 1.3666000000000622,
+   "pageErrors": []
+  },
+  "lostMirror": {
+   "yard": 75,
+   "q0": 0,
+   "ret": false,
+   "early": false,
+   "status": "ok",
+   "late": true,
+   "dropped": 1,
+   "qNow": 0,
+   "hostQ": 1,
+   "seen": true,
+   "sync": {
+    "log": [
+     "kick",
+     "kick",
+     "crash",
+     "note:host-publish",
+     "resync:missing"
+    ],
+    "resyncs": 1,
+    "pulse": {
+     "rev": 278,
+     "mrev": 102,
+     "day": 649,
+     "spd": 0,
+     "perr": 3,
+     "mfail": 0
+    },
+    "rev": 103
+   }
+  },
+  "reinf": {
+   "threw": null,
+   "pageErrors": []
+  }
+ }
+}

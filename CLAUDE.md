@@ -2,6 +2,16 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
+## Son teslim — MP-P0 misafir donması / kayıt (MP.8.9b19, 12 Kasım 2026)
+
+- Ayrıntı: `reports/claude/MP-P0-DONMA-KAYIT-SONUC.md`, kanıt `reports/claude/evidence/mp-p0/`. Taban `codex/stars-beta-ui-refinement0-mobile` b35f8cb; dal `claude/stars-mp-p0-guest-freeze-resume`. **Runtime (19 dosya), Save8, paket4/protokol1 ve p23 ZIP'i değişmedi**; yalnız MP kaynakları.
+- Gerçek Render raporu: misafir dünyası durdu, emirler etkisiz göründü, kayıt "bozuk" dendi. Gerçek oturumun tetikleyicisi **kanıtlanamadı** (host dosyası/konsol yok; yerelde s500/16AI'da kendiliğinden üretilemedi). Kanıtlanıp düzeltilen mekanizmalar: misafir `rebuild` zinciri istisnayla kalıcı duruyordu; dokunma bekletmesinin üst sınırı yoktu; host `publish()` hata yalıtımsızdı; misafir "dünya gelmiyor"u algılamıyordu; "tezgâha kondu" host ACK'inden önce yazılıyordu.
+- `mp-core`: `publish()` aşama/oyuncu yalıtımı (`stats.publishErrors`/`lastPublishError`), `pulse()` (yalnız sayaç), `save8Kind`, `packageFromSave8` (yalnız HOST'un tasarım kipi Save8'i; koltuklar rastgele özetle kapalı, host KİMLİĞİ KURTAR ile atar). **Misafir aynası asla host kaydına çevrilmez.** Yayın zincirine yeni aşama eklerken `guarded(...)` içine al.
+- `guest-stars`: `rebuild` = sarmalayıcı + `rebuild0`; eşitleme bekçisi `syncWatch` (dürt → `resync` → yeniden bağlan; not MP çubuğunda, kısa tutulur); bekleyen emir `S.pend`; gemi/bina bildirimi ACK'ten sonra (`acked`). Motor işlevi sarmalayıcısı gerçek düğmenin beklediği dönüş biçimini vermeli (`reinf` → `r.orders`).
+- `mp1-host`: döngü parçaları `part(...)` ile yalıtılı, 2 sn nabız; MP oyununda oyun içi "Dosyaya kaydet" `.starsmp.json` indirir; DOSYADAN AÇ `.sav` türünü açık nedenle söyler (`save8-guest`/`-single`/`-host`).
+- Test: `node tests/mp_p0_sync_test.js` (önce1/5, sonra6/0); `MP8_SCEN=P node tests/browser-mp8.cjs` (s500, 16AI, gerçek zamanlı + hedefli P2–P7; `MP8_P_FF`, `MP8_P_MIN`, `MP8_P_HOSTMONKEY=1`, `MP8_ONLY`). Tam Node koşusunda taban ve aday aynı 278 eski FAIL'i verir (54 paket; bu fazdan bağımsız, silinmedi).
+- P1 AÇIK: misafirde federasyon/Konsey üst olay kartları (oy kartı aynadan türetilmiyor). Render sürüm karşılaştırması, fiziksel PC/Android, LAN: NOT RUN. Kullanıcı kabulü/merge/deploy yok.
+
 ## Son teslim — BETA-UI-REFINEMENT.0 / p23
 
 - Ayrıntı: `reports/codex/BETA-UI-REFINEMENT0-SONUC.md`. p22 80d11da tabanı, kod/paket183c3ca, dal `codex/stars-beta-ui-refinement0-mobile`.

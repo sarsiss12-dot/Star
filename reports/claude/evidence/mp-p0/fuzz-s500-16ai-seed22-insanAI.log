@@ -1,0 +1,82 @@
+setup {"cfg":{"ok":true},"st":{"ok":true},"sys":500,"emps":19,"guest":1,"host":0}
+m1 2105ms day 30 pkg ok 512394 rev 31 resync 0   
+m2 2049ms day 60 pkg ok 556680 rev 61 resync 0   
+m3 2184ms day 90 pkg ok 603902 rev 91 resync 0   
+m4 1796ms day 120 pkg ok 647664 rev 121 resync 0   
+m5 2526ms day 150 pkg ok 697822 rev 151 resync 0   
+m6 2472ms day 180 pkg ok 743854 rev 181 resync 0   {"feds":0,"wars":0,"fleets":82,"dead":0,"offers":0}
+m7 2541ms day 210 pkg ok 792646 rev 211 resync 0   
+m8 2442ms day 240 pkg ok 837637 rev 241 resync 0   
+m9 2906ms day 270 pkg ok 883893 rev 271 resync 0   
+m10 2526ms day 300 pkg ok 936654 rev 301 resync 0   
+m11 2688ms day 330 pkg ok 986627 rev 331 resync 0   
+m12 3057ms day 360 pkg ok 1039036 rev 361 resync 0   load=L:slot-state {"feds":0,"wars":0,"fleets":99,"dead":0,"offers":0}
+m13 2762ms day 390 pkg ok 1072126 rev 391 resync 0   
+m14 3067ms day 420 pkg ok 1098052 rev 421 resync 0   
+m15 3329ms day 450 pkg ok 1126375 rev 451 resync 0   
+m16 3799ms day 480 pkg ok 1155261 rev 481 resync 0   
+m17 4072ms day 510 pkg ok 1183762 rev 511 resync 0   
+m18 4892ms day 540 pkg ok 1208264 rev 541 resync 0   {"feds":0,"wars":0,"fleets":113,"dead":0,"offers":0}
+m19 4693ms day 570 pkg ok 1231834 rev 571 resync 0   
+m20 4216ms day 600 pkg ok 1252876 rev 601 resync 0   
+m21 5419ms day 630 pkg ok 1275496 rev 631 resync 0   
+m22 5210ms day 660 pkg ok 1300486 rev 661 resync 0   
+m23 4998ms day 690 pkg ok 1320447 rev 691 resync 0   
+m24 6178ms day 720 pkg ok 1342870 rev 721 resync 0   load=L:slot-state {"feds":0,"wars":0,"fleets":113,"dead":0,"offers":0}
+m25 5794ms day 750 pkg ok 1361472 rev 751 resync 0   
+m26 4889ms day 780 pkg ok 1380005 rev 781 resync 0   
+m27 5181ms day 810 pkg ok 1401133 rev 811 resync 0   
+m28 5670ms day 840 pkg ok 1417169 rev 841 resync 0   
+m29 5279ms day 870 pkg ok 1433288 rev 871 resync 0   
+m30 5445ms day 900 pkg ok 1449827 rev 901 resync 0   {"feds":0,"wars":0,"fleets":108,"dead":0,"offers":0}
+m31 5439ms day 930 pkg ok 1460602 rev 931 resync 0   
+m32 5695ms day 960 pkg ok 1478260 rev 961 resync 0   
+m33 4952ms day 990 pkg ok 1495079 rev 991 resync 0   
+m34 5142ms day 1020 pkg ok 1515937 rev 1021 resync 0   
+m35 5320ms day 1050 pkg ok 1530846 rev 1051 resync 0   
+m36 6255ms day 1080 pkg ok 1551720 rev 1081 resync 0   load=L:slot-state {"feds":0,"wars":0,"fleets":110,"dead":0,"offers":0}
+m37 4910ms day 1110 pkg ok 1570185 rev 1111 resync 0   
+m38 5125ms day 1140 pkg ok 1588439 rev 1141 resync 0   
+m39 5868ms day 1170 pkg ok 1604733 rev 1171 resync 0   
+m40 5570ms day 1200 pkg ok 1622015 rev 1201 resync 0   
+m41 5855ms day 1230 pkg ok 1640196 rev 1231 resync 0   
+m42 5601ms day 1260 pkg ok 1654117 rev 1261 resync 0   {"feds":0,"wars":0,"fleets":111,"dead":0,"offers":0}
+m43 6220ms day 1290 pkg ok 1671966 rev 1291 resync 0   
+m44 6298ms day 1320 pkg ok 1696345 rev 1321 resync 0   
+m45 5710ms day 1350 pkg ok 1719665 rev 1351 resync 0   
+m46 6090ms day 1380 pkg ok 1739767 rev 1381 resync 0   
+m47 4584ms day 1410 pkg ok 1759154 rev 1411 resync 0   
+m48 6062ms day 1440 pkg ok 1776851 rev 1441 resync 0   load=L:slot-state {"feds":1,"wars":0,"fleets":123,"dead":0,"offers":0}
+m49 5799ms day 1470 pkg ok 1795787 rev 1471 resync 0   
+m50 4762ms day 1500 pkg ok 1814922 rev 1501 resync 0   
+m51 4701ms day 1530 pkg ok 1829639 rev 1531 resync 0   
+m52 5138ms day 1560 pkg ok 1846524 rev 1561 resync 0   
+m53 7054ms day 1590 pkg ok 1854517 rev 1591 resync 0   
+m54 5698ms day 1620 pkg ok 1868229 rev 1621 resync 0   {"feds":1,"wars":0,"fleets":122,"dead":0,"offers":0}
+m55 5693ms day 1650 pkg ok 1879236 rev 1651 resync 0   
+m56 6086ms day 1680 pkg ok 1887829 rev 1681 resync 0   
+m57 6136ms day 1710 pkg ok 1894395 rev 1711 resync 0   
+m58 5270ms day 1740 pkg ok 1896987 rev 1741 resync 0   
+m59 6100ms day 1770 pkg ok 1908736 rev 1771 resync 0   
+m60 5389ms day 1800 pkg ok 1915177 rev 1801 resync 0   load=L:slot-state {"feds":1,"wars":0,"fleets":123,"dead":0,"offers":0}
+m61 4507ms day 1830 pkg ok 1919438 rev 1831 resync 0   
+m62 4891ms day 1860 pkg ok 1922092 rev 1861 resync 0   
+m63 4783ms day 1890 pkg ok 1929707 rev 1891 resync 0   
+m64 5663ms day 1920 pkg ok 1941268 rev 1921 resync 0   
+m65 4387ms day 1950 pkg ok 1950469 rev 1951 resync 0   
+m66 5159ms day 1980 pkg ok 1954603 rev 1981 resync 0   {"feds":1,"wars":0,"fleets":116,"dead":0,"offers":0}
+m67 4655ms day 2010 pkg ok 1962219 rev 2011 resync 0   
+m68 4974ms day 2040 pkg ok 1968182 rev 2041 resync 0   
+m69 5181ms day 2070 pkg ok 1971243 rev 2071 resync 0   
+m70 4690ms day 2100 pkg ok 1974343 rev 2101 resync 0   
+m71 4165ms day 2130 pkg ok 1977941 rev 2131 resync 0   
+m72 4931ms day 2160 pkg ok 1980679 rev 2161 resync 0   load=L:slot-state {"feds":1,"wars":0,"fleets":112,"dead":0,"offers":0}
+m73 4735ms day 2190 pkg ok 1988715 rev 2191 resync 0   
+m74 4791ms day 2220 pkg ok 1990436 rev 2221 resync 0   
+m75 4567ms day 2250 pkg ok 1990882 rev 2251 resync 0   
+m76 5031ms day 2280 pkg ok 1996501 rev 2281 resync 0   
+m77 4224ms day 2310 pkg ok 2004237 rev 2311 resync 0   
+m78 4835ms day 2340 pkg ok 2007289 rev 2341 resync 0   {"feds":1,"wars":0,"fleets":114,"dead":0,"offers":0}
+m79 4983ms day 2370 pkg ok 2015391 rev 2371 resync 0   
+m80 5968ms day 2400 pkg ok 2019909 rev 2401 resync 0   load=L:slot-state 
+DONE throws 0 guestBad 0 pkgBad {}

@@ -1,0 +1,50 @@
+PASS P0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 16 AI, s500, seed 404; misafir gerçek STARS arayüzünde
+NOT RUN P1 gerçek zamanlı 1 dk: 500 sistem / 16 AI + 2 insan, host en yüksek hızda (ön ilerletme 6 ay), misafir gerçek dokunmayla oynar; host günü ilerlerken misafir dünyası 20 sn'den uzun durmamalı; komutlar aynaya yansımalı
+FAIL P2 misafirin yerel sunum durumunda bozuk kart (kurulum deserialize'dan ÖNCE istisna atar): dünya kalıcı donmaz — neden kaydedilir, durum onarılır, ayna uygulanır
+AssertionError [ERR_ASSERTION]: misafir dünyası ilerlemedi (kalıcı donma): {"ok":false,"ms":20000,"days":0,"diag":{"day":1.0466000000000004,"rev":31,"applied":2,"started":true,"timer":false,"mirror":true,"modalOpen":false,"modalCls":"hidden","modalHead":"","pointers":[],"untilMs":-1794495955224,"bootErr":"","bootFails":0,"stats":{"mirrors":1,"deltas":30,"builds":2,"fail":0,"held":0,"touchHeld":0,"resyncs":0,"speedMsgs":2,"lastBuildMs":0,"minGap":600},"hostSpd":2,"ws":1,"hostOnline":true,"screen":"game","decWait":0,"diagTail":[{"t":1794495953257,"tur":"error","m":"Uncaught TypeError: Cannot read properties of undefined (reading 'kind') @guest-stars.js:557"},{"t":1794495953957,"tur":"error","m":"Uncaught TypeError: Cannot read properties of undefined (reading 'kind')
+    at /home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:104:5
+    at async test (/home/user/p0/pre/tests/browser-mp8.cjs:26:162)
+    at async module.exports (/home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:100:3)
+    at async /home/user/p0/pre/tests/browser-mp8.cjs:403:17
+FAIL P3 kapanışı gelmeyen dokunma (pointerdown var, pointerup/pointercancel yok): ayna süresiz bekletilmez — en çok ~3 sn sonra uygulanır
+page.waitForFunction: Timeout 30000ms exceeded.
+    at settle (/home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:95:120)
+    at async /home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:107:21
+    at async test (/home/user/p0/pre/tests/browser-mp8.cjs:26:162)
+    at async module.exports (/home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:106:3)
+    at async /home/user/p0/pre/tests/browser-mp8.cjs:403:17
+FAIL P4 host bu oyuncunun aynasını kuramıyor (host yayın arızası): host döngüsü çökmez, hata host tanısında; misafir açık ileti görür; arıza kalkınca kendiliğinden eşitlenir
+page.waitForFunction: Timeout 30000ms exceeded.
+    at settle (/home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:95:120)
+    at async /home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:114:21
+    at async test (/home/user/p0/pre/tests/browser-mp8.cjs:26:162)
+    at async module.exports (/home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:113:3)
+    at async /home/user/p0/pre/tests/browser-mp8.cjs:403:17
+FAIL P5 DURAKLATILMIŞ oyunda kaybolan ayna iletisi ("host kabul etti ama tersane sırası değişmedi"): bildirim host ACK'inden ÖNCE çıkmaz; nabız eksik aynayı gösterir, misafir TAM ayna ister ve sıra görünür
+page.waitForFunction: Timeout 30000ms exceeded.
+    at settle (/home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:95:120)
+    at async /home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:128:111
+    at async test (/home/user/p0/pre/tests/browser-mp8.cjs:26:162)
+    at async module.exports (/home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:127:3)
+    at async /home/user/p0/pre/tests/browser-mp8.cjs:403:17
+FAIL P6 takviye düğmesi (reinf) misafirde yakalanmamış istisna atmaz; ret gerçek nedeniyle bildirilir
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'r.orders is not iterable'
+- null
+
+    at /home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:146:94
+    at async test (/home/user/p0/pre/tests/browser-mp8.cjs:26:162)
+    at async module.exports (/home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:144:3)
+    at async /home/user/p0/pre/tests/browser-mp8.cjs:403:17
+FAIL P7 kayıt → çıkış → devam (gerçek kullanıcı akışı): oyun içi "Dosyaya kaydet" MP'de çok oyunculu paket indirir; misafirin .sav'ı açık nedenle reddedilir; host'un düz .sav'ı devam lobisi açar, misafir yeni kodla katılır, host koltuğa atar, aynı gün ve devletten sürer
+page.waitForFunction: Timeout 30000ms exceeded.
+    at settle (/home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:95:120)
+    at async /home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:149:20
+    at async test (/home/user/p0/pre/tests/browser-mp8.cjs:26:162)
+    at async module.exports (/home/user/p0/pre/tests/helpers/mp-p0-soak.cjs:148:3)
+    at async /home/user/p0/pre/tests/browser-mp8.cjs:403:17
+SAYFA HATALARI ["B: Cannot read properties of undefined (reading 'kind')","B: Cannot read properties of undefined (reading 'kind')","B: Cannot read properties of undefined (reading 'kind')","B: Cannot read properties of undefined (reading 'kind')","B: Cannot read properties of undefined (reading 'kind')","B: Cannot read properties of undefined (reading 'kind')","B: Cannot read properties of undefined (reading 'kind')","B: Cannot read properties of undefined (reading 'kind')","B: Cannot read properties of undefined (reading 'kind')","B: Cannot read properties of undefined (reading 'kind')"]
+GEÇEN: 1 KALAN: 6
+EXIT 1
