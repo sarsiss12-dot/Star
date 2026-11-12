@@ -1,0 +1,96 @@
+{
+ "seats": {
+  "B": 1,
+  "C": 2
+ },
+ "fed": {
+  "ai": [
+   3,
+   4
+  ],
+  "k": "savunma",
+  "tok": "1",
+  "wait": [
+   1
+  ]
+ },
+ "e1": {
+  "b": {
+   "inbox": [
+    {
+     "kind": "fedvote",
+     "key": "fed:100:1",
+     "uid": 1
+    }
+   ],
+   "info": []
+  },
+  "c": {
+   "inbox": [],
+   "info": []
+  },
+  "h": 0
+ },
+ "e2": {
+  "wait1": "(kart kalktı)",
+  "yes": 1,
+  "sent": 1,
+  "said": [
+   "Karar gönderildi — yanıt bekleniyor"
+  ]
+ },
+ "e3": {
+  "b": [
+   "🏛 Federasyon oylaması sonuçlandı — EUX BirliğiSavunma Paktı: KABUL · Gerekli üye ve oy çoğunluğu sağlandı ›"
+  ],
+  "c": [],
+  "spd0": {
+   "g": 1,
+   "want": 1
+  },
+  "spd1": {
+   "g": 1,
+   "want": 1
+  }
+ },
+ "e3open": {
+  "diplo": true,
+  "fed": true,
+  "left": 0
+ },
+ "cnc": {
+  "key": "krizHazir",
+  "done": false,
+  "yes": [],
+  "no": [
+   3,
+   4
+  ]
+ },
+ "e4": {
+  "counts": {
+   "b": 1,
+   "c": 1
+  },
+  "done": {
+   "open": false,
+   "last": {
+    "passed": false,
+    "key": "council:krizHazir:9.31301199999994"
+   }
+  },
+  "info": {
+   "B": [
+    "🌐 Konsey kararı — Kriz HazırlığıReddedildi · EVET 19.0 / HAYIR 32.0 · gün 9.31301199999994 ›"
+   ],
+   "C": [
+    "🌐 Konsey kararı — Kriz HazırlığıReddedildi · EVET 19.0 / HAYIR 32.0 · gün 9.31301199999994 ›"
+   ]
+  }
+ },
+ "e5": {
+  "y": 5,
+  "q0": 0,
+  "status": "ok"
+ }
+}

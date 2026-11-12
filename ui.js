@@ -1951,6 +1951,7 @@ const UI = {
         break;
       }
       case 'openNote': this.openNote(x); break;
+      case 'instNote': this.instInfoOpen(x); break;   // BETA-EVENT-UX.0
       case 'noteQuick': this.noteQuickAct(x); break;   // MP.7.4
       case 'noteSwipe': return this.noteSwipe(x);      // MP.7.4
       case 'closem': this.closeModal(); break;
@@ -1965,7 +1966,46 @@ const UI = {
     $('sidebar').classList.remove('off');
     $('sbToggle').classList.remove('off');
     $('sbToggle').textContent = '›';
+    this.spyWidthApply();   // BETA-EVENT-UX.0
     this.refresh();
+  },
+  /* BETA-EVENT-UX.0 (#55) — CASUSLUK PANELİ GENİŞLİĞİ
+     Yalnız İSTİHBARAT sekmesi açıkken sağ panelin haritaya bakan kenarında sürükleme kolu görünür. Mevcut yerleşim değişkeni (--sb)
+     yalnız #game üzerinde, yalnız bu sekmede ezilir; sekme değişince kaldırılır → SİSTEM / FİLO ve öteki paneller standart genişlikte
+     kalır, ikinci bir kenar çubuğu motoru yok. Genişlik yalnız yerel arayüz tercihi (localStorage 'stars:spyWidth'): Save8, RNG ve ağ
+     verisine girmez. Sınırlar: en az standart genişlik, en çok "haritaya en az 220 px kalsın" ve görünür alanın %75'i. Fare, dokunma
+     (pointer capture; harita seçimine / rotaya sızmaz) ve klavye (← → Home End). */
+  spyWidthLimits(){
+    const g=$('game'),sb=$('sidebar');if(!g||!sb)return null;
+    const scale=sb.offsetWidth?sb.getBoundingClientRect().width/sb.offsetWidth:1,vw=window.innerWidth/(scale||1);
+    const prev=g.style.getPropertyValue('--sb');if(prev)g.style.removeProperty('--sb');const base=sb.offsetWidth||302;if(prev)g.style.setProperty('--sb',prev);
+    return {base,min:base,max:Math.max(base,Math.min(Math.round(vw*.75),Math.round(vw-220))),scale:scale||1};
+  },
+  spyWidthGet(){if(Number.isFinite(this._spyW))return this._spyW;let v=NaN;try{v=parseInt(localStorage.getItem('stars:spyWidth'),10);}catch{}return this._spyW=Number.isFinite(v)?v:null;},
+  spyWidthSet(w,save,lim){const L=lim||this.spyWidthLimits();if(!L)return;w=Math.round(Math.max(L.min,Math.min(L.max,w)));this._spyW=w;$('game').style.setProperty('--sb',w+'px');
+    const h=$('sbResize');if(h){h.setAttribute('aria-valuenow',String(w));h.setAttribute('aria-valuemin',String(L.min));h.setAttribute('aria-valuemax',String(L.max));}
+    if(save)try{localStorage.setItem('stars:spyWidth',String(w));}catch{}},
+  spyWidthApply(){
+    const g=$('game'),sb=$('sidebar');if(!g||!sb||!g.style||typeof g.style.removeProperty!=='function'||!g.classList)return;   // DOM'suz ortam (Node testleri, eski tarayıcı): dokunma
+    const on=this.cur==='intel';g.classList.toggle('spyPane',on);
+    let h=$('sbResize');
+    if(!on){g.style.removeProperty('--sb');return;}
+    if(!h){h=document.createElement('div');h.id='sbResize';h.tabIndex=0;h.setAttribute('role','separator');h.setAttribute('aria-orientation','vertical');
+      h.setAttribute('aria-label','Casusluk paneli genişliği — sürükle ya da ← → tuşları');h.title='Casusluk panelini genişlet / daralt';sb.appendChild(h);this.spyWidthBind(h);}
+    const w=this.spyWidthGet();if(Number.isFinite(w))this.spyWidthSet(w,false);else{g.style.removeProperty('--sb');const L=this.spyWidthLimits();if(L)h.setAttribute('aria-valuenow',String(L.base));}
+  },
+  spyWidthBind(h){
+    let drag=null;
+    const stop=e=>{if(!drag||e.pointerId!==drag.id)return;const drag0=drag;drag=null;h.classList.remove('drag');try{h.releasePointerCapture(e.pointerId);}catch{}if(Number.isFinite(this._spyW))this.spyWidthSet(this._spyW,true,drag0.L);};
+    h.addEventListener('pointerdown',e=>{if(e.button>0)return;e.preventDefault();e.stopPropagation();const L=this.spyWidthLimits();if(!L)return;
+      drag={id:e.pointerId,x:e.clientX,w:$('sidebar').offsetWidth,scale:L.scale,L};h.classList.add('drag');try{h.setPointerCapture(e.pointerId);}catch{}});
+    h.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;e.preventDefault();e.stopPropagation();this.spyWidthSet(drag.w+(drag.x-e.clientX)/drag.scale,false,drag.L);});
+    h.addEventListener('pointerup',stop);h.addEventListener('pointercancel',stop);
+    for(const t of ['click','touchstart'])h.addEventListener(t,e=>e.stopPropagation(),{passive:t==='touchstart'});
+    h.addEventListener('keydown',e=>{const L=this.spyWidthLimits();if(!L)return;const cur=$('sidebar').offsetWidth;let w=null;
+      if(e.key==='ArrowLeft')w=cur+24;else if(e.key==='ArrowRight')w=cur-24;else if(e.key==='Home')w=L.max;else if(e.key==='End')w=L.min;
+      if(w===null)return;e.preventDefault();this.spyWidthSet(w,true,L);});
+    window.addEventListener('resize',()=>{if(this.cur==='intel')this.spyWidthApply();});
   },
 
   setSpeed(i){
@@ -7458,17 +7498,22 @@ const UI = {
   },
   drawInbox(){
     if(this._deferInbox)return;this.fedFoundCards();this.fedAgendaCards();
-    G.inbox=(G.inbox||[]).filter(n=>{if(!['invite','fedvote','fedfound','decision'].includes(n.kind))return true;if(n.kind==='fedvote'){const f=fedOf(n.data);if(!f?.vote||n.key!=='fed:'+f.id+':'+fedVoteToken(f.vote)||!fedVoteCounts(f).waiting.includes(G.p.id))return false;}const r=DiplomaticInbox.state().records.find(r=>r.key===n.key||r.note?.key===n.key||r.note?.uid===n.uid);return !r||r.status==='pending'&&!DiplomaticInbox.gate(r).terminal;});
+    G.inbox=(G.inbox||[]).filter(n=>{if(n.kind==='cncvote')return this.cncVoteOpenFor();if(!['invite','fedvote','fedfound','decision'].includes(n.kind))return true;if(n.kind==='fedvote'){const f=fedOf(n.data);if(!f?.vote||n.key!=='fed:'+f.id+':'+fedVoteToken(f.vote)||!fedVoteCounts(f).waiting.includes(G.p.id))return false;}const r=DiplomaticInbox.state().records.find(r=>r.key===n.key||r.note?.key===n.key||r.note?.uid===n.uid);return !r||r.status==='pending'&&!DiplomaticInbox.gate(r).terminal;});
     const box = $('inbox');
     if (!box) return;
     const list = (G.inbox || []).filter(n=>!n.hidden);   // MP.7.5: kaydırılarak gizlenen olay kartı çizilmez
-    if (!list.length){this.surfaceReplace(box,'','inbox');box._inboxMarkup96d=null;box.classList.add('hidden');return; }
+    const info=this.instInfo();   // BETA-EVENT-UX.0: federasyon / Konsey bilgi kartları (Save8 ve G.inbox dışında)
+    if (!list.length&&!info.length){this.surfaceReplace(box,'','inbox');box._inboxMarkup96d=null;box.classList.add('hidden');return; }
     box.classList.remove('hidden');
     const markup = list.map(it =>{const brief=this.diplomaticBrief(it);return `<button class="nCard ${it.cls||''}" data-a="openNote" data-x="${it.uid}">
          <span class="nIco">${it.ico||'✉'}</span>
          <span class="nTxt"><b>${esc(brief?.title||it.title)}</b><i>${esc(brief?.sub||it.sub||'')}</i></span>
          <span class="nGo">›</span>
-       </button>${this.noteQuick(it)}`;}).join('');
+       </button>${this.noteQuick(it)}`;}).join('')+info.map(r=>`<button class="nCard nInfo sci" data-a="instNote" data-x="${r.id}">
+         <span class="nIco">${r.ico}</span>
+         <span class="nTxt"><b>${esc(r.title)}</b><i>${esc(r.sub)}</i></span>
+         <span class="nGo">›</span>
+       </button>`).join('');
     // Keep an unchanged decision's DOM node and entrance animation stable during refresh.
     this.surfaceRender(box,markup,'inbox',true);box._inboxMarkup96d=markup;
     this.noteSwipeBind(box);
@@ -7522,11 +7567,53 @@ const UI = {
     if(byId)return byId.status==='pending'?byId:null;
     return DiplomaticInbox.state().records.find(r=>r.status==='pending'&&r.note&&(r.note.uid===it.uid||typeof it.key==='string'&&r.note.key===it.key))||null;
   },
+  /* BETA-EVENT-UX.0 — FEDERASYON / KONSEY BİLGİ KARTLARI
+     Kurum olaylarının çoğu yalnız günlük satırı ve haberdi; üst çubukta görünmüyordu. Yeni olay motoru yok: kartlar oyuncunun ZATEN
+     yetkili olduğu veriden türetilir — kendi haber kayıtları (federasyon / Konsey kategorisi; misafirde host'un o oyuncu için süzdüğü
+     haberler) ve üyesi olduğu federasyonun son oylama sonucu (f.lastVote; misafire yalnız üyeye gider). Kartlar G.inbox'a girmez:
+     Save8, inboxUid, RNG ve hız değişmez, duraklatma yoktur. Tekillik: sabit anahtar + bu oturumun "görüldü" kümesi. İlk taramada
+     (yeni sayfa, yüklenen kayıt, oyun günü geri ya da 400 günden çok ileri sıçrayınca) var olan kayıtlar görüldü sayılır → yeniden bağlanma,
+     ayna yenilemesi ya da kayıt yükleme eski olayı yeniden doğurmaz. En çok 3 kart, 60 oyun gününden eskisi düşer; geçmiş haberlerde. */
+  instInfoRows(){
+    const out=[],p=G.p;if(!p)return out;
+    for(const r of (G.news&&G.news.records)||[]){if(r.category!=='federation'&&r.category!=='council')continue;
+      out.push({key:'n:'+r.key,day:r.day,ico:r.category==='council'?'🌐':'🏛',title:String(r.title||'').slice(0,90),sub:String(r.text||'').slice(0,140),news:r.id});}
+    for(const f of G.feds||[]){const v=f.lastVote;if(!v||!(f.members||[]).includes(p.id)||!Number.isFinite(v.day))continue;
+      const L=typeof fedVoteLaw==='function'?fedVoteLaw(v):null;
+      out.push({key:'v:'+f.id+':'+v.id+':'+v.day,day:v.day,ico:'🏛',title:'Federasyon oylaması sonuçlandı — '+f.name,sub:(L?L.n:'Karar')+(v.repeal?' (kaldırma)':'')+': '+(v.passed?'KABUL':'RED')+(v.why?' · '+String(v.why).slice(0,80):''),fed:f.id});}
+    return out;
+  },
+  instInfo(){
+    if(!G||!G.p)return [];
+    const day=G.day,sig=(G.cfg&&G.cfg.seed)+'|'+G.p.name,rows=this.instInfoRows();let st=this._instInfo;
+    if(!st||st.sig!==sig||day<st.day-1||day>st.day+400){st=this._instInfo={sig,day,seen:new Set(rows.map(r=>r.key)),live:[],next:st?st.next:1};return st.live;}
+    st.day=day;
+    for(const r of rows)if(!st.seen.has(r.key)){st.seen.add(r.key);if(r.day>=day-60)st.live.push({...r,id:'i'+(st.next++)});}
+    st.live=st.live.filter(r=>day-r.day<=60).slice(-3);
+    return st.live;
+  },
+  instInfoDismiss(id){const st=this._instInfo;if(!st)return false;const n=st.live.length;st.live=st.live.filter(r=>r.id!==String(id));if(st.live.length!==n)this.drawInbox();return st.live.length!==n;},
+  instInfoOpen(id){
+    const r=this._instInfo&&this._instInfo.live.find(x=>x.id===String(id));if(!r)return;this.instInfoDismiss(id);
+    if(Number.isInteger(r.news)&&typeof ArchiveUI!=='undefined'&&typeof GalacticNews!=='undefined'&&GalacticNews.get(r.news)){ArchiveUI.open('news');ArchiveUI.detail(r.news);return;}
+    if(Number.isInteger(r.fed)&&fedOf(r.fed)){this.openFed();return;}
+    if(typeof ArchiveUI!=='undefined')ArchiveUI.open('news');
+  },
+  /* BETA-EVENT-UX.0 — Konsey oy kartında hızlı EVET / HAYIR. Ayrı karar yolu yok: tam Konsey penceresinin cncYes / cncNo eylemi
+     (tek oyunculu ve host'ta castCouncilVote; misafirde aynı eylem councilVote komutuna iner). Kart oylama simgesini (token) çizim anında
+     tutar; oylama değiştiyse eski karttan oy gitmez. Oy verilmiş ya da kapanmış oylamanın kartı kutuda kalmaz. */
+  cncVoteOpenFor(e=G.p){const c=G.council,v=c&&c.vote;return !!(e&&v&&!v.done&&(c.members||[]).includes(e.id)&&!(v.yes||[]).includes(e.id)&&!(v.no||[]).includes(e.id)&&!(typeof isVassal==='function'&&isVassal(e)&&(c.members||[]).includes(e.overlord)));},
+  cncQuick(it){
+    if(!this.cncVoteOpenFor())return '';const tok=councilVoteToken(G.council.vote);it._cncToken=tok;
+    if(this._councilPending&&this._councilPending.token===tok)return `<div class="nQuick" data-uid="${it.uid}"><span class="nqWait">Oy gönderildi — host yanıtı bekleniyor…</span></div>`;
+    return `<div class="nQuick" data-uid="${it.uid}"><button class="nq ok" data-a="noteQuick" data-x="${it.uid}:y">EVET</button><button class="nq no" data-a="noteQuick" data-x="${it.uid}:n">HAYIR</button></div>`;
+  },
   noteQuick(it){
     if(this.noteChoiceData(it))return this.noteChoiceMenu(it);
+    if(it.kind==='cncvote')return this.cncQuick(it);   // BETA-EVENT-UX.0
     if(!['aideal','pact','invite','fedvote','fedfound'].includes(it.kind))return '';
     const r=this.noteRecord(it);if(!r)return '';
-    if(r._mpWait||it.kind==='fedfound'&&this.fedFoundWaiting?.(it.data))return `<div class="nQuick" data-uid="${it.uid}"><span class="nqWait">Karar gönderildi — yanıt bekleniyor…</span></div>`;
+    if(r._mpWait||it.kind==='fedfound'&&this.fedFoundWaiting?.(it.data)||it.kind==='fedvote'&&this.fedVoteWaiting?.(r.fid,r.token))return `<div class="nQuick" data-uid="${it.uid}"><span class="nqWait">Karar gönderildi — yanıt bekleniyor…</span></div>`;
     const v=it.kind==='fedvote';
     return `<div class="nQuick" data-uid="${it.uid}"><button class="nq ok" data-a="noteQuick" data-x="${it.uid}:y">${v?'EVET':'KABUL'}</button>`+
       `<button class="nq no" data-a="noteQuick" data-x="${it.uid}:n">${v?'HAYIR':'REDDET'}</button>`+
@@ -7534,6 +7621,9 @@ const UI = {
   },
   noteQuickAct(x){
     const [u,c]=String(x).split(':'),it=(G.inbox||[]).find(n=>n.uid===+u);if(!it)return;
+    if(it.kind==='cncvote'){if(c!=='y'&&c!=='n')return;const tok=it._cncToken,cur=councilVoteToken(G.council?.vote);
+      if(!tok||tok!==cur){say('Oylama değişti; Konsey panelinden güncel oylamayı aç','war');this.drawInbox();return;}
+      this.act(c==='y'?'cncYes':'cncNo',tok);this.noteResume();this.drawInbox();this.topbar();return;}
     const r=this.noteRecord(it);if(!r){this.openNote(it.uid);return;}
     if(c==='c'){
       if(r.kind!=='aideal')return;const g=DiplomaticInbox.gate(r);
@@ -7546,6 +7636,7 @@ const UI = {
     this.noteResume();this.drawInbox();this.topbar();
   },
   noteSwipe(uid){
+    if(/^i\d+$/.test(String(uid)))return this.instInfoDismiss(uid);
     const list=G.inbox||[],i=list.findIndex(n=>n.uid===+uid);if(i<0)return false;
     const it=list[i],dip=typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(it.kind);
     if(!dip&&!['wardec','warstart','crisend','cncnew'].includes(it.kind)){
