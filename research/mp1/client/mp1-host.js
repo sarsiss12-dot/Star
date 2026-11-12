@@ -219,12 +219,18 @@ function closeRoom(){
 const fedChange0=fedChange;fedChange=function(){const r=fedChange0.apply(this,arguments);if(r?.ok&&API.host&&API.started)API.dirty=true;return r;};
 const month=monthTick;
 monthTick=function(){const r=month.apply(this,arguments);if(API.host&&API.started){API.host.observeHumans();API.dirty=true;autosave();}return r;};
+/* MP-P0: döngünün parçaları birbirinden yalıtılır. Eskiden ilk parçadaki (mp71Tick) ya da yayındaki tek bir istisna aynı turdaki
+   bütün işi (yayın, hız eşitleme, teklif süpürme) atlatıyordu; kalıcı bir hata misafirlere dünya gitmesini sessizce kesiyordu.
+   Hata sayılır ve host'un tanı satırında görünür (API.loopErr: parça adı + kısa ileti). Nabız 2 sn'de bir (mp-core pulse). */
+API.loopErr=null;API.loopErrors=0;let pulseAt=0;
+const part=(name,fn)=>{try{fn();}catch(e){API.loopErrors++;API.loopErr={part:name,msg:String(e&&e.message||e).slice(0,120),at:Date.now()};}};
 setInterval(()=>{
-  if(API.host&&API.started&&window.MP71Dip)mp71Tick();
+  if(API.host&&API.started&&window.MP71Dip)part('mp71',mp71Tick);
   if(!API.host||!API.started||!API.connected)return;
-  const day=Math.floor(G.day);if(API.dirty||day!==API.lastDay){API.dirty=false;API.lastDay=day;API.host.publish();API.publishes++;}
-  if(PZ)applySpeed(true);else API.host.speedSync(window.MP61&&MP61.windowOpen()?'window':API.bg?'background':null);   // MP.6.1/6.3: host'un iç hız nedenleri de herkese
-  dipTick();
+  const day=Math.floor(G.day);if(API.dirty||day!==API.lastDay){API.dirty=false;API.lastDay=day;part('publish',()=>API.host.publish());API.publishes++;}
+  part('speed',()=>{if(PZ)applySpeed(true);else API.host.speedSync(window.MP61&&MP61.windowOpen()?'window':API.bg?'background':null);});   // MP.6.1/6.3: host'un iç hız nedenleri de herkese
+  part('dip',dipTick);
+  const t=Date.now();if(t-pulseAt>=2000){pulseAt=t;part('pulse',()=>API.host.pulse());}
 },250);
 /* MP.6.1: host'un STARS hız düğmeleri de ortak hız komutundan geçer (host.local: misafirle aynı kurallar, aynı bildirim).
    Oyun dışında (lobi, tek oyunculu) düğme olduğu gibi çalışır. */
@@ -280,6 +286,9 @@ API.pause=PZ;API.pauseStats=PZS;
 /* MP.5 uyumluluğu: ağ/arka plan duraklatması süren ortak hız (eski netSpeed/bgSpeed alanlarının anlamı) */
 Object.defineProperty(API,'netSpeed',{get:()=>mpOn()&&!API.connected?PZ.want:0});
 Object.defineProperty(API,'bgSpeed',{get:()=>mpOn()&&API.bg?PZ.want:0});
+/* MP-P0 tanı: yayın zinciri / host döngüsü hatası (yalnız aşama adı ve sayı; oyun verisi yok) */
+function pubDiag(){const st=API.host&&API.host.stats,e=st&&st.lastPublishError,n=(st&&st.publishErrors|0)+(API.loopErrors|0);if(!n)return '';
+  return ' · YAYIN HATASI '+n+(e?' ('+e.stage+')':API.loopErr?' ('+API.loopErr.part+')':'');}
 function mini(){
   let el=doc.getElementById('mp1Mini');
   if(!el){el=doc.createElement('div');el.id='mp1Mini';el.className='mp1-mini';(doc.getElementById('app')||doc.body).appendChild(el);   /* MP.6: oyunun kök kabında — STARS pencereleri ve 'çevir' uyarısıyla aynı katman bağlamı */el.addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(!b)return;
@@ -303,7 +312,7 @@ function mini(){
     (open?gs.map(p=>{const pid=pidOfSeat(p.seat);return '<div>'+esc(p.name)+' · '+(p.online?'bağlı':'koptu — koltuk bekletiliyor')+(p.online?'':'<button class="mp1-btn" data-g="kick" data-pid="'+esc(pid)+'">Çıkar (devlet boşta)</button><button class="mp1-btn" data-g="ai" data-pid="'+esc(pid)+'">Devleti AI\'ya ver</button>')+'</div>';}).join('')+
       (PZ?'<div class="mp1-row"><button class="mp1-btn" data-g="dpause" id="mp63Dpause" aria-pressed="'+decisionPause()+'">Karar pencerelerinde: '+(decisionPause()?'DURAKLAT':'1× YAVAŞLAT')+'</button></div>':'')+
       (window.MP4Save?'<div class="mp1-row"><button class="mp1-btn" data-g="save">OYUNU KAYDET</button><button class="mp1-btn" data-g="export">DOSYAYA AKTAR</button></div>':'')+
-      '<div class="mp1-sub" id="mpVer">'+esc(V.verLine()+' · host · '+(gs.length-off)+'/'+gs.length+' misafir bağlı'+(API.lastMonthMs!==undefined?' · son ay adımı '+API.lastMonthMs+' ms':'')+' · yeniden bağlanma '+(API.reconnects|0))+'</div>':'');   // MP.8: rol + son ay adımı (salt ölçüm)
+      '<div class="mp1-sub" id="mpVer">'+esc(V.verLine()+' · host · '+(gs.length-off)+'/'+gs.length+' misafir bağlı'+(API.lastMonthMs!==undefined?' · son ay adımı '+API.lastMonthMs+' ms':'')+' · yeniden bağlanma '+(API.reconnects|0)+pubDiag())+'</div>':'');   // MP.8: rol + son ay adımı (salt ölçüm)
 }
 /* ---------- MP.3: host'un MP diplomasi paneli ----------
    Yalnız insan oyuncularla teklif (AI devletlerle diplomasi tek oyunculu DİPLOMASİ ekranında, aynı motor).
@@ -365,6 +374,9 @@ const PKG_WHY={json:'Dosya okunamadı (geçersiz JSON).',fields:'Kayıt eksik ya
   session:'Oyuncu bilgisi bozuk.','dup-player':'Aynı oyuncu iki kez kayıtlı.','dup-empire':'Bir devlete iki oyuncu atanmış.','bad-empire':'Geçersiz devlet kimliği.',host:'Host kaydı geçersiz.',
   auth:'Oyuncu kimlik özeti eksik ya da bozuk.',offers:'Teklif deposu bozuk.',round:'Teklif turları tutarsız.',amount:'Teklifte geçersiz miktar.',items:'Teklif maddesi geçersiz.',display:'Kayıt özeti bozuk.',
   legacy:'Eski MP.0 oturum metası doğrudan yüklenemez.','save8-apply':'Oyun motoru kaydı uygulayamadı; önceki durum korundu.','slot-state':'Kayıttaki insan devletleri dünyayla uyuşmuyor; önceki durum korundu.',
+  'save8-guest':'Bu dosya bir MİSAFİR görünümü kaydı (misafirin oyun içi "Dosyaya kaydet"i). Galaksinin tamamını içermez; çok oyunculu oyun bununla sürdürülemez. Oyunu HOST\'un kaydı sürdürür: host\'un .starsmp.json dosyası, host cihazındaki kayıt listesi ya da host\'un oyun içi .sav dosyası.',
+  'save8-single':'Bu bir tek oyunculu kayıt (.sav). Ana menüden DEVAM ET / Dosyadan yükle ile açılır; çok oyunculu oturum bilgisi içermez.',
+  'save8-host':'Host\'un oyun içi kaydı (.sav).',
   busy:'Bir işlem sürüyor; birazdan yeniden dene.',phase:'Oyun başlamadan kaydedilemez.',full:'Kayıt sınırı doldu (12). Önce eski bir kaydı sil.',idb:'Telefonun tarayıcı deposu kullanılamıyor; DOSYAYA AKTAR ile sakla.'};
 const RECOVER_WHY={phase:'Bu aşamada yapılamaz.',visitor:'Bağlantı artık yok.',seat:'Geçersiz koltuk.','seat-online':'Bu koltuk şu an bağlı; devralınamaz.'};
 const SIZE_N={kucuk:'Küçük',orta:'Orta',buyuk:'Büyük',devasa:'Devasa',ulu:'Ulu'};
@@ -375,8 +387,8 @@ function savesScreen(){
   const list=API.saves,title=API.savesMode==='manage'?'KAYITLARI YÖNET':'KAYITLI OYUNA DEVAM ET';
   overlay.innerHTML='<div class="mp1-wrap mp4"><div class="mp1-h">'+title+'</div>'+
     '<p class="mp1-sub">Kayıtlı galaksiyi yeni bir odada açarsın; arkadaşların yeni kodla katılınca kendi devletlerine döner.</p>'+
-    '<label class="mp1-btn" for="mp4File" id="mp4FileBtn">DOSYADAN AÇ</label><input type="file" id="mp4File" accept=".json,application/json" hidden>'+
-    (API.fileSave?'<div class="mp1-card mp4-card" id="mp4FileCard">'+saveCard(API.fileSave.v.display,'<div class="mp1-sub">Dosya: '+esc(API.fileSave.name)+'</div>')+
+    '<label class="mp1-btn" for="mp4File" id="mp4FileBtn">DOSYADAN AÇ</label><input type="file" id="mp4File" accept=".json,.sav,.txt,application/json,text/plain" hidden>'+
+    (API.fileSave?'<div class="mp1-card mp4-card" id="mp4FileCard">'+saveCard(API.fileSave.v.display,'<div class="mp1-sub">Dosya: '+esc(API.fileSave.name)+'</div>'+(API.fileSave.v.imported?'<div class="mp1-status" id="mp4Imported">Host\'un oyun içi kaydı (.sav): galaksi aynen yüklenir; oyuncu kimlikleri bu dosyada yoktur. Arkadaşların yeni kodla katılınca DEVAM LOBİSİ\'nde KİMLİĞİ KURTAR ile her birini kendi devletine ata. Açık teklifler (imzalanmamış) taşınmaz.</div>':''))+
       '<button class="mp1-btn pri" data-m="resumeFile">DEVAM ET</button></div>':'')+
     '<div class="mp1-status'+(API.saveErr?' bad':'')+'" id="mp4Status">'+esc(API.saveErr||(list==null?'Kayıtlar okunuyor…':API.idb===false?PKG_WHY.idb:list.length?list.length+' kayıt':'Telefonda kayıt yok. Oyun içinde ÇOK OYUNCULU → OYUNU KAYDET.'))+'</div>'+
     (list||[]).map(x=>'<div class="mp1-card mp4-card" data-save="'+esc(x.key)+'">'+saveCard(x.display,'<div class="mp1-sub">'+(x.kind==='auto'?'Otomatik kayıt':'Elle kayıt')+' · '+esc(new Date(x.created).toLocaleString('tr-TR'))+' · '+Math.round(x.size/1024)+' KB</div>')+
@@ -388,7 +400,10 @@ function saveErr(t){API.saveErr=t;const s=doc.getElementById('mp4Status');if(s){
 async function resumeFromKey(key){try{const x=await MP4Save.get(key);if(!x)return saveErr('Kayıt bulunamadı.');const v=StarsMP.validatePackage(x.text);if(!v.ok)return saveErr(PKG_WHY[v.why]||v.why);confirmResume(x.text,v);}catch{saveErr(PKG_WHY.idb);}}
 async function exportKey(key){try{const x=await MP4Save.get(key);if(x){const n=MP4Save.exportFile(x.text,x.display);saveErr('Dosya indirildi: '+n);}}catch{saveErr(PKG_WHY.idb);}}
 function onFile(input){const f=input.files&&input.files[0];if(!f)return;
-  MP4Save.readFile(f).then(text=>{const v=StarsMP.validatePackage(text);if(!v.ok){API.fileSave=null;saveErr(PKG_WHY[v.why]||v.why);render();return;}API.saveErr='';API.fileSave={text,v,name:f.name};render();},
+  MP4Save.readFile(f).then(text=>{let v=StarsMP.validatePackage(text);
+      /* MP-P0: host'un oyun içi düz Save8'i (.sav) → devam paketi (dünya aynen; koltuklar host onayıyla kurtarılır). Misafir aynası ve tek oyunculu kayıt açık nedenle reddedilir. */
+      if(!v.ok&&v.why==='save8-host'){const w=StarsMP.packageFromSave8(text,{random:hex,now:()=>Date.now()});if(w.ok){v=w;text=JSON.stringify(w.pkg);}else v=w;}
+      if(!v.ok){API.fileSave=null;saveErr(PKG_WHY[v.why]||v.why);render();return;}API.saveErr='';API.fileSave={text,v,name:f.name};render();},
     e=>saveErr(e&&e.message==='too-big'?PKG_WHY['too-big']:PKG_WHY.json));input.value='';}
 function confirmResume(text,v){
   sheet('"'+v.display.name+'" (Yıl '+v.display.year+', Ay '+v.display.month+') yeni bir odada açılsın mı? Arkadaşların yeni kodla katılıp kendi devletlerine döner.','Yükle ve oda aç',()=>{
@@ -426,6 +441,14 @@ async function saveNow(kind){const s=snapshotText();if(!s)return;try{const r=awa
   catch{dipToast('Kayıt yazılamadı; mevcut kayıtlar korunuyor. DOSYAYA AKTAR ile sakla.',true);API.lastSave={ok:false,kind};}}
 function exportNow(){const s=snapshotText();if(!s)return;const n=MP4Save.exportFile(s.text,s.pkg.display);dipToast('Dosya indirildi: '+n,false);}
 API.mp4={saveNow,exportNow,refreshSaves};
+/* MP-P0: oyun içi ☰ → "Dosyaya kaydet" MP oyununda düz .sav üretiyordu; bu dosya ÇOK OYUNCULU → KAYITLI OYUNA DEVAM ET'te "Kayıt eksik
+   ya da bozuk" diye reddediliyordu (gerçek kullanıcı raporu). MP host oyunu sürerken aynı düğme çok oyunculu paketi (.starsmp.json)
+   indirir; "Cihaza kaydet" ayrıca MP kayıt listesine elle kayıt ekler. Tek oyunculuda ve lobide davranış aynen. */
+if(typeof downloadSave==='function'&&window.MP4Save){const dl0=downloadSave;downloadSave=function(){
+  if(!(API.host&&API.started))return dl0.apply(this,arguments);
+  const s=snapshotText();if(!s)return false;const n=MP4Save.exportFile(s.text,s.pkg.display);
+  dipToast('Çok oyunculu kayıt indirildi: '+n+' — ÇOK OYUNCULU → KAYITLI OYUNA DEVAM ET → DOSYADAN AÇ ile sürdürülür.',false);return true;};}
+if(typeof saveGame==='function'&&window.MP4Save){const sg0=saveGame;saveGame=function(){if(API.host&&API.started)saveNow('manual');return sg0.apply(this,arguments);};}
 /* ---------- Android arka plan / ekran kilidi ----------
    Arka planda rAF durur, zamanlayıcılar kısılır, sekme dondurulabilir. Yarım hızla
    sürüp misafirleri belirsiz bırakmak yerine: oyun güvenle duraklar, misafir nedeni

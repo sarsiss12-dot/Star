@@ -101,6 +101,9 @@ function validatePackage(input,o={}){
   if(typeof input==='string'){if(input.length>MAX_PKG)return fail('too-big');try{pkg=JSON.parse(input);}catch{return fail('json');}}
   if(!plain(pkg))return fail('json');
   if(pkg.mpMeta===1)return fail('legacy');
+  /* MP-P0: oyun içi "dosyaya kaydet" düz Save8 (.sav) üretir; çok oyunculu paket değildir. Eskiden bu dosya 'fields' ("Kayıt eksik ya da
+     bozuk") ile reddediliyordu: dosya bozuk değil, TÜRÜ farklı. Artık tür ayırt edilir ve kullanıcıya doğru neden söylenir. */
+  if(pkg.v===8&&Array.isArray(pkg.emps)&&Array.isArray(pkg.sys))return fail('save8-'+save8Kind(pkg));
   const KEYS=['format','mpVersion','build','createdAt','saveId','session','diplomacy','display','save8','integrity'];
   if(!onlyKeys(pkg,KEYS)||KEYS.some(k=>!has(pkg,k)))return fail('fields');
   if(pkg.format!==PKG_FORMAT)return fail('format');
@@ -161,6 +164,42 @@ function validatePackage(input,o={}){
   const ds=pkg.display;
   if(!plain(ds)||typeof ds.name!=='string'||ds.name.length>40||!int(ds.year,0,99999)||!int(ds.month,0,12)||!int(ds.day,0,1e7)||!int(ds.systems,1,1000)||!Array.isArray(ds.humans)||ds.humans.length>8)return fail('display');
   return {ok:true,pkg,display:ds};
+}
+/* MP-P0 — düz Save8'in türü (yalnız okur):
+   'guest'  : misafirin ayna dünyasından alınmış kayıt (öteki devletlerin kaynağı/teknolojisi yok, hepsi ai:true; settlements.__mp).
+              Kanonik dünya DEĞİLDİR; çok oyunculu oyunu sürdüremez ve asla host kaydına çevrilmez.
+   'host'   : tasarım kipi MP oyununda HOST'un oyun içi kaydı (cfg.humans = öteki insanların taslakları; devlet 0..k insan).
+              Kanonik dünyadır; oturum bilgisi (koltuk kimlikleri, teklif deposu) yoktur → packageFromSave8 ile devam lobisine alınır.
+   'single' : tek oyunculu kayıt (ya da insanları ayırt edilemeyen eski devralma kipi kaydı). */
+function save8Kind(d){
+  const es=Array.isArray(d.emps)?d.emps:[],hs=d.cfg&&Array.isArray(d.cfg.humans)?d.cfg.humans:[],others=es.slice(1).filter(e=>plain(e)&&!e.dead&&!e.wild);
+  const blank=e=>plain(e.res)&&Object.values(e.res).every(v=>v===0)&&(!plain(e.techs)||!Object.keys(e.techs).length);
+  if((plain(d.settlements)&&d.settlements.__mp===1)||Array.isArray(d.mpVisible)||(hs.length&&others.length&&others.every(e=>e.ai===true&&blank(e))))return 'guest';
+  if(hs.length>=1&&hs.length<=7&&es.length>hs.length&&plain(es[0])&&es[0].ai===false&&hs.every((_,i)=>plain(es[i+1])&&es[i+1].ai===false&&!blank(es[i+1])))return 'host';
+  return 'single';
+}
+/* MP-P0 — host'un oyun içi Save8'inden devam paketi. Dünya (Save8) baytı baytına aynen girer; oturum YENİDEN kurulur:
+   host = devlet 0, misafir koltukları = devlet 1..k (tasarım kipinin atama sırası). Kimlik özeti dosyada olmadığından her koltuğa
+   kimsenin bilmediği rastgele bir özet yazılır: hiçbir cihaz kendiliğinden koltuk alamaz; arkadaşlar yeni kodla "ziyaretçi" olarak
+   bağlanır ve HOST onları koltuklarına atar (mevcut KİMLİĞİ KURTAR akışı; güvenlik denetimi gevşemez). Teklif deposu ve oyuncu
+   notları oturumda yaşadığı için boş başlar (dünyadaki antlaşmalar/savaşlar Save8'dedir, korunur). */
+function packageFromSave8(text,o={}){
+  if(typeof text!=='string')return {ok:false,why:'json'};if(text.length>MAX_SAVE8)return {ok:false,why:'too-big'};
+  let d;try{d=JSON.parse(text);}catch{return {ok:false,why:'json'};}
+  if(!plain(d)||d.v!==8||!Array.isArray(d.emps)||!Array.isArray(d.sys))return {ok:false,why:'save-version'};
+  const kind=save8Kind(d);if(kind!=='host')return {ok:false,why:'save8-'+kind};
+  const random=o.random;if(typeof random!=='function')return {ok:false,why:'fields'};
+  const hs=d.cfg.humans,nm=(e,f)=>String(e&&e.name||f).replace(/[\u0000-\u001f<>]/g,'').slice(0,24)||f;
+  const players=[{playerId:'host',name:'Host',empireId:0,seat:0,color:'',lastSeq:0}];
+  hs.forEach((_,i)=>{const salt=random(16);players.push({playerId:'p-'+random(6),name:nm(d.emps[i+1],'Oyuncu '+(i+1)),empireId:i+1,seat:i+1,color:'',lastSeq:0,wasAI:false,takeover:null,auth:{salt,hash:sha256(salt+':'+random(16))}});});
+  const ai=(d.cfg.aiCount|0)-hs.length,size=typeof d.cfg.size==='string'?d.cfg.size:null;
+  const body={format:PKG_FORMAT,mpVersion:PKG_VERSION,build:has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null),createdAt:Number(o.now?o.now():Date.now()),saveId:'s-'+random(8),
+    session:{roomId:'',worldRevision:0,hostEmpireId:0,speed:0,capacity:Math.max(2,players.length),settings:size&&ai>=1&&ai<=48?{size,aiCount:ai,...(typeof d.cfg.shape==='string'?{shape:d.cfg.shape}:{})}:null,players,notes:{}},
+    diplomacy:{next:1,offers:[]},
+    display:{name:String(d.emps[0].name||'Galaksi').replace(/[\u0000-\u001f<>]/g,'').slice(0,40),year:d.year|0,month:d.month|0,day:Math.floor(d.day||0),size,systems:d.sys.length,
+      humans:players.map(x=>({name:x.name,empire:x.playerId==='host'?String(d.emps[0].name||'?'):String(d.emps[x.empireId].name||'?'),host:x.playerId==='host'?1:0}))}};
+  const h8=sha256(text),pkg={...body,save8:text,integrity:{alg:'SHA-256',save8:h8,body:sha256(canon({...body,save8:h8}))}};
+  const v=validatePackage(pkg,has(o,'build')?{build:o.build}:{});return v.ok?{...v,imported:'save8-host'}:v;
 }
 /* Doğrulanmış paketin dünyasını yükle: motorun kendi deserialize'ı (kendi işlemiyle geri alır). Oturumdaki her insan
    devleti yüklenen dünyada insan (ai:false) değilse önceki dünya geri yüklenir. */
@@ -287,20 +326,30 @@ function createHost(opts){
     const objs=[G,...G.emps,...G.fleets,...G.sys],saved=objs.map(o=>{const d={};for(const k of Object.keys(o))if(k[0]==='_')d[k]=Object.getOwnPropertyDescriptor(o,k);return d;});
     try{return fn();}finally{objs.forEach((o,i)=>{const d=saved[i];for(const k of Object.keys(o))if(k[0]==='_'&&!has(d,k))delete o[k];for(const k in d)Object.defineProperty(o,k,d[k]);});}
   }
+  /* MP-P0: yayın zinciri hata yalıtımı. Eskiden publish() içindeki tek bir istisna (bir süpürme, bir oyuncunun görünümü ya da aynası)
+     bütün yayını kesiyordu: komut ACK'i ve hız iletileri gitmeye devam ederken hiçbir misafire dünya güncellemesi gitmiyor, host da
+     bunu görmüyordu. Artık her aşama ve her oyuncu ayrı korunur; hata sayılır (stats.publishErrors / lastPublishError: yalnız aşama adı
+     ve kısa ileti — oyun verisi, jeton yok) ve o oyuncunun bir sonraki yayını TAM veriyle (snapshot / mirror) yeniden kurulur. */
+  function pubErr(stage,err,p){stats.publishErrors=(stats.publishErrors|0)+1;
+    stats.lastPublishError={stage,msg:String(err&&err.message||err).replace(/[\u0000-\u001f]/g,' ').slice(0,120),day:Math.floor(G.day),at:now(),...(p?{seat:p.seat|0}:{})};
+    if(typeof opts.onPublishError==='function')try{opts.onPublishError(stats.lastPublishError);}catch{}}
+  const guarded=(stage,fn,p)=>{try{fn();return true;}catch(err){pubErr(stage,err,p);return false;}};
   function publishTo(p,rev){
     if(!p.conn||p.empireId===null)return;
-    const e=G.emps[p.empireId],t0=now(),view=pure(()=>viewFor(e));let n;
-    if(!p.lastView){n=out(p.conn,{v:PROTOCOL,type:'snapshot',rev,t:clock(),you:{playerId:p.playerId,empireId:p.empireId},view});stats.snapshots++;stats.snapshotBytes.push(n);}
-    else{n=out(p.conn,{v:PROTOCOL,type:'delta',rev,base:p.lastRev,t:clock(),ops:diff(p.lastView,view)});stats.deltas++;stats.deltaBytes.push(n);}
-    p.lastView=view;p.lastRev=rev;stats.publishMs.push(now()-t0);
-    if(p.ui==='stars')sendMirror(p);
+    const okView=guarded('view',()=>{
+      const e=G.emps[p.empireId],t0=now(),view=pure(()=>viewFor(e));let n;
+      if(!p.lastView){n=out(p.conn,{v:PROTOCOL,type:'snapshot',rev,t:clock(),you:{playerId:p.playerId,empireId:p.empireId},view});stats.snapshots++;stats.snapshotBytes.push(n);}
+      else{n=out(p.conn,{v:PROTOCOL,type:'delta',rev,base:p.lastRev,t:clock(),ops:diff(p.lastView,view)});stats.deltas++;stats.deltaBytes.push(n);}
+      p.lastView=view;p.lastRev=rev;stats.publishMs.push(now()-t0);},p);
+    if(!okView)p.lastView=null;
+    if(p.ui==='stars'){if(guarded('mirror',()=>sendMirror(p),p))p.mirrorFail=0;else{p.lastMirror=null;p.mirrorFail=1;}}
   }
   /* MP.6: gerçek STARS arayüzünü kullanan misafire "ayna dünya" (research/mp6/mirror.js): yetkiye göre süzülmüş, misafiri 0 numara
      yapan Save8 biçimi. İlk kez tam, sonra fark; en sık opts.mirrorMs'de bir (son durum ertelenmiş gönderimle mutlaka gider). */
   const mirrorMs=Number.isFinite(opts.mirrorMs)?opts.mirrorMs:700,cosmetic=parseInt(fnv(String(opts.roomId||'r')).slice(0,7),16)%2147483646+1;
   function sendMirror(p){
     if(!p.conn||p.empireId===null||!root.StarsMirror)return;
-    const t=now();if(p.lastMirror&&mirrorMs>0&&t-(p.mirrorAt||0)<mirrorMs){if(!p.mirrorTimer&&typeof setTimeout==='function')p.mirrorTimer=setTimeout(()=>{p.mirrorTimer=null;sendMirror(p);},mirrorMs-(t-(p.mirrorAt||0)));return;}
+    const t=now();if(p.lastMirror&&mirrorMs>0&&t-(p.mirrorAt||0)<mirrorMs){if(!p.mirrorTimer&&typeof setTimeout==='function')p.mirrorTimer=setTimeout(()=>{p.mirrorTimer=null;if(!guarded('mirror',()=>sendMirror(p),p))p.lastMirror=null;},mirrorMs-(t-(p.mirrorAt||0)));return;}
     const m=pure(()=>root.StarsMirror.build(p.empireId,{cosmeticSeed:cosmetic,log:notes.get(p.empireId)||[],news:(newsBy.get(p.empireId)||{records:[]}).records}));
     const rev=(p.mirrorRev||0)+1;let n;
     if(!p.lastMirror)n=out(p.conn,{v:PROTOCOL,type:'mirror',rev,worldRev:S.worldRevision,full:m});
@@ -456,7 +505,14 @@ function createHost(opts){
     for(const [eid] of S.slots){const e=G.emps[eid];if(!remoteHuman(e)||e.dead||!c.members.includes(eid)||cncSilent(e)||c.vote.yes.includes(eid)||c.vote.no.includes(eid))continue;
       if(cncSeen.get(eid)===tok)continue;cncSeen.set(eid,tok);const R=RESOLUTIONS[c.vote.key];note(eid,'KONSEY OYLAMASI — '+(R?R.n:c.vote.key)+' · oyunu Konsey ekranından ver','sci');}
   }
-  function publish(){dipSweep();pure(polSweep);pure(warSweep);pure(settleSweep);pure(spySweep);pure(councilSweep);const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
+  function publish(){guarded('dip',dipSweep);guarded('pol',()=>pure(polSweep));guarded('war',()=>pure(warSweep));guarded('settle',()=>pure(settleSweep));guarded('spy',()=>pure(spySweep));guarded('council',()=>pure(councilSweep));
+    const rev=++S.worldRevision;for(const p of S.players.values())publishTo(p,rev);return rev;}
+  /* MP-P0: nabız. Misafir "bağlantı açık ama dünya gelmiyor" durumunu kendi başına ayırt edemiyordu (hız iletileri ayrı yoldan gelir).
+     Host birkaç saniyede bir her bağlı koltuğa yalnız sayaç gönderir: dünya revizyonu, o oyuncuya gönderilen son ayna revizyonu, tam gün,
+     ortak hız ve yayın hatası var mı. Oyun verisi / başka oyuncu bilgisi içermez. Misafir bununla eksik aynayı (mrev > elindeki) ve
+     host'un yayın hatasını (rev ilerliyor, mrev ilerlemiyor) kesin olarak görür ve TAM ayna ister. */
+  function pulse(){let n=0;for(const p of S.players.values()){if(!p.conn||p.empireId===null||p.playerId==='host')continue;
+      out(p.conn,{v:PROTOCOL,type:'pulse',rev:S.worldRevision,mrev:p.mirrorRev||0,day:Math.floor(G.day),spd:G.speed|0,perr:stats.publishErrors|0,...(p.mirrorFail?{mfail:1}:{})});n++;}return n;}
 
   /* ---------- komutlar: yalnız bu tablo ---------- */
   function locate(e,c){
@@ -1698,12 +1754,12 @@ function createHost(opts){
   function closeRoom(){if(!L)return {ok:false};L.phase='closed';broadcastLobby();for(const p of guests())if(p.conn){kick(p.conn,'room-closed');S.conns.delete(p.conn);p.conn=null;}return {ok:true};}
   if(opts.resume){if(!L)throw Error('MP.4: kayıttan devam lobi kipi ister');restoreSession(opts.resume);}
   const newsOf=id=>JSON.parse(JSON.stringify((newsBy.get(id)||{records:[]}).records));
-  return {newsOf,onMessage,onLeave,onJoin(){},publish,publishTo,speedSync,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView:e=>pure(()=>polView(e)),
+  return {newsOf,onMessage,onLeave,onJoin(){},publish,pulse,publishTo,speedSync,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView:e=>pure(()=>polView(e)),
     snapshot,resumeStart,recoverSeat,
     isHuman:humanEmpire,isRemoteHuman:remoteHuman,state:S,stats,COMMANDS,HANDLERS,clock,fnv,observeHumans,
     configure,setCapacity,claimFor,setHostTab,start,canStart,draftCheck,kick:kickPlayer,close:closeRoom,lobbyView:()=>L&&lobbyView(S.players.get('host')),lobby:L,
     /* MP.1.1: duraklatma nedeni (host-offline / host-background) misafire lobide 'pause' olarak gider; MP.0 çağrısı nedensiz kalır. */
     setPaused(v,why){S.paused=!!v;if(L&&['ingame','paused'].includes(L.phase)){const ph=v?'paused':'ingame',pw=v?(why||'host'):null;if(L.phase!==ph||L.pause!==pw){L.phase=ph;L.pause=pw;broadcastLobby();}}}};
 }
-root.StarsMP={PROTOCOL,createHost,fnv,isHumanActor,actorVision,TABS,sha256,canon,validatePackage,loadWorld,upgradeLegacy,PKG_FORMAT,PKG_VERSION};
+root.StarsMP={PROTOCOL,createHost,fnv,isHumanActor,actorVision,TABS,sha256,canon,validatePackage,loadWorld,upgradeLegacy,save8Kind,packageFromSave8,PKG_FORMAT,PKG_VERSION};
 })(typeof globalThis!=='undefined'?globalThis:this);
