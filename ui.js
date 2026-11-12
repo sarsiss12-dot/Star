@@ -1952,6 +1952,7 @@ const UI = {
       }
       case 'openNote': this.openNote(x); break;
       case 'instNote': this.instInfoOpen(x); break;   // BETA-EVENT-UX.0
+      case 'instDecide': this.instDecide(x); break;   // BETA-EVENT-UX.1
       case 'noteQuick': this.noteQuickAct(x); break;   // MP.7.4
       case 'noteSwipe': return this.noteSwipe(x);      // MP.7.4
       case 'closem': this.closeModal(); break;
@@ -3883,6 +3884,10 @@ const UI = {
       if(rec){rec.expires=p.expires;if(p.status!=='pending'||reply?.status!=='pending'){rec.status=p.status==='expired'?'expired':reply?.status==='accepted'?'accepted':reply?.status==='rejected'?'rejected':'invalid';rec.finished=p.finished||reply?.day||G.day;rec.why=p.why||reply?.why||p.status;G.inbox=(G.inbox||[]).filter(n=>n.key!==key);}else if(!G.inbox.some(n=>n.key===key)&&!this._fedFoundDismissed?.has(key)&&!(globalThis.MP6Stars?.S.swiped.has(key))){this.notify({kind:'fedfound',data:p.id,key,ico:'🏛',pause:false,title:'FEDERASYON KURULUŞ DAVETİ — '+G.emps[p.by].name,sub:summary});}}
       const stateKey='fedfound-result:'+p.id+(p.revision?':r'+p.revision:'')+':'+p.status+':'+p.members.map(id=>p.replies[id]?.status||'').join(',');
       if(!st.records.some(r=>r.key===stateKey)){
+        /* BETA-EVENT-UX.1 kök neden (taban p24'te yeniden üretildi): her ara durum (1/2 onay, 2/2 onay, KURULDU) ayrı kart doğuruyor ve eskisi
+           hiç kalkmıyordu → kurucunun çubuğunda aynı kuruluş için birikip takılı kalan kartlar. Aynı önerinin daha eski sonuç kartı yenisi
+           doğarken kalkar; kayıtları Gelen kutusu geçmişinde kalır. */
+        G.inbox=(G.inbox||[]).filter(n=>!(n.kind==='fedfoundResult'&&n.data===p.id&&n.key!==stateKey));
         const count=p.members.filter(id=>p.replies[id]?.status==='accepted').length,f=p.fid?fedOf(p.fid):null;
         const item={kind:'fedfoundResult',data:p.id,key:stateKey,ico:'🏛',pause:false,title:p.status==='founded'?'FEDERASYON KURULDU — '+(f?.name||'Federasyon'):'KURULUŞ SONUCU · '+count+'/'+p.members.length+' onay',sub:summary+(f?' · Lider: '+G.emps[f.leader].name:' · '+p.members.filter(id=>id!==p.by).map(id=>G.emps[id].name+': '+(p.replies[id]?.status==='accepted'?'kabul':p.replies[id]?.status==='rejected'?'ret':'bekliyor')).join(' · '))};
         if(!this.fedResultSeen(stateKey))this.notify(item);else DiplomaticInbox.capture({...item,uid:++G.inboxUid,born:G.day});
@@ -6552,11 +6557,14 @@ const UI = {
     if(f&&(v.kind==='war'||['newWar','joinWar'].includes(v.motion)))h+=`<div class="mini">${esc(fedDutyText(f))} Üyeler: ${f.members.map(name).join(', ')}</div>`;
     return h+'</div>';
   },
+  /* BETA-EVENT-UX.1: oy kartı alt yazısı — üyelik başvurusu / ihraç / başkan seçimi gibi hedefli önergede hedef devlet adıyla */
+  fedVoteSub(f){const v=f.vote,L=fedVoteLaw(v),t=v&&Number.isInteger(v.target)&&G.emps[v.target]?G.emps[v.target].name:null;
+    return (v&&v.motion==='admit'&&t?'Üyelik başvurusu — '+t:(L?L.n:'Karar')+(t&&v.kind==='motion'?' — '+t:''))+(v&&v.repeal?' — kaldırma':'');},
   fedVote(f){
     const L = fedVoteLaw(f.vote);
     if (!L) return;
     this.notify({kind:'fedvote', data:f.id, ico:'🏛', pause:true,
-      title:'Federasyon oylaması', sub:L.n+(f.vote.repeal?' — kaldırma':''), key:'fed:'+f.id+':'+fedVoteToken(f.vote)});
+      title:'Federasyon oylaması', sub:this.fedVoteSub(f), key:'fed:'+f.id+':'+fedVoteToken(f.vote)});
   },
   fedVoteOpen(fid){
     const f = fedOf(fid);
@@ -7513,7 +7521,7 @@ const UI = {
          <span class="nIco">${r.ico}</span>
          <span class="nTxt"><b>${esc(r.title)}</b><i>${esc(r.sub)}</i></span>
          <span class="nGo">›</span>
-       </button>`).join('');
+       </button>${r.decision?(r.wait?`<div class="nQuick"><span class="nqWait">Karar gönderildi — yanıt bekleniyor…</span></div>`:`<div class="nQuick"><button class="nq ok" data-a="instDecide" data-x="${r.id}:y">KABUL</button><button class="nq no" data-a="instDecide" data-x="${r.id}:n">REDDET</button></div>`):''}`).join('');
     // Keep an unchanged decision's DOM node and entrance animation stable during refresh.
     this.surfaceRender(box,markup,'inbox',true);box._inboxMarkup96d=markup;
     this.noteSwipeBind(box);
@@ -7565,7 +7573,12 @@ const UI = {
     if(!it||typeof DiplomaticInbox==='undefined'||!DiplomaticInbox.supported(it.kind))return null;
     const byId=Number.isInteger(it.rec)?DiplomaticInbox.get(it.rec):null;   // çok oyunculu kartın kayıt bağı
     if(byId)return byId.status==='pending'?byId:null;
-    return DiplomaticInbox.state().records.find(r=>r.status==='pending'&&r.note&&(r.note.uid===it.uid||typeof it.key==='string'&&r.note.key===it.key))||null;
+    const st=DiplomaticInbox.state().records,hit=st.find(r=>r.status==='pending'&&r.note&&(r.note.uid===it.uid||typeof it.key==='string'&&r.note.key===it.key));if(hit)return hit;
+    /* BETA-EVENT-UX.1: oylama kaydı Gelen kutusu eşitlemesiyle (DiplomaticInbox.sync) karttan önce doğduysa kaydın notunda kartın
+       uid/anahtarı yok; kart → kayıt bağı hızlı EVET/HAYIR'ı kaybediyordu (misafirde Gelen kutusu açıldıktan sonra gelen oy). Kayıt
+       anahtarı oylamanın kendisinden türetilir (aynı capture kuralı: 'vote:'+federasyon+':'+oy kimliği). */
+    const m=it.kind==='fedvote'&&typeof it.key==='string'&&/^fed:(\d+):(.+)$/.exec(it.key);
+    return m?st.find(r=>r.status==='pending'&&r.key==='vote:'+m[1]+':'+m[2])||null:null;
   },
   /* BETA-EVENT-UX.0 — FEDERASYON / KONSEY BİLGİ KARTLARI
      Kurum olaylarının çoğu yalnız günlük satırı ve haberdi; üst çubukta görünmüyordu. Yeni olay motoru yok: kartlar oyuncunun ZATEN
@@ -7574,27 +7587,81 @@ const UI = {
      Save8, inboxUid, RNG ve hız değişmez, duraklatma yoktur. Tekillik: sabit anahtar + bu oturumun "görüldü" kümesi. İlk taramada
      (yeni sayfa, yüklenen kayıt, oyun günü geri ya da 400 günden çok ileri sıçrayınca) var olan kayıtlar görüldü sayılır → yeniden bağlanma,
      ayna yenilemesi ya da kayıt yükleme eski olayı yeniden doğurmaz. En çok 3 kart, 60 oyun gününden eskisi düşer; geçmiş haberlerde. */
+  /* BETA-EVENT-UX.1: oyuncuya yönelik metinde kesirli oyun günü (motor metni "gün 9.4065…") yalnız GÖSTERİMDE tam güne yuvarlanır (G.day / kayıt değişmez) */
+  dayText(t){return String(t==null?'':t).replace(/\bgün (\d+)\.\d+/g,'gün $1');},
   instInfoRows(){
     const out=[],p=G.p;if(!p)return out;
+    const founding=new Set((G.fedFounding?.proposals||[]).map(x=>x.fid).filter(Number.isInteger));
     for(const r of (G.news&&G.news.records)||[]){if(r.category!=='federation'&&r.category!=='council')continue;
-      out.push({key:'n:'+r.key,day:r.day,ico:r.category==='council'?'🌐':'🏛',title:String(r.title||'').slice(0,90),sub:String(r.text||'').slice(0,140),news:r.id});}
+      const m=/^fed:(\d+):([A-Za-z]+):/.exec(r.key||''),ev=m&&m[2],fid=m&&+m[1],txt=String(r.text||''),fedName=txt.split(' — ')[0];
+      /* BETA-EVENT-UX.1: aynı olay iki kart olmasın — açık kuruluş süreciyle kurulan federasyonun sonucu fedfoundResult kartında; başkan değişimi ayrı izlenir */
+      if(ev==='founded'&&founding.has(fid))continue;
+      const kind=ev==='motion'?txt.slice(fedName.length+3):null;if(kind==='elect')continue;
+      const sub=ev==='motion'&&typeof FED_MOTIONS!=='undefined'&&FED_MOTIONS[kind]?fedName+' · '+FED_MOTIONS[kind].n:ev==='reformComplete'&&typeof FED_TYPES!=='undefined'&&FED_TYPES[kind=txt.slice(fedName.length+3)]?fedName+' · '+FED_TYPES[kind].n:ev?fedName:this.dayText(txt);
+      out.push({key:'n:'+r.key,day:r.day,ico:r.category==='council'?'🌐':'🏛',title:String(r.title||'').slice(0,90),sub:String(sub).slice(0,140),news:r.id});}
     for(const f of G.feds||[]){const v=f.lastVote;if(!v||!(f.members||[]).includes(p.id)||!Number.isFinite(v.day))continue;
       const L=typeof fedVoteLaw==='function'?fedVoteLaw(v):null;
       out.push({key:'v:'+f.id+':'+v.id+':'+v.day,day:v.day,ico:'🏛',title:'Federasyon oylaması sonuçlandı — '+f.name,sub:(L?L.n:'Karar')+(v.repeal?' (kaldırma)':'')+': '+(v.passed?'KABUL':'RED')+(v.why?' · '+String(v.why).slice(0,80):''),fed:f.id});}
+    /* BETA-EVENT-UX.1: üyelik başvurusunun sonucu başvurana (motorun admissionResults satırı; misafire aynada yalnız kendi satırı gider) */
+    for(const f of G.feds||[])for(const [tok,row] of Object.entries(f.admissionResults||{})){if(!row||row.target!==p.id)continue;
+      const iv=f.invites&&f.invites[p.id];if(row.status==='pending'&&iv&&(iv.vote===undefined?iv.admission==='vote':String(iv.vote)===String(tok))){out.push({key:'a:'+f.id+':'+tok+':consent',grp:'a:'+f.id+':'+tok,day:G.day,hide:true});continue;}   // oy kabul edildi, rıza bekleniyor: karar DAVET kartında; eski "oylamada" kartı kalkar
+      const lbl={pending:'oylamada',accepted:'kabul edildi',rejected:'reddedildi',expired:'süresi doldu',invalid:'geçersiz'}[row.status]||row.status;
+      out.push({key:'a:'+f.id+':'+tok+':'+row.status,grp:'a:'+f.id+':'+tok,day:Number.isFinite(row.updated)?row.updated:G.day,ico:'🏛',title:'Üyelik başvurun '+lbl+' — '+f.name,sub:String(row.why||'').slice(0,140),fed:f.id});}
     return out;
+  },
+  /* BETA-EVENT-UX.1: aynı başkan değişimi tek kart; federasyon başkanı (üyeye) ve Konsey başkanı (üyeye). Motor yalnız günlük satırı yazıyordu. */
+  instLeaderRows(st){
+    const out=[],p=G.p;
+    for(const f of G.feds||[]){if(!(f.members||[]).includes(p.id))continue;const was=st.lead.get(f.id);st.lead.set(f.id,f.leader);
+      if(was!==undefined&&was!==f.leader&&G.emps[f.leader])out.push({key:'L:'+f.id+':'+f.leader+':'+Math.floor(G.day),day:G.day,ico:'🏛',title:'Federasyon başkanı değişti — '+f.name,sub:'Yeni başkan: '+G.emps[f.leader].name,fed:f.id});}
+    const c=G.council,pres=c&&!c.dead?c.president:null,was=st.pres;st.pres=pres;
+    if(c&&!c.dead&&(c.members||[]).includes(p.id)&&was!==undefined&&was!==null&&pres!==was&&G.emps[pres])
+      out.push({key:'P:'+pres+':'+Math.floor(G.day),day:G.day,ico:'🌐',title:'Konsey başkanlığı değişti',sub:'Yeni başkan: '+G.emps[pres].name+' · '+(c.name||'Galaktik Konsey'),council:true});
+    /* yürürlükteki yasanın kalkması (motorda yalnız Koruyucu vetosu; haber üretilmiyordu) — kabul haberleri zaten motorun Konsey kararı haberi */
+    const laws=new Set(c&&!c.dead?Object.keys(c.laws||{}).filter(k=>c.laws[k]):[]),wasL=st.claws;st.claws=laws;
+    if(wasL&&c&&!c.dead&&(c.members||[]).includes(p.id))for(const k of wasL)if(!laws.has(k))
+      out.push({key:'R:'+k+':'+Math.floor(G.day),day:G.day,ico:'🌐',title:'Konsey yasası yürürlükten kalktı',sub:((typeof RESOLUTIONS!=='undefined'&&RESOLUTIONS[k]?.n)||k)+' · '+(c.name||'Galaktik Konsey'),council:true});
+    return out;
+  },
+  /* BETA-EVENT-UX.1: federasyona katılım daveti (doğrudan davet ya da üyelik oyundan sonra adayın ayrı rızası). Kayıt motorun
+     DiplomaticInbox'ında zaten vardı ama üst çubukta kart yoktu. Kart G.inbox dışında (Save8 / inboxUid değişmez); KABUL / RET
+     tam Gelen kutusu penceresiyle aynı DiplomaticInbox.resolve yolu (misafirde host fedReply). */
+  instInviteRows(){
+    const out=[],p=G.p;if(!p||typeof findFed==='function'&&findFed(p))return out;
+    for(const f of G.feds||[]){const inv=f.invites&&f.invites[p.id];if(!inv||!(inv.expires>G.day))continue;
+      out.push({key:'I:'+f.id+':'+inv.expires,rec:'invite:'+f.id+':'+inv.expires,fid:f.id,inv,ico:'🏛',decision:true,title:'FEDERASYON DAVETİ — '+f.name,sub:(inv.admission==='vote'?'Üyelik oyu kabul edildi; katılman için onayın gerekiyor':'Katılım daveti')+' · '+(typeof fedType==='function'?fedType(f).n:'')});}
+    return out;
+  },
+  instInviteRecord(r){
+    if(typeof DiplomaticInbox==='undefined')return null;const st=DiplomaticInbox.state();let rec=st.records.find(x=>x.key===r.rec);
+    const f=fedOf(r.fid);if(!rec&&f&&G.emps[r.inv.by])DiplomaticInbox.source('invite',r.rec,r.inv.by,f.id,String(r.inv.expires),r.inv.expires,'Federasyona katılım — '+f.name,fedType(f).n+' · '+fedType(f).d);
+    rec=st.records.find(x=>x.key===r.rec);return rec&&rec.status==='pending'?rec:null;
+  },
+  instDecide(x){
+    const [id,c]=String(x).split(':'),st=this._instInfo,r=st&&st.dec.find(d=>d.id===id);if(!r||(c!=='y'&&c!=='n'))return;
+    if(r.wait){say('Karar gönderildi — yanıt bekleniyor','sci');return;}
+    const rec=this.instInviteRecord(r);if(!rec){say('Davet artık geçerli değil','war');this.drawInbox();return;}
+    const out=DiplomaticInbox.resolve(rec.id,c==='y','haracguzar',G.emps);if(out.ok&&out.pending)r.wait=true;
+    say(out.ok?(out.pending?'Karar gönderildi — yanıt bekleniyor':(c==='y'?'Federasyona katıldın':'Davet reddedildi')):(out.why||'Karar verilemedi'),out.ok?'win':'war');
+    this.drawInbox();this.topbar();
   },
   instInfo(){
     if(!G||!G.p)return [];
     const day=G.day,sig=(G.cfg&&G.cfg.seed)+'|'+G.p.name,rows=this.instInfoRows();let st=this._instInfo;
-    if(!st||st.sig!==sig||day<st.day-1||day>st.day+400){st=this._instInfo={sig,day,seen:new Set(rows.map(r=>r.key)),live:[],next:st?st.next:1};return st.live;}
-    st.day=day;
-    for(const r of rows)if(!st.seen.has(r.key)){st.seen.add(r.key);if(r.day>=day-60)st.live.push({...r,id:'i'+(st.next++)});}
-    st.live=st.live.filter(r=>day-r.day<=60).slice(-3);
-    return st.live;
+    if(!st||st.sig!==sig||day<st.day-1||day>st.day+400){st=this._instInfo={sig,day,seen:new Set(rows.map(r=>r.key)),live:[],next:st?st.next:1,lead:new Map(),pres:undefined,dec:[]};this.instLeaderRows(st);}
+    else{st.day=day;
+      for(const r of rows.concat(this.instLeaderRows(st)))if(!st.seen.has(r.key)){st.seen.add(r.key);if(r.grp)st.live=st.live.filter(x=>x.grp!==r.grp);   // aynı başvurunun eski durum kartı yenisiyle değişir
+        if(r.day>=day-60&&!r.hide)st.live.push({...r,id:'i'+(st.next++)});}
+      st.live=st.live.filter(r=>day-r.day<=60).slice(-3);}
+    /* karar kartları: koşul sürdükçe görünür (60 gün kuralı yok); aynı anahtar tek kart, bekleme durumu korunur */
+    const inv=this.instInviteRows(),old=new Map((st.dec||[]).map(d=>[d.key,d]));st.dec=inv.map(r=>old.get(r.key)||{...r,id:'i'+(st.next++)});
+    return st.dec.concat(st.live);
   },
   instInfoDismiss(id){const st=this._instInfo;if(!st)return false;const n=st.live.length;st.live=st.live.filter(r=>r.id!==String(id));if(st.live.length!==n)this.drawInbox();return st.live.length!==n;},
   instInfoOpen(id){
-    const r=this._instInfo&&this._instInfo.live.find(x=>x.id===String(id));if(!r)return;this.instInfoDismiss(id);
+    const st=this._instInfo,d=st&&st.dec.find(x=>x.id===String(id));if(d){const rec=this.instInviteRecord(d);if(rec&&typeof ArchiveUI!=='undefined'){ArchiveUI.open('inbox');ArchiveUI.record(rec.id);}else this.openFed();return;}
+    const r=st&&st.live.find(x=>x.id===String(id));if(!r)return;this.instInfoDismiss(id);
+    if(r.council){this.openCouncil();return;}
     if(Number.isInteger(r.news)&&typeof ArchiveUI!=='undefined'&&typeof GalacticNews!=='undefined'&&GalacticNews.get(r.news)){ArchiveUI.open('news');ArchiveUI.detail(r.news);return;}
     if(Number.isInteger(r.fed)&&fedOf(r.fed)){this.openFed();return;}
     if(typeof ArchiveUI!=='undefined')ArchiveUI.open('news');
@@ -7737,6 +7804,9 @@ const UI = {
     const it = list[i];
     if(G.minNote===it.uid){G.minNote=null;this.topbar();}
     if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(it.kind)&&typeof ArchiveUI!=='undefined'){
+      /* BETA-EVENT-UX.1: kuruluş SONUCU yalnız bilgidir (kaydı zaten kapalı); açılınca kart kalkar, kayıt Gelen kutusu geçmişinde kalır.
+         Önceden açılsa da çubukta kalıyordu (takılı kart). */
+      if(it.kind==='fedfoundResult'){list.splice(i,1);this.drawInbox();}
       const rec=DiplomaticInbox.capture(it);if(rec){ArchiveUI.record(rec.id);return;}
     }
     list.splice(i, 1);

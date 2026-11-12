@@ -1,0 +1,192 @@
+{
+ "phases": [
+  {
+   "name": "a-kuruldu",
+   "B": {
+    "kur": 1,
+    "dom": [
+     "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 1,
+    "dom": [
+     "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "b-acildi",
+   "B": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "c-5-yayin",
+   "B": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "d-yeniden-baglanma",
+   "B": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "e-sayfa-yenileme",
+   "B": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "f-host-kayit-yukleme",
+   "B": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "g-yeni-karar",
+   "B": {
+    "kur": 0,
+    "dom": [
+     "🏛 Federasyon oylaması sonuçlandı — Helis Araştırma KonseyiSavunma Pak"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 0,
+    "dom": [
+     "🏛 Federasyon oylaması sonuçlandı — Helis Araştırma KonseyiSavunma Pak"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  }
+ ],
+ "opened": {
+  "k": "note",
+  "uid": 7
+ },
+ "f4req": {
+  "status": "ok",
+  "code": null
+ },
+ "f4sub": "Üyelik başvurusu — Yeşil Birlik",
+ "f4inv": true,
+ "f4staleApplied": 0,
+ "f4sent": 1
+}

@@ -1,0 +1,14 @@
+PASS F0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+  a-kuruldu {"B":1,"Bstale":0,"C":0,"H":1}
+PASS F1 gerçek kuruluş: host kuruluş penceresinden B'yi davet eder, B karttan KABUL, host son onay → federasyon; B'de ve host'ta "kuruldu" en çok bir kez
+  b-acildi {"B":0,"Bstale":0,"C":0,"H":0}
+  c-5-yayin {"B":0,"Bstale":0,"C":0,"H":0}
+  d-yeniden-baglanma {"B":0,"Bstale":0,"C":0,"H":0}
+  e-sayfa-yenileme {"B":0,"Bstale":0,"C":0,"H":0}
+  f-host-kayit-yukleme {"B":0,"Bstale":0,"C":0,"H":0}
+PASS F2 B sonuç kartını açıp kapatır; ardından 5 yayın + gün, hat kopması / yeniden bağlanma, sayfa yenileme, host dünyasının kayıttan yeniden yüklenmesi: "kuruldu" ve eski davet / oy kartı bir daha doğmaz
+  g-yeni-karar {"B":0,"Bstale":0,"C":0,"H":0}
+PASS F3 aynı federasyonda gerçekten yeni karar: host yasa önerir → B'de tek yeni oy kartı; B karttan EVET; sonuçlanınca B ve host'ta tek "oylaması sonuçlandı" kartı; "kuruldu" yine yok; kapanmış oy kartı kalmaz
+PASS F4 üyelik başvurusu (C, gerçek fedRequest komutu): C'de "Üyelik başvurun oylamada" kartı; üye B'nin oy kartı "Üyelik başvurusu — C"; oy kabul → C'de KABUL / REDDET davet kartı; C karttan KABUL → host'ta üye; kart kalkar; C'de tek komut
+PASS F5 başkan değişimi: host (başkan) federasyondan ayrılır (gerçek leaveFederation) → B ve C'de tek "Federasyon başkanı değişti" kartı; yeniden bağlanmada tekrar doğmaz
+GEÇEN: 6 KALAN: 0

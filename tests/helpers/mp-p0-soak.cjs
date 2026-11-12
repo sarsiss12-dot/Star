@@ -145,6 +145,9 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,origin,gues
     assert(seen,'misafir kaybolan aynayı kendiliğinden geri almadı: '+JSON.stringify(T.lostMirror).slice(0,700));});
 
   await test('P6 takviye düğmesi (reinf) misafirde yakalanmamış istisna atmaz; ret gerçek nedeniyle bildirilir',async()=>{
+    /* FİKSTÜR (açıkça): uzun koşuda misafirin filosu yok olabilir; düğmeyi sınamak için host'ta tek korvetlik filo */
+    if(!await B.evaluate(()=>G.fleets.some(x=>x.e===0))){await H.evaluate(()=>{const p=[...MP1Host.host.state.players.values()].find(x=>x.playerId!=='host'),e=G.emps[p.empireId];newFleet(e,e.home,[{c:'kor'}]);MP1Host.host.publish();});
+      await B.waitForFunction(()=>G.fleets.some(x=>x.e===0),undefined,{timeout:20000,polling:200});}
     const e0=errors.length;const r=await B.evaluate(()=>{const f=G.fleets.find(x=>x.e===0);if(!f)return {err:'filo yok'};let threw=null;try{UI.act('reinf',String(f.id));}catch(e){threw=String(e&&e.message||e);}return {threw};});
     await sleep(1500);T.reinf={...r,pageErrors:errors.slice(e0)};assert(!r.err,r.err);assert.equal(r.threw,null);assert.equal(errors.slice(e0).filter(x=>/orders is not iterable/.test(x)).length,0);});
 
@@ -183,6 +186,8 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,origin,gues
     const after={h:await H.evaluate(()=>({day:G.day,r:String(RND_STATE),sys:G.sys.length,emps:G.emps.length,hname:G.emps[0].name})),g:await B.evaluate(()=>({day:G.day,name:G.p.name,sys:G.sys.length}))};T.resume={before,after,code0,code1,dlName,pkgBytes:dlText.length,host8:host8.length,guest8:guest8.length};
     assert.equal(after.h.day,before.day);assert.equal(after.h.r,before.r);assert.equal(after.g.day,before.day,'misafir aynı günde');assert.equal(after.g.name,before.gname,'misafir kendi devletinde');assert.equal(after.h.hname,before.hname);
     /* f) oyun gerçekten sürer: misafir emri uygulanır, zaman ilerler */
+    /* FİKSTÜR (açıkça): gemi emri ACK yolunu sınar; uzun gerçek zamanlı koşuda misafirin alaşımı tükenebilir (rules:resources meşru ret) */
+    await H.evaluate(e=>{G.emps[e].res.ala=Math.max(G.emps[e].res.ala,2000);G.emps[e].res.min=Math.max(G.emps[e].res.min,2000);},before.ge);
     await B.evaluate(GUEST);const c=await command('resume');assert.equal(c.ship&&c.ship.status,'ok','devam sonrası emir: '+JSON.stringify(c).slice(0,300));
     await running();const m=await moved(30000,3);assert(m.ok,'devam sonrası dünya ilerlemedi: '+JSON.stringify(m).slice(0,500));await speed(0);await shot(B,'p0-resumed-guest');});
   fs.writeFileSync(path.join(out,'p0-soak.json'),JSON.stringify(metrics.p0,null,1));

@@ -2,6 +2,13 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
+## Son teslim — BETA-EVENT-UX.1 (p25 / MP.8.9b21, 12 Kasım 2026)
+
+- Ayrıntı: `reports/claude/BETA-EVENT-UX1-SONUC.md`, kanıt `reports/claude/evidence/beta-event-ux1/`. Dal `claude/stars-beta-event-ux1` (#36 üstünde). Save8v8/paket4/protokol1 aynı.
+- Tarihsel "FEDERASYON KURULDU" tekrarı `MP8_SCEN=F` ile p24'te yeniden üretildi (kurucuda ara durum kartları birikiyordu, açılan sonuç kartı kalıyordu, haber kartı ikinci kopya): `fedFoundCards` eski sonuç kartını kaldırır, `openNote` fedfoundResult'ı kaldırır, açık kuruluşun haberi kart olmaz. `noteRecord` oy kaydı yedeği (sync ile önce doğan kayıt).
+- Yeni kartlar (G.inbox dışında): `instInviteRows`/`instDecide` davet / aday rızası KABUL-RED (DiplomaticInbox.resolve), başvuru sonucu (`admissionResults`, `grp` ile eski durum kalkar), `instLeaderRows` federasyon / Konsey başkanı + Konsey yasası kalkması; `fedVoteSub`; `UI.dayText` yalnız gösterim. Olağanüstü Konsey toplantısı mekaniği yok.
+- Koruma `beta-event-ux1-reviewed.json` + `event-ux1-reviewed.cjs` (ux0 önce bunu çağırır). Test: `MP8_SCEN=F node tests/browser-mp8.cjs`, `browser-event-ux0.cjs` S6–S8. Sonraki: BETA-FED-FLEET.0 (UX0 raporu §10 + UX1 §9).
+
 ## Son teslim — BETA-EVENT-UX.0 (p24 / MP.8.9b20, 12 Kasım 2026)
 
 - Ayrıntı: `reports/claude/BETA-EVENT-UX0-SONUC.md`, kanıt `reports/claude/evidence/beta-event-ux0/`. Dal `claude/stars-beta-event-ux0` (PR #36, #35 üstünde). 96h10p24 / stars-v96h10p24; Save8v8, paket4/protokol1 değişmedi.

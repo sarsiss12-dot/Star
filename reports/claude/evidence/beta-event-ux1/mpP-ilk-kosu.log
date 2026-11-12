@@ -1,0 +1,21 @@
+PASS P0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 16 AI, s500, seed 404; misafir gerçek STARS arayüzünde
+  ön ilerletme ay 6 6 sn
+  ön ilerletme ay 12 15 sn
+  ön ilerletme ay 18 27 sn
+  ön ilerletme ay 24 41 sn
+  ön ilerletme ay 30 56 sn
+  ön ilerletme ay 36 71 sn
+  ön ilerletme ay 42 88 sn
+  eylem 253 · en büyük gecikme 22.9 gün · donma 0 · komut [["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true]]
+PASS P1 gerçek zamanlı 3 dk: 500 sistem / 16 AI + 2 insan, host en yüksek hızda (ön ilerletme 45 ay), misafir gerçek dokunmayla oynar; host günü ilerlerken misafir dünyası 20 sn'den uzun durmamalı; komutlar aynaya yansımalı
+PASS P2 misafirin yerel sunum durumunda bozuk kart (kurulum deserialize'dan ÖNCE istisna atar): dünya kalıcı donmaz — neden kaydedilir, durum onarılır, ayna uygulanır
+PASS P3 kapanışı gelmeyen dokunma (pointerdown var, pointerup/pointercancel yok): ayna süresiz bekletilmez — en çok ~3 sn sonra uygulanır
+PASS P4 host bu oyuncunun aynasını kuramıyor (host yayın arızası): host döngüsü çökmez, hata host tanısında; misafir açık ileti görür; arıza kalkınca kendiliğinden eşitlenir
+PASS P5 DURAKLATILMIŞ oyunda kaybolan ayna iletisi ("host kabul etti ama tersane sırası değişmedi"): bildirim host ACK'inden ÖNCE çıkmaz; nabız eksik aynayı gösterir, misafir TAM ayna ister ve sıra görünür
+PASS P6 takviye düğmesi (reinf) misafirde yakalanmamış istisna atmaz; ret gerçek nedeniyle bildirilir
+FAIL P7 kayıt → çıkış → devam (gerçek kullanıcı akışı): oyun içi "Dosyaya kaydet" MP'de çok oyunculu paket indirir; misafirin .sav'ı açık nedenle reddedilir; host'un düz .sav'ı devam lobisi açar, misafir yeni kodla katılır, host koltuğa atar, aynı gün ve devletten sürer
+AssertionError [ERR_ASSERTION]: devam sonrası emir: {"label":"resume","at":1794515615051,"own":{"fleets":2,"yards":1,"ala":29},"fleet":4,"moveTo":415,"move":{"status":"ok","code":null,"ms":37},"yard":75,"q0":25,"ship":{"status":"rejected","code":"rules:resources","ms":37}}
+
+'rejected' !== 'ok'
+
+GEÇEN: 7 KALAN: 1
