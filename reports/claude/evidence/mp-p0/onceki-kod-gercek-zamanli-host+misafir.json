@@ -1,0 +1,802 @@
+{
+ "ff": 45,
+ "minutes": 10,
+ "seed": 7,
+ "samples": [
+  {
+   "t": 1,
+   "hd": 1356.6,
+   "gd": 1351.2,
+   "hrev": 47,
+   "grev": 47,
+   "gapp": 47,
+   "held": 0,
+   "touch": 0,
+   "fail": 0,
+   "builds": 47,
+   "mo": 0
+  },
+  {
+   "t": 3,
+   "hd": 1378.2,
+   "gd": 1364.1,
+   "hrev": 50,
+   "grev": 50,
+   "gapp": 49,
+   "held": 0,
+   "touch": 4,
+   "fail": 0,
+   "builds": 49,
+   "mo": 0
+  },
+  {
+   "t": 5,
+   "hd": 1392.8,
+   "gd": 1387.2,
+   "hrev": 53,
+   "grev": 53,
+   "gapp": 53,
+   "held": 0,
+   "touch": 4,
+   "fail": 0,
+   "builds": 53,
+   "mo": 0
+  },
+  {
+   "t": 7,
+   "hd": 1410.8,
+   "gd": 1408.5,
+   "hrev": 57,
+   "grev": 56,
+   "gapp": 56,
+   "held": 4,
+   "touch": 4,
+   "fail": 0,
+   "builds": 55,
+   "mo": 0
+  },
+  {
+   "t": 10,
+   "hd": 1429.5,
+   "gd": 1414.7,
+   "hrev": 60,
+   "grev": 60,
+   "gapp": 58,
+   "held": 7,
+   "touch": 6,
+   "fail": 0,
+   "builds": 57,
+   "mo": 1
+  },
+  {
+   "t": 13,
+   "hd": 1451.8,
+   "gd": 1443.6,
+   "hrev": 64,
+   "grev": 64,
+   "gapp": 63,
+   "held": 7,
+   "touch": 7,
+   "fail": 0,
+   "builds": 61,
+   "mo": 0
+  },
+  {
+   "t": 15,
+   "hd": 1469.8,
+   "gd": 1457.6,
+   "hrev": 66,
+   "grev": 66,
+   "gapp": 65,
+   "held": 8,
+   "touch": 9,
+   "fail": 0,
+   "builds": 63,
+   "mo": 1
+  },
+  {
+   "t": 17,
+   "hd": 1490.7,
+   "gd": 1487.4,
+   "hrev": 70,
+   "grev": 70,
+   "gapp": 70,
+   "held": 8,
+   "touch": 10,
+   "fail": 0,
+   "builds": 67,
+   "mo": 0
+  },
+  {
+   "t": 19,
+   "hd": 1508.5,
+   "gd": 1500.7,
+   "hrev": 73,
+   "grev": 73,
+   "gapp": 72,
+   "held": 9,
+   "touch": 10,
+   "fail": 0,
+   "builds": 69,
+   "mo": 1
+  },
+  {
+   "t": 21,
+   "hd": 1527.5,
+   "gd": 1521.7,
+   "hrev": 75,
+   "grev": 75,
+   "gapp": 75,
+   "held": 9,
+   "touch": 12,
+   "fail": 0,
+   "builds": 72,
+   "mo": 0
+  },
+  {
+   "t": 24,
+   "hd": 1544.4,
+   "gd": 1543.9,
+   "hrev": 79,
+   "grev": 79,
+   "gapp": 79,
+   "held": 10,
+   "touch": 13,
+   "fail": 0,
+   "builds": 75,
+   "mo": 0
+  },
+  {
+   "t": 26,
+   "hd": 1561.9,
+   "gd": 1557.6,
+   "hrev": 82,
+   "grev": 82,
+   "gapp": 81,
+   "held": 12,
+   "touch": 14,
+   "fail": 0,
+   "builds": 77,
+   "mo": 0
+  },
+  {
+   "t": 29,
+   "hd": 1586.2,
+   "gd": 1581.5,
+   "hrev": 85,
+   "grev": 85,
+   "gapp": 85,
+   "held": 13,
+   "touch": 16,
+   "fail": 0,
+   "builds": 80,
+   "mo": 0
+  },
+  {
+   "t": 31,
+   "hd": 1602.2,
+   "gd": 1597.7,
+   "hrev": 88,
+   "grev": 88,
+   "gapp": 88,
+   "held": 18,
+   "touch": 17,
+   "fail": 0,
+   "builds": 81,
+   "mo": 0
+  },
+  {
+   "t": 34,
+   "hd": 1623.7,
+   "gd": 1621.3,
+   "hrev": 92,
+   "grev": 92,
+   "gapp": 92,
+   "held": 21,
+   "touch": 18,
+   "fail": 0,
+   "builds": 84,
+   "mo": 0
+  },
+  {
+   "t": 36,
+   "hd": 1642.5,
+   "gd": 1634.8,
+   "hrev": 95,
+   "grev": 94,
+   "gapp": 94,
+   "held": 21,
+   "touch": 20,
+   "fail": 0,
+   "builds": 86,
+   "mo": 1
+  },
+  {
+   "t": 38,
+   "hd": 1653.8,
+   "gd": 1650.7,
+   "hrev": 97,
+   "grev": 97,
+   "gapp": 97,
+   "held": 21,
+   "touch": 21,
+   "fail": 0,
+   "builds": 89,
+   "mo": 0
+  },
+  {
+   "t": 41,
+   "hd": 1674,
+   "gd": 1671.5,
+   "hrev": 100,
+   "grev": 100,
+   "gapp": 100,
+   "held": 21,
+   "touch": 21,
+   "fail": 0,
+   "builds": 92,
+   "mo": 0
+  },
+  {
+   "t": 43,
+   "hd": 1686.9,
+   "gd": 1686.8,
+   "hrev": 103,
+   "grev": 103,
+   "gapp": 103,
+   "held": 21,
+   "touch": 21,
+   "fail": 0,
+   "builds": 95,
+   "mo": 0
+  },
+  {
+   "t": 45,
+   "hd": 1692,
+   "gd": 1691.3,
+   "hrev": 105,
+   "grev": 105,
+   "gapp": 105,
+   "held": 21,
+   "touch": 23,
+   "fail": 0,
+   "builds": 97,
+   "mo": 0
+  },
+  {
+   "t": 48,
+   "hd": 1710.1,
+   "gd": 1700.1,
+   "hrev": 108,
+   "grev": 108,
+   "gapp": 107,
+   "held": 26,
+   "touch": 23,
+   "fail": 0,
+   "builds": 99,
+   "mo": 1
+  },
+  {
+   "t": 49,
+   "hd": 1726.5,
+   "gd": 1717.6,
+   "hrev": 111,
+   "grev": 111,
+   "gapp": 110,
+   "held": 28,
+   "touch": 23,
+   "fail": 0,
+   "builds": 101,
+   "mo": 0
+  },
+  {
+   "t": 52,
+   "hd": 1742.8,
+   "gd": 1742.4,
+   "hrev": 114,
+   "grev": 114,
+   "gapp": 114,
+   "held": 28,
+   "touch": 25,
+   "fail": 0,
+   "builds": 105,
+   "mo": 0
+  },
+  {
+   "t": 54,
+   "hd": 1757.5,
+   "gd": 1754,
+   "hrev": 117,
+   "grev": 117,
+   "gapp": 117,
+   "held": 28,
+   "touch": 27,
+   "fail": 0,
+   "builds": 108,
+   "mo": 0
+  },
+  {
+   "t": 56,
+   "hd": 1773.7,
+   "gd": 1770.1,
+   "hrev": 120,
+   "grev": 120,
+   "gapp": 120,
+   "held": 28,
+   "touch": 28,
+   "fail": 0,
+   "builds": 111,
+   "mo": 0
+  },
+  {
+   "t": 59,
+   "hd": 1795.2,
+   "gd": 1777.4,
+   "hrev": 123,
+   "grev": 123,
+   "gapp": 121,
+   "held": 32,
+   "touch": 29,
+   "fail": 0,
+   "builds": 112,
+   "mo": 1
+  },
+  {
+   "t": 61,
+   "hd": 1811.7,
+   "gd": 1801.2,
+   "hrev": 126,
+   "grev": 126,
+   "gapp": 125,
+   "held": 32,
+   "touch": 30,
+   "fail": 0,
+   "builds": 115,
+   "mo": 0
+  },
+  {
+   "t": 63,
+   "hd": 1830.5,
+   "gd": 1829.7,
+   "hrev": 129,
+   "grev": 129,
+   "gapp": 129,
+   "held": 32,
+   "touch": 33,
+   "fail": 0,
+   "builds": 119,
+   "mo": 0
+  },
+  {
+   "t": 65,
+   "hd": 1849,
+   "gd": 1839.6,
+   "hrev": 132,
+   "grev": 132,
+   "gapp": 131,
+   "held": 32,
+   "touch": 34,
+   "fail": 0,
+   "builds": 121,
+   "mo": 0
+  },
+  {
+   "t": 86,
+   "hd": 1956.6,
+   "gd": 1839.6,
+   "hrev": 156,
+   "grev": 156,
+   "gapp": 131,
+   "held": 114,
+   "touch": 34,
+   "fail": 0,
+   "builds": 121,
+   "mo": 1
+  }
+ ],
+ "stalls": [
+  {
+   "afterS": 86,
+   "stuckMs": 21010,
+   "host": {
+    "day": 1956.5871199999376,
+    "speed": 1,
+    "publishes": 279,
+    "rev": 156,
+    "conn": true,
+    "paused": false,
+    "bg": false,
+    "connected": true,
+    "monthMs": 563,
+    "fleets": 105
+   },
+   "guest": {
+    "day": 1839.6237999999553,
+    "rev": 156,
+    "applied": 131,
+    "started": true,
+    "timer": true,
+    "mirror": true,
+    "modalOpen": true,
+    "modalCls": "",
+    "modalHead": "▁ANOMALİ · Wynevos\n       Otomatik bir kargo deposu, yüklerini teslim edeceği imparatorluğ",
+    "pointers": [],
+    "untilMs": -20710,
+    "bootErr": "",
+    "bootFails": 0,
+    "stats": {
+     "mirrors": 1,
+     "deltas": 155,
+     "builds": 121,
+     "fail": 0,
+     "held": 114,
+     "touchHeld": 34,
+     "resyncs": 0,
+     "speedMsgs": 13,
+     "lastBuildMs": 10.6,
+     "minGap": 600
+    },
+    "hostSpd": 1,
+    "ws": 1,
+    "hostOnline": true,
+    "screen": "game",
+    "decWait": 0,
+    "diagTail": [
+     {
+      "t": 1794478379590,
+      "tur": "cache",
+      "m": "invalidate:load"
+     },
+     {
+      "t": 1794478380444,
+      "tur": "cache",
+      "m": "invalidate:load"
+     },
+     {
+      "t": 1794478381055,
+      "tur": "cache",
+      "m": "invalidate:load"
+     }
+    ],
+    "diplo": false,
+    "mirrorAgeMs": 538
+   },
+   "hostDaysSince": 107.6,
+   "lastActions": [
+    "modalTap:minModal",
+    "topTap:tab",
+    "modalTap:anomch",
+    "panelTap:spyTargetSet",
+    "panelTap:intelView",
+    "panelTap",
+    "H:modalTap:anomch",
+    "topTap:fit",
+    "topTap:home",
+    "inboxTap:noteChoice",
+    "modalTap:chch",
+    "H:panelTap:crisisManage"
+   ],
+   "cmd": {
+    "label": "stalled",
+    "at": 1794478403350,
+    "own": {
+     "fleets": 4,
+     "yards": 1,
+     "ala": 757
+    },
+    "fleet": 4,
+    "moveTo": 75,
+    "move": {
+     "status": "rejected",
+     "code": "rules:same",
+     "ms": 18
+    },
+    "yard": 75,
+    "q0": 0,
+    "ship": {
+     "status": "ok",
+     "code": null,
+     "ms": 18
+    }
+   },
+   "hostAfter": {
+    "day": 1967.3674799999367,
+    "speed": 4,
+    "publishes": 283,
+    "rev": 158,
+    "conn": true,
+    "paused": false,
+    "bg": false,
+    "connected": true,
+    "monthMs": 563,
+    "fleets": 106
+   },
+   "guestAfter": {
+    "day": 1839.6237999999553,
+    "rev": 158,
+    "applied": 131,
+    "started": true,
+    "timer": true,
+    "mirror": true,
+    "modalOpen": true,
+    "modalCls": "",
+    "modalHead": "▁ANOMALİ · Wynevos\n       Otomatik bir kargo deposu, yüklerini teslim edeceği imparatorluğ",
+    "pointers": [],
+    "untilMs": -21827,
+    "bootErr": "",
+    "bootFails": 0,
+    "stats": {
+     "mirrors": 1,
+     "deltas": 157,
+     "builds": 121,
+     "fail": 0,
+     "held": 118,
+     "touchHeld": 34,
+     "resyncs": 0,
+     "speedMsgs": 14,
+     "lastBuildMs": 10.6,
+     "minGap": 600
+    },
+    "hostSpd": 4,
+    "ws": 1,
+    "hostOnline": true,
+    "screen": "game",
+    "decWait": 0,
+    "diagTail": [
+     {
+      "t": 1794478379590,
+      "tur": "cache",
+      "m": "invalidate:load"
+     },
+     {
+      "t": 1794478380444,
+      "tur": "cache",
+      "m": "invalidate:load"
+     },
+     {
+      "t": 1794478381055,
+      "tur": "cache",
+      "m": "invalidate:load"
+     }
+    ],
+    "diplo": false,
+    "mirrorAgeMs": 182
+   },
+   "selfRecovered": false,
+   "guestLater": {
+    "day": 1839.6237999999553,
+    "rev": 174,
+    "applied": 131,
+    "started": true,
+    "timer": true,
+    "mirror": true,
+    "modalOpen": true,
+    "modalCls": "",
+    "modalHead": "▁ANOMALİ · Wynevos\n       Otomatik bir kargo deposu, yüklerini teslim edeceği imparatorluğ",
+    "pointers": [],
+    "untilMs": -36834,
+    "bootErr": "",
+    "bootFails": 0,
+    "stats": {
+     "mirrors": 1,
+     "deltas": 173,
+     "builds": 121,
+     "fail": 0,
+     "held": 176,
+     "touchHeld": 34,
+     "resyncs": 0,
+     "speedMsgs": 15,
+     "lastBuildMs": 10.6,
+     "minGap": 600
+    },
+    "hostSpd": 1,
+    "ws": 1,
+    "hostOnline": true,
+    "screen": "game",
+    "decWait": 0,
+    "diagTail": [
+     {
+      "t": 1794478379590,
+      "tur": "cache",
+      "m": "invalidate:load"
+     },
+     {
+      "t": 1794478380444,
+      "tur": "cache",
+      "m": "invalidate:load"
+     },
+     {
+      "t": 1794478381055,
+      "tur": "cache",
+      "m": "invalidate:load"
+     }
+    ],
+    "diplo": false,
+    "mirrorAgeMs": 425
+   }
+  }
+ ],
+ "actions": {
+  "panelTap:planetFold": 9,
+  "mapTap": 16,
+  "H:panelTap:planetFold": 6,
+  "panelTap:selfleet": 2,
+  "topTap:grpTog": 6,
+  "H:tabTap:tab": 7,
+  "panelScroll": 9,
+  "tabTap:tab": 8,
+  "H:topTap:grpTog": 1,
+  "panelTap:crisisManage": 6,
+  "modalClose": 9,
+  "H:panelTap:intelView": 5,
+  "inboxTap:noteOptions": 4,
+  "H:panelScroll": 3,
+  "topTap:route": 2,
+  "H:inboxTap:openNote": 4,
+  "topTap:selsys": 1,
+  "H:modalClose": 4,
+  "topTap:stop": 1,
+  "H:panelTap:spyTargetSet": 1,
+  "H:inboxTap:noteOptions": 3,
+  "H:mapTap": 12,
+  "H:topTap:home": 4,
+  "topTap:diplomaticInbox": 1,
+  "modalTap:closem": 5,
+  "panelTap:fleetFilter": 10,
+  "H:panelTap:selfleet": 2,
+  "inboxTap:openNote": 6,
+  "modalTap:minModal": 3,
+  "topTap:tab": 1,
+  "modalTap:anomch": 1,
+  "panelTap:spyTargetSet": 1,
+  "panelTap:intelView": 1,
+  "panelTap": 2,
+  "H:modalTap:anomch": 1,
+  "topTap:fit": 1,
+  "topTap:home": 1,
+  "inboxTap:noteChoice": 1,
+  "modalTap:chch": 1,
+  "H:panelTap:crisisManage": 1
+ },
+ "cmds": [
+  {
+   "label": "t+21",
+   "at": 1794478337017,
+   "own": {
+    "fleets": 3,
+    "yards": 1,
+    "ala": 608
+   },
+   "fleet": 4,
+   "moveTo": 415,
+   "move": {
+    "status": "ok",
+    "code": null,
+    "ms": 92
+   },
+   "yard": 75,
+   "q0": 0,
+   "ship": {
+    "status": "ok",
+    "code": null,
+    "ms": 30
+   },
+   "shipSeen": true
+  },
+  {
+   "label": "t+66",
+   "at": 1794478382173,
+   "own": {
+    "fleets": 4,
+    "yards": 1,
+    "ala": 757
+   },
+   "fleet": 4,
+   "moveTo": 75,
+   "move": {
+    "status": "ok",
+    "code": null,
+    "ms": 40
+   },
+   "yard": 75,
+   "q0": 0,
+   "ship": {
+    "status": "ok",
+    "code": null,
+    "ms": 54
+   },
+   "shipSeen": false
+  },
+  {
+   "label": "stalled",
+   "at": 1794478403350,
+   "own": {
+    "fleets": 4,
+    "yards": 1,
+    "ala": 757
+   },
+   "fleet": 4,
+   "moveTo": 75,
+   "move": {
+    "status": "rejected",
+    "code": "rules:same",
+    "ms": 18
+   },
+   "yard": 75,
+   "q0": 0,
+   "ship": {
+    "status": "ok",
+    "code": null,
+    "ms": 18
+   }
+  }
+ ],
+ "maxLagDays": 117,
+ "ffSeconds": 92,
+ "actionCount": 108,
+ "final": {
+  "host": {
+   "day": 2017.5425999999256,
+   "speed": 1,
+   "publishes": 310,
+   "rev": 174,
+   "conn": true,
+   "paused": false,
+   "bg": false,
+   "connected": true,
+   "monthMs": 673,
+   "fleets": 107
+  },
+  "guest": {
+   "day": 1839.6237999999553,
+   "rev": 174,
+   "applied": 131,
+   "started": true,
+   "timer": true,
+   "mirror": true,
+   "modalOpen": true,
+   "modalCls": "",
+   "modalHead": "▁ANOMALİ · Wynevos\n       Otomatik bir kargo deposu, yüklerini teslim edeceği imparatorluğ",
+   "pointers": [],
+   "untilMs": -36852,
+   "bootErr": "",
+   "bootFails": 0,
+   "stats": {
+    "mirrors": 1,
+    "deltas": 173,
+    "builds": 121,
+    "fail": 0,
+    "held": 176,
+    "touchHeld": 34,
+    "resyncs": 0,
+    "speedMsgs": 15,
+    "lastBuildMs": 10.6,
+    "minGap": 600
+   },
+   "hostSpd": 1,
+   "ws": 1,
+   "hostOnline": true,
+   "screen": "game",
+   "decWait": 0,
+   "diagTail": [
+    {
+     "t": 1794478379590,
+     "tur": "cache",
+     "m": "invalidate:load"
+    },
+    {
+     "t": 1794478380444,
+     "tur": "cache",
+     "m": "invalidate:load"
+    },
+    {
+     "t": 1794478381055,
+     "tur": "cache",
+     "m": "invalidate:load"
+    }
+   ],
+   "diplo": false,
+   "mirrorAgeMs": 443
+  }
+ }
+}

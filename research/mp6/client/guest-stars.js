@@ -41,7 +41,9 @@ const S={swiped:new Set(),decWait:new Map(),warQuote:{},pendingWar:null,counter:
   stats:{mirrors:0,deltas:0,bytes:0,builds:0,buildMs:[],resyncs:0,held:0,blocked:{},sent:{},speedMsgs:0},
   /* MP.7: oyun başlangıcı durum makinesi — her aşama yalnız gerçek olay olunca tamamlanır; eksik veri sınırlı geri çekilmeyle
      yeniden istenir (sonsuz bekleme ya da hızlı döngü yok); hata nedeni oyun verisi/jeton/oda anahtarı içermez */
-  boot:{since:0,stage:null,tries:0,next:0,fails:0,err:'',failed:false,log:[]}};
+  boot:{since:0,stage:null,tries:0,next:0,fails:0,err:'',failed:false,log:[]},
+  /* MP-P0 eşitleme bekçisi: bağlantı açık görünürken dünya gelmiyor / uygulanmıyor durumunun algılanması ve güvenli kurtarma */
+  sync:{note:'',why:'',since:0,asks:0,nextAsk:0,pulse:null,pulseAt:0,crash:0,lastErr:'',applyAt:0,recov:0,reconnects:0,log:[]},pend:new Map()};
 
 /* Presentation-only interpolation: no prediction, no simulation writes, bounded to actual received positions. */
 const motion={rows:new Map(),at:0,
@@ -196,12 +198,19 @@ function gate(){
   const wrap=(name,fn)=>{const o=window[name];if(typeof o!=='function')return;window[name]=function(...a){if(!S.on||S.building)return o.apply(this,a);return fn(o,...a);};};
   const mine=e=>e&&e.id===0;
   wrap('orderMove',(o,f,target,append,automatic)=>{if(automatic||!f||f.e!==0)return false;if(S.aimCol===f.id+':'+(+target)){S.aimCol=null;return true;}return send({kind:'move',fleet:f.id,to:+target})!==null;});
-  wrap('queueBuilding',(o,e,sys,pl,k)=>{if(!mine(e)||!sys||!pl)return false;return send({kind:'build',sys:sys.id,planet:pl.i,key:String(k)})!==null;});
+  /* MP-P0: "tezgâha kondu / sıraya alındı" bildirimi eskiden emir GÖNDERİLİNCE çıkıyordu (host kabul etmeden). Artık motor işlevi
+     false döner (yerel iyimser bildirim yok); bildirim host'un 'ok' yanıtıyla, ret gerçek nedeniyle gösterilir. */
+  const acked=(cmd,okMsg)=>{const cid=send(cmd);if(cid)waits[cid]=res=>{if(res.status==='ok'){try{say(okMsg());}catch{}}else if(res.code!=='rules:same')toast('Host reddetti: '+why(res),true);};return false;};
+  wrap('queueBuilding',(o,e,sys,pl,k)=>{if(!mine(e)||!sys||!pl)return false;return acked({kind:'build',sys:sys.id,planet:pl.i,key:String(k)},()=>((BUILDINGS[k]&&BUILDINGS[k].n)||'Bina')+' inşa sırasına alındı');});
   wrap('researchTarget',(o,e,id,action,position)=>{if(!mine(e))return {ok:false,why:'—'};const c={kind:'research',tech:String(id)};
     if(action&&action!=='toggle'){c.action=action;c.position=position|0;}return send(c)?{ok:true}:{ok:false,why:'Host bağlı değil'};});
   wrap('setResearchMode',(o,e,mode)=>{if(!mine(e))return false;return !!send({kind:'researchMode',mode:String(mode)});});
+  /* MP-P0: misafirin oyun içi kaydı ayna dünyadır (kanonik galaksi değil). "Dosyaya kaydet" çalışır ama ne olduğu söylenir; "Cihaza kaydet"
+     tek oyunculu kayıt yuvasının üzerine ayna yazmasın diye yapılmaz. Çok oyunculu oyunu yalnız host'un kaydı sürdürür. */
+  wrap('downloadSave',(o,...a)=>{const ok=o(...a);toast('Bu dosya MİSAFİR görünümüdür; çok oyunculu oyunu sürdüremez. Devam için host kaydetmeli (ÇOK OYUNCULU → OYUNU KAYDET).',true);return ok;});
+  wrap('saveGame',()=>{toast('Misafir görünümü cihaz kaydına yazılmaz (tek oyunculu kaydın korunur). Oyunu host kaydeder.',true);return Promise.resolve(false);});
   /* MP.6.1 — koloni / tersane */
-  wrap('queueShip',(o,e,sys,cls,oto)=>{if(oto||!mine(e)||!sys)return false;return send({kind:'ship',sys:sys.id,key:String(cls)})!==null;});
+  wrap('queueShip',(o,e,sys,cls,oto)=>{if(oto||!mine(e)||!sys)return false;return acked({kind:'ship',sys:sys.id,key:String(cls)},()=>((SHIPS[cls]&&SHIPS[cls].n)||'Gemi')+' tezgâha kondu');});
   wrap('queueDemolish',(o,e,sys,pl,k)=>{if(!mine(e)||!sys||!pl)return false;return send({kind:'demolish',sys:sys.id,planet:pl.i,key:String(k)})!==null;});
   wrap('cancelBuild',(o,e,sys,pl,idx)=>{if(!mine(e)||!sys||!pl)return false;return send({kind:'cancel',sys:sys.id,planet:pl.i,index:idx|0})!==null;});
   wrap('setFocus',(o,e,sys,pl,k)=>{if(!mine(e)||!sys||!pl)return false;return send({kind:'focus',sys:sys.id,planet:pl.i,key:String(k)})!==null;});
@@ -368,7 +377,10 @@ function gate(){
   wrap('falseFlagOp',(o,e,t,p,tur)=>mine(e)&&t&&p?special({kind:'spySpecial',op:'falseFlag',target:real(t.id),patsy:real(p.id),tur:String(tur||'')},{msg:'Sahte bayrak host\'a gönderildi.'}):NOT_MP);
   wrap('stealTech',(o,e,t)=>mine(e)&&t?special({kind:'spySpecial',op:'stealTech',target:real(t.id)}):NOT_MP);
   /* MP.6.4 — kalan filo / koloni işlemleri: gerçek düğmenin motor işlevi → komut (sahiplik, maliyet, koşul host'ta) */
-  wrap('reinforceFleet',(o,e,f)=>mine(e)&&f?r({kind:'reinforce',fleet:f.id}):NOT_MP);
+  /* MP-P0: gerçek düğme (ui.js 'reinf') başarıda r.orders listesini dolaşır; {ok:true} dönünce yakalanmamış TypeError atıyordu. Sipariş listesi
+     host'ta oluşur: yerel başarı iddia edilmez, sonuç host yanıtıyla bildirilir. */
+  wrap('reinforceFleet',(o,e,f)=>{if(!mine(e)||!f)return NOT_MP;const cid=send({kind:'reinforce',fleet:f.id});if(!cid)return {ok:false,why:'Host bağlı değil; emir gönderilmedi.'};
+    waits[cid]=res=>{if(res.status==='ok'){try{say('⚓ Takviye siparişi host\'ta verildi','sci');}catch{}}else toast('Host reddetti: '+why(res),true);};return {ok:false,why:'Takviye emri host\'a gönderildi…'};});
   wrap('shipmentAction',(o,e,f,action,target)=>{if(!mine(e)||!f)return NOT_MP;const t=target&&target.fleet!==undefined?{fleet:+target.fleet}:target&&Number.isInteger(target.sys)?{sys:target.sys}:undefined;
     return r({kind:'shipment',fleet:f.id,action:String(action),...(t?{target:t}:{})});});
   wrap('shipOrderToken',(o,q)=>S.on&&typeof q?._mpOrderToken==='string'?q._mpOrderToken:o(q));
@@ -521,7 +533,9 @@ function warLocal(p){const m=x=>x&&{...x,id:local(x.id)};return {...p,target:m(p
 const vasTerms=(type,t)=>{const o={};for(const k of ['tax','science','defense','war','autonomy','duration','renegotiate','sensors'])if(t&&t[k]!==undefined)o[k]=JSON.parse(JSON.stringify(t[k]));return o;};
 function why(res){const d=res.detail&&res.detail.length?' — '+res.detail.join(' · '):'';return (MP1View.ERR[res.code]||res.code)+d;}
 function send(cmd){const J=S.J;if(!J)return null;const r=J.cmd(cmd);S.stats.sent[cmd.kind]=(S.stats.sent[cmd.kind]||0)+1;
-  if(!r.ok){toast(r.why==='host-yok'?'Host bağlı değil; emir gönderilmedi.':'Emir gönderilemedi.',true);return null;}return r.cid;}
+  if(!r.ok){toast(r.why==='host-yok'?'Host bağlı değil; emir gönderilmedi.':'Emir gönderilemedi.',true);return null;}
+  S.pend.set(r.cid,{kind:cmd.kind,at:Date.now()});if(S.pend.size>64)S.pend.delete(S.pend.keys().next().value);   // MP-P0: host ACK'i gelene dek bekleyen emir
+  return r.cid;}
 
 /* ---- 2. ortak oyun hızı (MP.6.1): yerel hız 0, düğmeler host'un gerçek hızını gösterir ---- */
 function paintSpeed(){for(const b of doc.querySelectorAll('#timepod .sp'))b.classList.toggle('on',+b.dataset.x===S.hostSpd);}
@@ -531,9 +545,10 @@ function onMessage(m){
   /* MP.8: tam ayna = yeni bağlantı (ya da yeniden eşitleme). Önceki bağlantıda gönderilen kararların yanıtı artık gelmez
      (kopmada kaybolan komut host'a hiç ulaşmamış olabilir); o kuşağın karar kilitleri geçersiz. Gerçek sonuç aynada: uygulandıysa
      kayıt kapalıdır, uygulanmadıysa oyuncu yeniden karar verebilir. Tam bir kez kuralı host'ta (kapalı teklife ikinci yanıt 'closed'). */
-  if(m.type==='mirror'){motion.clear();S.appliedRev=0;S.appliedWorldRev=0;S.appliedGeneration=-1;S.mirrorWorldRev=Number.isSafeInteger(m.worldRev)?m.worldRev:0;S.mirror=m.full;S.rev=m.rev;S.mirrorAt=Date.now();S.gen=(S.gen|0)+1;S.stats.mirrors++;schedule();return true;}
+  if(m.type==='mirror'){motion.clear();S.appliedRev=0;S.appliedWorldRev=0;S.appliedGeneration=-1;S.mirrorWorldRev=Number.isSafeInteger(m.worldRev)?m.worldRev:0;S.mirror=m.full;S.rev=m.rev;S.mirrorAt=Date.now();S.gen=(S.gen|0)+1;S.stats.mirrors++;S.pend.clear();schedule();return true;}   // MP-P0: tam ayna = yeni kuşak; önceki kuşağın yanıtsız emir kaydı bekçiyi tetiklemez
   if(m.type==='mirrorDelta'){if(!S.mirror||m.base!==S.rev){S.stats.resyncs++;S.J&&S.J.sendRaw({v:1,type:'resync'});return true;}
     StarsMirror.apply(S.mirror,m.ops);S.mirrorWorldRev=Number.isSafeInteger(m.worldRev)?m.worldRev:0;S.rev=m.rev;S.mirrorAt=Date.now();S.stats.deltas++;schedule();return true;}
+  if(m.type==='pulse'){S.sync.pulse={rev:m.rev|0,mrev:m.mrev|0,day:m.day|0,spd:m.spd|0,perr:m.perr|0,mfail:m.mfail?1:0};S.sync.pulseAt=Date.now();S.stats.pulses=(S.stats.pulses||0)+1;return true;}
   if(m.type==='speed'){if(Number.isFinite(m.n)){if(m.n<=(S.speedN||0)){S.stats.staleSpeed=(S.stats.staleSpeed||0)+1;return true;}S.speedN=m.n;}   // MP.6.3: eski hız iletisi yenisini ezmez
     S.hostSpd=m.spd|0;S.hostWant=Number.isInteger(m.want)?m.want:S.hostSpd;S.stats.speedMsgs++;paintSpeed();if(window.MP61)MP61.speed(m);return true;}
   return false;
@@ -543,16 +558,37 @@ function onMessage(m){
 function fleetRecoveryApplied(a){if(S.appliedGeneration===S.gen&&S.appliedWorldRev>=a.rev)return true;const x=a.extra;if(!x||!Number.isSafeInteger(x.group)||!(x.afterStamp===null||typeof x.afterStamp==='string'))return false;const g=fleetRecoveryGroups(G.p).find(g=>g.id===x.group);return (g?fleetRecoveryStamp(g):null)===x.afterStamp;}
 function holdBuild(){const m=doc.getElementById('modal');if(m?.querySelector('#fleetRecoveryResult'))return false;if(doc.getElementById('warCenterRoot')&&typeof WarCenterUI!=='undefined'&&!WarCenterUI.confirmPlan)return false;return !!(m&&!m.classList.contains('hidden'));}
 function schedule(){if(S.timer)return;const wait=Math.max(0,S.minGap-(Date.now()-S.lastBuild));S.timer=setTimeout(rebuild,wait);}
+/* MP-P0: kurulum zinciri hiçbir istisnayla kalıcı durmaz. Eskiden rebuild içinde deserialize'dan ÖNCE atılan bir istisna (ör. yerel sunum
+   durumundaki bozuk bir kart) her aynada yeniden atılıyor, dünya hiç uygulanmıyor ve kullanıcıya hiçbir şey gösterilmiyordu; deserialize'dan
+   SONRA atılan istisna ise uygulanmış dünyayı "uygulanmadı" bırakıyordu. Artık: neden kaydedilir (tanı satırı), yerel sunum durumu
+   onarılır, sınırlı aralıkla yeniden denenir; dünya zaten kurulduysa uygulanmış sayılır ve arayüz yenilenir. */
 function rebuild(){
-  if(!loadNoticePrefs()){S.timer=setTimeout(rebuild,50);return;}
-  S.timer=null;if(!S.mirror)return;
+  const before=S.lastBuild,applied0=S.appliedRev;
+  try{rebuild0();if(S.lastBuild!==before&&S.appliedRev===S.rev&&S.appliedGeneration===S.gen){S.sync.crash=0;S.sync.lastErr='';S.sync.applyAt=Date.now();if(S.started){S.boot.err='';S.boot.fails=0;}}}
+  catch(e){
+    S.building=false;try{UI._deferInbox=false;}catch{}S.sync.crash++;S.stats.crash=(S.stats.crash||0)+1;S.sync.lastErr=String(e&&e.message||e).replace(/[\u0000-\u001f]/g,' ').slice(0,120);syncLog('crash');
+    try{if(typeof G!=='undefined'&&G){G.inbox=(G.inbox||[]).filter(n=>n&&typeof n==='object');if(G.news&&!Array.isArray(G.news.records))G.news.records=[];}}catch{}
+    if(S.lastBuild!==before){   // dünya kuruldu, sonrası (sunum) hata verdi: uygulanmış say, arayüzü yenile
+      S.appliedRev=S.rev;S.appliedWorldRev=S.mirrorWorldRev;S.appliedGeneration=S.gen;S.sync.applyAt=Date.now();
+      try{G.autoSave=false;G.speed=0;}catch{}try{UI.keepScroll=true;UI.refresh();}catch{}try{UI.drawInbox();}catch{}try{paintSpeed();}catch{}}
+    else{try{View.sel=null;UI._openNote=null;}catch{}if(S.timer)clearTimeout(S.timer);S.timer=setTimeout(rebuild,Math.min(4000,500*S.sync.crash));}
+  }
+}
+function rebuild0(){
+  S.timer=null;if(!loadNoticePrefs()){S.timer=setTimeout(rebuild,50);return;}
+  if(!S.mirror)return;
   /* MP.6.1: STARS penceresi açıkken ayna bekletilir (onay pencereleri dünya kimliğini denetler; tek oyunculuda da pencere açıkken dünya durur) */
   if(S.started&&holdBuild()){S.held++;S.stats.held++;S.timer=setTimeout(rebuild,250);return;}
   /* finishSaveLoad yüklemede rota kipini, dokunma hareketini ve açık bildirimi sıfırlar; canlı senkronda kullanıcının
      yarım hareketi bozulmasın diye korunur. Kamera View.cam'de; deserialize ona dokunmaz. Seçili filo kimlikle korunur. */
   const keep={route:View.route,routed:View.routed,note:UI._openNote,offer:UI.pendingOffer,sel:View.sel&&View.sel.id},rg=View.resetGesture;
   /* MP.7.5: kullanıcı dokunurken / kaydırırken (STARS yüzey işaretçisi) ayna uygulanmaz — düğmeler parmağın altında yer değiştirmesin */
-  if(S.started&&UI._surfacePointers&&(UI._surfacePointers.size||Date.now()<(UI._surfaceUntil||0))){S.stats.touchHeld=(S.stats.touchHeld||0)+1;S.timer=setTimeout(rebuild,200);return;}
+  /* MP-P0: bekletme en çok 3 sn sürer. Kapanışı gelmeyen bir işaretçi (pointerup / pointercancel kaybı) ya da sürekli kaydırma olayı
+     eskiden aynayı SÜRESİZ bekletebiliyordu; süre dolunca işaretçi kaydı temizlenir ve dünya uygulanır. */
+  if(S.started&&UI._surfacePointers&&(UI._surfacePointers.size||Date.now()<(UI._surfaceUntil||0))){S.stats.touchHeld=(S.stats.touchHeld||0)+1;if(!S.touchSince)S.touchSince=Date.now();
+    if(Date.now()-S.touchSince<3000){S.timer=setTimeout(rebuild,200);return;}
+    UI._surfacePointers.clear();UI._surfaceUntil=0;S.stats.touchForced=(S.stats.touchForced||0)+1;}
+  S.touchSince=0;
   const initialWorld=!S.started;
   const warCards=initialWorld?[]:(G.inbox||[]).filter(n=>n.kind==='internalrisk'||n.kind==='warstart'||n.kind==='wardec'),warUid=initialWorld?0:G.inboxUid||0,cardIds=new Map((initialWorld?[]:G.inbox||[]).filter(n=>n.key).map(n=>[n.key,n.uid]));
   const cardOrder=new Map((G.inbox||[]).filter(n=>n.key).map((n,i)=>[n.key,i]));
@@ -682,10 +718,13 @@ function chip(text,good){
       /* MP.7.3: çubuğa dokununca telefonda görünür tanı satırı (sürüm · bağlantı · aşama · son hata kodu); jeton / oda anahtarı yok */
       else if(e.target.closest('#mp6Conn')){S.diag=!S.diag;chip(S.chipText,S.chipGood);}});}
   if(text!==undefined){S.chipText=text;S.chipGood=good;}
+  /* MP-P0: eşitleme bekçisinin notu bağlantı durumunun önüne geçer (kritik → çubuk kendiliğinden açılır) */
+  const base={t:S.chipText,g:S.chipGood};if(S.sync.note&&S.chipText!==undefined){S.chipText=S.sync.note;S.chipGood=false;}
   /* MP.8: ekran görüntüsüyle teknik durum — rol, ayna sürümü ve saati, son kurulum süresi, son komut sonucu (jeton / anahtar / istihbarat yok) */
   const hhmm=t=>t?new Date(t).toTimeString().slice(0,8):'—',lr=S.J&&S.J.results&&S.J.results.length?S.J.results[S.J.results.length-1]:null,bm=S.stats.buildMs||[];
   const diag=V.verLine()+' · misafir · '+(online()?'host bağlı':'host yok')+(S.boot.stage?' · aşama: '+S.boot.stage:'')+' · ayna r'+(S.rev|0)+' '+hhmm(S.mirrorAt)+
-    (bm.length?' · kurulum '+Math.round(bm[bm.length-1])+' ms':'')+' · son komut: '+(lr?lr.status+(lr.code?' '+lr.code:''):'yok')+' · son hata: '+(S.lastErr||'yok');
+    (bm.length?' · kurulum '+Math.round(bm[bm.length-1])+' ms':'')+' · son komut: '+(lr?lr.status+(lr.code?' '+lr.code:''):'yok')+' · son hata: '+(S.lastErr||'yok')+
+    ' · eşitleme: uygulanan r'+(S.appliedRev|0)+(S.sync.pulse?' / host r'+S.sync.pulse.mrev:'')+(S.sync.why?' · '+S.sync.why:'')+(S.sync.lastErr?' · '+S.sync.lastErr.slice(0,48):S.boot.fails&&S.boot.err?' · '+S.boot.err.slice(0,60):'')+(S.pend.size?' · bekleyen emir '+S.pend.size:'')+(S.sync.reconnects?' · yeniden bağlanma '+S.sync.reconnects:'');
   /* MP.7.4: kapalıyken küçük düğme (👥 odadaki bağlı insan sayısı + bağlantı noktası); dokununca aynı satır + tanı açılır.
      Host bağlantısı yoksa (kritik) kendiliğinden açık. */
   const open=!!S.diag||!S.chipGood,L=S.J&&S.J.lobby,n0=L&&L.players?L.players.filter(p=>p.online!==false).length:0;
@@ -697,6 +736,7 @@ function chip(text,good){
     if(text!==undefined&&window.MP61)MP61.status(text,good);}
   chipEl.title=diag;
   chipEl.style.display=S.started?'':'none';
+  S.chipText=base.t;S.chipGood=base.g;
 }
 const view=()=>S.J&&S.J.game.view,day=()=>((S.J&&S.J.game.clock)||{}).day,online=()=>!!(S.J&&S.J.hostOnline);
 const sendF=(cmd,done)=>{const r=S.J.cmd(cmd);if(r.ok)waits[r.cid]=done;return r;};
@@ -735,7 +775,7 @@ function update(statusHtml){
   if(S.started&&s)chip(s.textContent,/\bok\b/.test(s.className));
   else if(!S.started){ov.style.display='';const h=statusHtml+bootHtml();if(ov.innerHTML!==h)ov.innerHTML=h;}
   /* host'un reddettiği komutlar: gerçek arayüzün kendi uyarısıyla */
-  for(;S.seenResults<J.results.length;S.seenResults++){const r=J.results[S.seenResults];
+  for(;S.seenResults<J.results.length;S.seenResults++){const r=J.results[S.seenResults];S.pend.delete(r.cid);
     if(waits[r.cid]){const w=waits[r.cid];delete waits[r.cid];try{w(r);}catch{}continue;}   // MP diplomasi paneli / gelen kutusu kendi sonucunu gösterir
     if(r.status!=='ok'&&r.code!=='rules:same')toast('Host reddetti: '+why(r),true);}
   /* MP.7.3 tanı: son reddedilen komutun KODU (içerik / jeton yok) — MP çubuğunun ipucunda */
@@ -781,8 +821,48 @@ function bootTick(){
   if(b.tries>=BOOT_MAX||b.fails>=3){b.failed=true;if(!b.err)b.err=st==='started'?'Host\'tan galaksi verisi gelmedi.':'Host\'tan STARS dünyası (ayna) gelmedi.';bootLog('failed');update(statusNow());return;}
   b.tries++;b.next=now+8000*2**Math.min(b.tries,3);bootAsk();
 }
+/* ---- MP-P0: eşitleme bekçisi ----
+   Belirti (gerçek kullanıcı raporu): bağlantı açık, hız iletileri geliyor, emirler "gönderildi" görünüyor ama dünya ilerlemiyor.
+   Misafir bunu eskiden algılayamıyordu (oyun başladıktan sonra bootTick çalışmaz). Bekçi her saniye üç şeye bakar:
+     1) veri geldi ama uygulanmadı  → pencere açıksa söyler (tasarım gereği bekler); değilse kurulumu dürter, olmuyorsa TAM ayna ister;
+     2) host'un nabzı (pulse) bu oyuncuya daha yeni ayna gönderildiğini söylüyor ama gelmedi → TAM ayna (resync) ister;
+     3) oyun akarken ayna / emir yanıtı gelmiyor → resync; 3 denemede düzelmezse bağlantıyı yeniler (join.js aynı koltuğa döner).
+   Host aynayı kuramıyorsa (pulse.mfail) bu açıkça yazılır. Hiçbir adım simülasyon yürütmez; kanonik dünya host'tadır. */
+function syncLog(what){const y=S.sync;y.log.push({t:Date.now(),what});if(y.log.length>30)y.log.shift();}
+function syncNote(text,why){const y=S.sync;if(y.note===text)return;y.note=text;y.why=text?(why||''):'';if(text)syncLog('note:'+why);try{chip();}catch{}}
+function reconnect(){const J=S.J,y=S.sync;y.reconnects++;syncLog('reconnect');syncNote('Eşitleme kurulamadı — bağlantı yenileniyor','reconnect');S.mirror=null;S.rev=0;try{J.ws&&J.ws.close();}catch{}}
+function syncWatch(){
+  const J=S.J,y=S.sync;if(!J||!S.started||!S.on){if(y.note)syncNote('');y.since=0;y.behindAt=0;return;}
+  const now=Date.now(),live=J.ws&&J.ws.readyState===1&&J.hostOnline,paused=J.lobby&&J.lobby.phase==='paused';
+  if(!live||paused){y.since=0;y.asks=0;y.behindAt=0;if(y.note)syncNote('');return;}   // bağlantı / duraklatma kendi iletisini gösterir
+  for(const [cid,p] of S.pend)if(now-p.at>60000)S.pend.delete(cid);
+  /* 1) veri geldi ama uygulanmadı */
+  const behind=!!S.mirror&&(S.rev!==S.appliedRev||S.appliedGeneration!==S.gen);
+  if(!behind)y.behindAt=0;else if(!y.behindAt)y.behindAt=now;
+  if(behind&&now-y.behindAt>4000){
+    if(holdBuild()){syncNote('Pencere açık — dünya, kapanınca güncellenir','window');return;}
+    if(!S.building&&now-(y.kickAt||0)>3000){y.kickAt=now;y.recov++;syncLog('kick');if(S.timer){clearTimeout(S.timer);S.timer=null;}schedule();}
+    if(now-y.behindAt>12000)syncNote('Eşitleme sorunu — yeniden deneniyor','apply');
+    if(now-y.behindAt>20000&&now-(y.hardAt||0)>20000){y.hardAt=now;syncLog('hard');S.mirror=null;S.rev=0;S.stats.resyncs++;J.sendRaw({v:1,type:'resync'});}
+    return;}
+  if(y.why==='window'||y.why==='apply')syncNote('');
+  /* 2) / 3) veri gelmiyor */
+  const pu=y.pulse&&now-y.pulseAt<8000?y.pulse:null;
+  const missing=!!pu&&pu.mrev>(S.rev|0),hostStuck=!!pu&&pu.mfail===1;
+  const oldPend=[...S.pend.values()].some(p=>now-p.at>8000);
+  const silent=!pu&&S.hostSpd>0&&!!S.mirrorAt&&now-S.mirrorAt>10000;     // nabız da yok (eski host / host yanıtsız), oyun akıyor görünüyor
+  const failing=S.boot.fails>0&&!!S.boot.err;                            // ayna geldi ama motor kuramadı (deserialize reddi): neden gösterilir
+  if(!missing&&!hostStuck&&!oldPend&&!silent&&!failing){y.since=0;y.asks=0;y.nextAsk=0;if(y.note)syncNote('');return;}
+  if(!y.since){y.since=now;y.nextAsk=now+2500;}                          // ertelenmiş (700 ms) ayna gönderimine ve yoldaki iletiye pay
+  if(hostStuck)syncNote('Host dünya verisi gönderemiyor (yayın hatası)','host-publish');
+  else if(failing)syncNote('Eşitleme sorunu — yeniden isteniyor','apply');
+  else if(now-y.since>6000)syncNote(oldPend&&!missing?'Host yanıt vermiyor — yeniden eşitleniyor':'Eşitleme gecikti — yeniden isteniyor','stall');
+  if(now<y.nextAsk)return;
+  if(y.asks>=3){y.asks=0;y.since=0;y.nextAsk=0;S.pend.clear();if(!hostStuck)reconnect();return;}
+  y.asks++;y.nextAsk=now+4000*2**y.asks;S.stats.resyncs++;syncLog('resync:'+(missing?'missing':hostStuck?'host':oldPend?'pend':'silent'));J.sendRaw({v:1,type:'resync'});
+}
 function statusNow(){const t=doc.getElementById('jConn');return t?t.outerHTML:'';}
-setInterval(()=>{try{bootTick();if(S.J&&!S.started&&S.J.screen==='game')update(statusNow());}catch{}},1000);
+setInterval(()=>{try{bootTick();if(S.J&&!S.started&&S.J.screen==='game')update(statusNow());}catch{}try{syncWatch();}catch{}},1000);
 doc.addEventListener('click',e=>{const el=e.target.closest('[data-g7="retry"]');if(!el)return;const b=S.boot;b.failed=false;b.tries=0;b.fails=0;b.err='';b.next=0;S.mirror=null;bootLog('retry');bootAsk();b.next=Date.now()+8000;update(statusNow());});
 window.MP6Stars={fleetRecovery(c,done){const cid=send({kind:'fleetRecovery',...c});if(cid)waits[cid]=res=>{if(res.status!=='ok'){done({ok:false,why:why(res)});return;}const applied={rev:res.rev,gen:S.gen,extra:res.extra};if(fleetRecoveryApplied(applied))done({ok:true});else{S.fleetRecoveryAcks=S.fleetRecoveryAcks||[];if(S.fleetRecoveryAcks.length>=16)S.fleetRecoveryAcks.shift().done({ok:false,why:'Durumu yeniden aç'});S.fleetRecoveryAcks.push({...applied,done});schedule();}};return cid;},warCommand(c,done){const cmd={...c};if(cmd.to!==undefined)cmd.to=real(cmd.to);for(const k of ['give','want'])if(cmd[k])cmd[k]=cmd[k].map(i=>i.t==='warJoin'?{...i,target:real(i.target)}:i);if(cmd.target!==undefined)cmd.target=real(cmd.target);if(cmd.member!==undefined&&cmd.member!==null)cmd.member=real(cmd.member);const cid=send(cmd);if(cid)waits[cid]=res=>done(res.status==='ok'?{ok:true,extra:res.extra||{}}:{ok:false,why:why(res)});return cid;},warCenterRead(front,done){const cid=send({kind:'warCenterRead',front});if(cid)waits[cid]=res=>{if(res.status!=='ok'){done({error:why(res)});return;}const m=id=>Number.isInteger(id)?local(id):id,part=x=>({...x,id:m(x.id)}),r=res.extra.report;done(r?{report:{...r,sides:r.sides.map(m),sponsor:m(r.sponsor),actor:m(r.actor),parties:r.parties.map(part),participants:r.participants.map(part),goals:r.goals.map(x=>({...x,by:m(x.by)})),fronts:r.fronts.map(x=>({...x,sides:x.sides.map(m)})),progress:r.progress.map(x=>({...x,from:m(x.from),to:m(x.to)}))}}:{preparations:(res.extra.preparations||[]).map(p=>({...p,owner:m(p.owner),target:m(p.target),commitments:p.commitments.map(c=>({...c,member:m(c.member),terms:{...c.terms,from:m(c.terms.from),to:m(c.terms.to),give:c.terms.give.map(i=>i.t==='warJoin'?{...i,target:m(i.target)}:i),want:c.terms.want.map(i=>i.t==='warJoin'?{...i,target:m(i.target)}:i)}}))})),index:(res.extra.index||[]).map(x=>({...x,sides:x.sides.map(m),sponsor:m(x.sponsor)}))});};return cid;},remoteQuote(fleet,sys,key,done){const cid=send({kind:'remoteQuote',fleet,sys,key});if(cid)waits[cid]=res=>done(res.status==='ok'?res.extra:{ok:false,why:why(res)});},SET,S,restoreObservation,onMessage,update,screen,attach(J){S.J=J;},onAssign(){S.uiSent=false;bootLog('assign');},VIEW,ACT,boot:{stage:bootStage,tick:bootTick},dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
 /* telefon geri tuşu: önce açık MP diplomasi onayı/paneli kapanır (join.js popstate bunu sorar) */

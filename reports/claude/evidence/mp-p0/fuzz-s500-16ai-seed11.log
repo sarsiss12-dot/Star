@@ -1,0 +1,82 @@
+setup {"cfg":{"ok":true},"st":{"ok":true},"sys":500,"emps":19,"guest":1,"host":0}
+m1 2076ms day 30 pkg ok 462224 rev 31 resync 0   
+m2 1705ms day 60 pkg ok 504959 rev 61 resync 0   
+m3 2337ms day 90 pkg ok 558292 rev 91 resync 0   
+m4 1612ms day 120 pkg ok 599331 rev 121 resync 0   
+m5 1684ms day 150 pkg ok 644639 rev 151 resync 0   
+m6 2140ms day 180 pkg ok 686483 rev 181 resync 0   {"feds":0,"wars":0,"fleets":82,"dead":0,"offers":0}
+m7 2139ms day 210 pkg ok 725201 rev 211 resync 0   
+m8 2034ms day 240 pkg ok 766860 rev 241 resync 0   
+m9 2275ms day 270 pkg ok 813311 rev 271 resync 0   
+m10 2004ms day 300 pkg ok 856691 rev 301 resync 0   
+m11 3110ms day 330 pkg ok 901094 rev 331 resync 0   
+m12 2846ms day 360 pkg ok 946353 rev 361 resync 0   load=ok day 360 {"feds":0,"wars":0,"fleets":99,"dead":0,"offers":0}
+m13 2453ms day 390 pkg ok 972503 rev 391 resync 0   
+m14 2626ms day 420 pkg ok 995325 rev 421 resync 0   
+m15 2708ms day 450 pkg ok 1021361 rev 451 resync 0   
+m16 3016ms day 480 pkg ok 1044693 rev 481 resync 0   
+m17 3506ms day 510 pkg ok 1066489 rev 511 resync 0   
+m18 3260ms day 540 pkg ok 1088393 rev 541 resync 0   {"feds":0,"wars":0,"fleets":106,"dead":0,"offers":0}
+m19 3508ms day 570 pkg ok 1110008 rev 571 resync 0   
+m20 3042ms day 600 pkg ok 1132606 rev 601 resync 0   
+m21 4148ms day 630 pkg ok 1158445 rev 631 resync 0   
+m22 3734ms day 660 pkg ok 1177168 rev 661 resync 0   
+m23 3446ms day 690 pkg ok 1197575 rev 691 resync 0   
+m24 4755ms day 720 pkg ok 1216744 rev 721 resync 0   load=ok day 720 {"feds":0,"wars":0,"fleets":104,"dead":0,"offers":0}
+m25 3832ms day 750 pkg ok 1240600 rev 751 resync 0   
+m26 3799ms day 780 pkg ok 1259875 rev 781 resync 0   
+m27 4258ms day 810 pkg ok 1280495 rev 811 resync 0   
+m28 3888ms day 840 pkg ok 1295998 rev 841 resync 0   
+m29 4473ms day 870 pkg ok 1308115 rev 871 resync 0   
+m30 4927ms day 900 pkg ok 1324848 rev 901 resync 0   {"feds":0,"wars":0,"fleets":108,"dead":0,"offers":0}
+m31 5061ms day 930 pkg ok 1341426 rev 931 resync 0   
+m32 5753ms day 960 pkg ok 1362546 rev 961 resync 0   
+m33 5198ms day 990 pkg ok 1379360 rev 991 resync 0   
+m34 4789ms day 1020 pkg ok 1396870 rev 1021 resync 0   
+m35 4732ms day 1050 pkg ok 1416522 rev 1051 resync 0   
+m36 4962ms day 1080 pkg ok 1437482 rev 1081 resync 0   load=ok day 1080 {"feds":1,"wars":0,"fleets":107,"dead":0,"offers":0}
+m37 4085ms day 1110 pkg ok 1456909 rev 1111 resync 0   
+m38 3885ms day 1140 pkg ok 1470791 rev 1141 resync 0   
+m39 3724ms day 1170 pkg ok 1489644 rev 1171 resync 0   
+m40 3844ms day 1200 pkg ok 1506235 rev 1201 resync 0   
+m41 4423ms day 1230 pkg ok 1523683 rev 1231 resync 0   
+m42 3622ms day 1260 pkg ok 1541932 rev 1261 resync 0   {"feds":1,"wars":0,"fleets":107,"dead":0,"offers":0}
+m43 5346ms day 1290 pkg ok 1561094 rev 1291 resync 0   
+m44 3872ms day 1320 pkg ok 1577105 rev 1321 resync 0   
+m45 4803ms day 1350 pkg ok 1597095 rev 1351 resync 0   
+m46 4322ms day 1380 pkg ok 1617069 rev 1381 resync 0   
+m47 4556ms day 1410 pkg ok 1635371 rev 1411 resync 0   
+m48 4644ms day 1440 pkg ok 1650801 rev 1441 resync 0   load=ok day 1440 {"feds":1,"wars":0,"fleets":112,"dead":0,"offers":0}
+m49 5185ms day 1470 pkg ok 1666582 rev 1471 resync 0   
+m50 4365ms day 1500 pkg ok 1683471 rev 1501 resync 0   
+m51 5069ms day 1530 pkg ok 1696937 rev 1531 resync 0   
+m52 4222ms day 1560 pkg ok 1708334 rev 1561 resync 0   
+m53 4229ms day 1590 pkg ok 1723360 rev 1591 resync 0   
+m54 4559ms day 1620 pkg ok 1737237 rev 1621 resync 0   {"feds":1,"wars":0,"fleets":123,"dead":0,"offers":0}
+m55 4215ms day 1650 pkg ok 1753380 rev 1651 resync 0   
+m56 4710ms day 1680 pkg ok 1764231 rev 1681 resync 0   
+m57 5292ms day 1710 pkg ok 1772651 rev 1711 resync 0   
+m58 4692ms day 1740 pkg ok 1785530 rev 1741 resync 0   
+m59 5420ms day 1770 pkg ok 1795679 rev 1771 resync 0   
+m60 4634ms day 1800 pkg ok 1803259 rev 1801 resync 0   load=ok day 1800 {"feds":1,"wars":0,"fleets":125,"dead":0,"offers":0}
+m61 5287ms day 1830 pkg ok 1810186 rev 1831 resync 0   
+m62 4878ms day 1860 pkg ok 1817215 rev 1861 resync 0   
+m63 5174ms day 1890 pkg ok 1821760 rev 1891 resync 0   
+m64 4433ms day 1920 pkg ok 1826785 rev 1921 resync 0   
+m65 4766ms day 1950 pkg ok 1829062 rev 1951 resync 0   
+m66 4854ms day 1980 pkg ok 1831805 rev 1981 resync 0   {"feds":1,"wars":0,"fleets":121,"dead":0,"offers":0}
+m67 6111ms day 2010 pkg ok 1843900 rev 2011 resync 0   
+m68 5783ms day 2040 pkg ok 1852483 rev 2041 resync 0   
+m69 5672ms day 2070 pkg ok 1856094 rev 2071 resync 0   
+m70 5243ms day 2100 pkg ok 1863175 rev 2101 resync 0   
+m71 4746ms day 2130 pkg ok 1873028 rev 2131 resync 0   
+m72 5174ms day 2160 pkg ok 1878102 rev 2161 resync 0   load=ok day 2160 {"feds":2,"wars":0,"fleets":128,"dead":0,"offers":0}
+m73 4598ms day 2190 pkg ok 1881374 rev 2191 resync 0   
+m74 4523ms day 2220 pkg ok 1886744 rev 2221 resync 0   
+m75 4752ms day 2250 pkg ok 1889000 rev 2251 resync 0   
+m76 4690ms day 2280 pkg ok 1898675 rev 2281 resync 0   
+m77 5317ms day 2310 pkg ok 1906957 rev 2311 resync 0   
+m78 5598ms day 2340 pkg ok 1912898 rev 2341 resync 0   {"feds":2,"wars":0,"fleets":125,"dead":0,"offers":0}
+m79 5539ms day 2370 pkg ok 1920628 rev 2371 resync 0   
+m80 5776ms day 2400 pkg ok 1924988 rev 2401 resync 0   load=ok day 2400 
+DONE throws 0 guestBad 0 pkgBad {}

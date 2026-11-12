@@ -1,0 +1,73 @@
+setup {"cfg":{"ok":true},"st":{"ok":true},"sys":500,"emps":19,"guest":1} ms 427
+m0 {"assign":"2×≤197","lobby":"4×≤900","lresult":"2×≤67","snapshot":"1×≤31522","delta":"1×≤89","mirror":"1×≤103325"}
+m1 969ms {"delta":"30×≤939","mirrorDelta":"30×≤7054"}
+m2 879ms {"delta":"30×≤935","mirrorDelta":"30×≤6865"}
+m3 1056ms {"delta":"30×≤941","mirrorDelta":"30×≤7099"}
+m4 1035ms {"delta":"30×≤943","mirrorDelta":"30×≤7226"}
+m5 1231ms {"delta":"30×≤946","mirrorDelta":"30×≤7287"}
+m6 1208ms {"delta":"30×≤1103","mirrorDelta":"30×≤7470","snapshot":"1×≤32368","mirror":"1×≤114251"} | RESYNC mirror 114247 snapshot 32364 limit 524288 | deserialize true 83ms | known 14 | fleets 82 | save8 600451
+m7 1439ms {"delta":"30×≤949","mirrorDelta":"30×≤7432"}
+m8 1429ms {"delta":"30×≤995","mirrorDelta":"30×≤7395"}
+m9 1568ms {"delta":"30×≤952","mirrorDelta":"30×≤7565"}
+m10 1413ms {"delta":"30×≤949","mirrorDelta":"30×≤7567"}
+m11 1827ms {"delta":"30×≤949","mirrorDelta":"30×≤7664"}
+m12 1800ms {"delta":"30×≤944","mirrorDelta":"30×≤7799","snapshot":"1×≤32871","mirror":"1×≤123831"} | RESYNC mirror 123827 snapshot 32867 limit 524288 | deserialize true 102ms | known 18 | fleets 93 | save8 823006
+m13 1927ms {"delta":"30×≤956","mirrorDelta":"30×≤7858"}
+m14 1779ms {"delta":"30×≤948","mirrorDelta":"30×≤7868"}
+m15 1705ms {"delta":"30×≤3562","mirrorDelta":"30×≤9854"}
+m16 1725ms {"delta":"30×≤1614","mirrorDelta":"30×≤9600"}
+m17 2021ms {"delta":"30×≤3288","mirrorDelta":"30×≤9376"}
+m18 2078ms {"delta":"30×≤1943","mirrorDelta":"30×≤9837","snapshot":"1×≤35211","mirror":"1×≤129911"} | RESYNC mirror 129907 snapshot 35207 limit 524288 | deserialize true 78ms | known 29 | fleets 101 | save8 953109
+m19 2197ms {"delta":"30×≤3288","mirrorDelta":"30×≤9547"}
+m20 2242ms {"delta":"30×≤2063","mirrorDelta":"30×≤9707"}
+m21 2332ms {"delta":"30×≤2293","mirrorDelta":"30×≤9736"}
+m22 2748ms {"delta":"30×≤3287","mirrorDelta":"30×≤9633"}
+m23 2289ms {"delta":"30×≤945","mirrorDelta":"30×≤9772"}
+m24 2384ms {"delta":"30×≤1756","mirrorDelta":"30×≤9879","snapshot":"1×≤35693","mirror":"1×≤132457"} | RESYNC mirror 132453 snapshot 35689 limit 524288 | deserialize true 79ms | known 33 | fleets 100 | save8 1079565
+m25 2410ms {"delta":"30×≤3286","mirrorDelta":"30×≤10168"}
+m26 2887ms {"delta":"30×≤4627","mirrorDelta":"30×≤10050"}
+m27 2868ms {"delta":"30×≤3402","mirrorDelta":"30×≤11295"}
+m28 2625ms {"delta":"30×≤3400","mirrorDelta":"30×≤11077"}
+m29 2381ms {"delta":"30×≤3465","mirrorDelta":"30×≤12483"}
+m30 2446ms {"delta":"30×≤3402","mirrorDelta":"30×≤11542","snapshot":"1×≤37462","mirror":"1×≤134494"} | RESYNC mirror 134490 snapshot 37458 limit 524288 | deserialize true 78ms | known 41 | fleets 100 | save8 1177891
+m31 2759ms {"delta":"30×≤2405","mirrorDelta":"30×≤11539"}
+m32 2811ms {"delta":"30×≤3403","mirrorDelta":"30×≤11693"}
+m33 2814ms {"delta":"30×≤3401","mirrorDelta":"30×≤11325"}
+m34 2415ms {"delta":"30×≤4742","mirrorDelta":"30×≤11377"}
+m35 2833ms {"delta":"30×≤3453","mirrorDelta":"30×≤11409"}
+m36 2864ms {"delta":"30×≤3795","mirrorDelta":"30×≤12068","snapshot":"1×≤39273","mirror":"1×≤136129"} | RESYNC mirror 136125 snapshot 39269 limit 524288 | deserialize true 80ms | known 46 | fleets 99 | save8 1276897
+m37 2651ms {"delta":"30×≤4193","mirrorDelta":"30×≤12309"}
+m38 3170ms {"delta":"30×≤3962","mirrorDelta":"30×≤11625"}
+m39 3181ms {"delta":"30×≤3538","mirrorDelta":"30×≤11757"}
+m40 2980ms {"delta":"30×≤4810","mirrorDelta":"30×≤11759"}
+m41 3106ms {"delta":"30×≤3443","mirrorDelta":"30×≤11788"}
+m42 2942ms {"delta":"30×≤3520","mirrorDelta":"30×≤11810","snapshot":"1×≤40350","mirror":"1×≤138026"} | RESYNC mirror 138022 snapshot 40346 limit 524288 | deserialize true 125ms | known 50 | fleets 105 | save8 1383357
+m43 2811ms {"delta":"30×≤3947","mirrorDelta":"30×≤11840"}
+m44 2914ms {"delta":"30×≤4888","mirrorDelta":"30×≤11906"}
+m45 2640ms {"delta":"30×≤3947","mirrorDelta":"30×≤12048"}
+m46 3016ms {"delta":"30×≤7746","mirrorDelta":"30×≤12863"}
+m47 2855ms {"delta":"30×≤3406","mirrorDelta":"30×≤12061"}
+m48 2172ms {"delta":"30×≤6933","mirrorDelta":"30×≤12122","snapshot":"1×≤41304","mirror":"1×≤140080"} | RESYNC mirror 140076 snapshot 41300 limit 524288 | deserialize true 84ms | known 55 | fleets 103 | save8 1458961
+m49 2378ms {"delta":"30×≤3919","mirrorDelta":"30×≤12116"}
+m50 2841ms {"delta":"30×≤3962","mirrorDelta":"30×≤12147"}
+m51 2822ms {"delta":"30×≤3937","mirrorDelta":"30×≤12170"}
+m52 3002ms {"delta":"30×≤3849","mirrorDelta":"30×≤12169"}
+m53 2455ms {"delta":"30×≤4712","mirrorDelta":"30×≤12872"}
+m54 2794ms {"delta":"30×≤4031","mirrorDelta":"30×≤12280","snapshot":"1×≤41962","mirror":"1×≤141535"} | RESYNC mirror 141531 snapshot 41958 limit 524288 | deserialize true 80ms | known 57 | fleets 106 | save8 1514443
+m55 2587ms {"delta":"30×≤8044","mirrorDelta":"30×≤20667"}
+m56 2429ms {"delta":"30×≤5268","mirrorDelta":"30×≤13438"}
+m57 2693ms {"delta":"30×≤4813","mirrorDelta":"30×≤12830"}
+m58 2495ms {"delta":"30×≤610","mirrorDelta":"30×≤12322"}
+m59 3052ms {"delta":"30×≤4511","mirrorDelta":"30×≤12336"}
+m60 3045ms {"delta":"30×≤611","mirrorDelta":"30×≤11346","snapshot":"1×≤43528","mirror":"1×≤143603"} | RESYNC mirror 143599 snapshot 43524 limit 524288 | deserialize true 82ms | known 84 | fleets 103 | save8 1548588
+m61 2674ms {"delta":"30×≤4435","mirrorDelta":"30×≤11619"}
+m62 3183ms {"delta":"30×≤4435","mirrorDelta":"30×≤12389"}
+m63 3087ms {"delta":"30×≤5482","mirrorDelta":"30×≤13151"}
+m64 3172ms {"delta":"30×≤4712","mirrorDelta":"30×≤12072"}
+m65 2944ms {"delta":"30×≤4898","mirrorDelta":"30×≤12102"}
+m66 3275ms {"delta":"30×≤5681","mirrorDelta":"30×≤13164","snapshot":"1×≤44090","mirror":"1×≤144799"} | RESYNC mirror 144795 snapshot 44086 limit 524288 | deserialize true 114ms | known 84 | fleets 109 | save8 1578015
+m67 3026ms {"delta":"30×≤5081","mirrorDelta":"30×≤12457"}
+m68 2829ms {"delta":"30×≤3303","mirrorDelta":"30×≤12840"}
+m69 3041ms {"delta":"30×≤1618","mirrorDelta":"30×≤13439"}
+m70 3324ms {"delta":"30×≤6047","mirrorDelta":"30×≤14002","snapshot":"1×≤44363","mirror":"1×≤145352"} | RESYNC mirror 145348 snapshot 44359 limit 524288 | deserialize true 91ms | known 84 | fleets 115 | save8 1603076
+ALL {"assign":{"n":2,"max":197,"over":0},"lobby":{"n":4,"max":900,"over":0},"lresult":{"n":2,"max":67,"over":0},"snapshot":{"n":13,"max":44363,"over":0},"delta":{"n":2101,"max":8044,"over":0},"mirror":{"n":13,"max":145352,"over":0},"mirrorDelta":{"n":2100,"max":20667,"over":0}}

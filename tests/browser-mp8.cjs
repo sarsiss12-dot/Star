@@ -14,8 +14,10 @@ const fs=require('fs'),path=require('path'),os=require('os'),net=require('net'),
 const root=path.resolve(__dirname,'..'),{selfSigned,startProxy}=require('./helpers/mp11-tls-proxy.js');
 const SCEN=(process.env.MP8_SCEN||'A').toUpperCase(),out=path.resolve(process.env.STARS_OUTPUT||path.join(root,'../evidence/mp8'),SCEN);fs.mkdirSync(out,{recursive:true});
 const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'buyuk',ai:8,seed:404,months:240,guests:1,every:12},
-  C:{size:'buyuk',ai:6,seed:23,months:120,guests:2,every:6},R:{size:'orta',ai:5,seed:11,months:60,guests:2,every:6},N:{size:'orta',ai:5,seed:22,months:4,guests:2,every:2}}[SCEN];
-if(!CONF)throw Error('MP8_SCEN A|B|C|R|N');
+  C:{size:'buyuk',ai:6,seed:23,months:120,guests:2,every:6},R:{size:'orta',ai:5,seed:11,months:60,guests:2,every:6},N:{size:'orta',ai:5,seed:22,months:4,guests:2,every:2},
+  /* MP-P0: gerçek zamanlı dayanıklılık — 500 sistem, 16 AI + 2 insan; host'un GERÇEK oyun döngüsü en yüksek hızda, misafir gerçek dokunmayla oynar */
+  P:{size:'s500',ai:16,seed:404,months:0,guests:1,every:6}}[SCEN];
+if(!CONF)throw Error('MP8_SCEN A|B|C|R|N|P');
 if(process.env.FEDAI0_R==='1'||process.env.ER0_R==='1')CONF.ai=8;
 if(process.env.SCALE0_MP){const c=JSON.parse(process.env.SCALE0_MP);Object.assign(CONF,c);}
 const MONTHS=+(process.env.MP8_MONTHS||CONF.months);
@@ -397,6 +399,8 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
       for(const n of guestNames())await wait(pg[n],()=>MP1Join.screen==='join'||!MP1Join.hostOnline,undefined,40000);await sleep(3000);
       const g=await pg.B.evaluate(()=>({screen:MP1Join.screen,err:MP1Join.err,closed:MP1Join.closed}));const s1=await pg.H.evaluate(()=>__mp8.state());
       metrics.net.relayRestart={guest:g,hostDayDelta:s1.day-s0.day,rngSame:s1.r===s0.r};assert.equal(s1.r,s0.r,'host world untouched');assert(g.err,'guest sees an explicit message');await shot(pg.B,'b-relay-restart');});}
+
+  if(SCEN==='P')await require('./helpers/mp-p0-soak.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,origin,guestGo,wait,tap,errors,design:DESIGNS});
 
 }catch(e){console.log('FATAL',e);results.push({name:'FATAL',status:'FAIL',error:String(e&&e.stack||e)});}
 finally{metrics.errors=errors;fs.writeFileSync(path.join(out,'mp8-'+SCEN+'.json'),JSON.stringify({results,metrics},null,1));
