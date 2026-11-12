@@ -46,7 +46,7 @@ const ArchiveUI = {
       const state=news?(r.pinned?'★ Sabit':r.read?'Okundu':'Yeni'):DiplomaticInbox.states[r.status];
       return `<article class="archiveRow ${news&&!r.read?'unread95e':''} ${this.selected===r.id?'selected':''}" data-record="${r.id}"><span class="archiveDate">${esc(this.date(r))}</span><span class="archiveType" title="${esc(type)}">${esc(type)}</span>
         ${e?`<button class="archiveEmpire" data-a="${news?'newsEmpire':'inboxEmpire'}" data-x="${news?r.id+':'+r.empires.findIndex(x=>x.id===e.id):r.id}" title="Devleti incele">${esc(e.name)}${empire.length>1?' +'+(empire.length-1):''}</button>`:'<span class="archiveEmpire">—</span>'}
-        <button class="archiveTitle" data-a="${news?'newsDetail':'diplomaticRecord'}" data-x="${r.id}" aria-label="Ayrıntı: ${esc(r.title)}"><strong>${esc(r.title)}</strong><span>${esc(news?r.text:r.sub)}</span></button><span class="archiveState">${esc(state)}${r.important?' · !':''}</span></article>`;
+        <button class="archiveTitle" data-a="${news?'newsDetail':'diplomaticRecord'}" data-x="${r.id}" aria-label="Ayrıntı: ${esc(r.title)}"><strong>${esc(r.title)}</strong><span>${esc(news?UI.dayText(r.text):r.sub)}</span></button><span class="archiveState">${esc(state)}${r.important?' · !':''}</span></article>`;
     }).join(''):'<div class="mini archiveEmpty">Bu filtrede bilinen kayıt yok.</div>')+
       (list.length>this.page?'<button class="abtn archiveMore" data-a="archiveMore">Daha eski kayıtları göster</button>':'');
     $('archiveRows').scrollTop=this.scroll||0;
@@ -97,7 +97,7 @@ const ArchiveUI = {
   newsBackButton(){return this.newsReturnRecord()?'<button class="abtn" data-a="newsReturn">İncelenen habere geri dön</button>':'';},
   detail(id){
     this.ensureWorld();const r=GalacticNews.get(id);if(!r)return;this.remember();this.selected=r.id;r.read=true;UI.topbar();if(r.category==='war'||r.category==='peace'&&/^war-end:\d+$/.test(r.key)){this.warStatus(r);return;}
-    this.shell(`<div class="mbd archiveDetail archive95e"><h3>${esc(r.title)}</h3><div class="mini">Olay: ${esc(r.key)} · ${esc(this.date(r))} · ${esc(GalacticNews.categories[r.category])}</div><p>${esc(r.text)}</p>
+    this.shell(`<div class="mbd archiveDetail archive95e"><h3>${esc(r.title)}</h3><div class="mini">Olay: ${esc(r.key)} · ${esc(this.date(r))} · ${esc(GalacticNews.categories[r.category])}</div><p>${esc(UI.dayText(r.text))}</p>
       <div class="mini">Bilgi kaynağı: ${esc(r.knowledge)}</div><div class="ph">İLGİLİ DEVLETLER</div>${r.empires.map((e,i)=>GalacticNews.known(e.id)?`<button class="abtn" data-a="newsEmpire" data-x="${r.id}:${i}">${esc(e.name)}${G.emps[e.id]?.dead?' · tarihsel devlet':''}</button>`:'').join('')}
       ${r.federation?`<p>Federasyon: ${esc(r.federation.name)}</p>`:''}${GalacticNews.location(r)?`<button class="abtn" data-a="newsLocation" data-x="${r.id}">${esc(r.system.name)}${r.planet?' · '+esc(r.planet.name):''} · Konuma git</button>`:''}</div>`,
       `${r.category==='council'&&councilExists()||r.federation&&findFed(G.p)?.id===r.federation.id?`<button class="ch" data-a="newsContext" data-x="${r.id}">Güncel ${r.category==='council'?'Konsey':'federasyon'} · tarihsel haber saklanır</button>`:''}<button class="ch" data-a="newsPin" data-x="${r.id}">${r.pinned?'Sabitlemeyi kaldır':'Sabitle'}</button><button class="ch" data-a="news">Listeye dön</button>`);

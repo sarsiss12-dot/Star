@@ -84,7 +84,7 @@ const VIEW=new Set(['warCenter','warCenterTab','warCenterDetail','warCenterSuppo
   'diploRelation','diploNav','diploFilter','bmPick','bmCancel','vsCurrent','vsInspect','vsType','vsEdit','vsBack','fleetFilter','fedTab','fedMember',
   'closeFed','closeDeal','closeMarket','closeDiplo','memTog','intelView','intelGroup','upInfo','crisInfo','selsys','selfleet','route','fedPane',
   'scienceTab','scienceNode','scienceFocus','scienceFilter','scienceMode','scienceQueue','scienceRoute','scienceMove','scienceRemove','scienceZoom',
-  'tech','build','sInfo','bInfo','showEv','minModal','restoreModal','openNote','instNote','closem','marketPane','mktSel','mute','save','diagShow','opLogMenu',
+  'tech','build','sInfo','bInfo','showEv','minModal','restoreModal','openNote','instNote','instDecide','closem','marketPane','mktSel','mute','save','diagShow','opLogMenu',
   /* MP.6.1 — görünüm / taslak */
   'news','newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord',
   'inboxEmpire','inboxReturn','inboxFederation','deal','dealAdd','dealRm','dealDiscard','dealBack','peace','vsOpen','vsCancel','vsCounter','fedBallot',
@@ -692,7 +692,7 @@ function inboxOffers(){
   for(const f of G.feds||[]){if(!f.vote||!(f.members||[]).includes(0)||typeof fedVoteCounts!=='function'||!fedVoteCounts(f).waiting.includes(0))continue;
     const key='fed:'+f.id+':'+fedVoteToken(f.vote);if(G.inbox.some(n=>n.key===key))continue;const L=typeof fedVoteLaw==='function'?fedVoteLaw(f.vote):null;
     G.inboxUid=(G.inboxUid||0)+1;const item={kind:'fedvote',data:f.id,ico:'🏛',cls:'sci',pause:false,uid:G.inboxUid,born:Number.isFinite(f.vote.opened)?f.vote.opened:G.day,
-      title:'Federasyon oylaması — '+f.name,sub:(L?L.n:'Karar')+(f.vote.repeal?' — kaldırma':''),key};
+      title:'Federasyon oylaması — '+f.name,sub:typeof UI.fedVoteSub==='function'?UI.fedVoteSub(f):(L?L.n:'Karar')+(f.vote.repeal?' — kaldırma':''),key};
     if(!DiplomaticInbox.capture(item))continue;G.inbox.push(item);changed=true;}
   /* MP.7.4: kaydırılarak kapatılan kart ayna yenilenince geri gelmez (karar kaydı gelen kutusunda kalır) */
   if(S.swiped.size){const n2=G.inbox.length;G.inbox=G.inbox.filter(n=>!S.swiped.has(noteSig(n)));if(G.inbox.length!==n2)changed=true;}

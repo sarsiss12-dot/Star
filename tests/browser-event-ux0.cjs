@@ -120,6 +120,47 @@ const handle=p=>p.evaluate(()=>{const h=document.getElementById('sbResize');if(!
       const again=await p.evaluate(cuid=>{try{UI.noteQuickAct(cuid+':y');}catch(e){return 'throw '+e.message;}const v=G.council.vote||G.council.lastVote;return (v.yes||[]).filter(x=>x===0).length;},cuid);assert.equal(again,1);
     }finally{await ctx.close();}});
 
+  /* ---- BETA-EVENT-UX.1 ---- */
+  const FED2=FED.replace("members:[0,1,2]","members:[1,2]").replace("for(const a of F.members)for(const b of F.members)","for(const a of [0,...F.members])for(const b of [0,...F.members])");
+  await test('S6 üyelik başvurusu (gerçek requestFederation): başvurana "Üyelik başvurun …" bilgi kartı; oy kabul olursa ayrı aday rızası için KABUL / REDDET davet kartı; KABUL tam Gelen kutusu yoluyla üye yapar; Save8 kutusu / inboxUid değişmez',async()=>{
+    const {p,ctx}=await page(1280,720,false);try{
+      await p.evaluate(FED2);await p.evaluate(()=>{UI.tick();});
+      const r=await p.evaluate(()=>{const F=G.feds[0],uid=G.inboxUid|0,inbox=JSON.stringify(serializeEventsWorld().inbox);const q=requestFederation(G.p,G.emps[F.leader]);
+        for(let i=0;i<4&&F.vote;i++){const t=fedVoteToken(F.vote);for(const id of fedVoteCounts(F).waiting)castFedVote(G.emps[id],F.id,t,true);if(F.vote)finishFedVote(F);}
+        UI.closeModal();UI.tick();UI.tick();return {q:q&&(q.ok?'ok':q.why),inv:!!(F.invites&&F.invites[0]),adm:Object.values(F.admissionResults||{}).map(x=>x.status),uid0:uid,uid1:G.inboxUid|0,same:inbox===JSON.stringify(serializeEventsWorld().inbox)};});
+      const info=await p.evaluate(()=>[...document.querySelectorAll('#inbox .nInfo')].map(e=>e.textContent.replace(/\s+/g,' ').trim()));
+      assert.equal(r.q,'ok','başvuru: '+JSON.stringify(r));assert(info.some(t=>/Üyelik başvurun/.test(t)),'başvuru kartı: '+JSON.stringify(info));
+      assert(r.inv,'oy kabul → davet: '+JSON.stringify(r));assert.equal(r.uid1,r.uid0,'inboxUid değişmez');assert(r.same,'kayıtlı kutu değişmez');
+      const k=p.locator('#inbox [data-a="instDecide"][data-x$=":y"]');await k.first().waitFor();await shot(p,'s6-invite-card');
+      await k.first().click();await p.waitForTimeout(150);
+      const after=await p.evaluate(()=>({member:!!(findFed(G.p)&&findFed(G.p).id===100),inv:!!(G.feds[0].invites||{})[0],rec:DiplomaticInbox.state().records.filter(r=>r.kind==='invite').map(r=>r.status)}));
+      assert(after.member,'KABUL → üye '+JSON.stringify(after));await p.evaluate(()=>UI.drawInbox());assert.equal(await p.locator('#inbox [data-a="instDecide"]').count(),0,'karar sonrası kart kalmaz');
+      assert.deepEqual(after.rec,['accepted'],'tek Gelen kutusu kaydı, kabul');
+    }finally{await ctx.close();}});
+  await test('S7 üye için üyelik başvurusu oy kartı başvuranı adıyla gösterir ("Üyelik başvurusu — X"); hızlı EVET aynı yol',async()=>{
+    const {p,ctx}=await page(1280,720,false);try{
+      await p.evaluate(FED);const r=await p.evaluate(()=>{const F=G.feds[0];G.emps[3].res.etk=3000;for(const id of F.members){G.emps[3].contact[id]=G.emps[id].contact[3]=true;}const q=requestFederation(G.emps[3],G.emps[F.leader]);UI.closeModal();UI.tick();
+        const n=G.inbox.find(n=>n.kind==='fedvote');return {q:q&&(q.ok?'ok':q.why),sub:n&&n.sub,name:G.emps[3].name,wait:F.vote&&fedVoteCounts(F).waiting};});
+      assert.equal(r.q,'ok',JSON.stringify(r));assert.equal(r.sub,'Üyelik başvurusu — '+r.name,JSON.stringify(r));await shot(p,'s7-admit-card');
+    }finally{await ctx.close();}});
+  await test('S8 başkan değişimleri: federasyon başkanı ayrılınca (gerçek leaveFederation) üyeye tek kart; Konsey dönem sonu seçimi (gerçek councilTick) başkan değişirse üyeye tek kart; Konsey karar metninde gün tam sayı',async()=>{
+    const {p,ctx}=await page(800,360,true);try{
+      await p.evaluate(FED);await p.evaluate(()=>UI.tick());
+      await p.evaluate(()=>{G.day+=1;leaveFederation(G.emps[G.feds[0].leader]);UI.tick();UI.tick();UI.tick();});
+      let info=await p.evaluate(()=>[...document.querySelectorAll('#inbox .nInfo')].map(e=>e.textContent.replace(/\s+/g,' ').trim()));
+      assert.equal(info.filter(t=>/Federasyon başkanı değişti/.test(t)).length,1,'tek başkan kartı: '+JSON.stringify(info));
+      const c=await p.evaluate(()=>{for(const e of G.emps)if(!e.wild)e.res.etk=Math.max(e.res.etk,3000);G.cfg.council='acik';
+        G.council={name:'EUX Konseyi',founder:1,members:[0,1,2,3],laws:{},targeted:{},treasury:0,president:0,termStart:G.day,terms:{0:1},voteIn:9999,vote:null,dead:false,termAge:PRESIDENT_TERM-1};
+        const w=m=>voteWeight(G.emps[m]),ms=[0,1,2,3].sort((a,b)=>w(a)-w(b));G.council.president=ms[0];G.council.terms={[ms[0]]:1};UI.tick();
+        G.day+=1;councilTick();UI.tick();UI.tick();return {pres:G.council.president,changed:G.council.president!==ms[0]};});
+      info=await p.evaluate(()=>[...document.querySelectorAll('#inbox .nInfo')].map(e=>e.textContent.replace(/\s+/g,' ').trim()));
+      assert(c.changed,'fikstür: başkan değişti');assert.equal(info.filter(t=>/Konsey başkanlığı değişti/.test(t)).length,1,'tek Konsey başkanı kartı: '+JSON.stringify(info));
+      const veto=await p.evaluate(()=>{G.council.laws.muhafiz=true;UI.tick();G.p.guardian={vetoAt:-1e9};G.day+=1;const r=guardianVeto(G.p,'muhafiz');UI.tick();UI.tick();return {ok:r.ok,cards:[...document.querySelectorAll('#inbox .nInfo')].filter(e=>/yürürlükten kalktı/.test(e.textContent)).map(e=>e.textContent.replace(/\s+/g,' ').trim())};});
+      assert(veto.ok,'fikstür: gerçek guardianVeto');assert.equal(veto.cards.length,1,'yasa kalkma kartı: '+JSON.stringify(veto));assert(/Konsey Muhafızları/.test(veto.cards[0]));
+      const dt=await p.evaluate(()=>UI.dayText('Kabul edildi · EVET 1.0 / HAYIR 0.0 · gün 9.406519999999936'));assert.equal(dt,'Kabul edildi · EVET 1.0 / HAYIR 0.0 · gün 9');
+      await shot(p,'s8-leader-cards-800');
+      const over=await p.evaluate(()=>[...document.querySelectorAll('#inbox .nCard')].map(e=>e.scrollWidth-e.clientWidth).filter(x=>x>2).length);assert.equal(over,0,'kartlar yatay taşmıyor (800×360)');
+    }finally{await ctx.close();}});
   await test('S5 sayfa hataları yok',async()=>{assert.deepEqual(errors,[]);});
 }catch(e){console.log('FATAL',e);results.push({name:'FATAL',status:'FAIL',error:String(e&&e.stack||e)});}
 finally{try{await browser?.close();}catch{}try{server?.close();}catch{}
