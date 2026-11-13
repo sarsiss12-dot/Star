@@ -1,11 +1,11 @@
 {
-  "phase": "BETA-EVENT-UX.1",
-  "build": "96h10p25",
+  "phase": "BETA-MOBILE-HUD.0",
+  "build": "96h10p25u1",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p25",
-  "parent_commit": "998e999992bf8cc1abc9be4df88a6e21d6df05b8",
-  "parent_zip_sha256": "f3e3adaf6605d72d23410191ffaef2b024aeb16a2386c5fa94acad135f9c975a",
+  "pwa_cache": "stars-v96h10p25u1",
+  "parent_commit": "bcbd6973db8d9adf6cc25cda9efafa42bde3a477",
+  "parent_zip_sha256": "86720c077e46b0dfd7460286c36eb914ac7e582846b231beec7e49cd462d82fa",
   "file_count": 19,
   "files": {
     "ai.js": "ac900e296e39378f9f0caab85de70b7896d9eaebd22b65d259e955cb702fb3de",
@@ -20,13 +20,13 @@
     "economy-ui.js": "aa9da4f84f0b63ecb8b17e54d3dd844595e98d5a8da5f6a3012de9467a12e3bf",
     "economy.js": "8f07121ff8384318cab8eea416cccddd8d82bfe22cee3857445095e60299a888",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
-    "index.html": "97ddfcb8d67ee6a86cdb42fab445c78c5df7cb393d99d1a742009a95e6f9174f",
-    "main.js": "d7b5bc7df3f492d59c97ebf7223ee86ad51eb73813866f69685a56c74a11ade8",
+    "index.html": "99b7567a2798fa862e3c8e8580735f856c7f7044b8f75af87fc125b9bc83d6b9",
+    "main.js": "c3ad14d9a57a717ea8e8c90bc44e6eaccad8a8dfceb02a8094b0348c95315bbe",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
-    "map.js": "400dbc524750443528b88bfbd0d82aa301fd7b1f12b03d8ea5fa3d73c07603fc",
+    "map.js": "2e3284353cba1cbead6925dc7d1b3251bbfe6b4ab95fdd8149d2fad19c0608e5",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "ec4248f145875421dfc45ceab52a9d62db8bf1ce8029e90539066b92e1739a14",
-    "ui.js": "20ad4722999383d7c1cd0488c541f1ed1105aac129ba70c2aaec05b2d717ee51"
+    "sw.js": "1ac866c2ada00a5579d0389a6a28383df05a49afffd6aada2c2e48a2f42ce435",
+    "ui.js": "536ef96317945c0cd5e1c27dc463a9d52a426528bcb067de9f362a4e18176e5a"
   },
-  "description": "Federasyon / Konsey bildirimlerinin tamamlanması (katılım daveti kararı, üyelik başvurusu sonucu, federasyon ve Konsey başkanı değişimi), tekrarlayan / takılı kuruluş kartlarının düzeltilmesi, gün metni gösterimi."
+  "description": "Yatay telefonda tek satırlı filo çubuğu, ilk dokunuşta rota durumu, olay katman sırası ve geçici bildirim opaklığı."
 }
