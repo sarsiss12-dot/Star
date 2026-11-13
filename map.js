@@ -309,6 +309,12 @@ const ART = (() => {
     else if(e.symbol==='planet'||e.symbol==='orbit'){g.beginPath();g.arc(32,32,8,0,Math.PI*2);g.stroke();g.beginPath();g.ellipse(32,32,15,5,-.5,0,Math.PI*2);g.stroke();if(e.symbol==='orbit')g.fillRect(43,23,5,5);}
     else if(e.symbol==='crystal'){polygon(4,14);g.stroke();g.beginPath();g.moveTo(32,18);g.lineTo(32,46);g.stroke();}
     else if(e.symbol==='sword'){g.beginPath();g.moveTo(32,18);g.lineTo(27,29);g.lineTo(32,36);g.lineTo(37,29);g.closePath();g.fill();g.fillRect(22,35,20,3);g.fillRect(30,37,4,11);}
+    else if(e.symbol==='eye'){g.beginPath();g.moveTo(18,32);g.quadraticCurveTo(32,15,46,32);g.quadraticCurveTo(32,49,18,32);g.stroke();g.beginPath();g.arc(32,32,5,0,Math.PI*2);g.fill();}
+    else if(e.symbol==='crown'){g.beginPath();g.moveTo(19,24);g.lineTo(26,30);g.lineTo(32,20);g.lineTo(38,30);g.lineTo(45,24);g.lineTo(41,41);g.lineTo(23,41);g.closePath();g.stroke();}
+    else if(e.symbol==='anchor'){g.beginPath();g.arc(32,23,4,0,Math.PI*2);g.moveTo(32,27);g.lineTo(32,44);g.moveTo(25,32);g.lineTo(39,32);g.moveTo(21,35);g.quadraticCurveTo(32,52,43,35);g.stroke();}
+    else if(e.symbol==='spiral'){g.beginPath();for(let i=0;i<=40;i++){const a=i*.24,r=i/3;g[i?'lineTo':'moveTo'](32+Math.cos(a)*r,32+Math.sin(a)*r);}g.stroke();}
+    else if(e.symbol==='flame'){g.beginPath();g.moveTo(33,18);g.quadraticCurveTo(49,36,40,44);g.quadraticCurveTo(18,51,23,32);g.lineTo(30,35);g.quadraticCurveTo(35,27,33,18);g.fill();}
+    else if(e.symbol==='mountain'){g.beginPath();g.moveTo(18,41);g.lineTo(32,21);g.lineTo(46,41);g.closePath();g.stroke();g.moveTo(27,28);g.lineTo(32,33);g.lineTo(37,28);g.stroke();}
     else {g.beginPath();g.moveTo(18,24);g.lineTo(32,32);g.lineTo(46,24);g.lineTo(40,39);g.lineTo(32,44);g.lineTo(24,39);g.closePath();g.stroke();}
     g.restore();
     if(e.federation){g.strokeStyle='#fff4d4';g.lineWidth=2;g.strokeRect(2,2,60,60);for(const x of [23,31,39]){g.fillStyle='#fff4d4';g.fillRect(x,1,3,3);}}
@@ -643,7 +649,8 @@ const ART = (() => {
     return c;
   }
 
-  return {planet, star, ship, emblem, identityEmblem, identityCache, portrait, portraitFull, leaderPortrait, portraitCache, nebula, cache,
+  function invalidateSprites(){cache.clear();identityCache.clear();portraitCache.clear();}
+  return {planet, star, ship, emblem, identityEmblem, identityCache, portrait, portraitFull, leaderPortrait, portraitCache, nebula, cache,invalidateSprites,
           PORTRAIT, ARMOR, hexOf: hex, drawPixelArt, PIXEL_ART};
 })();
 
@@ -1632,7 +1639,7 @@ const View = {
     }
     g.restore();
   },
-  drawTerritoryLabels(g){
+  drawTerritoryLabels(g,regions=this.territoryRegions()){
     this._territoryLabels=[];
     if (!G.p || this.vw<40 || this.vh<40) return;
     const overlap=(a,b)=>a.x<b.x+b.w+3 && a.x+a.w+3>b.x && a.y<b.y+b.h+3 && a.y+a.h+3>b.y;
@@ -1646,7 +1653,7 @@ const View = {
       if(r.width>0&&r.height>0)blocks.push({x:r.left-cvRect.left,y:r.top-cvRect.top,w:r.width,h:r.height});
     }
     const inside=p=>p.x>=6&&p.y>=6&&p.x<=this.vw-6&&p.y<=this.vh-6;
-    const groups=this.territoryRegions().map(r=>({...r,visible:r.systems.filter(s=>inside(this.w2s(s.x,s.y)))}))
+    const groups=regions.map(r=>({...r,visible:r.systems.filter(s=>inside(this.w2s(s.x,s.y)))}))
       .filter(r=>r.visible.length);
     const selected=this.selSys && this.selSys.id;
     const jobs=groups.map(r=>({owner:r.owner,name:r.name,col:r.col,kind:'region',
@@ -1719,6 +1726,29 @@ const View = {
     g.restore();
   },
 
+  drawTerritoryEmblems(g,regions){
+    const opacity=typeof UI!=='undefined'?(UI.territoryEmblemOpacity??18):18;
+    if(!opacity||!G.p||MAP_MODE==='siyasi_yok')return;
+    g.save();
+    g.globalAlpha=opacity/100;
+    const placed=[];
+    for(const region of regions){
+      if(!region.known)continue;
+      const visible=region.systems.filter(s=>pVis(s)&&this.inView(s.x,s.y));
+      if(!visible.length)continue;
+      const x=visible.reduce((sum,s)=>sum+s.x,0)/visible.length;
+      const y=visible.reduce((sum,s)=>sum+s.y,0)/visible.length;
+      const anchor=visible.reduce((a,b)=>Math.hypot(a.x-x,a.y-y)<=Math.hypot(b.x-x,b.y-y)?a:b);
+      const p=this.w2s(anchor.x,anchor.y);
+      const size=Math.min(62,28+Math.sqrt(visible.length)*9);
+      if(p.x<size/2||p.y<size/2||p.x>this.vw-size/2||p.y>this.vh-size/2)continue;
+      if(placed.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<(q.size+size)*.42))continue;
+      g.drawImage(ART.identityEmblem(stateEmblem(G.emps[region.owner]),64),p.x-size/2,p.y-size/2,size,size);
+      placed.push({...p,size});
+    }
+    g.restore();
+  },
+
   draw(t){
     /* ═══ FAZ 86C.4H-R4: HAFİF AŞAMA TAKİBİ ═══
        Her karede LOG YAZMAZ, piksel TARAMAZ — yalnız birkaç alan
@@ -1776,6 +1806,8 @@ const View = {
     }
 
 
+    const territories=this.territoryRegions();
+    this.drawTerritoryEmblems(g,territories);
     this.drawDiplomacyConnections(g);
     this.drawWarConnections(g); // 94D.1: under map labels and fleet hit areas
 
@@ -2816,7 +2848,7 @@ const View = {
 
     this.drawPlanetConflicts(g);
     this.drawFleetOwnerLabels(g);      // 91D.1: görünen filoların aidiyeti
-    this.drawTerritoryLabels(g);       // 91D: sahiplik adlarının tek çizim yolu
+    this.drawTerritoryLabels(g,territories); // 91D: sahiplik adlarının tek çizim yolu
     this.drawPings(g, t);               // FAZ 47: bildirim ping halkası
 
     this._drawCompleted = 'filolar';
