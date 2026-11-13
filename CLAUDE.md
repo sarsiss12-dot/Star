@@ -2,7 +2,13 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — MP-P0-DESYNC1 (p26 / MP.8.9b22, 13 Kasım 2026)
+## Son teslim — MP-P0-DESYNC2 (p27 / MP.8.9b24, 13 Kasım 2026)
+
+- Ayrıntı: `reports/claude/MP-P0-DESYNC2-SONUC.md`, kanıt `reports/claude/evidence/mp-p0-desync2/`. Dal `claude/stars-mp-p0-desync2` (P26 #39 üstünde). Commit 1 `cacf6fe` = P26 + PR #38 mobil HUD kaynağı (p27/MP.8.9b23; p25u1 kimliği/ZIP kopyalanmadı). Commit 2 = geçici AI koruması (yalnız MP kaynakları, MP.8.9b24; runtime/ZIP aynı). Save8v8/paket4/protokol1.
+- Koruma: lobi `setGuard` (varsayılan kapalı; pakette yalnız açıkken `settings.aiGuard:true`). Açıkken kopma ya da misafirin `synced{stale}` bildirimi oyun AKARKEN 30 sn sürerse `guardStart`; yalnız tehdit altındaki EMİRSİZ filolar mevcut `move` yoluyla güvenli dost sisteme (plan `pure()` içinde); oyuncu emri `guard-active`. İade yalnız bu bağlantıya koruma sonrası giden TAM aynanın o revizyonu `synced{full:true}` ile bildirilince. Durum Save8/pakete girmez. Test: `node tests/mp_p0_guard_test.js`, `MP8_SCEN=G node tests/browser-mp8.cjs`, D4 (misafir HUD), `browser-mobile-hud0.cjs`.
+- Koruma zinciri: `mp-p0-guard-reviewed` ← `mp-p0-desync2-reviewed` ← `mp-p0-desync1-reviewed` ← `event-ux1-reviewed`.
+
+## Önceki teslim — MP-P0-DESYNC1 (p26 / MP.8.9b22, 13 Kasım 2026)
 
 - Ayrıntı: `reports/claude/MP-P0-DESYNC1-SONUC.md`, kanıt `reports/claude/evidence/mp-p0-desync1/`. Dal `claude/stars-mp-p0-desync1` (#37 / p25 `bcbd697` üstünde). Save8v8/paket4/protokol1 aynı.
 - Kusur: `applyInternalPolicy` `started+gün` yazar, `validInternalPolicy` çıkararak denetliyordu → kesirli günde (gerçek döngü) motorun kendi değeri reddedildi; misafir aynası, host Save8 ve MP paketi yüklenmiyordu (AI'ların `aiInternalCrisis`'i de aynı yol). Düzeltme `internalPolicyIssue` (toplamsal, aynı kesinlik). Yeni zarf denetimlerinde süre/tarihi YAZILDIĞI işlemle denetle, çıkarma/yuvarlama yapma.

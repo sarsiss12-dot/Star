@@ -1,0 +1,8 @@
+PASS G0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS G1 oda seçeneği lobide gerçek dokunuşla açıldı; misafirler seçeneği görür; kısa paket kaybı (8 sn hat kesik) → hızlı toparlanma, koruma başlamaz
+FAIL G2 kalıcı tam ayna reddi (oyun akarken): ≤30 sn koruma yok; ~30 sn sonra yalnız B korumaya geçer, B ve oda bildirim görür, B'nin tehdit altındaki filosu güvenli sisteme çekilir; C oynar; B'nin emri host'ta reddedilir; host duraklatınca sayaç ilerlemez
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++   why: 'stale-world'
+-   why: 'guard-active'
+PASS G3 iade: host verisi düzelir → B dünyasını kurar, bu oturumun TAM aynasını uygular → host korumayı kapatır; B özet görür; ilk insan emri tam bir kez; AI yeni emir vermez; geç eşitleme bildirimi / geç fark durumu değiştirmez
+PASS G4 tekrar kopma: B'nin hattı 40 sn kesik (oyun akarken) → koruma (kopma); hat açılınca aynı koltuk/devlet, TAM ayna, iade; seçenek MP kaydında

@@ -1,0 +1,5 @@
+eux0 GEÇEN: 11 KALAN: 0
+mhud 4
+E 6/0
+F 6/0
+ALLDONE

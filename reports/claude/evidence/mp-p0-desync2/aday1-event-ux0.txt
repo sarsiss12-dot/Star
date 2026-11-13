@@ -1,0 +1,12 @@
+PASS S1 1280×720 fare: casusluk kolu yalnız İSTİHBARAT'ta; sola sürükleme genişletir, sağa daraltır; SİSTEM / FİLO standart; geri dönünce son genişlik; diplomasi aç/kapa korur; hit-test; harita seçimi değişmez
+PASS S1 1920×1080 fare: casusluk kolu yalnız İSTİHBARAT'ta; sola sürükleme genişletir, sağa daraltır; SİSTEM / FİLO standart; geri dönünce son genişlik; diplomasi aç/kapa korur; hit-test; harita seçimi değişmez
+PASS S1 800×360 dokunma: casusluk kolu yalnız İSTİHBARAT'ta; sola sürükleme genişletir, sağa daraltır; SİSTEM / FİLO standart; geri dönünce son genişlik; diplomasi aç/kapa korur; hit-test; harita seçimi değişmez
+PASS S1 915×412 dokunma: casusluk kolu yalnız İSTİHBARAT'ta; sola sürükleme genişletir, sağa daraltır; SİSTEM / FİLO standart; geri dönünce son genişlik; diplomasi aç/kapa korur; hit-test; harita seçimi değişmez
+PASS S2 federasyon bilgi kartı: olay haberi üst çubukta kart olur; G.inboxUid / kayıtlı kutu / hız değişmez; tekil; dokununca haber ayrıntısı; kayıt yüklemede yeniden doğmaz; ikinci olay yeni kart
+PASS S3 federasyon oylaması: oy kartı (motor) + hızlı EVET tek oy; sonuçlanınca "oylama sonuçlandı" bilgi kartı; kapanmış oy kartı yeniden doğmaz
+PASS S4 Konsey oylaması: kartta hızlı EVET / HAYIR; tam penceredeki castCouncilVote ile tam bir kez; oy verilince kart düşer, çift dokunma ikinci oy yazmaz
+PASS S6 üyelik başvurusu (gerçek requestFederation): oy kabul olursa eski "oylamada" kartı yerine ayrı aday rızası için KABUL / REDDET davet kartı; KABUL tam Gelen kutusu yoluyla üye yapar; Save8 kutusu / inboxUid değişmez
+PASS S7 üye için üyelik başvurusu oy kartı başvuranı adıyla gösterir ("Üyelik başvurusu — X"); hızlı EVET aynı yol
+PASS S8 başkan değişimleri: federasyon başkanı ayrılınca (gerçek leaveFederation) üyeye tek kart; Konsey dönem sonu seçimi (gerçek councilTick) başkan değişirse üyeye tek kart; Konsey karar metninde gün tam sayı
+PASS S5 sayfa hataları yok
+GEÇEN: 11 KALAN: 0

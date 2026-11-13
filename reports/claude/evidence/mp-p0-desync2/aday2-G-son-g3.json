@@ -1,0 +1,74 @@
+{
+ "releaseMs": 2084,
+ "B": {
+  "stale": false,
+  "guard": null,
+  "summary": {
+   "epoch": 1,
+   "secs": 10,
+   "orders": 2,
+   "actions": [
+    {
+     "fleet": "1. Muhafız Filosu",
+     "from": "Elaran-14",
+     "to": "Arephor",
+     "day": 63
+    },
+    {
+     "fleet": "Yerleşim Konvoyu",
+     "from": "Elaran-14",
+     "to": "Arephor",
+     "day": 63
+    }
+   ],
+   "at": 1794572342837
+  },
+  "applied": 70,
+  "rev": 70,
+  "day": 69.19866399999948,
+  "reports": 53,
+  "chip": "👥 3",
+  "emp": 1,
+  "name": "Saf Akıl Ağı",
+  "gblocked": 0
+ },
+ "first": {
+  "v": 1,
+  "type": "result",
+  "seq": 2,
+  "cid": "jmwey1e38x93fghyf",
+  "status": "ok",
+  "code": null,
+  "rev": 89,
+  "ms": 14
+ },
+ "queue": [
+  0,
+  1
+ ],
+ "ordersAfter": 0,
+ "late": {
+  "active": false,
+  "wait": 0,
+  "reason": null,
+  "actions": [],
+  "last": {
+   "epoch": 1,
+   "secs": 10,
+   "actions": [
+    {
+     "fleet": "1. Muhafız Filosu",
+     "from": "Elaran-14",
+     "to": "Arephor",
+     "day": 63
+    },
+    {
+     "fleet": "Yerleşim Konvoyu",
+     "from": "Elaran-14",
+     "to": "Arephor",
+     "day": 63
+    }
+   ]
+  }
+ }
+}

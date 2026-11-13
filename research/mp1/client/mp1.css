@@ -53,3 +53,6 @@ table.mp1-t{width:100%;border-collapse:collapse;table-layout:fixed}.mp1-t td{bor
 /* MP.7.5: kapalı düğme sol araç sütununda (#tools) — haritada yüzen kutu yok */
 #tools .mp1-mini.mp74-compact{position:static;left:auto;bottom:auto;padding:0;border-radius:4px;max-width:none;width:32px;flex:0 0 auto;border-color:var(--line,#4aa8d8)}
 #tools .mp74-pill{min-width:32px!important;width:32px!important;min-height:40px;padding:0!important;font-size:11px!important;flex-direction:column;justify-content:center;gap:2px}
+/* MP-P0-DESYNC2: lobide "Bağlantı kaybında geçici AI koruması" seçeneği (dokunma hedefi ≥ 44 px) */
+label.mp1-l.mpgd-row{display:flex;align-items:center;gap:10px;min-height:44px;color:#c9d6ea}
+label.mp1-l.mpgd-row input{width:22px;height:22px;flex:0 0 auto;accent-color:#6fe3b4}

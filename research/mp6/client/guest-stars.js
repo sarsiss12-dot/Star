@@ -539,7 +539,7 @@ function warLocal(p){const m=x=>x&&{...x,id:local(x.id)};return {...p,target:m(p
 const vasTerms=(type,t)=>{const o={};for(const k of ['tax','science','defense','war','autonomy','duration','renegotiate','sensors'])if(t&&t[k]!==undefined)o[k]=JSON.parse(JSON.stringify(t[k]));return o;};
 function why(res){const d=res.detail&&res.detail.length?' — '+res.detail.join(' · '):'';return (MP1View.ERR[res.code]||res.code)+d;}
 function send(cmd){const J=S.J;if(!J)return null;const r=J.cmd(cmd);S.stats.sent[cmd.kind]=(S.stats.sent[cmd.kind]||0)+1;
-  if(!r.ok){toast(r.why==='host-yok'?'Host bağlı değil; emir gönderilmedi.':r.why==='stale-world'?'Dünya güncel değil — emir gönderilmedi. Önce MP çubuğundan YENİDEN EŞİTLE.':'Emir gönderilemedi.',true);return null;}
+  if(!r.ok){toast(r.why==='host-yok'?'Host bağlı değil; emir gönderilmedi.':r.why==='stale-world'?'Dünya güncel değil — emir gönderilmedi. Önce MP çubuğundan YENİDEN EŞİTLE.':r.why==='guard-active'?'Geçici AI koruması sürüyor — dünyan eşitlenince kontrol sana döner; emir gönderilmedi.':'Emir gönderilemedi.',true);return null;}
   S.pend.set(r.cid,{kind:cmd.kind,at:Date.now()});if(S.pend.size>64)S.pend.delete(S.pend.keys().next().value);   // MP-P0: host ACK'i gelene dek bekleyen emir
   return r.cid;}
 
@@ -552,7 +552,7 @@ function onMessage(m){
      (kopmada kaybolan komut host'a hiç ulaşmamış olabilir); o kuşağın karar kilitleri geçersiz. Gerçek sonuç aynada: uygulandıysa
      kayıt kapalıdır, uygulanmadıysa oyuncu yeniden karar verebilir. Tam bir kez kuralı host'ta (kapalı teklife ikinci yanıt 'closed'). */
   if(m.type==='mirror'){motion.clear();S.appliedGeneration=-1;   /* MP-P0-DESYNC1: "uygulanan" = son BAŞARIYLA kurulan revizyon; tam ayna gelince sıfırlanmaz (eskiden r0 görünüyordu) */
-    S.mirrorWorldRev=Number.isSafeInteger(m.worldRev)?m.worldRev:0;S.mirror=m.full;S.rev=m.rev;S.mirrorFull=true;S.fullUnbuilt=true;S.mirrorAt=Date.now();S.gen=(S.gen|0)+1;S.stats.mirrors++;S.pend.clear();if(S.desync.on)S.desync.tryAt=0;schedule();return true;}   // MP-P0: tam ayna = yeni kuşak; önceki kuşağın yanıtsız emir kaydı bekçiyi tetiklemez
+    S.mirrorWorldRev=Number.isSafeInteger(m.worldRev)?m.worldRev:0;S.mirror=m.full;S.rev=m.rev;S.mirrorFull=true;S.fullUnbuilt=true;S.fullRev=m.rev;S.mirrorAt=Date.now();S.gen=(S.gen|0)+1;S.stats.mirrors++;S.pend.clear();if(S.desync.on)S.desync.tryAt=0;schedule();return true;}   // MP-P0: tam ayna = yeni kuşak; önceki kuşağın yanıtsız emir kaydı bekçiyi tetiklemez
   if(m.type==='mirrorDelta'){
     /* MP-P0-DESYNC1: aynı soketten gelen eski (geç) fark yok sayılır — revizyonu geri almaz, ikinci kez uygulanmaz; boşluk varsa TAM ayna
        istenir, ama yanıt beklenirken her farkta yeni istek gönderilmez (istek fırtınası yok). */
@@ -560,6 +560,12 @@ function onMessage(m){
     if(!S.mirror||m.base!==S.rev){if(!S.started&&S.boot.failed){S.stats.gapHeld=(S.stats.gapHeld||0)+1;return true;}   // başlangıç durdu: YENİDEN DENE'yi bekler (her farkta istek yok)
       if(Date.now()-(S.desync.askAt||0)>3000){S.desync.askAt=Date.now();S.stats.resyncs++;S.J&&S.J.sendRaw({v:1,type:'resync'});}else S.stats.gapHeld=(S.stats.gapHeld||0)+1;return true;}
     StarsMirror.apply(S.mirror,m.ops);S.mirrorWorldRev=Number.isSafeInteger(m.worldRev)?m.worldRev:0;S.rev=m.rev;S.mirrorFull=false;S.mirrorAt=Date.now();S.stats.deltas++;schedule();return true;}
+  /* MP-P0-DESYNC2: host'un geçici AI koruması (yalnız oda seçeneği açıkken) — bu koltuk ve odadaki öteki oyuncular için durum */
+  if(m.type==='guard'){if(m.on){S.guard={epoch:m.epoch|0,reason:m.reason==='sync'?'sync':'offline',since:Date.now()};syncLog('guard:on');toast('Bağlantı sorunu sürdüğü için host geçici AI korumasını başlattı: yalnız tehdit altındaki filoların güvenli sisteme çekilir. Devletin ve koltuğun sende.');}
+      else{const a=Array.isArray(m.actions)?m.actions.slice(0,12):[];S.guard=null;S.guardSummary={epoch:m.epoch|0,secs:m.secs|0,orders:m.orders|0,actions:a,at:Date.now()};syncLog('guard:off');
+        toast('Kontrol yeniden sende. AI koruması '+(m.secs|0)+' sn sürdü'+(a.length?': '+a.map(x=>x.fleet+' → '+x.to).join(' · '):'; hiçbir emir vermedi.'));if(S.sync.why==='guard')syncNote('');}
+    try{chip();}catch{}return true;}
+  if(m.type==='guardNote'){toast(String(m.name||'Oyuncu').slice(0,24)+(m.on?' — bağlantı sorunu: host geçici AI korumasını başlattı.':' kontrolü geri aldı.'));return true;}
   if(m.type==='pulse'){S.sync.pulse={rev:m.rev|0,mrev:m.mrev|0,day:m.day|0,spd:m.spd|0,perr:m.perr|0,mfail:m.mfail?1:0};S.sync.pulseAt=Date.now();S.stats.pulses=(S.stats.pulses||0)+1;return true;}
   if(m.type==='speed'){if(Number.isFinite(m.n)){if(m.n<=(S.speedN||0)){S.stats.staleSpeed=(S.stats.staleSpeed||0)+1;return true;}S.speedN=m.n;}   // MP.6.3: eski hız iletisi yenisini ezmez
     S.hostSpd=m.spd|0;S.hostWant=Number.isInteger(m.want)?m.want:S.hostSpd;S.stats.speedMsgs++;paintSpeed();if(window.MP61)MP61.speed(m);return true;}
@@ -642,7 +648,7 @@ function rebuild0(){
   warAlerts(warCards,initialWorld);
   G.inbox.sort((a,b)=>(cardOrder.get(a.key)??1000000)-(cardOrder.get(b.key)??1000000));
   S.appliedRev=S.rev;S.appliedWorldRev=S.mirrorWorldRev;S.appliedGeneration=S.gen;S.fullUnbuilt=false;
-  worldGood();
+  worldGood();syncReport(S.appliedRev===S.fullRev||!!S.guard);
   const recovery=S.fleetRecoveryAcks||[];S.fleetRecoveryAcks=[];for(const a of recovery){if(fleetRecoveryApplied(a))a.done({ok:true});else if(a.gen!==S.gen)a.done({ok:false,why:'Bağlantı yenilendi; kurtarma durumunu yeniden aç'});else S.fleetRecoveryAcks.push(a);}
   UI.drawInbox();
   paintSpeed();
@@ -877,7 +883,7 @@ function staleWorld(why){
   if(d.rejFull){d.fulls++;d.same=code===d.lastCode?d.same+1:1;}d.lastCode=code;
   if(d.rejFull&&d.same>=3&&!d.gaveUp){d.gaveUp=true;syncLog('give-up');}
   S.boot.err='Galaksi verisi kurulamadı: '+why;syncLog('reject:'+(d.rejFull?'full':'delta')+':'+rj.code);
-  try{doc.body.classList.add('mp-stale');}catch{}
+  try{doc.body.classList.add('mp-stale');}catch{}syncReport(true);
   syncNote('Dünya güncel değil — son geçerli r'+d.good.rev+' · '+rj.code,'stale');
 }
 function worldGood(){
@@ -893,6 +899,11 @@ function resyncNow(){
   else reconnect();
   return true;
 }
+/* MP-P0-DESYNC2: host'a eşitleme durumu — yalnız oda seçeneği (lobby.guard) açıkken; host bununla korumayı başlatır / iade eder.
+   rev = son BAŞARIYLA kurulan ayna, full = bu bağlantıya gelen TAM aynanın kendisi mi. Değişiklik yoksa en sık 5 sn'de bir. */
+function syncReport(force){const J=S.J;if(!J||!J.lobby||!J.lobby.guard||!J.ws||J.ws.readyState!==1)return;
+  const st={rev:S.appliedRev|0,full:!!S.fullRev&&(S.appliedRev|0)===S.fullRev&&S.appliedGeneration===S.gen,stale:!!S.desync.on},k=st.rev+':'+st.full+':'+st.stale,t=Date.now();
+  if(!force&&k===S.lastReportKey&&t-(S.lastReportAt||0)<5000)return;S.lastReportKey=k;S.lastReportAt=t;S.stats.reports=(S.stats.reports|0)+1;J.sendRaw({v:1,type:'synced',...st});}
 function acksWaiting(){const w=S.appliedWorldRev|0;return S.acks.filter(a=>a.rev>w).length;}
 /* kopyalanabilir tanı: sürüm, aşama, revizyonlar, ret nedeni, sayaçlar, son olay kayıtları. Oda kodu / anahtarı, jeton, oyuncu adı ve
    başka devletin verisi YOK. */
@@ -903,6 +914,7 @@ function diagText(){
     'durum: '+(d.on?'DÜNYA GÜNCEL DEĞİL':'güncel')+(d.on?' · son geçerli r'+d.good.rev+' gün '+Math.floor(d.good.day)+' · reddedilen r'+d.rejRev+' ('+(d.rejFull?'tam ayna':'fark')+')':''),
     'ret: '+(d.reason?d.reason.stage+' / '+d.reason.code+(d.reason.path?' @ '+d.reason.path:''):'yok')+' · ardışık tam ret '+d.same+' · toplam ret '+d.total+' · otomatik istek '+d.asks+'/3'+(d.gaveUp?' · otomatik istek durdu':''),
     'emir: bekleyen '+S.pend.size+' · onaylı/dünyada görünmeyen '+acksWaiting()+' · engellenen '+(S.stats.staleBlocked|0)+' · son komut '+(lr?lr.status+(lr.code?' '+lr.code:''):'yok'),
+    'AI koruması: '+(S.guard?'DEVREDE ('+S.guard.reason+')':'kapalı')+(S.guardSummary?' · son koruma '+S.guardSummary.secs+' sn, '+S.guardSummary.orders+' emir':'')+' · bildirim '+(S.stats.reports|0),
     'kurtarma: '+(d.episodes|0)+' olay · son '+(d.lastRecoveryMs?Math.round(d.lastRecoveryMs/100)/10+' sn':'—')+' · en uzun '+(d.maxRecoveryMs?Math.round(d.maxRecoveryMs/100)/10+' sn':'—'),
     'kayıt: '+S.sync.log.slice(-12).map(x=>Math.round((t0-x.t)/1000)+'s '+x.what).join(' | ')].join('\n');
 }
@@ -916,6 +928,8 @@ function syncWatch(){
   if(!live||paused){y.since=0;y.asks=0;y.behindAt=0;if(y.note)syncNote('');return;}   // bağlantı / duraklatma kendi iletisini gösterir
   for(const [cid,p] of S.pend)if(now-p.at>60000)S.pend.delete(cid);
   S.acks=S.acks.filter(a=>now-a.at<120000&&a.rev>(S.appliedWorldRev|0));
+  syncReport(false);
+  if(S.guard&&!S.desync.on)syncNote('AI koruması devrede — dünyan eşitlenince kontrol sana döner','guard');
   /* 0) MP-P0-DESYNC1: dünya güncel değil — sınırlı otomatik TAM ayna isteği; aynı ret tekrar ederse durur (yeniden bağlanma döngüsü yok) */
   const d=S.desync;
   if(d.on){
@@ -923,7 +937,7 @@ function syncWatch(){
     if(!d.gaveUp&&now>=d.nextAsk){
       if(d.asks>=3){if(d.fulls===0&&!d.reconnected){d.reconnected=true;d.asks=0;d.nextAsk=now+DS_WAIT[1];reconnect();return;}d.gaveUp=true;syncLog('give-up');}
       else{d.asks++;d.nextAsk=now+DS_WAIT[Math.min(d.asks,3)];d.askAt=now;S.stats.resyncs++;syncLog('resync:stale');J.sendRaw({v:1,type:'resync'});}}
-    syncNote('Dünya güncel değil — son geçerli r'+d.good.rev+' · '+(d.reason?d.reason.code:'?')+(d.gaveUp?' · YENİDEN EŞİTLE':''),'stale');
+    syncNote('Dünya güncel değil — son geçerli r'+d.good.rev+' · '+(d.reason?d.reason.code:'?')+(d.gaveUp?' · YENİDEN EŞİTLE':'')+(S.guard?' · AI koruması devrede':''),'stale');
     return;}
   /* 1) veri geldi ama uygulanmadı */
   const behind=!!S.mirror&&(S.rev!==S.appliedRev||S.appliedGeneration!==S.gen);
@@ -955,7 +969,9 @@ setInterval(()=>{try{bootTick();if(S.J&&!S.started&&S.J.screen==='game')update(s
 doc.addEventListener('click',e=>{const el=e.target.closest('[data-g7="retry"]');if(!el)return;const b=S.boot;b.failed=false;b.tries=0;b.fails=0;b.err='';b.next=0;S.mirror=null;bootLog('retry');bootAsk();b.next=Date.now()+8000;update(statusNow());});
 window.MP6Stars={fleetRecovery(c,done){const cid=send({kind:'fleetRecovery',...c});if(cid)waits[cid]=res=>{if(res.status!=='ok'){done({ok:false,why:why(res)});return;}const applied={rev:res.rev,gen:S.gen,extra:res.extra};if(fleetRecoveryApplied(applied))done({ok:true});else{S.fleetRecoveryAcks=S.fleetRecoveryAcks||[];if(S.fleetRecoveryAcks.length>=16)S.fleetRecoveryAcks.shift().done({ok:false,why:'Durumu yeniden aç'});S.fleetRecoveryAcks.push({...applied,done});schedule();}};return cid;},warCommand(c,done){const cmd={...c};if(cmd.to!==undefined)cmd.to=real(cmd.to);for(const k of ['give','want'])if(cmd[k])cmd[k]=cmd[k].map(i=>i.t==='warJoin'?{...i,target:real(i.target)}:i);if(cmd.target!==undefined)cmd.target=real(cmd.target);if(cmd.member!==undefined&&cmd.member!==null)cmd.member=real(cmd.member);const cid=send(cmd);if(cid)waits[cid]=res=>done(res.status==='ok'?{ok:true,extra:res.extra||{}}:{ok:false,why:why(res)});return cid;},warCenterRead(front,done){const cid=send({kind:'warCenterRead',front});if(cid)waits[cid]=res=>{if(res.status!=='ok'){done({error:why(res)});return;}const m=id=>Number.isInteger(id)?local(id):id,part=x=>({...x,id:m(x.id)}),r=res.extra.report;done(r?{report:{...r,sides:r.sides.map(m),sponsor:m(r.sponsor),actor:m(r.actor),parties:r.parties.map(part),participants:r.participants.map(part),goals:r.goals.map(x=>({...x,by:m(x.by)})),fronts:r.fronts.map(x=>({...x,sides:x.sides.map(m)})),progress:r.progress.map(x=>({...x,from:m(x.from),to:m(x.to)}))}}:{preparations:(res.extra.preparations||[]).map(p=>({...p,owner:m(p.owner),target:m(p.target),commitments:p.commitments.map(c=>({...c,member:m(c.member),terms:{...c.terms,from:m(c.terms.from),to:m(c.terms.to),give:c.terms.give.map(i=>i.t==='warJoin'?{...i,target:m(i.target)}:i),want:c.terms.want.map(i=>i.t==='warJoin'?{...i,target:m(i.target)}:i)}}))})),index:(res.extra.index||[]).map(x=>({...x,sides:x.sides.map(m),sponsor:m(x.sponsor)}))});};return cid;},remoteQuote(fleet,sys,key,done){const cid=send({kind:'remoteQuote',fleet,sys,key});if(cid)waits[cid]=res=>done(res.status==='ok'?res.extra:{ok:false,why:why(res)});},SET,S,restoreObservation,onMessage,update,screen,attach(J){S.J=J;if(J&&!J.__ds1){J.__ds1=true;const cmd0=J.cmd;
     /* MP-P0-DESYNC1: dünya güncel değilken dünyayı değiştiren emir host'a gitmez (eski dünyaya göre verilmiş olur); salt okuma önizlemeleri ve ortak hız serbest */
-    J.cmd=function(c){if(S.desync.on&&!(c&&RO_CMDS.has(c.kind))){S.stats.staleBlocked=(S.stats.staleBlocked||0)+1;syncLog('blocked:'+(c&&c.kind));return {ok:false,why:'stale-world'};}return cmd0.apply(this,arguments);};}},
+    J.cmd=function(c){if(S.desync.on&&!(c&&RO_CMDS.has(c.kind))){S.stats.staleBlocked=(S.stats.staleBlocked||0)+1;syncLog('blocked:'+(c&&c.kind));return {ok:false,why:'stale-world'};}
+      if(S.guard&&!(c&&RO_CMDS.has(c.kind))){S.stats.guardBlocked=(S.stats.guardBlocked||0)+1;syncLog('guard-blocked:'+(c&&c.kind));return {ok:false,why:'guard-active'};}   // MP-P0-DESYNC2: koruma sürerken host da reddeder
+      return cmd0.apply(this,arguments);};}},
   desync:{now:resyncNow,diag:diagText,copy:copyDiag,acks:acksWaiting},onAssign(){S.uiSent=false;bootLog('assign');},VIEW,ACT,boot:{stage:bootStage,tick:bootTick},dip:{open:dipOpen,seg:seg6,get ui(){return dipUI;},get pol(){return polUI;}}};
 /* telefon geri tuşu: önce açık MP diplomasi onayı/paneli kapanır (join.js popstate bunu sorar) */
 const prevBack=window.__mpBack;window.__mpBack=()=>{if(prevBack&&prevBack())return true;if(dipEl){dipOpen(false);return true;}return false;};

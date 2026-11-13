@@ -1,0 +1,5 @@
+FAIL E2 B karttan hızlı EVET (gerçek dokunma) → host castFedVote tam bir kez; bekleme durumu görünür; çift dokunma ikinci komut göndermez; oy verilince kart düşer
+AssertionError [ERR_ASSERTION]: tek komut
+
+2 !== 1
+

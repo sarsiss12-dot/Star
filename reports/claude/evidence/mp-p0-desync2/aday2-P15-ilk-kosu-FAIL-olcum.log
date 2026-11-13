@@ -1,0 +1,14 @@
+PASS P0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 16 AI, s500, seed 404; misafir gerçek STARS arayüzünde
+  kesirli politika {"status":"ok","kind":"autonomy","day":1472.1500799999933,"frac":true,"oldBad":true,"seen":true,"seenMs":1875,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"relief","day":2449.098919999952,"frac":true,"oldBad":false,"seen":true,"seenMs":2862,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"autonomy","day":3504.9271999998896,"frac":true,"oldBad":true,"seen":true,"seenMs":2268,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"relief","day":4501.799199999914,"frac":true,"oldBad":false,"seen":true,"seenMs":3114,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"autonomy","day":5355.246200000061,"frac":true,"oldBad":false,"seen":true,"seenMs":3581,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"relief","day":6074.428480000254,"frac":true,"oldBad":false,"seen":true,"seenMs":4288,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"autonomy","day":6710.785480000347,"frac":true,"oldBad":false,"seen":true,"seenMs":2064,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"relief","day":7251.080480000399,"frac":true,"oldBad":false,"seen":true,"seenMs":2614,"guestFail":0,"stale":false}
+  DESYNC1 {"triggers":8,"maxStillMs":4557,"guest":{"fail":0,"crash":0,"staleEpisodes":0,"staleTotal":0,"maxRecoveryMs":0,"lastRecoveryMs":0,"on":false,"reason":null,"resyncs":0,"reconnects":0},"host":{"policies":6,"ai":5,"frac":6,"oldBadAI":0,"oldBad":0,"save8":true,"why":null,"day":7381.560480000414}}
+  eylem 1806 · en büyük gecikme 18.9 gün · donma 0 · komut [["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",false],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true]]
+FAIL P1 gerçek zamanlı 15 dk: 500 sistem / 16 AI + 2 insan, host en yüksek hızda (ön ilerletme 45 ay), misafir gerçek dokunmayla oynar; host günü ilerlerken misafir dünyası 20 sn'den uzun durmamalı; komutlar aynaya yansımalı
+AssertionError [ERR_ASSERTION]: host'un kabul ettiği gemi siparişi misafir aynasına yansımadı: {"label":"t+473","at":1794570159968,"own":{"fleets":38,"yards":1,"ala":2517},"fleet":4,"moveTo":415,"move":{"status":"ok","code":null,"ms":14},"yard":75,"q0":5,"ship":{"status":"ok","code":null,"ms":25},"shipSeen":false}
+EXIT 1

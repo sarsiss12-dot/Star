@@ -1,0 +1,85 @@
+{
+ "at": {
+  "sys": 5,
+  "planet": 0
+ },
+ "paused": {
+  "active": false,
+  "wait": 0,
+  "reason": null,
+  "actions": [],
+  "last": null
+ },
+ "at20": {
+  "active": false,
+  "wait": 16769,
+  "reason": null,
+  "actions": [],
+  "last": null
+ },
+ "startMs": 31817,
+ "C": {
+  "active": false,
+  "wait": 0,
+  "reason": null,
+  "actions": [],
+  "last": null
+ },
+ "B": {
+  "stale": true,
+  "guard": {
+   "epoch": 1,
+   "reason": "sync",
+   "since": 1794572333019
+  },
+  "summary": null,
+  "applied": 29,
+  "rev": 58,
+  "day": 36.013304000000424,
+  "reports": 48,
+  "chip": "ÇOK OYUNCULU · Dünya güncel değil — son geçerli r29 · crisisPolicy.until · YENİDEN EŞİTLESTARS MP.8.9b24 · oyun 96h10p27 · misafir · host bağlı · aşama: ready · ayna r58 12:18:52 · kurulum 3 ms · son komut: yok · son hata: yok · eşitleme: uygulanan r29 / host r57 · stale · DÜNYA GÜNCEL DEĞİL: son geçerli r29 · reddedilen r58 · envelope/crisisPolicy.until @ sys[5].p[0].col.crisisPolicyDÜNYA GÜNCEL DEĞİLYENİDEN EŞİTLETANIYI KOPYALA",
+  "emp": 1,
+  "name": "Saf Akıl Ağı",
+  "gblocked": 0
+ },
+ "orders": [
+  {
+   "kind": "move",
+   "fleet": 4,
+   "to": 37,
+   "emp": 1
+  },
+  {
+   "kind": "move",
+   "fleet": 6,
+   "to": 37,
+   "emp": 1
+  }
+ ],
+ "hostLog": [
+  {
+   "on": true,
+   "name": "Bora",
+   "at": 1794572333016
+  }
+ ],
+ "Cnote": [],
+ "local": {
+  "ok": false,
+  "why": "stale-world"
+ },
+ "raw": {
+  "v": 1,
+  "type": "result",
+  "seq": 1,
+  "cid": "gdrawmwey18a9",
+  "status": "rejected",
+  "code": "guard-active",
+  "rev": 79
+ },
+ "cQueue": [
+  0,
+  1
+ ],
+ "cDays": 3.3599199999995832
+}

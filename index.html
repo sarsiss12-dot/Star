@@ -741,12 +741,9 @@ body.fauxFull canvas#map{width:100vw !important;height:100dvh !important}
 .nCard.sci .nGo{color:var(--plasma)}
 @keyframes noteIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 
-/* FAZ 14 DÜZELTMESİ: bildirim katmanı diploPane(640) ve modal(760)
-   ALTINDA kalıyordu (z-index 20). Fısıltı gibi kaplama içinden
-   tetiklenen işlemlerin sonucu yazılıyor ama görünmüyordu.
-   Artık en üstte; pointer-events:none olduğu için tıklamayı engellemez. */
-#alerts{position:fixed;left:44px;top:calc(var(--top) + 6px);z-index:900;pointer-events:none;
-  display:flex;flex-direction:column;gap:2px;pointer-events:none;max-width:38%}
+/* Geçici mesajlar haritanın üstünde, karar kartlarının altında kalır. */
+#alerts{position:fixed;left:44px;top:calc(var(--top) + 6px);z-index:25;pointer-events:none;
+  display:flex;flex-direction:column;gap:2px;max-width:38%;opacity:var(--alert-opacity,1)}
 /* ═══ FAZ 70: BİLDİRİMLER KÜÇÜLDÜ ═══
    10px/5-8px padding ekranda çok yer kaplıyordu. Font 8.5px'e,
    iç boşluk 3px/6px'e indi; satır aralığı sıkıldı ve uzun
@@ -1368,10 +1365,15 @@ html[data-ui-scaled] #menu .mwrap{max-width:min(860px,calc((100vw - 16px) / var(
  .colonyTable [data-a="colonyMap"]{display:inline-block;margin-left:8px}
  .colonyTable small{display:inline;margin-left:5px}
 }
-#seltag{box-sizing:border-box;display:flex;flex-wrap:wrap;gap:4px;padding:5px;white-space:normal}
-#seltag>span{flex:1 1 100px;white-space:nowrap;min-width:0}
-#seltag button{min-height:38px;padding:5px;min-width:38px}
-#seltag [data-a="route"]{min-width:68px}
+#seltag{box-sizing:border-box;gap:4px;padding:5px;container-type:inline-size}
+#seltag>span{flex:1 1 auto}
+#seltag button{min-height:44px;padding:5px;min-width:44px}
+#seltag [data-a="route"]{min-width:72px}
+@container (max-width: 205px){
+ #seltag .systemText{display:none}
+}
+.alertOpacity{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 12px}
+.alertOpacity input{grid-column:1/-1;min-height:32px;accent-color:var(--phos)}
 .spyWorkspace .ivNav{display:flex;flex-wrap:wrap}
 .spyWorkspace .ivTab{flex:1 1 88px;min-width:0;min-height:44px;white-space:normal}
 .spyWorkspace .ivTab span{white-space:normal;overflow:visible;text-overflow:clip;font-size:10px}

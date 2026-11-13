@@ -1,0 +1,9 @@
+c1-a 5/1 FAIL E5  
+c2-a 5/1 FAIL E5  
+c1-b 5/1 FAIL E5  
+c2-b 5/1 FAIL E5  
+ALLDONE
+p26-a 6/0 
+p25-a 5/1 FAIL E5  
+p26-b 5/1 FAIL E5  
+ALLDONE

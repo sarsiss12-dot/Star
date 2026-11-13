@@ -1,0 +1,52 @@
+{
+ "guardMs": 32876,
+ "state": {
+  "active": true,
+  "wait": 0,
+  "reason": "offline",
+  "actions": [],
+  "last": {
+   "epoch": 1,
+   "secs": 10,
+   "actions": [
+    {
+     "fleet": "1. Muhafız Filosu",
+     "from": "Elaran-14",
+     "to": "Arephor",
+     "day": 63
+    },
+    {
+     "fleet": "Yerleşim Konvoyu",
+     "from": "Elaran-14",
+     "to": "Arephor",
+     "day": 63
+    }
+   ]
+  }
+ },
+ "backMs": 37532,
+ "B": {
+  "stale": false,
+  "guard": null,
+  "summary": {
+   "epoch": 2,
+   "secs": 5,
+   "orders": 0,
+   "actions": [],
+   "at": 1794572426389
+  },
+  "applied": 111,
+  "rev": 112,
+  "day": 136.01722400000364,
+  "reports": 93,
+  "chip": "👥 3",
+  "emp": 1,
+  "name": "Saf Akıl Ağı",
+  "gblocked": 0
+ },
+ "pkg": {
+  "aiGuard": true,
+  "mp": 4,
+  "v": 8
+ }
+}

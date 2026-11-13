@@ -1,11 +1,11 @@
 {
-  "phase": "MP-P0-DESYNC1",
-  "build": "96h10p26",
+  "phase": "MP-P0-DESYNC2",
+  "build": "96h10p27",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p26",
-  "parent_commit": "bcbd6973db8d9adf6cc25cda9efafa42bde3a477",
-  "parent_zip_sha256": "86720c077e46b0dfd7460286c36eb914ac7e582846b231beec7e49cd462d82fa",
+  "pwa_cache": "stars-v96h10p27",
+  "parent_commit": "d782f73e11d410b82ef27adcfecb19607efae0a3",
+  "parent_zip_sha256": "da7e9d4ca4f818714c47992ca1dd3a48cb5ec1bbff52b3bdb8ae4fb55b64a30a",
   "file_count": 19,
   "files": {
     "ai.js": "ac900e296e39378f9f0caab85de70b7896d9eaebd22b65d259e955cb702fb3de",
@@ -20,13 +20,13 @@
     "economy-ui.js": "aa9da4f84f0b63ecb8b17e54d3dd844595e98d5a8da5f6a3012de9467a12e3bf",
     "economy.js": "138851b842ecf6294b8a03effab9caeb135f90347ff6cae4aebeba17f60f0984",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
-    "index.html": "97ddfcb8d67ee6a86cdb42fab445c78c5df7cb393d99d1a742009a95e6f9174f",
-    "main.js": "1916521cf890487776b9788bd2dc56984fd64588e88e1c7c4778d221db63532c",
+    "index.html": "99b7567a2798fa862e3c8e8580735f856c7f7044b8f75af87fc125b9bc83d6b9",
+    "main.js": "4a7f455ed36a8228936a9006d1d5b96a607d87862040c15390705c44ca93d541",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
-    "map.js": "400dbc524750443528b88bfbd0d82aa301fd7b1f12b03d8ea5fa3d73c07603fc",
+    "map.js": "2e3284353cba1cbead6925dc7d1b3251bbfe6b4ab95fdd8149d2fad19c0608e5",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "a0776c3b83972242c1b73eda08506e0aff75570ffc1480c112f528cdb63cf1bd",
-    "ui.js": "20ad4722999383d7c1cd0488c541f1ed1105aac129ba70c2aaec05b2d717ee51"
+    "sw.js": "59a577774bebfcc1fad9f358af4546f8ea15c978fbe1e05901106ab61e684a24",
+    "ui.js": "536ef96317945c0cd5e1c27dc463a9d52a426528bcb067de9f362a4e18176e5a"
   },
-  "description": "MP-P0 hotfix: iç müdahale politikası (Halkı yatıştır / Yerel özerklik) süre doğrulaması kesirli günde motorun kendi değerini reddediyordu (misafir aynası, host Save8 ve MP paketi yüklenemiyordu); doğrulama yazma biçimiyle (started + gün) eşleştirildi. Yükleme reddi aşama/kod/alan yolu ile ayırt edilir."
+  "description": "P26 (kesirli gün politika doğrulaması + misafir dünya güncel değil kurtarması) ile BETA-MOBILE-HUD.0 kaynak entegrasyonu: dar yatay ekranda tek satır ROTA/DUR/SİSTEM, ilk ROTA dokunuşunda hedefleme, olay kartları geçici mesajların üstünde, cihazda saklanan geçici bildirim opaklığı."
 }
