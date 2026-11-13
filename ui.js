@@ -174,6 +174,7 @@ const UI = {
     this.openModal(`<div class="mhd"><span>GEMİ ÜRETİMİNİ İPTAL ET</span></div>
       <div class="mbd"><div class="lead">${quote.count} geminin üretimi iptal edilecek.</div>
       <div class="row"><span>Kaynak iadesi</span><b>${esc(refund)}</b></div>
+      ${quote.fedRefund?'<div class="row" id="fedCancelRefund"><span>Federal fona iade</span><b>'+esc(Object.entries(quote.fedRefund).map(([r,v])=>RES[r].ico+' '+v).join(' · '))+'</b></div><div class="mini">Federal siparişin bedeli kişisel kasaya değil ortak federal fona döner.</div>':''}
       <div class="mini">Yeni siparişlerin ödenmiş bedeli tamamen iade edilir; üretim ilerlemesi kaybolur.</div>
       ${quote.legacy?'<div class="mini" style="color:#ff9b3d">'+quote.legacy+' eski siparişin ödeme kaydı yok. Bu işler iptal edilirse kaynak iadesi yapılmaz.</div>':''}
       ${all?'<div class="mini">Bu tersanenin sürekli üretim döngüsü de kapanır. Diğer tersaneler ve yoldaki gemiler etkilenmez.</div>':''}</div>

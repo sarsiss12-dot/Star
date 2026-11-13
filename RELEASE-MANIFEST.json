@@ -26,7 +26,7 @@
     "map.js": "2e3284353cba1cbead6925dc7d1b3251bbfe6b4ab95fdd8149d2fad19c0608e5",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
     "sw.js": "82204daa8690f949ce9250d2845f539cf3fa20f5bbbdf50529c16eacfe9a8ca7",
-    "ui.js": "6a8d7cbecd5db1cdf201ccac9794fbbb07f51b2cf20a28cf8c320d458bf3b814"
+    "ui.js": "3ae8511a2134b0433768bfbcdeb3c22eb0c7982c49e87f2981b4ea4e7576250e"
   },
   "description": "P27 üstünde federal donanma: Ortak Filo katkısı ve haraç tek federal fona (f.fund) gider, eski hazine yüklemede bir kez fona aktarılır; federal filoların enerji + alaşım bakımı ayda bir fondan düşer (başkanın kişisel bakımına girmez), fon yetmezse en zayıf federal filo dağılır; başkanın uygun tersanesinde federal sipariş (aynı kuyruk/süre/sınıf koşulları, bedel kabulde fondan bir kez, üye × 4 sınırı, ayda bir, 3 aylık bakım rezervi); dağılmada bekleyen işler kapanır ve fon katkı oranıyla iade edilir; AI başkan yalnız aktif federasyon savaşında aynı yolu kullanır."
 }
