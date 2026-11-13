@@ -1,0 +1,51 @@
+{
+ "lateDelta": {
+  "before": {
+   "rev": 22,
+   "applied": 22,
+   "day": 1009.1
+  },
+  "after": {
+   "rev": 22,
+   "applied": 22,
+   "day": 1009.1,
+   "late": 1
+  }
+ },
+ "dupResult": [
+  {
+   "status": "ok",
+   "dup": 0,
+   "code": null
+  },
+  {
+   "status": "ok",
+   "dup": 1,
+   "code": null
+  }
+ ],
+ "afterLateAck": {
+  "rev": 22,
+  "applied": 22,
+  "on": false,
+  "acksWaiting": 0
+ },
+ "bootFailMs": 11693,
+ "boot": {
+  "fails": 3,
+  "tries": 1,
+  "err": "Galaksi verisi kurulamadı: kayıt doğrulaması reddetti (crisisPolicy.after)",
+  "started": false,
+  "btn": true,
+  "txt": "Galaksi verisi kurulamadı: kayıt doğrulaması reddetti (crisisPolicy.after)"
+ },
+ "bootQuiet": {
+  "fails": 3,
+  "mirrors": 3
+ },
+ "bootRecoverMs": 433,
+ "reopened": {
+  "emp": 1,
+  "name": "Saf Akıl Ağı"
+ }
+}

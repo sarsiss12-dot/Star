@@ -1,0 +1,30 @@
+  delta false
+  full false
+  host8 false
+  pkg {"v":true,"why":null,"l":false,"lw":"save8-apply","mp":4}
+✓ A Halkı yatıştır · G.day=1000.1 (180 gün → 179.9999999999999): host kararı → fark paketi, tam ayna, host Save8 ve MP paketi aynı dünyadan yüklenir
+  delta false
+  full false
+  host8 false
+  pkg {"v":true,"why":null,"l":false,"lw":"save8-apply","mp":4}
+✓ A Yerel özerklik · G.day=1650.0001 ≈ 2214.08 (720 gün bekleme → 720.0000000000002): host kararı → fark paketi, tam ayna, host Save8 ve MP paketi aynı dünyadan yüklenir
+    at /home/user/Star/tests/_ds1_probe.js:82:10
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/_ds1_probe.js:78:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at /home/user/Star/tests/_ds1_probe.js:95:10
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/_ds1_probe.js:91:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)

@@ -1,0 +1,78 @@
+[
+ {
+  "kind": "autonomy",
+  "day": 1650.0001,
+  "pol": {
+   "v": 1,
+   "owner": 1,
+   "kind": "autonomy",
+   "started": 1650.0001,
+   "until": 2010.0001,
+   "after": 2370.0001
+  },
+  "built": true,
+  "b": {
+   "applied": 4,
+   "rev": 4,
+   "on": false,
+   "reason": null,
+   "fail": 0
+  },
+  "cMoved": true,
+  "cFail": 0,
+  "seen": {
+   "v": 1,
+   "owner": 0,
+   "kind": "autonomy",
+   "started": 1650.0001,
+   "until": 2010.0001,
+   "after": 2370.0001
+  },
+  "host": {
+   "save8": true,
+   "why": null,
+   "pkg": true,
+   "pkgWhy": null,
+   "v": 8,
+   "mp": 4
+  }
+ },
+ {
+  "kind": "relief",
+  "day": 1000.1,
+  "pol": {
+   "v": 1,
+   "owner": 1,
+   "kind": "relief",
+   "started": 1000.1,
+   "until": 1180.1,
+   "after": 1360.1
+  },
+  "built": true,
+  "b": {
+   "applied": 6,
+   "rev": 6,
+   "on": false,
+   "reason": null,
+   "fail": 0
+  },
+  "cMoved": true,
+  "cFail": 0,
+  "seen": {
+   "v": 1,
+   "owner": 0,
+   "kind": "relief",
+   "started": 1000.1,
+   "until": 1180.1,
+   "after": 1360.1
+  },
+  "host": {
+   "save8": true,
+   "why": null,
+   "pkg": true,
+   "pkgWhy": null,
+   "v": 8,
+   "mp": 4
+  }
+ }
+]

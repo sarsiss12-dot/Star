@@ -1,0 +1,537 @@
+{
+ "ff": 45,
+ "minutes": 15,
+ "seed": 1,
+ "samples": [
+  {
+   "t": 1,
+   "hd": 1356,
+   "gd": 1351.2,
+   "hrev": 47,
+   "grev": 47,
+   "gapp": 47,
+   "held": 0,
+   "touch": 0,
+   "fail": 0,
+   "builds": 47,
+   "mo": 0
+  },
+  {
+   "t": 3,
+   "hd": 1375.6,
+   "gd": 1370.8,
+   "hrev": 50,
+   "grev": 50,
+   "gapp": 50,
+   "held": 3,
+   "touch": 2,
+   "fail": 0,
+   "builds": 49,
+   "mo": 0
+  },
+  {
+   "t": 5,
+   "hd": 1388.8,
+   "gd": 1377.5,
+   "hrev": 53,
+   "grev": 53,
+   "gapp": 51,
+   "held": 4,
+   "touch": 6,
+   "fail": 0,
+   "builds": 50,
+   "mo": 1
+  },
+  {
+   "t": 7,
+   "hd": 1406.1,
+   "gd": 1398.1,
+   "hrev": 56,
+   "grev": 56,
+   "gapp": 55,
+   "held": 5,
+   "touch": 6,
+   "fail": 0,
+   "builds": 53,
+   "mo": 1
+  },
+  {
+   "t": 9,
+   "hd": 1419.4,
+   "gd": 1412.2,
+   "hrev": 59,
+   "grev": 59,
+   "gapp": 58,
+   "held": 6,
+   "touch": 7,
+   "fail": 0,
+   "builds": 56,
+   "mo": 0
+  },
+  {
+   "t": 11,
+   "hd": 1438.7,
+   "gd": 1434.2,
+   "hrev": 61,
+   "grev": 61,
+   "gapp": 61,
+   "held": 6,
+   "touch": 8,
+   "fail": 0,
+   "builds": 59,
+   "mo": 0
+  },
+  {
+   "t": 14,
+   "hd": 1454.4,
+   "gd": 1453.8,
+   "hrev": 64,
+   "grev": 64,
+   "gapp": 64,
+   "held": 6,
+   "touch": 8,
+   "fail": 0,
+   "builds": 62,
+   "mo": 0
+  },
+  {
+   "t": 37,
+   "hd": 1620,
+   "gd": 1470.1,
+   "hrev": 114,
+   "grev": 0,
+   "gapp": 0,
+   "held": 6,
+   "touch": 8,
+   "fail": 24,
+   "builds": 65,
+   "mo": 0
+  },
+  {
+   "t": 58,
+   "hd": 1718,
+   "gd": 1470.1,
+   "hrev": 153,
+   "grev": 0,
+   "gapp": 0,
+   "held": 6,
+   "touch": 9,
+   "fail": 45,
+   "builds": 65,
+   "mo": 0
+  }
+ ],
+ "stalls": [
+  {
+   "afterS": 58,
+   "stuckMs": 21144,
+   "host": {
+    "day": 1717.9941599999554,
+    "speed": 1,
+    "publishes": 182,
+    "rev": 153,
+    "conn": true,
+    "paused": false,
+    "bg": false,
+    "connected": true,
+    "monthMs": 557,
+    "fleets": 101
+   },
+   "guest": {
+    "day": 1470.084199999988,
+    "rev": 0,
+    "applied": 0,
+    "started": true,
+    "timer": false,
+    "mirror": false,
+    "modalOpen": false,
+    "modalCls": "hidden",
+    "modalHead": "",
+    "pointers": [],
+    "untilMs": -20795,
+    "bootErr": "Galaksi verisi kurulamadı: kayıt doğrulaması reddetti",
+    "bootFails": 45,
+    "stats": {
+     "mirrors": 45,
+     "deltas": 67,
+     "builds": 65,
+     "fail": 45,
+     "held": 6,
+     "touchHeld": 9,
+     "resyncs": 44,
+     "speedMsgs": 3,
+     "lastBuildMs": 9.5,
+     "minGap": 600
+    },
+    "syncNote": "Eşitleme sorunu — yeniden isteniyor",
+    "syncWhy": "apply",
+    "crash": 0,
+    "touchForced": 0,
+    "recon": 0,
+    "hostSpd": 1,
+    "ws": 1,
+    "hostOnline": true,
+    "screen": "game",
+    "decWait": 0,
+    "diagTail": [
+     {
+      "t": 1794552772582,
+      "tur": "cache",
+      "m": "invalidate:load"
+     },
+     {
+      "t": 1794552773368,
+      "tur": "cache",
+      "m": "invalidate:load"
+     },
+     {
+      "t": 1794552774223,
+      "tur": "cache",
+      "m": "invalidate:load"
+     }
+    ],
+    "diplo": false,
+    "mirrorAgeMs": 1010
+   },
+   "hostDaysSince": 98,
+   "lastActions": [
+    "inboxTap:noteOptions",
+    "mapTap",
+    "modalTap:anomch",
+    "modalClose",
+    "panelScroll",
+    "inboxTap:openNote",
+    "modalTap:closem",
+    "panelTap:crisisManage",
+    "topTap:fit",
+    "panelTap:focus",
+    "topTap:home",
+    "tabTap:tab"
+   ],
+   "cmd": {
+    "label": "stalled",
+    "at": 1794552817444,
+    "own": {
+     "fleets": 3,
+     "yards": 1,
+     "ala": 2005
+    },
+    "fleet": 4,
+    "moveTo": 415,
+    "move": {
+     "status": "rejected",
+     "code": "rules:same",
+     "ms": 42
+    },
+    "yard": 75,
+    "q0": 0,
+    "ship": {
+     "status": "ok",
+     "code": null,
+     "ms": 18
+    }
+   },
+   "hostAfter": {
+    "day": 1730.0217999999538,
+    "speed": 4,
+    "publishes": 188,
+    "rev": 157,
+    "conn": true,
+    "paused": false,
+    "bg": false,
+    "connected": true,
+    "monthMs": 557,
+    "fleets": 103
+   },
+   "guestAfter": {
+    "day": 1470.084199999988,
+    "rev": 0,
+    "applied": 0,
+    "started": true,
+    "timer": false,
+    "mirror": false,
+    "modalOpen": false,
+    "modalCls": "hidden",
+    "modalHead": "",
+    "pointers": [],
+    "untilMs": -22196,
+    "bootErr": "Galaksi verisi kurulamadı: kayıt doğrulaması reddetti",
+    "bootFails": 47,
+    "stats": {
+     "mirrors": 47,
+     "deltas": 67,
+     "builds": 65,
+     "fail": 47,
+     "held": 6,
+     "touchHeld": 9,
+     "resyncs": 46,
+     "speedMsgs": 4,
+     "lastBuildMs": 9.5,
+     "minGap": 600
+    },
+    "syncNote": "Eşitleme sorunu — yeniden isteniyor",
+    "syncWhy": "apply",
+    "crash": 0,
+    "touchForced": 0,
+    "recon": 0,
+    "hostSpd": 4,
+    "ws": 1,
+    "hostOnline": true,
+    "screen": "game",
+    "decWait": 0,
+    "diagTail": [
+     {
+      "t": 1794552772582,
+      "tur": "cache",
+      "m": "invalidate:load"
+     },
+     {
+      "t": 1794552773368,
+      "tur": "cache",
+      "m": "invalidate:load"
+     },
+     {
+      "t": 1794552774223,
+      "tur": "cache",
+      "m": "invalidate:load"
+     }
+    ],
+    "diplo": false,
+    "mirrorAgeMs": 386
+   },
+   "selfRecovered": false,
+   "guestLater": {
+    "day": 1470.084199999988,
+    "rev": 0,
+    "applied": 0,
+    "started": true,
+    "timer": false,
+    "mirror": false,
+    "modalOpen": false,
+    "modalCls": "hidden",
+    "modalHead": "",
+    "pointers": [],
+    "untilMs": -37210,
+    "bootErr": "Galaksi verisi kurulamadı: kayıt doğrulaması reddetti",
+    "bootFails": 65,
+    "stats": {
+     "mirrors": 65,
+     "deltas": 67,
+     "builds": 65,
+     "fail": 65,
+     "held": 6,
+     "touchHeld": 9,
+     "resyncs": 64,
+     "speedMsgs": 4,
+     "lastBuildMs": 9.5,
+     "minGap": 600
+    },
+    "syncNote": "Eşitleme sorunu — yeniden isteniyor",
+    "syncWhy": "apply",
+    "crash": 0,
+    "touchForced": 0,
+    "recon": 0,
+    "hostSpd": 4,
+    "ws": 1,
+    "hostOnline": true,
+    "screen": "game",
+    "decWait": 0,
+    "diagTail": [
+     {
+      "t": 1794552772582,
+      "tur": "cache",
+      "m": "invalidate:load"
+     },
+     {
+      "t": 1794552773368,
+      "tur": "cache",
+      "m": "invalidate:load"
+     },
+     {
+      "t": 1794552774223,
+      "tur": "cache",
+      "m": "invalidate:load"
+     }
+    ],
+    "diplo": false,
+    "mirrorAgeMs": 246
+   }
+  }
+ ],
+ "actions": {
+  "panelTap:planetFold": 7,
+  "inboxTap:noteOptions": 1,
+  "mapTap": 7,
+  "modalTap:anomch": 2,
+  "modalClose": 4,
+  "panelScroll": 4,
+  "inboxTap:openNote": 3,
+  "modalTap:closem": 1,
+  "panelTap:crisisManage": 1,
+  "topTap:fit": 1,
+  "panelTap:focus": 2,
+  "topTap:home": 1,
+  "tabTap:tab": 1
+ },
+ "cmds": [
+  {
+   "label": "t+38",
+   "at": 1794552795927,
+   "own": {
+    "fleets": 3,
+    "yards": 1,
+    "ala": 2005
+   },
+   "fleet": 4,
+   "moveTo": 415,
+   "move": {
+    "status": "ok",
+    "code": null,
+    "ms": 88
+   },
+   "yard": 75,
+   "q0": 0,
+   "ship": {
+    "status": "ok",
+    "code": null,
+    "ms": 133
+   },
+   "shipSeen": false
+  },
+  {
+   "label": "stalled",
+   "at": 1794552817444,
+   "own": {
+    "fleets": 3,
+    "yards": 1,
+    "ala": 2005
+   },
+   "fleet": 4,
+   "moveTo": 415,
+   "move": {
+    "status": "rejected",
+    "code": "rules:same",
+    "ms": 42
+   },
+   "yard": 75,
+   "q0": 0,
+   "ship": {
+    "status": "ok",
+    "code": null,
+    "ms": 18
+   }
+  }
+ ],
+ "maxLagDays": 247.9,
+ "ffSeconds": 94,
+ "desync": {
+  "triggers": [
+   {
+    "status": "ok",
+    "kind": "autonomy",
+    "day": 1476.7511999999872,
+    "frac": true,
+    "oldBad": true,
+    "seen": false,
+    "seenMs": 22037,
+    "guestFail": 24,
+    "stale": false
+   }
+  ],
+  "maxStillMs": 21144,
+  "guest": {
+   "fail": 65,
+   "crash": 0,
+   "staleEpisodes": 0,
+   "staleTotal": 0,
+   "maxRecoveryMs": 0,
+   "lastRecoveryMs": 0,
+   "on": false,
+   "reason": null,
+   "resyncs": 64,
+   "reconnects": 0
+  },
+  "host": {
+   "policies": 1,
+   "ai": 0,
+   "frac": 1,
+   "oldBadAI": 0,
+   "oldBad": 1,
+   "save8": false,
+   "why": null,
+   "day": 1841.0847999999435
+  }
+ },
+ "actionCount": 35,
+ "final": {
+  "host": {
+   "day": 1840.4847999999436,
+   "speed": 4,
+   "publishes": 240,
+   "rev": 193,
+   "conn": true,
+   "paused": false,
+   "bg": false,
+   "connected": true,
+   "monthMs": 544,
+   "fleets": 104
+  },
+  "guest": {
+   "day": 1470.084199999988,
+   "rev": 0,
+   "applied": 0,
+   "started": true,
+   "timer": false,
+   "mirror": false,
+   "modalOpen": false,
+   "modalCls": "hidden",
+   "modalHead": "",
+   "pointers": [],
+   "untilMs": -37275,
+   "bootErr": "Galaksi verisi kurulamadı: kayıt doğrulaması reddetti",
+   "bootFails": 65,
+   "stats": {
+    "mirrors": 65,
+    "deltas": 67,
+    "builds": 65,
+    "fail": 65,
+    "held": 6,
+    "touchHeld": 9,
+    "resyncs": 64,
+    "speedMsgs": 4,
+    "lastBuildMs": 9.5,
+    "minGap": 600
+   },
+   "syncNote": "Eşitleme sorunu — yeniden isteniyor",
+   "syncWhy": "apply",
+   "crash": 0,
+   "touchForced": 0,
+   "recon": 0,
+   "hostSpd": 4,
+   "ws": 1,
+   "hostOnline": true,
+   "screen": "game",
+   "decWait": 0,
+   "diagTail": [
+    {
+     "t": 1794552772582,
+     "tur": "cache",
+     "m": "invalidate:load"
+    },
+    {
+     "t": 1794552773368,
+     "tur": "cache",
+     "m": "invalidate:load"
+    },
+    {
+     "t": 1794552774223,
+     "tur": "cache",
+     "m": "invalidate:load"
+    }
+   ],
+   "diplo": false,
+   "mirrorAgeMs": 311
+  }
+ },
+ "targeted": {}
+}

@@ -2,7 +2,14 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — BETA-EVENT-UX.1 (p25 / MP.8.9b21, 12 Kasım 2026)
+## Son teslim — MP-P0-DESYNC1 (p26 / MP.8.9b22, 13 Kasım 2026)
+
+- Ayrıntı: `reports/claude/MP-P0-DESYNC1-SONUC.md`, kanıt `reports/claude/evidence/mp-p0-desync1/`. Dal `claude/stars-mp-p0-desync1` (#37 / p25 `bcbd697` üstünde). Save8v8/paket4/protokol1 aynı.
+- Kusur: `applyInternalPolicy` `started+gün` yazar, `validInternalPolicy` çıkararak denetliyordu → kesirli günde (gerçek döngü) motorun kendi değeri reddedildi; misafir aynası, host Save8 ve MP paketi yüklenmiyordu (AI'ların `aiInternalCrisis`'i de aynı yol). Düzeltme `internalPolicyIssue` (toplamsal, aynı kesinlik). Yeni zarf denetimlerinde süre/tarihi YAZILDIĞI işlemle denetle, çıkarma/yuvarlama yapma.
+- `main.js` `saveLoadReject()` → `{stage,code,path}` (değer/jeton yok). Misafir: "dünya güncel değil" (son geçerli dünya kalır, ayna bırakılmaz, dünya değiştiren emir `stale-world`, ≤3 otomatik TAM ayna, aynı ret tekrarında durur), MP çubuğunda YENİDEN EŞİTLE / TANIYI KOPYALA; `appliedRev` tam aynada sıfırlanmaz.
+- Koruma `mp-p0-desync1-reviewed.{json,cjs}` (event-ux1 önce bunu çağırır). Test: `node tests/mp_p0_desync1_test.js`, `MP8_SCEN=D node tests/browser-mp8.cjs`, `MP8_SCEN=P MP8_P_DESYNC=1 MP8_P_MIN=15 node tests/browser-mp8.cjs`. Özgün Render oturumunun reddedilen alanı doğrulanmadı (dosya yok).
+
+## Önceki teslim — BETA-EVENT-UX.1 (p25 / MP.8.9b21, 12 Kasım 2026)
 
 - Ayrıntı: `reports/claude/BETA-EVENT-UX1-SONUC.md`, kanıt `reports/claude/evidence/beta-event-ux1/`. Dal `claude/stars-beta-event-ux1` (#36 üstünde). Save8v8/paket4/protokol1 aynı.
 - Tarihsel "FEDERASYON KURULDU" tekrarı `MP8_SCEN=F` ile p24'te yeniden üretildi (kurucuda ara durum kartları birikiyordu, açılan sonuç kartı kalıyordu, haber kartı ikinci kopya): `fedFoundCards` eski sonuç kartını kaldırır, `openNote` fedfoundResult'ı kaldırır, açık kuruluşun haberi kart olmaz. `noteRecord` oy kaydı yedeği (sync ile önce doğan kayıt).

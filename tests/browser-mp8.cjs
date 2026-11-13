@@ -20,8 +20,10 @@ const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'bu
   /* BETA-EVENT-UX.0: federasyon / Konsey olay kartları — host + 2 misafir (ayrı Chromium), gerçek dokunma */
   E:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
   /* BETA-EVENT-UX.1: tarihsel FEDERASYON KURULDU tekrarı — host + 2 misafir */
-  F:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6}}[SCEN];
-if(!CONF)throw Error('MP8_SCEN A|B|C|R|N|P|E|F');
+  F:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
+  /* MP-P0-DESYNC1: kesirli gün kayıt doğrulaması + misafir kurtarma — host + 2 misafir */
+  D:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6}}[SCEN];
+if(!CONF)throw Error('MP8_SCEN A|B|C|R|N|P|E|F|D');
 if(process.env.FEDAI0_R==='1'||process.env.ER0_R==='1')CONF.ai=8;
 if(process.env.SCALE0_MP){const c=JSON.parse(process.env.SCALE0_MP);Object.assign(CONF,c);}
 const MONTHS=+(process.env.MP8_MONTHS||CONF.months);
@@ -404,6 +406,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
       const g=await pg.B.evaluate(()=>({screen:MP1Join.screen,err:MP1Join.err,closed:MP1Join.closed}));const s1=await pg.H.evaluate(()=>__mp8.state());
       metrics.net.relayRestart={guest:g,hostDayDelta:s1.day-s0.day,rngSame:s1.r===s0.r};assert.equal(s1.r,s0.r,'host world untouched');assert(g.err,'guest sees an explicit message');await shot(pg.B,'b-relay-restart');});}
 
+  if(SCEN==='D')await require('./helpers/mp-p0-desync1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
   if(SCEN==='F')await require('./helpers/event-ux1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,guestGo});
   if(SCEN==='E')await require('./helpers/event-ux0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors});
   if(SCEN==='P')await require('./helpers/mp-p0-soak.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,origin,guestGo,wait,tap,errors,design:DESIGNS});

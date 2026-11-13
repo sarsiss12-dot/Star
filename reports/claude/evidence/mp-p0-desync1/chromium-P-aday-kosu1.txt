@@ -1,0 +1,11 @@
+PASS P0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 16 AI, s500, seed 404; misafir gerçek STARS arayüzünde
+FAIL P1 gerçek zamanlı 3 dk: 500 sistem / 16 AI + 2 insan, host en yüksek hızda (ön ilerletme 45 ay), misafir gerçek dokunmayla oynar; host günü ilerlerken misafir dünyası 20 sn'den uzun durmamalı; komutlar aynaya yansımalı
+AssertionError [ERR_ASSERTION]: host'un kabul ettiği gemi siparişi misafir aynasına yansımadı: {"label":"t+156","at":1794553126553,"own":{"fleets":5,"yards":1,"ala":44},"fleet":6,"moveTo":75,"move":{"status":"ok","code":null,"ms":149},"yard":75,"q0":12,"ship":{"status":"ok","code":null,"ms":76},"shipSeen":false}
+PASS P2 misafirin yerel sunum durumunda bozuk kart (kurulum deserialize'dan ÖNCE istisna atar): dünya kalıcı donmaz — neden kaydedilir, durum onarılır, ayna uygulanır
+PASS P3 kapanışı gelmeyen dokunma (pointerdown var, pointerup/pointercancel yok): ayna süresiz bekletilmez — en çok ~3 sn sonra uygulanır
+PASS P4 host bu oyuncunun aynasını kuramıyor (host yayın arızası): host döngüsü çökmez, hata host tanısında; misafir açık ileti görür; arıza kalkınca kendiliğinden eşitlenir
+FAIL P5 DURAKLATILMIŞ oyunda kaybolan ayna iletisi ("host kabul etti ama tersane sırası değişmedi"): bildirim host ACK'inden ÖNCE çıkmaz; nabız eksik aynayı gösterir, misafir TAM ayna ister ve sıra görünür
+AssertionError [ERR_ASSERTION]: host emri kabul etti
+PASS P6 takviye düğmesi (reinf) misafirde yakalanmamış istisna atmaz; ret gerçek nedeniyle bildirilir
+PASS P7 kayıt → çıkış → devam (gerçek kullanıcı akışı): oyun içi "Dosyaya kaydet" MP'de çok oyunculu paket indirir; misafirin .sav'ı açık nedenle reddedilir; host'un düz .sav'ı devam lobisi açar, misafir yeni kodla katılır, host koltuğa atar, aynı gün ve devletten sürer
+EXIT 1
