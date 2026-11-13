@@ -3413,7 +3413,7 @@ function attritionTick(){
 function fleetAlloyUpkeep(e){
   let a = 0;
   for (const f of G.fleets){
-    if (f.e !== e.id || !f.ships.length) continue;
+    if (f.e !== e.id || !f.ships.length || f.federal) continue;   // BETA-FED-FLEET.0: federal bakım yalnız ortak fondan
     const sup = (typeof fleetSupply === 'function') ? fleetSupply(e, f) : 1;
     const lojistik = 1 + (1 - sup) * 1.4;
     for (const s of f.ships) a += (SHIPS[s.c].upA || 0) * lojistik;
@@ -3429,7 +3429,7 @@ function fleetUpkeep(e){
     if (!atWar) mobMul = 2;                       // barışta ağır seferberlik yükü
   }
   for (const f of G.fleets){
-    if (f.e !== e.id || !f.ships.length) continue;
+    if (f.e !== e.id || !f.ships.length || f.federal) continue;   // BETA-FED-FLEET.0: federal bakım yalnız ortak fondan
     /* İKMAL HATTI: hat uzadıkça bakım katlanır (×0.5 … ×3.2) */
     const sup = (typeof fleetSupply === 'function') ? fleetSupply(e, f) : 1;
     const lojistik = 1 + (1 - sup) * 2.2;
@@ -4498,6 +4498,7 @@ function dailyTick(dt){
     for (let d = doneIdx.length - 1; d >= 0; d--){
       const q = sys.queue[doneIdx[d]];
       sys.queue.splice(doneIdx[d], 1);
+      if (q.fed !== undefined){ if (typeof fedShipComplete === 'function') fedShipComplete(sys, q); continue; }   // BETA-FED-FLEET.0: federal sipariş
       const e = G.emps[q.e];
       if (e && !e.dead && sys.owner === e.id){
         const grp = c => SHIPS[c].rol === 'sav' ? 'sav' : SHIPS[c].rol;
@@ -7057,6 +7058,15 @@ function restorePoliticalWorld(data, sv){
   if (has(data,'cncAge') && typeof data.cncAge === 'number') G.cncAge = data.cncAge;
   if (has(data,'council'))  G.council = data.council ? jsonSafeClone(data.council, null) : null;
   if (has(data,'feds') && Array.isArray(data.feds)) G.feds = jsonSafeClone(data.feds, []);
+  /* BETA-FED-FLEET.0: eski 'Ortak Filo' hazinesi (f.treasury, tüketicisi yoktu) yüklemede BİR KEZ ortak fona aktarılır; alan 0 kalır,
+     ikinci yüklemede aktarılacak bir şey yoktur (toplam kaynak değişmez). Katkı kaydı geçersizse atılır (dağılmada eşit pay kuralı). */
+  let fedTreasuryMoved = 0;
+  for (const f of G.feds){
+    if (!f || typeof f !== 'object') continue;
+    const t = Number.isFinite(f.treasury) && f.treasury > 0 ? f.treasury : 0;
+    if (t > 0){ f.fund = (f.fund && typeof f.fund === 'object') ? f.fund : {ala:0, ene:0}; f.fund.ala = (Number.isFinite(f.fund.ala) ? f.fund.ala : 0) + t; f.treasury = 0; fedTreasuryMoved += t; }
+    if (f.contrib !== undefined && !(f.contrib && typeof f.contrib === 'object' && !Array.isArray(f.contrib) && Object.entries(f.contrib).every(([k, v]) => /^\d+$/.test(k) && v && typeof v === 'object' && ['ala','ene'].every(r => v[r] === undefined || Number.isFinite(v[r]) && v[r] >= 0)))) delete f.contrib;
+  }
   if (has(data,'fedFounding')){const x=fedFoundRestore(data.fedFounding);if(x)G.fedFounding=x;}
   if (has(data,'fedUid') && typeof data.fedUid === 'number') G.fedUid = data.fedUid;
   if (has(data,'friction') && data.friction && typeof data.friction === 'object')
@@ -7076,7 +7086,7 @@ function restorePoliticalWorld(data, sv){
     onarim = 'fedUid ' + G.fedUid + ' → ' + enBuyuk;
     G.fedUid = enBuyuk;
   }
-  return {migrated:false, from:(sv || 4), repair:onarim};
+  return {migrated:false, from:(sv || 4), repair:onarim, ...(fedTreasuryMoved > 0 ? {fedTreasuryMoved} : {})};
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -8659,7 +8669,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p27';
+const BUILD_ID = '96h10p28';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

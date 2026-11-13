@@ -95,7 +95,7 @@ const VIEW=new Set(['warCenter','warCenterTab','warCenterDetail','warCenterSuppo
   'inboxEmpire','inboxReturn','inboxFederation','deal','dealAdd','dealRm','dealDiscard','dealBack','peace','vsOpen','vsCancel','vsCounter','fedBallot',
   'fedVoteYes','fedVoteNo','fedVoteNow','fedFoundType','fedFoundSelect','fedFoundEdit','fedFoundEditStop','fedFoundUpdate','fedFoundStart','fedFoundReply','fedFoundCancel','fedFoundFinish',
   /* MP.6.1 — motor işlevi MP komutuna çevrilen gerçek düğmeler */
-  'sendhere','ship','focus','cancelBuild','demolish','foundFed','fedDipInvite','fedDipRequest','fedMotion','fedInviteAccept','fedInviteReject',
+  'sendhere','ship','fedShip','focus','cancelBuild','demolish','foundFed','fedDipInvite','fedDipRequest','fedMotion','fedInviteAccept','fedInviteReject',
   'fedLawPropose','fedLawRepeal','fedAgendaWithdraw','fedLeave','vsSend','vsReply','dealSend',
   /* MP.6.2 — savaş ve ikili siyaset: gerçek pencere açılır, son çağrı MP komutuna iner */
   'war','ally','pact','dealPact','endAlliance','unpact','embargo','unembargo','gift',
@@ -251,6 +251,8 @@ function gate(){
   const of0=UI.openFed.bind(UI);UI.openFed=function(...a){if(S.on)FF.at=Date.now();return of0(...a);};
   wrap('executeFedDecision',(o,e,fid,id)=>mine(e)?r({kind:'fedExecute',fed:+fid,id:String(id)}):NOT_MP);
   wrap('grantFed',(o,e)=>mine(e)?r({kind:'fedGrant'}):NOT_MP);
+  /* BETA-FED-FLEET.0: başkanın gerçek tersane düğmesi → host 'fedShip' (kabul ve etki host ACK'i ve güncel aynada) */
+  wrap('orderFederalShip',(o,e,sysId,cls)=>{if(!mine(e))return NOT_MP;return acked({kind:'fedShip',sys:+sysId,key:String(cls)},()=>((SHIPS[cls]&&SHIPS[cls].n)||'Gemi')+' — federal sipariş tezgâha kondu (bedel ortak fondan)');});
   wrap('supportIndep',(o,e,sub)=>mine(e)&&sub?r({kind:'supIndep',sub:real(sub.id)}):NOT_MP);
   wrap('acceptFedInvite',(o,e,fid)=>mine(e)?r({kind:'fedReply',fed:+fid,action:'accept'}):NOT_MP);
   wrap('rejectFedInvite',(o,e,fid)=>mine(e)?r({kind:'fedReply',fed:+fid,action:'reject'}):NOT_MP);

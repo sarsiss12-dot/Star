@@ -1,0 +1,4 @@
+PASS 640×360 · çubuk / ilk rota emri / olay önceliği / opaklık
+PASS 800×360 · çubuk / ilk rota emri / olay önceliği / opaklık
+PASS 915×412 · çubuk / ilk rota emri / olay önceliği / opaklık
+PASS 1280×720 · çubuk / ilk rota emri / olay önceliği / opaklık

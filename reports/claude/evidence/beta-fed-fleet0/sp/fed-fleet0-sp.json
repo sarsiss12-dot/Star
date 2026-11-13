@@ -1,0 +1,218 @@
+[
+ {
+  "tag": "640×360",
+  "layout": {
+   "buttons": 4,
+   "inside": true,
+   "noOverflow": true,
+   "minH": 38,
+   "info": "Ortak fon 3000 alaşım · 3000 enerji · donanma 0/8 gemi (kuyruk 0) · bu ay 1 sipariş hakkı · bakım 0 ene + 0 ala / ay"
+  },
+  "panelRefreshed": true,
+  "order": {
+   "cost": 37,
+   "s0": {
+    "ala": 3000,
+    "ene": 3000
+   },
+   "s1": {
+    "ala": 2963,
+    "ene": 3000
+   },
+   "q": [
+    {
+     "cls": "kor",
+     "left": 29.73336,
+     "paid": {
+      "ala": 37
+     }
+    }
+   ]
+  },
+  "ui": {
+   "row": true,
+   "dis": true,
+   "why": "Bu ay federal sipariş zaten verildi (ayda en çok bir)"
+  },
+  "cancelDialog": "Federal fona iade▰ 37",
+  "cancel": {
+   "ala": 3000,
+   "ene": 3000
+  },
+  "built": {
+   "days": 31,
+   "fleets": [
+    {
+     "e": 0,
+     "c": [
+      "kor"
+     ]
+    }
+   ],
+   "q": 0
+  },
+  "status": "PASS"
+ },
+ {
+  "tag": "800×360",
+  "layout": {
+   "buttons": 4,
+   "inside": true,
+   "noOverflow": true,
+   "minH": 38,
+   "info": "Ortak fon 3000 alaşım · 3000 enerji · donanma 0/8 gemi (kuyruk 0) · bu ay 1 sipariş hakkı · bakım 0 ene + 0 ala / ay"
+  },
+  "panelRefreshed": true,
+  "order": {
+   "cost": 37,
+   "s0": {
+    "ala": 3000,
+    "ene": 3000
+   },
+   "s1": {
+    "ala": 2963,
+    "ene": 3000
+   },
+   "q": [
+    {
+     "cls": "kor",
+     "left": 29.773360000000004,
+     "paid": {
+      "ala": 37
+     }
+    }
+   ]
+  },
+  "ui": {
+   "row": true,
+   "dis": true,
+   "why": "Bu ay federal sipariş zaten verildi (ayda en çok bir)"
+  },
+  "cancelDialog": "Federal fona iade▰ 37",
+  "cancel": {
+   "ala": 3000,
+   "ene": 3000
+  },
+  "built": {
+   "days": 31,
+   "fleets": [
+    {
+     "e": 0,
+     "c": [
+      "kor"
+     ]
+    }
+   ],
+   "q": 0
+  },
+  "status": "PASS"
+ },
+ {
+  "tag": "915×412",
+  "layout": {
+   "buttons": 4,
+   "inside": true,
+   "noOverflow": true,
+   "minH": 38,
+   "info": "Ortak fon 3000 alaşım · 3000 enerji · donanma 0/8 gemi (kuyruk 0) · bu ay 1 sipariş hakkı · bakım 0 ene + 0 ala / ay"
+  },
+  "panelRefreshed": true,
+  "order": {
+   "cost": 37,
+   "s0": {
+    "ala": 3000,
+    "ene": 3000
+   },
+   "s1": {
+    "ala": 2963,
+    "ene": 3000
+   },
+   "q": [
+    {
+     "cls": "kor",
+     "left": 29.773360000000004,
+     "paid": {
+      "ala": 37
+     }
+    }
+   ]
+  },
+  "ui": {
+   "row": true,
+   "dis": true,
+   "why": "Bu ay federal sipariş zaten verildi (ayda en çok bir)"
+  },
+  "cancelDialog": "Federal fona iade▰ 37",
+  "cancel": {
+   "ala": 3000,
+   "ene": 3000
+  },
+  "built": {
+   "days": 31,
+   "fleets": [
+    {
+     "e": 0,
+     "c": [
+      "kor"
+     ]
+    }
+   ],
+   "q": 0
+  },
+  "status": "PASS"
+ },
+ {
+  "tag": "1280×720",
+  "layout": {
+   "buttons": 4,
+   "inside": true,
+   "noOverflow": true,
+   "minH": 38,
+   "info": "Ortak fon 3000 alaşım · 3000 enerji · donanma 0/8 gemi (kuyruk 0) · bu ay 1 sipariş hakkı · bakım 0 ene + 0 ala / ay"
+  },
+  "panelRefreshed": true,
+  "order": {
+   "cost": 37,
+   "s0": {
+    "ala": 3000,
+    "ene": 3000
+   },
+   "s1": {
+    "ala": 2963,
+    "ene": 3000
+   },
+   "q": [
+    {
+     "cls": "kor",
+     "left": 29.76000000000001,
+     "paid": {
+      "ala": 37
+     }
+    }
+   ]
+  },
+  "ui": {
+   "row": true,
+   "dis": true,
+   "why": "Bu ay federal sipariş zaten verildi (ayda en çok bir)"
+  },
+  "cancelDialog": "Federal fona iade▰ 37",
+  "cancel": {
+   "ala": 3000,
+   "ene": 3000
+  },
+  "built": {
+   "days": 31,
+   "fleets": [
+    {
+     "e": 0,
+     "c": [
+      "kor"
+     ]
+    }
+   ],
+   "q": 0
+  },
+  "status": "PASS"
+ }
+]

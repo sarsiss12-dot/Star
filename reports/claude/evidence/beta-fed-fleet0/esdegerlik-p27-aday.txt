@@ -1,0 +1,6 @@
+PASS seed 11: federasyonsuz 36 ay ham Save8/RNG eşit
+PASS seed 22: federasyonsuz 34 ay ham Save8/RNG eşit; ilk federasyon ayı 35, ilk fark ayı 36 (.world.feds.0.contrib)
+PASS seed 23: federasyonsuz 36 ay ham Save8/RNG eşit
+PASS seed 42: federasyonsuz 36 ay ham Save8/RNG eşit
+PASS seed 404: federasyonsuz 35 ay ham Save8/RNG eşit; ilk federasyon ayı 36, fark yok
+GEÇEN: 5 KALAN: 0

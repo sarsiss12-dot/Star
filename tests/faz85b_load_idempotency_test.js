@@ -725,7 +725,7 @@ console.log('\nM. SENARYO 12 — FAZ 85A POLİTİK DÜNYA');
     "  konsey:G.council&&G.council.name, hazine:G.council&&G.council.treasury,",
     "  oy:G.council&&G.council.vote&&G.council.vote.key,",
     "  yaptirim:G.council&&G.council.targeted&&G.council.targeted.parya,",
-    "  fed:(G.feds[0]||{}).name, fedHaz:(G.feds[0]||{}).treasury,",
+    "  fed:(G.feds[0]||{}).name, fedHaz:(G.feds[0]||{}).treasury, fedFon:((G.feds[0]||{}).fund||{}).ala,",
     "  fedUid:G.fedUid, rebel:G.rebelAlliance&&G.rebelAlliance.target,",
     "  mega:(G.megaWatch||[]).length, sandbox:G.sandbox,",
     "  friction:JSON.stringify(G.friction)});"].join('\n'));
@@ -740,7 +740,8 @@ console.log('\nM. SENARYO 12 — FAZ 85A POLİTİK DÜNYA');
      d.konsey==='Büyük Konsey' && d.hazine===412 &&
      d.oy==='ambargo' && d.yaptirim===2);
   ok('federasyon + hazine + fedUid korundu',
-     d.fed==='Kuzey' && d.fedHaz===250 && d.fedUid===7);
+     /* BETA-FED-FLEET.0: eski hazine 5 yüklemede BİR KEZ fona geçer (çoğalmaz) */
+     d.fed==='Kuzey' && d.fedHaz===0 && d.fedFon===250 && d.fedUid===7);
   ok('rebelAlliance / megaWatch / sandbox / friction korundu',
      d.rebel===3 && d.mega===1 && d.sandbox===true &&
      d.friction==='{"0:2":14}');

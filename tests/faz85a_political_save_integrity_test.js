@@ -300,7 +300,7 @@ console.log('\nD. SENARYO 3 — FEDERASYON + YASA + HAZİNE + OY');
     "  uye:JSON.stringify(f.members),",
     "  uyeGecerli:f.members.every(function(id){return !!G.emps[id];}),",
     "  kurucu:f.founder, kurucuGecerli:!!G.emps[f.founder],",
-    "  yasa:!!f.laws.ortakSavunma, hazine:f.treasury, nextVote:f.nextVote,",
+    "  yasa:!!f.laws.ortakSavunma, hazine:f.treasury, fon:f.fund&&f.fund.ala, nextVote:f.nextVote,",
     "  oyYasa:f.vote&&f.vote.law, oyEvet:JSON.stringify(f.vote&&f.vote.yes),",
     "  oyHayir:JSON.stringify(f.vote&&f.vote.no), oyBitti:f.vote&&f.vote.done});"].join('\n'));
   let d={}; try{d=JSON.parse(r);}catch(e){}
@@ -312,7 +312,8 @@ console.log('\nD. SENARYO 3 — FEDERASYON + YASA + HAZİNE + OY');
   ok('lider/kurucu ID korundu ve geçerli',
      d.kurucu===0 && d.kurucuGecerli===true);
   ok('federasyon yasası korundu', d.yasa===true);
-  ok('federasyon hazinesi korundu (250)', d.hazine===250, String(d.hazine));
+  /* BETA-FED-FLEET.0: eski (tüketicisiz) f.treasury yüklemede BİR KEZ ortak fona (f.fund.ala) aktarılır; değer birebir korunur. */
+  ok('federasyon hazinesi korundu (250 → ortak fon)', d.hazine===0 && d.fon===250, String(d.hazine)+'/'+String(d.fon));
   ok('nextVote korundu (970)', d.nextVote===970, String(d.nextVote));
   ok('devam eden federasyon oyu korundu', d.oyYasa==='ortakPazar', d.oyYasa);
   ok('federasyon oy sayıları aynı',
@@ -619,6 +620,8 @@ console.log('\nL. SENARYO 14 — SERIALIZE→DESERIALIZE→SERIALIZE');
   const r=H.R([DUNYA,
     "/* 95B: compare a normalized current world; legacy migration has its own explicit assertions. */",
     "G.feds.forEach(fedNormalize);",
+    "/* BETA-FED-FLEET.0: eski hazine → ortak fon aktarımı kendi açık denetimlerine sahip (beta_fed_fleet0 F1, compat C1); burada güncel biçim. */",
+    "G.feds.forEach(function(f){f.fund=f.fund||{ala:0,ene:0};f.fund.ala+=f.treasury||0;f.treasury=0;});",
     "var k1=serialize();", ZEHIR,
     "deserialize(k1); var k2=serialize();",
     "deserialize(k2); var k3=serialize();",

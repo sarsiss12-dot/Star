@@ -9,7 +9,13 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,lanes,wait,
   const H=pg.H,B=pg.B,C=pg.C,M=metrics.eux={};
   const seats=await H.evaluate(()=>[...MP1Host.host.state.players.values()].filter(p=>p.playerId!=='host').sort((a,b)=>a.seat-b.seat).map(p=>p.empireId));
   const [eB,eC]=seats;M.seats={B:eB,C:eC};
-  const synced=async(p)=>{await H.evaluate(()=>MP1Host.host.publish());await p.waitForFunction(()=>MP6Stars.S.appliedRev===MP6Stars.S.rev&&!MP6Stars.S.building&&!MP6Stars.S.timer,undefined,{timeout:30000,polling:150}).catch(()=>{});};
+  /* BETA-FED-FLEET.0: host aynası son gönderimden sonra 700 ms'ye kadar ERTELENİR (p.mirrorTimer). Yalnız appliedRev===rev beklemek, ertelenmiş ayna
+     henüz gelmeden "eşit" sayıyordu (aralıklı E5 "sıra misafir aynasında" kökü). Önce host'un bu misafire son ayna revizyonu (bekleyen zamanlayıcı yok) beklenir. */
+  const synced=async(p)=>{await H.evaluate(()=>MP1Host.host.publish());const e=await p.evaluate(()=>MP1Join.empireId),t0=Date.now();
+    let first=null;for(;Date.now()-t0<30000;){const r=await H.evaluate(e=>{const x=[...MP1Host.host.state.players.values()].find(y=>y.empireId===e);return x&&!x.mirrorTimer?x.mirrorRev:-1;},e);if(first===null)first=r<0;
+      if(r>=0&&await p.evaluate(r=>MP6Stars.S.rev>=r,r))break;await new Promise(r=>setTimeout(r,150));}
+    synced.last={pendingMirrorAtPublish:first,waitMs:Date.now()-t0};
+    await p.waitForFunction(()=>MP6Stars.S.appliedRev===MP6Stars.S.rev&&!MP6Stars.S.building&&!MP6Stars.S.timer,undefined,{timeout:30000,polling:150}).catch(()=>{});};
   const both=async()=>{await synced(B);await synced(C);};
   const cards=(p)=>p.evaluate(()=>({inbox:G.inbox.filter(n=>!n.hidden).map(n=>({kind:n.kind,key:n.key,uid:n.uid})),info:[...document.querySelectorAll('#inbox .nInfo')].map(e=>e.textContent.replace(/\s+/g,' ').trim())}));
   const p0=(p)=>p.evaluate(()=>({note:MP6Stars.S.sync.note,crash:MP6Stars.S.stats.crash||0,applied:MP6Stars.S.appliedRev===MP6Stars.S.rev,fail:MP6Stars.S.stats.fail||0}));
@@ -94,7 +100,7 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,lanes,wait,
     for(const p of [B,C])assert.deepEqual(await p0(p),{note:'',crash:0,applied:true,fail:0});
     const r=await B.evaluate(async()=>{const y=G.sys.find(s=>s.owner===0&&hasYard(s));if(!y)return {skip:'tersane yok'};const q0=(y.queue||[]).length,n=MP1Join.results.length;const c=MP1Join.cmd({kind:'ship',sys:y.id,key:'kor'});
       const t=Date.now();while(!MP1Join.results.some(x=>x.cid===c.cid)&&Date.now()-t<10000)await new Promise(r=>setTimeout(r,100));const res=MP1Join.results.find(x=>x.cid===c.cid);return {y:y.id,q0,status:res&&res.status};});
-    M.e5=r;if(!r.skip){assert.equal(r.status,'ok');await synced(B);assert(await B.evaluate(a=>(G.sys[a.y].queue||[]).length>a.q0,r),'sıra misafir aynasında');}
+    M.e5=r;if(!r.skip){assert.equal(r.status,'ok');await synced(B);r.sync=synced.last;assert(await B.evaluate(a=>(G.sys[a.y].queue||[]).length>a.q0,r),'sıra misafir aynasında');}
     assert.deepEqual(errors,[],'sayfa hataları');});
   fs.writeFileSync(path.join(out,'event-ux0-mp.json'),JSON.stringify(M,null,1));
 };

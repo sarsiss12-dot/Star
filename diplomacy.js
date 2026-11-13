@@ -2310,7 +2310,7 @@ const FED_LAWS = {
   ticaret :{n:'Ticaret Birliği', ico:'🤝',
     d:'Üye limanları otomatik olarak birbirine bağlanır.'},
   filo    :{n:'Ortak Filo', ico:'⚑',
-    d:'Üyeler ayda 4 alaşımı ortak filo hazinesinde biriktirir; otomatik gemi üretmez.'}
+    d:'Her üye ayda en çok 4 alaşımı federal fona katar (katkı kaydedilir). Fon, başkanın federal gemi siparişlerini ve federal donanmanın bakımını öder; otomatik gemi üretmez.'}
 };
 
 /* 95B: political federation data. All timings are game days (30 days/month).
@@ -2492,8 +2492,7 @@ function fedRemoveMember(f,id,reason){
 function leaveFederation(e){const f=e&&findFed(e);if(!f)return {ok:false,why:'Federasyon üyesi değilsin'};fedRemoveMember(f,e.id,'leave');updateFederations();return {ok:true};}
 function fedDissolve(f){
  if(typeof GalacticNews!=='undefined')GalacticNews.political(f,'dissolved');
- const ids=f.members.slice();G.feds=G.feds.filter(x=>x!==f);
- for(const fl of G.fleets)if(fl.federal&&fl.fedId===f.id){delete fl.federal;delete fl.fedId;}
+ const ids=f.members.slice();f.fundReturn=fedDissolveFunds(f,ids);G.feds=G.feds.filter(x=>x!==f);   // BETA-FED-FLEET.0: işler iade, filo dağılır, fon katkıyla geri
  for(const id of ids)if(G.emps[id]){G.emps[id]._fedLeaveUntil=G.day+720;recalcMods(G.emps[id]);}
 }
 function fedAdmissionGate(f,o,ballot=false){
@@ -2883,7 +2882,7 @@ function fedTick(){
         const e = G.emps[id];
         if (!e || e.dead) continue;
         const give = Math.min(4, e.res.ala);
-        e.res.ala -= give; f.treasury += give;
+        e.res.ala -= give; f.fund = f.fund || {ala:0, ene:0}; f.fund.ala += give; fedContribute(f, id, 'ala', give);   // BETA-FED-FLEET.0: tek fon
       }
     }
     // ortak araştırma fonu
@@ -9345,8 +9344,8 @@ function fedFundTick(){
       const rate = f.laws && f.laws.ortakDon ? .09 : f.laws && f.laws.sivilFon ? .03 : fedType(f).tithe;
       const ala = Math.max(0, ((e.inc && e.inc.ala) || 0) * rate);
       const ene = Math.max(0, ((e.inc && e.inc.ene) || 0) * rate);
-      if (ala > 0 && (e.res.ala || 0) >= ala){ e.res.ala -= ala; f.fund.ala += ala; }
-      if (ene > 0 && (e.res.ene || 0) >= ene){ e.res.ene -= ene; f.fund.ene += ene; }
+      if (ala > 0 && (e.res.ala || 0) >= ala){ e.res.ala -= ala; f.fund.ala += ala; fedContribute(f, id, 'ala', ala); }
+      if (ene > 0 && (e.res.ene || 0) >= ene){ e.res.ene -= ene; f.fund.ene += ene; fedContribute(f, id, 'ene', ene); }
     }
 
     /* ── FEDERAL FİLO KOMUTASI ──
@@ -9363,27 +9362,22 @@ function fedFundTick(){
       }
     }
 
-    /* ── BAKIM FONDAN ── */
-    let bakim = 0;
-    for (const fl of G.fleets){
-      if (!fl.federal || fl.fedId !== f.id || !fl.ships) continue;
-      for (const sh of fl.ships)
-        bakim += (SHIPS[sh.c] && SHIPS[sh.c].up) || 0;
-    }
-    if (bakim > 0){
-      /* ═══ FAZ 50: FON TÜKENME UYARISI ═══
-         Rezerv 3 aylık bakımın altına düşünce başkana kırmızı
-         uyarı. Sessizce filo dağıtmak yerine önceden haber ver. */
-      const kalanAy = bakim > 0 ? Math.floor(f.fund.ene / bakim) : 99;
+    /* ── BAKIM FONDAN (BETA-FED-FLEET.0) ──
+       Federal donanmanın enerji VE alaşım bakımı ayda bir kez yalnız ortak fondan kesilir; başkanın kişisel bakım hesabına
+       girmez (fleetUpkeep / fleetAlloyUpkeep federal filoyu atlar). Fon yetmezse ödenebilen kadarı alınır (negatif bakiye
+       yok), eksik kalırsa mevcut kural: en zayıf (en az gemili) federal filo dağıtılır. */
+    const up = fedFleetUpkeep(f, false);
+    if (up.ene > 0 || up.ala > 0){
+      const kalanAy = Math.floor(Math.min(up.ene > 0 ? f.fund.ene / up.ene : 99, up.ala > 0 ? f.fund.ala / up.ala : 99));
       if (kalanAy <= 3 && f.leader === 0 && f._uyariAt !== (G.memAge || 0)){
         f._uyariAt = G.memAge || 0;
         say('⚠ FEDERAL FON TÜKENİYOR — gemiler ' + Math.max(0, kalanAy) +
             ' ay içinde dağıtılacak! Acil hibe gönder.', 'war');
       }
-      f.fund.ene -= bakim;
-      if (f.fund.ene < 0){
-        /* Fon tükendi: en zayıf federal filo dağıtılır */
-        f.fund.ene = 0;
+      const short = f.fund.ene < up.ene || f.fund.ala < up.ala;
+      f.fund.ene = Math.max(0, f.fund.ene - up.ene);
+      f.fund.ala = Math.max(0, f.fund.ala - up.ala);
+      if (short){
         let en = null;
         for (const fl of G.fleets){
           if (!fl.federal || fl.fedId !== f.id || !fl.ships.length) continue;
@@ -9397,39 +9391,138 @@ function fedFundTick(){
         G.fleets = G.fleets.filter(x => x.ships && x.ships.length);
       }
     }
+    /* ── KAPANMASI GEREKEN SİPARİŞLER: tersane el değiştirdi / sipariş veren üyelikten çıktı ── */
+    fedCloseOrders(f, (sys, q) => sys.owner !== q.e || !f.members.includes(q.e) || !G.emps[q.e] || G.emps[q.e].dead);
+    /* ── AI BAŞKAN: aynı sipariş yolu, ayda en çok bir karar, RNG yok ── */
+    if (baskan && !baskan.dead && baskan.ai) aiFederalFleetOrder(f);
   }
 }
 
-function canBuildFederal(e, cls){
-  const access = shipBuildAccess(e, cls);
-  if (!access.ok) return access;
+/* ═══════════════════════════════════════════════════════════════════
+   BETA-FED-FLEET.0 — FEDERAL SİPARİŞ (tek oyunculu, MP host, MP misafir başkan, AI başkan AYNI yol)
+   Başkanın kendi tersanesinde mevcut gemi kuyruğu (sys.queue) ve üretim süresi kullanılır. Bedel kabul anında ortak fondan
+   BİR KEZ düşer (q.fedPaid); gemi süre sonunda federal filo olarak doğar ve kapasite harcamaz. Sınırlar: üretilmiş + kuyruktaki
+   federal gemi ≤ üye × 4; federasyon başına ayda en çok bir kabul edilmiş sipariş; sipariş sonrası enerji ve alaşımda kuyruktakiler
+   dahil en az 3 aylık bakım rezervi. Federasyon kaydına yalnız kullanıldığında fleetOrderMonth / contrib alanları eklenir.
+   ═══════════════════════════════════════════════════════════════════ */
+const FED_FLEET = {perMember:4, reserveMonths:3, costMul:1.15, classes:['kor','muh','kru','zir']};
+function fedContribute(f, id, r, v){
+  if (!f || !(v > 0) || !Number.isInteger(id)) return;
+  f.contrib = f.contrib || {};
+  const row = f.contrib[id] || (f.contrib[id] = {ala:0, ene:0});
+  row[r] = (row[r] || 0) + v;
+}
+function fedMonth(){ return Math.floor((G.day || 0) / 30); }
+function fedShipCost(cls){ const S = SHIPS[cls]; return {ala: Math.round(((S && S.cost && S.cost.ala) || 0) * FED_FLEET.costMul)}; }
+function fedOrders(f){ const out = []; for (const sys of G.sys) for (const q of sys.queue || []) if (q && q.fed === f.id) out.push({sys, q}); return out; }
+/* Üretilmiş ve kuyruktaki federal gemiler; MP misafirinde (ayna) host'un hesapladığı f.fundView kullanılır. */
+function fedFleetLedger(f){
+  if (f && f.fundView) return f.fundView;
+  let ships = 0, fleets = 0;
+  for (const fl of G.fleets) if (fl.federal && fl.fedId === f.id && fl.ships && fl.ships.length){ fleets++; ships += fl.ships.length; }
+  const orders = fedOrders(f);
+  const up = fedFleetUpkeep(f, true);
+  return {ships, fleets, queued: orders.length, cap: f.members.length * FED_FLEET.perMember, upkeep: up,
+    monthUsed: f.fleetOrderMonth === fedMonth(), reserveMonths: FED_FLEET.reserveMonths,
+    orders: orders.map(({sys, q}) => ({sys: sys.id, cls: q.cls, left: q.left, cost: q.fedPaid ? q.fedPaid.ala || 0 : 0}))};
+}
+function fedFleetUpkeep(f, withQueued, extraCls){
+  let ene = 0, ala = 0;
+  const add = c => { const S = SHIPS[c]; if (S){ ene += S.up || 0; ala += S.upA || 0; } };
+  for (const fl of G.fleets) if (fl.federal && fl.fedId === f.id && fl.ships) for (const sh of fl.ships) add(sh.c);
+  if (withQueued) for (const {q} of fedOrders(f)) add(q.cls);
+  if (extraCls) add(extraCls);
+  return {ene, ala};
+}
+function fedShipQuote(e, sysId, cls){
+  const no = why => ({ok:false, why});
+  if (!e || e.dead || G.emps[e.id] !== e) return no('Üretici devlet geçersiz');
   const f = (typeof findFed === 'function') ? findFed(e) : null;
-  if (!f) return {ok:false, why:'Bir federasyona üye değilsin'};
-  if (f.leader !== e.id) return {ok:false, why:'Yalnız federasyon başkanı basabilir'};
-  const S = SHIPS[cls];
-  if (!S) return {ok:false, why:'Bilinmeyen gemi'};
+  if (!f) return no('Bir federasyona üye değilsin');
+  if (f.leader !== e.id) return no('Yalnız federasyon başkanı federal sipariş verebilir');
+  if (!FED_FLEET.classes.includes(cls)) return no('Federal sipariş yalnız savaş gemisi içindir');
+  const access = shipBuildAccess(e, cls); if (!access.ok) return no(access.why);
+  const sys = G.sys[sysId];
+  if (!sys || sys.owner !== e.id || !hasYard(sys)) return no('Kendi tersaneni seç');
+  if (sys.yardLock && sys.yardLock > (G.memAge || 0)) return no(sys.name + ' tersanesi sabote edilmiş');
+  const L = fedFleetLedger(f), cap = f.members.length * FED_FLEET.perMember;
+  if (L.ships + L.queued + 1 > cap) return no('Federal donanma sınırı dolu (' + (L.ships + L.queued) + '/' + cap + ' gemi; üye × ' + FED_FLEET.perMember + ')');
+  if (L.monthUsed) return no('Bu ay federal sipariş zaten verildi (ayda en çok bir)');
   f.fund = f.fund || {ala:0, ene:0};
-  const bedel = (S.cost && S.cost.ala) ? S.cost.ala * 1.15 : 100;
-  if (f.fund.ala < bedel)
-    return {ok:false, why:'Federal fon yetersiz (' + Math.round(f.fund.ala) +
-      '/' + Math.round(bedel) + ' alaşım)'};
-  return {ok:true, fed:f, bedel};
+  const cost = fedShipCost(cls), S = SHIPS[cls];
+  const up = {ene: L.upkeep.ene + (S.up || 0), ala: L.upkeep.ala + (S.upA || 0)}, R = FED_FLEET.reserveMonths;
+  if (f.fund.ala < cost.ala) return no('Federal fon yetersiz (' + Math.floor(f.fund.ala) + '/' + cost.ala + ' alaşım)');
+  if (f.fund.ala - cost.ala < up.ala * R || f.fund.ene < up.ene * R)
+    return no('Sipariş sonrası ' + R + ' aylık bakım rezervi kalmaz (gerekli ' + Math.ceil(up.ene * R) + ' enerji / ' + Math.ceil(up.ala * R) + ' alaşım; fonda ' + Math.floor(f.fund.ene) + ' / ' + Math.floor(f.fund.ala - cost.ala) + ')');
+  return {ok:true, why:'', fed:f, cost, days:shipProductionDays(e, cls), upkeep:up, cap, used:L.ships + L.queued};
 }
-
-function buildFederalShip(e, sysId, cls){
-  const chk = canBuildFederal(e, cls);
-  if (!chk.ok) return chk;
-  const sy = G.sys[sysId];
-  if (!sy) return {ok:false, why:'Sistem yok'};
-  chk.fed.fund.ala -= chk.bedel;
-  const fl = newFleet(e, sysId, [{c:cls}], 'Federal Donanma');
-  fl.federal = true;
-  fl.fedId = chk.fed.id;
-  if (e.id === 0)
-    say('🏛 Federal donanmaya ' + SHIPS[cls].n + ' katıldı (kapasite harcanmadı)', 'sci');
-  return {ok:true};
+function orderFederalShip(e, sysId, cls){
+  const q = fedShipQuote(e, sysId, cls); if (!q.ok) return q;
+  const f = q.fed, sys = G.sys[sysId];
+  f.fund.ala -= q.cost.ala; f.fleetOrderMonth = fedMonth();
+  sys.queue.push({cls, e:e.id, left:q.days, tot:q.days, paid:{}, fed:f.id, fedPaid:{...q.cost}});
+  if (e.id === 0) say('🏛 Federal sipariş: ' + SHIPS[cls].n + ' — ' + sys.name + ' (' + q.cost.ala + ' alaşım fondan, ~' + q.days + ' gün)', 'sci');
+  return {ok:true, why:'Federal sipariş tezgâha kondu', cost:q.cost, days:q.days};
 }
-
+/* Kuyruktaki federal işi kapatır: ödeme fona (federasyon varsa) BİR KEZ döner; iş kuyruktan önce çıkarılır. */
+function fedRefundOrder(sys, q){
+  const i = sys.queue.indexOf(q); if (i < 0 || q.fedRefunded) return false;
+  sys.queue.splice(i, 1); q.fedRefunded = true;
+  const f = (G.feds || []).find(x => x.id === q.fed);
+  if (f){ f.fund = f.fund || {ala:0, ene:0}; for (const [r, v] of Object.entries(q.fedPaid || {})) if (Number.isFinite(v) && v > 0) f.fund[r] = (f.fund[r] || 0) + v; }
+  return true;
+}
+function fedCloseOrders(f, pred){ let n = 0; for (const {sys, q} of fedOrders(f)) if (!pred || pred(sys, q)) if (fedRefundOrder(sys, q)) n++; return n; }
+/* Tersane işi tamamlandı (dailyTick): federal filo doğar, sahibi O ANKİ başkan; federasyon yoksa iş zaten kapatılmıştır. */
+function fedShipComplete(sys, q){
+  const f = (G.feds || []).find(x => x.id === q.fed), lead = f && G.emps[f.leader];
+  if (!f || !lead || lead.dead || sys.owner !== q.e){ if (f){ f.fund.ala = (f.fund.ala || 0) + ((q.fedPaid && q.fedPaid.ala) || 0); } return false; }
+  const fl = newFleet(lead, sys.id, [{c:q.cls}], 'Federal Donanma');
+  fl.federal = true; fl.fedId = f.id;
+  if (f.members.includes(0)) say('🏛 Federal donanmaya ' + SHIPS[q.cls].n + ' katıldı — ' + sys.name + ' (kapasite harcanmadı)', 'sci');
+  return true;
+}
+/* Eski API (çağıranı yoktu): artık aynı sipariş yoluna iner. */
+function canBuildFederal(e, cls){ const yard = G.sys.find(s => s.owner === e.id && hasYard(s)); return yard ? fedShipQuote(e, yard.id, cls) : {ok:false, why:'Kendi tersaneni seç'}; }
+function buildFederalShip(e, sysId, cls){ return orderFederalShip(e, sysId, cls); }
+/* AI başkan: aktif federasyon savaşı / açık savunma yükümlülüğü (bir üye federasyon dışıyla savaşta) varken, ayda en çok bir sipariş. Eşik her
+   kaynak için 2 × (sipariş bedeli + 6 aylık bakım, kuyruktakiler dahil); askerî ×0,8, ticaret ×1,3; 3 aylık rezerv quote'ta. RNG yok. */
+function aiFederalFleetOrder(f){
+  const e = G.emps[f.leader]; if (!e || e.dead || !e.ai) return null;
+  /* "Açık" yükümlülük = yürürlükteki ortak savunma görevi ile bir üyenin GERÇEKTEN federasyon dışı bir devletle savaşta olması;
+     aktif federasyon savaşı da aynı koşulu üretir. Askerî türde ortak savunma varsayılan açık olduğundan barışta sipariş verilmez. */
+  const atWar = f.members.some(id => { const m = G.emps[id]; return m && !m.dead && Object.keys(m.war || {}).some(k => m.war[k] && G.emps[k] && !G.emps[k].dead && !G.emps[k].wild && !f.members.includes(+k)); });
+  if (!atWar) return null;
+  const mul = f.type === 'askeri' ? .8 : f.type === 'ticaret' ? 1.3 : 1;
+  const yards = G.sys.filter(s => s.owner === e.id && hasYard(s) && !(s.yardLock && s.yardLock > (G.memAge || 0)));
+  if (!yards.length) return null;
+  const yard = yards.find(s => s.id === e.home) || yards.sort((a, b) => a.id - b.id)[0];
+  for (const cls of FED_FLEET.classes.slice().reverse()){
+    const q = fedShipQuote(e, yard.id, cls); if (!q.ok) continue;
+    if (f.fund.ala < 2 * (q.cost.ala + 6 * q.upkeep.ala) * mul || f.fund.ene < 2 * (6 * q.upkeep.ene) * mul) continue;
+    return orderFederalShip(e, yard.id, cls);
+  }
+  return null;
+}
+/* Dağılma: bekleyen federal işler fona iade edilir, federal filolar dağıtılır, kalan fon kayıtlı katkı oranlarıyla o anki üyelere
+   döner. Katkı kaydı olmayan (eski kayıt) fonda eşit pay. Son alıcı kalanı alır: toplam kaynak değişmez. */
+function fedDissolveFunds(f, ids){
+  fedCloseOrders(f);
+  for (const fl of G.fleets) if (fl.federal && fl.fedId === f.id && fl.ships && fl.ships.length){ fleetLost(fl, 'disband'); fl.ships.length = 0; }
+  G.fleets = G.fleets.filter(x => x.ships && x.ships.length);
+  const live = ids.filter(id => G.emps[id] && !G.emps[id].dead), fund = f.fund || {ala:0, ene:0}, out = {};
+  if (!live.length) return {rule:'none', out};
+  let rule = 'contrib';
+  for (const r of ['ala', 'ene']){
+    const total = Math.max(0, fund[r] || 0); if (!(total > 0)) continue;
+    let w = live.map(id => Math.max(0, (f.contrib && f.contrib[id] && f.contrib[id][r]) || 0)), sum = w.reduce((a, b) => a + b, 0);
+    if (!(sum > 0)){ w = live.map(() => 1); sum = live.length; rule = 'equal'; }
+    let given = 0;
+    live.forEach((id, i) => { const share = i === live.length - 1 ? total - given : total * w[i] / sum; given += share; G.emps[id].res[r] = (G.emps[id].res[r] || 0) + share; (out[id] = out[id] || {})[r] = share; });
+    fund[r] = 0;
+  }
+  return {rule, out};
+}
 
 /* ═══════════════════════════════════════════════════════════════════
    FAZ 50 — ACİL HİBE
@@ -9453,24 +9546,24 @@ function grantFed(e){
   f.fund = f.fund || {ala:0, ene:0};
   e.res.ala -= GRANT_ALA; e.res.ene -= GRANT_ENE;
   f.fund.ala += GRANT_ALA; f.fund.ene += GRANT_ENE;
+  fedContribute(f, e.id, 'ala', GRANT_ALA); fedContribute(f, e.id, 'ene', GRANT_ENE);
   if (e.id === 0)
     say('🏛 ACİL HİBE — federal fona ' + GRANT_ALA + ' alaşım, ' +
         GRANT_ENE + ' enerji aktarıldı', 'win');
   return {ok:true};
 }
 
-/* Fon durumu — arayüz okur */
+/* Fon durumu — arayüz okur (BETA-FED-FLEET.0: enerji + alaşım bakımı, gerçek katkı oranı, harcanabilir bakiye) */
 function fedFundStatus(f){
   if (!f) return null;
   f.fund = f.fund || {ala:0, ene:0};
-  let bakim = 0;
-  for (const fl of G.fleets){
-    if (!fl.federal || fl.fedId !== f.id || !fl.ships) continue;
-    for (const sh of fl.ships) bakim += (SHIPS[sh.c] && SHIPS[sh.c].up) || 0;
-  }
-  const kalanAy = bakim > 0 ? Math.floor(f.fund.ene / bakim) : 99;
-  return {bakim, kalanAy, kritik: bakim > 0 && kalanAy <= 3,
-          ala: f.fund.ala, ene: f.fund.ene};
+  const L = fedFleetLedger(f), up = L.upkeep, R = FED_FLEET.reserveMonths;
+  const kalanAy = Math.floor(Math.min(up.ene > 0 ? f.fund.ene / up.ene : 99, up.ala > 0 ? f.fund.ala / up.ala : 99));
+  const rate = f.laws && f.laws.ortakDon ? .09 : f.laws && f.laws.sivilFon ? .03 : fedType(f).tithe;
+  return {bakim: up.ene, bakimA: up.ala, kalanAy, kritik: (up.ene > 0 || up.ala > 0) && kalanAy <= R,
+          ala: f.fund.ala, ene: f.fund.ene, rate, filoLaw: !!(f.laws && f.laws.filo),
+          spendAla: Math.max(0, f.fund.ala - up.ala * R), spendEne: Math.max(0, f.fund.ene - up.ene * R),
+          ships: L.ships, queued: L.queued, cap: L.cap, monthUsed: !!L.monthUsed, orders: L.orders || []};
 }
 
 
