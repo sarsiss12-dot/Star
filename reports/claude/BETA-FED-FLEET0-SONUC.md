@@ -9,7 +9,10 @@ Dil kuralı: **PASS / FAIL / NOT RUN** ayrı yazılır. Bütün tarayıcı testl
 | Taban | PR #40 · `claude/stars-mp-p0-desync2` @ `43a36127d5bf66918ff4a7f89ae515ca40149789` (GitHub HEAD ile doğrulandı) — 96h10p27 / MP.8.9b24 |
 | Aday dal | **`claude/stars-beta-fed-fleet0`** (Render'da denenebilecek dal) — tabandan, taslak PR hedefi `claude/stars-mp-p0-desync2` |
 | Commit 1 — kod / test / yayın | `7172cb1` |
-| Commit 2 — rapor | yalnız belge / kanıt (son SHA PR'da ve sohbette) |
+| Commit 2 — rapor | `21f12d6` |
+| Commit 3 — devam turu (kod / test / yeni ZIP) | `478dbe4` |
+| Commit 4 — rapor güncellemesi | yalnız belge / kanıt (son SHA PR'da ve sohbette) |
+| (devam turu içeriği) | SP Chromium testi, iptal penceresi düzeltmesi (yeni ZIP), E5 bekleme kökü; rapor güncellemesi (son SHA PR'da ve sohbette) |
 | Sürüm | oyun **96h10p28** / PWA `stars-v96h10p28` / MP **MP.8.9b25** |
 | Uyumluluk | Save8 **v8**, MP paket **4**, protokol **1** değişmedi. p28 paket yükleyicisi p6–p27 ve p25u1 paketlerini kabul eder (gerçek p27 paketi C2 ile doğrulandı). |
 | Konsey Muhafızları / askerî komite AI | bu fazda **yok** (ayrı faz) |
@@ -131,27 +134,52 @@ Düzeltmeden sonra beş paket taban sayılarına döndü: 175/2, 134/2, 19/0, 66
 
 ### 4.4 Son tam Node koşusu
 
-**194 paket, GEÇEN 6222, KALAN 278** (`evidence/.../node-run-all-aday-son.txt`).
+**194 paket, GEÇEN 6222, KALAN 278** (`evidence/.../node-run-all-aday-son.txt`; §4.6 ui.js düzeltmesinden sonra yeniden: aynı, `node-run-all-aday-son2.txt`).
 
 - Taban p27'nin eski FAIL sayısı da 278'dir (`mp-p0-desync2/aday1-node-run-all.txt`). Paket paket karşılaştırmada fark yalnız yeni paketlerdedir: `beta_fed_fleet0_test` 11/0, `beta_fed_fleet0_mp_test` 7/0, `beta_fed_fleet0_compat_test` 3/0 ve P27 commit 2'nin `mp_p0_guard_test` 7/0'ı.
 - Bu fazda yeni FAIL kalmadı. Eski 278 FAIL (`faz95d_identity` Node v22 kayan nokta dahil) silinmedi.
 - Koşu sonrası `tests/navy-95a-after-*.json`, `audit-95d/.../war-lines-on.png`, `audit96e1/identity-distribution.json` geri alındı; `tests/audit96g2` depo dışına taşındı.
 
-### 4.5 NOT RUN
+### 4.5 Devam turu (aynı gün): tek oyunculu Chromium, iptal penceresi, E / F, aralıklı E5 kökü
+
+**Tek oyunculu gerçek Chromium — `node tests/browser-fed-fleet0-sp.cjs`: 4/4 PASS** (640×360, 800×360, 915×412 dokunma; 1280×720 fare). Kanıt: `evidence/.../sp/`. Her görünümde denetlenenler:
+- federal bölüm panel içinde ve yatay taşmasız; dört sınıf düğmesi dokunulabilir yükseklikte;
+- gerçek dokunuş → tek federal iş, fondan bir ödeme, kişisel kasa aynı, kuyrukta `FEDERAL` satırı;
+- aynı ay düğmeler kapalı ve "Bu ay federal sipariş zaten verildi" nedeni görünür;
+- gerçek ✕ + onay penceresi → fon geri, kişisel kasa aynı;
+- sonraki ay yeni sipariş → gerçek `dailyTick` ile tek federal korvet devlet 0'ın federal filosu olur;
+- sayfa hatası yok.
+
+İlk iki koşu 0/4 FAIL verdi; ikisi de test kusuruydu ve `sp-ilk-FAIL/` içinde korunuyor:
+1. Seçici `.box` satırını çocuk sayısı nedeniyle dışlıyordu.
+2. Panel yenilemesi dokunuştan sonra ertelendiği için okuma erken yapıldı. Test artık `#panel .fedTag` görünene kadar bekliyor; ürün yenilemesi 5 sn içinde her görünümde geldi.
+
+**Ürün düzeltmesi (`ui.js`, iptal penceresi).** Federal sipariş iptalinde pencere yalnız "Kaynak iadesi: Yok" gösteriyordu. Ödeme fona dönüyordu ama kullanıcıya söylenmiyordu. Pencereye `#fedCancelRefund` "Federal fona iade ▰37" satırı ve açıklaması eklendi; SP testi bunu denetler. Bu değişiklik için pinler, manifest ve ZIP yeniden üretildi (§5).
+
+**`MP8_SCEN=F`: 6/0 PASS · `MP8_SCEN=L` (yeniden): 6/0 PASS · `browser-mobile-hud0`: 4/4 PASS · tam Node: 194 paket, 6222/278.**
+
+**`MP8_SCEN=E`:**
+- İlk koşu 5/1 FAIL: E5 "sıra misafir aynasında", P27 kosu2'deki aralıklı E5 ile birebir (`chromium2-mp8-E-FAIL-E5.txt`).
+- **Kök neden (test):** host aynası son gönderimden sonra 700 ms'ye kadar ertelenir (`p.mirrorTimer`). E5'in `synced`'i yalnız misafirde `appliedRev===rev` bekliyordu, bu yüzden ertelenmiş ayna henüz gönderilmeden "eşit" sayıyordu. İddia, zamanlayıcı ateşlenmeden okunursa eski dünyayı görüyordu.
+- L senaryosunun ilk FAIL'i de aynı mekanizmaydı.
+- **Düzeltme:** `tests/helpers/event-ux0-mp.cjs` `synced`, host'un bu misafire son ayna revizyonunu (bekleyen zamanlayıcı yokken) bekler. İddia aynı kaldı, süre artırılmadı.
+- Tanı alanı: üç yeni koşunun **üçünde de** yayın anında bekleyen ayna vardı (`pendingMirrorAtPublish:true`, 329 / 338 / 791 ms bekleme), yani eski bekleme üç koşuda da erken dönebilirdi.
+- Sonuç: **E 3/3 PASS** (`e5-kok-neden/`). E5'in tarihsel aralıklı FAIL'i bu test-bekleme yarışıyla açıklanıyor; ürün kodu değişmedi.
+- **E2** ("tek komut 2 !== 1", çift dokunmada ikinci komut) bu turda 4 koşuda yeniden üretilmedi; kökü **AÇIK** kalıyor.
+
+### 4.6 NOT RUN
 
 - Gerçek Render oynanışı, fiziksel PC / Android, LAN.
-- `MP8_SCEN=E` / `F`: bu fazda koşulmadı. Federasyon olay kartları değişmedi; E2/E5 aralıklı FAIL'leri P25/P26'dan beri açık.
-- Tek oyunculu tersane panelinde gerçek dokunuşla federal sipariş: Chromium'da ayrı koşulmadı. Aynı `buildFedShip` → `orderFederalShip` yolu Node F4'te, misafir başkanınki Chromium L2'de denetlendi.
 - `MP8_SCEN=P` 500 sistem / 16 AI uzun dayanıklılık.
 
 ## 5. Yayın
 
 | | |
 |---|---|
-| ZIP | `releases/stars-faz96h10p28.zip` · 849 823 bayt · 20 girdi (19 runtime + manifest) |
-| SHA-256 | `5d61efc787340ac60e94f0a0323e783e010bb6ebbc4694804101cbc2b0aad8d1` |
-| CRC32 | `157C50D1` |
-| Manifest | `RELEASE-MANIFEST.json` SHA-256 `72cb59806687a2491e680b8ade0a8549276df444e30ba1a5825c4614a53278ff` · phase `BETA-FED-FLEET.0` · build `96h10p28` · parent `43a3612` · parent ZIP `56c46199…84de6` (p27) |
+| ZIP | `releases/stars-faz96h10p28.zip` · 849 908 bayt · 20 girdi (19 runtime + manifest) — devam turundaki `ui.js` iptal penceresi düzeltmesiyle yeniden üretildi (ilk p28 ZIP'i `5d61efc7…` / `157C50D1` geçersizdir) |
+| SHA-256 | `095e3c931ed6f5feabff6d8ce9b649ada68f68778b7acd0279cd77f6ae870a8a` |
+| CRC32 | `FEDCCBC3` |
+| Manifest | `RELEASE-MANIFEST.json` SHA-256 `ec56071bc164cd84e1a9c86a4499f0c603f0971056d727ae4169e9b5bed36f41` · phase `BETA-FED-FLEET.0` · build `96h10p28` · parent `43a3612` · parent ZIP `56c46199…84de6` (p27) |
 | Doğrulama | `python3 tools/verify-release.py` ve açılmış ZIP'te `--root` PASS; ikinci paketleme bayt-bayt aynı (deterministik) |
 | Değişen runtime | `diplomacy.js`, `main.js`, `economy.js`, `ui.js`, `sw.js` (CACHE) |
 | MP kaynakları | `mp-core.js` (fedShip + p27 paket uyumu), `mirror.js`, `guest-stars.js`, `view.js` / `relay.js` (MP.8.9b25) |
@@ -164,5 +192,4 @@ Render dağıtımı ve main birleştirmesi yapılmadı.
 - **Kullanıcı kabulü:** gerçek cihazda misafir başkan siparişi; Render'da `claude/stars-beta-fed-fleet0`.
 - **Federal filo komutası:** gemi o anki başkanın `e` kimliğiyle doğar. Başkan değişince (seçim, ardıllık, aylık başkan eşitlemesi) federal filolar mevcut motor kuralıyla yeni başkana geçer. Federal filonun ayrı komuta/yetki modeli (komite) yok; Konsey Muhafızları ve askerî komite AI ayrı fazdır.
 - **Eski hazinenin kökeni:** aktarılan hazine katkı defterine atfedilmez. Dağılmada kayıtlı katkı yoksa iade eşittir; kısmi kayıt varsa yalnız kayıtlı oranlar kullanılır (eski hazine payı da bu orana göre dağılır).
-- **Dar ekranda federal sipariş bölümü:** küçük ekranlarda ayrı yerleşim denetimi yapılmadı (yalnız 800×360 dışı masaüstü Chromium ve misafir varsayılan pencere).
-- **P27'den devralınan açıklar:** E2/E5 aralıklı FAIL'ler, özgün Render desync oturumunun reddedilen alanı, eski KATIL/dealSend aralıklı kökleri.
+- **P27'den devralınan açıklar:** E2 aralıklı FAIL'i (E5'in kökü §4.5'te test beklemesi olarak bulundu), özgün Render desync oturumunun reddedilen alanı, eski KATIL/dealSend aralıklı kökleri.
