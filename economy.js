@@ -4655,7 +4655,13 @@ function applyInternalPolicy(e,s,p,kind,stamp){
  if(kind==='relief')p.col.stab=clamp(p.col.stab+6,0,100);
  recordNews({category:'colony',scope:'player',empires:[e.id],system:s.id,planet:p.i,key:'internal-policy:'+e.id+':'+s.id+':'+p.i+':'+G.day,title:INTERNAL_POLICIES[kind].n,text:q.description});return {ok:true,why:'Müdahale uygulandı',cost:q.cost,until:p.col.crisisPolicy.until};
 }
-function validInternalPolicy(x,n){return x===undefined||!!(x&&Object.keys(x).every(k=>['v','owner','kind','started','until','after'].includes(k))&&x.v===1&&Number.isInteger(x.owner)&&x.owner>=0&&x.owner<n&&Object.hasOwn(INTERNAL_POLICIES,x.kind)&&[x.started,x.until,x.after].every(Number.isFinite)&&x.started>=0&&x.until-x.started===INTERNAL_POLICIES[x.kind].days&&x.after-x.started===INTERNAL_POLICIES[x.kind].cooldown);}
+/* MP-P0-DESYNC1: süreler applyInternalPolicy'nin yazdığı biçimde (started + gün) denetlenir. Eski denetim ÇIKARIYORDU
+   (until − started === gün): kesirli günde kayan nokta farkı motorun kendi değerini reddediyordu (1000.1+180−1000.1 =
+   179.9999999999999). Kesinlik aynı: başka her süre, sahip, tür ve tarih yine reddedilir; değer yuvarlanmaz. */
+function internalPolicyIssue(x,n){if(x===undefined)return '';if(!x||typeof x!=='object'||Array.isArray(x))return 'type';if(!Object.keys(x).every(k=>['v','owner','kind','started','until','after'].includes(k)))return 'keys';if(x.v!==1)return 'v';
+ if(!(Number.isInteger(x.owner)&&x.owner>=0&&x.owner<n))return 'owner';if(!Object.hasOwn(INTERNAL_POLICIES,x.kind))return 'kind';if(![x.started,x.until,x.after].every(Number.isFinite)||x.started<0)return 'date';
+ const P=INTERNAL_POLICIES[x.kind];if(x.until!==x.started+P.days)return 'until';if(x.after!==x.started+P.cooldown)return 'after';return '';}
+function validInternalPolicy(x,n){return !internalPolicyIssue(x,n);}
 function internalRiskSummary(e){return ColonyInfo.read(()=>internalRiskRaw(e));}
 function internalRiskRaw(e){
  const n=G.sys.filter(s=>s.owner===e.id).length,smallPassive=n<6&&!e.colonies.some(c=>G.sys[c.s]?.planets[c.p]?.col?.unrest),colonies=[];let total=0,count=0;

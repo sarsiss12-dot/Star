@@ -6,3 +6,7 @@
 /* MP.7: oyun başlangıcı aşamaları (misafir) */
 .mp7-boot ol.mp7-steps{list-style:none;margin:8px 0;padding:0;font-size:13px;line-height:1.7}
 .mp7-boot li{color:#5d6b85}.mp7-boot li.ok{color:#6fe3b4}.mp7-boot li.now{color:#e8eefc;font-weight:600}.mp7-boot li.bad{color:#ff7a7a;font-weight:600}
+/* MP-P0-DESYNC1: dünya güncel değil uyarısı + elle kurtarma (YENİDEN EŞİTLE / TANIYI KOPYALA); dokunma hedefi ≥ 44 px */
+.mp6-mini .mpds-row{flex-wrap:wrap;margin-top:4px}
+.mp6-mini .mpds-row .mp1-btn{flex:1 1 auto;width:auto;min-width:44px;min-height:44px;margin:0;padding:0 10px;font-size:12px}
+.mp6-mini .mpds-stale{flex:1 0 100%;color:#ff8f7a;font-size:12px;letter-spacing:.04em}

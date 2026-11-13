@@ -8150,6 +8150,12 @@ function restoreWorldBounds(d){
   return b;
 }
 
+/* MP-P0-DESYNC1: son yükleme reddinin nedeni — aşama (json / envelope / apply / busy), kısa kod ve gerekirse alan yolu.
+   Yalnız yapı ve alan adı tutulur: kayıttaki değer, ad, oturum jetonu ya da oda anahtarı tanıya girmez. Kayıt sonucu (true/false)
+   ve doğrulama kuralları değişmez; misafir bunu "Galaksi verisi kurulamadı" satırında ve kopyalanabilir tanıda gösterir. */
+let SAVE_LOAD_REJECT = null;
+function saveLoadReject(){ return SAVE_LOAD_REJECT ? {...SAVE_LOAD_REJECT} : null; }
+function loadReject(stage, code, path){ SAVE_LOAD_REJECT = {stage, code, path:path || ''}; return false; }
 function validSaveEnvelope(d){
   /* JSON sözdizimi doğru olsa bile eksik bir zarf, atamalar başladıktan
      sonra hata verip çalışan dünyayı yarım değiştirebiliyordu. Burada yalnız
@@ -8157,26 +8163,34 @@ function validSaveEnvelope(d){
   const record = x => x !== null && typeof x === 'object' && !Array.isArray(x);
   if (!record(d) || !Array.isArray(d.sys) || !d.sys.length ||
       !Array.isArray(d.emps) || !d.emps.length || !Array.isArray(d.fl) ||
-      !record(d.cfg)) return false;
+      !record(d.cfg)) return loadReject('envelope', 'root', '');
   /* 90RC.1: temel zarfın içindeki bozuk değerler de atamalardan önce
      reddedilir. Eski negatif stoklar burada düzeltilmez veya silinmez. */
-  if (!Number.isFinite(d.day) || d.day < 0 || !Number.isInteger(d.year) ||
-      !Number.isInteger(d.month) || d.month < 1 || d.month > 12) return false;
-  if (!d.sys.every((s,i) => s && Number.isInteger(s.i) && s.i === i &&
+  if (!Number.isFinite(d.day) || d.day < 0) return loadReject('envelope', 'day', 'day');
+  if (!Number.isInteger(d.year) ||
+      !Number.isInteger(d.month) || d.month < 1 || d.month > 12) return loadReject('envelope', 'date', 'year/month');
+  const badSys = d.sys.findIndex((s,i) => !(s && Number.isInteger(s.i) && s.i === i &&
       Number.isFinite(s.x) && Number.isFinite(s.y) &&
-      Array.isArray(s.p) && s.p.every(record) && Array.isArray(s.l))) return false;
-  if (!d.emps.every((e,i) => e && Number.isInteger(e.id) && e.id === i &&
+      Array.isArray(s.p) && s.p.every(record) && Array.isArray(s.l)));
+  if (badSys >= 0) return loadReject('envelope', 'system', 'sys[' + badSys + ']');
+  const badEmp = d.emps.findIndex((e,i) => !(e && Number.isInteger(e.id) && e.id === i &&
       record(e.res) && Object.keys(RES).every(k => Number.isFinite(e.res[k])) &&
-      Array.isArray(e.colonies))) return false;
-  if(!validInternalWarnings(d)||!d.sys.every(s=>s.p.every(p=>validInternalPolicy(p.col?.crisisPolicy,d.emps.length))))return false;
+      Array.isArray(e.colonies)));
+  if (badEmp >= 0) return loadReject('envelope', 'empire', 'emps[' + badEmp + ']');
+  if (!validInternalWarnings(d)) return loadReject('envelope', 'internalWarning', '');
+  for (const s of d.sys) for (let j = 0; j < s.p.length; j++){
+    const issue = internalPolicyIssue(s.p[j].col?.crisisPolicy, d.emps.length);
+    if (issue) return loadReject('envelope', 'crisisPolicy.' + issue, 'sys[' + s.i + '].p[' + j + '].col.crisisPolicy');
+  }
   const fleetIds = new Set();
-  return d.fl.every(f => {
+  const badFleet = d.fl.findIndex(f => {
     if (!record(f) || !Number.isInteger(f.id) || fleetIds.has(f.id) ||
         !Number.isInteger(f.e) || !d.emps[f.e] || !Array.isArray(f.ships) ||
-        !f.ships.every(sh => record(sh) && typeof sh.c === 'string')) return false;
+        !f.ships.every(sh => record(sh) && typeof sh.c === 'string')) return true;
     fleetIds.add(f.id);
-    return true;
+    return false;
   });
+  return badFleet < 0 || loadReject('envelope', 'fleet', 'fl[' + badFleet + ']');
 }
 /* 90RC.2: yükleme onay ekranı kayıt metnini dünyaya dokunmadan tanır.
    Ayrıntılı uygulama kapısı yine deserialize/validSaveEnvelope'dur. */
@@ -8197,11 +8211,13 @@ function loadCheckpoint(stage){
   if (typeof G._loadFailInject === 'function') G._loadFailInject(stage);
 }
 function deserialize(txt){
-  if (_loadTxActive || G._sideBuf || (typeof _dealTxActive !== 'undefined' && _dealTxActive)) return false;
-  let tx = null, selection, buf = [];
+  SAVE_LOAD_REJECT = null;
+  if (_loadTxActive || G._sideBuf || (typeof _dealTxActive !== 'undefined' && _dealTxActive)) return loadReject('busy', 'transaction', '');
+  let tx = null, selection, buf = [], stage = 'json';
   _loadTxActive = true;
   try {
     const d = JSON.parse(txt);
+    stage = 'apply';
     if (!validSaveEnvelope(d)) return false;
     selection = {sys:View.selSys && View.selSys.id, fleet:View.sel && View.sel.id};
     tx = {records:txCaptureGraph([G], new Set([G.nebula])), rng:RND_STATE,
@@ -8216,7 +8232,7 @@ function deserialize(txt){
   } catch(e){
     if (tx){ txRestoreGraph(tx.records); RND_STATE = tx.rng; }
     try { logDiag('load', 'Kayıt uygulanamadı: ' + String(e && e.message || e)); } catch(ignore){}
-    return false;
+    return loadReject(stage, stage === 'json' ? 'syntax' : 'exception', String(e && e.message || e).replace(/[\u0000-\u001f]/g, ' ').slice(0, 80));
   } finally { _loadTxActive = false; }
   // Geri alınamaz tarayıcı etkileri ancak dünya başarıyla kurulduktan sonra.
   finishSaveLoad(selection);
@@ -8643,7 +8659,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p25';
+const BUILD_ID = '96h10p26';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

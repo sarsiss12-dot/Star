@@ -8,6 +8,11 @@
           MP8_P_STALL_S (donma eşiği sn, vars. 20) · MP8_P_SCRIPT (virgüllü hedefli adımlar; bkz. SCRIPTS) */
 const fs=require('fs'),path=require('path');
 const FF=+(process.env.MP8_P_FF||30),MIN=+(process.env.MP8_P_MIN||6),SEED=+(process.env.MP8_P_SEED||1),STALL=+(process.env.MP8_P_STALL_S||20)*1000;
+/* MP-P0-DESYNC1: MP8_P_DESYNC=1 → gerçek döngünün KESİRLİ gününde misafir B kendi kolonisi için internalQuote → internalPolicy gönderir (her
+   MP8_P_DESYNC_S sn'de bir, relief/autonomy dönüşümlü; fikstür: istikrar 40 + kaynak, eski politika silinir). Ölçülen: eski doğrulamanın
+   (until − started) reddedeceği değer mi, misafirin ret / "dünya güncel değil" sayısı, kurtarma süresi, en uzun misafir duraklaması, host
+   Save8 ve AI'ların kendi kesirli politikaları. */
+const DS=process.env.MP8_P_DESYNC==='1',DS_EVERY=+(process.env.MP8_P_DESYNC_S||120)*1000;
 const BAN=['restart','toTitle','save','sandbox','trigCrisis','full','spd','fedLeave','diagCopy','mute','shareOpen','mapFix','cncLeave','advNever'];
 
 const GUEST=`window.__p0={
@@ -56,6 +61,19 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,origin,gues
     }catch(e){out.err=String(e&&e.message||e).slice(0,200);}
     P.cmds.push(out);return out;};
 
+  const desyncTrigger=async(kind)=>{await B.evaluate(()=>{try{UI.closeModal();}catch{}try{UI.act('closeDiplo');}catch{}});   // açık pencere aynayı tasarım gereği bekletir (komut ölçümüyle aynı kural)
+    const e=await B.evaluate(()=>MP1Join.empireId),t0=Date.now();
+    const at=await H.evaluate(e=>{const E=G.emps[e],s=G.sys[E.home],p=s&&s.planets.find(p=>p.owner===e&&p.col);if(!p)return null;p.col.stab=40;delete p.col.crisisPolicy;for(const k of Object.keys(E.res))E.res[k]=Math.max(E.res[k],2000);return {sys:s.id,planet:p.i};},e);
+    if(!at)return {status:'no-colony'};await sleep(1500);   // fikstürün aynaya gitmesi (gerçek döngünün yayını)
+    const qr=await B.evaluate(c=>MP1Join.cmd(c),{kind:'internalQuote',sys:at.sys,planet:at.planet,policy:kind});if(!qr.ok)return {status:'quote-local',why:qr.why};
+    await B.waitForFunction(cid=>MP1Join.results.some(x=>x.cid===cid),qr.cid,{timeout:15000,polling:100});
+    const qq=await B.evaluate(cid=>{const x=MP1Join.results.filter(y=>y.cid===cid).at(-1);return x.status==='ok'?x.extra:{ok:false,why:x.code};},qr.cid);if(!qq||!qq.ok)return {status:'quote-no',why:qq&&qq.why};
+    const r=await send1({kind:'internalPolicy',sys:at.sys,planet:at.planet,policy:kind,stamp:qq.stamp});
+    const pol=await H.evaluate(at=>{const x=G.sys[at.sys].planets[at.planet].col.crisisPolicy;if(!x)return null;const P=INTERNAL_POLICIES[x.kind];return {...x,frac:x.started%1!==0,oldBad:!(x.until-x.started===P.days&&x.after-x.started===P.cooldown)};},at);
+    await B.evaluate(()=>{try{UI.closeModal();}catch{}});const seen=await B.waitForFunction(({at,u})=>{const p=G.sys[at.sys].planets[at.planet];return !!(p.col&&p.col.crisisPolicy&&p.col.crisisPolicy.until===u);},{at,u:pol&&pol.until},{timeout:STALL,polling:250}).then(()=>true,()=>false);
+    const g=await B.evaluate(()=>({fail:MP6Stars.S.stats.fail||0,stale:!!(MP6Stars.S.desync&&MP6Stars.S.desync.on)}));
+    return {status:r.status,kind,day:pol&&pol.started,frac:pol&&pol.frac,oldBad:pol&&pol.oldBad,seen,seenMs:Date.now()-t0,guestFail:g.fail,stale:g.stale};};
+
   await test('P1 gerçek zamanlı '+MIN+' dk: 500 sistem / 16 AI + 2 insan, host en yüksek hızda (ön ilerletme '+FF+' ay), misafir gerçek dokunmayla oynar; host günü ilerlerken misafir dünyası '+(STALL/1000)+' sn\'den uzun durmamalı; komutlar aynaya yansımalı',async()=>{
     await B.evaluate(GUEST);if(HM)await H.evaluate(GUEST.replace(/diag\(\)\{[\s\S]*?\},\n  \/\* dokunulabilir/,'diag(){return {};},\n  /* dokunulabilir'));
     /* ön ilerletme: deterministik (hız 0), ay ay — sayfa uzun süre kilitlenmesin */
@@ -64,17 +82,19 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,origin,gues
     await B.waitForFunction(()=>MP6Stars.S.appliedRev===MP6Stars.S.rev&&MP6Stars.S.rev>0,undefined,{timeout:60000,polling:200}).catch(()=>{});
     const maxSpd=await H.evaluate(()=>Math.max(...[...document.querySelectorAll('#timepod .sp')].map(b=>+b.dataset.x)));
     const go=()=>H.evaluate(n=>{if((G.speed|0)!==n){const m=document.getElementById('modal');if(m&&!m.classList.contains('hidden'))try{UI.closeModal();}catch{}MP1Host.host.local({kind:'speed',value:n});}return G.speed|0;},maxSpd);
-    await go();const end=Date.now()+MIN*60000;let lastGuestDay=-1,lastGuestMove=Date.now(),lastHostDayAtMove=0,n=0,stalled=null,nextCmd=Date.now()+20000,nextSample=0;
+    await go();const end=Date.now()+MIN*60000;let lastGuestDay=-1,lastGuestMove=Date.now(),lastHostDayAtMove=0,n=0,stalled=null,nextCmd=Date.now()+20000,nextSample=0,nextDs=Date.now()+15000,dsKind='autonomy';
+    if(DS)P.desync={triggers:[],maxStillMs:0};
     while(Date.now()<end){
       await act(B).catch(e=>{P.actions['err:'+String(e&&e.message||e).slice(0,40)]=1;});n++;
       if(HM&&n%2===0)await act(H,'H:').catch(e=>{P.actions['H:err:'+String(e&&e.message||e).slice(0,40)]=1;});
       await sleep(120+Math.floor(rnd()*380));
       if(Date.now()>=nextCmd){nextCmd=Date.now()+45000;const c=await command('t+'+Math.round((Date.now()-(end-MIN*60000))/1000));
         if(c&&c.ship&&c.ship.status==='ok'){const seen=await B.waitForFunction(a=>{const s=G.sys[a.yard];return s&&(s.queue||[]).length>a.q0;},{yard:c.yard,q0:c.q0},{timeout:STALL,polling:250}).then(()=>true,()=>false);P.cmds[P.cmds.length-1].shipSeen=seen;}}
+      if(DS&&Date.now()>=nextDs){nextDs=Date.now()+DS_EVERY;const tr=await desyncTrigger(dsKind).catch(e=>({err:String(e&&e.message||e).slice(0,200)}));dsKind=dsKind==='relief'?'autonomy':'relief';P.desync.triggers.push(tr);console.log('  kesirli politika '+JSON.stringify(tr).slice(0,400));}
       if(Date.now()<nextSample)continue;nextSample=Date.now()+2000;
       const h=await hostState(),g=await B.evaluate(()=>__p0.diag()).catch(e=>({err:String(e)}));if((h.speed|0)<maxSpd&&!h.paused)await go();
       const lag=h.day-(g.day||0);if(lag>P.maxLagDays)P.maxLagDays=Math.round(lag*10)/10;
-      if(g.day!==lastGuestDay){lastGuestDay=g.day;lastGuestMove=Date.now();lastHostDayAtMove=h.day;}
+      if(g.day!==lastGuestDay){lastGuestDay=g.day;lastGuestMove=Date.now();lastHostDayAtMove=h.day;}else if(DS&&h.day-lastHostDayAtMove>0.5&&!g.modalOpen)P.desync.maxStillMs=Math.max(P.desync.maxStillMs,Date.now()-lastGuestMove);
       P.samples.push({t:Math.round((Date.now()-(end-MIN*60000))/1000),hd:Math.round(h.day*10)/10,gd:Math.round((g.day||0)*10)/10,hrev:h.rev,grev:g.rev,gapp:g.applied,held:g.stats&&g.stats.held,touch:g.stats&&g.stats.touchHeld,fail:g.stats&&g.stats.fail,builds:g.stats&&g.stats.builds,mo:g.modalOpen?1:0});
       /* açık pencere = tasarım gereği bekleme (artık MP çubuğunda yazılır): donma sayılmaz; oyuncu gibi pencere kapatılır */
       if(Date.now()-lastGuestMove>STALL&&g.modalOpen){P.windowHolds=(P.windowHolds||0)+1;P.windowNote=g.syncNote||P.windowNote||'';await B.evaluate(()=>{try{UI.closeModal();}catch{}});lastGuestMove=Date.now();continue;}
@@ -87,8 +107,15 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,origin,gues
         if(!stalled.selfRecovered)break;lastGuestMove=Date.now();}
     }
     P.actionCount=n;P.final={host:await hostState(),guest:await B.evaluate(()=>__p0.diag()).catch(()=>null)};
+    if(DS){P.desync.guest=await B.evaluate(()=>{const S=MP6Stars.S,d=S.desync||{};return {fail:S.stats.fail||0,crash:S.stats.crash||0,staleEpisodes:d.episodes||0,staleTotal:d.total||0,maxRecoveryMs:d.maxRecoveryMs||0,lastRecoveryMs:d.lastRecoveryMs||0,on:!!d.on,reason:d.reason||null,resyncs:S.stats.resyncs,reconnects:S.sync.reconnects};}).catch(e=>({err:String(e)}));
+      P.desync.host=await H.evaluate(()=>{const rows=[];for(const s of G.sys)for(const p of s.planets){const x=p.col&&p.col.crisisPolicy;if(!x)continue;const P=INTERNAL_POLICIES[x.kind];rows.push({owner:x.owner,ai:!!G.emps[x.owner].ai,kind:x.kind,started:x.started,frac:x.started%1!==0,oldBad:!(x.until-x.started===P.days&&x.after-x.started===P.cooldown)});}
+        const d=JSON.parse(serialize());const ok=validSaveEnvelope(d);return {policies:rows.length,ai:rows.filter(r=>r.ai).length,frac:rows.filter(r=>r.frac).length,oldBadAI:rows.filter(r=>r.ai&&r.oldBad).length,oldBad:rows.filter(r=>r.oldBad).length,save8:ok,why:typeof saveLoadReject==='function'?saveLoadReject():null,day:G.day};});
+      console.log('  DESYNC1 '+JSON.stringify({triggers:P.desync.triggers.length,maxStillMs:P.desync.maxStillMs,guest:P.desync.guest,host:P.desync.host}).slice(0,900));}
     fs.writeFileSync(path.join(out,'p0-soak.json'),JSON.stringify(P,null,1));
     console.log('  eylem '+n+' · en büyük gecikme '+P.maxLagDays+' gün · donma '+P.stalls.length+' · komut '+JSON.stringify(P.cmds.map(c=>[(c.move||{}).status,(c.ship||{}).status,c.shipSeen])));
+    if(DS){const T=P.desync.triggers.filter(t=>t.status==='ok');assert(T.length>=1,'en az bir kesirli politika kararı uygulanmalı: '+JSON.stringify(P.desync.triggers).slice(0,500));
+      assert(P.desync.host.save8,'host Save8 geçerli: '+JSON.stringify(P.desync.host));assert.equal(P.desync.guest.fail,0,'misafir aynası hiç reddedilmedi: '+JSON.stringify(P.desync.guest));
+      assert(T.every(t=>t.seen),'her kararın etkisi misafir dünyasında görüldü: '+JSON.stringify(T).slice(0,600));}
     assert.equal(P.stalls.filter(s=>!s.selfRecovered).length,0,'misafir dünyası kalıcı olarak durdu: '+JSON.stringify(P.stalls[0]||{}).slice(0,900));
     const lost=P.cmds.filter(c=>c.ship&&c.ship.status==='ok'&&c.shipSeen===false);assert.equal(lost.length,0,'host\'un kabul ettiği gemi siparişi misafir aynasına yansımadı: '+JSON.stringify(lost[0]||{}).slice(0,400));
   });
