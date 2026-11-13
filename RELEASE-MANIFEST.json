@@ -1,11 +1,11 @@
 {
-  "phase": "MP-P0-DESYNC2",
-  "build": "96h10p27",
+  "phase": "BETA-FED-FLEET.0",
+  "build": "96h10p28",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p27",
-  "parent_commit": "d782f73e11d410b82ef27adcfecb19607efae0a3",
-  "parent_zip_sha256": "da7e9d4ca4f818714c47992ca1dd3a48cb5ec1bbff52b3bdb8ae4fb55b64a30a",
+  "pwa_cache": "stars-v96h10p28",
+  "parent_commit": "43a36127d5bf66918ff4a7f89ae515ca40149789",
+  "parent_zip_sha256": "56c461999205e59f3e98d8ba555f27f33ebaddc1ab1af97bcd99816d29784de6",
   "file_count": 19,
   "files": {
     "ai.js": "ac900e296e39378f9f0caab85de70b7896d9eaebd22b65d259e955cb702fb3de",
@@ -15,18 +15,18 @@
     "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
     "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
     "construction.js": "19244de7be9ad0d0aaf5bf67cbccd85bd4f2988cd9d670bbe2a7dd4a91905bf5",
-    "diplomacy.js": "f425fefd492a68d49527040693cd0887293a1a6f43476106fcfbfa6f5c96b839",
+    "diplomacy.js": "05f085da66d970ecd160a279fecd2c38aa39d9bc0d64bb1eec629d42c6bddd0f",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
     "economy-ui.js": "aa9da4f84f0b63ecb8b17e54d3dd844595e98d5a8da5f6a3012de9467a12e3bf",
-    "economy.js": "138851b842ecf6294b8a03effab9caeb135f90347ff6cae4aebeba17f60f0984",
+    "economy.js": "f0e7dceb24d3a4d744c1ad8a4aa9cf68979b4d817f9fa1505dc43efcad7161af",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
     "index.html": "99b7567a2798fa862e3c8e8580735f856c7f7044b8f75af87fc125b9bc83d6b9",
-    "main.js": "4a7f455ed36a8228936a9006d1d5b96a607d87862040c15390705c44ca93d541",
+    "main.js": "e309bfd071cc32a175fdfcd47410deb3e0173f5ab58feb05253708ffa18a93cb",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "2e3284353cba1cbead6925dc7d1b3251bbfe6b4ab95fdd8149d2fad19c0608e5",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "59a577774bebfcc1fad9f358af4546f8ea15c978fbe1e05901106ab61e684a24",
-    "ui.js": "536ef96317945c0cd5e1c27dc463a9d52a426528bcb067de9f362a4e18176e5a"
+    "sw.js": "82204daa8690f949ce9250d2845f539cf3fa20f5bbbdf50529c16eacfe9a8ca7",
+    "ui.js": "6a8d7cbecd5db1cdf201ccac9794fbbb07f51b2cf20a28cf8c320d458bf3b814"
   },
-  "description": "P26 (kesirli gün politika doğrulaması + misafir dünya güncel değil kurtarması) ile BETA-MOBILE-HUD.0 kaynak entegrasyonu: dar yatay ekranda tek satır ROTA/DUR/SİSTEM, ilk ROTA dokunuşunda hedefleme, olay kartları geçici mesajların üstünde, cihazda saklanan geçici bildirim opaklığı."
+  "description": "P27 üstünde federal donanma: Ortak Filo katkısı ve haraç tek federal fona (f.fund) gider, eski hazine yüklemede bir kez fona aktarılır; federal filoların enerji + alaşım bakımı ayda bir fondan düşer (başkanın kişisel bakımına girmez), fon yetmezse en zayıf federal filo dağılır; başkanın uygun tersanesinde federal sipariş (aynı kuyruk/süre/sınıf koşulları, bedel kabulde fondan bir kez, üye × 4 sınırı, ayda bir, 3 aylık bakım rezervi); dağılmada bekleyen işler kapanır ve fon katkı oranıyla iade edilir; AI başkan yalnız aktif federasyon savaşında aynı yolu kullanır."
 }

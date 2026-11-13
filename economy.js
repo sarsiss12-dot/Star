@@ -1043,8 +1043,10 @@ function shipCancellationQuote(e,sys,orders){
   if(!Array.isArray(orders) || !orders.length || new Set(orders).size!==orders.length ||
       orders.some(q=>!q || q.e!==e.id || !sys.queue.includes(q)))
     return {ok:false,why:'Sipariş listesi değişti; kuyruğu yeniden aç'};
-  const refund={};let legacy=0;
+  const refund={},fedRefund={};let legacy=0;
   for(const q of orders){
+    /* BETA-FED-FLEET.0: federal sipariş ortak fondan ödendi; iptalde ödeme federal fona döner (kişisel kasaya değil) */
+    if(q.fed!==undefined){for(const [r,v] of Object.entries(q.fedPaid||{}))if(Number.isFinite(v)&&v>0)fedRefund[r]=(fedRefund[r]||0)+v;continue;}
     const paid=q.paid;
     if(!paid || typeof paid!=='object' || Array.isArray(paid) || !Object.keys(paid).length ||
       Object.entries(paid).some(([r,v])=>!Object.prototype.hasOwnProperty.call(RES,r) || !Number.isFinite(v) || v<0)){
@@ -1054,12 +1056,13 @@ function shipCancellationQuote(e,sys,orders){
   }
   if(Object.entries(refund).some(([r,v])=>!Number.isFinite(v) || !Number.isFinite(e.res[r]+v)))
     return {ok:false,why:'Kaynak iadesi hesaplanamadı'};
-  return {ok:true,count:orders.length,refund,legacy};
+  return {ok:true,count:orders.length,refund,legacy,...(Object.keys(fedRefund).length?{fedRefund}:{})};
 }
 function cancelShipOrders(e,sys,orders,stopLoop=false){
   const quote=shipCancellationQuote(e,sys,orders);
   if(!quote.ok)return quote;
   const selected=new Set(orders);
+  for(const q of orders)if(q.fed!==undefined&&typeof fedRefundOrder==='function')fedRefundOrder(sys,q);   // kuyruktan çıkar + fona tek iade
   sys.queue=sys.queue.filter(q=>!selected.has(q));
   if(stopLoop)delete sys.loopBuild;
   for(const [r,v] of Object.entries(quote.refund))e.res[r]+=v;

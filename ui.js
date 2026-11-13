@@ -1752,6 +1752,7 @@ const UI = {
       case 'cancelBuild': this.cancelBuild(x); break;
       case 'demolish': this.demolish(x); break;
       case 'ship': this.buildShip(x); break;
+      case 'fedShip': this.buildFedShip(x); break;   // BETA-FED-FLEET.0
       case 'scienceTab': case 'scienceNode': case 'scienceFocus': case 'scienceFilter':
       case 'scienceMode': case 'scienceQueue': case 'scienceRoute': case 'scienceMove': case 'scienceRemove': case 'scienceZoom':
         this.scienceAction(a,x);break;
@@ -2842,11 +2843,11 @@ const UI = {
           const cancelToken=shipOrderToken(q);
           this._shipCancelRefs.set(cancelToken,{sys:s,order:q});
           shipQueueHtml += `<div class="box" style="${act?'border-color:#ff9b3d':''}">
-                <div class="bt"><span>${act?'▸ ':''}${SHIPS[q.cls].n}</span>
+                <div class="bt"><span>${act?'▸ ':''}${SHIPS[q.cls].n}${q.fed!==undefined?' <b class="fedTag" style="color:#8fd3ff">FEDERAL</b>':''}</span>
                 <span class="mono" style="color:${act?'#ff9b3d':'#7d90ad'}">${Math.ceil(q.left)}g</span>
                 ${q.e===G.p.id?`<button class="sBtn shipCancelBtn" data-a="shipCancel" data-x="${cancelToken}" aria-label="${esc(SHIPS[q.cls].n)} siparişini iptal et">✕</button>`:''}</div>
                 <div class="bar em"><i style="width:${(1-q.left/q.tot)*100}%"></i></div>
-                <div class="mini">${esc(this.queueDeliveryText(s,q))}</div>
+                <div class="mini">${q.fed!==undefined?esc('Federal sipariş · '+Math.round(q.fedPaid?.ala||0)+' alaşım ortak fondan ödendi · kalan '+Math.ceil(q.left)+' gün · iptalde fona döner'):esc(this.queueDeliveryText(s,q))}</div>
                 ${!access.ok ? '<div class="mini">BEKLİYOR · '+esc(access.why)+'</div>' : ''}</div>`;
         });
         shipQueueHtml += `</div>`;
@@ -2865,7 +2866,7 @@ const UI = {
              `<span style="font-size:9px">${locked?'<span style="color:#7d90ad">KİLİTLİ</span>':
                Object.entries(cost).map(([r,v])=>`<span style="color:${e.res[r]>=v?RES[r].c:'#ff5f6d'}">${RES[r].ico}${v}</span>`).join(' ')}</span></button>`;
       }
-      h += `</div>`+shipQueueHtml;
+      h += `</div>`+this.fedOrderHtml(s)+shipQueueHtml;
     } else if (s.owner === 0){
       h += `<div class="mini" style="margin-top:8px">Gemi inşası için bu sistemde Tersane gerekli.</div>`;
     }
@@ -3955,11 +3956,13 @@ const UI = {
         if (fs2){
           const renk = fs2.kritik ? '#ff5f6d' : fs2.kalanAy < 8 ? '#ff9b3d' : '#65e08a';
           h += `<div class="ph">FEDERAL FON</div>`;
-          h += `<div class="box" style="border-color:${renk}">
-            <div class="bt"><span>⚙ Rezerv</span>
+          h += `<div class="box" id="fedFundBox" style="border-color:${renk}">
+            <div class="bt"><span>⚙ Ortak fon</span>
               <b style="color:${renk}">${Math.round(fs2.ala)} ala · ${Math.round(fs2.ene)} ene</b></div>
-            <div class="bd">Aylık bakım <b>${Math.round(fs2.bakim)}</b> enerji ·
-              ${fs2.bakim > 0
+            <div class="bd">Katkı: gelirin %${Math.round(fs2.rate*100)}'i${fs2.filoLaw?' + Ortak Filo yasası (üye başına ayda ≤ 4 alaşım)':''} ·
+              harcanabilir <b>${Math.floor(fs2.spendAla)}</b> ala / <b>${Math.floor(fs2.spendEne)}</b> ene (3 aylık bakım rezervi ayrıldı)<br>
+              Federal donanma ${fs2.ships} gemi${fs2.queued?' + '+fs2.queued+' kuyrukta':''} / sınır ${fs2.cap} · aylık bakım <b>${Math.round(fs2.bakim)}</b> ene + <b>${Math.round(fs2.bakimA*10)/10}</b> ala (fondan) ·
+              ${(fs2.bakim > 0 || fs2.bakimA > 0)
                 ? `<b style="color:${renk}">${fs2.kalanAy} ay</b> yeter`
                 : 'federal donanma yok'}
               ${fs2.kritik
@@ -3981,7 +3984,7 @@ const UI = {
       if(tab==='military'){
         const navy=G.fleets.filter(fl=>fl.federal&&fl.fedId===f.id);
         h+=`<p class="mini">${esc(fedDutyText(f))}</p><div class="row"><span>Federal donanma</span><b>${navy.length} filo · ${navy.reduce((n,fl)=>n+fl.ships.length,0)} gemi</b></div><div class="mini">Yönetim: ${esc(G.emps[f.leader]?.name||'—')}. Savaş sonrası yeni vassalların bağımsız cepheleri ve sözleşmeleri ilgili devletin Vassal Yönetimi bölümünde görünür.</div>`+this.fedGovernance(f,'military')+this.jointPanel(null,'fed');
-        if(f.laws.filo)h+=`<div class="row"><span>Ortak filo hazinesi</span><b>${Math.round(f.treasury)} ▰</b></div>`;
+        if(f.laws.filo)h+=`<div class="row"><span>Ortak Filo katkısı</span><b>federal fona</b></div>`;
       }
       if(tab==='laws'){
       h += `<div class="ph">YASALAR</div>`;
@@ -4032,7 +4035,7 @@ const UI = {
           ${f.lastVote.abstain || 0} çekimser ${esc(f.lastVote.invalid || '')}</div><div class="mini">${esc(f.lastVote.why||'')}</div>${this.fedAgendaContext(f.lastVote)}`;
       }
       if (f.laws.filo)
-        h += `<div class="row"><span>Ortak filo hazinesi</span><b>${Math.round(f.treasury)} ▰</b></div>`;
+        h += `<div class="row"><span>Ortak Filo katkısı</span><b>federal fona (${Math.round((f.fund&&f.fund.ala)||0)} ala)</b></div>`;
 
       h += `<div class="ph">OYLAMA</div>`;
       if (f.vote){
@@ -7146,6 +7149,26 @@ const UI = {
       say('⚠ Filo kapasitesi %' + Math.round(doluluk*100) + ' dolu — aşımda bakım fırlar', 'war');
     if (queueShip(e, G.sys[+sid], k)) say(SHIPS[k].n + ' tezgâha kondu');
     this.keepScroll = true; this.refresh();
+  },
+  /* BETA-FED-FLEET.0: başkanın tersanesinde federal sipariş (aynı motor yolu: orderFederalShip; MP misafirinde host komutu) */
+  buildFedShip(x){
+    const [sid,k] = x.split(':');
+    const r = (typeof orderFederalShip === 'function') ? orderFederalShip(G.p, +sid, k) : {ok:false, why:'—'};
+    if (r && r.ok === false && r.why) say(r.why, 'war');
+    this.keepScroll = true; this.refresh();
+  },
+  fedOrderHtml(s){
+    const f = typeof findFed === 'function' ? findFed(G.p) : null;
+    if (!f || f.leader !== G.p.id || typeof fedShipQuote !== 'function' || s.owner !== G.p.id) return '';
+    const st = fedFundStatus(f);
+    let h = `<div class="ph">FEDERAL SİPARİŞ · ${esc(f.name)}</div><div class="mini" id="fedOrderInfo">Ortak fon ${Math.floor(st.ala)} alaşım · ${Math.floor(st.ene)} enerji · donanma ${st.ships + st.queued}/${st.cap} gemi (kuyruk ${st.queued}) · ${st.monthUsed ? 'bu ay sipariş verildi' : 'bu ay 1 sipariş hakkı'} · bakım ${Math.round(st.bakim)} ene + ${Math.round(st.bakimA*10)/10} ala / ay</div><div class="act2">`;
+    let firstWhy = '';
+    for (const k of FED_FLEET.classes){
+      const d = SHIPS[k], q = fedShipQuote(G.p, s.id, k), cost = fedShipCost(k);
+      if (!q.ok && !firstWhy) firstWhy = q.why;
+      h += `<button class="abtn ${q.ok?'':'dis'}" ${q.ok?'':'disabled'} data-a="fedShip" data-x="${s.id}:${k}" title="${esc(q.ok?d.n+' · federal':q.why)}">🏛 ${d.ab}<br><span style="font-size:9px">▰${cost.ala} fon</span></button>`;
+    }
+    return h + `</div>` + (firstWhy ? `<div class="mini" id="fedOrderWhy" style="color:#ff9b3d">${esc(firstWhy)}</div>` : '');
   },
   setTech(x){
     const [b,id] = x.split(':');

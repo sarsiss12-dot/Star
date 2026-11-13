@@ -61,7 +61,7 @@ test('Federal fund cannot bypass technology or crisis-only restriction',()=>{
  eq(h.run("buildFederalShip(P,S.id,'muh').ok"),false);
  eq(h.run("buildFederalShip(P,S.id,'swarm_drone').ok"),false);
  eq(h.run('G.feds[0].fund.ala'),h.run('cash'));eq(h.run('G.fleets.length'),0);
- h.run('P.techs.m_muhrip=true');eq(h.run("buildFederalShip(P,S.id,'muh').ok"));eq(h.run('G.fleets.length'),1);
+ h.run('P.techs.m_muhrip=true');eq(h.run("buildFederalShip(P,S.id,'muh').ok"));/* BETA-FED-FLEET.0: anında filo değil, tersane kuyruğunda tek federal iş */eq(h.run('G.fleets.length'),0);eq(h.run("S.queue.filter(q=>q.fed===7&&q.cls==='muh').length"),1);
 });
 test('Council prohibition is shared by personal and federal production',()=>{
  const h=fresh();h.run("P.techs.m_yildiz=true;G.council={members:[0],laws:{colYasak:true}};G.feds=[{id:7,members:[0],leader:0,fund:{ala:10000}}]");

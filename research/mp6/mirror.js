@@ -115,10 +115,13 @@ function build(meId,o={}){
     for(const [tok,row] of Object.entries(f.admissionResults||{}))if(row&&row.target===meId)adm[tok]={...J(row),target:0,...(Number.isInteger(row.by)?{by:piN(row.by)}:{})};
     const lv=member&&f.lastVote?{id:f.lastVote.id,law:f.lastVote.law,kind:f.lastVote.kind,passed:!!f.lastVote.passed,day:f.lastVote.day,why:f.lastVote.why,rule:f.lastVote.rule,
       yes:Array.isArray(f.lastVote.yes)?f.lastVote.yes.map(piN):f.lastVote.yes,no:Array.isArray(f.lastVote.no)?f.lastVote.no.map(piN):f.lastVote.no,abstain:Array.isArray(f.lastVote.abstain)?f.lastVote.abstain.map(piN):f.lastVote.abstain}:null;
-    return {id:f.id,name:f.name,type:f.type,charter:J(f.charter),leader:piN(f.leader),founder:piN(f.founder),members:f.members.map(piN),laws:J(f.laws)||{},fund:{ala:0,ene:0},treasury:0,
+    return {id:f.id,name:f.name,type:f.type,charter:J(f.charter),leader:piN(f.leader),founder:piN(f.founder),members:f.members.map(piN),laws:J(f.laws)||{},fund:member?{ala:+(f.fund&&f.fund.ala)||0,ene:+(f.fund&&f.fund.ene)||0}:{ala:0,ene:0},treasury:0,...(member&&typeof fedFleetLedger==='function'?{fundView:fundView(f)}:{}),
       founded:f.founded,typeSince:f.typeSince,dutySince:{defense:0,offense:0},invites,decisions:member?decs(f.decisions):{},dutyConsent:{},cohesion:f.cohesion,nextVote:f.nextVote,politicsVersion:f.politicsVersion,
       ...(f.agenda&&(member||f.agenda.items.some(r=>r.by===meId)||f.agenda.history.some(r=>r.by===meId))?{agenda:{v:1,next:f.agenda.next,...(f.agenda.emergencyStreak!==undefined?{emergencyStreak:f.agenda.emergencyStreak}:{}),items:fedAgendaOrder(f).filter(r=>member||r.by===meId).map(r=>({...agendaRow(r),position:fedAgendaOrder(f).indexOf(r)+1})),history:f.agenda.history.filter(r=>member||r.by===meId).map(agendaRow)}}:{}),
       vote:member?vote(f.vote)||null:null,lastVote:lv,...(Object.keys(adm).length?{admissionResults:adm}:{})};});
+  /* BETA-FED-FLEET.0: üyeye kendi federasyonunun GERÇEK fonu ve host'un hesapladığı donanma defteri (gemi / kuyruk / sınır / tahmini bakım /
+     aylık sipariş hakkı). Üye olmayana gitmez; katkı kaydı (f.contrib) ve siparişlerin tersane konumları hiç gitmez. */
+  function fundView(f){const L=fedFleetLedger(f);return {ships:L.ships,fleets:L.fleets,queued:L.queued,cap:L.cap,upkeep:{ene:L.upkeep.ene,ala:L.upkeep.ala},monthUsed:!!L.monthUsed,reserveMonths:L.reserveMonths,orders:(L.orders||[]).map(o=>({cls:o.cls,left:o.left,cost:o.cost}))};}
   /* MP.6.4: federasyonun kabul edilmiş savaş kararları üyeye (gerçek STARS "uygula" düğmesi); kimlikler numaralandırılır */
   function decs(d){const o={};for(const [k,x] of Object.entries(d||{})){if(!x)continue;o[k]={...J(x),sponsor:piN(x.sponsor),target:piN(x.target),by:piN(x.by),approved:(x.approved||[]).map(piN),...(Array.isArray(x.joined)?{joined:x.joined.map(piN)}:{}),...(Array.isArray(x.blocked)?{blocked:x.blocked.map(b=>({...b,id:piN(b.id)}))}:{})};}return o;}
   /* ---- kök ---- */
