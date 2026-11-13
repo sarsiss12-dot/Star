@@ -1,0 +1,8 @@
+✓ G0 fikstür: tehdit gerçekten var (düşman gücü > kendi gücü), güvenli dost sistem komşu
+✓ G1 seçenek KAPALI: 60 sn kopma + akan oyun → koruma yok, AI emri yok, kimseye koruma iletisi yok (P26 davranışı)
+✓ G2 seçenek AÇIK, kısa sorun: 20 sn kopma → dönüş; 20 sn "dünya güncel değil" → düzelme: koruma başlamaz (sayaç sıfırlanır)
+✓ G3 duraklatma sayacı ilerletmez: 90 sn kopma hız 0 → koruma yok; hız 1'de 30 sn → yalnız etkilenen devlet korumaya geçer, öteki misafir oynar
+✓ G4 koruma: yalnız tehdit altındaki filo mevcut move yoluyla güvenli dost sisteme çekilir; harcama / üretim / savaş / diplomasi yok
+✓ G5 iade: eski oturum bildirimi / eski revizyon / "güncel değil" iade etmez; bu bağlantının TAM aynası uygulanınca iade; ilk insan emri tam bir kez; AI yeni emir vermez; özet gider
+✓ G6 tekrarlı kopma: iadeden sonra yeni kopmada sayaç sıfırdan; kayıttan devam: seçenek pakette korunur, zamanlayıcı/eski bildirim taşınmaz; eski paket kapalı başlar
+GEÇEN: 7 KALAN: 0

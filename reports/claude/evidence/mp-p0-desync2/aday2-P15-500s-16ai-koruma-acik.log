@@ -1,0 +1,14 @@
+PASS P0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 16 AI, s500, seed 404; misafir gerçek STARS arayüzünde
+  ön ilerletme ay 42 70 sn
+  kesirli politika {"status":"ok","kind":"autonomy","day":1500.8245999999947,"frac":true,"oldBad":true,"seen":true,"seenMs":2467,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"relief","day":2513.2748799999567,"frac":true,"oldBad":false,"seen":true,"seenMs":2457,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"autonomy","day":3502.043519999943,"frac":true,"oldBad":false,"seen":true,"seenMs":2670,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"relief","day":4426.055879999937,"frac":true,"oldBad":false,"seen":true,"seenMs":2861,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"autonomy","day":5161.497080000053,"frac":true,"oldBad":false,"seen":true,"seenMs":3671,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"relief","day":5750.834160000144,"frac":true,"oldBad":false,"seen":true,"seenMs":2064,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"autonomy","day":6289.977160000167,"frac":true,"oldBad":false,"seen":true,"seenMs":2053,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"relief","day":6855.8021600002085,"frac":true,"oldBad":false,"seen":true,"seenMs":5601,"guestFail":0,"stale":false}
+  DESYNC1 {"triggers":8,"maxStillMs":4172,"guest":{"fail":0,"crash":0,"staleEpisodes":0,"staleTotal":0,"maxRecoveryMs":0,"lastRecoveryMs":0,"on":false,"reason":null,"resyncs":0,"reconnects":0},"host":{"policies":4,"ai":3,"frac":4,"oldBadAI":0,"oldBad":0,"save8":true,"why":null,"day":6995.26916000023}}
+  eylem 1727 · en büyük gecikme 18.5 gün · donma 0 · komut [["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true]]
+PASS P1 gerçek zamanlı 15 dk: 500 sistem / 16 AI + 2 insan, host en yüksek hızda (ön ilerletme 45 ay), misafir gerçek dokunmayla oynar; host günü ilerlerken misafir dünyası 20 sn'den uzun durmamalı; komutlar aynaya yansımalı
+EXIT 0

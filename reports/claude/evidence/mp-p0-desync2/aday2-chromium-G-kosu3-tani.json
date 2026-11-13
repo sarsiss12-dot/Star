@@ -1,0 +1,82 @@
+{
+ "at": {
+  "sys": 5,
+  "planet": 0
+ },
+ "paused": {
+  "active": false,
+  "wait": 0,
+  "reason": null,
+  "actions": [],
+  "last": null
+ },
+ "at20": {
+  "active": false,
+  "wait": 18751,
+  "reason": null,
+  "actions": [],
+  "last": null
+ },
+ "startMs": 31277,
+ "C": {
+  "active": false,
+  "wait": 0,
+  "reason": null,
+  "actions": [],
+  "last": null
+ },
+ "B": {
+  "stale": true,
+  "guard": {
+   "epoch": 1,
+   "reason": "sync",
+   "since": 1794568513904
+  },
+  "summary": null,
+  "applied": 30,
+  "rev": 59,
+  "day": 36.16503600000042,
+  "reports": 50,
+  "chip": "ÇOK OYUNCULU · Dünya güncel değil — son geçerli r30 · crisisPolicy.untilSTARS MP.8.9b23 · oyun 96h10p27 · misafir · host bağlı · aşama: ready · ayna r59 11:15:13 · kurulum 3 ms · son komut: yok · son hata: yok · eşitleme: uygulanan r30 / host r57 · stale · DÜNYA GÜNCEL DEĞİL: son geçerli r30 · reddedilen r59 · envelope/crisisPolicy.until @ sys[5].p[0].col.crisisPolicyDÜNYA GÜNCEL DEĞİLYENİDEN EŞİTLETANIYI KOPYALA",
+  "emp": 1,
+  "name": "Saf Akıl Ağı",
+  "gblocked": 0
+ },
+ "diag": {
+  "speed": 1,
+  "phase": "ingame",
+  "paused": false,
+  "guard": {
+   "active": true,
+   "wait": 0,
+   "reason": "sync",
+   "actions": [],
+   "last": null
+  },
+  "enemy": {
+   "sys": 5,
+   "mv": null,
+   "e": 6,
+   "ships": 17,
+   "pow": 1840
+  },
+  "war": true,
+  "visHome": true,
+  "safeOwner": 1,
+  "homeLanes": [
+   37,
+   31,
+   20,
+   39
+  ],
+  "own": [
+   5,
+   37
+  ],
+  "stats": {
+   "g": 0,
+   "pe": 0,
+   "le": null
+  }
+ }
+}

@@ -1,0 +1,8 @@
+PASS E0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS E1 fikstür: B + 2 AI federasyonu (host ve C üye değil), AI başkanın gerçek yasa önerisi → B'nin üst çubuğunda "Federasyon oylaması" kartı (hızlı EVET / HAYIR); C'de ve host'ta kart yok
+PASS E2 B karttan hızlı EVET (gerçek dokunma) → host castFedVote tam bir kez; bekleme durumu görünür; çift dokunma ikinci komut göndermez; oy verilince kart düşer
+PASS E3 oylama sonuçlanınca (AI üyeler motorla oy verir) B'de "Federasyon oylaması sonuçlandı" bilgi kartı; C'de yok; host hızı değişmez; kart tekil, ayna yenilemesi / yeniden bağlanma yeniden doğurmaz; dokununca federasyon paneli
+PASS E4 Konsey: host + B + C + AI üyeler; gerçek startCouncilVote → host, B ve C'de "KONSEY OYLAMASI" kartı; C karttan HAYIR, B karttan EVET (gerçek dokunma) → host castCouncilVote tam bir kez; sonuçlanınca kamu "Konsey kararı" bilgi kartı herkeste
+FAIL E5 P0 koruması: olaylar sonrasında misafir dünyası güncel, eşitleme notu yok, kurulum istisnası yok; misafir gemi emri host ACK'iyle sıraya girer; sayfa hatası yok
+AssertionError [ERR_ASSERTION]: sıra misafir aynasında
+EXIT 1
