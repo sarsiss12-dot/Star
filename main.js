@@ -115,7 +115,8 @@ function planetOrb(tip, seed, boyut){
 
   return `<span class="pOrb" style="
     width:${d}px;height:${d}px;
-    background:
+    background-color:${orta};
+    background-image:
       ${leke}
       radial-gradient(circle at ${ax}% ${ay}%,
         ${acik} 0%, ${orta} 38%, ${pal[1]} 62%, ${koyu} 88%, #01030a 100%);
@@ -1439,11 +1440,34 @@ function setupSizeKey(n){return Object.keys(SIZES).find(k=>SIZES[k].sys===n);}
 function extendedEmpireColor(i){const h=(i*137.508)%360,s=.55,l=.48+(i%3)*.07,c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs(h/60%2-1)),m=l-c/2,parts=h<60?[c,x,0]:h<120?[x,c,0]:h<180?[0,c,x]:h<240?[0,x,c]:h<300?[x,0,c]:[c,0,x];return '#'+parts.map(v=>Math.round((v+m)*255).toString(16).padStart(2,'0')).join('');}
 // Missing field retains each historical size default; explicit values never clamp.
 function aiCountFor(cfg){return cfg.aiCount===undefined?SIZES[cfg.size]?.ai:cfg.aiCount;}
+const RIVAL_PERSONAS=['militarist','kriminal','izolasyonist'];
+function rivalSetupError(cfg, count){
+ if(cfg.aiRivals===undefined)return '';
+ const r=cfg.aiRivals;
+ return r&&Number.isInteger(r.min)&&Number.isInteger(r.max)&&r.min>=0&&r.min<=r.max&&r.max<=count
+  ?'':'Rakip doktrin aralığı 0 ile AI sayısı arasında olmalı. Alt sınır üst sınırı geçemez.';
+}
+function assignRivalPersonas(cfg){
+ if(cfg.aiRivals===undefined)return;
+ const rivals=G.emps.filter(e=>e.ai&&!e.wild&&!e.crisisSide);
+ const random=mulberry32(identityHash('ai-rivals:'+G.seed));
+ const {min,max}=cfg.aiRivals,count=min+Math.floor(random()*(max-min+1));
+ const ranked=rivals.map(e=>({e,r:random()})).sort((a,b)=>a.r-b.r||a.e.id-b.e.id);
+ ranked.forEach(({e},i)=>{
+   const current=personaKey(e);
+   const next=i<count?(RIVAL_PERSONAS.includes(current)?current:RIVAL_PERSONAS[Math.floor(random()*RIVAL_PERSONAS.length)])
+    :(RIVAL_PERSONAS.includes(current)?'yayilmaci':current);
+   applyChosenPersona(e,next);delete e._pers;delete e._persAt;e._prof=null;
+   personaOf(e);
+   if(isPurifier(e))e.civics=e.civics.filter(key=>key!=='golge_kons');
+   recalcMods(e);
+ });
+}
 function setupConfigError(cfg){
  if(!SIZES[cfg.size]||SIZES[cfg.size].available===false||(cfg.shape!==undefined&&!SHAPES[cfg.shape]))return 'Geçersiz galaksi boyutu veya şekli.';
  const n=aiCountFor(cfg);if(!Number.isInteger(n)||n<1||n>MAX_AI_COUNT)return 'AI devlet sayısı 1–48 arasında bir tam sayı olmalı.';
  if(n+1>SIZES[cfg.size].sys)return 'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.';
- const actualAI=n-(Array.isArray(cfg.humans)?cfg.humans.length:0);if(actualAI>SCALE_ACCEPTANCE.maxAI)return 'Bu sürümde uzun kampanyası doğrulanmış üst sınır '+SCALE_ACCEPTANCE.maxAI+' AI. 24/32/48 AI deneysel; seçim sessizce azaltılmaz.';return '';
+ const actualAI=n-(Array.isArray(cfg.humans)?cfg.humans.length:0);if(actualAI>SCALE_ACCEPTANCE.maxAI)return 'Bu sürümde uzun kampanyası doğrulanmış üst sınır '+SCALE_ACCEPTANCE.maxAI+' AI. 24/32/48 AI deneysel; seçim sessizce azaltılmaz.';return rivalSetupError(cfg,actualAI);
 }
 /* Harita kenarı: 30 sistem → 4200, 100 sistem → ~7670.
    Yıldız yoğunluğu (px/sistem) tüm boyutlarda benzer kalır. */
@@ -2665,13 +2689,15 @@ function setupGame(cfg){
 
   assignAIOrigins(cfg);
   assignAIIdentities(cfg);
+  assignRivalPersonas(cfg);
 
   // Konsey açıksa galakside en az bir pasifist devlet bulunsun
   if ((cfg.council || 'normal') !== 'kapali'){
     const anyPacifist = G.emps.some(x => !x.wild && ((x.ethics && x.ethics.mil) || 0) <= -2);
     if (!anyPacifist){
-      const cand = G.emps.filter(x => !x.wild && x.ai && RACES[x.race].dip > .3);
-      const pick2 = cand.length ? cand[0] : G.emps.find(x => !x.wild && x.ai);
+      const eligible=x=>!x.wild&&x.ai&&(cfg.aiRivals===undefined||!RIVAL_PERSONAS.includes(personaKey(x)));
+      const cand = G.emps.filter(x => eligible(x) && RACES[x.race].dip > .3);
+      const pick2 = cand.length ? cand[0] : G.emps.find(eligible);
       if (pick2){
         pick2.ethics = {mil:-2, aut:-1, mat:0,ahl:0};
         pick2.agr *= .5;
@@ -2931,6 +2957,8 @@ function setupGame(cfg){
     recalcMods(e);
   }
   updateVision();
+  for(const e of G.emps)if(e.ai&&!e.wild&&!e.crisisSide)
+    e.emblem=makeEmblem('state:'+G.seed+':'+e.id,e.col,false,true);
   normalizeIdentities();
   economyTick(true);
   assignFinalEmpireNames();
@@ -6231,7 +6259,10 @@ function paintEmblems(){
     let e;if(cv.dataset.identity==='setup')e=normalizeEmblem(CFG.emblem,CFG.color||RACES[CFG.race].col,'setup');
     else if(cv.dataset.identity==='federation'){const f=fedOf(+cv.dataset.id);if(!f||!f.members.some(id=>knownFederationBond(G.p,f,id)))continue;federationIdentity(f);e=f.emblem;}
     else {const state=G.emps[+cv.dataset.id];if(!state||!territoryOwnerInfo(state.id)?.known)continue;e=stateEmblem(state);}
-    cv.getContext('2d').drawImage(ART.identityEmblem(e,cv.width),0,0);
+    const g=cv.getContext('2d');
+    if(!g||g.isContextLost?.())continue;
+    g.clearRect(0,0,cv.width,cv.height);
+    g.drawImage(ART.identityEmblem(e,cv.width),0,0);
   }
 
   [...document.querySelectorAll('canvas[data-emb]')].forEach(cv=>{
@@ -8659,7 +8690,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p27';
+const BUILD_ID = '96h10p27s1';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -9050,7 +9081,8 @@ function runRecovery(sebep, deneme){
     if (typeof camSane === 'function') camSane();
     /* 9. Türetilmiş sınır yarıçapları */
     if (typeof refreshReach === 'function') refreshReach();
-    /* 10. Görsel önbellekler */
+    /* 10. Arka planda kaybolan Canvas piksellerini kaynakta da yenile. */
+    if(/visible|pageshow|focus|context|surface/i.test(sebep))ART.invalidateSprites?.();
     if (typeof View !== 'undefined' && View.invalidateRenderCaches)
       View.invalidateRenderCaches(sebep);
     /* 11. TEK zorunlu çizim */
@@ -9065,6 +9097,7 @@ function runRecovery(sebep, deneme){
     try {
       if (typeof UI !== 'undefined' && UI.refresh) UI.refresh();
       if (typeof repaintPortraits === 'function') repaintPortraits();
+      paintEmblems();
     } catch(e){ logDiag('recovery', 'ui: ' + (e && e.message)); }
     /* 13. Sağlık testi — YALNIZ kurtarma çiziminden SONRA */
     // One incoming pixel + four post-draw pixels + one border-cache check:
@@ -9800,15 +9833,16 @@ function leaveTitle(hedef){
 
 /* FAZ 95D — identity parameters use a private hash stream, never game RNG. */
 const EMBLEM_SHAPES={shield:'Kalkan',circle:'Daire',hex:'Altıgen',diamond:'Elmas',star:'Yıldız',ring:'Halka'};
-const EMBLEM_SYMBOLS={star:'Yıldız',sun:'Güneş',planet:'Gezegen',wing:'Kanat',sword:'Kılıç',crystal:'Kristal',gear:'Mekanik',orbit:'Yörünge'};
+const LEGACY_EMBLEM_SYMBOLS={star:'Yıldız',sun:'Güneş',planet:'Gezegen',wing:'Kanat',sword:'Kılıç',crystal:'Kristal',gear:'Mekanik',orbit:'Yörünge'};
+const EMBLEM_SYMBOLS={...LEGACY_EMBLEM_SYMBOLS,eye:'Göz',crown:'Taç',anchor:'Çapa',spiral:'Sarmal',flame:'Alev',mountain:'Dağ'};
 const EMBLEM_PATTERNS={plain:'Düz',stripe:'Şerit',split:'Bölünmüş',ring:'İç halka',corners:'Köşeler',rays:'Işınlar'};
 const EMBLEM_COLORS=['#f5665c','#f5c25c','#b2f55c','#5cf5d6','#5c9ef5','#d65cf5','#16304d','#492453','#ece9d5','#202537'];
 function identityHash(text){let h=2166136261;for(const c of String(text)){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;}
 function identityNameKey(name){return String(name).normalize('NFKC').toLocaleLowerCase('tr-TR').trim().replace(/\s+/g,' ');}
 function uniqueIdentityName(base,used){const keys=new Set(Object.keys(used).map(identityNameKey));let name=base,n=2;while(keys.has(identityNameKey(name)))name=base+' · '+n++;used[name]=1;return name;}
-function makeEmblem(seed,primary,federation=false){
+function makeEmblem(seed,primary,federation=false,expanded=false){
  const rand=mulberry32(identityHash(seed)),take=a=>a[Math.floor(rand()*a.length)];
- return {v:1,shape:take(Object.keys(EMBLEM_SHAPES)),symbol:take(Object.keys(EMBLEM_SYMBOLS)),pattern:take(Object.keys(EMBLEM_PATTERNS)),primary:/^#[0-9a-f]{6}$/i.test(primary)?primary:'#5c9ef5',secondary:take(EMBLEM_COLORS),federation:!!federation};
+ return {v:1,shape:take(Object.keys(EMBLEM_SHAPES)),symbol:take(Object.keys(expanded?EMBLEM_SYMBOLS:LEGACY_EMBLEM_SYMBOLS)),pattern:take(Object.keys(EMBLEM_PATTERNS)),primary:/^#[0-9a-f]{6}$/i.test(primary)?primary:'#5c9ef5',secondary:take(EMBLEM_COLORS),federation:!!federation};
 }
 function normalizeEmblem(value,col,seed,fed=false){const d=makeEmblem(seed,col,fed),v=value&&typeof value==='object'?value:{};
  for(const [k,pool] of [['shape',EMBLEM_SHAPES],['symbol',EMBLEM_SYMBOLS],['pattern',EMBLEM_PATTERNS]])if(Object.hasOwn(pool,v[k]))d[k]=v[k];
@@ -9831,7 +9865,7 @@ function normalizeIdentities(){const seen=[];for(const e of G.emps){e.emblem=uni
 let EMBLEM_ROLL=0;
 function randomizeSetupEmblem(){
  const old=normalizeEmblem(CFG.emblem,CFG.color||RACES[CFG.race].col,'setup');
- const next=makeEmblem('setup-roll:'+Date.now()+':'+(++EMBLEM_ROLL),old.primary);
+ const next=makeEmblem('setup-roll:'+Date.now()+':'+(++EMBLEM_ROLL),old.primary,false,true);
  // A press always changes every requested component, including both colors.
  for(const [key,pool] of [['shape',Object.keys(EMBLEM_SHAPES)],['symbol',Object.keys(EMBLEM_SYMBOLS)],['pattern',Object.keys(EMBLEM_PATTERNS)],['primary',EMBLEM_COLORS],['secondary',EMBLEM_COLORS]])if(next[key]===old[key])next[key]=pool[(pool.indexOf(old[key])+1)%pool.length];
  if(next.primary===next.secondary||next.secondary===old.secondary)next.secondary=EMBLEM_COLORS.find(c=>c!==next.primary&&c!==old.secondary);

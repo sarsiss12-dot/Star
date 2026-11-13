@@ -1,0 +1,13 @@
+{
+  "phase": "BETA-SP-MAP-WAR.0",
+  "build": "96h10p27s1",
+  "save_version": 8,
+  "pwa_cache": "stars-v96h10p27s1",
+  "multiplayer": "MP.8.9b24",
+  "archive": "releases/stars-faz96h10p27s1.zip",
+  "bytes": 847494,
+  "sha256": "f2aedaa0277ec01ff40c55dc0b00242eb84888c0b3b5f254c6614817aaaed46f",
+  "crc32": "c07282a7",
+  "runtime_files": 19,
+  "manifest": "RELEASE-MANIFEST.json"
+}
