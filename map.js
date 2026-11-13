@@ -1296,7 +1296,7 @@ const View = {
         if (!this.routed) this.sel.ord = null;
         this.routed = true;
         UI.pulse(s);
-        UI.refresh();
+        UI.refresh(true);
       }
       return;
     }

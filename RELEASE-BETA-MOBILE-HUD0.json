@@ -1,0 +1,25 @@
+{
+  "phase": "BETA-MOBILE-HUD.0",
+  "build": "96h10p25u1",
+  "pwa_cache": "stars-v96h10p25u1",
+  "save_version": 8,
+  "parent_commit": "bcbd6973db8d9adf6cc25cda9efafa42bde3a477",
+  "parent_zip_sha256": "86720c077e46b0dfd7460286c36eb914ac7e582846b231beec7e49cd462d82fa",
+  "runtime_changed": [
+    "index.html",
+    "main.js",
+    "map.js",
+    "sw.js",
+    "ui.js"
+  ],
+  "game": {
+    "file": "stars-faz96h10p25u1.zip",
+    "bytes": 843689,
+    "sha256": "aeac17e9ce70ab8a8b1a47f7a50169a974f286fd37b9827501339e68f8941c22",
+    "crc32": "AA9FC131",
+    "member_crc": "PASS",
+    "members": 20,
+    "manifest_runtime_files": 19
+  },
+  "report": "reports/codex/BETA-MOBILE-HUD0-SONUC.md"
+}

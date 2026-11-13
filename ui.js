@@ -300,6 +300,7 @@ const UI = {
       $('sidebar').classList.toggle('off');
       $('sbToggle').classList.toggle('off');
       $('sbToggle').textContent = $('sidebar').classList.contains('off') ? '‹' : '›';
+      this.seltag();
     });
     // Register once with boot; resizing a map surface does not add UI listeners.
     const placeMenus = () => this.positionToolMenus();
@@ -1695,7 +1696,17 @@ const UI = {
         }
         this.refresh(); break;
       }
-      case 'route': View.route = !View.route; View.routed = false; this.refresh(); break;
+      case 'route': {
+        if (!View.sel?.ships.length) break;
+        View.route = !View.route;
+        View.routed = false;
+        if (View.route) {
+          View.rallyForSys = View.rallyFor = undefined;
+          View.aimFleet = View.panoptFor = undefined;
+        }
+        this.refresh(true);
+        break;
+      }
       case 'stop': if (View.sel && View.sel.e===0){ cancelExploration(View.sel); if(hasShipment(View.sel))shipmentAction(G.p,View.sel,'cancel');else View.sel.path=[]; View.sel.ord=null; } this.refresh(); break;
       case 'stance': if (View.sel) View.sel.stance = View.sel.stance==='agresif'?'savunma':'agresif'; this.refresh(); break;
       case 'merge': this.mergeFleets(); break;
@@ -2188,7 +2199,7 @@ const UI = {
     this.refreshJointPanels();
     this.seltag();
   },
-  refresh(){
+  refresh(immediateSelection = false){
     if (this._diploWorld && this._diploWorld!==G.p){
       this.ensureDiploWorld();
       if (G.p && $('diploPane').classList.contains('show')) this.openDiplo();
@@ -2211,23 +2222,24 @@ const UI = {
     /* FAZ 82: panel her yenilendiğinde YENİ canvas'lar doğuyor;
        done bayrağı olmayanlar hemen boyanmalı yoksa siyah kalıyor. */
     this.paintSprites();
-    this.seltag();
+    this.seltag(!immediateSelection);
     if(typeof ColonyUI!=='undefined')ColonyUI.refresh();
     if(typeof WarCenterUI!=='undefined')WarCenterUI.refresh();
     this.positionToolMenus();
     $('stardate').textContent = G.year + '.' + String(G.month).padStart(2,'0');
   },
 
-  seltag(){
+  seltag(automatic = true){
     const t = $('seltag');
     if (!View.sel){ t.classList.add('hidden'); return; }
     const f = View.sel;
     t.classList.remove('hidden');
-    const html = `<span>${esc(f.name)} · ${isArmed(f)?fmt(fleetPower(f))+' güç':f.ships.length+' gemi'}</span>` +
-      `<button data-a="route" class="${View.route?'on':''}">${View.route?(View.routed?'+DURAK':'HEDEF SEÇ'):'ROTA'}</button>` +
+    const label = `${esc(f.name)} · ${isArmed(f)?fmt(fleetPower(f))+' güç':f.ships.length+' gemi'}`;
+    const html = `<span title="${label}">${label}</span>` +
+      `<button data-a="route" class="${View.route?'on':''}" aria-pressed="${!!View.route}">${View.route?(View.routed?'+DURAK':'HEDEF SEÇ'):'ROTA'}</button>` +
       `<button data-a="stop">DUR</button>` +
-      (f.sys >= 0 ? `<button data-a="selsys" data-x="${f.sys}">SİSTEM ›</button>` : '');
-    this.surfaceRender(t,html,'selection:'+f.id,true);
+      (f.sys >= 0 ? `<button data-a="selsys" data-x="${f.sys}" aria-label="Sistem paneli"><span class="systemText">SİSTEM </span><span aria-hidden="true">›</span></button>` : '');
+    this.surfaceRender(t,html,'selection:'+f.id,automatic);
     // Screen rectangles and UI-local CSS pixels must use the same zoom conversion.
     const zoom=this.getUIScale?this.getUIScale().effective/100:1,side=$('sidebar'),sr=side?.getBoundingClientRect(),pod=$('timepod')?.getBoundingClientRect();
     const right=side&&!side.classList.contains('off')&&sr?.width>0?Math.min(window.innerWidth,sr.left,window.innerWidth-sr.width):window.innerWidth;
@@ -8571,6 +8583,8 @@ const UI = {
          <button class="riX" data-a="closem">✕</button></div>
        <div class="mbd" style="padding:4px 16px"><button class="abtn" data-a="cameraReset">Kamerayı sıfırla</button></div>
        <div class="mbd" style="padding:4px 16px"><button class="abtn" data-a="warPauseToggle" aria-pressed="${WAR_PAUSE_ON}">Savaşa katılınca duraklat: ${WAR_PAUSE_ON?'AÇIK':'KAPALI'}</button></div>
+       <div class="mbd alertOpacity"><label for="alertOpacity">Geçici bildirim opaklığı</label><output for="alertOpacity" id="alertOpacityValue"></output>
+         <input id="alertOpacity" type="range" min="25" max="100" step="5"></div>
        <div class="mbd">${typeof AUDIO!=='undefined'?AUDIO.controls():''}</div>
        <div class="mbd" id="diagBox">Depolama sınanıyor…</div>
        <div class="mft">
@@ -8599,6 +8613,8 @@ const UI = {
           <div class="chd">Kaydetmeyi unutma — mevcut oyun bellekte kalmaz</div></button>
         <button class="ch" data-a="closem"><div class="cht">Kapat</div></button>
        </div>`);
+
+    this.bindAlertOpacity?.();
 
     /* MP.8.9: local presentation controls; hooks remain visible to the guest gate. */
     if(this.uiScaleControls){
@@ -9722,6 +9738,29 @@ const TITLE = {
   UI.uiScaleReady=storeGet(key).then(v=>{if(revision===initial){preferred=valid(v);apply();}}).catch(()=>{});
 })();
 /* END MP.8.9 UI SCALE */
+
+(()=>{
+  const root=document.documentElement;
+  if(!root?.style?.setProperty)return;
+  const key='stars:alertOpacity';
+  let opacity=100, edited=false;
+  function apply(){
+    root.style.setProperty('--alert-opacity',opacity/100);
+    const input=$('alertOpacity'),output=$('alertOpacityValue');
+    if(input&&output){input.value=String(opacity);output.textContent='%'+opacity;}
+  }
+  UI.bindAlertOpacity=()=>{
+    const input=$('alertOpacity');
+    if(!input)return;
+    apply();
+    input.addEventListener('input',()=>{edited=true;opacity=Number(input.value);apply();});
+    input.addEventListener('change',()=>storeSet(key,String(opacity)).catch(()=>{}));
+  };
+  storeGet(key).then(value=>{
+    const stored=Number(value);
+    if(!edited&&stored>=25&&stored<=100&&stored%5===0){opacity=stored;apply();}
+  }).catch(()=>{});
+})();
 
 /* BETA-STABILITY-AI.0 — the same recovery panel for host and guest; mutations await the host ACK. */
 Object.assign(UI,{

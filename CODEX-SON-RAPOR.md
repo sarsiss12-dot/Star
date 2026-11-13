@@ -1,5 +1,11 @@
 # Son Codex raporu — BETA-UI-REFINEMENT.0 / p23
 
+## BETA-MOBILE-HUD.0 — 13 Kasım 2026
+
+- [Mobil filo çubuğu, rota ve olay önceliği](reports/codex/BETA-MOBILE-HUD0-SONUC.md) · build `96h10p25u1` · dal `codex/stars-beta-mobile-hud0`.
+- Chromium 15 PASS, MP motor testleri 30 PASS, Save8/RNG üç ay eşdeğer. Fiziksel Android ve canlı Render NOT RUN.
+
+
 - [Tek parça Türkçe sonuç raporu](reports/codex/BETA-UI-REFINEMENT0-SONUC.md).
 - Kanonik p22 başlangıç `80d11dacc1bb2fcf139022cd5f8a1a65a2c75a9f`; p23 kod/paket `183c3ca635c6a65ae0d4320284c2e6ab026efb96`, dal `codex/stars-beta-ui-refinement0-mobile`.
 - Dokuz ana UI alanı: farklı gerçek event açıklamaları; kompakt kendi koloni paneli; outEmp içinde bağımsız gezegen girişi; göster/küçült/geri çipi; responsive 3/32 koloni ve key/undefined düzeltmesi; saat/sidebar uyumlu filo çubuğu; casusluk sekmeleri; pregame galaksi; tür tipografisi.

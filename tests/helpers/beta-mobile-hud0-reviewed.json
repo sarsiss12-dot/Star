@@ -1,0 +1,80 @@
+{
+  "index.html": {
+    "beforeSha256": "97ddfcb8d67ee6a86cdb42fab445c78c5df7cb393d99d1a742009a95e6f9174f",
+    "afterSha256": "99b7567a2798fa862e3c8e8580735f856c7f7044b8f75af87fc125b9bc83d6b9",
+    "hunks": [
+      {
+        "before": ".nCard.sci .nGo{color:var(--plasma)}\n@keyframes noteIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}\n\n/* FAZ 14 DÜZELTMESİ: bildirim katmanı diploPane(640) ve modal(760)\n   ALTINDA kalıyordu (z-index 20). Fısıltı gibi kaplama içinden\n   tetiklenen işlemlerin sonucu yazılıyor ama görünmüyordu.\n   Artık en üstte; pointer-events:none olduğu için tıklamayı engellemez. */\n#alerts{position:fixed;left:44px;top:calc(var(--top) + 6px);z-index:900;pointer-events:none;\n  display:flex;flex-direction:column;gap:2px;pointer-events:none;max-width:38%}\n/* ═══ FAZ 70: BİLDİRİMLER KÜÇÜLDÜ ═══\n   10px/5-8px padding ekranda çok yer kaplıyordu. Font 8.5px'e,\n   iç boşluk 3px/6px'e indi; satır aralığı sıkıldı ve uzun\n",
+        "after": ".nCard.sci .nGo{color:var(--plasma)}\n@keyframes noteIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}\n\n/* Geçici mesajlar haritanın üstünde, karar kartlarının altında kalır. */\n#alerts{position:fixed;left:44px;top:calc(var(--top) + 6px);z-index:25;pointer-events:none;\n  display:flex;flex-direction:column;gap:2px;max-width:38%;opacity:var(--alert-opacity,1)}\n/* ═══ FAZ 70: BİLDİRİMLER KÜÇÜLDÜ ═══\n   10px/5-8px padding ekranda çok yer kaplıyordu. Font 8.5px'e,\n   iç boşluk 3px/6px'e indi; satır aralığı sıkıldı ve uzun\n"
+      },
+      {
+        "before": " .colonyTable [data-a=\"colonyMap\"]{display:inline-block;margin-left:8px}\n .colonyTable small{display:inline;margin-left:5px}\n}\n#seltag{box-sizing:border-box;display:flex;flex-wrap:wrap;gap:4px;padding:5px;white-space:normal}\n#seltag>span{flex:1 1 100px;white-space:nowrap;min-width:0}\n#seltag button{min-height:38px;padding:5px;min-width:38px}\n#seltag [data-a=\"route\"]{min-width:68px}\n.spyWorkspace .ivNav{display:flex;flex-wrap:wrap}\n.spyWorkspace .ivTab{flex:1 1 88px;min-width:0;min-height:44px;white-space:normal}\n.spyWorkspace .ivTab span{white-space:normal;overflow:visible;text-overflow:clip;font-size:10px}\n",
+        "after": " .colonyTable [data-a=\"colonyMap\"]{display:inline-block;margin-left:8px}\n .colonyTable small{display:inline;margin-left:5px}\n}\n#seltag{box-sizing:border-box;gap:4px;padding:5px;container-type:inline-size}\n#seltag>span{flex:1 1 auto}\n#seltag button{min-height:44px;padding:5px;min-width:44px}\n#seltag [data-a=\"route\"]{min-width:72px}\n@container (max-width: 205px){\n #seltag .systemText{display:none}\n}\n.alertOpacity{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 12px}\n.alertOpacity input{grid-column:1/-1;min-height:32px;accent-color:var(--phos)}\n.spyWorkspace .ivNav{display:flex;flex-wrap:wrap}\n.spyWorkspace .ivTab{flex:1 1 88px;min-width:0;min-height:44px;white-space:normal}\n.spyWorkspace .ivTab span{white-space:normal;overflow:visible;text-overflow:clip;font-size:10px}\n"
+      }
+    ]
+  },
+  "main.js": {
+    "beforeSha256": "d7b5bc7df3f492d59c97ebf7223ee86ad51eb73813866f69685a56c74a11ade8",
+    "afterSha256": "c3ad14d9a57a717ea8e8c90bc44e6eaccad8a8dfceb02a8094b0348c95315bbe",
+    "hunks": [
+      {
+        "before": "   Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺\n   Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */\n/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p25';\nconst DIAG_MAX = 40;\nconst DIAG = [];\nfunction logDiag(tur, mesaj){\n",
+        "after": "   Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺\n   Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */\n/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p25u1';\nconst DIAG_MAX = 40;\nconst DIAG = [];\nfunction logDiag(tur, mesaj){\n"
+      }
+    ]
+  },
+  "map.js": {
+    "beforeSha256": "400dbc524750443528b88bfbd0d82aa301fd7b1f12b03d8ea5fa3d73c07603fc",
+    "afterSha256": "2e3284353cba1cbead6925dc7d1b3251bbfe6b4ab95fdd8149d2fad19c0608e5",
+    "hunks": [
+      {
+        "before": "        if (!this.routed) this.sel.ord = null;\n        this.routed = true;\n        UI.pulse(s);\n        UI.refresh();\n      }\n      return;\n    }\n",
+        "after": "        if (!this.routed) this.sel.ord = null;\n        this.routed = true;\n        UI.pulse(s);\n        UI.refresh(true);\n      }\n      return;\n    }\n"
+      }
+    ]
+  },
+  "sw.js": {
+    "beforeSha256": "ec4248f145875421dfc45ceab52a9d62db8bf1ce8029e90539066b92e1739a14",
+    "afterSha256": "1ac866c2ada00a5579d0389a6a28383df05a49afffd6aada2c2e48a2f42ce435",
+    "hunks": [
+      {
+        "before": "   önbellekteki tek parça main.js temizlensin. */\n/* FAZ 83: sürüm yükseltildi — eski ve yeni JS dosyalarının\n   karışmasını önler; activate'te eskiler siliniyor. */\nconst CACHE = 'stars-v96h10p25';\n\n/* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */\nconst KABUK = [\n",
+        "after": "   önbellekteki tek parça main.js temizlensin. */\n/* FAZ 83: sürüm yükseltildi — eski ve yeni JS dosyalarının\n   karışmasını önler; activate'te eskiler siliniyor. */\nconst CACHE = 'stars-v96h10p25u1';\n\n/* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */\nconst KABUK = [\n"
+      }
+    ]
+  },
+  "ui.js": {
+    "beforeSha256": "20ad4722999383d7c1cd0488c541f1ed1105aac129ba70c2aaec05b2d717ee51",
+    "afterSha256": "536ef96317945c0cd5e1c27dc463a9d52a426528bcb067de9f362a4e18176e5a",
+    "hunks": [
+      {
+        "before": "      $('sidebar').classList.toggle('off');\n      $('sbToggle').classList.toggle('off');\n      $('sbToggle').textContent = $('sidebar').classList.contains('off') ? '‹' : '›';\n    });\n    // Register once with boot; resizing a map surface does not add UI listeners.\n    const placeMenus = () => this.positionToolMenus();\n",
+        "after": "      $('sidebar').classList.toggle('off');\n      $('sbToggle').classList.toggle('off');\n      $('sbToggle').textContent = $('sidebar').classList.contains('off') ? '‹' : '›';\n      this.seltag();\n    });\n    // Register once with boot; resizing a map surface does not add UI listeners.\n    const placeMenus = () => this.positionToolMenus();\n"
+      },
+      {
+        "before": "        }\n        this.refresh(); break;\n      }\n      case 'route': View.route = !View.route; View.routed = false; this.refresh(); break;\n      case 'stop': if (View.sel && View.sel.e===0){ cancelExploration(View.sel); if(hasShipment(View.sel))shipmentAction(G.p,View.sel,'cancel');else View.sel.path=[]; View.sel.ord=null; } this.refresh(); break;\n      case 'stance': if (View.sel) View.sel.stance = View.sel.stance==='agresif'?'savunma':'agresif'; this.refresh(); break;\n      case 'merge': this.mergeFleets(); break;\n",
+        "after": "        }\n        this.refresh(); break;\n      }\n      case 'route': {\n        if (!View.sel?.ships.length) break;\n        View.route = !View.route;\n        View.routed = false;\n        if (View.route) {\n          View.rallyForSys = View.rallyFor = undefined;\n          View.aimFleet = View.panoptFor = undefined;\n        }\n        this.refresh(true);\n        break;\n      }\n      case 'stop': if (View.sel && View.sel.e===0){ cancelExploration(View.sel); if(hasShipment(View.sel))shipmentAction(G.p,View.sel,'cancel');else View.sel.path=[]; View.sel.ord=null; } this.refresh(); break;\n      case 'stance': if (View.sel) View.sel.stance = View.sel.stance==='agresif'?'savunma':'agresif'; this.refresh(); break;\n      case 'merge': this.mergeFleets(); break;\n"
+      },
+      {
+        "before": "    this.refreshJointPanels();\n    this.seltag();\n  },\n  refresh(){\n    if (this._diploWorld && this._diploWorld!==G.p){\n      this.ensureDiploWorld();\n      if (G.p && $('diploPane').classList.contains('show')) this.openDiplo();\n",
+        "after": "    this.refreshJointPanels();\n    this.seltag();\n  },\n  refresh(immediateSelection = false){\n    if (this._diploWorld && this._diploWorld!==G.p){\n      this.ensureDiploWorld();\n      if (G.p && $('diploPane').classList.contains('show')) this.openDiplo();\n"
+      },
+      {
+        "before": "    /* FAZ 82: panel her yenilendiğinde YENİ canvas'lar doğuyor;\n       done bayrağı olmayanlar hemen boyanmalı yoksa siyah kalıyor. */\n    this.paintSprites();\n    this.seltag();\n    if(typeof ColonyUI!=='undefined')ColonyUI.refresh();\n    if(typeof WarCenterUI!=='undefined')WarCenterUI.refresh();\n    this.positionToolMenus();\n    $('stardate').textContent = G.year + '.' + String(G.month).padStart(2,'0');\n  },\n\n  seltag(){\n    const t = $('seltag');\n    if (!View.sel){ t.classList.add('hidden'); return; }\n    const f = View.sel;\n    t.classList.remove('hidden');\n    const html = `<span>${esc(f.name)} · ${isArmed(f)?fmt(fleetPower(f))+' güç':f.ships.length+' gemi'}</span>` +\n      `<button data-a=\"route\" class=\"${View.route?'on':''}\">${View.route?(View.routed?'+DURAK':'HEDEF SEÇ'):'ROTA'}</button>` +\n      `<button data-a=\"stop\">DUR</button>` +\n      (f.sys >= 0 ? `<button data-a=\"selsys\" data-x=\"${f.sys}\">SİSTEM ›</button>` : '');\n    this.surfaceRender(t,html,'selection:'+f.id,true);\n    // Screen rectangles and UI-local CSS pixels must use the same zoom conversion.\n    const zoom=this.getUIScale?this.getUIScale().effective/100:1,side=$('sidebar'),sr=side?.getBoundingClientRect(),pod=$('timepod')?.getBoundingClientRect();\n    const right=side&&!side.classList.contains('off')&&sr?.width>0?Math.min(window.innerWidth,sr.left,window.innerWidth-sr.width):window.innerWidth;\n",
+        "after": "    /* FAZ 82: panel her yenilendiğinde YENİ canvas'lar doğuyor;\n       done bayrağı olmayanlar hemen boyanmalı yoksa siyah kalıyor. */\n    this.paintSprites();\n    this.seltag(!immediateSelection);\n    if(typeof ColonyUI!=='undefined')ColonyUI.refresh();\n    if(typeof WarCenterUI!=='undefined')WarCenterUI.refresh();\n    this.positionToolMenus();\n    $('stardate').textContent = G.year + '.' + String(G.month).padStart(2,'0');\n  },\n\n  seltag(automatic = true){\n    const t = $('seltag');\n    if (!View.sel){ t.classList.add('hidden'); return; }\n    const f = View.sel;\n    t.classList.remove('hidden');\n    const label = `${esc(f.name)} · ${isArmed(f)?fmt(fleetPower(f))+' güç':f.ships.length+' gemi'}`;\n    const html = `<span title=\"${label}\">${label}</span>` +\n      `<button data-a=\"route\" class=\"${View.route?'on':''}\" aria-pressed=\"${!!View.route}\">${View.route?(View.routed?'+DURAK':'HEDEF SEÇ'):'ROTA'}</button>` +\n      `<button data-a=\"stop\">DUR</button>` +\n      (f.sys >= 0 ? `<button data-a=\"selsys\" data-x=\"${f.sys}\" aria-label=\"Sistem paneli\"><span class=\"systemText\">SİSTEM </span><span aria-hidden=\"true\">›</span></button>` : '');\n    this.surfaceRender(t,html,'selection:'+f.id,automatic);\n    // Screen rectangles and UI-local CSS pixels must use the same zoom conversion.\n    const zoom=this.getUIScale?this.getUIScale().effective/100:1,side=$('sidebar'),sr=side?.getBoundingClientRect(),pod=$('timepod')?.getBoundingClientRect();\n    const right=side&&!side.classList.contains('off')&&sr?.width>0?Math.min(window.innerWidth,sr.left,window.innerWidth-sr.width):window.innerWidth;\n"
+      },
+      {
+        "before": "         <button class=\"riX\" data-a=\"closem\">✕</button></div>\n       <div class=\"mbd\" style=\"padding:4px 16px\"><button class=\"abtn\" data-a=\"cameraReset\">Kamerayı sıfırla</button></div>\n       <div class=\"mbd\" style=\"padding:4px 16px\"><button class=\"abtn\" data-a=\"warPauseToggle\" aria-pressed=\"${WAR_PAUSE_ON}\">Savaşa katılınca duraklat: ${WAR_PAUSE_ON?'AÇIK':'KAPALI'}</button></div>\n       <div class=\"mbd\">${typeof AUDIO!=='undefined'?AUDIO.controls():''}</div>\n       <div class=\"mbd\" id=\"diagBox\">Depolama sınanıyor…</div>\n       <div class=\"mft\">\n",
+        "after": "         <button class=\"riX\" data-a=\"closem\">✕</button></div>\n       <div class=\"mbd\" style=\"padding:4px 16px\"><button class=\"abtn\" data-a=\"cameraReset\">Kamerayı sıfırla</button></div>\n       <div class=\"mbd\" style=\"padding:4px 16px\"><button class=\"abtn\" data-a=\"warPauseToggle\" aria-pressed=\"${WAR_PAUSE_ON}\">Savaşa katılınca duraklat: ${WAR_PAUSE_ON?'AÇIK':'KAPALI'}</button></div>\n       <div class=\"mbd alertOpacity\"><label for=\"alertOpacity\">Geçici bildirim opaklığı</label><output for=\"alertOpacity\" id=\"alertOpacityValue\"></output>\n         <input id=\"alertOpacity\" type=\"range\" min=\"25\" max=\"100\" step=\"5\"></div>\n       <div class=\"mbd\">${typeof AUDIO!=='undefined'?AUDIO.controls():''}</div>\n       <div class=\"mbd\" id=\"diagBox\">Depolama sınanıyor…</div>\n       <div class=\"mft\">\n"
+      },
+      {
+        "before": "          <div class=\"chd\">Kaydetmeyi unutma — mevcut oyun bellekte kalmaz</div></button>\n        <button class=\"ch\" data-a=\"closem\"><div class=\"cht\">Kapat</div></button>\n       </div>`);\n\n    /* MP.8.9: local presentation controls; hooks remain visible to the guest gate. */\n    if(this.uiScaleControls){\n",
+        "after": "          <div class=\"chd\">Kaydetmeyi unutma — mevcut oyun bellekte kalmaz</div></button>\n        <button class=\"ch\" data-a=\"closem\"><div class=\"cht\">Kapat</div></button>\n       </div>`);\n\n    this.bindAlertOpacity?.();\n\n    /* MP.8.9: local presentation controls; hooks remain visible to the guest gate. */\n    if(this.uiScaleControls){\n"
+      },
+      {
+        "before": "})();\n/* END MP.8.9 UI SCALE */\n\n/* BETA-STABILITY-AI.0 — the same recovery panel for host and guest; mutations await the host ACK. */\nObject.assign(UI,{\n  fleetRecoverySummary(){\n",
+        "after": "})();\n/* END MP.8.9 UI SCALE */\n\n(()=>{\n  const root=document.documentElement;\n  if(!root?.style?.setProperty)return;\n  const key='stars:alertOpacity';\n  let opacity=100, edited=false;\n  function apply(){\n    root.style.setProperty('--alert-opacity',opacity/100);\n    const input=$('alertOpacity'),output=$('alertOpacityValue');\n    if(input&&output){input.value=String(opacity);output.textContent='%'+opacity;}\n  }\n  UI.bindAlertOpacity=()=>{\n    const input=$('alertOpacity');\n    if(!input)return;\n    apply();\n    input.addEventListener('input',()=>{edited=true;opacity=Number(input.value);apply();});\n    input.addEventListener('change',()=>storeSet(key,String(opacity)).catch(()=>{}));\n  };\n  storeGet(key).then(value=>{\n    const stored=Number(value);\n    if(!edited&&stored>=25&&stored<=100&&stored%5===0){opacity=stored;apply();}\n  }).catch(()=>{});\n})();\n\n/* BETA-STABILITY-AI.0 — the same recovery panel for host and guest; mutations await the host ACK. */\nObject.assign(UI,{\n  fleetRecoverySummary(){\n"
+      }
+    ]
+  }
+}
