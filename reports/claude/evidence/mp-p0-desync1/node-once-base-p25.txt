@@ -1,0 +1,17 @@
+✗ A Halkı yatıştır · G.day=1000.1 (180 gün → 179.9999999999999): host kararı → fark paketi, tam ayna, host Save8 ve MP paketi aynı dünyadan yüklenir — AssertionError [ERR_ASSERTION]: fark paketi uygulanmış ayna motorun deserialize'ıyla kur
+
+false !== true
+--
+✗ A Yerel özerklik · G.day=1650.0001 ≈ 2214.08 (720 gün bekleme → 720.0000000000002): host kararı → fark paketi, tam ayna, host Save8 ve MP paketi aynı dünyadan yüklenir — AssertionError [ERR_ASSERTION]: fark paketi uygulanmış ayna motorun d
+
+false !== true
+--
+✗ B koruma gevşemez: yanlış sahip, yanlış tür, yanlış süre (bir ulp bile), yanlış bekleme ve geçersiz tarih reddedilir — AssertionError [ERR_ASSERTION]: özgün değer geçerli
+
+false !== true
+--
+✗ C ret nedeni ayırt edilir: aşama · kısa kod · alan yolu; değer / jeton / oda anahtarı yok — AssertionError [ERR_ASSERTION]: motor son reddin nedenini verir
++ actual - expected
+
+--
+GEÇEN: 0 KALAN: 4

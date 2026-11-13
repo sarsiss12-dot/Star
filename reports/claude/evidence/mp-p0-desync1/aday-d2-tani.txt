@@ -1,0 +1,8 @@
+STARS MP tanı · STARS MP.8.9b22 · oyun 96h10p26 · misafir
+bağlantı: host bağlı · aşama: ready · yeniden bağlanma 0
+ayna: alınan r17 (tam, 9 sn önce) · son uygulanan r9 / dünya r20 · host r17 gün 1008
+durum: DÜNYA GÜNCEL DEĞİL · son geçerli r9 gün 1004 · reddedilen r17 (tam ayna)
+ret: envelope / crisisPolicy.until @ sys[5].p[0].col.crisisPolicy · ardışık tam ret 3 · toplam ret 4 · otomatik istek 3/3 · otomatik istek durdu
+emir: bekleyen 0 · onaylı/dünyada görünmeyen 0 · engellenen 1 · son komut ok
+kurtarma: 1 olay · son — · en uzun —
+kayıt: 23s stale | 23s reject:delta:crisisPolicy.until | 23s note:stale | 22s blocked:ship | 22s resync:stale | 20s reject:full:crisisPolicy.until | 19s resync:stale | 17s reject:full:crisisPolicy.until | 9s resync:stale | 8s give-up | 8s reject:full:crisisPolicy.until | 8s note:stale
