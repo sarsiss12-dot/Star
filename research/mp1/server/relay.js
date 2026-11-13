@@ -56,7 +56,7 @@ function create(env=process.env){
   const manifest=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE-MANIFEST.json'),'utf8'));
   /* MP.7.3: dağıtım doğrulaması — çok oyunculu sürüm, oyun build'i ve sunulan MP dosyalarının kısa SHA-256 özetleri (gizli bilgi yok) */
   const sha12=f=>{try{return crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,f))).digest('hex').slice(0,12);}catch{return null;}};
-  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b23',build:manifest.build,files:Object.fromEntries(['research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',
+  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b24',build:manifest.build,files:Object.fromEntries(['research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',
     'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});
   const ALLOW=new Set([...Object.keys(manifest.files),'research/mp0/mp-core.js',
     'research/mp1/client/mp1.css','research/mp1/client/mp1-host.js','research/mp1/client/join.js','research/mp1/client/view.js',

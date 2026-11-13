@@ -120,7 +120,7 @@ function validatePackage(input,o={}){
   const ss=pkg.session;
   if(!plain(ss)||!onlyKeys(ss,['roomId','worldRevision','hostEmpireId','speed','capacity','settings','players','notes']))return fail('session');
   if(!int(ss.worldRevision,0,2147483647)||!int(ss.hostEmpireId,0,63)||!int(ss.speed,0,16)||!int(ss.capacity,2,8)||typeof ss.roomId!=='string'||ss.roomId.length>40)return fail('session');
-  if(ss.settings!==null&&(!plain(ss.settings)||!onlyKeys(ss.settings,['size','aiCount','shape'])||typeof ss.settings.size!=='string'||!int(ss.settings.aiCount,1,48)))return fail('session');
+  if(ss.settings!==null&&(!plain(ss.settings)||!onlyKeys(ss.settings,['size','aiCount','shape','aiGuard'])||typeof ss.settings.size!=='string'||!int(ss.settings.aiCount,1,48)||ss.settings.aiGuard!==undefined&&ss.settings.aiGuard!==true))return fail('session');   // MP-P0-DESYNC2: aiGuard yalnız açıkken yazılır
   if(!Array.isArray(ss.players)||ss.players.length<1||ss.players.length>8)return fail('session');
   if(ss.players.filter(x=>plain(x)&&x.playerId==='host').length!==1)return fail('host');
   const pids=new Set(),eids=new Set();let hosts=0;
@@ -246,7 +246,7 @@ function createHost(opts){
   function humanEmpire(e){return !!e&&S.slots.has(e.id);}
   function remoteHuman(e){return isHumanActor(e)&&e.id!==hostEmpireId;}
   /* ---------- MP.1 lobi durumu (opts.lobby verilmezse MP.0 davranışı) ---------- */
-  const L=opts.lobby?{phase:'created',capacity:2,settings:null,galaxyRev:0,banned:new Set(),seatNext:1,rev:0,starts:0,
+  const L=opts.lobby?{phase:'created',capacity:2,settings:null,galaxyRev:0,banned:new Set(),seatNext:1,rev:0,starts:0,guard:false,
     /* MP.7: 'design' — her oyuncu kendi devletini tek oyunculu kurulum ekranında tasarlar, galaksi OYUN BAŞLARKEN bu taslaklarla
        kurulur (setupGame cfg.humans). 'claim' — MP.1 davranışı (galaksideki AI devletini devralma; eski testler/araçlar). */
     mode:opts.lobby.design?'design':'claim'}:null;
@@ -352,7 +352,7 @@ function createHost(opts){
     const t=now();if(p.lastMirror&&mirrorMs>0&&t-(p.mirrorAt||0)<mirrorMs){if(!p.mirrorTimer&&typeof setTimeout==='function')p.mirrorTimer=setTimeout(()=>{p.mirrorTimer=null;if(!guarded('mirror',()=>sendMirror(p),p))p.lastMirror=null;},mirrorMs-(t-(p.mirrorAt||0)));return;}
     const m=pure(()=>root.StarsMirror.build(p.empireId,{cosmeticSeed:cosmetic,log:notes.get(p.empireId)||[],news:(newsBy.get(p.empireId)||{records:[]}).records}));
     const rev=(p.mirrorRev||0)+1;let n;
-    if(!p.lastMirror)n=out(p.conn,{v:PROTOCOL,type:'mirror',rev,worldRev:S.worldRevision,full:m});
+    if(!p.lastMirror){n=out(p.conn,{v:PROTOCOL,type:'mirror',rev,worldRev:S.worldRevision,full:m});p.fullRev=rev;p.fullConn=p.conn;p.fullAt=t;}   // MP-P0-DESYNC2: iade yalnız bu bağlantıya giden bu TAM aynanın uygulanmasıyla
     else{const ops=root.StarsMirror.diff(p.lastMirror,m);if(!Object.keys(ops).length){p.mirrorAt=t;return;}n=out(p.conn,{v:PROTOCOL,type:'mirrorDelta',rev,worldRev:S.worldRevision,base:p.mirrorRev,ops});}
     p.lastMirror=m;p.mirrorRev=rev;p.mirrorAt=t;stats.mirrors=(stats.mirrors||0)+1;(stats.mirrorBytes||(stats.mirrorBytes=[])).push(n);if(stats.mirrorBytes.length>200)stats.mirrorBytes.shift();
   }
@@ -511,7 +511,7 @@ function createHost(opts){
      Host birkaç saniyede bir her bağlı koltuğa yalnız sayaç gönderir: dünya revizyonu, o oyuncuya gönderilen son ayna revizyonu, tam gün,
      ortak hız ve yayın hatası var mı. Oyun verisi / başka oyuncu bilgisi içermez. Misafir bununla eksik aynayı (mrev > elindeki) ve
      host'un yayın hatasını (rev ilerliyor, mrev ilerlemiyor) kesin olarak görür ve TAM ayna ister. */
-  function pulse(){let n=0;for(const p of S.players.values()){if(!p.conn||p.empireId===null||p.playerId==='host')continue;
+  function pulse(){guarded('guard',guardTick);let n=0;for(const p of S.players.values()){if(!p.conn||p.empireId===null||p.playerId==='host')continue;
       out(p.conn,{v:PROTOCOL,type:'pulse',rev:S.worldRevision,mrev:p.mirrorRev||0,day:Math.floor(G.day),spd:G.speed|0,perr:stats.publishErrors|0,...(p.mirrorFail?{mfail:1}:{})});n++;}return n;}
 
   /* ---------- komutlar: yalnız bu tablo ---------- */
@@ -1264,6 +1264,7 @@ function createHost(opts){
     if(p.empireId===null)return result(p,conn,msg,'rejected','no-empire');
     if(has(msg,'empire')&&msg.empire!==p.empireId)return result(p,conn,msg,'rejected','forged-empire');
     if(S.paused)return result(p,conn,msg,'rejected','paused');
+    if(p.guard&&!(plain(msg.cmd)&&(msg.cmd.kind==='speed'||COMMANDS[msg.cmd.kind]&&COMMANDS[msg.cmd.kind].ro)))return result(p,conn,msg,'rejected','guard-active');   // MP-P0-DESYNC2: koruma sürerken tek denetleyici host'un geri çekilmesidir
     const x=execute(p.playerId,p.empireId,msg.cmd);
     if(!x.ok)return result(p,conn,msg,'rejected',x.code,x.detail?{detail:x.detail}:undefined);
     const r=result(p,conn,msg,'ok',null,x.extra?{extra:x.extra}:undefined);if(x.ro)return r;stats.commandMs.push(now()-t0);
@@ -1334,7 +1335,7 @@ function createHost(opts){
         if(L){p.seat=L.seatNext++;p.ready=false;p.tab='lobi';p.claim=null;p.color=PALETTE[p.seat%PALETTE.length];p.rate=[];if(L.phase==='resume')p.visitor=true;}
         S.players.set(p.playerId,p);}
       const prev=playerOf(conn);if(prev&&prev!==p){prev.conn=null;prev.lastView=null;if(prev.visitor)S.players.delete(prev.playerId);}   // aynı bağlantı başka kimliğe geçerse eskisi bağsız kalır (MP.4: doğrulanan ziyaretçi kaydı silinir)
-      p.conn=conn;p.lastView=null;p.lastMirror=null;p.lastSeen=now();S.conns.set(conn,p.playerId);
+      p.conn=conn;p.lastView=null;p.lastMirror=null;p.lastSeen=now();p.sync=null;S.conns.set(conn,p.playerId);   // MP-P0-DESYNC2: önceki oturumun eşitleme bildirimi yeni bağlantıda geçersiz
       out(conn,{v:PROTOCOL,type:'assign',room:S.roomId,saveId:S.saveId,hostId:S.hostId,playerId:p.playerId,token:p.token,empireId:p.empireId,lastSeq:p.lastSeq,rev:S.worldRevision});
       if(p.empireId!==null)publishTo(p,S.worldRevision);
       if(!L||['ingame','paused'].includes(L.phase))out(conn,{v:PROTOCOL,type:'speed',spd:G.speed|0,silent:1,n:nextSeq(),...speedExtra()});   // MP.6.1: dönen oyuncu güncel ortak hızı alır (bildirimsiz)
@@ -1347,6 +1348,11 @@ function createHost(opts){
         return out(conn,{v:PROTOCOL,type:'error',code:'bad-cmd'});
       runCommand(conn,m);
     },
+    /* MP-P0-DESYNC2: misafirin eşitleme durumu (yalnız oda seçeneği açıkken gönderilir): son BAŞARIYLA kurduğu ayna revizyonu, bunun bu
+       bağlantıya giden TAM ayna olup olmadığı ve "dünya güncel değil" durumu. Bağlantıya bağlıdır; başka oturumun bildirimi sayılmaz. */
+    synced(conn,m){const p=playerOf(conn);if(!onlyKeys(m,['v','type','rev','full','stale'])||!int(m.rev,0,2147483647)||typeof m.full!=='boolean'||typeof m.stale!=='boolean')return out(conn,{v:PROTOCOL,type:'error',code:'bad-synced'});
+      if(!p||p.empireId===null||p.playerId==='host'||p.conn!==conn)return;const t=now();p.syncRate=(p.syncRate||[]).filter(x=>t-x<10000);if(p.syncRate.length>=20)return;p.syncRate.push(t);
+      p.sync={rev:m.rev,full:m.full,stale:m.stale,at:t,conn};guarded('guard',()=>guardSynced(p),p);},
     resync(conn,m){const p=playerOf(conn);if(!p||p.empireId===null)return out(conn,{v:PROTOCOL,type:'error',code:'no-empire'});p.lastView=null;p.lastMirror=null;publishTo(p,S.worldRevision);},
     /* MP.6: misafir gerçek STARS arayüzünü açtı → ayna dünya istenir (yalnız kendi devleti için; görünüm kuralları aynadadır) */
     ui(conn,m){const p=playerOf(conn);if(!onlyKeys(m,['v','type','mode'])||m.mode!=='stars')return out(conn,{v:PROTOCOL,type:'error',code:'bad-ui'});
@@ -1468,7 +1474,8 @@ function createHost(opts){
     return {v:PROTOCOL,type:'lobby',rev:L.rev,mode:L.mode,phase:phaseNow(),pause:L.pause||null,capacity:L.capacity,settings,galaxyRev:L.galaxyRev,
       you:viewer?{seat:viewer.seat,...(design?{draftRev:viewer.draftRev||0,draft:!!viewer.draft}:{})}:null,canStart:canStart().ok,
       ...(design?{designs:gs.map(p=>({seat:p.seat,card:p.playerId==='host'?(hd.ok?draftCard(hd.draft):null):draftCard(p.draft)}))}:{}),
-      players:gs.map(p=>({seat:p.seat,name:p.name,color:p.color,host:p.playerId==='host',online:p.playerId==='host'||!!p.conn,claim:p.empireId!==null?p.empireId:p.claim,ready:!!p.ready,tab:p.tab,...(p.visitor?{visitor:1}:{})})),
+      players:gs.map(p=>({seat:p.seat,name:p.name,color:p.color,host:p.playerId==='host',online:p.playerId==='host'||!!p.conn,claim:p.empireId!==null?p.empireId:p.claim,ready:!!p.ready,tab:p.tab,...(p.visitor?{visitor:1}:{}),...(p.guard?{guarded:1}:{})})),
+      ...(L.guard?{guard:true}:{}),
       empires,mine,...(L.resume?{resume:{name:L.resume.name,year:L.resume.year,month:L.resume.month,size:L.resume.size,you:viewer&&viewer.empireId!==null&&G.emps[viewer.empireId]?G.emps[viewer.empireId].name:null}}:{})};
   }
   function broadcastLobby(){if(!L)return;L.rev++;for(const p of S.players.values())if(p.conn)out(p.conn,lobbyView(p));if(opts.onLobby)opts.onLobby(lobbyView(S.players.get('host')));}
@@ -1479,7 +1486,7 @@ function createHost(opts){
     if(!plain(m)||m.v!==PROTOCOL||typeof m.type!=='string'||!(m.type in HANDLERS)){stats.rejected++;return out(conn,{v:PROTOCOL,type:'error',code:'bad-message'});}
     HANDLERS[m.type](conn,m);
   }
-  function onLeave(conn){const p=playerOf(conn);S.conns.delete(conn);if(p&&p.conn===conn){p.conn=null;p.lastView=null;p.lastSeen=now();if(L&&['waiting','ready'].includes(L.phase)&&p.ready)p.ready=false;if(opts.onPlayer)opts.onPlayer(p.playerId,'leave');if(L)broadcastLobby();}}
+  function onLeave(conn){const p=playerOf(conn);S.conns.delete(conn);if(p&&p.conn===conn){p.conn=null;p.lastView=null;p.lastSeen=now();p.sync=null;if(L&&['waiting','ready'].includes(L.phase)&&p.ready)p.ready=false;if(opts.onPlayer)opts.onPlayer(p.playerId,'leave');if(L)broadcastLobby();}}
 
   /* ---------- devlet sahipliği (yalnız host API) ---------- */
   function assign(playerId,empireId){
@@ -1618,6 +1625,68 @@ function createHost(opts){
     return (0,eval)('('+src.replace(from,to)+')');   // global kapsamda: motorun genel adlarını aynen görür
   }
 
+  /* ═══ MP-P0-DESYNC2 — bağlantı kaybında GEÇİCİ AI KORUMASI (oda seçeneği, varsayılan kapalı) ═══
+     Kapalıyken hiçbir şey yapılmaz (koltuk ve eşitleme davranışı P26 ile aynı). Açıkken host, bir misafir koltuğunda doğrulanmış kopma
+     (relay ayrılışı: p.conn yok) ya da misafirin bildirdiği kalıcı "dünya güncel değil" durumu OYUN AKARKEN 30 gerçek saniye sürerse
+     korumayı başlatır. Duraklatmada / hız 0'da sayaç ilerlemez; kısa gecikme ve hareketsizlik tetik değildir. Koruma sırasında devlet ve
+     koltuk oyuncuda kalır (e.ai değişmez, tam devlet AI'sı yok); host yalnız MEVCUT savaştaki görünür düşmanın kendi gücünden üstün olduğu
+     sistemdeki kendi filolarını mevcut 'move' komut yolundan (aynı why/apply kuralları) güvenli dost sisteme çeker. Harcama, üretim, savaş,
+     diplomasi ve oy oyuncuya kalır. İade: aynı koltuğun ŞU ANKİ bağlantısına koruma başladıktan sonra giden TAM aynanın tam o
+     revizyonunun uygulandığı bildirilince; önce koruma kapanır, sonra oyuncu emirleri kabul edilir. Durum Save8'e / pakete girmez. */
+  const GUARD_MS=Number.isFinite(opts.guardMs)?opts.guardMs:30000,GUARD_MAX_ORDERS=4;let guardEpoch=0,guardAt=null;
+  function setGuard(v){if(!L||!['created','waiting','ready','resume'].includes(L.phase))return {ok:false,why:'phase'};if(typeof v!=='boolean')return {ok:false,why:'bad-value'};if(L.guard!==v){L.guard=v;broadcastLobby();}return {ok:true};}
+  function guardRunning(){return !!L&&L.phase==='ingame'&&!S.paused&&(G.speed|0)>0;}
+  function guardProblem(p){if(!p.conn)return 'offline';const y=p.sync;return y&&y.conn===p.conn&&y.stale&&now()-y.at<15000?'sync':null;}
+  function guardTick(){
+    const t=now(),dt=guardAt===null?0:Math.max(0,Math.min(5000,t-guardAt));guardAt=t;if(!L)return;const run=guardRunning();let moved=0;
+    for(const p of guests()){if(p.empireId===null||p.visitor)continue;const e=G.emps[p.empireId];if(!e||e.dead){p.guardWait=0;continue;}
+      if(p.guard){if(run)moved+=guardAct(p,e);continue;}
+      if(!L.guard){p.guardWait=0;p.guardSeen=false;continue;}
+      const why=guardProblem(p);if(!why){p.guardWait=0;p.guardSeen=false;continue;}
+      /* sorunun İLK görüldüğü (ya da duraklatmadan dönülen) nabız sayılmaz: süre her zaman ≥ GUARD_MS gerçek ve akan oyun süresidir */
+      if(run){if(p.guardSeen)p.guardWait=(p.guardWait||0)+dt;p.guardSeen=true;}else p.guardSeen=false;
+      if(p.guardWait>=GUARD_MS)guardStart(p,why);}
+    if(moved)publish();
+  }
+  function guardNote(p,on,extra){const name=String(p.name).slice(0,24);for(const o of guests())if(o!==p&&o.conn)out(o.conn,{v:PROTOCOL,type:'guardNote',on,name});
+    broadcastLobby();if(opts.onGuard)try{opts.onGuard({on,playerId:p.playerId,name,empireId:p.empireId,...extra});}catch{}}
+  function guardStart(p,why){
+    p.guard={epoch:++guardEpoch,since:now(),day:G.day,reason:why,actions:[],orders:new Map()};p.guardWait=0;p.guardSeen=false;stats.guards=(stats.guards|0)+1;
+    S.journal.push({rev:S.worldRevision,day:G.day,playerId:p.playerId,empireId:p.empireId,guard:'on',reason:why});
+    if(p.conn){p.lastMirror=null;out(p.conn,{v:PROTOCOL,type:'guard',on:true,epoch:p.guard.epoch,reason:why});}   // bağlıysa bir sonraki ayna TAM gider
+    guardNote(p,true,{reason:why});
+  }
+  function guardEnd(p){
+    const g=p.guard;p.guard=null;p.guardWait=0;p.guardSeen=false;const secs=Math.round((now()-g.since)/1000),actions=g.actions.slice(-12);p.guardLast={epoch:g.epoch,secs,actions};
+    S.journal.push({rev:S.worldRevision,day:G.day,playerId:p.playerId,empireId:p.empireId,guard:'off',orders:g.actions.length});
+    if(p.conn)out(p.conn,{v:PROTOCOL,type:'guard',on:false,epoch:g.epoch,secs,orders:g.actions.length,actions});
+    guardNote(p,false,{secs,orders:g.actions.length});
+  }
+  function guardSynced(p){
+    const g=p.guard,y=p.sync;if(!g||!y||y.conn!==p.conn||y.stale)return;
+    if(y.full&&p.fullConn===p.conn&&(p.fullAt||0)>=g.since&&y.rev===p.fullRev)return guardEnd(p);
+    const t=now();if(t-(g.askAt||0)>5000){g.askAt=t;p.lastMirror=null;publishTo(p,S.worldRevision);}   // kurulan dünya bu oturumun TAM aynası değil: bir TAM ayna gönderilir
+  }
+  /* görünür düşman gücü (yalnız mevcut savaş, yalnız oyuncunun gördüğü) — RNG yok, motor durumu yazılmaz */
+  function guardThreat(e,vis,id){let w=0;for(const f of G.fleets){if(f.e===e.id||!f.ships.length||!isArmed(f)||!e.war[f.e])continue;const at=f.mv?f.mv.to:f.sys;if(at===id&&vis.has(at))w+=fleetPower(f);}return w;}
+  function guardAct(p,e){
+    /* plan salt okumadır (pure: motorun _ önbellekleri değişmez); emirler ayrıca mevcut 'move' komutuyla yürütülür */
+    const g=p.guard,plan=pure(()=>{const vis=actorVision(e),out=[];
+      for(const f of G.fleets){if(out.length>=GUARD_MAX_ORDERS)break;if(f.e!==e.id||!f.ships.length||f.mv||!(f.sys>=0))continue;
+        const o=g.orders.get(f.id);if(o!==undefined&&(f.path.length||f.sys!==o))continue;   // verilmiş geri çekilme sürüyor
+        if(o===undefined&&(f.path.length||f.ord||f.explore||f.auto))continue;   // oyuncunun kabul edilmiş emri / görevi olduğu gibi yürür
+        const here=guardThreat(e,vis,f.sys);if(here<=0)continue;let mine=0;for(const x of G.fleets)if(x.e===e.id&&x.sys===f.sys&&!x.mv&&x.ships.length&&isArmed(x))mine+=fleetPower(x);if(here<=mine)continue;
+        /* en yakın (sıçrama) güvenli dost sistem: kendi sistemi ve orada görünür düşman yok; önce (terk edilen sistem dışında) komşusunda da düşman olmayanlar */
+        const seen=new Set([f.sys]),q=[[f.sys,0]],calm=[],open=[];
+        while(q.length){const [id,d]=q.shift();if(d>=6)continue;for(const nb of G.sys[id].lanes){if(seen.has(nb))continue;seen.add(nb);q.push([nb,d+1]);
+          const s=G.sys[nb];if(s.owner!==e.id||guardThreat(e,vis,nb)>0)continue;(s.lanes.some(x=>x!==f.sys&&guardThreat(e,vis,x)>0)?open:calm).push(nb);}}
+        if(calm.length||open.length)out.push({f,cands:calm.concat(open)});}
+      return out;});
+    let n=0;
+    for(const {f,cands} of plan)for(const to of cands){const from=f.sys,x=execute('guard:'+p.playerId,e.id,{kind:'move',fleet:f.id,to});
+      if(x.ok){g.orders.set(f.id,to);g.actions.push({fleet:String(f.name||'Filo').slice(0,48),from:String(G.sys[from].name).slice(0,32),to:String(G.sys[to].name).slice(0,32),day:Math.floor(G.day)});if(g.actions.length>64)g.actions.shift();n++;stats.guardOrders=(stats.guardOrders|0)+1;break;}}
+    return n;
+  }
   /* ═══ MP.4 — çok oyunculu kayıt paketi: Save8 + oturum + MP.3 teklif deposu. Jeton kayda girmez (tuzlu özet). ═══ */
   function snapshot(o={}){
     if(G._sideBuf||(typeof _dealTxActive!=='undefined'&&_dealTxActive)||(typeof _loadTxActive!=='undefined'&&_loadTxActive))return {ok:false,why:'busy'};   // yarım işlem kayda girmez
@@ -1629,7 +1698,7 @@ function createHost(opts){
       return x;});
     const hostE=G.emps[hostEmpireId],name=String(o.name||'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,40)||(hostE?String(hostE.name).slice(0,40):'Galaksi');   // tarih ayrı alanlarda (year/month)
     const body={format:PKG_FORMAT,mpVersion:PKG_VERSION,build:typeof BUILD_ID==='string'?BUILD_ID:null,createdAt:now(),saveId:S.saveId,
-      session:{roomId:S.roomId,worldRevision:S.worldRevision,hostEmpireId,speed:sharedSpeed().want,capacity:L?L.capacity:Math.max(2,players.length),settings:L&&L.settings?{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{})}:null,
+      session:{roomId:S.roomId,worldRevision:S.worldRevision,hostEmpireId,speed:sharedSpeed().want,capacity:L?L.capacity:Math.max(2,players.length),settings:L&&L.settings?{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{}),...(L.guard?{aiGuard:true}:{})}:null,
         players,notes:Object.fromEntries([...notes].map(([k,v])=>[k,v.slice(-12)]))},
       diplomacy:{next:D.next,offers:JSON.parse(JSON.stringify(D.offers)),...(SQ.length?{sq:SQ.map(q=>({from:q.from,to:q.to,born:q.born,expires:q.expires,status:q.status}))}:{})},   // MP.6.3: statüko teklifleri
       display:{name,year:G.year,month:G.month,day:Math.floor(G.day),size:L&&L.settings?L.settings.size:null,systems:G.sys.length,
@@ -1646,7 +1715,7 @@ function createHost(opts){
     SQ.length=0;for(const q of pkg.diplomacy.sq||[])SQ.push({...q,...(q.status==='pending'&&G.day>=q.expires?{status:'expired'}:{})});   // MP.6.3: süresi dolan yapay uzatılmaz
     notes.clear();for(const [k,v] of Object.entries(ss.notes||{}))notes.set(+k,v.slice(-12));
     newsBy.clear();newsVisCache.clear();warSeen.clear();recoverWarNews();
-    if(L){L.phase='resume';L.capacity=ss.capacity;L.settings=ss.settings?{...ss.settings}:null;L.galaxyRev=1;L.seatNext=Math.max(1,...ss.players.map(x=>(x.seat|0)+1));
+    if(L){L.phase='resume';L.capacity=ss.capacity;L.guard=!!(ss.settings&&ss.settings.aiGuard===true);L.settings=ss.settings?{size:ss.settings.size,aiCount:ss.settings.aiCount,...(ss.settings.shape!==undefined?{shape:ss.settings.shape}:{})}:null;L.galaxyRev=1;L.seatNext=Math.max(1,...ss.players.map(x=>(x.seat|0)+1));
       L.resume={name:pkg.display.name,year:pkg.display.year,month:pkg.display.month,size:pkg.display.size,createdAt:pkg.createdAt};}
   }
   /* Devam: host açıkça başlatır. Kimliği doğrulanmamış ziyaretçiler çıkar; bekleyen koltuklar ayrılmış kalır (AI yönetmez). */
@@ -1755,7 +1824,7 @@ function createHost(opts){
   if(opts.resume){if(!L)throw Error('MP.4: kayıttan devam lobi kipi ister');restoreSession(opts.resume);}
   const newsOf=id=>JSON.parse(JSON.stringify((newsBy.get(id)||{records:[]}).records));
   return {newsOf,onMessage,onLeave,onJoin(){},publish,pulse,publishTo,speedSync,assign,release,installGuards,meta,restore,viewFor,local,dip:D,dipView,polView:e=>pure(()=>polView(e)),
-    snapshot,resumeStart,recoverSeat,
+    snapshot,resumeStart,recoverSeat,setGuard,guardTick,guardState:pid=>{const p=S.players.get(pid);return p?{active:!!p.guard,wait:p.guardWait|0,reason:p.guard?p.guard.reason:null,actions:p.guard?p.guard.actions.slice():[],last:p.guardLast||null}:null;},
     isHuman:humanEmpire,isRemoteHuman:remoteHuman,state:S,stats,COMMANDS,HANDLERS,clock,fnv,observeHumans,
     configure,setCapacity,claimFor,setHostTab,start,canStart,draftCheck,kick:kickPlayer,close:closeRoom,lobbyView:()=>L&&lobbyView(S.players.get('host')),lobby:L,
     /* MP.1.1: duraklatma nedeni (host-offline / host-background) misafire lobide 'pause' olarak gider; MP.0 çağrısı nedensiz kalır. */

@@ -112,6 +112,7 @@ function onClick(e){
   if(m==='kick'){sheet('Bu oyuncu odadan çıkarılsın mı? (bu odaya tekrar giremez)','Çıkar',()=>{API.host.kick(el.dataset.pid,false);});return;}
   if(m==='start'){startGame();return;}
   /* MP.7: tek oyunculu kurulum ekranı (aynı ekran, aynı kurallar); kaydedince galaksi ayarları lobiye uygulanır */
+  if(m==='guard'){const r=API.host&&API.host.setGuard(!!el.checked);if(r&&!r.ok)toast(r.why);API.lobby=API.host.lobbyView();render();return;}   // MP-P0-DESYNC2
   if(m==='editMe'||m==='galaxy'){if(window.MP7Setup)MP7Setup.open({role:'host',step:m==='galaxy'?'galaksi':'mizac',done(){applyHostSetup();}});return;}
   if(m==='close'){sheet('Oda kapatılsın mı? Bağlı oyuncular çıkarılır.','Odayı kapat',closeRoom);return;}
 }
@@ -156,6 +157,9 @@ function makeHost(){
     /* MP.6.3: ortak hız = son açık seçim (want); uygulanan hız geçici nedenlerle (karar penceresi / arka plan / ağ) düşük olabilir */
     speedInfo:()=>PZ&&API.started?{want:PZ.want,reason:PZ.reason()}:null,
     onSpeed:info=>{if(window.MP61)MP61.speed(info);},
+    /* MP-P0-DESYNC2: geçici AI koruması başladı / bitti — host'a görünür durum (oyuncu adı; gizli veri yok) */
+    onGuard:x=>{const t=x.on?x.name+' — bağlantı sorunu sürüyor: geçici AI koruması başladı (yalnız tehdit altındaki filoları güvenli sisteme çekilir).':x.name+' kontrolü geri aldı ('+(x.secs|0)+' sn, '+(x.orders|0)+' geri çekilme emri).';
+      API.guardLog=(API.guardLog||[]).concat({on:!!x.on,name:x.name,at:Date.now()}).slice(-20);try{if(typeof UI!=='undefined'&&UI.alert)UI.alert(t,x.on?'war':'');}catch{}try{dipToast(t,!!x.on);}catch{}},
     /* MP.7: tasarım kipi — host'un devleti kendi kurulum ekranındaki CFG, misafirlerinki kendi taslakları; galaksi OYUNU BAŞLAT'ta
        gerçek setupGame(cfg.humans) ile kurulur. MP7Setup yüklenmemişse (eski sayfa) MP.1 devralma kipi. */
     lobby:{design:!!window.MP7Setup&&!window.MP7Legacy,hostDraft:()=>window.MP7Setup?MP7Setup.draft():null,
@@ -189,7 +193,9 @@ function designLobby(){
     '<button class="mp1-btn pri" data-m="editMe" id="mp7EditMe">DEVLETİMİ DÜZENLE</button>'+
     '<div class="mp1-card" id="mp7Galaxy"><b>Galaksi</b><div>'+esc((SIZES[s.size]||{}).n||s.size||'—')+' · '+esc((SHAPES[s.shape]||{}).n||'')+' · '+(+s.aiCount||0)+' AI + '+L.capacity+' insan</div>'+
       '<label class="mp1-l" for="mp7Cap">İnsan oyuncu kapasitesi (host dahil)</label><select class="mp1-sel" id="mp7Cap">'+[2,3,4].map(n=>'<option'+(n===L.capacity?' selected':'')+'>'+n+'</option>').join('')+'</select>'+
-      '<button class="mp1-btn" data-m="galaxy" id="mp7GalaxyBtn">GALAKSİ AYARLARI</button>'+(API.setupNote?'<div class="mp1-sub">'+esc(API.setupNote)+'</div>':'')+'</div>'+
+      '<button class="mp1-btn" data-m="galaxy" id="mp7GalaxyBtn">GALAKSİ AYARLARI</button>'+(API.setupNote?'<div class="mp1-sub">'+esc(API.setupNote)+'</div>':'')+
+      '<label class="mp1-l mpgd-row" for="mpGuard"><input type="checkbox" id="mpGuard" data-m="guard"'+(L.guard?' checked':'')+'> Bağlantı kaybında geçici AI koruması</label>'+
+      '<div class="mp1-sub" id="mpGuardHelp">'+(L.guard?'Açık: oyun akarken 30 sn süren kopma ya da eşitleme sorununda host, oyuncunun yalnız tehdit altındaki filolarını güvenli dost sisteme çeker. Harcama, üretim, savaş, diplomasi ve oy oyuncuda kalır; dünyası eşitlenince kontrol ona döner.':'Kapalı (varsayılan): kopan oyuncunun devleti olduğu gibi bekler.')+'</div>'+'</div>'+
     '<div class="mp1-status'+(cs.ok?' ok':'')+'" id="mp1Start">'+(cs.ok?'Herkes hazır. Oyunu başlatabilirsin.':esc(START_WHY[cs.why]||cs.why))+'</div>'+
     '<button class="mp1-btn pri" data-m="start"'+(cs.ok?'':' disabled')+'>OYUNU BAŞLAT</button><button class="mp1-btn warn" data-m="close">ODAYI KAPAT</button>'+
     '<div class="mp1-status'+(API.connected?'':' bad')+'">'+(API.connected?'Bağlantı hizmetine bağlı':'Bağlantı hizmeti yok — yeniden deneniyor')+'</div><div class="mp1-sub" id="mpVer">'+esc(V.verLine())+'</div></div>';
@@ -422,6 +428,8 @@ function resumeLobby(){
       visitors.map(p=>{const pid=pidOfSeat(p.seat);return '<div class="mp4-seat"><span>'+esc(p.name)+'</span>'+(offline.length?'<select class="mp1-sel" data-rec="'+esc(pid)+'">'+offline.map(o=>'<option value="'+esc(pidOfSeat(o.seat))+'">'+esc(o.name)+' — '+esc(G.emps[o.claim]?G.emps[o.claim].name:'?')+'</option>').join('')+'</select>'+
         '<button class="mp1-btn warn" data-m="recover" data-pid="'+esc(pid)+'">KİMLİĞİ KURTAR</button>':'<span class="mp1-sub">boş koltuk yok</span>')+'</div>';}).join('')+'</div>':'')+
     '<div class="mp1-status'+(offline.length?'':' ok')+'" id="mp1Start">'+(offline.length?offline.length+' oyuncu bekleniyor. Devam edersen devletleri ayrılmış kalır (AI yönetmez); sonra katılabilirler.':'Bütün oyuncular bağlı.')+'</div>'+
+    '<div class="mp1-card" id="mpGuardCard">'+'<label class="mp1-l mpgd-row" for="mpGuard"><input type="checkbox" id="mpGuard" data-m="guard"'+(L.guard?' checked':'')+'> Bağlantı kaybında geçici AI koruması</label>'+
+      '<div class="mp1-sub" id="mpGuardHelp">'+(L.guard?'Açık: oyun akarken 30 sn süren kopma ya da eşitleme sorununda host, oyuncunun yalnız tehdit altındaki filolarını güvenli dost sisteme çeker. Harcama, üretim, savaş, diplomasi ve oy oyuncuda kalır; dünyası eşitlenince kontrol ona döner.':'Kapalı (varsayılan): kopan oyuncunun devleti olduğu gibi bekler.')+'</div>'+'</div>'+
     '<button class="mp1-btn pri" data-m="resumeGo">DEVAM ET</button><button class="mp1-btn warn" data-m="close">ODAYI KAPAT</button>'+
     '<div class="mp1-status'+(API.connected?'':' bad')+'">'+(API.connected?'Bağlantı hizmetine bağlı':'Bağlantı hizmeti yok — yeniden deneniyor')+'</div></div>';
 }

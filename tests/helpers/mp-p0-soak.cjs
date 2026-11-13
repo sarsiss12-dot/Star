@@ -52,7 +52,7 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,origin,gues
   /* doğrudan komut (misafirin gerçek MP yolu): kendi filosuna hareket + tersaneye korvet; host ACK'i ve aynadaki etkisi ölçülür */
   const send1=async(c)=>{const r=await B.evaluate(c=>MP1Join.cmd(c),c);if(!r.ok)return {status:'local',code:r.why};
     const got=await B.waitForFunction(cid=>MP1Join.results.some(x=>x.cid===cid),r.cid,{timeout:15000,polling:100}).then(()=>true,()=>false);if(!got)return {status:'no-reply',cid:r.cid};
-    return B.evaluate(cid=>{const x=MP1Join.results.filter(y=>y.cid===cid).at(-1);return {status:x.status,code:x.code||null,ms:x.ms};},r.cid);};
+    return B.evaluate(cid=>{const x=MP1Join.results.filter(y=>y.cid===cid).at(-1);return {status:x.status,code:x.code||null,ms:x.ms,rev:x.rev};},r.cid);};
   const command=async(label)=>{const out={label,at:Date.now()};try{
       await B.evaluate(()=>{try{UI.closeModal();}catch{}});   // açık pencere aynayı tasarım gereği bekletir; emir etkisi pencere kapalıyken ölçülür
       const own=await B.evaluate(()=>__p0.own());out.own={fleets:own.fleets.length,yards:own.yards.length,ala:own.ala};
@@ -89,7 +89,10 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,origin,gues
       if(HM&&n%2===0)await act(H,'H:').catch(e=>{P.actions['H:err:'+String(e&&e.message||e).slice(0,40)]=1;});
       await sleep(120+Math.floor(rnd()*380));
       if(Date.now()>=nextCmd){nextCmd=Date.now()+45000;const c=await command('t+'+Math.round((Date.now()-(end-MIN*60000))/1000));
-        if(c&&c.ship&&c.ship.status==='ok'){const seen=await B.waitForFunction(a=>{const s=G.sys[a.yard];return s&&(s.queue||[]).length>a.q0;},{yard:c.yard,q0:c.q0},{timeout:STALL,polling:250}).then(()=>true,()=>false);P.cmds[P.cmds.length-1].shipSeen=seen;}}
+        /* MP-P0-DESYNC2: yansıma ölçümü — host'un ACK'teki dünya revizyonunu içeren ayna misafirde KURULDU mu (P26 ACK ≠ etki ayrımı).
+           Eski ölçüm (tersane sırası q0'dan uzun mu) en yüksek hızda sipariş hemen tamamlanınca yanlış FAIL veriyordu (taban p25'te de); bilgi olarak tutulur. */
+        if(c&&c.ship&&c.ship.status==='ok'){const t1=Date.now(),seen=await B.waitForFunction(rev=>MP6Stars.S.appliedWorldRev>=rev&&MP6Stars.S.appliedGeneration===MP6Stars.S.gen,c.ship.rev,{timeout:STALL,polling:250}).then(()=>true,()=>false);
+          const last=P.cmds[P.cmds.length-1];last.shipSeen=seen;last.reflectMs=Date.now()-t1;last.queueLonger=await B.evaluate(a=>{const s=G.sys[a.yard];return !!(s&&(s.queue||[]).length>a.q0);},{yard:c.yard,q0:c.q0}).catch(()=>null);}}
       if(DS&&Date.now()>=nextDs){nextDs=Date.now()+DS_EVERY;const tr=await desyncTrigger(dsKind).catch(e=>({err:String(e&&e.message||e).slice(0,200)}));dsKind=dsKind==='relief'?'autonomy':'relief';P.desync.triggers.push(tr);console.log('  kesirli politika '+JSON.stringify(tr).slice(0,400));}
       if(Date.now()<nextSample)continue;nextSample=Date.now()+2000;
       const h=await hostState(),g=await B.evaluate(()=>__p0.diag()).catch(e=>({err:String(e)}));if((h.speed|0)<maxSpd&&!h.paused)await go();
@@ -110,12 +113,14 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,origin,gues
     if(DS){P.desync.guest=await B.evaluate(()=>{const S=MP6Stars.S,d=S.desync||{};return {fail:S.stats.fail||0,crash:S.stats.crash||0,staleEpisodes:d.episodes||0,staleTotal:d.total||0,maxRecoveryMs:d.maxRecoveryMs||0,lastRecoveryMs:d.lastRecoveryMs||0,on:!!d.on,reason:d.reason||null,resyncs:S.stats.resyncs,reconnects:S.sync.reconnects};}).catch(e=>({err:String(e)}));
       P.desync.host=await H.evaluate(()=>{const rows=[];for(const s of G.sys)for(const p of s.planets){const x=p.col&&p.col.crisisPolicy;if(!x)continue;const P=INTERNAL_POLICIES[x.kind];rows.push({owner:x.owner,ai:!!G.emps[x.owner].ai,kind:x.kind,started:x.started,frac:x.started%1!==0,oldBad:!(x.until-x.started===P.days&&x.after-x.started===P.cooldown)});}
         const d=JSON.parse(serialize());const ok=validSaveEnvelope(d);return {policies:rows.length,ai:rows.filter(r=>r.ai).length,frac:rows.filter(r=>r.frac).length,oldBadAI:rows.filter(r=>r.ai&&r.oldBad).length,oldBad:rows.filter(r=>r.oldBad).length,save8:ok,why:typeof saveLoadReject==='function'?saveLoadReject():null,day:G.day};});
+      P.desync.guardOption=await H.evaluate(()=>({option:!!(MP1Host.host.lobby&&MP1Host.host.lobby.guard),guards:MP1Host.host.stats.guards|0,orders:MP1Host.host.stats.guardOrders|0})).catch(()=>null);   // MP-P0-DESYNC2: sağlıklı oturumda yanlış tetikleme olmamalı
       console.log('  DESYNC1 '+JSON.stringify({triggers:P.desync.triggers.length,maxStillMs:P.desync.maxStillMs,guest:P.desync.guest,host:P.desync.host}).slice(0,900));}
     fs.writeFileSync(path.join(out,'p0-soak.json'),JSON.stringify(P,null,1));
     console.log('  eylem '+n+' · en büyük gecikme '+P.maxLagDays+' gün · donma '+P.stalls.length+' · komut '+JSON.stringify(P.cmds.map(c=>[(c.move||{}).status,(c.ship||{}).status,c.shipSeen])));
     if(DS){const T=P.desync.triggers.filter(t=>t.status==='ok');assert(T.length>=1,'en az bir kesirli politika kararı uygulanmalı: '+JSON.stringify(P.desync.triggers).slice(0,500));
       assert(P.desync.host.save8,'host Save8 geçerli: '+JSON.stringify(P.desync.host));assert.equal(P.desync.guest.fail,0,'misafir aynası hiç reddedilmedi: '+JSON.stringify(P.desync.guest));
-      assert(T.every(t=>t.seen),'her kararın etkisi misafir dünyasında görüldü: '+JSON.stringify(T).slice(0,600));}
+      assert(T.every(t=>t.seen),'her kararın etkisi misafir dünyasında görüldü: '+JSON.stringify(T).slice(0,600));
+      if(P.desync.guardOption&&P.desync.guardOption.option)assert.equal(P.desync.guardOption.guards,0,'sağlıklı oturumda geçici AI koruması tetiklenmedi: '+JSON.stringify(P.desync.guardOption));}
     assert.equal(P.stalls.filter(s=>!s.selfRecovered).length,0,'misafir dünyası kalıcı olarak durdu: '+JSON.stringify(P.stalls[0]||{}).slice(0,900));
     const lost=P.cmds.filter(c=>c.ship&&c.ship.status==='ok'&&c.shipSeen===false);assert.equal(lost.length,0,'host\'un kabul ettiği gemi siparişi misafir aynasına yansımadı: '+JSON.stringify(lost[0]||{}).slice(0,400));
   });
