@@ -131,4 +131,38 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,lanes,wait,
     await synced(B);const s2=await st(B);R.reopened={emp:s2.emp,name:s2.name};assert.equal(s2.emp,eB);assert.equal(s2.name,s0.name,'aynı devlete döndü');await shot(B,'d3-reopened');
     pg.B=B;fs.writeFileSync(path.join(out,'d3.json'),JSON.stringify(R,null,1));
   });
+  /* ---- D4: P26 + BETA-MOBILE-HUD.0 birleşik adayında misafir dar yatay HUD (MP8_SCEN=D, B = 800×360 dokunmatik) ---- */
+  if(process.env.MP8_D_HUD!=='0')await test('D4 misafir B (800×360): sağ panel açık + uzun filo adı → ROTA / DUR / SİSTEM tek satır; ilk ROTA dokunuşu hedeflemeyi açar, ilk harita dokunuşu doğru savaş filosuna tek move; olay kartı geçici mesajın üstünde',async()=>{
+    const R=M.d4={};await synced(B);
+    const fid=await H.evaluate(e=>{const E=G.emps[e],f=G.fleets.find(f=>f.e===e&&f.sys===E.home&&isArmed(f)&&!f.mv)||G.fleets.find(f=>f.e===e&&isArmed(f)&&f.sys>=0&&!f.mv);if(!f)return null;f.name='Uzun Adlı Birinci Ağır Saldırı Filosu Doğu Kanadı';f.path=[];MP1Host.host.publish();return f.id;},eB);
+    assert(fid!==null,'fikstür: B\'nin duran savaş filosu');
+    await B.waitForFunction(id=>G.fleets.some(f=>f.id===id&&/^Uzun Adlı/.test(f.name)),fid,{timeout:20000,polling:150});await synced(B);
+    const fx=await B.evaluate(id=>{try{UI.closeModal();}catch{}const f=G.fleets.find(x=>x.id===id);View.sel=f;View.route=false;UI.tab('filo');if($('sidebar').classList.contains('off'))$('sbToggle').click();
+      const other=G.fleets.find(x=>x.e===0&&x.id!==id);View.aimFleet=other?other.id:undefined;const s=G.sys[f.sys];View.cam.x=s.x;View.cam.y=s.y;UI.refresh();
+      return {other:other?other.id:null,otherPath:other?(other.path||[]).slice():null,side:!$('sidebar').classList.contains('off')};},fid);
+    const layout=()=>B.evaluate(()=>{const el=$('seltag'),p=el.getBoundingClientRect(),bs=[...el.querySelectorAll('button')].map(b=>b.getBoundingClientRect()),sb=$('sidebar'),right=sb.classList.contains('off')?innerWidth:sb.getBoundingClientRect().left;
+      return {count:bs.length,fits:p.right<=right+1&&bs.every(b=>b.left>=p.left&&b.right<=p.right&&b.height>=44),singleRow:new Set(bs.map(b=>Math.round(b.top))).size===1,name:(el.querySelector('span')||{}).textContent||''};});
+    await B.waitForFunction(()=>!$('seltag').classList.contains('hidden')&&$('seltag').querySelectorAll('button').length===3,undefined,{timeout:10000});
+    const l0=await layout();R.layoutOpen=l0;R.side=fx.side;await shot(B,'d4-hud-panel-acik');
+    assert(fx.side,'sağ panel açık');assert.deepEqual({c:l0.count,f:l0.fits,r:l0.singleRow},{c:3,f:true,r:true},'panel açık + uzun ad: '+JSON.stringify(l0));assert(/^Uzun Adlı/.test(l0.name));
+    const sent0=await B.evaluate(()=>MP6Stars.S.stats.sent.move|0),tgt=await B.evaluate(id=>{const f=G.fleets.find(x=>x.id===id),src=G.sys[f.sys];
+      const t=src.lanes.map(i=>G.sys[i]).find(s=>pSeen(s)&&findPathAllowed(G.p,f,src.id,s.id)?.length);if(!t)return null;View.cam.x=t.x;View.cam.y=t.y;UI.refresh();return {id:t.id,...View.w2s(t.x,t.y)};},fid);
+    assert(tgt,'fikstür: geçilebilir komşu');
+    await tap(B,'#seltag [data-a="route"]');
+    const r1=await B.evaluate(()=>({route:View.route,label:$('seltag').querySelector('[data-a="route"]').textContent,aim:View.aimFleet}));R.afterRoute=r1;const l1=await layout();R.layoutRoute=l1;
+    assert.equal(r1.route,true);assert.equal(r1.label,'HEDEF SEÇ','ilk dokunuşta hedefleme');assert.equal(r1.aim,undefined,'önceki hedefleme kipi temizlendi');assert(l1.singleRow&&l1.fits,'hedefleme çubuğu tek satır');
+    assert.equal(await B.evaluate(({x,y})=>document.elementFromPoint(x,y)?.id,tgt),'map','hedef noktası haritada');
+    await B.touchscreen.tap(tgt.x,tgt.y);
+    await H.waitForFunction(({id,to})=>{const f=G.fleets.find(x=>x.id===id);return f&&(f.path||[]).at(-1)===to;},{id:fid,to:tgt.id},{timeout:20000,polling:150});
+    const sent1=await B.evaluate(()=>MP6Stars.S.stats.sent.move|0);R.moveSent=sent1-sent0;assert.equal(R.moveSent,1,'tek move komutu');
+    if(fx.other!==null)assert.deepEqual(await H.evaluate(id=>(G.fleets.find(x=>x.id===id)?.path||[]).slice(),fx.other),fx.otherPath,'öteki filo etkilenmedi');
+    await B.waitForFunction(()=>$('seltag').querySelector('[data-a="route"]')?.textContent==='+DURAK',undefined,{timeout:20000,polling:150}).catch(()=>{});
+    R.label2=await B.evaluate(()=>$('seltag').querySelector('[data-a="route"]')?.textContent);await shot(B,'d4-hud-rota');
+    await B.evaluate(()=>{$('alerts').replaceChildren();UI.alert('Geçici bildirim '.repeat(12));UI.notify({kind:'test',title:'Olay kartı',sub:'Öncelikli karar',ico:'✉'});});
+    await B.locator('#inbox .nCard').first().waitFor({timeout:10000});
+    const layer=await B.evaluate(()=>{const a=$('alerts').getBoundingClientRect(),c=$('inbox').querySelector('.nCard'),b=c.getBoundingClientRect(),x=b.left+b.width/2,y=b.top+b.height/2;return {above:+getComputedStyle($('inbox')).zIndex>+getComputedStyle($('alerts')).zIndex,topHit:c.contains(document.elementFromPoint(x,y))};});
+    R.layer=layer;assert.deepEqual(layer,{above:true,topHit:true},'olay kartı üstte ve dokunulabilir');
+    await B.evaluate(()=>{G.inbox=G.inbox.filter(n=>n.kind!=='test');UI.drawInbox();});
+    fs.writeFileSync(path.join(out,'d4.json'),JSON.stringify(R,null,1));
+  });
 };
