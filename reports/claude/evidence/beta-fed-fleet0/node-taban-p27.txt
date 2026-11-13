@@ -1,0 +1,12 @@
+✗ B0 bulgular (P27): Ortak Filo katkısı federal fona gider; federal filo başkanın kişisel bakımına girmez; fon enerji + alaşım bakımını ayda bir öder — AssertionError [ERR_ASSERTION]: hazinede (tüketicisiz) birikmez
+✗ F1 eski hazine: f.treasury yüklemede bir kez fona; art arda kaydet/yükle döngülerinde toplam kaynak değişmez — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+✗ F2 aylık fon: tür oranı + Ortak Filo yasası + hibe katkısı kaydedilir; panel gerçek oranı ve harcanabilir bakiyeyi verir — TypeError: Cannot read properties of null (reading '0')
+✗ F3 yetersiz fon: ödenebilen alınır, negatif bakiye yok; en zayıf federal filo dağıtılır; başkanın kasası federal bakım ödemez — AssertionError [ERR_ASSERTION]: alaşım yeterli: normal kesinti
+✗ F4 sipariş: yalnız başkan / kendi tersanesi / savaş gemisi; bedel bir kez fondan; süre sonunda TEK federal gemi; ayda bir; kapasite üye×4 (kuyruk dahil); 3 aylık rezerv — evalmachine.<anonymous>:1
+✗ F5 iptal: ödeme federal fona bir kez döner; kişisel kasaya gitmez; yinelenen iptal ikinci iade yapmaz; kişisel sipariş aynen — evalmachine.<anonymous>:1
+✗ F6 üretim sürerken başkan değişir: iş federasyona bağlı kalır, gemi O ANKİ başkana federal doğar; eski başkan yeni sipariş veremez — evalmachine.<anonymous>:1
+✗ F7 kayıttan devam: üretim ortasında kaydet → yükle → tamamla: tek gemi, fon ve kaynak aynı — evalmachine.<anonymous>:1
+✗ F8 dağılma: bekleyen iş fona, federal filo dağıtılır (kişisel olmaz), fon katkı oranıyla iade; katkı kaydı yoksa eşit; toplam kaynak korunur — evalmachine.<anonymous>:1
+✗ F9 AI başkan: savaş / savunma yükümlülüğü yoksa sipariş yok; varsa eşikle ayda en çok bir; aynı yol (kuyruk); RNG tüketmez — evalmachine.<anonymous>:1
+✗ F10 tersane el değiştirir / sipariş veren üyelikten çıkar: iş aylık taramada kapanır, ödeme fona bir kez döner — evalmachine.<anonymous>:1
+GEÇEN: 0 KALAN: 11

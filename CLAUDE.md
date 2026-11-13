@@ -2,7 +2,15 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — MP-P0-DESYNC2 (p27 / MP.8.9b24, 13 Kasım 2026)
+## Son teslim — BETA-FED-FLEET.0 (p28 / MP.8.9b25, 13 Kasım 2026)
+
+- Ayrıntı: `reports/claude/BETA-FED-FLEET0-SONUC.md`, kanıt `reports/claude/evidence/beta-fed-fleet0/`. Dal `claude/stars-beta-fed-fleet0` (P27 #40 `43a3612` üstünde). Save8v8/paket4/protokol1; p28 paket yükleyicisi p6–p27 kabul eder.
+- Tek fon: `FED_LAWS.filo` + tür haracı `f.fund`'a, katkı `f.contrib` defterine (yeni isteğe bağlı alan; yalnız federasyon varken). Eski `f.treasury` `restorePoliticalWorld`'de BİR KEZ `fund.ala`'ya. Federal filolar kişisel bakıma girmez; `fedFundTick` enerji+alaşım bakımını fondan düşer, yetmezse en zayıf federal filo dağılır.
+- Federal sipariş `fedShipQuote`/`orderFederalShip` (başkan, kendi tersanesi, kor/muh/kru/zir, üye×4 kuyruk dahil, ayda bir, bedel ala×1,15 fondan kabulde bir kez, 3 aylık rezerv); kuyruk öğesi `fed`/`fedPaid`, tamamlanınca O ANKİ başkana `federal` filo; iptal/kapanış `fedRefundOrder` (fona bir kez). Dağılma `fedDissolveFunds` (katkı oranı, kayıt yoksa eşit). AI başkan `aiFederalFleetOrder` yalnız üye fiilen savaştayken, RNG yok.
+- MP `fedShip` komutu (host uygulama anında yeniden denetler); aynada yalnız üyeye gerçek `fund` + `fundView`, `contrib` hiç gitmez; misafir `orderFederalShip` sarmalayıcısı. Test: `node tests/beta_fed_fleet0_test.js`, `beta_fed_fleet0_mp_test.js`, `beta_fed_fleet0_compat_test.js`, `node tests/beta_fed_fleet0_equivalence.cjs`, `MP8_SCEN=L node tests/browser-mp8.cjs`.
+- Koruma zinciri: `beta-fed-fleet0-reviewed` ← `mp-p0-guard-reviewed` ← `mp-p0-desync2-reviewed` ← …
+
+## Önceki teslim — MP-P0-DESYNC2 (p27 / MP.8.9b24, 13 Kasım 2026)
 
 - Ayrıntı: `reports/claude/MP-P0-DESYNC2-SONUC.md`, kanıt `reports/claude/evidence/mp-p0-desync2/`. Dal `claude/stars-mp-p0-desync2` (P26 #39 üstünde). Commit 1 `cacf6fe` = P26 + PR #38 mobil HUD kaynağı (p27/MP.8.9b23; p25u1 kimliği/ZIP kopyalanmadı). Commit 2 = geçici AI koruması (yalnız MP kaynakları, MP.8.9b24; runtime/ZIP aynı). Save8v8/paket4/protokol1.
 - Koruma: lobi `setGuard` (varsayılan kapalı; pakette yalnız açıkken `settings.aiGuard:true`). Açıkken kopma ya da misafirin `synced{stale}` bildirimi oyun AKARKEN 30 sn sürerse `guardStart`; yalnız tehdit altındaki EMİRSİZ filolar mevcut `move` yoluyla güvenli dost sisteme (plan `pure()` içinde); oyuncu emri `guard-active`. İade yalnız bu bağlantıya koruma sonrası giden TAM aynanın o revizyonu `synced{full:true}` ile bildirilince. Durum Save8/pakete girmez. Test: `node tests/mp_p0_guard_test.js`, `MP8_SCEN=G node tests/browser-mp8.cjs`, D4 (misafir HUD), `browser-mobile-hud0.cjs`.

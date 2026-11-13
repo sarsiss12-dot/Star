@@ -1,0 +1,7 @@
+PASS L0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS L1 misafir başkan B gerçek sistem panelinde FEDERAL SİPARİŞ + gerçek ortak fonu görür; üye olmayan C fonu / defteri / düğmeyi görmez
+PASS L2 B gerçek FEDERAL SİPARİŞ düğmesine dokunur → host tersane kuyruğunda TEK federal iş, bedel ortak fondan bir kez; dokunma anında yerel etki yok, kabul host ACK'i + güncel aynada
+PASS L3 B'nin hattı kopup bağlanır, AYNI komut çerçevesi yeniden gönderilir → ikinci ödeme / ikinci iş yok; aynı ay yeni komut reddedilir
+PASS L4 iş gerçek dailyTick ile tamamlanır → tek federal gemi, B'nin (başkan) federal filosu; ödeme bir kez; B güncel aynada federal filoyu görür
+PASS L5 başkanlık host'a geçer (B'nin aynası henüz eski): B'nin gerçek düğme dokunuşu host'ta işlem anında reddedilir; fon ve kuyruk değişmez
+GEÇEN: 6 KALAN: 0

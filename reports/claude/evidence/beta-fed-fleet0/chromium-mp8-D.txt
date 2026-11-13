@@ -1,0 +1,6 @@
+PASS D0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS D1 kesirli gün + gerçek host karar yolu (misafir B: internalQuote → internalPolicy): B aynası kurulur, C etkilenmez; host Save8 ve MP paketi geçerli (taban p25: B "kayıt doğrulaması reddetti")
+PASS D2 B'ye giden fark kaybolur → otomatik TAM ayna; B'nin verisi reddedilir → "dünya güncel değil" (son geçerli dünya, emir engeli, ≤3 otomatik istek, yeniden bağlanma döngüsü yok), elle YENİDEN EŞİTLE + TANIYI KOPYALA; C kesintisiz; aynı devlet; ilk yeni emir tam bir kez
+PASS D3 geç iletiler revizyonu geri almaz / çift uygulamaz; ret sürerken sayfa yenilenirse başlangıç sınırlı denemede durur, geçerli ayna gelince oyun açılır
+PASS D4 misafir B (800×360): sağ panel açık + uzun filo adı → ROTA / DUR / SİSTEM tek satır; ilk ROTA dokunuşu hedeflemeyi açar, ilk harita dokunuşu doğru savaş filosuna tek move; olay kartı geçici mesajın üstünde
+GEÇEN: 5 KALAN: 0

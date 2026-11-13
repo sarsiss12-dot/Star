@@ -1,3 +1,7 @@
+# Son rapor bağlantısı
+
+- **Son teslim (Claude):** [BETA-FED-FLEET.0 — federal donanma, ortak fon, federal sipariş (p28 / MP.8.9b25)](reports/claude/BETA-FED-FLEET0-SONUC.md). Önceki Claude raporları: [MP-P0-DESYNC2](reports/claude/MP-P0-DESYNC2-SONUC.md), [MP-P0-DESYNC1](reports/claude/MP-P0-DESYNC1-SONUC.md).
+
 # Son Codex raporu — BETA-UI-REFINEMENT.0 / p23
 
 - [Tek parça Türkçe sonuç raporu](reports/codex/BETA-UI-REFINEMENT0-SONUC.md).

@@ -1,0 +1,173 @@
+{
+ "L1": {
+  "B": {
+   "leader": 0,
+   "fund": {
+    "ala": 3000,
+    "ene": 3000
+   },
+   "view": {
+    "ships": 0,
+    "fleets": 0,
+    "queued": 0,
+    "cap": 8,
+    "upkeep": {
+     "ene": 0,
+     "ala": 0
+    },
+    "monthUsed": false,
+    "reserveMonths": 3,
+    "orders": []
+   },
+   "info": "Ortak fon 3000 alaşım · 3000 enerji · donanma 0/8 gemi (kuyruk 0) · bu ay 1 sipariş hakkı · bakım 0 ene + 0 ala / ay",
+   "disabled": false
+  },
+  "host": {
+   "ala": 3000,
+   "ene": 3000
+  },
+  "C": {
+   "fund": {
+    "ala": 0,
+    "ene": 0
+   },
+   "view": null,
+   "contrib": null,
+   "member": false
+  }
+ },
+ "L2": {
+  "cost": 37,
+  "h0": {
+   "ala": 3000,
+   "ene": 3000
+  },
+  "h1": {
+   "ala": 2963,
+   "ene": 3000
+  },
+  "orders": [
+   {
+    "sys": 5,
+    "cls": "kor",
+    "e": 1,
+    "left": 33,
+    "paid": {
+     "ala": 37
+    }
+   }
+  ],
+  "local0": {
+   "q": 0,
+   "fund": 3000
+  },
+  "localNow": {
+   "q": 0,
+   "fund": 3000
+  },
+  "B": {
+   "q": [],
+   "fund": 3000,
+   "row": false,
+   "btn": false
+  },
+  "frame": true
+ },
+ "L3": {
+  "dup": {
+   "v": 1,
+   "type": "result",
+   "seq": 1,
+   "cid": "jmwf1iy157wlpmy5r",
+   "status": "ok",
+   "code": null,
+   "rev": 10,
+   "extra": {
+    "cost": {
+     "ala": 37
+    },
+    "days": 33
+   },
+   "dup": 1
+  },
+  "again": {
+   "v": 1,
+   "type": "result",
+   "seq": 2,
+   "cid": "jmwf1j32hfntedahi",
+   "status": "rejected",
+   "code": "rules:fed",
+   "rev": 13,
+   "detail": [
+    "Bu ay federal sipariş zaten verildi (ayda en çok bir)"
+   ],
+   "ms": 3
+  },
+  "h0": {
+   "ala": 2963,
+   "ene": 3000
+  },
+  "h1": {
+   "ala": 2963,
+   "ene": 3000
+  },
+  "orders": 1,
+  "dupStat": [
+   0,
+   1
+  ]
+ },
+ "L4": {
+  "days": 34,
+  "h0": {
+   "ala": 2963,
+   "ene": 3000
+  },
+  "h1": {
+   "ala": 2963,
+   "ene": 3000
+  },
+  "fleets": [
+   {
+    "id": 28,
+    "e": 1,
+    "n": 1,
+    "c": [
+     "kor"
+    ]
+   }
+  ],
+  "B": []
+ },
+ "L5": {
+  "res": {
+   "v": 1,
+   "type": "result",
+   "seq": 3,
+   "cid": "jmwf1j3l3u95if3ef",
+   "status": "rejected",
+   "code": "rules:fed",
+   "rev": 19,
+   "detail": [
+    "Yalnız federasyon başkanı federal sipariş verebilir"
+   ],
+   "ms": 15
+  },
+  "h0": {
+   "ala": 2963,
+   "ene": 3000
+  },
+  "h1": {
+   "ala": 2963,
+   "ene": 3000
+  },
+  "orders": [
+   0,
+   0
+  ],
+  "B": {
+   "leader": 0,
+   "btn": 4
+  }
+ }
+}

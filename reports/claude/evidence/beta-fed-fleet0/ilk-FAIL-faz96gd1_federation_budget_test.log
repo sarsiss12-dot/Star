@@ -1,0 +1,33 @@
+✓ real seed404 locked treasury forecast is exactly four alloy, no invented combat benefit
+✓ real seed23 fund tithe is included once, payment remains actual
+✓ private fund and locked treasury are separate real liabilities
+✓ freight cannot reduce production tax base and is charged once in forecast
+✓ a negative production forecast is not charged a positive-income tithe
+✗ existing payment engine still takes actual available stock without a waiver — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/home/user/Star/tests/faz96gd1_federation_budget_test.js:5:32)
+    at /home/user/Star/tests/faz96gd1_federation_budget_test.js:11:246
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/faz96gd1_federation_budget_test.js:11:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+✓ real seed404 costly law assessment changes for a reason, not RNG
+✓ a funded militarist can still support a paid military law
+✓ a newly unaffordable expensive law is rejected even with good relations
+✓ income loss and benefit from civilian budget use actual production calculator
+✓ law repeal recovers actual recurring burden rather than adding a bonus
+✓ funded majority preserves long-term review clock and grants no income
+✓ an unfunded losing member reviews immediately while keeping its lawful duties
+✓ same-day fresh forecast survives Save8 without double taxation
+✓ next-day post-law budget remains identical across Save8 reload
+✓ law forecasts never read hidden foreign stock or output
+✓ new discretionary war is rejected when own deployment budget is unfunded
+✓ strong hostile applicant can be rejected under the existing admission evaluator
+✓ harmful weighted reform can lose even when proposed by an ally
+GEÇEN: 18 KALAN: 1

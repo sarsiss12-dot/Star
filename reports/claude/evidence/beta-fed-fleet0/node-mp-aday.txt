@@ -1,0 +1,8 @@
+PASS M1 misafir başkan (B=1) federal siparişi host doğrular; bedel fondan bir kez, tersane kuyruğunda tek iş, kişisel kaynak değişmez
+PASS M2 başkan olmayan üye (C=3), üye olmayan (D=4), başkasının tersanesi ve sınıf dışı reddedilir; fon değişmez
+PASS M3 aynı komut kimliği (yeniden bağlanma / çift gönderim) ikinci ödeme ve ikinci iş üretmez; aynı ay ikinci sipariş reddedilir
+PASS M4 başkanlık değişince önceki başkanın (B) siparişi işlem anında reddedilir; yeni başkan (C) sipariş verebilir; bekleyen iş federasyonda kalır
+PASS M5 ayna: üyeler (B, C) gerçek fon + bakım defterini görür; üye olmayan (D) görmez; katkı kaydı ve sipariş tersaneleri hiç gitmez
+PASS M6 misafir aynası misafir motorunda yüklenir; misafir başkan kendi tersanesinde aynı teklif kuralını görür (ayda bir, fon, sınır)
+PASS M7 tamamlanınca federal gemi o anki başkana federal filo olarak çıkar; ödeme bir kez, iş kuyruktan kalkar
+GEÇEN: 7 KALAN: 0
