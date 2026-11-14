@@ -1,0 +1,48 @@
+✓ player declaration produces one structured notice with real names and timestamp
+✓ real fractional game day survives notice validation, display and Save v8
+✓ enemy declaration auto-pauses through existing speed infrastructure
+✓ pause off does not stop the game and retains the notification
+✓ settings exposes an accessible war pause option and persists changes
+✓ duplicate declaration and repeated hook do not repeat after dismissal
+✓ save/load preserves structured notice and ledger dedup flag
+✓ dismissed notification remains dismissed across Save v8 load
+✓ legacy active wars are not synthesized into new notices on load
+✓ new war after peace receives a different front and new notice
+✓ federation defense uses existing law, defensive side and participation reason
+✗ several automatic defenders each receive one front warning in the same campaign — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+1 !== 3
+
+    at eq (/home/user/Star/tests/faz94d1_war_visibility_test.js:5:29)
+    at /home/user/Star/tests/faz94d1_war_visibility_test.js:23:281
+    at test (/home/user/Star/tests/faz94d1_war_visibility_test.js:6:24)
+    at Object.<anonymous> (/home/user/Star/tests/faz94d1_war_visibility_test.js:23:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+✓ federation without defense law creates no new obligation
+✓ overlord protection announces player entry with real vassal reason
+✓ existing border-guard vassal war join reports its actual lord call
+✓ war promise records its actual sponsor and reason
+✓ independence backer path also produces a notice
+✓ notification opens exact opponent diplomacy target
+✓ unknown campaign participants and hidden power are excluded from detail
+✓ old wardec notes remain readable without fabricated start details
+✓ shared war data deduplicates multiple mutual war pairs
+✓ contact with only one party cannot reveal hidden opponent or line
+✓ diplomatic contact alone cannot reveal third-party wars
+✓ unexplored capitals never provide hidden line endpoints
+✓ charted foreign system already shown on political map remains a war endpoint without live radar
+✓ visible owned alternative replaces a hidden capital safely
+✓ war layer toggles independently without changing mode or political color
+✓ war renderer obeys independent switch in every mode and preserves Canvas state and game RNG
+✓ pan and zoom transform endpoints without modifying stored locations
+✓ old random incident cannot be generated or acted upon
+✓ border contact no longer damages relations or consumes RNG
+✓ real hostile activity memories survive random-adjacency removal
+✓ mobile notice stack is height bounded and touch sized
+✓ new war codec drops malformed payload without accepting arbitrary object fields
+GEÇEN: 33 KALAN: 1

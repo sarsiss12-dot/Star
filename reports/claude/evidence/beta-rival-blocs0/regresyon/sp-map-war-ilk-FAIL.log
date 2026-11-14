@@ -1,0 +1,11 @@
+PASS boş kaynak sprite ve gezegen tuvali görünürlük dönüşünde yeniden çizildi
+PASS geçmiş savaş, paylaşım kısayolu, alıcı değişikliği ve mutasyonsuz taslak
+PASS harita arması çiziliyor, %0 ve cihaz tercihi çalışıyor
+locator.tap: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="rivalToggle"]')[22m
+
+    at run (/home/user/Star/tests/browser-sp-map-war.cjs:128:50) {
+  log: [ `  - waiting for locator('[data-a="rivalToggle"]')` ],
+  name: 'TimeoutError'
+}

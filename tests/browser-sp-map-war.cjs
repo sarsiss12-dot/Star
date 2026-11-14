@@ -125,9 +125,15 @@ async function run() {
       CFG.aiCount=8;
       safeRenderSetup();
     });
-    await page.locator('[data-a="rivalToggle"]').tap();
-    await page.locator('#rivalMin').fill('3');
-    await page.locator('#rivalMax').fill('3');
+    /* BETA-RIVAL-BLOCS.0: sayı kutuları (klavye) yerine Az/Orta/Çok + −/+ — aynı amaç: sabit 3 rakip doktrin. */
+    await page.locator('#rivalPresets [data-x="orta"]').tap();
+    for (let i=0;i<12;i++){
+      const r=await page.evaluate(()=>CFG.aiRivals);
+      if (r.min===3&&r.max===3) break;
+      const x=r.min<3?'min:1':r.min>3?'min:-1':r.max>3?'max:-1':'max:1';
+      await page.locator(`.rivalSect [data-x="${x}"]`).tap();
+    }
+    assert.deepEqual(await page.evaluate(()=>CFG.aiRivals),{min:3,max:3});
     await page.locator('[data-a="start"]').tap();
     assert.equal(await page.evaluate(() => G.emps.filter(e=>e.ai&&!e.wild&&RIVAL_PERSONAS.includes(personaKey(e))).length),3);
     assert.deepEqual(errors,[]);
