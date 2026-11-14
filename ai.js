@@ -5110,7 +5110,7 @@ function aiDefenseShirk(m,attacker,victim,f){
  if(!m||!m.ai||!attacker||!victim||!f)return false;
  const h=aiHonesty(m),risk=aiKnownPower(m,attacker)/(aiKnownPower(m,m)+1),burden=aiFedWarBurden(m);
  const open=Object.keys(m.war||{}).filter(id=>m.war[id]&&G.emps[id]&&!G.emps[id].wild).length;
- const score=-.35-h*.45+clamp((risk-1.2)*.5,-.3,.6)+(burden.short||burden.budget?.critical?.30:0)+(open>=1?.25:0)-clamp((m.rel[victim.id]||0)/200,-.25,.4);
+ const score=-.75-h*.45+clamp((risk-1.2)*.5,-.3,.6)+(burden.short||burden.budget?.critical?.30:0)+(open>=1?.25:0)-clamp((m.rel[victim.id]||0)/200,-.25,.4);
  if(score<=0)return false;
  if((m.oathLog||[]).some(x=>x.kind==='defense'&&x.target===attacker.id&&x.victim===victim.id&&G.day-x.day<30))return true;   // aynı çağrının tekrarı ikinci kez kaydedilmez
  remember(victim,m.id,'paktBozdu');

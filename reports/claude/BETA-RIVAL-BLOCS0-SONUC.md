@@ -362,10 +362,10 @@ KOŞU_SONUCLARI
 
 | | |
 |---|---|
-| ZIP | `releases/stars-faz96h10p30.zip` · 873 200 bayt · 20 girdi (19 runtime + manifest) |
-| SHA-256 | `64b6adba28494ae1f0402be4d05c2ab780fddf41ca1b1b9001a618f3ebd4e911` |
-| CRC32 | `8A707120` |
-| Manifest | SHA-256 `b72cbff660076053f4e579cbb7f8d764f14d5adb2feb573e4b254f623471fd5e` · phase `BETA-RIVAL-BLOCS.0` · build `96h10p30` · parent `03bdb9b` · parent ZIP `ee22b694…e8d5` (p29) |
+| ZIP | `releases/stars-faz96h10p30.zip` · 873 202 bayt · 20 girdi (19 runtime + manifest) |
+| SHA-256 | `3b62475cc614b8befb96065cd3e96dcb6f1ad45d38e18618511c381a2a3ee54f` |
+| CRC32 | `D3944845` |
+| Manifest | SHA-256 `47fa8d0b9206a9b68415bf686a3db865ffc22fb70635987533b5b0b301284041` · phase `BETA-RIVAL-BLOCS.0` · build `96h10p30` · parent `03bdb9b` · parent ZIP `ee22b694…e8d5` (p29) |
 | Doğrulama | `verify-release.py` çalışma ağacında ve açılmış ZIP'te (`--root`) PASS; ikinci paketleme bayt bayt aynı |
 | Koruma | `tests/helpers/beta-rival-blocs0-reviewed.{json,cjs}` (`03bdb9b`'ye 13 dosya, tam metin hunk) ← `beta-galaxy0-reviewed` ← `beta-fed-fleet0-reviewed` ← … |
 | Değişen runtime | `ai.js`, `diplomacy.js`, `ui.js`, `main.js`, `map.js`, `construction.js`, `index.html`, `sw.js` |
