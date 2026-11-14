@@ -110,6 +110,7 @@ Fikstür: orta harita, seed 22. Oyuncunun ≈36K filosu Synarth başkentinde, sa
 | Rotası kapalı ordu sevkiyatı (K4) | "yolda" sayılıyordu | sayılmaz, 6 ayda alınır |
 | Kuşatma ortasında barış (3. ay) | sayaç **3/6'da kalır**, garnizon **0'da kalır** (toparlanma yok) | sayaç 0, garnizon toparlanır (86'ya) |
 | Yörüngede müttefik kara birliği | 12 ay 1/6'da takılı (birlik eriyince 17. ayda) | aynı **kural**; panel nedeni söyler |
+| Gerçekten yürüyen kara ordusu (K9) | yoldayken ateşkes, varınca çıkarma | aynı (1.–2. ay ateşkes, 3. ay alındı) |
 
 ### 3.2 Zincir
 
@@ -121,7 +122,7 @@ Fikstür: orta harita, seed 22. Oyuncunun ≈36K filosu Synarth başkentinde, sa
 | **Değişiklik** | `incomingArmy`: yürümeyen ordu sayılmaz, varış = yolun son durağı. `groundTick` başında `siegeStaleClear(sys,pl)`: kuşatan silahlı ve savaşta bir güç yoksa sayaç ve ateşkes sıfırlanır. `siegeStatus` / `siegeStopRows` gerçek koloni alanlarından metin üretir. Filo gücü, bombardıman ve kara çıkarmasının rolleri aynı. RNG yok. |
 | **Panel** | SİSTEM → "⚔ GEZEGEN SAVAŞI" satırında durum metni (`.siegeSt[data-code]`). Kendi filon yabancı kolonideyse ve savaş son 720 günde kapandıysa "⏸ KUŞATMA DURDU" + neden ve gün. |
 | **MP** | Ayna, yalnız sahibiyle savaşta olan ve yörüngesinde duran filosu bulunan misafire `truce`, `truceAge`, `reinforced` alanlarını ekler. Savaş yoksa ve filo yörüngedeyse kamu savaş sonu özeti `siegeEnd {d,r}` gider (K8 Node, MP8 K2). |
-| **Son test** | Node K1–K8 **8/0** (kontrolde K1, K3, K5–K8 FAIL; K1 ve K6–K8 yeni durum işlevleri yüzünden). Sahiplik her senaryoda tam bir kez değişir (K1, K2). Chromium F2 PASS, MP8 K2 PASS. |
+| **Son test** | Node K1–K9 **9/0** (kontrolde K1, K3, K5–K9 FAIL; K1, K6–K9 yeni durum işlevleri yüzünden). K9: gerçekten yürüyen ordu (birkaç durak uzakta) yoldayken ateşkes + "Kara ordusu bekleniyor" (1.–2. ay), 3. ayda çıkarma, tek sahiplik değişimi — mevcut kural korunur. Sahiplik her senaryoda tam bir kez değişir (K1, K2). Chromium F2 PASS, MP8 K2 PASS. |
 
 Saha süresi gerçek dakikadır; motor oyun tarihiyle ilerler. "5–10 gerçek dakika" ölçülen hıza bağlıdır ve doğrulanmadı. Bekletilen ordu ve barış sonrası sayaç mekanizmaları oyun ayıyla kanıtlandı.
 
@@ -139,7 +140,7 @@ Saha süresi gerçek dakikadır; motor oyun tarihiyle ilerler. "5–10 gerçek d
 
 | Test | Sonuç |
 |---|---|
-| `node tests/field_war_siege0_test.js` | aday **19/0** · kontrol `03a3aa4` **5/14** (ilk FAIL kanıtı `node-control-03a3aa4.log`) |
+| `node tests/field_war_siege0_test.js` | aday **20/0** (`node-aday.log`) · kontrol `03a3aa4` **5/15** (ilk FAIL kanıtı `node-control-03a3aa4.log`) |
 | `tests/browser-field-war-siege0.cjs` (SP, 844×390, gerçek dokunma) | **3/0** — F1 tek bildirim + önizleme yorgunluğu, F2 kuşatma paneli + KUŞATMA DURDU, F3 toplu sevkiyat |
 | `MP8_SCEN=K node tests/browser-mp8.cjs` (host + 1 misafir) | ilk koşu 2/1 (K2 regex "antlaşması" ≠ motor metni "anlaşması"; test hatası, `mp8-K-run1.log` korunur) → **3/0** (`mp8-K-run2.log`) |
 | Kampanya (kontrol / aday) | §6 |

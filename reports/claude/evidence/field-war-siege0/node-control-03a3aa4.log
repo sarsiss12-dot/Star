@@ -112,14 +112,30 @@ ReferenceError: siegeStatus is not defined
     at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:118:1)
     at Module._compile (node:internal/modules/cjs/loader:1706:14)
     at Object..js (node:internal/modules/cjs/loader:1839:10)
+FAIL K9 gerçekten yürüyen kara ordusu (birkaç durak uzakta) kuşatmayı ateşkeste bekletir, varınca çıkarma yapar; ateşkes kalkar
+evalmachine.<anonymous>:1
+JSON.stringify({m:1,owner:P.owner,truce:P.col&&P.col.truce!==undefined,st:siegeStatus(T,P,0)&&siegeStatus(T,P,0).code})
+                                                                                            ^
+
+ReferenceError: siegeStatus is not defined
+    at evalmachine.<anonymous>:1:93
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/field_war_siege0_test.js:7:29)
+    at /home/user/Star/tests/field_war_siege0_test.js:128:120
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:123:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
 FAIL K8 MP aynası: savaşta ve yörüngede olan misafir ateşkes/destek alanlarını, barıştan sonra yalnız kamu savaş sonunu görür; yörüngede değilse hiçbiri
 AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
 
 undefined !== 0
 
-    at /home/user/Star/tests/field_war_siege0_test.js:127:23
+    at /home/user/Star/tests/field_war_siege0_test.js:136:23
     at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
-    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:123:1)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:132:1)
     at Module._compile (node:internal/modules/cjs/loader:1706:14)
     at Object..js (node:internal/modules/cjs/loader:1839:10)
     at Module.load (node:internal/modules/cjs/loader:1441:32)
@@ -138,9 +154,9 @@ ReferenceError: shipmentRetryList is not defined
     at Object.runInContext (node:vm:301:6)
     at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
     at J (/home/user/Star/tests/field_war_siege0_test.js:7:29)
-    at /home/user/Star/tests/field_war_siege0_test.js:148:34
+    at /home/user/Star/tests/field_war_siege0_test.js:157:34
     at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
-    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:147:1)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:156:1)
     at Module._compile (node:internal/modules/cjs/loader:1706:14)
     at Object..js (node:internal/modules/cjs/loader:1839:10)
 FAIL S2 çift dokunuş: ikinci çağrı yola çıkanları yeniden başlatmaz (zaten yolda), yolları değişmez
@@ -153,9 +169,9 @@ ReferenceError: shipmentRetryAll is not defined
     at Script.runInContext (node:vm:149:12)
     at Object.runInContext (node:vm:301:6)
     at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
-    at /home/user/Star/tests/field_war_siege0_test.js:159:25
+    at /home/user/Star/tests/field_war_siege0_test.js:168:25
     at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
-    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:158:1)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:167:1)
     at Module._compile (node:internal/modules/cjs/loader:1706:14)
     at Object..js (node:internal/modules/cjs/loader:1839:10)
     at Module.load (node:internal/modules/cjs/loader:1441:32)
@@ -170,9 +186,9 @@ ReferenceError: shipmentRetryAll is not defined
     at Object.runInContext (node:vm:301:6)
     at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
     at J (/home/user/Star/tests/field_war_siege0_test.js:7:29)
-    at /home/user/Star/tests/field_war_siege0_test.js:164:11
+    at /home/user/Star/tests/field_war_siege0_test.js:173:11
     at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
-    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:162:1)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:171:1)
     at Module._compile (node:internal/modules/cjs/loader:1706:14)
     at Object..js (node:internal/modules/cjs/loader:1839:10)
 FAIL S4 kayıt/yükleme: sevkiyat durumları ve yolları korunur; yüklemeden sonra yeniden deneme aynı sonucu verir
@@ -186,16 +202,16 @@ ReferenceError: shipmentRetryAll is not defined
     at Object.runInContext (node:vm:301:6)
     at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
     at J (/home/user/Star/tests/field_war_siege0_test.js:7:29)
-    at /home/user/Star/tests/field_war_siege0_test.js:168:63
+    at /home/user/Star/tests/field_war_siege0_test.js:177:63
     at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
-    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:167:1)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:176:1)
     at Module._compile (node:internal/modules/cjs/loader:1706:14)
     at Object..js (node:internal/modules/cjs/loader:1839:10)
 FAIL S5 MP: misafir yalnız kendi sevkiyatlarını yeniden dener; başka oyuncununkine dokunmaz; boşsa açık ret
 Error: MP denetimi yalnız çalışma ağacında
-    at /home/user/Star/tests/field_war_siege0_test.js:176:119
+    at /home/user/Star/tests/field_war_siege0_test.js:185:119
     at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
-    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:175:1)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:184:1)
     at Module._compile (node:internal/modules/cjs/loader:1706:14)
     at Object..js (node:internal/modules/cjs/loader:1839:10)
     at Module.load (node:internal/modules/cjs/loader:1441:32)
@@ -203,4 +219,4 @@ Error: MP denetimi yalnız çalışma ağacında
     at TracingChannel.traceSync (node:diagnostics_channel:328:14)
     at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
-GEÇEN: 5 KALAN: 14
+GEÇEN: 5 KALAN: 15

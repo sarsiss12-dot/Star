@@ -120,6 +120,15 @@ test('K7 kalkan yüksekken "Kalkan düşürülüyor"; ateşkeste "Kara ordusu be
   assert.equal(J(h,'siegeStatus(T,P,0)').code,'shield');assert.match(J(h,'siegeStatus(T,P,0)').text,/^Kalkan düşürülüyor/);
   h.run('P.col.shield=0;P.col.truce=0;P.col.truceAge=3;');const st=J(h,'siegeStatus(T,P,0)');assert.equal(st.code,'truce');assert.match(st.text,/Kara ordusu bekleniyor.*3\/18/);
 });
+test('K9 gerçekten yürüyen kara ordusu (birkaç durak uzakta) kuşatmayı ateşkeste bekletir, varınca çıkarma yapar; ateşkes kalkar',()=>{
+  const h=world();h.run(`warAuthorize(A,S,{n:'t'});declareWar(A,S);warAuthClear();S.exh={};A.exh={};var F=big(T.id);P.col.shield=0;P.col.garrison=Math.max(1,(P.col.garrisonBase||10)*.2);
+    var tf=newFleet(A,A.home,[{c:'ord'},{c:'ord'},{c:'ord'}]);tf.path=findPath(A.home,T.id,A)||[];var hops=tf.path.length;var lastOwner=P.owner,flips=0;`);
+  assert.ok(h.run('hops')>=2,'ordu en az iki durak uzakta: '+h.run('hops'));
+  assert.ok(J(h,'incomingArmy(T.id,0)&&incomingArmy(T.id,0).f.id===tf.id'),'ilk duraktan önce de "yolda" sayılır (son durak = hedef)');
+  const rows=[];for(let m=1;m<=24;m++){h.run('month(1);if(P.owner!==lastOwner){flips++;lastOwner=P.owner;}');rows.push(J(h,'{m:'+m+',owner:P.owner,truce:P.col&&P.col.truce!==undefined,st:siegeStatus(T,P,0)&&siegeStatus(T,P,0).code}'));if(rows[rows.length-1].owner===0)break;}
+  console.log('  K9 ay/durum: '+rows.map(r=>r.m+':'+(r.truce?'T':'')+(r.st||'')+(r.owner===0?'!':'')).join(' '));assert.equal(rows[rows.length-1].owner,0,JSON.stringify(rows));assert.equal(h.run('flips'),1);
+  assert.ok(rows.slice(0,-1).some(r=>r.truce&&r.st==='truce')||rows.length===1,'yoldayken ateşkes ve "Kara ordusu bekleniyor": '+JSON.stringify(rows));
+});
 test('K8 MP aynası: savaşta ve yörüngede olan misafir ateşkes/destek alanlarını, barıştan sonra yalnız kamu savaş sonunu görür; yörüngede değilse hiçbiri',()=>{
   const h=world();h.run(fs.readFileSync(path.join(ROOT,'research/mp6/mirror.js'),'utf8'));
   h.run(`warAuthorize(A,S,{n:'t'});declareWar(A,S);warAuthClear();var F=big(T.id);if(!T.surv.includes(0))T.surv.push(0);P.col.truce=0;P.col.truceAge=4;P.col.reinforced=12;`);
