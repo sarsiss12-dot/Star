@@ -27,7 +27,7 @@ Hiçbir madde TAMAMLANDI değildir.
 
 | İş | Durum |
 |---|---|
-| p30 kaydı: 500 sistem / 16 AI / 2 insan / 15 dk (MP8 P) | PASS — p30 son kodunda 8/0 (p30 raporu §12). Aday için de koşuldu (§10). |
+| p30 kaydı: 500 sistem / 16 AI / 2 insan / 15 dk (MP8 P) | PASS — p30 son kodunda 8/0 (p30 raporu §12); aday p31'de de 8/0 (§10). |
 | Misafirin gerçek koloni panelinden otomatik inşaat emri (tarayıcı) | PASS — `MP8_SCEN=W` W3 |
 | Savaş İlan Et: iki normal hedef (Fetih / Vasallaştırma) | PASS (Node W1, W2, W9; Chromium B2; misafir W1) |
 | Fetih: hedef sistemler, barışta kalan / iade edilen, hedef devlet yok edilmez | PASS (Node W1) |
@@ -56,8 +56,8 @@ Hiçbir madde TAMAMLANDI değildir.
 | Galaktik Gerilim kurulum + SP / MP host / Save8 | PASS (W11, M5, Chromium B1) |
 | Galaktik Gerilim davranış etkisi | PASS (kontrollü deney) / kampanyada plasebo bandı içinde (§8, §9) |
 | Kampanya 11 / 23 / 404, 120 + 240 ay, Sakin / Dengeli / Çalkantılı | PASS (ölçüm) |
-| Regresyon | §10 |
-| Performans | §11 |
+| Regresyon | PASS — Node fark yalnız faz86b (+3, aynı kök) ve mp11 zamanlama (tekrar 9/0); Chromium 9 test; MP8 W/D/G/L/S/E/F/P PASS (§10) |
+| Performans | PASS (ay adımı fark yok, MP yayın / misafir güncellemesi) · harita çizimi ve dokunma gecikmesi ayrı ölçüm NOT RUN (§11) |
 | Fiziksel Android, canlı Render, LAN | NOT RUN |
 
 ## 3. Savaş hedefleri
@@ -322,15 +322,86 @@ Gerçek gerekçe, antlaşma, rota ve bütçe kapıları aynen; RNG çekim sayıs
 
 ## 10. Regresyon
 
-__REG__
+Bütün koşular bu konteynerde, aday dalın son runtime'ı ile (p31). Günlükler: `evidence/beta-war-goals0/regresyon/`, tarayıcı çıktıları `evidence/beta-war-goals0/tarayici/`.
+
+**Node (`node tests/run-all.js`, 3 işçi):**
+
+| Koşu | Sonuç |
+|---|---|
+| Tam koşu | SUITES 202 · GEÇEN 6280 · KALAN 281 |
+| p30 tabanı | SUITES 200 · GEÇEN 6263 · KALAN 277 (p30 raporu §12; iki koruma testi düzeltilmiş hâli) |
+| Yeni paketler | `beta_war_goals0_test` **13/0**, `beta_war_goals0_mp_test` **5/0** |
+| Fark | `faz86b_deal_engine` 24 → 27 FAIL. Yeni parametreli maddeler (vassal, landPromise, fedPeace) genel "her madde türü parametresiz çalışır" denetiminde; mevcut `warJoin` FAIL'iyle aynı kök (§13). |
+| Fark | `mp11_online` 9/0 → **8/1**. Relay yeniden başlatma (SIGTERM) zamanlaması; paralel yük altında. Tek başına yeniden koşu **9/0**. İlk FAIL `regresyon/mp11_online-ilk-FAIL.log`. |
+| Sonuç | Kalan 277 FAIL p30 tabanıyla aynı paketlerde (bu fazdan bağımsız, silinmedi). |
+
+Geliştirme sırasındaki ilk FAIL'ler (düzeltildi, kayıt bu rapordadır):
+- `mp62_core` 13/0 → 6/7: önizleme önbellek yazıyordu → `warPure`.
+- Satır içi `//` yorumu `war` komutunun `locate`'ini kapattı → `bad-target`.
+- `faz95d_war_preview` önizleme engeli → seçeneksiz eski çağrı eski davranışta.
+- W3: teslim sonrası isyan → `warSurrenderGrace`.
+- M4: ortak barış tek cephe yüzünden reddi → barışabilen cepheler.
+
+**Chromium (yerel):**
+
+| Test | Sonuç |
+|---|---|
+| `browser-war-goals0.cjs` (yeni: gerilim kurulumu 2 görünüm, iki hedef + hedef seçimi + önizleme, teslim / ayrı barış, federasyona karşı savaş) | **5/0 PASS** |
+| `browser-rival-blocs0.cjs` (p30 davet, klavyesiz kurulum, çarpan, arma, otomatik inşaat) | 9/0 PASS |
+| `browser-pregame-galaxy0.cjs` | 10/0 PASS |
+| `browser-bgreturn-galaxy0.cjs` | 14/0 PASS |
+| `browser-share-galaxy0.cjs` | 8/0 PASS |
+| `browser-sp-map-war.cjs` | 4/0 PASS |
+| `browser-fed-fleet0-sp.cjs` | 4/0 PASS |
+| `browser-mobile-hud0.cjs` | 4/0 PASS |
+| `browser-event-ux0.cjs` | 11/0 PASS |
+
+**MP (`tests/browser-mp8.cjs`, üretim relay süreci + TLS vekili):**
+
+| Senaryo | Sonuç |
+|---|---|
+| **W** (yeni: misafir gerçek Fetih ilanı, gerçek teslim teklifi → AI kabul → vasallık + cephe kapanır, çerçeve tekrarı; misafirin gerçek koloni panelinden otomatik inşaat) | **4/0 PASS** |
+| D / G / L / S / E / F | 5/0 · 5/0 · 6/0 · 4/0 · 6/0 · 6/0 PASS |
+| P (500 sistem / 16 AI / 2 insan / 15 dk, seed 404, `MP8_P_DESYNC=1`) | **8/0 PASS** |
+
+P ayrıntısı:
+- Ön ilerletme 30 ay / 45 sn.
+- Misafir dünyası en uzun 4,46 sn durağan kaldı (p30: 6,05 sn; sınır 20 sn).
+- Misafirde 0 ret, 0 çökme, 0 eski-dünya bölümü, 0 yeniden eşitleme.
+- Host günü 6331'e ulaştı (p30 5881).
+- Komutlar aynaya yansıdı (P1).
+
+Canlı Render, fiziksel Android ve LAN: **NOT RUN**.
 
 ## 11. Performans
 
-__PERF__
+| Ölçüm | Sonuç |
+|---|---|
+| Host ay adımı (Node, s500 / 16 AI, seed 404, 24 ay ısınma + 12 ay; `evidence/beta-war-goals0/kampanya/bench.cjs`) | Kontrol p30 ortalama 3098 / 2776 ms/ay, aday 3046 / 2955 ms/ay (iki sırayla; ikinci koşu JIT ısınmasıyla hızlı). Ortalama fark ≈ +%2, sıra etkisi (%10) içinde → **fark yok** iddiası. |
+| MP host yayın (P, m0) | publish medyan 7,6 ms, p95 7,8 ms |
+| Misafir dünya güncellemesi (P, m0) | kurulum medyan 32,6 ms, yenileme 6,4 ms; uzun görev yok; en uzun durağan dünya 4,46 sn (15 dk boyunca) |
+| Harita çizimi | `map.js` bu fazda değişmedi; p30 ölçümü geçerli. Yeniden ölçüm **NOT RUN**. |
+| Dokunma gecikmesi | Ayrı ölçüm **NOT RUN**. Gerçek dokunma akışları (W1–W3, B2–B4) zaman aşımı olmadan geçti; bu bir gecikme ölçümü değildir. |
+
+Saf optimizasyon yapılmadı (ayrı faz).
+
+Önizleme maliyeti: `warPreviewExtend` her temaslı devlet için tutum ve meşruiyet hesaplar. Yalnız SAVAŞ HEDEFİ önizlemesinde ve host `warQuote`'unda çalışır; aylık AI adımında değil. AI ay adımındaki yeni maliyet `aiWarLegitTerm` (warAppetite) ve `aiWarTermsTick`'tir; yukarıdaki ay adımı ölçümüne dahildir.
 
 ## 12. Yayın
 
-__ZIP__
+| | |
+|---|---|
+| ZIP | `releases/stars-faz96h10p31.zip` · 893 105 bayt · 20 girdi (19 runtime + manifest) |
+| SHA-256 | `c72a48f51b027b6078c4507d7ec2420551254d2b9c5bd6bd87109e41f0bfe138` |
+| CRC32 | `30FEF058` |
+| Manifest | SHA-256 `65027a5c2370eb6106c4e8c94bb86148186f6eb60e6b8f31986a30809ad640c9` · phase `BETA-WAR-GOALS.0` · build `96h10p31` · parent `4e6f7f6` · parent ZIP `3b62475c…e54f` (p30) |
+| Doğrulama | `verify-release.py` çalışma ağacında ve açılmış ZIP'te (`--root`) PASS ("DOĞRULANDI: 19 dosya; oyun build 96h10p31"); ikinci paketleme bayt bayt aynı |
+| Koruma | `tests/helpers/beta-war-goals0-reviewed.{json,cjs}` (`4e6f7f6`'ya 11 dosya, tam metin hunk) ← `beta-rival-blocs0-reviewed` ← `beta-galaxy0-reviewed` ← … |
+| Değişen runtime | `ai.js`, `diplomacy.js`, `ui.js`, `main.js`, `sw.js` |
+| MP kaynakları | `mp-core.js` (teslim / vaat / ortak barış maddeleri, savaş hedefi seçenekleri, fedWar önergesi, gerilim ayarı, p31 paket uyumu), `guest-stars.js` (hedef seçimi, savaş önizlemesi, madde köprüsü), `mp71-dip.js` (madde köprüsü), `mp1-host.js` (gerilim lobi ayarı), `view.js` / `relay.js` (MP.8.9b28) |
+| Yeni testler | Node: `beta_war_goals0_test.js` (13), `beta_war_goals0_mp_test.js` (5). Chromium: `browser-war-goals0.cjs` (5), `browser-mp8.cjs` `MP8_SCEN=W` (4; `helpers/war-goals0-mp.cjs`) |
+
+Canlı Render dağıtımı yapılmadı; main'e birleştirme yapılmadı.
 
 ## 13. Açık işler ve sınırlar
 
