@@ -37,7 +37,7 @@ const doc=document;
 const ov=doc.createElement('div');ov.id='mp6App';ov.className='mp1-overlay mp6-join';ov.innerHTML='<div class="mp1-status">Yükleniyor…</div>';
 (doc.body||doc.documentElement).appendChild(ov);
 
-const S={swiped:new Set(),decWait:new Map(),warQuote:{},pendingWar:null,counter:null,J:null,mirror:null,rev:0,timer:null,building:false,started:false,on:false,lastBuild:0,minGap:600,uiSent:false,seenResults:0,hostSpd:0,held:0,
+const S={swiped:new Set(),decWait:new Map(),warQuote:{},warOpts:{},pendingWar:null,counter:null,J:null,mirror:null,rev:0,timer:null,building:false,started:false,on:false,lastBuild:0,minGap:600,uiSent:false,seenResults:0,hostSpd:0,held:0,
   stats:{mirrors:0,deltas:0,bytes:0,builds:0,buildMs:[],resyncs:0,held:0,blocked:{},sent:{},speedMsgs:0},
   /* MP.7: oyun başlangıcı durum makinesi — her aşama yalnız gerçek olay olunca tamamlanır; eksik veri sınırlı geri çekilmeyle
      yeniden istenir (sonsuz bekleme ya da hızlı döngü yok); hata nedeni oyun verisi/jeton/oda anahtarı içermez */
@@ -99,6 +99,8 @@ const VIEW=new Set(['warCenter','warCenterTab','warCenterDetail','warCenterSuppo
   'fedLawPropose','fedLawRepeal','fedAgendaWithdraw','fedLeave','vsSend','vsReply','dealSend',
   /* MP.6.2 — savaş ve ikili siyaset: gerçek pencere açılır, son çağrı MP komutuna iner */
   'war','ally','pact','dealPact','endAlliance','unpact','embargo','unembargo','gift',
+  /* BETA-WAR-GOALS.0 — hedef/tür seçimi ve müzakere taslağı görünümdür; önizleme host'un warQuote'u, son çağrı 'war' / 'offer' */
+  'setwg','wgTarget','wgVtype','wgVwar','dealVassal','dealPromise','fedWarOpen','fwTarget','fwGoal','fwPropose',
   /* MP.6.3 — ortak savaş paylaşımı penceresi (taslak/oy/uygula düğmeleri _hook; son çağrılar MP komutuna iner) */
   'shareOpen',
   /* MP.6.3 — federasyon kararları ve bağımsızlık desteği: motor işlevi MP komutuna iner */
@@ -145,8 +147,9 @@ const ACT={
   ctrNo:()=>S.counter?respond(false):blocked('ctrNo'),
   /* MP.6.2: savaş hedefi seçildi → önce host'un önizlemesi (warQuote, ilan edenin kendi bilgisiyle), sonra GERÇEK STARS önizleme
      penceresi bu veriyle açılır; ONAYLA → declareWar/setWarGoal sarmalayıcısı → 'war' komutu */
-  setwg:x=>{const [id,key]=String(x).split(':');const cid=send({kind:'warQuote',target:real(+id),goal:key});
-    if(cid)waits[cid]=res=>{if(res.status!=='ok'){toast('Host reddetti: '+why(res),true);return;}S.warQuote[id+':'+key]=warLocal(res.extra);UI.warDeclarationPreview(+id,key);};},
+  wgGo:()=>{const s=UI._wgSel;if(!s)return;const id=s.id,key=s.key,opts=key==='fetih'?{targets:s.targets.slice()}:{vtype:s.vtype,war:s.war};   // BETA-WAR-GOALS.0
+    const cid=send({kind:'warQuote',target:real(+id),goal:key,...opts});
+    if(cid)waits[cid]=res=>{if(res.status!=='ok'){toast('Host reddetti: '+why(res),true);return;}S.warQuote[id+':'+key]=warLocal(res.extra);S.warOpts[id+':'+key]=opts;UI.warDeclarationPreview(+id,key,opts);};},
   giftDo:x=>{const [id,r,v]=String(x).split(':');const cid=send({kind:'gift',target:real(+id),r,v:+v});
     if(cid)waits[cid]=res=>toast(res.status==='ok'?'Hediye gönderildi; host uyguladı.':'Host reddetti: '+why(res),res.status!=='ok');try{UI.closeModal();}catch{}},
   statuko:x=>{const cid=send({kind:'statusQuo',target:real(+x)});if(cid)waits[cid]=res=>toast(res.status==='ok'?'Statüko barışı: host uyguladı ya da teklif karşı oyuncuya gitti.':'Host reddetti: '+why(res),res.status!=='ok');},
@@ -239,7 +242,7 @@ function gate(){
     if(kind==='admit')return Number.isInteger(opt.target)?r({kind:'fedInvite',target:real(opt.target)}):NOT_MP;
     /* MP.6.3: ihraç, başkan seçimi, reform, anayasa / oy rejimi, savaşa katılma, ortak savaş izni — motorun önerge yolu host'ta */
     const c={kind:'fedMotion',motion:String(kind)};for(const k of ['target','sponsor'])if(Number.isInteger(opt[k]))c[k]=real(opt[k]);
-    for(const k of ['type','field','value'])if(typeof opt[k]==='string')c[k]=opt[k];return r(c);});
+    for(const k of ['type','field','value','goal','vtype','war'])if(typeof opt[k]==='string')c[k]=opt[k];if(Number.isInteger(opt.targetFed))c.targetFed=opt.targetFed;if(Array.isArray(opt.targets))c.targets=opt.targets.slice();return r(c);});   // BETA-WAR-GOALS.0
   /* MP.6.3: kuruluş uygunluğu (AI adaylarının kabulü) aynada hesaplanamaz (AI gözlem kaydı, rota, güven host'ta): gerçek kuruluş
      penceresi host'un motor kararını (fedFoundQuote, salt okuma) gösterir; gelince pencere yeniden çizilir. Kuruluşta host yeniden doğrular. */
   const FF={q:{},wait:{},at:0};
@@ -338,11 +341,11 @@ function gate(){
   wrap('colossusFire',(o,f,pl,mod)=>f&&f.e===0?!!hostSays({kind:'colFire',fleet:f.id,mod:String(mod)},()=>'Kolossus ateşlendi; host uyguladı.'):o(f,pl,mod));
   /* MP.6.2 — savaş ilanı: gerçek önizleme penceresi host'un önizlemesiyle (warQuote) çizilir; erişim ve son karar host'ta.
      declareWar yalnız hedefi işaretler; ardından gelen setWarGoal hedef+amaçla TEK 'war' komutu gönderir. */
-  wrap('warDeclarationPreview',(o,actor,target,key)=>mine(actor)&&target&&S.warQuote[target.id+':'+key]?S.warQuote[target.id+':'+key]:o(actor,target,key));
+  wrap('warDeclarationPreview',(o,actor,target,key,opts)=>mine(actor)&&target&&S.warQuote[target.id+':'+key]?S.warQuote[target.id+':'+key]:o(actor,target,key,opts));
   wrap('warDeclarationAccess',(o,a,b,opt)=>mine(a)&&b&&Object.keys(S.warQuote).some(k=>k.startsWith(b.id+':'))?{ok:true,why:''}:o(a,b,opt));
   wrap('declareWar',(o,a,b)=>{if(!mine(a)||!b)return false;S.pendingWar=b.id;return true;});
-  wrap('setWarGoal',(o,e,foe,key)=>{if(!mine(e)||!foe||S.pendingWar!==foe.id)return false;S.pendingWar=null;delete S.warQuote[foe.id+':'+key];
-    const invites=UI._warInvites||[];UI._warInvites=null;const cid=send({kind:'war',target:real(foe.id),goal:String(key)});
+  wrap('setWarGoal',(o,e,foe,key,opts)=>{if(!mine(e)||!foe||S.pendingWar!==foe.id)return false;S.pendingWar=null;delete S.warQuote[foe.id+':'+key];const wo=opts||S.warOpts[foe.id+':'+key]||{};delete S.warOpts[foe.id+':'+key];
+    const invites=UI._warInvites||[];UI._warInvites=null;const cid=send({kind:'war',target:real(foe.id),goal:String(key),...wo});
     if(cid)waits[cid]=res=>{toast(res.status==='ok'?'Savaş ilanı host\'ta uygulandı — '+(foe.name||''):'Host reddetti: '+why(res),res.status!=='ok');if(res.status==='ok'&&res.extra?.front)WarCenterUI.sendInvites(res.extra.front,foe.id,invites);};return !!cid;});
   /* MP.6.2 — misafirin aynasında eksik olan veriye dayanan düğme kapıları host'un kararını kullanır (MP.2/MP.3.1 görünümü):
      statüko (işgal haritası), federasyona başvuru (aracı üyenin Etkisi) ve üye kabul önergesi (adayın ittifak bağları). */
@@ -540,7 +543,7 @@ function setSync(){
   if(changed&&S.started&&setShown()&&SET.last)try{UI.openSettlement(...SET.last.slice(0,1));}catch{}   // açık paylaşım penceresi host'un yeni durumunu gösterir
 }
 /* host önizlemesi (gerçek kimlikler) → aynadaki numaralar; adlar host'ta ilan edenin bilgisiyle süzülmüş gelir */
-function warLocal(p){const m=x=>x&&{...x,id:local(x.id)};return {...p,target:m(p.target),certain:(p.certain||[]).map(m),conditional:(p.conditional||[]).map(m)};}
+function warLocal(p){const m=x=>x&&{...x,id:local(x.id)};return {...p,target:m(p.target),certain:(p.certain||[]).map(m),conditional:(p.conditional||[]).map(m),...(p.stances?{stances:p.stances.map(m)}:{})};}
 const vasTerms=(type,t)=>{const o={};for(const k of ['tax','science','defense','war','autonomy','duration','renegotiate','sensors'])if(t&&t[k]!==undefined)o[k]=JSON.parse(JSON.stringify(t[k]));return o;};
 function why(res){const d=res.detail&&res.detail.length?' — '+res.detail.join(' · '):'';return (MP1View.ERR[res.code]||res.code)+d;}
 function send(cmd){const J=S.J;if(!J)return null;const r=J.cmd(cmd);S.stats.sent[cmd.kind]=(S.stats.sent[cmd.kind]||0)+1;

@@ -88,10 +88,15 @@ function sha256(str){
 function canon(v){if(Array.isArray(v))return '['+v.map(x=>x===undefined?'null':canon(x)).join(',')+']';
   if(v&&typeof v==='object')return '{'+Object.keys(v).filter(k=>v[k]!==undefined).sort().map(k=>JSON.stringify(k)+':'+canon(v[k])).join(',')+'}';return JSON.stringify(v);}
 const HEX=(s,n)=>typeof s==='string'&&s.length===n&&/^[a-f0-9]+$/.test(s);
-const ITEM_T=['res','peace','nap','pact','ally','intel','spynet','passage','tech','sys','lux','freight','tribute','warOn','peaceWith','warJoin'];
+const ITEM_T=['res','peace','nap','pact','ally','intel','spynet','passage','tech','sys','lux','freight','tribute','warOn','peaceWith','warJoin','vassal','landPromise','fedPeace'];   // BETA-WAR-GOALS.0: +teslim, +toprak vaadi
+const WAR_VTYPE=['haracguzar','bekci','akademik'],WAR_VWAR=['none','defense','all'];
+const warItemOk=it=>it.t==='fedPeace'?onlyKeys(it,['t']):it.t==='vassal'?onlyKeys(it,['t','type','war'])&&WAR_VTYPE.includes(it.type)&&WAR_VWAR.includes(it.war):it.t==='landPromise'?onlyKeys(it,['t','sys','front'])&&int(it.sys,0,4095)&&int(it.front,1,2147483647):true;
+const warGoalOpts=c=>Array.isArray(c.targets)?{targets:c.targets.slice()}:typeof c.vtype==='string'?{vtype:c.vtype,war:c.war}:null;
+const warGoalArgs=c=>(c.targets===undefined||Array.isArray(c.targets)&&c.targets.length>=1&&c.targets.length<=5&&c.targets.every(n=>int(n,0,4095)))&&(c.vtype===undefined||WAR_VTYPE.includes(c.vtype))&&(c.war===undefined||c.vtype!==undefined&&WAR_VWAR.includes(c.war))&&!(c.targets!==undefined&&c.vtype!==undefined);
 const RES_K=['min','ene','yiy','ala','tuk','ara','etk'];
 function pkgItem(it){if(!plain(it)||!ITEM_T.includes(it.t)||Object.keys(it).length>8)return 'items';
   for(const [k,v] of Object.entries(it))if(!['number','string','boolean'].includes(typeof v)||typeof v==='number'&&!Number.isFinite(v)||typeof v==='string'&&v.length>40)return 'items';
+  if(!warItemOk(it))return 'items';
   if(it.t==='warJoin'&&(!onlyKeys(it,['t','target','front','plan'])||!int(it.target,0,63)||!((int(it.front,1,2147483647)&&!has(it,'plan'))||(int(it.plan,1,2147483647)&&!has(it,'front')))))return 'items';
   if(it.t==='res'&&(!RES_K.includes(it.r)||!Number.isFinite(it.v)||it.v<=0||it.v>1e7))return 'amount';return null;}
 /* Paketi doğrula (yan etkisiz). Metin ya da nesne alır. Önce boyut ve bütünlük, sonra şema. */
@@ -120,7 +125,7 @@ function validatePackage(input,o={}){
   const ss=pkg.session;
   if(!plain(ss)||!onlyKeys(ss,['roomId','worldRevision','hostEmpireId','speed','capacity','settings','players','notes']))return fail('session');
   if(!int(ss.worldRevision,0,2147483647)||!int(ss.hostEmpireId,0,63)||!int(ss.speed,0,16)||!int(ss.capacity,2,8)||typeof ss.roomId!=='string'||ss.roomId.length>40)return fail('session');
-  if(ss.settings!==null&&(!plain(ss.settings)||!onlyKeys(ss.settings,['size','aiCount','shape','aiGuard','planetMul'])||typeof ss.settings.size!=='string'||!int(ss.settings.aiCount,1,48)||(ss.settings.planetMul!==undefined&&!(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(ss.settings.planetMul)&&ss.settings.planetMul!==1))||ss.settings.aiGuard!==undefined&&ss.settings.aiGuard!==true))return fail('session');   // MP-P0-DESYNC2: aiGuard yalnız açıkken yazılır
+  if(ss.settings!==null&&(!plain(ss.settings)||!onlyKeys(ss.settings,['size','aiCount','shape','aiGuard','planetMul','tension'])||ss.settings.tension!==undefined&&!['sakin','calkantili'].includes(ss.settings.tension)||typeof ss.settings.size!=='string'||!int(ss.settings.aiCount,1,48)||(ss.settings.planetMul!==undefined&&!(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(ss.settings.planetMul)&&ss.settings.planetMul!==1))||ss.settings.aiGuard!==undefined&&ss.settings.aiGuard!==true))return fail('session');   // MP-P0-DESYNC2: aiGuard yalnız açıkken yazılır
   if(!Array.isArray(ss.players)||ss.players.length<1||ss.players.length>8)return fail('session');
   if(ss.players.filter(x=>plain(x)&&x.playerId==='host').length!==1)return fail('host');
   const pids=new Set(),eids=new Set();let hosts=0;
@@ -194,7 +199,7 @@ function packageFromSave8(text,o={}){
   hs.forEach((_,i)=>{const salt=random(16);players.push({playerId:'p-'+random(6),name:nm(d.emps[i+1],'Oyuncu '+(i+1)),empireId:i+1,seat:i+1,color:'',lastSeq:0,wasAI:false,takeover:null,auth:{salt,hash:sha256(salt+':'+random(16))}});});
   const ai=(d.cfg.aiCount|0)-hs.length,size=typeof d.cfg.size==='string'?d.cfg.size:null;
   const body={format:PKG_FORMAT,mpVersion:PKG_VERSION,build:has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null),createdAt:Number(o.now?o.now():Date.now()),saveId:'s-'+random(8),
-    session:{roomId:'',worldRevision:0,hostEmpireId:0,speed:0,capacity:Math.max(2,players.length),settings:size&&ai>=1&&ai<=48?{size,aiCount:ai,...(typeof d.cfg.shape==='string'?{shape:d.cfg.shape}:{}),...(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(d.cfg.planetMul)&&d.cfg.planetMul!==1?{planetMul:d.cfg.planetMul}:{})}:null,players,notes:{}},
+    session:{roomId:'',worldRevision:0,hostEmpireId:0,speed:0,capacity:Math.max(2,players.length),settings:size&&ai>=1&&ai<=48?{size,aiCount:ai,...(typeof d.cfg.shape==='string'?{shape:d.cfg.shape}:{}),...(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(d.cfg.planetMul)&&d.cfg.planetMul!==1?{planetMul:d.cfg.planetMul}:{}),...(['sakin','calkantili'].includes(d.cfg.tension)?{tension:d.cfg.tension}:{})}:null,players,notes:{}},
     diplomacy:{next:1,offers:[]},
     display:{name:String(d.emps[0].name||'Galaksi').replace(/[\u0000-\u001f<>]/g,'').slice(0,40),year:d.year|0,month:d.month|0,day:Math.floor(d.day||0),size,systems:d.sys.length,
       humans:players.map(x=>({name:x.name,empire:x.playerId==='host'?String(d.emps[0].name||'?'):String(d.emps[x.empireId].name||'?'),host:x.playerId==='host'?1:0}))}};
@@ -448,7 +453,7 @@ function createHost(opts){
       for(const r of rows.slice(-NEWS_MAX))newsFan({...r,scope:'player',important:true},{day:r.day,year:2210+Math.floor(r.day/360),month:Math.floor(r.day%360/30)+1},eid);
     }
   }
-  function fedMotionOpts(c){const o={};for(const k of ['target','sponsor','type','field','value'])if(c[k]!==undefined)o[k]=c[k];return o;}
+  function fedMotionOpts(c){const o={};for(const k of ['target','sponsor','type','field','value','targetFed','goal','vtype','war'])if(c[k]!==undefined)o[k]=c[k];if(Array.isArray(c.targets))o.targets=c.targets.slice();return o;}   // BETA-WAR-GOALS.0
   const settleSide=(e,c)=>(G.warLedger&&G.warLedger.fronts||[]).some(f=>f.campaign===c&&f.sides.includes(e.id));
   function settleMember(e,id){const o=typeof settlementOffer==='function'&&settlementOffer(id);return o&&o.members.includes(e.id)?{o}:{err:'no-offer'};}
   function settleAssignOk(a){return a===null||plain(a)&&Object.keys(a).length<=64&&Object.entries(a).every(([k,v])=>typeof k==='string'&&k.length<=24&&int(v,0,63));}
@@ -673,18 +678,18 @@ function createHost(opts){
        Önizleme (warQuote) motorun kendi bilgisini kullanır: yalnız ilan edenin temaslı olduğu devletler, bilinen federasyon
        bağları, istihbarat ≥3. Konsey yasağında motor yalnız devlet 0'a "bilerek çiğne" yolunu açıyor, diğerlerine AI zarı
        (rnd < .75 → vazgeç) atıyor: insan için devlet 0 dalı aynen uygulanır (ceza + savaş), AI zarı ve RNG çekimi yok. */
-    warQuote:{keys:['kind','target','goal'],ro:true,check:c=>int(c.target,0,63)&&typeof c.goal==='string'&&has(WAR_GOALS,c.goal),locate:(e,c)=>{const o=warTarget(e,c);return o?{o}:{err:'no-target'};},
+    warQuote:{keys:['kind','target','goal','targets','vtype','war'],ro:true,check:c=>int(c.target,0,63)&&typeof c.goal==='string'&&has(WAR_GOALS,c.goal)&&warGoalArgs(c),locate:(e,c)=>{const o=warTarget(e,c);return o?{o}:{err:'no-target'};},
       why:(e,at,c)=>warTarget(e,c)?null:'no-target',roots:()=>[],
-      apply:(e,at,c)=>({ok:true,extra:warDeclarationPreview(e,G.emps[c.target],c.goal)})},
-    war:{keys:['kind','target','goal'],check:c=>int(c.target,0,63)&&typeof c.goal==='string'&&has(WAR_GOALS,c.goal),locate:(e,c)=>{const o=warTarget(e,c);return o?{o}:{err:'no-target'};},
-      why(e,at,c){const o=warTarget(e,c);if(!o)return 'no-target';const p=warDeclarationPreview(e,o,c.goal);return p.ok?null:{code:'war',detail:p.blockers.slice(0,4).map(String)};},
+      apply:(e,at,c)=>({ok:true,extra:warDeclarationPreview(e,G.emps[c.target],c.goal,warGoalOpts(c))})},
+    war:{keys:['kind','target','goal','targets','vtype','war'],check:c=>int(c.target,0,63)&&typeof c.goal==='string'&&has(WAR_GOALS,c.goal)&&warGoalArgs(c),/* BETA-WAR-GOALS.0: +hedef seçenekleri (eski anahtarlar protokolde kabul; gerçek arayüz yalnız iki hedef sunar) */locate:(e,c)=>{const o=warTarget(e,c);return o?{o}:{err:'no-target'};},
+      why(e,at,c){const o=warTarget(e,c);if(!o)return 'no-target';const p=warDeclarationPreview(e,o,c.goal,warGoalOpts(c));return p.ok?null:{code:'war',detail:p.blockers.slice(0,4).map(String)};},
       roots:()=>[],
       apply(e,at,c){const o=G.emps[c.target];if(!warDeclarationAccess(e,o).ok)return false;
         const council=typeof councilBlocksWar==='function'&&councilBlocksWar(e,o),cb0=council?councilBlocksWar:null;
         const own=(m,cl)=>{if(remoteHuman(e))note(e.id,m,cl);};   // ilan edene özel iletiler; motorun kamu iletileri (gerekçesiz savaş…) host günlüğüne motorun yazdığı gibi
         if(council){own('KONSEY YASAĞI: '+o.name+' korunuyor. Yine de saldırırsan konsey sana döner.','war');councilPunish(e);councilBlocksWar=()=>false;}
         let ok;try{ok=declareWar(e,o);}finally{if(council)councilBlocksWar=cb0;}
-        if(!ok)return false;if(setWarGoal(e,o,c.goal))own('Savaş hedefi: '+WAR_GOALS[c.goal].n,'war');return {ok:true,extra:{front:warLedgerFind(e.id,o.id)?.id||0}};}},
+        if(!ok)return false;if(setWarGoal(e,o,c.goal,warGoalOpts(c)))own('Savaş hedefi: '+WAR_GOALS[c.goal].n,'war');return {ok:true,extra:{front:warLedgerFind(e.id,o.id)?.id||0}};}},
     /* ittifakı sonlandır (canEndAlliance / endAlliance), ticaret anlaşmasını feshet (tek oyunculu unpactYes satırları),
        ambargo (setEmbargo), hediye (tek oyunculu giftDo satırları) */
     endAlliance:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate:(e,c)=>{const o=diploTarget(e,c);return o?{o}:{err:'no-target'};},
@@ -913,9 +918,9 @@ function createHost(opts){
        anayasa/oy rejimi, başkan seçimi, mevcut savaşa katılma ve ortak savaş izni için; oylama ve kabul kuralları federasyonun
        anayasasından (motor). Kabul edilen savaş kararını yalnız önerici ya da başkan uygular (executeFedDecision). Acil hibe
        (canGrantFed / grantFed) yalnız üyenin kendi kaynağından. Kimlikler gerçek; seçenekler yalnız motorun beklediği alanlar. */
-    fedMotion:{keys:['kind','motion','target','sponsor','type','field','value'],
+    fedMotion:{keys:['kind','motion','target','sponsor','type','field','value','targetFed','goal','targets','vtype','war'],   // BETA-WAR-GOALS.0: +fedWar alanları
       check:c=>typeof c.motion==='string'&&Object.hasOwn(FED_MOTIONS,c.motion)&&c.motion!=='admit'&&[c.target,c.sponsor].every(x=>x===undefined||int(x,0,63))&&
-        [c.type,c.field,c.value].every(x=>x===undefined||typeof x==='string'&&x.length<=24),
+        [c.type,c.field,c.value].every(x=>x===undefined||typeof x==='string'&&x.length<=24)&&(c.targetFed===undefined||int(c.targetFed,0,2147483647))&&(c.goal===undefined||['fetih','boyun'].includes(c.goal))&&warGoalArgs(c),
       locate:()=>({}),why(e,at,c){if(!findFed(e))return 'no-fed';if(c.target!==undefined&&!e.contact[c.target]&&!findFed(e).members.includes(c.target))return 'no-target';
         const q=canFedMotion(e,c.motion,fedMotionOpts(c));return q.ok?null:polWhy(q);},
       roots:()=>[],apply:(e,at,c)=>proposeFedMotion(e,c.motion,fedMotionOpts(c))},
@@ -1060,6 +1065,7 @@ function createHost(opts){
       if(it.t==='res'&&onlyKeys(it,['t','r','v'])&&DIP_RES.includes(it.r)&&int(it.v,1,10000000))out.push({t:'res',r:it.r,v:it.v});
       else if(it.t==='warJoin'&&onlyKeys(it,['t','target','front','plan'])&&int(it.target,0,63)&&((int(it.front,1,2147483647)&&!has(it,'plan'))||(int(it.plan,1,2147483647)&&!has(it,'front'))))out.push({t:'warJoin',target:it.target,...(it.plan?{plan:it.plan}:{front:it.front})});
       else if(DIP_TREATY.includes(it.t)&&onlyKeys(it,['t']))out.push({t:it.t});   // MP.6.2: barış + antlaşmalar (motorun dealQuote / executeDeal'i)
+      else if((it.t==='vassal'||it.t==='landPromise'||it.t==='fedPeace')&&warItemOk(it))out.push({...it});   // BETA-WAR-GOALS.0
       else return null;}
     return out;
   }
@@ -1478,7 +1484,7 @@ function createHost(opts){
     const started=['starting','ingame','paused','resume'].includes(L.phase);
     const empires=L.galaxyRev&&(L.mode!=='design'||started)&&G.emps?G.emps.filter(e=>e.id!==hostEmpireId&&!e.wild&&!e.crisisSide&&!e.dead).map(e=>({...empireCard(e),seat:(gs.find(p=>p.playerId!=='host'&&(p.claim===e.id||p.empireId===e.id))||{}).seat??null})).filter(e=>!started||e.seat!==null):[];
     /* Tohum yalnız host'ta: tohum + açık motor kodu tüm galaksiyi (konumlar, AI devletleri) yeniden kurdurur. */
-    const settings=L.settings&&(viewer&&viewer.playerId==='host'?L.settings:{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{}),...(L.settings.planetMul!==undefined?{planetMul:L.settings.planetMul}:{})});
+    const settings=L.settings&&(viewer&&viewer.playerId==='host'?L.settings:{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{}),...(L.settings.planetMul!==undefined?{planetMul:L.settings.planetMul}:{}),...(L.settings.tension!==undefined?{tension:L.settings.tension}:{})});
     const mine=viewer&&viewer.claim!==null&&G.emps&&G.emps[viewer.claim]?{empire:viewer.claim,...prepCard(G.emps[viewer.claim])}:null;
     const design=L.mode==='design',hd=design?hostDraftNow():null;
     return {v:PROTOCOL,type:'lobby',rev:L.rev,mode:L.mode,phase:phaseNow(),pause:L.pause||null,capacity:L.capacity,settings,galaxyRev:L.galaxyRev,
@@ -1708,7 +1714,7 @@ function createHost(opts){
       return x;});
     const hostE=G.emps[hostEmpireId],name=String(o.name||'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,40)||(hostE?String(hostE.name).slice(0,40):'Galaksi');   // tarih ayrı alanlarda (year/month)
     const body={format:PKG_FORMAT,mpVersion:PKG_VERSION,build:typeof BUILD_ID==='string'?BUILD_ID:null,createdAt:now(),saveId:S.saveId,
-      session:{roomId:S.roomId,worldRevision:S.worldRevision,hostEmpireId,speed:sharedSpeed().want,capacity:L?L.capacity:Math.max(2,players.length),settings:L&&L.settings?{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{}),...(L.settings.planetMul!==undefined?{planetMul:L.settings.planetMul}:{}),...(L.guard?{aiGuard:true}:{})}:null,
+      session:{roomId:S.roomId,worldRevision:S.worldRevision,hostEmpireId,speed:sharedSpeed().want,capacity:L?L.capacity:Math.max(2,players.length),settings:L&&L.settings?{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{}),...(L.settings.planetMul!==undefined?{planetMul:L.settings.planetMul}:{}),...(L.settings.tension!==undefined?{tension:L.settings.tension}:{}),...(L.guard?{aiGuard:true}:{})}:null,
         players,notes:Object.fromEntries([...notes].map(([k,v])=>[k,v.slice(-12)]))},
       diplomacy:{next:D.next,offers:JSON.parse(JSON.stringify(D.offers)),...(SQ.length?{sq:SQ.map(q=>({from:q.from,to:q.to,born:q.born,expires:q.expires,status:q.status}))}:{})},   // MP.6.3: statüko teklifleri
       display:{name,year:G.year,month:G.month,day:Math.floor(G.day),size:L&&L.settings?L.settings.size:null,systems:G.sys.length,
@@ -1725,7 +1731,7 @@ function createHost(opts){
     SQ.length=0;for(const q of pkg.diplomacy.sq||[])SQ.push({...q,...(q.status==='pending'&&G.day>=q.expires?{status:'expired'}:{})});   // MP.6.3: süresi dolan yapay uzatılmaz
     notes.clear();for(const [k,v] of Object.entries(ss.notes||{}))notes.set(+k,v.slice(-12));
     newsBy.clear();newsVisCache.clear();warSeen.clear();recoverWarNews();
-    if(L){L.phase='resume';L.capacity=ss.capacity;L.guard=!!(ss.settings&&ss.settings.aiGuard===true);L.settings=ss.settings?{size:ss.settings.size,aiCount:ss.settings.aiCount,...(ss.settings.shape!==undefined?{shape:ss.settings.shape}:{}),...(ss.settings.planetMul!==undefined?{planetMul:ss.settings.planetMul}:{})}:null;L.galaxyRev=1;L.seatNext=Math.max(1,...ss.players.map(x=>(x.seat|0)+1));
+    if(L){L.phase='resume';L.capacity=ss.capacity;L.guard=!!(ss.settings&&ss.settings.aiGuard===true);L.settings=ss.settings?{size:ss.settings.size,aiCount:ss.settings.aiCount,...(ss.settings.shape!==undefined?{shape:ss.settings.shape}:{}),...(ss.settings.planetMul!==undefined?{planetMul:ss.settings.planetMul}:{}),...(ss.settings.tension!==undefined?{tension:ss.settings.tension}:{})}:null;L.galaxyRev=1;L.seatNext=Math.max(1,...ss.players.map(x=>(x.seat|0)+1));
       L.resume={name:pkg.display.name,year:pkg.display.year,month:pkg.display.month,size:pkg.display.size,createdAt:pkg.createdAt};}
   }
   /* Devam: host açıkça başlatır. Kimliği doğrulanmamış ziyaretçiler çıkar; bekleyen koltuklar ayrılmış kalır (AI yönetmez). */
@@ -1771,12 +1777,12 @@ function createHost(opts){
       if(typeof AI_VIEW_CACHE!=='undefined')AI_VIEW_CACHE.delete(e);}
     return n;}
   /* ---------- MP.1 lobi host API'si (ağdan erişilemez) ---------- */
-  const SETTINGS_KEYS=['size','shape','aiCount','seed','planetMul'];
+  const SETTINGS_KEYS=['size','shape','aiCount','seed','planetMul','tension'];   // BETA-WAR-GOALS.0: +tension
   function configure(set){
     if(!L)return {ok:false,why:'no-lobby'};
     if(!['created','waiting','ready'].includes(L.phase))return {ok:false,why:'phase'};
     if(!plain(set)||!onlyKeys(set,SETTINGS_KEYS))return {ok:false,why:'bad-settings'};
-    if(!has(SIZES,set.size)||SIZES[set.size].available===false||(set.shape!==undefined&&!has(SHAPES,set.shape))||(set.planetMul!==undefined&&!(PLANET_MULS.includes(set.planetMul)&&set.planetMul!==1))||!int(set.aiCount,1,48)||!int(set.seed,1,2147483647))return {ok:false,why:'bad-settings'};
+    if(!has(SIZES,set.size)||SIZES[set.size].available===false||(set.shape!==undefined&&!has(SHAPES,set.shape))||(set.planetMul!==undefined&&!(PLANET_MULS.includes(set.planetMul)&&set.planetMul!==1))||(set.tension!==undefined&&!['sakin','calkantili'].includes(set.tension))||!int(set.aiCount,1,48)||!int(set.seed,1,2147483647))return {ok:false,why:'bad-settings'};
     if(set.aiCount+(L.mode==='design'?L.capacity:1)>SIZES[set.size].sys)return {ok:false,why:'galaxy-too-small'};
     if(L.mode==='design'){
       /* MP.7: galaksi OYUN BAŞLARKEN taslaklarla kurulur; burada yalnız ayar doğrulanır. AI + insan ≤ 49 (ID 0–63 için özel taraf payı korunur). */

@@ -1568,8 +1568,11 @@ const UI = {
         break;
       }
       case 'setwg': {
-        const [id,key]=String(x).split(':');this.warDeclarationPreview(+id,key);break;
+        const [id,key]=String(x).split(':');this.warGoalPick(+id,key);break;   // BETA-WAR-GOALS.0: önce hedef/tür seçimi
       }
+      case 'wgTarget': case 'wgVtype': case 'wgVwar': case 'wgGo': this.warGoalAct(a,x); break;   // BETA-WAR-GOALS.0
+      case 'dealVassal': case 'dealPromise': this.warDealAct(a,x); break;   // BETA-WAR-GOALS.0
+      case 'fedWarOpen': case 'fwTarget': case 'fwGoal': case 'fwPropose': this.fedWarAct(a,x); break;   // BETA-WAR-GOALS.0
       case 'runop': {
         /* FAZ 86A: geriye dönük uyumluluk — doğrudan yürütme yerine
            kanonik onay ekranına yönlendirilir. Tek dokunuş = tek onay. */
@@ -5640,6 +5643,7 @@ const UI = {
       <button class="abtn" data-a="dealAdd" data-x="want:passage">🚪 Geçiş izni</button>
     </div></div></div>`;
 
+    h += this.warDealHtml(d,e,o);   // BETA-WAR-GOALS.0: savaş şartları
     // --- anlaşma türleri ---
     h += `<div class="ph">ANLAŞMA MADDELERİ</div><div class="act2">`;
     /* FAZ 86B: `spynet` DEAL_KINDS ve applyItems'ta vardı ama hiçbir
@@ -5891,27 +5895,27 @@ const UI = {
     if(id===G.p.id){this.tab('devlet');this.refresh();return;}
     this.selectDiplo(id,'relation');
   },
-  warDeclarationPreview(id,key){
-    const p=warDeclarationPreview(G.p,G.emps[id],key);if(!p.target)return;
+  warDeclarationPreview(id,key,opts=null){
+    const p=warDeclarationPreview(G.p,G.emps[id],key,opts);if(!p.target)return;
     const group=(title,items)=>`<div class="ph">${title}</div>${items.length?items.map(v=>`<div class="mini">${esc(v.name)} · ${esc(v.side==='defense'?'Hedefin yanında':'Senin yanında')} · ${esc(v.why)}</div>`).join(''):'<div class="mini">Bilinen katılımcı yok.</div>'}`;
     this.openModal(`<div class="mhd">SAVAŞ İLANI ÖNİZLEMESİ</div><div class="mbd"><div class="lead">Hedef: ${esc(p.target.name)} · ${esc(WAR_GOALS[key]?.n||'Geçersiz hedef')}</div>
       <div class="mini">Etki bedeli: ${p.cost} ◈. Son onaya kadar savaş başlamaz. İttifak tek başına otomatik savaş katılımı değildir.</div>
       <details><summary>İsteğe bağlı: Müttefikleri savaşa çağır</summary><p class="mini">İlan sonrasında seçilenlere ayrı gönüllü destek teklifi gönderilir. Ret, ilanını geri almaz. En fazla 8 davet.</p>${G.emps.filter(e=>e.id!==G.p.id&&e.id!==id&&!e.dead&&!e.wild&&!e.crisisSide&&G.p.contact[e.id]).map(e=>`<label class="row"><span>${esc(e.name)}</span><input type="checkbox" data-war-invite="${e.id}"></label>`).join('')}</details>
       ${group('KESİN KATILACAKLAR',p.certain)}${group('KOŞULLU KATILABİLECEKLER',p.conditional)}
       <div class="ph">BİLİNMEYENLER</div><div class="mini">İstihbarat kapsamı dışındaki siyasi bağlantılar ve gizli taahhütler belirlenemez. Bu bölüm gizli devlet sayısını göstermez.</div>
-      ${p.risks.map(v=>`<div class="mini">⚠ ${esc(v)}</div>`).join('')}${p.blockers.map(v=>`<div class="mini">Engel: ${esc(v)}</div>`).join('')}
+      ${this.warPreviewGoalHtml(p)}${p.risks.map(v=>`<div class="mini">⚠ ${esc(v)}</div>`).join('')}${p.blockers.map(v=>`<div class="mini">Engel: ${esc(v)}</div>`).join('')}
       </div><div class="mft"><button class="ch" data-a="warPrepare" data-x="${id}:${key}" ${p.ok?'':'disabled'}>ÖNCE KOALİSYON HAZIRLA</button><button id="warFinalConfirm" data-a="warFinalConfirm" class="ch" ${p.ok?'':'disabled'}>ONAYLA · SAVAŞ İLAN ET</button><button class="ch" data-a="closem">Vazgeç</button></div>`,'war');
-    const pending={world:G.sys,player:G.p,id,key,signature:p.signature};this._warPreview=pending;
+    const pending={world:G.sys,player:G.p,id,key,opts,signature:p.signature};this._warPreview=pending;
     this._hook('warFinalConfirm',()=>{
       if(this._warPreview!==pending||G.sys!==pending.world||G.p!==pending.player)return;
       const invites=[...document.querySelectorAll('[data-war-invite]:checked')].map(e=>+e.dataset.warInvite);if(invites.length>8){say('En fazla 8 davet seç');return;}this._warInvites=invites;
       this._devourPending=null;
-    this._warPreview=null;const current=warDeclarationPreview(G.p,G.emps[id],key);
-      if(current.signature!==pending.signature||!current.ok){this.warDeclarationPreview(id,key);say('Koşullar değişti; güncel önizlemeyi yeniden onayla.','war');return;}
+    this._warPreview=null;const current=warDeclarationPreview(G.p,G.emps[id],key,opts);
+      if(current.signature!==pending.signature||!current.ok){this.warDeclarationPreview(id,key,opts);say('Koşullar değişti; güncel önizlemeyi yeniden onayla.','war');return;}
       // Synchronous final validation precedes both declaration and goal payment.
       const actor=G.p,target=G.emps[id];
       if(!warDeclarationAccess(actor,target).ok||!declareWar(actor,target)){say('Savaş ilanı uygulanamadı; koşullar değişti.','war');return;}
-      if(setWarGoal(actor,target,key))say('Savaş hedefi: '+WAR_GOALS[key].n,'war');
+      if(setWarGoal(actor,target,key,opts))say('Savaş hedefi: '+WAR_GOALS[key].n,'war');
       if(!(typeof MP6Stars!=='undefined'&&MP6Stars.S?.started)){this._warInvites=null;const f=warLedgerFind(actor.id,target.id);if(f)WarCenterUI.sendInvites(f.id,target.id,invites);}
       this.closeModal();this.openDiplo();
     });
@@ -5925,15 +5929,15 @@ const UI = {
       <div class="row"><span>Etkin</span><b style="color:#6ff2c8">${fmt(e.res.etk)}</b></div>
       ${hasPerk(e,'freeWar')?'<div class="mini" style="color:#65e08a">✧ Savaş Hakkı: hedef bedava</div>':''}
       </div><div class="mft">`;
-    for (const k in WAR_GOALS){
+    for (const k of WAR_GOAL_MAIN){   // BETA-WAR-GOALS.0: yeni ilanda iki normal hedef; eski 4 hedef yalnız eski kayıtlarda sürer
       const W = WAR_GOALS[k];
       const free = hasPerk(e,'freeWar');
       const afford = free || e.res.etk >= W.etk;
       h += `<button class="ch" data-a="${afford?'setwg':'x'}" data-x="${id}:${k}" style="${afford?'':'opacity:.4'}">
         <div class="cht">${W.ico} ${W.n} <span style="float:right;color:#7d90ad">${free?'bedava':W.etk+'◈'}</span></div>
-        <div class="chd">${W.d}</div></button>`;
+        <div class="chd">${WAR_GOAL_TEXT[k]||W.d}</div></button>`;
     }
-    h += `<button class="ch" data-a="closem"><div class="cht">Vazgeç</div></button></div>`;
+    h += `<div class="mini" style="padding:4px 8px">Haraç, Bilgi, Yıkım ve Yok Etme eski kayıtlardaki savaşlarda şartlarıyla sürer; yeni ilanda seçilmez. Haraç ve teknoloji barış maddesi olarak müzakere masasında istenebilir.</div><button class="ch" data-a="closem"><div class="cht">Vazgeç</div></button></div>`;
     this.openModal(h, 'war');
   },
   /* hediye ekranı — ne göndereceğini ve ne kadar olduğunu seçersin */
@@ -6572,7 +6576,8 @@ const UI = {
       if(!e.war[target.id])h+=button('newWar',{target:target.id},'Ortak savaş izni öner');
       for(const id of f.members)if(G.emps[id].war[target.id]&&(id===e.id||intelOf(e,id)>=3))h+=button('joinWar',{target:target.id,sponsor:id},G.emps[id].name+' savaşına destek öner');h+='</div>';
     }
-    for(const d of Object.values(f.decisions||{}))if(d.state==='ready')h+=`<div class="box"><b>${d.kind==='newWar'?'Ortak savaş izni':'Mevcut savaşa destek'} · ${esc(e.contact[d.target]?G.emps[d.target]?.name:'Temassız hedef')}</b><div class="mini">${Math.ceil(Math.max(0,d.expires-G.day))} gün geçerli. Katılımcılar kendi evet oylarını verdi.</div><button class="abtn" data-a="fedExecute" data-x="${f.id}:${d.id}" ${e.id===f.leader||e.id===d.by?'':'disabled'}>KARARI UYGULA</button></div>`;
+    h+=this.fedWarListHtml(f,e);   // BETA-WAR-GOALS.0
+    for(const d of Object.values(f.decisions||{}))if(d.state==='ready')h+=`<div class="box"><b>${d.kind==='fedWar'?'Federasyona karşı savaş':d.kind==='newWar'?'Ortak savaş izni':'Mevcut savaşa destek'} · ${esc(e.contact[d.target]?G.emps[d.target]?.name:'Temassız hedef')}</b><div class="mini">${Math.ceil(Math.max(0,d.expires-G.day))} gün geçerli. Katılımcılar kendi evet oylarını verdi.</div><button class="abtn" data-a="fedExecute" data-x="${f.id}:${d.id}" ${e.id===f.leader||e.id===d.by?'':'disabled'}>KARARI UYGULA</button></div>`;
     h+='</details>';
     }
     return h;
@@ -9325,6 +9330,7 @@ function renderSetup(){
     for (const m of (typeof PLANET_MULS!=='undefined'?PLANET_MULS:[1])) h += `<button class="opt ${pm===m?'on':''}" data-a="planetMul" data-x="${m}" aria-pressed="${pm===m}">${String(m).replace('.',',')}×<small>${m===1?'Varsayılan':m<.25?'Çok seyrek':m<1?'Az yerleşim':'Bol yerleşim'}</small></button>`;
     h += `</div><div class="mini">Normal yaşanabilir gezegen adaylarının sayısını değiştirir${pm<1?` (${String(pm).replace('.',',')}× ≈ normal adayların %${Math.round(pm*100)}'i kalır, kalanlar ölü dünyaya döner)`:''}. Sistem konumları, hiperhatlar, başkentler ve toplam gezegen sayısı aynı tohumda değişmez${pm>1?' (yalnız fazladan aday gerekirse boş sistemlere eklenir)':''}; başkent dünyaları, Gaia / Makine Dünyası gibi nadir dünyalar, özel yataklar ve tür kuralları korunur.</div></div>`;
 
+    h += tensionSetupHtml(c);   // BETA-WAR-GOALS.0
     if(!window.MP7Setup?.active){
       h+=rivalSetupHtml(c);
     }
@@ -9600,6 +9606,7 @@ function setupClickHandler(e){
   else if(a==='sizeStep'){const steps=availableGalaxySteps(),i=steps.indexOf(SIZES[CFG.size]?.sys),n=steps[i+Number(x)];if(n){CFG.aiCount=aiCountFor(CFG);CFG.size=setupSizeKey(n);}safeRenderSetup();}
   else if (a === 'size'){ if(!SIZES[x]||SIZES[x].available===false)return;CFG.aiCount=aiCountFor(CFG);CFG.size = x; safeRenderSetup(); }
   else if (a === 'shape'){ if(!SHAPES[x])return; CFG.shape = x; safeRenderSetup(); }
+  else if (a === 'tension'){ if(!Object.hasOwn(TENSION_LEVELS,x))return; if(x==='dengeli')delete CFG.tension; else CFG.tension=x; safeRenderSetup(); }   // BETA-WAR-GOALS.0
   else if (a === 'planetMul'){ const m=Number(x); if(!PLANET_MULS.includes(m))return; if(m===1)delete CFG.planetMul; else CFG.planetMul=m; safeRenderSetup(); }
   else if (a === 'regenGalaxy'){ CFG.seed = (Math.random()*1e9)|0; UI.setupError=''; UI.setupRegen=false; safeRenderSetup(); }
   else if (a === 'diff'){ CFG.diff = x; safeRenderSetup(); }
@@ -9961,3 +9968,114 @@ UI.autoBuildHtml=function(e,s){
     say(r.ok?(STRUCTS[key].n+' · '+(G.fleets.find(f=>f.id===r.fleet)?.name||'inşaat gemisi')+(r.queued?' kuyruğuna eklendi':' atandı')+(Number.isFinite(r.eta)?' · ~'+Math.round(r.eta)+' gün':'')):r.why,r.ok?'sci':'war');
     this.keepScroll=true;this.refresh(true);return;}
   return act0.apply(this,arguments);};})();
+/* ═══ BETA-WAR-GOALS.0 — Savaş İlan Et: iki normal hedef, hedef/tür seçimi, gerekçe ve tutum önizlemesi; müzakere masasında savaş şartları ═══
+   Görünüm durumu (_wgSel) yalnız bu pencerenin taslağıdır; Save8/ağ alanı değil. Son karar motorun warDeclarationPreview / setWarGoal / dealQuote yolundan. */
+const WAR_GOAL_TEXT={fetih:'Seçtiğin sistemleri talep et (başkent hariç, en çok 5). Barışta hedefler sende kalır, hedef dışı işgaller iade edilir; hedef devlet yok edilmez.',
+ boyun:'Hedefi vasalın yap. Tür, vergi ve yükümlülükler ilandan önce görünür. Savaşta koşullu teslim teklif edebilirsin; karşı taraf da boyun eğme önerebilir.'};
+UI.warGoalPick=function(id,key){
+  const e=G.p,o=G.emps[id];if(!o||!WAR_GOAL_MAIN.includes(key))return;
+  const prev=this._wgSel&&this._wgSel.id===id&&this._wgSel.key===key?this._wgSel:null;
+  const s=this._wgSel=prev||(key==='fetih'?{id,key,targets:warFetihDefault(e,o)}:{id,key,vtype:'haracguzar',war:WAR_VASSAL_WAR.haracguzar});
+  let h=`<div class="mhd"><span>${WAR_GOALS[key].ico} ${esc(key==='boyun'?'VASALLAŞTIRMA':'FETİH')} · ${esc(o.name)}</span></div><div class="mbd">`;
+  if(key==='fetih'){
+    const c=warFetihCandidates(e,o),max=Math.min(WAR_FETIH_MAX,Math.max(0,sysCount(o)-1));
+    h+=`<div class="lead">Talep edilecek sistemleri seç (${s.targets.length}/${max}). Başkent hedef olamaz; hedefe en az bir sistem kalır.</div>`;
+    h+=c.length?c.map(x=>`<button class="ch wgT ${s.targets.includes(x.id)?'pri':''}" data-a="wgTarget" data-x="${x.id}"><div class="cht">${s.targets.includes(x.id)?'☑':'☐'} ${esc(x.name)}<span style="float:right;color:#7d90ad">${x.col} koloni</span></div></button>`).join(''):'<div class="mini">Bilinen başkent dışı sistemi yok: önce keşif ya da istihbarat.</div>';
+  } else {
+    h+=`<div class="lead">Vasallık türü ve senyörün savaşlarına katılım hükmü.</div>`;
+    for(const t of Object.keys(VASSAL_TYPES))h+=`<button class="ch ${s.vtype===t?'pri':''}" data-a="wgVtype" data-x="${t}"><div class="cht">${VASSAL_TYPES[t].ico} ${esc(VASSAL_TYPES[t].n)}</div><div class="chd">${esc(VASSAL_TYPES[t].d)}</div></button>`;
+    h+='<div class="ph">SAVAŞLARA KATILIM</div><div class="act2">';
+    for(const [w,l] of [['none','Katılmaz'],['defense','Yalnız savunma'],['all','Saldırı da']]){const ok=!!warVassalGoalTerms(s.vtype,w);h+=`<button class="abtn ${s.war===w?'pri':(ok?'':'dis')}" data-a="wgVwar" data-x="${w}" ${ok?'':'disabled'}>${l}</button>`;}
+    h+='</div><div class="mini">Yeni vasal saldırı savaşlarına yalnız bu madde açıkça kabul edilirse katılır.</div>';
+  }
+  h+=`</div><div class="mft"><button class="ch" data-a="wgGo" ${key==='fetih'&&!s.targets.length?'disabled':''}>ÖNİZLEME · GEREKÇE VE KATILIMCILAR</button><button class="ch" data-a="war" data-x="${id}">Geri</button><button class="ch" data-a="closem">Vazgeç</button></div>`;
+  this.openModal(h,'war');
+};
+UI.warGoalAct=function(a,x){
+  const s=this._wgSel;if(!s)return;const o=G.emps[s.id];
+  if(a==='wgTarget'){const id=+x,i=s.targets.indexOf(id);if(i>=0)s.targets.splice(i,1);else if(s.targets.length<Math.min(WAR_FETIH_MAX,sysCount(o)-1))s.targets.push(id);else say('En çok '+Math.min(WAR_FETIH_MAX,sysCount(o)-1)+' hedef sistem','war');}
+  if(a==='wgVtype'&&VASSAL_TYPES[x]){s.vtype=x;s.war=WAR_VASSAL_WAR[x];}
+  if(a==='wgVwar'&&warVassalGoalTerms(s.vtype,x))s.war=x;
+  if(a==='wgGo'){this.warDeclarationPreview(s.id,s.key,s.key==='fetih'?{targets:s.targets.slice()}:{vtype:s.vtype,war:s.war});return;}
+  this.warGoalPick(s.id,s.key);
+};
+UI.warPreviewGoalHtml=function(p){
+  let h='';const g=p.goal,L=p.legit;
+  if(g?.targets)h+=`<div class="ph">HEDEF: FETİH</div><div class="mini">${g.targets.map(t=>esc(t.name)).join(' · ')}</div><div class="mini">${esc(g.note)}</div>`;
+  if(g?.vtype)h+=`<div class="ph">HEDEF: VASALLAŞTIRMA · ${esc(g.name)}</div><div class="mini">Vergi: ${esc(g.terms.tax)} · Bilim payı: ${esc(g.terms.science)}</div><div class="mini">${esc(g.terms.defense)} · ${esc(g.terms.war)} · ${esc(g.terms.autonomy)}</div><div class="mini">${esc(g.note)}</div>`;
+  if(L){h+=`<div class="ph">GEREKÇELER VE MEŞRUİYET</div><div class="row"><span>Meşruiyet</span><b>${Math.round(L.score*100)} / gereken ${Math.round(L.need*100)} · ${esc(L.level.toUpperCase())}</b></div>`;
+    h+=L.list.length?L.list.map(j=>`<div class="mini">• ${esc(j.n)} · güç ${Math.round(j.strength*100)} · ${j.age?esc(j.age+' ay önce'):'güncel'} · ${esc(j.evidence)}</div>`).join(''):'<div class="mini">Kayıtlı gerekçe yok. Talep ne kadar büyükse o kadar güçlü gerekçe gerekir.</div>';
+    h+=`<div class="mini">Bilinen güç oranı ≈ ${L.ratio}${L.band?' (±%'+Math.round(L.band*100)+')':''}.</div>${L.uncertain?`<div class="mini">⚠ ${esc(L.uncertain)}</div>`:''}`;}
+  if(p.stances){h+='<div class="ph">TAHMİNİ TUTUMLAR</div>';h+=p.stances.length?p.stances.map(r=>`<div class="mini">${esc(r.name)} · <b>${esc(WAR_STANCE_TEXT[r.stance])}</b> · ${esc(r.why)}</div>`).join(''):'<div class="mini">Temaslı başka devlet yok.</div>';
+    h+='<div class="mini">Tutum siyasi tepkidir; askerî katılım bütçe, rota ve cephelere göre ayrıca belirlenir. Gizli taahhütler ve temas kurulmamış devletler gösterilmez.</div>';}
+  return h;
+};
+UI.warDealHtml=function(d,e,o){
+  let h='';const all=d.give.concat(d.want);
+  if(e.war[o.id]){
+    h+='<div class="ph">SAVAŞ ŞARTLARI</div><div class="act2">';
+    for(const t of Object.keys(VASSAL_TYPES))h+=`<button class="abtn ${d.want.some(i=>i.t==='vassal'&&i.type===t)?'pri':''}" data-a="dealVassal" data-x="want:${t}">👑 Teslim iste: ${esc(VASSAL_TYPES[t].n)}</button>`;
+    for(const t of Object.keys(VASSAL_TYPES))h+=`<button class="abtn ${d.give.some(i=>i.t==='vassal'&&i.type===t)?'pri':''}" data-a="dealVassal" data-x="give:${t}">🏳 Boyun eğ: ${esc(VASSAL_TYPES[t].n)}</button>`;
+    h+='</div><div class="mini">Teslim maddesi savaşı kendisi bitirir; barış maddesi eklenmez. Haraç ve teknoloji aynı pakete eklenebilir.</div>';
+    for(const [x,y] of [[e,o],[o,e]]){const fp=warFetihPreview(x,y);if(!fp)continue;
+      h+=`<div class="mini">${esc(x===e?'Senin':o.name+' devletinin')} Fetih hedefi${fp.legacy?' (eski kayıt: işgaller barışta kalır)':''}: kalacak ${fp.keep.map(t=>esc(t.name)).join(', ')||'—'} · alınamayan ${fp.open.map(t=>esc(t.name)).join(', ')||'—'} · iade ${fp.back.map(t=>esc(t.name)).join(', ')||'—'}</div>`;}
+  }
+  const v=all.find(i=>i.t==='vassal');
+  if(v){const sub=d.give.includes(v)?e:o,lord=sub===e?o:e,tp=warTermsPreview(sub,lord,v);
+    if(tp){h+=`<div class="box"><b>TESLİM ÖNİZLEMESİ — ${esc(G.emps[tp.sub].name)} → ${esc(G.emps[tp.lord].name)} (${esc(tp.type)})</b>
+      <div class="mini">Vergi: ${esc(tp.tax)} · ${esc(tp.autonomy)} · ${esc(tp.protection)} · ${esc(tp.war)}</div><div class="mini">${esc(tp.territory)}</div>
+      <div class="mini">Kapanan cepheler: ${tp.closes.map(c=>esc(c.text)).join(' · ')}</div><div class="mini">Süren savaşlar: ${tp.continues.map(c=>esc(c.text)).join(' · ')||'—'}</div>${tp.duties.map(t=>`<div class="mini">${esc(t)}</div>`).join('')}
+      <div class="act2">${['none','defense','all'].map(w=>`<button class="abtn ${v.war===w?'pri':(warVassalGoalTerms(v.type,w)?'':'dis')}" data-a="dealVassal" data-x="war:${w}" ${warVassalGoalTerms(v.type,w)?'':'disabled'}>${{none:'Katılmaz',defense:'Yalnız savunma',all:'Saldırı da'}[w]}</button>`).join('')}</div></div>`;}}
+  if(all.some(i=>i.t==='peace')&&e.war[o.id]){const sp=warSeparatePeacePreview(e,o);
+    if(sp)h+=`<div class="box"><b>AYRI BARIŞ — yalnız bu cephe (#${sp.front}) kapanır</b>${sp.ends.map(t=>`<div class="mini">Sona eren: ${esc(t)}</div>`).join('')}${sp.broken?'<div class="mini">⚠ Sözleşmeli katılımın sahibi bu düşmanla savaşırken ayrı barış söz bozma sayılabilir.</div>':''}<div class="mini">Öteki cepheler: ${sp.others.map(x=>esc(x.text)+' — '+x.state).join(' · ')||'—'}</div></div>`;}
+  const join=d.want.find(i=>i.t==='warJoin'&&i.front);
+  if(join){const f=(G.warLedger?.fronts||[]).find(x=>x.id===join.front),enemy=f&&G.emps[f.sides.find(id=>id!==e.id)];
+    if(f&&enemy&&f.sides.includes(e.id)){const c=warFetihCandidates(e,enemy);
+      h+='<div class="ph">TOPRAK VAADİ (isteğe bağlı)</div><div class="act2">'+(c.map(x=>`<button class="abtn ${d.give.some(i=>i.t==='landPromise'&&i.sys===x.id)?'pri':''}" data-a="dealPromise" data-x="${x.id}:${f.id}">⚑ ${esc(x.name)}</button>`).join('')||'<span class="mini">Bilinen düşman sistemi yok</span>')+'</div><div class="mini">Vaat, bu cephe kapanınca değerlendirilir: sistem sendeyse devredilir; değilse karşılanamaz sayılır.</div>';}}
+  for(const p of (G.warLedger?.promises||[]).filter(p=>(p.giver===e.id&&p.taker===o.id||p.taker===e.id&&p.giver===o.id)).slice(-4)){const st=p.state==='open'?warPromiseState(p):{state:p.state,why:p.why||''};
+    h+=`<div class="mini">Vaat ${esc(G.sys[p.sys]?.name||'?')} (${esc(G.emps[p.giver].name)} → ${esc(G.emps[p.taker].name)}): <b>${esc(WAR_PROMISE_TEXT[st.state]||st.state)}</b> · ${esc(st.why)}</div>`;}
+  return h;
+};
+UI.warDealAct=function(a,x){
+  const d=this.deal;if(!d)return;const e=G.p,o=G.emps[d.to];
+  if(a==='dealVassal'){const [side,val]=String(x).split(':');
+    if(side==='war'){const v=d.give.concat(d.want).find(i=>i.t==='vassal');if(v&&warVassalGoalTerms(v.type,val))v.war=val;}
+    else if(['give','want'].includes(side)&&VASSAL_TYPES[val]){const had=d[side].some(i=>i.t==='vassal'&&i.type===val);d.give=d.give.filter(i=>i.t!=='vassal'&&i.t!=='peace');d.want=d.want.filter(i=>i.t!=='vassal'&&i.t!=='peace');if(!had)d[side].push({t:'vassal',type:val,war:WAR_VASSAL_WAR[val]});}}
+  if(a==='dealPromise'){const [sys,front]=String(x).split(':').map(Number),i=d.give.findIndex(it=>it.t==='landPromise'&&it.sys===sys);if(i>=0)d.give.splice(i,1);else d.give.push({t:'landPromise',sys,front});}
+  this.dealMsg='';this.drawDeal();
+};
+UI.fedWarListHtml=function(f,e){
+  const others=(G.feds||[]).filter(x=>x!==f&&x.members.some(id=>e.contact[id]));if(!others.length)return '';
+  let h='<div class="mini">Federasyona karşı savaş: hedef karşı federasyon olarak kaydedilir; ilan seçilen üyeye yapılır, karşı tarafın gerçek savunma yükümlülükleri uygulanır.</div>';
+  for(const o of others)h+=`<button class="abtn" data-a="fedWarOpen" data-x="${o.id}">⚔ Federasyona Karşı Savaş Öner: ${esc(o.name)}</button>`;
+  return h;
+};
+UI.fedWarPick=function(){
+  const s=this._fwSel,e=G.p,f=findFed(e),o=fedOf(s?.fed);if(!s||!f||!o){this.closeModal();return;}
+  const known=o.members.filter(id=>e.contact[id]&&G.emps[id]&&!G.emps[id].dead),t=G.emps[s.target];
+  const opts=s.goal==='fetih'?{targets:t?warFetihDefault(e,t):[]}:{vtype:'haracguzar',war:'none'},full={targetFed:o.id,target:s.target,goal:s.goal,...opts};
+  const p=t?fedWarPreview(e,f,full):{ok:false,why:'Hedef üyeyi seç'};this._fwOpts=full;
+  const rows=(title,list)=>`<div class="mini"><b>${title}:</b> ${list.map(r=>esc(r.name)+' ('+esc(r.why)+')').join(' · ')||'—'}</div>`;
+  let h=`<div class="mhd"><span>⚔ FEDERASYONA KARŞI SAVAŞ · ${esc(o.name)}</span></div><div class="mbd"><div class="lead">Hedef üye ve savaş hedefi; oylamadan sonra ayrıca uygulanır.</div><div class="act2">`;
+  for(const id of known)h+=`<button class="abtn ${s.target===id?'pri':''}" data-a="fwTarget" data-x="${id}">${esc(G.emps[id].name)}</button>`;
+  h+=`</div><div class="act2"><button class="abtn ${s.goal==='fetih'?'pri':''}" data-a="fwGoal" data-x="fetih">⚔ Fetih</button><button class="abtn ${s.goal==='boyun'?'pri':''}" data-a="fwGoal" data-x="boyun">👑 Vasallaştırma</button></div>`;
+  if(t&&s.goal==='fetih')h+=`<div class="mini">Hedef sistemler: ${opts.targets.map(id=>esc(G.sys[id]?.name||'?')).join(', ')||'bilinen sistem yok'}</div>`;
+  if(t&&s.goal==='boyun')h+='<div class="mini">Vasallık: Haraçgüzar · senyörün savaşlarına katılmaz.</div>';
+  if(p.ok){h+='<div class="ph">BİZİM TARAF</div>'+rows('Koşullu',p.ours.conditional)+rows('Katılmayacak',p.ours.no)+'<div class="ph">KARŞI TARAF</div>'+rows('Kesin',p.theirs.certain)+rows('Koşullu',p.theirs.conditional)+`<div class="mini">Meşruiyet ${Math.round(p.legit.score*100)} / ${Math.round(p.legit.need*100)} · ${esc(p.legit.level)}</div><div class="mini">${esc(p.note)}</div>`;}
+  else h+=`<div class="mini">Engel: ${esc(p.why)}</div>`;
+  h+=`</div><div class="mft"><button class="ch" data-a="fwPropose" ${p.ok?'':'disabled'}>OYLAMAYA SUN</button><button class="ch" data-a="closem">Vazgeç</button></div>`;
+  this.openModal(h,'war');
+};
+UI.fedWarAct=function(a,x){
+  if(a==='fedWarOpen'){this._fwSel={fed:+x,target:null,goal:'fetih'};this.fedWarPick();return;}
+  const s=this._fwSel;if(!s)return;
+  if(a==='fwTarget')s.target=+x;if(a==='fwGoal'&&WAR_GOAL_MAIN.includes(x))s.goal=x;
+  if(a==='fwPropose'){const r=proposeFedMotion(G.p,'fedWar',this._fwOpts||{});if(!r||r.ok===false)say(r?.why||'Önerge sunulamadı','war');this._fwSel=null;this.closeModal();this.openFed();return;}
+  this.fedWarPick();
+};
+function tensionSetupHtml(c){
+  const t=tensionOf(c);let h='<h2 style="margin-top:12px">GALAKTİK GERİLİM</h2><div class="grid g3" id="tensionRow">';
+  for(const k of Object.keys(TENSION_LEVELS))h+=`<button class="opt ${t===k?'on':''}" data-a="tension" data-x="${k}" aria-pressed="${t===k}">${TENSION_LEVELS[k].n}<small>${k==='dengeli'?'Varsayılan':k==='sakin'?'Daha az entrika':'Daha çok fırsat'}</small></button>`;
+  return h+`</div><div class="mini">${esc(TENSION_LEVELS[t].d)} Rakip Doktrinlerden ayrıdır; harita ve AI doktrinleri değişmez. Yapay sınır, zorunlu blok ya da gerekçesiz savaş yoktur.</div>`;
+}
+/* END BETA-WAR-GOALS.0 UI */

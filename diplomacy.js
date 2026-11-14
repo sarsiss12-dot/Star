@@ -187,6 +187,7 @@ function warLedgerSync(reason='observed',actor=null){
     if(f.ended!==null) continue;
     if(!warLedgerPair(...f.sides)){
       f.ended=G.day;f.endReason=reason+'|actor:'+(actor===null?(['observed','load-observed','legacy'].includes(reason)?'unknown':'auto'):actor);
+      if(reason!=='load-observed')warPromiseFrontEnded(f);   // BETA-WAR-GOALS.0
       recordNews({category:'peace',empires:f.sides,key:'war-end:'+f.id,title:'Savaş sona erdi',text:(typeof WAR_END_REASONS!=='undefined'&&WAR_END_REASONS[reason]||'Bitiş nedeni: '+reason)+' · Savaş #'+f.id+' · '+f.sides.map(id=>G.emps[id]?.name||'?').join(' ↔ ')+' · gün '+G.day+' · '+f.endReason,important:true});continue;
     }
     for(const id of f.sides){
@@ -305,6 +306,8 @@ function restoreWarLedger(raw){
       !f.sides.includes(x.from)||!f.sides.includes(x.to)||x.from===x.to||!time(x.day))fail();
   }
   if(raw.preparations!==undefined&&!warPreparationsValid(raw.preparations))fail();
+  if(raw.promises!==undefined&&!warPromisesValid(raw.promises))fail();   // BETA-WAR-GOALS.0
+  if(raw.fronts.some(f=>f.fedWar!==undefined&&!warFedMarkValid(f.fedWar)))fail();   // BETA-WAR-GOALS.0
   G.warLedger=JSON.parse(JSON.stringify(raw));
   warLedgerSync('load-observed');
 }
@@ -895,6 +898,7 @@ function resolveProxyWars(a, b){
 }
 function makePeace(a, b, reason=a?.ai?'ai-peace':'agreement', actor=a?.id??null){
   if (!canPeace(a,b)) return false;
+  warFetihSettle(a,b);   // BETA-WAR-GOALS.0: v2 Fetih — hedef dışı işgal iade
   a.war[b.id] = false; b.war[a.id] = false;
   if (a.warDefense) delete a.warDefense[b.id];
   if (b.warDefense) delete b.warDefense[a.id];
@@ -1160,6 +1164,9 @@ const DEAL_KINDS = {
   warOn  :{n:'Üçüncü Tarafa Savaş',ico:'⚔'},
   warJoin:{n:'Belirli Savaşa Destek',ico:'⚔'},
   peaceWith:{n:'Üçüncü Tarafla Barış',ico:'🤲'},
+  vassal :{n:'Teslim: Vasallık',ico:'👑'},          // BETA-WAR-GOALS.0
+  landPromise:{n:'Toprak Vaadi',ico:'⚑'},       // BETA-WAR-GOALS.0
+  fedPeace:{n:'Federasyonlar Arası Ortak Barış',ico:'🕊'},   // BETA-WAR-GOALS.0
   /* FAZ 86C.1: `intel` TEK YÖNLÜdür — veren tarafın sensör verisini
      alıcıya açar. Simetrik ortak casus ağı `spynet`tir. */
   intel  :{n:'Sensör Verisi Paylaşımı', ico:'👁',
@@ -1186,6 +1193,9 @@ function dealLabel(it){
     case 'intel':   return '👁 Sensör anlaşması';
     case 'spynet':  return '🕸 Casusluk ağı paktı';
     case 'passage': return '🚪 Sınır geçiş izni';
+    case 'vassal':  return '👑 Teslim: '+(VASSAL_TYPES[it.type]?.n||'?')+' vasallık · '+({none:'savaşlara katılmaz',defense:'yalnız savunma',all:'saldırı savaşlarına da katılır'}[it.war]||'?');   // BETA-WAR-GOALS.0
+    case 'fedPeace': return '🕊 Ortak barış: iki federasyonun kampanya cepheleri';   // BETA-WAR-GOALS.0
+    case 'landPromise': return '⚑ Toprak vaadi: '+(G.sys[it.sys]?.name||'?')+' · Cephe #'+it.front;   // BETA-WAR-GOALS.0
   }
   return '?';
 }
@@ -1257,12 +1267,15 @@ function itemValue(e, it, other){
       if (RACES[e.race].dip <= .05) v = -120;      // kovan ittifakı sevmez
       return v;
     }
+    case 'vassal': return warVassalLordValue(e,it,other);   // BETA-WAR-GOALS.0: ALAN = senyör
+    case 'landPromise': return G.sys[it.sys]?itemValue(e,{t:'sys',id:it.sys},other)*.55:0;   // BETA-WAR-GOALS.0
+    case 'fedPeace': return fedPeaceFronts(e,other).concat(fedPeaceFronts(other,e)).length?itemValue(e,{t:'peace'},other)*1.2:0;   // BETA-WAR-GOALS.0
     case 'warJoin': return ColonyInfo.read(()=>{
       const enemy=G.emps[it.target],p=it.plan&&warPreparation(it.plan),receiving=!!e.war[it.target]||p?.owner===e.id;
       if(!enemy)return 0;
       if(receiving)return clamp(80+aiKnownPower(e,other)/Math.max(1,aiKnownPower(e,e))*120,80,320);
       const risk=aiKnownPower(e,enemy)/Math.max(1,aiKnownPower(e,e)+aiKnownPower(e,other));
-      return clamp((140+risk*100+(e.exh?.[it.target]||0)+Object.values(e.war||{}).filter(Boolean).length*25)*(e.mizac==='militarist'?.85:e.mizac==='pasifist'?1.3:e.mizac==='tuccar'?1.15:1),60,600);
+      return clamp((140+risk*100+(e.exh?.[it.target]||0)+Object.values(e.war||{}).filter(Boolean).length*25)*(e.mizac==='militarist'?.85:e.mizac==='pasifist'?1.3:e.mizac==='tuccar'?1.15:1)*aiWarJoinLegitMul(other,enemy),60,600);   // BETA-WAR-GOALS.0
     });
     case 'warOn': {
       const tgt = G.emps[it.target];
@@ -1384,7 +1397,7 @@ function evalOffer(ai, offer){
     gain+=value;
     gainParts.push({it,value,effective:!n.effectiveGive||n.effectiveGive.includes(it)});
   }
-  for (const it of n.want) cost += itemValue(ai, it, other);
+  for (const it of n.want) cost += it.t==='vassal'?warVassalSubmitCost(ai,it,other).cost:it.t==='landPromise'?(G.sys[it.sys]?itemValue(ai,{t:'sys',id:it.sys},other)*.35:0):itemValue(ai, it, other);   // BETA-WAR-GOALS.0
 
   const F = dealFactors(ai, other, n, gainParts);
   const f = F.f;
@@ -1467,6 +1480,9 @@ function applyItems(giver, taker, items){
         const source=(G.warLedger.fronts||[]).find(f=>f.id===it.front);if(source)source.coalition=true;
         break;
       }
+      case 'vassal': warVassalApply(giver,taker,it); break;          // BETA-WAR-GOALS.0
+      case 'landPromise': warPromiseAdd(giver,taker,it); break;      // BETA-WAR-GOALS.0
+      case 'fedPeace': fedPeaceApply(giver,taker); break;           // BETA-WAR-GOALS.0
       case 'warOn': {
         const t = G.emps[it.target];
         if (t && !t.dead && declareWar(giver, t, {sponsor:taker.id, enemy:t.id, kind:'promise'})){
@@ -1601,7 +1617,7 @@ function dealCost(offer){
 }
 
 /* Simetrik antlaşmalar: iki tarafı da bağlar, teklifte TEK madde olur. */
-const DEAL_SYMMETRIC = ['peace','nap','pact','ally','spynet'];
+const DEAL_SYMMETRIC = ['peace','nap','pact','ally','spynet','fedPeace'];   // BETA-WAR-GOALS.0: +fedPeace
 /* Tek yönlü maddeler: yön metni gerekir. */
 const DEAL_DIRECTED  = ['res','tribute','sys','tech','lux','intel','passage',
                         'warOn','peaceWith'];
@@ -1623,6 +1639,7 @@ function dealItemKey(it){
     case 'sys': case 'tech':    return it.t + ':' + it.id;
     case 'lux':                 return it.t + ':' + it.k;
     case 'warJoin': return it.t+':'+(it.plan?'plan'+it.plan:it.front)+':'+it.target;
+    case 'landPromise': return it.t+':'+it.sys;   // BETA-WAR-GOALS.0
     case 'warOn': case 'peaceWith': return it.t + ':' + it.target;
     default:                    return it.t;
   }
@@ -1688,6 +1705,8 @@ function normalizeDeal(offer){
       const it = {t: raw.t};
       if(it.t==='warJoin'){const key=raw.plan!==undefined?'plan':'front';if(raw.plan!==undefined&&raw.front!==undefined||!Number.isSafeInteger(raw[key])||raw[key]<1||!Number.isSafeInteger(raw.target)){errors.push('Geçersiz savaş katılım kimliği');continue;}it[key]=raw[key];}
       if(it.t==='freight')for(const k of ['source','target','every','months'])it[k]=raw[k];
+      if(it.t==='vassal'){it.type=raw.type;it.war=raw.war;if(!warVassalItemValid(it)){errors.push('Geçersiz teslim maddesi');continue;}}   // BETA-WAR-GOALS.0
+      if(it.t==='landPromise'){it.sys=raw.sys;it.front=raw.front;if(!Number.isSafeInteger(it.sys)||!G.sys[it.sys]||!Number.isSafeInteger(it.front)||it.front<1){errors.push('Geçersiz toprak vaadi');continue;}}   // BETA-WAR-GOALS.0
       if (raw.r !== undefined) it.r = raw.r;
       if (raw.k !== undefined) it.k = raw.k;
       if (raw.id !== undefined) it.id = raw.id;
@@ -1795,6 +1814,7 @@ function treatyAlreadyActive(a, b, it){
   if (!a || !b || !it) return false;
   switch(it.t){
     case 'peace':   return !a.war[b.id];
+    case 'fedPeace': return !fedPeaceFronts(a,b).length;   // BETA-WAR-GOALS.0
     case 'nap':     return !(a.war&&a.war[b.id]) && !(b.war&&b.war[a.id]) &&
                            !!(a.nap && a.nap[b.id] > G.day);
     case 'pact':    return !(a.war&&a.war[b.id]) && !(b.war&&b.war[a.id]) &&
@@ -1867,6 +1887,9 @@ function dealValidity(offer){
                        hata = 'ittifak mümkün değil'; break;
         case 'pact': {const gate=pactAccess(veren,alan);if(!gate.ok)hata=gate.why;break;}
         case 'warJoin': {const g=warSupportGate(veren,alan,it);if(!g.ok)hata=g.why;break;}
+        case 'vassal': {const g=warVassalGate(veren,alan,it);if(!g.ok)hata=g.why;break;}          // BETA-WAR-GOALS.0
+        case 'landPromise': {const g=warPromiseGate(veren,alan,it);if(!g.ok)hata=g.why;break;}    // BETA-WAR-GOALS.0
+        case 'fedPeace': {const g=fedPeaceGate(veren,alan);if(!g.ok)hata=g.why;break;}          // BETA-WAR-GOALS.0
         case 'warOn': {
           /* FAZ 86C.2: saf söz kapısı — geçici yetki aranmaz. */
           const t = G.emps[it.target];
@@ -1914,11 +1937,13 @@ function dealValidity(offer){
     ally:  !!a.ally[b.id]
   };
   for (const it of hepsi){
-    if (it.t === 'peace') plan.savas = false;
+    if (it.t === 'peace' || it.t === 'vassal') plan.savas = false;   // BETA-WAR-GOALS.0: teslim savaşı kapatır
     if (it.t === 'pact') plan.pact = true;
     if (it.t === 'ally') plan.ally = true;
   }
   const planHata = m => { reasons.push(m); };
+  if(hepsi.some(it=>it.t==='vassal')&&hepsi.some(it=>it.t==='peace'||it.t==='ally'||it.t==='nap'))planHata('Teslim maddesi barışı kendisi kurar: aynı pakete barış, ittifak veya saldırmazlık ekleme');   // BETA-WAR-GOALS.0
+  for(const [own,oth] of [[n.effectiveGive,n.effectiveWant],[n.effectiveWant,n.effectiveGive]])for(const it of own)if(it.t==='landPromise'&&!oth.some(x=>x.t==='warJoin'&&x.front===it.front))planHata('Toprak vaadi yalnız aynı cepheye katılım maddesiyle birlikte verilir');   // BETA-WAR-GOALS.0
   for (const it of hepsi){
     switch(it.t){
       case 'nap':
@@ -2236,6 +2261,9 @@ function dealPostcondition(giver, taker, it){
       const t = T(it.target);
       return !!(t && giver.war[t.id] && t.war[giver.id]);
     }
+    case 'vassal': return giver.overlord===taker.id&&!giver.war[taker.id]&&!taker.war[giver.id];   // BETA-WAR-GOALS.0
+    case 'fedPeace': return !fedPeaceFronts(giver,taker).length;   // BETA-WAR-GOALS.0
+    case 'landPromise': return (G.warLedger?.promises||[]).some(p=>p.state==='open'&&p.sys===it.sys&&p.giver===giver.id&&p.taker===taker.id);   // BETA-WAR-GOALS.0
     case 'intel':    return !!(taker.visionFrom && taker.visionFrom[giver.id]);
     /* applyItems: VEREN taraf kendi sınırını alana açar. */
     case 'passage':  return !!(giver.passage && giver.passage[taker.id]);
@@ -2323,7 +2351,7 @@ const FED_TYPES={
  ticaret:{n:'Ticaret Federasyonu',ico:'🤝',d:'Filo bakım değiştiricisi −5 yüzde puan; taban fon kesintisi %4; araştırma −%3. Teslimatsız ticaret geliri eklemez.',cap:0,up:-.05,ara:.97,ene:1,tithe:.04},
  yagmaci:{n:'Yağmacı Federasyon',ico:'⚔',d:'+8 filo kapasitesi; bakım +6 yüzde puan, araştırma −%5, taban fon %6. Gerçek savaş fethinde düşman stokundan koloni başına en çok120 maden/40 alaşım, cephe ve üye başına240/80; aynı koloni bir kez. Savunma ve saldırı oylamayla.',cap:8,up:.06,ara:.95,ene:1,tithe:.06}
 };
-const FED_MOTIONS={admit:{n:'Üye Kabulü',c:60},expel:{n:'Üye İhracı',c:80},reform:{n:'Tür Reformu',c:150},charter:{n:'Anayasa Değişikliği',c:100},elect:{n:'Başkan Seçimi',c:50},joinWar:{n:'Mevcut Savaşa Katılma',c:0},newWar:{n:'Ortak Savaş İzni',c:0}};
+const FED_MOTIONS={admit:{n:'Üye Kabulü',c:60},expel:{n:'Üye İhracı',c:80},reform:{n:'Tür Reformu',c:150},charter:{n:'Anayasa Değişikliği',c:100},elect:{n:'Başkan Seçimi',c:50},joinWar:{n:'Mevcut Savaşa Katılma',c:0},newWar:{n:'Ortak Savaş İzni',c:0},fedWar:{n:'Federasyona Karşı Savaş',c:0}};   // BETA-WAR-GOALS.0: +fedWar
 /* 96G extends the existing charter and ballot. Members publish bounded
    representation mandates; foreign applicants are assessed through observed
    intelligence only. Mandates contain no fleet locations, technologies or stocks. */
@@ -2441,7 +2469,8 @@ function fedRestoreAgenda(f){
  const row=r=>{if(!r||!Number.isSafeInteger(r.id)||r.id<1||r.id>2147483646||ids.has(r.id)||!Number.isInteger(r.by)||!G.emps[r.by]||!['law','war','motion','application'].includes(r.kind)||!Number.isFinite(r.created)||!Number.isFinite(r.expires)||r.expires<=r.created||r.expires>r.created+360)return null;
   const o=r.options;if(!o||typeof o!=='object'||Array.isArray(o))return null;
   const opts={};for(const k of ['target','sponsor','applicant'])if(o[k]!==undefined){if(!Number.isInteger(o[k])||!G.emps[o[k]])return null;opts[k]=o[k];}
-  for(const k of ['kind','type','field','value'])if(o[k]!==undefined){if(typeof o[k]!=='string'||o[k].length>32)return null;opts[k]=o[k];}if(o.repeal!==undefined)opts.repeal=!!o.repeal;
+  for(const k of ['kind','type','field','value','goal','vtype','war'])if(o[k]!==undefined){if(typeof o[k]!=='string'||o[k].length>32)return null;opts[k]=o[k];}if(o.repeal!==undefined)opts.repeal=!!o.repeal;
+  if(o.targetFed!==undefined){if(!Number.isSafeInteger(o.targetFed)||o.targetFed<0)return null;opts.targetFed=o.targetFed;}if(o.targets!==undefined){if(!Array.isArray(o.targets)||o.targets.length>5||o.targets.some(n=>!Number.isSafeInteger(n)||!G.sys[n]))return null;opts.targets=o.targets.slice();}   // BETA-WAR-GOALS.0
   if(r.kind==='law'&&!Object.hasOwn(FED_LAWS,r.law)&&!Object.hasOwn(FED_INNER_LAWS,r.law)||r.kind==='motion'&&!Object.hasOwn(FED_MOTIONS,opts.kind)||r.kind==='application'&&(!Number.isInteger(opts.applicant)||!Number.isInteger(opts.target)||!Number.isInteger(opts.sponsor)||opts.applicant!==r.by||opts.target!==opts.applicant)||r.kind==='war'&&!Number.isInteger(opts.target))return null;
   if(r.defenseFront!==undefined&&(!Number.isSafeInteger(r.defenseFront)||r.defenseFront<1||r.kind!=='motion'||opts.kind!=='joinWar'))return null;
   ids.add(r.id);return {...(r.defenseFront?{defenseFront:r.defenseFront}:{}),id:r.id,by:r.by,kind:r.kind,law:r.kind==='law'?r.law:r.kind==='war'?'warPermit':'motion',options:opts,key:fedAgendaKey(r.kind,r.law,opts),created:r.created,expires:r.expires,status:r.status,...(typeof r.why==='string'?{why:r.why.slice(0,240)}:{}),...(Number.isFinite(r.updated)?{updated:r.updated}:{}),...(typeof r.vote==='string'?{vote:r.vote.slice(0,40)}:{}),...(Number.isInteger(r.position)&&r.position>0&&r.position<=12?{position:r.position}:{})};};
@@ -2558,7 +2587,7 @@ function fedTrackAdmission(f,v){
  }
 }
 function fedMotionOptions(kind,o){
- const out={kind};for(const k of ['target','sponsor','type','field','value','applicant'])if(o[k]!==undefined)out[k]=o[k];return out;
+ const out={kind};for(const k of ['target','sponsor','type','field','value','applicant','targetFed','goal','vtype','war'])if(o[k]!==undefined)out[k]=o[k];if(Array.isArray(o.targets))out.targets=o.targets.slice(0,5);return out;   // BETA-WAR-GOALS.0
 }
 function canFedMotion(e,kind,options={},resolving=false){
  const M=Object.hasOwn(FED_MOTIONS,kind)&&FED_MOTIONS[kind],f=e&&findFed(e);
@@ -2587,6 +2616,7 @@ function canFedMotion(e,kind,options={},resolving=false){
   const values={defense:['auto','vote'],offense:['auto','vote'],admission:['allies','contact'],ballot:['equal','hegemonic','economic','mixed']};
   if(!Object.hasOwn(values,options.field)||!values[options.field].includes(options.value)||fedCharter(f)[options.field]===options.value)return {ok:false,why:'Farklı geçerli anayasa kuralı seç'};
  }
+ if(kind==='fedWar'){const g=fedWarGate(e,f,options);if(!g.ok)return g;}   // BETA-WAR-GOALS.0
  if(kind==='joinWar'||kind==='newWar'){
   if(!target||target.dead||target.wild||target.crisisSide||f.members.includes(target.id)||!e.contact[target.id])return {ok:false,why:'Bilinen yaşayan dış hedef gerekli'};
   const sponsor=G.emps[options.sponsor??e.id];
@@ -2621,6 +2651,7 @@ function fedApplyMotion(f,v,c){
   const before={defense:fedDuty(f,'defense'),offense:fedDuty(f,'offense')};f.charter={...fedCharter(f),[v.field]:v.value};if(v.field==='ballot'){f.politicsVersion=96;fedRefreshRepresentation(f,true);}fedSyncDuties(f,before);
   if(v.field==='offense')for(const id of f.members)f.dutyConsent[id]={offense:v.value==='auto'&&v.yes.includes(id),since:G.day};
  }
+ if(v.motion==='fedWar')f.decisions[fedVoteToken(v)]={id:fedVoteToken(v),kind:'fedWar',sponsor:v.proposer,target:v.target,targetFed:v.targetFed,goal:v.goal,...(v.targets?{targets:v.targets.slice()}:{vtype:v.vtype,war:v.war}),by:v.proposer,approved:v.yes.filter(id=>c.eligible.includes(id)),expires:G.day+180,state:'ready'};   // BETA-WAR-GOALS.0
  if(v.motion==='joinWar'||v.motion==='newWar')f.decisions[fedVoteToken(v)]={id:fedVoteToken(v),kind:v.motion,sponsor:v.sponsor??v.proposer,target:v.target,by:v.proposer,...(v.defenseFront?{defenseFront:v.defenseFront}:{}),approved:v.yes.filter(id=>c.eligible.includes(id)),expires:G.day+180,state:'ready'};
  fedPoliticalRecord(f,'motion',{kind:v.motion,target:v.target,type:v.type});
 }
@@ -2638,6 +2669,7 @@ function fedJoinSide(f,e,target,sponsor){
 }
 function executeFedDecision(e,fid,id){
  const f=fedOf(fid),d=f?.decisions?.[id];
+ if(d?.kind==='fedWar'){const r=fedWarExecute(e,fid,id);if(r.ok&&e.id===0&&typeof DiplomaticInbox!=='undefined')DiplomaticInbox.settleSource('decision',fid,id,'accepted');return r;}   // BETA-WAR-GOALS.0
  if(!f||!e||!f.members.includes(e.id)||!d||d.state!=='ready'||d.expires<=G.day||!(e.id===d.by||e.id===f.leader))return {ok:false,why:'Karar veya uygulama yetkisi geçerli değil'};
  const target=G.emps[d.target],sponsor=G.emps[d.sponsor];
  if(d.defenseFront&&fedEmergencyId(f,e,'joinWar',{target:d.target,sponsor:d.sponsor})!==d.defenseFront)return {ok:false,why:'Acil savunma kaynağı artık geçerli değil'};
@@ -3093,6 +3125,7 @@ function fedOpenVote(f, law, proposer, options = {}){
   f.voteSeq = Math.max(f.voteSeq || 0, Number(f.vote && f.vote.id) || 0) + 1;
   const v = f.vote = {id:f.voteSeq, law, kind:law==='motion'?'motion':law === 'warPermit' ? 'war' : inner ? 'inner' : 'basic',
     ...(law==='motion'?{applicant:options.applicant,motion:options.kind,type:options.type,field:options.field,value:options.value,sponsor:options.sponsor}:{}),
+    ...(law==='motion'&&options.kind==='fedWar'?{targetFed:options.targetFed,goal:options.goal,...(options.targets?{targets:options.targets.slice()}:{vtype:options.vtype,war:options.war})}:{}),   // BETA-WAR-GOALS.0
     ...(options.defenseFront?{defenseFront:options.defenseFront}:{}),
     repeal:!!options.repeal, target:options.target,
     proposer:proposer ? proposer.id : null, opened:G.day, expires:G.day + 90,
@@ -3681,6 +3714,7 @@ function runOp(e, target, key){
         target.rel[e.id] = clamp(target.rel[e.id] + 18, -100, 100);
         if (typeof remember === 'function') remember(target, e.id, 'yardimEtti');
       }
+      warFalseFlagRevealed(magdur, target, gercek);   // BETA-WAR-GOALS.0
       msg = (gercek ? gercek.name : 'Biri') + ' iftira atmış — ' +
             target.name + ' suçsuz çıktı' +
             (magdur.id === 0 ? ' (senin dosyandı)' : ', ' + magdur.name + ' gerçeği öğrendi');
@@ -4251,7 +4285,7 @@ function facSummary(e){
    "savaş puanı" birikir; müzakerede karşı taraf bunu tanır ve barışa
    daha yatkın olur. Hedefsiz savaş amaçsız sürüklenir.            */
 const WAR_GOALS = {
-  boyun:{n:'Boyun Eğdirme', ico:'👑', etk:45,
+  boyun:{n:'Vasallaştırma', ico:'👑', etk:45,   // BETA-WAR-GOALS.0: görünen ad (anahtar aynı)
     d:'Düşmanı yok etme, boyunduruk altına al. Başkentini kuşat ve ' +
       'filosunu yarıya indir — sonra vasalın olur.',
     setup(e, foe){ return {home: foe.home, base: Math.max(1, totalPower(foe))}; },
@@ -4363,6 +4397,7 @@ function checkSubjugation(e, foeId){
   const foe = G.emps[foeId];
   if (!foe || foe.dead) return false;
   e.wg[foeId].done = true;
+  if (e.wg[foeId].v === 2 && e.wg[foeId].vtype) return warGoalSubjugate(e, foe, e.wg[foeId]);   // BETA-WAR-GOALS.0
   /* Tür seçimi: sınır komşusuysa tampon bekçi, uzaksa haraçgüzar */
   const komsu = G.sys.some(sy => sy.owner === foe.id &&
     sy.lanes.some(l => G.sys[l].owner === e.id));
@@ -4379,15 +4414,17 @@ function warGoalCheckReward(e, foeId){
     e.factions.forEach(f => facShift(e, f.k, +15, 'savaş hedefi tamamlandı'));
   if (e.id === 0) say('SAVAŞ HEDEFİ TAMAMLANDI — barış masasında güçlüsün', 'win');
 }
-function setWarGoal(e, foe, key){
+function setWarGoal(e, foe, key, opts=null){
   if (!e || !foe || !fedWarAllowed(e,foe)) return false;
   const G2 = WAR_GOALS[key];
   if (!G2) return false;
+  const custom = opts ? warGoalOptions(e, foe, key, opts) : null;   // BETA-WAR-GOALS.0
+  if (opts && !custom) return false;
   if ((e.res.etk || 0) < G2.etk && !hasPerk(e,'freeWar')) return false;
   if (!hasPerk(e,'freeWar')) e.res.etk -= G2.etk;
   e.wg = e.wg || {};
   const extra = G2.setup ? G2.setup(e, foe) : {};
-  e.wg[foe.id] = Object.assign({t:key, start:G.day}, extra);
+  e.wg[foe.id] = Object.assign({t:key, start:G.day}, extra, custom || {});
   warLedgerGoal(warLedgerFind(e.id,foe.id), e.id);
   return true;
 }
@@ -5620,9 +5657,10 @@ function warAppetite(e, o){
     }
   }
 
+  const legit = aiWarLegitTerm(e, o);   // BETA-WAR-GOALS.0: sınırlı meşruiyet terimi
   return {score: opportunity * .55 + cause * .90 + grudge * .55 + identity +
-                 ganimet - brake,
-          ratio, cause, cb, grudge, brake, ganimet};
+                 ganimet - brake + legit,
+          ratio, cause, cb, grudge, brake, ganimet, legit};
 }
 
 /* Hafızadaki yara savaş HEDEFİNİ belirler */
@@ -5770,7 +5808,7 @@ function aiWarReview(){
     }
 
     /* Karar aylara yayılır: savaş patlamaz, gerginlik birikir. */
-    const chance = clamp((best.ap.score - .92 + best.ap.grudge * .55) * .20, .015, .34);
+    const chance = clamp((best.ap.score - .92 + best.ap.grudge * .55) * .20, .015, .34) * tensionMul();   // BETA-WAR-GOALS.0: Galaktik Gerilim (Dengeli ×1)
     if (rnd() > chance) continue;
 
     const budget=aiWarBudget(e,best.o);
@@ -5779,7 +5817,7 @@ function aiWarReview(){
     if (typeof setWarGoal === 'function' && typeof WAR_GOALS !== 'undefined'){
       const key = pickCasusBelli(e, best.o);
       const cost = WAR_GOALS[key] ? WAR_GOALS[key].etk : 999;
-      setWarGoal(e, best.o, (e.res.etk >= cost) ? key : 'fetih');
+      aiSetWarGoal(e, best.o, (e.res.etk >= cost) ? key : 'fetih');   // BETA-WAR-GOALS.0: iki normal hedef
     }
     e._lastCB = best.ap.cb;
     warAuthorize(e, best.o, best.ap.cb);
@@ -5908,6 +5946,7 @@ function diploTick(){
   if (typeof aiColossusTick === 'function') aiColossusTick();     // FAZ 25: süper silah sevki
   if (typeof hitLogTick === 'function') hitLogTick();             // soğuk dosya soruşturması
   aiWarReview();
+  aiWarTermsTick();   // BETA-WAR-GOALS.0
 }
 
 
@@ -8093,6 +8132,7 @@ function deepInvestigate(e){
       /* Tehdit puanı tavanlı: üst üste ifşalar sonsuz birikmesin
          (testte 60 soruşturmada 975'e çıkmıştı). */
       gercek.threat = Math.min(120, (gercek.threat || 0) + 25);
+      warFalseFlagRevealed(e, sucsuz, gercek);   // BETA-WAR-GOALS.0
     }
     return {ok:true, cozuldu:true, kuklaci: gercek ? gercek.id : null,
       sucsuz: sucsuz ? sucsuz.id : null,
@@ -10234,6 +10274,7 @@ function separatistTick(){
     /* Fonlama zamanla soğur — sürekli beslenmezse etkisi geçer */
     if (sub.sepFunded) sub.sepFunded = Math.max(0, sub.sepFunded - .35);
     if (vassalLoyalty(sub) > 0) continue;
+    if (warSurrenderGrace(sub)) continue;   // BETA-WAR-GOALS.0: müzakereli teslimden sonra 12 ay kendiliğinden isyan yok
 
     const lord = overlordOf(sub);
     if (!lord || lord.dead) continue;
@@ -10300,7 +10341,7 @@ function warDeclarationAccess(a,b,options={}){
  if(!options.authorized&&!canDeclareWarOn(a,b))return no('Savaş ilanı yetkisi veya hedef koşulları uygun değil');
  return {ok:true,why:''};
 }
-function warDeclarationPreview(actor,target,key){
+function warDeclarationPreview(actor,target,key,opts=null){
  const access=warDeclarationAccess(actor,target),goal=WAR_GOALS[key],cost=actor&&hasPerk(actor,'freeWar')?0:goal?.etk||0;
  const p={ok:false,target:target&&actor&&(target.id===actor.id||actor.contact[target.id])?{id:target.id,name:target.name}:null,cost,certain:[],conditional:[],risks:[],blockers:[]};
  if(!p.target){p.blockers.push('Hedefle temas yok');p.signature=JSON.stringify(p);return p;}
@@ -10337,7 +10378,7 @@ function warDeclarationPreview(actor,target,key){
   }
  }
  for(const base of [{e:actor,enemy:target,side:'attack'},{e:target,enemy:actor,side:'defense'}])for(const id of Object.keys(base.e.ally||{})){const e=G.emps[+id];if(e&&base.e.ally[id]&&e.ally[base.e.id]&&knownAllianceBond(actor,base.e,e))add(e,base.enemy,base.side,'İttifak: ayrı gönüllü yardım veya savaş taahhüdü gerekli',false);}
- p.certain.sort((a,b)=>a.id-b.id);p.conditional.sort((a,b)=>a.id-b.id);p.ok=!p.blockers.length;p.signature=JSON.stringify(p);return p;
+ p.certain.sort((a,b)=>a.id-b.id);p.conditional.sort((a,b)=>a.id-b.id);warPure(()=>warPreviewExtend(p,actor,target,key,opts));p.ok=!p.blockers.length;p.signature=JSON.stringify(p);return p;   // BETA-WAR-GOALS.0
 }
 
 /* 96G.1: clauses belong to the existing subject relationship. Talks refer to
@@ -10725,3 +10766,425 @@ function oathBreakRecord(a,b,kind){
   if(typeof GalacticNews!=='undefined')GalacticNews.emit({category:'politics',empires:[a.id,b.id],key:'oath:'+a.id+':'+b.id+':'+G.day,important:true,
     title:(kind==='ally'?'İttifak çiğnendi':'Saldırmazlık çiğnendi')+' — '+a.name,text:a.name+', '+b.name+' ile '+(kind==='ally'?'ittifakı':'saldırmazlık sözünü')+' bozarak savaş açtı. Gerekçe: '+why+'.'});
 }
+
+/* ═══ BETA-WAR-GOALS.0 — savaş hedefleri, meşruiyet, savaş içi şartlar ═══
+   Yeni savaş/diplomasi motoru yok: hedef kaydı e.wg, vasallık subjugate/vassalTerms,
+   şartlar dealQuote/executeDeal, cepheler warLedger. RNG çekilmez. */
+const WAR_GOAL_MAIN=['fetih','boyun'],WAR_FETIH_MAX=5;
+const WAR_VASSAL_WAR={haracguzar:'none',bekci:'defense',akademik:'none'};
+/* Önizleme salt okunur: motor yollarının yazdığı "_" önekli önbellekler (Save8'e giren) çağrıdan sonra aynen geri konur (MP.2 pure() ile aynı kural). */
+function warPure(fn){
+ const objs=[G,...G.emps,...G.fleets,...G.sys],saved=objs.map(o=>{const d={};for(const k of Object.keys(o))if(k[0]==='_')d[k]=Object.getOwnPropertyDescriptor(o,k);return d;});
+ const views=typeof AI_VIEW_CACHE!=='undefined'?G.emps.map(e=>[e,AI_VIEW_CACHE.has(e),AI_VIEW_CACHE.get(e)]):[];   // AI görüş önbelleği de önizlemeden önceki hâline döner
+ try{return fn();}finally{objs.forEach((o,i)=>{const d=saved[i];for(const k of Object.keys(o))if(k[0]==='_'&&!Object.hasOwn(d,k))delete o[k];for(const k in d)Object.defineProperty(o,k,d[k]);});
+  for(const [e,had,v] of views){if(had)AI_VIEW_CACHE.set(e,v);else AI_VIEW_CACHE.delete(e);}}
+}
+function warGoalSees(e,s,foe){
+ if(!e||!s||!foe||s.owner!==foe.id)return false;
+ return e.ai?aiKnownSystem(e,s)?.owner===foe.id:(s.seen||[]).includes(e.id);
+}
+function warFetihCandidates(e,foe){
+ if(!e||!foe)return [];
+ const mine=G.sys.filter(s=>s.owner===e.id),near=s=>Math.min(9e9,...mine.map(x=>dist(x,s)));
+ return G.sys.filter(s=>s.id!==foe.home&&warGoalSees(e,s,foe)).map(s=>({id:s.id,name:s.name,col:s.planets.filter(p=>p.col&&p.owner===foe.id).length,d:near(s)}))
+  .sort((a,b)=>a.d-b.d||a.id-b.id).slice(0,12);
+}
+function warFetihDefault(e,foe){return warFetihCandidates(e,foe).slice(0,Math.max(1,Math.min(3,sysCount(foe)-1))).map(x=>x.id);}
+function warVassalGoalTerms(type,war){
+ if(!Object.hasOwn(VASSAL_TYPES,type))return null;
+ return vassalTerms(type,{...vassalDefaultTerms(type),war:war??WAR_VASSAL_WAR[type]});
+}
+/* Yeni ilan seçenekleri. Geçersizse null (sessiz düzeltme yok). Eski 4 hedef yeni seçenek almaz. */
+function warGoalOptions(e,foe,key,opts){
+ if(!opts||typeof opts!=='object'||Array.isArray(opts)||!WAR_GOAL_MAIN.includes(key))return null;
+ if(key==='fetih'){
+  const t=opts.targets;if(!Array.isArray(t)||!t.length||t.length>WAR_FETIH_MAX||new Set(t).size!==t.length)return null;
+  const ok=new Set(warFetihCandidates(e,foe).map(x=>x.id));
+  if(t.some(id=>!Number.isSafeInteger(id)||!ok.has(id))||t.length>sysCount(foe)-1)return null;
+  return {v:2,targets:t.slice()};
+ }
+ const terms=warVassalGoalTerms(opts.vtype,opts.war);
+ return terms?{v:2,vtype:opts.vtype,terms}:null;
+}
+function warGoalSummary(e,foe,g){
+ if(!g)return '';
+ if(g.t==='fetih'&&g.v===2)return 'Fetih · '+(g.targets||[]).map(id=>G.sys[id]?.name||'?').join(', ');
+ if(g.t==='boyun'&&g.v===2)return 'Vasallaştırma · '+(VASSAL_TYPES[g.vtype]?.n||'?');
+ return (WAR_GOALS[g.t]?.n||'?')+' (eski hedef)';
+}
+/* Hedef dolunca boyunduruk: v2 kaydı seçilen tür/şartla, sonra kampanya kapsamı. */
+function warGoalSubjugate(e,foe,g){
+ const scope=warTermsScope(e,foe);
+ if(!subjugate(e,foe,g.vtype,g.terms,'war-goal'))return false;
+ warTermsScopeApply(scope,'war-goal');return true;
+}
+/* v2 Fetih barışı: hedef dışı işgaller sahibine döner, hedefler kalır.
+   Yalnız bu cephede, bu hedefle başlayan kayıtlar; eski savaşların şartı değişmez. */
+function warFetihSettle(a,b){
+ const out=[];
+ for(const [x,y] of [[a,b],[b,a]]){
+  const g=x?.wg?.[y?.id],f=warLedgerFind(x?.id,y?.id);
+  if(!g||g.t!=='fetih'||g.v!==2||!f||y.dead)continue;
+  const keep=new Set(g.targets||[]),seen=new Set();
+  for(const o of f.occupation.slice().reverse()){
+   if(o.to!==x.id||o.from!==y.id||seen.has(o.sys))continue;seen.add(o.sys);
+   const s=G.sys[o.sys];if(!s||keep.has(s.id)||s.owner!==x.id||s.id===x.home)continue;
+   captureSystem(s,y.id,'transfer');out.push({sys:s.id,to:y.id});
+  }
+ }
+ return out;
+}
+function warFetihPreview(x,y){
+ const g=x?.wg?.[y?.id],f=warLedgerFind(x?.id,y?.id);
+ if(!g||g.t!=='fetih')return null;
+ const held=new Set((f?.occupation||[]).filter(o=>o.to===x.id&&G.sys[o.sys]?.owner===x.id).map(o=>o.sys));
+ const legacy=g.v!==2,targets=(g.targets||[]).map(id=>({id,name:G.sys[id]?.name||'?',held:G.sys[id]?.owner===x.id}));
+ const back=legacy?[]:[...held].filter(id=>!(g.targets||[]).includes(id)&&id!==x.home).map(id=>({id,name:G.sys[id]?.name||'?'}));
+ return {legacy,targets,keep:targets.filter(t=>t.held),open:targets.filter(t=>!t.held),back};
+}
+function aiWarGoalChoice(e,o,legacy){
+ const ratio=aiKnownPower(e,e)/Math.max(1,aiKnownPower(e,o)),cands=warFetihCandidates(e,o),own=Math.max(1,sysCount(e));
+ const fetih=cands.slice(0,3).reduce((n,c)=>n+60+c.col*45-Math.min(60,c.d/8),0)/3;
+ const enemies=G.emps.filter(x=>x!==e&&x!==o&&!x.dead&&aiKnownWar(e,o,x)&&!e.war[x.id]);
+ const rivals=G.emps.filter(x=>x!==e&&x!==o&&!x.dead&&!x.wild&&(e.rel[x.id]||0)<-30&&aiKnownSystems(e,x.id).some(s=>s.lanes.some(l=>G.sys[l]?.owner===o.id)));
+ const tax=Math.min(220,aiKnownSystems(e,o.id).length*28),buffer=rivals.length?60:0,burden=enemies.reduce((n,x)=>n+Math.min(120,aiKnownPower(e,x)/Math.max(1,aiKnownPower(e,e))*80),0);
+ const viable=aiKnownSystems(e,o.id).length>=2&&ratio>1.35&&!isVassal(o)&&!isVassal(e)&&!vassalsOf(o).length;
+ const vassal=viable?tax+buffer-burden+(legacy==='boyun'?80:0)+(own<4?-40:0):-1e9;
+ const fetihScore=cands.length&&sysCount(o)>1?fetih+(['fetih','yikim','yoketme'].includes(legacy)?30:0):-1e9;
+ if(vassal>fetihScore&&(e.res.etk||0)>=WAR_GOALS.boyun.etk){const type=rivals.length&&ratio>1.8?'bekci':'haracguzar';return {key:'boyun',opts:{vtype:type}};}
+ if(cands.length&&sysCount(o)>1)return {key:'fetih',opts:{targets:cands.slice(0,Math.max(1,Math.min(3,sysCount(o)-1))).map(c=>c.id)}};
+ return {key:'fetih',opts:null};
+}
+function aiSetWarGoal(e,o,legacy){
+ const c=aiWarGoalChoice(e,o,legacy);
+ if(c.opts&&setWarGoal(e,o,c.key,c.opts))return c.key;
+ return setWarGoal(e,o,'fetih')?'fetih':null;
+}
+
+/* ── Gerekçe ve meşruiyet: mevcut hafıza (e.mem) ve savaş defteri. Her olay bir kez sayılır. ── */
+const WAR_JUST={sahteBayrak:{n:'Sahte Bayrak ifşası',w:.95},ihanet:{n:'İttifak ihlali',w:.95},paktBozdu:{n:'Saldırmazlık / söz ihlali',w:.8},
+ sistemAldi:{n:'Kaybedilen toprak',w:.75},sabotaj:{n:'Kanıtlanmış sabotaj',w:.6},komplo:{n:'Kanıtlanmış casusluk ağı',w:.55},casusYakalan:{n:'Yakalanan casus',w:.35},
+ konseyIhlal:{n:'Konsey ihlali',w:.55},kervanYagma:{n:'Ticaret yolu saldırısı',w:.35},yaptirim:{n:'Ambargo',w:.2},sinirGergin:{n:'Sınır gerginliği (kayıt)',w:.2},savasIlan:{n:'Geçmişte sana savaş açtı',w:.3}};
+function warJustifications(e,o){
+ if(!e||!o||e===o)return [];
+ const now=G.memAge||0,list=[],keys=new Set();
+ for(const m of (e.mem?.[o.id]||[])){
+  const J=WAR_JUST[m.k];if(!J)continue;
+  const key=m.k+':'+(m.source||m.t);if(keys.has(key))continue;keys.add(key);
+  const age=Math.max(0,now-(m.t||0)),recency=clamp(1-age/120,0,1);if(recency<=0)continue;
+  list.push({k:m.k,n:J.n,month:m.t,age,strength:+(J.w*recency).toFixed(3),evidence:m.source?'kayıtlı olay':'hafıza kaydı'});
+ }
+ for(const f of (G.warLedger?.fronts||[])){
+  if(f.ended!==null||f.legacy||f.sides[0]!==o.id||f.parent!==null)continue;
+  const v=G.emps[f.sides[1]];if(!v||v===e||!(e.ally[v.id]&&v.ally[e.id])||!warFrontKnown(e,f))continue;
+  const key='ally:'+f.id;if(keys.has(key))continue;keys.add(key);
+  list.push({k:'muttefik',n:'Müttefike saldırı: '+v.name,month:null,age:Math.floor((G.day-f.opened)/30),strength:.7,evidence:'savaş defteri #'+f.id});
+ }
+ const v=aiView(e),mine=new Set(G.sys.filter(s=>s.owner===e.id).map(s=>s.id));let mass=0;
+ for(const fl of G.fleets)if(fl.e===o.id&&fl.sys>=0&&isArmed(fl)&&v.ctx.visible.has(fl.sys)&&G.sys[fl.sys]?.lanes.some(l=>mine.has(l)))mass+=fleetPower(fl);
+ if(mass>totalPower(e)*.25)list.push({k:'yigin',n:'Sınır yığınağı (gözlenen)',month:now,age:0,strength:+clamp(mass/Math.max(1,totalPower(e))*.3,.1,.45).toFixed(3),evidence:'şu an görünen filolar'});
+ if(e.ethics&&o.ethics&&ethicGap(e,o)>=.5)list.push({k:'ideoloji',n:'İdeolojik düşmanlık',month:null,age:0,strength:+((ethicGap(e,o)-.4)*.5).toFixed(3),evidence:'etik farkı'});
+ return list.sort((a,b)=>b.strength-a.strength||(a.k<b.k?-1:1));
+}
+function warLegitNeed(key,opts){
+ if(key==='fetih')return +(.15+.08*Math.max(1,opts?.targets?.length||3)).toFixed(3);
+ if(key==='boyun')return .55;
+ return .35;
+}
+function warLegitimacy(e,o,key='fetih',opts=null){
+ const list=warJustifications(e,o),score=+(1-list.reduce((p,j)=>p*(1-clamp(j.strength,0,.95)),1)).toFixed(3),need=warLegitNeed(key,opts);
+ const level=score>=need?'yeterli':score>=need*.5?'zayıf':list.length?'orantısız':'gerekçesiz';
+ const sp=shownPower(e,o),intel=intelOf(e,o.id);
+ return {list,score,need,level,ratio:+(totalPower(e)/Math.max(1,sp.v)).toFixed(2),band:+(sp.band||0).toFixed(2),
+  uncertain:intel<2?'İstihbarat sınırlı: hedef gücü ±%'+Math.round((sp.band||.5)*100)+' belirsiz; bilinmeyen kayıtlar sayılmadı.':null};
+}
+/* Temaslı devletlerin tahmini tutumu: yalnız bilinen bağlar ve sana karşı ilişkisi. Gizli taahhüt, temassız devlet yok. */
+function warStances(actor,target,legit,preview){
+ const rows=[],pre=new Map();
+ for(const r of (preview?.certain||[]).concat(preview?.conditional||[]))pre.set(r.id,r.side);
+ for(const x of G.emps){
+  if(!x||x.dead||x.wild||x.crisisSide||x===actor||x===target||!actor.contact[x.id])continue;
+  let s='neutral',why='Belirgin bağ yok';
+  if(pre.get(x.id)==='defense'){s='defend';why='Bilinen savunma bağı';}
+  else if(pre.get(x.id)==='attack'){s='support';why='Bilinen saldırı bağı';}
+  else if(knownAllianceBond(actor,target,x)&&x.ally[target.id]){s='defend';why='Hedefin müttefiki';}
+  else if(knownAllianceBond(actor,actor,x)&&x.ally[actor.id]){s='support';why='Senin müttefikin';}
+  else if(aiKnownWar(actor,x,target)){s='support';why='Hedefle zaten savaşta';}
+  else{
+   const rel=x.rel[actor.id]||0,council=councilExists()&&inCouncil(x)&&councilBlocksWar(actor,target);
+   if(council){s='condemn';why='Konsey yasağı';}
+   else if(legit.level==='gerekçesiz'||legit.level==='orantısız'){if(rel<30){s='condemn';why='Gerekçe talebe göre orantısız';}}
+   else if(legit.level==='yeterli'&&rel>=40){s='support';why='İyi ilişki ve kabul edilebilir gerekçe';}
+   else if(rel<=-40){s='condemn';why='Sana karşı düşmanca ilişki';}
+  }
+  rows.push({id:x.id,name:x.name,stance:s,why});
+ }
+ return rows.sort((a,b)=>a.id-b.id);
+}
+const WAR_STANCE_TEXT={support:'Destekler',neutral:'Tarafsız',condemn:'Kınar',defend:'Savunur'};
+function warPreviewExtend(p,actor,target,key,opts){
+ if(!p.target||!actor||!target)return p;
+ const custom=opts?warGoalOptions(actor,target,key,opts):null;
+ if(opts&&!custom)p.blockers.push(key==='fetih'?'Fetih hedefleri geçersiz: başkent dışı, bilinen, en çok '+WAR_FETIH_MAX+' sistem ve hedefe en az bir sistem kalmalı':'Vasallık türü veya hükümleri geçersiz');
+ if(custom?.targets)p.goal={key,targets:custom.targets.map(id=>({id,name:G.sys[id]?.name||'?'})),note:'Barışta hedef sistemler sende kalır; hedef dışı işgaller iade edilir. Başkent hedef olamaz; hedef devlet yok edilmez.'};
+ if(custom?.vtype){const t=custom.terms;p.goal={key,vtype:custom.vtype,name:VASSAL_TYPES[custom.vtype].n,
+  terms:{tax:Object.entries(t.tax).filter(([,v])=>v>0).map(([k,v])=>RES[k].n+' %'+Math.round(v*100)).join(', ')||'yok',science:t.science?'%'+Math.round(t.science*100):'yok',defense:t.defense?'Senyör korur':'Koruma yok',war:{none:'Senyörün savaşlarına katılmaz',defense:'Yalnız savunma savaşlarına katılır',all:'Saldırı savaşlarına da katılır (sözleşme maddesi)'}[t.war],autonomy:t.autonomy==='free'?'Serbest dış politika':'Dış politikada senyör onayı'},
+  note:'Hedef dolarsa ya da savaş içinde teslim kabul edilirse bu hükümlerle vasallık kurulur.'};}
+ const legit=warLegitimacy(actor,target,key,custom||opts);p.legit=legit;p.stances=warStances(actor,target,legit,p);
+ if(legit.level!=='yeterli')p.risks.push('Meşruiyet '+legit.level+' ('+Math.round(legit.score*100)+' / gereken '+Math.round(legit.need*100)+'): üçüncü taraflar kınayabilir.');
+ p.signature=JSON.stringify(p);return p;
+}
+
+/* ── Savaş içi vasallık maddesi {t:'vassal',type,war}: VEREN vasal olur, ALAN senyör. ── */
+function warVassalGate(sub,lord,it){
+ if(!sub||!lord||sub===lord||sub.dead||lord.dead||sub.wild||lord.wild||sub.crisisSide||lord.crisisSide)return {ok:false,why:'Taraf geçerli değil'};
+ if(!sub.war[lord.id]||!lord.war[sub.id])return {ok:false,why:'Yalnız aranızdaki savaşta teslim maddesi kullanılır'};
+ if([sub,lord].some(x=>x.warCause?.[(x===sub?lord:sub).id]==='Bağımsızlık Savaşı'))return {ok:false,why:'Bağımsızlık savaşı kendi barış akışını kullanır'};
+ if(isVassal(sub)||isVassal(lord))return {ok:false,why:'Taraflardan biri zaten vasal'};
+ if(sub.freeUntil&&sub.freeUntil>(G.memAge||0))return {ok:false,why:'Yeni kazanılmış bağımsızlık korunuyor'};
+ if(!warVassalGoalTerms(it.type,it.war))return {ok:false,why:'Vasallık türü veya hükmü geçersiz'};
+ return {ok:true};
+}
+function warVassalItemValid(it){return !!it&&Object.keys(it).every(k=>['t','type','war'].includes(k))&&Object.hasOwn(VASSAL_TYPES,it.type)&&['none','defense','all'].includes(it.war)&&!!warVassalGoalTerms(it.type,it.war);}
+/* Senyör adayı (AI) için değer: vergi + tampon − koruma yükü − yeni cephe riski. */
+function warVassalLordValue(e,it,sub){
+ if(!sub||!e.war[sub.id])return 0;
+ const known=aiKnownSystems(e,sub.id).length,terms=warVassalGoalTerms(it.type,it.war);if(!terms)return 0;
+ const tax=Object.values(terms.tax).reduce((n,v)=>n+v,0)*known*120+terms.science*known*200+(it.type==='bekci'?known*25:0);
+ const enemies=G.emps.filter(x=>x!==e&&x!==sub&&!x.dead&&aiKnownWar(e,sub,x)&&!e.war[x.id]);
+ const burden=enemies.reduce((n,x)=>n+Math.min(160,aiKnownPower(e,x)/Math.max(1,aiKnownPower(e,e))*110),0);
+ const peace=itemValue(e,{t:'peace'},sub);
+ return clamp(120+tax+peace*.5-burden+(known<2?-80:0),-200,900);
+}
+/* Teslim olan (AI) için bedel: egemenlik − baskı. Gerekçe metniyle. */
+function warVassalSubmitCost(e,it,lord){
+ const terms=warVassalGoalTerms(it.type,it.war);if(!terms||!lord)return {cost:1e6,why:['Geçersiz hüküm']};
+ const why=[],own=Math.max(1,sysCount(e)),harsh=Object.values(terms.tax).reduce((n,v)=>n+v,0)*900+terms.science*900+(terms.war==='all'?140:0)+(terms.autonomy==='consent'?80:0);
+ let cost=320+own*45+harsh;
+ const cap=G.sys[e.home],capP=cap&&cap.owner!==e.id?420:cap&&G.fleets.some(f=>f.e===lord.id&&f.sys===e.home&&isArmed(f))?260:0;
+ if(capP){cost-=capP;why.push(capP>300?'Başkent kaybedildi':'Başkent kuşatmada');}
+ const exh=(e.exh?.[lord.id]||0)*5;if(exh>100)why.push('Savaş yorgunluğu yüksek');cost-=exh;
+ const ratio=aiKnownPower(e,lord)/Math.max(1,aiKnownPower(e,e));cost-=clamp((ratio-1)*160,-200,480);if(ratio>2)why.push('Güç farkı ezici');
+ const prog=warGoalProgress(lord,e.id)*300;cost-=prog;
+ const allies=G.emps.filter(x=>x!==e&&x!==lord&&!x.dead&&x.war[lord.id]&&(x.ally[e.id]||findFed(x)&&findFed(x)===findFed(e)));
+ const help=allies.reduce((n,x)=>n+aiKnownPower(e,x),0)/Math.max(1,aiKnownPower(e,lord));
+ if(help>.3){cost+=Math.min(400,help*300);why.push('Ulaşabilir müttefikler savaşıyor');}
+ if(!why.length)why.push('Egemenlik bedeli şartlardan ağır');
+ return {cost:Math.max(-200,cost),why};
+}
+/* Kapsam: kampanya ve cephe kimliğine göre. lord–sub kapanır; yalnız lord'un seferini desteklemek için girenlerin
+   sub cepheleri kapanır (kendi hedefi yoksa); sub'u savunmak için girenler kendi hedefi yoksa çekilir; bağımsız savaşlar sürer. */
+function warTermsScope(lord,sub){
+ const base=warLedgerFind(lord.id,sub.id),out={lord:lord.id,sub:sub.id,base:base?.id||null,close:[],keep:[]};
+ if(!base)return out;
+ const roleL=base.roles[base.sides.indexOf(lord.id)];
+ for(const f of G.warLedger.fronts){
+  if(f.ended!==null||f.id===base.id||f.legacy)continue;
+  const inCamp=f.campaign===base.campaign;
+  const side=id=>f.roles[f.sides.indexOf(id)];
+  if(f.sides.includes(sub.id)){
+   const x=G.emps[f.sides.find(id=>id!==sub.id)];
+   const own=!!x?.wg?.[sub.id],supporter=inCamp&&side(x.id)===roleL&&f.entryKind!=='declaration';
+   (supporter&&!own?out.close:out.keep).push({front:f.id,a:x.id,b:sub.id,why:supporter?(own?'Kendi savaş hedefi var':'Yalnız senyör adayının seferini destekliyordu'):'Bağımsız savaş'});
+  } else if(inCamp){
+   const d=f.sides.find(id=>side(id)!==roleL),x=G.emps[d],enemy=G.emps[f.sides.find(id=>id!==d)];
+   const defender=f.sponsor===sub.id||['defense','federation','vassal','promise','alliance'].includes(f.entryKind)&&side(d)!==roleL;
+   const own=!!x?.wg?.[enemy?.id];
+   (defender&&!own?out.close:out.keep).push({front:f.id,a:d,b:enemy?.id,why:defender?(own?'Kendi savaş hedefi var':'Teslim olan tarafı savunmak için girmişti'):'Kampanyada ayrı cephe'});
+  }
+ }
+ return out;
+}
+function warTermsScopeApply(scope,reason){
+ const done=[];
+ for(const c of scope.close){const a=G.emps[c.a],b=G.emps[c.b];if(!a||!b||!a.war[b.id])continue;if(makePeace(a,b,'surrender-scope',scope.lord))done.push(c.front);}
+ return done;
+}
+function warTermsPreview(sub,lord,it){
+ const terms=warVassalGoalTerms(it?.type,it?.war);if(!terms||!sub||!lord)return null;
+ const s=warTermsScope(lord,sub),name=id=>G.emps[id]?.name||'?';
+ return {lord:lord.id,sub:sub.id,type:VASSAL_TYPES[it.type].n,
+  tax:Object.entries(terms.tax).filter(([,v])=>v>0).map(([k,v])=>RES[k].n+' %'+Math.round(v*100)).join(', ')||'yok',
+  autonomy:terms.autonomy==='free'?'Serbest dış politika':'Dış politikada senyör onayı',protection:terms.defense?'Senyör vasalı korur':'Koruma yok',
+  war:{none:'Senyörün savaşlarına katılmaz',defense:'Yalnız savunma savaşlarına katılır',all:'Saldırı savaşlarına da katılır'}[terms.war],
+  territory:'İşgal edilen sistemler fiilî sahibinde kalır; vasal kendi topraklarını korur.',
+  closes:[{front:s.base,text:name(lord.id)+' ↔ '+name(sub.id)}].concat(s.close.map(c=>({front:c.front,text:name(c.a)+' ↔ '+name(c.b)+' · '+c.why}))),
+  continues:s.keep.map(c=>({front:c.front,text:name(c.a)+' ↔ '+name(c.b)+' · '+c.why})),
+  duties:vassalsOf(sub).length?['Vasalın mevcut vasalları ('+vassalsOf(sub).map(v=>v.name).join(', ')+') yeni senyöre bağlanır']:[]};
+}
+function warVassalApply(sub,lord,it){
+ const g=warVassalGate(sub,lord,it);if(!g.ok)throw Error(g.why);
+ const scope=warTermsScope(lord,sub);
+ if(!subjugate(lord,sub,it.type,warVassalGoalTerms(it.type,it.war),'surrender'))throw Error('Vasallık kurulamadı');
+ warTermsScopeApply(scope,'surrender');
+ if(lord.wg?.[sub.id])lord.wg[sub.id].done=true;
+}
+/* Ayrı barış önizlemesi: yalnız kendi cephesi kapanır; sona eren ortak yükümlülükler ve öteki cepheler. */
+function warSeparatePeacePreview(e,foe){
+ const f=warLedgerFind(e?.id,foe?.id);if(!f)return null;
+ const name=id=>e.contact[id]||id===e.id?G.emps[id]?.name||'?':'Bilinmeyen devlet';
+ const others=G.warLedger.fronts.filter(x=>x.ended===null&&x.id!==f.id&&x.campaign===f.campaign&&warFrontKnown(e,x));
+ if(!others.length&&f.parent===null)return null;
+ const ends=[];
+ if(e.proxyWar?.[foe.id]!==undefined)ends.push(name(e.proxyWar[foe.id])+' adına açılan vekil savaş yükümlülüğü');
+ if(f.sponsor!==null&&f.sponsor!==e.id)ends.push(name(f.sponsor)+' seferine katılım ('+({promise:'anlaşma maddesi',federation:'federasyon kararı',vassal:'senyörlük çağrısı'}[f.entryKind]||f.entryKind)+')');
+ const promises=(G.warLedger.promises||[]).filter(p=>p.state==='open'&&p.campaign===f.campaign&&(p.giver===e.id||p.taker===e.id));
+ for(const p of promises)ends.push('Toprak vaadi: '+(G.sys[p.sys]?.name||'?')+' ('+name(p.giver)+' → '+name(p.taker)+') bu cephenin barışıyla yeniden değerlendirilir');
+ const broken=f.entryKind==='promise'&&f.sponsor!==e.id&&others.some(x=>x.sides.includes(f.sponsor)&&x.sides.includes(foe.id));
+ return {front:f.id,campaign:f.campaign,ends,broken,
+  others:others.map(x=>({front:x.id,text:x.sides.map(name).join(' ↔ '),state:'sürer'}))};
+}
+
+/* ── Toprak vaadi {t:'landPromise',sys,front}: VEREN (sefer sahibi) barışta sistemi ALANA devretmeyi taahhüt eder. ── */
+function warPromiseGate(giver,taker,it){
+ const f=(G.warLedger?.fronts||[]).find(x=>x.id===it.front),s=G.sys[it.sys];
+ if(!f||f.ended!==null||!f.sides.includes(giver.id))return {ok:false,why:'Vaat edilen sefer cephesi geçerli değil'};
+ const enemy=G.emps[f.sides.find(id=>id!==giver.id)];
+ if(!s||s.owner===giver.id||s.owner===taker.id||s.id===enemy?.home||s.owner!==enemy?.id)return {ok:false,why:'Vaat edilen sistem düşmanın başkent dışı sistemi olmalı'};
+ if((G.warLedger.promises||[]).filter(p=>p.state==='open'&&p.sys===s.id).length)return {ok:false,why:'Bu sistem zaten başka bir vaatte'};
+ return {ok:true,enemy,f};
+}
+function warPromisesValid(raw){
+ if(!Array.isArray(raw)||raw.length>64)return false;
+ const nat=n=>Number.isSafeInteger(n)&&n>=0;
+ return raw.every(p=>p&&Object.keys(p).every(k=>['id','campaign','front','giver','taker','enemy','sys','day','state','settled','why'].includes(k))&&nat(p.id)&&nat(p.campaign)&&nat(p.front)&&[p.giver,p.taker,p.enemy].every(id=>nat(id)&&G.emps[id])&&nat(p.sys)&&G.sys[p.sys]&&Number.isFinite(p.day)&&['open','delivered','unfulfillable','broken','renegotiate'].includes(p.state)&&(p.settled===undefined||Number.isFinite(p.settled))&&(p.why===undefined||typeof p.why==='string'&&p.why.length<=120))&&new Set(raw.map(p=>p.id)).size===raw.length;
+}
+function warPromiseAdd(giver,taker,it){
+ const g=warPromiseGate(giver,taker,it);if(!g.ok)throw Error(g.why);
+ const l=G.warLedger;l.promises=l.promises||[];
+ l.promises.push({id:(l.promises.reduce((n,p)=>Math.max(n,p.id),0)+1),campaign:g.f.campaign,front:g.f.id,giver:giver.id,taker:taker.id,enemy:g.enemy.id,sys:it.sys,day:G.day,state:'open'});
+}
+function warPromiseState(p){
+ const s=G.sys[p.sys],giver=G.emps[p.giver],taker=G.emps[p.taker];
+ if(!s||!giver||!taker||giver.dead||taker.dead)return {state:'unfulfillable',why:'Taraf artık yok'};
+ if(s.owner===taker.id)return {state:'delivered',why:'Sistem alıcıda'};
+ if(s.owner===giver.id)return giver.war[taker.id]?{state:'renegotiate',why:'Taraflar artık savaşta'}:{state:'deliverable',why:'Sistem verende; barışta devredilir'};
+ if(s.owner>=0&&s.owner!==p.enemy&&G.emps[s.owner]&&G.warLedger.fronts.some(f=>f.campaign===p.campaign&&f.sides.includes(s.owner)))return {state:'renegotiate',why:'Sistem başka bir sefer ortağında'};
+ return {state:'unfulfillable',why:'Sistem ele geçirilmedi'};
+}
+/* Cephe kapanınca (her yoldan: warLedgerSync tek nokta) vaatler sonuçlanır; tek kez. */
+function warPromiseFrontEnded(f){
+ for(const p of (G.warLedger?.promises||[])){
+  if(p.state!=='open'||!f.sides.includes(p.giver)||!f.sides.includes(p.enemy))continue;
+  const giver=G.emps[p.giver],taker=G.emps[p.taker],s=G.sys[p.sys],st=warPromiseState(p);
+  p.settled=G.day;
+  if(st.state==='deliverable'){
+   const keep=giver.ai&&aiHonesty(giver)<-.3&&itemValue(giver,{t:'sys',id:s.id},taker)>180;
+   if(keep){p.state='broken';p.why='Veren sistemi elinde tuttu';remember(taker,giver.id,'paktBozdu');taker.rel[giver.id]=clamp((taker.rel[giver.id]||0)-20,-100,100);
+    if(typeof GalacticNews!=='undefined')GalacticNews.emit({category:'politics',empires:[giver.id,taker.id],key:'promise:'+p.id,important:true,title:'Toprak vaadi çiğnendi',text:giver.name+', '+s.name+' sistemini '+taker.name+' devletine devretmedi'});}
+   else{captureSystem(s,taker.id,'transfer');p.state='delivered';p.why='Barışta devredildi';}
+  } else {p.state=st.state;p.why=st.why;}
+ }
+}
+function warPromiseRows(e,campaign){
+ return (G.warLedger?.promises||[]).filter(p=>p.campaign===campaign&&(p.giver===e.id||p.taker===e.id)).map(p=>({...p,name:G.sys[p.sys]?.name||'?',now:p.state==='open'?warPromiseState(p):{state:p.state,why:p.why||''}}));
+}
+const WAR_PROMISE_TEXT={deliverable:'Teslim edilebilir',delivered:'Teslim edildi',unfulfillable:'Karşılanamıyor',renegotiate:'Yeniden müzakere',broken:'Çiğnendi',open:'Açık'};
+
+/* ── Sahte Bayrak ifşası: kanıt düzeltildi (forgetMemoryEvent); bu kanıta dayanan savaş yeniden değerlendirilir. Savaş kendiliğinden kapanmaz. ── */
+function warFalseFlagRevealed(victim,patsy,real){
+ if(!victim||!patsy||victim.dead||patsy.dead)return null;
+ const r={victim:victim.id,patsy:patsy.id,real:real?.id??null,day:G.day,war:!!victim.war[patsy.id],legit:null,offers:[]};
+ if(!r.war)return r;
+ const L=warLegitimacy(victim,patsy,'fetih');r.legit=L.score;
+ const send=(a,b)=>{const q={from:a.id,to:b.id,give:[{t:'peace'}],want:[],born:G.day,expires:G.day+180};if(!dealQuote(q).ok)return;r.offers.push({from:a.id,to:b.id,result:aiCoalitionSend(a,b,[{t:'peace'}],[]).karar});};
+ if(L.score<.2){
+  if(victim.ai)send(victim,patsy);
+  else if(victim.id===G.p?.id)say('KANIT ÇÖKTÜ — '+patsy.name+' karşısındaki savaşın gerekçesi sahte bayraktı. Statüko barışı önerebilirsin.','war');
+  const base=warLedgerFind(victim.id,patsy.id);
+  for(const f of (G.warLedger?.fronts||[]))if(base&&f.ended===null&&f.campaign===base.campaign&&f.sponsor===victim.id&&f.sides.includes(patsy.id)){
+   const x=G.emps[f.sides.find(id=>id!==patsy.id)];if(x?.ai&&warLegitimacy(x,patsy,'fetih').score<.2)send(x,patsy);
+  }
+ }
+ if(typeof GalacticNews!=='undefined')GalacticNews.emit({category:'intel',empires:[victim.id,patsy.id],key:'ff-reveal:'+victim.id+':'+patsy.id+':'+G.day,important:true,
+  title:'Sahte bayrak ifşa edildi',text:victim.name+' — '+patsy.name+' suçsuz çıktı'+(r.war?'; savaşın gerekçesi yeniden değerlendiriliyor':'')});
+ (G._warFfLog=G._warFfLog||[]).push(r);if(G._warFfLog.length>32)G._warFfLog.shift();
+ return r;
+}
+
+/* ── AI aylık savaş şartları: yalnız mevcut teklif yolu (aiCoalitionSend). Ayda en çok bir teklif, aynı çifte 12 ayda bir. ── */
+function aiWarTermsTick(){
+ for(const e of G.emps){
+  if(e.dead||e.wild||!e.ai||e.crisisSide)continue;
+  e._wtAt=e._wtAt||{};
+  for(const id of Object.keys(e.war||{})){
+   const o=G.emps[+id];if(!e.war[id]||!o||o.dead||o.wild||o.crisisSide)continue;
+   if((e._wtAt[o.id]||-1e9)>G.day-360)continue;
+   const g=e.wg?.[o.id],prog=g?warGoalProgress(e,o.id):0;let give=null,want=null;
+   if(g?.t==='boyun'&&g.v===2&&prog>=.6&&warVassalGate(o,e,{type:g.vtype,war:g.terms.war}).ok){give=[];want=[{t:'vassal',type:g.vtype,war:g.terms.war}];}
+   else if(g?.t==='fetih'&&g.v===2&&prog>=1){give=[{t:'peace'}];want=[];}
+   else{
+    const og=o.wg?.[e.id];
+    if(og?.t==='boyun'&&warVassalGate(e,o,{type:og.vtype||'haracguzar',war:og.terms?.war||WAR_VASSAL_WAR[og.vtype||'haracguzar']}).ok){
+     const it={t:'vassal',type:og.vtype||'haracguzar',war:og.terms?.war||WAR_VASSAL_WAR[og.vtype||'haracguzar']},c=warVassalSubmitCost(e,it,o);
+     if(c.cost<=0){give=[it];want=[];}
+    }
+   }
+   if(!give)continue;
+   e._wtAt[o.id]=G.day;
+   const q={from:e.id,to:o.id,give,want,born:G.day,expires:G.day+180};if(!dealQuote(q).ok)continue;
+   aiCoalitionSend(e,o,give,want);break;
+  }
+ }
+}
+/* END BETA-WAR-GOALS.0 */
+
+/* ═══ BETA-WAR-GOALS.0 — Federasyona karşı federasyon savaşı ═══
+   Önerge (fedWar) → mevcut gündem/anayasa oyu → yetkili uygulama (başkan ya da önerici). Hedef KARŞI FEDERASYON olarak kaydedilir;
+   ilan seçilen üyeye seçilen hedefle yapılır, karşı federasyonun gerçek savunma yükümlülükleri motorda (fedDefend) uygulanır.
+   Ortak barış {t:'fedPeace'}: iki başkan arasında, kampanyadaki GÜNCEL üyeler arası bütün cepheleri kapatır; üyenin ayrı barışı yalnız kendi cephesi. */
+function fedWarMark(front){const root=front&&(G.warLedger?.fronts||[]).find(x=>x.id===front.campaign);return root?.fedWar||null;}
+function warFedMarkValid(m){return !!m&&typeof m==='object'&&Object.keys(m).every(k=>['by','against','decision','day'].includes(k))&&[m.by,m.against].every(n=>Number.isSafeInteger(n)&&n>=0)&&m.by!==m.against&&typeof m.decision==='string'&&m.decision.length<=40&&Number.isFinite(m.day);}
+function fedWarGoalOpts(o){return o.goal==='fetih'?(Array.isArray(o.targets)?{targets:o.targets}:null):o.goal==='boyun'?{vtype:o.vtype,war:o.war}:null;}
+function fedWarGate(e,f,o){
+ const other=fedOf(o.targetFed),target=G.emps[o.target];
+ if(!f||!other||other===f)return {ok:false,why:'Başka bir federasyon seç'};
+ if(!target||target.dead||!other.members.includes(target.id)||!e.contact[target.id])return {ok:false,why:'Karşı federasyonun bilinen bir üyesini hedef seç'};
+ if(!WAR_GOAL_MAIN.includes(o.goal)||!warGoalOptions(e,target,o.goal,fedWarGoalOpts(o)))return {ok:false,why:'Fetih hedefleri veya vasallaştırma türü geçersiz'};
+ if(f.members.some(id=>G.emps[id]?.war[target.id]))return {ok:false,why:'Bir üye bu hedefle zaten savaşta; mevcut savaşa destek önergesini kullan'};
+ const gate=canPromiseWarOn(e,target,true);if(!gate.ok)return gate;
+ return {ok:true,other,target};
+}
+function fedWarPreview(e,f,o){return warPure(()=>fedWarPreview0(e,f,o));}
+function fedWarPreview0(e,f,o){
+ const g=fedWarGate(e,f,o),name=id=>id===e.id||e.contact[id]?G.emps[id]?.name||'?':'Bilinmeyen devlet';if(!g.ok)return {ok:false,why:g.why};
+ const ours={certain:[],conditional:[],no:[]},theirs={certain:[],conditional:[],no:[]};
+ for(const id of f.members){const m=G.emps[id];if(!m||m.dead)continue;
+  if(!fedSupportGate(m,g.target,id!==e.id).ok)ours.no.push({id,name:name(id),why:'Antlaşma, vasallık veya Konsey engeli'});
+  else if(!aiFedHelp(m,g.target,true))ours.no.push({id,name:name(id),why:'Ulaşabilir askerî rota yok'});
+  else ours.conditional.push({id,name:name(id),why:'Evet oyu veren üye uygulamada katılır'});}
+ for(const id of g.other.members){if(id===g.target.id)continue;const m=G.emps[id];if(!m||m.dead||!knownFederationBond(e,g.other,id))continue;
+  const auto=fedDuty(g.other,'defense')&&(!g.other.defenseFrontCutoff||(G.warLedger?.next||1)>=g.other.defenseFrontCutoff);
+  (auto?theirs.certain:theirs.conditional).push({id,name:name(id),why:auto?'Yürürlükteki ortak savunma':'Savunma oylaması gerekli'});}
+ return {ok:true,fed:f.id,against:g.other.id,againstName:g.other.name,target:g.target.id,targetName:g.target.name,goal:o.goal,ours,theirs,
+  legit:warLegitimacy(e,g.target,o.goal,fedWarGoalOpts(o)),
+  note:'Oy ve ilan ayrı adımdır: onay savaş başlatmaz. Uygulamada yalnız evet veren, erişebilen ve engeli olmayan üyeler girer. Savaş ortasında ayrılan üyenin cephesi sürer ama ortak barışa girmez; sonradan katılan üye mevcut ortak savaşa kendiliğinden girmez.'};
+}
+function fedWarExecute(e,fid,id){
+ const f=fedOf(fid),d=f?.decisions?.[id];
+ if(!f||!e||!f.members.includes(e.id)||!d||d.kind!=='fedWar'||d.state!=='ready'||d.expires<=G.day||!(e.id===d.by||e.id===f.leader))return {ok:false,why:'Karar veya uygulama yetkisi geçerli değil'};
+ const actor=G.emps[d.by],o={targetFed:d.targetFed,target:d.target,goal:d.goal,targets:d.targets,vtype:d.vtype,war:d.war},g=fedWarGate(actor,f,o);
+ if(!g.ok)return {ok:false,why:g.why};
+ if(!d.approved.includes(actor.id)||!aiFedHelp(actor,g.target,true))return {ok:false,why:'Önerenin savaş koşulları değişti'};
+ if(!fedJoinSide(f,actor,g.target,actor.id))return {ok:false,why:'Savaş ilanı uygulanamadı'};
+ setWarGoal(actor,g.target,d.goal,fedWarGoalOpts(o));
+ const joined=[actor.id],blocked=[];
+ for(const mid of d.approved){if(mid===actor.id||!f.members.includes(mid))continue;const m=G.emps[mid];if(!m||m.dead||m.war[g.target.id])continue;
+  if(!aiFedHelp(m,g.target,true)){blocked.push({id:mid,why:'Bilinen ulaşabilir askerî yardım rotası yok'});continue;}
+  if(fedJoinSide(f,m,g.target,actor.id))joined.push(mid);}
+ const root=warLedgerFind(actor.id,g.target.id),camp=root&&G.warLedger.fronts.find(x=>x.id===root.campaign);
+ if(camp)camp.fedWar={by:f.id,against:g.other.id,decision:String(d.id),day:G.day};
+ d.state='applied';d.applied=G.day;d.joined=joined;d.blocked=blocked;fedPoliticalRecord(f,'warDecision',{target:d.target,joined});
+ if(typeof GalacticNews!=='undefined')GalacticNews.emit({category:'war',empires:[actor.id,g.target.id],key:'fedwar:'+f.id+':'+g.other.id+':'+G.day,important:true,title:'Federasyonlar arası savaş',text:f.name+' → '+g.other.name+' ('+g.target.name+')'});
+ return {ok:true,joined,blocked,campaign:camp?.id||null};
+}
+function fedPeaceFronts(a,b){
+ const fa=findFed(a),fb=findFed(b);if(!fa||!fb||fa===fb||fa.leader!==a.id||fb.leader!==b.id)return [];
+ return (G.warLedger?.fronts||[]).filter(x=>{if(x.ended!==null)return false;const m=fedWarMark(x);if(!m||!([m.by,m.against].includes(fa.id)&&[m.by,m.against].includes(fb.id)))return false;
+  return x.sides.every(id=>fa.members.includes(id)||fb.members.includes(id))&&!(fa.members.includes(x.sides[0])&&fa.members.includes(x.sides[1]));});
+}
+function fedPeaceGate(a,b){const fronts=fedPeaceFronts(a,b);if(!fronts.length)return {ok:false,why:'İki federasyon başkanı arasında süren ortak savaş yok'};
+ if(fronts.some(x=>!canPeace(G.emps[x.sides[0]],G.emps[x.sides[1]])))return {ok:false,why:'Bir cephede barış doktrin nedeniyle mümkün değil'};return {ok:true,fronts};}
+function fedPeaceApply(a,b){const g=fedPeaceGate(a,b);if(!g.ok)throw Error(g.why);for(const x of g.fronts){const p=G.emps[x.sides[0]],q=G.emps[x.sides[1]];if(p.war[q.id]&&!makePeace(p,q,'federation-peace',a.id))throw Error('Ortak barış uygulanamadı');}}
+function warSurrenderGrace(sub){const c=sub?.vassalContract;return !!(c&&c.status==='active'&&['surrender','war-goal'].includes(c.source)&&G.day-c.started<360&&!sub.sepFunded);}
+/* END BETA-WAR-GOALS.0 FED */

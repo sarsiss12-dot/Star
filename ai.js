@@ -1812,7 +1812,7 @@ function aiTurn(e){
                    : prof.eco > .7 ? ['harac','fetih']
                    : prof.sci > .8 ? ['bilgi','fetih'] : ['fetih','yikim'];
         const pick2 = opts.find(k => e.res.etk >= WAR_GOALS[k].etk) || 'fetih';
-        setWarGoal(e, o, pick2);
+        aiSetWarGoal(e, o, pick2);   // BETA-WAR-GOALS.0: iki normal hedef
       }
       declareWar(e, o);
     }
@@ -3615,7 +3615,7 @@ function aiOpsTick(){
     else if (ahl <= -1) sans *= 1.5;
     else if (ahl >= 2) sans *= .35;      // koyu dürüst: gölgeden kaçınır
     else if (ahl >= 1) sans *= .60;
-    if (rnd() > clamp(sans, .01, .34)) continue;
+    if (rnd() > clamp(sans * tensionMul(), .01, .34)) continue;   // BETA-WAR-GOALS.0: Galaktik Gerilim (Dengeli ×1)
 
     /* Gölge Konseyi ayda iki operasyon çevirir */
     const kota = (typeof hasCivic === 'function' && hasCivic(e, 'shadow')) ? 2 : 1;
@@ -4121,7 +4121,7 @@ function aiFalseFlagTick(){
     if (mz === 'Fanatik Arındırıcılar') sans += .03;
     if (typeof hasCivic === 'function' && hasCivic(e, 'shadow')) sans += .05;
     if (prof.dip > .6) sans += .02;
-    if (rnd() > sans) continue;
+    if (rnd() > sans * tensionMul() * aiFalseFlagHonestyMul(e)) continue;   // BETA-WAR-GOALS.0: gerilim + dürüstlük yalnız seçimde; başarı oranları aynı
 
     /* Hedef: istihbaratımız olan bir düşman */
     const hedefler = G.emps.filter(o => !o.dead && !o.wild && !o.crisisSide &&
@@ -4945,12 +4945,13 @@ function aiFedVoteWant(e,f,v){
   if(v.field==='defense'&&v.value==='auto')want+=aiProfile({...e}).war*.2+aiProfile({...e}).dip*.1;
   if(v.field==='admission'&&v.value==='contact')want+=aiProfile({...e}).dip*.25;
  }
- if(v.motion==='joinWar'||v.motion==='newWar'){
+ if(v.motion==='joinWar'||v.motion==='newWar'||v.motion==='fedWar'){   // BETA-WAR-GOALS.0: +fedWar
   const target=G.emps[v.target];if(!target||!e.contact[target.id]||e.ally[target.id]||(e.nap?.[target.id]||0)>G.day)return .01;
   if(!e.war[target.id]&&(!fedSupportGate(e,target).ok||!aiFedHelp(e,target,true)))return .01;
   if(f.type==='yagmaci'&&v.motion==='newWar'&&!e.war[target.id]){const shown=shownPower(e,target),combined=aiKnownPower(e,e)+f.members.filter(id=>id!==e.id).reduce((n,id)=>n+aiKnownPower(e,G.emps[id])*.75,0);if(combined<shown.v*(1+shown.band)*1.1)return .02;}
   const ratio=totalPower({...e})/(aiKnownPower(e,target)+1);
   want=.3+aiProfile({...e}).war*.35-(e.rel[target.id]||0)/250+((e.war[target.id]||aiObservedThreat(e,e.home)>0)?.25:0)-clamp(.8-ratio,0,.8)*.35;
+  if(!e.war[target.id])want+=aiWarVoteLegitTerm(e,target,G.emps[v.sponsor??v.proposer]);   // BETA-WAR-GOALS.0
   if(!e.war[target.id]){
    const burden=aiFedWarBurden(e),defending=aiObservedThreat(e,e.home)>0;
    if(burden.budget.critical||burden.short)want-=defending?.15:.45;
@@ -4986,6 +4987,7 @@ function aiFederationPolitics(){
   const preferred=aiFedType(e);
   if(G.day-f.founded>=720&&preferred!==f.type&&aiFedAffinity(e,preferred)>aiFedAffinity(e,f.type)+.2&&offer('reform',{type:preferred}))continue;
   if(f.type==='yagmaci'&&aiRaiderMilitaryProposal(e,f,offer))continue;
+  if(aiFedWarProposal(e,f,offer))continue;   // BETA-WAR-GOALS.0
   const candidate=G.emps.find(o=>o!==e&&e.contact[o.id]&&(e.rel[o.id]||0)>45&&fedAdmissionGate(f,o,true).ok&&aiFedWilling(o,e,f.type,f).ok);
   if(candidate&&offer('admit',{target:candidate.id}))continue;
   if(f.type==='askeri'||f.type==='yagmaci'){
@@ -5031,7 +5033,7 @@ function aiCoalitionDiplomacy(e){
   if(!e.ally[enemy.id]&&!(e.nap?.[enemy.id]>G.day)&&G.day-(e.peaceAt?.[enemy.id]??-9999)>=720-grudgeOf(e,enemy.id)*5&&power>own*.8&&own>power*.3&&aiWarBudget(e,enemy).ok&&warSupportReach(e,enemy,e,[])){
    const friends=G.emps.filter(o=>o!==e&&!o.dead&&!o.wild&&!o.crisisSide&&e.ally[o.id]&&e.contact[o.id]&&(e.rel[o.id]||0)>25&&trustOf(e,o.id)>-20&&!isVassal(o)&&!isPurifier(o));
    const eligible=friends.filter(o=>!aiKnownWar(e,o,enemy)&&aiFedHelp(e,o)).sort((a,b)=>aiKnownPower(e,b)-aiKnownPower(e,a)||a.id-b.id).slice(0,3);
-   if(eligible.length){const created=aiCoalitionAuthorize(e,enemy,()=>warPrepareCreate(e,enemy.id,goal));if(created.ok){s.coalition={plan:created.id,after:G.day+360};aiPlanEvent(e,'coalition-prepare',{plan:created.id,target:enemy.id,why:'Mevcut bölgesel hedef için tek başına yetersiz, bilinen müttefik desteği erişilebilir'});
+   if(eligible.length){const created=aiCoalitionAuthorize(e,enemy,()=>warPrepareCreate(e,enemy.id,goal));if(created.ok){s.coalition={plan:created.id,after:G.day+Math.round(360/tensionMul())};aiPlanEvent(e,'coalition-prepare',{plan:created.id,target:enemy.id,why:'Mevcut bölgesel hedef için tek başına yetersiz, bilinen müttefik desteği erişilebilir'});
     const payment=Math.min(750,Math.floor(Math.max(0,e.res.min||0)*.06));
     for(const o of eligible){const give=[...(payment>=20?[{t:'res',r:'min',v:payment}]:[]),{t:'passage'}],want=[{t:'warJoin',plan:created.id,target:enemy.id}];const r=aiCoalitionSend(e,o,give,want);aiPlanEvent(e,'coalition-offer',{plan:created.id,other:o.id,result:r.karar,applied:!!r.uygulandi});}return;}}
   }
@@ -5044,7 +5046,7 @@ function aiCoalitionDiplomacy(e){
   if(s.supportOpportunity?.signature===signature||(s.supportOpportunity?.after||0)>G.day)continue;
   const reachable=warSupportReach(e,enemy,sponsor,[]),via=reachable||warSupportReach(e,enemy,sponsor,[{t:'passage'}]);if(!via)continue;
   const ask=Math.min(240,Math.max(40,Math.ceil(fleetUpkeep(e)*3))),give=[{t:'warJoin',front:f.id,target:enemy.id}],want=[{t:'res',r:'min',v:ask},...(!reachable?[{t:'passage'}]:[])];
-  s.supportOpportunity={signature,front:f.id,after:G.day+360};const r=aiCoalitionSend(e,sponsor,give,want);aiPlanEvent(e,'support-opportunity',{front:f.id,other:sponsor.id,payment:ask,passage:!reachable,result:r.karar,applied:!!r.uygulandi});return;
+  s.supportOpportunity={signature,front:f.id,after:G.day+Math.round(360/tensionMul())};const r=aiCoalitionSend(e,sponsor,give,want);aiPlanEvent(e,'support-opportunity',{front:f.id,other:sponsor.id,payment:ask,passage:!reachable,result:r.karar,applied:!!r.uygulandi});return;
  }
 }
 
@@ -5190,3 +5192,39 @@ function aiFedStayReview(e,f){
  if(!alt)return false;
  leaveFederation(e);e._fedStrain=0;e.aiFedReason={day:G.day,kind:'leave',why:'Uzun süreli çıkar çatışması ve yaşayabilir alternatif blok (anayasaya uygun ayrılış)'};return true;
 }
+
+/* ═══ BETA-WAR-GOALS.0 — AI meşruiyet terimleri (sınırlı; RNG yok). Askerî katılım bütçe/rota/cephe kapılarında ayrıca değerlendirilir. ═══ */
+function aiWarLegitTerm(e,o){
+ if(!e||!o||!e.ai)return 0;
+ return clamp((warLegitimacy(e,o,'fetih',{targets:[0,0]}).score-.31)*.25,-.08,.08);
+}
+function aiWarJoinLegitMul(sponsor,enemy){
+ if(!sponsor||!enemy)return 1;
+ return 1+clamp(.3-warLegitimacy(sponsor,enemy).score,0,.3);
+}
+function aiWarVoteLegitTerm(e,target,sponsor){
+ const L=Math.max(warLegitimacy(e,target).score,sponsor&&sponsor!==e?warLegitimacy(sponsor,target).score:0);
+ return clamp((L-.3)*.3,-.1,.08);
+}
+/* Federasyona karşı savaş önergesi: yalnız başkan; 720 günde bir; gerçek katılımcı, erişim, meşruiyet ve güç dengesi. Kör döngü yok. */
+function aiFedWarProposal(e,f,offer){
+ if(f.leader!==e.id||(f.fedWarAt||-1e9)>G.day-720||f.type==='yagmaci')return false;
+ let best=null;
+ for(const o of (G.feds||[])){
+  if(o===f||!o.members.length)continue;
+  for(const id of o.members){const t=G.emps[id];if(!t||t.dead||!e.contact[t.id]||e.war[t.id])continue;
+   const ap=warAppetite(e,t);if(!ap.cb)continue;
+   const c=aiWarGoalChoice(e,t,'fetih'),opts={targetFed:o.id,target:t.id,goal:c.key,...(c.opts||{targets:warFetihDefault(e,t)})};
+   const p=fedWarPreview(e,f,opts);if(!p.ok||p.legit.score<p.legit.need*.5)continue;
+   const ours=p.ours.conditional.map(r=>G.emps[r.id]).filter(Boolean),theirs=[t,...p.theirs.certain.map(r=>G.emps[r.id])];
+   const pa=ours.reduce((n,m)=>n+aiKnownPower(e,m),0),pb=theirs.reduce((n,m)=>n+aiKnownPower(e,m),0);
+   if(ours.length<2||pa<pb*1.15)continue;
+   const score=ap.score+(pa/Math.max(1,pb)-1)*.3+p.legit.score*.4;
+   if(!best||score>best.score)best={score,opts};}
+ }
+ if(!best||best.score<.9)return false;
+ f.fedWarAt=G.day;return offer('fedWar',best.opts);
+}
+/* Sahte Bayrak operasyon SEÇİMİ: dürüst AI daha az, sahtekâr daha çok dener (×0,55 … ×1,45). falseFlagOp başarı/ifşa oranları değişmez. */
+function aiFalseFlagHonestyMul(e){return clamp(1-aiHonesty(e)*.45,.55,1.45);}
+/* END BETA-WAR-GOALS.0 AI */

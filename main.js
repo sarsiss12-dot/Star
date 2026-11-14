@@ -1467,6 +1467,7 @@ function assignRivalPersonas(cfg){
 function setupConfigError(cfg){
  if(!SIZES[cfg.size]||SIZES[cfg.size].available===false||(cfg.shape!==undefined&&!SHAPES[cfg.shape]))return 'Geçersiz galaksi boyutu veya şekli.';
  if(cfg.planetMul!==undefined&&!PLANET_MULS.includes(cfg.planetMul))return 'Kolonileştirilebilir gezegen çarpanı geçersiz.';
+ if(cfg.tension!==undefined&&!(Object.hasOwn(TENSION_LEVELS,cfg.tension)&&cfg.tension!=='dengeli'))return 'Galaktik gerilim geçersiz.';   // BETA-WAR-GOALS.0
  const n=aiCountFor(cfg);if(!Number.isInteger(n)||n<1||n>MAX_AI_COUNT)return 'AI devlet sayısı 1–48 arasında bir tam sayı olmalı.';
  if(n+1>SIZES[cfg.size].sys)return 'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.';
  const actualAI=n-(Array.isArray(cfg.humans)?cfg.humans.length:0);if(actualAI>SCALE_ACCEPTANCE.maxAI)return 'Bu sürümde uzun kampanyası doğrulanmış üst sınır '+SCALE_ACCEPTANCE.maxAI+' AI. 24/32/48 AI deneysel; seçim sessizce azaltılmaz.';return rivalSetupError(cfg,actualAI);
@@ -2352,6 +2353,11 @@ const GALAXY_ROUTE_ERROR = 'Galaksi rota denetimi başarısız: bazı yıldız s
    akışla yapılır: sistem konumları, hiperhatlar ve başkentler çarpandan bağımsızdır; ana RNG çekilmez. 1× hiçbir şey yapmaz. */
 const PLANET_MULS = [.05, .1, .15, .25, .5, .75, 1, 1.5, 2, 3];   // BETA-RIVAL-BLOCS.0: 0,05–0,15× çok seyrek yerleşim
 let LAST_PLANET_MUL = null;
+/* BETA-WAR-GOALS.0 — Galaktik Gerilim: yalnız AI'nın şans tabanlı entrika / savaş fırsatı / koalisyon pazarlığı temposu.
+   Kurulumda kullanılmaz (aynı tohumda harita ve doktrinler aynı). Dengeli = p30 (×1, cfg'ye yazılmaz); eski kayıt Dengeli. */
+const TENSION_LEVELS={sakin:{n:'Sakin',m:.6,d:'Entrika, sınır fırsatı ve savaş kararı daha seyrek.'},dengeli:{n:'Dengeli',m:1,d:'Varsayılan tempo.'},calkantili:{n:'Çalkantılı',m:1.5,d:'Entrika ve savaş fırsatları daha sık; gerçek gerekçe, antlaşma, rota ve bütçe denetimleri aynı.'}};
+function tensionOf(cfg){const c=cfg===undefined?G.cfg:cfg;return c&&Object.hasOwn(TENSION_LEVELS,c.tension)?c.tension:'dengeli';}
+function tensionMul(){return TENSION_LEVELS[tensionOf()].m;}
 function planetMulOf(cfg){ return cfg && PLANET_MULS.includes(cfg.planetMul) ? cfg.planetMul : 1; }
 function colonizableCensus(protectedSys){
   /* normal: çarpanın değiştirdiği adaylar · special: lüks/kalıntı yatağı taşıyan yaşanabilir (korunur) · guaranteed: başkent sistemi/sahipli · rare: Gaia, Makine Dünyası */
@@ -7842,6 +7848,8 @@ function encodeOffer(o){
       const e = {t};
       if(t==='warJoin'){if(Number.isSafeInteger(it.front))e.front=it.front;if(Number.isSafeInteger(it.plan))e.plan=it.plan;}
       if(t==='freight')for(const k of ['source','every','months'])if(_num(it[k])!==null)e[k]=it[k];
+      if(t==='vassal'){if(_str(it.type)!==null)e.type=it.type;if(_str(it.war)!==null)e.war=it.war;}   // BETA-WAR-GOALS.0
+      if(t==='landPromise'){if(Number.isSafeInteger(it.sys))e.sys=it.sys;if(Number.isSafeInteger(it.front))e.front=it.front;}   // BETA-WAR-GOALS.0
       if (_str(it.r) !== null) e.r = it.r;
       if (_num(it.v) !== null) e.v = it.v;
       if (_num(it.n) !== null) e.n = it.n;
