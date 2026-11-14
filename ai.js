@@ -2255,6 +2255,7 @@ function aiRespond(ai, offer){
     return {v:'red', ev, why:'İstediğin şeyleri veremeyiz.'};
 
   if (ev.net > 0) return {v:'kabul', ev};
+  {const sub=(offer.want||[]).find(x=>x.t==='vassal');if(sub)return {v:'red',ev,why:'Teslim reddedildi: '+warVassalSubmitCost(ai,sub,G.emps[offer.from]).why.join(' · ')};}   // BETA-WAR-GOALS.0: teslime kaynakla karşı teklif yok
 
   /* Eksiği GERÇEKTEN kapatan bir karşı teklif kur.
      Önceki sürüm yetersiz miktar önerip sonsuz döngüye giriyordu:

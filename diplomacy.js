@@ -1814,7 +1814,7 @@ function treatyAlreadyActive(a, b, it){
   if (!a || !b || !it) return false;
   switch(it.t){
     case 'peace':   return !a.war[b.id];
-    case 'fedPeace': return !fedPeaceFronts(a,b).length;   // BETA-WAR-GOALS.0
+    case 'fedPeace': return !fedPeaceClosable(a,b).length;   // BETA-WAR-GOALS.0
     case 'nap':     return !(a.war&&a.war[b.id]) && !(b.war&&b.war[a.id]) &&
                            !!(a.nap && a.nap[b.id] > G.day);
     case 'pact':    return !(a.war&&a.war[b.id]) && !(b.war&&b.war[a.id]) &&
@@ -2262,7 +2262,7 @@ function dealPostcondition(giver, taker, it){
       return !!(t && giver.war[t.id] && t.war[giver.id]);
     }
     case 'vassal': return giver.overlord===taker.id&&!giver.war[taker.id]&&!taker.war[giver.id];   // BETA-WAR-GOALS.0
-    case 'fedPeace': return !fedPeaceFronts(giver,taker).length;   // BETA-WAR-GOALS.0
+    case 'fedPeace': return !fedPeaceClosable(giver,taker).length;   // BETA-WAR-GOALS.0
     case 'landPromise': return (G.warLedger?.promises||[]).some(p=>p.state==='open'&&p.sys===it.sys&&p.giver===giver.id&&p.taker===taker.id);   // BETA-WAR-GOALS.0
     case 'intel':    return !!(taker.visionFrom && taker.visionFrom[giver.id]);
     /* applyItems: VEREN taraf kendi sınırını alana açar. */
@@ -11183,8 +11183,10 @@ function fedPeaceFronts(a,b){
  return (G.warLedger?.fronts||[]).filter(x=>{if(x.ended!==null)return false;const m=fedWarMark(x);if(!m||!([m.by,m.against].includes(fa.id)&&[m.by,m.against].includes(fb.id)))return false;
   return x.sides.every(id=>fa.members.includes(id)||fb.members.includes(id))&&!(fa.members.includes(x.sides[0])&&fa.members.includes(x.sides[1]));});
 }
-function fedPeaceGate(a,b){const fronts=fedPeaceFronts(a,b);if(!fronts.length)return {ok:false,why:'İki federasyon başkanı arasında süren ortak savaş yok'};
- if(fronts.some(x=>!canPeace(G.emps[x.sides[0]],G.emps[x.sides[1]])))return {ok:false,why:'Bir cephede barış doktrin nedeniyle mümkün değil'};return {ok:true,fronts};}
+function fedPeaceClosable(a,b){return fedPeaceFronts(a,b).filter(x=>canPeace(G.emps[x.sides[0]],G.emps[x.sides[1]]));}
+/* Doktrin nedeniyle barışamayan cephe (ör. Kan Hukuku, Arındırıcı) kapanmaz ve önizlemede ayrıca listelenir. */
+function fedPeaceGate(a,b){const all=fedPeaceFronts(a,b),fronts=fedPeaceClosable(a,b);if(!all.length)return {ok:false,why:'İki federasyon başkanı arasında süren ortak savaş yok'};
+ if(!fronts.length)return {ok:false,why:'Kampanyadaki cephelerin hiçbirinde barış doktrin nedeniyle mümkün değil'};return {ok:true,fronts,blocked:all.filter(x=>!fronts.includes(x))};}
 function fedPeaceApply(a,b){const g=fedPeaceGate(a,b);if(!g.ok)throw Error(g.why);for(const x of g.fronts){const p=G.emps[x.sides[0]],q=G.emps[x.sides[1]];if(p.war[q.id]&&!makePeace(p,q,'federation-peace',a.id))throw Error('Ortak barış uygulanamadı');}}
 function warSurrenderGrace(sub){const c=sub?.vassalContract;return !!(c&&c.status==='active'&&['surrender','war-goal'].includes(c.source)&&G.day-c.started<360&&!sub.sepFunded);}
 /* END BETA-WAR-GOALS.0 FED */
