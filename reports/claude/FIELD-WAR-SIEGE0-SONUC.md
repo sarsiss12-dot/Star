@@ -64,7 +64,7 @@ Kullanıcının kayıt dosyası eklenmedi. Saha belirtileri kontrollü fikstürl
 | Başlangıç HEAD | `03a3aa432c2a126ace8180844f0735e60209d679` |
 | Aday dal | **`claude/stars-field-war-siege0`** |
 | Render Branch adı | `claude/stars-field-war-siege0` (dağıtım yapılmadı) |
-| Bitiş HEAD ve PR | {{BITIS}} |
+| Bitiş HEAD ve PR | Taslak PR **#46** — https://github.com/sarsiss12-dot/Star/pull/46 (taban #45 `claude/stars-war-goals0`); son commit PR'da ve sonuç raporunda |
 | Sürüm | oyun **96h10p32** · PWA `stars-v96h10p32` · Save8 **v8** · MP **MP.8.9b29** · paket **4** · protokol **1** |
 | Paket uyumu | p32 yükleyicisi p6–p31, p25u1 ve p27s1 paketlerini kabul eder |
 | Save8 | Yeni zorunlu alan yok. Sevkiyat kayıtları aynı `f.shipment` biçimindedir. Ayna alanı `col.siegeEnd` yalnız misafir aynasındadır; Save8'e yazılmaz. |
@@ -176,11 +176,42 @@ Yalnız AI, orta harita. Kollar: kontrol `03a3aa4` (`git archive` sabit kopya) v
 
 ## 7. Regresyon
 
-{{REGRESYON}}
+Günlükler: `evidence/field-war-siege0/regresyon/`. p31 karşılaştırması: aynı makine, aynı betik (`reg31.sh` → `reg32.sh`).
+
+| Küme | p31 (`03a3aa4`) | p32 aday |
+|---|---|---|
+| Node tam koşu | 202 paket · 6280 geçen / 281 kalan | **203 paket · 6300 / 280** |
+| Paket paket fark | — | Yalnız yeni `field_war_siege0` (19/0; K9 sonradan eklendi, son koşu 20/0) ve `mp11_online` (p31'de 8/1 zamanlama FAIL'i, bu koşuda 9/0). Öteki 201 paketin GEÇEN/KALAN sayıları aynı; bilinen eski FAIL'ler (faz86b, faz95d coğrafya vb.) değişmedi. |
+| Chromium | 9 test PASS | `browser-field-war-siege0` **3/0** (yeni); war-goals0 5/0, rival-blocs0 9/0, pregame-galaxy0 10/0, bgreturn-galaxy0 14/0, share-galaxy0 8/0, sp-map-war 4/0, fed-fleet0-sp 4/0, mobile-hud0 4/0, event-ux0 11/0 |
+| MP8 | W 4/0, D 5/0, G 5/0, L 6/0, S 4/0, E 6/0, F 6/0 | **K 3/0** (yeni); W 4/0, D 5/0, G 5/0, L 6/0, S 4/0, E 6/0, F 6/0 |
+| MP8 P (500 sistem / 16 AI / 2 insan / 15 dk, DESYNC) | 8/0 · en büyük gecikme 24,2 gün · maxStill 4462 ms · host günü 6331 · son ay 6,6 sn | İlk koşu **7/1** (aşağıda) → tekrar **8/0** · en büyük gecikme **17,6 gün** · maxStill **626 ms** · donma 0 · 20/20 gemi siparişi aynaya yansıdı · host günü **6661** · son ay 4,8 sn · misafir aynası hiç reddedilmedi · Save8 geçerli |
+
+**MP8 P ilk koşu FAIL** (`mp8-P-ilk-FAIL.log`, `mp8-P-ilk-FAIL-soak.json`)
+- t+381'deki komut ölçümü misafirde açık pencereyi kapatıyor, sonra hareket ve gemi emri gönderiyor.
+- Host gemi siparişini kabul etti (ACK rev 1547). 20 sn içinde misafirin uygulanmış dünyası o revizyona ulaşmadı.
+- O aralıkta misafirde yeniden bir STARS penceresi açıktı:
+  - örnekte `mo:1`;
+  - bekletilen kurulum sayacı 94 → 172 (≈ 78 × 250 ms);
+  - son durumda açık pencere "İÇ İSTİKRAR".
+- Açık pencere aynayı **tasarım gereği** bekletir (MP.6.1).
+- Pencere kapanınca (t≈405) ayna 3 sn içinde tekrar eşitlendi; kalıcı donma yok, misafir aynası reddedilmedi.
+- Pencereyi kimin açtığı (maymunun ölçümden önce kuyruğa giren dokunuşu mu, host kaynaklı bir kart mı) kesinleştirilmedi.
+- Bu fazın değişiklikleri pencere açmıyor; açılan pencere SEVKİYAT ya da kuşatma pencereleri değil.
+- Aynı senaryo tek kez yeniden koşuldu: 8/0. İlk FAIL kanıt olarak korunur; kök nedeni **açık** (test ölçümünün kapalı pencere varsayımı).
 
 ## 8. Yayın
 
-{{YAYIN}}
+| | |
+|---|---|
+| ZIP | `releases/stars-faz96h10p32.zip` (20 girdi: 19 runtime + `RELEASE-MANIFEST.json`) |
+| ZIP SHA-256 | `dd0de3f7961bb1709bdfd90a20dc1d2a349b17234c062a8051b28559c34e1765` |
+| ZIP CRC32 | `4F5AB2A4` (dosyanın tamamı) |
+| Manifest SHA-256 | `dbf81512cf4dd775b3632695cec37d41ca8e62d8f29a05e2e7f70ee6dc381ffc` |
+| Belirlenimlilik | `tools/package-release.py` iki kez → bayt bayt aynı |
+| Doğrulama | ZIP çıkarılıp `python3 tools/verify-release.py --root <dizin>` → **DOĞRULANDI: 19 dosya; oyun build 96h10p32**; çalışma ağacında da aynı |
+| Manifest | `parent_commit` `03a3aa4…`, `parent_zip_sha256` p31 ZIP `c72a48f5…e138` |
+| Koruma | `tests/helpers/field-war-siege0-reviewed.{json,cjs}` (taban 03a3aa4; 10 dosya, TAM METİN hunk) → `beta-war-goals0-reviewed` zincirinin başına; hash gevşetilmedi, test silinmedi |
+| MP dosyaları | `research/mp0/mp-core.js`, `research/mp6/mirror.js`, `research/mp6/client/guest-stars.js`, `research/mp1/client/view.js`, `research/mp1/server/relay.js` ZIP dışında ayrı teslimdir; host ve istemci birlikte p32 olmalı |
 
 ## 9. Açık işler ve sınırlar
 
