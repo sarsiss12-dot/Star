@@ -11185,7 +11185,7 @@ function warExhaustionClose(e,o){
  e.exh[o.id]=55;o.exh=o.exh||{};o.exh[e.id]=Math.min(o.exh[e.id]||0,55);
  const pid=G.p?.id,mode=lock?'zorunlu ateşkes (doktrin barış antlaşmasını yasaklıyor)':'zorunlu barış',tag=f?' · Savaş #'+f.id:'';
  if(e.id===pid)say('SAVAŞ YORGUNLUĞU %100 — '+o.name+' ile '+mode+'. Ordun savaşamıyor; yorgunluk %55\'ten barışta ayda 2,5 azalır'+tag,'war');
- else if(o.id===pid)say(e.name+' SAVAŞ YORGUNLUĞU %100 — '+e.name+' ordusu savaşamıyor; '+mode+' ile savaş durdu. '+e.name+'\'in yorgunluğu %55\'te başlar ve barışta ayda 2,5 azalır'+tag,'war');
+ else if(o.id===pid)say(e.name+' SAVAŞ YORGUNLUĞU %100 — ordusu savaşamıyor; '+mode+' ile savaş durdu. Rakibin yorgunluğu %55\'ten başlar ve barışta ayda 2,5 azalır'+tag,'war');
  return true;
 }
 /* İlan önizlemesi: oyuncunun bildiğiyle zorunlu barış riski. Kendi yorgunluğu kesin; hedefinki yalnız istihbarat ≥3 ise kesin,

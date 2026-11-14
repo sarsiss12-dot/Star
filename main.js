@@ -4013,6 +4013,50 @@ function shipmentAction(e,f,action,target){
   } else return {ok:false,why:'Geçersiz sevkiyat işlemi'};
   followRallyFleet(f);return {ok:true};
 }
+/* FIELD-WAR-SIEGE.0 — Bekleyenleri Yeniden Dene: oyuncunun yeniden denenebilir bütün sevkiyatları (seçili filodan bağımsız).
+   Her sevkiyat kendi hedefini mevcut followRallyFleet (güvenli rota + hareketli hedef izleme) ile yeniden arar; yolda / savaşta /
+   geri çekilen / birleşme bekleyen sevkiyat dokunulmaz. Rota araması adım bütçesi (8) ile; artanı 'ready' kalır ve sonraki
+   filo adımında aynı sırayla aranır. Kaynak / gemi sayısı değişmez; RNG yok. */
+const SHIPMENT_RETRY_BUDGET=8;
+function shipmentRetryClass(f){
+  const d=f.shipment;
+  if(f.mv||(f.path&&f.path.length))return 'moving';
+  if(f.combat)return 'combat';
+  if(f.retreating)return 'retreat';
+  if(d&&d.state==='waiting')return 'waiting';
+  if(d&&d.state==='lost')return 'lost';
+  if(d&&d.fleet!==undefined&&!G.fleets.some(x=>x.id===d.fleet&&x.e===f.e&&x.ships.length))return 'lost';
+  return 'retry';
+}
+function shipmentRetryList(e){
+  if(!e||G.emps[e.id]!==e||e.dead)return [];
+  return G.fleets.filter(f=>f.e===e.id&&f.ships.length&&hasShipment(f)).map(f=>({f,cls:shipmentRetryClass(f)}));
+}
+function shipmentRetryAll(e){
+  if(!e||G.emps[e.id]!==e||e.dead)return {ok:false,why:'Geçerli devlet yok'};
+  const rows=shipmentRetryList(e),n={moved:0,arrived:0,blocked:0,lost:0,queued:0,moving:0,busy:0,waiting:0,total:rows.length};
+  const budget={left:SHIPMENT_RETRY_BUDGET,fleets:new Map(G.fleets.map(f=>[f.id,f]))};
+  for(const {f,cls} of rows){
+    if(cls==='moving'){n.moving++;continue;}
+    if(cls==='combat'||cls==='retreat'){n.busy++;continue;}
+    if(cls==='waiting'){n.waiting++;continue;}
+    if(cls==='lost'){shipmentRecord(f);if(f.shipment.state!=='lost')holdShipment(f,'lost');n.lost++;continue;}
+    const d=shipmentRecord(f);d.state='ready';d.attempts=0;d.next=0;
+    followRallyFleet(f,budget);
+    if(!hasShipment(f)||!f.ships.length)n.arrived++;
+    else if(f.path.length||f.mv)n.moved++;
+    else if(f.shipment.state==='lost')n.lost++;
+    else if(f.shipment.state==='waiting')n.waiting++;
+    else if(f.shipment.state==='ready')n.queued++;
+    else n.blocked++;
+  }
+  const parts=[];
+  if(n.moved)parts.push(n.moved+' yola çıktı');if(n.arrived)parts.push(n.arrived+' teslim edildi');
+  if(n.blocked)parts.push(n.blocked+' güvenli rota bekliyor');if(n.lost)parts.push(n.lost+' hedef bulunamadı — hedef değiştir');
+  if(n.queued)parts.push(n.queued+' rota hesabı sırada');if(n.moving)parts.push(n.moving+' zaten yolda');
+  if(n.busy)parts.push(n.busy+' savaşta / geri çekiliyor');if(n.waiting)parts.push(n.waiting+' ana filoyu bekliyor');
+  return {ok:true,counts:n,text:parts.join(' · ')||'Bekleyen sevkiyat yok'};
+}
 function restoreShipments(){
   for(const f of G.fleets){
     if(!f.shipment)continue; // eski v8 alanları ilk tikte tembel olarak alınır

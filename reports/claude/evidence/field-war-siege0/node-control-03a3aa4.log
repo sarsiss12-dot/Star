@@ -1,0 +1,206 @@
+PASS W1 yeni savaş + olağan barış: tek cephe, kapanış nedeni / tarafı / tarihi defterde
+FAIL W2 geçerli zorunlu barış (Synarth %100 yorgunluk): tek kapanış, "çekildi" tarafı Synarth, tek oyuncu bildirimi; yorgunluk 55
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /^exhaustion\|actor:1/. Input:
+
+'exhaustion|actor:auto'
+
+    at /home/user/Star/tests/field_war_siege0_test.js:32:59
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:30:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL W3 zorunlu ateşkes (Kan Hukuku barışı yasaklar): makePeace defteri tutar, neden exhaustion-lock, "barış imzalandı" denmez
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /^exhaustion-lock\|actor:1/. Input:
+
+'exhaustion|actor:auto'
+
+    at /home/user/Star/tests/field_war_siege0_test.js:39:100
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:37:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL W4 aynı hedefe art arda iki elle yeniden ilan: önizleme yorgunluk riskini gösterir; her savaş ayrı cephe, bir kez kapanır, toprak bir kez el değiştirir
+AssertionError [ERR_ASSERTION]: önizleme: rakibin yorgunluğu (tahmin ya da kesin) undefined
+    at /home/user/Star/tests/field_war_siege0_test.js:49:37
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:44:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+PASS W5 Fetih v2 zorunlu barış: hedef dışı işgal tam bir kez iade edilir; hedef sistem kazanana kalır; ikinci devir yok
+PASS W6 kayıt/yükleme: yeniden ilan edilmiş savaş ve yorgunluk aynı kalır; yüklemeden sonraki kapanış aynı gün ve nedenle
+FAIL K1 sürekli savaş, kara ordusuz bombardıman: 6 ay ilerleme (1/6 … 6/6) ve tek sahiplik değişimi
+AssertionError [ERR_ASSERTION]: [null,null,null,null,null,null]
+    at /home/user/Star/tests/field_war_siege0_test.js:96:10
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:94:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+PASS K2 kara ordusu çıkarması: kalkan düşükken bir iki ayda alınır, tek sahiplik değişimi
+FAIL K3 bekletilen (yürümeyen) kara ordusu son direnişi ateşkeste TUTMAZ: bombardıman kural süresinde sonuçlanır
+AssertionError [ERR_ASSERTION]: 30 ayda alınmadı: [{"m":1,"owner":1,"shield":0,"garr":1,"siege":0,"truce":true,"st":null,"war":true,"stop":0},{"m":2,"owner":1,"shield":0,"garr":1,"siege":0,"truce":true,"st":null,"war":true,"stop":0},{"m":3,"owner":1,"shield":0,"garr":1,"siege":0,"truce":true,"st":null,"war":true,"stop":0},{"m":4,"owner":1,"shield":0,"garr":1,"siege":0,"truce":true,"st":null,"war":true,"stop":0},{"m":5,"owner":1,"shield":0,"garr":1,"siege":0,"truce":true,"st":null,"war":true,"stop":0},{"m":6,"owner":1,"shield":0,"garr":0,"siege":0,"truce":true,"st":null,"war":true,"stop":0},{"m":7,"owner":1,"shield":0,"garr":0,"siege":0,"truce":true,"st":null,"war":true,"stop":0},{"m":8,"owner":1,"shield":0,"garr":0,"siege":0,"truce":true,"st":null,"war":true,"stop":0}]
+
+1 !== 0
+
+    at /home/user/Star/tests/field_war_siege0_test.js:102:37
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:101:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+PASS K4 rotası kapalı (otomatik deneme sınırında) ordu sevkiyatı "yolda" sayılmaz
+FAIL K5 kuşatma ortasında barış: sayaç sıfırlanır, garnizon toparlanır, panel somut neden söyler; yeni savaş eski sayaçtan devam etmez
+AssertionError [ERR_ASSERTION]: barıştan sonra sayaç 0: [{"m":5,"owner":1,"shield":8,"garr":0,"siege":3,"truce":false,"st":null,"war":false,"stop":0},{"m":6,"owner":1,"shield":12,"garr":0,"siege":3,"truce":false,"st":null,"war":false,"stop":0},{"m":7,"owner":1,"shield":16,"garr":0,"siege":3,"truce":false,"st":null,"war":false,"stop":0}]
+    at /home/user/Star/tests/field_war_siege0_test.js:110:36
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:108:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL K6 müttefik kara birlikleri garnizonu destekliyor: durum metni gerçek nedeni söyler
+AssertionError [ERR_ASSERTION]: [null,null,null,null]
+    at /home/user/Star/tests/field_war_siege0_test.js:116:92
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:115:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL K7 kalkan yüksekken "Kalkan düşürülüyor"; ateşkeste "Kara ordusu bekleniyor"
+evalmachine.<anonymous>:1
+JSON.stringify(siegeStatus(T,P,0))
+     ^
+
+ReferenceError: siegeStatus is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/field_war_siege0_test.js:7:29)
+    at /home/user/Star/tests/field_war_siege0_test.js:120:16
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:118:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+FAIL K8 MP aynası: savaşta ve yörüngede olan misafir ateşkes/destek alanlarını, barıştan sonra yalnız kamu savaş sonunu görür; yörüngede değilse hiçbiri
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+undefined !== 0
+
+    at /home/user/Star/tests/field_war_siege0_test.js:127:23
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:123:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL S1 tek liste, tek dokunuş: rota açılan iki (biri otomatik sınırda) yola çıkar, kapalı rota bekler, kayıp hedef bildirilir, yoldaki dokunulmaz; kaynak/gemi değişmez
+evalmachine.<anonymous>:1
+JSON.stringify(shipmentRetryList(A).map(r=>[r.f.name,r.cls]))
+     ^
+
+ReferenceError: shipmentRetryList is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/field_war_siege0_test.js:7:29)
+    at /home/user/Star/tests/field_war_siege0_test.js:148:34
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:147:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+FAIL S2 çift dokunuş: ikinci çağrı yola çıkanları yeniden başlatmaz (zaten yolda), yolları değişmez
+evalmachine.<anonymous>:1
+shipmentRetryAll(A)
+^
+
+ReferenceError: shipmentRetryAll is not defined
+    at evalmachine.<anonymous>:1:1
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at /home/user/Star/tests/field_war_siege0_test.js:159:25
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:158:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+FAIL S3 ortak rota bütçesi: 11 bekleyen → 8 rota hesabı şimdi, 3 sırada; sonraki filo adımında aranır
+evalmachine.<anonymous>:1
+JSON.stringify(shipmentRetryAll(A))
+     ^
+
+ReferenceError: shipmentRetryAll is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/field_war_siege0_test.js:7:29)
+    at /home/user/Star/tests/field_war_siege0_test.js:164:11
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:162:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+FAIL S4 kayıt/yükleme: sevkiyat durumları ve yolları korunur; yüklemeden sonra yeniden deneme aynı sonucu verir
+evalmachine.<anonymous>:1
+JSON.stringify(shipmentRetryAll(A).counts)
+     ^
+
+ReferenceError: shipmentRetryAll is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/field_war_siege0_test.js:7:29)
+    at /home/user/Star/tests/field_war_siege0_test.js:168:63
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:167:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+FAIL S5 MP: misafir yalnız kendi sevkiyatlarını yeniden dener; başka oyuncununkine dokunmaz; boşsa açık ret
+Error: MP denetimi yalnız çalışma ağacında
+    at /home/user/Star/tests/field_war_siege0_test.js:176:119
+    at test (/home/user/Star/tests/field_war_siege0_test.js:8:42)
+    at Object.<anonymous> (/home/user/Star/tests/field_war_siege0_test.js:175:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+GEÇEN: 5 KALAN: 14

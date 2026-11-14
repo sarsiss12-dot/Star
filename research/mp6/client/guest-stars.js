@@ -110,7 +110,7 @@ const VIEW=new Set(['warCenter','warCenterTab','warCenterDetail','warCenterSuppo
   /* MP.6.4 — Galaktik Borsa (seçim görünüm, TAKAS ET → 'market') */
   'mktTrade',
   /* MP.6.4 — kalan filo / koloni işlemleri (motor işlevi MP komutuna iner) */
-  'fleetRecovery','fleetRecoveryDo','reinf','shipmentMenu','shipmentApply','shipCancel','shipCancelAll','shipCancelConfirm','rallySysSet','rallySysClear','rallySysCancel','terraform','habitat','ldrAssign','ldrHire',
+  'fleetRecovery','fleetRecoveryDo','reinf','shipmentMenu','shipmentApply','shipmentRetryAll','shipCancel','shipCancelAll','shipCancelConfirm','rallySysSet','rallySysClear','rallySysCancel','terraform','habitat','ldrAssign','ldrHire',
   /* MP.7.1 — Ekonomi Merkezi görünüm eylemleri (runtime economy-ui.js UI.act sarmalayıcısında; kaynak seçimi, süzgeç, kendi sistemine / filosuna git) */
   'ecoPick','ecoFilter','ecoSystem','ecoFleet',
   /* MP.7.1 — salt gezinme: karşı teklif kartında "Düzenlemeye dön", eski diplomasi bağlantıları (ilişki / istihbarat sayfası) */
@@ -396,6 +396,10 @@ function gate(){
     waits[cid]=res=>{if(res.status==='ok'){try{say('⚓ Takviye siparişi host\'ta verildi','sci');}catch{}}else toast('Host reddetti: '+why(res),true);};return {ok:false,why:'Takviye emri host\'a gönderildi…'};});
   wrap('shipmentAction',(o,e,f,action,target)=>{if(!mine(e)||!f)return NOT_MP;const t=target&&target.fleet!==undefined?{fleet:+target.fleet}:target&&Number.isInteger(target.sys)?{sys:target.sys}:undefined;
     return r({kind:'shipment',fleet:f.id,action:String(action),...(t?{target:t}:{})});});
+  /* FIELD-WAR-SIEGE.0: toplu yeniden deneme host'ta; sonuç metni host yanıtından (iyimser sonuç yok) */
+  wrap('shipmentRetryAll',(o,e)=>{if(!mine(e))return NOT_MP;const cid=send({kind:'shipmentRetryAll'});if(!cid)return {ok:false,why:'Host bağlı değil; emir gönderilmedi.'};
+    waits[cid]=res=>{try{UI._shipmentRetryPending=false;UI._shipmentRetryResult=res.status==='ok'?res.extra.text:'Host reddetti: '+why(res);if(res.status==='ok')say('SEVKİYAT — '+res.extra.text,'sci');else toast(UI._shipmentRetryResult,true);UI.keepScroll=true;UI.refresh();}catch{}};
+    return {ok:false,pending:true,why:'Host denetliyor…'};});
   wrap('shipOrderToken',(o,q)=>S.on&&typeof q?._mpOrderToken==='string'?q._mpOrderToken:o(q));
   wrap('cancelShipOrders',(o,e,sys,orders,all)=>{if(!mine(e)||!sys)return NOT_MP;const own=(sys.queue||[]).filter(q=>q.e===0),tokens=(orders||[]).map(q=>own.includes(q)&&q._mpOrderToken);
     if(tokens.some(t=>typeof t!=='string'))return {ok:false,why:'Kuyruk değişti; siparişi yeniden seç.'};const x=r({kind:'shipCancel',sys:sys.id,orders:tokens,all:!!all});return x.ok?{...x,count:tokens.length}:x;});

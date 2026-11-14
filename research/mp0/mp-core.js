@@ -864,6 +864,9 @@ function createHost(opts){
       locate(e,c){const f=G.fleets.find(x=>x.id===c.fleet);return f&&f.e===e.id?{f}:{err:'not-owner'};},
       why(e,at,c){if(c.target&&c.target.fleet!==undefined){const t=G.fleets.find(x=>x.id===c.target.fleet);if(!t||t.e!==e.id)return 'not-owner';}return null;},roots:()=>[],
       apply:(e,{f},c)=>shipmentAction(e,f,c.action,c.target?{...c.target}:undefined)},
+    /* FIELD-WAR-SIEGE.0 — Bekleyenleri Yeniden Dene: yalnız komutu verenin kendi sevkiyatları; durum host'ta yeniden sınıflanır. */
+    shipmentRetryAll:{say:'actor',keys:['kind'],check:()=>true,locate:()=>({}),why:e=>shipmentRetryList(e).some(r=>r.cls==='retry')?null:{code:'nothing-to-retry',detail:['Yeniden denenecek bekleyen sevkiyat yok']},roots:()=>[],
+      apply(e){const r=shipmentRetryAll(e);return r.ok?{ok:true,extra:{counts:r.counts,text:r.text}}:r;}},
     fleetRecovery:{say:'actor',keys:['kind','id','action','target','stamp'],check:c=>int(c.id,0,2147483647)&&['retarget','hold','merge'].includes(c.action)&&typeof c.stamp==='string'&&/^[0-9a-f]{1,8}$/.test(c.stamp)&&
         (c.target===undefined||plain(c.target)&&onlyKeys(c.target,['fleet','sys'])&&Object.keys(c.target).length===1&&Object.values(c.target).every(v=>int(v,0,2147483647))),
       locate:()=>({}),why:()=>null,roots:()=>[],apply(e,at,c){const r=fleetRecoveryAction(e,c.id,c.action,c.target,c.stamp);if(!r.ok)return r;const g=fleetRecoveryGroups(e).find(g=>g.id===c.id);return {ok:true,extra:{group:c.id,afterStamp:g?fleetRecoveryStamp(g):null}};}},

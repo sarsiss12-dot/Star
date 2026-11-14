@@ -4716,7 +4716,9 @@ function siegeStatus(sys,pl,atkId){
  if(!atk.war[pl.owner]&&!atk.wild){
   const last=(G.warLedger?.fronts||[]).filter(f=>f.ended!==null&&f.sides.includes(+atkId)&&f.sides.includes(pl.owner)).slice(-1)[0];
   const why=last?String(last.endReason||'').split('|')[0]:'';
-  return {code:'nowar',text:'Kuşatma durdu — gezegen sahibiyle savaş '+(last?'sona erdi ('+((typeof WAR_END_REASONS!=='undefined'&&WAR_END_REASONS[why])||why)+', gün '+Math.floor(last.ended)+')':'yok')+'. Bombardıman ve çıkarma yalnız aktif savaşta işler.'};
+  const se=!last&&col.siegeEnd;   /* MP misafiri: defter aynada yok, host'un yetkili özeti */
+  const txt=last?'sona erdi ('+((typeof WAR_END_REASONS!=='undefined'&&WAR_END_REASONS[why])||why)+', gün '+Math.floor(last.ended)+')':se?'sona erdi ('+((typeof WAR_END_REASONS!=='undefined'&&WAR_END_REASONS[se.r])||se.r)+', gün '+se.d+')':'yok';
+  return {code:'nowar',text:'Kuşatma durdu — gezegen sahibiyle savaş '+txt+'. Bombardıman ve çıkarma yalnız aktif savaşta işler.'};
  }
  const sh=Math.round(col.shield||0),g=Math.round(col.garrison||0),base=Math.round(col.garrisonBase||g);
  if(ground&&sh<=5)return {code:'landing',text:'Kara ordusu çıkarmada — garnizon '+g+' / '+base};
@@ -4725,5 +4727,20 @@ function siegeStatus(sys,pl,atkId){
  if((col.reinforced||0)>0)return {code:'allied',text:'Müttefik kara birlikleri garnizonu her ay destekliyor — bombardımanla düşmez; kara ordusuyla çıkarma gerekir'};
  if(g>0)return {code:'garrison',text:'Garnizon bastırılıyor — '+g+' / '+base+(g<=base*.25?' (son direniş: bombardım etkisi düşük, kara ordusu hızlandırır)':'')};
  return {code:'siege',text:'Bombardıman ilerlemesi '+(col.siege||0)+'/6 ay'};
+}
+/* Misafir aynası: kendi duran filosu yabancı kolonide, sahibiyle savaş YOKSA son kapanan cephenin günü + nedeni (kamu savaş sonu). */
+function siegeEndView(meId,sys,pl){
+ const me=G.emps[meId];if(!me||!pl.col||me.war[pl.owner]||!G.fleets.some(f=>f.e===meId&&f.sys===sys.id&&!f.mv&&f.ships.length))return {};
+ const last=(G.warLedger?.fronts||[]).filter(f=>f.ended!==null&&f.sides.includes(meId)&&f.sides.includes(pl.owner)).slice(-1)[0];
+ return last&&G.day-last.ended<=720?{siegeEnd:{d:Math.floor(last.ended),r:String(last.endReason||'').split('|')[0]}}:{};
+}
+function siegeStopRows(sys,viewer=G.p){
+ if(!sys||!viewer)return [];const out=[];
+ if(!G.fleets.some(f=>f.e===viewer.id&&f.sys===sys.id&&!f.mv&&f.ships.length&&(isArmed(f)||isTransport(f))))return out;
+ for(const pl of sys.planets){if(!pl.col||pl.owner<0||pl.owner===viewer.id||viewer.war[pl.owner])continue;
+  const st=siegeStatus(sys,pl,viewer.id);if(!st||st.code!=='nowar')continue;
+  const last=(G.warLedger?.fronts||[]).filter(f=>f.ended!==null&&f.sides.includes(viewer.id)&&f.sides.includes(pl.owner)).slice(-1)[0];
+  if(last?G.day-last.ended<=720:pl.col.siegeEnd)out.push({planet:pl.i,owner:pl.owner,text:st.text});}
+ return out;
 }
 /* END FIELD-WAR-SIEGE.0 SIEGE */
