@@ -1,0 +1,194 @@
+[
+ {
+  "seed": 11,
+  "min": 0,
+  "max": 0,
+  "n": 0,
+  "by": [
+   "yayilmaci",
+   "yayilmaci",
+   "tuccar",
+   "yayilmaci",
+   "tuccar",
+   "pasifist",
+   "pasifist",
+   "yayilmaci"
+  ]
+ },
+ {
+  "seed": 11,
+  "min": 2,
+  "max": 4,
+  "n": 2,
+  "by": [
+   "yayilmaci",
+   "yayilmaci",
+   "tuccar",
+   "yayilmaci",
+   "tuccar",
+   "izolasyonist",
+   "izolasyonist",
+   "yayilmaci"
+  ]
+ },
+ {
+  "seed": 11,
+  "min": 3,
+  "max": 3,
+  "n": 3,
+  "by": [
+   "yayilmaci",
+   "yayilmaci",
+   "tuccar",
+   "yayilmaci",
+   "kriminal",
+   "izolasyonist",
+   "izolasyonist",
+   "yayilmaci"
+  ]
+ },
+ {
+  "seed": 11,
+  "min": 8,
+  "max": 8,
+  "n": 8,
+  "by": [
+   "kriminal",
+   "izolasyonist",
+   "kriminal",
+   "militarist",
+   "kriminal",
+   "izolasyonist",
+   "izolasyonist",
+   "kriminal"
+  ]
+ },
+ {
+  "seed": 23,
+  "min": 0,
+  "max": 0,
+  "n": 0,
+  "by": [
+   "tuccar",
+   "tuccar",
+   "yayilmaci",
+   "pasifist",
+   "yayilmaci",
+   "yayilmaci",
+   "yayilmaci",
+   "pasifist"
+  ]
+ },
+ {
+  "seed": 23,
+  "min": 2,
+  "max": 4,
+  "n": 3,
+  "by": [
+   "militarist",
+   "tuccar",
+   "yayilmaci",
+   "pasifist",
+   "yayilmaci",
+   "militarist",
+   "yayilmaci",
+   "izolasyonist"
+  ]
+ },
+ {
+  "seed": 23,
+  "min": 3,
+  "max": 3,
+  "n": 3,
+  "by": [
+   "militarist",
+   "tuccar",
+   "yayilmaci",
+   "pasifist",
+   "yayilmaci",
+   "militarist",
+   "yayilmaci",
+   "izolasyonist"
+  ]
+ },
+ {
+  "seed": 23,
+  "min": 8,
+  "max": 8,
+  "n": 8,
+  "by": [
+   "militarist",
+   "kriminal",
+   "izolasyonist",
+   "izolasyonist",
+   "militarist",
+   "militarist",
+   "kriminal",
+   "izolasyonist"
+  ]
+ },
+ {
+  "seed": 404,
+  "min": 0,
+  "max": 0,
+  "n": 0,
+  "by": [
+   "tuccar",
+   "yayilmaci",
+   "yayilmaci",
+   "pasifist",
+   "pasifist",
+   "tuccar",
+   "yayilmaci",
+   "yayilmaci"
+  ]
+ },
+ {
+  "seed": 404,
+  "min": 2,
+  "max": 4,
+  "n": 3,
+  "by": [
+   "militarist",
+   "yayilmaci",
+   "yayilmaci",
+   "pasifist",
+   "pasifist",
+   "militarist",
+   "kriminal",
+   "yayilmaci"
+  ]
+ },
+ {
+  "seed": 404,
+  "min": 3,
+  "max": 3,
+  "n": 3,
+  "by": [
+   "militarist",
+   "yayilmaci",
+   "yayilmaci",
+   "pasifist",
+   "pasifist",
+   "militarist",
+   "kriminal",
+   "yayilmaci"
+  ]
+ },
+ {
+  "seed": 404,
+  "min": 8,
+  "max": 8,
+  "n": 8,
+  "by": [
+   "militarist",
+   "militarist",
+   "izolasyonist",
+   "izolasyonist",
+   "militarist",
+   "militarist",
+   "kriminal",
+   "kriminal"
+  ]
+ }
+]

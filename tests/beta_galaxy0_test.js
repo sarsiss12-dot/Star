@@ -5,7 +5,7 @@
 const fs=require('fs'),path=require('path'),os=require('os'),cp=require('child_process'),assert=require('assert/strict'),{runtime}=require('./helpers/runtime');
 let pass=0,fail=0;const test=(n,f)=>{try{f();pass++;console.log('PASS '+n);}catch(e){fail++;console.log('FAIL '+n+'\n'+(e&&e.stack||e));}};
 const J=(h,x)=>JSON.parse(h.run('JSON.stringify('+x+')'));
-const out=process.env.STARS_OUTPUT||path.join(__dirname,'..','reports/claude/evidence/beta-galaxy0');fs.mkdirSync(out,{recursive:true});
+const out=process.env.STARS_OUTPUT||path.join(__dirname,'..','reports/claude/evidence/beta-galaxy0');fs.mkdirSync(out,{recursive:true});const out_dir=()=>out;
 const setup=(o)=>{const h=runtime();h.sb.__o=o;h.run(`setupGame({...CFG,...__o});G.autoSave=false;`);return h;};
 const NEW=['eliptik','kumeli','cubuklu','duzensiz'];
 const rows={shapes:[],broken:null,planetMul:[],ai:[]};
@@ -120,4 +120,12 @@ test('G8 MP: lobi configure şekil + çarpanı kabul eder (geçersizi reddeder),
   assert.equal(m.n,J(g,'G.sys.length'));assert.equal(m.ok,true);
 });
 
+test('G9 Rakip Doktrinler (#41): sabit sayı ve min–maks aralığı tohumla tutarlı; militarist/kriminal/fanatik toplamı aralıkta, aynı tohum aynı dağılım',()=>{
+  const out=[];
+  for(const seed of [11,23,404])for(const [min,max] of [[0,0],[2,4],[3,3],[8,8]]){
+    const run=()=>J(setup({seed,size:'buyuk',aiCount:8,aiRivals:{min,max}}),`(()=>{const ai=G.emps.filter(e=>e.ai&&!e.wild&&!e.crisisSide);return {n:ai.filter(e=>RIVAL_PERSONAS.includes(personaKey(e))).length,by:ai.map(e=>personaKey(e))};})()`);
+    const a=run(),b=run();out.push({seed,min,max,n:a.n,by:a.by});
+    assert.ok(a.n>=min&&a.n<=max,JSON.stringify({seed,min,max,a}));assert.deepEqual(b,a,'aynı tohum aynı dağılım');}
+  fs.writeFileSync(path.join(out_dir(),'rakip-doktrin.json'),JSON.stringify(out,null,1));
+});
 console.log(`GEÇEN: ${pass} KALAN: ${fail}`);if(fail)process.exitCode=1;
