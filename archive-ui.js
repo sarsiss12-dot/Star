@@ -204,10 +204,25 @@ const WarCenterUI={
   if(open){if(mine)h+=`<button class="abtn pri" data-a="warCenterSupport" data-x="${status.id}:0">ASKERÎ DESTEK İSTE</button>`;
    else for(const id of status.sides)h+=`<button class="abtn" data-a="warCenterCompose" data-x="${status.id}:${id}:0">${esc(this.label(id))} tarafına katılmayı öner</button>`;
    if(mine){const foe=status.sides.find(id=>id!==0);h+=`<button class="abtn" data-a="warCenterPeace" data-x="${foe}">BARIŞ / STATÜKO GÖRÜŞMESİ</button>`;}}
-  if(!open&&mine)h+=`<p class="mini">Fethedilen yerler savaş sırasında el değiştirir. Ortak savaşta, bütün cepheler kapandıktan sonra uygun topraklar için ayrı paylaşım teklifi açabilirsin.</p><button class="abtn pri" data-a="shareOpen" data-x="${status.campaign}">TOPRAK PAYLAŞIMINI İNCELE</button>`;
+  if(mine)h+=this.shareAccess(status,open);
   h+='<button class="abtn" data-a="warCenter">SAVAŞ MERKEZİ LİSTESİNE DÖN</button>';
   if(this.backNews)h+=`<button class="abtn" data-a="newsDetail" data-x="${this.backNews.id}">HABERE DÖN</button>`;
   return h+'</section>';
+ },
+ /* BETA-GALAXY.0: savaş ayrıntısından toprak paylaşımına erişim — Diplomasi Merkezi'yle aynı sefer ve teklif durumu.
+    Uygun değilse motorun (settlementContext) somut gerekçesi gösterilir; kısa liste sınırı bu yolu etkilemez.
+    Misafirde karar host'ta: düğme kalır, uygunluk host yanıtından gelir. */
+ shareAccess(status,open){
+  const c=status.campaign,intro='<p class="mini">Fethedilen yerler savaş sırasında el değiştirir. Ortak savaşta, bütün cepheler kapandıktan sonra uygun topraklar için ayrı paylaşım teklifi açabilirsin.</p>';
+  if(window.MP6Stars&&window.MP6Stars.S)return intro+`<button class="abtn pri" data-a="shareOpen" data-x="${c}">TOPRAK PAYLAŞIMINI İNCELE</button>`;
+  if(typeof settlementContext!=='function')return intro;
+  const o=(G.settlements?.offers||[]).filter(x=>x.campaign===c&&x.members.includes(G.p.id)).slice(-1)[0];
+  const labels={pending:'onay bekliyor',approved:'onaylandı · uygulanmayı bekliyor',applied:'uygulandı',rejected:'reddedildi',expired:'süresi doldu',invalid:'geçersiz',withdrawn:'geri çekildi'};
+  if(o){const st=settlementState(o);return intro+`<p class="mini" id="shareState">Sefer ${c} paylaşım teklifi: ${esc(labels[st.state]||st.state)}${st.why?' · '+esc(st.why):''}</p><button class="abtn pri" data-a="shareOpen" data-x="${c}">PAYLAŞIM TEKLİFİNİ AÇ</button>`;}
+  const q=settlementContext(G.p,c);
+  if(!q.ok)return intro+`<p class="mini" id="shareWhy">Paylaşım şu an açılamaz: ${esc(open?'Seferdeki bütün cepheler kapanmalı':q.why)}</p>`;
+  const col=q.rows.filter(r=>r.planet!==null).length,sys=q.rows.length-col;
+  return intro+`<p class="mini" id="shareReady">Sefer ${c}: ${col} koloni · ${sys} boş sistem paylaşılabilir · ${q.members.length} ortak</p><button class="abtn pri" data-a="shareOpen" data-x="${c}">TOPRAK PAYLAŞIMINI İNCELE</button>`;
  },
  support(front,sponsor){this.front=front;const enemy=this.status?.sides.find(id=>id!==sponsor);if(!Number.isInteger(enemy))return;
   const candidates=G.emps.filter(e=>e.id!==sponsor&&e.id!==enemy&&!e.dead&&!e.wild&&!e.crisisSide&&G.p.contact[e.id]&&!e.war[enemy]&&e.contact?.[enemy]!==false);

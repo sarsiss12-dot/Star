@@ -6485,6 +6485,7 @@ const UI = {
       const title=visible?(r.planet===null?s.name:(pl.col?.name||pl.name)+' · '+s.name):'Keşif bilgisi yetersiz';
       const kind=r.planet===null?'Boş sistem':'Koloni';
       return `<div class="lrow"><b>${esc(title)}</b><div class="mini">${kind} · ağırlık ${r.value} · ${r.from===r.to?'Sahiplik kalır':'Devir önerisi'} · ${name(r.from)} → ${name(r.to)}</div>
+        <div class="mini shareFacts">${visible?`Mevcut sahip: ${name(r.from)} · kayıtlı fetih hedefi (toprak iddiası): ${r.claims&&r.claims.length?r.claims.map(name).join(', '):'yok'} · önerilen alıcı: ${name(r.to)}`:''}</div>
         <div class="mini">${visible?esc(r.why):'Kabul için bu toprağı incelemelisin.'}</div>
         ${!o&&visible?`<label>Alıcı <select data-share-recipient="${i}">${q.members.map(id=>`<option value="${id}" ${r.to===id?'selected':''}>${name(id)}</option>`).join('')}</select></label>`:''}</div>`;
     }).join('');
