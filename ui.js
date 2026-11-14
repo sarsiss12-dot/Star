@@ -9018,48 +9018,21 @@ function renderSetup(){
       <div class="mini">Biyolojin nasıl beslendiğini, hangi dünyalarda
         yaşayabildiğini ve ne hızla çoğaldığını belirler. Yönetim şeklinden
         bağımsızdır — bir kayaç cumhuriyeti de kurabilirsin.</div>`;
-    h += `<div class="grid g2">`;
+    /* BETA-GALAXY.0: fizyoloji kartları tek biçimde — başlık, kısa özet, motor alanlarından hesaplanan etki satırı.
+       Değerler economy.js / main.js / combat.js'deki gerçek kullanımla aynı birimdedir (yüzde çarpan ≠ düz puan). */
+    h += `<div class="grid g2 physioGrid">`;
     for (const k in PHYSIO){
-      const P = PHYSIO[k];
-      const on = (c.physio || 'humanoid') === k;
-      /* ═══ FAZ 77A: ŞEFFAF İSTATİSTİK ═══
-         Hikâye metninin yanına net sayılar. Oyuncu ne seçtiğini
-         yüzdeyle görsün. */
-      const st = [];
-      if (P.habBonus) st.push('Yaşanabilirlik ' + (P.habBonus>0?'+':'') +
-        Math.round(P.habBonus*100) + '%');
-      if (P.growMul) st.push((P.makine ? 'Montaj ' : 'Büyüme ') +
-        (P.growMul>0?'+':'') + Math.round(P.growMul*100) + '%');
-      for (const mk in (P.e || {})){
-        const v = P.e[mk];
-        if (!v) continue;
-        const ad = TRAIT_LABEL[mk] || mk;
-        st.push(ad + ' ' + ((typeof FLAT_KEYS !== 'undefined' && FLAT_KEYS[mk])
-            ? (v>0?'+':'') + v                       // FAZ 82: düz puan
-            : (v>0?'+':'−') + Math.round(Math.abs(v)*100) + '%'));
-      }
-      if (P.yiyer === 'enerji')  st.push('Enerjiyle beslenir');
-      if (P.yiyer === 'mineral') st.push('Mineralle beslenir');
-      h += `<button class="opt ${on?'on':''}" data-a="physio" data-x="${k}">
-        ${P.ico} ${P.n}<small>${st.length
-          ? '<b style="color:#9fdcc9">' + st.join(' · ') + '</b>' : P.art}</small></button>`;
+      const P = PHYSIO[k], on = (c.physio || 'humanoid') === k, fx = physioEffects(P);
+      h += `<button class="opt physioCard ${on?'on':''}" data-a="physio" data-x="${k}" aria-pressed="${on}">
+        <span class="pcHead">${P.ico} ${esc(P.n)}</span>
+        <span class="pcSum">${esc(P.d)}</span>
+        <span class="pcFx">${fx.filter(x=>x.card).map(x=>`<span class="${x.cls}">${esc(x.t)}</span>`).join(' · ')}</span></button>`;
     }
     h += `</div>`;
-    const sec = PHYSIO[c.physio || 'humanoid'];
-    h += `<div class="box" style="border-color:#6ff2c8;margin-top:8px">
-      <div class="bt"><span>${sec.ico} ${sec.n}</span></div>
-      <div class="bd">${sec.d}<br><br>
-        <b>Beslenme:</b> ${
-          sec.yiyer === 'mineral' ? 'mineral (yiyecek tüketmez)' :
-          sec.yiyer === 'enerji'  ? 'ENERJİ (yiyecek tüketmez)' : 'yiyecek'}
-        ${sec.photo ? ' + fotosentez' : ''}<br>
-        <b>Yaşanabilirlik:</b> ${sec.habBonus ? (sec.habBonus>0?'+':'') +
-          Math.round(sec.habBonus*100) + '%' : 'temel'}<br>
-        <b>Büyüme:</b> ${sec.growMul ? (sec.growMul>0?'+':'') +
-          Math.round(sec.growMul*100) + '%' : 'normal'}
-        ${sec.sever ? '<br><b>Sever:</b> ' + sec.sever.map(t=>PLANETS[t]?PLANETS[t].n:t).join(', ') : ''}
-        ${sec.sevmez ? '<br><b>Yaşayamaz:</b> ' + sec.sevmez.map(t=>PLANETS[t]?PLANETS[t].n:t).join(', ') : ''}
-      </div></div>`;
+    const sec = PHYSIO[c.physio || 'humanoid'], sfx = physioEffects(sec);
+    h += `<div class="box physioDetail" style="border-color:#6ff2c8;margin-top:8px">
+      <div class="bt"><span>${sec.ico} ${esc(sec.n)}</span></div>
+      <div class="bd"><p>${esc(sec.d)}</p><dl class="pcDl">${sfx.map(x=>`<dt>${esc(x.k)}</dt><dd class="${x.cls}">${esc(x.long||x.t)}</dd>`).join('')}</dl></div></div>`;
     h += `</div>`;
   
     /* FAZ 77A: özellik ekranının sayaçları */
@@ -9105,12 +9078,9 @@ function renderSetup(){
         <span class="tc" style="color:${t.c<0?'#65e08a':'#f2d452'}">${
           t.c > 0 ? '−' + t.c : '+' + (-t.c)}</span>
         <div class="tn">${t.n}</div>
-        <div class="td">${etki.length
-          ? '<b style="color:' + (t.c<0?'#ff9b3d':'#9fdcc9') + '">' +
-            etki.join(' · ') + '</b>'
-          : t.d}</div>
-        ${kilit ? '<div class="td" style="color:#ff5f6d;font-size:9px">' +
-          esc(chk.why || '') + '</div>' : ''}</button>`;
+        ${etki.length ? `<span class="tfx ${t.c<0?'neg':'pos'}">${etki.join(' · ')}</span>` : ''}
+        <div class="td">${t.d || ''}</div>
+        ${kilit ? '<div class="tlock">' + esc(chk.why || '') + '</div>' : ''}</button>`;
     }
     h += `</div></div>`;
 
@@ -9414,13 +9384,16 @@ function renderSetup(){
   h += `<div class="sumRow"><span>Rastgele olaylar</span><b>${c.randomEvents===false?'KAPALI':'AÇIK'}</b></div>`;
   h += `</div>`;
 
-  if(UI.setupError)h+=`<div class="mini" role="alert" id="setupErrorBox">${esc(UI.setupError)}</div>${UI.setupRegen?'<div class="btnrow"><button class="btn" data-a="regenGalaxy">YENİ TOHUMLA YENİDEN ÜRET</button></div>':''}`;
+  /* BETA-GALAXY.0: rota hatası ve YENİDEN ÜRET düğmesi gezinme satırının ALTINDA — başlat düğmesinin yeri değişmez
+     (dokunmada pointerup sonrası gelen sentetik tıklama yerine geçen düğmeye düşmesin) */
+  if(UI.setupError&&!UI.setupRegen)h+=`<div class="mini" role="alert">${esc(UI.setupError)}</div>`;
   const idx = STEPS.findIndex(x=>x.k===SETUP_STEP);
   h += `<div class="btnrow" style="margin-top:10px">`;
   if (idx > 0) h += `<button class="btn ghost" data-a="step" data-x="${STEPS[idx-1].k}">‹ GERİ</button>`;
   if (idx < STEPS.length-1) h += `<button class="btn" data-a="step" data-x="${STEPS[idx+1].k}">İLERİ ›</button>`;
   else h += `<button class="btn" data-a="start">GALAKSİYİ YARAT</button>`;
   h += `</div>`;
+  if(UI.setupError&&UI.setupRegen)h+=`<div class="mini" role="alert" id="setupErrorBox">${esc(UI.setupError)}</div><div class="btnrow"><button class="btn" data-a="regenGalaxy">YENİ TOHUMLA YENİDEN ÜRET</button></div>`;
   if (idx < STEPS.length-1)
     h += `<button class="btn ghost" data-a="start" style="margin-top:6px">VARSAYILANLARLA BAŞLA</button>`;
 
@@ -9896,3 +9869,28 @@ Object.assign(UI,{
 });
 const stabilityFleetAct=UI.act;
 UI.act=function(a,x){if(a==='fleetRecovery')return this.fleetRecoveryOpen(x);if(a==='fleetRecoveryDo')return this.fleetRecoveryDo(x);return stabilityFleetAct.call(this,a,x);};
+
+/* BETA-GALAXY.0: fizyoloji etkileri motor alanlarından (PHYSIO + gerçek kullanım yerleri). k: başlık, t: kart kısa metni, long: ayrıntı. */
+function physioEffects(P){
+  const out = [], pct = v => (v > 0 ? '+' : '−') + '%' + Math.round(Math.abs(v) * 100), pln = t => t.map(x => PLANETS[x] ? PLANETS[x].n : x).join(', ');
+  const add = (k, t, long, cls, card = true) => out.push({k, t, long, cls, card});
+  add('Beslenme', P.yiyer === 'enerji' ? 'Enerjiyle beslenir' : P.yiyer === 'mineral' ? 'Mineralle beslenir' : P.photo ? 'Yiyecek + fotosentez' : 'Yiyecekle beslenir',
+    P.yiyer === 'enerji' ? 'Nüfus yiyecek yerine enerji tüketir (yiyecek gerekmez).' : P.yiyer === 'mineral' ? 'Nüfus yiyecek yerine mineral tüketir (yiyecek gerekmez).' :
+    P.photo ? 'Nüfusun yiyecek ihtiyacının %45\'i fotosentezle karşılanır; bunun bedeli yarısı kadar enerjidir. Kolonilerin çoğu soğuk dünyadaysa (Tundra, Kutup, Buzul) enerji bedeli iki katıdır.' : 'Nüfus yiyecek tüketir.', 'info');
+  if (P.habBonus) add('Yaşanabilirlik', 'Yaşanabilirlik ' + pct(P.habBonus), 'Bütün yaşanabilir gezegenlerde yaşanabilirlik ' + pct(P.habBonus) + ' (çarpan; tür uyumundan sonra uygulanır).', P.habBonus > 0 ? 'pos' : 'neg');
+  if (P.sever) add('Avantajlı gezegenler', pln(P.sever) + ': +18 yaşanabilirlik, ' + pct(.2) + ' üretim', pln(P.sever) + ': yaşanabilirlik +18 puan ve bu dünyalardaki koloni üretimi ' + pct(.2) + '.', 'pos');
+  if (P.sevmez) add('Dezavantajlı gezegenler', pln(P.sevmez) + ': −35 yaşanabilirlik', pln(P.sevmez) + ': yaşanabilirlik −35 puan.', 'neg');
+  if (P.growMul) add(P.makine ? 'Montaj' : 'Nüfus artışı', (P.makine ? 'Montaj ' : 'Büyüme ') + pct(P.growMul), (P.makine ? 'Nüfus montaj hızı ' : 'Nüfus büyüme hızı ') + pct(P.growMul) + '.', P.growMul > 0 ? 'pos' : 'neg');
+  for (const mk in (P.e || {})){
+    const v = P.e[mk]; if (!v) continue;
+    const flat = typeof FLAT_KEYS !== 'undefined' && FLAT_KEYS[mk], ad = (typeof TRAIT_LABEL !== 'undefined' && TRAIT_LABEL[mk]) || 'Diğer etki';
+    const val = flat ? (v > 0 ? '+' : '') + v : pct(v), good = (mk === 'colCost' || mk === 'upMul') ? v < 0 : v > 0;
+    add(ad, ad + ' ' + val, ad + ' ' + val + (flat ? ' puan.' : '.'), good ? 'pos' : 'neg');
+  }
+  if (P.evasion) add('Kaçınma', 'Gelen hasar −%' + Math.round(P.evasion * 100), 'Uzay muharebesinde filolara gelen hasar −%' + Math.round(P.evasion * 100) + ' (kaçınma).', 'pos');
+  if (P.groundArmor) add('Kara savunması', 'Kara savunması ' + pct(P.groundArmor), 'Koloni kara savunması ' + pct(P.groundArmor) + '.', 'pos');
+  if (P.groundFrail) add('Kara savunması', 'Kara savunması ' + pct(-P.groundFrail), 'Koloni kara savunması ' + pct(-P.groundFrail) + '.', 'neg');
+  if (P.kovan) add('Kovan', 'İstikrar düşmez', 'Kovan zihni: koloni istikrarı yüksek tabanda kalır; yerel siyasi özerklik seçilemez.', 'info', false);
+  if (P.makine) add('Makine', 'Her dünyada çalışır', 'Organik değildir; enerjiyle çalışır ve her gezegen türünde yaşayabilir.', 'info', false);
+  return out;
+}

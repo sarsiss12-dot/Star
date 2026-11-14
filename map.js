@@ -1731,20 +1731,34 @@ const View = {
     if(!opacity||!G.p||MAP_MODE==='siyasi_yok')return;
     g.save();
     g.globalAlpha=opacity/100;
-    const placed=[];
+    const placed=[];this._emblemPlaced=[];
+    const labels=this._territoryLabels||[],stars=G.sys.filter(s=>this.inView(s.x,s.y)).map(s=>this.w2s(s.x,s.y));
     for(const region of regions){
       if(!region.known)continue;
       const visible=region.systems.filter(s=>pVis(s)&&this.inView(s.x,s.y));
       if(!visible.length)continue;
+      /* BETA-GALAXY.0: arma bölgenin İÇİNDE, yıldızlardan / sistem adlarından / bölge etiketlerinden en uzak aday noktaya
+         (merkez + bölge içi hat ortaları). Hiçbir aday temiz değilse küçülür; yine sığmazsa o karede çizilmez. */
       const x=visible.reduce((sum,s)=>sum+s.x,0)/visible.length;
       const y=visible.reduce((sum,s)=>sum+s.y,0)/visible.length;
-      const anchor=visible.reduce((a,b)=>Math.hypot(a.x-x,a.y-y)<=Math.hypot(b.x-x,b.y-y)?a:b);
-      const p=this.w2s(anchor.x,anchor.y);
-      const size=Math.min(62,28+Math.sqrt(visible.length)*9);
+      const own=new Set(visible.map(s=>s.id)),cands=[this.w2s(x,y)];
+      for(const s of visible){for(const l of s.lanes)if(l>s.id&&own.has(l)){const o=G.sys[l];cands.push(this.w2s((s.x+o.x)/2,(s.y+o.y)/2));if(cands.length>=28)break;}if(cands.length>=28)break;}
+      let size=Math.min(62,28+Math.sqrt(visible.length)*9),best=null;
+      for(const p of cands){
+        if(p.x<22||p.y<22||p.x>this.vw-22||p.y>this.vh-22)continue;
+        let clear=Infinity;
+        for(const sp of stars){const d=Math.min(Math.hypot(p.x-sp.x,p.y-sp.y),Math.hypot(p.x-sp.x,p.y-sp.y-12)-10);if(d<clear)clear=d;}
+        for(const b of labels){const dx=Math.max(b.x-p.x,0,p.x-(b.x+b.w)),dy=Math.max(b.y-p.y,0,p.y-(b.y+b.h));const d=Math.hypot(dx,dy);if(d<clear)clear=d;}
+        for(const q of placed){const d=Math.hypot(p.x-q.x,p.y-q.y)-q.size/2;if(d<clear)clear=d;}
+        if(!best||clear>best.clear)best={p,clear};
+      }
+      if(!best||best.clear<11)continue;
+      size=Math.min(size,Math.floor(best.clear*2-4));
+      const p=best.p;
       if(p.x<size/2||p.y<size/2||p.x>this.vw-size/2||p.y>this.vh-size/2)continue;
-      if(placed.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<(q.size+size)*.42))continue;
       g.drawImage(ART.identityEmblem(stateEmblem(G.emps[region.owner]),64),p.x-size/2,p.y-size/2,size,size);
       placed.push({...p,size});
+      (this._emblemPlaced||(this._emblemPlaced=[])).push({owner:region.owner,x:p.x,y:p.y,size});
     }
     g.restore();
   },

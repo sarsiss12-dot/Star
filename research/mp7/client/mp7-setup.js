@@ -17,6 +17,8 @@ function draft(){
     monoRes:CFG.monoRes||'min',portraitVariant:normalizePortraitVariant(CFG.portraitVariant),color:/^#[0-9a-f]{6}$/i.test(CFG.color||'')?CFG.color:null,
     ethics:Object.fromEntries(Object.keys(ETHICS).map(k=>[k,Math.round(+(CFG.ethics&&CFG.ethics[k])||0)])),civics:[...(CFG.civics||[])],traits:[...(CFG.traits||[])]};
   if(CFG.emblem&&typeof CFG.emblem==='object'){const e={};for(const k of EMB)if(typeof CFG.emblem[k]==='string')e[k]=CFG.emblem[k];if(Object.keys(e).length)d.emblem=e;}
+  /* BETA-GALAXY.0: arma hiç düzenlenmediyse Görünüş önizlemesindeki varsayılan gönderilir (oyundaki arma önizlemeyle aynı) */
+  else if(typeof normalizeEmblem==='function'){const n=normalizeEmblem(undefined,CFG.color||RACES[CFG.race].col,'setup');d.emblem={shape:n.shape,symbol:n.symbol,pattern:n.pattern,secondary:n.secondary};}
   return d;
 }
 /* kayıtlı taslağı (bu cihazda) kurulum durumuna geri yükle */

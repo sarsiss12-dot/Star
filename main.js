@@ -462,7 +462,8 @@ const TRAIT_LABEL = {
   stab:'İstikrar', sensor:'Sensör menzili', tradeMul:'Ticaret',
   opCost:'Casusluk bedeli', shipSpeed:'Gemi üretimi',
   borderMul:'Sınır büyümesi', newColStab:'Yeni koloni istikrarı',
-  trustCap:'Güven tavanı', trustStart:'Başlangıç güveni'
+  trustCap:'Güven tavanı', trustStart:'Başlangıç güveni',
+  colCost:'Kolonileştirme maliyeti'   // BETA-GALAXY.0: oyuncuya kod terimi gösterilmez
 };
 
 /* Makine Ağında "nüfus artışı" montajdır; yiyecek etkileri enerjiye kayar */
@@ -8750,6 +8751,8 @@ async function loadGame(){
 /* ---------- oyunu başlat ---------- */
 function startGame(){
   const error=setupConfigError(CFG);if(error){UI.setupError=error;safeRenderSetup();return;}UI.setupError='';
+  /* BETA-GALAXY.0: Görünüş sekmesinde önizlenen arma oyundakiyle aynı olsun — seçilmemişse önizleme varsayılanı sabitlenir */
+  if(!CFG.emblem||typeof CFG.emblem!=='object')CFG.emblem=normalizeEmblem(undefined,CFG.color||RACES[CFG.race].col,'setup');
   try { setupGame({...CFG}); }
   catch (e){ if (e && e.galaxyRoute){ UI.setupError = e.message; UI.setupRegen = true; safeRenderSetup(); return; } throw e; }
   UI.setupRegen = false;
