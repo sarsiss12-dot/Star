@@ -1732,7 +1732,7 @@ const View = {
     g.save();
     g.globalAlpha=opacity/100;
     const placed=[];this._emblemPlaced=[];
-    const labels=this._territoryLabels||[],stars=G.sys.filter(s=>this.inView(s.x,s.y)).map(s=>this.w2s(s.x,s.y));
+    const labels=this._territoryLabels||[],starSys=G.sys.filter(s=>this.inView(s.x,s.y)),stars=starSys.map(s=>this.w2s(s.x,s.y));
     for(const region of regions){
       if(!region.known)continue;
       const visible=region.systems.filter(s=>pVis(s)&&this.inView(s.x,s.y));
@@ -1744,6 +1744,10 @@ const View = {
       const own=new Set(visible.map(s=>s.id)),cands=[this.w2s(x,y)];
       for(const s of visible){for(const l of s.lanes)if(l>s.id&&own.has(l)){const o=G.sys[l];cands.push(this.w2s((s.x+o.x)/2,(s.y+o.y)/2));if(cands.length>=28)break;}if(cands.length>=28)break;}
       let size=Math.min(62,28+Math.sqrt(visible.length)*9),best=null;
+      /* Tek sistemli / seyrek bölge: yıldızın çevresindeki noktalar da aday; en yakın görünür sistemi yine bu bölgenin sahibininse bölge içidir. */
+      for(const s of visible.slice(0,12)){const c=this.w2s(s.x,s.y);for(let k=0;k<8;k++){const a=k*Math.PI/4,q={x:c.x+Math.cos(a)*size*.8,y:c.y+Math.sin(a)*size*.8};
+        let nb=null,nd=Infinity;for(let i=0;i<stars.length;i++){const d=Math.hypot(q.x-stars[i].x,q.y-stars[i].y);if(d<nd){nd=d;nb=starSys[i];}}
+        if(nb&&nb.owner===region.owner&&pSeen(nb))cands.push(q);}}
       for(const p of cands){
         if(p.x<22||p.y<22||p.x>this.vw-22||p.y>this.vh-22)continue;
         let clear=Infinity;
