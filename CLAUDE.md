@@ -2,7 +2,16 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — BETA-WAR-GOALS.0 (p31 / MP.8.9b28, 14 Kasım 2026)
+## Son teslim — FIELD-WAR-SIEGE.0 (p32 / MP.8.9b29, 14 Kasım 2026)
+
+- Ayrıntı: `reports/claude/FIELD-WAR-SIEGE0-SONUC.md`, kanıt `reports/claude/evidence/field-war-siege0/`. Dal `claude/stars-field-war-siege0` (p31 `03a3aa4` üstünde). Save8v8/paket4/protokol1; p32 paket yükleyicisi p6–p31, p25u1, p27s1 kabul eder.
+- %100 yorgunluk kapanışı tek yol `warExhaustionClose` (diplomacy.js): her durumda `makePeace(…,{force:true,quiet:true})`; doktrin kilidinde (Kan Hukuku `kan_hukuku`, `canPeace` false) neden `exhaustion-lock`, değilse `exhaustion`; `actor` = çekilen taraf; tek bildirim ("Savaş #n"). `makePeace` `opts.force` olmadan `canPeace`'i aynen denetler. Önizleme `warExhaustionForecast` (rakip: SIZILMIŞ istihbaratla kesin, yoksa son zorunlu barıştan tahmin).
+- Kuşatma (economy.js): `incomingArmy` yürümeyen (jointHold / savaşta / ricat / sevkiyatı blocked-paused-lost) orduyu saymaz, varış = yolun son durağı; `groundTick` başında `siegeStaleClear` (kuşatan savaşan silahlı güç yoksa `siege/truce/truceAge` sıfır). Metin `siegeStatus`/`siegeStopRows`; ayna `truce/truceAge/reinforced` (savaşta + yörüngede) ve `siegeEndView` → `col.siegeEnd` (yalnız aynada).
+- Toplu sevkiyat `shipmentRetryList/shipmentRetryAll` (main.js; `followRallyFleet` + bütçe 8, artanı `ready`), FİLO sekmesi `UI.shipmentsSection` (1,2 sn çift dokunuş koruması), MP `shipmentRetryAll` komutu + misafir sarmalayıcı (sonuç host yanıtından).
+- Test: `node tests/field_war_siege0_test.js` (19; kontrol 03a3aa4 5/14), Chromium `browser-field-war-siege0.cjs` (3), `MP8_SCEN=K node tests/browser-mp8.cjs` (3). Kontrol/aday yeniden üretim: `evidence/field-war-siege0/repro-war-close.cjs`, `repro-siege.cjs <kök>`. Koruma: `field-war-siege0-reviewed` ← `beta-war-goals0-reviewed` ← `beta-rival-blocs0-reviewed` ← …
+- Kan Hukuku civic anahtarı `kan_hukuku` (bayrak `blood`); `e.civics=['blood']` hiçbir şey yapmaz.
+
+## Önceki teslim — BETA-WAR-GOALS.0 (p31 / MP.8.9b28, 14 Kasım 2026)
 
 - Ayrıntı: `reports/claude/BETA-WAR-GOALS0-SONUC.md`, kanıt `reports/claude/evidence/beta-war-goals0/`. Dal `claude/stars-war-goals0` (p30 `4e6f7f6` üstünde). Save8v8/paket4/protokol1; p31 paket yükleyicisi p6–p30, p25u1, p27s1 kabul eder.
 - Savaş İlan Et yalnız `WAR_GOAL_MAIN` (fetih / boyun = "Vasallaştırma") sunar; seçenek `setWarGoal(e,foe,key,opts)` → `warGoalOptions` (Fetih: bilinen, başkent dışı 1–5 sistem, hedefe ≥1 sistem kalır; Vasallaştırma: tür + `war` hükmü, `vassalTerms`). Kayıt `e.wg[foe]={…,v:2}`; eski 6 hedef ve `v`'siz kayıtlar aynen sürer (protokolde eski anahtarlar kabul). v2 Fetih barışında `warFetihSettle` hedef dışı işgali iade eder (makePeace başı). AI `aiSetWarGoal`/`aiWarGoalChoice` (RNG yok; pickCasusBelli zarı aynen çekilir).
@@ -10,7 +19,7 @@ Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strat
 - Anlaşma maddeleri: `vassal {type,war}` (VEREN vasal olur; yalnız aralarındaki savaşta; barış/ittifak/NAP ile aynı pakette değil; `warVassalApply` → subjugate 'surrender' + `warTermsScope/ScopeApply` kampanya kapsamı), `landPromise {sys,front}` (yalnız aynı cepheye `warJoin` ile; `G.warLedger.promises`, cephe kapanınca `warPromiseFrontEnded`), `fedPeace` (iki başkan, `fedWarMark` kampanyası, barışabilen cepheler). AI teslim kararı `warVassalSubmitCost`; teslime kaynakla karşı teklif yok. `warSurrenderGrace`: teslimden sonra 12 ay separatistTick isyanı yok.
 - Federasyona karşı: önerge `fedWar` (targetFed, target, goal, targets / vtype+war) → oy → `fedWarExecute` (kök cephe `fedWar` işareti). AI `aiFedWarProposal` (başkan, 720 gün). Sahte Bayrak ifşası `warFalseFlagRevealed` (iki ifşa yolu); savaş kendiliğinden kapanmaz.
 - Galaktik Gerilim `cfg.tension` sakin/calkantili (Dengeli yazılmaz) → `tensionMul()` aiWarReview şansı, aiOpsTick, aiFalseFlagTick (+ `aiFalseFlagHonestyMul`), koalisyon bekleme; kurulumda kullanılmaz. MP SETTINGS_KEYS + paket.
-- Test: `node tests/beta_war_goals0_test.js` (13), `_mp_test.js` (5); Chromium `browser-war-goals0.cjs` (5), `MP8_SCEN=W node tests/browser-mp8.cjs` (misafir gerçek Fetih ilanı + teslim + koloni panelinden otomatik inşaat). Kampanya `evidence/beta-war-goals0/kampanya` (`wars.cjs`, kontrol `git archive 4e6f7f6`). Koruma: `beta-war-goals0-reviewed` ← `beta-rival-blocs0-reviewed` ← `beta-galaxy0-reviewed` ← …
+- Test: `node tests/beta_war_goals0_test.js` (13), `_mp_test.js` (5); Chromium `browser-war-goals0.cjs` (5), `MP8_SCEN=W node tests/browser-mp8.cjs` (misafir gerçek Fetih ilanı + teslim + koloni panelinden otomatik inşaat). Kampanya `evidence/beta-war-goals0/kampanya` (`wars.cjs`, kontrol `git archive 4e6f7f6`). Koruma: `field-war-siege0-reviewed` ← `beta-war-goals0-reviewed` ← `beta-rival-blocs0-reviewed` ← …
 - Satır içi yorum UYARISI: tek satırlık komut tanımının ortasına `//` yorum ekleme (mp-core `war` komutunun `locate`'i yorumda kaldı → `bad-target`); `/* */` kullan.
 
 ## Önceki teslim — BETA-RIVAL-BLOCS.0 (p30 / MP.8.9b27, 14 Kasım 2026)
