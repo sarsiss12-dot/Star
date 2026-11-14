@@ -32,8 +32,10 @@ const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'bu
   /* BETA-WAR-GOALS.0: misafir gerçek arayüzle Fetih ilanı, savaş içi teslim teklifi ve koloni panelinden otomatik inşaat — host + 1 misafir */
   W:{size:'orta',ai:5,seed:22,months:0,guests:1,every:6},
   /* FIELD-WAR-SIEGE.0: misafir FİLO → Bekleyenleri Yeniden Dene (çift dokunuş, host tek uygulama) ve SİSTEM kuşatma durumu (ateşkes / barış) — host + 1 misafir */
-  K:{size:'orta',ai:5,seed:22,months:0,guests:1,every:6}}[SCEN];
-if(!CONF)throw Error('MP8_SCEN A|B|C|R|N|P|E|F|D|G|L|S|W|K');
+  K:{size:'orta',ai:5,seed:22,months:0,guests:1,every:6},
+  /* WAR-COALITION.0: misafir B planlar (tek savaş ilanı akışı), misafir C daveti gelen kutusunda alır ve karşı teklif verir — host + 2 misafir */
+  Q:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6}}[SCEN];
+if(!CONF)throw Error('MP8_SCEN A|B|C|R|N|P|E|F|D|G|L|S|W|K|Q');
 if(process.env.FEDAI0_R==='1'||process.env.ER0_R==='1')CONF.ai=8;
 if(process.env.SCALE0_MP){const c=JSON.parse(process.env.SCALE0_MP);Object.assign(CONF,c);}
 const MONTHS=+(process.env.MP8_MONTHS||CONF.months);
@@ -421,6 +423,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
   if(SCEN==='S')await require('./helpers/galaxy0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
   if(SCEN==='W')await require('./helpers/war-goals0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
   if(SCEN==='K')await require('./helpers/field-war-siege0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
+  if(SCEN==='Q')await require('./helpers/war-coalition0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
   if(SCEN==='L')await require('./helpers/fed-fleet0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
   if(SCEN==='D')await require('./helpers/mp-p0-desync1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
   if(SCEN==='F')await require('./helpers/event-ux1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,guestGo});

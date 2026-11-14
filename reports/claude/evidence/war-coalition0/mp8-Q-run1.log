@@ -1,0 +1,32 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":288,"buildMs":321,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":369,"buildMs":410,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":4.5,"p95":5.4,"max":5.4},"longtask":{"n":0},"heapMB":15,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":21.6,"p95":21.6,"max":21.6},"refresh":{"n":1,"med":1.8,"p95":1.8,"max":1.8},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":41.8,"p95":41.8,"max":41.8},"refresh":{"n":1,"med":2.3,"p95":2.3,"max":2.3},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":721,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS Q0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+FAIL Q1 misafir B gerçek ilişki sayfasından SAVAŞ → Fetih → tek akış; C (insan) + Y (AI) seçilir; "Davetleri Gönder (2)" çift dokunuş → host'ta tek hazırlık, C'ye tek teklif; Y karşı teklif
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Davetleri Gönder \(2\)/. Input:
+
+'Davetleri Gönder (0)'
+
+    at /home/user/Star/tests/helpers/war-coalition0-mp.cjs:38:63
+    at async test (/home/user/Star/tests/browser-mp8.cjs:44:162)
+    at async module.exports (/home/user/Star/tests/helpers/war-coalition0-mp.cjs:30:3)
+    at async /home/user/Star/tests/browser-mp8.cjs:426:17
+FAIL Q2 misafir C gerçek gelen kutusu kartı (desteklenen taraf, hedef, amaç, başlangıç, son gün) → karşı teklif; B akışta C ve Y için "Kabul Et"; C, Y'nin teklifini ve B'nin hazırlığını görmez
+page.evaluate: TypeError: Cannot read properties of undefined (reading 'id')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:85)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /home/user/Star/tests/helpers/war-coalition0-mp.cjs:49:23
+    at test (/home/user/Star/tests/browser-mp8.cjs:44:168)
+    at module.exports (/home/user/Star/tests/helpers/war-coalition0-mp.cjs:48:9)
+    at async /home/user/Star/tests/browser-mp8.cjs:426:17
+FAIL Q3 B "2 Destekçiyle Savaş İlan Et" çift dokunuş → tek cephe; C ve Y savaşta; Fetih seçimi ve bedeller bir kez; C'nin aynasında savaş
+page.evaluate: TypeError: Cannot read properties of undefined (reading 'state')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:256)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /home/user/Star/tests/helpers/war-coalition0-mp.cjs:69:21
+    at async test (/home/user/Star/tests/browser-mp8.cjs:44:162)
+    at async module.exports (/home/user/Star/tests/helpers/war-coalition0-mp.cjs:65:3)
+    at async /home/user/Star/tests/browser-mp8.cjs:426:17
+GEÇEN: 1 KALAN: 3

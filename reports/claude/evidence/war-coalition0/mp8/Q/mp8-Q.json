@@ -1,0 +1,279 @@
+{
+ "results": [
+  {
+   "name": "Q0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 9598
+  },
+  {
+   "name": "Q1 misafir B gerçek ilişki sayfasından SAVAŞ → Fetih → tek akış; C (insan) + Y (AI) seçilir; \"Davetleri Gönder (2)\" çift dokunuş → host'ta tek hazırlık, C'ye tek teklif; Y karşı teklif",
+   "status": "PASS",
+   "ms": 9571
+  },
+  {
+   "name": "Q2 misafir C gerçek gelen kutusu kartı (desteklenen taraf, hedef, amaç, başlangıç, son gün) → karşı teklif; B akışta C ve Y için \"Kabul Et\"; C, Y'nin teklifini ve B'nin hazırlığını görmez",
+   "status": "PASS",
+   "ms": 2585
+  },
+  {
+   "name": "Q3 B \"2 Destekçiyle Savaş İlan Et\" çift dokunuş → tek cephe; C ve Y savaşta; Fetih seçimi ve bedeller bir kez; C'nin aynasında savaş",
+   "status": "PASS",
+   "ms": 2419
+  }
+ ],
+ "metrics": {
+  "scen": "Q",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 801,
+    "buildMs": 840,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 895,
+    "buildMs": 944,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 6.2,
+      "p95": 10.8,
+      "max": 10.8
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 18,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 31.6,
+       "p95": 31.6,
+       "max": 31.6
+      },
+      "refresh": {
+       "n": 1,
+       "med": 5.4,
+       "p95": 5.4,
+       "max": 5.4
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 26,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 43.7,
+       "p95": 43.7,
+       "max": 43.7
+      },
+      "refresh": {
+       "n": 1,
+       "med": 6.9,
+       "p95": 6.9,
+       "max": 6.9
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 721,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 9368,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "coalition": {
+   "fixture": {
+    "B": 1,
+    "C": 2,
+    "X": 3,
+    "Y": 4
+   },
+   "local": {
+    "xB": 3,
+    "yB": 4,
+    "cB": 2
+   },
+   "Q1acts": {
+    "acts": [
+     "coalPick:2",
+     "coalTerms:4",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalTermsDone:4"
+    ],
+    "picks": [
+     2,
+     4
+    ],
+    "st": true
+   },
+   "Q1": {
+    "preps": 1,
+    "opts": {
+     "targets": [
+      12,
+      14
+     ]
+    },
+    "inv": [
+     [
+      2,
+      "pending"
+     ],
+     [
+      4,
+      "accepted"
+     ]
+    ],
+    "toC": 1,
+    "yTerms": [
+     {
+      "t": "res",
+      "r": "ala",
+      "v": 400
+     }
+    ]
+   },
+   "cardDiag": {
+    "brief": {
+     "title": "Saf Akıl Ağı · Savaş katılım daveti",
+     "sub": "Veriyor: yok · İstiyor: ⚔ Saf Akıl Ağı yanında İxir Tahtı karşısına savaş · Fetih · Athdor, Kalinex · katılım Saf Akıl Ağı savaşı ilan ettiği anda başlar (hazırlık #1, en geç gün 181) · 18 ay"
+    },
+    "err": null,
+    "draw": null,
+    "inboxHtml": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"1\">\n         <span class=\"nIco\">📜</span>\n         <span class=\"nTxt\"><b>Saf Akıl Ağı · Savaş katılım daveti</b><i>Veriyor: yok · İstiyor: ⚔ Saf Akıl Ağı yanında İxir Tahtı karşısına savaş · Fetih · Athdor, Kalinex · katılım Saf Akıl Ağı savaşı ila",
+    "raw": "{\"id\":1,\"from\":1,\"to\":2,\"fn\":\"Saf Akıl Ağı\",\"tn\":\"Yeşil Birlik\",\"give\":[],\"want\":[{\"t\":\"warJoin\",\"target\":3,\"plan\":1,\"l\":\"⚔ Saf Akıl Ağı yanında İxir Tahtı karşısına savaş · Fetih · Athdor, Kalinex · katılım Saf Akıl Ağı savaşı ilan ettiği anda başlar (hazırlık #1, en geç gün 181)\"}],\"born\":1,\"expires\":541,\"round\":1,\"prev\":null,\"status\":\"pending\",\"why\":\"\",\"by\":\"human\",\"cost\":0}"
+   },
+   "card": "Teklif — Saf Akıl Ağı || 📜\nSaf Akıl Ağı · Savaş katılım daveti\nVeriyor: yok · İstiyor: ⚔ Saf Akıl Ağı yanında İxir Tahtı karşısına savaş · Fetih · Athdor, Kalinex · katılım Saf Akıl Ağı savaşı ilan ettiği anda başlar (hazırlık #1, en geç gün 181) · 18 ay\n›\nKABUL\nREDDET\nKARŞI TEKLİF",
+   "Q2": {
+    "button": "2 Destekçiyle Savaş İlan Et"
+   },
+   "Q3": {
+    "fronts": 1,
+    "c": true,
+    "y": true,
+    "wg": {
+     "t": "fetih",
+     "start": 1.2198120000000003,
+     "targets": [
+      12,
+      14
+     ],
+     "v": 2
+    },
+    "res": {
+     "min": 3850,
+     "ene": 4000,
+     "yiy": 4000,
+     "ala": 3600,
+     "ara": 0,
+     "tuk": 4000,
+     "etk": 4975
+    },
+    "state": "launched",
+    "spent": {
+     "min": 150,
+     "ala": 400,
+     "etk": 25
+    }
+   }
+  },
+  "errors": []
+ }
+}

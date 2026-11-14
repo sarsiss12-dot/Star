@@ -1166,7 +1166,7 @@ function createHost(opts){
   }
   /* Oyuncuya özel diplomasi görünümü: yalnız tarafı olduğu teklifler ve temas kurduğu devletler. */
   function dipView(e){
-    const nm=id=>G.emps[id]?String(G.emps[id].name):'?',lb=it=>({...it,l:String(dealLabel(it)).replace(/<[^>]*>/g,'').slice(0,90)});
+    const nm=id=>G.emps[id]?String(G.emps[id].name):'?',lb=it=>({...it,l:String(dealLabel(it)).replace(/<[^>]*>/g,'').slice(0,it.t==='warJoin'&&it.plan?260:90)});   /* WAR-COALITION.0: davet kartının hedef/başlangıç/son gün bilgisi kesilmez */
     const offers=D.offers.filter(r=>r.from===e.id||r.to===e.id).slice(-40).map(r=>({id:r.id,from:r.from,to:r.to,fn:nm(r.from),tn:nm(r.to),give:r.give.map(lb),want:r.want.map(lb),
       born:Math.floor(r.born),expires:Math.floor(r.expires),round:r.round,prev:r.prev,status:r.status,why:r.why,by:r.by,cost:r.cost}));
     const contacts=G.emps.filter(o=>o!==e&&dipParty(o)&&e.contact[o.id]).map(o=>{const sq=e.war[o.id]?canStatusQuo(e,o):null;   // MP.6.2: statüko kapısı host'ta (misafirin işgal verisi eksik)

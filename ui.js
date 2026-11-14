@@ -7624,9 +7624,9 @@ const UI = {
      yolunu kullanır (DiplomaticInbox.resolve, karşı teklifte aiDealOpen).
      Kaydırmak yalnız kartı ekrandan kaldırır: karar vermez, kaydı silmez. */
   diplomaticBrief(it){
-    if(it.kind!=='aideal'||!it.data)return null;const o=it.data,all=[...(o.give||[]),...(o.want||[])],types=[...new Set(all.map(i=>i.t))];
-    const kind=types.includes('peace')?'Barış teklifi':types.includes('ally')?'İttifak teklifi':types.includes('nap')?'Saldırmazlık teklifi':'Diplomatik teklif';
-    const label=l=>l.slice(0,2).map(i=>dealLabel(i)).join(', ')||'yok',extra=Math.max(0,(o.give||[]).length-2)+Math.max(0,(o.want||[]).length-2),duty=types.includes('ally')?' · Karşılıklı ittifak yükümlülüğü':'';
+    if(it.kind!=='aideal'||!it.data)return null;const raw=typeof MP71Dip!=='undefined'&&MP71Dip.offerByKey?MP71Dip.offerByKey(it.key):null,o=raw?{...it.data,give:raw.give,want:raw.want}:it.data,all=[...(o.give||[]),...(o.want||[])],types=[...new Set(all.map(i=>i.t))];
+    const kind=types.includes('peace')?'Barış teklifi':types.includes('ally')?'İttifak teklifi':types.includes('nap')?'Saldırmazlık teklifi':all.some(i=>i.t==='warJoin'&&i.plan)?'Savaş katılım daveti':'Diplomatik teklif';   /* WAR-COALITION.0 */
+    const label=l=>l.slice(0,2).map(i=>i.l||dealLabel(i)).join(', ')||'yok',extra=Math.max(0,(o.give||[]).length-2)+Math.max(0,(o.want||[]).length-2),duty=types.includes('ally')?' · Karşılıklı ittifak yükümlülüğü':'';
     return {title:this.diploName(o.from)+' · '+kind,sub:'Veriyor: '+label(o.give||[])+' · İstiyor: '+label(o.want||[])+duty+(extra?' · +'+extra+' koşul · Ayrıntıları gör':'')+(Number.isFinite(o.expires)?' · '+Math.max(0,Math.ceil((o.expires-G.day)/30))+' ay':'')};
   },
   noteChoiceData(it){
