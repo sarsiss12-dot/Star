@@ -17,7 +17,7 @@ const EMP_MAPS=['rel','war','ally','contact','nap','pact','embargo','envoy','exh
   'internalVassalWarnings','peaceAt','passage','warCause','warSince','warStart','wg','warDefense','coldWar','lastOffer','offerRefused','proxyWar','tradeFlow','routeIntel','fleetIntel','fakeTo','responses','lastSwap'];
 /* kabukta misafirle ikili kamu durumları (savaş başlangıcı, savunma tarafı, barış, geçiş, soğuk savaş, ambargo) */
 const SHELL_PAIR=['warSince','warStart','warDefense','peaceAt','passage','coldWar','embargo'];
-const STRIP_ME=['aiIntel','aiStrategy','aiShipPlan','aiTalk','aiLastOp','_aiSpyNext','_prof','_trCache','_trSig','_press','_pressAt','_powC','_powAt','_trAt','_persAt'];
+const STRIP_ME=['oathLog','aiIntel','aiStrategy','aiShipPlan','aiTalk','aiLastOp','_aiSpyNext','_prof','_trCache','_trSig','_press','_pressAt','_powC','_powAt','_trAt','_persAt'];
 const UNKNOWN_COL='#7d90ad';
 const EH_EVENTS=40;
 

@@ -52,6 +52,41 @@ const RemoteConstruction = {
   },
   cancel(f,id){const t=this.tasks(f).find(t=>t.id===+id);if(!t)return {ok:false,why:'Görev yok'};if(t.state==='building')return {ok:false,why:'İnşaat başladı; maliyet ödendi ve mevcut yapı motorunda tamamlanacak'};
     if(this.tasks(f)[0]===t&&t.state==='travel')f.path=f.mv?[f.mv.to]:[];this.finish(f,t,'cancelled','İptal edildi; kaynak harcanmadı');return {ok:true};},
+  /* BETA-RIVAL-BLOCS.0 — koloni panelinden otomatik gemi seçimi. Yalnız mevcut gate/enqueue/tick/startStruct yolunu kullanır;
+     yeni ödeme, hareket ya da kamera motoru yok. Rota SÜRESİ = explorationGraph maliyeti (uzaklık / hız, ikmal cezalı;
+     güvensiz / kapalı / ikmalsiz düğüm elenir). Sıradaki işi veya manuel emri kesmez: yalnız boştaki gemi seçilir;
+     isteğe bağlı olarak meşgul geminin kuyruğunun sonuna eklenir. */
+  idle(f){return !this.tasks(f).length&&!f.mv&&!f.path.length&&!f.combat&&f.building===undefined&&!f.ships.some(s=>s.busy!==undefined);},
+  eta(e,f,sid,from){const ctx=explorationContext(e);ctx.frontier=new Set(ctx.known);const c=explorationGraph(e,{...f,sys:from,mv:null},ctx).cost[sid];return Number.isFinite(c)?c:null;},
+  autoPick(e,sid,key,{queue=false}={}){
+    const no=(why,x={})=>({ok:false,why,...x}),s=G.sys[sid];
+    if(!e||e.dead||!s)return no('Geçerli hedef yok');
+    if(!Object.hasOwn(STRUCTS,key)||!structAllowed(e,s,key))return no('Yapı, sahiplik, araştırma veya hak iddiası koşulu uygun değil');
+    if(Object.values(this.state().queues).flat().some(t=>t.system===sid&&t.key===key&&t.state!=='building')||s.work?.some(w=>w.key===key))return no('Bu yapı için zaten bir görev veya süren inşaat var');
+    const ships=G.fleets.filter(f=>f.e===e.id&&f.ships.some(sh=>sh.c==='ins'));
+    if(!ships.length)return no('İnşaat gemisi gerekli',{noShips:true});
+    let best=null,busy=0,blocked=0,first='';
+    for(const f of ships){
+      if(!this.idle(f)){busy++;continue;}
+      const q=this.gate(f,sid,key);if(!q.ok){blocked++;first=first||q.why;continue;}
+      const eta=f.sys===sid?0:this.eta(e,f,sid,f.sys);if(eta===null){blocked++;continue;}
+      if(!best||eta<best.eta||eta===best.eta&&f.id<best.fleet.id)best={fleet:f,eta,cost:q.cost};
+    }
+    if(best)return {ok:true,...best,queued:false,busy,blocked};
+    if(busy&&queue){
+      let pick=null;for(const f of ships){if(this.idle(f)||this.tasks(f).length>=this.queueLimit)continue;const from=this.tasks(f).at(-1)?.system??(f.mv?f.mv.to:f.sys),q=this.gate(f,sid,key,{from});if(!q.ok){first=first||q.why;continue;}
+        const eta=this.eta(e,f,sid,from);if(eta===null)continue;if(!pick||this.tasks(f).length<this.tasks(pick.fleet).length||this.tasks(f).length===this.tasks(pick.fleet).length&&eta<pick.eta)pick={fleet:f,eta,cost:q.cost};}
+      if(pick)return {ok:true,...pick,queued:true,busy,blocked};
+    }
+    if(busy&&!blocked)return no('Bütün inşaat gemileri meşgul — istersen kuyruğa ekle',{busy,blocked,canQueue:true});
+    return no(first||'Güvenli, ikmalli ve erişilebilir rota yok',{busy,blocked,canQueue:busy>0});
+  },
+  autoOrder(e,sid,key,opts={}){
+    const p=this.autoPick(e,sid,key,opts);if(!p.ok)return p;
+    const r=this.enqueue(p.fleet,sid,key);if(!r.ok)return r;
+    r.task.auto=true;if(Number.isFinite(p.eta))r.task.eta=Math.round(p.eta*10)/10;
+    return {ok:true,task:r.task,fleet:p.fleet.id,eta:p.eta,queued:p.queued,cost:p.cost};
+  },
   manual(f){for(const t of this.tasks(f).slice())if(t.state!=='building')this.finish(f,t,'cancelled','Manuel hareket emri görevin yerini aldı; kaynak harcanmadı');},
   retry(f,t,why){t.attempts++;if(t.attempts>=this.retryLimit){this.finish(f,t,'failed',why+'; dört sınırlı denemeden sonra durduruldu');return;}t.state='waiting';t.why=why;t.next=G.day+[5,10,20][t.attempts-1];},
   tick(){
@@ -87,7 +122,7 @@ const RemoteConstruction = {
   restore(raw){
     const st=this.empty(),ids=new Set(),parse=t=>{
       if(!t||!Number.isSafeInteger(t.id)||t.id<1||ids.has(t.id)||!Number.isInteger(t.fleet)||!Number.isInteger(t.empire)||!Number.isInteger(t.system)||!G.sys[t.system]||!Object.hasOwn(STRUCTS,t.key)||!Object.hasOwn(this.labels,t.state))return null;
-      ids.add(t.id);return {id:t.id,fleet:t.fleet,empire:t.empire,system:t.system,systemName:String(t.systemName||G.sys[t.system].name).slice(0,120),key:t.key,state:t.state,born:Number.isFinite(t.born)?t.born:G.day,attempts:Math.min(4,Math.max(0,t.attempts|0)),next:Number.isFinite(t.next)?Math.min(t.next,G.day+20):G.day,why:String(t.why||'').slice(0,300),...(Number.isFinite(t.finished)?{finished:t.finished}:{})};
+      ids.add(t.id);return {id:t.id,fleet:t.fleet,empire:t.empire,system:t.system,systemName:String(t.systemName||G.sys[t.system].name).slice(0,120),key:t.key,state:t.state,born:Number.isFinite(t.born)?t.born:G.day,attempts:Math.min(4,Math.max(0,t.attempts|0)),next:Number.isFinite(t.next)?Math.min(t.next,G.day+20):G.day,why:String(t.why||'').slice(0,300),...(Number.isFinite(t.finished)?{finished:t.finished}:{}),...(t.auto===true?{auto:true}:{}),...(Number.isFinite(t.eta)&&t.eta>=0?{eta:Math.min(1e5,t.eta)}:{})};
     };
     if(raw?.v===1){
       for(const [fid,list] of Object.entries(raw.queues||{}).slice(0,1024)){

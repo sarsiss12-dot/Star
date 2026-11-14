@@ -128,6 +128,9 @@ const ACT={
   remoteBuild:x=>{S.remoteFleet=+x;ArchiveUI.build(+x);},
   remoteConfirm:()=>{const token=UI._constructionToken,fleet=S.remoteFleet,sys=+doc.getElementById('remoteTarget')?.value,key=doc.getElementById('remoteStructure')?.value,b=doc.getElementById('remoteConfirm');const cid=send({kind:'remoteBuild',fleet,sys,key});if(!cid)return;if(b)b.disabled=true;waits[cid]=res=>{toast(res.status==='ok'?'Host onayladı; kaynaklar inşa başladığında kesilir.':'Host reddetti: '+why(res),res.status!=='ok');if(res.status==='ok'){if(UI._constructionToken===token)UI.closeModal();}else if(b?.isConnected&&UI._constructionToken===token)b.disabled=false;};},
   remoteCancel:x=>{const[fleet,id]=String(x).split(':').map(Number);send({kind:'remoteCancel',fleet,id});},
+  /* BETA-RIVAL-BLOCS.0 — koloni panelinden otomatik inşaat gemisi: gemiyi host seçer ve doğrular */
+  autoBuild:x=>{const[sys,key]=String(x).split(':');const cid=send({kind:'remoteAuto',sys:+sys,key,queue:false});if(!cid)return;waits[cid]=res=>{const ok=res.status==='ok';UI._autoBuildMsg=ok?null:{sid:+sys,key,why:why(res),canQueue:/kuyruğa ekle/.test(why(res))};toast(ok?'Host gemiyi atadı; kaynaklar inşa başladığında bir kez kesilir.':'Host reddetti: '+why(res),!ok);};},
+  autoBuildQueue:x=>{const[sys,key]=String(x).split(':');const cid=send({kind:'remoteAuto',sys:+sys,key,queue:true});if(!cid)return;waits[cid]=res=>{const ok=res.status==='ok';UI._autoBuildMsg=null;toast(ok?'Host görevi meşgul geminin kuyruğuna ekledi.':'Host reddetti: '+why(res),!ok);};},
   spd:x=>send({kind:'speed',value:+x|0}),
   stop:()=>{const f=sel();return f&&send({kind:'stop',fleet:f.id});},
   stance:()=>{const f=sel();return f&&send({kind:'stance',fleet:f.id});},

@@ -234,6 +234,8 @@ const UI = {
              title="Filo hareketleri ve ralli hatları — ana moddan bağımsız aç/kapat">🚀<span>Radar</span></button>
            <button class="tool fleetNamesBtn${FLEET_NAMES_ON?' on':''}" id="fleetNamesBtn" data-a="fleetNamesToggle"
              aria-pressed="${FLEET_NAMES_ON}" title="Görünen filoların hangi devlete ait olduğunu göster — bağımsız aç/kapat">🏷<span>Filo sahipleri</span></button>
+           <button class="tool bigEmblemsBtn${BIG_EMBLEMS_ON?' on':''}" id="bigEmblemsBtn" data-a="bigEmblemsToggle"
+             aria-pressed="${BIG_EMBLEMS_ON}" title="Devletin görünür toprağının ortasına saydam büyük arma (filigran) — kapalıyken küçük armalar">🛡<span>Büyük armalar</span></button>
          </div>
        </div>
 
@@ -594,6 +596,13 @@ const UI = {
         say(RADAR_ON
           ? '🚀 Radar açık — filo hareketleri ve ralli hatları görünür'
           : '🚀 Radar kapalı');
+        break;
+      }
+      case 'bigEmblemsToggle': {   // BETA-RIVAL-BLOCS.0
+        BIG_EMBLEMS_ON=!BIG_EMBLEMS_ON;BIG_EMBLEMS_REV++;
+        const b=$('bigEmblemsBtn');
+        if(b){b.className='tool bigEmblemsBtn'+(BIG_EMBLEMS_ON?' on':'');b.setAttribute('aria-pressed',String(BIG_EMBLEMS_ON));}
+        try { storeSet('stars:bigEmblems',BIG_EMBLEMS_ON?'on':'off'); } catch(e){}
         break;
       }
       case 'fleetNamesToggle': {
@@ -2893,6 +2902,7 @@ const UI = {
         });
       }
       if(typeof ArchiveUI!=='undefined'&&View.sel?.e===0&&View.sel.ships.some(sh=>sh.c==='ins'))h+=`<button class="abtn pri" data-a="remoteBuild" data-x="${View.sel.id}">Seçili gemiyle bu sisteme uzaktan inşaat</button>`;
+      h+=this.autoBuildHtml(e,s);
       const builders = G.fleets.filter(f=>f.e===0 && fleetHasRole(f,'insaat') && f.sys===s.id);
       if(G.cfg.gates===false)h+='<div class="mini">Yıldız kapıları bu galakside kapalı: yeni inşa, geçiş ve kapı ikmali yok. Eski kapılar korunur; önceden ödenmiş işler ek bedel/iade olmadan tamamlanır ve pasif kalır.</div>';
       const avail = Object.keys(STRUCTS).filter(k=>structAllowed(e, s, k));
@@ -3706,9 +3716,9 @@ const UI = {
     let h='<div class="ph">FEDERASYON DİPLOMASİSİ</div>';
     const button=(action,label,q)=>`<button class="abtn" data-a="${action}" data-x="${o.id}" ${q.ok?'':'disabled'}>${label}</button><div class="mini">${esc(q.why||(action==='fedDipInvite'?'Üyeler oy verir; aday ayrıca daveti kabul eder. 60 ◈.':'Üyeler oy verir; onaydan sonra yükümlülükleri kabul ederek katıl. 60 ◈.'))}</div>`;
     if(own&&other===own)return h+'<div class="mini">Aynı federasyonun üyesisiniz.</div><button class="abtn" data-a="fedPane">Federasyonu Yönet</button>';
-    if(own&&!other){const q=canFedMotion(e,'admit',{target:o.id});h+=button('fedDipInvite','Federasyonuma Davet Et',q);if(q.ok){const a=aiFedWilling(o,e,own.type,own);h+=`<div class="mini">Adayın eğilimi: ${a.ok?'Olumlu':'Olumsuz'} · ${esc(a.why)}</div>`;}}
+    if(own&&!other){const q=canFedMotion(e,'admit',{target:o.id});h+=button('fedDipInvite','Federasyonuma Davet Et',q);if(q.ok){const a=aiFedWilling(o,e,own.type,own);h+=`<div class="mini">Adayın eğilimi: ${a.ok?'Olumlu':'Olumsuz'} · ${esc(a.why)}</div>`;}if(q.ok||canFedMotion(e,'admit',{target:o.id},true).ok)h+=`<div class="mini fedAllies">Ön ittifak gerekmez. Oy ve adayın kabulüyle üyelik ve eksik ittifaklar birlikte kurulur. ${esc(fedAdmissionAllianceText(own,o.id,e))}</div>`;}
     else if(!own&&other)h+=button('fedDipRequest','Federasyonuna Katılma Talebi Gönder',canRequestFederation(e,o));
-    else if(!own&&!other)h+='<button class="abtn" data-a="fedPane">Federasyon Kurma Teklifi</button><div class="mini">Mevcut kuruluş ekranında türü seç. En az iki uygun ve kabul eden AI müttefik ile kuruluş Etkisi gerekir.</div>';
+    else if(!own&&!other)h+='<button class="abtn" data-a="fedPane">Federasyon Kurma Teklifi</button><div class="mini">Kuruluş ekranında türü ve kurucuları seç. Önceden ittifak gerekmez; eksik ittifaklar kuruluşla birlikte kurulur. Tek insanlı kuruluşta en az iki AI ortak gerekir.</div>';
     else h+='<div class="mini">Farklı federasyonlara üyesiniz. Yeni üyelik için önce bağımsız olmak gerekir.</div>';
     return h;
   },
@@ -3848,14 +3858,14 @@ const UI = {
     if(this._fedFoundWorld!==G.emps){this._fedFoundWorld=G.emps;this.fedFoundEditing=null;this.fedFoundSelected=[];this.fedFoundType='askeri';}
     const e=G.p,type=Object.hasOwn(FED_TYPES,this.fedFoundType)?this.fedFoundType:'askeri',ballot=Object.hasOwn(FED_BALLOTS,this.fedBallotChoice)&&this.fedBallotChoice!=='weighted'?this.fedBallotChoice:'equal',selected=this.fedFoundSelected||[],q=fedFoundQuote(e,type,ballot,selected);
     const labels={pending:'BEKLİYOR',accepted:'KABUL EDİLDİ',rejected:'REDDEDİLDİ',founded:'KURULDU',cancelled:'İPTAL',expired:'SÜRESİ DOLDU',invalid:'GEÇERSİZ'};
-    let h='<div class="ph">FEDERASYON KURULUŞU</div><div class="mini">İki açık rızalı insan yeterlidir. Tek insanlı oyunda en az iki AI ortak gerekir. Yalnız seçtiğin ortaklar davet edilir; ücret son onayda bir kez kesilir.</div>';
+    let h='<div class="ph">FEDERASYON KURULUŞU</div><div class="mini">Önceden ittifak gerekmez: kurucuların eksik karşılıklı ittifakları federasyonla birlikte, son onayda kurulur. İki açık rızalı insan yeterlidir; tek insanlı kuruluşta en az iki AI ortak gerekir. Yalnız seçtiğin ortaklar davet edilir; ücret son onayda bir kez kesilir.</div>';
     for(const p of G.fedFounding?.proposals||[]){if(!p.members.includes(e.id))continue;const own=p.by===e.id,r=p.replies[e.id];
-      h+=`<div class="box fedFoundation" data-founding="${p.id}"><b>${esc(FED_TYPES[p.type].n)} · ${esc(FED_BALLOTS[p.ballot].n)} · ${labels[p.status]}</b><div class="mini">Öneren: ${esc(G.emps[p.by].name)} · ${Math.max(0,Math.ceil((p.expires-G.day)/30))} ay · ${fedFoundCost(G.emps[p.by])} Etki · yalnız kurucudan</div><div class="mini">${esc(fedDutyText({type:p.type,charter:{...fedDefaultCharter(p.type),ballot:p.ballot},laws:{}}))} Üyeler arasında ittifak oluşur. Önceki savaşlar sessizce kapatılmaz.</div>`;
+      h+=`<div class="box fedFoundation" data-founding="${p.id}"><b>${esc(FED_TYPES[p.type].n)} · ${esc(FED_BALLOTS[p.ballot].n)} · ${labels[p.status]}</b><div class="mini">Öneren: ${esc(G.emps[p.by].name)} · ${Math.max(0,Math.ceil((p.expires-G.day)/30))} ay · ${fedFoundCost(G.emps[p.by],p.members)} Etki · yalnız kurucudan</div><div class="mini">${esc(fedDutyText({type:p.type,charter:{...fedDefaultCharter(p.type),ballot:p.ballot},laws:{}}))} Önceki savaşlar sessizce kapatılmaz.</div><div class="mini fedAllies">${esc(fedAllianceText(p.members,e))}</div>`;
       for(const id of p.members)h+=`<div class="mini">${esc(G.emps[id]?.name||'Bilinmeyen kurucu')} — ${labels[p.replies[id]?.status]||'GEÇERSİZ'} · ${esc(p.replies[id]?.why||'')}</div>`;
       if(p.revision)h+=`<div class="mini">Şart sürümü ${p.revision}; önceki kabuller değişen kadroyu onaylamaz. ${p.revisions.map(v=>'Sürüm '+v.revision+': '+(v.replies[e.id]?.status||'kurucu geçmişi')).join(' · ')}</div>`;
       if(p.why)h+=`<div role="status">${esc(p.why)}</div>`;
       if(p.status==='pending'){
-        if(own)h+=`<button class="abtn" data-a="fedFoundEdit" data-x="${p.id}">TASLAĞI DÜZENLE</button><button class="abtn pri" data-a="fedFoundFinish" data-x="${p.id}${p.revision?':'+p.revision:''}" ${p.members.every(id=>p.replies[id]?.status==='accepted')?'':'disabled'}>SON KURULUŞ ONAYI · ${fedFoundCost(e)} ◈</button><button class="abtn" data-a="fedFoundCancel" data-x="${p.id}">SÜRECİ İPTAL ET</button>`;
+        if(own)h+=`<button class="abtn" data-a="fedFoundEdit" data-x="${p.id}">TASLAĞI DÜZENLE</button><button class="abtn pri" data-a="fedFoundFinish" data-x="${p.id}${p.revision?':'+p.revision:''}" ${p.members.every(id=>p.replies[id]?.status==='accepted')?'':'disabled'}>SON KURULUŞ ONAYI · ${fedFoundCost(e,p.members)} ◈</button><button class="abtn" data-a="fedFoundCancel" data-x="${p.id}">SÜRECİ İPTAL ET</button>`;
         else if(r?.status==='pending')h+=`<button class="abtn pri" data-a="fedFoundReply" data-x="${p.id}:yes${p.revision?':'+p.revision:''}">ŞARTLARI KABUL ET</button><button class="abtn" data-a="fedFoundReply" data-x="${p.id}:no${p.revision?':'+p.revision:''}">REDDET</button>`;
       }
       h+='</div>';
@@ -3865,7 +3875,9 @@ const UI = {
     h+='<div class="ph">OY REJİMİ</div>';
     for(const [key,B]of Object.entries(FED_BALLOTS))if(key!=='weighted')h+=`<button class="abtn ${key===ballot?'pri':''}" data-a="fedBallot" data-x="${key}">${esc(B.n)}</button>`;
     h+=`<p class="mini">${esc(FED_TYPES[type].d)} ${esc(FED_BALLOTS[ballot].d)} ${esc(fedDutyText({type,charter:{...fedDefaultCharter(type),ballot},laws:{}}))} Kuruluşta seçilen üyeler birbirleriyle ittifak kurar. Açık taslak düzenlenebilir. Kadro/tür/oy rejimi değişirse eski kabuller geçmişte kalır; güncel rıza yeniden gerekir. Süre uzatılmaz.</p><div class="ph">KURUCU ORTAKLAR · ${selected.length} SEÇİLİ</div>`;
-    for(const c of q.candidates){const o=G.emps[c.id];if(!o)continue;h+=`<div class="box"><button class="abtn ${selected.includes(c.id)?'pri':''}" data-a="fedFoundSelect" data-x="${c.id}" aria-pressed="${selected.includes(c.id)}" ${c.ok?'':'disabled'}>${selected.includes(c.id)?'☑':'☐'} ${esc(o.name)}</button><div class="mini">${c.h?'İnsan — açık yanıt gerekli':'AI — stratejik karar davette verilir'} · İlişki ${Math.round(e.rel[c.id]||0)} · ${esc(c.ok?'Yapısal olarak uygun':c.why)}</div>${c.approach?`<div class="mini">Tür / oy rejimi yaklaşımı: ${esc(c.approach)}</div>`:''}</div>`;}
+    for(const c of q.candidates){const o=G.emps[c.id];if(!o)continue;h+=`<div class="box"><button class="abtn ${selected.includes(c.id)?'pri':''}" data-a="fedFoundSelect" data-x="${c.id}" aria-pressed="${selected.includes(c.id)}" ${c.ok?'':'disabled'}>${selected.includes(c.id)?'☑':'☐'} ${esc(o.name)}</button><div class="mini">${c.h?'İnsan — açık yanıt gerekli':'AI — stratejik karar davette verilir'} · İlişki ${Math.round(e.rel[c.id]||0)} · ${esc(c.ok?'Yapısal olarak uygun'+(e.ally[c.id]&&o.ally[e.id]?' · zaten müttefik':' · ittifak kuruluşla birlikte kurulur'):c.why)}</div>${c.approach?`<div class="mini">Tür / oy rejimi yaklaşımı: ${esc(c.approach)}</div>`:''}</div>`;}
+    const counter=selected.length?fedCounterBloc(q.members):null;
+    if(selected.length)h+=`<div class="mini fedAllies">${esc(fedAllianceText(q.members,e))}${counter?' Denge birliği: '+esc(counter.name)+' yaşayan devletlerin %'+Math.round(counter.share*100)+'\'ini kapsıyor; kuruluş bedeli %40 indirimli.':''}</div>`;
     h+=`<div class="mini" role="status">${esc(q.why||'Seçilen şartlar davete uygun')} · ${q.cost} ◈</div>${this.fedFoundEditing?'<p>Güncelleme maddi şartları değiştirir: kalan bütün kurucu ortaklar yeni rızaya çağrılır. Hiçbir ücret henüz kesilmez.</p>':''}<button class="abtn pri" data-a="${this.fedFoundEditing?'fedFoundUpdate':'fedFoundStart'}" ${q.ok?'':'disabled'}>${this.fedFoundEditing?'GÜNCEL DAVETLERİ GÖNDER':'KURULUŞ DAVETLERİNİ GÖNDER'}</button>${this.fedFoundEditing?'<button class="abtn" data-a="fedFoundEditStop">DÜZENLEMEDEN VAZGEÇ</button>':''}`;
     return h;
   },
@@ -3893,7 +3905,7 @@ const UI = {
     if(this._fedFoundSync||!G.p)return;if(this._fedNoticeWorld!==G.emps){this._fedNoticeWorld=G.emps;this._fedFoundDismissed=new Set();this._fedResultsSeen=new Set();}this._fedFoundSync=true;
     try{for(const r of DiplomaticInbox.state().records){if(r.kind!=='fedfound'||r.status!=='pending')continue;const p=fedFoundGet(r.note?.data);if(!p||!p.members.includes(G.p.id)||fedFoundRecordRevision(r)!==(p.revision||0)){r.status='invalid';r.why='Kuruluş kadrosu veya şart sürümü değişti';r.finished=G.day;G.inbox=G.inbox.filter(n=>n.key!==r.key);}}for(const p of G.fedFounding?.proposals||[]){if(!p.members.includes(G.p.id))continue;const me=G.p.id,reply=p.replies[me],key='fedfound:'+p.id+(p.revision?':'+p.revision:''),st=DiplomaticInbox.state();
       let rec=st.records.find(r=>r.key===key);
-      const summary=FED_TYPES[p.type].n+' · '+p.members.length+' kurucu · '+FED_BALLOTS[p.ballot].n+' · '+fedDutyText({type:p.type,charter:{...fedDefaultCharter(p.type),ballot:p.ballot},laws:{}});
+      const summary=FED_TYPES[p.type].n+' · '+p.members.length+' kurucu · '+FED_BALLOTS[p.ballot].n+' · '+fedDutyText({type:p.type,charter:{...fedDefaultCharter(p.type),ballot:p.ballot},laws:{}})+' '+fedAllianceText(p.members,G.p);
       if(p.by!==me&&!rec){this.notify({kind:'fedfound',data:p.id,key,ico:'🏛',pause:false,title:'FEDERASYON KURULUŞ DAVETİ — '+G.emps[p.by].name,sub:summary});rec=st.records.find(r=>r.key===key);}
       if(rec){rec.expires=p.expires;if(p.status!=='pending'||reply?.status!=='pending'){rec.status=p.status==='expired'?'expired':reply?.status==='accepted'?'accepted':reply?.status==='rejected'?'rejected':'invalid';rec.finished=p.finished||reply?.day||G.day;rec.why=p.why||reply?.why||p.status;G.inbox=(G.inbox||[]).filter(n=>n.key!==key);}else if(!G.inbox.some(n=>n.key===key)&&!this._fedFoundDismissed?.has(key)&&!(globalThis.MP6Stars?.S.swiped.has(key))){this.notify({kind:'fedfound',data:p.id,key,ico:'🏛',pause:false,title:'FEDERASYON KURULUŞ DAVETİ — '+G.emps[p.by].name,sub:summary});}}
       const stateKey='fedfound-result:'+p.id+(p.revision?':r'+p.revision:'')+':'+p.status+':'+p.members.map(id=>p.replies[id]?.status||'').join(',');
@@ -7681,7 +7693,7 @@ const UI = {
   instInviteRows(){
     const out=[],p=G.p;if(!p||typeof findFed==='function'&&findFed(p))return out;
     for(const f of G.feds||[]){const inv=f.invites&&f.invites[p.id];if(!inv||!(inv.expires>G.day))continue;
-      out.push({key:'I:'+f.id+':'+inv.expires,rec:'invite:'+f.id+':'+inv.expires,fid:f.id,inv,ico:'🏛',decision:true,title:'FEDERASYON DAVETİ — '+f.name,sub:(inv.admission==='vote'?'Üyelik oyu kabul edildi; katılman için onayın gerekiyor':'Katılım daveti')+' · '+(typeof fedType==='function'?fedType(f).n:'')});}
+      out.push({key:'I:'+f.id+':'+inv.expires,rec:'invite:'+f.id+':'+inv.expires,fid:f.id,inv,ico:'🏛',decision:true,title:'FEDERASYON DAVETİ — '+f.name,sub:(inv.admission==='vote'?'Üyelik oyu kabul edildi; katılman için onayın gerekiyor':'Katılım daveti')+' · '+(typeof fedType==='function'?fedType(f).n:'')+(typeof fedAdmissionAllianceText==='function'?' · '+fedAdmissionAllianceText(f,p.id,p):'')});}
     return out;
   },
   instInviteRecord(r){
@@ -9310,14 +9322,11 @@ function renderSetup(){
     /* BETA-GALAXY.0: kolonileştirilebilir gezegen çarpanı (normal yaşanabilir aday sayısı; başkent / nadir dünyalar korunur) */
     const pm = typeof planetMulOf==='function' ? planetMulOf(c) : 1;
     h += `<h2 style="margin-top:12px">KOLONİLEŞTİRİLEBİLİR GEZEGEN</h2><div class="grid g4" id="planetMulRow">`;
-    for (const m of (typeof PLANET_MULS!=='undefined'?PLANET_MULS:[1])) h += `<button class="opt ${pm===m?'on':''}" data-a="planetMul" data-x="${m}" aria-pressed="${pm===m}">${String(m).replace('.',',')}×<small>${m===1?'Varsayılan':m<1?'Az yerleşim':'Bol yerleşim'}</small></button>`;
-    h += `</div><div class="mini">Normal yaşanabilir gezegen adaylarının sayısını değiştirir. Sistem konumları, hiperhatlar ve başkentler aynı tohumda değişmez; başkent dünyaları, Gaia / Makine Dünyası gibi nadir dünyalar ve tür kuralları korunur.</div></div>`;
+    for (const m of (typeof PLANET_MULS!=='undefined'?PLANET_MULS:[1])) h += `<button class="opt ${pm===m?'on':''}" data-a="planetMul" data-x="${m}" aria-pressed="${pm===m}">${String(m).replace('.',',')}×<small>${m===1?'Varsayılan':m<.25?'Çok seyrek':m<1?'Az yerleşim':'Bol yerleşim'}</small></button>`;
+    h += `</div><div class="mini">Normal yaşanabilir gezegen adaylarının sayısını değiştirir${pm<1?` (${String(pm).replace('.',',')}× ≈ normal adayların %${Math.round(pm*100)}'i kalır, kalanlar ölü dünyaya döner)`:''}. Sistem konumları, hiperhatlar, başkentler ve toplam gezegen sayısı aynı tohumda değişmez${pm>1?' (yalnız fazladan aday gerekirse boş sistemlere eklenir)':''}; başkent dünyaları, Gaia / Makine Dünyası gibi nadir dünyalar, özel yataklar ve tür kuralları korunur.</div></div>`;
 
     if(!window.MP7Setup?.active){
-      const rivals=c.aiRivals;
-      h+=`<div class="sect"><h2>RAKİP DOKTRİNLER</h2><button class="btn" data-a="rivalToggle" aria-pressed="${!!rivals}">${rivals?'Sayı aralığını kullan':'Doğal dağılım'}</button>
-        ${rivals?`<div class="btnrow"><label>En az <input id="rivalMin" type="number" min="0" max="${aiCountFor(c)}" step="1" value="${esc(rivals.min??'')}"></label><label>En çok <input id="rivalMax" type="number" min="0" max="${aiCountFor(c)}" step="1" value="${esc(rivals.max??'')}"></label></div>`:''}
-        <div class="mini">Militarist, Kriminal Sendika ve Fanatik Arındırıcı AI devletlerinin toplamı. Sabit sayı için iki sınırı aynı seç. Özel dağılımda AI, bilinen devletlerin çoğunu toplayan federasyonlara katılmaya daha isteksiz olur.</div></div>`;
+      h+=rivalSetupHtml(c);
     }
 
     h += `<div class="sect"><h2>ZORLUK</h2><div class="grid g4">`;
@@ -9409,10 +9418,6 @@ function renderSetup(){
   });
   const inp = $('empName');
   if (inp) inp.addEventListener('input', e => { CFG.name = e.target.value || 'Yeni Hanedan'; });
-  for(const [id,key] of [['rivalMin','min'],['rivalMax','max']]){
-    const field=$(id);
-    if(field)field.addEventListener('input',()=>{CFG.aiRivals[key]=field.value===''?null:Number(field.value);});
-  }
   paintEmblems();
 }
 
@@ -9589,7 +9594,9 @@ function setupClickHandler(e){
   else if (a === 'ruinSet'){ CFG.ruins = x; safeRenderSetup(); }
   else if (a === 'aiCount'){ CFG.aiCount=Math.max(1,Math.min(SCALE_ACCEPTANCE.maxAI,aiCountFor(CFG)+Number(x)));safeRenderSetup(); }
   else if(a==='aiPick'){if(Number.isInteger(+x)&&+x>=1&&+x<=SCALE_ACCEPTANCE.maxAI)CFG.aiCount=+x;safeRenderSetup();}
-  else if(a==='rivalToggle'){if(CFG.aiRivals)delete CFG.aiRivals;else CFG.aiRivals={min:Math.min(2,aiCountFor(CFG)),max:Math.min(4,aiCountFor(CFG))};safeRenderSetup();}
+  else if(a==='rivalToggle'){if(CFG.aiRivals)delete CFG.aiRivals;else CFG.aiRivals=rivalPreset('orta',aiCountFor(CFG));safeRenderSetup();}
+  else if(a==='rivalPreset'){if(x==='auto')delete CFG.aiRivals;else CFG.aiRivals=rivalPreset(x,aiCountFor(CFG));safeRenderSetup();}
+  else if(a==='rivalStep'){rivalStep(CFG,x);safeRenderSetup();}
   else if(a==='sizeStep'){const steps=availableGalaxySteps(),i=steps.indexOf(SIZES[CFG.size]?.sys),n=steps[i+Number(x)];if(n){CFG.aiCount=aiCountFor(CFG);CFG.size=setupSizeKey(n);}safeRenderSetup();}
   else if (a === 'size'){ if(!SIZES[x]||SIZES[x].available===false)return;CFG.aiCount=aiCountFor(CFG);CFG.size = x; safeRenderSetup(); }
   else if (a === 'shape'){ if(!SHAPES[x])return; CFG.shape = x; safeRenderSetup(); }
@@ -9895,3 +9902,62 @@ function physioEffects(P){
   if (P.makine) add('Makine', 'Her dünyada çalışır', 'Organik değildir; enerjiyle çalışır ve her gezegen türünde yaşayabilir.', 'info', false);
   return out;
 }
+
+/* ═══ BETA-RIVAL-BLOCS.0 — Rakip Doktrinler: klavyesiz aralık ═══
+   Hazır seçim (Az / Orta / Çok) toplam AI sayısına göre aralık seçer; En az / En çok büyük −/+ ile; her dokunuşta
+   0 ≤ En az ≤ En çok ≤ toplam AI korunur (sınırı geçen değer ötekini birlikte taşır). Doğal = CFG.aiRivals yok (eski davranış). */
+function rivalPreset(k,n){
+  const r=k==='az'?[0,Math.ceil(n*.2)]:k==='cok'?[Math.round(n*.5),Math.round(n*.75)]:[Math.round(n*.25),Math.round(n*.45)];
+  const max=Math.min(n,Math.max(r[0],r[1]));return {min:Math.min(r[0],max),max};
+}
+function rivalNormalize(c){
+  const r=c.aiRivals;if(!r)return null;const n=aiCountFor(c);
+  let min=Number.isInteger(r.min)?r.min:0,max=Number.isInteger(r.max)?r.max:min;
+  max=Math.max(0,Math.min(n,max));min=Math.max(0,Math.min(min,max));r.min=min;r.max=max;return r;
+}
+function rivalStep(c,x){
+  const r=rivalNormalize(c);if(!r)return;const n=aiCountFor(c),[key,d]=String(x).split(':'),dv=+d;if(!['min','max'].includes(key)||![1,-1].includes(dv))return;
+  if(key==='min'){r.min=Math.max(0,Math.min(n,r.min+dv));if(r.min>r.max)r.max=r.min;}
+  else{r.max=Math.max(0,Math.min(n,r.max+dv));if(r.max<r.min)r.min=r.max;}
+}
+function rivalSetupHtml(c){
+  const r=rivalNormalize(c),n=aiCountFor(c),presets=['az','orta','cok'],names={az:'Az',orta:'Orta',cok:'Çok'};
+  const match=r&&presets.find(k=>{const p=rivalPreset(k,n);return p.min===r.min&&p.max===r.max;});
+  let h=`<div class="sect rivalSect"><h2>RAKİP DOKTRİNLER</h2><div class="grid g4" id="rivalPresets"><button class="opt ${!r?'on':''}" data-a="rivalPreset" data-x="auto" aria-pressed="${!r}">Doğal<small>Otomatik dağılım</small></button>`;
+  for(const k of presets){const p=rivalPreset(k,n);h+=`<button class="opt ${match===k?'on':''}" data-a="rivalPreset" data-x="${k}" aria-pressed="${match===k}">${names[k]}<small>${p.min===p.max?p.min:p.min+'–'+p.max} AI</small></button>`;}
+  h+='</div>';
+  if(r){const step=(key,d,dis,label)=>`<button class="btn rivalStep" data-a="rivalStep" data-x="${key}:${d}" ${dis?'disabled':''} aria-label="${label}">${d>0?'+':'−'}</button>`;
+    h+=`<div class="rivalRange"><div class="rivalRow"><span class="rivalLbl">En az</span>${step('min',-1,r.min<=0,'En az azalt')}<b class="rivalVal" id="rivalMinVal">${r.min}</b>${step('min',1,r.min>=n,'En az artır')}</div>
+      <div class="rivalRow"><span class="rivalLbl">En çok</span>${step('max',-1,r.max<=0,'En çok azalt')}<b class="rivalVal" id="rivalMaxVal">${r.max}</b>${step('max',1,r.max>=n,'En çok artır')}</div>
+      <div class="rivalSum" id="rivalSum" role="status">Seçili: ${r.min===r.max?r.min+' AI (sabit sayı)':r.min+'–'+r.max+' AI'} · toplam ${n} AI${match?'':' · özel aralık'}</div></div>`;}
+  return h+`<div class="mini">Ayar; Militarist, Kriminal Sendika ve Fanatik Arındırıcı AI devletlerinin TOPLAMINI belirler (geri kalan AI'lar öteki doktrinlerden). En az ile En çok eşitse sabit sayıdır. AI sayısı azalırsa aralık kendiliğinden uyarlanır. Doğal dağılım eski otomatik seçimdir. Özel dağılımda AI, bilinen devletlerin çoğunu toplayan federasyonlara katılmaya daha isteksiz olur.</div></div>`;
+}
+
+/* ═══ BETA-RIVAL-BLOCS.0 — koloni panelinden otomatik inşaat gemisi ═══
+   Panel rota HESAPLAMAZ (yalnız görev durumu + yapı listesi); rota/ETA yalnız düğmeye basıldığında RemoteConstruction.autoOrder'da.
+   MP misafirinde aynı düğmeler host'un remoteAuto komutuna iner (gemiyi host seçer). */
+UI.autoBuildHtml=function(e,s){
+  if(!e||!s||!(s.owner===e.id||s.planets.some(p=>p.owner===e.id)))return '';
+  const ships=G.fleets.filter(f=>f.e===e.id&&f.ships.some(sh=>sh.c==='ins'));
+  if(!e.insReady&&!ships.length)return '';
+  const RC=RemoteConstruction,tasks=Object.values(RC.state().queues).flat().filter(t=>t.system===s.id&&t.empire===e.id),recent=RC.state().history.filter(t=>t.system===s.id&&t.empire===e.id).slice(-2);
+  let h='<div class="ph">OTOMATİK İNŞAAT GEMİSİ</div><div class="mini">Yapıyı seç; en erken varacak boş inşaat gemisi geçerli ve güvenli rotayla atanır. Kaynak inşa başladığında bir kez kesilir.</div>';
+  const fname=id=>{const f=G.fleets.find(f=>f.id===id);return f?esc(f.name||('Filo '+id)):'Gemi kaybedildi';};
+  for(const t of tasks){const c=structCost(e,t.key);h+=`<div class="box autoTask" data-task="${t.id}"><b>${STRUCTS[t.key].ico} ${esc(STRUCTS[t.key].n)} · ${esc(RC.labels[t.state]||t.state)}</b><div class="mini">Gemi: ${fname(t.fleet)}${Number.isFinite(t.eta)?' · tahmini varış ~'+Math.max(0,Math.round(t.eta))+' gün':''} · Maliyet ${Object.entries(c).map(([r,v])=>RES[r].ico+v).join(' ')}</div><div class="mini">${esc(t.why||'')}</div>${t.state!=='building'?`<button class="abtn" data-a="remoteCancel" data-x="${t.fleet}:${t.id}">GÖREVİ İPTAL ET</button>`:''}</div>`;}
+  for(const t of recent)h+=`<div class="mini">${esc(STRUCTS[t.key].n)} — ${esc(RC.labels[t.state]||t.state)}: ${esc(t.why||'')}</div>`;
+  const avail=Object.keys(STRUCTS).filter(k=>structAllowed(e,s,k)&&!tasks.some(t=>t.key===k)&&!s.work?.some(w=>w.key===k));
+  const msg=this._autoBuildMsg&&this._autoBuildMsg.sid===s.id?this._autoBuildMsg:null;
+  if(!ships.length)h+='<div class="mini warnTxt" role="status">İnşaat gemisi gerekli — tersanede İNŞ üret. Seçenekler görünür kalır.</div>';
+  if(avail.length){h+='<div class="act2 autoBuildRow">';
+    for(const k of avail){const S=STRUCTS[k],c=structCost(e,k),afford=Object.keys(c).every(r=>(e.res[r]||0)>=c[r]);
+      h+=`<button class="abtn ${afford&&ships.length?'':'dis'}" data-a="autoBuild" data-x="${s.id}:${k}" ${ships.length?'':'disabled'} aria-label="${esc(S.n)} için otomatik gemi">${S.ico} ${esc(S.n.split(' ')[0])}<br><span style="font-size:9px">${Object.entries(c).map(([r,v])=>`<span style="color:${(e.res[r]||0)>=v?RES[r].c:'#ff5f6d'}">${RES[r].ico}${v}</span>`).join(' ')} · ${S.ay}ay</span></button>`;}
+    h+='</div>';}
+  if(msg)h+=`<div class="mini warnTxt" role="status">${esc(STRUCTS[msg.key]?.n||'')}: ${esc(msg.why)}</div>${msg.canQueue?`<button class="abtn" data-a="autoBuildQueue" data-x="${s.id}:${msg.key}">MEŞGUL GEMİNİN KUYRUĞUNA EKLE</button>`:''}`;
+  return h;
+};
+(function(){const act0=UI.act;UI.act=function(a,x,el){
+  if(a==='autoBuild'||a==='autoBuildQueue'){const[sid,key]=String(x).split(':'),r=RemoteConstruction.autoOrder(G.p,+sid,key,{queue:a==='autoBuildQueue'});
+    this._autoBuildMsg=r.ok?null:{sid:+sid,key,why:r.why,canQueue:!!r.canQueue};
+    say(r.ok?(STRUCTS[key].n+' · '+(G.fleets.find(f=>f.id===r.fleet)?.name||'inşaat gemisi')+(r.queued?' kuyruğuna eklendi':' atandı')+(Number.isFinite(r.eta)?' · ~'+Math.round(r.eta)+' gün':'')):r.why,r.ok?'sci':'war');
+    this.keepScroll=true;this.refresh(true);return;}
+  return act0.apply(this,arguments);};})();

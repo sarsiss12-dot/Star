@@ -748,6 +748,7 @@ function declareWar(a, b, support = null){
     }
     if (a.id === 0) say('İHANET — tüm galaksi bunu gördü, itibarın çöktü', 'war');
     else if (b.id === 0) say(a.name + ' verdiği sözü çiğnedi!', 'war');
+    oathBreakRecord(a, b, wasAlly ? 'ally' : 'nap');   // BETA-RIVAL-BLOCS.0
   }
   const _cb = a._lastCB; a._lastCB = null;
   a.warCause = a.warCause || {};
@@ -2604,7 +2605,7 @@ function proposeFedMotion(e,kind,options={}){
 function fedMotionLabel(v){
  const M=FED_MOTIONS[v.motion];if(!M)return null;
  const suffix=v.motion==='reform'?' — '+(FED_TYPES[v.type]?.n||'?'):v.motion==='charter'?' — '+v.field+' / '+v.value:'';
- return {n:M.n+suffix,ico:'🏛',d:v.motion==='reform'?'En az %75 üye onayı; 12 ay geçiş; 120 ay reform beklemesi. Yeni yükümlülükler eski savaşlara uygulanmaz.':v.motion==='charter'?'En az %75 üye onayı. Yeni saldırı yükümlülüğü yalnız açıkça onay veren üyeye uygulanır.':v.motion==='expel'?'Hedef oy kullanamaz. Kalan seçmenlerin mutlak çoğunluğu gerekir.':'Uygun üyelerin mutlak çoğunluğu gerekir. Üyelikte adayın ayrıca kabulü; savaşta ayrıca uygulama gerekir.'};
+ return {n:M.n+suffix,ico:'🏛',d:v.motion==='reform'?'En az %75 üye onayı; 12 ay geçiş; 120 ay reform beklemesi. Yeni yükümlülükler eski savaşlara uygulanmaz.':v.motion==='charter'?'En az %75 üye onayı. Yeni saldırı yükümlülüğü yalnız açıkça onay veren üyeye uygulanır.':v.motion==='expel'?'Hedef oy kullanamaz. Kalan seçmenlerin mutlak çoğunluğu gerekir.':'Uygun üyelerin mutlak çoğunluğu gerekir. Üyelikte adayın ayrıca kabulü; kabulde eksik ittifaklar bütün üyelerle birlikte kurulur (ön ittifak gerekmez). Savaşta ayrıca uygulama gerekir.'};
 }
 function fedApplyMotion(f,v,c){
  if(v.motion==='admit'){
@@ -2687,7 +2688,7 @@ function fedFoundCandidate(e,o){
   else{
     if(findFed(o))reasons.push('Başka federasyonun üyesi');
     if(!e.contact[o.id]||!o.contact[e.id])reasons.push('Karşılıklı temas gerekli');
-    if(!e.ally[o.id]||!o.ally[e.id])reasons.push('Karşılıklı ittifak gerekli');
+    if(diploBlocked(e,o))reasons.push('Doktrin diplomatik bağı engelliyor');   // BETA-RIVAL-BLOCS.0: önceden ittifak gerekmez; eksik ittifaklar kuruluşla birlikte kurulur
     if(e.war[o.id]||o.war[e.id])reasons.push('Kurucuyla savaşta');
     if((o._fedLeaveUntil||0)>G.day)reasons.push('Federasyondan ayrılış beklemesi sürüyor');
   }
@@ -2699,12 +2700,12 @@ function fedFoundRead(fn){
 }
 function fedFoundQuote(e,type,ballot,selected){return fedFoundRead(()=>fedFoundQuoteRaw(e,type,ballot,selected));}
 function fedFoundQuoteRaw(e,type,ballot,selected){
-  const reasons=[],members=[e?.id,...(Array.isArray(selected)?selected:[])],cost=e?fedFoundCost(e):220;
+  const reasons=[],members=[e?.id,...(Array.isArray(selected)?selected:[])],cost=e?fedFoundCost(e,members):220;
   if(!e||G.emps[e.id]!==e||e.dead||e.wild||e.crisisSide||isVassal(e)||isPurifier(e)||findFed(e)||(e._fedLeaveUntil||0)>G.day)reasons.push('Kurucu bağımsız ve federasyonsuz olmalı');
   if(!Object.hasOwn(FED_TYPES,type)||!Object.hasOwn(FED_BALLOTS,ballot)||ballot==='weighted')reasons.push('Geçerli tür ve oy rejimi gerekli');
   if(!Array.isArray(selected)||selected.length>48||new Set(members).size!==members.length||members.some(id=>!Number.isInteger(id)||!G.emps[id]))reasons.push('Geçerli, benzersiz kurucu listesi seç');
-  const humans=members.filter(id=>fedFoundHuman(G.emps[id])).length,min=humans>=2?2:3;
-  if(members.length<min)reasons.push(humans>=2?'En az iki açık rızalı insan kurucu gerekli':'Tek insanlı kuruluşta en az iki AI ortak gerekli');
+  const humans=members.filter(id=>fedFoundHuman(G.emps[id])).length,min=humans===1?3:2;   // BETA-RIVAL-BLOCS.0: iki bağımsız AI ya da iki insan kurabilir; tek insanlı kuruluşta (BETA-FED-FOUND.0) iki AI ortak kuralı korunur
+  if(members.length<min)reasons.push(humans===1?'Tek insanlı kuruluşta en az iki AI ortak gerekli':'En az bir kurucu ortak seç');
   if(e&&(e.res.etk||0)<cost)reasons.push(cost+' Etki gerekli');
   const candidates=e?G.emps.filter(o=>o!==e&&!o.wild&&!o.crisisSide&&e.contact[o.id]).map(o=>({id:o.id,h:fedFoundHuman(o),...fedFoundCandidate(e,o)})):[];
   if(Object.hasOwn(FED_TYPES,type)&&Object.hasOwn(FED_BALLOTS,ballot))for(const c of candidates)if(c.ok&&!c.h){const a=fedFoundAssessment({...G.emps[c.id]},e,{type,ballot,members:[...new Set([...members,c.id])].filter(id=>G.emps[id]&&(id===e.id||e.contact[id]))});const ids=[...new Set([...members,c.id])].filter(id=>G.emps[id]&&(id===e.id||e.contact[id])),regime=aiFedRegimeScore({...G.emps[c.id]},ballot,ids);c.approach='Tür: '+(aiFedAffinity(G.emps[c.id],type)>=.5?'Olumlu':'Çekinceli')+' · Oy rejimi: '+(regime.score>=.5?'Olumlu':'Çekinceli')+' · '+(a.ok?'Genel kabul eğilimi: ':'Genel ret eğilimi: ')+a.why;}
@@ -2719,7 +2720,7 @@ function fedFoundAssessment(o,e,p){
   // Existing strategic evaluator; all selected peers contribute through its
   // existing admission / regime / known-power logic. No new strategic RNG.
   for(const id of p.members)if(id!==o.id&&(o.war[id]||(o.rel[id]||0)<-35))return {ok:false,why:'Kurucular arasındaki savaş veya düşmanlık uygun değil'};
-  return aiFedWilling(o,e,p.type,{members:p.members,cohesion:70,type:p.type,charter:{...fedDefaultCharter(p.type),ballot:p.ballot}},p.ballot,p.members);
+  return aiFoundWilling(o,e,p);   // BETA-RIVAL-BLOCS.0: mevcut aiFedWilling + ortak tehdit
 }
 function fedFoundValid(p){
   if(!p||p.status!=='pending')return {ok:false,why:'Kuruluş süreci artık beklemiyor'};
@@ -2767,8 +2768,16 @@ function fedFoundRestore(raw){
   return out;
 }
 
-function fedFoundCost(e){
-  return hasCivic(e,'council') ? 130 : 220;
+function fedFoundCost(e,members=null){
+  const base=hasCivic(e,'council') ? 130 : 220;
+  return Array.isArray(members)&&fedCounterBloc(members) ? Math.round(base*.6) : base;   // BETA-RIVAL-BLOCS.0: denge birliği indirimi
+}
+/* BETA-RIVAL-BLOCS.0 — denge birliği: kurucuların hiçbiri üye değilken yaşayan devletlerin en az üçte birini kapsayan bir
+   federasyon varsa yeni (karşı) birliğin kuruluş bedeli %40 düşer. Kural herkese aynı; büyük blok yoksa bedel değişmez. */
+function fedCounterBloc(members){
+  const live=G.emps.filter(o=>!o.dead&&!o.wild&&!o.crisisSide).length;if(live<4)return null;
+  let best=null;for(const f of G.feds||[]){const n=f.members.filter(id=>G.emps[id]&&!G.emps[id].dead).length;if(n>=3&&n/live>=1/3&&!members.some(id=>f.members.includes(id))&&(!best||n>best.n))best={f,n};}
+  return best?{fed:best.f.id,name:best.f.name,share:best.n/live}:null;
 }
 function fedFounderCandidate(e,o,type,ballot='equal',founders=null){
   const reasons=[];
@@ -3160,6 +3169,7 @@ function fedDefend(attacker, victim){
     if (m.ally[attacker.id]) continue;          // müttefikine savaş açtırmayız
     if (m.id === attacker.id) continue;
     if(!fedSupportGate(m,attacker,false).ok)continue;
+    if(m.ai&&typeof aiDefenseShirk==='function'&&aiDefenseShirk(m,attacker,victim,f))continue;   // BETA-RIVAL-BLOCS.0
     m._lastCB = {n:'Savunma Paktı Yükümlülüğü'};
     warAuthorize(m, attacker, m._lastCB);
     declareWar(m, attacker, {sponsor:victim.id, enemy:attacker.id, kind:'federation'});
@@ -5569,14 +5579,14 @@ function warAppetite(e, o){
   for (const w in e.war) if (e.war[w]) openWars++;
   if (openWars >= 2) brake += .55;
   if (e.pact && e.pact[o.id]) brake += .35;
-  if (e.nap && e.nap[o.id] > G.day) brake += 1.30;
+  if (e.nap && e.nap[o.id] > G.day) brake += 1.30 * aiOathMul(e) + aiOathReputation(e, o);   // BETA-RIVAL-BLOCS.0
   if ((e.inc && e.inc.ene || 0) < 0) brake += .40;
   const _P = (typeof personaOf === 'function') ? personaOf(e) : null;
   if (honorOf(e) > 25) brake += .30 * (_P ? _P.honorCare : 1);
   if (typeof councilExists === 'function' && councilExists() &&
       inCouncil(e) && inCouncil(o)) brake += .45;
   /* Müttefike saldırmak neredeyse imkânsız — AI önce ittifakı bozar */
-  if (e.ally[o.id]) brake += 2.20 - Math.min(1.1, grudge * 1.4);
+  if (e.ally[o.id]) brake += (2.20 - Math.min(1.1, grudge * 1.4)) * aiOathMul(e) + aiOathReputation(e, o);   // BETA-RIVAL-BLOCS.0
 
   /* ═══ FAZ 40: GANİMET İŞTAHI ═══
      İki ayrı açgözlülük kaynağı: */
@@ -5826,7 +5836,7 @@ function aiReviewAlliances(){
         if (!x.dead && !x.wild && x.id !== e.id && x.id !== o.id &&
             e.war[x.id] && aiKnownWar(e,o,x)) bound += 35;
 
-      const strain = (-trustOf(e, o.id)) + (-e.rel[o.id] * .4) - bound + (prof.war - .5) * 20;
+      const strain = (-trustOf(e, o.id)) + (-e.rel[o.id] * .4) - bound + (prof.war - .5) * 20 + aiOathStrain(e);   // BETA-RIVAL-BLOCS.0
       if (strain > 45 && rnd() < .05){
         applyAllianceEnd(e,o);
         if (o.id === 0)
@@ -10690,4 +10700,28 @@ function fedAgendaOrder(f){
  while(pending.length){let i=pending.findIndex(r=>r.defenseFront);if(i<0)i=0;else if(streak>=2){const n=pending.findIndex(r=>!r.defenseFront);if(n>=0)i=n;}
   const r=pending.splice(i,1)[0];ordered.push(r);streak=r.defenseFront?Math.min(2,streak+1):0;
  }return ordered;
+}
+
+/* ═══ BETA-RIVAL-BLOCS.0 — tek işlemde ittifak + federasyon ═══
+   Kuruluşta ve oylu üyelikte eksik karşılıklı ittifaklar federasyonla BİRLİKTE kurulur (foundFederation / acceptFedInvite'in
+   mevcut ittifak yazımı). Bu yardımcılar yalnız gösterim ve denetim içindir; dünyayı değiştirmez, RNG kullanmaz. */
+function fedAlliancePlan(members,viewer=null){
+  const ids=[...new Set(members)].filter(id=>G.emps[id]&&!G.emps[id].dead),pairs=[],wars=[];
+  for(let i=0;i<ids.length;i++)for(let j=i+1;j<ids.length;j++){const a=G.emps[ids[i]],b=G.emps[ids[j]];if(!(a.ally[b.id]&&b.ally[a.id]))pairs.push([a.id,b.id]);}
+  for(const id of ids){const e=G.emps[id];for(const k of Object.keys(e.war||{})){const o=G.emps[k];if(!e.war[k]||!o||o.dead||o.wild||ids.includes(o.id))continue;if(viewer&&viewer.id!==e.id&&!(viewer.contact?.[o.id]&&viewer.contact?.[e.id]))continue;wars.push([e.id,o.id]);}}
+  return {pairs,wars};
+}
+function fedAllianceText(members,viewer=G.p){
+  const name=id=>id===viewer?.id?'Sen':viewer&&id!==viewer.id&&!viewer.contact?.[id]?'Bilinmeyen devlet':G.emps[id]?.name||'?',plan=fedAlliancePlan(members,viewer);
+  const a=plan.pairs.length?'Kurulacak ittifaklar: '+plan.pairs.slice(0,12).map(([x,y])=>name(x)+' ↔ '+name(y)).join(', ')+(plan.pairs.length>12?' (+'+(plan.pairs.length-12)+')':'')+'.':'Bütün kurucular zaten karşılıklı müttefik.';
+  const w=plan.wars.length?' Süren savaşlar: '+plan.wars.slice(0,8).map(([x,y])=>name(x)+' — '+name(y)).join(', ')+'. Kuruluştan önce başlayan savaşlar ortak savunma yükümlülüğüne girmez.':'';
+  return a+w;
+}
+function fedAdmissionAllianceText(f,id,viewer=G.p){return f&&G.emps[id]?fedAllianceText([...f.members,id],viewer):'';}
+/* Söz bozan savaş ilanı (ittifak / saldırmazlık): gerekçe hafızaya (remember, mevcut) ve haber akışına. */
+function oathBreakRecord(a,b,kind){
+  if(!a||!b)return;const why=a._lastCB?.n||a.warCause?.[b.id]||'Stratejik fırsat';
+  a.oathLog=(Array.isArray(a.oathLog)?a.oathLog:[]).concat([{day:G.day,kind,target:b.id,why:String(why).slice(0,120)}]).slice(-12);
+  if(typeof GalacticNews!=='undefined')GalacticNews.emit({category:'politics',empires:[a.id,b.id],key:'oath:'+a.id+':'+b.id+':'+G.day,important:true,
+    title:(kind==='ally'?'İttifak çiğnendi':'Saldırmazlık çiğnendi')+' — '+a.name,text:a.name+', '+b.name+' ile '+(kind==='ally'?'ittifakı':'saldırmazlık sözünü')+' bozarak savaş açtı. Gerekçe: '+why+'.'});
 }
