@@ -1187,7 +1187,8 @@ function dealLabel(it){
     case 'nap':     return '🛡 Saldırmazlık paktı';
     case 'pact':    return '🤝 Ticaret anlaşması';
     case 'ally':    return '⚑ İttifak';
-    case 'warJoin': return '⚔ '+(it.plan?'Hazırlık #'+it.plan:'Cephe #'+it.front)+' · '+(G.emps[it.target]?.name||'Bilinmeyen devlet')+' karşısında destek';
+    case 'warJoin': {const p=it.plan&&typeof warCoalitionLabel==='function'?warCoalitionLabel(it):'';if(p)return p;   /* WAR-COALITION.0: davet kartı tek bakışta */
+      return '⚔ '+(it.plan?'Hazırlık #'+it.plan:'Cephe #'+it.front)+' · '+(G.emps[it.target]?.name||'Bilinmeyen devlet')+' karşısında destek';}
     case 'warOn':   return '⚔ ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + '\'a savaş ilanı';
     case 'peaceWith': return '🤲 ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + ' ile barış';
     case 'intel':   return '👁 Sensör anlaşması';
@@ -10616,7 +10617,7 @@ function warPrepareQuote(e,id,mode=null){
   add(q.norm.from,'etk',q.cost);
  }
  for(const [key,n]of sums){const[id,r]=key.split(':');if((G.emps[+id].res[r]||0)<n)return no('Toplam taahhütler için kaynak yetersiz');}
- return {ok:true,why:'Son onayda ilan, bütün katılımlar ve bedeller birlikte uygulanır',stamp:JSON.stringify([p.id,p.goal,p.target,preview.signature,contracts.map(c=>c.terms)]),members:contracts.map(c=>c.member)};
+ return {ok:true,why:'Son onayda ilan, bütün katılımlar ve bedeller birlikte uygulanır',stamp:warStampHash(JSON.stringify([p.id,p.goal,p.target,preview.signature,contracts.map(c=>c.terms)])),members:contracts.map(c=>c.member)};   /* WAR-COALITION.0: özet damga (misafir 8192 karakter çerçeve sınırı) */
 }
 function warPrepareWithdraw(e,id,member=null){
  const p=warPreparation(id);if(!p||warPreparationState(p)!=='pending')return {ok:false,why:'Hazırlık kapalı'};
@@ -11252,8 +11253,14 @@ function warCoalitionQuote(e,id){
  const own={};for(const [k,n] of totals(valid)){const [id,r]=k.split(':');if(+id===e.id)own[r]=Math.round(n);}
  const pending=(p.invites||[]).filter(v=>['pending','countered'].includes(warInviteState(p,v))).map(v=>v.member);
  return {ok:true,why:valid.length?'Son onayda ilan, geçerli kabuller ve bedeller birlikte uygulanır':'Kabul edilmiş destek yok; ilan tek başına yapılır',
-  stamp:JSON.stringify([p.id,p.goal,p.opts||null,p.target,preview.signature,valid.map(v=>v.c.terms)]),members:valid.map(v=>v.c.member),invalid,own,pending};
+  stamp:warStampHash(JSON.stringify([p.id,p.goal,p.opts||null,p.target,preview.signature,valid.map(v=>v.c.terms)])),members:valid.map(v=>v.c.member),invalid,own,pending};
 }
+/* Damga: tam kanonik metnin iki bağımsız 32 bit özeti (MP'de istemci çerçeve sınırına sığar; aynı metin = aynı damga). Güvenlik değil, eşzamanlılık denetimi. */
+/* İnsan alıcının gelen kutusu kartı: desteklenen taraf, hedef, savaş amacı, katılımın başlangıcı ve hazırlığın son günü (yalnız yeni akışın seçenekli hazırlığında). */
+function warCoalitionLabel(it){const p=warPreparation(it.plan);if(!p||!p.opts||p.target!==it.target)return '';
+ const n=id=>G.emps[id]?.name||'Bilinmeyen devlet',goal=p.goal==='fetih'?'Fetih · '+(p.opts.targets||[]).map(id=>G.sys[id]?.name||'?').join(', '):'Vasallaştırma · '+(VASSAL_TYPES[p.opts.vtype]?.n||'?');
+ return '⚔ '+n(p.owner)+' yanında '+n(it.target)+' karşısına savaş · '+goal+' · katılım '+n(p.owner)+' savaşı ilan ettiği anda başlar (hazırlık #'+p.id+', en geç gün '+Math.floor(p.expires)+')';}
+function warStampHash(t){let a=0x811c9dc5,b=0x9747b28c;for(let i=0;i<t.length;i++){const c=t.charCodeAt(i);a=Math.imul(a^c,16777619)>>>0;b=Math.imul(b^c,2246822519)>>>0;b=(b<<13|b>>>19)>>>0;}return 'c'+t.length.toString(36)+'-'+a.toString(36)+'-'+b.toString(36);}
 function warPrepareUpdate(e,id,goal,opts){
  const p=warPreparation(id);if(!p||p.owner!==e.id||warPreparationState(p)!=='pending')return {ok:false,why:'Hazırlık açık değil veya yetkin yok'};
  const norm=warPrepOptsNorm(e,G.emps[p.target],goal,opts);if(!norm)return {ok:false,why:'Geçersiz savaş hedefi seçimi'};
