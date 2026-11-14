@@ -11328,9 +11328,10 @@ function warCoalitionCandidates(e,target,p,preview){
   if(m.war[target.id]&&!m.war[e.id]){row.state='sameSide';row.why='Hedefle zaten savaşta — aynı taraftasınız; ayrıca davet ve ödeme gerekmez';}
   else if(known&&preview.certain.includes(known)){row.state='auto';row.why='Mevcut yükümlülükle katılır: '+known.why+'; ayrıca ödeme yok';}
   else if(c&&!warCommitStale(p,c)){row.state='accepted';row.why='Kabul etti · '+(c.terms.give.concat(c.terms.want).filter(i=>i.t!=='warJoin').map(i=>dealLabel(i)).join(' · ')||'bedelsiz katılım');}
-  else if(c){row.state='stale';row.why='Hedef şartları değişti; güncel koşulları yeniden onaylaması gerekir';row.invitable=true;}
   else if(ist==='pending'){row.state='pending';row.why='Cevap bekleniyor · son gün '+Math.floor(inv.expires);}
   else if(ist==='countered'){row.state='countered';row.why=inv.why||'Karşı teklif';row.counter=encodeOffer(inv.counter);row.human=!!inv.human;if(Number.isSafeInteger(inv.offer))row.offer=inv.offer;}
+  else if(c){row.state='stale';row.why='Hedef şartları değişti; güncel koşulları yeniden onaylaması gerekir';row.invitable=true;
+   row.prior=(c.terms.from===e.id?c.terms.give:c.terms.want).filter(i=>i.t==='res'||i.t==='passage').map(i=>({...i}));}   /* yeniden davette önceki şartlar hazır gelir */
   if(!row.state){
    if(ist&&!row.state){row.state=ist;row.why=inv.why||({rejected:'Reddetti',expired:'Süresi doldu',closed:'Davet kapandı'}[ist]);}
    const gate=warSupportGate(m,e,p?{plan:p.id,target:target.id}:{draft:true,target:target.id});

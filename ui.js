@@ -10129,13 +10129,18 @@ const WarCoal={st:null,req:0,last:0,view:null,
  open(id,key,opts){
   const same=this.st&&this.st.id===id&&this.st.key===key;
   const sel=key==='fetih'?{targets:(opts&&Array.isArray(opts.targets)&&opts.targets.length?opts.targets:(G.emps[id]?warFetihDefault(G.p,G.emps[id]):[])).slice()}:{vtype:opts?.vtype||'haracguzar',war:opts?.war||WAR_VASSAL_WAR.haracguzar};
-  this.st=same?{...this.st,sel}:{id,key,sel,picks:[],terms:{},editing:null,msg:'',busy:false,others:false};
+  this.st=same?{...this.st,sel,explicit:!!opts}:{id,key,sel,picks:[],terms:{},editing:null,msg:'',busy:false,others:false,explicit:!!opts};
   this.view=null;this.req++;UI.openModal(`<div class="mhd"><span>⚔ SAVAŞ İLANI · ${esc(G.emps[id]?.name||'')}</span><button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warCoalRoot">Önizleme hazırlanıyor…</div>`,'war');
   this.load();
  },
  load(after){const st=this.st;if(!st)return;const req=++this.req;this.last=Date.now();
   this.cmd({kind:'warCoalition',target:st.id,...this.cmdOpts(st)},r=>{if(req!==this.req||this.st!==st)return;
-   if(!r.ok){this.view=null;st.msg=r.why||'Önizleme alınamadı';}else{this.view=r.extra;if(this.view.prep&&this.view.prep.opts){const o=this.view.prep.opts;st.key=this.view.goal;st.sel=st.key==='fetih'?{targets:o.targets.slice()}:{vtype:o.vtype,war:o.war};}}
+   if(!r.ok){this.view=null;st.msg=r.why||'Önizleme alınamadı';}
+   else{this.view=r.extra;const pr=this.view.prep;
+    /* Kayıtlı hazırlık varken oyuncu "Hedefi değiştir" ile yeni şart seçtiyse: açık hedef güncellemesi (host doğrular); önceki kabuller güncel şartları yeniden onaylamalı. */
+    if(pr&&pr.state==='pending'&&st.explicit&&JSON.stringify([st.key,this.optsOf(st)])!==JSON.stringify([pr.goal,pr.opts||null])){st.explicit=false;st.busy=true;
+     this.cmd({kind:'warPrepareGoal',id:pr.id,...this.cmdOpts(st)},u=>{st.busy=false;st.msg=u.ok?'Savaş hedefi güncellendi; önceki kabuller güncel şartları yeniden onaylamalı, bekleyen davetler kapandı.':'Hedef güncellenemedi: '+(u.why||'');this.load();});return;}
+    st.explicit=false;if(pr&&pr.opts){const o=pr.opts;st.key=this.view.goal;st.sel=st.key==='fetih'?{targets:o.targets.slice()}:{vtype:o.vtype,war:o.war};}}
    if(after)after(r);this.render();});
  },
  refresh(){if(!this.st||!document.getElementById('warCoalRoot')||$('modal').classList.contains('hidden')||this.st.busy||Date.now()-this.last<2000)return;this.load();},
@@ -10234,7 +10239,7 @@ const WarCoal={st:null,req:0,last:0,view:null,
    st.msg=res.map(x=>(G.emps[x.member]?.name||'?')+' '+(L[x.result]||x.result)).join(' · ');st.picks=[];st.editing=null;this.load();});
  },
  act(a,x){const st=this.st;if(!st&&a!=='coalOpen')return false;
-  if(a==='coalPick'){const id=+x,i=st.picks.indexOf(id);if(i>=0)st.picks.splice(i,1);else if(st.picks.length<8)st.picks.push(id);else st.msg='En çok 8 devlet seçebilirsin';this.render();return true;}
+  if(a==='coalPick'){const id=+x,i=st.picks.indexOf(id);if(i>=0)st.picks.splice(i,1);else if(st.picks.length<8){st.picks.push(id);const c=(this.view?.candidates||[]).find(c=>c.id===id);if(c&&c.prior&&c.prior.length&&!(st.terms[id]&&st.terms[id].give.length))st.terms[id]={give:c.prior.map(i=>({...i}))};}else st.msg='En çok 8 devlet seçebilirsin';this.render();return true;}
   if(a==='coalTerms'){st.editing=st.editing===+x?null:+x;this.render();return true;}
   if(a==='coalTermsDone'){st.editing=null;if(!st.picks.includes(+x)&&st.picks.length<8)st.picks.push(+x);this.render();return true;}
   if(a==='coalAmt'){const[id,r,d]=String(x).split(':');const t=st.terms[+id]||(st.terms[+id]={give:[]});let it=t.give.find(i=>i.t==='res'&&i.r===r);

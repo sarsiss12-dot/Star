@@ -1,0 +1,23 @@
+PASS 844x390 S1 tek başına ilan iki adımda: Fetih sistem seçimi → tek akış → "Savaş İlan Et"; seçim ilana taşınır; davet/hazırlık yok
+PASS 844x390 S2 Vasallaştırma seçimi (Akademik + Katılmaz) "Hedefi değiştir" ile geri gidince korunur
+FAIL 844x390 S3 karışık koalisyon tek ekrandan: kaynaklı kabul, karşı teklif → Kabul Et, ret, engelli aday; kaydet-çık-devam; kaydet/yükle; hedef değişince yeniden onay; ilan bedeli bir kez
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'stale'
+- 'accepted'
+
+    at /home/user/Star/tests/browser-war-coalition0.cjs:80:112
+    at async test (/home/user/Star/tests/browser-war-coalition0.cjs:15:42)
+    at async run (/home/user/Star/tests/browser-war-coalition0.cjs:52:5)
+FAIL 740x360 S3 karışık koalisyon tek ekrandan: kaynaklı kabul, karşı teklif → Kabul Et, ret, engelli aday; kaydet-çık-devam; kaydet/yükle; hedef değişince yeniden onay; ilan bedeli bir kez
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'stale'
+- 'accepted'
+
+    at /home/user/Star/tests/browser-war-coalition0.cjs:80:112
+    at async test (/home/user/Star/tests/browser-war-coalition0.cjs:15:42)
+    at async run (/home/user/Star/tests/browser-war-coalition0.cjs:52:5)
+GEÇEN: 2 KALAN: 2
