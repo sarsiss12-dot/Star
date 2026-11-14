@@ -1,0 +1,51 @@
+[
+ {
+  "name": "F1 Synarth %100 yorgunluk: günlükte tek açık neden; yeniden ilanda ÖNİZLEME SAVAŞ YORGUNLUĞU bloğu",
+  "status": "PASS",
+  "log": [
+   "Synarth Sığınağı SAVAŞ YORGUNLUĞU %100 — ordusu savaşamıyor; zorunlu ateşkes (doktrin barış antlaşmasını yasaklıyor) ile savaş durdu. Rakibin yorgunluğu %55'ten başlar ve barışta ayda 2,5 azalır · Savaş #1"
+  ],
+  "preview": [
+   "Hedef: Synarth Sığınağı · Fetih",
+   "SAVAŞ YORGUNLUĞU",
+   "Senin: %0 · Synarth Sığınağı: %53 (son zorunlu barıştan tahmin). Taraflardan biri %100'e ulaşınca savaş zorunlu barışla kendiliğinden durur; önceki savaşın yorgunluğu barışta ayda 2,5 azalarak taşınır.",
+   "⚠ Synarth Sığınağı yorgunluğu ~%53 (son zorunlu barıştan tahmin): %100'de savaş zorunlu barışla durur; kayıpsız en geç 37 ay, gemi/sistem kaybıyla çok daha erken."
+  ]
+ },
+ {
+  "name": "F2 36K filo düşman başkentinde: SİSTEM paneli gerçek kuşatma durumu; barıştan sonra KUŞATMA DURDU + neden",
+  "status": "PASS",
+  "month1": {
+   "code": "siege",
+   "text": "Bombardıman ilerlemesi 1/6 ay"
+  }
+ },
+ {
+  "name": "F3 FİLO SEVKİYATLAR: tek liste, \"Bekleyenleri Yeniden Dene (3)\", çift gerçek dokunuş tek uygulama, doğru sonuç metni",
+  "status": "PASS",
+  "calls": 1,
+  "res": "2 yola çıktı · 1 güvenli rota bekliyor · 1 hedef bulunamadı — hedef değiştir · 1 zaten yolda",
+  "states": [
+   [
+    "Arran",
+    "moving"
+   ],
+   [
+    "Lyrdex-59",
+    "moving"
+   ],
+   [
+    "Kapalı",
+    "blocked"
+   ],
+   [
+    "Kayıp",
+    "lost"
+   ],
+   [
+    "Yolda",
+    "moving"
+   ]
+  ]
+ }
+]

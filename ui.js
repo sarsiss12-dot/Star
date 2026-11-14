@@ -565,8 +565,8 @@ const UI = {
       }
       case 'shipmentMenu': this.shipmentMenu(G.fleets.find(f=>f.id===+x)); break;
       case 'shipmentRetryAll': {   /* FIELD-WAR-SIEGE.0: çift dokunuş ikinci denemeyi başlatmaz (bekleyen bayrak) */
-        if(this._shipmentRetryPending)break;
-        this._shipmentRetryPending=true;
+        if(this._shipmentRetryPending||Date.now()-(this._shipmentRetryAt||0)<1200)break;   /* hayalet / çift dokunuş: son sonucu korur */
+        this._shipmentRetryPending=true;this._shipmentRetryAt=Date.now();
         const r=shipmentRetryAll(G.p);
         if(r&&r.pending){this._shipmentRetryResult=r.why||'';this.keepScroll=true;this.refresh();break;}
         this._shipmentRetryPending=false;
