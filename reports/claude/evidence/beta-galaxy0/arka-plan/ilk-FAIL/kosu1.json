@@ -1,0 +1,70 @@
+[
+ {
+  "name": "800x360 başlangıç: açık sistem panelinde gezegen küçük resimleri, haritada bölge armaları ve yıldızlar çizili",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: []\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:53:14\n    at test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:16:48)\n    at run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:52:11)"
+ },
+ {
+  "name": "800x360 arka plan dönüşü #1: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyun durumu değişmedi\n+ actual - expected\n\n+ '50841:950206258'\n- '50920:950206258'\n     ^\n\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:60:138\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:16:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:54:26)"
+ },
+ {
+  "name": "800x360 arka plan dönüşü #2: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyun durumu değişmedi\n+ actual - expected\n\n+ '50826:950206258'\n- '50920:950206258'\n     ^\n\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:60:138\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:16:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:54:26)"
+ },
+ {
+  "name": "800x360 arka plan dönüşü #3: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyun durumu değişmedi\n+ actual - expected\n\n+ '50863:950206258'\n- '50920:950206258'\n     ^\n\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:60:138\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:16:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:54:26)"
+ },
+ {
+  "name": "800x360 paneldeki gezegen tuvaline gerçek contextrestored olayı → tuval yeniden boyanır",
+  "status": "FAIL",
+  "error": "page.evaluate: TypeError: Cannot read properties of null (reading 'getContext')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:59)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:63:26\n    at test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:16:48)\n    at run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:62:11)"
+ },
+ {
+  "name": "800x360 kayıttan yükleme sonrası bir dönüş: görseller geri gelir, yüklenen dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: []\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:71:14\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:16:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:66:5)"
+ },
+ {
+  "name": "800x360 sayfa hatası yok",
+  "status": "PASS"
+ },
+ {
+  "name": "1280x720 başlangıç: açık sistem panelinde gezegen küçük resimleri, haritada bölge armaları ve yıldızlar çizili",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: []\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:53:14\n    at test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:16:48)\n    at run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:52:11)"
+ },
+ {
+  "name": "1280x720 arka plan dönüşü #1: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyun durumu değişmedi\n+ actual - expected\n\n+ '50834:950206258'\n- '50801:950206258'\n      ^\n\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:60:138\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:16:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:54:26)"
+ },
+ {
+  "name": "1280x720 arka plan dönüşü #2: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyun durumu değişmedi\n+ actual - expected\n\n+ '50826:950206258'\n- '50801:950206258'\n      ^\n\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:60:138\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:16:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:54:26)"
+ },
+ {
+  "name": "1280x720 arka plan dönüşü #3: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyun durumu değişmedi\n+ actual - expected\n\n+ '50862:950206258'\n- '50801:950206258'\n      ^\n\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:60:138\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:16:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:54:26)"
+ },
+ {
+  "name": "1280x720 paneldeki gezegen tuvaline gerçek contextrestored olayı → tuval yeniden boyanır",
+  "status": "FAIL",
+  "error": "page.evaluate: TypeError: Cannot read properties of null (reading 'getContext')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:59)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:63:26\n    at test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:16:48)\n    at run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:62:11)"
+ },
+ {
+  "name": "1280x720 kayıttan yükleme sonrası bir dönüş: görseller geri gelir, yüklenen dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: []\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:71:14\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:16:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:66:5)"
+ },
+ {
+  "name": "1280x720 sayfa hatası yok",
+  "status": "PASS"
+ }
+]

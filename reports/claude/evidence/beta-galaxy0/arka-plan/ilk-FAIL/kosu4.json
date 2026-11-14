@@ -1,0 +1,104 @@
+[
+ {
+  "name": "800x360 başlangıç: açık sistem panelinde gezegen küçük resimleri, haritada bölge armaları ve yıldızlar çizili",
+  "status": "PASS",
+  "base": {
+   "cam": {
+    "x": 2630,
+    "y": 3409,
+    "z": 0.9
+   },
+   "sel": 30,
+   "tab": "sistem",
+   "speed": 1,
+   "day": 1.0105599999999995,
+   "pspr": [
+    100,
+    100,
+    100
+   ],
+   "emblems": 0,
+   "map": 2954
+  }
+ },
+ {
+  "name": "800x360 arka plan dönüşü #1: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyun durumu değişmedi: .day: 1.0239199999999995 -> 2.0181599999997766 | .fl.4.x: 3912.5976972594476 -> 3831.1916433637034 | .fl.4.y: 2287.302028989499 -> 2237.0905733202235 | .fl.4.mv.t: 0.2284968333950445 -> 0.46128301631437996 | .fl.4.explore.next: 1.0573599999999999 -> 2.0705599999999995 | .fl.7.x: 4073.8959684245724 -> 4156.816081758906 | .fl.7.y: 2383.379514456101 -> 2431.0491137404006 | .fl.7.mv.t: 0.22717746088705595 -> 0.4586195039974501 | .fl.7.explore.next: 1.0573599999999999 -> 2.0705599999999995\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:62:138\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:17:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:56:26)"
+ },
+ {
+  "name": "800x360 arka plan dönüşü #2: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyun durumu değişmedi: .day: 1.0239199999999995 -> 2.917679999999781 | .fl.4.x: 3912.5976972594476 -> 3757.541042301268 | .fl.4.y: 2287.302028989499 -> 2191.662700167226 | .fl.4.mv.t: 0.2284968333950445 -> 0.6718919510380347 | .fl.4.explore.next: 1.0573599999999999 -> 3.0843199999997792 | .fl.7.x: 4073.8959684245724 -> 4231.8364997128365 | .fl.7.y: 2383.379514456101 -> 2474.1772899837847 | .fl.7.mv.t: 0.22717746088705595 -> 0.668012353428882 | .fl.7.explore.next: 1.0573599999999999 -> 3.0843199999997792\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:62:138\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:17:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:56:26)"
+ },
+ {
+  "name": "800x360 arka plan dönüşü #3: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyun durumu değişmedi: .day: 1.0239199999999995 -> 3.8151199999995646 | .fl.4.x: 3912.5976972594476 -> 3684.0607467909344 | .fl.4.y: 2287.302028989499 -> 2146.339871900577 | .fl.4.mv.t: 0.2284968333950445 -> 0.8820138853789596 | .fl.4.explore.next: 1.0573599999999999 -> 4.101759999999563 | .fl.7.x: 4073.8959684245724 -> 4306.6834446263 | .fl.7.y: 2383.379514456101 -> 2517.2057390320024 | .fl.7.mv.t: 0.22717746088705595 -> 0.8769210144855537 | .fl.7.explore.next: 1.0573599999999999 -> 4.101759999999563\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:62:138\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:17:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:56:26)"
+ },
+ {
+  "name": "800x360 paneldeki arma tuvaline gerçek contextrestored olayı → tuval yeniden boyanır",
+  "status": "PASS",
+  "pixels": 1360
+ },
+ {
+  "name": "800x360 kayıttan yükleme sonrası bir dönüş: görseller geri gelir, yüklenen dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: yüklenen dünya korunur: .day: 4.681759999999564 -> 5.578079999999411 | .fl.1.explore.next: 5.048 -> 10.055039999999561 | .fl.1.explore.review: 12.048 -> 17.05503999999956 | .fl.1.explore.backoff: 5 -> 10 | .fl.1.explore.retry: 5.048 -> 15.055039999999561 | .fl.4.surv: 28.640000000000008 -> 27.74368000000018 | .fl.7.surv: 28.666640000000008 -> 27.77032000000018 | .fl.9.surv: 28.55992000000001 -> 27.66360000000018 | .fl.12.surv: 27.409200000000254 -> 26.512880000000425\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:74:141\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:17:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:69:5)"
+ },
+ {
+  "name": "800x360 sayfa hatası yok",
+  "status": "PASS"
+ },
+ {
+  "name": "1280x720 başlangıç: açık sistem panelinde gezegen küçük resimleri, haritada bölge armaları ve yıldızlar çizili",
+  "status": "PASS",
+  "base": {
+   "cam": {
+    "x": 2630,
+    "y": 3409,
+    "z": 0.9
+   },
+   "sel": 30,
+   "tab": "sistem",
+   "speed": 1,
+   "day": 0.9841600000000004,
+   "pspr": [
+    100,
+    100,
+    100
+   ],
+   "emblems": 0,
+   "map": 5636
+  }
+ },
+ {
+  "name": "1280x720 arka plan dönüşü #1: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyun durumu değişmedi: .day: 0.9974400000000003 -> 2.045919999999927 | .fl.4.x: 3914.7658179417376 -> 3828.918719264735 | .fl.4.y: 2288.6393311963334 -> 2235.6886281064053 | .fl.4.mv.t: 0.2222969439078929 -> 0.46778259834475167 | .fl.4.explore.next: 1.0574400000000002 -> 2.0708000000000006 | .fl.7.x: 4071.6875231788636 -> 4159.131279644904 | .fl.7.y: 2382.109910548545 -> 2432.3800882295977 | .fl.7.mv.t: 0.22101337042442679 -> 0.4650815565368577 | .fl.7.explore.next: 1.0574400000000002 -> 2.0708000000000006\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:62:138\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:17:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:56:26)"
+ },
+ {
+  "name": "1280x720 arka plan dönüşü #2: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyun durumu değişmedi: .day: 0.9974400000000003 -> 2.970879999999928 | .fl.4.x: 3914.7658179417376 -> 3753.1851502960512 | .fl.4.y: 2288.6393311963334 -> 2188.975975189742 | .fl.4.mv.t: 0.2222969439078929 -> 0.6843479223642203 | .fl.4.explore.next: 1.0574400000000002 -> 3.0841599999999274 | .fl.7.x: 4071.6875231788636 -> 4236.273406324319 | .fl.7.y: 2382.109910548545 -> 2476.7280047829604 | .fl.7.mv.t: 0.22101337042442679 -> 0.6803964022435648 | .fl.7.explore.next: 1.0574400000000002 -> 3.0841599999999274\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:62:138\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:17:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:56:26)"
+ },
+ {
+  "name": "1280x720 arka plan dönüşü #3: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyun durumu değişmedi: .day: 0.9974400000000003 -> 3.892639999999857 | .fl.4.x: 3914.7658179417376 -> 3677.7135898690403 | .fl.4.y: 2288.6393311963334 -> 2142.4249297905244 | .fl.4.mv.t: 0.2222969439078929 -> 0.9001640150257064 | .fl.4.explore.next: 1.0574400000000002 -> 4.112719999999856 | .fl.7.x: 4071.6875231788636 -> 4313.1486514030385 | .fl.7.y: 2382.109910548545 -> 2520.922494882234 | .fl.7.mv.t: 0.22101337042442679 -> 0.8949663427583971 | .fl.7.explore.next: 1.0574400000000002 -> 4.112719999999856\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:62:138\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:17:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:56:26)"
+ },
+ {
+  "name": "1280x720 paneldeki arma tuvaline gerçek contextrestored olayı → tuval yeniden boyanır",
+  "status": "PASS",
+  "pixels": 1360
+ },
+ {
+  "name": "1280x720 kayıttan yükleme sonrası bir dönüş: görseller geri gelir, yüklenen dünya korunur",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: yüklenen dünya korunur: .day: 4.820719999999848 -> 5.763199999999768 | .fl.1.explore.next: 5.048 -> 10.060719999999847 | .fl.1.explore.review: 12.048 -> 17.060719999999847 | .fl.1.explore.backoff: 5 -> 10 | .fl.1.explore.retry: 5.048 -> 15.060719999999847 | .fl.4.surv: 28.506640000000004 -> 27.56416000000009 | .fl.7.surv: 28.533280000000005 -> 27.59080000000009 | .fl.9.surv: 28.413280000000004 -> 27.47080000000009 | .fl.12.surv: 27.2701600000001 -> 26.327680000000186\n    at /home/user/Star/tests/browser-bgreturn-galaxy0.cjs:74:141\n    at async test (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:17:42)\n    at async run (/home/user/Star/tests/browser-bgreturn-galaxy0.cjs:69:5)"
+ },
+ {
+  "name": "1280x720 sayfa hatası yok",
+  "status": "PASS"
+ }
+]

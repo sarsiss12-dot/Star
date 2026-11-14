@@ -9358,6 +9358,9 @@ function runRecovery(sebep, deneme){
       if (typeof UI !== 'undefined' && UI.refresh) UI.refresh();
       if (typeof repaintPortraits === 'function') repaintPortraits();
       paintEmblems();
+      /* BETA-GALAXY.0: panel gezegen küreleri (CSS) için katman yeniden rasterleme dürtmesi — dönüşte bazı mobil
+         derleyiciler eski / boş katmanı tutabiliyor. Yalnız görsel; DOM yapısı ve oyun durumu değişmez. */
+      if(/visible|pageshow|focus|context|surface/i.test(sebep))for(const o of document.querySelectorAll('.pOrb')){o.style.transform='translateZ(0)';requestAnimationFrame(()=>{o.style.transform='';});}
     } catch(e){ logDiag('recovery', 'ui: ' + (e && e.message)); }
     /* 13. Sağlık testi — YALNIZ kurtarma çiziminden SONRA */
     // One incoming pixel + four post-draw pixels + one border-cache check:
@@ -9611,6 +9614,14 @@ window.addEventListener('focus', ()=>{
    (map.js `_ekle('contextlost'/'contextrestored')`): ilk yüzey de
    sonrakiler de aynı kurallarla bağlanır ve sökülür. */
 
+/* BETA-GALAXY.0: panel / portre / arma DOM tuvalleri bağlam kaybından dönünce yeniden boyanır. contextrestored kabarcıklanmaz;
+   belge yakalama aşaması yeterli. Harita yüzeyi (#map) map.js yüzey yaşam döngüsünde kalır; burada yalnız küçük DOM tuvalleri. */
+document.addEventListener('contextrestored', ev=>{
+  const cv=ev.target;if(!cv||cv.tagName!=='CANVAS'||cv.id==='map')return;
+  if(cv.dataset)delete cv.dataset.done;
+  try{ if(typeof ART!=='undefined')ART.invalidateSprites?.(); if(typeof UI!=='undefined'&&UI.paintSprites)UI.paintSprites(); paintEmblems(); }
+  catch(e){ if(typeof logDiag==='function')logDiag('recovery','canvas restored: '+(e&&e.message)); }
+}, true);
 document.addEventListener('pointerdown', ()=>{ LOOP.touch = performance.now(); }, true);
 
 /* ═══════════════════════════════════════════════════════════════════
