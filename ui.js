@@ -147,6 +147,17 @@ const UI = {
     const access=shipBuildAccess(G.emps[q.e],q.cls);
     return 'Kaynak tersane: '+sys.name+' · Hedef: '+label+' · '+(d?.hold?'BEKLETİLİYOR — ödenmiş sipariş korunuyor':access.ok?'Üretim sürüyor':access.why)+(d?.fleet!==undefined?' · Özel filo hedefi; genel ralli gerekmez':'');
   },
+  /* FIELD-WAR-SIEGE.0 — SEVKİYATLAR: oyuncunun bütün sevkiyatları + tek tuşla yeniden deneme (seçili filodan bağımsız). */
+  shipmentsSection(){
+    const rows=typeof shipmentRetryList==='function'?shipmentRetryList(G.p):[];if(!rows.length)return '';
+    const n=rows.filter(r=>r.cls==='retry').length,lbl={moving:'yolda',combat:'savaşta',retreat:'geri çekiliyor',waiting:'birleşme bekliyor',lost:'hedef kayıp',retry:'yeniden denenebilir'};
+    const busy=!!this._shipmentRetryPending;
+    let h=`<section class="shipmentsAll"><div class="ph">SEVKİYATLAR (${rows.length})${n?' · '+n+' bekliyor':''}</div>`;
+    h+=`<button class="abtn ${n?'pri':''}" data-a="shipmentRetryAll" ${n&&!busy?'':'disabled'}>${busy?'Host denetliyor…':'Bekleyenleri Yeniden Dene ('+n+')'}</button>`;
+    if(this._shipmentRetryResult)h+=`<div class="mini shipmentRetryResult">${esc(this._shipmentRetryResult)}</div>`;
+    for(const {f,cls} of rows)h+=`<div class="box shipmentAllRow" data-cls="${cls}"><div class="mini"><b>${esc(f.name||('Filo '+f.id))}</b> · ${f.ships.length} gemi · ${lbl[cls]}</div><div class="mini">${esc(shipmentStatus(f))}</div><button class="abtn" data-a="shipmentMenu" data-x="${f.id}">SEVKİYATI YÖNET</button></div>`;
+    return h+'<div class="mini">Yolda, savaşta, geri çekilen ve birleşme bekleyen sevkiyatlar değişmez. Hedefi kaybolan sevkiyat için SEVKİYATI YÖNET → yeni hedef.</div></section>';
+  },
   shipmentRow(f,action=true){
     const d=f.shipment||{},target=d.fleet??f.joinFleet,main=G.fleets.find(x=>x.id===target&&x.e===f.e&&x.ships.length);
     const label=target!==undefined?(main?.name||'Hedef filo bulunamadı'):(G.sys[d.sys??f.rallyTo]?.name||'Geçersiz sistem');
@@ -553,6 +564,15 @@ const UI = {
         this.keepScroll=true;this.refresh();break;
       }
       case 'shipmentMenu': this.shipmentMenu(G.fleets.find(f=>f.id===+x)); break;
+      case 'shipmentRetryAll': {   /* FIELD-WAR-SIEGE.0: çift dokunuş ikinci denemeyi başlatmaz (bekleyen bayrak) */
+        if(this._shipmentRetryPending||Date.now()-(this._shipmentRetryAt||0)<1200)break;   /* hayalet / çift dokunuş: son sonucu korur */
+        this._shipmentRetryPending=true;this._shipmentRetryAt=Date.now();
+        const r=shipmentRetryAll(G.p);
+        if(r&&r.pending){this._shipmentRetryResult=r.why||'';this.keepScroll=true;this.refresh();break;}
+        this._shipmentRetryPending=false;
+        this._shipmentRetryResult=r.ok?r.text:r.why;if(r.ok)say('SEVKİYAT — '+r.text,'sci');else say(r.why,'war');
+        this.keepScroll=true;this.refresh();break;
+      }
       case 'shipmentApply': {
         const [token,choice]=String(x).split(':'),p=this._shipmentPending;
         if(!p || String(p.token)!==token || p.world!==G.sys)break;
@@ -2410,8 +2430,11 @@ const UI = {
     const conflicts=planetConflictStates(s);
     if(conflicts.length){h+='<section class="box warStatus"><div class="bt">⚔ GEZEGEN SAVAŞI</div>';
       for(const x of conflicts){const pl=s.planets.find(p=>p.i===x.planet);
-        h+=`<div class="bd"><b>${esc(pl.name)} — ${x.kind==='invasion'?'⚑ İşgal sürüyor':'💥 Bombardıman'}</b><br>${esc(G.emps[x.attacker].name)} → ${esc(G.emps[x.defender].name)}<br>Kalkan ${fmt(x.shield)} · Garnizon ${fmt(x.garrison)}${x.siege?' · Kuşatma '+x.siege+'/6 ay':''}</div>`;
+        h+=`<div class="bd"><b>${esc(pl.name)} — ${x.kind==='invasion'?'⚑ İşgal sürüyor':'💥 Bombardıman'}</b><br>${esc(G.emps[x.attacker].name)} → ${esc(G.emps[x.defender].name)}<br>Kalkan ${fmt(x.shield)} · Garnizon ${fmt(x.garrison)}${x.siege?' · Kuşatma '+x.siege+'/6 ay':''}${(st=>st?'<br><span class="siegeSt" data-code="'+st.code+'">'+esc(st.text)+'</span>':'')(typeof siegeStatus==='function'?siegeStatus(s,pl,x.attacker):null)}</div>`;
       }h+='</section>';
+    }
+    for(const x of (typeof siegeStopRows==='function'?siegeStopRows(s):[])){const pl=s.planets.find(p=>p.i===x.planet);   /* FIELD-WAR-SIEGE.0 */
+      h+=`<section class="box warStatus"><div class="bt">⏸ KUŞATMA DURDU</div><div class="bd"><b>${esc(pl.name)}</b> — ${esc(G.emps[x.owner]?.name||'Bilinmiyor')}<br><span class="siegeSt" data-code="nowar">${esc(x.text)}</span></div></section>`;
     }
     if(pVis(s)||s.planets.some(p=>p.owner===0))for(const pl of s.planets){const last=pl.col&&pl.col.lastWarResult;
       if(last&&G.day-last.day<=90)h+=`<div class="mini">⚑ ${esc(pl.name)}: kontrol ${esc(G.emps[last.from]?.name||'Bilinmiyor')} → ${esc(G.emps[last.to]?.name||'Bilinmiyor')}</div>`;
@@ -3294,6 +3317,7 @@ const UI = {
       }
     }
     if (!mine.length) return h + `<div class="empty">Filon yok.</div>`;
+    h+=this.shipmentsSection();   /* FIELD-WAR-SIEGE.0 */
     const filters={all:'Tümü',war:'Savaş',science:'Bilim',colony:'Koloni',build:'İnşaat',idle:'Bekleyen'};
     const waiting=fl=>fl.sys>=0&&!fl.path.length&&!fl.combat&&!fl.auto&&!fl.surv&&!hasShipment(fl);
     const fits=(fl,k)=>k==='all'||k==='war'&&isArmed(fl)||k==='science'&&fleetHasRole(fl,'bilim')||k==='colony'&&fleetHasRole(fl,'koloni')||k==='build'&&fleetHasRole(fl,'insaat')||k==='idle'&&waiting(fl);
@@ -10006,6 +10030,7 @@ UI.warPreviewGoalHtml=function(p){
   if(L){h+=`<div class="ph">GEREKÇELER VE MEŞRUİYET</div><div class="row"><span>Meşruiyet</span><b>${Math.round(L.score*100)} / gereken ${Math.round(L.need*100)} · ${esc(L.level.toUpperCase())}</b></div>`;
     h+=L.list.length?L.list.map(j=>`<div class="mini">• ${esc(j.n)} · güç ${Math.round(j.strength*100)} · ${j.age?esc(j.age+' ay önce'):'güncel'} · ${esc(j.evidence)}</div>`).join(''):'<div class="mini">Kayıtlı gerekçe yok. Talep ne kadar büyükse o kadar güçlü gerekçe gerekir.</div>';
     h+=`<div class="mini">Bilinen güç oranı ≈ ${L.ratio}${L.band?' (±%'+Math.round(L.band*100)+')':''}.</div>${L.uncertain?`<div class="mini">⚠ ${esc(L.uncertain)}</div>`:''}`;}
+  if(p.exh){const x=p.exh;h+=`<div class="ph">SAVAŞ YORGUNLUĞU</div><div class="mini">Senin: %${x.own} · ${esc(p.target.name)}: ${x.foe===null?'bilinmiyor (SIZILMIŞ istihbarat gerekir)':'%'+x.foe+' ('+esc(x.basis)+')'}. Taraflardan biri %100'e ulaşınca savaş zorunlu barışla kendiliğinden durur; önceki savaşın yorgunluğu barışta ayda 2,5 azalarak taşınır.</div>`;}   // FIELD-WAR-SIEGE.0
   if(p.stances){h+='<div class="ph">TAHMİNİ TUTUMLAR</div>';h+=p.stances.length?p.stances.map(r=>`<div class="mini">${esc(r.name)} · <b>${esc(WAR_STANCE_TEXT[r.stance])}</b> · ${esc(r.why)}</div>`).join(''):'<div class="mini">Temaslı başka devlet yok.</div>';
     h+='<div class="mini">Tutum siyasi tepkidir; askerî katılım bütçe, rota ve cephelere göre ayrıca belirlenir. Gizli taahhütler ve temas kurulmamış devletler gösterilmez.</div>';}
   return h;

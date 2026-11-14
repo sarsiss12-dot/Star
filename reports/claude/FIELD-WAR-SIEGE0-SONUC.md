@@ -1,0 +1,222 @@
+# FIELD-WAR-SIEGE.0 — savaşın kendiliğinden kapanması, kuşatma ve toplu sevkiyat (14 Kasım 2026)
+
+**Dil kuralı:** PASS / PARTIAL / FAIL / NOT RUN ayrı yazılır.
+
+**Test ortamı:**
+- Tarayıcı testleri bu konteynerde **yerel Chromium**'dur.
+- MP'de üretim relay süreci ve yerel TLS vekili kullanılır.
+- Canlı Render, fiziksel Android, LAN ve kullanıcı kabulü **NOT RUN**.
+
+Kullanıcının kayıt dosyası eklenmedi. Saha belirtileri kontrollü fikstürle yeniden üretildi (§2–§4). Hiçbir madde TAMAMLANDI değildir.
+
+## 0. Kısa sonuç
+
+**Savaş neden kapandı**
+- Synarth Sığınağı (AI) %100 savaş yorgunluğuna ulaştı. Yorgunluk 100'e varınca savaş her zaman zorla kapanır.
+- Synarth'ta **Kan Hukuku** doktrini var; doktrin barış antlaşmasını yasaklar.
+- Bu durumda eski kod `makePeace`'i atlayan ayrı bir dal çalıştırıyordu. Aynı gün iki mesaj yazıyordu:
+  - "ORDU SAVAŞAMIYOR — … çatışma kendiliğinden durdu"
+  - "Synarth Sığınağı savaştan çekildi — barış imzalandı"
+- İkisi **aynı kapanıştır** (§2, `repro-war-close.txt`, gün 60).
+- Aynı dal Fetih iadesini, savunma ve gerekçe temizliğini ve haberi atlıyordu. Defterde kapanışı yapan taraf yazılmıyordu (`actor:auto`).
+- Yeniden ilanda savaşın çabuk kapanmasının nedeni yorgunluğun devredilmesidir. Rakip yorgunluğu barıştan sonra %55'ten başlar ve ayda 2,5 azalır. Bu geçerli bir kural; artık ilan önizlemesinde gösteriliyor.
+- **Düzeltme:** tek kapanış yolu `warExhaustionClose`.
+  - Her durumda `makePeace` defteri tutulur.
+  - Doktrin kilidinde neden `exhaustion-lock` ("zorunlu ateşkes"), değilse `exhaustion`.
+  - Defterde çekilen taraf ve savaş numarası yazılır.
+  - Oyuncuya tek bildirim gider.
+
+**36K kuşatma neden ilerlemedi**
+- Gezegenin sahibiyle savaş sürerken gerçek iki engel vardı:
+  1. **Yürümeyen kara ordusu "yolda" sayılıyordu.** Bekletilen, rotası kapalı ya da savaşta olan bir ordu bile son direnişi **18 ay** ateşkeste tutuyordu (garnizon %8 tabanı).
+     - Kontrol fikstüründe 36K filo bu sürede ikmalsizlikten eridi (güç 0).
+     - Gezegen 30 ayda alınamadı.
+     - Adayda aynı kurulum **6 ayda** alınıyor.
+  2. **Barıştan kalan kuşatma sayacı** (`col.siege`) sıfırlanmıyordu.
+     - Garnizon toparlanması kalıcı olarak duruyordu (kontrolde garnizon 0, sayaç 3/6 sonsuza dek).
+     - Sonraki savaş eski sayaçtan devam ediyordu.
+- Kurala bağlı iki bekleme düzeltilmedi, panelde açıklandı:
+  - savaş bitince bombardımanın durması;
+  - yörüngedeki müttefik kara birliklerinin garnizonu her ay desteklemesi.
+- **SİSTEM** panelinde "⚔ GEZEGEN SAVAŞI" altında gerçek durum gösteriliyor:
+  - "Kalkan düşürülüyor — kalkan n"
+  - "Kara ordusu bekleniyor — son direniş korunuyor (ateşkes a/18 ay)"
+  - "Müttefik kara birlikleri garnizonu her ay destekliyor…"
+  - "Garnizon bastırılıyor"
+  - "Bombardıman ilerlemesi k/6 ay"
+- Savaş bitmişse ayrı "⏸ KUŞATMA DURDU — gezegen sahibiyle savaş sona erdi (neden, gün n)" bölümü çıkar.
+- Misafir bu bilgiyi host durumundan alır.
+
+**Bekleyenleri Yeniden Dene — gerçek sonuçlar**
+- Fikstür: Arran ve Lyrdex-59 tersanelerinden "Araştırma 3"e sevkiyat ("güvenli rota yok"; Lyrdex-59 otomatik deneme sınırında) + kapalı rotalı + hedefi kayıp + yolda.
+- Tek dokunuş sonucu: **"2 yola çıktı · 1 güvenli rota bekliyor · 1 hedef bulunamadı — hedef değiştir · 1 zaten yolda"**.
+  - Düğme etiketi (3) → (1).
+  - Kaynak ve gemi sayısı değişmedi.
+  - Çift dokunuşta motor tek kez çağrıldı.
+- 11 bekleyende ortak rota bütçesi: 8 rota hemen hesaplandı, **"3 rota hesabı sırada"**; sonraki filo adımında arandılar.
+- MP misafiri kendi panelinden kullandı: host'ta **tek** uygulama; başka devletin sevkiyatı değişmedi.
+
+## 1. Kaynak, dal, sürüm
+
+| | |
+|---|---|
+| Doğrulanmış taban | Taslak PR **#45** açık. GitHub HEAD `claude/stars-war-goals0` = **`03a3aa432c2a126ace8180844f0735e60209d679`** (p31; PR'ın head SHA'sı, API ile doğrulandı). Daha yeni uygun taban yok. |
+| Başlangıç HEAD | `03a3aa432c2a126ace8180844f0735e60209d679` |
+| Aday dal | **`claude/stars-field-war-siege0`** |
+| Render Branch adı | `claude/stars-field-war-siege0` (dağıtım yapılmadı) |
+| Bitiş HEAD ve PR | Taslak PR **#46** — https://github.com/sarsiss12-dot/Star/pull/46 (taban #45 `claude/stars-war-goals0`); son commit PR'da ve sonuç raporunda |
+| Sürüm | oyun **96h10p32** · PWA `stars-v96h10p32` · Save8 **v8** · MP **MP.8.9b29** · paket **4** · protokol **1** |
+| Paket uyumu | p32 yükleyicisi p6–p31, p25u1 ve p27s1 paketlerini kabul eder |
+| Save8 | Yeni zorunlu alan yok. Sevkiyat kayıtları aynı `f.shipment` biçimindedir. Ayna alanı `col.siegeEnd` yalnız misafir aynasındadır; Save8'e yazılmaz. |
+
+## 2. Sorun 1 — elle ilan edilen savaş kendiliğinden kapanıyor
+
+### 2.1 Zincir
+
+| Adım | İçerik |
+|---|---|
+| **İlk davranış** | Kontrol `03a3aa4`, fikstür `repro-war-close.cjs`: oyuncu Synarth'a ilan eder, Synarth yorgunluğu 99,5. **Gün 60**'ta tek kapanış olur. Kan Hukuku'lu dalda günlükte iki mesaj çıkar: "ORDU SAVAŞAMIYOR — Synarth Sığınağı ile çatışma kendiliğinden durdu" ve "Synarth Sığınağı savaştan çekildi — barış imzalandı". Defter: `exhaustion\|actor:auto`. Doktrinsiz dalda da üç ayrı mesaj çıkar. |
+| **Neden** | `warExhTick` (diplomacy.js) yorgunluk ≥ 100'de iki dala ayrılıyordu. **Kilitli dal** (`!canPeace`) `makePeace`'i atlıyordu: Fetih iadesi, `warDefense`/`warCause`, vekil savaşlar, haber ve toprak vaadi sonu çalışmıyordu. Mesaj "barış imzalandı" diyordu. Kapanışı yapan taraf yazılmıyordu. Bildirim yalnız `id===0` için gidiyordu. |
+| **Yeniden ilanın çabuk kapanması** | Geçerli kural. Rakibin yorgunluğu kapanışta %55'e iner, barışta ayda 2,5 azalır. Yeni savaşta ayda en az +1,3 artar; gemi kaybı 1,6, sistem kaybı 6. Yeniden ilan bu birikimin üstünden başlar. `warStart` sıfırlanır; eski emirler, taraf kayıtları ya da bitiş koşulları yeni savaşa geçmez (W4, W6). |
+| **Değişiklik** | `warExhaustionClose(e,o)`: kilitte `wg`/`proxyWar` temizlenir. Sonra `makePeace(e,o,lock?'exhaustion-lock':'exhaustion',e.id,{force:true,quiet:true})` çağrılır, yorgunluk 55 / min(·,55) olur. Tek bildirim: "SAVAŞ YORGUNLUĞU %100 — … zorunlu barış \| zorunlu ateşkes (doktrin barış antlaşmasını yasaklıyor) … · Savaş #n". `makePeace` yalnız `opts.force` ile `canPeace`'i atlar; olağan çağrılar değişmez. |
+| **Önizleme** | `warExhaustionForecast(actor,target)`: kendi yorgunluğun kesin. Rakibinki SIZILMIŞ istihbaratla kesin; yoksa son zorunlu barıştan tahmin edilir; ikisi de yoksa "bilinmiyor". Kayıpsız kalan ay da verilir. Savaş ilanı ÖNİZLEMESİ'nde "SAVAŞ YORGUNLUĞU" bloğu ve riskler satırı gösterilir (yalnız oyuncunun bildiğiyle). |
+| **Son test** | Node `field_war_siege0_test` W1–W6 **6/0** (kontrolde W2/W3/W4 FAIL). Chromium F1 PASS. |
+
+### 2.2 Kabul
+
+| Durum | Sonuç |
+|---|---|
+| Yeni savaş + olağan barış (W1) | PASS — tek cephe, `agreement\|actor:0`, tarih defterde |
+| Geçerli zorunlu barış (W2) | PASS — `exhaustion\|actor:1` (çekilen Synarth), tek bildirim, yorgunluk 55 |
+| Zorunlu ateşkes, doktrin kilidi (W3) | PASS — `exhaustion-lock\|actor:1`, savaş hedefi temizlendi, "barış imzalandı" yok |
+| Aynı hedefe art arda iki elle ilan (W4) | PASS — her ilan ayrı cephe; önizleme rakip yorgunluğunu ve risk satırını gösterir; hiçbir cephe iki kez kapanmaz; A↔S arası toprak el değiştirmez |
+| Fetih v2 zorunlu barışta (W5) | PASS — hedef dışı işgal **tam bir kez** iade, hedef sistem kalır, kapanıştan sonra ikinci devir yok |
+| Kayıt/yükleme (W6) | PASS — yeniden ilan edilmiş savaş Save8'den yüklenir; sonraki kapanış aynı gün ve nedenle |
+| Kim, neden, hangi tarihte | Defter `endReason` = `neden\|actor:<çekilen>`, `ended` = oyun günü; bildirimde "Savaş #n". |
+| Vasallaştırma, ayrı barış, işgal, toprak vaadi | Kapanış artık hep `makePeace`'ten geçer. p31'in mevcut yolu kullanılır: `warFetihSettle`, `warPromiseFrontEnded`, `resolveProxyWars`. Teslim vasallığı yorgunlukla ilgisiz (p31 testleri, §6). |
+
+## 3. Sorun 2 — 36K filo kuşatmada ilerleme görmüyor
+
+### 3.1 Ölçüm (oyun tarihi; `repro-siege.cjs`, `repro-siege.txt`)
+
+Fikstür: orta harita, seed 22. Oyuncunun ≈36K filosu Synarth başkentinde, savaş sürüyor.
+
+| Senaryo | Kontrol `03a3aa4` | Aday |
+|---|---|---|
+| Kara ordusuz bombardıman | 6 ayda alındı (sayaç 1…6/6) | 6 ay (aynı) |
+| Kara ordusu çıkarması | 1 ay | 1 ay (aynı) |
+| Bekletilen kara ordusu (ortak plan bekletmesi) | **30 ayda alınamadı.** Ateşkes 18 ay, garnizon %8 tabanında; **36K filo ikmalsizlikten eridi (güç 0)** | **6 ay**, ateşkes yok |
+| Kale + bekletilen ordu | **alınamadı** (aynı) | 6 ay |
+| Rotası kapalı ordu sevkiyatı (K4) | "yolda" sayılıyordu | sayılmaz, 6 ayda alınır |
+| Kuşatma ortasında barış (3. ay) | sayaç **3/6'da kalır**, garnizon **0'da kalır** (toparlanma yok) | sayaç 0, garnizon toparlanır (86'ya) |
+| Yörüngede müttefik kara birliği | 12 ay 1/6'da takılı (birlik eriyince 17. ayda) | aynı **kural**; panel nedeni söyler |
+| Gerçekten yürüyen kara ordusu (K9) | yoldayken ateşkes, varınca çıkarma | aynı (1.–2. ay ateşkes, 3. ay alındı) |
+
+### 3.2 Zincir
+
+| Adım | İçerik |
+|---|---|
+| **Neden 1 (hata)** | `incomingArmy` bekletilen (`jointHoldUntil`), savaşta, geri çekilen ya da sevkiyatı `blocked/paused/lost` olan orduyu da "yolda" sayıyordu. Hareketli orduda hedefi bir sonraki durak (`mv.to`) sanıyordu. Bu yüzden son direniş 18 ay ateşkeste kalıyordu. |
+| **Neden 2 (hata)** | Kuşatan kalmadığında ya da savaş bitince `col.siege`, `truce` ve `truceAge` sıfırlanmıyordu. `groundTick` "kuşatma altında" sanıp garnizonu doldurmuyordu; sonraki savaş eski sayaçtan sürüyordu. |
+| **Kural (açıklandı)** | Savaş bitince bombardıman ve çıkarma durur. Müttefik kara birlikleri garnizonu destekler. Kalkan 5 üstündeyken çıkarma yoktur. Son direnişte bombardıman etkisi düşüktür. |
+| **Değişiklik** | `incomingArmy`: yürümeyen ordu sayılmaz, varış = yolun son durağı. `groundTick` başında `siegeStaleClear(sys,pl)`: kuşatan silahlı ve savaşta bir güç yoksa sayaç ve ateşkes sıfırlanır. `siegeStatus` / `siegeStopRows` gerçek koloni alanlarından metin üretir. Filo gücü, bombardıman ve kara çıkarmasının rolleri aynı. RNG yok. |
+| **Panel** | SİSTEM → "⚔ GEZEGEN SAVAŞI" satırında durum metni (`.siegeSt[data-code]`). Kendi filon yabancı kolonideyse ve savaş son 720 günde kapandıysa "⏸ KUŞATMA DURDU" + neden ve gün. |
+| **MP** | Ayna, yalnız sahibiyle savaşta olan ve yörüngesinde duran filosu bulunan misafire `truce`, `truceAge`, `reinforced` alanlarını ekler. Savaş yoksa ve filo yörüngedeyse kamu savaş sonu özeti `siegeEnd {d,r}` gider (K8 Node, MP8 K2). |
+| **Son test** | Node K1–K9 **9/0** (kontrolde K1, K3, K5–K9 FAIL; K1, K6–K9 yeni durum işlevleri yüzünden). K9: gerçekten yürüyen ordu (birkaç durak uzakta) yoldayken ateşkes + "Kara ordusu bekleniyor" (1.–2. ay), 3. ayda çıkarma, tek sahiplik değişimi — mevcut kural korunur. Sahiplik her senaryoda tam bir kez değişir (K1, K2). Chromium F2 PASS, MP8 K2 PASS. |
+
+Saha süresi gerçek dakikadır; motor oyun tarihiyle ilerler. "5–10 gerçek dakika" ölçülen hıza bağlıdır ve doğrulanmadı. Bekletilen ordu ve barış sonrası sayaç mekanizmaları oyun ayıyla kanıtlandı.
+
+## 4. Sorun 3 — Bekleyenleri Yeniden Dene
+
+| Adım | İçerik |
+|---|---|
+| **İlk davranış** | Sevkiyatlar yalnız seçili filonun SEVKİYAT kutusundan, tek tek "YENİDEN DENE" ile denenebiliyordu. |
+| **Değişiklik** | `shipmentRetryList(e)` / `shipmentRetryAll(e)` (main.js). Sınıflar: `retry` (blocked/paused/ready), `moving`, `combat`, `retreat`, `waiting`, `lost`. Yeniden denenecekler mevcut `followRallyFleet` ile aranır (güvenli rota, hareketli hedef izleme); tekli denemeyle aynı sıfırlama yapılır. Ortak bütçe 8; artanı `ready` kalır ve sonraki `stepFleets` adımında aranır. |
+| **Arayüz** | FİLO sekmesi, filo seçiminden bağımsız "SEVKİYATLAR (n)" bölümü: "Bekleyenleri Yeniden Dene (N)", gerçek sonuç metni, her sevkiyatın durumu ve "SEVKİYATI YÖNET" (hedef değiştir). Çift ya da hayalet dokunuş 1,2 sn korunur; misafirde host yanıtına kadar "Host denetliyor…". |
+| **MP** | Yeni host komutu `shipmentRetryAll` (`keys:['kind']`). Sahiplik ve durum host'ta yeniden sınıflanır; yeniden denenecek yoksa `nothing-to-retry`. Misafir sarmalayıcısı sonucu host yanıtından yazar (iyimser sonuç yok). |
+| **Son test** | Node S1–S5 **5/0**: tek liste, çift çağrı, bütçe 8 + 3 sırada, kayıt/yükleme, MP sahiplik. Chromium F3 PASS. MP8 K1 PASS (çift gerçek dokunuş → host'ta tek çağrı). |
+
+## 5. Testler
+
+| Test | Sonuç |
+|---|---|
+| `node tests/field_war_siege0_test.js` | aday **20/0** (`node-aday.log`) · kontrol `03a3aa4` **5/15** (ilk FAIL kanıtı `node-control-03a3aa4.log`) |
+| `tests/browser-field-war-siege0.cjs` (SP, 844×390, gerçek dokunma) | **3/0** — F1 tek bildirim + önizleme yorgunluğu, F2 kuşatma paneli + KUŞATMA DURDU, F3 toplu sevkiyat |
+| `MP8_SCEN=K node tests/browser-mp8.cjs` (host + 1 misafir) | ilk koşu 2/1 (K2 regex "antlaşması" ≠ motor metni "anlaşması"; test hatası, `mp8-K-run1.log` korunur) → **3/0** (`mp8-K-run2.log`) |
+| Kampanya (kontrol / aday) | §6 |
+| Tam regresyon | §7 |
+
+## 6. Kampanya (yalnız AI, orta harita)
+
+Yalnız AI, orta harita. Kollar: kontrol `03a3aa4` (`git archive` sabit kopya) ve aday. Aynı tohum; oyuncu devleti emir vermez.
+- Betik: `evidence/field-war-siege0/kampanya/camp.cjs`.
+- Ham sonuç: `camp-7ai-120ay.jsonl` (7 AI, 120 ay), `camp-10ai-240ay.jsonl` (10 AI, 240 ay).
+- Plasebo kolu koşulmadı; bu yüzden kampanya düzeyinde fayda **iddia edilmez**.
+
+**Belirlenimli sonuçlar (iddia edilen)**
+
+7 AI, 120 ay. Tohum 22 iki kolda aynı; tohum 11 ve 23'te yorgunluk kapanışları aynı ama ele geçirme sayısı ve takılı kuşatma farklı:
+
+| Tohum | Kontrol yorgunluk kapanışı | Aday | Kontrol barıştan kalan takılı kuşatma sayacı | Aday |
+|---|---|---|---|---|
+| 11 | `exhaustion` 2 | `exhaustion-lock` 2 | 1 | 0 |
+| 22 | — | — | 0 | 0 |
+| 23 | `exhaustion` 4 | `exhaustion-lock` 4 | 1 | 0 |
+
+- Kontrolde doktrin kilitli AI kapanışları sıradan `exhaustion` olarak kaydediliyordu. Adayda aynı sayıda kapanış doğru nedenle (`exhaustion-lock`) kaydedilir.
+- Barıştan kalan, savaşı bitmiş kuşatma sayacı adayda 0.
+
+**10 AI, 240 ay**
+- Kontrol ve aday ilk olarak şu kontrol noktalarında ayrılır: tohum 23 → 72. ay, 11 ve 22 → 144, 7 → 168, 404 → 192.
+- Sonrası kaotiktir:
+  - cephe sayısı 1–14;
+  - ele geçirme sayacı kriz tarafının sıfır etkili çağrılarını da sayıyor (tohum 11 kontrolünde 780).
+- Takılı kuşatma sayacı 240. ayda: kontrol 1 / 2 / 1 / 0 / 1, aday 0 / 0 / 0 / 0 / 0.
+- Bu bant genişliğinde savaş sayısı, fetih ya da hayatta kalma için yön iddia edilmez.
+
+## 7. Regresyon
+
+Günlükler: `evidence/field-war-siege0/regresyon/`. p31 karşılaştırması: aynı makine, aynı betik (`reg31.sh` → `reg32.sh`).
+
+| Küme | p31 (`03a3aa4`) | p32 aday |
+|---|---|---|
+| Node tam koşu | 202 paket · 6280 geçen / 281 kalan | **203 paket · 6300 / 280** |
+| Paket paket fark | — | Yalnız yeni `field_war_siege0` (19/0; K9 sonradan eklendi, son koşu 20/0) ve `mp11_online` (p31'de 8/1 zamanlama FAIL'i, bu koşuda 9/0). Öteki 201 paketin GEÇEN/KALAN sayıları aynı; bilinen eski FAIL'ler (faz86b, faz95d coğrafya vb.) değişmedi. |
+| Chromium | 9 test PASS | `browser-field-war-siege0` **3/0** (yeni); war-goals0 5/0, rival-blocs0 9/0, pregame-galaxy0 10/0, bgreturn-galaxy0 14/0, share-galaxy0 8/0, sp-map-war 4/0, fed-fleet0-sp 4/0, mobile-hud0 4/0, event-ux0 11/0 |
+| MP8 | W 4/0, D 5/0, G 5/0, L 6/0, S 4/0, E 6/0, F 6/0 | **K 3/0** (yeni); W 4/0, D 5/0, G 5/0, L 6/0, S 4/0, E 6/0, F 6/0 |
+| MP8 P (500 sistem / 16 AI / 2 insan / 15 dk, DESYNC) | 8/0 · en büyük gecikme 24,2 gün · maxStill 4462 ms · host günü 6331 · son ay 6,6 sn | İlk koşu **7/1** (aşağıda) → tekrar **8/0** · en büyük gecikme **17,6 gün** · maxStill **626 ms** · donma 0 · 20/20 gemi siparişi aynaya yansıdı · host günü **6661** · son ay 4,8 sn · misafir aynası hiç reddedilmedi · Save8 geçerli |
+
+**MP8 P ilk koşu FAIL** (`mp8-P-ilk-FAIL.log`, `mp8-P-ilk-FAIL-soak.json`)
+- t+381'deki komut ölçümü misafirde açık pencereyi kapatıyor, sonra hareket ve gemi emri gönderiyor.
+- Host gemi siparişini kabul etti (ACK rev 1547). 20 sn içinde misafirin uygulanmış dünyası o revizyona ulaşmadı.
+- O aralıkta misafirde yeniden bir STARS penceresi açıktı:
+  - örnekte `mo:1`;
+  - bekletilen kurulum sayacı 94 → 172 (≈ 78 × 250 ms);
+  - son durumda açık pencere "İÇ İSTİKRAR".
+- Açık pencere aynayı **tasarım gereği** bekletir (MP.6.1).
+- Pencere kapanınca (t≈405) ayna 3 sn içinde tekrar eşitlendi; kalıcı donma yok, misafir aynası reddedilmedi.
+- Pencereyi kimin açtığı (maymunun ölçümden önce kuyruğa giren dokunuşu mu, host kaynaklı bir kart mı) kesinleştirilmedi.
+- Bu fazın değişiklikleri pencere açmıyor; açılan pencere SEVKİYAT ya da kuşatma pencereleri değil.
+- Aynı senaryo tek kez yeniden koşuldu: 8/0. İlk FAIL kanıt olarak korunur; kök nedeni **açık** (test ölçümünün kapalı pencere varsayımı).
+
+## 8. Yayın
+
+| | |
+|---|---|
+| ZIP | `releases/stars-faz96h10p32.zip` (20 girdi: 19 runtime + `RELEASE-MANIFEST.json`) |
+| ZIP SHA-256 | `dd0de3f7961bb1709bdfd90a20dc1d2a349b17234c062a8051b28559c34e1765` |
+| ZIP CRC32 | `4F5AB2A4` (dosyanın tamamı) |
+| Manifest SHA-256 | `dbf81512cf4dd775b3632695cec37d41ca8e62d8f29a05e2e7f70ee6dc381ffc` |
+| Belirlenimlilik | `tools/package-release.py` iki kez → bayt bayt aynı |
+| Doğrulama | ZIP çıkarılıp `python3 tools/verify-release.py --root <dizin>` → **DOĞRULANDI: 19 dosya; oyun build 96h10p32**; çalışma ağacında da aynı |
+| Manifest | `parent_commit` `03a3aa4…`, `parent_zip_sha256` p31 ZIP `c72a48f5…e138` |
+| Koruma | `tests/helpers/field-war-siege0-reviewed.{json,cjs}` (taban 03a3aa4; 10 dosya, TAM METİN hunk) → `beta-war-goals0-reviewed` zincirinin başına; hash gevşetilmedi, test silinmedi |
+| MP dosyaları | `research/mp0/mp-core.js`, `research/mp6/mirror.js`, `research/mp6/client/guest-stars.js`, `research/mp1/client/view.js`, `research/mp1/server/relay.js` ZIP dışında ayrı teslimdir; host ve istemci birlikte p32 olmalı |
+
+## 9. Açık işler ve sınırlar
+
+- Saha kaydı yok. Gerçek oturumun Synarth'ının Kan Hukuku taşıdığı **doğrulanmadı**; aynı iki mesajı yalnız kilitli dal ürettiği için çıkarımdır.
+- 36K bekleme süresinin gerçek dakika karşılığı doğrulanmadı (§3).
+- Müttefik kara birliği desteği ve savaş sonrası bombardımanın durması kuraldır, değiştirilmedi; panelde açıklanır.
+- AI kuşatma kararları değişmedi. Kural düzeltmeleri AI savaşlarını da etkiler (§6).
+- Fiziksel Android, canlı Render, LAN: **NOT RUN**. Kullanıcı kabulü yok; main'e birleştirme ya da dağıtım yapılmadı.

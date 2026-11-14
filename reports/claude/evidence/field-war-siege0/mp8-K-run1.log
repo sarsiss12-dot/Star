@@ -1,0 +1,73 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":372,"buildMs":387,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":3.7,"p95":3.7,"max":3.7},"longtask":{"n":0},"heapMB":15,"dom":724,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":27.2,"p95":27.2,"max":27.2},"refresh":{"n":1,"med":1.4,"p95":1.4,"max":1.4},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":21,"joinErrors":0}}}
+PASS K0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS K1 misafir FİLO → SEVKİYATLAR → "Bekleyenleri Yeniden Dene (3)": çift dokunuş host'ta tek uygulama; sonuç metni host yanıtı; başka devlete dokunulmaz
+FAIL K2 misafirin SİSTEM paneli: ateşkeste "Kara ordusu bekleniyor", barıştan sonra "KUŞATMA DURDU — savaş sona erdi" (host durumundan)
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Kuşatma durdu — gezegen sahibiyle savaş sona erdi \(Diplomatik barış antlaşması, gün \d+\)/. Input:
+
+'⚔ Ortak askerî koordinasyon\n' +
+  'Cynaephor\n' +
+  'Yıldız\n' +
+  'M Kırmızı Cüce\n' +
+  'Sistem hâkimiyeti\n' +
+  'Tharaeth Lejyonu\n' +
+  'Hiper yol\n' +
+  '4 bağlantı\n' +
+  'Tharaeth Lejyonu\n' +
+  '1 sistem · YABANCI\n' +
+  'Filo gücü: ≈1303 ?\n' +
+  'İlişkin\n' +
+  '-10\n' +
+  'Yürürlükte ortak antlaşma yok\n' +
+  '🤝 İLİŞKİ VE EYLEMLER\n' +
+  '🕵 CASUSLUK\n' +
+  '📦 Lojistik ağ\n' +
+  'Kapsam dışı — 7 atlama (%40)\n' +
+  'Buraya gönderilen filo %40 hasarla savaşır; kalkanı %34 çalışır. Gövde dayanımı değişmez. Yakınına karakol ya da tersane kurmak hattı ileri taşır.\n' +
+  'Harita: ◇ uygun boş dünya · ■ yerleşilmiş uygun dünya. Son taranmış gözlem; güncel görünmeyen durum değişebilir.\n' +
+  '⏸ KUŞATMA DURDU\n' +
+  'Cynaephor IV — Tharaeth Lejyonu\n' +
+  'Kuşatma durdu — gezegen sahibiyle savaş sona erdi (Diplomatik barış anlaşması, gün 0). Bombardıman ve çıkarma yalnız aktif savaşta işler.\n' +
+  'GEZEGENLER\n' +
+  'Cynaephor I\n' +
+  'Volkanik · boyut 15\n' +
+  'Kolonileştirilemiyor: Yaşanabilirlik %35 altında\n' +
+  'Cynaephor II\n' +
+  'Buzul · boyut 15\n' +
+  'Kolonileştirilemiyor: Yaşanabilirlik %35 altında\n' +
+  'Cynaephor III\n' +
+  'Toksik · boyut 18\n' +
+  'Kolonileştirilemiyor: Yaşanabilirlik %35 altında\n' +
+  '▾\n' +
+  'Cynaephor IV\n' +
+  'Çöl · yaşanabilirlik %38 · boyut 18\n' +
+  'Fetih engeli: Gezegen sahibiyle savaş yok\n' +
+  'Koloni sahibi: Tharaeth Lejyonu\n' +
+  '◈ Bereketli Ovalar (+5 Yiyecek)\n' +
+  'Nüfus\n' +
+  '12 / 16\n' +
+  'İstikrar / moral\n' +
+  '0\n' +
+  '⚠ Moral çökük — kuşatma altında teslim olabilir\n' +
+  'Cynaephor V\n' +
+  'Volkanik · boyut 17\n' +
+  'Kolonileştirilemiyor: Yaşanabilirlik %35 altında\n' +
+  '◈ Kristal Oluşumu (+3 Mineral, +2 Araştırma)\n' +
+  'UZAY YAPILARI\n' +
+  'Uzay yapısı için İnşaat Gemisi gerekir (tersanede İNŞ).\n' +
+  'YÖRÜNGEDE\n' +
+  '1. Filo\n' +
+  '3 gemi · 416 güç\n' +
+  'Yerleşim 3\n' +
+  '1 gemi · sivil\n' +
+  'Yabancı\n' +
+  '2 gemi · 448 güç\n' +
+  'Ana 36K\n' +
+  '351 gemi · 36.1K güç\n' +
+  'BEKLİYOR'
+
+    at /home/user/Star/tests/helpers/field-war-siege0-mp.cjs:58:126
+    at async test (/home/user/Star/tests/browser-mp8.cjs:42:162)
+    at async module.exports (/home/user/Star/tests/helpers/field-war-siege0-mp.cjs:47:3)
+    at async /home/user/Star/tests/browser-mp8.cjs:423:17
+GEÇEN: 2 KALAN: 1

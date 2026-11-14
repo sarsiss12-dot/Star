@@ -1515,6 +1515,7 @@ function groundTick(){
       if (col.garrison === undefined) col.garrison = taban;
       if (col.garrison < taban){
         /* Kuşatma altındaysa toparlanma durur */
+        siegeStaleClear(sys, pl);   // FIELD-WAR-SIEGE.0: savaş bitmiş / kuşatan yoksa eski sayaç kalmaz
         const kusatmaVar = (col.siege || 0) > 0;
         /* Sıkıyönetimde garnizon üç kat hızlı toparlanır */
         const hiz = (pl.martial_law > 0) ? .36 : .12;
@@ -1563,8 +1564,10 @@ function incomingArmy(sysId, empId){
     if (typeof isTransport !== 'function' || !isTransport(f)) continue;
     /* Zaten oradaysa ateşkese gerek yok — çıkarma başlar */
     if (f.sys === sysId && !f.mv) continue;
-    const varis = f.mv ? f.mv.to
-                : (f.path && f.path.length ? f.path[f.path.length - 1] : -1);
+    /* FIELD-WAR-SIEGE.0: bekletilen / engelli ordu "yolda" sayılmaz; hedef bacak değil son durak */
+    if (!f.mv && (f.jointHoldUntil > G.day || f.combat || f.retreating ||
+        (f.shipment && ['blocked','paused','lost'].includes(f.shipment.state)))) continue;
+    const varis = f.path && f.path.length ? f.path[f.path.length - 1] : (f.mv ? f.mv.to : -1);
     if (varis !== sysId) continue;
     /* Kaba varış tahmini: kalan yol / hız */
     const kalan = (f.path ? f.path.length : 1) + (f.mv ? 1 : 0);
@@ -4690,3 +4693,54 @@ function aiInternalCrisis(e){
 }
 
 function validInternalWarnings(d){const mark=(x,stages,owner)=>x===undefined||!!(x&&typeof x==='object'&&!Array.isArray(x)&&Object.keys(x).every(k=>['stage','episode',...(owner?['owner']:[])].includes(k))&&stages.includes(x.stage)&&Number.isFinite(x.episode)&&x.episode>=0&&(!owner||Number.isInteger(x.owner)&&x.owner>=0&&x.owner<d.emps.length));return d.sys.every(s=>s.p.every(p=>mark(p.col?.internalWarning,[5,15,24],true)))&&d.emps.every(e=>mark(e.schismWarning,[12,24,40])&&(e.internalVassalWarnings===undefined||e.internalVassalWarnings&&typeof e.internalVassalWarnings==='object'&&!Array.isArray(e.internalVassalWarnings)&&Object.keys(e.internalVassalWarnings).length<=d.emps.length&&Object.entries(e.internalVassalWarnings).every(([id,x])=>/^\d+$/.test(id)&&+id<d.emps.length&&mark(x,[50,70]))));}
+
+/* ═══ FIELD-WAR-SIEGE.0 — kuşatma durumu ve eski sayaç ═══
+   Saha raporu: 36K filo gezegende beklerken ilerleme görülmüyordu. Ölçülen nedenler: (1) savaş zorunlu barışla bitince filo
+   yörüngede kalıyor, bombardıman durmuş ama panel bunu söylemiyordu; (2) "yolda" sayılan ama hareket etmeyen kara ordusu son direnişi
+   18 ay ateşkeste tutuyordu (yalnız istihbarat panelinde "ateşkes" notu); (3) yörüngedeki müttefik kara birlikleri garnizonu her ay
+   yeniden doldurup sayacı 1/6'da tutuyordu; (4) savaş bitince col.siege sayacı sıfırlanmıyor, garnizon toparlanması kalıcı duruyordu.
+   (1)(3) mevcut kurallar → gerçek durum metni; (2)(4) hata → düzeltildi. RNG yok. */
+function siegeActive(sys,pl){
+ if(!pl.col||pl.owner<0)return false;
+ return G.fleets.some(f=>f.sys===sys.id&&!f.mv&&f.ships.length&&f.e!==pl.owner&&isArmed(f)&&G.emps[f.e]&&!G.emps[f.e].dead&&(G.emps[f.e].war[pl.owner]||G.emps[f.e].wild));
+}
+function siegeStaleClear(sys,pl){
+ const col=pl&&pl.col;if(!col||!((col.siege||0)>0||col.truce!==undefined))return false;
+ if(siegeActive(sys,pl))return false;
+ col.siege=0;delete col.truce;col.truceAge=0;return true;
+}
+function siegeStatus(sys,pl,atkId){
+ const col=pl&&pl.col,atk=G.emps[atkId];if(!col||!atk||pl.owner<0||+atkId===pl.owner)return null;
+ const here=G.fleets.filter(f=>f.e===+atkId&&f.sys===sys.id&&!f.mv&&f.ships.length);if(!here.length)return null;
+ const armed=here.some(f=>isArmed(f)),ground=here.some(f=>isTransport(f));if(!armed&&!ground)return null;
+ if(!atk.war[pl.owner]&&!atk.wild){
+  const last=(G.warLedger?.fronts||[]).filter(f=>f.ended!==null&&f.sides.includes(+atkId)&&f.sides.includes(pl.owner)).slice(-1)[0];
+  const why=last?String(last.endReason||'').split('|')[0]:'';
+  const se=!last&&col.siegeEnd;   /* MP misafiri: defter aynada yok, host'un yetkili özeti */
+  const txt=last?'sona erdi ('+((typeof WAR_END_REASONS!=='undefined'&&WAR_END_REASONS[why])||why)+', gün '+Math.floor(last.ended)+')':se?'sona erdi ('+((typeof WAR_END_REASONS!=='undefined'&&WAR_END_REASONS[se.r])||se.r)+', gün '+se.d+')':'yok';
+  return {code:'nowar',text:'Kuşatma durdu — gezegen sahibiyle savaş '+txt+'. Bombardıman ve çıkarma yalnız aktif savaşta işler.'};
+ }
+ const sh=Math.round(col.shield||0),g=Math.round(col.garrison||0),base=Math.round(col.garrisonBase||g);
+ if(ground&&sh<=5)return {code:'landing',text:'Kara ordusu çıkarmada — garnizon '+g+' / '+base};
+ if(sh>5)return {code:'shield',text:'Kalkan düşürülüyor — kalkan '+sh+(ground?' (çıkarma kalkan 5\'in altına inince başlar)':'')};
+ if(col.truce!==undefined)return {code:'truce',text:'Kara ordusu bekleniyor — son direniş korunuyor (ateşkes '+(col.truceAge||0)+'/18 ay); ordu gelmezse bombardıman devam eder'};
+ if((col.reinforced||0)>0)return {code:'allied',text:'Müttefik kara birlikleri garnizonu her ay destekliyor — bombardımanla düşmez; kara ordusuyla çıkarma gerekir'};
+ if(g>0)return {code:'garrison',text:'Garnizon bastırılıyor — '+g+' / '+base+(g<=base*.25?' (son direniş: bombardım etkisi düşük, kara ordusu hızlandırır)':'')};
+ return {code:'siege',text:'Bombardıman ilerlemesi '+(col.siege||0)+'/6 ay'};
+}
+/* Misafir aynası: kendi duran filosu yabancı kolonide, sahibiyle savaş YOKSA son kapanan cephenin günü + nedeni (kamu savaş sonu). */
+function siegeEndView(meId,sys,pl){
+ const me=G.emps[meId];if(!me||!pl.col||me.war[pl.owner]||!G.fleets.some(f=>f.e===meId&&f.sys===sys.id&&!f.mv&&f.ships.length))return {};
+ const last=(G.warLedger?.fronts||[]).filter(f=>f.ended!==null&&f.sides.includes(meId)&&f.sides.includes(pl.owner)).slice(-1)[0];
+ return last&&G.day-last.ended<=720?{siegeEnd:{d:Math.floor(last.ended),r:String(last.endReason||'').split('|')[0]}}:{};
+}
+function siegeStopRows(sys,viewer=G.p){
+ if(!sys||!viewer)return [];const out=[];
+ if(!G.fleets.some(f=>f.e===viewer.id&&f.sys===sys.id&&!f.mv&&f.ships.length&&(isArmed(f)||isTransport(f))))return out;
+ for(const pl of sys.planets){if(!pl.col||pl.owner<0||pl.owner===viewer.id||viewer.war[pl.owner])continue;
+  const st=siegeStatus(sys,pl,viewer.id);if(!st||st.code!=='nowar')continue;
+  const last=(G.warLedger?.fronts||[]).filter(f=>f.ended!==null&&f.sides.includes(viewer.id)&&f.sides.includes(pl.owner)).slice(-1)[0];
+  if(last?G.day-last.ended<=720:pl.col.siegeEnd)out.push({planet:pl.i,owner:pl.owner,text:st.text});}
+ return out;
+}
+/* END FIELD-WAR-SIEGE.0 SIEGE */

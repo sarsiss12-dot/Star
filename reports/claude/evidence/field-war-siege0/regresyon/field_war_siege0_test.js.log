@@ -1,0 +1,20 @@
+PASS W1 yeni savaş + olağan barış: tek cephe, kapanış nedeni / tarafı / tarihi defterde
+PASS W2 geçerli zorunlu barış (Synarth %100 yorgunluk): tek kapanış, "çekildi" tarafı Synarth, tek oyuncu bildirimi; yorgunluk 55
+PASS W3 zorunlu ateşkes (Kan Hukuku barışı yasaklar): makePeace defteri tutar, neden exhaustion-lock, "barış imzalandı" denmez
+PASS W4 aynı hedefe art arda iki elle yeniden ilan: önizleme yorgunluk riskini gösterir; her savaş ayrı cephe, bir kez kapanır, toprak bir kez el değiştirir
+PASS W5 Fetih v2 zorunlu barış: hedef dışı işgal tam bir kez iade edilir; hedef sistem kazanana kalır; ikinci devir yok
+PASS W6 kayıt/yükleme: yeniden ilan edilmiş savaş ve yorgunluk aynı kalır; yüklemeden sonraki kapanış aynı gün ve nedenle
+PASS K1 sürekli savaş, kara ordusuz bombardıman: 6 ay ilerleme (1/6 … 6/6) ve tek sahiplik değişimi
+PASS K2 kara ordusu çıkarması: kalkan düşükken bir iki ayda alınır, tek sahiplik değişimi
+PASS K3 bekletilen (yürümeyen) kara ordusu son direnişi ateşkeste TUTMAZ: bombardıman kural süresinde sonuçlanır
+PASS K4 rotası kapalı (otomatik deneme sınırında) ordu sevkiyatı "yolda" sayılmaz
+PASS K5 kuşatma ortasında barış: sayaç sıfırlanır, garnizon toparlanır, panel somut neden söyler; yeni savaş eski sayaçtan devam etmez
+PASS K6 müttefik kara birlikleri garnizonu destekliyor: durum metni gerçek nedeni söyler
+PASS K7 kalkan yüksekken "Kalkan düşürülüyor"; ateşkeste "Kara ordusu bekleniyor"
+PASS K8 MP aynası: savaşta ve yörüngede olan misafir ateşkes/destek alanlarını, barıştan sonra yalnız kamu savaş sonunu görür; yörüngede değilse hiçbiri
+PASS S1 tek liste, tek dokunuş: rota açılan iki (biri otomatik sınırda) yola çıkar, kapalı rota bekler, kayıp hedef bildirilir, yoldaki dokunulmaz; kaynak/gemi değişmez
+PASS S2 çift dokunuş: ikinci çağrı yola çıkanları yeniden başlatmaz (zaten yolda), yolları değişmez
+PASS S3 ortak rota bütçesi: 11 bekleyen → 8 rota hesabı şimdi, 3 sırada; sonraki filo adımında aranır
+PASS S4 kayıt/yükleme: sevkiyat durumları ve yolları korunur; yüklemeden sonra yeniden deneme aynı sonucu verir
+PASS S5 MP: misafir yalnız kendi sevkiyatlarını yeniden dener; başka oyuncununkine dokunmaz; boşsa açık ret
+GEÇEN: 19 KALAN: 0

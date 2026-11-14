@@ -1,11 +1,11 @@
 {
-  "phase": "BETA-WAR-GOALS.0",
-  "build": "96h10p31",
+  "phase": "FIELD-WAR-SIEGE.0",
+  "build": "96h10p32",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p31",
-  "parent_commit": "4e6f7f646590af5d5c7c7b0e3ba029eb797bc3d0",
-  "parent_zip_sha256": "3b62475cc614b8befb96065cd3e96dcb6f1ad45d38e18618511c381a2a3ee54f",
+  "pwa_cache": "stars-v96h10p32",
+  "parent_commit": "03a3aa432c2a126ace8180844f0735e60209d679",
+  "parent_zip_sha256": "c72a48f51b027b6078c4507d7ec2420551254d2b9c5bd6bd87109e41f0bfe138",
   "file_count": 19,
   "files": {
     "ai.js": "74386043cb4091ff3e0639e03dfb1cc43066c0eb23bafc68a79c747300d3b3af",
@@ -15,18 +15,18 @@
     "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
     "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
     "construction.js": "920d6122c3d3e65ef2650c94a9a5a804c3d67b65411627e23184f0e1d5d60e08",
-    "diplomacy.js": "200d7a5db1d0bb0dd2fe21a138e6eb06395b4e9f6e22a0c2c117b7f47be6c8f9",
+    "diplomacy.js": "79c6252518823d0ead6d4ab59af97d854ecdc748ada6bab1efc8b9e24606dc3d",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
     "economy-ui.js": "aa9da4f84f0b63ecb8b17e54d3dd844595e98d5a8da5f6a3012de9467a12e3bf",
-    "economy.js": "f0e7dceb24d3a4d744c1ad8a4aa9cf68979b4d817f9fa1505dc43efcad7161af",
+    "economy.js": "de3fe81743ab1e4c7156649afe4342b378ef36f3ae5303dde5301253292a2707",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
     "index.html": "4347492c8c5b59243edf8353f9ef44183235fd0f55b820c9892b89f70361866e",
-    "main.js": "c69e76fa64ee6923f78bb530c8af199860c18972a674724e0539ffb589e4145a",
+    "main.js": "b806d6e014440b1a5af41c9c4a71cbd0fc600590870aedf70b1b4f57976a7224",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "5b40278d2e0c34a25db5838c87c691f0b23738b0f3b3af7b87ae1fcd85badddc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "d94dc9a2168600e4abe71a66b8a8377b2cafe8828ff234c5b1cee1bc95b630e5",
-    "ui.js": "1f0542d09cd60ea6a4487976be9f4e652da834feb1803bb8155ac5ec141636af"
+    "sw.js": "dda91bd54acdbc5ed0f1d052744688078850a6b822129db06241704873a11ab3",
+    "ui.js": "2e87b8dab9a2bf94fe2b78df3c3972cc1b05a92cc95b4fd9b11578accec6f065"
   },
-  "description": "BETA-WAR-GOALS.0: Savaş İlan Et'te iki normal hedef (Fetih: seçilen sistemler, hedef dışı işgal barışta iade; Vasallaştırma: tür ve hükümler), gerekçe/meşruiyet ve temaslı devlet tutumu önizlemesi, savaş içi teslim maddesi ve kampanya kapsamı, ayrı barış önizlemesi, toprak vaadi, Sahte Bayrak ifşasında savaşın yeniden değerlendirilmesi, federasyona karşı federasyon önergesi ve ortak barış, Galaktik Gerilim (Sakin / Dengeli / Çalkantılı). Save8 v8, paket 4, protokol 1."
+  "description": "FIELD-WAR-SIEGE.0: %100 savaş yorgunluğu kapanışı tek yoldan (zorunlu barış / doktrin kilidinde zorunlu ateşkes; kapanışı yapan taraf, savaş no ve tek bildirim; yeniden ilan önizlemesinde yorgunluk tahmini), kuşatmada barıştan kalan eski sayaç ve yürümeyen kara ordusunun ateşkesi düzeltildi, gezegen savaşı panelinde gerçek kuşatma durumu ve KUŞATMA DURDU nedeni, filo panelinde Bekleyenleri Yeniden Dene (SP + MP). Save8 v8, paket 4, protokol 1."
 }
