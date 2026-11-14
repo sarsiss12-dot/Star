@@ -1,0 +1,239 @@
+{
+ "results": [
+  {
+   "name": "S0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 7173
+  },
+  {
+   "name": "S1 kümeli + 2× oda: host galaksisi rota denetiminden geçti; misafir aynı koordinatları, bildiği sistemlerde aynı hatları ve gezegenleri alır",
+   "status": "PASS",
+   "ms": 285
+  },
+  {
+   "name": "S2 hız mesajı gelirken misafirin dünya güncellemesi kesilir → hat açılınca mevcut yeniden eşitleme toparlar; dünya güncel değil kalmaz",
+   "status": "PASS",
+   "ms": 7022
+  },
+  {
+   "name": "S3 toparlanma sonrası misafirin gerçek üretim (ship) ve filo (move) emri host'ta ve misafir aynasında aynı sonucu verir",
+   "status": "PASS",
+   "ms": 1754
+  }
+ ],
+ "metrics": {
+  "scen": "S",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 1,
+   "every": 6,
+   "shape": "kumeli",
+   "planetMul": 2
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 306,
+    "buildMs": 329,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 2,
+      "p95": 4.1,
+      "max": 4.1
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 15,
+     "dom": 710,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 25.3,
+       "p95": 25.3,
+       "max": 25.3
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.7,
+       "p95": 1.7,
+       "max": 1.7
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 697,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 22,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 11622,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 7
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   }
+  ],
+  "galaxy0": {
+   "S1": {
+    "cfg": {
+     "shape": "kumeli",
+     "planetMul": 2
+    },
+    "route": {
+     "ok": true,
+     "systems": 45,
+     "components": 1,
+     "componentsBefore": 1,
+     "reachableSystems": 45,
+     "planets": 131,
+     "reachablePlanets": 131,
+     "repairs": 0,
+     "links": [],
+     "sanitized": 0,
+     "oneway": 0,
+     "issuesBefore": 0,
+     "initialRepairs": 0,
+     "initialLinks": [],
+     "componentsAtGeneration": 1
+    },
+    "mul": {
+     "mul": 2,
+     "before": {
+      "normal": 23,
+      "special": 15,
+      "guaranteed": 8,
+      "rare": 5,
+      "total": 51
+     },
+     "target": 46,
+     "after": {
+      "normal": 46,
+      "special": 15,
+      "guaranteed": 8,
+      "rare": 5,
+      "total": 74
+     },
+     "changed": 23
+    },
+    "gen": {
+     "shape": "kumeli",
+     "componentsBeforeMerge": 4,
+     "mergeLinks": 3,
+     "clusters": 4,
+     "interClusterLanes": 4
+    },
+    "systems": [
+     45,
+     45
+    ],
+    "knownSystems": 10,
+    "laneSubset": true,
+    "knownPlanetsEqual": true
+   },
+   "S2": {
+    "r0": 2,
+    "cut": {
+     "rev": 2,
+     "day": 1.053344000000001
+    },
+    "after": {
+     "rev": 4,
+     "applied": 4,
+     "day": 11.066543999999999,
+     "stale": false,
+     "speed": 0
+    },
+    "host": {
+     "day": 11.066543999999999,
+     "speed": 0
+    }
+   },
+   "S3": {
+    "ship": {
+     "res": "ok",
+     "host": [
+      [
+       "kor",
+       1
+      ]
+     ],
+     "guest": [
+      [
+       "kor",
+       0
+      ]
+     ]
+    },
+    "move": {
+     "res": "ok",
+     "host": {
+      "path": [
+       38
+      ],
+      "mvTo": null
+     },
+     "guest": {
+      "path": [
+       38
+      ],
+      "mvTo": null
+     }
+    }
+   }
+  },
+  "errors": []
+ }
+}

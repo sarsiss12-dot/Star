@@ -26,8 +26,10 @@ const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'bu
   /* MP-P0-DESYNC2: geçici AI koruması (lobide gerçek dokunuşla açılır) — host + 2 misafir */
   G:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
   /* BETA-FED-FLEET.0: misafir başkanın federal siparişi (gerçek tersane düğmesi), fon görünürlüğü, başkan değişimi, çift komut — host + 2 misafir */
-  L:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6}}[SCEN];
-if(!CONF)throw Error('MP8_SCEN A|B|C|R|N|P|E|F|D|G|L');
+  L:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
+  /* BETA-GALAXY.0: yeni şekil (kümeli) + gezegen çarpanı 2× ile host + 1 misafir; misafir host'un doğrulanmış galaksisini alır, gerçek filo emri */
+  S:{size:'orta',ai:5,seed:22,months:0,guests:1,every:6,shape:'kumeli',planetMul:2}}[SCEN];
+if(!CONF)throw Error('MP8_SCEN A|B|C|R|N|P|E|F|D|G|L|S');
 if(process.env.FEDAI0_R==='1'||process.env.ER0_R==='1')CONF.ai=8;
 if(process.env.SCALE0_MP){const c=JSON.parse(process.env.SCALE0_MP);Object.assign(CONF,c);}
 const MONTHS=+(process.env.MP8_MONTHS||CONF.months);
@@ -86,7 +88,7 @@ async function room({cutAtStart}={}){
   const H=pg.H;await H.goto(origin.H+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn')&&window.MP7Setup);
   await tap(H,'#mp1Btn');await tap(H,'[data-m="create"]');await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.mode==='design'&&MP1Host.lobby.phase==='waiting');
   if(CONF.guests>1){await H.selectOption('#mp7Cap',String(CONF.guests+1));await wait(H,c=>MP1Host.lobby.capacity===c,CONF.guests+1);}
-  {const r=await H.evaluate(c=>{Object.assign(CFG,{size:c.size,aiCount:c.ai,seed:c.seed});return MP1Host.host.configure({size:c.size,aiCount:c.ai,seed:c.seed});},CONF);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
+  {const r=await H.evaluate(c=>{Object.assign(CFG,{size:c.size,aiCount:c.ai,seed:c.seed},c.shape?{shape:c.shape}:{},c.planetMul?{planetMul:c.planetMul}:{});return MP1Host.host.configure({size:c.size,aiCount:c.ai,seed:c.seed,...(c.shape?{shape:c.shape}:{}),...(c.planetMul?{planetMul:c.planetMul}:{})});},CONF);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
   if(SCEN==='G'||process.env.MP8_GUARD==='1'){await tap(H,'#mpGuard');await wait(H,()=>MP1Host.lobby.guard===true);metrics.guardOption=true;}   // MP-P0-DESYNC2: oda seçeneği gerçek dokunuşla
   await tap(H,'#mp7EditMe');await design(H,DESIGNS.H);code=await H.evaluate(()=>MP1Host.code);
   for(const n of guestNames()){const p=pg[n];await guestGo(n,code,n==='B'?'Bora':'Cem');
@@ -412,6 +414,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
       metrics.net.relayRestart={guest:g,hostDayDelta:s1.day-s0.day,rngSame:s1.r===s0.r};assert.equal(s1.r,s0.r,'host world untouched');assert(g.err,'guest sees an explicit message');await shot(pg.B,'b-relay-restart');});}
 
   if(SCEN==='G')await require('./helpers/mp-p0-guard-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
+  if(SCEN==='S')await require('./helpers/galaxy0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
   if(SCEN==='L')await require('./helpers/fed-fleet0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
   if(SCEN==='D')await require('./helpers/mp-p0-desync1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
   if(SCEN==='F')await require('./helpers/event-ux1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,guestGo});
