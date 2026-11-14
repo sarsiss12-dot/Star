@@ -3398,6 +3398,10 @@ function fleetHasRole(f, r){ return f.ships.some(s => SHIPS[s.c].rol === r); }
 function fleetGroup(f){
   return f.ships.some(s => SHIPS[s.c].dmg > 0) ? 'sav' : 'sivil';
 }
+/* BETA-GALAXY.0: federal donanma kimliği — bölünen filo aynı federasyonda kalır, federal ve kişisel (ya da başka federasyonun)
+   filoları birleşmez. Sahiplik/komuta (o anki başkan), kapasite (federal sayılmaz) ve bakım (fondan) böylece tutarlı kalır. */
+function fleetFedKey(f){ return f && f.federal ? 'fed:' + f.fedId : 'own'; }
+function fleetFederalCopy(src, nf){ if (src && nf && src.federal){ nf.federal = true; nf.fedId = src.fedId; } return nf; }
 /* Session-only order identity: never written into canonical Save8 or RNG. */
 const SHIP_ORDER_TOKENS=new WeakMap();let SHIP_ORDER_TOKEN_SEQ=0;
 function shipOrderToken(q){let token=SHIP_ORDER_TOKENS.get(q);if(!token){token='order:'+(++SHIP_ORDER_TOKEN_SEQ).toString(36);SHIP_ORDER_TOKENS.set(q,token);}return token;}
@@ -3409,7 +3413,7 @@ function splitType(e, f, cls, count){
     if (f.ships[i].c === cls) taken.push(f.ships.splice(i, 1)[0]);
   }
   if (!taken.length) return null;
-  const nf = newFleet(e, f.sys, taken.map(s=>({c:s.c})));
+  const nf = fleetFederalCopy(f, newFleet(e, f.sys, taken.map(s=>({c:s.c}))));
   taken.forEach((s,i)=>{ if (nf.ships[i]) nf.ships[i].h = s.h; });
   nf.stance = f.stance;
   if (!f.ships.length){fleetRemovalRecord({...f,ships:taken},'split',nf.id);redirectFleetReferences(e.id,f.id,nf.id);if(f.composition)nf.composition=f.composition;if(f.capTarget)nf.capTarget=f.capTarget;G.fleets = G.fleets.filter(x => x !== f);}
@@ -4083,6 +4087,7 @@ function mergeFleetInto(e,main,others,allowLost=false){
   const all=[main,...others];
   if(new Set(all).size!==all.length||all.some(f=>!G.fleets.includes(f)||f.e!==e.id||f.sys!==main.sys||!f.ships.length||f.mv||f.combat||f.retreating||
     fleetGroup(f)!==fleetGroup(main)||hasShipment(f)&&!(allowLost&&f.shipment?.state==='lost')))return {ok:false,why:'Filo durumu değişti; hareket / savaş / sevkiyat sürüyor'};
+  if(all.some(f=>fleetFedKey(f)!==fleetFedKey(main)))return {ok:false,why:'Federal ve kişisel filolar birleştirilemez'};
   const plans=all.filter(f=>f.composition),counts={};
   for(const f of plans)for(const [c,n] of Object.entries(f.composition.counts||{}))counts[c]=(counts[c]||0)+n;
   if(Object.values(counts).reduce((a,b)=>a+b,0)>300)return {ok:false,why:'Birleşik bileşim 300 gemi sınırını aşıyor; önce bileşimi düzenle'};

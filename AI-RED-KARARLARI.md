@@ -52,3 +52,15 @@ Ortak ders: yerel bir göstergede kazanç (tek seed, tek kaynak, tek devlet) gen
 - 96H.10: kara ordusu güvenliği (aday D): silahsız ordu, görünür düşman savaş gücünün oradaki ya da oraya giden kendi savaş filolarını (×1,15) aştığı sisteme gönderilmez; yoldaki ordu varışı güvensizleşince ya da hedef geçersizleşince yeniden karar verir. `research/96h10/candidate-D-army-safety-ACCEPTED.patch`.
 - 96H.9: kara ordusu koordinasyonu (aday BC): bilinen kolonili savaş hedefi için ordu hazırlıkta alınır (yalnız alaşım eksikse bedeli savaş gemilerinden ayrılır, kaynak verilmez); hedefe ulaşan kampanya kuvveti kuşatmayı sürdürür. `research/96h9/candidate-BC-ACCEPTED.patch`.
 - 96H.7.1: kapanmış tek üyeli ortak sefer geçmişinin Save8 yüklemesi (`research/96h63/SAVE8-GUARD-PROPOSED.patch` ile aynı satır). AI karar davranışı değil, yükleme doğrulaması düzeltmesidir; ayrıntı `PROJE-DURUMU.md`.
+
+
+## BETA-GALAXY.0 — doğal dağılımda federasyon yoğunlaşma cezası + ayrılma kuralı (REDDEDİLDİ, 14 Kasım 2026)
+
+- Aday: #41'in yalnız özel rakip dağılımında çalışan `aiFedConcentration` cezasını doğal dağılıma yumuşak (projected−0,55)×1,3 olarak yaymak;
+  büyük ortak tehditte (kriz ya da bilinen, kendisinden 1,6× güçlü düşmanla savaş) dörtte bire indirmek; aşırı yığılma + düşük uyumda zayıf bağlı
+  üyenin ayrılması.
+- Ölçüm: orta galaksi, 8 AI, 120 ay, tohum 11/23/404; kontrol (d64af78), plasebo (tek RNG çekimi), aday. En büyük federasyonun geç dönem
+  (61–120. ay) payı: 11 → 0,56/0,56/0,56; 23 → 0,76/0,75/0,67; 404 → 0,78/0,77/0,83 (kontrol/plasebo/aday). Hiçbir kolda aynı anda ikinci
+  blok oluşmadı (maks. 1). Sonuç: tutarlı fayda yok, 404'te kötüleşme. Kod geri alındı; kanıt
+  `reports/claude/evidence/beta-galaxy0/ai-federal/blok-olcumu-kontrol-plasebo-aday-RED.jsonl`.
+- Gözlem: rakip blok kurulmamasının kökü katılma cezası değil, kuruluş kapısı için ittifaklı bağımsız AI bulunmaması; ayrı faz.

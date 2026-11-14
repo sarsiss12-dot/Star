@@ -1779,7 +1779,7 @@ function aiTurn(e){
     const arr = byS[k];
     if (arr.length < 2) continue;
     const main = arr.reduce((a,b)=> a.ships.length >= b.ships.length ? a : b);
-    for (const f of arr) if (f !== main && main.ships.length < 26){
+    for (const f of arr) if (f !== main && main.ships.length < 26 && fleetFedKey(f)===fleetFedKey(main)){
       mergeFleetInto(e,main,[f]);
     }
     G.fleets = G.fleets.filter(f => f.ships.length);

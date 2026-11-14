@@ -1385,7 +1385,7 @@ const UI = {
         /* FAZ 76: yalnız askeri filoları tek ID altında birleştir */
         const sid2 = +x;
         const sav2 = G.fleets.filter(q => q.e === 0 && q.sys === sid2 &&
-                                          q.ships.length && isArmed(q));
+                                          q.ships.length && isArmed(q) && !q.federal);   // BETA-GALAXY.0: federal donanma kişisel filoyla birleşmez
         if (sav2.length < 2){ say('Birleşecek savaş filosu yok', 'war'); break; }
         const ana = sav2[0];
         const kac=sav2.length-1,result=mergeFleetInto(G.p,ana,sav2.slice(1));
@@ -7245,7 +7245,7 @@ const UI = {
     const f = View.sel; if (!f || f.sys<0) return;
     if(hasShipment(f)){say('Önce sevkiyatı iptal et');return;}
     const grp = fleetGroup(f);
-    const others = G.fleets.filter(x=>x!==f && x.e===0 && x.sys===f.sys && !hasShipment(x) && fleetGroup(x)===grp);
+    const others = G.fleets.filter(x=>x!==f && x.e===0 && x.sys===f.sys && !hasShipment(x) && fleetGroup(x)===grp && fleetFedKey(x)===fleetFedKey(f));
     if (!others.length){
       say(grp === 'sav' ? 'Bu sistemde birleşecek başka savaş filosu yok'
                         : 'Bu sistemde birleşecek başka sivil filo yok');
@@ -7258,7 +7258,7 @@ const UI = {
   splitFleet(){
     const f = View.sel; if (!f || f.ships.length<2 || f.sys<0) return;
     const half = f.ships.splice(0, Math.floor(f.ships.length/2));
-    const nf = newFleet(G.p, f.sys, half.map(s=>({c:s.c})));
+    const nf = fleetFederalCopy(f, newFleet(G.p, f.sys, half.map(s=>({c:s.c}))));
     half.forEach((s,i)=>nf.ships[i].h = s.h);
     say('Filo ayrıldı');
     this.refresh();

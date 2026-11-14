@@ -536,7 +536,7 @@ function createHost(opts){
     SQ.push({from:a.id,to:b.id,born:Math.floor(G.day),expires:Math.floor(G.day)+SQ_LIFE,status:'pending'});if(SQ.length>100)SQ.splice(0,SQ.length-100);
     dipNotify(b.id,'Statüko barışı teklifi — '+a.name,'sci');return true;}
   /* tek oyunculu mergeFleets: aynı sistemde, sevkiyatsız, aynı gruptan (savaş / sivil) kendi filoları */
-  function mergeMates(e,f){const g=fleetGroup(f);return G.fleets.filter(x=>x!==f&&x.e===e.id&&x.sys===f.sys&&x.ships.length&&!hasShipment(x)&&fleetGroup(x)===g);}
+  function mergeMates(e,f){const g=fleetGroup(f),k=typeof fleetFedKey==='function'?fleetFedKey:()=>'own';return G.fleets.filter(x=>x!==f&&x.e===e.id&&x.sys===f.sys&&x.ships.length&&!hasShipment(x)&&fleetGroup(x)===g&&k(x)===k(f));}
   /* ═══ MP.6.1 ortak oyun hızı ═══
      Tek yetkili kaynak host'un G.speed'idir. Bir oyuncunun hız komutu (ya da host'un kendi hız düğmesi, host.local) motorun
      hız işlevini çağırır ve herkese 'speed' iletisi gider. Host'un kendi iç duraklatmaları (pencere, arka plan, ağ)
@@ -639,7 +639,7 @@ function createHost(opts){
       apply(e,{f}){return mergeFleetInto(e,f,mergeMates(e,f));}},
     split:{say:'actor',keys:['kind','fleet'],check:c=>int(c.fleet,0,2147483647),locate:ownFleet,
       why:(e,{f})=>f.sys<0?'no-position':f.ships.length<2?'too-small':null,roots:(e,{f})=>[f],
-      apply(e,{f}){const half=f.ships.splice(0,Math.floor(f.ships.length/2)),nf=newFleet(e,f.sys,half.map(s=>({c:s.c})));half.forEach((s,i)=>nf.ships[i].h=s.h);return true;}},
+      apply(e,{f}){const half=f.ships.splice(0,Math.floor(f.ships.length/2)),nf=newFleet(e,f.sys,half.map(s=>({c:s.c})));if(typeof fleetFederalCopy==='function')fleetFederalCopy(f,nf);half.forEach((s,i)=>nf.ships[i].h=s.h);return true;}},
     splitType:{say:'actor',keys:['kind','fleet','cls','all'],check:c=>int(c.fleet,0,2147483647)&&typeof c.cls==='string'&&has(SHIPS,c.cls)&&typeof c.all==='boolean',locate:ownFleet,
       why:(e,{f},c)=>f.sys<0?'no-position':f.ships.some(s=>s.c===c.cls)?null:'none',roots:(e,{f})=>[f],
       apply:(e,{f},c)=>!!splitType(e,f,c.cls,c.all?f.ships.filter(s=>s.c===c.cls).length:1)},

@@ -9477,7 +9477,9 @@ function fedCloseOrders(f, pred){ let n = 0; for (const {sys, q} of fedOrders(f)
 /* Tersane işi tamamlandı (dailyTick): federal filo doğar, sahibi O ANKİ başkan; federasyon yoksa iş zaten kapatılmıştır. */
 function fedShipComplete(sys, q){
   const f = (G.feds || []).find(x => x.id === q.fed), lead = f && G.emps[f.leader];
-  if (!f || !lead || lead.dead || sys.owner !== q.e){ if (f){ f.fund.ala = (f.fund.ala || 0) + ((q.fedPaid && q.fedPaid.ala) || 0); } return false; }
+  /* BETA-GALAXY.0: sipariş veren hâlâ yaşayan üye olmalı — ayrılan/ölen eski başkanın tersanesinde federal gemi teslim edilmez (bedel fona bir kez döner) */
+  const orderer = G.emps[q.e];
+  if (!f || !lead || lead.dead || sys.owner !== q.e || !orderer || orderer.dead || !f.members.includes(q.e)){ if (f){ f.fund.ala = (f.fund.ala || 0) + ((q.fedPaid && q.fedPaid.ala) || 0); } return false; }
   const fl = newFleet(lead, sys.id, [{c:q.cls}], 'Federal Donanma');
   fl.federal = true; fl.fedId = f.id;
   if (f.members.includes(0)) say('🏛 Federal donanmaya ' + SHIPS[q.cls].n + ' katıldı — ' + sys.name + ' (kapasite harcanmadı)', 'sci');
