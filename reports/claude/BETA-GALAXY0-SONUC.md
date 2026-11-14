@@ -15,7 +15,7 @@ hiçbir madde TAMAMLANDI değildir.
 | Birleştirme | `d64af78` = #42 + #41; içerik çakışması yok (yalnız sürüm kimliği, paket uyumluluk listesi, koruma zinciri, rapor bağlantısı) |
 | Sürüm | oyun **96h10p29** · PWA `stars-v96h10p29` · Save8 **v8** · MP **MP.8.9b26** · paket **4** · protokol **1** |
 | Paket uyumu | p29 yükleyicisi p6–p28, p25u1 ve p27s1 paketlerini kabul eder |
-| Bitiş HEAD | PR ve sohbette (rapor commit'i) |
+| Bitiş HEAD | `f5e4f1a` (kod + yayın son değişikliği `0cb3db4`) · draft PR **#43** (taban #42 `claude/stars-beta-fed-fleet0`) |
 
 ## 2. Özet tablo
 
@@ -36,7 +36,7 @@ hiçbir madde TAMAMLANDI değildir.
 | 7. Rakip Doktrinler sabit sayı / aralık | PASS |
 | 7. Tek blokta yığılmayı azaltan AI adayı | PARTIAL — incelendi, ölçüldü, **reddedildi** (§8) |
 | 7. Federal filo bölünme / birleşme, başkanın ayrılması | PASS (bir yetkisiz teslim açığı bulundu ve kapatıldı) |
-| 8. ZIP / manifest / rapor / PR | PASS (PR §10) |
+| 8. ZIP / manifest / rapor / PR | PASS (draft PR #43) |
 | Canlı Render, fiziksel Android | NOT RUN |
 
 ## 3. Galaksi şekilleri ve yapısal rota denetimi
