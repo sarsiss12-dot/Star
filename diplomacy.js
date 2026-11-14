@@ -11342,6 +11342,7 @@ function warCoalitionView(e,targetId,goal,opts){
   const p=(G.warLedger?.preparations||[]).find(x=>x.owner===e.id&&x.target===targetId&&warPreparationState(x)==='pending')||null;
   const g=p?p.goal:goal,o=p?(p.opts||null):(opts&&WAR_GOAL_MAIN.includes(goal)?warPrepOptsNorm(e,target,goal,opts):null);
   const preview=warDeclarationPreview(e,target,g,o);
+  if(!p&&opts&&!o){preview.blockers.push('Geçersiz savaş hedefi seçimi');preview.ok=false;}   /* geçersiz seçim sessizce hedefsiz ilana dönmez */
   return {ok:true,target:targetId,goal:g,opts:o,preview,prep:p?warPrepareView(e).find(x=>x.id===p.id):null,quote:p?warCoalitionQuote(e,p.id):null,
    candidates:warCoalitionCandidates(e,target,p,preview),limit:8,council:councilBlocksWar(e,target),day:Math.floor(G.day)};
  }));

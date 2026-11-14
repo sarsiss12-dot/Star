@@ -725,9 +725,18 @@ function createHost(opts){
         const r=statusQuoPeace(e,o);if(!(r&&r.ok))return {ok:false,why:(r&&r.why)||'Barış uygulanamadı'};q.status='accepted';dipNotify(o.id,'Statüko barışı imzalandı — '+e.name,'win');return true;}},
     /* ═══ MP.3 — diplomasi. Yeni motor yok: dealQuote / executeDeal / aiRespond. Teklif kaydı Save8 dışında,
        oturumdadır (dipView yalnız taraflara gönderir). Taraf olmayan teklif kimliği "yok" ile aynı kodu alır. */
-    warPrepare:{keys:['kind','target','goal'],check:c=>int(c.target,0,63)&&typeof c.goal==='string'&&has(WAR_GOALS,c.goal),locate:()=>({}),why:()=>null,roots:()=>[],apply(e,at,c){const r=warPrepareCreate(e,c.target,c.goal);return r.ok?{ok:true,extra:{id:r.id}}:r;}},
-    warLaunch:{keys:['kind','id','stamp'],check:c=>int(c.id,1,2147483647)&&typeof c.stamp==='string'&&c.stamp.length<=20000,locate:()=>({}),why:()=>null,roots:()=>[],apply(e,at,c){const r=warPrepareLaunch(e,c.id,c.stamp);return r.ok?{ok:true,extra:{front:r.front}}:r;}},
-    warPrepareWithdraw:{keys:['kind','id','member'],check:c=>int(c.id,1,2147483647)&&(c.member===null||int(c.member,0,63)),locate:()=>({}),why:()=>null,roots:()=>[],apply:(e,at,c)=>warPrepareWithdraw(e,c.id,c.member)},
+    warPrepare:{keys:['kind','target','goal','targets','vtype','war'],check:c=>int(c.target,0,63)&&typeof c.goal==='string'&&has(WAR_GOALS,c.goal)&&coalOptsOk(c),locate:()=>({}),why:()=>null,roots:()=>[],apply(e,at,c){const r=warPrepareCreate(e,c.target,c.goal,coalOptsOf(c));return r.ok?{ok:true,extra:{id:r.id}}:r;}},
+    warLaunch:{keys:['kind','id','stamp','mode'],check:c=>int(c.id,1,2147483647)&&typeof c.stamp==='string'&&c.stamp.length<=20000&&(c.mode===undefined||c.mode==='partial'),locate:()=>({}),why:()=>null,roots:()=>[],apply(e,at,c){const r=warPrepareLaunch(e,c.id,c.stamp,c.mode==='partial'?'partial':null);if(r.ok)coalCloseOffers(c.id,'Savaş ilan edildi; ilan öncesi teklif kapandı');return r.ok?{ok:true,extra:{front:r.front}}:r;}},
+    /* ═══ WAR-COALITION.0 — savaş ilanında koalisyon. Host: motorun warCoalitionCommand'ı (aynı hazırlık kaydı). İnsan alıcıya davet MP teklif
+       deposundan (dipSend) gider ve gerçek gelen kutusu kartı olur; kabulü executeDeal → warPrepareAccept. Görünüm yalnız hazırlığın sahibine. */
+    warCoalition:{ro:true,keys:['kind','target','goal','targets','vtype','war'],check:c=>int(c.target,0,63)&&(c.goal===undefined||WAR_GOAL_MAIN.includes(c.goal))&&coalOptsOk(c),locate:()=>({}),
+      why:(e,at,c)=>{const t=G.emps[c.target];return !t||t===e||!e.contact[t.id]?'no-target':null;},roots:()=>[],apply(e,at,c){return pure(()=>warCoalitionCommand(e,{...c,kind:'warCoalition'}));}},
+    warInvite:{keys:['kind','target','goal','targets','vtype','war','list'],check:c=>int(c.target,0,63)&&WAR_GOAL_MAIN.includes(c.goal)&&coalOptsOk(c)&&Array.isArray(c.list)&&c.list.length>=1&&c.list.length<=8&&c.list.every(x=>plain(x)&&onlyKeys(x,['member','give','want'])&&int(x.member,0,63)&&(x.give===undefined||coalTermsOk(x.give))&&(x.want===undefined||coalTermsOk(x.want))),locate:()=>({}),
+      why:(e,at,c)=>{const t=G.emps[c.target];return !t||t===e||!e.contact[t.id]?'no-target':null;},roots:()=>[],
+      apply(e,at,c){return warCoalitionCommand(e,c,{human:(m,o)=>{if(D.offers.filter(r=>r.status==='pending'&&r.from===e.id).length>=DIP_PENDING_OUT)return {ok:false,why:'Bekleyen teklif sınırı'};const r=dipSend(e,m,dipItems(o.give),dipItems(o.want),null);return r&&r.ok?{ok:true,offer:r.extra&&r.extra.offer}:{ok:false,why:'Teklif gönderilemedi'};}});}},
+    warInviteReply:{keys:['kind','id','member','action'],check:c=>int(c.id,1,2147483647)&&int(c.member,0,63)&&['accept','reject'].includes(c.action),locate:()=>({}),why:()=>null,roots:()=>[],apply:(e,at,c)=>warCoalitionCommand(e,c)},
+    warPrepareGoal:{keys:['kind','id','goal','targets','vtype','war'],check:c=>int(c.id,1,2147483647)&&WAR_GOAL_MAIN.includes(c.goal)&&coalOptsOk(c),locate:()=>({}),why:()=>null,roots:()=>[],apply(e,at,c){const r=warCoalitionCommand(e,c);if(r.ok)coalCloseOffers(c.id,'Savaş hedefi değişti; güncel şartlarla yeniden davet gerekir');return r;}},
+    warPrepareWithdraw:{keys:['kind','id','member'],check:c=>int(c.id,1,2147483647)&&(c.member===null||int(c.member,0,63)),locate:()=>({}),why:()=>null,roots:()=>[],apply(e,at,c){const r=warPrepareWithdraw(e,c.id,c.member);if(r&&r.ok&&c.member===null)coalCloseOffers(c.id,'Hazırlık iptal edildi');return r;}},
     warCenterRead:{ro:true,keys:['kind','front'],check:c=>int(c.front,0,2147483647),locate:()=>({}),why:(e,at,c)=>c.front&&!warCenterIndex(e).some(x=>x.id===c.front)?'no-target':null,roots:()=>[],apply(e,at,c){return {ok:true,extra:pure(()=>c.front?{report:warNewsReport(e,c.front)}:{index:warCenterIndex(e),preparations:warPrepareView(e)})};}},
     offer:{keys:['kind','to','give','want'],
       check:c=>int(c.to,0,63)&&dipCheck(c),
@@ -756,7 +765,7 @@ function createHost(opts){
         if(c.action==='accept'){const q=dealQuote(dipOffer(r));if(!q.ok)return {code:'quote',detail:dipReasons(q,A)};}return null;},
       roots:()=>[],
       apply(e,{r},c){const A=G.emps[r.from];
-        if(c.action==='reject'){r.status='rejected';r.finished=G.day;r.why='Reddedildi';dipNotify(A.id,'Teklif reddedildi — '+e.name,'war');return true;}
+        if(c.action==='reject'){r.status='rejected';r.finished=G.day;r.why='Reddedildi';coalMark(r,'rejected','Reddetti');dipNotify(A.id,'Teklif reddedildi — '+e.name,'war');return true;}
         if(!executeDeal(dipOffer(r),'deal:mp71:'+r.id))return false;                       // motorun kendi işlemi: başarısızlıkta kendisi geri alır
         r.status='accepted';r.finished=G.day;stats.deals=(stats.deals||0)+1;
         dipNotify(A.id,'Teklif kabul edildi — '+e.name,'win');dipNotify(e.id,'Anlaşma imzalandı — '+A.name,'win');return true;}},
@@ -768,13 +777,13 @@ function createHost(opts){
         const B=G.emps[r.from];if(!dipParty(B)||!dipParty(e)||!e.contact[B.id]||!B.contact[e.id])return 'invalid';
         return dipGate(dealQuote(dipNew(e,B,dipItems(c.give),dipItems(c.want))),e,B);},
       roots:()=>[],
-      apply:(e,{r},c)=>dipSend(e,G.emps[r.from],dipItems(c.give),dipItems(c.want),r)},
+      apply(e,{r},c){const x=dipSend(e,G.emps[r.from],dipItems(c.give),dipItems(c.want),r);if(x&&x.ok&&isHumanActor(e)){const nr=D.offers.find(o=>o.id===x.extra.offer);if(nr)coalMark(nr,'countered','Karşı teklif verdi',true);}return x;}},
     withdraw:{keys:['kind','offer'],
       check:c=>int(c.offer,1,2147483647),
       locate(e,c){const r=dipFind(e,c.offer);return r?{r}:{err:'no-offer'};},
       why:(e,{r})=>r.from!==e.id?'not-sender':r.status!=='pending'?'closed':null,
       roots:()=>[],
-      apply(e,{r}){r.status='invalid';r.why='Gönderen geri çekti';r.finished=G.day;dipNotify(r.to,'Teklif geri çekildi — '+e.name);return true;}},
+      apply(e,{r}){r.status='invalid';r.why='Gönderen geri çekti';r.finished=G.day;coalMark(r,'closed','Davet geri çekildi');dipNotify(r.to,'Teklif geri çekildi — '+e.name);return true;}},
     /* ═══ MP.3.1 — federasyon ve vasallık. Yeni siyasi motor yok: her komut motorun kendi işlevini çağırır
        (requestFederation, proposeFedMotion, acceptFedInvite / rejectFedInvite, castFedVote, leaveFederation, proposeFedLaw,
        foundFederation, vassalOffer, vassalReply). Bu işlevlerin kendi işlemi (fedChange / vassalTransaction) vardır; ikinci
@@ -1072,6 +1081,14 @@ function createHost(opts){
       else return null;}
     return out;
   }
+  /* WAR-COALITION.0 yardımcıları: hedef seçenekleri, şart maddeleri, MP teklifi ↔ hazırlık daveti */
+  function coalOptsOk(c){return (c.targets===undefined||Array.isArray(c.targets)&&c.targets.length<=5&&c.targets.every(id=>int(id,0,100000)))&&(c.vtype===undefined||typeof c.vtype==='string'&&has(VASSAL_TYPES,c.vtype))&&(c.war===undefined||['none','defense','all'].includes(c.war));}
+  function coalOptsOf(c){return c.goal==='fetih'&&Array.isArray(c.targets)?{targets:c.targets.slice()}:c.goal==='boyun'&&c.vtype?{vtype:c.vtype,war:c.war}:null;}
+  function coalTermsOk(l){return Array.isArray(l)&&l.length<=6&&l.every(i=>plain(i)&&(i.t==='passage'&&onlyKeys(i,['t'])||i.t==='res'&&onlyKeys(i,['t','r','v'])&&DIP_RES.includes(i.r)&&int(i.v,1,10000000)));}
+  function coalPlanOf(r){const o=dipOffer(r),j=(o.give||[]).concat(o.want||[]).find(i=>i.t==='warJoin'&&i.plan);return j?warPreparation(j.plan):null;}
+  function coalMark(r,state,why,counter){const p=coalPlanOf(r);if(!p||!p.invites)return;const member=r.from===p.owner?r.to:r.from;const v=(p.invites||[]).filter(x=>x.member===member).slice(-1)[0];if(!v)return;
+    v.state=state;v.at=G.day;v.why=why;if(counter){v.counter=encodeOffer(dipOffer(r));v.offer=r.id;v.human=true;}else delete v.counter;}
+  function coalCloseOffers(plan,why){for(const r of D.offers)if(r.status==='pending'){const p=coalPlanOf(r);if(p&&p.id===plan){r.status='invalid';r.why=why;r.finished=G.day;dipNotify(r.to,'Davet kapandı — '+why);}}}
   function dipCheck(c){const g=dipItems(c.give),w=dipItems(c.want);return !!g&&!!w&&g.length+w.length>0&&g.length+w.length<=8;}
   const dipNew=(A,B,give,want)=>({from:A.id,to:B.id,give,want,born:G.day,expires:G.day+dipLife()});
   const dipOffer=r=>({from:r.from,to:r.to,give:r.give.map(x=>({...x})),want:r.want.map(x=>({...x})),born:r.born,expires:r.expires});
