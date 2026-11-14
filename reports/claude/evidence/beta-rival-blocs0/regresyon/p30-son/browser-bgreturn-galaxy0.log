@@ -1,0 +1,15 @@
+PASS 800x360 başlangıç: açık sistem panelinde gezegen küçük resimleri, haritada bölge armaları ve yıldızlar çizili
+PASS 800x360 arka plan dönüşü #1: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur
+PASS 800x360 arka plan dönüşü #2: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur
+PASS 800x360 arka plan dönüşü #3: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur
+PASS 800x360 paneldeki arma tuvaline gerçek contextrestored olayı → tuval yeniden boyanır
+PASS 800x360 kayıttan yükleme sonrası bir dönüş: görseller geri gelir, yüklenen dünya korunur
+PASS 800x360 sayfa hatası yok
+PASS 1280x720 başlangıç: açık sistem panelinde gezegen küçük resimleri, haritada bölge armaları ve yıldızlar çizili
+PASS 1280x720 arka plan dönüşü #1: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur
+PASS 1280x720 arka plan dönüşü #2: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur
+PASS 1280x720 arka plan dönüşü #3: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur
+PASS 1280x720 paneldeki arma tuvaline gerçek contextrestored olayı → tuval yeniden boyanır
+PASS 1280x720 kayıttan yükleme sonrası bir dönüş: görseller geri gelir, yüklenen dünya korunur
+PASS 1280x720 sayfa hatası yok
+GEÇEN: 14 KALAN: 0

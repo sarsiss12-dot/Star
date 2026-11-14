@@ -2,7 +2,16 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — BETA-GALAXY.0 (p29 / MP.8.9b26, 14 Kasım 2026)
+## Son teslim — BETA-RIVAL-BLOCS.0 (p30 / MP.8.9b27, 14 Kasım 2026)
+
+- Ayrıntı: `reports/claude/BETA-RIVAL-BLOCS0-SONUC.md`, kanıt `reports/claude/evidence/beta-rival-blocs0/` (huni, kampanya kontrol/plasebo/aday JSON'ları, etik deneyi, tarayıcı). Dal `claude/stars-rival-blocs0` (p29 `03bdb9b` üstünde). Save8v8/paket4/protokol1; p30 paket yükleyicisi p6–p29, p25u1, p27s1 kabul eder.
+- Kuruluşta ve oylu üyelikte ön ittifak yok: `fedFoundCandidate` ittifak istemez; eksik ittifaklar `foundFederation`/`acceptFedInvite`'ın mevcut yazımıyla birlikte kurulur (davet/kabulde yazılmaz). `fedAllianceText`/`fedAdmissionAllianceText` gösterim. İki AI ya da iki insan kurabilir; tek insanlı kuruluşta iki AI ortak kuralı (BETA-FED-FOUND.0) korunur. Denge birliği `fedCounterBloc`: büyük blok (≥⅓, ≥3 üye, kuruculardan hiçbiri üye değil) varken `fedFoundCost(e,members)` %40 düşük — herkese aynı kural.
+- AI `aiRivalBlocChoice` (katıl / bağımsız / kur; `aiBlocThreat` ortak tehdit, krizde kapalı), `aiFoundPending`, `aiFedStayReview` (`_fedStrain`), ayda tek AI kuruluş girişimi, bağlı AI başka davete kabul vermez (`aiPendingPoliticalCommitment(e,except)`), müttefikler önce, AI insanı kuruluşa otomatik davet etmez, Yağmacı yolu aynen. `aiFedWilling(...,threat)` varsayılan 0'da eski davranış. RNG yok.
+- Dürüstlük `aiHonesty`: `warAppetite` NAP/ittifak freni `aiOathMul` + `aiOathReputation`, `aiReviewAlliances` `aiOathStrain`, `fedDefend` → `aiDefenseShirk` (sınırlı risk terimi, tekrar kaydı yok). Söz bozan savaş `oathBreakRecord` (haber + `e.oathLog`, misafire gitmez: mirror STRIP_ME). Etki yalnız AI'da.
+- Kurulum: `rivalPreset/rivalNormalize/rivalStep/rivalSetupHtml` (Doğal/Az/Orta/Çok, −/+; sayı kutusu yok), `PLANET_MULS` 0,05/0,10/0,15 eklendi. Harita: `BIG_EMBLEMS_ON` (`stars:bigEmblems`, KATMANLAR) → `View.bigEmblemLayout` (bkey önbelleği) / `drawBigTerritoryEmblems`. Otomatik inşaat: `RemoteConstruction.autoPick/autoOrder/idle/eta` (görev `auto`,`eta`), `e.insReady`, `UI.autoBuildHtml`, MP `remoteAuto`, misafir `ACT.autoBuild`.
+- Test: `node tests/beta_rival_blocs0_test.js`, `_mp_test.js`, `_setup_test.js`, `_build_test.js`; Chromium `browser-rival-blocs0.cjs` (oyun içi testler yatay 844×390 — dikeyde "çevir" katmanı). Kampanya: `evidence/.../blocs.cjs` + `campaign.sh` (kontrol kökü `git archive 03bdb9b` sabit kopya). `deserialize` METİN bekler (nesne verilirse sessizce false). Koruma: `beta-rival-blocs0-reviewed` ← `beta-galaxy0-reviewed` ← `beta-fed-fleet0-reviewed` ← …
+
+## Önceki teslim — BETA-GALAXY.0 (p29 / MP.8.9b26, 14 Kasım 2026)
 
 - Ayrıntı: `reports/claude/BETA-GALAXY0-SONUC.md`, kanıt `reports/claude/evidence/beta-galaxy0/`. Dal `claude/stars-pregame-galaxy0` = #42 (`9d269ce`) + #41 (`5649d28`) birleşimi (`d64af78`) üstünde. Save8v8/paket4/protokol1; p29 paket yükleyicisi p6–p28, p25u1, p27s1 kabul eder.
 - Şekiller `eliptik/kumeli/cubuklu/duzensiz` yalnız yeni anahtarlarla dallanır (eski üç şeklin Save8/RNG'si aynı; `galaxyShapeContext/Point/Preview`). Yapısal rota denetimi `galaxyRouteAudit/Repair` rota motorunun hat grafiğinde (iki yönlü, geçerli hat; en yakın çiftle en az hat), üretim sonrası + kurulum sonunda başkentlerden; başarısızsa `RangeError(galaxyRoute)` → SP YENİDEN ÜRET, MP host başlamaz. Sonuç `LAST_GALAXY_ROUTE/GEN` (G/Save8 dışı).

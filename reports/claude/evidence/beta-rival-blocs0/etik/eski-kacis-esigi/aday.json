@@ -1,0 +1,406 @@
+{
+ "nap": [
+  {
+   "grudge": -20,
+   "ahl": -3,
+   "trials": 120,
+   "broke": 61,
+   "rate": 0.508,
+   "appetite": {
+    "score": 1.085,
+    "brake": 1.22,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.83,
+    "budget": true
+   },
+   "example": {
+    "oath": {
+     "day": 180,
+     "kind": "nap",
+     "target": 2,
+     "why": "Kayıp Topraklar"
+    },
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -20,
+   "ahl": -1,
+   "trials": 120,
+   "broke": 0,
+   "rate": 0,
+   "appetite": {
+    "score": 0.711,
+    "brake": 1.593,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.83,
+    "budget": true
+   },
+   "example": null
+  },
+  {
+   "grudge": -20,
+   "ahl": 0,
+   "trials": 120,
+   "broke": 0,
+   "rate": 0,
+   "appetite": {
+    "score": 0.525,
+    "brake": 1.78,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.83,
+    "budget": true
+   },
+   "example": null
+  },
+  {
+   "grudge": -20,
+   "ahl": 1,
+   "trials": 120,
+   "broke": 0,
+   "rate": 0,
+   "appetite": {
+    "score": 0.338,
+    "brake": 1.967,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.83,
+    "budget": true
+   },
+   "example": null
+  },
+  {
+   "grudge": -20,
+   "ahl": 3,
+   "trials": 120,
+   "broke": 0,
+   "rate": 0,
+   "appetite": {
+    "score": -0.035,
+    "brake": 2.34,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.83,
+    "budget": true
+   },
+   "example": null
+  },
+  {
+   "grudge": -60,
+   "ahl": -3,
+   "trials": 120,
+   "broke": 103,
+   "rate": 0.858,
+   "appetite": {
+    "score": 1.305,
+    "brake": 1.22,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.65,
+    "budget": true
+   },
+   "example": {
+    "oath": {
+     "day": 180,
+     "kind": "nap",
+     "target": 2,
+     "why": "Kayıp Topraklar"
+    },
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -60,
+   "ahl": -1,
+   "trials": 120,
+   "broke": 73,
+   "rate": 0.608,
+   "appetite": {
+    "score": 0.931,
+    "brake": 1.593,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.65,
+    "budget": true
+   },
+   "example": {
+    "oath": {
+     "day": 180,
+     "kind": "nap",
+     "target": 2,
+     "why": "Kayıp Topraklar"
+    },
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -60,
+   "ahl": 0,
+   "trials": 120,
+   "broke": 36,
+   "rate": 0.3,
+   "appetite": {
+    "score": 0.745,
+    "brake": 1.78,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.65,
+    "budget": true
+   },
+   "example": {
+    "oath": {
+     "day": 180,
+     "kind": "nap",
+     "target": 2,
+     "why": "Kayıp Topraklar"
+    },
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -60,
+   "ahl": 1,
+   "trials": 120,
+   "broke": 0,
+   "rate": 0,
+   "appetite": {
+    "score": 0.558,
+    "brake": 1.967,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.65,
+    "budget": true
+   },
+   "example": null
+  },
+  {
+   "grudge": -60,
+   "ahl": 3,
+   "trials": 120,
+   "broke": 0,
+   "rate": 0,
+   "appetite": {
+    "score": 0.185,
+    "brake": 2.34,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.65,
+    "budget": true
+   },
+   "example": null
+  },
+  {
+   "grudge": -110,
+   "ahl": -3,
+   "trials": 120,
+   "broke": 117,
+   "rate": 0.975,
+   "appetite": {
+    "score": 1.525,
+    "brake": 1.22,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.47,
+    "budget": true
+   },
+   "example": {
+    "oath": {
+     "day": 180,
+     "kind": "nap",
+     "target": 2,
+     "why": "Kayıp Topraklar"
+    },
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -110,
+   "ahl": -1,
+   "trials": 120,
+   "broke": 105,
+   "rate": 0.875,
+   "appetite": {
+    "score": 1.151,
+    "brake": 1.593,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.47,
+    "budget": true
+   },
+   "example": {
+    "oath": {
+     "day": 180,
+     "kind": "nap",
+     "target": 2,
+     "why": "Kayıp Topraklar"
+    },
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -110,
+   "ahl": 0,
+   "trials": 120,
+   "broke": 98,
+   "rate": 0.817,
+   "appetite": {
+    "score": 0.965,
+    "brake": 1.78,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.47,
+    "budget": true
+   },
+   "example": {
+    "oath": {
+     "day": 180,
+     "kind": "nap",
+     "target": 2,
+     "why": "Kayıp Topraklar"
+    },
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -110,
+   "ahl": 1,
+   "trials": 120,
+   "broke": 80,
+   "rate": 0.667,
+   "appetite": {
+    "score": 0.778,
+    "brake": 1.967,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.47,
+    "budget": true
+   },
+   "example": {
+    "oath": {
+     "day": 180,
+     "kind": "nap",
+     "target": 2,
+     "why": "Kayıp Topraklar"
+    },
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -110,
+   "ahl": 3,
+   "trials": 120,
+   "broke": 0,
+   "rate": 0,
+   "appetite": {
+    "score": 0.405,
+    "brake": 2.34,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.47,
+    "budget": true
+   },
+   "example": null
+  }
+ ],
+ "defense": [
+  {
+   "strong": 0,
+   "ahl": -3,
+   "risk": 0,
+   "joined": true,
+   "log": []
+  },
+  {
+   "strong": 0,
+   "ahl": 0,
+   "risk": 0,
+   "joined": true,
+   "log": []
+  },
+  {
+   "strong": 0,
+   "ahl": 3,
+   "risk": 0,
+   "joined": true,
+   "log": []
+  },
+  {
+   "strong": 6,
+   "ahl": -3,
+   "risk": 65.31428571428572,
+   "joined": false,
+   "log": [
+    {
+     "day": 180,
+     "kind": "defense",
+     "target": 3,
+     "victim": 1,
+     "why": "Bilinen güç oranı 65.31"
+    }
+   ]
+  },
+  {
+   "strong": 6,
+   "ahl": 0,
+   "risk": 65.31428571428572,
+   "joined": false,
+   "log": [
+    {
+     "day": 180,
+     "kind": "defense",
+     "target": 3,
+     "victim": 1,
+     "why": "Bilinen güç oranı 65.31"
+    }
+   ]
+  },
+  {
+   "strong": 6,
+   "ahl": 3,
+   "risk": 65.31428571428572,
+   "joined": true,
+   "log": []
+  },
+  {
+   "strong": 40,
+   "ahl": -3,
+   "risk": 435.42857142857144,
+   "joined": false,
+   "log": [
+    {
+     "day": 180,
+     "kind": "defense",
+     "target": 3,
+     "victim": 1,
+     "why": "Bilinen güç oranı 435.43"
+    }
+   ]
+  },
+  {
+   "strong": 40,
+   "ahl": 0,
+   "risk": 435.42857142857144,
+   "joined": false,
+   "log": [
+    {
+     "day": 180,
+     "kind": "defense",
+     "target": 3,
+     "victim": 1,
+     "why": "Bilinen güç oranı 435.43"
+    }
+   ]
+  },
+  {
+   "strong": 40,
+   "ahl": 3,
+   "risk": 435.42857142857144,
+   "joined": true,
+   "log": []
+  }
+ ]
+}

@@ -1728,7 +1728,8 @@ const View = {
 
   drawTerritoryEmblems(g,regions){
     const opacity=typeof UI!=='undefined'?(UI.territoryEmblemOpacity??18):18;
-    if(!opacity||!G.p||MAP_MODE==='siyasi_yok')return;
+    if(!opacity||!G.p||MAP_MODE==='siyasi_yok'){this._emblemPlaced=[];return;}
+    if(typeof BIG_EMBLEMS_ON!=='undefined'&&BIG_EMBLEMS_ON)return this.drawBigTerritoryEmblems(g,regions,opacity);   // BETA-RIVAL-BLOCS.0
     g.save();
     g.globalAlpha=opacity/100;
     const placed=[];this._emblemPlaced=[];
@@ -1763,6 +1764,50 @@ const View = {
       g.drawImage(ART.identityEmblem(stateEmblem(G.emps[region.owner]),64),p.x-size/2,p.y-size/2,size,size);
       placed.push({...p,size});
       (this._emblemPlaced||(this._emblemPlaced=[])).push({owner:region.owner,x:p.x,y:p.y,size});
+    }
+    g.restore();
+  },
+
+  /* ═══ BETA-RIVAL-BLOCS.0 — büyük bölge arması (filigran) ═══
+     Yerleşim dünya koordinatında, yalnız sınır dokusu anahtarı (this.bkey: konum, sahip, menzil, sis, mod) değişince
+     yeniden hesaplanır. Bölge sahipliği sınır dokusunun kuralıyla (en küçük uzaklık/menzil; kenar dalgası ≥ .84) tahmin
+     edilir: her örnek noktada çember kendi bölgesinin en yakın sisteminin menzilinde ve yabancı sistemlerin
+     eşit-skor sınırının berisinde kalacak en büyük yarıçap. Arma o yarıçapın ⅔ çapında (iç genişliğin ~⅔'ü); yıldızdan
+     kaçmaz (yıldızlar/hatlar/filolar/yazılar sonra çizilir). Yalnız görülmüş (pSeen) sistemler; sis kimliği açmaz. */
+  bigEmblemLayout(regions){
+    const key=(this.bkey||'')+'|'+regions.length;
+    if(this._bigEmblem&&this._bigEmblem.key===key&&this._bigEmblem.world===G.sys)return this._bigEmblem.list;
+    const t0=typeof performance!=='undefined'?performance.now():0;
+    const seen=G.sys.filter(s=>s.owner>=0&&s._reach>0&&pSeen(s)),list=[];
+    for(const region of regions){
+      if(!region.known)continue;
+      const own=region.systems.filter(s=>s._reach>0&&pSeen(s));if(!own.length)continue;
+      const ids=new Set(own.map(s=>s.id)),reach=Math.max(...own.map(s=>s._reach));
+      let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;for(const s of own){x0=Math.min(x0,s.x-s._reach);y0=Math.min(y0,s.y-s._reach);x1=Math.max(x1,s.x+s._reach);y1=Math.max(y1,s.y+s._reach);}
+      const foreign=seen.filter(s=>!ids.has(s.id)&&s.x>x0-reach*2&&s.x<x1+reach*2&&s.y>y0-reach*2&&s.y<y1+reach*2);
+      const steps=Math.min(26,Math.max(8,Math.round(Math.sqrt(own.length)*6)));const cx0=own.reduce((n,s)=>n+s.x,0)/own.length,cy0=own.reduce((n,s)=>n+s.y,0)/own.length;
+      let best=null;
+      for(let i=0;i<=steps;i++)for(let j=0;j<=steps;j++){
+        const px=x0+(x1-x0)*i/steps,py=y0+(y1-y0)*j/steps;
+        let so=null,sc=Infinity;for(const s of own){const v=Math.hypot(px-s.x,py-s.y)/s._reach;if(v<sc){sc=v;so=s;}}
+        if(sc>=.84)continue;let R=.84*so._reach-Math.hypot(px-so.x,py-so.y);
+        for(const f of foreign){const df=Math.hypot(px-f.x,py-f.y)/f._reach;if(df<=sc){R=-1;break;}R=Math.min(R,(df-sc)/(1/so._reach+1/f._reach));}
+        if(R<=0)continue;const off=Math.hypot(px-cx0,py-cy0);
+        if(!best||R>best.R*1.04||R>best.R*.96&&off<best.off)best={x:px,y:py,R,off};
+      }
+      if(best)list.push({owner:region.owner,x:best.x,y:best.y,R:best.R,size:best.R*4/3,systems:own.length});
+    }
+    this._bigEmblem={key,world:G.sys,list,ms:(typeof performance!=='undefined'?performance.now():0)-t0};
+    return list;
+  },
+  drawBigTerritoryEmblems(g,regions,opacity){
+    const list=this.bigEmblemLayout(regions),z=this.cam.z;
+    g.save();g.globalAlpha=opacity/100;this._emblemPlaced=[];
+    for(const b of list){
+      const p=this.w2s(b.x,b.y),size=b.size*z;if(size<16)continue;
+      if(p.x+size/2<0||p.y+size/2<0||p.x-size/2>this.vw||p.y-size/2>this.vh)continue;
+      g.drawImage(ART.identityEmblem(stateEmblem(G.emps[b.owner]),Math.min(256,Math.max(64,Math.round(size/64)*64))),p.x-size/2,p.y-size/2,size,size);
+      this._emblemPlaced.push({owner:b.owner,x:p.x,y:p.y,size,big:true});
     }
     g.restore();
   },

@@ -2350,7 +2350,7 @@ const GALAXY_ROUTE_ERROR = 'Galaksi rota denetimi başarısız: bazı yıldız s
    Normal aday = HAB_TYPES (Gaia/Makine Dünyası gibi nadir türler hariç). Başkent sistemleri, sahipli gezegenler, nadir/özel
    dünyalar, lüks yatak ve kalıntı yatağı taşıyanlar dokunulmaz. Uygulama başkentler yerleştikten SONRA ve ayrı tohumlu
    akışla yapılır: sistem konumları, hiperhatlar ve başkentler çarpandan bağımsızdır; ana RNG çekilmez. 1× hiçbir şey yapmaz. */
-const PLANET_MULS = [.25, .5, .75, 1, 1.5, 2, 3];
+const PLANET_MULS = [.05, .1, .15, .25, .5, .75, 1, 1.5, 2, 3];   // BETA-RIVAL-BLOCS.0: 0,05–0,15× çok seyrek yerleşim
 let LAST_PLANET_MUL = null;
 function planetMulOf(cfg){ return cfg && PLANET_MULS.includes(cfg.planetMul) ? cfg.planetMul : 1; }
 function colonizableCensus(protectedSys){
@@ -4796,6 +4796,7 @@ function dailyTick(dt){
           const nf = newFleet(e,sys.id,[{c:q.cls}]);
           if (SHIPS[q.cls].rol === 'bilim') nf.auto=true;
         }
+        if (q.cls === 'ins' && !e.ai) e.insReady = true;   // BETA-RIVAL-BLOCS.0: ilk inşaat gemisi → koloni panelinde uzay yapıları
         if (!e.ai) say(SHIPS[q.cls].n + ' hazır — ' + sys.name +
           (sonuc ? ' · '+sonuc : ''));
       }
@@ -7110,6 +7111,7 @@ let WAR_PAUSE_ON = true, WAR_PAUSE_REV = 0;
 let LOGI_ON = false;
 // 91D.1: filo aidiyeti, zemin ve diğer katmanlardan bağımsızdır.
 let FLEET_NAMES_ON = false, FLEET_NAMES_REV = 0;
+let BIG_EMBLEMS_ON = false, BIG_EMBLEMS_REV = 0;   // BETA-RIVAL-BLOCS.0: isteğe bağlı büyük bölge armaları (cihazda; Save8/ayna dışı)
 /* FAZ 47: küçük olayları otomatik çöz (ekonomi + minör anomali) */
 let AUTO_EVENT = false;
 
@@ -7189,6 +7191,16 @@ async function loadFleetNamesPref(){
     const b=document.getElementById('fleetNamesBtn');
     if(b){b.className='tool fleetNamesBtn'+(FLEET_NAMES_ON?' on':'');
       b.setAttribute('aria-pressed',String(FLEET_NAMES_ON));}
+  } catch(e){}
+}
+async function loadBigEmblemsPref(){
+  const rev=BIG_EMBLEMS_REV;
+  try {
+    const v=await storeGet('stars:bigEmblems');
+    if(rev!==BIG_EMBLEMS_REV)return;
+    BIG_EMBLEMS_ON=(v==='on');
+    const b=document.getElementById('bigEmblemsBtn');
+    if(b){b.className='tool bigEmblemsBtn'+(BIG_EMBLEMS_ON?' on':'');b.setAttribute('aria-pressed',String(BIG_EMBLEMS_ON));}
   } catch(e){}
 }
 async function loadAudioPref(){
@@ -8955,7 +8967,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p29';
+const BUILD_ID = '96h10p30';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -9873,6 +9885,7 @@ window.addEventListener('load', ()=>{
   loadLogiPref();               // FAZ 86C.4H-R2: lojistik katmanı
   loadWarViewPrefs();
   loadFleetNamesPref();         // 91D.1: görünür filoların devlet adları
+  loadBigEmblemsPref();         // BETA-RIVAL-BLOCS.0
   loadTemplates().then(()=>{    // FAZ 61: kurulum şablonları
     try { if (SETUP_STEP && $('menu') && !$('menu').classList.contains('hidden'))
       safeRenderSetup(); } catch(e){}

@@ -1,0 +1,9 @@
+PASS 1 cepheler açıkken (P–T ve M–T sürüyor): Savaş Merkezi → Benim Savaşlarım → Ayrıntı somut gerekçe verir, düğme yok; Diplomasi Merkezi kısayolu yok; P–T barışı M–T cephesini de kapatır mı kaydedilir
+PASS 2 son cephe kapanır: Savaş Merkezi ayrıntısı ve Diplomasi Merkezi kısayolu AYNI seferi ve taslağı açar; taslakta koloni/boş sistem, mevcut sahip, fetih hedefi, önerilen alıcı
+PASS 3 P'nin fethettiği koloninin alıcısı M seçilir (gerçek seçim kutusu) ve taslak sunulur; ortak onayıyla teklif onaylanır
+PASS 4 kaydet → yükle: onaylı teklif ve Savaş Merkezi durumu korunur
+PASS 5 Uygula ayrı adım (gerçek düğme): koloni P'den M'ye geçer — fetheden devlet ≠ yeni sahip; nüfus/yapılar korunur
+PASS 6 ikinci uygulama yapılamaz: düğme yok, motor reddeder, sahiplik değişmez
+PASS 7 tek galip seferi ve eksik (legacy) kayıt: Savaş Merkezi ayrıntısında somut gerekçe
+PASS sayfa hatası yok
+GEÇEN: 8 KALAN: 0

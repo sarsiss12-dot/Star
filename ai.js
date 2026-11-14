@@ -4905,9 +4905,9 @@ function aiFedAdmissionScore(e,other,type,f=null){
  const ok=score>=.5,sorted=factors.slice().sort((a,b)=>ok?b.v-a.v:a.v-b.v).slice(0,3);
  return {ok,score,factors,why:(ok?'Olumlu':'Olumsuz')+': '+sorted.map(x=>x.n+' '+(x.v>=0?'+':'')+x.v.toFixed(2)).join(' · ')};
 }
-function aiFedWilling(e,founder,type,f=null,ballot=null,founders=null){
+function aiFedWilling(e,founder,type,f=null,ballot=null,founders=null,threat=0){
  if(!e||!founder||e.dead||e.wild||e.crisisSide||isPurifier(e)||isVassal(e)||!e.contact[founder.id]||e.war[founder.id]||(e._fedLeaveUntil||0)>G.day)return {ok:false,why:'Siyasi koşullar uygun değil'};
- const rel=e.rel[founder.id]||0;if(rel<15||trustOf(e,founder.id)<-35)return {ok:false,why:'Güven veya ilişki yetersiz'};
+ const rel=e.rel[founder.id]||0;if(rel<15-threat*50||trustOf(e,founder.id)<-35)return {ok:false,why:'Güven veya ilişki yetersiz'};   // BETA-RIVAL-BLOCS.0: ortak tehdit (yalnız kuruluşta, varsayılan 0) eşiği gevşetir
  let eta=Infinity;const home=G.sys[e.home];
  const targets=aiKnownSystems(e,founder.id).sort((a,b)=>dist(home,a)-dist(home,b)||a.id-b.id).slice(0,3);
  const probe={e:e.id,ships:[{c:type==='askeri'?'kor':'bil',h:1}]};
@@ -4921,7 +4921,7 @@ function aiFedWilling(e,founder,type,f=null,ballot=null,founders=null){
  const peerBias=peers.length?peers.reduce((sum,id)=>sum+clamp((e.rel[id]||0)/500,-.15,.15),0)/peers.length:0;
  const regime=ballot||f&&fedBallot(f),regimeVote=regime?aiFedRegimeScore(e,regime,founders||[...(f?.members||[founder.id]),e.id],f):null;
  const concentration=aiFedConcentration(e,f,e.id);
- const score=assessment.score+(regimeVote?(regimeVote.score-.55)*.7:0)+(aiFedAffinity(e,type)-.5)*.3+protection+peerBias-(f&&fedCohesion(f)<35?.4:0)-concentration;
+ const score=assessment.score+(regimeVote?(regimeVote.score-.55)*.7:0)+(aiFedAffinity(e,type)-.5)*.3+protection+peerBias-(f&&fedCohesion(f)<35?.4:0)-concentration+threat;
  const why=score>=.5?'İlişki, çıkar ve bilinen erişim uygun · '+assessment.why:assessment.why+' · birlik uyumu / bilinen koruma '+(score-assessment.score).toFixed(2);
  return {ok:score>=.5,score,eta,why:why+(concentration?' · Büyük federasyonda bağımsızlık maliyeti −'+concentration.toFixed(2):'')};
 }
@@ -4965,24 +4965,20 @@ function aiFederationPolitics(){
   const month=G.year*12+G.month;if(e._fedPoliticsMonth===month)continue;e._fedPoliticsMonth=month;
   if(aiFederationEmergency(e))continue;
   if(aiRaiderPending(e))continue;
+  if(aiFoundPending(e))continue;   // BETA-RIVAL-BLOCS.0
   if((e._fedPoliticsAfter||0)>G.day)continue;
   let f=findFed(e);
   if(!f){
    let invited=false;
    for(const other of G.feds||[])if(other.invites?.[e.id]){const inv=other.invites[e.id],founder=G.emps[inv.by];if(aiFedWilling(e,founder,other.type,other).ok)acceptFedInvite(e,other.id);else rejectFedInvite(e,other.id);invited=true;break;}
    if(invited)continue;
-   const partners=G.emps.filter(o=>o!==e&&e.contact[o.id]&&findFed(o)&&canRequestFederation(e,o).ok)
-    .map(o=>({o,assessment:aiFedWilling(e,o,findFed(o).type,findFed(o))})).filter(x=>x.assessment.ok);
-   const partner=partners.sort((a,b)=>(G.cfg?.aiRivals?b.assessment.score-a.assessment.score:0)||(e.rel[b.o.id]||0)-(e.rel[a.o.id]||0)||a.o.id-b.o.id)[0]?.o;
-   if(partner){const result=requestFederation(e,partner);if(result.ok){e._fedPoliticsAfter=G.day+360;e.aiFedReason={day:G.day,kind:'apply',why:'Bilinen erişim, ilişki ve ortak çıkar'};}continue;}
-   const type=aiFedType(e),ids=[e.id,...G.emps.filter(o=>o!==e&&e.contact[o.id]&&e.ally[o.id]&&!o.dead&&!o.wild&&!findFed(o)).map(o=>o.id)],ballot=aiFedBallot(e,ids),gate=canFoundFed(e,type,ballot);
-   if(type==='yagmaci'){aiRaiderFound(e,ids,ballot);continue;}
-   if(gate.ok){const result=foundFederation(e,type,ballot);e.aiFedReason={day:G.day,kind:'found',type,ballot,why:'Kabul eden müttefikler, bilinen rota ve doktrin uyumu'};if(result.ok)e._fedPoliticsAfter=G.day+360;}
+   aiRivalBlocChoice(e);   // BETA-RIVAL-BLOCS.0: katıl / bağımsız kal / rakip blok kur aynı değerlendirmede
    continue;
   }
   for(const d of Object.values(f.decisions||{}))if(d.state==='ready'&&(d.by===e.id||f.leader===e.id))executeFedDecision(e,f.id,d.id);
   if(f.agenda?.items.some(r=>r.by===e.id))continue;
   if(!f.vote&&G.day-f.founded>=720&&fedCohesion(f)<20&&(e.rel[f.leader]||0)<-50){leaveFederation(e);e.aiFedReason={day:G.day,kind:'leave',why:'Uzun süreli uyumsuzluk ve başkana güvensizlik'};continue;}
+  if(aiFedStayReview(e,f))continue;   // BETA-RIVAL-BLOCS.0
   if(f.leader!==e.id)continue;
   const offer=(kind,options)=>{const result=proposeFedMotion(e,kind,options);if(result.ok){e._fedPoliticsAfter=G.day+360;e.aiFedReason={day:G.day,kind,...options,why:'Güven, doktrin, erişim ve mevcut birlik koşulları'};}return result.ok;};
   const hostile=f.members.find(id=>id!==e.id&&(e.rel[id]||0)<-65&&trustOf(e,id)<-40);
@@ -5007,8 +5003,8 @@ function aiCoalitionSend(e,o,give,want){
  if(o.id===0)return {karar:UI.aiOffer(offer)?'bekliyor':'bekle',uygulandi:false};
  return aiNegotiate(e,o,give,want,true);
 }
-function aiPendingPoliticalCommitment(e){
- return !!G.fedFounding?.proposals.some(p=>p.status==='pending'&&G.day<p.expires&&(p.by===e.id||p.members.includes(e.id)&&p.replies[e.id]?.status==='accepted'));
+function aiPendingPoliticalCommitment(e,except=null){
+ return !!G.fedFounding?.proposals.some(p=>p.id!==except&&p.status==='pending'&&G.day<p.expires&&(p.by===e.id||p.members.includes(e.id)&&p.replies[e.id]?.status==='accepted'));
 }
 function aiCoalitionSafe(e){
  if(!e?.ai||e.dead||e.wild||e.crisisSide||isPurifier(e)||isVassal(e)||!e.aiStrategy?.objective||['recovery'].includes(e.aiStrategy.objective.kind))return false;
@@ -5095,4 +5091,102 @@ function aiRaiderMilitaryProposal(e,f,offer){
  if(ongoing)return offer('joinWar',{target:ongoing.id,sponsor:e.id});
  const target=G.emps[e.aiStrategy?.plan?.enemy]||aiStrategicFacts(e).enemies.find(o=>warAppetite(e,o).cb);
  return !!(target&&e.contact[target.id]&&!e.ally[target.id]&&!e.war[target.id]&&warAppetite(e,target).cb&&aiFedVoteAssessment(e,f,{kind:'motion',motion:'newWar',target:target.id,proposer:e.id}).score>=.5&&offer('newWar',{target:target.id}));
+}
+
+/* ═══ BETA-RIVAL-BLOCS.0 — rakip bloklar ve dürüstlük ═══
+   Bütün kararlar deterministik (yeni RNG yok); mevcut aiFedWilling / aiFedAdmissionScore / fedFoundPropose / requestFederation
+   yollarını kullanır. Dürüst–Sahtekâr (ethics.ahl, −3…+3) söz bozma eşiğini ölçekler: savaş tutumunu (mil) değil yöntemi değiştirir. */
+function aiHonesty(e){return clamp(((e&&e.ethics&&e.ethics.ahl)||0)/3,-1,1);}
+function aiOathMul(e){return e&&e.ai?1+.40*aiHonesty(e):1;}
+function aiOathReputation(e,o){
+ if(!e||!e.ai)return 0;
+ const known=G.emps.filter(x=>x!==e&&x!==o&&!x.dead&&!x.wild&&e.contact[x.id]).length;
+ return clamp(known*.02,0,.30)*(1+.5*aiHonesty(e));   // gelecekte ortak bulmanın / itibarın bilinen maliyeti
+}
+function aiOathStrain(e){return e&&e.ai?-aiHonesty(e)*15:0;}
+/* Kabul edilmiş federasyon savunma yükümlülüğü: AI üye bilerek kaçabilir. Bilinen güç oranı, bütçe, açık cepheler, kurbana
+   ilişki ve dürüstlük; düşük getirili kaçış iki profilde de yapılmaz. Sonuç: hafıza + uyum + haber. */
+function aiDefenseShirk(m,attacker,victim,f){
+ if(!m||!m.ai||!attacker||!victim||!f)return false;
+ const h=aiHonesty(m),risk=aiKnownPower(m,attacker)/(aiKnownPower(m,m)+1),burden=aiFedWarBurden(m);
+ const open=Object.keys(m.war||{}).filter(id=>m.war[id]&&G.emps[id]&&!G.emps[id].wild).length;
+ const score=-.75-h*.45+clamp((risk-1.2)*.5,-.3,.6)+(burden.short||burden.budget?.critical?.30:0)+(open>=1?.25:0)-clamp((m.rel[victim.id]||0)/200,-.25,.4);
+ if(score<=0)return false;
+ if((m.oathLog||[]).some(x=>x.kind==='defense'&&x.target===attacker.id&&x.victim===victim.id&&G.day-x.day<30))return true;   // aynı çağrının tekrarı ikinci kez kaydedilmez
+ remember(victim,m.id,'paktBozdu');
+ for(const id of f.members)if(id!==m.id&&G.emps[id]){const x=G.emps[id];x.rel[m.id]=clamp((x.rel[m.id]||0)-10,-100,100);if(id!==victim.id)remember(x,m.id,'sozAksadi');}
+ f.cohesion=clamp((f.cohesion===undefined?70:f.cohesion)-6,0,100);
+ m.oathLog=(Array.isArray(m.oathLog)?m.oathLog:[]).concat([{day:G.day,kind:'defense',target:attacker.id,victim:victim.id,why:'Bilinen güç oranı '+risk.toFixed(2)+(burden.short?', bütçe yetersiz':'')+(open?', açık cephe':'')}]).slice(-12);
+ m.aiFedReason={day:G.day,kind:'shirk',target:attacker.id,why:'Savunma yükümlülüğünden kaçtı: risk '+risk.toFixed(2)};
+ if(typeof GalacticNews!=='undefined')GalacticNews.emit({category:'federation',federation:f,empires:[m.id,victim.id,attacker.id],key:'shirk:'+f.id+':'+m.id+':'+attacker.id+':'+G.day,important:true,
+   title:'Savunma yükümlülüğü çiğnendi — '+m.name,text:m.name+', '+f.name+' üyesi '+victim.name+' saldırıya uğradığında ortak savunmaya katılmadı.'});
+ if(victim.id===0)say(m.name+' federasyon savunma yükümlülüğünü çiğnedi — '+attacker.name+' karşısında yalnız bırakıldın','war');
+ return true;
+}
+/* Bilinen en büyük federasyon ve ona karşı ortak tehdit (kriz sırasında geniş koalisyon serbest kalır). */
+function aiBlocThreat(e,exclude=[]){
+ if(!e||(typeof crisisActive==='function'&&crisisActive()))return {bonus:0};
+ const known=G.emps.filter(o=>!o.dead&&!o.wild&&!o.crisisSide&&(o.id===e.id||e.contact[o.id]));if(known.length<4)return {bonus:0};
+ let best=null;for(const f of G.feds||[]){if(f.members.includes(e.id)||f.members.some(id=>exclude.includes(id)))continue;const seen=f.members.filter(id=>id!==e.id&&e.contact[id]&&G.emps[id]&&!G.emps[id].dead);if(seen.length<2)continue;if(!best||seen.length>best.seen.length)best={f,seen};}
+ if(!best)return {bonus:0};
+ const share=best.seen.length/known.length,war=best.seen.some(id=>e.war[id]),rel=best.seen.reduce((n,id)=>n+(e.rel[id]||0),0)/best.seen.length;
+ const power=best.seen.reduce((n,id)=>n+aiKnownPower(e,G.emps[id]),0),own=aiKnownPower(e,e)+1,hostile=war||rel<5||power>own*1.4;
+ return share>=.34&&hostile?{bonus:clamp(.10+(share-.34)*.4,0,.28),fed:best.f.id,share,war,rel}:{bonus:0,fed:best.f.id,share};
+}
+function aiFoundWilling(o,e,p){
+ if(aiPendingPoliticalCommitment(o,p.id??null))return {ok:false,why:'Başka bir kuruluş sürecine bağlı'};
+ const t=aiBlocThreat(o,p.members),base=aiFedWilling(o,e,p.type,{members:p.members,cohesion:70,type:p.type,charter:{...fedDefaultCharter(p.type),ballot:p.ballot}},p.ballot,p.members,t.bonus);
+ return t.bonus&&base.ok?{...base,why:base.why+' · Ortak tehdit: büyük blok karşısında denge +'+t.bonus.toFixed(2)}:base;
+}
+/* Bağımsız AI: mevcut bloğa katıl / bağımsız kal / rakip blok kur — aynı değerlendirmede. */
+function aiRivalBlocChoice(e){
+ const joinable=G.emps.filter(o=>o!==e&&e.contact[o.id]&&findFed(o)&&canRequestFederation(e,o).ok)
+  .map(o=>({o,a:aiFedWilling(e,o,findFed(o).type,findFed(o))})).filter(x=>x.a.ok)
+  .sort((a,b)=>(G.cfg?.aiRivals?b.a.score-a.a.score:0)||(e.rel[b.o.id]||0)-(e.rel[a.o.id]||0)||a.o.id-b.o.id);
+ const join=joinable[0]||null;
+ const types=Object.keys(FED_TYPES).sort((a,b)=>aiFedAffinity(e,b)-aiFedAffinity(e,a)||a.localeCompare(b));
+ const allyIds=[e.id,...G.emps.filter(o=>o!==e&&e.contact[o.id]&&e.ally[o.id]&&!o.dead&&!o.wild&&!findFed(o)).map(o=>o.id)];
+ if(!join&&types[0]==='yagmaci'){aiRaiderFound(e,allyIds,aiFedBallot(e,allyIds));return true;}   // Yağmacı yolu ve kuralları aynen (BETA-FED-AI.0)
+ const type=types[0],threat=aiBlocThreat(e);
+ // AI kuruluşa insanı otomatik davet etmez (BETA-FED-FOUND.0); insan AI'ları davet eder, AI yanıtlar. Kabul eden müttefik varsa
+ // önce müttefikler (eski topoloji tercihi); yoksa ittifaksız ortaklar — eksik ittifaklar kuruluşla kurulur.
+ const tempo=(G.fedFounding?.proposals||[]).some(p=>G.emps[p.by]?.ai&&Math.floor(p.opened/30)===Math.floor(G.day/30))||(G.feds||[]).some(f=>Math.floor(f.founded/30)===Math.floor(G.day/30));
+ const pool0=tempo||aiPendingPoliticalCommitment(e)||aiEconomyPlan(e).critical?[]:G.emps.filter(o=>o!==e&&o.ai&&!o.dead&&!o.wild&&!o.crisisSide&&e.contact[o.id]&&!fedFoundHuman(o)&&fedFoundCandidate(e,o).ok)
+  .map(o=>({o,ally:!!(e.ally[o.id]&&o.ally[e.id]),s:aiFedAdmissionScore(e,o,type).score+(threat.bonus&&aiBlocThreat(o,[e.id]).fed===threat.fed?threat.bonus*.5:0)})).filter(x=>x.s>=.5)
+  .filter(x=>aiFoundWilling(x.o,e,{type,ballot:'equal',members:[e.id,x.o.id]}).ok);
+ const pool=(pool0.some(x=>x.ally)?pool0.filter(x=>x.ally):pool0).sort((a,b)=>b.s-a.s||a.o.id-b.o.id).slice(0,3);
+ const cost=fedFoundCost(e,[e.id,...pool.map(x=>x.o.id)]),score=pool.length?pool.reduce((n,x)=>n+x.s,0)/pool.length+threat.bonus:0;
+ const found=pool.length&&(e.res.etk||0)>=cost?{score,ids:pool.map(x=>x.o.id)}:null;
+ if(join&&(!found||join.a.score+.03>=found.score)){
+  const result=requestFederation(e,join.o);if(result.ok){e._fedPoliticsAfter=G.day+360;e.aiFedReason={day:G.day,kind:'apply',why:'Bilinen erişim, ilişki ve ortak çıkar'+(found?' · katılım '+join.a.score.toFixed(2)+' ≥ yeni blok '+found.score.toFixed(2):'')};}
+  return true;
+ }
+ if(found&&found.score>=.5){
+  const ids=found.ids.slice().sort((a,b)=>a-b),ballot=aiFedBallot(e,[e.id,...ids]),q=fedFoundPropose(e,type,ballot,ids);
+  if(q.ok){e._fedPoliticsAfter=G.day+180;e.aiFedReason={day:G.day,kind:'propose',type,ballot,members:ids,why:(threat.bonus?'Büyük blok karşısında ortak tehdit · ':'')+'Kurucu ortaklarla ilişki, erişim ve doktrin uyumu '+found.score.toFixed(2)+(join?' > katılım '+join.a.score.toFixed(2):'')};
+   const p=fedFoundGet(q.id);if(p&&p.members.every(id=>p.replies[id]?.status==='accepted'))aiFoundPending(e);}   // yalnız AI: bütün açık kabuller davette geldiyse son onay hemen
+  return true;
+ }
+ return false;
+}
+/* AI'ın öne sürdüğü (Yağmacı dışı) kuruluş: bütün güncel kabuller gelince son onay; ret/sürede kadro düzenlenir ya da iptal. */
+function aiFoundPending(e){
+ const p=G.fedFounding?.proposals.find(p=>p.by===e.id&&p.type!=='yagmaci'&&p.status==='pending');if(!p)return false;
+ const q=fedFoundValid(p);if(!q.ok){fedFoundTick();return true;}
+ if(p.members.every(id=>p.replies[id]?.status==='accepted')){const r=fedFoundFinish(e,p.id,p.revision||0);e.aiFedReason={day:G.day,kind:r.ok?'found':'found-failed',type:p.type,ballot:p.ballot,why:r.ok?'Bütün kurucuların güncel açık kabulü alındı':r.why};if(r.ok)e._fedPoliticsAfter=G.day+360;return true;}
+ if(p.members.some(id=>p.replies[id]?.status==='rejected')){
+  const keep=p.members.filter(id=>id!==e.id&&p.replies[id]?.status!=='rejected');
+  if(keep.length>=1&&(p.revision||0)<12)fedFoundUpdate(e,p.id,p.revision||0,p.type,p.ballot,keep);else fedFoundCancel(e,p.id);
+ }
+ return true;
+}
+/* Üye: uzun süren çıkar çatışması + yaşayabilir alternatif → anayasaya uygun ayrılış. Dürüst üye daha uzun sabreder. */
+function aiFedStayReview(e,f){
+ if(!e.ai||f.leader===e.id||f.vote||G.day-(f.dutyConsent?.[e.id]?.since??f.founded)<720)return false;
+ const conflict=(45-fedCohesion(f))/100+(-(e.rel[f.leader]||0))/150+(.45-aiFedAffinity(e,f.type))+(aiBlocThreat(e).bonus?0:-.05);
+ e._fedStrain=conflict>.15?(e._fedStrain||0)+1:Math.max(0,(e._fedStrain||0)-1);
+ if(e._fedStrain<Math.round(12+8*aiHonesty(e)))return false;
+ const alt=G.emps.some(o=>o!==e&&!o.dead&&!o.wild&&e.contact[o.id]&&!f.members.includes(o.id)&&(findFed(o)?aiFedWilling(e,o,findFed(o).type,findFed(o)).score>=.55:fedFoundCandidate(e,o).ok&&aiFedAdmissionScore(e,o,aiFedType(e)).score>=.55));
+ if(!alt)return false;
+ leaveFederation(e);e._fedStrain=0;e.aiFedReason={day:G.day,kind:'leave',why:'Uzun süreli çıkar çatışması ve yaşayabilir alternatif blok (anayasaya uygun ayrılış)'};return true;
 }

@@ -1,0 +1,10 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[3,3],"mirrorEq":true,"revMs":531,"buildMs":559,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[3,3],"mirrorEq":true,"revMs":670,"buildMs":774,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":4.3,"p95":6.9,"max":6.9},"longtask":{"n":0},"heapMB":16,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":3,"med":9.9,"p95":89.8,"max":89.8},"refresh":{"n":1,"med":4.8,"p95":4.8,"max":4.8},"longtask":{"n":3,"med":61,"p95":66,"max":66},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":15,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":30,"joinErrors":0},"C":{"build":{"n":3,"med":25.6,"p95":42.3,"max":42.3},"refresh":{"n":1,"med":2.2,"p95":2.2,"max":2.2},"longtask":{"n":2,"med":66,"p95":66,"max":66},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":15,"dom":721,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0}}}
+PASS L0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS L1 misafir başkan B gerçek sistem panelinde FEDERAL SİPARİŞ + gerçek ortak fonu görür; üye olmayan C fonu / defteri / düğmeyi görmez
+PASS L2 B gerçek FEDERAL SİPARİŞ düğmesine dokunur → host tersane kuyruğunda TEK federal iş, bedel ortak fondan bir kez; dokunma anında yerel etki yok, kabul host ACK'i + güncel aynada
+PASS L3 B'nin hattı kopup bağlanır, AYNI komut çerçevesi yeniden gönderilir → ikinci ödeme / ikinci iş yok; aynı ay yeni komut reddedilir
+PASS L4 iş gerçek dailyTick ile tamamlanır → tek federal gemi, B'nin (başkan) federal filosu; ödeme bir kez; B güncel aynada federal filoyu görür
+PASS L5 başkanlık host'a geçer (B'nin aynası henüz eski): B'nin gerçek düğme dokunuşu host'ta işlem anında reddedilir; fon ve kuyruk değişmez
+GEÇEN: 6 KALAN: 0

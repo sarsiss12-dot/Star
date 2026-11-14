@@ -1,0 +1,10 @@
+PASS 390x844 Rakip Doktrinler: Az → 5–6 → sabit sayı → AI sayısını düşür → Doğal; klavye yok, sınırlar her dokunuşta geçerli
+PASS 390x844 seçim kurulum sonucuna yansır: 8 AI, 5–6 → oyunda militarist+kriminal+arındırıcı toplamı 5–6; 0,05× çarpan dokunarak seçilir
+PASS 800x360 Rakip Doktrinler: Az → 5–6 → sabit sayı → AI sayısını düşür → Doğal; klavye yok, sınırlar her dokunuşta geçerli
+PASS Büyük bölge armaları: KATMANLAR anahtarı; aynı kamerada kapalı/açık görüntü; arma kendi bölgesinin içinde, ⅔ genişlik; tercih cihazda saklanır
+PASS Büyük arma tercihi yeniden yüklemede geri gelir; %0 opaklık iki kipte de görünürlüğü kapatır
+PASS Gerçek düğmelerle ittifaksız kuruluş: iki AI kurucu seç → KURULUŞ DAVETLERİNİ GÖNDER → SON KURULUŞ ONAYI; ittifaklar federasyonla birlikte
+PASS Gerçek düğmelerle ittifaksız üye daveti: Diplomasi → Federasyonuma Davet Et → oy kartında EVET → AI kabul → üyelik + ittifaklar
+PASS Koloni panelinden otomatik inşaat: gemi seçmeden yapı düğmesi → en erken varacak boş İNŞ atanır; panelde gemi / tahmini varış / maliyet
+PASS 500 sistem / 16 AI: büyük arma yerleşimi bir kez hesaplanır, kare başına çizim maliyeti ölçülür (kapalı / açık)
+GEÇEN: 9 KALAN: 0
