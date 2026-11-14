@@ -10130,7 +10130,7 @@ const WarCoal={st:null,req:0,last:0,view:null,
   const same=this.st&&this.st.id===id&&this.st.key===key;
   const sel=key==='fetih'?{targets:(opts&&Array.isArray(opts.targets)&&opts.targets.length?opts.targets:(G.emps[id]?warFetihDefault(G.p,G.emps[id]):[])).slice()}:{vtype:opts?.vtype||'haracguzar',war:opts?.war||WAR_VASSAL_WAR.haracguzar};
   this.st=same?{...this.st,sel,explicit:!!opts}:{id,key,sel,picks:[],terms:{},editing:null,msg:'',busy:false,others:false,explicit:!!opts};
-  this.view=null;this.req++;UI.openModal(`<div class="mhd"><span>⚔ SAVAŞ İLANI · ${esc(G.emps[id]?.name||'')}</span><button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warCoalRoot">Önizleme hazırlanıyor…</div>`,'war');
+  this.view=null;this.req++;UI.openModal(`<div class="mhd"><span>⚔ SAVAŞ İLANI · ${esc(G.emps[id]?.name||'')}</span><button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warCoalRoot">Önizleme hazırlanıyor…</div>`,'war liveWorld');
   this.load();
  },
  load(after){const st=this.st;if(!st)return;const req=++this.req;this.last=Date.now();

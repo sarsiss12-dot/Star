@@ -595,7 +595,10 @@ function onMessage(m){
 /* ayna bekletme: yalnız gerçek onay penceresi (#modal) açıkken. MP.6.2: diplomasi sayfası açıkken de ayna uygulanır; sayfa,
    hedef ve anlaşma taslağı yeni dünyaya taşınır (ensureDiploWorld G.p kimliği değişince bunları sıfırlıyordu). */
 function fleetRecoveryApplied(a){if(S.appliedGeneration===S.gen&&S.appliedWorldRev>=a.rev)return true;const x=a.extra;if(!x||!Number.isSafeInteger(x.group)||!(x.afterStamp===null||typeof x.afterStamp==='string'))return false;const g=fleetRecoveryGroups(G.p).find(g=>g.id===x.group);return (g?fleetRecoveryStamp(g):null)===x.afterStamp;}
-function holdBuild(){const m=doc.getElementById('modal');if(m?.querySelector('#fleetRecoveryResult'))return false;if(doc.getElementById('warCenterRoot')&&typeof WarCenterUI!=='undefined'&&!WarCenterUI.confirmPlan)return false;return !!(m&&!m.classList.contains('hidden'));}
+/* WAR-COALITION.0: yalnız kimlikle çalışan, kendi durumunu host'tan / kimlikten yeniden kuran pencereler (.mbox.liveWorld: savaş ilanı + koalisyon akışı,
+   gelen kutusu / haberler, İç İstikrar) açıkken dünya uygulanır — harita, tarih ve kabul edilmiş emirler güncellenir; pencere yüzeyi yeni dünyaya taşınır,
+   akışın seçimleri / şart taslakları / kaydırma konumu korunur. Dünya kimliğini denetleyen onay pencereleri eskisi gibi bekletir. */
+function holdBuild(){const m=doc.getElementById('modal');if(m?.querySelector('#fleetRecoveryResult'))return false;if(m&&!m.classList.contains('hidden')&&m.querySelector('.mbox.liveWorld'))return false;if(doc.getElementById('warCenterRoot')&&typeof WarCenterUI!=='undefined'&&!WarCenterUI.confirmPlan)return false;return !!(m&&!m.classList.contains('hidden'));}
 function schedule(){if(S.timer)return;const wait=Math.max(0,S.minGap-(Date.now()-S.lastBuild));S.timer=setTimeout(rebuild,wait);}
 /* MP-P0: kurulum zinciri hiçbir istisnayla kalıcı durmaz. Eskiden rebuild içinde deserialize'dan ÖNCE atılan bir istisna (ör. yerel sunum
    durumundaki bozuk bir kart) her aynada yeniden atılıyor, dünya hiç uygulanmıyor ve kullanıcıya hiçbir şey gösterilmiyordu; deserialize'dan

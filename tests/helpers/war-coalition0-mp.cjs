@@ -85,4 +85,29 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,wait,tap}){
     assert.equal(h.fronts,1,'tek savaş');assert.equal(h.c,true);assert.equal(h.y,true);assert.equal(h.state,'launched');assert.equal(h.wg.t,'fetih');assert.equal(h.wg.v,2);
     assert.equal(M.Q3.spent.min,150,'C\'nin istediği 150 Mineral bir kez: '+JSON.stringify(M.Q3.spent));
     await synced(C);assert.equal(await C.evaluate(n=>{const x=G.emps.findIndex(e=>e&&e.name===n);return !!G.p.war[x];},XN),true,'C aynasında savaşı görür');await shot(B,'q3-ilan');});
+
+  await test('Q4 açık pencere misafirin dünyasını bekletmez: B savaş ilanı/koalisyon akışı AÇIKKEN host 45 gün ilerler ve B gemi emri verir → tarih, harita ve emir sonucu pencere kapanmadan yansır; seçim, şart taslağı ve kaydırma korunur; İç İstikrar penceresi de aynı',async()=>{
+    const Z=await H.evaluate(([b,x,y,c])=>{const Z=G.emps.find(e=>e.ai&&!e.wild&&!e.dead&&![0,b,x,y,c].includes(e.id));remember(Z,b,'savasIlan');MP1Host.host.publish();return Z.id;},[eB,fx.X,fx.Y,eC]);
+    await synced(B);await clean(B);const zB=await lid(B,await nameOf(Z));
+    await B.evaluate(z=>{UI.warGoalPick(z,'boyun');UI.warGoalAct('wgGo');},zB);await B.waitForSelector('#warCoalRoot .coalSummary',{timeout:20000});
+    await tap(B,'.coalAllies > summary');await B.waitForSelector(`[data-a="coalPick"][data-x="${cB}"]`,{timeout:10000});await tap(B,`[data-a="coalPick"][data-x="${cB}"]`);
+    await tap(B,`[data-a="coalTerms"][data-x="${cB}"]`);await tap(B,`[data-a="coalAmt"][data-x="${cB}:min:50"]`);
+    await B.evaluate(()=>{const b=document.querySelector('#modal .mbox');b.scrollTop=Math.min(220,b.scrollHeight);});const scroll0=await B.evaluate(()=>document.querySelector('#modal .mbox').scrollTop);
+    const g0=await B.evaluate(()=>({day:G.day,rev:MP6Stars.S.appliedRev,held:MP6Stars.S.stats.held}));
+    await H.evaluate(()=>MP1Host.advance(45));
+    const own=await B.evaluate(()=>{const s=G.sys.find(s=>s.owner===0&&typeof hasYard==='function'&&hasYard(s));return s?{yard:s.id,q:(s.queue||[]).length}:null;});
+    const t0=Date.now();const c=await B.evaluate(y=>MP1Join.cmd({kind:'ship',sys:y,key:'kor'}),own.yard);assert.equal(c.ok,true,JSON.stringify(c));
+    await B.waitForFunction(cid=>MP1Join.results.some(x=>x.cid===cid),c.cid,{timeout:15000,polling:100});const ack=await B.evaluate(cid=>MP1Join.results.filter(y=>y.cid===cid).at(-1),c.cid);assert.equal(ack.status,'ok',JSON.stringify(ack));
+    await B.waitForFunction(rev=>MP6Stars.S.appliedWorldRev>=rev,ack.rev,{timeout:20000,polling:100});const reflectMs=Date.now()-t0;
+    const g1=await B.evaluate(()=>({day:G.day,open:!document.getElementById('modal').classList.contains('hidden')&&!!document.getElementById('warCoalRoot'),picks:WarCoal.st&&WarCoal.st.picks.slice(),terms:WarCoal.st&&WarCoal.st.terms,scroll:document.querySelector('#modal .mbox')?.scrollTop,held:MP6Stars.S.stats.held,rev:MP6Stars.S.appliedRev}));
+    M.Q4={reflectMs,dayBefore:Math.round(g0.day),dayAfter:Math.round(g1.day),scroll0,scroll1:g1.scroll,heldDelta:g1.held-g0.held,revBefore:g0.rev,revAfter:g1.rev};
+    assert.equal(g1.open,true,'pencere açık kaldı');assert.ok(g1.day>=g0.day+40,'misafir tarihi pencere açıkken ilerledi: '+JSON.stringify(M.Q4));assert.ok(reflectMs<20000);
+    assert.deepEqual(g1.picks,[cB],'seçim korunur');assert.equal(g1.terms[cB].give[0].v,50,'şart taslağı korunur');assert.ok(Math.abs(g1.scroll-scroll0)<40,'kaydırma korunur '+JSON.stringify(M.Q4));
+    await shot(B,'q4-acik-pencere');await clean(B);
+    /* İç İstikrar penceresi */
+    await B.evaluate(()=>{const s=G.sys[G.p.home],p=s.planets.find(p=>p.owner===0&&p.col);InternalUI.open(s.id,G.sys[s.id].planets.indexOf(p));});
+    const hasInternal=await B.evaluate(()=>!document.getElementById('modal').classList.contains('hidden'));
+    if(hasInternal){const d0=await B.evaluate(()=>G.day);await H.evaluate(()=>MP1Host.advance(30));await B.waitForFunction(d=>G.day>=d+25,d0,{timeout:20000,polling:100});
+      M.Q4.internal={open:await B.evaluate(()=>!document.getElementById('modal').classList.contains('hidden')),days:Math.round(await B.evaluate(()=>G.day)-d0)};assert.equal(M.Q4.internal.open,true);}
+    else M.Q4.internal='pencere açıcı bulunamadı (NOT RUN)';});
 };

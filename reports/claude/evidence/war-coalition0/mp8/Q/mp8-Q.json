@@ -3,22 +3,27 @@
   {
    "name": "Q0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
    "status": "PASS",
-   "ms": 9598
+   "ms": 9002
   },
   {
    "name": "Q1 misafir B gerçek ilişki sayfasından SAVAŞ → Fetih → tek akış; C (insan) + Y (AI) seçilir; \"Davetleri Gönder (2)\" çift dokunuş → host'ta tek hazırlık, C'ye tek teklif; Y karşı teklif",
    "status": "PASS",
-   "ms": 9571
+   "ms": 8227
   },
   {
    "name": "Q2 misafir C gerçek gelen kutusu kartı (desteklenen taraf, hedef, amaç, başlangıç, son gün) → karşı teklif; B akışta C ve Y için \"Kabul Et\"; C, Y'nin teklifini ve B'nin hazırlığını görmez",
    "status": "PASS",
-   "ms": 2585
+   "ms": 5755
   },
   {
    "name": "Q3 B \"2 Destekçiyle Savaş İlan Et\" çift dokunuş → tek cephe; C ve Y savaşta; Fetih seçimi ve bedeller bir kez; C'nin aynasında savaş",
    "status": "PASS",
-   "ms": 2419
+   "ms": 32378
+  },
+  {
+   "name": "Q4 açık pencere misafirin dünyasını bekletmez: B savaş ilanı/koalisyon akışı AÇIKKEN host 45 gün ilerler ve B gemi emri verir → tarih, harita ve emir sonucu pencere kapanmadan yansır; seçim, şart taslağı ve kaydırma korunur; İç İstikrar penceresi de aynı",
+   "status": "PASS",
+   "ms": 4094
   }
  ],
  "metrics": {
@@ -41,8 +46,8 @@
      2
     ],
     "mirrorEq": true,
-    "revMs": 801,
-    "buildMs": 840,
+    "revMs": 196,
+    "buildMs": 207,
     "diff": [],
     "leak": []
    },
@@ -55,8 +60,8 @@
      2
     ],
     "mirrorEq": true,
-    "revMs": 895,
-    "buildMs": 944,
+    "revMs": 261,
+    "buildMs": 304,
     "diff": [],
     "leak": []
    }
@@ -71,15 +76,15 @@
       "n": 0
      },
      "publish": {
-      "n": 3,
-      "med": 6.2,
-      "p95": 10.8,
-      "max": 10.8
+      "n": 2,
+      "med": 4.2,
+      "p95": 4.2,
+      "max": 4.2
      },
      "longtask": {
       "n": 0
      },
-     "heapMB": 18,
+     "heapMB": 17,
      "dom": 725,
      "intervals": 2,
      "timeouts": 2,
@@ -93,15 +98,15 @@
      "B": {
       "build": {
        "n": 2,
-       "med": 31.6,
-       "p95": 31.6,
-       "max": 31.6
+       "med": 28.6,
+       "p95": 28.6,
+       "max": 28.6
       },
       "refresh": {
        "n": 1,
-       "med": 5.4,
-       "p95": 5.4,
-       "max": 5.4
+       "med": 2.5,
+       "p95": 2.5,
+       "max": 2.5
       },
       "longtask": {
        "n": 0
@@ -122,15 +127,15 @@
      "C": {
       "build": {
        "n": 2,
-       "med": 43.7,
-       "p95": 43.7,
-       "max": 43.7
+       "med": 50.7,
+       "p95": 50.7,
+       "max": 50.7
       },
       "refresh": {
        "n": 1,
-       "med": 6.9,
-       "p95": 6.9,
-       "max": 6.9
+       "med": 1,
+       "p95": 1,
+       "max": 1
       },
       "longtask": {
        "n": 0
@@ -154,7 +159,7 @@
   "notes": [],
   "net": {},
   "resume": {},
-  "relayPid1": 9368,
+  "relayPid1": 12005,
   "actualWorld": {
    "seed": 22,
    "size": "orta",
@@ -250,7 +255,7 @@
     "y": true,
     "wg": {
      "t": "fetih",
-     "start": 1.2198120000000003,
+     "start": 1.253208000000001,
      "targets": [
       12,
       14
@@ -271,6 +276,20 @@
      "min": 150,
      "ala": 400,
      "etk": 25
+    }
+   },
+   "Q4": {
+    "reflectMs": 732,
+    "dayBefore": 1,
+    "dayAfter": 46,
+    "scroll0": 220,
+    "scroll1": 220,
+    "heldDelta": 0,
+    "revBefore": 6,
+    "revAfter": 8,
+    "internal": {
+     "open": true,
+     "days": 30
     }
    }
   },
