@@ -64,3 +64,10 @@ Ortak ders: yerel bir göstergede kazanç (tek seed, tek kaynak, tek devlet) gen
   blok oluşmadı (maks. 1). Sonuç: tutarlı fayda yok, 404'te kötüleşme. Kod geri alındı; kanıt
   `reports/claude/evidence/beta-galaxy0/ai-federal/blok-olcumu-kontrol-plasebo-aday-RED.jsonl`.
 - Gözlem: rakip blok kurulmamasının kökü katılma cezası değil, kuruluş kapısı için ittifaklı bağımsız AI bulunmaması; ayrı faz.
+
+## BETA-RIVAL-BLOCS.0 — kuruluş bedeli alt adayları (REDDEDİLDİ / GERİ ALINDI, 14 Kasım 2026)
+
+- **Koşulsuz iki kurucu indirimi** (iki kurucuyla kuruluş bedeli %40 düşük, herkes için): 8 AI · orta · 120 ayda üç seed'de de ikinci blok oluşturdu, ama BETA-FED-FOUND.0'ın kabul edilmiş "iki insan · tek ücret 220" kuralını değiştiriyordu (`beta_fed_found0_core_test`). Geri alındı; yerine yalnız büyük blok (yaşayan devletlerin ≥ ⅓'ü) varken geçerli **denge birliği** kuralı (`fedCounterBloc`, herkese aynı) kabul edildi.
+- **AI Etki biriktirme** (kuruluş ortağı varken 12 ay casusluk / istihbarat paktı harcamasını ertelemek): 11/23/404'te ikinci blok çıkmadı, 404'teki ikinci blok kayboldu (kaotik ayrışma, fayda yok). Kod geri alındı.
+- **Yağmacı tercihli AI'ın genel kuruluşa düşmesi**: `beta_fed_ai0_raider_test`'in korunan kuralını (ittifaksız / ekonomisi kritik Yağmacı AI kuramaz) bozuyordu; geri alındı, Yağmacı yolu aynen.
+- Ölçüm betikleri: `reports/claude/evidence/beta-rival-blocs0/` (`blocs.cjs`, `campaign.sh`).

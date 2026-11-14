@@ -1,0 +1,167 @@
+[
+ {
+  "seed": 11,
+  "mul": 1,
+  "normal": 333,
+  "guaranteed": 16,
+  "special": 39,
+  "rare": 37,
+  "protectedHabitable": 92,
+  "totalHabitable": 425,
+  "planets": 1343
+ },
+ {
+  "seed": 11,
+  "mul": 0.25,
+  "normal": 83,
+  "guaranteed": 16,
+  "special": 39,
+  "rare": 37,
+  "protectedHabitable": 92,
+  "totalHabitable": 175,
+  "planets": 1343
+ },
+ {
+  "seed": 11,
+  "mul": 0.15,
+  "normal": 50,
+  "guaranteed": 16,
+  "special": 39,
+  "rare": 37,
+  "protectedHabitable": 92,
+  "totalHabitable": 142,
+  "planets": 1343
+ },
+ {
+  "seed": 11,
+  "mul": 0.1,
+  "normal": 33,
+  "guaranteed": 16,
+  "special": 39,
+  "rare": 37,
+  "protectedHabitable": 92,
+  "totalHabitable": 125,
+  "planets": 1343
+ },
+ {
+  "seed": 11,
+  "mul": 0.05,
+  "normal": 17,
+  "guaranteed": 16,
+  "special": 39,
+  "rare": 37,
+  "protectedHabitable": 92,
+  "totalHabitable": 109,
+  "planets": 1343
+ },
+ {
+  "seed": 23,
+  "mul": 1,
+  "normal": 381,
+  "guaranteed": 21,
+  "special": 38,
+  "rare": 25,
+  "protectedHabitable": 84,
+  "totalHabitable": 465,
+  "planets": 1385
+ },
+ {
+  "seed": 23,
+  "mul": 0.25,
+  "normal": 95,
+  "guaranteed": 21,
+  "special": 38,
+  "rare": 25,
+  "protectedHabitable": 84,
+  "totalHabitable": 179,
+  "planets": 1385
+ },
+ {
+  "seed": 23,
+  "mul": 0.15,
+  "normal": 57,
+  "guaranteed": 21,
+  "special": 38,
+  "rare": 25,
+  "protectedHabitable": 84,
+  "totalHabitable": 141,
+  "planets": 1385
+ },
+ {
+  "seed": 23,
+  "mul": 0.1,
+  "normal": 38,
+  "guaranteed": 21,
+  "special": 38,
+  "rare": 25,
+  "protectedHabitable": 84,
+  "totalHabitable": 122,
+  "planets": 1385
+ },
+ {
+  "seed": 23,
+  "mul": 0.05,
+  "normal": 19,
+  "guaranteed": 21,
+  "special": 38,
+  "rare": 25,
+  "protectedHabitable": 84,
+  "totalHabitable": 103,
+  "planets": 1385
+ },
+ {
+  "seed": 404,
+  "mul": 1,
+  "normal": 379,
+  "guaranteed": 20,
+  "special": 37,
+  "rare": 36,
+  "protectedHabitable": 93,
+  "totalHabitable": 472,
+  "planets": 1361
+ },
+ {
+  "seed": 404,
+  "mul": 0.25,
+  "normal": 95,
+  "guaranteed": 20,
+  "special": 37,
+  "rare": 36,
+  "protectedHabitable": 93,
+  "totalHabitable": 188,
+  "planets": 1361
+ },
+ {
+  "seed": 404,
+  "mul": 0.15,
+  "normal": 57,
+  "guaranteed": 20,
+  "special": 37,
+  "rare": 36,
+  "protectedHabitable": 93,
+  "totalHabitable": 150,
+  "planets": 1361
+ },
+ {
+  "seed": 404,
+  "mul": 0.1,
+  "normal": 38,
+  "guaranteed": 20,
+  "special": 37,
+  "rare": 36,
+  "protectedHabitable": 93,
+  "totalHabitable": 131,
+  "planets": 1361
+ },
+ {
+  "seed": 404,
+  "mul": 0.05,
+  "normal": 19,
+  "guaranteed": 20,
+  "special": 37,
+  "rare": 36,
+  "protectedHabitable": 93,
+  "totalHabitable": 112,
+  "planets": 1361
+ }
+]

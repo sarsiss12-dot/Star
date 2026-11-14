@@ -1,0 +1,257 @@
+[
+ {
+  "name": "390x844 Rakip Doktrinler: Az → 5–6 → sabit sayı → AI sayısını düşür → Doğal; klavye yok, sınırlar her dokunuşta geçerli",
+  "status": "PASS",
+  "steps": [
+   {
+    "r": {
+     "min": 0,
+     "max": 2
+    },
+    "n": 8,
+    "sum": "Seçili: 0–2 AI · toplam 8 AI",
+    "on": [
+     "az"
+    ],
+    "inputs": 0,
+    "dis": [
+     "min:-1"
+    ]
+   },
+   {
+    "r": {
+     "min": 5,
+     "max": 6
+    },
+    "n": 8,
+    "sum": "Seçili: 5–6 AI · toplam 8 AI · özel aralık",
+    "on": [],
+    "inputs": 0,
+    "dis": []
+   },
+   {
+    "r": {
+     "min": 5,
+     "max": 5
+    },
+    "n": 8,
+    "sum": "Seçili: 5 AI (sabit sayı) · toplam 8 AI · özel aralık",
+    "on": [],
+    "inputs": 0,
+    "dis": []
+   },
+   {
+    "r": {
+     "min": 3,
+     "max": 3
+    },
+    "n": 3,
+    "sum": "Seçili: 3 AI (sabit sayı) · toplam 3 AI · özel aralık",
+    "on": [],
+    "inputs": 0,
+    "dis": [
+     "min:1",
+     "max:1"
+    ]
+   },
+   {
+    "r": null,
+    "n": 3,
+    "sum": "",
+    "on": [
+     "auto"
+    ],
+    "inputs": 0,
+    "dis": []
+   }
+  ]
+ },
+ {
+  "name": "390x844 seçim kurulum sonucuna yansır: 8 AI, 5–6 → oyunda militarist+kriminal+arındırıcı toplamı 5–6; 0,05× çarpan dokunarak seçilir",
+  "status": "PASS",
+  "n": 6,
+  "mul": 0.05,
+  "lpm": {
+   "b": 26,
+   "a": 1
+  }
+ },
+ {
+  "name": "800x360 Rakip Doktrinler: Az → 5–6 → sabit sayı → AI sayısını düşür → Doğal; klavye yok, sınırlar her dokunuşta geçerli",
+  "status": "PASS",
+  "steps": [
+   {
+    "r": {
+     "min": 0,
+     "max": 2
+    },
+    "n": 8,
+    "sum": "Seçili: 0–2 AI · toplam 8 AI",
+    "on": [
+     "az"
+    ],
+    "inputs": 0,
+    "dis": [
+     "min:-1"
+    ]
+   },
+   {
+    "r": {
+     "min": 5,
+     "max": 6
+    },
+    "n": 8,
+    "sum": "Seçili: 5–6 AI · toplam 8 AI · özel aralık",
+    "on": [],
+    "inputs": 0,
+    "dis": []
+   },
+   {
+    "r": {
+     "min": 5,
+     "max": 5
+    },
+    "n": 8,
+    "sum": "Seçili: 5 AI (sabit sayı) · toplam 8 AI · özel aralık",
+    "on": [],
+    "inputs": 0,
+    "dis": []
+   },
+   {
+    "r": {
+     "min": 3,
+     "max": 3
+    },
+    "n": 3,
+    "sum": "Seçili: 3 AI (sabit sayı) · toplam 3 AI · özel aralık",
+    "on": [],
+    "inputs": 0,
+    "dis": [
+     "min:1",
+     "max:1"
+    ]
+   },
+   {
+    "r": null,
+    "n": 3,
+    "sum": "",
+    "on": [
+     "auto"
+    ],
+    "inputs": 0,
+    "dis": []
+   }
+  ]
+ },
+ {
+  "name": "Büyük bölge armaları: KATMANLAR anahtarı; aynı kamerada kapalı/açık görüntü; arma kendi bölgesinin içinde, ⅔ genişlik; tercih cihazda saklanır",
+  "status": "PASS",
+  "small": 1,
+  "big": {
+   "on": true,
+   "placed": 1,
+   "ms": 0.19999999972060323,
+   "checks": [
+    {
+     "owner": 0,
+     "inside": true,
+     "ratio": 0.6666666666666667
+    }
+   ]
+  },
+  "pref": "on",
+  "tapHit": {
+   "near": 44
+  }
+ },
+ {
+  "name": "Büyük arma tercihi yeniden yüklemede geri gelir; %0 opaklık iki kipte de görünürlüğü kapatır",
+  "status": "PASS",
+  "afterReload": true
+ },
+ {
+  "name": "Gerçek düğmelerle ittifaksız kuruluş: iki AI kurucu seç → KURULUŞ DAVETLERİNİ GÖNDER → SON KURULUŞ ONAYI; ittifaklar federasyonla birlikte",
+  "status": "PASS",
+  "pick": [
+   1,
+   2
+  ],
+  "fed": [
+   0,
+   1,
+   2
+  ],
+  "allied": true
+ },
+ {
+  "name": "Gerçek düğmelerle ittifaksız üye daveti: Diplomasi → Federasyonuma Davet Et → oy kartında EVET → AI kabul → üyelik + ittifaklar",
+  "status": "PASS",
+  "target": 4,
+  "member": true,
+  "allied": true,
+  "vote": null,
+  "invite": null,
+  "adm": [
+   {
+    "day": 0.2868,
+    "year": 2210,
+    "month": 1,
+    "event": "vote",
+    "kind": "motion",
+    "law": "motion",
+    "passed": true,
+    "yes": 3,
+    "no": 0
+   },
+   {
+    "day": 0.2868,
+    "year": 2210,
+    "month": 1,
+    "event": "join",
+    "target": 4
+   },
+   {
+    "day": 0.2868,
+    "year": 2210,
+    "month": 1,
+    "event": "motion",
+    "kind": "admit",
+    "target": 4
+   }
+  ]
+ },
+ {
+  "name": "Koloni panelinden otomatik inşaat: gemi seçmeden yapı düğmesi → en erken varacak boş İNŞ atanır; panelde gemi / tahmini varış / maliyet",
+  "status": "PASS",
+  "key": "bilim_ist",
+  "fleet": "İnş Uzak",
+  "eta": 5.8,
+  "auto": true,
+  "state": "queued"
+ },
+ {
+  "name": "500 sistem / 16 AI: büyük arma yerleşimi bir kez hesaplanır, kare başına çizim maliyeti ölçülür (kapalı / açık)",
+  "status": "PASS",
+  "off": {
+   "med": 2.1000000000931323,
+   "p95": 6.5
+  },
+  "on": {
+   "med": 1.2000000001862645,
+   "p95": 2.6999999997206032
+  },
+  "first": 1.7000000001862645,
+  "layout": 0.39999999990686774,
+  "emblems": 17
+ },
+ {
+  "name": "kapatılan bildirim pencereleri",
+  "status": "INFO",
+  "modals": [
+   {
+    "before": "[data-a=\"fedFoundSelect\"][data-x=\"1\"]",
+    "modal": "▁\n🛰 DANIŞMAN\nHoş geldin, Yeni Hanedan. Üç şeyi bilirsen gerisi gelir.\n▲ ÜST BAR\nEKONOMİ\nMineral, enerji, yiyecek, alaşım ve etki. Yanındaki küçük sayı aylık ge"
+   }
+  ]
+ }
+]

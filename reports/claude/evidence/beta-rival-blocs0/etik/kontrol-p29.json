@@ -1,0 +1,334 @@
+{
+ "nap": [
+  {
+   "grudge": -20,
+   "ahl": -3,
+   "trials": 60,
+   "broke": 0,
+   "rate": 0,
+   "appetite": {
+    "score": 0.605,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.83,
+    "budget": true
+   },
+   "example": null
+  },
+  {
+   "grudge": -20,
+   "ahl": -1,
+   "trials": 60,
+   "broke": 0,
+   "rate": 0,
+   "appetite": {
+    "score": 0.605,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.83,
+    "budget": true
+   },
+   "example": null
+  },
+  {
+   "grudge": -20,
+   "ahl": 0,
+   "trials": 60,
+   "broke": 0,
+   "rate": 0,
+   "appetite": {
+    "score": 0.605,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.83,
+    "budget": true
+   },
+   "example": null
+  },
+  {
+   "grudge": -20,
+   "ahl": 1,
+   "trials": 60,
+   "broke": 0,
+   "rate": 0,
+   "appetite": {
+    "score": 0.605,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.83,
+    "budget": true
+   },
+   "example": null
+  },
+  {
+   "grudge": -20,
+   "ahl": 3,
+   "trials": 60,
+   "broke": 0,
+   "rate": 0,
+   "appetite": {
+    "score": 0.605,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.83,
+    "budget": true
+   },
+   "example": null
+  },
+  {
+   "grudge": -60,
+   "ahl": -3,
+   "trials": 60,
+   "broke": 28,
+   "rate": 0.467,
+   "appetite": {
+    "score": 0.825,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.65,
+    "budget": true
+   },
+   "example": {
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -60,
+   "ahl": -1,
+   "trials": 60,
+   "broke": 28,
+   "rate": 0.467,
+   "appetite": {
+    "score": 0.825,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.65,
+    "budget": true
+   },
+   "example": {
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -60,
+   "ahl": 0,
+   "trials": 60,
+   "broke": 28,
+   "rate": 0.467,
+   "appetite": {
+    "score": 0.825,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.65,
+    "budget": true
+   },
+   "example": {
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -60,
+   "ahl": 1,
+   "trials": 60,
+   "broke": 28,
+   "rate": 0.467,
+   "appetite": {
+    "score": 0.825,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.65,
+    "budget": true
+   },
+   "example": {
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -60,
+   "ahl": 3,
+   "trials": 60,
+   "broke": 28,
+   "rate": 0.467,
+   "appetite": {
+    "score": 0.825,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.65,
+    "budget": true
+   },
+   "example": {
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -110,
+   "ahl": -3,
+   "trials": 60,
+   "broke": 50,
+   "rate": 0.833,
+   "appetite": {
+    "score": 1.045,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.47,
+    "budget": true
+   },
+   "example": {
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -110,
+   "ahl": -1,
+   "trials": 60,
+   "broke": 50,
+   "rate": 0.833,
+   "appetite": {
+    "score": 1.045,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.47,
+    "budget": true
+   },
+   "example": {
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -110,
+   "ahl": 0,
+   "trials": 60,
+   "broke": 50,
+   "rate": 0.833,
+   "appetite": {
+    "score": 1.045,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.47,
+    "budget": true
+   },
+   "example": {
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -110,
+   "ahl": 1,
+   "trials": 60,
+   "broke": 50,
+   "rate": 0.833,
+   "appetite": {
+    "score": 1.045,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.47,
+    "budget": true
+   },
+   "example": {
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  },
+  {
+   "grudge": -110,
+   "ahl": 3,
+   "trials": 60,
+   "broke": 50,
+   "rate": 0.833,
+   "appetite": {
+    "score": 1.045,
+    "brake": 1.7,
+    "cb": "Kayıp Topraklar",
+    "threshold": 0.47,
+    "budget": true
+   },
+   "example": {
+    "mem": [
+     "paktBozdu"
+    ]
+   }
+  }
+ ],
+ "defense": [
+  {
+   "strong": 0,
+   "ahl": -3,
+   "risk": 0,
+   "joined": true,
+   "log": []
+  },
+  {
+   "strong": 0,
+   "ahl": 0,
+   "risk": 0,
+   "joined": true,
+   "log": []
+  },
+  {
+   "strong": 0,
+   "ahl": 3,
+   "risk": 0,
+   "joined": true,
+   "log": []
+  },
+  {
+   "strong": 6,
+   "ahl": -3,
+   "risk": 65.31428571428572,
+   "joined": true,
+   "log": []
+  },
+  {
+   "strong": 6,
+   "ahl": 0,
+   "risk": 65.31428571428572,
+   "joined": true,
+   "log": []
+  },
+  {
+   "strong": 6,
+   "ahl": 3,
+   "risk": 65.31428571428572,
+   "joined": true,
+   "log": []
+  },
+  {
+   "strong": 40,
+   "ahl": -3,
+   "risk": 435.42857142857144,
+   "joined": true,
+   "log": []
+  },
+  {
+   "strong": 40,
+   "ahl": 0,
+   "risk": 435.42857142857144,
+   "joined": true,
+   "log": []
+  },
+  {
+   "strong": 40,
+   "ahl": 3,
+   "risk": 435.42857142857144,
+   "joined": true,
+   "log": []
+  }
+ ]
+}
