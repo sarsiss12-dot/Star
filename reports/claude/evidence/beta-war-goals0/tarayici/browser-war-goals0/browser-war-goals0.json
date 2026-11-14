@@ -1,0 +1,86 @@
+{
+ "pass": 5,
+ "fail": 0,
+ "rows": [
+  {
+   "name": "390x844 B1 GALAKTİK GERİLİM: Dengeli varsayılan; Sakin / Çalkantılı dokunuşla seçilir; Dengeli cfg'ye yazılmaz; seçim başlangıçta G.cfg'ye geçer",
+   "status": "PASS",
+   "final": {
+    "on": [
+     "dengeli"
+    ],
+    "txt": "1\nDOKTRİN\n2\nGÖRÜNÜŞ\n3\nFİZYOLOJİ\n4\nETİK\n5\nCIVIC\n6\nKÖKEN\n7\nGALAKSİ\n💾 ŞABLONU KAYDET\nKayıtlı şablon yok\n🌌 GALAKSİ ÖZELLİKLERİ\nBu anahtarlar galaksinin karakterini belirler. Her ayar yalnız aşağıda belirtilen sistemi etkiler; savaş, diplomasi ve diğer tehditler kendi kurallarıyla sürer.\nAI Devletlerine Rastgele Köken\nAI kökenleri dengeli havuzdan seçilir. Altın Çağ gibi aşırı güçlü başlangıçlar rastgele dağıtılmaz. — AÇIK\n☠ Korsan Tehdidi\nKorsan yuvaları, filoları ve baskınları. Kapalıyken kalıntılar, canavarlar ve ayrı kriz ayarı etkilenmez — AÇIK\n🌀 Yıldız Kapıları\nHazır ağ vermez. Açıkken devletler kapı inşa edebilir; izinli kapılar hızlı ulaşım ve ikmal sağlar. Kapalıyken yeni inşa ve kullanım yok — AÇIK\n🎲 Rastgele Olaylar\nMaden kazası, salgın, tesadüfi hikâye zincirleri ve galaktik çalkantılar; diplomasi, casusluk, savaş ve keşif devam eder — AÇIK\nAI özel köken ihtimali · 35%\nDüşük · %20\nNormal · %35\nYüksek · %60\nHer devlet · %100\n☣ KRİZ ŞİDDETİ\nKAPALI\nHiçlik Sürüsü hiç gelmez\nNORMAL ×1\nDengeli kıyamet\nACIMASIZ ×2\nDalga gücü bütçesi ×2; gemi sınırları korunur\nŞiddet veya zamanlama KAPALI ise yeni kriz başlamaz. Zamanlama yeniden açılırsa kapalı şiddet NORMAL olur. Özel AI köken zarları bağımsızdır; oyuncunun kökeni değişmez.\nYILDIZ SİSTEMİ SAYISI\n−\n45\n+\n30\nsistem\n45\nsistem\n60\nsistem\n80\nsistem\n100\nsistem\n200\nsistem\n300\nsistem\n500\nsistem\n1000\nDeneysel · kabul edilmedi\n📱 Android için önerilen: yaklaşık 100 yıldız sistemi ve en fazla 9 AI devleti. Daha büyük galaksiler PC için önerilir. Performans cihazın gücüne göre değişebilir.\nAI DEVLET SAYISI\n−\n5 AI\n+\nOyuncu dahil 6 normal devlet. 1–16 doğrulanmış AI. Korsanlar ve sonradan doğan devletler hariç.\n5\n9\n16\n24 · deneysel\n32 · deneysel\n48 · deneysel\nSARMAL\nKollu galaksi\nHALKA\nMerkezi boş\nKÜME\nDağınık öbekler\nELİPTİK\nUzun eksenli yoğun disk; yol uzun eksen boyunca uzar\nKÜMELİ\nSıkı öbekler; öbekler arası az sayıda geçit\nÇUBUKLU SARMAL\nMerkezde yoğun çubuk hattı ve iki kol\nDÜZENSİZ\nAsimetrik yoğun bölgeler ve boşluklar\nKOLONİLEŞTİRİLEBİLİR GEZEGEN\n0,05×\nÇok seyrek\n0,1×\nÇok seyrek\n0,15×\nÇok seyrek\n0,25×\nAz yerleşim\n0,5×\nAz yerleşim\n0,75×\nAz yerleşim\n1×\nVarsayılan\n1,5×\nBol yerleşim\n2×\nBol yerleşim\n3×\nBol yerleşim\nNormal yaşanabilir gezegen adaylarının sayısını değiştirir. Sistem konumları, hiperhatlar, başkentler ve toplam gezegen sayısı aynı tohumda değişmez; başkent dünyaları, Gaia / Makine Dünyası gibi nadir dünyalar, özel yataklar ve tür kuralları korunur.\nGALAKTİK GERİLİM\nSakin\nDaha az entrika\nDengeli\nVarsayılan\nÇalkantılı\nDaha çok fırsat\nVarsayılan tempo. Rakip Doktrinlerden ayrıdır; harita ve AI doktrinleri değişmez. Yapay sınır, zorunlu blok ya da gerekçesiz savaş yoktur.\nRAKİP DOKTRİNLER\nDoğal\nOtomatik dağılım\nAz\n0–1 AI\nOrta\n1–2 AI\nÇok\n3–4 AI\nAyar; Militarist, Kriminal Sendika ve Fanatik Arındırıcı AI devletlerinin TOPLAMINI belirler (geri kalan AI'lar öteki doktrinlerden). En az ile En çok eşitse sabit sayıdır. AI sayısı azalırsa aralık kendiliğinden uyarlanır. Doğal dağılım eski otomatik seçimdir. Özel dağılımda AI, bilinen devletlerin çoğunu toplayan federasyonlara katılmaya daha isteksiz olur.\nZORLUK\nKOLAY\nYapay zekâ ihtiyatlı\nNORMAL\nDengeli galaksi\nZOR\nRakipler acımasız\nKÂBUS\nGalaksi seni istemiyor\nOYUN SONU KRİZİ\nKAPALI\nKriz hiç gelmez — saf inşa oyunu\nERKEN\n110–150. ay · yaklaşık 2219–2222\nNORMAL\n150–200. ay · yaklaşık 2222–2226\nGEÇ\n230–290. ay · yaklaşık 2229–2234\nOYUN SONU\n930–1020. ay · yaklaşık 2287–2295\nGalaksinin dışından gelen bir istila. Güç; filo, üretim ve yerleşimle ölçeklenir. Gösterilen ay aralığında başlar; oyuncunun Altın Çağ kökeni takvimi en erken 72. aya kadar öne çekebilir.\nGALAKTİK KONSEY\nKAPALI\nKonsey diplomasisi devre dışı\nSIK\n12 turda bir oylama · yoğun meclis\nNORMAL\n18 turda bir oylama · dengeli\nSEYREK\n30 turda bir oylama · nadir ama ağır kararlar\nKonsey kararları galaksi çapında bağlayıcıdır: silahsızlanma, yaptırım, savaş yasağı. Erken kuruluş için Pasifist 2, temas ve etki gerekir. 100. aydan itibaren en az üç temaslı devlet varsa kongreyle de kurulabilir. KAPALI, kuruluşu devre dışı bırakır; SIK/NORMAL/SEYREK oylama aralığını belirler.\nKAYIP UYGARLIK KALINTILARI\nYOK\nKalıntı yok\nAZ\nEn çok 2 kalıntı · uygun boş sistemlerde\nORTA\nEn çok 4 kalıntı · uygun boş sistemlerde\nÇOK\nEn çok 7 kalıntı · uygun boş sistemlerde\nUykuda ama çok güçlü savunma sistemleri. Erken oyunda geçilmez; yıkan büyük ödül alır.\nTOHUM\nGalaksi tohumu\n351938478\nYENİ TOHUM\nSON KAYDI YÜKLE\nCivic\n—\nGörünüş\nHümanoid\nKöken\nStandart Başlangıç\nGalaksi\nORTA · SARMAL · NORMAL\nKriz · Kalıntı\nNORMAL · ORTA\nKonsey\nNORMAL\nAI devlet sayısı\n5 AI · 1 insan ile 6 normal devlet\nAI kökenleri\nAÇIK · %35\nRastgele olaylar\nAÇIK\n‹ GERİ\nGALAKSİYİ YARAT\nYatay tut · oyun içinde ⛶ ile tam ekrana geç"
+   }
+  },
+  {
+   "name": "800x360 B1 GALAKTİK GERİLİM: Dengeli varsayılan; Sakin / Çalkantılı dokunuşla seçilir; Dengeli cfg'ye yazılmaz; seçim başlangıçta G.cfg'ye geçer",
+   "status": "PASS",
+   "final": {
+    "on": [
+     "dengeli"
+    ],
+    "txt": "1\nDOKTRİN\n2\nGÖRÜNÜŞ\n3\nFİZYOLOJİ\n4\nETİK\n5\nCIVIC\n6\nKÖKEN\n7\nGALAKSİ\n💾 ŞABLONU KAYDET\nKayıtlı şablon yok\n🌌 GALAKSİ ÖZELLİKLERİ\nBu anahtarlar galaksinin karakterini belirler. Her ayar yalnız aşağıda belirtilen sistemi etkiler; savaş, diplomasi ve diğer tehditler kendi kurallarıyla sürer.\nAI Devletlerine Rastgele Köken\nAI kökenleri dengeli havuzdan seçilir. Altın Çağ gibi aşırı güçlü başlangıçlar rastgele dağıtılmaz. — AÇIK\n☠ Korsan Tehdidi\nKorsan yuvaları, filoları ve baskınları. Kapalıyken kalıntılar, canavarlar ve ayrı kriz ayarı etkilenmez — AÇIK\n🌀 Yıldız Kapıları\nHazır ağ vermez. Açıkken devletler kapı inşa edebilir; izinli kapılar hızlı ulaşım ve ikmal sağlar. Kapalıyken yeni inşa ve kullanım yok — AÇIK\n🎲 Rastgele Olaylar\nMaden kazası, salgın, tesadüfi hikâye zincirleri ve galaktik çalkantılar; diplomasi, casusluk, savaş ve keşif devam eder — AÇIK\nAI özel köken ihtimali · 35%\nDüşük · %20\nNormal · %35\nYüksek · %60\nHer devlet · %100\n☣ KRİZ ŞİDDETİ\nKAPALI\nHiçlik Sürüsü hiç gelmez\nNORMAL ×1\nDengeli kıyamet\nACIMASIZ ×2\nDalga gücü bütçesi ×2; gemi sınırları korunur\nŞiddet veya zamanlama KAPALI ise yeni kriz başlamaz. Zamanlama yeniden açılırsa kapalı şiddet NORMAL olur. Özel AI köken zarları bağımsızdır; oyuncunun kökeni değişmez.\nYILDIZ SİSTEMİ SAYISI\n−\n45\n+\n30\nsistem\n45\nsistem\n60\nsistem\n80\nsistem\n100\nsistem\n200\nsistem\n300\nsistem\n500\nsistem\n1000\nDeneysel · kabul edilmedi\n📱 Android için önerilen: yaklaşık 100 yıldız sistemi ve en fazla 9 AI devleti. Daha büyük galaksiler PC için önerilir. Performans cihazın gücüne göre değişebilir.\nAI DEVLET SAYISI\n−\n5 AI\n+\nOyuncu dahil 6 normal devlet. 1–16 doğrulanmış AI. Korsanlar ve sonradan doğan devletler hariç.\n5\n9\n16\n24 · deneysel\n32 · deneysel\n48 · deneysel\nSARMAL\nKollu galaksi\nHALKA\nMerkezi boş\nKÜME\nDağınık öbekler\nELİPTİK\nUzun eksenli yoğun disk; yol uzun eksen boyunca uzar\nKÜMELİ\nSıkı öbekler; öbekler arası az sayıda geçit\nÇUBUKLU SARMAL\nMerkezde yoğun çubuk hattı ve iki kol\nDÜZENSİZ\nAsimetrik yoğun bölgeler ve boşluklar\nKOLONİLEŞTİRİLEBİLİR GEZEGEN\n0,05×\nÇok seyrek\n0,1×\nÇok seyrek\n0,15×\nÇok seyrek\n0,25×\nAz yerleşim\n0,5×\nAz yerleşim\n0,75×\nAz yerleşim\n1×\nVarsayılan\n1,5×\nBol yerleşim\n2×\nBol yerleşim\n3×\nBol yerleşim\nNormal yaşanabilir gezegen adaylarının sayısını değiştirir. Sistem konumları, hiperhatlar, başkentler ve toplam gezegen sayısı aynı tohumda değişmez; başkent dünyaları, Gaia / Makine Dünyası gibi nadir dünyalar, özel yataklar ve tür kuralları korunur.\nGALAKTİK GERİLİM\nSakin\nDaha az entrika\nDengeli\nVarsayılan\nÇalkantılı\nDaha çok fırsat\nVarsayılan tempo. Rakip Doktrinlerden ayrıdır; harita ve AI doktrinleri değişmez. Yapay sınır, zorunlu blok ya da gerekçesiz savaş yoktur.\nRAKİP DOKTRİNLER\nDoğal\nOtomatik dağılım\nAz\n0–1 AI\nOrta\n1–2 AI\nÇok\n3–4 AI\nAyar; Militarist, Kriminal Sendika ve Fanatik Arındırıcı AI devletlerinin TOPLAMINI belirler (geri kalan AI'lar öteki doktrinlerden). En az ile En çok eşitse sabit sayıdır. AI sayısı azalırsa aralık kendiliğinden uyarlanır. Doğal dağılım eski otomatik seçimdir. Özel dağılımda AI, bilinen devletlerin çoğunu toplayan federasyonlara katılmaya daha isteksiz olur.\nZORLUK\nKOLAY\nYapay zekâ ihtiyatlı\nNORMAL\nDengeli galaksi\nZOR\nRakipler acımasız\nKÂBUS\nGalaksi seni istemiyor\nOYUN SONU KRİZİ\nKAPALI\nKriz hiç gelmez — saf inşa oyunu\nERKEN\n110–150. ay · yaklaşık 2219–2222\nNORMAL\n150–200. ay · yaklaşık 2222–2226\nGEÇ\n230–290. ay · yaklaşık 2229–2234\nOYUN SONU\n930–1020. ay · yaklaşık 2287–2295\nGalaksinin dışından gelen bir istila. Güç; filo, üretim ve yerleşimle ölçeklenir. Gösterilen ay aralığında başlar; oyuncunun Altın Çağ kökeni takvimi en erken 72. aya kadar öne çekebilir.\nGALAKTİK KONSEY\nKAPALI\nKonsey diplomasisi devre dışı\nSIK\n12 turda bir oylama · yoğun meclis\nNORMAL\n18 turda bir oylama · dengeli\nSEYREK\n30 turda bir oylama · nadir ama ağır kararlar\nKonsey kararları galaksi çapında bağlayıcıdır: silahsızlanma, yaptırım, savaş yasağı. Erken kuruluş için Pasifist 2, temas ve etki gerekir. 100. aydan itibaren en az üç temaslı devlet varsa kongreyle de kurulabilir. KAPALI, kuruluşu devre dışı bırakır; SIK/NORMAL/SEYREK oylama aralığını belirler.\nKAYIP UYGARLIK KALINTILARI\nYOK\nKalıntı yok\nAZ\nEn çok 2 kalıntı · uygun boş sistemlerde\nORTA\nEn çok 4 kalıntı · uygun boş sistemlerde\nÇOK\nEn çok 7 kalıntı · uygun boş sistemlerde\nUykuda ama çok güçlü savunma sistemleri. Erken oyunda geçilmez; yıkan büyük ödül alır.\nTOHUM\nGalaksi tohumu\n832278618\nYENİ TOHUM\nSON KAYDI YÜKLE\nCivic\n—\nGörünüş\nHümanoid\nKöken\nStandart Başlangıç\nGalaksi\nORTA · SARMAL · NORMAL\nKriz · Kalıntı\nNORMAL · ORTA\nKonsey\nNORMAL\nAI devlet sayısı\n5 AI · 1 insan ile 6 normal devlet\nAI kökenleri\nAÇIK · %35\nRastgele olaylar\nAÇIK\n‹ GERİ\nGALAKSİYİ YARAT\nYatay tut · oyun içinde ⛶ ile tam ekrana geç"
+   }
+  },
+  {
+   "name": "B2 SAVAŞ HEDEFİ SEÇ → yalnız Fetih / Vasallaştırma → hedef sistem seçimi → ÖNİZLEME (hedef, gerekçe, tutum) → ONAYLA; v2 kaydı",
+   "status": "PASS",
+   "goal": {
+    "t": "fetih",
+    "start": 0.37339999999999995,
+    "targets": [
+     1,
+     13
+    ],
+    "v": 2
+   }
+  },
+  {
+   "name": "B3 müzakere masası: \"Teslim iste\" → TESLİM ÖNİZLEMESİ (vergi, özerklik, kapanan/süren cephe, katılım hükmü); destek ortağının AYRI BARIŞ kutusu yalnız kendi cephesini kapatır",
+   "status": "PASS",
+   "C": 2
+  },
+  {
+   "name": "B4 iki federasyon: FEDERASYONA KARŞI SAVAŞ ÖNER → hedef üye + Vasallaştırma → OYLAMAYA SUN → AI üye oyu → karar UYGULA → ilan; ORTAK BARIŞ kutusu; karşı federasyonun kesin savunmacıları önizlemede",
+   "status": "PASS",
+   "ids": {
+    "FA": 1,
+    "FB": 2,
+    "B": 2,
+    "B2": 3,
+    "A2": 1
+   },
+   "decision": {
+    "id": "1",
+    "state": "ready",
+    "approved": [
+     1,
+     0
+    ]
+   },
+   "fronts": [
+    [
+     0,
+     2
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     1
+    ]
+   ]
+  },
+  {
+   "name": "kapatılan bağımsız pencereler",
+   "status": "INFO",
+   "modals": []
+  }
+ ]
+}

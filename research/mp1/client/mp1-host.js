@@ -176,7 +176,7 @@ function makeHost(){
 /* MP.7: host'un kurulum ekranındaki galaksi ayarları (aynı CFG) lobiye uygulanır; AI + insan ≤ 49 */
 function applyHostSetup(){
   const cap=API.host.lobby.capacity,ai=aiCountFor(CFG);
-  const r=API.host.configure({size:CFG.size,aiCount:ai,seed:Math.trunc(+CFG.seed)%2147483646||1,...(CFG.shape?{shape:CFG.shape}:{}),...(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(CFG.planetMul)&&CFG.planetMul!==1?{planetMul:CFG.planetMul}:{})});
+  const r=API.host.configure({size:CFG.size,aiCount:ai,seed:Math.trunc(+CFG.seed)%2147483646||1,...(CFG.shape?{shape:CFG.shape}:{}),...(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(CFG.planetMul)&&CFG.planetMul!==1?{planetMul:CFG.planetMul}:{}),...(['sakin','calkantili'].includes(CFG.tension)?{tension:CFG.tension}:{})});   // BETA-WAR-GOALS.0
   API.setupNote=r.ok?'':r.why==='too-many-states'?'Bu oturumda en fazla '+(49-cap)+' AI seçilebilir; insanlarla birlikte en fazla 49 normal devlet.':r.why==='galaxy-too-small'?'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.':(START_WHY[r.why]||r.why);
   if(API.screen==='lobby')render();
 }
