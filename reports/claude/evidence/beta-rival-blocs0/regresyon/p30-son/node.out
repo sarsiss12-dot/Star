@@ -1,0 +1,480 @@
+beta_fed_fleet0_compat_test.js: 3/0 (exit 0)
+beta_fed_fleet0_mp_test.js: 7/0 (exit 0)
+beta_fed_fleet0_test.js: 11/0 (exit 0)
+beta_fed_found0_compat_test.js: 1/5 (exit 1)
+AssertionError [ERR_ASSERTION]: raw Save8 seed 11 month 1
+AssertionError [ERR_ASSERTION]: raw Save8 seed 23 month 1
+AssertionError [ERR_ASSERTION]: raw Save8 seed 42 month 1
+AssertionError [ERR_ASSERTION]: raw Save8 seed 99 month 2
+AssertionError [ERR_ASSERTION]: raw Save8 seed 404 month 1
+beta_fed_found0_core_test.js: 10/0 (exit 0)
+beta_galaxy0_fedfleet_test.js: 6/0 (exit 0)
+beta_fed_found0_events_test.js: 10/1 (exit 1)
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+beta_p01_ballot_test.js: 3/0 (exit 0)
+beta_fed_found0_mp_test.js: 11/0 (exit 0)
+beta_p01_compat_test.js: 4/0 (exit 0)
+beta_p01_mirror_test.js: 2/1 (exit 1)
+FAIL misafir kamu savaş kimliği ve kendi gözlem özetini alır; host katkı ve filo verisi aktarılmaz AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+beta_p01_embargo_test.js: 5/0 (exit 0)
+beta_p01_news_test.js: 4/0 (exit 0)
+beta_p01_war_end_test.js: 5/0 (exit 0)
+beta_p02_news_return_test.js: 3/0 (exit 0)
+beta_p02_news_test.js: 8/0 (exit 0)
+beta_rival_blocs0_build_test.js: 7/0 (exit 0)
+beta_rival_blocs0_mp_test.js: 3/0 (exit 0)
+beta_rival_blocs0_test.js: 10/0 (exit 0)
+faz83_2_brand_test.js: 70/1 (exit 1)
+  ✗ map altyapısı sabit; hedef seçimi 93A referansında
+faz83_3_render_recovery_test.js: 58/4 (exit 1)
+  ✗ serialize kurtarma öncesi/sonrası anlamsal olarak aynı — HATA: DiplomaticInbox is not defined
+  ✗ ralli korundu
+  ✗ loopBuild korundu
+  ✗ UI.tab hâlâ function
+beta_rival_blocs0_setup_test.js: 5/0 (exit 0)
+faz83_4_redraw_leaders_test.js: 69/10 (exit 1)
+  ✗ HAM serialize birebir eşit — HATA: DiplomaticInbox is not defined
+  ✗ leaders alanı öncesinde yoktu
+  ✗ kurtarma leaders alanı OLUŞTURMADI
+  ✗ ralli korundu
+  ✗ loopBuild korundu
+  ✗ gün/yıl/ay korundu
+  ✗ filolar korundu — undefined filo
+  ✗ 120 ay + harita + sekme + kayıt — 120ay:DiplomaticInbox is not defined
+  ✗ UI.tab hâlâ function
+  ✗ ralli/loopBuild korundu
+faz84a_intel_dedup_test.js: 83/5 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined
+  ✗ 120 ay + kaydet/yükle — 120ay:DiplomaticInbox is not defined
+  ✗ UI.tab hâlâ function
+  ✗ leaderPool saf kaldı
+  ✗ situation pasif kaldı
+faz84b_vassal_state_dedup_test.js: 125/1 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined
+faz84c_state_visibility_gate_test.js: 121/1 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined
+beta_galaxy0_test.js: 9/0 (exit 0)
+faz85a_political_save_integrity_test.js: 175/2 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined
+  ✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi
+faz85c_crisis_save_continuity_test.js: 90/54 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined
+  ✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi
+  ✗ kriz gerçekten aktifti (kurulum geçerli)
+  ✗ 5 yükleme sonrası crisis nesnesi BİREBİR aynı — {}
+  ✗ stage korundu (2) — undefined
+  ✗ timer korundu (7) — undefined
+  ✗ kills korundu (5) — undefined
+  ✗ need korundu (120) — undefined
+  ✗ contrib korundu
+  ✗ warned korundu (true)
+  ✗ over korundu (false)
+  ✗ crisisActive() yükleme sonrası TRUE
+  ✗ crisisId doğru crisisSide devletine bağlı — id=undefined undefined
+  ✗ kriz filoları/gemileri/sistemleri/emirleri korundu — undefined filo · undefined gemi
+  ✗ tek tik sayacı YALNIZ BİR kez ilerletti — undefined → undefined
+  ✗ over=true korundu
+  ✗ stage=3 korundu — undefined
+  ✗ yükleme krizi YENİDEN BAŞLATMADI
+  ✗ yeni kriz filosu DOĞMADI — undefined
+  ✗ guardian korundu
+  ✗ crisisScore korundu (380) — undefined
+  ✗ crisisId hâlâ gerçek crisisSide devletine bağlı — id=undefined
+  ✗ OYUN A aktif krizle yüklendi — id=undefined
+  ✗ OYUN B: G.crisis A'dan SIZMADI
+  ✗ OYUN B: crisisId A'dan SIZMADI (undefined)
+  ✗ OYUN B: crisisActive false
+  ✗ OYUN B: kriz devleti yok — undefined
+  ✗ yeni oyunda eski crisisId SİLİNDİ
+  ✗ yeni oyunda kriz devleti henüz yok — undefined
+  ✗ yeni oyunda bekleyen kriz kuruldu (stage 0)
+  ✗ ensureCrisisEmpire GERÇEK yeni devlet oluşturdu — undefined #undefined
+  ✗ mevcut hiçbir devletin adı/rengi/etiği/savaşı kriz devletine dönmedi
+  ✗ gerçek crisisSide adayından deterministik onarım yapıldı
+  ✗ normal devlet kriz tarafına DÖNÜŞTÜRÜLMEDİ
+  ✗ aralık dışı crisisId de onarıldı
+  ✗ aday YOKKEN normal devlet ELE GEÇİRİLMEDİ — crisisId undefined
+  ✗ taraf bulunamayan aktif kriz güvenle devre dışı bırakıldı
+  ✗ v4 aktif kriz: crisisId GERÇEK crisisSide devletine bağlandı — id=undefined
+  ✗ kriz filoları ÖKSÜZ kalmadı — undefined → undefined
+  ✗ kriz aktif olarak sürdürüldü — stage=undefined
+  ✗ kurtarılamayan alanlara dürüst varsayılan verildi
+  ✗ göç DETERMİNİSTİK ve RNG sabit
+  ✗ kurtarılamayan bilgi açıkça raporlandı
+  ✗ crisisSide var + filo yok → ÇÖZÜLMÜŞ kabul edildi — over=undefined
+  ✗ kriz YENİDEN BAŞLATILMADI (galaksi 2. kez cezalandırılmadı) — kriz filo=undefined
+  ✗ crisisId yine de gerçek devlete bağlı (öksüz değil) — id=undefined
+  ✗ göç DETERMİNİSTİK
+  ✗ çözülmüş varsayımı açıkça raporlandı
+  ✗ 85B: 6 yüklemede kalkan TAM 4 kaldı
+  ✗ 85B: economyTick(false) hâlâ normal ilerliyor — undefined → undefined
+  ✗ 85A: memAge/cncAge korundu — undefined/undefined
+  ✗ 85A: Konsey + hazine korundu
+  ✗ 85A: fedUid / sandbox / rebelAlliance korundu
+  ✗ 85C: kriz aynı yüklemelerde de korundu
+faz85b_load_idempotency_test.js: 134/2 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined
+  ✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi
+faz85e_event_inbox_continuity_test.js: 92/59 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined
+  ✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi
+  ✗ kind "sqOffer": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "pact": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "submit": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "cncnew": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "cncvote": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "aideal": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "fedvote": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "chain": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "event": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "anomaly": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "peace": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "facdem": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "faccoup": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "criswarn": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "crisis": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "crisend": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "wardec": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ kind "border": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK
+  ✗ event yüklemeden sonra katalog nesnesine bağlı
+  ✗ seçilen event fonksiyonu TAM BİR KEZ çalıştı — undefined çağrı
+  ✗ anomaly ID + sistem ID üzerinden yeniden kuruldu
+  ✗ seçilen anomaly seçeneği TAM BİR KEZ çalıştı — undefined çağrı
+  ✗ üç FARKLI teklif ayrı ayrı kuyrukta (birebir aynısı tekrarlanmadı) — undefined teklif
+  ✗ aynı devletten şartları farklı iki teklif AYRI kaldı
+  ✗ İLK teklif açılabildi (eskiden "geçerliliğini yitirdi" diyordu)
+  ✗ bir teklifi reddetmek DİĞERİNİ değiştirmedi
+  ✗ ikinci teklif KENDİ şartlarıyla açıldı
+  ✗ tekil UI.pendingOffer artık doğruluğun kaynağı değil
+  ✗ sqOffer tıklanınca GERÇEK modal açıldı (eskiden hiçbir şey olmuyordu)
+  ✗ modal teklifi yapan devleti gösteriyor
+  ✗ modal statüko sonucunu ve donma uyarısını gösteriyor
+  ✗ Kabul / Reddet / Daha sonra düğmeleri var
+  ✗ kabul statusQuoPeace'i TAM BİR KEZ çağırdı — undefined
+  ✗ çift dokunuş İKİNCİ barış üretmedi — ilk undefined → ikinci undefined
+  ✗ savaş gerçekten bitti
+  ✗ RET statusQuoPeace çağırmadı — undefined
+  ✗ RET sahiplik veya kaynak değiştirmedi
+  ✗ RET yeni ceza uydurmadı (ilişki değişmedi)
+  ✗ RET sonrası savaş sürüyor
+  ✗ mevcut AI cooldown davranışı korundu
+  ✗ eskimiş sqOffer "geçersiz" ekranı gösterdi
+  ✗ eskimiş teklif statusQuoPeace ÇAĞIRMADI — undefined
+  ✗ açılınca bildirim kutudan çıktı
+  ✗ DAHA SONRA bildirimi TAM BİR KOPYA olarak geri koydu — kopya=undefined toplam=undefined
+  ✗ 10 ardışık yükleme inbox'ı ÇOĞALTMADI ve sırasını değiştirmedi
+  ✗ inboxUid en büyük UID'den küçükse güvenle yükseltildi — 1 → undefined
+  ✗ sonraki bildirimin UID'si mevcutlarla ÇAKIŞMIYOR — yeni uid=undefined
+  ✗ seenChains kaydet/yükle sonrası korundu (zehri ezdi)
+  ✗ başlamış zincir 300 denemede YENİDEN SEÇİLMEDİ
+  ✗ setupGame seenChains'i temizledi
+  ✗ setupGame inbox ve inboxUid'i temizledi
+  ✗ setupGame _openNote / pendingOffer temizledi
+  ✗ bildirim açılınca kutudan çıktı ve _openNote'a alındı
+  ✗ serialize AÇIK bildirimi runtime state'i DEĞİŞTİRMEDEN yakaladı
+  ✗ yüklemede açık bildirim inbox'a TEK KOPYA döndü — undefined
+  ✗ yükleme bildirimi OTOMATİK AÇMADI
+  ✗ ham minRaw modal HTML'i kayda GİRMEDİ
+faz85d_campaign_save_continuity_test.js: 156/31 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined
+  ✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi
+  ✗ crisisId=0 (OYUNCU): sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #undefined
+  ✗ crisisId=0 (OYUNCU): oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI
+  ✗ crisisId=0 (OYUNCU): AI devletinin kimliği BOZULMADI
+  ✗ crisisId=0 (OYUNCU): savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id undefined
+  ✗ crisisId=normal AI: sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #undefined
+  ✗ crisisId=normal AI: oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI
+  ✗ crisisId=normal AI: AI devletinin kimliği BOZULMADI
+  ✗ crisisId=normal AI: savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id undefined
+  ✗ crisisId=aralık dışı: sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #undefined
+  ✗ crisisId=aralık dışı: oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI
+  ✗ crisisId=aralık dışı: AI devletinin kimliği BOZULMADI
+  ✗ crisisId=aralık dışı: savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id undefined
+  ✗ crisisId=null: sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #undefined
+  ✗ crisisId=null: oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI
+  ✗ crisisId=null: AI devletinin kimliği BOZULMADI
+  ✗ crisisId=null: savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id undefined
+  ✗ crisisId=geçerli crisisSide: MEVCUT devlet aynen döndü — döndü #undefined
+  ✗ geçerli kimlikte İKİNCİ kriz devleti üretilmedi
+  ✗ yükleme KAYNAKLARI değiştirmedi
+  ✗ yükleme İLİŞKİLERİ değiştirmedi
+  ✗ yükleme FİLO/GEMİ sayısını değiştirmedi
+  ✗ yükleme SİSTEM SAHİPLİĞİNİ değiştirmedi
+  ✗ yükleme NÜFUSU değiştirmedi
+  ✗ yükleme BİLDİRİM/EVENT üretmedi — undefined
+  ✗ 85B: 6 yüklemede kalkan TAM 4 kaldı
+  ✗ 85B: economyTick(false) hâlâ normal ilerliyor — undefined → undefined
+  ✗ 85A: memAge/cncAge/fedUid/sandbox/Konsey korundu
+  ✗ 85C: aktif kriz korundu ve doğru devlete bağlı
+  ✗ 85D: kampanya durumu aynı yüklemelerde korundu
+faz86a_intel_command_center_test.js: 125/2 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined
+  ✗ DOSYALAR görünümünde fail ADI sızmıyor
+faz86c_1_quote_effective_plan_test.js: 101/1 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined
+faz86b_deal_engine_test.js: 109/24 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined
+  ✗ tür "warJoin": normalize→validate→quote→execute hattı çalıştı — valid=false quote=false exec=false maliyet=0 · Geçersiz savaş katılım kimliği
+  ✗ 14 türün tamamı sınandı — 15
+  ✗ süresi dolmamış teklif açılabiliyor — undefined ay kaldı
+  ✗ süresi DOLAN teklif uygulanmıyor ve nedeni söyleniyor
+  ✗ süresi dolan teklif kaynak değiştirmedi
+  ✗ born var expires yok → deterministik born+540 göçü
+  ✗ ikisi de yoksa süresiz sayılıyor (geriye uyum)
+  ✗ aiOffer teklife born + expires damgası ekledi
+  ✗ yükleme oyun zamanını ilerletmedi
+  ✗ teklif ekranı YÖN metni gösteriyor
+  ✗ teklif ekranı kalan süre ve imzalama maliyetini gösteriyor
+  ✗ karşı teklif AYRI kartta; orijinal teklif korundu
+  ✗ oyuncunun düzenleme listesi ayrı nesne
+  ✗ "Düzenlemeye dön" orijinal kartı koruyor
+  ✗ reddetmek kaynak ve Etki değiştirmedi
+  ✗ ret sonrası karşı teklif kartı temizlendi
+  ✗ 200 normalize/validate/quote çağrısı kaynakları değiştirmedi
+  ✗ 200 çağrı ilişki/antlaşma/log değiştirmedi
+  ✗ 200 çağrı RNG tüketmedi
+  ✗ normalizeDeal GİRİŞ nesnesini değiştirmedi
+  ✗ executeDeal dış/bozuk çağrılarda guard'ları uyguladı — ,,,
+  ✗ bozuk çağrılar kaynak değiştirmedi
+  ✗ 240 aylık simülasyon hatasız — DiplomaticInbox is not defined
+faz86c_2_transaction_test.js: 110/1 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined
+faz86c_3_ai_negotiation_test.js: 86/4 (exit 1)
+  ✗ map altyapısı sabit; hedef seçimi 93A referansında
+  ✗ seed 11: 360 ay HATASIZ — DiplomaticInbox is not defined
+  ✗ seed 99: 360 ay HATASIZ — DiplomaticInbox is not defined
+  ✗ seed 404: 360 ay HATASIZ — DiplomaticInbox is not defined
+faz86c_4_reciprocal_offers_test.js: 93/5 (exit 1)
+  ✗ map altyapısı sabit; hedef seçimi 93A referansında
+  ✗ seed 11: 360 ay HATASIZ — DiplomaticInbox is not defined
+  ✗ seed 99: 360 ay HATASIZ — DiplomaticInbox is not defined
+  ✗ seed 404: 360 ay HATASIZ — DiplomaticInbox is not defined
+  ✗ 3 seed toplamında GERÇEK karşı teklif üretildi
+faz86c_4h_map_input_test.js: 81/2 (exit 1)
+  ✗ map altyapısı sabit; hedef seçimi 93A referansında
+  ✗ 93D bilim CSS ve değişmeyen 93C HTML
+faz85f_spatial_simulation_continuity_test.js: 166/2 (exit 1)
+  ✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined
+  ✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi
+faz86c_4h_r1_exact_regression_test.js: 110/2 (exit 1)
+  ✗ map altyapısı sabit; hedef seçimi 93A referansında
+  ✗ 93D bilim CSS ve değişmeyen 93C HTML
+  ✓ ReferenceError YOK — üretim yolu hatasız — ok
+faz86c_4h_r2_surface_camera_layers_test.js: 83/2 (exit 1)
+  ✗ map altyapısı sabit; hedef seçimi 93A referansında
+  ✗ 93D bilim CSS ve değişmeyen 93C HTML
+faz86c_4h_r3_surface_lifecycle_test.js: 95/2 (exit 1)
+  ✗ map altyapısı sabit; hedef seçimi 93A referansında
+  ✗ 93D bilim CSS ve değişmeyen 93C HTML
+faz86c_4h_r4_diagnosis_test.js: 91/2 (exit 1)
+  ✗ map altyapısı sabit; hedef seçimi 93A referansında
+  ✗ 93D bilim CSS ve değişmeyen 93C HTML
+faz86c_5_diagnostics_test.js: 38/0 (exit 0)
+faz86c_4h_r4_targeted_diag_test.js: 93/2 (exit 1)
+  ✗ map altyapısı sabit; hedef seçimi 93A referansında
+  ✗ 93D bilim CSS ve değişmeyen 93C HTML
+faz86c_5_1_ui_portraits_native_canvas_test.js: 48/0 (exit 0)
+faz86c_5_native_canvas_test.js: 66/0 (exit 0)
+faz86c_strict_deal_ai_test.js: 144/3 (exit 1)
+  ✗ seed 11: 360 ay HATASIZ — DiplomaticInbox is not defined
+  ✗ seed 99: 360 ay HATASIZ — DiplomaticInbox is not defined
+  ✗ seed 404: 360 ay HATASIZ — DiplomaticInbox is not defined
+faz86e_diplomacy_center_test.js: 44/1 (exit 1)
+✗ Mobil CSS kontrolleri kapsamlıdır; tema değişkenleri tanımlıdır (yerleşim testi değil) — AssertionError [ERR_ASSERTION]: --ui-scale
+faz86d_envoy_missions_test.js: 58/0 (exit 0)
+faz86g_integration_handoff_test.js: 16/0 (exit 0)
+faz86c_6_transaction_acceptance_test.js: 528/1 (exit 1)
+✗ Colonized system, empire purge and fleet removal are all reached, then rolled back: G.fleetJournal.value changed
+faz87a_espionage_feedback_test.js: 36/0 (exit 0)
+faz87b_ai_operation_selection_test.js: 26/0 (exit 0)
+faz87c_1_intrigue_outcomes_test.js: 45/0 (exit 0)
+faz87c_special_operation_outcomes_test.js: 39/0 (exit 0)
+faz87d_offer_repetition_test.js: 24/0 (exit 0)
+faz88a_1_ship_dispatch_test.js: 30/0 (exit 0)
+faz88a_fleet_routes_test.js: 38/0 (exit 0)
+faz88b_combat_feedback_test.js: 24/0 (exit 0)
+faz89a_memory_factions_test.js: 24/0 (exit 0)
+faz90rc_1_save_boundary_test.js: 19/0 (exit 0)
+faz90rc_2_load_feedback_test.js: 14/0 (exit 0)
+faz90rc_3_load_transaction_test.js: 48/0 (exit 0)
+faz90rc_release_candidate_test.js: 15/0 (exit 0)
+faz91a_special_presentation_test.js: 37/0 (exit 0)
+faz86f_ai_balance_test.js: 25/0 (exit 0)
+faz91b_faction_share_test.js: 8/0 (exit 0)
+faz91c_ai_candidates_test.js: 6/0 (exit 0)
+faz91c_pirate_combat_test.js: 21/0 (exit 0)
+faz91d_1_fleet_names_native_canvas_test.js: 30/0 (exit 0)
+faz91d_territory_native_canvas_test.js: 39/1 (exit 1)
+  ✗ Historical source lock still detects changes to tap, recovery and fleet drawing — Expected values to be strictly equal:
+faz91e_1_federation_policy_test.js: 31/0 (exit 0)
+faz89b_daily_campaign_test.js: 11/0 (exit 0)
+faz91e_federation_laws_test.js: 30/1 (exit 1)
+  ✗ Player proposal pays once and still requires explicit player vote — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz92b1_ship_lock_test.js: 19/0 (exit 0)
+faz92a_war_contribution_test.js: 32/2 (exit 1)
+✗ Empire elimination closes episode without crediting purged fleets as combat kills — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+✗ Status quo closes real episode without distributing coalition land — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz92b_settlement_proposal_test.js: 33/0 (exit 0)
+faz92c_settlement_apply_test.js: 28/0 (exit 0)
+faz92d_settlement_agenda_test.js: 14/0 (exit 0)
+faz93a1_production_panels_test.js: 21/0 (exit 0)
+faz93a_logistics_targets_test.js: 15/0 (exit 0)
+faz93b_pending_shipments_test.js: 31/0 (exit 0)
+faz91b_campaign_observer_test.js: 5/0 (exit 0)
+faz93d1_navy_production_test.js: 17/0 (exit 0)
+faz93c_fleet_composition_test.js: 47/0 (exit 0)
+faz93d_science_ui_test.js: 19/1 (exit 1)
+✗ preservation guard rejects edits to both original UI and new science CSS — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz93d_research_planner_test.js: 33/0 (exit 0)
+faz93e1_doctrine_test.js: 32/0 (exit 0)
+faz93e_specialization_test.js: 34/0 (exit 0)
+faz94a_camera_test.js: 27/0 (exit 0)
+faz94b_exploration_test.js: 37/0 (exit 0)
+faz94c_camera_trade_test.js: 32/0 (exit 0)
+faz94d_mobile_diplomacy_war_test.js: 28/0 (exit 0)
+faz94d1_war_visibility_test.js: 33/1 (exit 1)
+✗ several automatic defenders each receive one front warning in the same campaign — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz95a_strategic_ai_test.js: 51/0 (exit 0)
+faz95c1_diplomacy_test.js: 25/7 (exit 1)
+✗ askeri founding: live validator permits real paid founding and no automatic offense — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+✗ askeri candidate exclusion and all founder blockers are visible — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+✗ bilimsel founding: live validator permits real paid founding and no automatic offense — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+✗ bilimsel candidate exclusion and all founder blockers are visible — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+✗ ticaret founding: live validator permits real paid founding and no automatic offense — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+✗ ticaret candidate exclusion and all founder blockers are visible — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+✗ exact influence succeeds; failure then refreshed balance has no cached founder lock — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz95b_federation_reform_test.js: 66/2 (exit 1)
+✗ admission quotes are pure and require the constitutional alliance rule — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+✗ one open agenda, insufficient influence and invalid motion do not mutate or consume RNG — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz95c1_logistics_test.js: 24/0 (exit 0)
+faz95c1_storage_test.js: 15/0 (exit 0)
+faz95c1_ui_test.js: 28/1 (exit 1)
+✗ CSS preservation guard rejects modifications to new mobile rules as well as historical UI — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz95d_identity_test.js: 20/3 (exit 1)
+✗ 11 historical seeded geography preserved; identity normalization is observational — AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+✗ 99 historical seeded geography preserved; identity normalization is observational — AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+✗ 404 historical seeded geography preserved; identity normalization is observational — AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+faz95c_joint_campaign_test.js: 59/0 (exit 0)
+faz95d_map_test.js: 23/0 (exit 0)
+faz95e1_random_event_switch_test.js: 8/0 (exit 0)
+faz95d_war_preview_test.js: 18/1 (exit 1)
+✗ automatic military defenders match real declarations, not mere alliances — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz95e2_regression_test.js: 8/0 (exit 0)
+faz95e3_layers_test.js: 10/0 (exit 0)
+faz95e3_sensor_test.js: 7/0 (exit 0)
+faz95e_construction_test.js: 21/0 (exit 0)
+faz93d1_navy_campaign_test.js: 8/0 (exit 0)
+faz95e_inbox_test.js: 20/0 (exit 0)
+faz95e_news_test.js: 19/1 (exit 1)
+✗ real war ledger edge and peace engine generate one readable event each — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz95e_ui_save_test.js: 16/1 (exit 1)
+✗ reviewed mobile CSS is additive and rejects mutations — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz96b_accounting_test.js: 9/0 (exit 0)
+faz96a_integrity_test.js: 12/0 (exit 0)
+faz96c1_cache_test.js: 10/0 (exit 0)
+faz96a_cargo_test.js: 36/0 (exit 0)
+faz96c1_navy_test.js: 12/0 (exit 0)
+faz96b_economy_test.js: 21/0 (exit 0)
+faz96c1_war_test.js: 11/0 (exit 0)
+faz96c_diagnostics_test.js: 4/0 (exit 0)
+faz96c2_rebuild_test.js: 23/1 (exit 1)
+✗ ledger and construction remain unchanged; cargo receipt memory is audited in 96F — AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+faz96c3_ui_test.js: 24/0 (exit 0)
+faz96d_audio_test.js: 6/0 (exit 0)
+faz96c_trade_test.js: 10/0 (exit 0)
+faz96d_portraits_native_canvas_test.js: 8/0 (exit 0)
+faz96d_origins_test.js: 15/0 (exit 0)
+faz96c_planning_test.js: 22/0 (exit 0)
+faz96e1_actions_test.js: 17/0 (exit 0)
+faz96e1_mechanics_test.js: 64/0 (exit 0)
+faz96e_federation_test.js: 28/1 (exit 1)
+✗ admission rejects allies and preserves world — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz96e1_identity_test.js: 22/0 (exit 0)
+faz96f3_demolition_test.js: 9/0 (exit 0)
+faz96f1_budget_trade_test.js: 17/0 (exit 0)
+faz96f3_purchase_test.js: 11/0 (exit 0)
+faz96f3_physiology_test.js: 17/0 (exit 0)
+faz96f4_colony_test.js: 12/0 (exit 0)
+faz96f5_robustness_test.js: 2/0 (exit 0)
+faz96f4_trade_test.js: 9/0 (exit 0)
+faz96f_map_panel_native_canvas_test.js: 17/2 (exit 1)
+✗ the existing report X hides only the completed battle, preserving results and fleets — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+✗ dismissed report persists after v8 load and a new battle obtains a fresh key — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz96f_memory_test.js: 21/0 (exit 0)
+faz96e_origins_test.js: 27/0 (exit 0)
+faz96f_strategy_test.js: 29/0 (exit 0)
+faz96g1_contract_test.js: 25/0 (exit 0)
+faz96gd1_federation_budget_test.js: 19/0 (exit 0)
+faz96g_politics_test.js: 34/0 (exit 0)
+faz96h0_building_safety_test.js: 9/1 (exit 1)
+✗ the reviewed compact layout stays pinned and rejects loss of counter spacing or touch size — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+faz96gd2_war_memory_test.js: 18/0 (exit 0)
+faz96h31_compact_construction_test.js: 13/2 (exit 1)
+✗ H3 simulation bytes are preserved except the separately tested H5 market guard AssertionError [ERR_ASSERTION]: ai.js
+✗ review guard rejects compact height and hit-shape regressions AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+faz96h10_army_safety_test.js: 9/2 (exit 1)
+✗ invasion, combat and diplomacy rules keep their 96H.9 bytes — AssertionError [ERR_ASSERTION]: economy.js
+✗ only the reviewed 96H.10 army-safety blocks differ from 96H.9 ai.js — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz96h3_vassal_budget_test.js: 16/0 (exit 0)
+faz96h52_politics_test.js: 27/0 (exit 0)
+faz96h5_doctrine_engine_test.js: 43/0 (exit 0)
+faz96h71_closed_joint_save_test.js: 8/2 (exit 1)
+✗ 96H.6.1 source rejects its own save after federation dissolution (bug reproduced) — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+✗ only the reviewed guard and 96H.8 campaign change differ from 96H.6.1 ai.js — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz96h8_campaign_cost_test.js: 11/1 (exit 1)
+✗ only the reviewed 96H.8 campaign blocks differ from 96H.7.1 ai.js — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz96h9_invasion_test.js: 9/2 (exit 1)
+✗ invasion, combat and diplomacy rules keep their 96H.8 bytes — AssertionError [ERR_ASSERTION]: economy.js
+✗ only the reviewed 96H.9 invasion blocks differ from 96H.8 ai.js — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+faz96h61_alliance_test.js: 13/0 (exit 0)
+mp11_online_test.js: 9/0 (exit 0)
+mp0_core_test.js: 11/0 (exit 0)
+faz96g2_setup_test.js: 11/1 (exit 1)
+✗ invalid densities reject before mutating the existing world — AssertionError [ERR_ASSERTION]: Missing expected exception.
+mp1_lobby_core_test.js: 7/0 (exit 0)
+mp1_relay_test.js: 14/0 (exit 0)
+mp2_core_test.js: 7/0 (exit 0)
+mp1_actor_vision_b_test.js: 2/0 (exit 0)
+mp1_actor_vision_test.js: 2/0 (exit 0)
+mp31_core_test.js: 15/0 (exit 0)
+mp5_relay_security_test.js: 13/0 (exit 0)
+mp3_core_test.js: 11/0 (exit 0)
+mp4_core_test.js: 14/0 (exit 0)
+mp63_pause_test.js: 7/0 (exit 0)
+mp61_core_test.js: 9/0 (exit 0)
+mp63_polvas_test.js: 4/7 (exit 1)
+✗ C kuruluş (GERÇEK): B, iki bağımsız AI müttefikiyle (2, 4) motorun foundFederation'ıyla federasyon kurar; başkan B, oy rejimi seçilen; kontrol: gözlem kaydı yoksa motor kendi gerekçesiyle reddeder — AssertionError [ERR_ASSERTION]: control: engine condition, not an MP error
+✗ C oylama: üye kabulünde uzak insan B'nin oyu OTOMATİK DEĞİL (AI üyeler kendi değerlendirmesiyle); B kendi oyunu verir; ikinci oy reddedilir; A daveti kendisi kabul eder — AssertionError [ERR_ASSERTION]:  {"v":1,"type":"result","seq":1,"cid":"m63pcB00001","status":"rejected","code":"rules:fed","rev":2,"detail":["Açık kuruluş daveti, ortak rızaları ve son onay gerekli"]}
+✗ C anayasa / oy rejimi: A önerir (karma); oylama kuralı federasyonun (≥%75) — B HAYIR derken 3/4 ile kabul; oybirliğine çevrilmez; rejim değişir — AssertionError [ERR_ASSERTION]: found {"v":1,"type":"result","seq":1,"cid":"m63pcB00001","status":"rejected","code":"rules:fed","rev":2,"detail":["Açık kuruluş daveti, ortak rızaları ve son onay gerekli"]}
+✗ C reform ve başkan seçimi: B tür reformu önerir (motor: 12 ay geçiş kaydı); A kendini başkanlığa önerir; insanlar kendi oyunu verir — AssertionError [ERR_ASSERTION]: found {"v":1,"type":"result","seq":1,"cid":"m63pcB00001","status":"rejected","code":"rules:fed","rev":2,"detail":["Açık kuruluş daveti, ortak rızaları ve son onay gerekli"]}
+✗ C ihraç: A, AI 4'ün ihracını önerir; hedef oy veremez; sonuç federasyonun kuralıyla; ihraç edilen üye çıkar — AssertionError [ERR_ASSERTION]: found {"v":1,"type":"result","seq":1,"cid":"m63pcB00001","status":"rejected","code":"rules:fed","rev":2,"detail":["Açık kuruluş daveti, ortak rızaları ve son onay gerekli"]}
+✗ C ortak savaş: üye 2 savaştayken B "mevcut savaşa katılma" önerir; kabul → hazır karar; uygulamayı yalnız önerici/başkan yapar (A reddedilir); B uygular → motor sonucu — AssertionError [ERR_ASSERTION]: found {"v":1,"type":"result","seq":1,"cid":"m63pcB00001","status":"rejected","code":"rules:fed","rev":2,"detail":["Açık kuruluş daveti, ortak rızaları ve son onay gerekli"]}
+✗ C acil hibe: yalnız başkan (B) kendi kaynağından; A reddedilir (motor gerekçesi); B'ye kendi bildirimi — AssertionError [ERR_ASSERTION]: found {"v":1,"type":"result","seq":1,"cid":"m63pcB00001","status":"rejected","code":"rules:fed","rev":2,"detail":["Açık kuruluş daveti, ortak rızaları ve son onay gerekli"]}
+mp62_core_test.js: 13/0 (exit 0)
+mp63_settle_test.js: 9/0 (exit 0)
+mp64_market_test.js: 5/0 (exit 0)
+mp64_news_test.js: 4/0 (exit 0)
+mp63_sq_test.js: 4/0 (exit 0)
+mp64_ops_test.js: 5/0 (exit 0)
+mp64_spy_test.js: 7/0 (exit 0)
+mp6_mirror_test.js: 8/0 (exit 0)
+mp72_gameplay_test.js: 12/0 (exit 0)
+mp71_bridge_test.js: 9/0 (exit 0)
+mp74_lobby_test.js: 5/0 (exit 0)
+mp74_notice_test.js: 6/0 (exit 0)
+mp75_war_test.js: 5/0 (exit 0)
+mp7_lobby_test.js: 7/0 (exit 0)
+mp7_ws_frames_test.js: 6/0 (exit 0)
+mp84_notice_identity_test.js: 4/1 (exit 1)
+✗ gizlenen karar Save8 olay codecinde korunur fakat hidden taşınmaz; menü erişimi sürer — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+mp86_nebula_cache_test.js: 3/0 (exit 0)
+mp73_council_test.js: 14/0 (exit 0)
+mp89_ui_integrity_test.js: 0/1 (exit 0)
+mp88_host_hash_test.js: 5/0 (exit 0)
+mp_p0_desync1_test.js: 4/0 (exit 0)
+mp_p0_guard_test.js: 7/0 (exit 0)
+mp_p0_sync_test.js: 6/0 (exit 0)
+perf1_equivalence_test.js: 4/0 (exit 0)
+perf2_equivalence_test.js: 5/0 (exit 0)
+mp73_council_equiv_test.js: 1/0 (exit 0)
+SUITES: 200 GEÇEN: 6261 KALAN: 279

@@ -23,7 +23,7 @@ Referans görseller ("268958.png", "268956.png", "268957.png") ve "onaylı tasla
 | 2. İttifaksız kuruluş: davet, açık kabul, son onay; ittifaklar birlikte | PASS (Node, MP komutu, gerçek düğme Chromium) |
 | 2. İttifaksız üye kabulü (Federasyonuma Davet Et → oy → aday kabulü) | PASS. Yol p29'da motorda vardı; görünür metin ve testler eklendi (§4). |
 | 2. İki küçük devletin savunma bağından federasyona geçmesi (hedefli senaryo) | PASS (R6, 12 ay sürdü) |
-| 3. AI katıl / bağımsız kal / rakip blok kur | PARTIAL — 8 AI'da seed 11 ve 23'te kalıcı ikinci blok, 404'te etki yok; 16 AI'da seed 23'te güçlü etki, 11 ve 404'te payda bant içi (§6). Doğal kampanyada üyelikten ayrılma hiç tetiklenmedi. |
+| 3. AI katıl / bağımsız kal / rakip blok kur | PARTIAL — 8 AI'da seed 11 ve 23'te kalıcı ikinci blok, 404'te etki yok; 16 AI'da seed 23'te güçlü etki; 11 ve 404'te kontrolde de çoklu blok var, 240. ayda aday payı bandın altında (§6). Doğal kampanyada üyelikten ayrılma hiç tetiklenmedi. |
 | 4. Dürüst–Sahtekâr söz bozma eşiği | PASS (kontrollü deney §7). Doğal kampanyada nadir (birkaç olay). |
 | 5. Sahte Bayrak kampanya ölçümü | PASS (ölçüm; §8). Operasyon oranlarına dokunulmadı. |
 | 6. Rakip Doktrinler klavyesiz ayar | PASS (portre 390×844 ve dar yatay 800×360, gerçek dokunma) |
@@ -31,7 +31,7 @@ Referans görseller ("268958.png", "268956.png", "268957.png") ve "onaylı tasla
 | 8. Büyük bölge armaları | PASS (yerel Chromium; 500 sistem maliyeti ölçüldü) |
 | 9. Koloni panelinden otomatik inşaat gemisi | PASS (Node 7/0 + Chromium; MP misafir komutu Node'da) |
 | 10. Kampanya karşılaştırması (kontrol / plasebo / aday) | PASS (§6) |
-| 10. p29 regresyonu ve 500 / 16 / 2 / 15 dk | §12 |
+| 10. p29 regresyonu ve 500 / 16 / 2 / 15 dk | PASS — Node fark yalnız iki koruma testi, düzeltildi; Chromium 8 test ve MP8 D/G/L/S/E/F/P PASS (§12) |
 | Canlı Render, fiziksel Android, LAN | NOT RUN |
 
 ## 3. AI federasyon kuruluş hunisi (p29 tabanı, ölçüm)
@@ -143,24 +143,28 @@ Tablo değeri: **en büyük blok geç dönem payı / en çok eşzamanlı blok / 
 | 23 · 240 | 0,79 / 1 / 0 / 0 / 1,89 | 0,79 / 1 / 0 / 0 / 1,84 | **0,48 / 2 / 227 / 227** / 2,35 |
 | 404 · 240 | 0,68 / 1 / 0 / 0 / 3,35 | 0,78 / 1 / 0 / 0 / 2 | 0,80 / 1 / 0 / 0 / 1,98 |
 
+Aday sütunu `b5a045a` (muhafazakâr savunma kaçışı eşiği) ile **yeniden koşuldu**. 8 AI aday satırları bayt bayt aynı çıktı; 16 AI'da yalnız 11 · 240 bağımsız ortalaması ve 404 satırları değişti. İlk eşikle alınan aday JSON'ları `kampanya/eski-kacis-esigi/` altında saklı.
+
 **16 AI, s200:**
 
 | Seed · ay | Kontrol | Plasebo | Aday |
 |---|---|---|---|
 | 11 · 120 | 0,30 / 3 / 90 / 90 / 7,12 / 26 | 0,25 / 2 / 76 / 76 / 9,68 / 25 | 0,25 / 5 / 108 / 108 / 4,93 / 12 |
 | 23 · 120 | 0,52 / 1 / 0 / 0 / 7,6 / 30 | 0,56 / 1 / 0 / 0 / 7,55 / 26 | **0,48 / 3 / 104 / 104** / 4,75 / 12 |
-| 404 · 120 | 0,38 / 3 / 91 / 91 / 3,48 / 27 | 0,32 / 3 / 90 / 90 / 4,12 / 25 | 0,29 / 4 / 108 / 108 / 4,42 / 11 |
-| 11 · 240 | 0,32 / 3 / 210 / 210 / 2,6 | 0,53 / 2 / 196 / 196 / 5,47 | 0,24 / 5 / 228 / 228 / 6,77 |
+| 404 · 120 | 0,38 / 3 / 91 / 91 / 3,48 / 27 | 0,32 / 3 / 90 / 90 / 4,12 / 25 | 0,29 / 4 / 108 / 108 / 4,43 / 11 |
+| 11 · 240 | 0,32 / 3 / 210 / 210 / 2,6 | 0,53 / 2 / 196 / 196 / 5,47 | 0,24 / 5 / 228 / 228 / 5,63 |
 | 23 · 240 | 0,85 / 1 / 0 / 0 / 2,25 | 0,77 / 1 / 0 / 0 / 3,98 | **0,56 / 3 / 224 / 224** / 2,05 |
-| 404 · 240 | 0,39 / 3 / 211 / 211 / 3,27 | 0,38 / 3 / 210 / 210 / 2,45 | 0,38 / 4 / 228 / 223 / 3,9 |
+| 404 · 240 | 0,39 / 3 / 211 / 211 / 3,27 | 0,38 / 3 / 210 / 210 / 2,45 | **0,25 / 4 / 228 / 228** / 4,13 |
 
 **Okuma** (fayda yalnız plasebo bandı dışında iddia edilir):
 
 - **8 AI, seed 11 ve 23:** Kontrol ve plaseboda hiç ikinci blok yok. Adayda ikinci blok 28–227 ay ayakta kalıyor; en büyük blok payı 0,62–0,79 → 0,43–0,48. Bant dışı → **fayda**.
 - **8 AI, seed 404:** Fark yok; pay bant içinde (0,80 ile 0,68–0,78 arası).
 - **16 AI, seed 23:** Kontrol ve plaseboda tek blok; adayda 3 blok, pay 0,85 / 0,77 → 0,56. **Fayda**.
-- **16 AI, seed 11 ve 404:** Kontrolde de 2–3 blok var. Adayda blok sayısı 4–5'e çıkıyor, ama pay bant içinde (11 · 240: 0,24 / bant 0,32–0,53; 404: 0,38 / 0,38–0,39).
-  - Bu iki seed'de kuruluş sonrası dağılma da görüldü (3 ve 1).
+- **16 AI, seed 11 ve 404:** Kontrolde de 2–3 blok var. Adayda blok sayısı 4–5'e çıkıyor.
+  - Seed 11 · 240: pay 0,24, bant 0,32–0,53 (bant altında, düşük).
+  - Seed 404 · 240: pay 0,25, bant 0,38–0,39 → yeni eşikle bant dışı **düşük**. İlk eşikte bant içindeydi (0,38).
+  - Kuruluş sonrası dağılma: seed 11'de 1, 404'te 0 (ilk eşikte 3 ve 1).
 - **İlk büyük bloğun büyüme hızı:** İttifaksız kuruluşla ilk federasyon daha erken kuruluyor (ay 11–23; kontrolde 26–45). Ama 60. aydaki en büyük blok payı adayda eşit ya da daha düşük:
   - 8 AI: 0,44 / 0,44 / 0,78 (kontrol 0,56 / 0,67 / 0,78)
   - 16 AI: 0,24 / 0,35 / 0,29 (kontrol 0,29 / 0,38 / 0,35)
@@ -168,10 +172,14 @@ Tablo değeri: **en büyük blok geç dönem payı / en çok eşzamanlı blok / 
 
 **Kuruluş, katılım ve ayrılma gerekçeleri** (6 koşunun toplamı):
 
-| Kol | Başvuru | Üye önerisi | Kuruluş | Savunmadan kaçış | İhraç | Ayrılma |
-|---|---|---|---|---|---|---|
-| Kontrol | 73 | 12 | 9 | — | 4 | 0 |
-| Aday | 61 | 23 | 17 | 9 | 1 | 0 |
+Sayılar kampanya JSON'larının `ev` alanından toplandı (6 koşu, 240 ay).
+
+| Kol | Kuruluş | Başvuru | Katılım | Savunmadan kaçış | İhraç | Ayrılma | Dağılma |
+|---|---|---|---|---|---|---|---|
+| Kontrol | 10 | 73 | 31 | — (mekanik yok) | 0 | 0 | 0 |
+| Aday | 17 | 58 | 28 | 2 | 1 | 0 | 1 |
+
+İlk eşikte adayda savunmadan kaçış 9 idi; yeni eşikte kaçış yalnız 8 AI seed 404'te (2 olay).
 
 ## 7. Dürüstlük ve söz bozma
 
@@ -204,8 +212,10 @@ Federasyon savunma çağrısı (katılım), gözlenen güç oranına göre:
 | Güç oranı | Sahtekâr (−3) | Nötr (0) | Dürüst (+3) | Kontrol |
 |---|---|---|---|---|
 | 0 | katıldı | katıldı | katıldı | hepsi katıldı |
-| 65 | **kaçtı** | **kaçtı** | katıldı | hepsi katıldı |
-| 435 | **kaçtı** | **kaçtı** | katıldı | hepsi katıldı |
+| 65 | **kaçtı** | katıldı | katıldı | hepsi katıldı |
+| 435 | **kaçtı** | katıldı | katıldı | hepsi katıldı |
+
+Yukarıdaki savunma satırları `b5a045a` eşiğiyle yeniden ölçüldü. İlk eşikte nötr de kaçıyordu; `faz94d1` / `faz95d` koruma testleri bunu yakaladı (ilk FAIL kayıtları `regresyon/` altında). Yeni eşikte nötr üye yalnız ek baskı (bütçe, açık cephe) varken kaçar. Eski ölçüm: `etik/eski-kacis-esigi/aday.json`.
 
 Okuma:
 - Kontrolde ahl kararı hiç değiştirmiyor.
@@ -214,7 +224,7 @@ Okuma:
 
 **Doğal kampanyada** (aday, `oathLog`):
 - İttifak / saldırmazlık bozan savaşlar 8 AI'da 1–3, 16 AI'da 2–3 olay. Gerekçeler: Bağımsızlık Savaşı, Senyörlük Yükümlülüğü, Sahte Bayrak Kanıtı.
-- Savunmadan kaçış 2–5 olay.
+- Savunmadan kaçış: yeni eşikte 12 koşunun toplamında 2 olay (8 AI seed 404). İlk eşikte 2–5 olay / koşu.
 - **Ölçüm notu:** Kampanya betiğinin ayrı ihanet sayacı (`oathAlly` / `oathNap`) bu vasal / Sahte Bayrak yollarını yakalamadı ve 0 gösterdi. Bu yüzden kontrol kolunda doğal söz bozma sayısı **NOT RUN**; karşılaştırma yukarıdaki kontrollü deneye dayanır.
 - Kanıt: `evidence/beta-rival-blocs0/etik/`.
 
@@ -356,7 +366,50 @@ Okuma:
 
 ## 12. Regresyon
 
-KOŞU_SONUCLARI
+Bütün koşular bu konteynerde, aday dalın son kodu (`b5a045a` motor + `ac64a01` test uyarlaması) ile. Günlükler: `evidence/beta-rival-blocs0/regresyon/p30-son/`.
+
+**Node (`node tests/run-all.js`, 3 işçi):**
+
+| Koşu | Sonuç |
+|---|---|
+| Tam koşu | SUITES 200 · GEÇEN 6261 · KALAN 279 |
+| p29 tabanı (aynı konteyner, `reg29`) | SUITES 196 · GEÇEN 6238 · KALAN 277 |
+| Fark | Yalnız `faz94d1_war_visibility` (33/1) ve `faz95d_war_preview` (18/1). İkisi de nötr AI'nın savunmadan kaçmasıydı → `b5a045a` ile eşik muhafazakâr yapıldı. Yeniden koşu: **34/0** ve **19/0** PASS. İlk FAIL kayıtları `regresyon/faz94d1-ilk-FAIL.log`, `faz95d-ilk-FAIL.log`. |
+| Sonuç | Kalan 277 FAIL p29 tabanıyla aynı paketlerde (bu fazdan bağımsız, silinmedi). Yeni paketler: `beta_rival_blocs0_test` 10/0, `_mp_test` 3/0, `_setup_test` 5/0, `_build_test` 7/0 — PASS. |
+
+**Chromium (yerel):**
+
+| Test | Sonuç |
+|---|---|
+| `browser-rival-blocs0.cjs` | 9/0 PASS |
+| `browser-pregame-galaxy0.cjs` | 10/0 PASS |
+| `browser-bgreturn-galaxy0.cjs` | 14/0 PASS |
+| `browser-share-galaxy0.cjs` | 8/0 PASS |
+| `browser-sp-map-war.cjs` | İlk koşu 3/0 + çıkış 1 (rakip doktrin adımı eski sayı kutusunu arıyordu) → `ac64a01` uyarlaması sonrası **4/0 PASS**. İlk kayıt `regresyon/sp-map-war-ilk-FAIL.log`. |
+| `browser-fed-fleet0-sp.cjs` | 4/0 PASS |
+| `browser-mobile-hud0.cjs` | 4/0 PASS |
+| `browser-event-ux0.cjs` | 11/0 PASS |
+
+**MP (`tests/browser-mp8.cjs`, üretim relay süreci + TLS vekili):**
+
+| Senaryo | Sonuç |
+|---|---|
+| D (desync1) | 5/0 PASS |
+| G (geçici AI koruması) | 5/0 PASS |
+| L (federal filo) | 6/0 PASS |
+| S (galaksi kurulumu) | 4/0 PASS |
+| E (olay kartları) | 6/0 PASS |
+| F (federasyon kuruluşu) | 6/0 PASS |
+| P (500 sistem / 16 AI / 2 insan / 15 dk, seed 404, `MP8_P_DESYNC=1`) | **8/0 PASS** |
+
+P koşusunun ayrıntısı:
+- Ön ilerletme 30 ay / 56 sn; ardından 15 dk gerçek zaman, host en yüksek hızda.
+- Misafir gerçek STARS arayüzünde gerçek dokunmayla oynadı; komutlar aynaya yansıdı (P1).
+- Misafir dünyası en uzun 6,05 sn durağan kaldı (sınır 20 sn).
+- 8 kesirli politika kaydı; misafirde 0 ret, 0 çökme, 0 eski-dünya bölümü, 0 yeniden eşitleme.
+- Host Save8 yüklendi (gün 5881).
+
+Canlı Render, fiziksel Android ve LAN: **NOT RUN**.
 
 ## 13. Yayın
 
@@ -377,7 +430,7 @@ Canlı Render dağıtımı yapılmadı; main'e birleştirme yapılmadı.
 ## 14. Açık işler ve sonraki fazlar için
 
 - **Seed 404 (8 AI):** İkinci blok oluşmuyor. Kök: kurucu adayların ilişkisi 15'in altında ve 404 haritasında bilinen rota uzun. Bu fazda eşik gevşetilmedi.
-- **16 AI dağılmalar:** Seed 11 ve 404'te kuruluş sonrası dağılma (3 ve 1) arttı; izlenmeli.
+- **16 AI dağılmalar:** Yeni eşikle seed 11'de 1 dağılma (ilk eşikte 3); izlenmeli.
 - **Üye ayrılması:** Kalma / ayrılma değerlendirmesi doğal kampanyada hiç tetiklenmedi; 720 gün + çatışma süresi eşikleri muhafazakâr.
 - **Sahte Bayrak:**
   - Ahlak ekseni operasyon iştahına bağlı değil.

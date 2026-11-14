@@ -347,16 +347,8 @@
    "strong": 6,
    "ahl": 0,
    "risk": 65.31428571428572,
-   "joined": false,
-   "log": [
-    {
-     "day": 180,
-     "kind": "defense",
-     "target": 3,
-     "victim": 1,
-     "why": "Bilinen güç oranı 65.31"
-    }
-   ]
+   "joined": true,
+   "log": []
   },
   {
    "strong": 6,
@@ -384,16 +376,8 @@
    "strong": 40,
    "ahl": 0,
    "risk": 435.42857142857144,
-   "joined": false,
-   "log": [
-    {
-     "day": 180,
-     "kind": "defense",
-     "target": 3,
-     "victim": 1,
-     "why": "Bilinen güç oranı 435.43"
-    }
-   ]
+   "joined": true,
+   "log": []
   },
   {
    "strong": 40,
