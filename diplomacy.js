@@ -608,8 +608,9 @@ function settlementApply(e,id){
         const idx=from.colonies.findIndex(x=>x.s===s.id&&x.p===p.i);
         from.colonies.splice(idx,1);to.colonies.push({s:s.id,p:p.i});
         for(const leader of leaderPool(from))if(leader.tip==='vali'&&String(leader.post)===s.id+':'+p.i)delete leader.post;
-        delete c.leader;c.auto=false;delete c._dirWarn;
+        delete c.leader;
         territoryOwnerSet(p,to.id); // Barışçı devir: nüfus/yapı/fetih hafızası korunur.
+        c.auto=false;c.autoAfter=undefined;delete c._dirWarn;
         if(!s.surv.includes(to.id))s.surv.push(to.id);
       }
       if(!s.seen.includes(to.id))s.seen.push(to.id);

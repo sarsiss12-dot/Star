@@ -4899,6 +4899,8 @@ function aiFedAdmissionScore(e,other,type,f=null){
  if(f&&f.members.includes(e.id)){
   const mode=fedBallot(f),before=aiFedRegimeScore(e,mode,f.members,f).share,after=aiFedRegimeScore(e,mode,f.members.concat(other.id),f).share;
   score+=add('Oy dengesi ve stratejik genişleme',clamp((after-before)*.15,-.06,0)+(['federation','influence','trade'].includes(goal)?.04:0));
+  const concentration=aiFedConcentration(e,f,other.id);
+  if(concentration)score+=add('Büyük federasyonun genişlemesi',-concentration);
  }
  const ok=score>=.5,sorted=factors.slice().sort((a,b)=>ok?b.v-a.v:a.v-b.v).slice(0,3);
  return {ok,score,factors,why:(ok?'Olumlu':'Olumsuz')+': '+sorted.map(x=>x.n+' '+(x.v>=0?'+':'')+x.v.toFixed(2)).join(' · ')};
@@ -4918,8 +4920,17 @@ function aiFedWilling(e,founder,type,f=null,ballot=null,founders=null){
  const peers=f?f.members.filter(id=>id!==founder.id&&e.contact[id]):[];
  const peerBias=peers.length?peers.reduce((sum,id)=>sum+clamp((e.rel[id]||0)/500,-.15,.15),0)/peers.length:0;
  const regime=ballot||f&&fedBallot(f),regimeVote=regime?aiFedRegimeScore(e,regime,founders||[...(f?.members||[founder.id]),e.id],f):null;
- const score=assessment.score+(regimeVote?(regimeVote.score-.55)*.7:0)+(aiFedAffinity(e,type)-.5)*.3+protection+peerBias-(f&&fedCohesion(f)<35?.4:0);
- return {ok:score>=.5,score,eta,why:score>=.5?'İlişki, çıkar ve bilinen erişim uygun · '+assessment.why:assessment.why+' · birlik uyumu / bilinen koruma '+(score-assessment.score).toFixed(2)};
+ const concentration=aiFedConcentration(e,f,e.id);
+ const score=assessment.score+(regimeVote?(regimeVote.score-.55)*.7:0)+(aiFedAffinity(e,type)-.5)*.3+protection+peerBias-(f&&fedCohesion(f)<35?.4:0)-concentration;
+ const why=score>=.5?'İlişki, çıkar ve bilinen erişim uygun · '+assessment.why:assessment.why+' · birlik uyumu / bilinen koruma '+(score-assessment.score).toFixed(2);
+ return {ok:score>=.5,score,eta,why:why+(concentration?' · Büyük federasyonda bağımsızlık maliyeti −'+concentration.toFixed(2):'')};
+}
+function aiFedConcentration(e,f,candidate){
+ if(!f||!G.cfg?.aiRivals)return 0;
+ const known=G.emps.filter(o=>!o.dead&&!o.wild&&!o.crisisSide&&(o.id===e.id||e.contact[o.id]));
+ if(known.length<4)return 0;
+ const projected=known.filter(o=>o.id===candidate||f.members.includes(o.id)).length/known.length;
+ return clamp((projected-.5)*1.8,0,.9);
 }
 function aiFedVoteWant(e,f,v){
  const proposer=G.emps[v.proposer],rel=proposer?(e.rel[proposer.id]||0):0;
@@ -4960,7 +4971,9 @@ function aiFederationPolitics(){
    let invited=false;
    for(const other of G.feds||[])if(other.invites?.[e.id]){const inv=other.invites[e.id],founder=G.emps[inv.by];if(aiFedWilling(e,founder,other.type,other).ok)acceptFedInvite(e,other.id);else rejectFedInvite(e,other.id);invited=true;break;}
    if(invited)continue;
-   const partner=G.emps.filter(o=>o!==e&&e.contact[o.id]&&findFed(o)&&canRequestFederation(e,o).ok&&aiFedWilling(e,o,findFed(o).type,findFed(o)).ok).sort((a,b)=>(e.rel[b.id]||0)-(e.rel[a.id]||0)||a.id-b.id)[0];
+   const partners=G.emps.filter(o=>o!==e&&e.contact[o.id]&&findFed(o)&&canRequestFederation(e,o).ok)
+    .map(o=>({o,assessment:aiFedWilling(e,o,findFed(o).type,findFed(o))})).filter(x=>x.assessment.ok);
+   const partner=partners.sort((a,b)=>(G.cfg?.aiRivals?b.assessment.score-a.assessment.score:0)||(e.rel[b.o.id]||0)-(e.rel[a.o.id]||0)||a.o.id-b.o.id)[0]?.o;
    if(partner){const result=requestFederation(e,partner);if(result.ok){e._fedPoliticsAfter=G.day+360;e.aiFedReason={day:G.day,kind:'apply',why:'Bilinen erişim, ilişki ve ortak çıkar'};}continue;}
    const type=aiFedType(e),ids=[e.id,...G.emps.filter(o=>o!==e&&e.contact[o.id]&&e.ally[o.id]&&!o.dead&&!o.wild&&!findFed(o)).map(o=>o.id)],ballot=aiFedBallot(e,ids),gate=canFoundFed(e,type,ballot);
    if(type==='yagmaci'){aiRaiderFound(e,ids,ballot);continue;}

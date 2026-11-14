@@ -6454,14 +6454,19 @@ const UI = {
   settlementAgenda(){
     const latest=new Map();
     for(const o of G.settlements?.offers||[])if(o.members.includes(G.p.id))latest.set(o.campaign,o);
-    if(!latest.size)return '';
+    const fronts=G.warLedger?.fronts||[];
+    const recent=[...new Set(fronts.filter(f=>f.ended!==null&&G.day-f.ended<=180&&f.sides.includes(G.p.id)&&!latest.has(f.campaign))
+      .map(f=>f.campaign))].reverse().slice(0,12);
+    const drafts=recent.filter(id=>settlementContext(G.p,id).ok);
+    if(!latest.size&&!drafts.length)return '';
     const label={pending:'Oyun bekleniyor',approved:'Onaylandı · Uygula',applied:'Tamamlandı',
       rejected:'Reddedildi',expired:'Süresi doldu',invalid:'Koşullar değişti',withdrawn:'Geri çekildi'};
     const items=[...latest.values()].map(o=>({o,s:settlementState(o).state}));
     items.sort((a,b)=>Number(['pending','approved'].includes(b.s))-Number(['pending','approved'].includes(a.s))||b.o.id-a.o.id);
     return '<details class="dcDetails" open><summary>Ortak savaş paylaşımları</summary>'+items.slice(0,12).map(({o,s})=>
       `<button class="abtn" data-a="shareOpen" data-x="${o.campaign}">⚖ Sefer ${o.campaign} · ${label[s]||'İncele'}</button>`).join('')+
-      '<div class="mini">Oy vermek tek başına devir yapmaz. Onaylanan paylaşımı ayrıca uygula. Son 12 gündem gösterilir.</div></details>';
+      drafts.map(id=>`<button class="abtn" data-a="shareOpen" data-x="${id}">⚖ Sefer ${id} · Paylaşım taslağı hazırla</button>`).join('')+
+      '<div class="mini">Oy vermek tek başına devir yapmaz. Onaylanan paylaşımı ayrıca uygula.</div></details>';
   },
   openSettlement(campaign,assignments=null,expectedStamp=null,newDraft=false){
     const player=G.p,store=G.settlements;
@@ -6478,15 +6483,16 @@ const UI = {
     const rows=proposal.rows.map((r,i)=>{
       const s=G.sys[r.sys],pl=r.planet===null?null:s?.planets[r.planet],visible=settlementVisible(player,r);
       const title=visible?(r.planet===null?s.name:(pl.col?.name||pl.name)+' · '+s.name):'Keşif bilgisi yetersiz';
-      return `<div class="lrow"><b>${esc(title)}</b><div class="mini">${name(r.from)} → ${name(r.to)} · ağırlık ${r.value}</div>
+      const kind=r.planet===null?'Boş sistem':'Koloni';
+      return `<div class="lrow"><b>${esc(title)}</b><div class="mini">${kind} · ağırlık ${r.value} · ${r.from===r.to?'Sahiplik kalır':'Devir önerisi'} · ${name(r.from)} → ${name(r.to)}</div>
         <div class="mini">${visible?esc(r.why):'Kabul için bu toprağı incelemelisin.'}</div>
-        ${!o?`<button class="abtn" data-a="shareNext" data-x="${i}">Alıcıyı değiştir</button>`:''}</div>`;
+        ${!o&&visible?`<label>Alıcı <select data-share-recipient="${i}">${q.members.map(id=>`<option value="${id}" ${r.to===id?'selected':''}>${name(id)}</option>`).join('')}</select></label>`:''}</div>`;
     }).join('');
     const labels={pending:'Ortakların onayı bekleniyor',approved:'Oybirliğiyle onaylandı · uygulanmayı bekliyor',applied:'Paylaşım uygulandı',rejected:'Reddedildi',expired:'Süresi doldu',invalid:'Bilgiler değişti · teklif geçersiz',withdrawn:'Geri çekildi'};
     const application=o&&state.state==='approved'?settlementApplyQuote(player,o.id):null;
     const canVote=o&&state.state==='pending'&&!o.votes.some(v=>v.by===player.id);
     const visible=proposal.rows.every(r=>settlementVisible(player,r))&&proposal.members.every(id=>id===player.id||player.contact[id]);
-    const summary=proposal.shares.map(s=>`<div class="row"><span>${name(s.id)} · katkı ${s.points}</span><b>${s.held} → ${s.allocated}</b></div>`).join('');
+    const summary=proposal.shares.map(s=>`<div class="row"><span>${name(s.id)} · katkı ${s.points} · hedef pay ${s.target.toFixed(1)}</span><b>${s.held} → ${s.allocated}</b></div>`).join('');
     this.openModal(`<div class="mhd"><span>ORTAK SAVAŞ PAYLAŞIMI</span></div><div class="mbd">
       <div class="lead">${o?labels[state.state]:'İncelenecek taslak'}</div>
       <div class="mini">Öneri ücretsiz. Ağırlıklar kaynak değildir: koloni 3, boş sistem 1.
@@ -6506,11 +6512,20 @@ const UI = {
       ${o&&!['pending','approved','applied'].includes(state.state)?'<button class="ch" data-a="shareNew">Yeni taslak</button>':''}
       <button class="ch" data-a="closem">Kapat</button></div>`);
     const result=r=>{if(!r.ok)say(r.why,'war');this.openSettlement(campaign);};
+    const changeRecipient=(i,to)=>{
+      if(!current()||o)return;
+      const row=q.rows[i];
+      if(!row||!q.members.includes(to))return;
+      const next=Object.fromEntries(q.rows.map(r=>[r.key,r.to]));next[row.key]=to;
+      const body=$('modal').querySelector('.mbd'),scroll=body?.scrollTop||0;
+      this.openSettlement(campaign,next,q.stamp,true);
+      const updated=$('modal').querySelector('.mbd');if(updated)updated.scrollTop=scroll;
+    };
+    for(const select of $('modal').querySelectorAll('[data-share-recipient]'))select.addEventListener('change',()=>changeRecipient(+select.dataset.shareRecipient,Number(select.value)));
     this._hook('shareNext',i=>{
       if(!current()||o||!q.rows[i])return;
-      const a=Object.fromEntries(q.rows.map(r=>[r.key,r.to])),r=q.rows[i];
-      a[r.key]=q.members[(q.members.indexOf(r.to)+1)%q.members.length];
-      this.openSettlement(campaign,a,q.stamp,true);
+      const row=q.rows[i];
+      changeRecipient(i,q.members[(q.members.indexOf(row.to)+1)%q.members.length]);
     });
     this._hook('shareSend',()=>{if(current()&&!o)result(settlementSubmit(player,campaign,q.stamp,Object.fromEntries(q.rows.map(r=>[r.key,r.to]))));});
     this._hook('shareYes',()=>{if(current()&&canVote&&settlementOffer(o.id)===o)result(settlementVote(player,o.id,true));});
@@ -8609,6 +8624,8 @@ const UI = {
        <div class="mbd" style="padding:4px 16px"><button class="abtn" data-a="warPauseToggle" aria-pressed="${WAR_PAUSE_ON}">Savaşa katılınca duraklat: ${WAR_PAUSE_ON?'AÇIK':'KAPALI'}</button></div>
        <div class="mbd alertOpacity"><label for="alertOpacity">Geçici bildirim opaklığı</label><output for="alertOpacity" id="alertOpacityValue"></output>
          <input id="alertOpacity" type="range" min="25" max="100" step="5"></div>
+       <div class="mbd alertOpacity"><label for="territoryEmblemOpacity">Bölge armalarının opaklığı</label><output for="territoryEmblemOpacity" id="territoryEmblemOpacityValue"></output>
+         <input id="territoryEmblemOpacity" type="range" min="0" max="60" step="1"></div>
        <div class="mbd">${typeof AUDIO!=='undefined'?AUDIO.controls():''}</div>
        <div class="mbd" id="diagBox">Depolama sınanıyor…</div>
        <div class="mft">
@@ -8639,6 +8656,7 @@ const UI = {
        </div>`);
 
     this.bindAlertOpacity?.();
+    this.bindTerritoryEmblemOpacity?.();
 
     /* MP.8.9: local presentation controls; hooks remain visible to the guest gate. */
     if(this.uiScaleControls){
@@ -8832,19 +8850,20 @@ const UI = {
 
     [...document.querySelectorAll('canvas.pspr')].forEach(c=>{
       if (c.dataset.done) return;
-      c.dataset.done = 1;
-      const spr = ART.planet(c.dataset.t, +c.dataset.s, 26);
       const g = c.getContext('2d');
+      if(!g||!c.width||!c.height||g.isContextLost?.())return;
+      const spr = ART.planet(c.dataset.t, +c.dataset.s, 26);
       g.imageSmoothingEnabled = false;
       g.clearRect(0,0,c.width,c.height);
       g.drawImage(spr, 0, 0, c.width, c.height);
+      c.dataset.done = 1;
     });
   }
 };
 
 function setupHumanSlots(){return window.MP7Setup?.active&&window.MP7Setup.role==='host'?(window.MP1Host?.lobby?.capacity||1):1;}
 function setupSelectionError(c){
- const why=setupConfigError(c);if(why)return why;
+ const why=setupConfigError(window.MP7Setup?.active?{...c,aiRivals:undefined}:c);if(why)return why;
  const humans=setupHumanSlots();
  if(humans>1&&aiCountFor(c)+humans>49)return 'Bu oturumda en fazla '+(49-humans)+' AI seçilebilir; insanlarla birlikte en fazla 49 normal devlet.';
  if(aiCountFor(c)+humans>SIZES[c.size].sys)return 'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.';
@@ -9313,6 +9332,13 @@ function renderSetup(){
     for (const k in SHAPES) h += `<button class="opt ${c.shape===k?'on':''}" data-a="shape" data-x="${k}">${SHAPES[k].n}<small>${SHAPES[k].d}</small></button>`;
     h += `</div></div>`;
 
+    if(!window.MP7Setup?.active){
+      const rivals=c.aiRivals;
+      h+=`<div class="sect"><h2>RAKİP DOKTRİNLER</h2><button class="btn" data-a="rivalToggle" aria-pressed="${!!rivals}">${rivals?'Sayı aralığını kullan':'Doğal dağılım'}</button>
+        ${rivals?`<div class="btnrow"><label>En az <input id="rivalMin" type="number" min="0" max="${aiCountFor(c)}" step="1" value="${esc(rivals.min??'')}"></label><label>En çok <input id="rivalMax" type="number" min="0" max="${aiCountFor(c)}" step="1" value="${esc(rivals.max??'')}"></label></div>`:''}
+        <div class="mini">Militarist, Kriminal Sendika ve Fanatik Arındırıcı AI devletlerinin toplamı. Sabit sayı için iki sınırı aynı seç. Özel dağılımda AI, bilinen devletlerin çoğunu toplayan federasyonlara katılmaya daha isteksiz olur.</div></div>`;
+    }
+
     h += `<div class="sect"><h2>ZORLUK</h2><div class="grid g4">`;
     for (const k in DIFFS) h += `<button class="opt ${c.diff===k?'on':''}" data-a="diff" data-x="${k}">${DIFFS[k].n}<small>${DIFFS[k].d}</small></button>`;
     h += `</div></div>`;
@@ -9399,6 +9425,10 @@ function renderSetup(){
   });
   const inp = $('empName');
   if (inp) inp.addEventListener('input', e => { CFG.name = e.target.value || 'Yeni Hanedan'; });
+  for(const [id,key] of [['rivalMin','min'],['rivalMax','max']]){
+    const field=$(id);
+    if(field)field.addEventListener('input',()=>{CFG.aiRivals[key]=field.value===''?null:Number(field.value);});
+  }
   paintEmblems();
 }
 
@@ -9575,6 +9605,7 @@ function setupClickHandler(e){
   else if (a === 'ruinSet'){ CFG.ruins = x; safeRenderSetup(); }
   else if (a === 'aiCount'){ CFG.aiCount=Math.max(1,Math.min(SCALE_ACCEPTANCE.maxAI,aiCountFor(CFG)+Number(x)));safeRenderSetup(); }
   else if(a==='aiPick'){if(Number.isInteger(+x)&&+x>=1&&+x<=SCALE_ACCEPTANCE.maxAI)CFG.aiCount=+x;safeRenderSetup();}
+  else if(a==='rivalToggle'){if(CFG.aiRivals)delete CFG.aiRivals;else CFG.aiRivals={min:Math.min(2,aiCountFor(CFG)),max:Math.min(4,aiCountFor(CFG))};safeRenderSetup();}
   else if(a==='sizeStep'){const steps=availableGalaxySteps(),i=steps.indexOf(SIZES[CFG.size]?.sys),n=steps[i+Number(x)];if(n){CFG.aiCount=aiCountFor(CFG);CFG.size=setupSizeKey(n);}safeRenderSetup();}
   else if (a === 'size'){ if(!SIZES[x]||SIZES[x].available===false)return;CFG.aiCount=aiCountFor(CFG);CFG.size = x; safeRenderSetup(); }
   else if (a === 'shape'){ CFG.shape = x; safeRenderSetup(); }
@@ -9762,6 +9793,27 @@ const TITLE = {
   UI.uiScaleReady=storeGet(key).then(v=>{if(revision===initial){preferred=valid(v);apply();}}).catch(()=>{});
 })();
 /* END MP.8.9 UI SCALE */
+
+(()=>{
+  const key='stars:territoryEmblemOpacity';
+  let edited=false;
+  UI.territoryEmblemOpacity=18;
+  function apply(value){
+    UI.territoryEmblemOpacity=value;
+    const input=$('territoryEmblemOpacity'),output=$('territoryEmblemOpacityValue');
+    if(input&&output){input.value=String(value);output.textContent=value?'%'+value:'Kapalı';}
+    if(!document.hidden&&G.p&&!$('game')?.classList.contains('hidden')&&View.g)View.draw(performance.now());
+  }
+  UI.bindTerritoryEmblemOpacity=()=>{
+    const input=$('territoryEmblemOpacity'),output=$('territoryEmblemOpacityValue');
+    if(!input||!output)return;
+    const value=UI.territoryEmblemOpacity;
+    input.value=String(value);output.textContent=value?'%'+value:'Kapalı';
+    input.addEventListener('input',()=>{edited=true;apply(Number(input.value));});
+    input.addEventListener('change',()=>storeSet(key,input.value).catch(()=>{}));
+  };
+  storeGet(key).then(v=>{if(!edited&&v!==null&&v!==undefined&&Number.isInteger(Number(v))&&+v>=0&&+v<=60)apply(+v);}).catch(()=>{});
+})();
 
 (()=>{
   const root=document.documentElement;

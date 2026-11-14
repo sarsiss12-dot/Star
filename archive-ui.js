@@ -204,6 +204,7 @@ const WarCenterUI={
   if(open){if(mine)h+=`<button class="abtn pri" data-a="warCenterSupport" data-x="${status.id}:0">ASKERÎ DESTEK İSTE</button>`;
    else for(const id of status.sides)h+=`<button class="abtn" data-a="warCenterCompose" data-x="${status.id}:${id}:0">${esc(this.label(id))} tarafına katılmayı öner</button>`;
    if(mine){const foe=status.sides.find(id=>id!==0);h+=`<button class="abtn" data-a="warCenterPeace" data-x="${foe}">BARIŞ / STATÜKO GÖRÜŞMESİ</button>`;}}
+  if(!open&&mine)h+=`<p class="mini">Fethedilen yerler savaş sırasında el değiştirir. Ortak savaşta, bütün cepheler kapandıktan sonra uygun topraklar için ayrı paylaşım teklifi açabilirsin.</p><button class="abtn pri" data-a="shareOpen" data-x="${status.campaign}">TOPRAK PAYLAŞIMINI İNCELE</button>`;
   h+='<button class="abtn" data-a="warCenter">SAVAŞ MERKEZİ LİSTESİNE DÖN</button>';
   if(this.backNews)h+=`<button class="abtn" data-a="newsDetail" data-x="${this.backNews.id}">HABERE DÖN</button>`;
   return h+'</section>';
