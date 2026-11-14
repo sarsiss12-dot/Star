@@ -10006,6 +10006,7 @@ UI.warPreviewGoalHtml=function(p){
   if(L){h+=`<div class="ph">GEREKÇELER VE MEŞRUİYET</div><div class="row"><span>Meşruiyet</span><b>${Math.round(L.score*100)} / gereken ${Math.round(L.need*100)} · ${esc(L.level.toUpperCase())}</b></div>`;
     h+=L.list.length?L.list.map(j=>`<div class="mini">• ${esc(j.n)} · güç ${Math.round(j.strength*100)} · ${j.age?esc(j.age+' ay önce'):'güncel'} · ${esc(j.evidence)}</div>`).join(''):'<div class="mini">Kayıtlı gerekçe yok. Talep ne kadar büyükse o kadar güçlü gerekçe gerekir.</div>';
     h+=`<div class="mini">Bilinen güç oranı ≈ ${L.ratio}${L.band?' (±%'+Math.round(L.band*100)+')':''}.</div>${L.uncertain?`<div class="mini">⚠ ${esc(L.uncertain)}</div>`:''}`;}
+  if(p.exh){const x=p.exh;h+=`<div class="ph">SAVAŞ YORGUNLUĞU</div><div class="mini">Senin: %${x.own} · ${esc(p.target.name)}: ${x.foe===null?'bilinmiyor (SIZILMIŞ istihbarat gerekir)':'%'+x.foe+' ('+esc(x.basis)+')'}. Taraflardan biri %100'e ulaşınca savaş zorunlu barışla kendiliğinden durur; önceki savaşın yorgunluğu barışta ayda 2,5 azalarak taşınır.</div>`;}   // FIELD-WAR-SIEGE.0
   if(p.stances){h+='<div class="ph">TAHMİNİ TUTUMLAR</div>';h+=p.stances.length?p.stances.map(r=>`<div class="mini">${esc(r.name)} · <b>${esc(WAR_STANCE_TEXT[r.stance])}</b> · ${esc(r.why)}</div>`).join(''):'<div class="mini">Temaslı başka devlet yok.</div>';
     h+='<div class="mini">Tutum siyasi tepkidir; askerî katılım bütçe, rota ve cephelere göre ayrıca belirlenir. Gizli taahhütler ve temas kurulmamış devletler gösterilmez.</div>';}
   return h;

@@ -127,7 +127,7 @@ function borderFriction(){
 /* 92A — savaş kanıt defteri. Puan/ödül/toprak dağıtmaz, RNG tüketmez.
    Her cephe tek devlet çiftine aittir. Yalnız açık destek çağrısı aynı
    sefere bağlar; ortak düşman/sonradan ittifak geçmişi yeniden yazmaz. */
-const WAR_END_REASONS={exhaustion:'%100 savaş yorgunluğu nedeniyle zorunlu barış',crisis:'Galaktik kriz nedeniyle AI ateşkesi',agreement:'Diplomatik barış anlaşması','ai-peace':'AI tarafından başlatılan barış','council-unity':'Konsey Galaktik Odak kuralı','proxy-peace':'Vekil savaş yükümlülüğünün sona ermesi','status-quo':'Statüko anlaşması','alliance':'İttifak anlaşması','alliance-conflict':'İttifak ile savaş çelişkisinin onarılması','subject-binding':'Vasallık bağıyla çelişen savaşın onarılması','subjugation':'Boyun eğdirme sonucu','subjugation-federation':'Boyun eğdirme / federasyon sonucu','rebel-coalition':'Ortak isyancı koalisyonu','rebellion-victory':'Özgürlük savaşının kazanılması'};
+const WAR_END_REASONS={exhaustion:'%100 savaş yorgunluğu nedeniyle zorunlu barış','exhaustion-lock':'%100 savaş yorgunluğu — doktrin barış antlaşmasını yasakladığı için zorunlu ateşkes',crisis:'Galaktik kriz nedeniyle AI ateşkesi',agreement:'Diplomatik barış anlaşması','ai-peace':'AI tarafından başlatılan barış','council-unity':'Konsey Galaktik Odak kuralı','proxy-peace':'Vekil savaş yükümlülüğünün sona ermesi','status-quo':'Statüko anlaşması','alliance':'İttifak anlaşması','alliance-conflict':'İttifak ile savaş çelişkisinin onarılması','subject-binding':'Vasallık bağıyla çelişen savaşın onarılması','subjugation':'Boyun eğdirme sonucu','subjugation-federation':'Boyun eğdirme / federasyon sonucu','rebel-coalition':'Ortak isyancı koalisyonu','rebellion-victory':'Özgürlük savaşının kazanılması'};
 function warLedgerEmpty(){ return {v:1,next:1,fronts:[]}; }
 function warLedgerPair(a,b){
   const x=G.emps[a],y=G.emps[b];
@@ -896,8 +896,8 @@ function resolveProxyWars(a, b){
   }
   warLedgerSync('proxy-peace');
 }
-function makePeace(a, b, reason=a?.ai?'ai-peace':'agreement', actor=a?.id??null){
-  if (!canPeace(a,b)) return false;
+function makePeace(a, b, reason=a?.ai?'ai-peace':'agreement', actor=a?.id??null, opts=null){
+  if (!(opts&&opts.force) && !canPeace(a,b)) return false;   // FIELD-WAR-SIEGE.0: %100 yorgunluk kilidi aynı barış defterini kullanır
   warFetihSettle(a,b);   // BETA-WAR-GOALS.0: v2 Fetih — hedef dışı işgal iade
   a.war[b.id] = false; b.war[a.id] = false;
   if (a.warDefense) delete a.warDefense[b.id];
@@ -930,7 +930,7 @@ function makePeace(a, b, reason=a?.ai?'ai-peace':'agreement', actor=a?.id??null)
   if (typeof facEvent === 'function'){ facEvent(a,'peace'); facEvent(b,'peace'); }
   a.rel[b.id] = Math.max(a.rel[b.id], -10);
   b.rel[a.id] = Math.max(b.rel[a.id], -10);
-  if (a.id === G.p?.id || b.id === G.p?.id){
+  if ((a.id === G.p?.id || b.id === G.p?.id) && !(opts&&opts.quiet)){
     const rest=G.emps.filter(e=>e!==G.p&&!e.dead&&G.p.war[e.id]).map(e=>e.name);
     say('Barış imzalandı — '+(a===G.p?b.name:a.name)+(rest.length?' · Savaş devam ediyor: '+rest.join(', '):' · Aktif savaş kalmadı'), 'win');
   }
@@ -4524,29 +4524,7 @@ function warExhTick(){
          canPeace() soğuma/kilit döndürebiliyordu ve o durumda savaş
          sonsuza dek sürüyordu. Yorgunluk doruğa vurduğunda ordu
          zaten savaşamaz: kilit ne olursa olsun barış dayatılır. */
-      if (e.exh[o.id] >= 100){
-        if (!canPeace(e, o)){
-          /* Kilidi kır: savaş hedefi ve vekil savaş kayıtları düşer */
-          if (e.wg) delete e.wg[o.id];
-          if (o.wg) delete o.wg[e.id];
-          if (e.proxyWar) delete e.proxyWar[o.id];
-          if (o.proxyWar) delete o.proxyWar[e.id];
-          e.war[o.id] = false; o.war[e.id] = false;
-          e.peaceAt = e.peaceAt || {}; o.peaceAt = o.peaceAt || {};
-          e.peaceAt[o.id] = G.day; o.peaceAt[e.id] = G.day;
-          if (typeof remember === 'function'){
-            remember(e, o.id, 'barisImzala');
-            remember(o, e.id, 'barisImzala');
-          }
-          if (e.id === 0 || o.id === 0)
-            say('ORDU SAVAŞAMIYOR — ' + (e.id===0?o.name:e.name) +
-                ' ile çatışma kendiliğinden durdu', 'war');
-          warLedgerSync('exhaustion',null);
-        } else makePeace(e, o,'exhaustion',null);
-        e.exh[o.id] = 55; o.exh = o.exh || {}; o.exh[e.id] = Math.min(o.exh[e.id]||0, 55);
-        if (e.id === 0) say('SAVAŞ YORGUNLUĞU DORUKTA — ' + o.name + ' ile barış zorunlu oldu', 'war');
-        else if (o.id === 0) say(e.name + ' savaştan çekildi — barış imzalandı', 'win');
-      }
+      if (e.exh[o.id] >= 100) warExhaustionClose(e, o);   // FIELD-WAR-SIEGE.0: iki kapanış yolu tek işlevde, tek bildirim
     }
   }
 }
@@ -10931,6 +10909,9 @@ function warPreviewExtend(p,actor,target,key,opts){
   terms:{tax:Object.entries(t.tax).filter(([,v])=>v>0).map(([k,v])=>RES[k].n+' %'+Math.round(v*100)).join(', ')||'yok',science:t.science?'%'+Math.round(t.science*100):'yok',defense:t.defense?'Senyör korur':'Koruma yok',war:{none:'Senyörün savaşlarına katılmaz',defense:'Yalnız savunma savaşlarına katılır',all:'Saldırı savaşlarına da katılır (sözleşme maddesi)'}[t.war],autonomy:t.autonomy==='free'?'Serbest dış politika':'Dış politikada senyör onayı'},
   note:'Hedef dolarsa ya da savaş içinde teslim kabul edilirse bu hükümlerle vasallık kurulur.'};}
  const legit=warLegitimacy(actor,target,key,custom||opts);p.legit=legit;p.stances=warStances(actor,target,legit,p);
+ const fx=warExhaustionForecast(actor,target);p.exh=fx;   // FIELD-WAR-SIEGE.0
+ if(fx&&fx.foe!==null&&fx.foe>=40)p.risks.push(target.name+' yorgunluğu ~%'+fx.foe+' ('+fx.basis+'): %100\'de savaş zorunlu barışla durur; kayıpsız en geç '+fx.foeMonths+' ay, gemi/sistem kaybıyla çok daha erken.');
+ if(fx&&fx.own>=40)p.risks.push('Senin yorgunluğun %'+fx.own+' (önceki savaştan kalan): %100\'de zorunlu barış; kayıpsız en geç '+fx.ownMonths+' ay.');
  if(legit.level!=='yeterli')p.risks.push('Meşruiyet '+legit.level+' ('+Math.round(legit.score*100)+' / gereken '+Math.round(legit.need*100)+'): üçüncü taraflar kınayabilir.');
  p.signature=JSON.stringify(p);return p;
 }
@@ -11190,3 +11171,32 @@ function fedPeaceGate(a,b){const all=fedPeaceFronts(a,b),fronts=fedPeaceClosable
 function fedPeaceApply(a,b){const g=fedPeaceGate(a,b);if(!g.ok)throw Error(g.why);for(const x of g.fronts){const p=G.emps[x.sides[0]],q=G.emps[x.sides[1]];if(p.war[q.id]&&!makePeace(p,q,'federation-peace',a.id))throw Error('Ortak barış uygulanamadı');}}
 function warSurrenderGrace(sub){const c=sub?.vassalContract;return !!(c&&c.status==='active'&&['surrender','war-goal'].includes(c.source)&&G.day-c.started<360&&!sub.sepFunded);}
 /* END BETA-WAR-GOALS.0 FED */
+
+/* ═══ FIELD-WAR-SIEGE.0 — %100 savaş yorgunluğu kapanışı ═══
+   Saha raporu: "ORDU SAVAŞAMIYOR — X ile çatışma kendiliğinden durdu" ve "X savaştan çekildi — barış imzalandı" AYNI kapanıştan çıkıyordu
+   (warExhTick, X'in yorgunluğu %100). Doktrin barışı yasakladığında (canPeace false: Kan Hukuku / diplomasi kilidi) ayrı bir yol savaş
+   bayrağını elle siliyor; makePeace'in defter işleri (savunma/vekil/gerekçe temizliği, v2 Fetih iadesi, bağımsızlık savaşı, haber) atlanıyordu.
+   Artık iki yol da makePeace'ten geçer (kilitte force), kayıt nedeni 'exhaustion' / 'exhaustion-lock' ve aktör = yorulan taraf; oyuncuya TEK bildirim. */
+function warExhaustionClose(e,o){
+ if(!e||!o||!e.war[o.id])return false;
+ const lock=!canPeace(e,o),f=warLedgerFind(e.id,o.id);
+ if(lock){if(e.wg)delete e.wg[o.id];if(o.wg)delete o.wg[e.id];if(e.proxyWar)delete e.proxyWar[o.id];if(o.proxyWar)delete o.proxyWar[e.id];}
+ makePeace(e,o,lock?'exhaustion-lock':'exhaustion',e.id,{force:true,quiet:true});
+ e.exh[o.id]=55;o.exh=o.exh||{};o.exh[e.id]=Math.min(o.exh[e.id]||0,55);
+ const pid=G.p?.id,mode=lock?'zorunlu ateşkes (doktrin barış antlaşmasını yasaklıyor)':'zorunlu barış',tag=f?' · Savaş #'+f.id:'';
+ if(e.id===pid)say('SAVAŞ YORGUNLUĞU %100 — '+o.name+' ile '+mode+'. Ordun savaşamıyor; yorgunluk %55\'ten barışta ayda 2,5 azalır'+tag,'war');
+ else if(o.id===pid)say(e.name+' SAVAŞ YORGUNLUĞU %100 — '+e.name+' ordusu savaşamıyor; '+mode+' ile savaş durdu. '+e.name+'\'in yorgunluğu %55\'te başlar ve barışta ayda 2,5 azalır'+tag,'war');
+ return true;
+}
+/* İlan önizlemesi: oyuncunun bildiğiyle zorunlu barış riski. Kendi yorgunluğu kesin; hedefinki yalnız istihbarat ≥3 ise kesin,
+   aksi hâlde yalnız oyuncunun gördüğü son zorunlu barış kaydından kural tahmini (55 − 2,5 × ay). Temel artış ayda 1,3 (kayıplar hariç). */
+function warExhaustionForecast(actor,target){
+ if(!actor||!target)return null;
+ const own=actor.exh?.[target.id]||0,exact=intelOf(actor,target.id)>=3;let foe=exact?(target.exh?.[actor.id]||0):null,basis=exact?'istihbarat':'bilinmiyor';
+ if(!exact){const last=(G.warLedger?.fronts||[]).filter(f=>f.ended!==null&&f.sides.includes(actor.id)&&f.sides.includes(target.id)&&/^exhaustion/.test(f.endReason||'')).slice(-1)[0];
+  const who=last&&+(/\|actor:(\d+)$/.exec(last.endReason)||[])[1];
+  if(last&&who===target.id){foe=Math.max(0,55-2.5*Math.floor((G.day-last.ended)/30));basis='son zorunlu barıştan tahmin';}}
+ const months=x=>x===null?null:Math.max(0,Math.ceil((100-x)/1.3));
+ return {own:Math.round(own),foe:foe===null?null:Math.round(foe),basis,ownMonths:months(own),foeMonths:months(foe)};
+}
+/* END FIELD-WAR-SIEGE.0 WAR */
