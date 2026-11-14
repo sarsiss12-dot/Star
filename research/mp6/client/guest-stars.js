@@ -100,7 +100,7 @@ const VIEW=new Set(['warCenter','warCenterTab','warCenterDetail','warCenterSuppo
   /* MP.6.2 — savaş ve ikili siyaset: gerçek pencere açılır, son çağrı MP komutuna iner */
   'war','ally','pact','dealPact','endAlliance','unpact','embargo','unembargo','gift',
   /* BETA-WAR-GOALS.0 — hedef/tür seçimi ve müzakere taslağı görünümdür; önizleme host'un warQuote'u, son çağrı 'war' / 'offer' */
-  'setwg','wgTarget','wgVtype','wgVwar','dealVassal','dealPromise','fedWarOpen','fwTarget','fwGoal','fwPropose',
+  'setwg','wgTarget','wgVtype','wgVwar','dealVassal','dealPromise','dealFedPeace','fedWarOpen','fwTarget','fwGoal','fwPropose',
   /* MP.6.3 — ortak savaş paylaşımı penceresi (taslak/oy/uygula düğmeleri _hook; son çağrılar MP komutuna iner) */
   'shareOpen',
   /* MP.6.3 — federasyon kararları ve bağımsızlık desteği: motor işlevi MP komutuna iner */

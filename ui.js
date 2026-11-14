@@ -1571,7 +1571,7 @@ const UI = {
         const [id,key]=String(x).split(':');this.warGoalPick(+id,key);break;   // BETA-WAR-GOALS.0: önce hedef/tür seçimi
       }
       case 'wgTarget': case 'wgVtype': case 'wgVwar': case 'wgGo': this.warGoalAct(a,x); break;   // BETA-WAR-GOALS.0
-      case 'dealVassal': case 'dealPromise': this.warDealAct(a,x); break;   // BETA-WAR-GOALS.0
+      case 'dealVassal': case 'dealPromise': case 'dealFedPeace': this.warDealAct(a,x); break;   // BETA-WAR-GOALS.0
       case 'fedWarOpen': case 'fwTarget': case 'fwGoal': case 'fwPropose': this.fedWarAct(a,x); break;   // BETA-WAR-GOALS.0
       case 'runop': {
         /* FAZ 86A: geriye dönük uyumluluk — doğrudan yürütme yerine
@@ -10020,6 +10020,9 @@ UI.warDealHtml=function(d,e,o){
     for(const [x,y] of [[e,o],[o,e]]){const fp=warFetihPreview(x,y);if(!fp)continue;
       h+=`<div class="mini">${esc(x===e?'Senin':o.name+' devletinin')} Fetih hedefi${fp.legacy?' (eski kayıt: işgaller barışta kalır)':''}: kalacak ${fp.keep.map(t=>esc(t.name)).join(', ')||'—'} · alınamayan ${fp.open.map(t=>esc(t.name)).join(', ')||'—'} · iade ${fp.back.map(t=>esc(t.name)).join(', ')||'—'}</div>`;}
   }
+  {const fp=fedPeaceFronts(e,o),fpc=fedPeaceClosable(e,o);
+   if(fp.length){const on=d.give.concat(d.want).some(i=>i.t==='fedPeace');
+    h+=`<div class="box"><b>FEDERASYONLAR ARASI ORTAK BARIŞ</b><div class="mini">İki federasyon başkanı arasında: kampanyadaki güncel üyeler arası ${fpc.length} cephe kapanır${fp.length>fpc.length?', '+(fp.length-fpc.length)+' cephe doktrin nedeniyle sürer':''}. Ayrılmış üyelerin ve kampanya dışı savaşlar sürer.</div><button class="abtn ${on?'pri':''}" data-a="dealFedPeace" data-x="1">🕊 Ortak barışı ${on?'çıkar':'ekle'}</button></div>`;}}
   const v=all.find(i=>i.t==='vassal');
   if(v){const sub=d.give.includes(v)?e:o,lord=sub===e?o:e,tp=warTermsPreview(sub,lord,v);
     if(tp){h+=`<div class="box"><b>TESLİM ÖNİZLEMESİ — ${esc(G.emps[tp.sub].name)} → ${esc(G.emps[tp.lord].name)} (${esc(tp.type)})</b>
@@ -10041,6 +10044,7 @@ UI.warDealAct=function(a,x){
   if(a==='dealVassal'){const [side,val]=String(x).split(':');
     if(side==='war'){const v=d.give.concat(d.want).find(i=>i.t==='vassal');if(v&&warVassalGoalTerms(v.type,val))v.war=val;}
     else if(['give','want'].includes(side)&&VASSAL_TYPES[val]){const had=d[side].some(i=>i.t==='vassal'&&i.type===val);d.give=d.give.filter(i=>i.t!=='vassal'&&i.t!=='peace');d.want=d.want.filter(i=>i.t!=='vassal'&&i.t!=='peace');if(!had)d[side].push({t:'vassal',type:val,war:WAR_VASSAL_WAR[val]});}}
+  if(a==='dealFedPeace'){const had=d.give.some(i=>i.t==='fedPeace');d.give=d.give.filter(i=>i.t!=='fedPeace'&&i.t!=='vassal');d.want=d.want.filter(i=>i.t!=='fedPeace'&&i.t!=='vassal');if(!had)d.give.push({t:'fedPeace'});}
   if(a==='dealPromise'){const [sys,front]=String(x).split(':').map(Number),i=d.give.findIndex(it=>it.t==='landPromise'&&it.sys===sys);if(i>=0)d.give.splice(i,1);else d.give.push({t:'landPromise',sys,front});}
   this.dealMsg='';this.drawDeal();
 };
