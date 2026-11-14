@@ -1,0 +1,272 @@
+[
+ {
+  "name": "800x360 başlangıç: açık sistem panelinde gezegen küçük resimleri, haritada bölge armaları ve yıldızlar çizili",
+  "status": "PASS",
+  "base": {
+   "cam": {
+    "x": 2630,
+    "y": 3409,
+    "z": 0.9
+   },
+   "sel": 30,
+   "tab": "sistem",
+   "speed": 0,
+   "day": 0,
+   "pspr": [
+    100,
+    100,
+    100
+   ],
+   "emblems": 0,
+   "map": 2954
+  }
+ },
+ {
+  "name": "800x360 arka plan dönüşü #1: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "PASS",
+  "cycle": {
+   "label": "dönüş 1",
+   "hiddenBlank": true
+  },
+  "state": {
+   "cam": {
+    "x": 2630,
+    "y": 3409,
+    "z": 0.9
+   },
+   "sel": 30,
+   "tab": "sistem",
+   "speed": 0,
+   "day": 0,
+   "pspr": [
+    100,
+    100,
+    100
+   ],
+   "emblems": 0,
+   "map": 2954
+  }
+ },
+ {
+  "name": "800x360 arka plan dönüşü #2: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "PASS",
+  "cycle": {
+   "label": "dönüş 2",
+   "hiddenBlank": true
+  },
+  "state": {
+   "cam": {
+    "x": 2630,
+    "y": 3409,
+    "z": 0.9
+   },
+   "sel": 30,
+   "tab": "sistem",
+   "speed": 0,
+   "day": 0,
+   "pspr": [
+    100,
+    100,
+    100
+   ],
+   "emblems": 0,
+   "map": 2954
+  }
+ },
+ {
+  "name": "800x360 arka plan dönüşü #3: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "PASS",
+  "cycle": {
+   "label": "dönüş 3",
+   "hiddenBlank": true
+  },
+  "state": {
+   "cam": {
+    "x": 2630,
+    "y": 3409,
+    "z": 0.9
+   },
+   "sel": 30,
+   "tab": "sistem",
+   "speed": 0,
+   "day": 0,
+   "pspr": [
+    100,
+    100,
+    100
+   ],
+   "emblems": 0,
+   "map": 2954
+  }
+ },
+ {
+  "name": "800x360 paneldeki arma tuvaline gerçek contextrestored olayı → tuval yeniden boyanır",
+  "status": "PASS",
+  "pixels": 1360
+ },
+ {
+  "name": "800x360 kayıttan yükleme sonrası bir dönüş: görseller geri gelir, yüklenen dünya korunur",
+  "status": "PASS",
+  "cycle": {
+   "label": "yükleme sonrası",
+   "hiddenBlank": true
+  },
+  "state": {
+   "cam": {
+    "x": 2630,
+    "y": 3409,
+    "z": 0.4
+   },
+   "sel": 30,
+   "tab": "sistem",
+   "speed": 0,
+   "day": 0,
+   "pspr": [
+    100,
+    100,
+    100
+   ],
+   "emblems": 0,
+   "map": 1308
+  }
+ },
+ {
+  "name": "800x360 sayfa hatası yok",
+  "status": "PASS"
+ },
+ {
+  "name": "1280x720 başlangıç: açık sistem panelinde gezegen küçük resimleri, haritada bölge armaları ve yıldızlar çizili",
+  "status": "PASS",
+  "base": {
+   "cam": {
+    "x": 2630,
+    "y": 3409,
+    "z": 0.9
+   },
+   "sel": 30,
+   "tab": "sistem",
+   "speed": 0,
+   "day": 0,
+   "pspr": [
+    100,
+    100,
+    100
+   ],
+   "emblems": 0,
+   "map": 5636
+  }
+ },
+ {
+  "name": "1280x720 arka plan dönüşü #1: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "PASS",
+  "cycle": {
+   "label": "dönüş 1",
+   "hiddenBlank": true
+  },
+  "state": {
+   "cam": {
+    "x": 2630,
+    "y": 3409,
+    "z": 0.9
+   },
+   "sel": 30,
+   "tab": "sistem",
+   "speed": 0,
+   "day": 0,
+   "pspr": [
+    100,
+    100,
+    100
+   ],
+   "emblems": 0,
+   "map": 5636
+  }
+ },
+ {
+  "name": "1280x720 arka plan dönüşü #2: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "PASS",
+  "cycle": {
+   "label": "dönüş 2",
+   "hiddenBlank": true
+  },
+  "state": {
+   "cam": {
+    "x": 2630,
+    "y": 3409,
+    "z": 0.9
+   },
+   "sel": 30,
+   "tab": "sistem",
+   "speed": 0,
+   "day": 0,
+   "pspr": [
+    100,
+    100,
+    100
+   ],
+   "emblems": 0,
+   "map": 5636
+  }
+ },
+ {
+  "name": "1280x720 arka plan dönüşü #3: gezegen görselleri + armalar + harita geri gelir; kamera / yakınlaştırma / seçim / sekme / dünya korunur",
+  "status": "PASS",
+  "cycle": {
+   "label": "dönüş 3",
+   "hiddenBlank": true
+  },
+  "state": {
+   "cam": {
+    "x": 2630,
+    "y": 3409,
+    "z": 0.9
+   },
+   "sel": 30,
+   "tab": "sistem",
+   "speed": 0,
+   "day": 0,
+   "pspr": [
+    100,
+    100,
+    100
+   ],
+   "emblems": 0,
+   "map": 5636
+  }
+ },
+ {
+  "name": "1280x720 paneldeki arma tuvaline gerçek contextrestored olayı → tuval yeniden boyanır",
+  "status": "PASS",
+  "pixels": 1360
+ },
+ {
+  "name": "1280x720 kayıttan yükleme sonrası bir dönüş: görseller geri gelir, yüklenen dünya korunur",
+  "status": "PASS",
+  "cycle": {
+   "label": "yükleme sonrası",
+   "hiddenBlank": true
+  },
+  "state": {
+   "cam": {
+    "x": 2630,
+    "y": 3409,
+    "z": 0.4
+   },
+   "sel": 30,
+   "tab": "sistem",
+   "speed": 0,
+   "day": 0,
+   "pspr": [
+    100,
+    100,
+    100
+   ],
+   "emblems": 0,
+   "map": 4343
+  }
+ },
+ {
+  "name": "1280x720 sayfa hatası yok",
+  "status": "PASS"
+ }
+]

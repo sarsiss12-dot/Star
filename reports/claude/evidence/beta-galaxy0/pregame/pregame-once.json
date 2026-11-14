@@ -1,0 +1,172 @@
+[
+ {
+  "name": "390x844 fizyoloji: Okyanus Canlısı / Kuş Benzeri / Makine Ağı kartları aynı tipografi, kod terimi yok, taşma yok; seçili kart ayırt edilir",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyuncuya kod terimi gösterilmez: colCost\n+ actual - expected\n\n+ [\n+   'colCost'\n+ ]\n- []\n\n    at /home/user/Star/tests/browser-pregame-galaxy0.cjs:40:14\n    at async test (/home/user/Star/tests/browser-pregame-galaxy0.cjs:11:42)\n    at async run (/home/user/Star/tests/browser-pregame-galaxy0.cjs:23:5)"
+ },
+ {
+  "name": "390x844 genetik özellik kartları tek tipografi; puan satırı görünür; özellik seçimi puanı değiştirir",
+  "status": "PASS",
+  "metrics": {
+   "n": 28,
+   "tn": [
+    "10.5px|700|normal"
+   ],
+   "td": [
+    "9.5px|400|13.3px"
+   ],
+   "overflow": 0,
+   "bar": "PUAN 3 / 3\nözellik 0/5\nolumsuz 0/2 · kazanç +0/3"
+  },
+  "trait": "ustun_zeka",
+  "cost": [
+   0,
+   2
+  ]
+ },
+ {
+  "name": "390x844 Görünüş arması: önizleme sekmeler arası aynı, fizyolojiye gidip dönünce değişmez, oyundaki arma ile aynı",
+  "status": "PASS",
+  "preview": {
+   "v": 1,
+   "shape": "hex",
+   "symbol": "sun",
+   "pattern": "corners",
+   "primary": "#4aa8d8",
+   "secondary": "#ece9d5",
+   "federation": false
+  },
+  "game": {
+   "v": 1,
+   "shape": "diamond",
+   "symbol": "wing",
+   "pattern": "corners",
+   "primary": "#983e8f",
+   "secondary": "#f5665c",
+   "federation": false
+  },
+  "size": {
+   "w": 80,
+   "h": 80
+  }
+ },
+ {
+  "viewport": "390x844",
+  "errors": []
+ },
+ {
+  "name": "800x360 fizyoloji: Okyanus Canlısı / Kuş Benzeri / Makine Ağı kartları aynı tipografi, kod terimi yok, taşma yok; seçili kart ayırt edilir",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyuncuya kod terimi gösterilmez: colCost\n+ actual - expected\n\n+ [\n+   'colCost'\n+ ]\n- []\n\n    at /home/user/Star/tests/browser-pregame-galaxy0.cjs:40:14\n    at async test (/home/user/Star/tests/browser-pregame-galaxy0.cjs:11:42)\n    at async run (/home/user/Star/tests/browser-pregame-galaxy0.cjs:23:5)"
+ },
+ {
+  "name": "800x360 genetik özellik kartları tek tipografi; puan satırı görünür; özellik seçimi puanı değiştirir",
+  "status": "PASS",
+  "metrics": {
+   "n": 28,
+   "tn": [
+    "10.5px|700|normal"
+   ],
+   "td": [
+    "9.5px|400|13.3px"
+   ],
+   "overflow": 0,
+   "bar": "PUAN 3 / 3\nözellik 0/5\nolumsuz 0/2 · kazanç +0/3"
+  },
+  "trait": "ustun_zeka",
+  "cost": [
+   0,
+   2
+  ]
+ },
+ {
+  "name": "800x360 Görünüş arması: önizleme sekmeler arası aynı, fizyolojiye gidip dönünce değişmez, oyundaki arma ile aynı",
+  "status": "PASS",
+  "preview": {
+   "v": 1,
+   "shape": "hex",
+   "symbol": "sun",
+   "pattern": "corners",
+   "primary": "#4aa8d8",
+   "secondary": "#ece9d5",
+   "federation": false
+  },
+  "game": {
+   "v": 1,
+   "shape": "ring",
+   "symbol": "gear",
+   "pattern": "corners",
+   "primary": "#5c9ef5",
+   "secondary": "#5cf5d6",
+   "federation": false
+  },
+  "size": {
+   "w": 80,
+   "h": 80
+  }
+ },
+ {
+  "viewport": "800x360",
+  "errors": []
+ },
+ {
+  "name": "1280x720 fizyoloji: Okyanus Canlısı / Kuş Benzeri / Makine Ağı kartları aynı tipografi, kod terimi yok, taşma yok; seçili kart ayırt edilir",
+  "status": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: oyuncuya kod terimi gösterilmez: colCost\n+ actual - expected\n\n+ [\n+   'colCost'\n+ ]\n- []\n\n    at /home/user/Star/tests/browser-pregame-galaxy0.cjs:40:14\n    at async test (/home/user/Star/tests/browser-pregame-galaxy0.cjs:11:42)\n    at async run (/home/user/Star/tests/browser-pregame-galaxy0.cjs:23:5)"
+ },
+ {
+  "name": "1280x720 genetik özellik kartları tek tipografi; puan satırı görünür; özellik seçimi puanı değiştirir",
+  "status": "PASS",
+  "metrics": {
+   "n": 28,
+   "tn": [
+    "10.5px|700|normal"
+   ],
+   "td": [
+    "9.5px|400|13.3px"
+   ],
+   "overflow": 0,
+   "bar": "PUAN 3 / 3\nözellik 0/5\nolumsuz 0/2 · kazanç +0/3"
+  },
+  "trait": "ustun_zeka",
+  "cost": [
+   0,
+   2
+  ]
+ },
+ {
+  "name": "1280x720 Görünüş arması: önizleme sekmeler arası aynı, fizyolojiye gidip dönünce değişmez, oyundaki arma ile aynı",
+  "status": "PASS",
+  "preview": {
+   "v": 1,
+   "shape": "hex",
+   "symbol": "sun",
+   "pattern": "corners",
+   "primary": "#4aa8d8",
+   "secondary": "#ece9d5",
+   "federation": false
+  },
+  "game": {
+   "v": 1,
+   "shape": "diamond",
+   "symbol": "crystal",
+   "pattern": "rays",
+   "primary": "#56983e",
+   "secondary": "#f5c25c",
+   "federation": false
+  },
+  "size": {
+   "w": 80,
+   "h": 80
+  }
+ },
+ {
+  "viewport": "1280x720",
+  "errors": []
+ },
+ {
+  "name": "galaksi sekmesi: yeni şekiller önizlemeli, çarpan seçilir; rota onarımı başarısızsa açık hata + YENİ TOHUMLA YENİDEN ÜRET",
+  "status": "PASS",
+  "notRun": true
+ }
+]

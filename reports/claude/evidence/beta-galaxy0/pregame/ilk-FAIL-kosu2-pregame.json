@@ -1,0 +1,178 @@
+[
+ {
+  "name": "390x844 fizyoloji: Okyanus Canlısı / Kuş Benzeri / Makine Ağı kartları aynı tipografi, kod terimi yok, taşma yok; seçili kart ayırt edilir",
+  "status": "PASS",
+  "metrics": {
+   "n": 7,
+   "sumStyles": [
+    "11px|400|rgb(185, 198, 218)|15.95px"
+   ],
+   "fxStyles": [
+    "10.5px|500|rgb(207, 227, 244)|15.225px"
+   ],
+   "noFx": 0,
+   "code": [],
+   "overflow": [],
+   "sel": [
+    "machine"
+   ],
+   "selOutline": "solid",
+   "aquatic": "🌊 Okyanus Canlısı\nSuya bağımlı. Okyanus ve tundrada muhteşem, çölde ölümcül.\nYiyecekle beslenir · Okyanus, Sulakalan, Tundra: +18 yaşanabilirlik, +%20 üretim · Çöl, Kurak: −35 yaşanabilirlik",
+   "avian": "🪶 Kuş Benzeri\nHafif kemikli, hızlı. Uzayda çevik, yüzeyde kırılgan.\nYiyecekle beslenir · Büyüme +%10 · Filo hızı +%10 · Kolonileştirme maliyeti −%15 · Gelen hasar −%10 · Kara savunması −%15",
+   "detail": "⚙ Makine Ağı\n\nOrganik değil. Yiyecek yerine enerji tüketir, her dünyada çalışır.\n\nBeslenme\nNüfus yiyecek yerine enerji tüketir (yiyecek gerekmez).\nYaşanabilirlik\nBütün yaşanabilir gezegenlerde yaşanabilirlik +%35 (çarpan; tür uyumundan sonra uygulanır).\nMontaj\nNüfus montaj hızı −%20.\nEnerji\nEnerji −%15.\nGövde\nGövde +%15.\nMakine\nOrganik değildir; enerjiyle çalışır ve her gezegen türünde yaşayabilir."
+  },
+  "shots": [
+   "sonra-390x844-fizyo-aquatic.png",
+   "sonra-390x844-fizyo-avian.png",
+   "sonra-390x844-fizyo-machine.png"
+  ]
+ },
+ {
+  "name": "390x844 genetik özellik kartları tek tipografi; puan satırı görünür; özellik seçimi puanı değiştirir",
+  "status": "PASS",
+  "metrics": {
+   "n": 28,
+   "tn": [
+    "11.5px|600|14.95px"
+   ],
+   "td": [
+    "10.5px|400|15.225px"
+   ],
+   "overflow": 0,
+   "bar": "PUAN 3 / 3\nözellik 0/5\nolumsuz 0/2 · kazanç +0/3"
+  },
+  "trait": "ustun_zeka",
+  "cost": [
+   0,
+   2
+  ]
+ },
+ {
+  "name": "390x844 Görünüş arması: önizleme sekmeler arası aynı, fizyolojiye gidip dönünce değişmez, oyundaki arma ile aynı",
+  "status": "FAIL",
+  "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at /home/user/Star/tests/browser-pregame-galaxy0.cjs:59:124\n    at async test (/home/user/Star/tests/browser-pregame-galaxy0.cjs:11:42)\n    at async run (/home/user/Star/tests/browser-pregame-galaxy0.cjs:52:5)"
+ },
+ {
+  "viewport": "390x844",
+  "errors": []
+ },
+ {
+  "name": "800x360 fizyoloji: Okyanus Canlısı / Kuş Benzeri / Makine Ağı kartları aynı tipografi, kod terimi yok, taşma yok; seçili kart ayırt edilir",
+  "status": "PASS",
+  "metrics": {
+   "n": 7,
+   "sumStyles": [
+    "11px|400|rgb(185, 198, 218)|15.95px"
+   ],
+   "fxStyles": [
+    "10.5px|500|rgb(207, 227, 244)|15.225px"
+   ],
+   "noFx": 0,
+   "code": [],
+   "overflow": [],
+   "sel": [
+    "machine"
+   ],
+   "selOutline": "solid",
+   "aquatic": "🌊 Okyanus Canlısı\nSuya bağımlı. Okyanus ve tundrada muhteşem, çölde ölümcül.\nYiyecekle beslenir · Okyanus, Sulakalan, Tundra: +18 yaşanabilirlik, +%20 üretim · Çöl, Kurak: −35 yaşanabilirlik",
+   "avian": "🪶 Kuş Benzeri\nHafif kemikli, hızlı. Uzayda çevik, yüzeyde kırılgan.\nYiyecekle beslenir · Büyüme +%10 · Filo hızı +%10 · Kolonileştirme maliyeti −%15 · Gelen hasar −%10 · Kara savunması −%15",
+   "detail": "⚙ Makine Ağı\n\nOrganik değil. Yiyecek yerine enerji tüketir, her dünyada çalışır.\n\nBeslenme\nNüfus yiyecek yerine enerji tüketir (yiyecek gerekmez).\nYaşanabilirlik\nBütün yaşanabilir gezegenlerde yaşanabilirlik +%35 (çarpan; tür uyumundan sonra uygulanır).\nMontaj\nNüfus montaj hızı −%20.\nEnerji\nEnerji −%15.\nGövde\nGövde +%15.\nMakine\nOrganik değildir; enerjiyle çalışır ve her gezegen türünde yaşayabilir."
+  },
+  "shots": [
+   "sonra-800x360-fizyo-aquatic.png",
+   "sonra-800x360-fizyo-avian.png",
+   "sonra-800x360-fizyo-machine.png"
+  ]
+ },
+ {
+  "name": "800x360 genetik özellik kartları tek tipografi; puan satırı görünür; özellik seçimi puanı değiştirir",
+  "status": "PASS",
+  "metrics": {
+   "n": 28,
+   "tn": [
+    "11.5px|600|14.95px"
+   ],
+   "td": [
+    "10.5px|400|15.225px"
+   ],
+   "overflow": 0,
+   "bar": "PUAN 3 / 3\nözellik 0/5\nolumsuz 0/2 · kazanç +0/3"
+  },
+  "trait": "ustun_zeka",
+  "cost": [
+   0,
+   2
+  ]
+ },
+ {
+  "name": "800x360 Görünüş arması: önizleme sekmeler arası aynı, fizyolojiye gidip dönünce değişmez, oyundaki arma ile aynı",
+  "status": "FAIL",
+  "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at /home/user/Star/tests/browser-pregame-galaxy0.cjs:59:124\n    at async test (/home/user/Star/tests/browser-pregame-galaxy0.cjs:11:42)\n    at async run (/home/user/Star/tests/browser-pregame-galaxy0.cjs:52:5)"
+ },
+ {
+  "viewport": "800x360",
+  "errors": []
+ },
+ {
+  "name": "1280x720 fizyoloji: Okyanus Canlısı / Kuş Benzeri / Makine Ağı kartları aynı tipografi, kod terimi yok, taşma yok; seçili kart ayırt edilir",
+  "status": "PASS",
+  "metrics": {
+   "n": 7,
+   "sumStyles": [
+    "11px|400|rgb(185, 198, 218)|15.95px"
+   ],
+   "fxStyles": [
+    "10.5px|500|rgb(207, 227, 244)|15.225px"
+   ],
+   "noFx": 0,
+   "code": [],
+   "overflow": [],
+   "sel": [
+    "machine"
+   ],
+   "selOutline": "solid",
+   "aquatic": "🌊 Okyanus Canlısı\nSuya bağımlı. Okyanus ve tundrada muhteşem, çölde ölümcül.\nYiyecekle beslenir · Okyanus, Sulakalan, Tundra: +18 yaşanabilirlik, +%20 üretim · Çöl, Kurak: −35 yaşanabilirlik",
+   "avian": "🪶 Kuş Benzeri\nHafif kemikli, hızlı. Uzayda çevik, yüzeyde kırılgan.\nYiyecekle beslenir · Büyüme +%10 · Filo hızı +%10 · Kolonileştirme maliyeti −%15 · Gelen hasar −%10 · Kara savunması −%15",
+   "detail": "⚙ Makine Ağı\n\nOrganik değil. Yiyecek yerine enerji tüketir, her dünyada çalışır.\n\nBeslenme\nNüfus yiyecek yerine enerji tüketir (yiyecek gerekmez).\nYaşanabilirlik\nBütün yaşanabilir gezegenlerde yaşanabilirlik +%35 (çarpan; tür uyumundan sonra uygulanır).\nMontaj\nNüfus montaj hızı −%20.\nEnerji\nEnerji −%15.\nGövde\nGövde +%15.\nMakine\nOrganik değildir; enerjiyle çalışır ve her gezegen türünde yaşayabilir."
+  },
+  "shots": [
+   "sonra-1280x720-fizyo-aquatic.png",
+   "sonra-1280x720-fizyo-avian.png",
+   "sonra-1280x720-fizyo-machine.png"
+  ]
+ },
+ {
+  "name": "1280x720 genetik özellik kartları tek tipografi; puan satırı görünür; özellik seçimi puanı değiştirir",
+  "status": "PASS",
+  "metrics": {
+   "n": 28,
+   "tn": [
+    "11.5px|600|14.95px"
+   ],
+   "td": [
+    "10.5px|400|15.225px"
+   ],
+   "overflow": 0,
+   "bar": "PUAN 3 / 3\nözellik 0/5\nolumsuz 0/2 · kazanç +0/3"
+  },
+  "trait": "ustun_zeka",
+  "cost": [
+   0,
+   2
+  ]
+ },
+ {
+  "name": "1280x720 Görünüş arması: önizleme sekmeler arası aynı, fizyolojiye gidip dönünce değişmez, oyundaki arma ile aynı",
+  "status": "FAIL",
+  "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at /home/user/Star/tests/browser-pregame-galaxy0.cjs:59:124\n    at async test (/home/user/Star/tests/browser-pregame-galaxy0.cjs:11:42)\n    at async run (/home/user/Star/tests/browser-pregame-galaxy0.cjs:52:5)"
+ },
+ {
+  "viewport": "1280x720",
+  "errors": []
+ },
+ {
+  "name": "galaksi sekmesi: yeni şekiller önizlemeli, çarpan seçilir; rota onarımı başarısızsa açık hata + YENİ TOHUMLA YENİDEN ÜRET",
+  "status": "FAIL",
+  "error": "page.waitForSelector: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#setupErrorBox') to be visible\u001b[22m\n\n    at /home/user/Star/tests/browser-pregame-galaxy0.cjs:80:16\n    at async test (/home/user/Star/tests/browser-pregame-galaxy0.cjs:11:42)\n    at async run (/home/user/Star/tests/browser-pregame-galaxy0.cjs:71:3)"
+ }
+]

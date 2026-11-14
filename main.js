@@ -115,7 +115,8 @@ function planetOrb(tip, seed, boyut){
 
   return `<span class="pOrb" style="
     width:${d}px;height:${d}px;
-    background:
+    background-color:${orta};
+    background-image:
       ${leke}
       radial-gradient(circle at ${ax}% ${ay}%,
         ${acik} 0%, ${orta} 38%, ${pal[1]} 62%, ${koyu} 88%, #01030a 100%);
@@ -461,7 +462,8 @@ const TRAIT_LABEL = {
   stab:'İstikrar', sensor:'Sensör menzili', tradeMul:'Ticaret',
   opCost:'Casusluk bedeli', shipSpeed:'Gemi üretimi',
   borderMul:'Sınır büyümesi', newColStab:'Yeni koloni istikrarı',
-  trustCap:'Güven tavanı', trustStart:'Başlangıç güveni'
+  trustCap:'Güven tavanı', trustStart:'Başlangıç güveni',
+  colCost:'Kolonileştirme maliyeti'   // BETA-GALAXY.0: oyuncuya kod terimi gösterilmez
 };
 
 /* Makine Ağında "nüfus artışı" montajdır; yiyecek etkileri enerjiye kayar */
@@ -1439,11 +1441,35 @@ function setupSizeKey(n){return Object.keys(SIZES).find(k=>SIZES[k].sys===n);}
 function extendedEmpireColor(i){const h=(i*137.508)%360,s=.55,l=.48+(i%3)*.07,c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs(h/60%2-1)),m=l-c/2,parts=h<60?[c,x,0]:h<120?[x,c,0]:h<180?[0,c,x]:h<240?[0,x,c]:h<300?[x,0,c]:[c,0,x];return '#'+parts.map(v=>Math.round((v+m)*255).toString(16).padStart(2,'0')).join('');}
 // Missing field retains each historical size default; explicit values never clamp.
 function aiCountFor(cfg){return cfg.aiCount===undefined?SIZES[cfg.size]?.ai:cfg.aiCount;}
+const RIVAL_PERSONAS=['militarist','kriminal','izolasyonist'];
+function rivalSetupError(cfg, count){
+ if(cfg.aiRivals===undefined)return '';
+ const r=cfg.aiRivals;
+ return r&&Number.isInteger(r.min)&&Number.isInteger(r.max)&&r.min>=0&&r.min<=r.max&&r.max<=count
+  ?'':'Rakip doktrin aralığı 0 ile AI sayısı arasında olmalı. Alt sınır üst sınırı geçemez.';
+}
+function assignRivalPersonas(cfg){
+ if(cfg.aiRivals===undefined)return;
+ const rivals=G.emps.filter(e=>e.ai&&!e.wild&&!e.crisisSide);
+ const random=mulberry32(identityHash('ai-rivals:'+G.seed));
+ const {min,max}=cfg.aiRivals,count=min+Math.floor(random()*(max-min+1));
+ const ranked=rivals.map(e=>({e,r:random()})).sort((a,b)=>a.r-b.r||a.e.id-b.e.id);
+ ranked.forEach(({e},i)=>{
+   const current=personaKey(e);
+   const next=i<count?(RIVAL_PERSONAS.includes(current)?current:RIVAL_PERSONAS[Math.floor(random()*RIVAL_PERSONAS.length)])
+    :(RIVAL_PERSONAS.includes(current)?'yayilmaci':current);
+   applyChosenPersona(e,next);delete e._pers;delete e._persAt;e._prof=null;
+   personaOf(e);
+   if(isPurifier(e))e.civics=e.civics.filter(key=>key!=='golge_kons');
+   recalcMods(e);
+ });
+}
 function setupConfigError(cfg){
  if(!SIZES[cfg.size]||SIZES[cfg.size].available===false||(cfg.shape!==undefined&&!SHAPES[cfg.shape]))return 'Geçersiz galaksi boyutu veya şekli.';
+ if(cfg.planetMul!==undefined&&!PLANET_MULS.includes(cfg.planetMul))return 'Kolonileştirilebilir gezegen çarpanı geçersiz.';
  const n=aiCountFor(cfg);if(!Number.isInteger(n)||n<1||n>MAX_AI_COUNT)return 'AI devlet sayısı 1–48 arasında bir tam sayı olmalı.';
  if(n+1>SIZES[cfg.size].sys)return 'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.';
- const actualAI=n-(Array.isArray(cfg.humans)?cfg.humans.length:0);if(actualAI>SCALE_ACCEPTANCE.maxAI)return 'Bu sürümde uzun kampanyası doğrulanmış üst sınır '+SCALE_ACCEPTANCE.maxAI+' AI. 24/32/48 AI deneysel; seçim sessizce azaltılmaz.';return '';
+ const actualAI=n-(Array.isArray(cfg.humans)?cfg.humans.length:0);if(actualAI>SCALE_ACCEPTANCE.maxAI)return 'Bu sürümde uzun kampanyası doğrulanmış üst sınır '+SCALE_ACCEPTANCE.maxAI+' AI. 24/32/48 AI deneysel; seçim sessizce azaltılmaz.';return rivalSetupError(cfg,actualAI);
 }
 /* Harita kenarı: 30 sistem → 4200, 100 sistem → ~7670.
    Yıldız yoğunluğu (px/sistem) tüm boyutlarda benzer kalır. */
@@ -1453,8 +1479,86 @@ function galaxyScale(sysN){
 const SHAPES = {
   sarmal :{n:'SARMAL',  d:'Kollu galaksi'},
   halka  :{n:'HALKA',   d:'Merkezi boş'},
-  kume   :{n:'KÜME',    d:'Dağınık öbekler'}
+  kume   :{n:'KÜME',    d:'Dağınık öbekler'},
+  /* BETA-GALAXY.0: yeni şekiller yalnız kendi anahtarlarıyla dallanır; eski üç şeklin nokta/hat RNG akışı aynıdır. */
+  eliptik:{n:'ELİPTİK', d:'Uzun eksenli yoğun disk; yol uzun eksen boyunca uzar'},
+  kumeli :{n:'KÜMELİ',  d:'Sıkı öbekler; öbekler arası az sayıda geçit'},
+  cubuklu:{n:'ÇUBUKLU SARMAL', d:'Merkezde yoğun çubuk hattı ve iki kol'},
+  duzensiz:{n:'DÜZENSİZ', d:'Asimetrik yoğun bölgeler ve boşluklar'}
 };
+const GALAXY_NEW_SHAPES=['eliptik','kumeli','cubuklu','duzensiz'];
+/* Yeni şekil bağlamı (yalnız yeni anahtarlar): öbek merkezleri / yönelim tohumdan, ana akıştan çekilir. */
+function galaxyShapeContext(shape, rnd, R, cx, cy, N){
+  if (shape === 'kumeli'){
+    const nk = Math.max(4, Math.min(12, Math.round(Math.sqrt(N) / 2.1)));
+    const rc = R * Math.sqrt(.42 / nk), centers = [];
+    for (let i = 0, g = 0; centers.length < nk && g < 4000; g++){
+      const a = rnd() * Math.PI * 2, r = Math.sqrt(rnd()) * (R - rc * .9);
+      const x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r;
+      if (centers.every(c => Math.hypot(c.x - x, c.y - y) > rc * 2.25 - Math.min(g, 3000) * rc * .0004)) centers.push({x, y, w:.6 + rnd() * .8, i:i++});
+    }
+    return {centers, rc};
+  }
+  if (shape === 'eliptik') return {tilt: rnd() * Math.PI, ratio: .42 + rnd() * .1};
+  if (shape === 'cubuklu') return {tilt: rnd() * Math.PI};
+  if (shape === 'duzensiz'){
+    const n = 3 + Math.floor(rnd() * 3), blobs = [], lean = rnd() * Math.PI * 2;
+    for (let i = 0; i < n; i++){
+      /* öbekler tohuma bağlı bir yöne yaslanır; ilk öbek ağır, öteki yarı seyrek kalır */
+      const a = lean + (rnd() - .5) * 2.2, r = R * (.12 + rnd() * .42);
+      blobs.push({x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r, r: R * (.14 + rnd() * .24), w: (i === 0 ? 1.6 : .3) + rnd() * 1.1, sx: .55 + rnd() * .9});
+    }
+    return {blobs, total: blobs.reduce((t, b) => t + b.w, 0)};
+  }
+  return null;
+}
+function galaxyShapePoint(shape, rnd, R, cx, cy, ctx){
+  if (shape === 'eliptik'){
+    const a = rnd() * Math.PI * 2, r = Math.pow(rnd(), .72) * R;
+    const ex = Math.cos(a) * r, ey = Math.sin(a) * r * ctx.ratio;
+    return {x: cx + ex * Math.cos(ctx.tilt) - ey * Math.sin(ctx.tilt), y: cy + ex * Math.sin(ctx.tilt) + ey * Math.cos(ctx.tilt)};
+  }
+  if (shape === 'kumeli'){
+    const tot = ctx.centers.reduce((t, c) => t + c.w, 0);
+    let pick = rnd() * tot, c = ctx.centers[ctx.centers.length - 1];
+    for (const k of ctx.centers){ pick -= k.w; if (pick <= 0){ c = k; break; } }
+    const a = rnd() * Math.PI * 2, r = Math.pow(rnd(), .55) * ctx.rc;
+    return {x: c.x + Math.cos(a) * r, y: c.y + Math.sin(a) * r, k: c.i};
+  }
+  if (shape === 'cubuklu'){
+    let lx, ly;
+    if (rnd() < .34){ lx = (rnd() * 2 - 1) * R * .42; ly = (rnd() - .5) * R * .12; }
+    else {
+      const side = rnd() < .5 ? 0 : Math.PI, t = Math.pow(rnd(), .8);
+      const ang = side + t * 2.5 + (rnd() - .5) * .45, rr = R * .42 + t * R * .56 + (rnd() - .5) * R * .1;
+      lx = Math.cos(ang) * rr; ly = Math.sin(ang) * rr;
+    }
+    return {x: cx + lx * Math.cos(ctx.tilt) - ly * Math.sin(ctx.tilt), y: cy + lx * Math.sin(ctx.tilt) + ly * Math.cos(ctx.tilt)};
+  }
+  if (shape === 'duzensiz'){
+    if (rnd() < .1){ const a = rnd() * Math.PI * 2, r = Math.sqrt(rnd()) * R; return {x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r}; }
+    let pick = rnd() * ctx.total, b = ctx.blobs[ctx.blobs.length - 1];
+    for (const k of ctx.blobs){ pick -= k.w; if (pick <= 0){ b = k; break; } }
+    const a = rnd() * Math.PI * 2, r = Math.pow(rnd(), .6) * b.r;
+    return {x: b.x + Math.cos(a) * r * b.sx, y: b.y + Math.sin(a) * r / b.sx};
+  }
+  return null;
+}
+/* Kurulum ekranı önizlemesi: aynı şekil üreteci, sabit tohum, 70 nokta (oyun RNG'si / G kullanılmaz). */
+function galaxyShapePreview(shape){
+  const rnd = mulberry32(identityHash('shape-preview:' + shape)), R = 46, cx = 50, cy = 50, pts = [];
+  const ctx = galaxyShapeContext(shape, rnd, R, cx, cy, 70);
+  for (let g = 0; pts.length < 70 && g < 3000; g++){
+    let p;
+    if (GALAXY_NEW_SHAPES.includes(shape)) p = galaxyShapePoint(shape, rnd, R, cx, cy, ctx);
+    else if (shape === 'sarmal'){ const arm = Math.floor(rnd() * 3), t = Math.pow(rnd(), .62), ang = arm * (Math.PI * 2 / 3) + t * 3.1 + (rnd() - .5) * .62, rr = t * R + (rnd() - .5) * R * .16; p = {x: cx + Math.cos(ang) * rr, y: cy + Math.sin(ang) * rr}; }
+    else if (shape === 'halka'){ const ang = rnd() * Math.PI * 2, rr = R * (.52 + rnd() * .46); p = {x: cx + Math.cos(ang) * rr, y: cy + Math.sin(ang) * rr}; }
+    else { const nk = 6, k = Math.floor(rnd() * nk), ka = (k / nk) * Math.PI * 2 + .4, kr = R * (.30 + (k % 3) * .24), a2 = rnd() * Math.PI * 2, r2 = Math.pow(rnd(), .6) * R * .30; p = {x: cx + Math.cos(ka) * kr + Math.cos(a2) * r2, y: cy + Math.sin(ka) * kr + Math.sin(a2) * r2}; }
+    p.x = clamp(p.x, 3, 97); p.y = clamp(p.y, 3, 97);
+    if (pts.every(q => Math.hypot(q.x - p.x, q.y - p.y) >= 4.2)) pts.push(p);
+  }
+  return pts;
+}
 
 /* ---------- yıldız sınıfları ---------- */
 const STARS = [
@@ -2019,10 +2123,19 @@ function generateGalaxy(cfg){
      ampirik olarak .30 → .19'a çekildi. */
   const minD = R * .19 * Math.sqrt(30 / Math.max(30, N));
 
+  const shapeCtx = GALAXY_NEW_SHAPES.includes(cfg.shape) ? galaxyShapeContext(cfg.shape, rnd, R, cx, cy, N) : null;
+  /* yeni şekiller: aynı minD kabul/ret kararını O(1) veren ızgara (yalnız hız; sonuç doğrusal taramayla aynı) */
+  const grid = shapeCtx ? new Map() : null, gk = (x, y) => Math.floor(x / minD) + ':' + Math.floor(y / minD);
+  const near = (x, y, r) => { const gx = Math.floor(x / minD), gy = Math.floor(y / minD), m = Math.ceil(r / minD);
+    for (let i = gx - m; i <= gx + m; i++) for (let j = gy - m; j <= gy + m; j++) for (const p of (grid.get(i + ':' + j) || [])) if (Math.hypot(p.x - x, p.y - y) < r) return true; return false; };
+  const put = p => { const k = gk(p.x, p.y); (grid.get(k) || grid.set(k, []).get(k)).push(p); };
   let guard = 0;
   while (pts.length < N && guard++ < N*400){
-    let x, y;
-    if (cfg.shape === 'sarmal'){
+    let x, y, k;
+    if (shapeCtx){
+      const p = galaxyShapePoint(cfg.shape, rnd, R, cx, cy, shapeCtx);
+      x = p.x; y = p.y; k = p.k;
+    } else if (cfg.shape === 'sarmal'){
       const arm = Math.floor(rnd()*3);
       const t = Math.pow(rnd(), .62);
       const ang = arm*(Math.PI*2/3) + t*3.1 + (rnd()-.5)*.62;
@@ -2041,9 +2154,10 @@ function generateGalaxy(cfg){
       x = kx + Math.cos(a2)*r2; y = ky + Math.sin(a2)*r2;
     }
     x = clamp(x, 140, G.W-140); y = clamp(y, 140, G.H-140);
+    if (grid){ if (!near(x, y, minD)){ const p = k === undefined ? {x,y} : {x,y,k}; pts.push(p); put(p); } continue; }
     let ok = true;
     for (const p of pts) if (Math.hypot(p.x-x,p.y-y) < minD){ ok = false; break; }
-    if (ok) pts.push({x,y});
+    if (ok) pts.push(k === undefined ? {x,y} : {x,y,k});
   }
 
   // Only repair exhausted rejection sampling; successful legacy maps keep
@@ -2052,7 +2166,7 @@ function generateGalaxy(cfg){
   for(let i=0;pts.length<N&&i<N*2000;i++){
     const base=anchors[i%anchors.length],angle=i*2.399963229728653;
     const radius=minD*(1+(i%7)/7),x=clamp(base.x+Math.cos(angle)*radius,140,G.W-140),y=clamp(base.y+Math.sin(angle)*radius,140,G.H-140);
-    if(pts.every(p=>Math.hypot(p.x-x,p.y-y)>=minD*.75))pts.push({x,y});
+    if(grid?!near(x,y,minD*.75):pts.every(p=>Math.hypot(p.x-x,p.y-y)>=minD*.75)){const q=base.k===undefined?{x,y}:{x,y,k:base.k};pts.push(q);if(grid)put(q);}
   }
   if(pts.length!==N)throw new RangeError('İstenen sistem sayısı güvenle yerleştirilemedi.');
   const used = new Set();
@@ -2083,8 +2197,10 @@ function generateGalaxy(cfg){
 
   /* --- hiper yolları --- */
   const maxLane = minD*2.5;
+  /* KÜMELİ: öbek içi hatlar; öbekler arası geçiş yalnız aşağıdaki bileşen birleştirme + seyrek yedek köprülerle */
+  const clusterOf = cfg.shape === 'kumeli' ? pts.map(p => p.k) : null;
   for (const a of G.sys){
-    const near = G.sys.filter(b=>b!==a).map(b=>({b, d:dist(a,b)}))
+    const near = G.sys.filter(b=>b!==a&&(!clusterOf||clusterOf[b.id]===clusterOf[a.id])).map(b=>({b, d:dist(a,b)}))
                       .sort((p,q)=>p.d-q.d);
     const k = 2 + (rnd()<.5?1:0);
     for (let i=0;i<Math.min(k, near.length); i++){
@@ -2094,6 +2210,7 @@ function generateGalaxy(cfg){
   }
   // bağlantısız kümeleri birleştir
   let comps = components();
+  const genComponents = comps.length;   // BETA-GALAXY.0 tanı: üretecin kendi birleştirmesinden önceki bileşen sayısı (RNG yok)
   guard = 0;
   while (comps.length > 1 && guard++ < 200){
     const A = comps[0], B = comps[1];
@@ -2105,6 +2222,23 @@ function generateGalaxy(cfg){
     link(G.sys[best.a], G.sys[best.b]);
     comps = components();
   }
+  if (clusterOf){
+    /* yedek köprü: tek bağlantılı öbeklerin yarısına (tohuma bağlı) en yakın ikinci öbeğe bir geçit daha */
+    const ks = [...new Set(clusterOf)].sort((a,b)=>a-b);
+    const bridges = k => G.sys.filter(s=>clusterOf[s.id]===k).reduce((n,s)=>n+s.lanes.filter(l=>clusterOf[l]!==k).length,0);
+    for (const k of ks){
+      if (bridges(k) > 1 || rnd() < .5) continue;
+      let best = null;
+      for (const a of G.sys) if (clusterOf[a.id]===k) for (const b of G.sys){
+        if (clusterOf[b.id]===k || a.lanes.includes(b.id) || a.lanes.some(l=>clusterOf[l]===clusterOf[b.id])) continue;
+        const d = dist(a,b); if (!best || d < best.d) best = {a, b, d};
+      }
+      if (best) link(best.a, best.b);
+    }
+  }
+  LAST_GALAXY_GEN = {shape: cfg.shape || 'sarmal', componentsBeforeMerge: genComponents, mergeLinks: Math.max(0, genComponents - comps.length),
+    clusters: clusterOf ? new Set(clusterOf).size : 0,
+    interClusterLanes: clusterOf ? G.sys.reduce((t, a) => t + a.lanes.filter(l => clusterOf[l] !== clusterOf[a.id]).length, 0) / 2 : 0};
 
   function link(a,b){
     if (a.lanes.includes(b.id)) return;
@@ -2143,6 +2277,131 @@ function generateGalaxy(cfg){
   G.seed = cfg.seed;
   G.nebula = ART.nebula(cfg.seed, 128, 128);
   return rnd;
+}
+
+/* ═══ BETA-GALAXY.0: YAPISAL ROTA DENETİMİ ═══
+   Esas, rota motorunun (findPath) kullandığı hat grafiğidir: G.sys[u].lanes. Kapılar, sis, kapalı sınır, savaş ve geçiş izni
+   OYUN İÇİ kısıtlardır; burada yalnız yapısal grafik denetlenir (yıldız kapısı yokken de galaksi bağlı olmalı).
+   Geçerli hat: tamsayı, aralıkta, kendine değil, tekrarsız ve iki yönlü. Sonuç G'ye/Save8'e yazılmaz. */
+let LAST_GALAXY_ROUTE = null, LAST_GALAXY_GEN = null;
+function galaxyRouteAudit(capitals){
+  const n = G.sys.length, issues = [];
+  for (const s of G.sys){
+    if (!Array.isArray(s.lanes)){ issues.push({sys:s.id, kind:'lanes'}); continue; }
+    const seen = new Set();
+    for (const l of s.lanes){
+      if (!Number.isInteger(l) || l < 0 || l >= n) issues.push({sys:s.id, lane:l, kind:'invalid'});
+      else if (l === s.id) issues.push({sys:s.id, lane:l, kind:'self'});
+      else if (seen.has(l)) issues.push({sys:s.id, lane:l, kind:'duplicate'});
+      else if (!Array.isArray(G.sys[l].lanes) || !G.sys[l].lanes.includes(s.id)) issues.push({sys:s.id, lane:l, kind:'oneway'});
+      seen.add(l);
+    }
+  }
+  const ok = (u, v) => Number.isInteger(v) && v >= 0 && v < n && v !== u && Array.isArray(G.sys[v].lanes) && G.sys[v].lanes.includes(u);
+  const reach = from => { const seen = new Uint8Array(n), st = [from]; seen[from] = 1; let c = 0;
+    while (st.length){ const u = st.pop(); c++; for (const v of (G.sys[u].lanes || [])) if (ok(u, v) && !seen[v]){ seen[v] = 1; st.push(v); } }
+    return seen; };
+  const comp = new Int32Array(n).fill(-1), sizes = [];
+  for (let i = 0; i < n; i++) if (comp[i] < 0){ const r = reach(i); let k = 0; for (let j = 0; j < n; j++) if (r[j]){ comp[j] = sizes.length; k++; } sizes.push(k); }
+  const planets = G.sys.reduce((t, s) => t + (s.planets ? s.planets.length : 0), 0);
+  const caps = (capitals || []).filter(h => Number.isInteger(h) && G.sys[h]);
+  let minSys = n, minPl = planets;
+  for (const h of caps){ const r = reach(h); let cs = 0, cp = 0; for (let j = 0; j < n; j++) if (r[j]){ cs++; cp += G.sys[j].planets ? G.sys[j].planets.length : 0; } minSys = Math.min(minSys, cs); minPl = Math.min(minPl, cp); }
+  return {ok: !issues.length && sizes.length === 1 && minSys === n, systems:n, components:sizes.length, sizes:sizes.slice().sort((a,b)=>b-a),
+    planets, reachableSystems: caps.length ? minSys : (sizes.length === 1 ? n : Math.max(...sizes)), reachablePlanets: caps.length ? minPl : planets,
+    capitals: caps.length, issues: issues.slice(0, 32), issueCount: issues.length, comp};
+}
+/* Onarım: geçersiz hatları ayıkla, tek yönlüyü çift yönlü yap, bileşenleri EN YAKIN çiftle (tohumun ürettiği konumlar)
+   en az sayıda hatla bağla. RNG çekmez. Bağlı ve temiz haritada hiçbir şey değiştirmez. */
+function galaxyRouteRepair(capitals){
+  const before = galaxyRouteAudit(capitals), log = {sanitized:0, oneway:0, links:[]};
+  if (before.ok) return {ok:true, repairs:0, before, after:before, log};
+  const n = G.sys.length;
+  for (const s of G.sys){
+    if (!Array.isArray(s.lanes)){ s.lanes = []; log.sanitized++; continue; }
+    const clean = [];
+    for (const l of s.lanes){ if (Number.isInteger(l) && l >= 0 && l < n && l !== s.id && !clean.includes(l)) clean.push(l); else log.sanitized++; }
+    s.lanes = clean;
+  }
+  for (const s of G.sys) for (const l of s.lanes) if (!G.sys[l].lanes.includes(s.id)){ G.sys[l].lanes.push(s.id); log.oneway++; }
+  for (let guard = 0; guard < n; guard++){
+    const a = galaxyRouteAudit(capitals);
+    if (a.components <= 1) break;
+    const main = a.comp[(capitals && capitals.find(h => G.sys[h])) ?? 0] ?? 0;
+    let best = null;
+    for (let i = 0; i < n; i++) if (a.comp[i] === main) for (let j = 0; j < n; j++) if (a.comp[j] !== main){
+      const d = dist(G.sys[i], G.sys[j]); if (!best || d < best.d || (d === best.d && (i < best.a || (i === best.a && j < best.b)))) best = {a:i, b:j, d};
+    }
+    if (!best) break;
+    G.sys[best.a].lanes.push(best.b); G.sys[best.b].lanes.push(best.a); log.links.push([best.a, best.b]);
+  }
+  const after = galaxyRouteAudit(capitals);
+  return {ok: after.ok, repairs: log.sanitized + log.oneway + log.links.length, before, after, log};
+}
+function galaxyRouteSummary(r){
+  const a = r.after;
+  return {ok:r.ok, systems:a.systems, components:a.components, componentsBefore:r.before.components, reachableSystems:a.reachableSystems,
+    planets:a.planets, reachablePlanets:a.reachablePlanets, repairs:r.repairs, links:r.log.links.slice(0, 32), sanitized:r.log.sanitized, oneway:r.log.oneway,
+    issuesBefore:r.before.issueCount};
+}
+const GALAXY_ROUTE_ERROR = 'Galaksi rota denetimi başarısız: bazı yıldız sistemlerine normal hiperhatlarla ulaşılamıyor ve onarım tamamlanamadı. Bu harita başlatılmadı; farklı bir tohumla yeniden üret.';
+
+/* ═══ BETA-GALAXY.0: KOLONİLEŞTİRİLEBİLİR GEZEGEN ÇARPANI ═══
+   Normal aday = HAB_TYPES (Gaia/Makine Dünyası gibi nadir türler hariç). Başkent sistemleri, sahipli gezegenler, nadir/özel
+   dünyalar, lüks yatak ve kalıntı yatağı taşıyanlar dokunulmaz. Uygulama başkentler yerleştikten SONRA ve ayrı tohumlu
+   akışla yapılır: sistem konumları, hiperhatlar ve başkentler çarpandan bağımsızdır; ana RNG çekilmez. 1× hiçbir şey yapmaz. */
+const PLANET_MULS = [.25, .5, .75, 1, 1.5, 2, 3];
+let LAST_PLANET_MUL = null;
+function planetMulOf(cfg){ return cfg && PLANET_MULS.includes(cfg.planetMul) ? cfg.planetMul : 1; }
+function colonizableCensus(protectedSys){
+  /* normal: çarpanın değiştirdiği adaylar · special: lüks/kalıntı yatağı taşıyan yaşanabilir (korunur) · guaranteed: başkent sistemi/sahipli · rare: Gaia, Makine Dünyası */
+  let normal = 0, special = 0, guaranteed = 0, rare = 0;
+  for (const s of G.sys) for (const p of s.planets){
+    const def = PLANETS[p.t]; if (!def || def.k !== 'hab') continue;
+    if (def.rare) rare++;
+    else if (protectedSys.has(s.id) || p.owner >= 0 || p.col) guaranteed++;
+    else if (p.lux || p.dep === 'kalinti') special++;
+    else normal++;
+  }
+  return {normal, special, guaranteed, rare, total: normal + special + guaranteed + rare};
+}
+function applyPlanetMultiplier(cfg, homes){
+  const mul = planetMulOf(cfg), protectedSys = new Set(homes);
+  const before = colonizableCensus(protectedSys);
+  if (mul === 1){ LAST_PLANET_MUL = {mul, before, after:before, changed:0}; return LAST_PLANET_MUL; }
+  const rnd = mulberry32(identityHash('planet-mul:' + G.seed + ':' + mul));
+  const free = p => p.owner < 0 && !p.col && !p.lux && p.dep !== 'kalinti';
+  const target = Math.max(0, Math.round(before.normal * mul));
+  let changed = 0;
+  if (mul < 1){
+    const pool = [];
+    for (const s of G.sys) if (!protectedSys.has(s.id)) for (const p of s.planets) if (HAB_TYPES.includes(p.t) && free(p)) pool.push(p);
+    const order = pool.map(p => ({p, r: rnd()})).sort((a, b) => a.r - b.r);
+    for (const {p} of order){
+      if (before.normal - changed <= target) break;
+      p.t = DEAD_TYPES[Math.floor(rnd() * DEAD_TYPES.length)]; p.dep = null; p.sz = 10 + Math.floor(rnd() * 11); changed++;
+    }
+  } else {
+    const dead = [];
+    for (const s of G.sys) if (!protectedSys.has(s.id)) for (const p of s.planets) if (DEAD_TYPES.includes(p.t) && free(p)) dead.push(p);
+    const order = dead.map(p => ({p, r: rnd()})).sort((a, b) => a.r - b.r);
+    let have = before.normal;
+    for (const {p} of order){
+      if (have >= target) break;
+      p.t = HAB_TYPES[Math.floor(rnd() * HAB_TYPES.length)]; p.dep = null; p.sz = 10 + Math.floor(rnd() * 11); have++; changed++;
+    }
+    /* ölü gezegen yetmezse: koruma dışı sistemlere sona yeni normal gezegen (mevcut gezegen sırası/adları değişmez) */
+    const hosts = G.sys.filter(s => !protectedSys.has(s.id)).map(s => ({s, r: rnd()})).sort((a, b) => a.r - b.r).map(x => x.s);
+    for (let pass = 0; have < target && pass < 4; pass++) for (const s of hosts){
+      if (have >= target) break;
+      if (s.planets.length >= 6 + pass) continue;
+      const i = s.planets.length, t = HAB_TYPES[Math.floor(rnd() * HAB_TYPES.length)];
+      s.planets.push({i, t, dep:null, sz: 10 + Math.floor(rnd() * 11), seed:(s.id*131 + i*17 + 3)|0, owner:-1, col:null, name: s.name + ' ' + (ROMAN[i] || String(i + 1))});
+      have++; changed++;
+    }
+  }
+  LAST_PLANET_MUL = {mul, before, target, after: colonizableCensus(protectedSys), changed};
+  return LAST_PLANET_MUL;
 }
 
 /* =====================================================================
@@ -2541,6 +2800,9 @@ function setupGame(cfg){
   G.jointOps = jointEmpty();
   rndSeed(cfg.seed ^ 0x5f3a91);
   const rnd = generateGalaxy(cfg);
+  /* BETA-GALAXY.0: son galaksi üretiminden hemen sonra yapısal rota onarımı (bağlı ve temiz haritada işlem yapmaz) */
+  const routeRepair = galaxyRouteRepair(null);
+  if (!routeRepair.ok){ const err = new RangeError(GALAXY_ROUTE_ERROR); err.galaxyRoute = galaxyRouteSummary(routeRepair); LAST_GALAXY_ROUTE = err.galaxyRoute; throw err; }
   const nAI = aiCountFor(cfg);
   G.emps = [];
   G.fleets = []; G.nextFleet = 1;
@@ -2665,13 +2927,15 @@ function setupGame(cfg){
 
   assignAIOrigins(cfg);
   assignAIIdentities(cfg);
+  assignRivalPersonas(cfg);
 
   // Konsey açıksa galakside en az bir pasifist devlet bulunsun
   if ((cfg.council || 'normal') !== 'kapali'){
     const anyPacifist = G.emps.some(x => !x.wild && ((x.ethics && x.ethics.mil) || 0) <= -2);
     if (!anyPacifist){
-      const cand = G.emps.filter(x => !x.wild && x.ai && RACES[x.race].dip > .3);
-      const pick2 = cand.length ? cand[0] : G.emps.find(x => !x.wild && x.ai);
+      const eligible=x=>!x.wild&&x.ai&&(cfg.aiRivals===undefined||!RIVAL_PERSONAS.includes(personaKey(x)));
+      const cand = G.emps.filter(x => eligible(x) && RACES[x.race].dip > .3);
+      const pick2 = cand.length ? cand[0] : G.emps.find(eligible);
       if (pick2){
         pick2.ethics = {mil:-2, aut:-1, mat:0,ahl:0};
         pick2.agr *= .5;
@@ -2872,6 +3136,7 @@ function setupGame(cfg){
     recalcMods(e);
   });
 
+  applyPlanetMultiplier(cfg, homes);
   // ilk araştırmalar
   G.emps.forEach(e => {
     ['fiz','top','muh'].forEach(b => autoResearch(e,b));
@@ -2930,7 +3195,16 @@ function setupGame(cfg){
     if (typeof initFactions === 'function') initFactions(e);
     recalcMods(e);
   }
+  /* BETA-GALAXY.0: oyuncu haritaya girmeden / MP host başlatmadan önce her başkentten bütün gezegenli sistemlere yapısal rota */
+  {
+    const capitals = G.emps.filter(e => !e.wild && Number.isInteger(e.home) && e.home >= 0).map(e => e.home);
+    const final = galaxyRouteRepair(capitals);
+    LAST_GALAXY_ROUTE = {...galaxyRouteSummary(final), initialRepairs: routeRepair.repairs, initialLinks: routeRepair.log.links.slice(0, 32), componentsAtGeneration: routeRepair.before.components};
+    if (!final.ok){ const err = new RangeError(GALAXY_ROUTE_ERROR); err.galaxyRoute = LAST_GALAXY_ROUTE; throw err; }
+  }
   updateVision();
+  for(const e of G.emps)if(e.ai&&!e.wild&&!e.crisisSide)
+    e.emblem=makeEmblem('state:'+G.seed+':'+e.id,e.col,false,true);
   normalizeIdentities();
   economyTick(true);
   assignFinalEmpireNames();
@@ -3124,6 +3398,10 @@ function fleetHasRole(f, r){ return f.ships.some(s => SHIPS[s.c].rol === r); }
 function fleetGroup(f){
   return f.ships.some(s => SHIPS[s.c].dmg > 0) ? 'sav' : 'sivil';
 }
+/* BETA-GALAXY.0: federal donanma kimliği — bölünen filo aynı federasyonda kalır, federal ve kişisel (ya da başka federasyonun)
+   filoları birleşmez. Sahiplik/komuta (o anki başkan), kapasite (federal sayılmaz) ve bakım (fondan) böylece tutarlı kalır. */
+function fleetFedKey(f){ return f && f.federal ? 'fed:' + f.fedId : 'own'; }
+function fleetFederalCopy(src, nf){ if (src && nf && src.federal){ nf.federal = true; nf.fedId = src.fedId; } return nf; }
 /* Session-only order identity: never written into canonical Save8 or RNG. */
 const SHIP_ORDER_TOKENS=new WeakMap();let SHIP_ORDER_TOKEN_SEQ=0;
 function shipOrderToken(q){let token=SHIP_ORDER_TOKENS.get(q);if(!token){token='order:'+(++SHIP_ORDER_TOKEN_SEQ).toString(36);SHIP_ORDER_TOKENS.set(q,token);}return token;}
@@ -3135,7 +3413,7 @@ function splitType(e, f, cls, count){
     if (f.ships[i].c === cls) taken.push(f.ships.splice(i, 1)[0]);
   }
   if (!taken.length) return null;
-  const nf = newFleet(e, f.sys, taken.map(s=>({c:s.c})));
+  const nf = fleetFederalCopy(f, newFleet(e, f.sys, taken.map(s=>({c:s.c}))));
   taken.forEach((s,i)=>{ if (nf.ships[i]) nf.ships[i].h = s.h; });
   nf.stance = f.stance;
   if (!f.ships.length){fleetRemovalRecord({...f,ships:taken},'split',nf.id);redirectFleetReferences(e.id,f.id,nf.id);if(f.composition)nf.composition=f.composition;if(f.capTarget)nf.capTarget=f.capTarget;G.fleets = G.fleets.filter(x => x !== f);}
@@ -3809,6 +4087,7 @@ function mergeFleetInto(e,main,others,allowLost=false){
   const all=[main,...others];
   if(new Set(all).size!==all.length||all.some(f=>!G.fleets.includes(f)||f.e!==e.id||f.sys!==main.sys||!f.ships.length||f.mv||f.combat||f.retreating||
     fleetGroup(f)!==fleetGroup(main)||hasShipment(f)&&!(allowLost&&f.shipment?.state==='lost')))return {ok:false,why:'Filo durumu değişti; hareket / savaş / sevkiyat sürüyor'};
+  if(all.some(f=>fleetFedKey(f)!==fleetFedKey(main)))return {ok:false,why:'Federal ve kişisel filolar birleştirilemez'};
   const plans=all.filter(f=>f.composition),counts={};
   for(const f of plans)for(const [c,n] of Object.entries(f.composition.counts||{}))counts[c]=(counts[c]||0)+n;
   if(Object.values(counts).reduce((a,b)=>a+b,0)>300)return {ok:false,why:'Birleşik bileşim 300 gemi sınırını aşıyor; önce bileşimi düzenle'};
@@ -6232,7 +6511,10 @@ function paintEmblems(){
     let e;if(cv.dataset.identity==='setup')e=normalizeEmblem(CFG.emblem,CFG.color||RACES[CFG.race].col,'setup');
     else if(cv.dataset.identity==='federation'){const f=fedOf(+cv.dataset.id);if(!f||!f.members.some(id=>knownFederationBond(G.p,f,id)))continue;federationIdentity(f);e=f.emblem;}
     else {const state=G.emps[+cv.dataset.id];if(!state||!territoryOwnerInfo(state.id)?.known)continue;e=stateEmblem(state);}
-    cv.getContext('2d').drawImage(ART.identityEmblem(e,cv.width),0,0);
+    const g=cv.getContext('2d');
+    if(!g||g.isContextLost?.())continue;
+    g.clearRect(0,0,cv.width,cv.height);
+    g.drawImage(ART.identityEmblem(e,cv.width),0,0);
   }
 
   [...document.querySelectorAll('canvas[data-emb]')].forEach(cv=>{
@@ -8474,7 +8756,11 @@ async function loadGame(){
 /* ---------- oyunu başlat ---------- */
 function startGame(){
   const error=setupConfigError(CFG);if(error){UI.setupError=error;safeRenderSetup();return;}UI.setupError='';
-  setupGame({...CFG});
+  /* BETA-GALAXY.0: Görünüş sekmesinde önizlenen arma oyundakiyle aynı olsun — seçilmemişse önizleme varsayılanı sabitlenir */
+  if(!CFG.emblem||typeof CFG.emblem!=='object')CFG.emblem=normalizeEmblem(undefined,CFG.color||RACES[CFG.race].col,'setup');
+  try { setupGame({...CFG}); }
+  catch (e){ if (e && e.galaxyRoute){ UI.setupError = e.message; UI.setupRegen = true; safeRenderSetup(); return; } throw e; }
+  UI.setupRegen = false;
   if (CFG.mizac) applyChosenPersona(G.p, CFG.mizac);   // seçilen mizacı sabitle
   enterGame();
 }
@@ -8669,7 +8955,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p28';
+const BUILD_ID = '96h10p29';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -9060,7 +9346,8 @@ function runRecovery(sebep, deneme){
     if (typeof camSane === 'function') camSane();
     /* 9. Türetilmiş sınır yarıçapları */
     if (typeof refreshReach === 'function') refreshReach();
-    /* 10. Görsel önbellekler */
+    /* 10. Arka planda kaybolan Canvas piksellerini kaynakta da yenile. */
+    if(/visible|pageshow|focus|context|surface/i.test(sebep))ART.invalidateSprites?.();
     if (typeof View !== 'undefined' && View.invalidateRenderCaches)
       View.invalidateRenderCaches(sebep);
     /* 11. TEK zorunlu çizim */
@@ -9075,6 +9362,10 @@ function runRecovery(sebep, deneme){
     try {
       if (typeof UI !== 'undefined' && UI.refresh) UI.refresh();
       if (typeof repaintPortraits === 'function') repaintPortraits();
+      paintEmblems();
+      /* BETA-GALAXY.0: panel gezegen küreleri (CSS) için katman yeniden rasterleme dürtmesi — dönüşte bazı mobil
+         derleyiciler eski / boş katmanı tutabiliyor. Yalnız görsel; DOM yapısı ve oyun durumu değişmez. */
+      if(/visible|pageshow|focus|context|surface/i.test(sebep))for(const o of document.querySelectorAll('.pOrb')){o.style.transform='translateZ(0)';requestAnimationFrame(()=>{o.style.transform='';});}
     } catch(e){ logDiag('recovery', 'ui: ' + (e && e.message)); }
     /* 13. Sağlık testi — YALNIZ kurtarma çiziminden SONRA */
     // One incoming pixel + four post-draw pixels + one border-cache check:
@@ -9328,6 +9619,14 @@ window.addEventListener('focus', ()=>{
    (map.js `_ekle('contextlost'/'contextrestored')`): ilk yüzey de
    sonrakiler de aynı kurallarla bağlanır ve sökülür. */
 
+/* BETA-GALAXY.0: panel / portre / arma DOM tuvalleri bağlam kaybından dönünce yeniden boyanır. contextrestored kabarcıklanmaz;
+   belge yakalama aşaması yeterli. Harita yüzeyi (#map) map.js yüzey yaşam döngüsünde kalır; burada yalnız küçük DOM tuvalleri. */
+document.addEventListener('contextrestored', ev=>{
+  const cv=ev.target;if(!cv||cv.tagName!=='CANVAS'||cv.id==='map')return;
+  if(cv.dataset)delete cv.dataset.done;
+  try{ if(typeof ART!=='undefined')ART.invalidateSprites?.(); if(typeof UI!=='undefined'&&UI.paintSprites)UI.paintSprites(); paintEmblems(); }
+  catch(e){ if(typeof logDiag==='function')logDiag('recovery','canvas restored: '+(e&&e.message)); }
+}, true);
 document.addEventListener('pointerdown', ()=>{ LOOP.touch = performance.now(); }, true);
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -9810,15 +10109,16 @@ function leaveTitle(hedef){
 
 /* FAZ 95D — identity parameters use a private hash stream, never game RNG. */
 const EMBLEM_SHAPES={shield:'Kalkan',circle:'Daire',hex:'Altıgen',diamond:'Elmas',star:'Yıldız',ring:'Halka'};
-const EMBLEM_SYMBOLS={star:'Yıldız',sun:'Güneş',planet:'Gezegen',wing:'Kanat',sword:'Kılıç',crystal:'Kristal',gear:'Mekanik',orbit:'Yörünge'};
+const LEGACY_EMBLEM_SYMBOLS={star:'Yıldız',sun:'Güneş',planet:'Gezegen',wing:'Kanat',sword:'Kılıç',crystal:'Kristal',gear:'Mekanik',orbit:'Yörünge'};
+const EMBLEM_SYMBOLS={...LEGACY_EMBLEM_SYMBOLS,eye:'Göz',crown:'Taç',anchor:'Çapa',spiral:'Sarmal',flame:'Alev',mountain:'Dağ'};
 const EMBLEM_PATTERNS={plain:'Düz',stripe:'Şerit',split:'Bölünmüş',ring:'İç halka',corners:'Köşeler',rays:'Işınlar'};
 const EMBLEM_COLORS=['#f5665c','#f5c25c','#b2f55c','#5cf5d6','#5c9ef5','#d65cf5','#16304d','#492453','#ece9d5','#202537'];
 function identityHash(text){let h=2166136261;for(const c of String(text)){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;}
 function identityNameKey(name){return String(name).normalize('NFKC').toLocaleLowerCase('tr-TR').trim().replace(/\s+/g,' ');}
 function uniqueIdentityName(base,used){const keys=new Set(Object.keys(used).map(identityNameKey));let name=base,n=2;while(keys.has(identityNameKey(name)))name=base+' · '+n++;used[name]=1;return name;}
-function makeEmblem(seed,primary,federation=false){
+function makeEmblem(seed,primary,federation=false,expanded=false){
  const rand=mulberry32(identityHash(seed)),take=a=>a[Math.floor(rand()*a.length)];
- return {v:1,shape:take(Object.keys(EMBLEM_SHAPES)),symbol:take(Object.keys(EMBLEM_SYMBOLS)),pattern:take(Object.keys(EMBLEM_PATTERNS)),primary:/^#[0-9a-f]{6}$/i.test(primary)?primary:'#5c9ef5',secondary:take(EMBLEM_COLORS),federation:!!federation};
+ return {v:1,shape:take(Object.keys(EMBLEM_SHAPES)),symbol:take(Object.keys(expanded?EMBLEM_SYMBOLS:LEGACY_EMBLEM_SYMBOLS)),pattern:take(Object.keys(EMBLEM_PATTERNS)),primary:/^#[0-9a-f]{6}$/i.test(primary)?primary:'#5c9ef5',secondary:take(EMBLEM_COLORS),federation:!!federation};
 }
 function normalizeEmblem(value,col,seed,fed=false){const d=makeEmblem(seed,col,fed),v=value&&typeof value==='object'?value:{};
  for(const [k,pool] of [['shape',EMBLEM_SHAPES],['symbol',EMBLEM_SYMBOLS],['pattern',EMBLEM_PATTERNS]])if(Object.hasOwn(pool,v[k]))d[k]=v[k];
@@ -9841,7 +10141,7 @@ function normalizeIdentities(){const seen=[];for(const e of G.emps){e.emblem=uni
 let EMBLEM_ROLL=0;
 function randomizeSetupEmblem(){
  const old=normalizeEmblem(CFG.emblem,CFG.color||RACES[CFG.race].col,'setup');
- const next=makeEmblem('setup-roll:'+Date.now()+':'+(++EMBLEM_ROLL),old.primary);
+ const next=makeEmblem('setup-roll:'+Date.now()+':'+(++EMBLEM_ROLL),old.primary,false,true);
  // A press always changes every requested component, including both colors.
  for(const [key,pool] of [['shape',Object.keys(EMBLEM_SHAPES)],['symbol',Object.keys(EMBLEM_SYMBOLS)],['pattern',Object.keys(EMBLEM_PATTERNS)],['primary',EMBLEM_COLORS],['secondary',EMBLEM_COLORS]])if(next[key]===old[key])next[key]=pool[(pool.indexOf(old[key])+1)%pool.length];
  if(next.primary===next.secondary||next.secondary===old.secondary)next.secondary=EMBLEM_COLORS.find(c=>c!==next.primary&&c!==old.secondary);

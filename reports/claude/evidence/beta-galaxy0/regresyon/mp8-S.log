@@ -1,0 +1,7 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":377,"buildMs":397,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":2.4,"p95":2.4,"max":2.4},"longtask":{"n":0},"heapMB":15,"dom":710,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":37.2,"p95":37.2,"max":37.2},"refresh":{"n":1,"med":2.4,"p95":2.4,"max":2.4},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":697,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":21,"joinErrors":0}}}
+PASS S0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS S1 kümeli + 2× oda: host galaksisi rota denetiminden geçti; misafir aynı koordinatları, bildiği sistemlerde aynı hatları ve gezegenleri alır
+PASS S2 hız mesajı gelirken misafirin dünya güncellemesi kesilir → hat açılınca mevcut yeniden eşitleme toparlar; dünya güncel değil kalmaz
+PASS S3 toparlanma sonrası misafirin gerçek üretim (ship) ve filo (move) emri host'ta ve misafir aynasında aynı sonucu verir
+GEÇEN: 4 KALAN: 0

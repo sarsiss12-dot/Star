@@ -1,0 +1,4 @@
+İlk koşu (fedShipComplete düzeltmesi öncesi): S4 FAIL
+  [{"before":2963,"up":9.59,"after":2953.41},...] — iş aylık taramadan önce 40 günde tamamlandı; gemi federasyondan AYRILMIŞ eski başkanın
+  tersanesinde üretilip yeni başkana teslim edildi, bedel fona dönmedi (yetkisiz teslim). Düzeltme: fedShipComplete sipariş verenin yaşayan üye
+  olmasını da ister; değilse bedel fona bir kez döner. Sonraki koşu S4 (iki yol) PASS.

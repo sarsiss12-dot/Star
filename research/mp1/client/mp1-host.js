@@ -163,7 +163,7 @@ function makeHost(){
     /* MP.7: tasarım kipi — host'un devleti kendi kurulum ekranındaki CFG, misafirlerinki kendi taslakları; galaksi OYUNU BAŞLAT'ta
        gerçek setupGame(cfg.humans) ile kurulur. MP7Setup yüklenmemişse (eski sayfa) MP.1 devralma kipi. */
     lobby:{design:!!window.MP7Setup&&!window.MP7Legacy,hostDraft:()=>window.MP7Setup?MP7Setup.draft():null,
-      generate(set){const {host:_h,...rest}=set;setupGame({...CFG,...rest});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
+      generate(set){const {host:_h,...rest}=set,{aiRivals:_rivals,...defaults}=CFG;setupGame({...defaults,...rest});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
   API.host.installGuards();
   /* MP.8: son ay adımı süresi (yalnız performance.now ölçümü; argüman, dönüş, RNG, sıra aynı) — tanı satırında */
   if(!API._mtWrap&&typeof window.monthTick==='function'){const mt=window.monthTick;window.monthTick=function(){const t=performance.now();try{return mt.apply(this,arguments);}finally{API.lastMonthMs=Math.round(performance.now()-t);}};API._mtWrap=true;}
@@ -176,7 +176,7 @@ function makeHost(){
 /* MP.7: host'un kurulum ekranındaki galaksi ayarları (aynı CFG) lobiye uygulanır; AI + insan ≤ 49 */
 function applyHostSetup(){
   const cap=API.host.lobby.capacity,ai=aiCountFor(CFG);
-  const r=API.host.configure({size:CFG.size,aiCount:ai,seed:Math.trunc(+CFG.seed)%2147483646||1,...(CFG.shape?{shape:CFG.shape}:{})});
+  const r=API.host.configure({size:CFG.size,aiCount:ai,seed:Math.trunc(+CFG.seed)%2147483646||1,...(CFG.shape?{shape:CFG.shape}:{}),...(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(CFG.planetMul)&&CFG.planetMul!==1?{planetMul:CFG.planetMul}:{})});
   API.setupNote=r.ok?'':r.why==='too-many-states'?'Bu oturumda en fazla '+(49-cap)+' AI seçilebilir; insanlarla birlikte en fazla 49 normal devlet.':r.why==='galaxy-too-small'?'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.':(START_WHY[r.why]||r.why);
   if(API.screen==='lobby')render();
 }

@@ -1,0 +1,13 @@
+PASS boş kaynak sprite ve gezegen tuvali görünürlük dönüşünde yeniden çizildi
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(draws > 0)
+
+    at run (/home/user/Star/tests/browser-sp-map-war.cjs:80:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

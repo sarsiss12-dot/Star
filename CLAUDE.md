@@ -2,7 +2,16 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — BETA-FED-FLEET.0 (p28 / MP.8.9b25, 13 Kasım 2026)
+## Son teslim — BETA-GALAXY.0 (p29 / MP.8.9b26, 14 Kasım 2026)
+
+- Ayrıntı: `reports/claude/BETA-GALAXY0-SONUC.md`, kanıt `reports/claude/evidence/beta-galaxy0/`. Dal `claude/stars-pregame-galaxy0` = #42 (`9d269ce`) + #41 (`5649d28`) birleşimi (`d64af78`) üstünde. Save8v8/paket4/protokol1; p29 paket yükleyicisi p6–p28, p25u1, p27s1 kabul eder.
+- Şekiller `eliptik/kumeli/cubuklu/duzensiz` yalnız yeni anahtarlarla dallanır (eski üç şeklin Save8/RNG'si aynı; `galaxyShapeContext/Point/Preview`). Yapısal rota denetimi `galaxyRouteAudit/Repair` rota motorunun hat grafiğinde (iki yönlü, geçerli hat; en yakın çiftle en az hat), üretim sonrası + kurulum sonunda başkentlerden; başarısızsa `RangeError(galaxyRoute)` → SP YENİDEN ÜRET, MP host başlamaz. Sonuç `LAST_GALAXY_ROUTE/GEN` (G/Save8 dışı).
+- Gezegen çarpanı `cfg.planetMul` (0,25–3×; 1× yazılmaz) başkentlerden sonra ayrı tohumla; konum/hat/başkent değişmez; başkent/nadir/lüks-kalıntı korunur (`applyPlanetMultiplier`, `LAST_PLANET_MUL`); MP lobi/paket ayarında yalnız ≠1.
+- Fizyoloji kartları `physioEffects` (motor alanları); `TRAIT_LABEL.colCost`. Seçilmemiş arma başlarken önizleme varsayılanıyla sabitlenir (SP `startGame`, MP `mp7-setup` taslağı). Bölge arması bölge içi en açık noktaya (adaylar: merkez, bölge içi hat ortaları, her sistemin çevresinde 8 nokta — tek sistemli bölge de çizilir; `browser-sp-map-war`). Kurulum ekranında hata/YENİDEN ÜRET gezinme satırının ALTINDA (dokunma hayalet tıklaması).
+- Dönüş: DOM tuvali `contextrestored` yeniden boyama, panel `.pOrb` rasterleme dürtmesi. Savaş ayrıntısı `WarCenterUI.shareAccess` (settlementContext gerekçesi). Federal filo `fleetFedKey/fleetFederalCopy` (bölünen federal kalır, federal/kişisel birleşmez); `fedShipComplete` sipariş veren üye değilse teslim etmez, fona iade.
+- AI federasyon yoğunlaşma adayı ölçüldü ve REDDEDİLDİ (`AI-RED-KARARLARI.md`). Test: `node tests/beta_galaxy0_test.js`, `beta_galaxy0_fedfleet_test.js`; Chromium `browser-pregame-galaxy0.cjs`, `browser-bgreturn-galaxy0.cjs`, `browser-share-galaxy0.cjs`, `MP8_SCEN=S node tests/browser-mp8.cjs`. Koruma: `beta-galaxy0-reviewed` ← `beta-fed-fleet0-reviewed` ← `mp-p0-guard-reviewed` ← …
+
+## Önceki teslim — BETA-FED-FLEET.0 (p28 / MP.8.9b25, 13 Kasım 2026)
 
 - Ayrıntı: `reports/claude/BETA-FED-FLEET0-SONUC.md`, kanıt `reports/claude/evidence/beta-fed-fleet0/`. Dal `claude/stars-beta-fed-fleet0` (P27 #40 `43a3612` üstünde). Save8v8/paket4/protokol1; p28 paket yükleyicisi p6–p27 kabul eder.
 - Tek fon: `FED_LAWS.filo` + tür haracı `f.fund`'a, katkı `f.contrib` defterine (yeni isteğe bağlı alan; yalnız federasyon varken). Eski `f.treasury` `restorePoliticalWorld`'de BİR KEZ `fund.ala`'ya. Federal filolar kişisel bakıma girmez; `fedFundTick` enerji+alaşım bakımını fondan düşer, yetmezse en zayıf federal filo dağılır.

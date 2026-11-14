@@ -1,0 +1,17 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":209,"buildMs":228,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":265,"buildMs":293,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":5.5,"p95":7.1,"max":7.1},"longtask":{"n":0},"heapMB":15,"dom":723,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":34.1,"p95":34.1,"max":34.1},"refresh":{"n":1,"med":2.3,"p95":2.3,"max":2.3},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":711,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":43.6,"p95":43.6,"max":43.6},"refresh":{"n":1,"med":8,"p95":8,"max":8},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":719,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS F0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+  a-kuruldu {"B":1,"Bstale":0,"C":0,"H":1}
+PASS F1 gerçek kuruluş: host kuruluş penceresinden B'yi davet eder, B karttan KABUL, host son onay → federasyon; B'de ve host'ta "kuruldu" en çok bir kez
+  b-acildi {"B":0,"Bstale":0,"C":0,"H":0}
+  c-5-yayin {"B":0,"Bstale":0,"C":0,"H":0}
+  d-yeniden-baglanma {"B":0,"Bstale":0,"C":0,"H":0}
+  e-sayfa-yenileme {"B":0,"Bstale":0,"C":0,"H":0}
+  f-host-kayit-yukleme {"B":0,"Bstale":0,"C":0,"H":0}
+PASS F2 B sonuç kartını açıp kapatır; ardından 5 yayın + gün, hat kopması / yeniden bağlanma, sayfa yenileme, host dünyasının kayıttan yeniden yüklenmesi: "kuruldu" ve eski davet / oy kartı bir daha doğmaz
+  g-yeni-karar {"B":0,"Bstale":0,"C":0,"H":0}
+PASS F3 aynı federasyonda gerçekten yeni karar: host yasa önerir → B'de tek yeni oy kartı; B karttan EVET; sonuçlanınca B ve host'ta tek "oylaması sonuçlandı" kartı; "kuruldu" yine yok; kapanmış oy kartı kalmaz
+PASS F4 üyelik başvurusu (C, gerçek fedRequest komutu): C'de "Üyelik başvurun oylamada" kartı; üye B'nin oy kartı "Üyelik başvurusu — C"; oy kabul → C'de KABUL / REDDET davet kartı; C karttan KABUL → host'ta üye; kart kalkar; C'de tek komut
+PASS F5 başkan değişimi: host (başkan) federasyondan ayrılır (gerçek leaveFederation) → B ve C'de tek "Federasyon başkanı değişti" kartı; yeniden bağlanmada tekrar doğmaz
+GEÇEN: 6 KALAN: 0

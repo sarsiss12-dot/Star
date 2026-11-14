@@ -1,0 +1,41 @@
+[
+ {
+  "name": "1 bir cephe açık (M–T sürüyor): Savaş Merkezi → Geçmiş → Ayrıntı somut gerekçe verir, düğme yok; Diplomasi Merkezi kısayolu yok",
+  "status": "FAIL",
+  "error": "locator.waitFor: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"warCenterTab\"][data-x=\"past\"]').first()\u001b[22m\n\n    at tap (/home/user/Star/tests/browser-share-galaxy0.cjs:20:67)\n    at openWarDetail (/home/user/Star/tests/browser-share-galaxy0.cjs:36:137)\n    at async /home/user/Star/tests/browser-share-galaxy0.cjs:40:7\n    at async test (/home/user/Star/tests/browser-share-galaxy0.cjs:15:42)\n    at async run (/home/user/Star/tests/browser-share-galaxy0.cjs:39:5)"
+ },
+ {
+  "name": "2 son cephe kapanır: Savaş Merkezi ayrıntısı ve Diplomasi Merkezi kısayolu AYNI seferi ve taslağı açar; taslakta koloni/boş sistem, mevcut sahip, fetih hedefi, önerilen alıcı",
+  "status": "FAIL",
+  "error": "locator.waitFor: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"warCenterTab\"][data-x=\"past\"]').first()\u001b[22m\n\n    at tap (/home/user/Star/tests/browser-share-galaxy0.cjs:20:67)\n    at openWarDetail (/home/user/Star/tests/browser-share-galaxy0.cjs:36:137)\n    at async /home/user/Star/tests/browser-share-galaxy0.cjs:45:65\n    at async test (/home/user/Star/tests/browser-share-galaxy0.cjs:15:42)\n    at async run (/home/user/Star/tests/browser-share-galaxy0.cjs:44:5)"
+ },
+ {
+  "name": "3 P'nin fethettiği koloninin alıcısı M seçilir (gerçek seçim kutusu) ve taslak sunulur; ortak onayıyla teklif onaylanır",
+  "status": "FAIL",
+  "error": "locator.selectOption: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#modal select[data-share-recipient=\"0\"]')\u001b[22m\n\n    at /home/user/Star/tests/browser-share-galaxy0.cjs:60:92\n    at async test (/home/user/Star/tests/browser-share-galaxy0.cjs:15:42)\n    at async run (/home/user/Star/tests/browser-share-galaxy0.cjs:57:5)"
+ },
+ {
+  "name": "4 kaydet → yükle: onaylı teklif ve Savaş Merkezi durumu korunur",
+  "status": "FAIL",
+  "error": "locator.waitFor: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"warCenterTab\"][data-x=\"past\"]').first()\u001b[22m\n\n    at tap (/home/user/Star/tests/browser-share-galaxy0.cjs:20:67)\n    at openWarDetail (/home/user/Star/tests/browser-share-galaxy0.cjs:36:137)\n    at async /home/user/Star/tests/browser-share-galaxy0.cjs:69:7\n    at async test (/home/user/Star/tests/browser-share-galaxy0.cjs:15:42)\n    at async run (/home/user/Star/tests/browser-share-galaxy0.cjs:67:5)"
+ },
+ {
+  "name": "5 Uygula ayrı adım (gerçek düğme): koloni P'den M'ye geçer — fetheden devlet ≠ yeni sahip; nüfus/yapılar korunur",
+  "status": "FAIL",
+  "error": "locator.waitFor: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#warCenterRoot [data-a=\"shareOpen\"]').first()\u001b[22m\n\n    at tap (/home/user/Star/tests/browser-share-galaxy0.cjs:20:67)\n    at /home/user/Star/tests/browser-share-galaxy0.cjs:72:13\n    at async test (/home/user/Star/tests/browser-share-galaxy0.cjs:15:42)\n    at async run (/home/user/Star/tests/browser-share-galaxy0.cjs:70:5)"
+ },
+ {
+  "name": "6 ikinci uygulama yapılamaz: düğme yok, motor reddeder, sahiplik değişmez",
+  "status": "FAIL",
+  "error": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'id')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:187)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /home/user/Star/tests/browser-share-galaxy0.cjs:80:26\n    at async test (/home/user/Star/tests/browser-share-galaxy0.cjs:15:42)\n    at async run (/home/user/Star/tests/browser-share-galaxy0.cjs:78:5)"
+ },
+ {
+  "name": "7 tek galip seferi ve eksik (legacy) kayıt: Savaş Merkezi ayrıntısında somut gerekçe",
+  "status": "FAIL",
+  "error": "locator.waitFor: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"warCenterTab\"][data-x=\"past\"]').first()\u001b[22m\n\n    at tap (/home/user/Star/tests/browser-share-galaxy0.cjs:20:67)\n    at /home/user/Star/tests/browser-share-galaxy0.cjs:84:96\n    at async test (/home/user/Star/tests/browser-share-galaxy0.cjs:15:42)\n    at async run (/home/user/Star/tests/browser-share-galaxy0.cjs:82:5)"
+ },
+ {
+  "name": "sayfa hatası yok",
+  "status": "PASS"
+ }
+]

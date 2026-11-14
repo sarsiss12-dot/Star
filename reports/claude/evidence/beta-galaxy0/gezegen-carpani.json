@@ -1,0 +1,167 @@
+[
+ {
+  "seed": 11,
+  "mul": 0.25,
+  "normal": 6,
+  "normalAt1x": 25,
+  "special": 18,
+  "guaranteed": 9,
+  "rare": 1,
+  "total": 34,
+  "changed": 19
+ },
+ {
+  "seed": 11,
+  "mul": 0.5,
+  "normal": 13,
+  "normalAt1x": 25,
+  "special": 18,
+  "guaranteed": 9,
+  "rare": 1,
+  "total": 41,
+  "changed": 12
+ },
+ {
+  "seed": 11,
+  "mul": 1,
+  "normal": 25,
+  "normalAt1x": 25,
+  "special": 18,
+  "guaranteed": 9,
+  "rare": 1,
+  "total": 53,
+  "changed": 0
+ },
+ {
+  "seed": 11,
+  "mul": 2,
+  "normal": 50,
+  "normalAt1x": 25,
+  "special": 18,
+  "guaranteed": 9,
+  "rare": 1,
+  "total": 78,
+  "changed": 25
+ },
+ {
+  "seed": 11,
+  "mul": 3,
+  "normal": 75,
+  "normalAt1x": 25,
+  "special": 18,
+  "guaranteed": 9,
+  "rare": 1,
+  "total": 103,
+  "changed": 50
+ },
+ {
+  "seed": 23,
+  "mul": 0.25,
+  "normal": 5,
+  "normalAt1x": 19,
+  "special": 20,
+  "guaranteed": 5,
+  "rare": 5,
+  "total": 35,
+  "changed": 14
+ },
+ {
+  "seed": 23,
+  "mul": 0.5,
+  "normal": 10,
+  "normalAt1x": 19,
+  "special": 20,
+  "guaranteed": 5,
+  "rare": 5,
+  "total": 40,
+  "changed": 9
+ },
+ {
+  "seed": 23,
+  "mul": 1,
+  "normal": 19,
+  "normalAt1x": 19,
+  "special": 20,
+  "guaranteed": 5,
+  "rare": 5,
+  "total": 49,
+  "changed": 0
+ },
+ {
+  "seed": 23,
+  "mul": 2,
+  "normal": 38,
+  "normalAt1x": 19,
+  "special": 20,
+  "guaranteed": 5,
+  "rare": 5,
+  "total": 68,
+  "changed": 19
+ },
+ {
+  "seed": 23,
+  "mul": 3,
+  "normal": 57,
+  "normalAt1x": 19,
+  "special": 20,
+  "guaranteed": 5,
+  "rare": 5,
+  "total": 87,
+  "changed": 38
+ },
+ {
+  "seed": 404,
+  "mul": 0.25,
+  "normal": 5,
+  "normalAt1x": 21,
+  "special": 15,
+  "guaranteed": 6,
+  "rare": 4,
+  "total": 30,
+  "changed": 16
+ },
+ {
+  "seed": 404,
+  "mul": 0.5,
+  "normal": 11,
+  "normalAt1x": 21,
+  "special": 15,
+  "guaranteed": 6,
+  "rare": 4,
+  "total": 36,
+  "changed": 10
+ },
+ {
+  "seed": 404,
+  "mul": 1,
+  "normal": 21,
+  "normalAt1x": 21,
+  "special": 15,
+  "guaranteed": 6,
+  "rare": 4,
+  "total": 46,
+  "changed": 0
+ },
+ {
+  "seed": 404,
+  "mul": 2,
+  "normal": 42,
+  "normalAt1x": 21,
+  "special": 15,
+  "guaranteed": 6,
+  "rare": 4,
+  "total": 67,
+  "changed": 21
+ },
+ {
+  "seed": 404,
+  "mul": 3,
+  "normal": 63,
+  "normalAt1x": 21,
+  "special": 15,
+  "guaranteed": 6,
+  "rare": 4,
+  "total": 88,
+  "changed": 42
+ }
+]

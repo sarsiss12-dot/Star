@@ -1,0 +1,108 @@
+{
+ "S1": {
+  "cfg": {
+   "shape": "kumeli",
+   "planetMul": 2
+  },
+  "route": {
+   "ok": true,
+   "systems": 45,
+   "components": 1,
+   "componentsBefore": 1,
+   "reachableSystems": 45,
+   "planets": 131,
+   "reachablePlanets": 131,
+   "repairs": 0,
+   "links": [],
+   "sanitized": 0,
+   "oneway": 0,
+   "issuesBefore": 0,
+   "initialRepairs": 0,
+   "initialLinks": [],
+   "componentsAtGeneration": 1
+  },
+  "mul": {
+   "mul": 2,
+   "before": {
+    "normal": 23,
+    "special": 15,
+    "guaranteed": 8,
+    "rare": 5,
+    "total": 51
+   },
+   "target": 46,
+   "after": {
+    "normal": 46,
+    "special": 15,
+    "guaranteed": 8,
+    "rare": 5,
+    "total": 74
+   },
+   "changed": 23
+  },
+  "gen": {
+   "shape": "kumeli",
+   "componentsBeforeMerge": 4,
+   "mergeLinks": 3,
+   "clusters": 4,
+   "interClusterLanes": 4
+  },
+  "systems": [
+   45,
+   45
+  ],
+  "knownSystems": 10,
+  "laneSubset": true,
+  "knownPlanetsEqual": true
+ },
+ "S2": {
+  "r0": 2,
+  "cut": {
+   "rev": 2,
+   "day": 1.053344000000001
+  },
+  "after": {
+   "rev": 4,
+   "applied": 4,
+   "day": 11.066543999999999,
+   "stale": false,
+   "speed": 0
+  },
+  "host": {
+   "day": 11.066543999999999,
+   "speed": 0
+  }
+ },
+ "S3": {
+  "ship": {
+   "res": "ok",
+   "host": [
+    [
+     "kor",
+     1
+    ]
+   ],
+   "guest": [
+    [
+     "kor",
+     0
+    ]
+   ]
+  },
+  "move": {
+   "res": "ok",
+   "host": {
+    "path": [
+     38
+    ],
+    "mvTo": null
+   },
+   "guest": {
+    "path": [
+     38
+    ],
+    "mvTo": null
+   }
+  }
+ }
+}

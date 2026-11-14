@@ -1,0 +1,108 @@
+[
+ {
+  "name": "1 bir cephe açık (M–T sürüyor): Savaş Merkezi → Geçmiş → Ayrıntı somut gerekçe verir, düğme yok; Diplomasi Merkezi kısayolu yok",
+  "status": "FAIL",
+  "error": "locator.innerText: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#shareWhy')\u001b[22m\n\n    at /home/user/Star/tests/browser-share-galaxy0.cjs:40:71\n    at async test (/home/user/Star/tests/browser-share-galaxy0.cjs:15:42)\n    at async run (/home/user/Star/tests/browser-share-galaxy0.cjs:39:5)"
+ },
+ {
+  "name": "2 son cephe kapanır: Savaş Merkezi ayrıntısı ve Diplomasi Merkezi kısayolu AYNI seferi ve taslağı açar; taslakta koloni/boş sistem, mevcut sahip, fetih hedefi, önerilen alıcı",
+  "status": "PASS",
+  "ready": "Sefer 1: 2 koloni · 2 boş sistem paylaşılabilir · 2 ortak",
+  "a": {
+   "head": "ORTAK SAVAŞ PAYLAŞIMI",
+   "facts": [
+    "Mevcut sahip: Yüce Nyx Zihni · kayıtlı fetih hedefi (toprak iddiası): yok · önerilen alıcı: Yüce Nyx Zihni",
+    "Mevcut sahip: Yüce Nyx Zihni · kayıtlı fetih hedefi (toprak iddiası): yok · önerilen alıcı: Özgür Morrigan Konsorsiyumu",
+    "Mevcut sahip: Özgür Morrigan Konsorsiyumu · kayıtlı fetih hedefi (toprak iddiası): yok · önerilen alıcı: Özgür Morrigan Konsorsiyumu",
+    "Mevcut sahip: Özgür Morrigan Konsorsiyumu · kayıtlı fetih hedefi (toprak iddiası): yok · önerilen alıcı: Özgür Morrigan Konsorsiyumu"
+   ],
+   "rows": [
+    "Joradeth I · Orrnex",
+    "Orrdex",
+    "Joradeth I · Nextyr-69",
+    "Zoryalith"
+   ],
+   "kinds": [
+    "Koloni · ağırlık 3 · Sahiplik kalır · Yüce Nyx Zihni → Yüce Nyx Zihni",
+    "Boş sistem · ağırlık 1 · Devir önerisi · Yüce Nyx Zihni → Özgür Morrigan Konsorsiyumu",
+    "Koloni · ağırlık 3 · Sahiplik kalır · Özgür Morrigan Konsorsiyumu → Özgür Morrigan Konsorsiyumu",
+    "Boş sistem · ağırlık 1 · Sahiplik kalır · Özgür Morrigan Konsorsiyumu → Özgür Morrigan Konsorsiyumu"
+   ]
+  }
+ },
+ {
+  "name": "3 P'nin fethettiği koloninin alıcısı M seçilir (gerçek seçim kutusu) ve taslak sunulur; ortak onayıyla teklif onaylanır",
+  "status": "PASS",
+  "offer": {
+   "id": 1,
+   "state": "approved",
+   "rows": [
+    [
+     0,
+     0,
+     0,
+     3
+    ],
+    [
+     3,
+     null,
+     0,
+     3
+    ],
+    [
+     4,
+     0,
+     3,
+     3
+    ],
+    [
+     9,
+     null,
+     3,
+     3
+    ]
+   ]
+  },
+  "target": {
+   "sys": 0,
+   "planet": 0,
+   "owner": 0
+  }
+ },
+ {
+  "name": "4 kaydet → yükle: onaylı teklif ve Savaş Merkezi durumu korunur",
+  "status": "PASS",
+  "st": "Sefer 1 paylaşım teklifi: onaylandı · uygulanmayı bekliyor"
+ },
+ {
+  "name": "5 Uygula ayrı adım (gerçek düğme): koloni P'den M'ye geçer — fetheden devlet ≠ yeni sahip; nüfus/yapılar korunur",
+  "status": "PASS",
+  "after": {
+   "owner": 3,
+   "b": "{\"maden\":3,\"santral\":3,\"ciftlik\":3,\"lab\":2,\"dokum\":2,\"fabrika\":2,\"tersane\":2,\"liman\":1}",
+   "state": "applied",
+   "inM": true,
+   "inP": false
+  }
+ },
+ {
+  "name": "6 ikinci uygulama yapılamaz: düğme yok, motor reddeder, sahiplik değişmez",
+  "status": "PASS",
+  "btn": false,
+  "again": {
+   "ok": false,
+   "why": "Ortakların onayladığı paylaşım uygulandı"
+  },
+  "owner": 3
+ },
+ {
+  "name": "7 tek galip seferi ve eksik (legacy) kayıt: Savaş Merkezi ayrıntısında somut gerekçe",
+  "status": "PASS",
+  "why1": "Paylaşım şu an açılamaz: Paylaşım için en az iki yaşayan ortak gerekir",
+  "why2": "Paylaşım şu an açılamaz: Kısmi savaş kaydı paylaşım için yeterli değil"
+ },
+ {
+  "name": "sayfa hatası yok",
+  "status": "PASS"
+ }
+]
