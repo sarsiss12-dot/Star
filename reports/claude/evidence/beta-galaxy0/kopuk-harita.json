@@ -1,0 +1,50 @@
+{
+ "cutLanes": 10,
+ "isolated": 12,
+ "target": 17,
+ "before": {
+  "ok": false,
+  "components": 4,
+  "issues": 2,
+  "kinds": [
+   "oneway",
+   "invalid"
+  ],
+  "reachableSystems": 1,
+  "systems": 45
+ },
+ "blockedOrder": false,
+ "repair": {
+  "ok": true,
+  "systems": 45,
+  "components": 1,
+  "componentsBefore": 4,
+  "reachableSystems": 45,
+  "planets": 131,
+  "reachablePlanets": 131,
+  "repairs": 5,
+  "links": [
+   [
+    43,
+    16
+   ],
+   [
+    20,
+    8
+   ],
+   [
+    10,
+    22
+   ]
+  ],
+  "sanitized": 1,
+  "oneway": 1,
+  "issuesBefore": 2
+ },
+ "orderAfter": true,
+ "pathLen": 9,
+ "arrived": true,
+ "days": 64,
+ "fleetAlive": true,
+ "ships": 3
+}

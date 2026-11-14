@@ -9329,8 +9329,18 @@ function renderSetup(){
     for(const n of [30,45,60,80,100,200,300,500,1000]){const k=setupSizeKey(n),v=SIZES[k];h+=`<button class="opt ${c.size===k?'on':''}" data-a="size" data-x="${k}" ${v.available===false?'disabled':''}>${n}<small>${v.available===false?'Deneysel · kabul edilmedi':'sistem'}</small></button>`;}
     h+=`</div>${count>100?'<div class="mini">Büyük PC galaksisi: ay hesabı saniyeler sürebilir; 240 aylık kabul ve fiziksel cihaz performansı henüz doğrulanmadı.</div>':''}<div class="mini">📱 Android için önerilen: yaklaşık 100 yıldız sistemi ve en fazla 9 AI devleti. Daha büyük galaksiler PC için önerilir. Performans cihazın gücüne göre değişebilir.</div>`;
     h += `<h2>AI DEVLET SAYISI</h2><div class="btnrow"><button class="btn" data-a="aiCount" data-x="-1" ${aiCountFor(c)<=1?'disabled':''} aria-label="AI sayısını azalt">−</button><b id="aiCountValue" style="font-size:22px;min-width:90px;text-align:center">${aiCountFor(c)} AI</b><button class="btn" data-a="aiCount" data-x="1" ${aiCountFor(c)>=SCALE_ACCEPTANCE.maxAI?'disabled':''} aria-label="AI sayısını artır">+</button></div><div class="mini" id="aiCountHelp">${mpHumans?`${aiCountFor(c)} AI + en fazla ${mpHumans} insan; toplam ${aiCountFor(c)+mpHumans} normal devlet. Bu sürümde en fazla 16 AI; kimlik tavanı toplam 49.`:`Oyuncu dahil ${aiCountFor(c)+1} normal devlet. 1–16 doğrulanmış AI.`} Korsanlar ve sonradan doğan devletler hariç.</div><div class="btnrow">${[5,9,16,24,32,48].map(n=>`<button class="btn ghost" data-a="aiPick" data-x="${n}" ${n>SCALE_ACCEPTANCE.maxAI?'disabled':''}>${n}${n>SCALE_ACCEPTANCE.maxAI?' · deneysel':''}</button>`).join('')}</div>${setupSelectionError(c)?`<div class="mini" role="alert">${esc(setupSelectionError(c))}</div>`:''}${aiCountFor(c)+1>SIZES[c.size].sys/4?'<div class="mini">Yoğun galaksi: başkent mesafeleri daralabilir; komşu başlangıçlar oluşabilir.</div>':''}<div class="grid g3" style="margin-top:8px">`;
-    for (const k in SHAPES) h += `<button class="opt ${c.shape===k?'on':''}" data-a="shape" data-x="${k}">${SHAPES[k].n}<small>${SHAPES[k].d}</small></button>`;
-    h += `</div></div>`;
+    /* BETA-GALAXY.0: şekil önizlemesi (sabit tohumlu küçük nokta bulutu; oyun RNG'si / G kullanılmaz) */
+    for (const k in SHAPES){
+      const pv = typeof galaxyShapePreview==='function' ? galaxyShapePreview(k) : [];
+      const svg = pv.length ? `<svg class="shapePv" viewBox="0 0 100 100" aria-hidden="true">${pv.map(p=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="1.7"/>`).join('')}</svg>` : '';
+      h += `<button class="opt ${c.shape===k?'on':''}" data-a="shape" data-x="${k}" aria-pressed="${c.shape===k}">${svg}${SHAPES[k].n}<small>${SHAPES[k].d}</small></button>`;
+    }
+    h += `</div>`;
+    /* BETA-GALAXY.0: kolonileştirilebilir gezegen çarpanı (normal yaşanabilir aday sayısı; başkent / nadir dünyalar korunur) */
+    const pm = typeof planetMulOf==='function' ? planetMulOf(c) : 1;
+    h += `<h2 style="margin-top:12px">KOLONİLEŞTİRİLEBİLİR GEZEGEN</h2><div class="grid g4" id="planetMulRow">`;
+    for (const m of (typeof PLANET_MULS!=='undefined'?PLANET_MULS:[1])) h += `<button class="opt ${pm===m?'on':''}" data-a="planetMul" data-x="${m}" aria-pressed="${pm===m}">${String(m).replace('.',',')}×<small>${m===1?'Varsayılan':m<1?'Az yerleşim':'Bol yerleşim'}</small></button>`;
+    h += `</div><div class="mini">Normal yaşanabilir gezegen adaylarının sayısını değiştirir. Sistem konumları, hiperhatlar ve başkentler aynı tohumda değişmez; başkent dünyaları, Gaia / Makine Dünyası gibi nadir dünyalar ve tür kuralları korunur.</div></div>`;
 
     if(!window.MP7Setup?.active){
       const rivals=c.aiRivals;
@@ -9404,7 +9414,7 @@ function renderSetup(){
   h += `<div class="sumRow"><span>Rastgele olaylar</span><b>${c.randomEvents===false?'KAPALI':'AÇIK'}</b></div>`;
   h += `</div>`;
 
-  if(UI.setupError)h+=`<div class="mini" role="alert">${esc(UI.setupError)}</div>`;
+  if(UI.setupError)h+=`<div class="mini" role="alert" id="setupErrorBox">${esc(UI.setupError)}</div>${UI.setupRegen?'<div class="btnrow"><button class="btn" data-a="regenGalaxy">YENİ TOHUMLA YENİDEN ÜRET</button></div>':''}`;
   const idx = STEPS.findIndex(x=>x.k===SETUP_STEP);
   h += `<div class="btnrow" style="margin-top:10px">`;
   if (idx > 0) h += `<button class="btn ghost" data-a="step" data-x="${STEPS[idx-1].k}">‹ GERİ</button>`;
@@ -9608,7 +9618,9 @@ function setupClickHandler(e){
   else if(a==='rivalToggle'){if(CFG.aiRivals)delete CFG.aiRivals;else CFG.aiRivals={min:Math.min(2,aiCountFor(CFG)),max:Math.min(4,aiCountFor(CFG))};safeRenderSetup();}
   else if(a==='sizeStep'){const steps=availableGalaxySteps(),i=steps.indexOf(SIZES[CFG.size]?.sys),n=steps[i+Number(x)];if(n){CFG.aiCount=aiCountFor(CFG);CFG.size=setupSizeKey(n);}safeRenderSetup();}
   else if (a === 'size'){ if(!SIZES[x]||SIZES[x].available===false)return;CFG.aiCount=aiCountFor(CFG);CFG.size = x; safeRenderSetup(); }
-  else if (a === 'shape'){ CFG.shape = x; safeRenderSetup(); }
+  else if (a === 'shape'){ if(!SHAPES[x])return; CFG.shape = x; safeRenderSetup(); }
+  else if (a === 'planetMul'){ const m=Number(x); if(!PLANET_MULS.includes(m))return; if(m===1)delete CFG.planetMul; else CFG.planetMul=m; safeRenderSetup(); }
+  else if (a === 'regenGalaxy'){ CFG.seed = (Math.random()*1e9)|0; UI.setupError=''; UI.setupRegen=false; safeRenderSetup(); }
   else if (a === 'diff'){ CFG.diff = x; safeRenderSetup(); }
   else if (a === 'seed'){ CFG.seed = (Math.random()*1e9)|0; safeRenderSetup(); }
   else if (a === 'start'){ startGame(); }
