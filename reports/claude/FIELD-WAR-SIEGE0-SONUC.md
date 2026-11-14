@@ -148,7 +148,31 @@ Saha süresi gerçek dakikadır; motor oyun tarihiyle ilerler. "5–10 gerçek d
 
 ## 6. Kampanya (yalnız AI, orta harita)
 
-{{KAMPANYA}}
+Yalnız AI, orta harita. Kollar: kontrol `03a3aa4` (`git archive` sabit kopya) ve aday. Aynı tohum; oyuncu devleti emir vermez.
+- Betik: `evidence/field-war-siege0/kampanya/camp.cjs`.
+- Ham sonuç: `camp-7ai-120ay.jsonl` (7 AI, 120 ay), `camp-10ai-240ay.jsonl` (10 AI, 240 ay).
+- Plasebo kolu koşulmadı; bu yüzden kampanya düzeyinde fayda **iddia edilmez**.
+
+**Belirlenimli sonuçlar (iddia edilen)**
+
+7 AI, 120 ay. Tohum 22 iki kolda aynı; tohum 11 ve 23'te yorgunluk kapanışları aynı ama ele geçirme sayısı ve takılı kuşatma farklı:
+
+| Tohum | Kontrol yorgunluk kapanışı | Aday | Kontrol barıştan kalan takılı kuşatma sayacı | Aday |
+|---|---|---|---|---|
+| 11 | `exhaustion` 2 | `exhaustion-lock` 2 | 1 | 0 |
+| 22 | — | — | 0 | 0 |
+| 23 | `exhaustion` 4 | `exhaustion-lock` 4 | 1 | 0 |
+
+- Kontrolde doktrin kilitli AI kapanışları sıradan `exhaustion` olarak kaydediliyordu. Adayda aynı sayıda kapanış doğru nedenle (`exhaustion-lock`) kaydedilir.
+- Barıştan kalan, savaşı bitmiş kuşatma sayacı adayda 0.
+
+**10 AI, 240 ay**
+- Kontrol ve aday ilk olarak şu kontrol noktalarında ayrılır: tohum 23 → 72. ay, 11 ve 22 → 144, 7 → 168, 404 → 192.
+- Sonrası kaotiktir:
+  - cephe sayısı 1–14;
+  - ele geçirme sayacı kriz tarafının sıfır etkili çağrılarını da sayıyor (tohum 11 kontrolünde 780).
+- Takılı kuşatma sayacı 240. ayda: kontrol 1 / 2 / 1 / 0 / 1, aday 0 / 0 / 0 / 0 / 0.
+- Bu bant genişliğinde savaş sayısı, fetih ya da hayatta kalma için yön iddia edilmez.
 
 ## 7. Regresyon
 
