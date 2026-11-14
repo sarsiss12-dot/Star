@@ -19,7 +19,7 @@ Hiçbir madde TAMAMLANDI değildir.
 | Başlangıç HEAD | `4e6f7f6` |
 | Aday dal | **`claude/stars-war-goals0`** |
 | Render Branch adı | `claude/stars-war-goals0` (dağıtım yapılmadı) |
-| Bitiş HEAD ve PR | PR açıklamasında ve sohbette |
+| Bitiş HEAD ve PR | Taslak PR **#45** — https://github.com/sarsiss12-dot/Star/pull/45 (taban #44); son commit PR'da |
 | Sürüm | oyun **96h10p31** · PWA `stars-v96h10p31` · Save8 **v8** · MP **MP.8.9b28** · paket **4** · protokol **1** |
 | Paket uyumu | p31 yükleyicisi p6–p30, p25u1 ve p27s1 paketlerini kabul eder |
 
