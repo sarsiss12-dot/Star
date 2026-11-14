@@ -22,7 +22,8 @@ hiçbir madde TAMAMLANDI değildir.
 | İş | Durum |
 |---|---|
 | 1. #41 + #42 birleştirme | PASS |
-| 1. Desync: mevcut P26/P27 düzeltmesi korunur; 500 sistem / 16 AI / 2 oyuncu / 15 dk | §9 |
+| 1. Desync: mevcut P26/P27 düzeltmesi korunur; 500 sistem / 16 AI / 2 oyuncu / 15 dk | PASS (yerel Chromium, `MP8_SCEN=P` 8/0; desync kodu değiştirilmedi) |
+| 1. YENİDEN EŞİTLE + TANIYI KOPYALA (elle), varsayılan kapalı AI koruması | PASS (`MP8_SCEN=D` D2, `MP8_SCEN=G` G1–G4) |
 | 1. Hız mesajı sırasında kesik misafir aynası → yeniden eşitleme, emir eşitliği | PASS (`MP8_SCEN=S` S2–S3) |
 | 2. Yeni galaksi şekilleri (eliptik, kümeli, çubuklu sarmal, düzensiz) + açıklama + önizleme | PASS |
 | 2. Zorunlu yapısal rota denetimi / onarım / başarısızsa başlatmama | PASS |
@@ -30,7 +31,7 @@ hiçbir madde TAMAMLANDI değildir.
 | 4. Fizyoloji / genetik kart tipografisi, colCost, gerçek birimler | PASS (Chromium; "268513.png" bu oturuma ulaşmadı, bkz. §6) |
 | 4. Arma: Görünüş ↔ oyun eşleşmesi, çakışmasız bölge arması, ayrı saydamlık | PASS |
 | 5. Android arka plan dönüşü | PARTIAL (Chromium emülasyonu PASS; gerçek arka plan bu ortamda üretilemedi; fiziksel Android NOT RUN) |
-| 5. Dar yatay HUD, #41'de zaman aşımına uğrayan misafir olay kartı (D4) | §9 |
+| 5. Dar yatay HUD, #41'de zaman aşımına uğrayan misafir olay kartı (D4) | PASS (`browser-mobile-hud0` 4/0, `MP8_SCEN=D` 5/0) |
 | 6. Barış sonrası toprak paylaşımına erişim ve gerçek devir | PASS (yetkili misafir: Node `mp63_settle_test`) |
 | 7. Rakip Doktrinler sabit sayı / aralık | PASS |
 | 7. Tek blokta yığılmayı azaltan AI adayı | PARTIAL — incelendi, ölçüldü, **reddedildi** (§8) |
@@ -189,7 +190,43 @@ hiçbir madde TAMAMLANDI değildir.
 
 ## 9. Regresyon (birleşik aday p29)
 
-KOŞU_SONUCLARI
+İki tur koşuldu. **1. tur** `46f4a3a` üstünde. **2. tur** `0cb3db4` üstünde (yalnız `map.js` arma yerleşimi değişti; çizim katmanı). Komutlar `STARS_CHROMIUM_PATH=/opt/pw-browsers/chromium` ile. Hepsi yerel Chromium; MP'de üretim relay süreci + yerel TLS vekili.
+
+| Koşu | Komut | Tur | Sonuç |
+|---|---|---|---|
+| Tam Node | `STARS_TEST_WORKERS=4 node tests/run-all.js` | 1 ve 2 | **196 paket, 6238 geçen / 277 kalan** (iki turda aynı). Kalan 277 tabanla aynı eski FAIL'ler; yeni FAIL yok. faz92c 27/1 → 28/0 |
+| Desync D | `MP8_SCEN=D node tests/browser-mp8.cjs` | 1 | PASS 5/0 |
+| AI koruması G | `MP8_SCEN=G …` | 1 | PASS 5/0 (varsayılan kapalı, açıkken 30 sn kural, güvenli iade) |
+| Federal filo L | `MP8_SCEN=L …` | 1 | NOT RUN — altyapı: testin seçtiği boş bağlantı noktası relay açılmadan başka bir sürece geçti (EADDRINUSE). Koşu takıldı ve öldürüldü (`mp8-L-ilk-altyapi.log`). Kod kusuru değil |
+| Federal filo L | aynı | 2 | **PASS 6/0** |
+| Şekil + çarpan + kesik ayna S | `MP8_SCEN=S …` | 1 | PASS 4/0 (kümeli, 2×; hız mesajı sırasında hat kesik → yeniden eşitleme; `ship` ve `move` iki tarafta aynı) |
+| Kurum kartları E / F | `MP8_SCEN=E`, `MP8_SCEN=F` | 1 | PASS 6/0, 6/0 |
+| Mobil HUD + misafir olay kartı (#41 D4 dahil) | `node tests/browser-mobile-hud0.cjs` | 1 | PASS 4/0 |
+| Olay UX | `node tests/browser-event-ux0.cjs` | 1 | PASS 11/0 |
+| #41 harita / savaş / arma | `node tests/browser-sp-map-war.cjs` | 1 | **FAIL** (`assert(draws > 0)`: tek sistemli bölgede arma çizilmiyordu; §5) |
+| #41 harita / savaş / arma | aynı | 2 | **PASS 4/0** |
+| Federal filo tek oyunculu | `node tests/browser-fed-fleet0-sp.cjs` | 1 | PASS 4/0 |
+| Kurulum / fizyoloji / arma | `node tests/browser-pregame-galaxy0.cjs` | 1 ve 2 | PASS 10/0 |
+| Arka plan dönüşü | `node tests/browser-bgreturn-galaxy0.cjs` | 1 ve 2 | PASS 14/0 |
+| Barış sonrası paylaşım | `node tests/browser-share-galaxy0.cjs` | 1 | PASS 8/0 |
+| 15 dk 500 / 16 AI / 2 oyuncu | `MP8_SCEN=P MP8_P_DESYNC=1 MP8_P_MIN=15 …` | 1 | NOT RUN — arma düzeltmesini almak için koşuyu ben durdurdum. O loglardaki FAIL'ler "browser has been closed"; ürün sonucu değil |
+| 15 dk 500 / 16 AI / 2 oyuncu | aynı | 2 | **PASS 8/0** — ayrıntı aşağıda |
+
+**P (2. tur) ayrıntısı** (`evidence/beta-galaxy0/regresyon/mp8-P*.json`):
+- Kurulum: s500, seed 404, 2 insan + 16 AI.
+- Ön ilerletme 30 ay, 47 sn. Ardından 15 dk gerçek zaman, host en yüksek hızda.
+- 377 örnek; 1757 gerçek dokunma eylemi.
+- Ayna: 1002 = 1002 = uygulanan; 872 kurulum; 0 kurulum hatası; 0 durma (`stalls: []`).
+- En büyük gün farkı 27,2 gün; o an ayna bekletiliyordu, sonra kapandı.
+- P26/P27 kesirli gün tetikleyicileri (özerklik / yardım): 8/8 host'ta kabul edildi, misafirde görüldü, "dünya güncel değil" yok. En geç görülme 6,6 sn.
+- P2–P7 hedefli vakalar PASS: bozuk kart, kapanmayan dokunma, host yayın arızası, duraklatılmışken kaybolan ayna, `reinf`, kayıt → çıkış → devam.
+
+**Ortam ayrımı:**
+- Yerel Chromium: yukarıdaki tablo.
+- Canlı Render: **NOT RUN** (dağıtım yapılmadı).
+- Fiziksel Android: **NOT RUN** (cihaz erişimi yok).
+- LAN: **NOT RUN**.
+- Testlerin ürettiği `.sav` dosyaları kanıta eklenmedi.
 
 ## 10. Yayın
 

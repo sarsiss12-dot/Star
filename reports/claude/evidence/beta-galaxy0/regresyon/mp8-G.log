@@ -1,0 +1,9 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":851,"buildMs":885,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":941,"buildMs":982,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":8.7,"p95":9.4,"max":9.4},"longtask":{"n":0},"heapMB":16,"dom":723,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":63.8,"p95":63.8,"max":63.8},"refresh":{"n":1,"med":2,"p95":2,"max":2},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":711,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":27,"joinErrors":0},"C":{"build":{"n":2,"med":35.9,"p95":35.9,"max":35.9},"refresh":{"n":1,"med":7.6,"p95":7.6,"max":7.6},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":719,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS G0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS G1 oda seçeneği lobide gerçek dokunuşla açıldı; misafirler seçeneği görür; kısa paket kaybı (8 sn hat kesik) → hızlı toparlanma, koruma başlamaz
+PASS G2 kalıcı tam ayna reddi (oyun akarken): ≤30 sn koruma yok; ~30 sn sonra yalnız B korumaya geçer, B ve oda bildirim görür, B'nin tehdit altındaki filosu güvenli sisteme çekilir; C oynar; B'nin emri host'ta reddedilir; host duraklatınca sayaç ilerlemez
+PASS G3 iade: host verisi düzelir → B dünyasını kurar, bu oturumun TAM aynasını uygular → host korumayı kapatır; B özet görür; ilk insan emri tam bir kez; AI yeni emir vermez; geç eşitleme bildirimi / geç fark durumu değiştirmez
+PASS G4 tekrar kopma: B'nin hattı 40 sn kesik (oyun akarken) → koruma (kopma); hat açılınca aynı koltuk/devlet, TAM ayna, iade; seçenek MP kaydında
+GEÇEN: 5 KALAN: 0
