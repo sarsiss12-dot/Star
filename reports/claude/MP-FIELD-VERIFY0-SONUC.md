@@ -152,4 +152,14 @@ Runtime 19 dosya, Save8, MP paketi 4 / protokol 1, mp-core, mirror, mp1-host, mp
 
 ## 10. Teslim
 
-[DOLDURULACAK]
+| Alan | Değer |
+|---|---|
+| Başlangıç HEAD | `0ec601797eb392d2ef223b84813cc83777df6b74` (p34, dal `claude/stars-mp-field-fix0`, taslak PR #48) |
+| Bitiş HEAD | bu raporun commit'i (`claude/stars-mp-field-verify0`; kanıt commit'i `0e26f7f`) |
+| Sürüm | oyun 96h10p34 (değişmedi), MP **MP.8.9b32** |
+| Render dalı | **`claude/stars-mp-field-verify0`** (relay + istemci aynı daldan) |
+| PR | https://github.com/sarsiss12-dot/Star/pull/49 (taslak, taban `claude/stars-mp-field-fix0`) |
+| ZIP | yeni ZIP yok; p34 ZIP'i geçerli: SHA-256 `1288a372d922e282c5fbd691aa5e95253dff73e7bdbf818bd21e423f235b35d4`, CRC32 `F1E95EAB`; `python3 tools/verify-release.py` → DOĞRULANDI: 19 dosya, build 96h10p34 |
+| Dal notu | Sistemin verdiği `claude/stars-project-takeover-y9x8m9` eski 96H.8 dalıdır; force-push gerektirmemek için doğrulanan HEAD'den yeni dal açıldı (önceki fazlarla aynı yöntem) |
+
+Kullanıcı kabulü yok; main'e birleştirme ve Render dağıtımı yapılmadı.
