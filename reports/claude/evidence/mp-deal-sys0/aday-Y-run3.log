@@ -1,0 +1,38 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":838,"buildMs":867,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":920,"buildMs":958,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":4,"p95":10.2,"max":10.2},"longtask":{"n":0},"heapMB":16,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":34.6,"p95":34.6,"max":34.6},"refresh":{"n":1,"med":3.4,"p95":3.4,"max":3.4},"longtask":{"n":1,"med":50,"p95":50,"max":50},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":27,"joinErrors":0},"C":{"build":{"n":2,"med":57.4,"p95":57.4,"max":57.4},"refresh":{"n":1,"med":2.2,"p95":2.2,"max":2.2},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":16,"dom":721,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS Y0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+FAIL Y1 Barış + Sistem Devri + Haraç: C gerçek masada (dokunuş) hazırlar, özet sonucu gösterir; B karşı teklif; C karttan kabul; host + B + C aynı yeni sahip ve aynı ödeme takvimi
+AssertionError [ERR_ASSERTION]: {"status":"rejected","code":"rules:quote","ms":25,"cid":"jmwi63uk6gh9nofkz"}
+
+'rejected' !== 'ok'
+
+    at /home/user/Star/tests/helpers/mp-deal-sys0-mp.cjs:44:134
+    at async test (/home/user/Star/tests/browser-mp8.cjs:47:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-deal-sys0-mp.cjs:30:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:432:17
+FAIL Y2 bir ödeme → kaydet → host kapanır → YENİ odada devam → misafirler döner → sonraki ödeme doğru ayda BİR kez
+page.evaluate: TypeError: Cannot read properties of undefined (reading 'last')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:25)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /home/user/Star/tests/helpers/mp-deal-sys0-mp.cjs:57:23
+    at async test (/home/user/Star/tests/browser-mp8.cjs:47:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-deal-sys0-mp.cjs:55:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:432:17
+PASS Y3 teklif beklerken sahiplik değişir → geçersiz + iki tarafa neden; aynı kabul iki kez + yanıt sırasında hat donar/kopar → tek uygulama
+FAIL Y4 Federasyon: tek dokunuş İttifak Daveti (misafir → misafir bekliyor → kabul; misafir → AI sonuç satırda; çift dokunuş tek teklif); host masaüstünde misafire; bekleyen federasyon oyu üstte
+AssertionError [ERR_ASSERTION]: C aday satırında: ["1","3","4","5","6","7"]
+    at /home/user/Star/tests/helpers/mp-deal-sys0-mp.cjs:93:107
+    at async test (/home/user/Star/tests/browser-mp8.cjs:47:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-deal-sys0-mp.cjs:91:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:432:17
+FAIL Y5 Savaş Merkezi: seçili cepheden destekçi kartı (uygunluk / ret nedeni / kaynak + toprak vaadi şartı) → Destek İste doğru cepheye → kabul; AI adayı sonucu kartta; çift dokunuş tek teklif
+page.waitForFunction: Timeout 20000ms exceeded.
+    at wait (/home/user/Star/tests/browser-mp8.cjs:52:40)
+    at /home/user/Star/tests/helpers/mp-deal-sys0-mp.cjs:122:72
+    at async test (/home/user/Star/tests/browser-mp8.cjs:47:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-deal-sys0-mp.cjs:117:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:432:17
+SAYFA HATALARI ["B: Cannot read properties of null (reading 'find')"]
+GEÇEN: 2 KALAN: 4

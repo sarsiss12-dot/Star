@@ -1795,6 +1795,7 @@ const UI = {
       case 'war': this.diploAct('war', +x); break;
       case 'peace': this.diploAct('peace', +x); break;
       case 'ally': this.diploAct('ally', +x); break;
+      case 'allyInvite': this.allyInviteSend(+x); break;   /* MP-DEAL-SYS.0 */
       case 'gift': this.giftMenu(+x); break;
       case 'giftDo': {
         const [id, r, v] = x.split(':');
@@ -3903,6 +3904,53 @@ const UI = {
     for(const o of G.emps.filter(o=>o!==G.p&&G.p.contact[o.id]&&!o.dead&&!o.wild&&!findFed(o)))h+=`<div class="box"><b>${esc(o.name)}</b>${this.fedMotionButton('admit',{target:o.id},'Üyelik öner · 60 ◈')}</div>`;
     return h+'</details>';
   },
+  /* ═══ MP-DEAL-SYS.0 ═══ bekleyen federasyon işleri: oyuncunun oyu, ret sonrası düzenlenebilir kurucu taslağı, uygulanabilir onaylı karar.
+     Bitmiş kararlar (uygulanmış / süresi dolmuş) listelenmez. Düğme ilgili sekmeye götürür; sekmelerin kaydırma ve açık bölümleri korunur. */
+  fedPendingItems(f){
+    const e=G.p,out=[];
+    if(f&&f.vote){const v=f.vote,voted=(v.yes||[]).includes(e.id)||(v.no||[]).includes(e.id),can=Array.isArray(v.eligible)?v.eligible.includes(e.id):f.members.includes(e.id);
+      if(can&&!voted&&!(v.expires<=G.day))out.push({kind:'vote',text:'Oyun bekleniyor: '+String((typeof this.fedVoteSub==='function'?this.fedVoteSub(f):'')||v.motion||v.kind||'önerge'),a:'fedVoteNow',x:String(f.id),btn:'OY VER'});}
+    for(const p of G.fedFounding?.proposals||[]){if(p.status!=='pending'||!p.members.includes(e.id))continue;
+      if(p.by===e.id){const rej=p.members.filter(id=>p.replies[id]?.status==='rejected');
+        if(rej.length)out.push({kind:'found',text:'Kurucu kadro: '+rej.map(id=>G.emps[id]?.name||'?').join(', ')+' reddetti — kadroyu düzenleyip yeniden davet et',a:'fedFoundEdit',x:String(p.id),btn:'TASLAĞI DÜZENLE'});
+        else if(p.members.every(id=>p.replies[id]?.status==='accepted'))out.push({kind:'found',text:'Bütün kurucular kabul etti — son kuruluş onayı bekliyor',a:'fedFoundFinish',x:p.id+(p.revision?':'+p.revision:''),btn:'SON ONAY'});}
+      else if(p.replies[e.id]?.status==='pending')out.push({kind:'found',text:'Kuruluş daveti yanıt bekliyor — '+(G.emps[p.by]?.name||'?'),a:'fedTab',x:'general',btn:'DAVETİ GÖR'});}
+    if(f)for(const d of Object.values(f.decisions||{}))if(d.state==='ready'&&d.expires>G.day&&(e.id===f.leader||e.id===d.by))
+      out.push({kind:'decision',text:'Onaylı karar uygulanabilir: '+(d.kind==='fedWar'?'Federasyona karşı savaş':d.kind==='newWar'?'Ortak savaş izni':'Mevcut savaşa destek')+' · '+(e.contact[d.target]?G.emps[d.target]?.name:'Temassız hedef')+' · '+Math.ceil(d.expires-G.day)+' gün',a:'fedExecute',x:f.id+':'+d.id,btn:'KARARI UYGULA'});
+    return out;
+  },
+  fedPendingHtml(f){
+    const items=this.fedPendingItems(f);if(!items.length)return '';
+    return `<div class="box fedPending" role="region" aria-label="Bekleyen federasyon işleri"><b>⏳ BEKLEYEN İŞLER (${items.length})</b>${items.map(it=>`<div class="fedPendRow" data-kind="${it.kind}"><span class="mini">${esc(it.text)}</span> <button class="abtn pri" data-a="${it.a}" data-x="${esc(it.x)}">${esc(it.btn)}</button></div>`).join('')}</div>`;
+  },
+  /* Tek dokunuşla ittifak daveti: kanonik dealQuote → (AI) aiRespond + executeDeal (UI.dealSend ile aynı karar yolu) ya da (MP insan /
+     misafir) host'un 'offer' komutu. Gönderim sürerken düğme pasif: çift dokunuş ikinci davet üretmez; sonuç aynı satırda. */
+  allyInviteState(id){
+    const st=(this._allyInv||{})[id];if(!st)return {state:'',text:''};
+    if(st.state==='pending'&&st.offer&&typeof this.mpOfferState==='function'){const r=this.mpOfferState(st.offer);
+      if(r&&r.status&&r.status!=='pending'){st.state=r.status==='accepted'?'accepted':r.status==='countered'?'countered':'rejected';st.why=r.why||'';}}
+    const o=G.emps[id],nm=o?o.name:'';
+    const text={sending:'Gönderiliyor…',pending:'Bekliyor — '+nm+' kararını veriyor (Gelen kutusu → Gönderilen)',accepted:'Kabul edildi — ittifak kuruldu',
+      countered:'Karşı teklif geldi'+(st.why?': '+st.why:'')+' — Şartlı Teklif… ile müzakere et',rejected:'Reddedildi'+(st.why?': '+st.why:''),error:'Gönderilemedi: '+(st.why||'bilinmeyen neden')}[st.state]||'';
+    return {state:st.state,text};
+  },
+  allyInviteSend(id){
+    const e=G.p,o=this.diploKnown(+id);if(!o)return;const inv=this._allyInv||(this._allyInv={}),cur=inv[o.id];
+    if(cur&&(cur.state==='sending'||cur.state==='pending'))return;   /* çift dokunuş: ikinci davet yok */
+    const set=x=>{inv[o.id]={...x,day:G.day};if($('diploPane').classList.contains('show')&&$('diploPane').querySelector('.fedBox'))this.openFed();};
+    if(typeof canAlly==='function'&&!canAlly(e,o))return set({state:'error',why:'Doktrin bu devletle ittifakı yasaklıyor'});
+    if(RACES[o.race]&&RACES[o.race].dip<=.05&&!(o.ai===false))return set({state:'error',why:o.name+' ittifak kavramını tanımıyor'});
+    const d={from:e.id,to:o.id,give:[{t:'ally'}],want:[],born:G.day,expires:G.day+(typeof DEAL_OFFER_LIFE==='number'?DEAL_OFFER_LIFE:540)};
+    if(typeof this.mpQuickOffer==='function'){inv[o.id]={state:'sending',day:G.day};
+      const handled=this.mpQuickOffer(o.id,d.give,d.want,res=>{const ai=res&&res.extra&&res.extra.ai;
+        if(!res||res.status!=='ok')set({state:'error',why:res&&res.why||(typeof MP71Dip!=='undefined'?MP71Dip.why(res||{}):'host yanıt vermedi')});
+        else set({state:ai==='kabul'?'accepted':ai==='red'?'rejected':ai==='karsi'?'countered':'pending',offer:res.extra.offer||null,why:''});});
+      if(handled){this.openFed();return;}delete inv[o.id];}
+    const q=dealQuote(d);if(!q.ok)return set({state:'error',why:q.reasons[0]||'Teklif geçersiz'});
+    const r=aiRespond(o,q.norm);
+    if(r.v==='kabul'){if(executeDeal(q.norm)){say('ANLAŞMA İMZALANDI — '+o.name,'win');set({state:'accepted'});}else set({state:'error',why:'Anlaşma uygulanamadı'});this.refresh();return;}
+    set({state:r.v==='karsi'?'countered':'rejected',why:r.why||''});
+  },
   fedFoundPanel(){
     if(this._fedFoundWorld!==G.emps){this._fedFoundWorld=G.emps;this.fedFoundEditing=null;this.fedFoundSelected=[];this.fedFoundType='askeri';}
     const e=G.p,type=Object.hasOwn(FED_TYPES,this.fedFoundType)?this.fedFoundType:'askeri',ballot=Object.hasOwn(FED_BALLOTS,this.fedBallotChoice)&&this.fedBallotChoice!=='weighted'?this.fedBallotChoice:'equal',selected=this.fedFoundSelected||[],q=fedFoundQuote(e,type,ballot,selected);
@@ -3986,6 +4034,7 @@ const UI = {
       <div class="dpBody dcBody ${f?'fedTabBody':''}" data-fed-tab="${tab}">`;
 
     h+=typeof ArchiveUI!=='undefined'?ArchiveUI.newsBackButton():'';
+    h+=this.fedPendingHtml(f);   /* MP-DEAL-SYS.0: bekleyen federasyon işleri üstte */
     if (!f){
       const allies=G.emps.filter(o=>o!==e&&!o.dead&&!o.wild&&e.ally[o.id]);
       h+=this.fedFoundPanel();
@@ -3993,18 +4042,23 @@ const UI = {
       for(const other of G.feds||[])if(other.agenda?.items.some(r=>r.by===e.id))h+=this.fedAgendaList(other);
       const cands = G.emps.filter(o=>!o.dead && !o.wild && o.id!==0 && !e.ally[o.id] &&
                                      e.contact[o.id] && !e.war[o.id] && canAlly(e,o));
-      if (cands.length){
+      /* MP-DEAL-SYS.0: tek dokunuşla İttifak Daveti (standart teklif, sonucu aynı satırda) + Şartlı Teklif… (müzakere masası).
+         Federasyon kuruluşu / üyeliği (p30: ön ittifak gerektirmez) bu satırdan etkilenmez. */
+      const inv=this._allyInv||{},shown=new Set(cands.map(o=>o.id));
+      const recent=G.emps.filter(o=>!shown.has(o.id)&&inv[o.id]&&['accepted','pending','countered','rejected'].includes(this.allyInviteState(o.id).state)&&G.day-(inv[o.id].day||0)<=90);
+      if (cands.length||recent.length){
         h += `<div class="ph">İTTİFAK ADAYLARI</div>`;
-        cands.forEach(o=>{
-          const cost = hasCivic(e,'allyCheap') ? 55 : 90;
-          const foe = sharedFoe(e, o);
-          h += `<div class="dpCard"><div class="dpTop">
+        cands.concat(recent).forEach(o=>{
+          const foe = sharedFoe(e, o),st=this.allyInviteState(o.id),busy=st.state==='sending'||st.state==='pending';
+          const q=dealQuote({from:e.id,to:o.id,give:[{t:'ally'}],want:[],born:G.day,expires:G.day+(typeof DEAL_OFFER_LIFE==='number'?DEAL_OFFER_LIFE:540)});
+          h += `<div class="dpCard allyCand" data-ally="${o.id}"><div class="dpTop">
             <div class="dpName"><b style="color:${o.col}">${esc(o.name)}</b>
               <i>ilişki ${Math.round(e.rel[o.id])}${foe?' · ortak düşman':''}</i></div></div>
             <div class="act2">
-              <button class="abtn pri" data-a="ally" data-x="${o.id}">⚑ İTTİFAK · ${foe?Math.round(cost*.5):cost}◈</button>
+              ${e.ally[o.id]?'':`<button class="abtn pri" data-a="allyInvite" data-x="${o.id}" ${busy?'disabled':''}>⚑ İttifak Daveti Gönder · ${Math.round(q.cost||0)}◈</button>
+              <button class="abtn" data-a="ally" data-x="${o.id}">Şartlı Teklif…</button>`}
               <button class="abtn" data-a="envoy" data-x="${o.id}">🎓 ELÇİ</button>
-            </div></div>`;
+            </div>${st.text?`<div class="mini allyInvState" data-state="${st.state}" role="status" style="color:${st.state==='accepted'?'#65e08a':st.state==='error'||st.state==='rejected'?'#ff5f6d':'#ff9b3d'}">${esc(st.text)}</div>`:''}</div>`;
         });
       }
     } else {

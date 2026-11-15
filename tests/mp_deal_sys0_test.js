@@ -102,4 +102,12 @@ test('N7 ayna: alıcıya kendisine ödenen haraç, ödeyene kendi yükümlülü�
   assert.equal(c.length,1);assert.notEqual(c[0].to,0);assert.equal(c[0].v,25);
   assert(d.slice(1).every(t=>!t||!t.length),'üçüncü misafire başkasının haracı gitmez');
 });
+test('N8 karşı teklif: karşı tarafın önceki teklifinde açıkça sunduğu sistem, sahipliği gözlenmemiş olsa da istenebilir; başka gizli sistem istenemez',()=>{
+  const h=world();prep(h);const s=cSys(h);
+  h.run(`G.emps[1].mapOwners={};for(const id of ${JSON.stringify(s)}){G.emps[1].mapOwners[id]=-1;const x=G.sys[id];x.seen=x.seen.filter(v=>v!==1);}`);
+  assert.equal(cmd(h,'C',{kind:'offer',to:1,give:[{t:'sys',id:s[0]}],want:[{t:'res',r:'min',v:10}]}).status,'ok');const r=last(h);
+  const ok=cmd(h,'B',{kind:'counter',offer:r.id,give:[{t:'res',r:'min',v:5}],want:[{t:'sys',id:s[0]}]});assert.equal(ok.status,'ok',JSON.stringify(ok));
+  const r2=last(h);const bad=cmd(h,'C',{kind:'counter',offer:r2.id,give:[{t:'sys',id:s[0]}],want:[{t:'res',r:'min',v:5}]});assert.equal(bad.status,'ok','C kendi sistemini yeniden sunabilir');
+  const r3=last(h);const hidden=cmd(h,'B',{kind:'counter',offer:r3.id,give:[],want:[{t:'sys',id:s[1]}]});assert.equal(hidden.status,'rejected');assert.match(JSON.stringify(hidden.detail),/bilinmiyor/);
+});
 console.log(`GEÇEN: ${pass} KALAN: ${fail}`);if(fail)process.exitCode=1;

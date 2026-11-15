@@ -200,6 +200,12 @@ const isMp=rec=>!!rec&&rec.kind==='aideal'&&(M.ad.role==='guest'?!!rec.mp:!!offe
 /* ---------- kurulum ---------- */
 function attach(ad){
   M.ad=ad;if(M.installed)return;M.installed=true;
+  /* MP-DEAL-SYS.0: tek dokunuşla standart teklif (Federasyon → İttifak Daveti Gönder). Host: yalnız uzak insan alıcı (AI ile tek oyunculu
+     yol aynen); misafir: her alıcı host'un 'offer' komutundan. Sonuç host yanıtından; kayıt durumu MP teklif deposundan. */
+  UI.mpQuickOffer=function(to,give,want,cb){if(!on())return false;const A=M.ad;if(A.role==='host'&&!A.human(to))return false;
+    let done=false;const fin=r=>{if(done)return;done=true;cb(r&&r.status!=='ok'?{...r,why:why(r)}:r);};
+    const cid=A.send({kind:'offer',to:A.real(to),give,want},fin);if(!cid)fin({status:'rejected',code:'host-yok'});return true;};
+  UI.mpOfferState=function(id){if(!on())return null;const l=M.ad.role==='host'?(M.ad.raw?M.ad.raw():[]):(M.ad.offers?M.ad.offers():[]);const o=l.find(x=>x.id===id);return o?{status:o.status,why:o.why||''}:null;};
   doc.addEventListener('click',onClick,true);
   const shell0=ArchiveUI.shell;ArchiveUI.shell=function(){const r=shell0.apply(this,arguments);if(this.mode!=='mpsent')M.mode=null;else M.mode='sent';if(this.mode!=='mpsent'){M.detail=null;M.confirm=null;}addTab();return r;};
   /* misafir: anlaşma sayfası çizilince kutu (host'ta drawDeal sarmalayıcısı aynı işi yapar) */
