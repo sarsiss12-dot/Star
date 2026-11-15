@@ -110,4 +110,47 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,wait,tap}){
     if(hasInternal){const d0=await B.evaluate(()=>G.day);await H.evaluate(()=>MP1Host.advance(30));await B.waitForFunction(d=>G.day>=d+25,d0,{timeout:20000,polling:100});
       M.Q4.internal={open:await B.evaluate(()=>!document.getElementById('modal').classList.contains('hidden')),days:Math.round(await B.evaluate(()=>G.day)-d0)};assert.equal(M.Q4.internal.open,true);}
     else M.Q4.internal='pencere açıcı bulunamadı (NOT RUN)';});
+
+  /* ═══ Önceki MP savaş diplomasisi açıkları: misafirin gerçek müzakere masası ve federasyon ekranı ═══ */
+  await test('Q5 misafir B gerçek masada AYRI BARIŞ kutusunu görür (host\'un yetkili defteri; öteki cepheler listelenir) ve teklifi sunar; host teklifi kaydeder',async()=>{
+    await clean(B);await synced(B);await B.evaluate(x=>UI.openDeal(x),xB);await B.waitForSelector('[data-a="dealPact"][data-x="peace"]',{state:'attached',timeout:15000});
+    await tap(B,'[data-a="dealPact"][data-x="peace"]');
+    await B.waitForFunction(()=>/AYRI BARIŞ — yalnız bu cephe/.test(document.getElementById('diploPane').innerText),undefined,{timeout:15000});
+    const box=await B.evaluate(()=>[...document.querySelectorAll('#diploPane .box')].map(b=>b.innerText).find(t=>/AYRI BARIŞ/.test(t))||'');M.Q5={box:box.slice(0,500)};
+    assert.match(box,/Öteki cepheler/);await shot(B,'q5-ayri-baris');
+    const n0=await H.evaluate(()=>MP1Host.host.dip.offers.length);await tap(B,'[data-a="dealSend"]');await wait(H,n=>MP1Host.host.dip.offers.length>n,n0,20000);
+    const r=await H.evaluate(([b,x])=>{const o=MP1Host.host.dip.offers.at(-1);return {from:o.from,to:o.to,give:o.give.map(i=>i.t),want:o.want.map(i=>i.t),status:o.status,why:o.why||''};},[eB,fx.X]);M.Q5.offer=r;
+    assert.equal(r.from,eB);assert.equal(r.to,fx.X);assert.ok(r.give.concat(r.want).includes('peace'),JSON.stringify(r));await B.evaluate(()=>{try{UI.act('closeDiplo');}catch{}});});
+
+  await test('Q6 misafir B gerçek masada TOPRAK VAADİ: cepheye katılım isteğine sistem vaadi ekler (dokunuş) ve sunar; host teklifi doğru cephe kimliğiyle kaydeder',async()=>{
+    const Z=await H.evaluate(([b,x,y,c])=>{const Z=G.emps.find(e=>e.ai&&!e.wild&&!e.dead&&![0,b,x,y,c].includes(e.id)&&!e.war[x]);return Z.id;},[eB,fx.X,fx.Y,eC]);
+    const F=await H.evaluate(([b,x])=>warLedgerFind(b,x).id,[eB,fx.X]);const zB=await lid(B,await nameOf(Z));M.Q6={Z,F};
+    await clean(B);await synced(B);
+    /* WarCenterUI.compose ile aynı taslak: B'nin cephesine katılım isteği (Savaş Merkezi → ASKERÎ DESTEK İSTE yolu) */
+    await B.evaluate(([z,f,x])=>{UI.openDeal(z);UI.deal.give=[];UI.deal.want=[{t:'warJoin',front:f,target:x}];UI.drawDeal();},[zB,F,xB]);
+    await B.waitForSelector('[data-a="dealPromise"]',{timeout:15000}).catch(async e=>{M.Q6.diag=await B.evaluate(()=>({deal:UI.deal,txt:(document.getElementById('diploPane')?.innerText||'').slice(0,1200),cand:(()=>{try{const f=UI.deal.want[0];return warFetihCandidates(G.p,G.emps[f.target]).map(x=>x.id);}catch(err){return String(err);}})()}));throw e;});const pick=await B.evaluate(()=>document.querySelector('[data-a="dealPromise"]').dataset.x);
+    await tap(B,`[data-a="dealPromise"][data-x="${pick}"]`);await B.waitForFunction(()=>UI.deal.give.some(i=>i.t==='landPromise'),undefined,{timeout:5000});
+    M.Q6.ui=await B.evaluate(()=>[...document.querySelectorAll('#diploPane .ph')].map(x=>x.innerText).filter(t=>/TOPRAK VAADİ/.test(t)));await shot(B,'q6-toprak-vaadi');
+    const n0=await H.evaluate(()=>MP1Host.host.dip.offers.length);await tap(B,'[data-a="dealSend"]');await wait(H,n=>MP1Host.host.dip.offers.length>n,n0,20000);
+    const r=await H.evaluate(()=>{const o=MP1Host.host.dip.offers.at(-1);return {from:o.from,to:o.to,give:o.give,want:o.want,status:o.status,why:o.why||''};});M.Q6.offer=r;
+    const lp=r.give.find(i=>i.t==='landPromise');assert.ok(lp,'vaat maddesi: '+JSON.stringify(r));assert.equal(lp.front,F);assert.equal(lp.sys,+pick.split(':')[0]);
+    assert.ok(r.want.some(i=>i.t==='warJoin'&&i.front===F));await B.evaluate(()=>{try{UI.act('closeDiplo');}catch{}});});
+
+  await test('Q7 misafir B (federasyon başkanı) gerçek federasyon ekranında FEDERASYONA KARŞI SAVAŞ ÖNER → hedef üye → Vasallaştırma → OYLAMAYA SUN; host\'ta fedWar önergesi oylamada',async()=>{
+    const ids=await H.evaluate(([b,c,x,y])=>{const rest=G.emps.filter(e=>e.ai&&!e.wild&&!e.dead&&![0,b,c,x,y].includes(e.id));const z=rest[0],w=rest[1];
+      function mk(ms){const f={id:(G.fedUid=(G.fedUid||0)+1),name:'Test '+ms[0],type:'askeri',charter:{...fedDefaultCharter('askeri'),ballot:'equal',defense:'auto'},politicsVersion:96,leader:ms[0],founder:ms[0],members:ms.slice(),laws:{},treasury:0,fund:{ala:0,ene:0},nextVote:G.day+9999,vote:null,founded:G.day,typeSince:G.day,dutySince:{defense:G.day,offense:G.day},defenseFrontCutoff:1,dutyConsent:{},invites:{},decisions:{},cohesion:70};G.feds.push(f);federationIdentity(f);for(const id of ms)f.dutyConsent[id]={offense:false,since:G.day};return f;}
+      for(const a of [b,c,z.id,w.id])for(const o of G.emps)if(o.id!==a&&!o.wild){G.emps[a].contact[o.id]=o.contact[a]=true;}
+      G.emps[b].ally[c]=G.emps[c].ally[b]=true;z.ally[w.id]=w.ally[z.id]=true;const FA=mk([b,c]),FB=mk([z.id,w.id]);remember(w,b,'savasIlan');remember(z,b,'savasIlan');   /* FİKSTÜR: gerekçe (meşruiyet) */
+      for(const e of G.emps)e.aiIntel={v:1,systems:Object.fromEntries(G.sys.map(s=>[s.id,{owner:s.owner,defense:sysDefense(s),day:G.day}]))};
+      for(const t of [z,w]){const nb=G.sys[t.home].lanes.filter(l=>G.sys[l].owner<0).slice(0,2);for(const l of nb)territoryOwnerSet(G.sys[l],t.id);const hs=G.sys[G.emps[b].home],ts=G.sys[t.home];if(!hs.lanes.includes(ts.id)){hs.lanes.push(ts.id);ts.lanes.push(hs.id);}}
+      if(typeof TRADE_PATHS!=='undefined')TRADE_PATHS.clear?.();MP1Host.host.publish();return {FA:FA.id,FB:FB.id,Z:z.id,W:w.id};},[eB,eC,fx.X,fx.Y]);
+    M.Q7={ids};await synced(B);await clean(B);const wB=await lid(B,await nameOf(ids.W));
+    await B.evaluate(()=>UI.openFed());await B.waitForSelector('[data-a="fedTab"][data-x="military"]',{state:'attached',timeout:15000});await tap(B,'[data-a="fedTab"][data-x="military"]');
+    await B.waitForSelector(`[data-a="fedWarOpen"][data-x="${ids.FB}"]`,{state:'attached',timeout:15000});
+    await B.evaluate(f=>{const d=document.querySelector(`[data-a="fedWarOpen"][data-x="${f}"]`).closest('details');if(d)d.open=true;},ids.FB);await tap(B,`[data-a="fedWarOpen"][data-x="${ids.FB}"]`);
+    await B.waitForSelector(`#modal [data-a="fwTarget"][data-x="${wB}"]`,{timeout:15000});await tap(B,`#modal [data-a="fwTarget"][data-x="${wB}"]`);await tap(B,'#modal [data-a="fwGoal"][data-x="boyun"]');
+    const pv=await B.locator('#modal').innerText();M.Q7.preview=pv.slice(0,600);await shot(B,'q7-fedwar');
+    assert.equal(await B.evaluate(()=>!document.querySelector('#modal [data-a="fwPropose"]').disabled),true,'önerge sunulabilir: '+pv.slice(0,300));
+    await tap(B,'#modal [data-a="fwPropose"]');await sleep(2500);M.Q7.lastResult=await B.evaluate(()=>MP1Join.results.slice(-2));await wait(H,f=>{const F=G.feds.find(x=>x.id===f);return !!(F&&(F.vote&&F.vote.kind==='fedWar'||Object.values(F.decisions||{}).some(d=>d.kind==='fedWar')));},ids.FA,20000);
+    M.Q7.vote=await H.evaluate(f=>{const F=G.feds.find(x=>x.id===f);return F.vote?{kind:F.vote.kind,target:F.vote.target,goal:F.vote.goal||F.vote.args?.goal}:Object.values(F.decisions).find(d=>d.kind==='fedWar');},ids.FA);});
 };

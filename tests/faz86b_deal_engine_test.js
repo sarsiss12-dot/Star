@@ -293,7 +293,7 @@ console.log('\nD. 14 DEAL_KINDS HATTI');
   const H=harness(); H.R(KUR);
   const r=H.R([
     "var e=G.p, sonuc={};",
-    "var kinds=Object.keys(DEAL_KINDS).filter(k=>k!=='freight'); /* 96A paired freight is covered by faz96a_cargo_test. */",
+    "var kinds=Object.keys(DEAL_KINDS).filter(k=>k!=='freight'&&!['warJoin','vassal','landPromise','fedPeace'].includes(k)); /* 96A paired freight is covered by faz96a_cargo_test. WAR-COALITION.0: parametreli savaş maddeleri (cephe/hazırlık kimliği, tür+hüküm, sistem+cephe, iki federasyon başkanı) parametresiz ölçülemez; aşağıdaki E bölümünde geçerli parametreyle olumlu ve eksik parametreyle ret olarak sınanır. */",
     "kinds.forEach(function(k,i){",
     "  var o=G.emps[(i%6)+1]; if(!o) return;",
     "  /* her tür için GERÇEK üretici verisiyle uygulanabilir madde kur */",
@@ -336,6 +336,45 @@ console.log('\nD. 14 DEAL_KINDS HATTI');
   });
   ok('14 türün tamamı sınandı', Object.keys(d||{}).length===14,
      String(Object.keys(d||{}).length));
+}
+
+/* ═══ E. PARAMETRELİ SAVAŞ MADDELERİ (WAR-COALITION.0) ═══
+   Eski matris bu dört maddeyi parametresiz ({t:k}) deniyordu: yanlış koşul. Burada gerçek savaş/federasyon durumuyla geçerli parametre
+   (normalize → validate → quote → execute ve gerçek etki) ve eksik/geçersiz parametrenin açık gerekçeyle reddi ölçülür. Gerçek çalışma zamanı. */
+console.log('\nE. PARAMETRELİ SAVAŞ MADDELERİ');
+{
+  const {runtime}=require('./helpers/runtime');const J=(h,x)=>JSON.parse(h.run('JSON.stringify('+x+')'));
+  const W=()=>{const h=runtime();h.run(`setupGame({...CFG,seed:22,size:'orta',aiCount:6,pirates:false});G.autoSave=false;var A=G.p,X=G.emps[1],O=G.emps[2],Q=G.emps[3];
+    for(const e of G.emps){e.res.etk=5000;e.civics=[];for(const o of G.emps)if(e!==o&&!o.wild){e.contact[o.id]=true;e.ally[o.id]=false;e.war[o.id]=false;e.rel[o.id]=60;}}
+    for(const s of G.sys)for(const e of G.emps)if(!e.wild&&!s.seen.includes(e.id))s.seen.push(e.id);
+    for(const e of G.emps.filter(e=>!e.wild)){const nb=G.sys[e.home].lanes.filter(l=>G.sys[l].owner<0).slice(0,4);for(const l of nb)territoryOwnerSet(G.sys[l],e.id);}
+    warAuthorize(A,X,{n:'t'});declareWar(A,X);warAuthClear();var F=warLedgerFind(A.id,X.id).id;`);return h;};
+  const q=(h,o)=>J(h,`(()=>{const o=${o};const n=normalizeDeal(o),v=dealValidity(o),q=dealQuote(o);return {n:n.give.length+n.want.length,v:v.ok,q:q.ok,why:(q.reasons&&q.reasons[0])||(v.reasons&&v.reasons[0])||''};})()`);
+  { const h=W();
+    const r=q(h,`{from:A.id,to:O.id,give:[],want:[{t:'warJoin',front:F,target:X.id}],born:G.day,expires:G.day+30}`);
+    const ex=J(h,`executeDeal({from:A.id,to:O.id,give:[],want:[{t:'warJoin',front:F,target:X.id}],born:G.day,expires:G.day+30})`);
+    ok('warJoin (cephe kimliğiyle): normalize→validate→quote→execute; katılan savaşa girer',r.v&&r.q&&ex&&J(h,'!!O.war[X.id]'),JSON.stringify(r)+' exec='+ex);
+    const bad=q(h,`{from:A.id,to:Q.id,give:[],want:[{t:'warJoin'}],born:G.day,expires:G.day+30}`);ok('warJoin parametresiz reddedilir (gerekçeli)',!bad.v&&!bad.q&&/katılım kimliği/.test(bad.why),bad.why); }
+  { const h=W();
+    const r=q(h,`{from:A.id,to:X.id,give:[],want:[{t:'vassal',type:'haracguzar',war:'none'}],born:G.day,expires:G.day+30}`);
+    const ex=J(h,`executeDeal({from:A.id,to:X.id,give:[],want:[{t:'vassal',type:'haracguzar',war:'none'}],born:G.day,expires:G.day+30})`);
+    ok('vassal (tür + savaş hükmü, aralarındaki savaşta): teslim uygulanır, cephe kapanır',r.v&&r.q&&ex&&J(h,'X.overlord===A.id&&!A.war[X.id]'),JSON.stringify(r)+' exec='+ex);
+    const h2=W();const bad=q(h2,`{from:A.id,to:X.id,give:[],want:[{t:'vassal'}],born:G.day,expires:G.day+30}`);ok('vassal türsüz/hükümsüz reddedilir',!bad.v&&!bad.q&&/teslim maddesi/.test(bad.why),bad.why);
+    const nw=q(h2,`{from:A.id,to:O.id,give:[],want:[{t:'vassal',type:'haracguzar',war:'none'}],born:G.day,expires:G.day+30}`);ok('vassal savaş dışı tarafla reddedilir',!nw.q,nw.why); }
+  { const h=W();h.run(`var sys=warFetihCandidates(A,X)[0].id;`);
+    const o=`{from:A.id,to:O.id,give:[{t:'landPromise',sys,front:F}],want:[{t:'warJoin',front:F,target:X.id}],born:G.day,expires:G.day+30}`;
+    const r=q(h,o);const ex=J(h,`executeDeal(${o})`);
+    ok('landPromise (sistem + cephe, aynı cepheye warJoin ile): vaat kaydı oluşur',r.v&&r.q&&ex&&J(h,'(G.warLedger.promises||[]).some(p=>p.giver===A.id&&p.taker===O.id&&p.sys===sys&&p.front===F)'),JSON.stringify(r)+' exec='+ex);
+    const h2=W();h2.run(`var sys=warFetihCandidates(A,X)[0].id;`);
+    const bad=q(h2,`{from:A.id,to:O.id,give:[{t:'landPromise'}],want:[{t:'warJoin',front:F,target:X.id}],born:G.day,expires:G.day+30}`);ok('landPromise sistemsiz/cephesiz reddedilir',!bad.v&&!bad.q&&/toprak vaadi/.test(bad.why),bad.why);
+    const alone=q(h2,`{from:A.id,to:O.id,give:[{t:'landPromise',sys,front:F}],want:[],born:G.day,expires:G.day+30}`);ok('landPromise aynı cepheye katılım olmadan reddedilir',!alone.q,alone.why); }
+  { const h=W();h.run(`function mk(ms){const f={id:(G.fedUid=(G.fedUid||0)+1),name:'T'+ms[0],type:'askeri',charter:{...fedDefaultCharter('askeri'),ballot:'equal',defense:'auto'},politicsVersion:96,leader:ms[0],founder:ms[0],members:ms.slice(),laws:{},treasury:0,fund:{ala:0,ene:0},nextVote:G.day+9999,vote:null,founded:G.day,typeSince:G.day,dutySince:{defense:G.day,offense:G.day},defenseFrontCutoff:1,dutyConsent:{},invites:{},decisions:{},cohesion:70};G.feds.push(f);federationIdentity(f);return f;}
+      G.feds=[];var FA=mk([A.id,O.id]),FB=mk([X.id,Q.id]);A.ally[O.id]=O.ally[A.id]=X.ally[Q.id]=Q.ally[X.id]=true;
+      const root=warLedgerFind(A.id,X.id);root.fedWar={by:FA.id,against:FB.id,decision:'t',day:G.day};`);
+    const r=q(h,`{from:A.id,to:X.id,give:[{t:'fedPeace'}],want:[],born:G.day,expires:G.day+30}`);
+    const ex=J(h,`executeDeal({from:A.id,to:X.id,give:[{t:'fedPeace'}],want:[],born:G.day,expires:G.day+30})`);
+    ok('fedPeace (iki federasyon başkanı, işaretli kampanya): kampanya cepheleri kapanır',r.v&&r.q&&ex&&J(h,'!A.war[X.id]'),JSON.stringify(r)+' exec='+ex);
+    const h2=W();const bad=q(h2,`{from:A.id,to:X.id,give:[{t:'fedPeace'}],want:[],born:G.day,expires:G.day+30}`);ok('fedPeace federasyonlar arası işaretli savaş yokken reddedilir (yeni etki yok)',!bad.q&&!bad.v===false||!bad.q,bad.why); }
 }
 
 /* ═══ E. MALİYET POLİTİKASI ═══ */
