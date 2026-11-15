@@ -10025,8 +10025,8 @@ UI.warGoalPick=function(id,key){
     for(const [w,l] of [['none','Katılmaz'],['defense','Yalnız savunma'],['all','Saldırı da']]){const ok=!!warVassalGoalTerms(s.vtype,w);h+=`<button class="abtn ${s.war===w?'pri':(ok?'':'dis')}" data-a="wgVwar" data-x="${w}" ${ok?'':'disabled'}>${l}</button>`;}
     h+='</div><div class="mini">Yeni vasal saldırı savaşlarına yalnız bu madde açıkça kabul edilirse katılır.</div>';
   }
-  const off=key==='fetih'&&!s.targets.length;
-  h+=`</div><div class="mft">${off?`<div class="mini wgWhy wgGoWhy">${esc(why)}</div>`:''}<button class="ch wgGo" data-a="wgGo" ${off?'disabled aria-disabled="true"':''}>ÖNİZLEME · GEREKÇE VE KATILIMCILAR</button><button class="ch" data-a="war" data-x="${id}">Geri</button><button class="ch" data-a="closem">Vazgeç</button></div>`;
+  const off=key==='fetih'&&!s.targets.length,short=why&&/^Önizleme/.test(why)?why:'Önizleme kapalı: uygun hedef yok — yukarıdaki nedene bak ya da Vasallaştırmaya dön.';
+  h+=`</div><div class="mft">${off?`<div class="mini wgGoWhy">${esc(short)}</div>`:''}<button class="ch wgGo" data-a="wgGo" ${off?'disabled aria-disabled="true"':''}>ÖNİZLEME · GEREKÇE VE KATILIMCILAR</button><button class="ch" data-a="war" data-x="${id}">Geri</button><button class="ch" data-a="closem">Vazgeç</button></div>`;
   /* liveWorld: misafirde açık pencere dünya güncellemesini bekletmez; açıkken aynı pencere yerinde yenilenir (kaydırma ve seçim korunur) */
   const m=$('modal'),box=m.querySelector('.mbox.wgPick');
   if(box&&!m.classList.contains('hidden')&&this._wgOpen===id+':'+key){this.surfaceRender(box,h,'wg-pick',true);return;}

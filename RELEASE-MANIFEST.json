@@ -26,7 +26,7 @@
     "map.js": "5b40278d2e0c34a25db5838c87c691f0b23738b0f3b3af7b87ae1fcd85badddc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
     "sw.js": "468a4352f9920adc288031e1d2833cbdc443a1b82c88e4e5bfa7a106db4ca1e0",
-    "ui.js": "ceeb240dc6786167d8254234c38552946ceffa94ecaf36f8553b06c8b3c1ada2"
+    "ui.js": "371283c6a103c582588533306dcb4e282bd1efb6003c5f3277abdc8ff90423ef"
   },
   "description": "MP-FIELD-FIX.0: son Render denemesinin dört saha bulgusu — oyuncu katılım yolları tam STARS arayüzüne (eski /mp/join bağlantısı ve ana menü ODAYA KATIL → /mp/play; oda kodu korunur, katılım hatasında aşama), misafir olay şeridinde kaydırılan kart kalıcı ve karar listede kalır, sevkiyat reddi Türkçe ve birleşik uyarı, Fetih hedef seçimi oyuncunun bildiği sahiplikten ve açık pencerede canlı (pasif düğme, neden, Vasallaştırmaya dön), müzakere masasından Savaşa Destek İste. Save8 v8, paket 4, protokol 1."
 }
