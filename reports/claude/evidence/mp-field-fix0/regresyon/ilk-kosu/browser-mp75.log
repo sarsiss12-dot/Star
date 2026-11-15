@@ -1,0 +1,7 @@
+PASS A1 oda + başlangıç; MP düğmesi host ve misafirde sol araç sütununda (#tools), hız kutusu / kaynak çubuğu / araç düğmeleriyle örtüşmez; açılınca panel, kapanınca sütuna döner
+PASS A2 misafirde açık panel yerinde güncellenir: diplomasi sayfası açıkken oyun ilerler, ayna birçok kez kurulur, panel baştan yazılmaz (surfaceKept)
+PASS A3 savaş / barış: misafir AI ile savaşta; AI barış teklifi misafirin kartına gelir; KABUL (dokunma) → host'ta savaş biter; SAVAŞ MERKEZİ üst sayaçla aynı savaşları gösterir
+PASS A4 dokunmatik miktar: filo bileşimi penceresinde SIFIR / −50 / −10 / +10 / +50 (dokunma), klavye açılmaz; anlaşma miktarında pencerenin kendi düğmeleri korunur (çift kontrol yok)
+PASS A5 karar bekleyen olay kaydırılınca gizlenir (silinmez), ☰ durum listesinde kalır ve oradan aynı karar penceresi açılır
+PASS sayfa hataları yok
+GEÇEN: 6 KALAN: 0

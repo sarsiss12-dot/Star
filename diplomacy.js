@@ -10762,20 +10762,24 @@ function warPure(fn){
  try{return fn();}finally{objs.forEach((o,i)=>{const d=saved[i];for(const k of Object.keys(o))if(k[0]==='_'&&!Object.hasOwn(d,k))delete o[k];for(const k in d)Object.defineProperty(o,k,d[k]);});
   for(const [e,had,v] of views){if(had)AI_VIEW_CACHE.set(e,v);else AI_VIEW_CACHE.delete(e);}}
 }
-function warGoalSees(e,s,foe){
+function warGoalSees(e,s,foe,known=null){
  if(!e||!s||!foe||s.owner!==foe.id)return false;
  if(e.ai)return aiKnownSystem(e,s)?.owner===foe.id;
  if(!(s.seen||[]).includes(e.id))return false;
  /* MP-FIELD-FIX.0: uzak insan oyuncu (çok oyunculu misafir; tek oyunculuda G.p dışında insan yok) yalnız KENDİ bildiği sahipliği hedefleyebilir —
-    host her görüş adımında e.mapOwners'ı oyuncunun gözlemiyle günceller (görünür sistem = gerçek sahip, değilse son gözlem). Misafirin aynası
-    da aynı bilgiyi taşır: aday listesi iki tarafta aynıdır, gizli sahiplik ne listede ne gerekçede görünür. Tek oyunculu oyuncu ve AI yolu aynen. */
- if(e!==G.p&&e.mapOwners&&typeof e.mapOwners==='object')return e.mapOwners[s.id]===foe.id;
+    misafirin aynasıyla AYNI hesap (humanMapKnowledge: görünür sistemde güncel gerçek sahip, değilse oyuncunun son gözlemi). Aday listesi iki
+    tarafta aynıdır; gizli sahiplik ne listede ne gerekçede görünür. Tek oyunculu oyuncu ve AI yolu aynen. */
+ if(known)return known[s.id]===foe.id;
  return true;
+}
+function warHumanKnownOwners(e){
+ if(!e||e.ai||typeof G==='undefined'||e===G.p||!e.mapOwners||typeof e.mapOwners!=='object'||typeof humanMapKnowledge!=='function')return null;
+ return warPure(()=>humanMapKnowledge(e,humanVisionContext(e)).owners);   /* salt okuma: görüş önbellekleri geri konur */
 }
 function warFetihCandidates(e,foe){
  if(!e||!foe)return [];
- const mine=G.sys.filter(s=>s.owner===e.id),near=s=>Math.min(9e9,...mine.map(x=>dist(x,s)));
- return G.sys.filter(s=>s.id!==foe.home&&warGoalSees(e,s,foe)).map(s=>({id:s.id,name:s.name,col:s.planets.filter(p=>p.col&&p.owner===foe.id).length,d:near(s)}))
+ const mine=G.sys.filter(s=>s.owner===e.id),near=s=>Math.min(9e9,...mine.map(x=>dist(x,s))),known=warHumanKnownOwners(e);
+ return G.sys.filter(s=>s.id!==foe.home&&warGoalSees(e,s,foe,known)).map(s=>({id:s.id,name:s.name,col:s.planets.filter(p=>p.col&&p.owner===foe.id).length,d:near(s)}))
   .sort((a,b)=>a.d-b.d||a.id-b.id).slice(0,12);
 }
 /* MP-FIELD-FIX.0: seçilebilecek en çok hedef. Başkent hedef olamaz ve hedefte kalır; sahibi bilinmese de (misafirin görüşü dışında) sayılır — host / tek oyunculu /

@@ -1,0 +1,9 @@
+PASS A1 oda, iki tasarım (gerçek kurulum ekranı), başlat; ikisi de haritayı görür; ayrı ÇOK OYUNCULU DİPLOMASİ paneli ve düğmesi YOK (host ve misafir)
+PASS A2 host GERÇEK anlaşma penceresinden B'ye teklif sunar (kaynak ver / kaynak iste); pencerede insan oyuncu notu; teklif host deposunda bekler, B'nin stoğu host'a gösterilmez
+PASS A3 B teklifi GERÇEK gelen kutusu kartından açar, yatay 800×360'ta KABUL ET / REDDET / Karşı teklif görünür ve çakışmaz; KABUL ET → host uygular (kaynaklar el değiştirir), iki tarafta Kabul edildi
+FAIL A4 B gerçek anlaşma penceresinden host'a teklif; host GERÇEK gelen kutusu kartından açar → Karşı teklif hazırla → anlaşma penceresi (orijinal saklı kart) → TEKLİFİ SUN = karşı teklif; B kartı görür ve REDDEDER; B'nin Gönderilen sekmesi durumu gösterir
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:17:40)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:145:11
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:13:7)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:133:3

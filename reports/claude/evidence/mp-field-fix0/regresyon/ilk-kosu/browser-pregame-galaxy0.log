@@ -1,0 +1,11 @@
+PASS 390x844 fizyoloji: Okyanus Canlısı / Kuş Benzeri / Makine Ağı kartları aynı tipografi, kod terimi yok, taşma yok; seçili kart ayırt edilir
+PASS 390x844 genetik özellik kartları tek tipografi; puan satırı görünür; özellik seçimi puanı değiştirir
+PASS 390x844 Görünüş arması: önizleme sekmeler arası aynı, fizyolojiye gidip dönünce değişmez, oyundaki arma ile aynı
+PASS 800x360 fizyoloji: Okyanus Canlısı / Kuş Benzeri / Makine Ağı kartları aynı tipografi, kod terimi yok, taşma yok; seçili kart ayırt edilir
+PASS 800x360 genetik özellik kartları tek tipografi; puan satırı görünür; özellik seçimi puanı değiştirir
+PASS 800x360 Görünüş arması: önizleme sekmeler arası aynı, fizyolojiye gidip dönünce değişmez, oyundaki arma ile aynı
+PASS 1280x720 fizyoloji: Okyanus Canlısı / Kuş Benzeri / Makine Ağı kartları aynı tipografi, kod terimi yok, taşma yok; seçili kart ayırt edilir
+PASS 1280x720 genetik özellik kartları tek tipografi; puan satırı görünür; özellik seçimi puanı değiştirir
+PASS 1280x720 Görünüş arması: önizleme sekmeler arası aynı, fizyolojiye gidip dönünce değişmez, oyundaki arma ile aynı
+PASS galaksi sekmesi: yeni şekiller önizlemeli, çarpan seçilir; rota onarımı başarısızsa açık hata + YENİ TOHUMLA YENİDEN ÜRET
+GEÇEN: 10 KALAN: 0

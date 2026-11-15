@@ -1,0 +1,86 @@
+PASS kurulum: gerçek lobi → oyun (B = 3, C = 5); siyasi fikstür; gerçek komutlar; bekleyen MP.3 karşı teklifi, federasyon oyu ve vasallık karşı teklifi
+PASS kayıt: OYUN İÇİ → OYUNU KAYDET (IndexedDB) ve DOSYAYA AKTAR (indirme); kayıt Save8/RNG değiştirmez; dosyada jeton yok; misafir cihazında kayıt kimliği saklı
+PASS gerçek kapanış: misafir C tarayıcısı ve host tarayıcı SÜRECİ kapanır, relay süreci de durur ve yeniden başlar (eski oda yok)
+PASS yeniden açılış: host yeni süreçte aynı profille → KAYITLI OYUNA DEVAM ET → kayıt kartı (ad, tarih, insanlar) → DEVAM ET → doğrulama → yeni oda + devam lobisi; dünya motorun yüklediğiyle aynı, RNG aynı, zaman ilerlemiyor
+FAIL dönüş: B yeni kodla katılır → cihazındaki kimlikle devlet 3 ("Eski devletin bulundu"); izinsiz kişi C'nin adıyla gelir → ziyaretçi, uydurma jeton/talep/komut geçmez
+AssertionError [ERR_ASSERTION]: host-resume-lobby 360x800 <44px
++ actual - expected
+
++ [
++   'mpGuard:22x22'
++ ]
+- []
+
+    at assertLayout (/home/user/Star/tests/browser-mp4.cjs:43:124)
+    at viewports (/home/user/Star/tests/browser-mp4.cjs:45:144)
+    at async /home/user/Star/tests/browser-mp4.cjs:171:5
+    at async test (/home/user/Star/tests/browser-mp4.cjs:17:54)
+    at async /home/user/Star/tests/browser-mp4.cjs:157:3
+PASS devam: host DEVAM ET (C yok → onay); ziyaretçi çıkarılır; B oyunda kendi devletiyle; C'nin devleti AI'ya geçmez, B'nin bekleyen oyu AI tarafından verilmez
+PASS geç dönüş: C'nin tarayıcısı yeni süreçte aynı profille açılır, yeni kodla katılır → oyun sürerken kendi devleti 5; jetonsuz yabancı reddedilir
+PASS diplomasi sürer: B, C'nin karşı teklifini kabul eder (tam bir kez); eski tur kabul edilemez; B FEDERASYON ekranından oy verir; B vasallık karşı teklifini kabul eder → sözleşme
+FAIL ikinci kayıt + dosya: host kaydeder ve dışa aktarır, host süreci yine kapanır; otomatik kayıt sınırlı
+locator.tap: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#mp1Mini [data-g="toggle"]')[22m
+[2m    - locator resolved to <button data-g="toggle" aria-expanded="false" class="mp1-mini-h mp74-pill" aria-label="Çok oyunculu paneli — 3 oyuncu bağlı">…</button>[22m
+[2m  - attempting tap action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div id="rotate" class="show">…</div> intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div id="rotate" class="show">…</div> intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 100ms[22m
+[2m    55 × waiting for element to be visible, enabled and stable[22m
+[2m       - element is visible, enabled and stable[22m
+[2m       - scrolling into view if needed[22m
+[2m       - done scrolling[22m
+[2m       - <div id="rotate" class="show">…</div> intercepts pointer events[22m
+[2m     - retrying tap action[22m
+[2m       - waiting 500ms[22m
+
+    at miniTap (/home/user/Star/tests/browser-mp4.cjs:67:149)
+    at async /home/user/Star/tests/browser-mp4.cjs:224:5
+    at async test (/home/user/Star/tests/browser-mp4.cjs:17:54)
+    at async /home/user/Star/tests/browser-mp4.cjs:213:3
+FAIL dosyadan açma (boş profil, yeni host süreci): bozuk JSON, değiştirilmiş Save8 ve tek oyunculu kayıt reddedilir, mevcut durum bozulmaz; geçerli dosya → devam lobisi
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+    at Object.readFileSync (node:fs:438:14)
+    at /home/user/Star/tests/browser-mp4.cjs:234:19
+    at async test (/home/user/Star/tests/browser-mp4.cjs:17:54)
+    at async /home/user/Star/tests/browser-mp4.cjs:231:3
+FAIL kimlik kurtarma: C telefonunu kaybetti (temiz tarayıcı) → ziyaretçi; host onaylı KİMLİĞİ KURTAR ile yalnız bağlı olmayan C koltuğunu verir; B kendi (yenilenmiş) jetonuyla döner; DEVAM ET onaysız
+page.waitForFunction: Timeout 25000ms exceeded.
+    at wait (/home/user/Star/tests/browser-mp4.cjs:19:40)
+    at /home/user/Star/tests/browser-mp4.cjs:250:47
+    at async test (/home/user/Star/tests/browser-mp4.cjs:17:54)
+    at async /home/user/Star/tests/browser-mp4.cjs:248:3
+FAIL KAYITLARI YÖNET: ilk profil yeniden açılır; liste (elle + otomatik), DIŞA AKTAR indirir, SİL onay ister (Vazgeç → kalır, Sil → gider); 5 ekran boyutu
+browserType.launchPersistentContext: Failed to create a ProcessSingleton for your profile directory. This usually means that the profile is already in use by another instance of Chromium.
+Call log:
+[2m  - <launching> /opt/pw-browsers/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-gpu --disable-dev-shm-usage --enable-precise-memory-info --user-data-dir=/tmp/mp4-host1-iQNgGZ --remote-debugging-pipe about:blank[22m
+[2m  - <launched> pid=30641[22m
+[2m  - [pid=30641][err] [30641:30641:1115/131714.772885:ERROR:chrome/browser/process_singleton_posix.cc:347] Failed to create /tmp/mp4-host1-iQNgGZ/SingletonLock: File exists (17)[22m
+[2m  - [pid=30641][err] [30641:30641:1115/131714.773388:ERROR:chrome/app/chrome_main_delegate.cc:550] Failed to create a ProcessSingleton for your profile directory. This means that running multiple instances would start multiple browser processes rather than opening a new window in the existing process. Aborting now to avoid profile corruption.[22m
+[2m  - [pid=30641] <gracefully close start>[22m
+[2m  - [pid=30641] <kill>[22m
+[2m  - [pid=30641] <will force kill>[22m
+[2m  - [pid=30641] <process did exit: exitCode=21, signal=null>[22m
+[2m  - [pid=30641] starting temporary directories cleanup[22m
+[2m  - [pid=30641] finished temporary directories cleanup[22m
+[2m  - [pid=30641] <gracefully close end>[22m
+
+    at async persistent (/home/user/Star/tests/browser-mp4.cjs:57:50)
+    at async /home/user/Star/tests/browser-mp4.cjs:271:19
+    at async test (/home/user/Star/tests/browser-mp4.cjs:17:54)
+    at async /home/user/Star/tests/browser-mp4.cjs:269:3
+PASS performans: 45 / 60 / 100 sistem, gerçek tarayıcıda kayıt alma, doğrulama, yükleme ve IndexedDB yazma; dosya boyutu
+GEÇEN: 8 KALAN: 5
