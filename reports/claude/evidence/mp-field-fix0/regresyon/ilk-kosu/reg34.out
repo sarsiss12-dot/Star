@@ -1,0 +1,32 @@
+node SUITES: 206 GEÇEN: 6325 KALAN: 275
+browser-mp-field-fix0-sp exit 0 1/0
+browser-war-coalition0 exit 0 5/0
+browser-field-war-siege0 exit 0 3/0
+browser-war-goals0 exit 0 5/0
+browser-rival-blocs0 exit 0 9/0
+browser-pregame-galaxy0 exit 0 10/0
+browser-bgreturn-galaxy0 exit 0 14/0
+browser-share-galaxy0 exit 0 8/0
+browser-sp-map-war exit 0 4/0
+browser-fed-fleet0-sp exit 0 4/0
+browser-mobile-hud0 exit 0 4/0
+browser-event-ux0 exit 0 11/0
+mp8-K exit 0 3/0
+mp8-W exit 1 2/2
+mp8-D exit 0 5/0
+mp8-G exit 0 5/0
+mp8-L exit 0 6/0
+mp8-S exit 0 4/0
+mp8-E exit 0 6/0
+mp8-F exit 0 6/0
+mp8-Q exit 1 3/5
+mp8-R exit 0 5/0
+mp8-N exit 0 9/0
+mp8-Z exit 0 10/0
+mp8-P exit 0 8/0
+DONE1
+browser-mp4 exit 1 8/5 GEÇEN: 8 KALAN: 5
+browser-mp71 exit 1 8/4 GEÇEN: 8 KALAN: 4
+browser-mp74 exit 0 7/0 GEÇEN: 7 KALAN: 0
+browser-mp75 exit 0 6/0 GEÇEN: 6 KALAN: 0
+DONE2

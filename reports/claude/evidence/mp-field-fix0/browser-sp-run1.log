@@ -1,0 +1,6 @@
+FAIL S1 tek oyunculu OYUNA DEVAM ET: bekleyen / kapatılmış / gizlenmiş olay kayıttan doğru döner; tarih ilerlerken yeni olay ve anomali şeritte ve listede; karar bir kez
+AssertionError [ERR_ASSERTION]: kayıttan önce şerit ["Alaşım Grevi"]
+    at /home/user/Star/tests/browser-mp-field-fix0-sp.cjs:28:33
+    at async test (/home/user/Star/tests/browser-mp-field-fix0-sp.cjs:10:42)
+    at async /home/user/Star/tests/browser-mp-field-fix0-sp.cjs:20:3
+GEÇEN: 0 KALAN: 1

@@ -36,7 +36,7 @@ function connect(){
      ikincisi "oda dolu" alıyordu. Kurulmakta / açık olan soket varken yeni bağlantı açılmaz; eskisi varsa önce kapatılır. */
   if(J.ws&&J.ws.readyState<=1&&!J.closed)return;
   if(J.ws){const old=J.ws;J.ws=null;old.onclose=null;old.onmessage=null;try{old.close();}catch{}}
-  J.err='';J.closed=false;const code=J.code.replace(/-/g,'');
+  J.err='';J.errStage=null;J.errCode=null;J.closed=false;const code=J.code.replace(/-/g,'');
   if(!new RegExp('^[A-Z0-9]{'+V.CODE_LEN+'}$').test(code)){J.err='Oda kodu '+V.CODE_LEN+' karakter olmalı (örn. K7M2P).';return render();}
   const name=($('jName')&&$('jName').value||J.name).replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,24);
   if(!name){J.err='Bir oyuncu adı yaz.';return render();}
@@ -50,12 +50,18 @@ function connect(){
     /* Kapanış kodu son sözdür: neden çerçevesi yolda kaybolsa bile oda kapandı/atıldın/dolu döngüye girmez. */
     /* MP.5: yeniden bağlanırken "oda dolu" kalıcı değildir — relay eski (ölü) soketimizi henüz bırakmamış olabilir; denemeye devam */
     const retryFull=ev.code===4005&&J.reconnecting&&['lobby','game'].includes(J.screen);
-    if(!J.closed&&!retryFull&&(ev.code===4003||FINAL[ev.code])){J.closed=true;J.screen='join';J.lobby=null;J.err=ev.code===4003?kickMsg(ev.reason):ev.code===4005?fullMsg():V.ERR[ev.reason]||V.ERR[FINAL[ev.code]];}
-    else if(J.screen==='connecting'){J.screen='join';J.err='Bağlanılamadı. İnternet bağlantını ve davet adresini kontrol et.';}   // el sıkışma reddi / sunucu yok
+    if(!J.closed&&!retryFull&&(ev.code===4003||FINAL[ev.code])){J.closed=true;J.screen='join';J.lobby=null;const c=ev.code===4003?(['left','replaced'].includes(ev.reason)?ev.reason:'kicked'):ev.code===4005&&load().token?'seat-elsewhere':V.ERR[ev.reason]?ev.reason:FINAL[ev.code];fail(c,ev.code===4003?kickMsg(ev.reason):ev.code===4005?fullMsg():V.ERR[ev.reason]||V.ERR[FINAL[ev.code]]);}
+    else if(J.screen==='connecting'){J.screen='join';fail('net','Sunucuya bağlanılamadı. İnternet bağlantını ve davet adresini kontrol et.');}   // el sıkışma reddi / sunucu yok
     if(!J.leaving&&!J.closed&&['lobby','game'].includes(J.screen)){const d=Math.min(8000,400*2**J.retry++);J.reconnecting=true;setTimeout(()=>{if(!J.ws&&!J.closed)connect();},d);}
     render();};
 }
 const FINAL={4001:'room-closed',4004:'invalid-code',4005:'room-full',4008:'rate-limited',4029:'rate-limited'};
+/* MP-FIELD-FIX.0: katılım hangi aşamada durdu — oda, oyuncu kimliği ya da bağlantı. Ekranda aşama başlığı + motorun/relay'in Türkçe gerekçesi. */
+const STAGE={oda:'ODA BULUNAMADI',kimlik:'OYUNCU KİMLİĞİ DOĞRULANAMADI',baglanti:'BAĞLANTI KESİLDİ'};
+const STAGE_OF={'invalid-code':'oda','room-closed':'oda','room-full':'oda','game-started':'oda','server-restart':'oda','seat-elsewhere':'kimlik','no-save-id':'kimlik',kicked:'kimlik',left:'kimlik',replaced:'kimlik',
+  'rate-limited':'baglanti','server-full':'baglanti','no-host':'baglanti',net:'baglanti'};
+function fail(code,text){J.errCode=code;J.errStage=STAGE_OF[code]||null;J.err=text;}
+J.stageText=()=>J.err?(J.errStage?STAGE[J.errStage]+' · ':'')+J.err:'';
 /* MP.8: dolu odaya aynı tarayıcıdan ikinci sekme — relay soketi jeton host'a ulaşmadan reddeder (koltuk güvenliği doğru); bu tarayıcıda
    bu odanın oyuncu kimliği varsa "oda dolu" yerine gerçek durumu söyle. Jeton gösterilmez, kural değişmez. */
 function fullMsg(){return load().token?V.ERR['seat-elsewhere']:V.ERR['room-full'];}
@@ -64,21 +70,23 @@ function hello(){const s=load();raw({v:1,type:'hello',name:J.name,...(s.token?{t
 function receive(t,t0){
   J.stats.msgs++;J.stats.bytes+=t.length;J.packets.push(t);if(J.packets.length>3000)J.packets.shift();
   if(t[0]==='R'){let m;try{m=JSON.parse(t.slice(1));}catch{return;}
-    if(m.t==='welcome'){J.hostOnline=!!m.host;J.retry=0;J.reconnecting=false;if(J.stats.connectMs===null&&t0)J.stats.connectMs=Math.round(performance.now()-t0);if(J.hostOnline)hello();else J.err=V.ERR['no-host'];}
+    if(m.t==='welcome'){J.hostOnline=!!m.host;J.retry=0;J.reconnecting=false;if(J.stats.connectMs===null&&t0)J.stats.connectMs=Math.round(performance.now()-t0);if(J.hostOnline)hello();else fail('no-host',V.ERR['no-host']);}
     else if(m.t==='host-up'){J.hostOnline=true;J.err='';hello();}
     else if(m.t==='host-left'){J.hostOnline=false;}
-    else if(m.t==='room-closed'){J.closed=true;J.screen='join';J.lobby=null;J.err=V.ERR[m.reason==='server-restart'?'server-restart':'room-closed'];}
-    else if(m.t==='kicked'){J.closed=true;J.screen='join';J.lobby=null;J.err=kickMsg(m.reason);}   // relay K nedeni: host'un gerçek gerekçesi
+    else if(m.t==='room-closed'){J.closed=true;J.screen='join';J.lobby=null;const c=m.reason==='server-restart'?'server-restart':'room-closed';fail(c,V.ERR[c]);}
+    else if(m.t==='kicked'){J.closed=true;J.screen='join';J.lobby=null;fail(['left','replaced'].includes(m.reason)?m.reason:'kicked',kickMsg(m.reason));}   // relay K nedeni: host'un gerçek gerekçesi
     else if(m.t==='error'){J.errors.push(m.code);if(m.code==='room-full'&&J.reconnecting&&['lobby','game'].includes(J.screen))return render();
-      if(['invalid-code','room-full','room-closed','rate-limited','server-full'].includes(m.code)){J.closed=true;J.screen='join';J.err=m.code==='room-full'?fullMsg():V.ERR[m.code]||m.code;}}
+      if(['invalid-code','room-full','room-closed','rate-limited','server-full'].includes(m.code)){J.closed=true;J.screen='join';fail(m.code==='room-full'&&load().token?'seat-elsewhere':m.code,m.code==='room-full'?fullMsg():V.ERR[m.code]||m.code);}}
     return render();}
   if(t[0]!=='H')return;let m;try{m=JSON.parse(t.slice(1));}catch{return;}if(m.v!==1)return;
   if(window.MP6Stars&&MP6Stars.onMessage(m))return;   // MP.6: ayna dünya (gerçek STARS arayüzü)
-  if(m.type==='assign'){if(window.MP6Stars)MP6Stars.onAssign();J.assigned=true;J.playerId=m.playerId;J.empireId=m.empireId;J.saveId=m.saveId;save({token:m.token,seq:Math.max(J.seq,m.lastSeq||0)});J.seq=Math.max(J.seq,m.lastSeq||0);saveSeat(m.saveId,m.token,m.empireId);}
+  if(m.type==='assign'){if(window.MP6Stars)MP6Stars.onAssign();J.assigned=true;
+    /* MP-FIELD-FIX.0: kod elle yazıldıysa adres oda kodunu taşısın — sayfa yenilenince / Android sekmeyi yeniden yükleyince aynı odaya kendiliğinden döner (öteki parametreler korunur) */
+    try{const u=new URL(location.href),c=J.code.replace(/-/g,'');if(u.searchParams.get('code')!==c){u.searchParams.set('code',c);history.replaceState(history.state,'',u.pathname+u.search+u.hash);}}catch{}J.playerId=m.playerId;J.empireId=m.empireId;J.saveId=m.saveId;save({token:m.token,seq:Math.max(J.seq,m.lastSeq||0)});J.seq=Math.max(J.seq,m.lastSeq||0);saveSeat(m.saveId,m.token,m.empireId);}
   else if(m.type==='resume'){   // MP.4: devam lobisi bu bağlantıyı tanımadı; cihazda bu kayıt için kimlik varsa bir kez gönder
     const s=seatOf(m.saveId);J.resumeTried=J.resumeTried||{};
     if(s&&s.token&&!J.resumeTried[m.saveId]){J.resumeTried[m.saveId]=1;raw({v:1,type:'hello',name:J.name,token:s.token});}
-    else{J.resumeNoId=true;if(!J.assigned){J.closed=true;J.screen='join';J.err=V.ERR['no-save-id'];try{J.ws&&J.ws.close();}catch{}}}}   // oyun sürüyor ve bu cihazda kimlik yok
+    else{J.resumeNoId=true;if(!J.assigned){J.closed=true;J.screen='join';fail('no-save-id',V.ERR['no-save-id']);try{J.ws&&J.ws.close();}catch{}}}}   // oyun sürüyor ve bu cihazda kimlik yok
   else if(m.type==='lobby'){J.lobby=m;if(m.phase==='closed'){J.closed=true;J.screen='join';J.err=V.ERR['room-closed'];}
     else if(['ingame','paused'].includes(m.phase)&&J.empireId!==null){if(J.screen!=='game'){J.screen='game';J.tab='oyun';history.pushState({mp1:'game'},'');raw({v:1,type:'presence',tab:'oyun'});}}
     else if(J.screen!=='lobby'&&J.screen!=='game'){J.screen='lobby';J.lobbyAt=performance.now();history.pushState({mp1:'lobby'},'');}}   // MP.7.4: bkz. hayalet dokunuş kuralı (click işleyicisi)
@@ -86,7 +94,7 @@ function receive(t,t0){
   else if(m.type==='result'){if(J.pending&&J.pending.cid===m.cid){m.ms=Math.round(performance.now()-J.pending.at);J.pending=null;}J.results.push(m);}
   else if(m.type==='lresult')J.lresults.push(m);
   else if(m.type==='pong'){J.stats.rtt.push(Math.round(performance.now()-m.t));if(J.stats.rtt.length>100)J.stats.rtt.shift();}
-  else if(m.type==='error'){J.errors.push(m.code);if(['room-full','game-started','kicked','room-closed'].includes(m.code)){J.closed=true;J.screen='join';J.err=V.ERR[m.code]||m.code;}}
+  else if(m.type==='error'){J.errors.push(m.code);if(['room-full','game-started','kicked','room-closed'].includes(m.code)){J.closed=true;J.screen='join';fail(m.code,V.ERR[m.code]||m.code);}}
   render();
 }
 setInterval(()=>{if(J.hostOnline&&J.ws)raw({v:1,type:'ping',t:Math.round(performance.now())});},3000);
@@ -117,7 +125,7 @@ function render(){
       '<label class="mp1-l" for="jName">Oyuncu adı</label><input class="mp1-in name" id="jName" autocomplete="nickname" maxlength="24" enterkeyhint="go" placeholder="Adın">'+
       '<button class="mp1-btn pri" data-j="go">KATIL</button><a class="mp1-btn" href="/" data-j="home">GERİ</a><div class="mp1-status" id="jStatus"></div>';
     if(fresh){$('jCode').value=J.code;$('jName').value=J.name;}
-    const s=$('jStatus');s.className='mp1-status'+(J.err?' bad':'');s.textContent=J.screen==='connecting'?'Bağlanıyor…':(J.err||'Kodu girip KATIL\'a dokun.');
+    const s=$('jStatus');s.className='mp1-status'+(J.err?' bad':'');s.dataset.stage=J.errStage||'';s.textContent=J.screen==='connecting'?'Bağlanıyor…':(J.stageText()||'Kodu girip KATIL\'a dokun.');
     $('jCode').disabled=$('jName').disabled=J.screen==='connecting';const go=doc.querySelector('[data-j="go"]');if(go){go.disabled=J.screen==='connecting';go.textContent=J.screen==='connecting'?'BAĞLANIYOR…':'KATIL';}return;
   }
   if(J.screen==='lobby')return J.lobby&&J.lobby.phase==='resume'?resumeLobby(app):lobby(app);

@@ -1,0 +1,592 @@
+{
+ "results": [
+  {
+   "name": "Z0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 9080
+  },
+  {
+   "name": "Z1 katılım yolları: B ana menü ÇOK OYUNCULU → ODAYA KATIL, C eski /mp/join?code= bağlantısı → ikisi de tam STARS arayüzü (/mp/play), oda kodu korunur, kendi devleti",
+   "status": "PASS",
+   "ms": 6084
+  },
+  {
+   "name": "Z2 katılım başarısızlığında aşama ekranda: yanlış kod → ODA BULUNAMADI; bağlantı yok → BAĞLANTI KESİLDİ (X: ayrı profil, bu odada kimliği yok)",
+   "status": "PASS",
+   "ms": 3206
+  },
+  {
+   "name": "Z3 canlı MP olay şeridi: B kartı FAREYLE, sonra DOKUNARAK kaydırır → kart kalkar, karar ☰ listesinde; host ayna yeniler, bağlantı kopup döner, sayfa yenilenir → kart geri gelmez; sonraki olay görünür; karar host'ta bir kez",
+   "status": "PASS",
+   "ms": 11040
+  },
+  {
+   "name": "Z4 takviye sevkiyatındaki filoyu birleştirme: host kuralı geçerli (ret), gerekçe Türkçe, art arda aynı uyarı tek satırda birleşir; karar kartları etkilenmez",
+   "status": "PASS",
+   "ms": 3354
+  },
+  {
+   "name": "Z5 kaydet → host ve misafirler kapanır → relay yeniden başlar → host kaydı YENİ odada açar ve misafir yokken devam eder: bekleyen / gizlenen olay doğru, tarih ilerlerken yeni olay ve anomali şeritte ve listede",
+   "status": "PASS",
+   "ms": 5154
+  },
+  {
+   "name": "Z6 misafirler yeni odaya döner: B ana menü ODAYA KATIL + yeni kod, C eski /mp/join bağlantısı → aynı devletler; tarih ve bekleyen kararlar korunur; kaydırılan kart geri gelmez; kimliksiz X \"OYUNCU KİMLİĞİ DOĞRULANAMADI\"",
+   "status": "PASS",
+   "ms": 9187
+  },
+  {
+   "name": "Z7 Fetih hedef seçimi: tek sistemli hedefte 0/0 + neden + pasif düğme + Vasallaştırmaya dön; pencere AÇIKKEN keşfedilen sistem listeye girer; başkent dışı hedefle seçim → önizleme → onay → gerçek savaş (misafir); host'ta aynı kural",
+   "status": "PASS",
+   "ms": 6388
+  },
+  {
+   "name": "Z8 müzakere masası: genel Savaş sözü MP'de pasif + neden; Savaşa Destek İste → B'nin aktif cephesi; C ret → yeniden teklif → C karşı teklif → B kabul → C savaşta (tek kez); host → B daveti kabul; kapanan savaşa gecikmiş kabul işlenmez",
+   "status": "PASS",
+   "ms": 8576
+  },
+  {
+   "name": "Z9 dünya ilerler ve emirler uygulanır: B gerçek komut yolundan filo emri verir; host günleri ilerler; emir host dünyasında, misafir aynası host ile aynı",
+   "status": "PASS",
+   "ms": 995
+  }
+ ],
+ "metrics": {
+  "scen": "Z",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 248,
+    "buildMs": 290,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 335,
+    "buildMs": 350,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 8.9,
+      "p95": 8.9,
+      "max": 8.9
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 16,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 33.2,
+       "p95": 33.2,
+       "max": 33.2
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.1,
+       "p95": 2.1,
+       "max": 2.1
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 26,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 48.8,
+       "p95": 48.8,
+       "max": 48.8
+      },
+      "refresh": {
+       "n": 1,
+       "med": 5.2,
+       "p95": 5.2,
+       "max": 5.2
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 721,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 11022,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "field": {
+   "E": {
+    "B": 1,
+    "C": 2
+   },
+   "menuJoin": {
+    "path": "/mp/play",
+    "search": "",
+    "full": true,
+    "basic": false,
+    "started": false,
+    "e": null,
+    "stage": null,
+    "status": "Kodu girip KATIL'a dokun."
+   },
+   "oldLink": {
+    "path": "/mp/play",
+    "search": "?code=WZDHZ",
+    "full": true,
+    "basic": false,
+    "started": true,
+    "e": 2,
+    "stage": null,
+    "status": ""
+   },
+   "after": {
+    "B": {
+     "path": "/mp/play",
+     "search": "?code=WZDHZ",
+     "full": true,
+     "basic": false,
+     "started": true,
+     "e": 1,
+     "stage": null,
+     "status": ""
+    },
+    "C": {
+     "path": "/mp/play",
+     "search": "?code=WZDHZ",
+     "full": true,
+     "basic": false,
+     "started": true,
+     "e": 2,
+     "stage": null,
+     "status": ""
+    }
+   },
+   "badCode": {
+    "path": "/mp/play",
+    "search": "?code=ZZZZZ",
+    "full": true,
+    "basic": false,
+    "started": false,
+    "e": null,
+    "stage": "oda",
+    "status": "ODA BULUNAMADI · Oda kodu geçersiz ya da oda yok."
+   },
+   "offline": {
+    "path": "/mp/play",
+    "search": "?code=ZZZZZ",
+    "full": true,
+    "basic": false,
+    "started": false,
+    "e": null,
+    "stage": "baglanti",
+    "status": "BAĞLANTI KESİLDİ · Sunucuya bağlanılamadı. İnternet bağlantını ve davet adresini kontrol et."
+   },
+   "events": {
+    "enq": {
+     "r1": {
+      "ok": true,
+      "id": 1
+     },
+     "r2": {
+      "ok": true,
+      "id": 2
+     },
+     "pending": [
+      {
+       "id": 1,
+       "kind": "event"
+      },
+      {
+       "id": 2,
+       "kind": "anomaly"
+      }
+     ]
+    },
+    "cards0": [
+     {
+      "uid": 1,
+      "t": "Kayıp Sonda",
+      "kind": "event"
+     },
+     {
+      "uid": 2,
+      "t": "Terk Edilmiş İstasyon",
+      "kind": "anomaly"
+     }
+    ],
+    "afterMouse": [
+     {
+      "uid": 2,
+      "t": "Terk Edilmiş İstasyon",
+      "kind": "anomaly"
+     }
+    ],
+    "afterTouch": [],
+    "statusList": "Savaşlar, olaylar ve durumlar\n⚔ Savaş Merkezi · 0 düşman\n▣ Kayıp Sonda\n▣ Terk Edilmiş İstasyon\n📰 Galaktik Haber Ağı\nVazgeç",
+    "afterReload": [],
+    "next": [
+     {
+      "uid": 7,
+      "t": "Bilim Konseyi Talebi",
+      "kind": "event"
+     }
+    ],
+    "resolved": {
+     "before": "pending",
+     "after": {
+      "st": "resolved",
+      "done": 0
+     }
+    },
+    "again": {
+     "status": "rejected",
+     "code": "rules:engine",
+     "ms": 21,
+     "cid": "jmwht8mx1js2f5j2j"
+    }
+   },
+   "ship": {
+    "fx": {
+     "a": 28,
+     "t": 29,
+     "sys": 5,
+     "has": true
+    },
+    "direct": {
+     "status": "rejected",
+     "code": "rules:shipment",
+     "ms": 33,
+     "cid": "jmwht8n30mt4bn42l"
+    },
+    "alerts": [
+     "Host reddetti: Bu filo sevkiyatta (takviye / toplanma rotasında). Birleştirmeden önce sevkiyatı iptal et."
+    ]
+   },
+   "code1": "2KJQG",
+   "hostAlone": {
+    "saved": {
+     "a": "Bilim Konseyi Talebi",
+     "b": "Göçmen Filosu",
+     "keys": [
+      [
+       "ev:e1",
+       false
+      ],
+      [
+       "ev:e2",
+       true
+      ]
+     ]
+    },
+    "after": {
+     "day": 4,
+     "keys": [
+      [
+       "ev:e1",
+       false
+      ],
+      [
+       "ev:e2",
+       true
+      ]
+     ]
+    },
+    "cards": [
+     "Bilim Konseyi Talebi"
+    ],
+    "list": "Savaşlar, olaylar ve durumlar\n⚔ Savaş Merkezi · 0 düşman\n▣ Bilim Konseyi Talebi\n▣ Göçmen Filosu\n📰 Galaktik Haber Ağı\nVazgeç",
+    "newer": {
+     "neu": {
+      "ev": "Alaşım Grevi",
+      "an": "Anomali — Ithkrim-95",
+      "day": 8
+     },
+     "cards": [
+      "Bilim Konseyi Talebi",
+      "Alaşım Grevi",
+      "Anomali — Ithkrim-95"
+     ],
+     "list": "Savaşlar, olaylar ve durumlar\n⚔ Savaş Merkezi · 0 düşman\n▣ Bilim Konseyi Talebi\n▣ Göçmen Filosu\n▣ Alaşım Grevi\n▣ Anomali — Ithkrim-95\n📰 Galaktik Haber Ağı\nVazgeç"
+    }
+   },
+   "visitor": {
+    "path": "/mp/play",
+    "search": "?code=2KJQG",
+    "full": true,
+    "basic": false,
+    "started": false,
+    "e": null,
+    "stage": "kimlik",
+    "status": "OYUNCU KİMLİĞİ DOĞRULANAMADI · Oyun kayıttan devam ediyor ve bu cihazda bu kayda ait oyuncu kimliği yok. Host'tan kimliğini kurtarmasını iste."
+   },
+   "rejoin": {
+    "g": {
+     "day": 15,
+     "pending": [
+      2,
+      3
+     ],
+     "inbox": [
+      [
+       "personal:2",
+       true
+      ],
+      [
+       "personal:3",
+       false
+      ]
+     ],
+     "swiped": [
+      "personal:1",
+      "personal:2"
+     ]
+    },
+    "hd": 15,
+    "saved": {
+     "pending": [
+      2,
+      3
+     ],
+     "swiped": [
+      "personal:1",
+      "personal:2"
+     ]
+    }
+   },
+   "fetih": {
+    "fx": {
+     "t1": 3,
+     "t2": 4,
+     "t3": 5,
+     "s2": 25,
+     "s3": 0
+    },
+    "t1": {
+     "lead": "Talep edilecek sistemleri seç (0/0). Başkent hedef olamaz; hedefe en az bir sistem kalır.",
+     "why": [
+      "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı.",
+      "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı."
+     ],
+     "n": 0,
+     "ids": [],
+     "off": true,
+     "op": 0.38,
+     "vas": true,
+     "live": true
+    },
+    "toVassal": true,
+    "t3": {
+     "before": {
+      "lead": "Talep edilecek sistemleri seç (0/0). Başkent hedef olamaz; hedefe en az bir sistem kalır.",
+      "why": [
+       "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı.",
+       "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı."
+      ],
+      "n": 0,
+      "ids": [],
+      "off": true,
+      "op": 0.38,
+      "vas": true,
+      "live": true
+     },
+     "after": {
+      "lead": "Talep edilecek sistemleri seç (0/1). Başkent hedef olamaz; hedefe en az bir sistem kalır.",
+      "why": [
+       "Önizleme için en az bir hedef sistem seç."
+      ],
+      "n": 1,
+      "ids": [
+       0
+      ],
+      "off": true,
+      "op": 0.38,
+      "vas": false,
+      "live": true
+     }
+    },
+    "t2pick": {
+     "lead": "Talep edilecek sistemleri seç (1/1). Başkent hedef olamaz; hedefe en az bir sistem kalır.",
+     "why": [],
+     "n": 1,
+     "ids": [
+      25
+     ],
+     "off": false,
+     "op": 1,
+     "vas": false,
+     "live": true
+    },
+    "t2": {
+     "sel": [
+      25
+     ],
+     "wg": {
+      "t": "fetih",
+      "start": 20.58474400000021,
+      "targets": [
+       25
+      ],
+      "v": 2
+     }
+    },
+    "host": {
+     "off": true,
+     "why": [
+      "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı.",
+      "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı."
+     ]
+    }
+   },
+   "support": {
+    "F": 1,
+    "warOn": {
+     "warOn": [
+      true,
+      true
+     ],
+     "why": "⚔ Genel savaş sözü çok oyunculuda gönderilemez. Belirli bir savaşa katılım için Savaşa Destek İste."
+    },
+    "o1": {
+     "id": 1,
+     "want": [
+      {
+       "t": "warJoin",
+       "front": 1,
+       "target": 4
+      }
+     ]
+    },
+    "T4": {
+     "id": 6,
+     "r": {
+      "ok": true,
+      "extra": {
+       "front": 3
+      }
+     }
+    },
+    "late": {
+     "status": "rejected",
+     "code": "rules:closed",
+     "ms": 83,
+     "cid": "jmwht9c2gwwaqe5q4"
+    }
+   },
+   "world": {
+    "mv": {
+     "fleet": 4,
+     "to": 37
+    },
+    "h": {
+     "day": 20.159920000000007,
+     "at": 37,
+     "mv": null,
+     "path": []
+    },
+    "settle": {
+     "B": {
+      "e": 1,
+      "rev": 26,
+      "revMs": 341,
+      "buildMs": 386
+     },
+     "C": {
+      "e": 2,
+      "rev": 23,
+      "revMs": 465,
+      "buildMs": 495
+     }
+    }
+   }
+  },
+  "relayPid2": 11582,
+  "errors": []
+ }
+}

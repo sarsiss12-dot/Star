@@ -1,0 +1,14 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":793,"buildMs":829,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":867,"buildMs":915,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":8.6,"p95":8.6,"max":8.6},"longtask":{"n":0},"heapMB":18,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":45.7,"p95":45.7,"max":45.7},"refresh":{"n":1,"med":3,"p95":3,"max":3},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":28,"joinErrors":0},"C":{"build":{"n":2,"med":62.2,"p95":62.2,"max":62.2},"refresh":{"n":1,"med":5.7,"p95":5.7,"max":5.7},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":721,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":24,"joinErrors":0}}}
+PASS Z0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+NOT RUN Z1 katılım yolları: B ana menü ÇOK OYUNCULU → ODAYA KATIL, C eski /mp/join?code= bağlantısı → ikisi de tam STARS arayüzü (/mp/play), oda kodu korunur, kendi devleti
+NOT RUN Z2 katılım başarısızlığında aşama ekranda: yanlış kod → ODA BULUNAMADI; bağlantı yok → BAĞLANTI KESİLDİ (X: ayrı profil, bu odada kimliği yok)
+FAIL Z3 canlı MP olay şeridi: B kartı FAREYLE, sonra DOKUNARAK kaydırır → kart kalkar, karar ☰ listesinde; host ayna yeniler, bağlantı kopup döner, sayfa yenilenir → kart geri gelmez; sonraki olay görünür; karar host'ta bir kez
+AssertionError [ERR_ASSERTION]: olay + anomali kartı: [{"uid":1,"t":"Kayıp Sonda"},{"uid":2,"t":"Terk Edilmiş İstasyon"}]
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:62:4
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:56:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+NOT RUN Z4 takviye sevkiyatındaki filoyu birleştirme: host kuralı geçerli (ret), gerekçe Türkçe, art arda aynı uyarı tek satırda birleşir; karar kartları etkilenmez
+GEÇEN: 1 KALAN: 1

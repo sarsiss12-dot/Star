@@ -60,7 +60,7 @@ async function plain(vp,name){const b=await chromium.launch(launch);const p=awai
 
 async function hostMenu(H,base){await H.goto(base+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn'));
   await H.locator('#mp1Btn').tap();await wait(H,()=>MP1Host.screen==='menu');}
-async function guestJoin(p,base,code,name){await p.goto(base+'/mp/join?code='+code);await wait(p,()=>window.MP1Join&&document.getElementById('jCode'));
+async function guestJoin(p,base,code,name){await p.goto(base+'/mp/join?basic=1&code='+code);await wait(p,()=>window.MP1Join&&document.getElementById('jCode'));
   if(name)await p.fill('#jName',name);await p.locator('[data-j="go"]').tap();}
 async function sheetOk(H){await wait(H,()=>document.getElementById('mp1Sheet'));await H.locator('#mp1Sheet [data-m="sheetOk"]').tap();await wait(H,()=>!document.getElementById('mp1Sheet'));}
 const freeBar=p=>p.evaluate(()=>{const m=document.getElementById('modal');if(m&&!m.classList.contains('hidden')&&typeof UI!=='undefined'){const s=G.speed;UI.closeModal();UI.setSpeed(s);}});   // MP.6: açık STARS penceresi (danışman/olay) MP çubuğunun üstündedir; kapat, hızı koru

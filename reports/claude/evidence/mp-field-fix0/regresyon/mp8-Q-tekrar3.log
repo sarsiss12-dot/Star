@@ -1,0 +1,12 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":232,"buildMs":247,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":282,"buildMs":316,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":5.9,"p95":8,"max":8},"longtask":{"n":0},"heapMB":15,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":26.7,"p95":26.7,"max":26.7},"refresh":{"n":1,"med":1.8,"p95":1.8,"max":1.8},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":36.5,"p95":36.5,"max":36.5},"refresh":{"n":1,"med":2.2,"p95":2.2,"max":2.2},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":721,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS Q0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS Q1 misafir B gerçek ilişki sayfasından SAVAŞ → Fetih → tek akış; C (insan) + Y (AI) seçilir; "Davetleri Gönder (2)" çift dokunuş → host'ta tek hazırlık, C'ye tek teklif; Y karşı teklif
+PASS Q2 misafir C gerçek gelen kutusu kartı (desteklenen taraf, hedef, amaç, başlangıç, son gün) → karşı teklif; B akışta C ve Y için "Kabul Et"; C, Y'nin teklifini ve B'nin hazırlığını görmez
+PASS Q3 B "2 Destekçiyle Savaş İlan Et" çift dokunuş → tek cephe; C ve Y savaşta; Fetih seçimi ve bedeller bir kez; C'nin aynasında savaş
+PASS Q4 açık pencere misafirin dünyasını bekletmez: B savaş ilanı/koalisyon akışı AÇIKKEN host 45 gün ilerler ve B gemi emri verir → tarih, harita ve emir sonucu pencere kapanmadan yansır; seçim, şart taslağı ve kaydırma korunur; İç İstikrar penceresi de aynı
+PASS Q5 misafir B gerçek masada AYRI BARIŞ kutusunu görür (host'un yetkili defteri; öteki cepheler listelenir) ve teklifi sunar; host teklifi kaydeder
+PASS Q6 misafir B gerçek masada TOPRAK VAADİ: cepheye katılım isteğine sistem vaadi ekler (dokunuş) ve sunar; host teklifi doğru cephe kimliğiyle kaydeder
+PASS Q7 misafir B (federasyon başkanı) gerçek federasyon ekranında FEDERASYONA KARŞI SAVAŞ ÖNER → hedef üye → Vasallaştırma → OYLAMAYA SUN; host'ta fedWar önergesi oylamada
+GEÇEN: 8 KALAN: 0

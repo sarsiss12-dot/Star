@@ -10762,17 +10762,30 @@ function warPure(fn){
  try{return fn();}finally{objs.forEach((o,i)=>{const d=saved[i];for(const k of Object.keys(o))if(k[0]==='_'&&!Object.hasOwn(d,k))delete o[k];for(const k in d)Object.defineProperty(o,k,d[k]);});
   for(const [e,had,v] of views){if(had)AI_VIEW_CACHE.set(e,v);else AI_VIEW_CACHE.delete(e);}}
 }
-function warGoalSees(e,s,foe){
+function warGoalSees(e,s,foe,known=null){
  if(!e||!s||!foe||s.owner!==foe.id)return false;
- return e.ai?aiKnownSystem(e,s)?.owner===foe.id:(s.seen||[]).includes(e.id);
+ if(e.ai)return aiKnownSystem(e,s)?.owner===foe.id;
+ if(!(s.seen||[]).includes(e.id))return false;
+ /* MP-FIELD-FIX.0: uzak insan oyuncu (çok oyunculu misafir; tek oyunculuda G.p dışında insan yok) yalnız KENDİ bildiği sahipliği hedefleyebilir —
+    misafirin aynasıyla AYNI hesap (humanMapKnowledge: görünür sistemde güncel gerçek sahip, değilse oyuncunun son gözlemi). Aday listesi iki
+    tarafta aynıdır; gizli sahiplik ne listede ne gerekçede görünür. Tek oyunculu oyuncu ve AI yolu aynen. */
+ if(known)return known[s.id]===foe.id;
+ return true;
+}
+function warHumanKnownOwners(e){
+ if(!e||e.ai||typeof G==='undefined'||e===G.p||!e.mapOwners||typeof e.mapOwners!=='object'||typeof humanMapKnowledge!=='function')return null;
+ return warPure(()=>humanMapKnowledge(e,humanVisionContext(e)).owners);   /* salt okuma: görüş önbellekleri geri konur */
 }
 function warFetihCandidates(e,foe){
  if(!e||!foe)return [];
- const mine=G.sys.filter(s=>s.owner===e.id),near=s=>Math.min(9e9,...mine.map(x=>dist(x,s)));
- return G.sys.filter(s=>s.id!==foe.home&&warGoalSees(e,s,foe)).map(s=>({id:s.id,name:s.name,col:s.planets.filter(p=>p.col&&p.owner===foe.id).length,d:near(s)}))
+ const mine=G.sys.filter(s=>s.owner===e.id),near=s=>Math.min(9e9,...mine.map(x=>dist(x,s))),known=warHumanKnownOwners(e);
+ return G.sys.filter(s=>s.id!==foe.home&&warGoalSees(e,s,foe,known)).map(s=>({id:s.id,name:s.name,col:s.planets.filter(p=>p.col&&p.owner===foe.id).length,d:near(s)}))
   .sort((a,b)=>a.d-b.d||a.id-b.id).slice(0,12);
 }
-function warFetihDefault(e,foe){return warFetihCandidates(e,foe).slice(0,Math.max(1,Math.min(3,sysCount(foe)-1))).map(x=>x.id);}
+/* MP-FIELD-FIX.0: seçilebilecek en çok hedef. Başkent hedef olamaz ve hedefte kalır; sahibi bilinmese de (misafirin görüşü dışında) sayılır — host / tek oyunculu /
+   AI'da başkentin sahibi zaten hedef olduğundan değer aynıdır (sysCount − 1). */
+function warFetihMax(foe){return foe?Math.min(WAR_FETIH_MAX,Math.max(0,sysCount(foe)+(G.sys[foe.home]?.owner===foe.id?0:1)-1)):0;}
+function warFetihDefault(e,foe){return warFetihCandidates(e,foe).slice(0,Math.max(1,Math.min(3,warFetihMax(foe)))).map(x=>x.id);}
 function warVassalGoalTerms(type,war){
  if(!Object.hasOwn(VASSAL_TYPES,type))return null;
  return vassalTerms(type,{...vassalDefaultTerms(type),war:war??WAR_VASSAL_WAR[type]});
@@ -11387,3 +11400,17 @@ function warDealLedger(e,o){
  return {fronts:fronts.concat(roots).map(row),promises:(G.warLedger.promises||[]).filter(p=>p.giver===e.id||p.taker===e.id).slice(-16).map(p=>({...p}))};
 }
 /* END WAR-COALITION.0 */
+/* ═══ MP-FIELD-FIX.0 — müzakere masasından "Savaşa Destek İste": karşı tarafın katılabileceği BELİRLİ savaşlar (aktif cephe ya da bekleyen hazırlık).
+   Satır doğrudan warJoin maddesidir ({front} ya da {plan}); geçerliliği teklif motorunun aynı kapısı warSupportGate (joiner = karşı taraf, sponsor = e).
+   Salt okuma, RNG yok. Genel "Savaş sözü" (warOn) ayrı maddedir; tek oyunculuda aynen sürer. ═══ */
+function warSupportOptions(e,o){
+ if(!e||!o||e===o||!G.warLedger)return [];const rows=[];
+ for(const f of G.warLedger.fronts||[]){if(f.ended!==null||!f.sides.includes(e.id))continue;const t=f.sides.find(id=>id!==e.id),en=G.emps[t];if(!en||en.dead||t===o.id||!e.contact[t])continue;
+  const g=warSupportGate(o,e,{t:'warJoin',front:f.id,target:t});
+  rows.push({kind:'front',front:f.id,target:t,label:'Cephe #'+f.id+' · '+en.name+' karşısında (savaş sürüyor)',ok:!!g.ok,why:g.ok?'':String(g.why||'')});}
+ for(const p of G.warLedger.preparations||[]){if(p.owner!==e.id||warPreparationState(p)!=='pending')continue;const en=G.emps[p.target];if(!en||en.dead||p.target===o.id)continue;
+  const g=warSupportGate(o,e,{t:'warJoin',plan:p.id,target:p.target});
+  rows.push({kind:'plan',plan:p.id,target:p.target,label:'Hazırlık #'+p.id+' · '+en.name+' · '+(WAR_GOALS[p.goal]?.n||p.goal)+' (henüz ilan edilmedi; en geç gün '+Math.floor(p.expires)+')',ok:!!g.ok,why:g.ok?'':String(g.why||'')});}
+ return rows.slice(0,16);
+}
+/* END MP-FIELD-FIX.0 */

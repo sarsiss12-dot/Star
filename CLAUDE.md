@@ -2,7 +2,16 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — WAR-COALITION.0 (p33 / MP.8.9b30, 15 Kasım 2026)
+## Son teslim — MP-FIELD-FIX.0 (p34 / MP.8.9b31, 15 Kasım 2026)
+
+- Ayrıntı: `reports/claude/MP-FIELD-FIX0-SONUC.md`, kanıt `reports/claude/evidence/mp-field-fix0/`. Dal `claude/stars-mp-field-fix0` (p33 `0ec5720` üstünde). Save8v8/paket4/protokol1; p34 paket yükleyicisi p6–p33, p25u1, p27s1 kabul eder.
+- Katılım: relay `GET /mp/join` → `302 /mp/play`+sorgu; basit MP.2 istemcisi yalnız `?basic=1` (eski MP.1–MP.5 tarayıcı testleri bu adresi kullanır). Ana menü ODAYA KATIL → `/mp/play`. `join.js` `fail(code,text)` → `J.errStage` (`oda`/`kimlik`/`baglanti`), `#jStatus[data-stage]`; katılımda adres `?code=` alır (yenilemede aynı oda).
+- Misafir olay şeridi: kaydırılan kart imzaları `mp:swiped:<saveId>:<devlet>` (storeGet/storeSet, bildirim tercihleriyle aynı kapı); karar bekleyen olay/anomali `G.inbox`'tan silinmez, `hidden` (☰ listesinde). Ret uyarısı `toast` aynı metni "(×n)" birleştirir; `why()` `rules:engine` gerekçesi, ham kod yok; filo ret kodları `MP1View.ERR` (`rules:shipment` …).
+- Fetih: `warGoalSees` uzak insan (`e!==G.p`, `e.mapOwners`) yalnız bildiği sahiplik; `warFetihMax` başkenti her zaman sayar (host/SP/AI değeri aynı; `warGoalOptions` gerçek sayımla). Hedef seçme penceresi `.mbox.wgPick.liveWorld` (`UI.warGoalPickRefresh`), neden `.wgWhy`, pasif `.wgGo:disabled`, "Vasallaştırmaya dön".
+- Masa: `warSupportOptions(e,o)` (cephe/hazırlık satırları, `warSupportGate`), MP RO `warSupportList`, `UI.dealSupportHtml/Pick` (`dealSupport`, `dealSupportPick` misafirde VIEW), `UI.dealMpHuman` → MP insan müzakeresinde genel `warOn` pasif + neden.
+- Test: `node tests/mp_field_fix0_test.js` (3; kontrol 0ec5720 1/2), `MP8_SCEN=Z node tests/browser-mp8.cjs` (10; host+B+C+X, kayıt→yeni oda; kontrol 1/9), `node tests/browser-mp-field-fix0-sp.cjs` (1). Koruma: `mp-field-fix0-reviewed` ← `war-coalition0-reviewed` ← `field-war-siege0-reviewed` ← …
+
+## Önceki teslim — WAR-COALITION.0 (p33 / MP.8.9b30, 15 Kasım 2026)
 
 - Ayrıntı: `reports/claude/WAR-COALITION0-SONUC.md`, kanıt `reports/claude/evidence/war-coalition0/`. Dal `claude/stars-war-coalition0` (p32 `a20d531` üstünde). Save8v8/paket4/protokol1; p33 paket yükleyicisi p6–p32, p25u1, p27s1 kabul eder.
 - Tek savaş ilanı akışı `WarCoal` (ui.js, `UI.warDeclarationPreview` → `WarCoal.open`; pencere `.mbox.war.liveWorld`): hedef → müttefikleri çağır → son onay. Ana düğme `#warFinalConfirm` ("N Destekçiyle Savaş İlan Et" / "Desteksiz…" / "Savaş İlan Et"). Seçimler `UI._wgSels` (`id:key`).

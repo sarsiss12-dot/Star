@@ -91,7 +91,7 @@ test('misafir sayfası (/mp/play): aynı index.html + <base href="/"> + lobi/ayn
     const inline=[...orig.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>"'sha256-"+crypto.createHash('sha256').update(m[1]).digest('base64')+"'");
     for(const x of inline)assert(csp.includes(x),'inline script hash');assert(csp.includes("'sha256-"+crypto.createHash('sha256').update('forceFullscreen()').digest('base64')+"'"));
     for(const p of ['/research/mp6/mirror.js','/research/mp6/client/guest-stars.js','/research/mp6/client/mp6.css','/research/mp61/client/mp61.js','/research/mp61/client/mp61.css','/research/mp7/client/mp7-setup.js','/research/mp7/client/mp7.css'])assert.equal((await get(p)).status,200,p);
-    assert.equal((await get('/mp/join?code=X')).status,200,'legacy lite client kept during the transition');
+    assert.equal((await get('/mp/join?basic=1&code=X')).status,200,'legacy lite client kept only behind explicit ?basic=1');assert.equal((await get('/mp/join?code=X')).status,302,'MP-FIELD-FIX.0: old /mp/join link redirects to the full STARS UI');
   }finally{relay.shutdown('test');}
 });
 test('performans: 45 / 60 / 100 sistemde ayna boyutu, host üretim süresi, misafir deserialize süresi',()=>{

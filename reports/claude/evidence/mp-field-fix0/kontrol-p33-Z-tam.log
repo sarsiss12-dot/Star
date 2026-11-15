@@ -1,0 +1,89 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":221,"buildMs":278,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":321,"buildMs":353,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":6.6,"p95":6.6,"max":6.6},"longtask":{"n":0},"heapMB":17,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":38.3,"p95":38.3,"max":38.3},"refresh":{"n":1,"med":1.2,"p95":1.2,"max":1.2},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":48.1,"p95":48.1,"max":48.1},"refresh":{"n":1,"med":2.2,"p95":2.2,"max":2.2},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":721,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS Z0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+FAIL Z1 katılım yolları: B ana menü ÇOK OYUNCULU → ODAYA KATIL, C eski /mp/join?code= bağlantısı → ikisi de tam STARS arayüzü (/mp/play), oda kodu korunur, kendi devleti
+AssertionError [ERR_ASSERTION]: ana menü ODAYA KATIL tam arayüze gider: {"path":"/mp/join","search":"","full":false,"basic":true,"started":false,"e":null,"stage":null,"status":"Kodu girip KATIL'a dokun."}
++ actual - expected
+
++ '/mp/join'
+- '/mp/play'
+       ^
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:39:11
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:34:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+FAIL Z2 katılım başarısızlığında aşama ekranda: yanlış kod → ODA BULUNAMADI; bağlantı yok → BAĞLANTI KESİLDİ (X: ayrı profil, bu odada kimliği yok)
+AssertionError [ERR_ASSERTION]: {"path":"/mp/play","search":"?code=ZZZZZ","full":true,"basic":false,"started":false,"e":null,"stage":null,"status":"Oda kodu geçersiz ya da oda yok."}
+
+null !== 'oda'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:51:11
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:48:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+FAIL Z3 canlı MP olay şeridi: B kartı FAREYLE, sonra DOKUNARAK kaydırır → kart kalkar, karar ☰ listesinde; host ayna yeniler, bağlantı kopup döner, sayfa yenilenir → kart geri gelmez; sonraki olay görünür; karar host'ta bir kez
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:51:40)
+    at ensure (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:23:65)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:57:4
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:56:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+FAIL Z4 takviye sevkiyatındaki filoyu birleştirme: host kuralı geçerli (ret), gerekçe Türkçe, art arda aynı uyarı tek satırda birleşir; karar kartları etkilenmez
+AssertionError [ERR_ASSERTION]: ham kod gösterilmez: ["Host reddetti: rules:shipment","Host reddetti: rules:shipment","Host reddetti: rules:shipment","Host reddetti: rules:shipment"]
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:97:4
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:86:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+FAIL Z5 kaydet → host ve misafirler kapanır → relay yeniden başlar → host kaydı YENİ odada açar ve misafir yokken devam eder: bekleyen / gizlenen olay doğru, tarih ilerlerken yeni olay ve anomali şeritte ve listede
+page.evaluate: TypeError: Cannot read properties of undefined (reading 'pending')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:24)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:13:29
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:9:2)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:102:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+FAIL Z6 misafirler yeni odaya döner: B ana menü ODAYA KATIL + yeni kod, C eski /mp/join bağlantısı → aynı devletler; tarih ve bekleyen kararlar korunur; kaydırılan kart geri gelmez; kimliksiz X "OYUNCU KİMLİĞİ DOĞRULANAMADI"
+page.waitForURL: Timeout 20000ms exceeded.
+=========================== logs ===========================
+waiting for navigation until "load"
+  navigated to "https://localhost:38943/mp/join"
+============================================================
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:40:12
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:37:2)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:102:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+FAIL Z7 Fetih hedef seçimi: tek sistemli hedefte 0/0 + neden + pasif düğme + Vasallaştırmaya dön; pencere AÇIKKEN keşfedilen sistem listeye girer; başkent dışı hedefle seçim → önizleme → onay → gerçek savaş (misafir); host'ta aynı kural
+Error: z7: host has no mirror for B
+    at settle (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:185:159)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:73:56
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:56:2)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:102:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+FAIL Z8 müzakere masası: genel Savaş sözü MP'de pasif + neden; Savaşa Destek İste → B'nin aktif cephesi; C ret → yeniden teklif → C karşı teklif → B kabul → C savaşta (tek kez); host → B daveti kabul; kapanan savaşa gecikmiş kabul işlenmez
+page.evaluate: TypeError: Cannot read properties of null (reading 'id')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:28)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:104:22
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:102:2)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:102:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+FAIL Z9 dünya ilerler ve emirler uygulanır: B gerçek komut yolundan filo emri verir; host günleri ilerler; emir host dünyasında, misafir aynası host ile aynı
+AssertionError [ERR_ASSERTION]: {"status":"local","code":"host-yok"}
+
+'local' !== 'ok'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:139:146
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:137:2)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:102:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+GEÇEN: 1 KALAN: 9

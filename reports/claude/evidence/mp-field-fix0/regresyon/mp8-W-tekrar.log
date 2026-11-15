@@ -1,0 +1,7 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":275,"buildMs":322,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":2.1,"p95":4.8,"max":4.8},"longtask":{"n":1,"med":72,"p95":72,"max":72},"heapMB":15,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":40.9,"p95":40.9,"max":40.9},"refresh":{"n":1,"med":1.1,"p95":1.1,"max":1.1},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":16,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":22,"joinErrors":0}}}
+PASS W0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS W1 misafir gerçek SAVAŞ HEDEFİ SEÇ → Fetih → sistem seçimi → host önizlemesi (meşruiyet + tutum) → ONAYLA; host v2 Fetih kaydı, seçilen hedefler
+PASS W2 misafir gerçek müzakere masasında "Teslim iste" (Akademik) → TESLİM ÖNİZLEMESİ → TEKLİFİ SUN; AI motorun aiRespond'u ile karar verir; kabulde vasallık + cephe kapanır; çerçeve tekrarı ikinci teklif üretmez
+PASS W3 misafir gerçek koloni panelinden OTOMATİK İNŞAAT GEMİSİ → host remoteAuto; misafirin İNŞ gemisi atanır; güncel aynada panel görevi gösterir
+GEÇEN: 4 KALAN: 0

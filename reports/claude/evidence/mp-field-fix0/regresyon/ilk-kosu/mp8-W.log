@@ -1,0 +1,49 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":401,"buildMs":417,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":4.6,"p95":4.9,"max":4.9},"longtask":{"n":0},"heapMB":15,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":35,"p95":35,"max":35},"refresh":{"n":1,"med":4.1,"p95":4.1,"max":4.1},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":16,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":22,"joinErrors":0}}}
+PASS W0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+FAIL W1 misafir gerçek SAVAŞ HEDEFİ SEÇ → Fetih → sistem seçimi → host önizlemesi (meşruiyet + tutum) → ONAYLA; host v2 Fetih kaydı, seçilen hedefler
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /HEDEF: FETİH/. Input:
+
+'⚔ SAVAŞ İLANI · Tharaeth Lejyonu\n' +
+  '✕\n' +
+  '1 Hedef ✓ · 2 Müttefikler (isteğe bağlı) · 3 Son onay\n' +
+  '1 · HEDEF\n' +
+  'Hedefi değiştir\n' +
+  'Fetih\n' +
+  '2 · MÜTTEFİKLERİ ÇAĞIR · isteğe bağlı\n' +
+  '3 · SON ONAY\n' +
+  'Hedef\n' +
+  'Tharaeth Lejyonu · Fetih\n' +
+  'Kesin destek\n' +
+  '—\n' +
+  'Hedefin bilinen destekçileri\n' +
+  'Bilinen yok\n' +
+  'SAVAŞ YORGUNLUĞU\n' +
+  'Senin %0 · Tharaeth Lejyonu: bilinmiyor\n' +
+  "Rakibin yorgunluğu SIZILMIŞ istihbarat olmadan bilinmez. Taraflardan biri %100'e ulaşınca savaş zorunlu barışla durur; önceki savaşın yorgunluğu barışta ayda 2,5 azalarak taşınır.\n" +
+  'Toplam bedel\n' +
+  '◈ 25 Etki\n' +
+  'Meşruiyet\n' +
+  '0 / gereken 39 · gerekçesiz\n' +
+  'Gerekçe: kayıtlı gerekçe yok\n' +
+  '⚠ Meşruiyet gerekçesiz (0 / gereken 39): üçüncü taraflar kınayabilir.\n' +
+  'Engel: Geçersiz savaş hedefi seçimi\n' +
+  'GEREKÇELER VE MEŞRUİYET · TAHMİNİ TUTUMLAR · AYRINTI\n' +
+  'Savaş İlan Et\n' +
+  'Vazgeç'
+
+    at /home/user/Star/tests/helpers/war-goals0-mp.cjs:36:165
+    at async test (/home/user/Star/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/home/user/Star/tests/helpers/war-goals0-mp.cjs:28:3)
+    at async /home/user/Star/tests/browser-mp8.cjs:426:17
+FAIL W2 misafir gerçek müzakere masasında "Teslim iste" (Akademik) → TESLİM ÖNİZLEMESİ → TEKLİFİ SUN; AI motorun aiRespond'u ile karar verir; kabulde vasallık + cephe kapanır; çerçeve tekrarı ikinci teklif üretmez
+page.waitForSelector: Timeout 15000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="dealVassal"][data-x="want:akademik"]') to be visible[22m
+
+    at /home/user/Star/tests/helpers/war-goals0-mp.cjs:46:66
+    at async test (/home/user/Star/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/home/user/Star/tests/helpers/war-goals0-mp.cjs:44:3)
+    at async /home/user/Star/tests/browser-mp8.cjs:426:17
+PASS W3 misafir gerçek koloni panelinden OTOMATİK İNŞAAT GEMİSİ → host remoteAuto; misafirin İNŞ gemisi atanır; güncel aynada panel görevi gösterir
+GEÇEN: 2 KALAN: 2

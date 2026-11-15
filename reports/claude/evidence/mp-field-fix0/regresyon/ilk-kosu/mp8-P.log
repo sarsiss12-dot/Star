@@ -1,0 +1,26 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":430,"buildMs":466,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":4.9,"p95":7.9,"max":7.9},"longtask":{"n":0},"heapMB":19,"dom":742,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":33.7,"p95":33.7,"max":33.7},"refresh":{"n":1,"med":3.1,"p95":3.1,"max":3.1},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":18,"dom":699,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":22,"joinErrors":0}}}
+PASS P0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 16 AI, s500, seed 404; misafir gerçek STARS arayüzünde
+  ön ilerletme ay 6 5 sn
+  ön ilerletme ay 12 12 sn
+  ön ilerletme ay 18 22 sn
+  ön ilerletme ay 24 35 sn
+  ön ilerletme ay 30 49 sn
+  kesirli politika {"status":"ok","kind":"autonomy","day":1036.9806000000024,"frac":true,"oldBad":false,"seen":true,"seenMs":2598,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"relief","day":2040.9245999999753,"frac":true,"oldBad":false,"seen":true,"seenMs":2916,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"autonomy","day":2940.8848799999837,"frac":true,"oldBad":false,"seen":true,"seenMs":2615,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"relief","day":3825.689879999872,"frac":true,"oldBad":true,"seen":true,"seenMs":3374,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"autonomy","day":4552.427879999885,"frac":true,"oldBad":false,"seen":true,"seenMs":2656,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"relief","day":4993.42587999998,"frac":true,"oldBad":false,"seen":true,"seenMs":5575,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"autonomy","day":5492.256880000084,"frac":true,"oldBad":false,"seen":true,"seenMs":6942,"guestFail":0,"stale":false}
+  kesirli politika {"status":"ok","kind":"relief","day":5927.455880000184,"frac":true,"oldBad":false,"seen":true,"seenMs":5759,"guestFail":0,"stale":false}
+  DESYNC1 {"triggers":8,"maxStillMs":676,"guest":{"fail":0,"crash":0,"staleEpisodes":0,"staleTotal":0,"maxRecoveryMs":0,"lastRecoveryMs":0,"on":false,"reason":null,"resyncs":0,"reconnects":0},"host":{"policies":4,"ai":3,"frac":4,"oldBadAI":0,"oldBad":0,"save8":true,"why":null,"day":6061.468880000206}}
+  eylem 1572 · en büyük gecikme 21.8 gün · donma 0 · komut [["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true],["ok","ok",true]]
+PASS P1 gerçek zamanlı 15 dk: 500 sistem / 16 AI + 2 insan, host en yüksek hızda (ön ilerletme 30 ay), misafir gerçek dokunmayla oynar; host günü ilerlerken misafir dünyası 20 sn'den uzun durmamalı; komutlar aynaya yansımalı
+PASS P2 misafirin yerel sunum durumunda bozuk kart (kurulum deserialize'dan ÖNCE istisna atar): dünya kalıcı donmaz — neden kaydedilir, durum onarılır, ayna uygulanır
+PASS P3 kapanışı gelmeyen dokunma (pointerdown var, pointerup/pointercancel yok): ayna süresiz bekletilmez — en çok ~3 sn sonra uygulanır
+PASS P4 host bu oyuncunun aynasını kuramıyor (host yayın arızası): host döngüsü çökmez, hata host tanısında; misafir açık ileti görür; arıza kalkınca kendiliğinden eşitlenir
+PASS P5 DURAKLATILMIŞ oyunda kaybolan ayna iletisi ("host kabul etti ama tersane sırası değişmedi"): bildirim host ACK'inden ÖNCE çıkmaz; nabız eksik aynayı gösterir, misafir TAM ayna ister ve sıra görünür
+PASS P6 takviye düğmesi (reinf) misafirde yakalanmamış istisna atmaz; ret gerçek nedeniyle bildirilir
+PASS P7 kayıt → çıkış → devam (gerçek kullanıcı akışı): oyun içi "Dosyaya kaydet" MP'de çok oyunculu paket indirir; misafirin .sav'ı açık nedenle reddedilir; host'un düz .sav'ı devam lobisi açar, misafir yeni kodla katılır, host koltuğa atar, aynı gün ve devletten sürer
+GEÇEN: 8 KALAN: 0

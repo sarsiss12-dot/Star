@@ -19,7 +19,9 @@ async function main(argv){
     must(/mp1-host\.js/.test(r.body),'MP katmanı yok');must(r.h['x-content-type-options']==='nosniff','nosniff yok');if(secure)must(/max-age=\d+/.test(r.h['strict-transport-security']||''),'HSTS yok');});
   await check('runtime dosyaları RELEASE-MANIFEST ile bayt bayt aynı (index.html hariç, enjekte)',async()=>{const m=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE-MANIFEST.json')));let n=0;
     for(const [f,h] of Object.entries(m.files)){if(f==='index.html')continue;const r=await get('/'+f);must(r.status===200,f+' '+r.status);must(crypto.createHash('sha256').update(r.body).digest('hex')===(h.sha256||h),f+' farklı');n++;}return n+' dosya, build '+m.build;});
-  await check('misafir sayfası /mp/join ve sıkı CSP',async()=>{const r=await get('/mp/join?code=ABCD-EFGH');must(r.status===200,'durum '+r.status);must(/connect-src 'self'/.test(r.h['content-security-policy']||''),'CSP');});
+  /* MP-FIELD-FIX.0: eski /mp/join bağlantısı oda kodunu koruyarak tam STARS misafir sayfasına (/mp/play) yönlenir; misafir sayfası sıkı CSP ile */
+  await check('eski /mp/join → /mp/play yönlendirmesi ve misafir sayfası sıkı CSP',async()=>{const j=await get('/mp/join?code=ABCD-EFGH');must(j.status===302&&j.h.location==='/mp/play?code=ABCD-EFGH','yönlendirme '+j.status+' '+(j.h.location||''));
+    const r=await get('/mp/play?code=ABCD-EFGH');must(r.status===200,'durum '+r.status);must(/connect-src 'self'/.test(r.h['content-security-policy']||''),'CSP');});
   /* MP.7.3: dağıtım doğrulaması — sunulan MP dosyaları bu çalışma ağacıyla aynı mı (eski imaj / eski dal tespit edilir) */
   await check('sürüm işareti /mp/version: MP sürümü, oyun build\'i ve MP dosyaları bu çalışma ağacıyla aynı',async()=>{const r=await get('/mp/version');must(r.status===200,'durum '+r.status+' (eski dağıtım?)');
     const v=JSON.parse(r.body.toString()),m=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE-MANIFEST.json')));must(v.build===m.build,'build '+v.build+' ≠ '+m.build);

@@ -1,0 +1,418 @@
+{
+ "results": [
+  {
+   "name": "Q0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 8841
+  },
+  {
+   "name": "Q1 misafir B gerçek ilişki sayfasından SAVAŞ → Fetih → tek akış; C (insan) + Y (AI) seçilir; \"Davetleri Gönder (2)\" çift dokunuş → host'ta tek hazırlık, C'ye tek teklif; Y karşı teklif",
+   "status": "PASS",
+   "ms": 7977
+  },
+  {
+   "name": "Q2 misafir C gerçek gelen kutusu kartı (desteklenen taraf, hedef, amaç, başlangıç, son gün) → karşı teklif; B akışta C ve Y için \"Kabul Et\"; C, Y'nin teklifini ve B'nin hazırlığını görmez",
+   "status": "PASS",
+   "ms": 5637
+  },
+  {
+   "name": "Q3 B \"2 Destekçiyle Savaş İlan Et\" çift dokunuş → tek cephe; C ve Y savaşta; Fetih seçimi ve bedeller bir kez; C'nin aynasında savaş",
+   "status": "PASS",
+   "ms": 32299
+  },
+  {
+   "name": "Q4 açık pencere misafirin dünyasını bekletmez: B savaş ilanı/koalisyon akışı AÇIKKEN host 45 gün ilerler ve B gemi emri verir → tarih, harita ve emir sonucu pencere kapanmadan yansır; seçim, şart taslağı ve kaydırma korunur; İç İstikrar penceresi de aynı",
+   "status": "PASS",
+   "ms": 4307
+  },
+  {
+   "name": "Q5 misafir B gerçek masada AYRI BARIŞ kutusunu görür (host'un yetkili defteri; öteki cepheler listelenir) ve teklifi sunar; host teklifi kaydeder",
+   "status": "PASS",
+   "ms": 2085
+  },
+  {
+   "name": "Q6 misafir B gerçek masada TOPRAK VAADİ: cepheye katılım isteğine sistem vaadi ekler (dokunuş) ve sunar; host teklifi doğru cephe kimliğiyle kaydeder",
+   "status": "PASS",
+   "ms": 2196
+  },
+  {
+   "name": "Q7 misafir B (federasyon başkanı) gerçek federasyon ekranında FEDERASYONA KARŞI SAVAŞ ÖNER → hedef üye → Vasallaştırma → OYLAMAYA SUN; host'ta fedWar önergesi oylamada",
+   "status": "PASS",
+   "ms": 5177
+  }
+ ],
+ "metrics": {
+  "scen": "Q",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 264,
+    "buildMs": 285,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 327,
+    "buildMs": 357,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 10.9,
+      "p95": 10.9,
+      "max": 10.9
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 16,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 37.9,
+       "p95": 37.9,
+       "max": 37.9
+      },
+      "refresh": {
+       "n": 1,
+       "med": 3.4,
+       "p95": 3.4,
+       "max": 3.4
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 26,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 45,
+       "p95": 45,
+       "max": 45
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.8,
+       "p95": 1.8,
+       "max": 1.8
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 721,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 12212,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "coalition": {
+   "fixture": {
+    "B": 1,
+    "C": 2,
+    "X": 3,
+    "Y": 4
+   },
+   "local": {
+    "xB": 3,
+    "yB": 4,
+    "cB": 2
+   },
+   "Q1acts": {
+    "acts": [
+     "coalPick:2",
+     "coalTerms:4",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalAmt:4:ala:50",
+     "coalTermsDone:4"
+    ],
+    "picks": [
+     2,
+     4
+    ],
+    "st": true
+   },
+   "Q1": {
+    "preps": 1,
+    "opts": {
+     "targets": [
+      12,
+      14
+     ]
+    },
+    "inv": [
+     [
+      2,
+      "pending"
+     ],
+     [
+      4,
+      "accepted"
+     ]
+    ],
+    "toC": 1,
+    "yTerms": [
+     {
+      "t": "res",
+      "r": "ala",
+      "v": 400
+     }
+    ]
+   },
+   "cardDiag": {
+    "brief": {
+     "title": "Saf Akıl Ağı · Savaş katılım daveti",
+     "sub": "Veriyor: yok · İstiyor: ⚔ Saf Akıl Ağı yanında İxir Tahtı karşısına savaş · Fetih · Athdor, Kalinex · katılım Saf Akıl Ağı savaşı ilan ettiği anda başlar (hazırlık #1, en geç gün 181) · 18 ay"
+    },
+    "err": null,
+    "draw": null,
+    "inboxHtml": "<button class=\"nCard sci\" data-a=\"openNote\" data-x=\"1\">\n         <span class=\"nIco\">📜</span>\n         <span class=\"nTxt\"><b>Saf Akıl Ağı · Savaş katılım daveti</b><i>Veriyor: yok · İstiyor: ⚔ Saf Akıl Ağı yanında İxir Tahtı karşısına savaş · Fetih · Athdor, Kalinex · katılım Saf Akıl Ağı savaşı ila",
+    "raw": "{\"id\":1,\"from\":1,\"to\":2,\"fn\":\"Saf Akıl Ağı\",\"tn\":\"Yeşil Birlik\",\"give\":[],\"want\":[{\"t\":\"warJoin\",\"target\":3,\"plan\":1,\"l\":\"⚔ Saf Akıl Ağı yanında İxir Tahtı karşısına savaş · Fetih · Athdor, Kalinex · katılım Saf Akıl Ağı savaşı ilan ettiği anda başlar (hazırlık #1, en geç gün 181)\"}],\"born\":1,\"expires\":541,\"round\":1,\"prev\":null,\"status\":\"pending\",\"why\":\"\",\"by\":\"human\",\"cost\":0}"
+   },
+   "card": "Teklif — Saf Akıl Ağı || 📜\nSaf Akıl Ağı · Savaş katılım daveti\nVeriyor: yok · İstiyor: ⚔ Saf Akıl Ağı yanında İxir Tahtı karşısına savaş · Fetih · Athdor, Kalinex · katılım Saf Akıl Ağı savaşı ilan ettiği anda başlar (hazırlık #1, en geç gün 181) · 18 ay\n›\nKABUL\nREDDET\nKARŞI TEKLİF",
+   "Q2": {
+    "button": "2 Destekçiyle Savaş İlan Et"
+   },
+   "Q3": {
+    "fronts": 1,
+    "c": true,
+    "y": true,
+    "wg": {
+     "t": "fetih",
+     "start": 1.1394759999999988,
+     "targets": [
+      12,
+      14
+     ],
+     "v": 2
+    },
+    "res": {
+     "min": 3850,
+     "ene": 4000,
+     "yiy": 4000,
+     "ala": 3600,
+     "ara": 0,
+     "tuk": 4000,
+     "etk": 4975
+    },
+    "state": "launched",
+    "spent": {
+     "min": 150,
+     "ala": 400,
+     "etk": 25
+    }
+   },
+   "Q4": {
+    "reflectMs": 738,
+    "dayBefore": 1,
+    "dayAfter": 46,
+    "scroll0": 220,
+    "scroll1": 220,
+    "heldDelta": 0,
+    "revBefore": 6,
+    "revAfter": 8,
+    "internal": {
+     "open": true,
+     "days": 30
+    }
+   },
+   "Q5": {
+    "box": "AYRI BARIŞ — yalnız bu cephe (#1) kapanır\nÖteki cepheler: Rhyvaur Şurası ↔ İxir Tahtı — sürer · Yeşil Birlik ↔ İxir Tahtı — sürer",
+    "offer": {
+     "from": 1,
+     "to": 3,
+     "give": [],
+     "want": [
+      "peace"
+     ],
+     "status": "rejected",
+     "why": "🕊 Barış için elindekiler yetersiz. Yaklaşık 706 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin."
+    }
+   },
+   "Q6": {
+    "Z": 5,
+    "F": 1,
+    "hostX": [
+     [
+      12,
+      4,
+      true,
+      false
+     ],
+     [
+      14,
+      4,
+      true,
+      false
+     ],
+     [
+      44,
+      3,
+      true,
+      true
+     ]
+    ],
+    "added": 3,
+    "ui": [
+     "TOPRAK VAADİ (isteğe bağlı)"
+    ],
+    "offer": {
+     "from": 1,
+     "to": 5,
+     "give": [
+      {
+       "t": "landPromise",
+       "sys": 3,
+       "front": 1
+      }
+     ],
+     "want": [
+      {
+       "t": "warJoin",
+       "target": 3,
+       "front": 1
+      }
+     ],
+     "status": "rejected",
+     "why": "Bilinen güç veya askerî erişim desteği karşılamıyor"
+    }
+   },
+   "Q7": {
+    "ids": {
+     "FA": 2,
+     "FB": 3,
+     "Z": 5,
+     "W": 6
+    },
+    "preview": "⚔ FEDERASYONA KARŞI SAVAŞ · Test 5\nHedef üye ve savaş hedefi; oylamadan sonra ayrıca uygulanır.\nSylraen Meclisi\nOriar Sendikası\n⚔ Fetih\n👑 Vasallaştırma\nVasallık: Haraçgüzar · senyörün savaşlarına katılmaz.\nBİZİM TARAF\nKoşullu: Saf Akıl Ağı (Evet oyu veren üye uygulamada katılır)\nKatılmayacak: Yeşil Birlik (Antlaşma, vasallık veya Konsey engeli)\nKARŞI TARAF\nKesin: —\nKoşullu: —\nMeşruiyet 20 / 55 · orantısız\nOy ve ilan ayrı adımdır: onay savaş başlatmaz. Uygulamada yalnız evet veren, erişebilen ve engeli olmayan üyeler girer. Savaş ortasında ayrılan üyenin cephesi sürer ama ortak barışa girmez; ",
+    "lastResult": [
+     {
+      "v": 1,
+      "type": "result",
+      "seq": 17,
+      "cid": "jmwhvy166pgimtps7",
+      "status": "ok",
+      "code": null,
+      "rev": 31,
+      "extra": {
+       "offer": 11,
+       "ai": "red"
+      },
+      "ms": 26
+     },
+     {
+      "v": 1,
+      "type": "result",
+      "seq": 18,
+      "cid": "jmwhvy37ittigid78",
+      "status": "ok",
+      "code": null,
+      "rev": 35,
+      "ms": 30
+     }
+    ],
+    "vote": {
+     "kind": "motion",
+     "motion": "fedWar",
+     "target": 6,
+     "targetFed": 3,
+     "goal": "boyun",
+     "vtype": "haracguzar",
+     "war": "none"
+    }
+   }
+  },
+  "errors": []
+ }
+}

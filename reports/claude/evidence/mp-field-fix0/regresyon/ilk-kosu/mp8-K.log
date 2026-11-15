@@ -1,0 +1,6 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":415,"buildMs":426,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":2.4,"p95":2.4,"max":2.4},"longtask":{"n":0},"heapMB":16,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":30.1,"p95":30.1,"max":30.1},"refresh":{"n":1,"med":2.5,"p95":2.5,"max":2.5},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":21,"joinErrors":0}}}
+PASS K0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS K1 misafir FİLO → SEVKİYATLAR → "Bekleyenleri Yeniden Dene (3)": çift dokunuş host'ta tek uygulama; sonuç metni host yanıtı; başka devlete dokunulmaz
+PASS K2 misafirin SİSTEM paneli: ateşkeste "Kara ordusu bekleniyor", barıştan sonra "KUŞATMA DURDU — savaş sona erdi" (host durumundan)
+GEÇEN: 3 KALAN: 0

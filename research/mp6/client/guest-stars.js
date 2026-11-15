@@ -69,9 +69,13 @@ function loadNoticePrefs(){
  const namespace=join?.saveId&&'mp:fed-results:'+join.saveId+':'+join.empireId;
  if(!namespace)return true;if(noticePrefs.namespace!==namespace){noticePrefs.namespace=namespace;S.resolvedChoices=new Set();S.swiped.clear();noticePrefs.ready=false;noticePrefs.promise=null;noticePrefs.keys=new Set();}
  if(noticePrefs.ready)return true;
- if(!noticePrefs.promise)noticePrefs.promise=(async()=>{try{const raw=await storeGet(namespace),keys=JSON.parse(raw||'[]');if(noticePrefs.namespace===namespace&&Array.isArray(keys))for(const k of keys.slice(-192))if(typeof k==='string')noticePrefs.keys.add(k);}catch{}finally{if(noticePrefs.namespace===namespace)noticePrefs.ready=true;}})();
+ if(!noticePrefs.promise)noticePrefs.promise=(async()=>{try{const raw=await storeGet(namespace),keys=JSON.parse(raw||'[]');if(noticePrefs.namespace===namespace&&Array.isArray(keys))for(const k of keys.slice(-192))if(typeof k==='string')noticePrefs.keys.add(k);
+   /* MP-FIELD-FIX.0: kaydırılarak kapatılan kartlar kayıt + devlet ad alanında kalıcı (sayfa yenilenince / Android arka plan dönüşünde / kayıttan yeni odada geri gelmez) */
+   const sw=JSON.parse(await storeGet(swipedKey(namespace))||'[]');if(noticePrefs.namespace===namespace&&Array.isArray(sw))for(const k of sw.slice(-192))if(typeof k==='string')S.swiped.add(k);}catch{}finally{if(noticePrefs.namespace===namespace)noticePrefs.ready=true;}})();
  return false;
 }
+const swipedKey=ns=>ns.replace('mp:fed-results:','mp:swiped:');
+function saveSwiped(){if(!noticePrefs.namespace)return;while(S.swiped.size>192)S.swiped.delete(S.swiped.values().next().value);Promise.resolve(storeSet(swipedKey(noticePrefs.namespace),JSON.stringify([...S.swiped]))).catch(()=>{});}
 function restoreObservation(m){
  if(!m||!G.p)return;G.vis=new Set(m.mpVisible||[]);G._sensorVision=new Map();G._shareVisSet=null;
  G.p.mapHabitats=JSON.parse(JSON.stringify(m.emps?.[0]?.mapHabitats||{}));
@@ -84,7 +88,7 @@ function restoreObservation(m){
 /* ---- 1. eylem kapısı ---- */
 /* Yalnız görünüm/gezinme (dünyayı değiştirmeyen) eylemler yerelde çalışır. MP.6.1: arşiv/gelen kutusu görünümleri, anlaşma,
    vasallık ve federasyon taslak ekranları da görünümdür (gönderim motor işlevinde MP komutuna çevrilir). */
-const VIEW=new Set(['coalPick','coalTerms','coalTermsDone','coalAmt','coalPassage','coalEdit','coalReply','coalWithdraw','coalSend','coalLaunch','coalSave','coalCancel','coalOthersFold','coalAlliesFold','warCenter','warCenterTab','warCenterDetail','warCenterSupport','warCenterCompose','warCenterPeace','warPrepare','warPreparation','warPrepareInvite','warPrepareCompose','warPrepareLaunchAsk','warPrepareLaunch','warPrepareWithdraw','colonies','colonySelect','colonyMap','colonySort','colonyDetails','borderDiplo','noteOptions','noteChoice','activeWars','activeWarDiplo','noteQuick','noteSwipe','tab','full','cameraReset','cameraFocus','home','fit','topStatus','diploPane','globalPane','advClose','advShow','advNever','planetFold',
+const VIEW=new Set(['dealSupport','dealSupportPick','coalPick','coalTerms','coalTermsDone','coalAmt','coalPassage','coalEdit','coalReply','coalWithdraw','coalSend','coalLaunch','coalSave','coalCancel','coalOthersFold','coalAlliesFold','warCenter','warCenterTab','warCenterDetail','warCenterSupport','warCenterCompose','warCenterPeace','warPrepare','warPreparation','warPrepareInvite','warPrepareCompose','warPrepareLaunchAsk','warPrepareLaunch','warPrepareWithdraw','colonies','colonySelect','colonyMap','colonySort','colonyDetails','borderDiplo','noteOptions','noteChoice','activeWars','activeWarDiplo','noteQuick','noteSwipe','tab','full','cameraReset','cameraFocus','home','fit','topStatus','diploPane','globalPane','advClose','advShow','advNever','planetFold',
   'radarTog','fleetNamesToggle','grpTog','fedLinksToggle','allyLinksToggle','warLinksToggle','logiToggle','mapMode','bgTog','diploView','diploPick',
   'diploRelation','diploNav','diploFilter','bmPick','bmCancel','vsCurrent','vsInspect','vsType','vsEdit','vsBack','fleetFilter','fedTab','fedMember',
   'closeFed','closeDeal','closeMarket','closeDiplo','memTog','intelView','intelGroup','upInfo','crisInfo','selsys','selfleet','route','fedPane',
@@ -136,7 +140,7 @@ const ACT={
   spd:x=>send({kind:'speed',value:+x|0}),
   stop:()=>{const f=sel();return f&&send({kind:'stop',fleet:f.id});},
   stance:()=>{const f=sel();return f&&send({kind:'stance',fleet:f.id});},
-  merge:()=>{const f=sel();return f&&send({kind:'merge',fleet:f.id});},
+  merge:()=>{const f=sel();if(f&&typeof hasShipment==='function'&&hasShipment(f)){toast('Önce sevkiyatı iptal et',true);return false;}return f&&send({kind:'merge',fleet:f.id});},   /* MP-FIELD-FIX.0: tek oyunculu mergeFleets ile aynı ön koşul (host kuralı aynı) */
   split:()=>{const f=sel();return f&&send({kind:'split',fleet:f.id});},
   splitOne:x=>{const f=sel();return f&&send({kind:'splitType',fleet:f.id,cls:String(x),all:false});},
   splitAll:x=>{const f=sel();return f&&send({kind:'splitType',fleet:f.id,cls:String(x),all:true});},
@@ -160,7 +164,9 @@ const ACT={
   ldrUnassign:x=>send({kind:'leader',action:'unassign',leader:+x}),
   colonize:x=>{const [s,p]=String(x).split(':').map(Number),f=sel(),c={kind:'colonize',sys:s,planet:p};if(f&&fleetHasRole(f,'koloni'))c.fleet=f.id;return send(c);},
   /* MP.7.2: motor işlevi olmayan tek oyunculu düğmeler → host komutu (aynı işlem host'ta, yalnız kendi nesnesi) */
-  mergeArmed:x=>{const f=G.fleets.find(q=>q.e===0&&q.sys===+x&&q.ships.length&&isArmed(q));return f?send({kind:'merge',fleet:f.id}):toast('Birleşecek savaş filosu yok',true);},   // MP.6.1 'merge' (aynı gruptaki savaş filoları)
+  /* MP-FIELD-FIX.0: çapa sevkiyatsız savaş filosu (host 'merge' kuralı sevkiyattaki filoyu reddeder: rules:shipment). Sistemdekiler sevkiyattaysa neden yerelde söylenir. */
+  mergeArmed:x=>{const arm=G.fleets.filter(q=>q.e===0&&q.sys===+x&&q.ships.length&&isArmed(q)&&!q.federal),f=arm.find(q=>!(typeof hasShipment==='function'&&hasShipment(q)));
+    if(!f)return toast(arm.length?'Bu sistemdeki savaş filoları sevkiyatta (takviye / toplanma rotasında); önce sevkiyatı iptal et.':'Birleşecek savaş filosu yok',true);return send({kind:'merge',fleet:f.id});},   // MP.6.1 'merge' (aynı gruptaki savaş filoları)
   dirTog:x=>{const [s,p]=String(x).split(':').map(Number);return send({kind:'colAuto',sys:s,planet:p});},
   /* BETA-P0.1: canonical ballot command; token = law + real target + opened (legacy allowed). */
   cncYes:x=>councilVote(true,x),cncNo:x=>councilVote(false,x),
@@ -181,7 +187,10 @@ function respond(yes){const c=S.counter;const cid=send({kind:'respond',offer:c.o
   S.counter=null;try{UI.dealCounter=null;UI.closeDiplo?UI.closeDiplo():doc.getElementById('diploPane').classList.remove('show');}catch{}}
 const WHY={toTitle:'Odadan ayrılmak için telefonun geri tuşunu kullan.'};
 function blocked(a){S.stats.blocked[a]=(S.stats.blocked[a]||0)+1;toast(WHY[a]||'Bu işlem çok oyunculu misafirde henüz yok (MP.6.1). Host yetkili komut sistemi bu eylemi desteklemiyor.',true);}
-function toast(m,bad){try{UI.alert(m,bad?'war':'');}catch{}}
+/* MP-FIELD-FIX.0: peş peşe gelen AYNI uyarı yeni satır açmaz; görünen satır "(×n)" sayacıyla yenilenir (ör. art arda reddedilen aynı komut). */
+function toast(m,bad){try{const box=doc.getElementById('alerts'),old=box&&[...box.children].find(d=>d.dataset.mpMsg===m&&d.style.opacity!=='0');
+  if(old){const n=(+old.dataset.mpN||1)+1;old.remove();UI.alert(m+' (×'+n+')',bad?'war':'');const d=box.lastElementChild;if(d){d.dataset.mpMsg=m;d.dataset.mpN=n;}return;}
+  UI.alert(m,bad?'war':'');const d=box&&box.lastElementChild;if(d)d.dataset.mpMsg=m;}catch{}}
 /* host'taki gerçek kimlik: aynada misafir 0, host'un devleti misafirin numarası (π = (0 me)) */
 const real=id=>{const me=S.J?S.J.empireId:0;return id===0?me:id===me?0:id;};
 const local=real;                                                     // π kendi tersi
@@ -402,6 +411,10 @@ function gate(){
     return {ok:false,pending:true,why:'Host denetliyor…'};});
   /* WAR-COALITION.0: misafirin müzakere masasında savaş kutuları (ayrı barış, toprak vaadi, federasyonlar arası ortak barış) host'un yetkili
      kısaltılmış defteriyle çizilir (warDealRead); defter yalnız o çizim çağrısı boyunca G.warLedger'a konur, sonra geri alınır (MP.7.2 ortak destek paneli gibi). */
+  /* MP-FIELD-FIX.0: "Savaşa Destek İste" seçenekleri host'tan (aynada savaş defteri yok); kimlikler yerel numaraya çevrilir */
+  {const SR={};UI.dealSupportRows=function(o){if(!S.on||!S.started||!o)return [];const k=o.id,c=SR[k];
+     if(!c||Date.now()-c.at>2500){if(!c||!c.busy){const cid=send({kind:'warSupportList',to:real(k)});if(cid){SR[k]={...(c||{}),busy:true,at:c?c.at:0};waits[cid]=res=>{SR[k]={at:Date.now(),busy:false,rows:res.status==='ok'?(res.extra.rows||[]).map(r=>({...r,target:local(r.target)})):[]};if(UI.deal&&UI.deal.to===k)try{UI.drawDeal();}catch{}};}}}
+     return SR[k]&&SR[k].rows?SR[k].rows:null;};}
   {const DL={};const ledgerLocal=x=>({next:0,fronts:(x.fronts||[]).map(f=>({...f,sides:f.sides.map(local),sponsor:Number.isInteger(f.sponsor)?local(f.sponsor):f.sponsor,occupation:(f.occupation||[]).map(o=>({...o,from:local(o.from),to:local(o.to)}))})),
      promises:(x.promises||[]).map(p=>({...p,giver:local(p.giver),taker:local(p.taker),...(Number.isInteger(p.enemy)?{enemy:local(p.enemy)}:{})}))});
    const dh=UI.warDealHtml;UI.warDealHtml=function(d,e,o){if(!S.on||!S.started||!o)return dh.apply(this,arguments);const k=o.id,c=DL[k];
@@ -499,7 +512,7 @@ function gate(){
   wrap('executeDeal',()=>{toast('Çok oyunculuda anlaşma kararı gelen kutusundan verilir; host uygular.',true);return false;});
   /* MP.6.1 — gerçek gelen kutusu: karar → MP komutu. MP.3 tekliflerinde uygunluğu host denetler (karşı tarafın stoğu aynada yok). */
   /* MP.7.4: kaydırılan kartın imzası saklanır (ayna G.inbox'ı her kurulumda yeniler) */
-  if(typeof UI.noteSwipe==='function'){const ns0=UI.noteSwipe.bind(UI);UI.noteSwipe=function(uid){const it=(G.inbox||[]).find(n=>n.uid===+uid),ok=ns0(uid);if(ok&&it&&S.on)S.swiped.add(noteSig(it));return ok;};}
+  if(typeof UI.noteSwipe==='function'){const ns0=UI.noteSwipe.bind(UI);UI.noteSwipe=function(uid){const it=(G.inbox||[]).find(n=>n.uid===+uid),ok=ns0(uid);if(ok&&it&&S.on){S.swiped.add(noteSig(it));saveSwiped();}return ok;};}
   const DI=DiplomaticInbox,resolve0=DI.resolve.bind(DI),gate0=DI.gate.bind(DI);
   /* MP.8: karar kilidi yalnız aynı bağlantı kuşağında geçerli (bkz. tam ayna) */
   const decBusy=dk=>{const w=S.decWait.get(dk);return !!w&&w.gen===(S.gen|0);};
@@ -566,7 +579,9 @@ function coalLocal(x){if(!x||typeof x!=='object')return x;const o={...x};
   if(o.results)o.results=o.results.map(r=>({...r,member:local(r.member)}));return o;}
 function warLocal(p){const m=x=>x&&{...x,id:local(x.id)};return {...p,target:m(p.target),certain:(p.certain||[]).map(m),conditional:(p.conditional||[]).map(m),...(p.stances?{stances:p.stances.map(m)}:{})};}
 const vasTerms=(type,t)=>{const o={};for(const k of ['tax','science','defense','war','autonomy','duration','renegotiate','sensors'])if(t&&t[k]!==undefined)o[k]=JSON.parse(JSON.stringify(t[k]));return o;};
-function why(res){const d=res.detail&&res.detail.length?' — '+res.detail.join(' · '):'';return (MP1View.ERR[res.code]||res.code)+d;}
+/* MP-FIELD-FIX.0: oyuncuya ham kod gösterilmez — motorun kendi gerekçesi varsa o; bilinmeyen kural kodunda "Kural izin vermedi" (kod tanı için parantezde) */
+function why(res){const det=res.detail&&res.detail.length?res.detail.join(' · '):'',c=String(res.code||'');
+  if(c==='rules:engine'&&det)return det;const base=MP1View.ERR[c]||(/^rules:/.test(c)?'Kural izin vermedi ('+c.slice(6)+')':c);return base+(det?' — '+det:'');}
 function send(cmd){const J=S.J;if(!J)return null;const r=J.cmd(cmd);S.stats.sent[cmd.kind]=(S.stats.sent[cmd.kind]||0)+1;
   if(!r.ok){toast(r.why==='host-yok'?'Host bağlı değil; emir gönderilmedi.':r.why==='stale-world'?'Dünya güncel değil — emir gönderilmedi. Önce MP çubuğundan YENİDEN EŞİTLE.':r.why==='guard-active'?'Geçici AI koruması sürüyor — dünyan eşitlenince kontrol sana döner; emir gönderilmedi.':'Emir gönderilemedi.',true);return null;}
   S.pend.set(r.cid,{kind:cmd.kind,at:Date.now()});if(S.pend.size>64)S.pend.delete(S.pend.keys().next().value);   // MP-P0: host ACK'i gelene dek bekleyen emir
@@ -749,7 +764,9 @@ function inboxOffers(){
       title:'Federasyon oylaması — '+f.name,sub:typeof UI.fedVoteSub==='function'?UI.fedVoteSub(f):(L?L.n:'Karar')+(f.vote.repeal?' — kaldırma':''),key};
     if(!DiplomaticInbox.capture(item))continue;G.inbox.push(item);changed=true;}
   /* MP.7.4: kaydırılarak kapatılan kart ayna yenilenince geri gelmez (karar kaydı gelen kutusunda kalır) */
-  if(S.swiped.size){const n2=G.inbox.length;G.inbox=G.inbox.filter(n=>!S.swiped.has(noteSig(n)));if(G.inbox.length!==n2)changed=true;}
+  /* MP-FIELD-FIX.0: diplomatik kayıt (teklif, oy, davet) Gelen kutusunda kaldığı için kartı kalkar; karar bekleyen olay / anomali ise SİLİNMEZ —
+     gizlenir ve ☰ durum listesinden aynı karar penceresiyle açılır (eskiden ayna yenilenince karar listeden de kayboluyordu). */
+  if(S.swiped.size){const n2=G.inbox.length;G.inbox=G.inbox.filter(n=>{if(!S.swiped.has(noteSig(n)))return true;if(typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(n.kind))return false;if(!n.hidden){n.hidden=true;changed=true;}return true;});if(G.inbox.length!==n2)changed=true;}
   // Rebuild restores live UIDs before rendering; an intermediate draw would
   // detach an unchanged card underneath an active pointer.
   if(changed&&!S.building)try{UI.drawInbox();UI.topbar();}catch{}
@@ -905,7 +922,7 @@ function reconnect(){const J=S.J,y=S.sync;y.reconnects++;syncLog('reconnect');sy
    üstüne uygulanır ve sınırlı aralıkla yeniden denenir), dünyayı değiştiren yeni emirler gönderilmez (gönderilmiş emirler kendiliğinden
    yeniden gönderilmez). İlk tepki TAM ayna istemektir (fark birikimi bozulmuş olabilir). TAM ayna da aynı nedenle reddedilirse sorun host
    verisindedir: en çok 3 otomatik istek, sonra istek durur (sonsuz yeniden bağlanma yok); oyuncu YENİDEN EŞİTLE ile tekrar isteyebilir. */
-const RO_CMDS=new Set(['quote','warQuote','warCenterRead','warCoalition','warDealRead','fedFoundPlan','fedFoundQuote','vassalQuote','internalQuote','spyQuote','settleQuote','remoteQuote','speed']);
+const RO_CMDS=new Set(['quote','warQuote','warCenterRead','warCoalition','warDealRead','warSupportList','fedFoundPlan','fedFoundQuote','vassalQuote','internalQuote','spyQuote','settleQuote','remoteQuote','speed']);
 const DS_WAIT=[0,3000,10000,30000];
 function staleWorld(why){
   const d=S.desync,now=Date.now(),rj=S.lastReject||{stage:'unknown',code:'false',path:''},code=rj.stage+':'+rj.code;

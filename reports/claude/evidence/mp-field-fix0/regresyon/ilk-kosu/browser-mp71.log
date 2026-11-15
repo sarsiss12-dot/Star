@@ -1,0 +1,37 @@
+PASS A1 oda, iki tasarım (gerçek kurulum ekranı), başlat; ikisi de haritayı görür; ayrı ÇOK OYUNCULU DİPLOMASİ paneli ve düğmesi YOK (host ve misafir)
+PASS A2 host GERÇEK anlaşma penceresinden B'ye teklif sunar (kaynak ver / kaynak iste); pencerede insan oyuncu notu; teklif host deposunda bekler, B'nin stoğu host'a gösterilmez
+FAIL A3 B teklifi GERÇEK gelen kutusu kartından açar, yatay 800×360'ta KABUL ET / REDDET / Karşı teklif görünür ve çakışmaz; KABUL ET → host uygular (kaynaklar el değiştirir), iki tarafta Kabul edildi
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/home/user/Star/tests/browser-mp71.cjs:17:40)
+    at /home/user/Star/tests/browser-mp71.cjs:125:37
+    at async test (/home/user/Star/tests/browser-mp71.cjs:13:7)
+    at async /home/user/Star/tests/browser-mp71.cjs:120:3
+PASS A4 B gerçek anlaşma penceresinden host'a teklif; host GERÇEK gelen kutusu kartından açar → Karşı teklif hazırla → anlaşma penceresi (orijinal saklı kart) → TEKLİFİ SUN = karşı teklif; B kartı görür ve REDDEDER; B'nin Gönderilen sekmesi durumu gösterir
+PASS A5 GERİ ÇEK: host anlaşma sayfasındaki "BEKLEYEN TEKLİFLERİN" kutusundan iki adımlı onayla geri çeker; B'nin kartı kalkar, gelen kutusu geçmişinde Geçersizleşti · Gönderen geri çekti; çift dokunuş tek komut
+PASS A6 açık pencere korunur: B Gönderilen sekmesi açıkken host B'nin teklifini kabul eder → satır yerinde "Kabul edildi" olur (pencere kapanmaz, liste öğesi aynı); B'nin anlaşma taslağı yeni ayna gelince korunur
+PASS A7 yetkisiz ve yinelenen kararlar host'ta reddedilir (kendi teklifine yanıt, başkasının teklifini geri çekme, sonuçlanmış teklife ikinci kabul); bağlantı kopması sırasında gelen teklif dönüşte kartta, tek uygulama
+PASS A8 kayıt: MP.4 paketi teklif deposunu (Gönderilen / geçmiş durumları) ve host'un gerçek gelen kutusu kayıtlarını (Save8) taşır; paket doğrulanır
+FAIL B1 host + 2 misafir: B, C'ye gerçek anlaşma penceresinden teklif; C 915×412'de gerçek gelen kutusu kartından açar, Karşı teklif hazırla → TEKLİFİ SUN; B karşı teklifi kartından KABUL EDER; host uygular
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/home/user/Star/tests/browser-mp71.cjs:17:40)
+    at /home/user/Star/tests/browser-mp71.cjs:208:41
+    at async test (/home/user/Star/tests/browser-mp71.cjs:13:7)
+    at async /home/user/Star/tests/browser-mp71.cjs:202:3
+FAIL B2 gizlilik ve yetki: host'un gelen kutusunda / görünümünde B–C teklifi yok; C'nin aynasında B'nin stoğu yok; C, B–C karşı teklifini (kendi gönderdiği) kabul edemez
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'bad-params'
+- 'rules:not-recipient'
+
+    at /home/user/Star/tests/browser-mp71.cjs:225:12
+    at async test (/home/user/Star/tests/browser-mp71.cjs:13:7)
+    at async /home/user/Star/tests/browser-mp71.cjs:220:3
+FAIL B3 B'nin Gönderilen sekmesi (yatay 800×360): satır, şartlar, durum; ayrıntıda yanıt ve geri dönüş düğmeleri ekranda
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/home/user/Star/tests/browser-mp71.cjs:17:40)
+    at /home/user/Star/tests/browser-mp71.cjs:229:11
+    at async test (/home/user/Star/tests/browser-mp71.cjs:13:7)
+    at async /home/user/Star/tests/browser-mp71.cjs:227:3
+PASS sayfa hataları yok
+GEÇEN: 8 KALAN: 4
