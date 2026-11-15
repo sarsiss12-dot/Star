@@ -63,7 +63,7 @@ function connect(){
 const FINAL={4001:'room-closed',4004:'invalid-code',4005:'room-full',4008:'rate-limited',4029:'rate-limited'};
 /* MP-FIELD-FIX.0: katılım hangi aşamada durdu — oda, oyuncu kimliği ya da bağlantı. Ekranda aşama başlığı + motorun/relay'in Türkçe gerekçesi. */
 const STAGE={oda:'ODA BULUNAMADI',kimlik:'OYUNCU KİMLİĞİ DOĞRULANAMADI',baglanti:'BAĞLANTI KESİLDİ'};
-const STAGE_OF={'invalid-code':'oda','room-closed':'oda','room-full':'oda','game-started':'oda','server-restart':'oda','seat-elsewhere':'kimlik','no-save-id':'kimlik',kicked:'kimlik',left:'kimlik',replaced:'kimlik',
+const STAGE_OF={'invalid-code':'oda','room-closed':'oda','room-full':'oda','game-started':'oda','server-restart':'oda','room-no-host':'oda','seat-elsewhere':'kimlik','no-save-id':'kimlik',kicked:'kimlik',left:'kimlik',replaced:'kimlik',
   'rate-limited':'baglanti','server-full':'baglanti','no-host':'baglanti',net:'baglanti'};
 function fail(code,text){J.errCode=code;J.errStage=STAGE_OF[code]||null;J.err=text;}
 J.stageText=()=>J.err?(J.errStage?STAGE[J.errStage]+' · ':'')+J.err:'';
@@ -75,7 +75,13 @@ function hello(){const s=load();raw({v:1,type:'hello',name:J.name,...(s.token?{t
 function receive(t,t0){
   J.stats.msgs++;J.stats.bytes+=t.length;J.packets.push(t);if(J.packets.length>3000)J.packets.shift();
   if(t[0]==='R'){let m;try{m=JSON.parse(t.slice(1));}catch{return;}
-    if(m.t==='welcome'){J.hostOnline=!!m.host;J.retry=0;J.reconnecting=false;if(J.stats.connectMs===null&&t0)J.stats.connectMs=Math.round(performance.now()-t0);if(J.hostOnline)hello();else fail('no-host',V.ERR['no-host']);}
+    if(m.t==='welcome'){J.hostOnline=!!m.host;J.retry=0;J.reconnecting=false;if(J.stats.connectMs===null&&t0)J.stats.connectMs=Math.round(performance.now()-t0);if(J.hostOnline)hello();
+      /* MP-FIELD-VERIFY.0 (saha: "birlikte yeniden giremedik"): host ayrılan oda relay'de MP1_HOST_GRACE_MS (10 dk) açık kalır. Host kaydı YENİ odada
+         açınca eski kodla (adresteki ?code= / otomatik dönüş) ilk katılım "Bağlanıyor…" ekranında, kod/ad kutusu ve KATIL pasifken süresiz bekliyordu.
+         İlk katılımda host yoksa soket kapanır, giriş ekranı düzenlenebilir döner ve neden yazılır; lobide/oyundayken yeniden bağlanma host'u beklemeye devam eder. */
+      else if(J.screen==='connecting'){const w=J.ws;J.ws=null;J.closed=true;if(w){w.onclose=null;w.onmessage=null;try{w.close(4000,'no-host');}catch{try{w.close();}catch{}}}J.screen='join';J.auto=false;
+        fail('room-no-host','Bu odada host yok. Host oyunu kayıttan yeni bir odada açtıysa YENİ kodu gir; aynı odaya dönecekse biraz sonra KATIL\'a yeniden dokun.');}
+      else fail('no-host',V.ERR['no-host']);}
     else if(m.t==='host-up'){J.hostOnline=true;J.err='';hello();}
     else if(m.t==='host-left'){J.hostOnline=false;}
     else if(m.t==='room-closed'){J.closed=true;J.screen='join';J.lobby=null;const c=m.reason==='server-restart'?'server-restart':'room-closed';fail(c,V.ERR[c]);}

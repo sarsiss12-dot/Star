@@ -7,7 +7,7 @@
        doğru cephe ve sistem; host gelen kutusunda kart; iz (taslak → gönderim → yeniden → yanıt → ileti) aynı işlem kimliğiyle
    Z12 ret (host duraklatıldı) → açık neden, taslak düzenlenebilir; sonra aynı taslak kabul edilir (tek kayıt). Soket KAPANIRKEN basış → "bağlantı yok",
        taslak durur; bağlantı dönünce tek kayıt. Host karşı teklifi → B kabul → host cephede savaşta, vaat TEK kez yazılır; savaş kapanınca gecikmiş kabul işlenmez
-   Z13 ikinci kayıt/devam: devam lobisinde DAVET PAYLAŞ bağlantısı (B), eski oda kodu (oda aşaması), aynı profilde açık ikinci sekme (koltuk başka sekmede),
+   Z13 ikinci kayıt/devam: devam lobisinde DAVET PAYLAŞ bağlantısı (B), aynı profilde ikinci sekme, eski oda kodu (host yok: oda aşaması, kod kutusu açık),
        C ana menüden yeni kodla; DEVAM ET; aynı odada C'nin hattı kopar / döner → aynı devlet, tarih ilerler, C'nin filo emri host'ta ve C haritasında */
 module.exports=async(X,{E,M,ready,where,closeUI,cards,ensure})=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,origin,open,ctx,getCode,setCode,CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance}=X;
  const H=()=>pg.H,B=()=>pg.B,C=()=>pg.C;const V=M.verify={};
@@ -19,6 +19,7 @@ module.exports=async(X,{E,M,ready,where,closeUI,cards,ensure})=>{const {test,pg,
  const bState=()=>B().evaluate(()=>{const S=MP6Stars.S,d=UI.deal;return {msg:UI.dealMsg||'',tx:S.dealTx?{id:S.dealTx.id,tries:S.dealTx.tries,sent:S.dealTx.sent}:null,
    give:d?d.give.map(i=>i.t+(i.sys!==undefined?':'+i.sys:'')+(i.r?':'+i.r+':'+i.v:'')):null,want:d?d.want.map(i=>i.t+(i.front!==undefined?':'+i.front:'')):null,
    page:UI.diploPage,shown:document.getElementById('diploPane').classList.contains('show'),builds:S.stats.builds,trace:(S.dealTrace||[]).slice(-14)};});
+ const closeDiplo=p=>p.evaluate(()=>{try{UI.closeDiplo?.();}catch{}document.getElementById('diploPane').classList.remove('show');});   /* oyuncu müzakere panelini kapatır */
  const moveOrder=async(n,e)=>{const mv=await H().evaluate(b=>{const fs=G.fleets.filter(f=>f.e===b&&f.ships.length&&!f.mv&&!f.path.length&&f.sys>=0&&!f.combat&&!hasShipment(f));
      for(const f of fs){const to=G.sys[f.sys].lanes.find(l=>__mp8.why(G.emps[b],{kind:'move',fleet:f.id,to:l})===null);if(to!==undefined)return {fleet:f.id,from:f.sys,to};}return null;},e);
    assert(mv,n+': hareket edebilen filo');
@@ -31,7 +32,7 @@ module.exports=async(X,{E,M,ready,where,closeUI,cards,ensure})=>{const {test,pg,
    assert(h&&(h.sys===mv.to||h.mv===mv.to||h.path.includes(mv.to)),n+': emir host dünyasında '+JSON.stringify(h));assert.deepEqual(g,h,n+': misafir haritasında filo host ile aynı');return {mv,h,g};};
 
  await test('Z10 dönen misafir B: olay kartına dokunup karar verir (host\'ta bir kez, kart kalkar); filo emri gerçek motor işlevinden → host uygular, B haritasında aynı',async()=>{
-   await ensure('B');await closeUI(B());
+   await ensure('B');await closeUI(B());await closeDiplo(B());
    const q=await H().evaluate(b=>{const e=G.emps[b];for(const k of ['e2','e3','e5','e6','e7','e1','e4']){const r=enqueueDecision(e,'event',k);if(r.ok){MP1Host.host.publish();return {id:r.id,k};}}return null;},E.B);
    assert(q,'deterministik olay kuyruğa girdi');V.decision={q};
    const uid=await waitv(B(),id=>{const n=(G.inbox||[]).find(n=>n.decisionId===id&&!n.hidden);return n&&document.querySelector(`#inbox .nCard[data-x="${n.uid}"]`)?n.uid:null;},q.id,20000);
@@ -86,11 +87,15 @@ module.exports=async(X,{E,M,ready,where,closeUI,cards,ensure})=>{const {test,pg,
  await test('Z12 ret ve bağlantı hatası taslağı korur; karşı teklif + kabul vaadi TEK kez yazar; savaş kapanınca gecikmiş kabul işlenmez',async()=>{
    await ensure('B');const F=V.q6.F,T=V.q6.T,hB=V.q6.hostLocal;
    const reopen=async extra=>{await B().evaluate(([h,x])=>{UI.openDeal(h);if(x)UI.deal.give.push(x);UI.drawDeal();},[hB,extra]);await wait(B(),()=>UI.deal&&document.querySelector('[data-a="dealSend"]'));};
+   /* taslak: gerçek dokunuşlarla destek isteği (cephe) + toprak vaadi (son aday) + farklı tutarda kaynak (önceki bekleyen tekliften farklı içerik) */
+   const compose=async v=>{await B().evaluate(h=>{UI.forgetDeal(h);},hB);await reopen(null);
+     if(!(await B().evaluate(()=>!!document.querySelector('[data-a="dealSupportPick"]'))))await tap(B(),'[data-a="dealSupport"]');   /* seçici açık kaldıysa yeniden dokunuş onu kapatır */
+     await wait(B(),F=>!!document.querySelector(`[data-a="dealSupportPick"][data-x^="front:${F}:"]`),F,20000);await tap(B(),`[data-a="dealSupportPick"][data-x^="front:${F}:"]`);
+     await wait(B(),()=>document.querySelector('[data-a="dealPromise"]'),undefined,15000);const pick=await B().evaluate(()=>[...document.querySelectorAll('[data-a="dealPromise"]')].map(b=>b.dataset.x).at(-1));
+     await tap(B(),`[data-a="dealPromise"][data-x="${pick}"]`);await B().evaluate(v=>{UI.deal.give.push({t:'res',r:'min',v});UI.drawDeal();},v);
+     await wait(B(),()=>UI.deal.give.some(i=>i.t==='landPromise')&&UI.deal.want.some(i=>i.t==='warJoin'));return pick;};
    /* (a) host REDDİ (duraklatma) → açık neden, taslak düzenlenebilir */
-   await B().evaluate(h=>{UI.forgetDeal(h);},hB);await reopen(null);
-   await tap(B(),'[data-a="dealSupport"]');await wait(B(),F=>!!document.querySelector(`[data-a="dealSupportPick"][data-x^="front:${F}:"]`),F,20000);await tap(B(),`[data-a="dealSupportPick"][data-x^="front:${F}:"]`);
-   await wait(B(),()=>document.querySelector('[data-a="dealPromise"]'),undefined,15000);const pick=await B().evaluate(()=>[...document.querySelectorAll('[data-a="dealPromise"]')].map(b=>b.dataset.x).at(-1));
-   await tap(B(),`[data-a="dealPromise"][data-x="${pick}"]`);await B().evaluate(()=>{UI.deal.give.push({t:'res',r:'min',v:1});UI.drawDeal();});   /* önceki bekleyen tekliften farklı içerik */
+   await compose(1);
    const n0=await H().evaluate(()=>MP1Host.host.dip.offers.length);await H().evaluate(()=>MP1Host.host.setPaused(true,'host'));
    await tap(B(),'[data-a="dealSend"]');await wait(B(),()=>!MP6Stars.S.dealTx,undefined,20000);const rj=await bState();V.reject={msg:rj.msg,give:rj.give,want:rj.want};await shot(B(),'z12-ret');
    assert.match(rj.msg,/Host reddetti/);assert.match(rj.msg,/taslak korunuyor/i);assert(rj.give.some(x=>/^landPromise/.test(x))&&rj.want.some(x=>/^warJoin/.test(x)),'ret sonrası taslak duruyor '+JSON.stringify(rj));
@@ -98,9 +103,9 @@ module.exports=async(X,{E,M,ready,where,closeUI,cards,ensure})=>{const {test,pg,
    await tap(B(),'[data-a="dealSend"]');await wait(H(),n=>MP1Host.host.dip.offers.length>n,n0,20000);await wait(B(),()=>!MP6Stars.S.dealTx,undefined,20000);
    const od=await offersFrom(n0,E.B);assert.equal(od.length,1,'düzenlenmiş taslak tek kayıt');V.reject.offer=od[0].id;
    /* (b) soket KAPANIRKEN basış (hostOnline henüz düşmedi) → "bağlantı yok", taslak durur; bağlantı dönünce tek kayıt */
-   await reopen({t:'res',r:'min',v:2});const n1=await H().evaluate(()=>MP1Host.host.dip.offers.length);
+   await compose(2);const n1=await H().evaluate(()=>MP1Host.host.dip.offers.length);
    const cl=await B().evaluate(()=>{const ws=MP1Join.ws;ws.close();const st0=ws.readyState,on0=MP1Join.hostOnline;UI.dealSend();return {st0,on0,msg:UI.dealMsg,tx:!!MP6Stars.S.dealTx,give:UI.deal&&UI.deal.give.length};});V.closing=cl;
-   assert.match(cl.msg,/Bağlantı yok/,'kapanan sokette açık ileti: '+cl.msg);assert(cl.give>=2,'taslak korunur');
+   assert.match(cl.msg,/Bağlantı yok/,'kapanan sokette açık ileti: '+cl.msg);assert.equal(cl.give,2,'taslak korunur (vaat + kaynak)');assert.equal(cl.tx,false,'işlem açılmadı (komut gitmedi)');
    await wait(B(),()=>MP1Join.hostOnline&&MP1Join.ws&&MP1Join.ws.readyState===1,undefined,40000);await settle('z12-baglanti');await sleep(3000);
    assert.equal(await H().evaluate(()=>MP1Host.host.dip.offers.length),n1,'kaybolan komut sessizce "gönderildi" sayılmaz; host\'ta kayıt yok');
    await B().evaluate(h=>UI.openDeal(h),hB);await tap(B(),'[data-a="dealSend"]');await wait(H(),n=>MP1Host.host.dip.offers.length>n,n1,20000);await sleep(2000);
@@ -110,17 +115,17 @@ module.exports=async(X,{E,M,ready,where,closeUI,cards,ensure})=>{const {test,pg,
    const ct=await H().evaluate(([a,F,T,s])=>MP1Host.host.local({kind:'counter',offer:a,give:[{t:'warJoin',front:F,target:T}],want:[{t:'landPromise',sys:s,front:F},{t:'res',r:'min',v:3}]}),[a,F,T,sys]);V.counter={ct};
    assert.equal(ct.ok,true,'host karşı teklifi: '+JSON.stringify(ct));const cid=await H().evaluate(()=>MP1Host.host.dip.offers.at(-1).id);await settle('z12-karsi');
    const rec=await waitv(B(),id=>{try{MP71Dip.tick();}catch{}const r=DiplomaticInbox.state().records.find(r=>r.mp===id&&r.status==='pending');return r?r.id:null;},cid,20000);
-   const res=await B().evaluate(id=>DiplomaticInbox.resolve(DiplomaticInbox.state().records.find(r=>r.id===id),true),rec);V.counter.accept=res;
+   const res=await B().evaluate(id=>DiplomaticInbox.resolve(id,true),rec);V.counter.accept=res;
    await wait(H(),([h,t])=>!!G.emps[h].war[t],[0,T],20000);await settle('z12-kabul');
    const after=await H().evaluate(([b,s])=>({min:G.emps[b].res.min,promises:(G.warLedger.promises||[]).filter(p=>p.sys===s).map(p=>({sys:p.sys,front:p.front,giver:p.giver,taker:p.taker,state:p.state})),n:(G.warLedger.promises||[]).length}),[E.B,sys]);V.counter.after=after;
    assert.equal(min0-after.min,3,'karşı teklif bedeli bir kez');assert.equal(after.n-pr0,1,'vaat TEK kez yazıldı: '+JSON.stringify(after));assert.equal(after.promises.filter(p=>p.front===F).length,1);
    assert.notEqual((await cmd('B',{kind:'respond',offer:cid,action:'accept'})).status,'ok','ikinci kabul yok');
    /* (d) savaş kapanınca (B–hedef barış) bekleyen eski teklifin gecikmiş kabulü işlenmez */
    await H().evaluate(([b,t])=>{makePeace(G.emps[b],G.emps[t],{force:true,quiet:true});MP1Host.host.publish();},[E.B,T]);const pr1=await H().evaluate(()=>(G.warLedger.promises||[]).length);
-   await hostRecInstall();const late=await H().evaluate(([id])=>{const r=window.__hostRec(id);return r?{via:'inbox',...DiplomaticInbox.resolve(r,true)}:{via:'local',...MP1Host.host.local({kind:'respond',offer:id,action:'accept'})};},[V.closing.offer]);V.late=late;
+   await hostRecInstall();const late=await H().evaluate(([id])=>{const r=window.__hostRec(id);return r?{via:'inbox',...DiplomaticInbox.resolve(r.id,true)}:{via:'local',...MP1Host.host.local({kind:'respond',offer:id,action:'accept'})};},[V.closing.offer]);V.late=late;
    assert.notEqual(late&&late.ok,true,'kapanan cepheye gecikmiş kabul işlenmez: '+JSON.stringify(late));assert.equal(await H().evaluate(()=>(G.warLedger.promises||[]).length),pr1,'yeni vaat yazılmadı');});
 
- await test('Z13 ikinci kayıt/devam: DAVET PAYLAŞ bağlantısı (B) + eski oda kodu + aynı profilde ikinci sekme + C ana menüden; DEVAM ET; aynı odada C kopar/döner → aynı devlet, tarih ilerler, C filo emri host\'ta ve C haritasında',async()=>{
+ await test('Z13 ikinci kayıt/devam: DAVET PAYLAŞ bağlantısı (B) + aynı profilde ikinci sekme (yeni sekme alır, eski sekme nedenini gösterir, KATIL ile geri alır) + eski oda kodu (host yok → oda aşaması, kod düzenlenebilir) + C ana menüden; DEVAM ET; aynı odada C kopar/döner → aynı devlet, tarih ilerler, C filo emri host\'ta ve C haritasında',async()=>{
    for(const n of ['B','C'])await ensure(n);const old=getCode();
    await H().evaluate(()=>MP1Host.mp4.saveNow('manual'));await wait(H(),()=>MP1Host.lastSave&&MP1Host.lastSave.ok);const day0=await H().evaluate(()=>Math.floor(G.day));
    await ctx.H.close().catch(()=>{});
@@ -139,17 +144,22 @@ module.exports=async(X,{E,M,ready,where,closeUI,cards,ensure})=>{const {test,pg,
    /* aynı profilde ikinci sekme: koltuk başka sekmede — ilk sekme koltuğunu korur */
    const b2=await ctx.B.newPage();await b2.goto(origin.B+'/mp/play?code='+code2);await wait(b2,()=>window.MP1Join&&document.getElementById('jName'));if(await b2.evaluate(()=>!MP1Join.ws))await tap(b2,'[data-j="go"]');
    await wait(b2,()=>!!MP1Join.err||MP1Join.empireId!==null,undefined,30000);await sleep(2000);V.rejoin2.secondTab=await where(b2);await shot(b2,'z13-ikinci-sekme');
-   const b1=await where(B());V.rejoin2.firstTab=b1;await b2.close();
+   V.rejoin2.firstTab=await where(B());await shot(B(),'z13-ilk-sekme');
+   /* yeni sekme koltuğu alır; eski sekme nedenini (kimlik aşaması) gösterir ve KATIL ile koltuğu geri alabilir */
+   assert.equal(V.rejoin2.secondTab.e,E.B,'yeni sekme aynı devlete bağlanır');assert.equal(V.rejoin2.firstTab.stage,'kimlik',JSON.stringify(V.rejoin2.firstTab));assert.match(V.rejoin2.firstTab.status,/başka bir sekmede/);
+   await b2.close();await sleep(1500);await tap(B(),'[data-j="go"]');await wait(B(),e=>MP1Join.empireId===e,E.B,40000);V.rejoin2.firstBack=await where(B());
    /* eski / yanlış oda kodu: C ana menüden eski kodu girer → oda aşaması, oyun açılmaz */
    const c=C();await c.goto(origin.C+'/');await wait(c,()=>document.getElementById('mp1Btn'));await tap(c,'#mp1Btn');await tap(c,'[data-m="join"]');
    await c.waitForURL(u=>/\/mp\/play/.test(String(u)),{timeout:20000});await wait(c,()=>document.getElementById('jCode'));await c.fill('#jCode',old);await tap(c,'[data-j="go"]');
    await wait(c,()=>MP1Join.screen==='join'&&!!MP1Join.err,undefined,30000).catch(()=>{});V.rejoin2.oldCode=await where(c);await shot(c,'z13-eski-kod');
-   assert.notEqual(V.rejoin2.oldCode.started,true,'eski kodla oyuna girilmez');assert(['oda','baglanti'].includes(V.rejoin2.oldCode.stage),'eski kod aşaması: '+JSON.stringify(V.rejoin2.oldCode));
+   V.rejoin2.oldCode.inputs=await c.evaluate(()=>({code:!document.getElementById('jCode').disabled,go:!document.querySelector('[data-j="go"]').disabled}));
+   assert.notEqual(V.rejoin2.oldCode.started,true,'eski kodla oyuna girilmez');assert.equal(V.rejoin2.oldCode.stage,'oda','eski kod aşaması: '+JSON.stringify(V.rejoin2.oldCode));
+   assert.match(V.rejoin2.oldCode.status,/host yok/i);assert.deepEqual(V.rejoin2.oldCode.inputs,{code:true,go:true},'yeni kod yazılabilir (eskiden "Bağlanıyor…" ekranında kilitliydi)');
    /* C yeni kodla */
    await c.fill('#jCode',code2);await tap(c,'[data-j="go"]');await wait(c,e=>MP1Join.empireId===e,E.C,40000);
    await tap(h,'[data-m="resumeGo"]');await sleep(800);if(await h.evaluate(()=>!!document.getElementById('mp1Sheet')))await tap(h,'#mp1Sheet [data-m="sheetOk"]');
    await wait(h,()=>MP1Host.started&&MP1Host.host.lobby.phase==='ingame',undefined,40000);await ready(B(),E.B);await ready(c,E.C);for(const p of [B(),c])await p.evaluate(CANON+GUESTLIB);await settle('z13');
-   assert.equal(b1.e,E.B,'ilk sekme koltuğunu korudu');assert.notEqual(V.rejoin2.secondTab.e===E.B&&V.rejoin2.secondTab.started,true,'ikinci sekme aynı koltuğu çalmaz');
+   assert.equal(await B().evaluate(()=>MP1Join.empireId),E.B,'B kendi devletinde');
    assert.equal(await H().evaluate(()=>Math.floor(G.day)),day0,'kayıt tarihi');
    /* aynı odada kopma / dönüş */
    await lanes.C.down();await sleep(3000);await lanes.C.up();await wait(c,()=>MP1Join.hostOnline&&MP1Join.ws&&MP1Join.ws.readyState===1,undefined,40000);await ready(c,E.C);
