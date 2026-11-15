@@ -4,7 +4,7 @@
    - Başlık menüsüne ÇOK OYUNCULU ekler (YENİ OYUN / OYUNA DEVAM ET / AYARLAR korunur).
    - ODA OLUŞTUR: relay'den güvenli oda kodu + host anahtarı alır, galaksiyi gerçek
      setupGame ile kurar, lobiyi yönetir, OYUNU BAŞLAT ile gerçek oyuna girer.
-   - ODAYA KATIL: motor yüklemeyen /mp/join sayfasına gider (misafir simülasyon yürütmez).
+   - ODAYA KATIL: tam STARS misafir arayüzü /mp/play (misafir simülasyon yürütmez; motor yalnız gösterim için yüklenir).
    - Oyun içinde: ay sonu yayını, uzak insanların keşif belleği, küçük host paneli. */
 (function(){
 const V=MP1View,esc=V.esc,doc=document;
@@ -95,7 +95,7 @@ function onChange(e){const t=e.target;if(t.id==='mp4File'){onFile(t);return;}if(
 function onClick(e){
   const el=e.target.closest('[data-m]');if(!el)return;const m=el.dataset.m;
   if(m==='back'){history.back();return;}
-  if(m==='join'){location.assign('/mp/join');return;}
+  if(m==='join'){location.assign('/mp/play');return;}   /* MP-FIELD-FIX.0: tam STARS arayüzü (eskiden motor yüklemeyen /mp/join basit istemcisi) */
   if(m==='create'){createRoom();return;}
   if(m==='saves'){API.savesMode=el.dataset.mode||'resume';API.saveErr='';API.fileSave=null;API.saves=null;go('saves');refreshSaves();return;}
   if(m==='resume'){resumeFromKey(el.dataset.k);return;}

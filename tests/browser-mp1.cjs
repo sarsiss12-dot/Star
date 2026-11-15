@@ -39,7 +39,7 @@ async function layout(p){return p.evaluate(()=>{
   return {vw,vh:innerHeight,scrollW:document.documentElement.scrollWidth,overflow:document.documentElement.scrollWidth>vw+1,controls:ctl.length,small,wide,minFont,minAt};});}
 function assertLayout(l,where){assert(!l.overflow,where+' horizontal overflow '+l.scrollW+'>'+l.vw);assert.deepEqual(l.wide,[],where+' element wider than screen');
   assert.deepEqual(l.small,[],where+' touch target < 44 px');assert(l.minFont>=11,where+' font '+l.minFont+' '+l.minAt);}
-async function joinByLink(p,name){await p.goto(base+'/mp/join?code='+code);await wait(p,()=>window.MP1Join&&document.getElementById('jCode'));
+async function joinByLink(p,name){await p.goto(base+'/mp/join?basic=1&code='+code);await wait(p,()=>window.MP1Join&&document.getElementById('jCode'));
   assert.equal(await p.inputValue('#jCode'),code);await p.fill('#jName',name);   // MP.7.4: 5 karakter, tiresiz
   await p.locator('[data-j="go"]').tap();await wait(p,()=>MP1Join.screen==='lobby'&&MP1Join.lobby&&MP1Join.playerId);}
 function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.execPath,[path.join(root,'research/mp1/server/relay.js')],{env:{...process.env,MP1_PORT:'0',MP_DELAY_MS:String(delay)},stdio:['ignore','pipe','pipe']});
@@ -88,7 +88,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
   });
   await test('guest A joins by invite link, guest B types the code by hand (lowercase, no dash) and presses Enter; guests run no engine',async()=>{
     await joinByLink(A,'Ayşe');
-    await B.goto(base+'/mp/join');await wait(B,()=>window.MP1Join);await B.locator('#jCode').tap();await B.keyboard.type(code.toLowerCase());
+    await B.goto(base+'/mp/join?basic=1');await wait(B,()=>window.MP1Join);await B.locator('#jCode').tap();await B.keyboard.type(code.toLowerCase());
     assert.equal(await B.inputValue('#jCode'),code,'typed code is normalised (upper case, 5 characters)');
     await B.fill('#jName','Bo"ra<img src=x onerror=__x=1>');await B.press('#jName','Enter');
     await wait(B,()=>MP1Join.screen==='lobby'&&MP1Join.lobby);
@@ -168,7 +168,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
   });
   await test('mobile lobby layout at 360×800, 390×844, 412×915, 844×390, 915×412: no horizontal overflow, ≥44 px targets, readable text, keyboard keeps inputs visible, back asks before leaving',async()=>{
     const sizes=[[360,800],[390,844],[412,915],[844,390],[915,412]];
-    await X.goto(base+'/mp/join');await wait(X,()=>window.MP1Join);
+    await X.goto(base+'/mp/join?basic=1');await wait(X,()=>window.MP1Join);
     for(const [w,h] of sizes){const tag=w+'x'+h,m=metrics.viewports[tag]={};
       for(const [n,p] of [['host',H],['guest',A],['join',X]]){await p.setViewportSize({width:w,height:h});await p.waitForTimeout(120);const l=await layout(p);m[n+'Lobby']=l;assertLayout(l,n+' '+tag);}
       await A.locator('[data-j="tab"][data-tab="etik"]').tap();await A.waitForTimeout(60);assertLayout(await layout(A),'guest etik '+tag);await A.locator('[data-j="tab"][data-tab="lobi"]').tap();
@@ -193,7 +193,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
     assert.match(await C.textContent('.mp1-h'),/4\/4 OYUNCU/);
     await C.evaluate(()=>MP1Join.claim(3));await wait(C,()=>MP1Join.lresults.some(r=>r.action==='claim'));assert.equal(await C.evaluate(()=>MP1Join.lresults[0].code),'taken');
     await C.locator('[data-j="claim"][data-e="5"]').tap();await wait(H,()=>MP1Host.lobby.players[3].claim===5);
-    await X.goto(base+'/mp/join?code='+code);await wait(X,()=>window.MP1Join&&document.getElementById('jCode'));await X.fill('#jName','Fazla');await X.locator('[data-j="go"]').tap();
+    await X.goto(base+'/mp/join?basic=1&code='+code);await wait(X,()=>window.MP1Join&&document.getElementById('jCode'));await X.fill('#jName','Fazla');await X.locator('[data-j="go"]').tap();
     await wait(X,()=>/Oda dolu/.test(document.getElementById('jStatus').textContent));
     assert.equal(await H.evaluate(()=>MP1Host.host.setCapacity(3).why),'too-many');
     await shot(H,'host-lobby-3guests');
@@ -355,7 +355,7 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
       await h.goto(r.base+'/');await wait(h,()=>document.getElementById('mp1Btn'));await h.locator('#mp1Btn').tap();
       let t=Date.now();await h.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>h.locator('[data-m="create"]').tap());await wait(h,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');m.createMs=Date.now()-t;
       const c=await h.evaluate(()=>MP1Host.code);
-      await g.goto(r.base+'/mp/join?code='+c);await wait(g,()=>document.getElementById('jCode'));await g.fill('#jName','Gecikme');
+      await g.goto(r.base+'/mp/join?basic=1&code='+c);await wait(g,()=>document.getElementById('jCode'));await g.fill('#jName','Gecikme');
       t=Date.now();await g.locator('[data-j="go"]').tap();await wait(g,()=>MP1Join.screen==='lobby');m.joinMs=Date.now()-t;
       t=Date.now();const e1=await h.evaluate(()=>MP1Host.lobby.empires.map(e=>G.emps[e.id]).find(e=>e.colonies.some(c=>{const pl=G.sys[c.s].planets[c.p];return colonyUsed(pl.col)+colonyQueued(pl.col)<colonySlots(pl.col,e,pl)&&e.res.min>=buildingCost(e,'santral').min;})).id);await g.locator('[data-j="claim"][data-e="'+e1+'"]').tap();await wait(h,e=>MP1Host.lobby.players[1].claim===e,e1);m.claimToHostMs=Date.now()-t;
       await wait(g,e=>MP1Join.lobby.players[1].claim===e,e1);m.claimEchoMs=Date.now()-t;
@@ -373,12 +373,12 @@ function childRelay(delay){return new Promise((res,rej)=>{const c=spawn(process.
       // odayı kapat: oyun içinde değil, ikinci bir lobide
       const h2=await ctxh.newPage();await h2.goto(r.base+'/');await wait(h2,()=>document.getElementById('mp1Btn'));await h2.locator('#mp1Btn').tap();await h2.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>h2.locator('[data-m="create"]').tap());
       await wait(h2,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');const c2=await h2.evaluate(()=>MP1Host.code);
-      const g2=await ctxg.newPage();await g2.goto(r.base+'/mp/join?code='+c2);await wait(g2,()=>document.getElementById('jCode'));await g2.fill('#jName','Kapanış');await g2.locator('[data-j="go"]').tap();await wait(g2,()=>MP1Join.screen==='lobby');
+      const g2=await ctxg.newPage();await g2.goto(r.base+'/mp/join?basic=1&code='+c2);await wait(g2,()=>document.getElementById('jCode'));await g2.fill('#jName','Kapanış');await g2.locator('[data-j="go"]').tap();await wait(g2,()=>MP1Join.screen==='lobby');
       await h2.locator('[data-m="close"]').tap();await h2.locator('[data-m="sheetOk"]').tap();
       await wait(g2,()=>MP1Join.screen==='join'&&/Oda kapandı/.test(document.getElementById('jStatus').textContent),undefined,8000).catch(async e=>{throw Error('close: '+JSON.stringify(await g2.evaluate(()=>({s:MP1Join.screen,err:MP1Join.err,errs:MP1Join.errors,st:(document.getElementById('jStatus')||{}).textContent,pk:MP1Join.packets.slice(-4)}))));});
-      await g2.evaluate(()=>localStorage.clear());await g2.goto(r.base+'/mp/join?code='+c2);await wait(g2,()=>document.getElementById('jCode'));await g2.fill('#jName','Eski');await g2.locator('[data-j="go"]').tap();
+      await g2.evaluate(()=>localStorage.clear());await g2.goto(r.base+'/mp/join?basic=1&code='+c2);await wait(g2,()=>document.getElementById('jCode'));await g2.fill('#jName','Eski');await g2.locator('[data-j="go"]').tap();
       await wait(g2,()=>/Oda kapandı/.test(document.getElementById('jStatus').textContent));
-      await g2.goto(r.base+'/mp/join?code=ABCDEFGH');await wait(g2,()=>document.getElementById('jCode'));await g2.fill('#jName','Yanlış');await g2.locator('[data-j="go"]').tap();
+      await g2.goto(r.base+'/mp/join?basic=1&code=ABCDEFGH');await wait(g2,()=>document.getElementById('jCode'));await g2.fill('#jName','Yanlış');await g2.locator('[data-j="go"]').tap();
       await wait(g2,()=>/geçersiz/.test(document.getElementById('jStatus').textContent));
       assert(!/[A-Z2-9]{8}/.test(r.stdout().replace(/STARS MP\.1 relay[^\n]*/,'')),'relay stdout carries no room codes');
     }finally{await ctxh.close();await ctxg.close();r.proc.kill();}

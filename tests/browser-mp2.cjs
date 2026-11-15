@@ -48,7 +48,7 @@ async function room(hostPage,size,ai,seed,guests){
   await hostPage.locator('#mp1Btn').tap();await hostPage.evaluate(()=>{window.MP7Legacy=1;/* MP.7: bu test MP.1 devralma kipini (AI devletini seçme) sınar; tasarım kipi browser-mp7 */}).then(()=>hostPage.locator('[data-m="create"]').tap());await wait(hostPage,()=>MP1Host.lobby&&MP1Host.lobby.phase==='waiting');
   const c=await hostPage.evaluate(([size,ai,seed,n])=>{MP1Host.host.setCapacity(n+1);MP1Host.host.configure({size,aiCount:ai,seed});return MP1Host.code;},[size,ai,seed,guests.length]);
   await hostPage.evaluate(()=>{MP1Host.ws.send('C'+JSON.stringify({cap:MP1Host.host.lobby.capacity-1}));});
-  for(const [g,name,e] of guests){await g.goto(base+'/mp/join?code='+c);await wait(g,()=>window.MP1Join&&document.getElementById('jCode'));await g.fill('#jName',name);
+  for(const [g,name,e] of guests){await g.goto(base+'/mp/join?basic=1&code='+c);await wait(g,()=>window.MP1Join&&document.getElementById('jCode'));await g.fill('#jName',name);
     await g.locator('[data-j="go"]').tap();await wait(g,()=>MP1Join.screen==='lobby'&&MP1Join.lobby);await g.evaluate(x=>MP1Join.claim(x),e);
     await wait(hostPage,([e])=>MP1Host.lobby.players.some(p=>p.claim===e),[e]);await g.evaluate(()=>MP1Join.ready(true));}
   await wait(hostPage,()=>MP1Host.host.canStart().ok);await hostPage.locator('[data-m="start"]').tap();

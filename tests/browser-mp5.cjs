@@ -79,7 +79,7 @@ async function restartRelay(){const t0=Date.now();
 async function openHost(){const ctx=await chromium.launchPersistentContext(hostDir,{...launch,...PHONE(844,390)});const p=ctx.pages()[0]||await ctx.newPage();
   p.on('pageerror',e=>errors.push('host: '+e.message));p.on('websocket',w=>metrics.wsUrls.push(w.url()));return {ctx,p};}
 async function plain(vp,name){const b=await chromium.launch(launch);const p=await (await b.newContext(PHONE(...vp))).newPage();p.on('pageerror',e=>errors.push(name+': '+e.message));p.on('websocket',w=>metrics.wsUrls.push(w.url()));return {b,p};}
-async function guestJoin(p,laneName,code,name){await p.goto(origin[laneName]+'/mp/join?code='+code);await wait(p,()=>window.MP1Join&&document.getElementById('jCode'));
+async function guestJoin(p,laneName,code,name){await p.goto(origin[laneName]+'/mp/join?basic=1&code='+code);await wait(p,()=>window.MP1Join&&document.getElementById('jCode'));
   if(name)await p.fill('#jName',name);await p.locator('[data-j="go"]').tap();}
 async function hostMenu(){await H.goto(origin.H+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn'));await H.locator('#mp1Btn').tap();await wait(H,()=>MP1Host.screen==='menu');}
 async function sheetOk(p){await wait(p,()=>document.getElementById('mp1Sheet'));await p.locator('#mp1Sheet [data-m="sheetOk"]').tap();await wait(p,()=>!document.getElementById('mp1Sheet'));}

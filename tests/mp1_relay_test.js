@@ -63,7 +63,9 @@ test('static: injected game page, exact runtime bytes, join page CSP, allowlist 
     const man=JSON.parse(fs.readFileSync(path.join(root,'RELEASE-MANIFEST.json'),'utf8'));
     for(const f of Object.keys(man.files).filter(f=>f!=='index.html')){const x=await get(r.port,'/'+f);assert.equal(x.status,200,f);
       assert.equal(crypto.createHash('sha256').update(x.body).digest('hex'),man.files[f].sha256??man.files[f],f);}
-    const j=await get(r.port,'/mp/join?code=ABCD-EFGH');assert.equal(j.status,200);assert.match(j.headers['content-security-policy'],/script-src 'self'/);
+    const j=await get(r.port,'/mp/join?basic=1&code=ABCD-EFGH');assert.equal(j.status,200);assert.match(j.headers['content-security-policy'],/script-src 'self'/);
+    /* MP-FIELD-FIX.0: eski davet bağlantısı tam arayüze yönlenir, oda kodu ve öteki parametreler korunur */
+    const jr=await get(r.port,'/mp/join?code=ABCD-EFGH&name=X');assert.equal(jr.status,302);assert.equal(jr.headers.location,'/mp/play?code=ABCD-EFGH&name=X');
     assert.equal(j.headers['x-content-type-options'],'nosniff');assert.equal(j.headers['x-frame-options'],'DENY');assert.equal(j.headers['referrer-policy'],'no-referrer');
     for(const p of ['/research/mp1/server/relay.js','/research/mp0/server/dev-relay.js','/package.json','/tests/run-all.js','/.git/config','/%2e%2e/etc/passwd','/../etc/passwd',
       '/RELEASE-MANIFEST.json','/research/mp1/client/join.html','/mp/stats','/mp/host','/research/mp0/mp-host.js'])assert.equal((await get(r.port,p)).status,404,p);

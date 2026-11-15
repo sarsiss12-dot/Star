@@ -1499,6 +1499,8 @@ const UI = {
          (js + html) hiçbir data-a üreticisi veya çağrısı yoktu. */
       case 'closeDeal': this.stashDiploDraft();$('diploPane').classList.remove('show');break;
       case 'dealAdd': this.dealAdd(x); break;
+      case 'dealSupport': this._dealSupport=this._dealSupport===+x?null:+x;this.drawDeal();break;   // MP-FIELD-FIX.0
+      case 'dealSupportPick': this.dealSupportPick(x);break;
       case 'dealRm': this.dealRm(x); break;
       case 'dealPact': this.dealPact(x); break;
       case 'dealSend': this.dealSend(); break;
@@ -5644,7 +5646,7 @@ const UI = {
       <button class="abtn" data-a="dealAdd" data-x="give:tribute">⏳ Haraç</button>
       <button class="abtn" data-a="dealAdd" data-x="give:lux">❖ Lüks mal</button>
       <button class="abtn" data-a="dealAdd" data-x="give:intel">👁 İstihbarat</button>
-      <button class="abtn" data-a="dealAdd" data-x="give:warOn">⚔ Savaş sözü</button>
+      ${this.dealMpHuman(o)?'<button class="abtn dis dealWarOnOff" disabled title="Çok oyunculuda genel savaş sözü gönderilemez">⚔ Savaş sözü</button>':'<button class="abtn" data-a="dealAdd" data-x="give:warOn">⚔ Savaş sözü</button>'}
       <button class="abtn" data-a="dealAdd" data-x="give:peaceWith">🤲 Barıştırma</button>
       <button class="abtn" data-a="dealAdd" data-x="give:passage">🚪 Geçiş izni</button>
     </div></div>`;
@@ -5662,11 +5664,13 @@ const UI = {
       <button class="abtn" data-a="dealAdd" data-x="want:tribute">⏳ Haraç</button>
       <button class="abtn" data-a="dealAdd" data-x="want:lux" ${intelOf(e,o.id)<2?'disabled title="İZLENİYOR istihbaratı gerekir"':''}>❖ Lüks mal</button>
       <button class="abtn" data-a="dealAdd" data-x="want:intel">👁 İstihbarat</button>
-      <button class="abtn" data-a="dealAdd" data-x="want:warOn">⚔ Savaş sözü</button>
+      ${this.dealMpHuman(o)?'<button class="abtn dis dealWarOnOff" disabled title="Çok oyunculuda genel savaş sözü gönderilemez">⚔ Savaş sözü</button>':'<button class="abtn" data-a="dealAdd" data-x="want:warOn">⚔ Savaş sözü</button>'}
+      <button class="abtn ${this._dealSupport===o.id?'pri':''}" data-a="dealSupport" data-x="${o.id}">⚔ Savaşa Destek İste</button>
       <button class="abtn" data-a="dealAdd" data-x="want:peaceWith">🤲 Barıştırma</button>
       <button class="abtn" data-a="dealAdd" data-x="want:passage">🚪 Geçiş izni</button>
     </div></div></div>`;
 
+    h += this.dealSupportHtml(d,e,o);   // MP-FIELD-FIX.0: belirli savaşa destek daveti
     h += this.warDealHtml(d,e,o);   // BETA-WAR-GOALS.0: savaş şartları
     // --- anlaşma türleri ---
     h += `<div class="ph">ANLAŞMA MADDELERİ</div><div class="act2">`;
@@ -10000,11 +10004,20 @@ UI.warGoalPick=function(id,key){
   const e=G.p,o=G.emps[id];if(!o||!WAR_GOAL_MAIN.includes(key))return;
   const prev=this._wgSel&&this._wgSel.id===id&&this._wgSel.key===key?this._wgSel:null;
   const s=this._wgSel=prev||(key==='fetih'?{id,key,targets:warFetihDefault(e,o)}:{id,key,vtype:'haracguzar',war:WAR_VASSAL_WAR.haracguzar});
-  let h=`<div class="mhd"><span>${WAR_GOALS[key].ico} ${esc(key==='boyun'?'VASALLAŞTIRMA':'FETİH')} · ${esc(o.name)}</span></div><div class="mbd">`;
+  let h=`<div class="mhd"><span>${WAR_GOALS[key].ico} ${esc(key==='boyun'?'VASALLAŞTIRMA':'FETİH')} · ${esc(o.name)}</span></div><div class="mbd" id="wgPickRoot">`;
+  let why='';
   if(key==='fetih'){
-    const c=warFetihCandidates(e,o),max=Math.min(WAR_FETIH_MAX,Math.max(0,sysCount(o)-1));
+    /* MP-FIELD-FIX.0: adaylar oyuncunun bildiği sahiplikten (warFetihCandidates; misafirde aynadaki bilgi, host'ta aynı kural). Açık seçim korunur;
+       pencere açıkken geçerliliği değişen hedef düşer ve nedeni yazılır, yeni keşfedilen sistem listeye girer. */
+    const c=warFetihCandidates(e,o),ids=new Set(c.map(x=>x.id)),max=Math.min(WAR_FETIH_MAX,Math.max(0,sysCount(o)-1));
+    const gone=s.targets.filter(t=>!ids.has(t));if(gone.length){s.targets=s.targets.filter(t=>ids.has(t));s.note=gone.map(t=>G.sys[t]?.name||'?').join(', ')+' artık hedef olamaz (sahipliği değişti ya da bilgin güncellendi).';}
+    if(s.targets.length>max)s.targets=s.targets.slice(0,max);
     h+=`<div class="lead">Talep edilecek sistemleri seç (${s.targets.length}/${max}). Başkent hedef olamaz; hedefe en az bir sistem kalır.</div>`;
-    h+=c.length?c.map(x=>`<button class="ch wgT ${s.targets.includes(x.id)?'pri':''}" data-a="wgTarget" data-x="${x.id}"><div class="cht">${s.targets.includes(x.id)?'☑':'☐'} ${esc(x.name)}<span style="float:right;color:#7d90ad">${x.col} koloni</span></div></button>`).join(''):'<div class="mini">Bilinen başkent dışı sistemi yok: önce keşif ya da istihbarat.</div>';
+    if(s.note)h+=`<div class="mini warnTxt wgNote">⚠ ${esc(s.note)}</div>`;
+    if(c.length)h+=c.map(x=>`<button class="ch wgT ${s.targets.includes(x.id)?'pri':''}" data-a="wgTarget" data-x="${x.id}"><div class="cht">${s.targets.includes(x.id)?'☑':'☐'} ${esc(x.name)}<span style="float:right;color:#7d90ad">${x.col} koloni</span></div></button>`).join('');
+    else{why=sysCount(o)<=1?'Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı.':'Bilinen başkent dışı sistemi yok: önce keşif ya da istihbarat.';
+      h+=`<div class="mini wgWhy">${esc(why)}</div><button class="ch" data-a="setwg" data-x="${id}:boyun"><div class="cht">👑 Vasallaştırmaya dön</div><div class="chd">Toprak talep etmeden hedefi vasalın yapmayı öner.</div></button>`;}
+    if(!why&&!s.targets.length)why='Önizleme için en az bir hedef sistem seç.';
   } else {
     h+=`<div class="lead">Vasallık türü ve senyörün savaşlarına katılım hükmü.</div>`;
     for(const t of Object.keys(VASSAL_TYPES))h+=`<button class="ch ${s.vtype===t?'pri':''}" data-a="wgVtype" data-x="${t}"><div class="cht">${VASSAL_TYPES[t].ico} ${esc(VASSAL_TYPES[t].n)}</div><div class="chd">${esc(VASSAL_TYPES[t].d)}</div></button>`;
@@ -10012,9 +10025,36 @@ UI.warGoalPick=function(id,key){
     for(const [w,l] of [['none','Katılmaz'],['defense','Yalnız savunma'],['all','Saldırı da']]){const ok=!!warVassalGoalTerms(s.vtype,w);h+=`<button class="abtn ${s.war===w?'pri':(ok?'':'dis')}" data-a="wgVwar" data-x="${w}" ${ok?'':'disabled'}>${l}</button>`;}
     h+='</div><div class="mini">Yeni vasal saldırı savaşlarına yalnız bu madde açıkça kabul edilirse katılır.</div>';
   }
-  h+=`</div><div class="mft"><button class="ch" data-a="wgGo" ${key==='fetih'&&!s.targets.length?'disabled':''}>ÖNİZLEME · GEREKÇE VE KATILIMCILAR</button><button class="ch" data-a="war" data-x="${id}">Geri</button><button class="ch" data-a="closem">Vazgeç</button></div>`;
-  this.openModal(h,'war');
+  const off=key==='fetih'&&!s.targets.length;
+  h+=`</div><div class="mft">${off?`<div class="mini wgWhy wgGoWhy">${esc(why)}</div>`:''}<button class="ch wgGo" data-a="wgGo" ${off?'disabled aria-disabled="true"':''}>ÖNİZLEME · GEREKÇE VE KATILIMCILAR</button><button class="ch" data-a="war" data-x="${id}">Geri</button><button class="ch" data-a="closem">Vazgeç</button></div>`;
+  /* liveWorld: misafirde açık pencere dünya güncellemesini bekletmez; açıkken aynı pencere yerinde yenilenir (kaydırma ve seçim korunur) */
+  const m=$('modal'),box=m.querySelector('.mbox.wgPick');
+  if(box&&!m.classList.contains('hidden')&&this._wgOpen===id+':'+key){this.surfaceRender(box,h,'wg-pick',true);return;}
+  this._wgOpen=id+':'+key;this.openModal(h,'war liveWorld wgPick');
 };
+/* MP-FIELD-FIX.0 — müzakere masası: "Savaşa Destek İste" = karşı tarafı BELİRLİ bir savaşa (aktif cephe / bekleyen hazırlık) çağıran warJoin maddesi.
+   Genel "Savaş sözü" (warOn) çok oyunculuda insanla müzakerede gönderilemez (MP teklif deposu cepheye bağlı maddeyi taşır); tek oyunculuda aynen. */
+UI.dealMpHuman=function(o){if(typeof MP6Stars!=='undefined'&&MP6Stars.S?.started)return true;return typeof MP1Host!=='undefined'&&!!MP1Host.started&&!!o&&!o.ai&&o.id!==G.p.id;};
+UI.dealSupportRows=function(o){return typeof warSupportOptions==='function'?warSupportOptions(G.p,o):[];};
+UI.dealSupportHtml=function(d,e,o){
+  let h='';if(this.dealMpHuman(o))h+='<div class="mini dealWarOnWhy">⚔ Genel savaş sözü çok oyunculuda gönderilemez. Belirli bir savaşa katılım için <b>Savaşa Destek İste</b>.</div>';
+  if(this._dealSupport!==o.id)return h;
+  const rows=this.dealSupportRows(o);
+  h+=`<div class="box dealSupport"><b>SAVAŞA DESTEK İSTE · ${esc(o.name)}</b><div class="mini">Davet seçtiğin savaşa bağlanır; kabulde katılım ve anlaşma şartları birlikte uygulanır. Savaş ya da hazırlık kapanırsa gecikmiş kabul işlenmez.</div>`;
+  if(rows===null)h+='<div class="mini">Host\'tan güncel savaşların alınıyor…</div>';
+  else if(!rows.length)h+='<div class="mini warnTxt">Destek istenecek aktif savaşın ya da bekleyen savaş hazırlığın yok. Önce savaş ilan et ya da Savaş İlan Et → müttefik çağır akışıyla hazırlık aç.</div>';
+  else for(const r of rows){const x=r.kind==='front'?'front:'+r.front+':'+r.target:'plan:'+r.plan+':'+r.target,on=d.want.some(i=>i.t==='warJoin'&&(r.kind==='front'?i.front===r.front:i.plan===r.plan));
+    h+=`<button class="abtn ${on?'pri':''} ${r.ok?'':'dis'}" data-a="dealSupportPick" data-x="${x}" ${r.ok?'':'disabled'}>${on?'☑':'☐'} ${esc(r.label)}</button>${r.ok?'':`<div class="mini warnTxt">${esc(r.why)}</div>`}`;}
+  return h+'</div>';
+};
+UI.dealSupportPick=function(x){
+  const d=this.deal;if(!d)return;const [k,a,t]=String(x).split(':'),id=+a,target=+t;if(!['front','plan'].includes(k)||!Number.isSafeInteger(id)||!Number.isSafeInteger(target))return;
+  const rows=this.dealSupportRows(G.emps[d.to])||[],r=rows.find(r=>r.kind===k&&(k==='front'?r.front===id:r.plan===id)&&r.target===target);if(!r||!r.ok){say(r?.why||'Bu savaşa destek artık istenemez','war');this.drawDeal();return;}
+  const i=d.want.findIndex(i=>i.t==='warJoin'&&(k==='front'?i.front===id:i.plan===id));
+  if(i>=0)d.want.splice(i,1);else{d.want=d.want.filter(i=>i.t!=='warJoin');d.want.push(k==='front'?{t:'warJoin',front:id,target}:{t:'warJoin',plan:id,target});}
+  this.drawDeal();
+};
+UI.warGoalPickRefresh=function(){const m=$('modal'),s=this._wgSel;if(!s||m.classList.contains('hidden')||!m.querySelector('.mbox.wgPick')||this._wgOpen!==s.id+':'+s.key)return;this.warGoalPick(s.id,s.key);};
 UI.warGoalAct=function(a,x){
   const s=this._wgSel;if(!s)return;const o=G.emps[s.id];
   if(a==='wgTarget'){const id=+x,i=s.targets.indexOf(id);if(i>=0)s.targets.splice(i,1);else if(s.targets.length<Math.min(WAR_FETIH_MAX,sysCount(o)-1))s.targets.push(id);else say('En çok '+Math.min(WAR_FETIH_MAX,sysCount(o)-1)+' hedef sistem','war');}
@@ -10280,7 +10320,7 @@ const WarCoal={st:null,req:0,last:0,view:null,
   const p=typeof warCoalitionPending==='function'&&!WarCoal.guest()?warCoalitionPending(G.p,id):(typeof WarCenterUI!=='undefined'&&WarCenterUI.preparations||[]).find(x=>x.owner===0&&x.target===id&&x.state==='pending');
   if(p&&WAR_GOAL_MAIN.includes(p.goal)&&p.opts){WarCoal.open(id,p.goal,p.opts);return;}
   return menu0.apply(this,arguments);};
- const rf=UI.refresh;UI.refresh=function(){const r=rf.apply(this,arguments);WarCoal.refresh();return r;};
+ const rf=UI.refresh;UI.refresh=function(){const r=rf.apply(this,arguments);WarCoal.refresh();UI.warGoalPickRefresh();return r;};
  /* Savaş Merkezi'ndeki koalisyon hazırlığı kaydı: yeni hazırlıklar aynı akışa açılır; eski (seçeneksiz) hazırlıklar eski kabul ekranında sürer.
     archive-ui.js ui.js'ten sonra yüklenir: sarmalama ilk eylemde bir kez kurulur. */
  WarCoal.install=function(){if(this.installed||typeof WarCenterUI==='undefined')return;this.installed=true;

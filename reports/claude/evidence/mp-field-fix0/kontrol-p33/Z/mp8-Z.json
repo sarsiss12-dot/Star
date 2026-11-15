@@ -1,0 +1,223 @@
+{
+ "results": [
+  {
+   "name": "Z0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 10105
+  },
+  {
+   "name": "Z3 canlı MP olay şeridi: B kartı FAREYLE, sonra DOKUNARAK kaydırır → kart kalkar, karar ☰ listesinde; host ayna yeniler, bağlantı kopup döner, sayfa yenilenir → kart geri gelmez; sonraki olay görünür; karar host'ta bir kez",
+   "status": "FAIL",
+   "error": "AssertionError [ERR_ASSERTION]: sayfa yenilemesi kapatılan kartı geri getirmez [{\"uid\":1,\"t\":\"Kayıp Sonda\",\"kind\":\"event\"},{\"uid\":2,\"t\":\"Terk Edilmiş İstasyon\",\"kind\":\"anomaly\"}]\n    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:74:48\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:56:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17"
+  }
+ ],
+ "metrics": {
+  "scen": "Z",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 819,
+    "buildMs": 854,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 894,
+    "buildMs": 927,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 9,
+      "p95": 9,
+      "max": 9
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 18,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 38.3,
+       "p95": 38.3,
+       "max": 38.3
+      },
+      "refresh": {
+       "n": 1,
+       "med": 6.2,
+       "p95": 6.2,
+       "max": 6.2
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 27,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 47.7,
+       "p95": 47.7,
+       "max": 47.7
+      },
+      "refresh": {
+       "n": 1,
+       "med": 6.1,
+       "p95": 6.1,
+       "max": 6.1
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 721,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 4433,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "field": {
+   "events": {
+    "enq": {
+     "r1": {
+      "ok": true,
+      "id": 1
+     },
+     "r2": {
+      "ok": true,
+      "id": 2
+     },
+     "pending": [
+      {
+       "id": 1,
+       "kind": "event"
+      },
+      {
+       "id": 2,
+       "kind": "anomaly"
+      }
+     ]
+    },
+    "cards0": [
+     {
+      "uid": 1,
+      "t": "Kayıp Sonda",
+      "kind": "event"
+     },
+     {
+      "uid": 2,
+      "t": "Terk Edilmiş İstasyon",
+      "kind": "anomaly"
+     }
+    ],
+    "afterMouse": [
+     {
+      "uid": 2,
+      "t": "Terk Edilmiş İstasyon",
+      "kind": "anomaly"
+     }
+    ],
+    "afterTouch": [],
+    "statusList": "Savaşlar, olaylar ve durumlar\n⚔ Savaş Merkezi · 0 düşman\n▣ Terk Edilmiş İstasyon\n📰 Galaktik Haber Ağı\nVazgeç",
+    "afterReload": [
+     {
+      "uid": 1,
+      "t": "Kayıp Sonda",
+      "kind": "event"
+     },
+     {
+      "uid": 2,
+      "t": "Terk Edilmiş İstasyon",
+      "kind": "anomaly"
+     }
+    ]
+   }
+  },
+  "errors": []
+ }
+}

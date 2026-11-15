@@ -49,7 +49,7 @@ async function setHidden(page,hidden){return page.evaluate(h=>{Object.defineProp
     await H.evaluate(()=>MP1Host.host.configure({size:'orta',aiCount:5,seed:11}));
   });
   await test('guest phone (separate browser process) opens the HTTPS invite link and joins over WSS; the guest page loads no engine',async()=>{
-    const link=(await H.textContent('#mp1Link')).replace('/mp/play?','/mp/join?');const t0=Date.now();await Gp.goto(link);   // MP.6: bu paketin misafir vakaları hafif istemciyle (/mp/join); gerçek arayüz browser-mp6'daawait wait(Gp,()=>window.MP1Join&&document.getElementById('jCode'));
+    const link=(await H.textContent('#mp1Link')).replace('/mp/play?','/mp/join?basic=1&');const t0=Date.now();await Gp.goto(link);   // MP.6: bu paketin misafir vakaları hafif istemciyle (/mp/join); gerçek arayüz browser-mp6'daawait wait(Gp,()=>window.MP1Join&&document.getElementById('jCode'));
     await Gp.fill('#jName','Ayşe');await Gp.locator('[data-j="go"]').tap();await wait(Gp,()=>MP1Join.screen==='lobby'&&MP1Join.lobby);metrics.inviteToLobbyMs=Date.now()-t0;
     const g=await Gp.evaluate(()=>({proto:location.protocol,ws:MP1Join.ws&&MP1Join.ws.url,engine:typeof G+typeof setupGame,connectMs:MP1Join.stats.connectMs}));
     assert.equal(g.proto,'https:');assert.match(g.ws,/^wss:\/\/localhost:\d+\/mp1\/ws\?role=client&code=/);assert.equal(g.engine,'undefinedundefined');metrics.guestConnectMs=g.connectMs;
@@ -109,13 +109,13 @@ async function setHidden(page,hidden){return page.evaluate(h=>{Object.defineProp
   await test('attacks from a third browser: foreign origin refused, wrong code, fake host, room full — each with a clear Turkish message',async()=>{
     const X=await (await bX.newContext(PHONE(360,800))).newPage();X.on('pageerror',e=>errors.push('X: '+e.message));
     const d0=relay.stats.denied.origin||0;
-    await X.goto('https://127.0.0.1:'+pport+'/mp/join?code='+code);await wait(X,()=>document.getElementById('jCode'));await X.fill('#jName','Kötü');await X.locator('[data-j="go"]').tap();
+    await X.goto('https://127.0.0.1:'+pport+'/mp/join?basic=1&code='+code);await wait(X,()=>document.getElementById('jCode'));await X.fill('#jName','Kötü');await X.locator('[data-j="go"]').tap();
     await wait(X,()=>/Bağlanılamadı/.test(document.getElementById('jStatus').textContent));assert.equal(relay.stats.denied.origin,d0+1,'origin https://127.0.0.1 is not in MP1_ORIGINS');
-    await X.goto(base+'/mp/join?code=ZZZZZZZZ');await wait(X,()=>document.getElementById('jCode'));await X.fill('#jName','Yanlış');await X.locator('[data-j="go"]').tap();
+    await X.goto(base+'/mp/join?basic=1&code=ZZZZZZZZ');await wait(X,()=>document.getElementById('jCode'));await X.fill('#jName','Yanlış');await X.locator('[data-j="go"]').tap();
     await wait(X,()=>/geçersiz/.test(document.getElementById('jStatus').textContent));
     const fake=await X.evaluate(([b,c])=>new Promise(r=>{const w=new WebSocket(b.replace('https','wss')+'/mp1/ws?role=host&code='+c);w.onopen=()=>w.send('Asahte-anahtar');w.onmessage=e=>{r(String(e.data));w.close();};}),[base,code]);
     assert.match(fake,/bad-host-key/);
-    await X.goto(base+'/mp/join?code='+code);await wait(X,()=>document.getElementById('jCode'));await X.fill('#jName','Fazla');await X.locator('[data-j="go"]').tap();
+    await X.goto(base+'/mp/join?basic=1&code='+code);await wait(X,()=>document.getElementById('jCode'));await X.fill('#jName','Fazla');await X.locator('[data-j="go"]').tap();
     await wait(X,()=>/Oda dolu|Oyun başladı/.test(document.getElementById('jStatus').textContent));await shot(X,'third-room-full');
   });
   await test('resources: guest phone and host phone memory/CPU during play; traffic through the TLS proxy',async()=>{

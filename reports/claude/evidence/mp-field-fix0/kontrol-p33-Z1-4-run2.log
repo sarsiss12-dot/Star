@@ -1,0 +1,38 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[3,3],"mirrorEq":true,"revMs":343,"buildMs":421,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[3,3],"mirrorEq":true,"revMs":504,"buildMs":549,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":10.8,"p95":12.9,"max":12.9},"longtask":{"n":0},"heapMB":16,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":3,"med":10.5,"p95":38.7,"max":38.7},"refresh":{"n":1,"med":6.3,"p95":6.3,"max":6.3},"longtask":{"n":0},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":16,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":30,"joinErrors":0},"C":{"build":{"n":3,"med":29,"p95":59.5,"max":59.5},"refresh":{"n":1,"med":1.4,"p95":1.4,"max":1.4},"longtask":{"n":0},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":17,"dom":721,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0}}}
+PASS Z0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+FAIL Z1 katılım yolları: B ana menü ÇOK OYUNCULU → ODAYA KATIL, C eski /mp/join?code= bağlantısı → ikisi de tam STARS arayüzü (/mp/play), oda kodu korunur, kendi devleti
+AssertionError [ERR_ASSERTION]: ana menü ODAYA KATIL tam arayüze gider: {"path":"/mp/join","search":"","full":false,"basic":true,"started":false,"e":null,"stage":null,"status":"Kodu girip KATIL'a dokun."}
++ actual - expected
+
++ '/mp/join'
+- '/mp/play'
+       ^
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:39:11
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:34:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+FAIL Z2 katılım başarısızlığında aşama ekranda: yanlış kod → ODA BULUNAMADI; bağlantı yok → BAĞLANTI KESİLDİ (X: ayrı profil, bu odada kimliği yok)
+AssertionError [ERR_ASSERTION]: {"path":"/mp/play","search":"?code=ZZZZZ","full":true,"basic":false,"started":false,"e":null,"stage":null,"status":"Oda kodu geçersiz ya da oda yok."}
+
+null !== 'oda'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:51:11
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:48:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+FAIL Z3 canlı MP olay şeridi: B kartı FAREYLE, sonra DOKUNARAK kaydırır → kart kalkar, karar ☰ listesinde; host ayna yeniler, bağlantı kopup döner, sayfa yenilenir → kart geri gelmez; sonraki olay görünür; karar host'ta bir kez
+AssertionError [ERR_ASSERTION]: olay + anomali kartı: [{"uid":1,"t":"❗"},{"uid":2,"t":"🔬"}]
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:62:4
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:56:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+FAIL Z4 takviye sevkiyatındaki filoyu birleştirme: host kuralı geçerli (ret), gerekçe Türkçe, art arda aynı uyarı tek satırda birleşir; karar kartları etkilenmez
+AssertionError [ERR_ASSERTION]: ham kod gösterilmez: ["Host reddetti: rules:shipment","Host reddetti: rules:shipment","Host reddetti: rules:shipment","Host reddetti: rules:shipment"]
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:96:4
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:86:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17
+GEÇEN: 1 KALAN: 4

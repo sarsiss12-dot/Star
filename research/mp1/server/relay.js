@@ -22,7 +22,7 @@
 
    Uç noktalar
      GET /, /index.html  → oyun sayfası + MP.1 katmanı (runtime dosyaları değişmez)
-     GET /mp/join        → motor yüklemeyen katılım sayfası
+     GET /mp/join        → /mp/play'e yönlenir (parametreler korunur); ?basic=1 → motor yüklemeyen eski katılım sayfası
      GET izinli statik    → 19 runtime dosyası ve MP betikleri (başka hiçbir şey)
      WS  /mp1/ws?role=host                     → yeni oda (R {t:'room',code,key})
      WS  /mp1/ws?role=host&code=…              → host yeniden bağlanır; İLK çerçeve "A<anahtar>" olmalı
@@ -128,6 +128,9 @@ function create(env=process.env){
     if(req.method!=='GET'){res.writeHead(405,SEC);return res.end();}
     if(n==='/'||n==='/index.html'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html']});return res.end(page());}
     if(n==='/mp/play'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html'],'Content-Security-Policy':GUEST_CSP});return res.end(guestPage());}
+    /* MP-FIELD-FIX.0: oyuncuya açık bütün katılım yolları tam STARS arayüzüne (/mp/play) gider. Eski davet / yer imi bağlantıları oda kodunu ve
+       öteki parametreleri koruyarak yönlenir. Motor yüklemeyen basit istemci yalnız açıkça ?basic=1 ile (eski MP.1–MP.5 testleri) sunulur. */
+    if(n==='/mp/join'&&url.searchParams.get('basic')!=='1'){res.writeHead(302,{...SEC,Location:'/mp/play'+url.search,'Cache-Control':'no-store'});return res.end();}
     if(n==='/mp/join'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html'],'Content-Security-Policy':"default-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'"});
       return res.end(fs.readFileSync(path.join(ROOT,'research/mp1/client/join.html')));}
     if(n==='/mp/stats'&&cfg.dev){res.writeHead(200,{...SEC,'Content-Type':TYPES['.json']});return res.end(JSON.stringify({...stats,rooms:rooms.size}));}

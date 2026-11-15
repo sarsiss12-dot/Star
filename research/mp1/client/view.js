@@ -10,7 +10,10 @@ const ERR={'invalid-code':'Oda kodu geçersiz ya da oda yok.','room-full':'Oda d
   kicked:'Host seni odadan çıkardı.','rate-limited':'Çok fazla deneme. Biraz bekle.','no-host':'Host şu an bağlı değil.','server-full':'Sunucu dolu.',
   'bad-host-key':'Host anahtarı geçersiz.','host-exists':'Bu odanın host bağlantısı zaten açık.',taken:'Bu devlet başka bir oyuncuda.','not-claimable':'Bu devlet seçilemez.',
   'host-empire':'Host\'un devleti seçilemez.','no-claim':'Önce bir devlet seç.',phase:'Bu aşamada yapılamaz.','not-started':'Oyun henüz başlamadı.',offline:'Bağlantı yok.',paused:'Oyun duraklatıldı; komut uygulanmadı.','server-restart':'Sunucu yeniden başlatıldı; oda kapandı.',
-  'no-save-id':'Oyun kayıttan devam ediyor ve bu cihazda bu kayda ait oyuncu kimliği yok. Host\'tan kimliğini kurtarmasını iste.'};
+  'no-save-id':'Oyun kayıttan devam ediyor ve bu cihazda bu kayda ait oyuncu kimliği yok. Host\'tan kimliğini kurtarmasını iste.',
+  /* MP-FIELD-FIX.0: filo komutlarının host ret kodları (kural aynı; yalnız Türkçe gerekçe) */
+  'rules:shipment':'Bu filo sevkiyatta (takviye / toplanma rotasında). Birleştirmeden önce sevkiyatı iptal et.','rules:no-position':'Filo yolda; bu işlem için bir sistemde durmalı.',
+  'rules:none':'Bu sistemde bu işlem için uygun başka filo ya da gemi yok.','rules:too-small':'Filoda ayrılacak yeterli gemi yok.','rules:not-owner':'Bu filo senin değil.'};
 const CODE_LEN=5;   // MP.7.4: oda kodu 5 karakter (relay CODE_LEN ile aynı); tire yok
 const fmtCode=c=>{c=String(c||'');return c.length>CODE_LEN?c.replace(/^(.{4})(.+)$/,'$1-$2'):c;};
 function players(L){
