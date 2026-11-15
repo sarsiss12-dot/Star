@@ -3,27 +3,42 @@
   {
    "name": "Q0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
    "status": "PASS",
-   "ms": 9002
+   "ms": 10843
   },
   {
    "name": "Q1 misafir B gerçek ilişki sayfasından SAVAŞ → Fetih → tek akış; C (insan) + Y (AI) seçilir; \"Davetleri Gönder (2)\" çift dokunuş → host'ta tek hazırlık, C'ye tek teklif; Y karşı teklif",
    "status": "PASS",
-   "ms": 8227
+   "ms": 12135
   },
   {
    "name": "Q2 misafir C gerçek gelen kutusu kartı (desteklenen taraf, hedef, amaç, başlangıç, son gün) → karşı teklif; B akışta C ve Y için \"Kabul Et\"; C, Y'nin teklifini ve B'nin hazırlığını görmez",
    "status": "PASS",
-   "ms": 5755
+   "ms": 6222
   },
   {
    "name": "Q3 B \"2 Destekçiyle Savaş İlan Et\" çift dokunuş → tek cephe; C ve Y savaşta; Fetih seçimi ve bedeller bir kez; C'nin aynasında savaş",
    "status": "PASS",
-   "ms": 32378
+   "ms": 32579
   },
   {
    "name": "Q4 açık pencere misafirin dünyasını bekletmez: B savaş ilanı/koalisyon akışı AÇIKKEN host 45 gün ilerler ve B gemi emri verir → tarih, harita ve emir sonucu pencere kapanmadan yansır; seçim, şart taslağı ve kaydırma korunur; İç İstikrar penceresi de aynı",
    "status": "PASS",
-   "ms": 4094
+   "ms": 5847
+  },
+  {
+   "name": "Q5 misafir B gerçek masada AYRI BARIŞ kutusunu görür (host'un yetkili defteri; öteki cepheler listelenir) ve teklifi sunar; host teklifi kaydeder",
+   "status": "PASS",
+   "ms": 2538
+  },
+  {
+   "name": "Q6 misafir B gerçek masada TOPRAK VAADİ: cepheye katılım isteğine sistem vaadi ekler (dokunuş) ve sunar; host teklifi doğru cephe kimliğiyle kaydeder",
+   "status": "FAIL",
+   "error": "page.waitForSelector: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-a=\"dealPromise\"]') to be visible\u001b[22m\n\n    at /home/user/Star/tests/helpers/war-coalition0-mp.cjs:131:13\n    at async test (/home/user/Star/tests/browser-mp8.cjs:44:162)\n    at async module.exports (/home/user/Star/tests/helpers/war-coalition0-mp.cjs:125:3)\n    at async /home/user/Star/tests/browser-mp8.cjs:426:17"
+  },
+  {
+   "name": "Q7 misafir B (federasyon başkanı) gerçek federasyon ekranında FEDERASYONA KARŞI SAVAŞ ÖNER → hedef üye → Vasallaştırma → OYLAMAYA SUN; host'ta fedWar önergesi oylamada",
+   "status": "FAIL",
+   "error": "page.waitForFunction: Timeout 20000ms exceeded.\n    at wait (/home/user/Star/tests/browser-mp8.cjs:49:40)\n    at /home/user/Star/tests/helpers/war-coalition0-mp.cjs:154:136\n    at async test (/home/user/Star/tests/browser-mp8.cjs:44:162)\n    at async module.exports (/home/user/Star/tests/helpers/war-coalition0-mp.cjs:139:3)\n    at async /home/user/Star/tests/browser-mp8.cjs:426:17"
   }
  ],
  "metrics": {
@@ -46,8 +61,8 @@
      2
     ],
     "mirrorEq": true,
-    "revMs": 196,
-    "buildMs": 207,
+    "revMs": 767,
+    "buildMs": 788,
     "diff": [],
     "leak": []
    },
@@ -60,8 +75,8 @@
      2
     ],
     "mirrorEq": true,
-    "revMs": 261,
-    "buildMs": 304,
+    "revMs": 862,
+    "buildMs": 907,
     "diff": [],
     "leak": []
    }
@@ -77,14 +92,14 @@
      },
      "publish": {
       "n": 2,
-      "med": 4.2,
-      "p95": 4.2,
-      "max": 4.2
+      "med": 11.4,
+      "p95": 11.4,
+      "max": 11.4
      },
      "longtask": {
       "n": 0
      },
-     "heapMB": 17,
+     "heapMB": 15,
      "dom": 725,
      "intervals": 2,
      "timeouts": 2,
@@ -98,15 +113,15 @@
      "B": {
       "build": {
        "n": 2,
-       "med": 28.6,
-       "p95": 28.6,
-       "max": 28.6
+       "med": 34.4,
+       "p95": 34.4,
+       "max": 34.4
       },
       "refresh": {
        "n": 1,
-       "med": 2.5,
-       "p95": 2.5,
-       "max": 2.5
+       "med": 1.3,
+       "p95": 1.3,
+       "max": 1.3
       },
       "longtask": {
        "n": 0
@@ -121,21 +136,21 @@
       "timeouts": 1,
       "notes": 0,
       "results": 0,
-      "packets": 26,
+      "packets": 27,
       "joinErrors": 0
      },
      "C": {
       "build": {
        "n": 2,
-       "med": 50.7,
-       "p95": 50.7,
-       "max": 50.7
+       "med": 53.8,
+       "p95": 53.8,
+       "max": 53.8
       },
       "refresh": {
        "n": 1,
-       "med": 1,
-       "p95": 1,
-       "max": 1
+       "med": 2.3,
+       "p95": 2.3,
+       "max": 2.3
       },
       "longtask": {
        "n": 0
@@ -159,7 +174,7 @@
   "notes": [],
   "net": {},
   "resume": {},
-  "relayPid1": 12005,
+  "relayPid1": 2637,
   "actualWorld": {
    "seed": 22,
    "size": "orta",
@@ -255,7 +270,7 @@
     "y": true,
     "wg": {
      "t": "fetih",
-     "start": 1.253208000000001,
+     "start": 1.5270000000000004,
      "targets": [
       12,
       14
@@ -279,9 +294,9 @@
     }
    },
    "Q4": {
-    "reflectMs": 732,
-    "dayBefore": 1,
-    "dayAfter": 46,
+    "reflectMs": 883,
+    "dayBefore": 2,
+    "dayAfter": 47,
     "scroll0": 220,
     "scroll1": 220,
     "heldDelta": 0,
@@ -291,6 +306,129 @@
      "open": true,
      "days": 30
     }
+   },
+   "Q5": {
+    "box": "AYRI BARIŞ — yalnız bu cephe (#1) kapanır\nÖteki cepheler: Rhyvaur Şurası ↔ İxir Tahtı — sürer · Yeşil Birlik ↔ İxir Tahtı — sürer",
+    "offer": {
+     "from": 1,
+     "to": 3,
+     "give": [],
+     "want": [
+      "peace"
+     ],
+     "status": "rejected",
+     "why": "🕊 Barış için elindekiler yetersiz. Yaklaşık 706 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin."
+    }
+   },
+   "Q6": {
+    "Z": 5,
+    "F": 1,
+    "diag": {
+     "deal": {
+      "from": 0,
+      "to": 5,
+      "give": [],
+      "want": [
+       {
+        "t": "warJoin",
+        "front": 1,
+        "target": 3
+       }
+      ]
+     },
+     "txt": "DİPLOMASİ ·\nSylraen Meclisi\n✕\nDEVLETLER\nİLİŞKİ\nMÜZAKERE\nTaslak bu oturumda saklanır; sekme değiştirirken kaybolmaz. Yalnız TEKLİFİ SUN düğmesi karşı tarafa gönderir.\n\nKabulde belirli cepheye katılım ve ödeme birlikte uygulanır. Geçiş maddesi mevcut süresiz sınır iznidir; savaş bitince otomatik kalkmaz.\n\nTutum tahmini için en az İZLENİYOR düzeyinde istihbarat gerekir.\nSEN VERİYORSUN\n— boş —\n◆ Kaynak\n✦ Teknoloji\n★ Sistem\n⏳ Haraç\n❖ Lüks mal\n👁 İstihbarat\n⚔ Savaş sözü\n🤲 Barıştırma\n🚪 Geçiş izni\nSEN İSTİYORSUN\n⚔ Cephe #1 · İxir Tahtı karşısında destek\n✕\n◆ Kaynak\n✦ Teknoloji\n★ Sistem\n⏳ Haraç\n❖ Lüks mal\n👁 İstihbarat\n⚔ Savaş sözü\n🤲 Barıştırma\n🚪 Geçiş izni\nTOPRAK VAADİ (isteğe bağlı)\nBilinen düşman sistemi yok\nVaat, bu cephe kapanınca değerlendirilir: sistem sendeyse devredilir; değilse karşılanamaz sayılır.\nANLAŞMA MADDELERİ\n🕊 Barış\n🛡 Saldırmazlık\n🤝 Ticaret\n⚑ İttifak\n🕸 Casusluk ağı\nSimetrik antlaşmalar iki tarafı da bağlar ve teklifte TEK madde olarak durur.\n🔒 Barış: Bütün maddeler zaten yürürlükte — yeni etki yok\n🔒 Ticaret Anlaşması: Saf Akıl Ağı → Ticaret Anlaşması: Ticaret yaptırımı / ambargo yürürlükte\nTEKLİF ÖZETİ\nİmzalama maliyeti\n0 ◈\nMaliyet YALNIZ imza gerçekleşirse ve te",
+     "cand": []
+    }
+   },
+   "Q7": {
+    "ids": {
+     "FA": 2,
+     "FB": 3,
+     "Z": 5,
+     "W": 6
+    },
+    "preview": "⚔ FEDERASYONA KARŞI SAVAŞ · Test 5\nHedef üye ve savaş hedefi; oylamadan sonra ayrıca uygulanır.\nSylraen Meclisi\nOriar Sendikası\n⚔ Fetih\n👑 Vasallaştırma\nVasallık: Haraçgüzar · senyörün savaşlarına katılmaz.\nBİZİM TARAF\nKoşullu: Saf Akıl Ağı (Evet oyu veren üye uygulamada katılır)\nKatılmayacak: Yeşil Birlik (Antlaşma, vasallık veya Konsey engeli)\nKARŞI TARAF\nKesin: —\nKoşullu: —\nMeşruiyet 20 / 55 · orantısız\nOy ve ilan ayrı adımdır: onay savaş başlatmaz. Uygulamada yalnız evet veren, erişebilen ve engeli olmayan üyeler girer. Savaş ortasında ayrılan üyenin cephesi sürer ama ortak barışa girmez; ",
+    "lastResult": [
+     {
+      "v": 1,
+      "type": "result",
+      "seq": 16,
+      "cid": "jmwhi6hsbffobgv4u",
+      "status": "ok",
+      "code": null,
+      "rev": 29,
+      "extra": {
+       "fronts": [
+        {
+         "id": 1,
+         "campaign": 1,
+         "sides": [
+          1,
+          3
+         ],
+         "roles": [
+          0,
+          1
+         ],
+         "sponsor": null,
+         "parent": null,
+         "entryKind": "declaration",
+         "opened": 1.5270000000000004,
+         "ended": null,
+         "occupation": []
+        },
+        {
+         "id": 2,
+         "campaign": 1,
+         "sides": [
+          4,
+          3
+         ],
+         "roles": [
+          0,
+          1
+         ],
+         "sponsor": 1,
+         "parent": 1,
+         "entryKind": "promise",
+         "opened": 1.5270000000000004,
+         "ended": null,
+         "occupation": []
+        },
+        {
+         "id": 3,
+         "campaign": 1,
+         "sides": [
+          2,
+          3
+         ],
+         "roles": [
+          0,
+          1
+         ],
+         "sponsor": 1,
+         "parent": 1,
+         "entryKind": "promise",
+         "opened": 1.5270000000000004,
+         "ended": null,
+         "occupation": []
+        }
+       ],
+       "promises": []
+      },
+      "ms": 86
+     },
+     {
+      "v": 1,
+      "type": "result",
+      "seq": 17,
+      "cid": "jmwhi6wis8vx7n4xr",
+      "status": "ok",
+      "code": null,
+      "rev": 32,
+      "ms": 27
+     }
+    ]
    }
   },
   "errors": []

@@ -124,11 +124,11 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,wait,tap}){
 
   await test('Q6 misafir B gerçek masada TOPRAK VAADİ: cepheye katılım isteğine sistem vaadi ekler (dokunuş) ve sunar; host teklifi doğru cephe kimliğiyle kaydeder',async()=>{
     const Z=await H.evaluate(([b,x,y,c])=>{const Z=G.emps.find(e=>e.ai&&!e.wild&&!e.dead&&![0,b,x,y,c].includes(e.id)&&!e.war[x]);return Z.id;},[eB,fx.X,fx.Y,eC]);
-    const F=await H.evaluate(([b,x])=>warLedgerFind(b,x).id,[eB,fx.X]);const zB=await lid(B,await nameOf(Z));M.Q6={Z,F};
+    const F=await H.evaluate(([b,x])=>warLedgerFind(b,x).id,[eB,fx.X]);const zB=await lid(B,await nameOf(Z));M.Q6={Z,F};M.Q6.hostX=await H.evaluate(([x,b])=>G.sys.filter(s=>s.owner===x||[12,14].includes(s.id)).map(s=>[s.id,s.owner,s.seen.includes(b),s.id===G.emps[x].home]),[fx.X,eB]);
     await clean(B);await synced(B);
     /* WarCenterUI.compose ile aynı taslak: B'nin cephesine katılım isteği (Savaş Merkezi → ASKERÎ DESTEK İSTE yolu) */
     await B.evaluate(([z,f,x])=>{UI.openDeal(z);UI.deal.give=[];UI.deal.want=[{t:'warJoin',front:f,target:x}];UI.drawDeal();},[zB,F,xB]);
-    await B.waitForSelector('[data-a="dealPromise"]',{timeout:15000}).catch(async e=>{M.Q6.diag=await B.evaluate(()=>({deal:UI.deal,txt:(document.getElementById('diploPane')?.innerText||'').slice(0,1200),cand:(()=>{try{const f=UI.deal.want[0];return warFetihCandidates(G.p,G.emps[f.target]).map(x=>x.id);}catch(err){return String(err);}})()}));throw e;});const pick=await B.evaluate(()=>document.querySelector('[data-a="dealPromise"]').dataset.x);
+    await B.waitForSelector('[data-a="dealPromise"]',{timeout:15000}).catch(async e=>{M.Q6.diag=await B.evaluate(()=>({deal:UI.deal,txt:(document.getElementById('diploPane')?.innerText||'').slice(0,1200),cand:(()=>{try{const f=UI.deal.want[0];return warFetihCandidates(G.p,G.emps[f.target]).map(x=>x.id);}catch(err){return String(err);}})(),own:(()=>{try{const t=UI.deal.want[0].target;return G.sys.filter(s=>s.owner===t||[12,14].includes(s.id)).map(s=>[s.id,s.owner,s.seen,G.emps[t].home]);}catch(err){return String(err);}})()}));M.Q6.hostOwn=await H.evaluate(([x,b])=>G.sys.filter(s=>s.owner===x).map(s=>[s.id,s.seen.includes(b)]),[fx.X,eB]);throw e;});const pick=await B.evaluate(()=>document.querySelector('[data-a="dealPromise"]').dataset.x);
     await tap(B,`[data-a="dealPromise"][data-x="${pick}"]`);await B.waitForFunction(()=>UI.deal.give.some(i=>i.t==='landPromise'),undefined,{timeout:5000});
     M.Q6.ui=await B.evaluate(()=>[...document.querySelectorAll('#diploPane .ph')].map(x=>x.innerText).filter(t=>/TOPRAK VAADİ/.test(t)));await shot(B,'q6-toprak-vaadi');
     const n0=await H.evaluate(()=>MP1Host.host.dip.offers.length);await tap(B,'[data-a="dealSend"]');await wait(H,n=>MP1Host.host.dip.offers.length>n,n0,20000);
@@ -151,6 +151,6 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,wait,tap}){
     await B.waitForSelector(`#modal [data-a="fwTarget"][data-x="${wB}"]`,{timeout:15000});await tap(B,`#modal [data-a="fwTarget"][data-x="${wB}"]`);await tap(B,'#modal [data-a="fwGoal"][data-x="boyun"]');
     const pv=await B.locator('#modal').innerText();M.Q7.preview=pv.slice(0,600);await shot(B,'q7-fedwar');
     assert.equal(await B.evaluate(()=>!document.querySelector('#modal [data-a="fwPropose"]').disabled),true,'önerge sunulabilir: '+pv.slice(0,300));
-    await tap(B,'#modal [data-a="fwPropose"]');await sleep(2500);M.Q7.lastResult=await B.evaluate(()=>MP1Join.results.slice(-2));await wait(H,f=>{const F=G.feds.find(x=>x.id===f);return !!(F&&(F.vote&&F.vote.kind==='fedWar'||Object.values(F.decisions||{}).some(d=>d.kind==='fedWar')));},ids.FA,20000);
-    M.Q7.vote=await H.evaluate(f=>{const F=G.feds.find(x=>x.id===f);return F.vote?{kind:F.vote.kind,target:F.vote.target,goal:F.vote.goal||F.vote.args?.goal}:Object.values(F.decisions).find(d=>d.kind==='fedWar');},ids.FA);});
+    await tap(B,'#modal [data-a="fwPropose"]');await sleep(2500);M.Q7.lastResult=await B.evaluate(()=>MP1Join.results.slice(-2));await wait(H,f=>{const F=G.feds.find(x=>x.id===f);return !!(F&&(F.vote&&F.vote.motion==='fedWar'||Object.values(F.decisions||{}).some(d=>d.kind==='fedWar')));   /* fedOpenVote: kind 'motion', motion 'fedWar' */},ids.FA,20000);
+    M.Q7.vote=await H.evaluate(f=>{const F=G.feds.find(x=>x.id===f);return F.vote?{kind:F.vote.kind,motion:F.vote.motion,target:F.vote.target,targetFed:F.vote.targetFed,goal:F.vote.goal,vtype:F.vote.vtype,war:F.vote.war}:Object.values(F.decisions).find(d=>d.kind==='fedWar');},ids.FA);});
 };

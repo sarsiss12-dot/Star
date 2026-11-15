@@ -54,7 +54,8 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,origin,gues
     const got=await B.waitForFunction(cid=>MP1Join.results.some(x=>x.cid===cid),r.cid,{timeout:15000,polling:100}).then(()=>true,()=>false);if(!got)return {status:'no-reply',cid:r.cid};
     return B.evaluate(cid=>{const x=MP1Join.results.filter(y=>y.cid===cid).at(-1);return {status:x.status,code:x.code||null,ms:x.ms,rev:x.rev};},r.cid);};
   const command=async(label)=>{const out={label,at:Date.now()};try{
-      await B.evaluate(()=>{try{UI.closeModal();}catch{}});   // açık pencere aynayı tasarım gereği bekletir; emir etkisi pencere kapalıyken ölçülür
+      if(process.env.MP8_P_MODAL==='1'){out.modal=await B.evaluate(()=>{try{UI.closeModal();InternalUI.risks();}catch(e){return 'err:'+e.message;}return document.querySelector('#modal .mbox')?.className||'';});}   /* WAR-COALITION.0: kasıtlı AÇIK pencere (İç İstikrar, liveWorld) — emir etkisi pencere kapanmadan ölçülür */
+      else await B.evaluate(()=>{try{UI.closeModal();}catch{}});   // açık pencere aynayı tasarım gereği bekletir; emir etkisi pencere kapalıyken ölçülür
       const own=await B.evaluate(()=>__p0.own());out.own={fleets:own.fleets.length,yards:own.yards.length,ala:own.ala};
       const f=own.fleets.find(x=>x.sys>=0&&!x.mv);if(f){const to=await B.evaluate(id=>G.sys[id].lanes[0],f.sys);out.fleet=f.id;out.moveTo=to;out.move=await send1({kind:'move',fleet:f.id,to});}
       const y=own.yards[0];if(y){out.yard=y.id;out.q0=y.q;out.ship=await send1({kind:'ship',sys:y.id,key:'kor'});}
@@ -92,7 +93,7 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,origin,gues
         /* MP-P0-DESYNC2: yansıma ölçümü — host'un ACK'teki dünya revizyonunu içeren ayna misafirde KURULDU mu (P26 ACK ≠ etki ayrımı).
            Eski ölçüm (tersane sırası q0'dan uzun mu) en yüksek hızda sipariş hemen tamamlanınca yanlış FAIL veriyordu (taban p25'te de); bilgi olarak tutulur. */
         if(c&&c.ship&&c.ship.status==='ok'){const t1=Date.now(),seen=await B.waitForFunction(rev=>MP6Stars.S.appliedWorldRev>=rev&&MP6Stars.S.appliedGeneration===MP6Stars.S.gen,c.ship.rev,{timeout:STALL,polling:250}).then(()=>true,()=>false);
-          const last=P.cmds[P.cmds.length-1];last.shipSeen=seen;last.reflectMs=Date.now()-t1;last.queueLonger=await B.evaluate(a=>{const s=G.sys[a.yard];return !!(s&&(s.queue||[]).length>a.q0);},{yard:c.yard,q0:c.q0}).catch(()=>null);}}
+          const last=P.cmds[P.cmds.length-1];last.shipSeen=seen;last.reflectMs=Date.now()-t1;if(process.env.MP8_P_MODAL==='1')last.modalStillOpen=await B.evaluate(()=>!document.getElementById('modal').classList.contains('hidden')).catch(()=>null);last.queueLonger=await B.evaluate(a=>{const s=G.sys[a.yard];return !!(s&&(s.queue||[]).length>a.q0);},{yard:c.yard,q0:c.q0}).catch(()=>null);}}
       if(DS&&Date.now()>=nextDs){nextDs=Date.now()+DS_EVERY;const tr=await desyncTrigger(dsKind).catch(e=>({err:String(e&&e.message||e).slice(0,200)}));dsKind=dsKind==='relief'?'autonomy':'relief';P.desync.triggers.push(tr);console.log('  kesirli politika '+JSON.stringify(tr).slice(0,400));}
       if(Date.now()<nextSample)continue;nextSample=Date.now()+2000;
       const h=await hostState(),g=await B.evaluate(()=>__p0.diag()).catch(e=>({err:String(e)}));if((h.speed|0)<maxSpd&&!h.paused)await go();
