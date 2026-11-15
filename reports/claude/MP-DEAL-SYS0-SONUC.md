@@ -139,4 +139,8 @@ Belge: [`reports/claude/SONRAKI-FAZ-GOREVLERI.md`](https://github.com/sarsiss12-
 
 ## 10. Teslim
 
-Taslak PR ve bitiş HEAD bir sonraki commit ile yazılır.
+- Taslak PR: https://github.com/sarsiss12-dot/Star/pull/50 (head `claude/stars-mp-deal-sys0` → base `claude/stars-mp-field-verify0` / PR #49).
+- Commit'ler: `67a2d11` (Sistem Devri + Haraç motor/MP), `7056916` (federasyon / Savaş Merkezi, sürüm, pin, manifest, ZIP), `42e23f2` (regresyon + rapor), ardından bu teslim satırını yazan commit (bitiş HEAD = dalın ucu).
+- Render'da seçilecek dal: `claude/stars-mp-deal-sys0`; dağıtım sonrası beklenen `/mp/version` §1'de.
+- ZIP `releases/stars-faz96h10p35.zip`: SHA-256 `1af6ab0df169d7b11885c7b3e6fb98321e7dd586a8ab472c9f67855d65110e04`, CRC32 `94760EA9`, 921661 bayt, 20 girdi; çıkarılmış kopyada `verify-release.py --root` → DOĞRULANDI: 19 dosya; oyun build 96h10p35. Runtime `7056916`'dan sonra değişmedi.
+- main'e merge, Render dağıtımı, force-push yapılmadı; kullanıcı kabulü bekliyor.
