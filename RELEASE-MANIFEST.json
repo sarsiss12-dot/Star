@@ -1,11 +1,11 @@
 {
-  "phase": "WAR-COALITION.0",
-  "build": "96h10p33",
+  "phase": "MP-FIELD-FIX.0",
+  "build": "96h10p34",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p33",
-  "parent_commit": "a20d531aa1945b743da44fb6776b56f319362fd0",
-  "parent_zip_sha256": "dd0de3f7961bb1709bdfd90a20dc1d2a349b17234c062a8051b28559c34e1765",
+  "pwa_cache": "stars-v96h10p34",
+  "parent_commit": "0ec57209d2d6bc9d02c72b4452dec3f05d05f678",
+  "parent_zip_sha256": "c13dc7933863c08b9be3af0ada649adb23cd7b299f5551cb064db40761bf76bd",
   "file_count": 19,
   "files": {
     "ai.js": "74386043cb4091ff3e0639e03dfb1cc43066c0eb23bafc68a79c747300d3b3af",
@@ -15,18 +15,18 @@
     "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
     "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
     "construction.js": "920d6122c3d3e65ef2650c94a9a5a804c3d67b65411627e23184f0e1d5d60e08",
-    "diplomacy.js": "868b429107fdedf40188a31bd2ede2d5a31936c48ff8e793f51bf209b6d4735d",
+    "diplomacy.js": "8c2f9ba17db27509906b589056bc73c2d0fe70b4f424c7dbe36dbc3338c7104c",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
     "economy-ui.js": "68025b1bb388188435a51cca2319e92e7eb9ec6517b4e3c8437f335e2916763f",
     "economy.js": "de3fe81743ab1e4c7156649afe4342b378ef36f3ae5303dde5301253292a2707",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
-    "index.html": "b432a57be26e242a10ce6d6f70def6ee185debea5e25ecaf0db47c5916a16091",
-    "main.js": "9164d58f804ab57e1a2cc3259f4eb9fffcee4cd5402011b40a19179bb8161ba4",
+    "index.html": "3bb3c8291d247981322a54cd347782a8d4d727e01a0e60c707667bcf95d63bc9",
+    "main.js": "b0765bccb885e38c2af8409d840f6a13e806e9f7557dad8b02fb877cf7a4cf9f",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "5b40278d2e0c34a25db5838c87c691f0b23738b0f3b3af7b87ae1fcd85badddc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "d700bec57ba32f2032ef63fc0ea5f409f8dec0713dbfc53061223454bcc36223",
-    "ui.js": "e72540bd9985a94bb9b158cf628499eb495a273ff36f3746f2663d1c584aaaba"
+    "sw.js": "468a4352f9920adc288031e1d2833cbdc443a1b82c88e4e5bfa7a106db4ca1e0",
+    "ui.js": "ceeb240dc6786167d8254234c38552946ceffa94ecaf36f8553b06c8b3c1ada2"
   },
-  "description": "WAR-COALITION.0: tek savaş ilanı akışı (hedef → müttefikleri çağır → son onay, aynı pencerede; tek başına iki adım), toplu davet, durum kartları (davet edilebilir / cevap bekleniyor / karşı teklif / kabul / ret / süresi doldu / engellendi), şart ekleme, kısmi son onay (\"N Destekçiyle Savaş İlan Et\" / desteksiz), hazırlığı kaydet ve dön, hedef şartı değişince yeniden onay; hazırlıkta Fetih/Vasallaştırma seçenekleri ilana taşınır; misafirde açık pencere dünyayı bekletmez; Kan Hukuku ateşkesinde hedef dışı işgal iadesi. Save8 v8, paket 4, protokol 1."
+  "description": "MP-FIELD-FIX.0: son Render denemesinin dört saha bulgusu — oyuncu katılım yolları tam STARS arayüzüne (eski /mp/join bağlantısı ve ana menü ODAYA KATIL → /mp/play; oda kodu korunur, katılım hatasında aşama), misafir olay şeridinde kaydırılan kart kalıcı ve karar listede kalır, sevkiyat reddi Türkçe ve birleşik uyarı, Fetih hedef seçimi oyuncunun bildiği sahiplikten ve açık pencerede canlı (pasif düğme, neden, Vasallaştırmaya dön), müzakere masasından Savaşa Destek İste. Save8 v8, paket 4, protokol 1."
 }

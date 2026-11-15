@@ -3,12 +3,52 @@
   {
    "name": "Z0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
    "status": "PASS",
-   "ms": 10105
+   "ms": 9383
+  },
+  {
+   "name": "Z1 katılım yolları: B ana menü ÇOK OYUNCULU → ODAYA KATIL, C eski /mp/join?code= bağlantısı → ikisi de tam STARS arayüzü (/mp/play), oda kodu korunur, kendi devleti",
+   "status": "FAIL",
+   "error": "AssertionError [ERR_ASSERTION]: ana menü ODAYA KATIL tam arayüze gider: {\"path\":\"/mp/join\",\"search\":\"\",\"full\":false,\"basic\":true,\"started\":false,\"e\":null,\"stage\":null,\"status\":\"Kodu girip KATIL'a dokun.\"}\n+ actual - expected\n\n+ '/mp/join'\n- '/mp/play'\n       ^\n\n    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:39:11\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:34:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17"
+  },
+  {
+   "name": "Z2 katılım başarısızlığında aşama ekranda: yanlış kod → ODA BULUNAMADI; bağlantı yok → BAĞLANTI KESİLDİ (X: ayrı profil, bu odada kimliği yok)",
+   "status": "FAIL",
+   "error": "AssertionError [ERR_ASSERTION]: {\"path\":\"/mp/play\",\"search\":\"?code=ZZZZZ\",\"full\":true,\"basic\":false,\"started\":false,\"e\":null,\"stage\":null,\"status\":\"Oda kodu geçersiz ya da oda yok.\"}\n\nnull !== 'oda'\n\n    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:51:11\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:48:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17"
   },
   {
    "name": "Z3 canlı MP olay şeridi: B kartı FAREYLE, sonra DOKUNARAK kaydırır → kart kalkar, karar ☰ listesinde; host ayna yeniler, bağlantı kopup döner, sayfa yenilenir → kart geri gelmez; sonraki olay görünür; karar host'ta bir kez",
    "status": "FAIL",
-   "error": "AssertionError [ERR_ASSERTION]: sayfa yenilemesi kapatılan kartı geri getirmez [{\"uid\":1,\"t\":\"Kayıp Sonda\",\"kind\":\"event\"},{\"uid\":2,\"t\":\"Terk Edilmiş İstasyon\",\"kind\":\"anomaly\"}]\n    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:74:48\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:56:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17"
+   "error": "page.waitForFunction: Timeout 30000ms exceeded.\n    at wait (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:51:40)\n    at ensure (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:23:65)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:57:4\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:56:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17"
+  },
+  {
+   "name": "Z4 takviye sevkiyatındaki filoyu birleştirme: host kuralı geçerli (ret), gerekçe Türkçe, art arda aynı uyarı tek satırda birleşir; karar kartları etkilenmez",
+   "status": "FAIL",
+   "error": "AssertionError [ERR_ASSERTION]: ham kod gösterilmez: [\"Host reddetti: rules:shipment\",\"Host reddetti: rules:shipment\",\"Host reddetti: rules:shipment\",\"Host reddetti: rules:shipment\"]\n    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:97:4\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:86:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17"
+  },
+  {
+   "name": "Z5 kaydet → host ve misafirler kapanır → relay yeniden başlar → host kaydı YENİ odada açar ve misafir yokken devam eder: bekleyen / gizlenen olay doğru, tarih ilerlerken yeni olay ve anomali şeritte ve listede",
+   "status": "FAIL",
+   "error": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'pending')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:24)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:13:29\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:9:2)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:102:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17"
+  },
+  {
+   "name": "Z6 misafirler yeni odaya döner: B ana menü ODAYA KATIL + yeni kod, C eski /mp/join bağlantısı → aynı devletler; tarih ve bekleyen kararlar korunur; kaydırılan kart geri gelmez; kimliksiz X \"OYUNCU KİMLİĞİ DOĞRULANAMADI\"",
+   "status": "FAIL",
+   "error": "page.waitForURL: Timeout 20000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n  navigated to \"https://localhost:38943/mp/join\"\n============================================================\n    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:40:12\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:37:2)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:102:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17"
+  },
+  {
+   "name": "Z7 Fetih hedef seçimi: tek sistemli hedefte 0/0 + neden + pasif düğme + Vasallaştırmaya dön; pencere AÇIKKEN keşfedilen sistem listeye girer; başkent dışı hedefle seçim → önizleme → onay → gerçek savaş (misafir); host'ta aynı kural",
+   "status": "FAIL",
+   "error": "Error: z7: host has no mirror for B\n    at settle (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:185:159)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:73:56\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:56:2)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:102:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17"
+  },
+  {
+   "name": "Z8 müzakere masası: genel Savaş sözü MP'de pasif + neden; Savaşa Destek İste → B'nin aktif cephesi; C ret → yeniden teklif → C karşı teklif → B kabul → C savaşta (tek kez); host → B daveti kabul; kapanan savaşa gecikmiş kabul işlenmez",
+   "status": "FAIL",
+   "error": "page.evaluate: TypeError: Cannot read properties of null (reading 'id')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:28)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:104:22\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:102:2)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:102:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17"
+  },
+  {
+   "name": "Z9 dünya ilerler ve emirler uygulanır: B gerçek komut yolundan filo emri verir; host günleri ilerler; emir host dünyasında, misafir aynası host ile aynı",
+   "status": "FAIL",
+   "error": "AssertionError [ERR_ASSERTION]: {\"status\":\"local\",\"code\":\"host-yok\"}\n\n'local' !== 'ok'\n\n    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:139:146\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:46:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp2.cjs:137:2)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/helpers/mp-field-fix0-mp.cjs:102:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp8.cjs:429:17"
   }
  ],
  "metrics": {
@@ -31,8 +71,8 @@
      2
     ],
     "mirrorEq": true,
-    "revMs": 819,
-    "buildMs": 854,
+    "revMs": 221,
+    "buildMs": 278,
     "diff": [],
     "leak": []
    },
@@ -45,8 +85,8 @@
      2
     ],
     "mirrorEq": true,
-    "revMs": 894,
-    "buildMs": 927,
+    "revMs": 321,
+    "buildMs": 353,
     "diff": [],
     "leak": []
    }
@@ -62,14 +102,14 @@
      },
      "publish": {
       "n": 2,
-      "med": 9,
-      "p95": 9,
-      "max": 9
+      "med": 6.6,
+      "p95": 6.6,
+      "max": 6.6
      },
      "longtask": {
       "n": 0
      },
-     "heapMB": 18,
+     "heapMB": 17,
      "dom": 725,
      "intervals": 2,
      "timeouts": 2,
@@ -89,9 +129,9 @@
       },
       "refresh": {
        "n": 1,
-       "med": 6.2,
-       "p95": 6.2,
-       "max": 6.2
+       "med": 1.2,
+       "p95": 1.2,
+       "max": 1.2
       },
       "longtask": {
        "n": 0
@@ -100,27 +140,27 @@
       "deltas": 1,
       "resyncs": 0,
       "minGap": 600,
-      "heapMB": 16,
+      "heapMB": 14,
       "dom": 713,
       "intervals": 3,
       "timeouts": 1,
       "notes": 0,
       "results": 0,
-      "packets": 27,
+      "packets": 26,
       "joinErrors": 0
      },
      "C": {
       "build": {
        "n": 2,
-       "med": 47.7,
-       "p95": 47.7,
-       "max": 47.7
+       "med": 48.1,
+       "p95": 48.1,
+       "max": 48.1
       },
       "refresh": {
        "n": 1,
-       "med": 6.1,
-       "p95": 6.1,
-       "max": 6.1
+       "med": 2.2,
+       "p95": 2.2,
+       "max": 2.2
       },
       "longtask": {
        "n": 0
@@ -144,7 +184,7 @@
   "notes": [],
   "net": {},
   "resume": {},
-  "relayPid1": 4433,
+  "relayPid1": 12225,
   "actualWorld": {
    "seed": 22,
    "size": "orta",
@@ -162,60 +202,58 @@
    }
   ],
   "field": {
-   "events": {
-    "enq": {
-     "r1": {
-      "ok": true,
-      "id": 1
-     },
-     "r2": {
-      "ok": true,
-      "id": 2
-     },
-     "pending": [
-      {
-       "id": 1,
-       "kind": "event"
-      },
-      {
-       "id": 2,
-       "kind": "anomaly"
-      }
-     ]
+   "E": {
+    "B": 1,
+    "C": 2
+   },
+   "menuJoin": {
+    "path": "/mp/join",
+    "search": "",
+    "full": false,
+    "basic": true,
+    "started": false,
+    "e": null,
+    "stage": null,
+    "status": "Kodu girip KATIL'a dokun."
+   },
+   "badCode": {
+    "path": "/mp/play",
+    "search": "?code=ZZZZZ",
+    "full": true,
+    "basic": false,
+    "started": false,
+    "e": null,
+    "stage": null,
+    "status": "Oda kodu geçersiz ya da oda yok."
+   },
+   "ship": {
+    "fx": {
+     "a": 28,
+     "t": 29,
+     "sys": 5,
+     "has": true
     },
-    "cards0": [
-     {
-      "uid": 1,
-      "t": "Kayıp Sonda",
-      "kind": "event"
-     },
-     {
-      "uid": 2,
-      "t": "Terk Edilmiş İstasyon",
-      "kind": "anomaly"
-     }
-    ],
-    "afterMouse": [
-     {
-      "uid": 2,
-      "t": "Terk Edilmiş İstasyon",
-      "kind": "anomaly"
-     }
-    ],
-    "afterTouch": [],
-    "statusList": "Savaşlar, olaylar ve durumlar\n⚔ Savaş Merkezi · 0 düşman\n▣ Terk Edilmiş İstasyon\n📰 Galaktik Haber Ağı\nVazgeç",
-    "afterReload": [
-     {
-      "uid": 1,
-      "t": "Kayıp Sonda",
-      "kind": "event"
-     },
-     {
-      "uid": 2,
-      "t": "Terk Edilmiş İstasyon",
-      "kind": "anomaly"
-     }
+    "direct": {
+     "status": "rejected",
+     "code": "rules:shipment",
+     "ms": 66,
+     "cid": "jmwhtam3636aaqtju"
+    },
+    "alerts": [
+     "Host reddetti: rules:shipment",
+     "Host reddetti: rules:shipment",
+     "Host reddetti: rules:shipment",
+     "Host reddetti: rules:shipment"
     ]
+   },
+   "fetih": {
+    "fx": {
+     "t1": 3,
+     "t2": 4,
+     "t3": 5,
+     "s2": 25,
+     "s3": 0
+    }
    }
   },
   "errors": []
