@@ -80,4 +80,22 @@ test('C6 AI ve eski çağrılar: seçeneksiz hazırlıkta kısmi olmayan warPrep
   const h=world();h.run(`var pl=warPrepareCreate(A,1,'harac');`);const q=J(h,'warPrepareQuote(A,pl.id)');assert.equal(q.ok,false);assert.match(q.why,/En az bir açık kabul/);
   assert.equal(h.run('warPreparation(pl.id).invites===undefined'),true,'kullanılmayan yeni alan yazılmaz');assert.equal(J(h,'Object.keys(warPreparation(pl.id)).sort().join()'),'commitments,expires,goal,id,opened,owner,state,target');
 });
+test('C7 Kan Hukuku zorunlu ateşkesinde sahiplik (beklenen kural: Fetih barışıyla aynı): ele geçirilen HEDEF sistem kazananda kalır, HEDEF DIŞI işgal iade edilir, ortağa vaat edilen hedef sistem ortağa devredilir; her devir tam bir kez; neden exhaustion-lock, tek bildirim',()=>{
+  const h=world();h.run(`T.civics=['kan_hukuku'];var own=G.sys.filter(s=>s.owner===T.id&&s.id!==T.home);var T1=own[0],T2=own[1],N=own[2];
+    warAuthorize(A,T,{n:'t'});declareWar(A,T);warAuthClear();setWarGoal(A,T,'fetih',{targets:[T1.id,T2.id]});var F=warLedgerFind(A.id,T.id).id,O=G.emps[2];
+    if(!executeDeal({from:A.id,to:O.id,give:[{t:'landPromise',sys:T2.id,front:F}],want:[{t:'warJoin',front:F,target:T.id}],born:G.day,expires:G.day+30}))throw Error('vaat kurulamadı');
+    for(const s of [T1,T2,N])captureSystem(s,A.id);
+    var moves=[];const _c=captureSystem;captureSystem=function(s,to,m){moves.push([s.id,to,m||'']);return _c.apply(this,arguments);};
+    globalThis.__log=[];const _say=say;say=function(m){__log.push(String(m));return _say.apply(this,arguments);};
+    function month(n=1){for(let i=0;i<n*60;i++){const m=Math.floor(G.day/30);G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();if(Math.floor(G.day/30)>m)monthTick();}}
+    T.exh=T.exh||{};T.exh[A.id]=99.5;`);
+  assert.equal(J(h,'[T1.owner,T2.owner,N.owner].join()'),'0,0,0');
+  let m=0;while(m<4&&h.run('!!A.war[T.id]')){h.run('month(1)');m++;}
+  const r=J(h,`{war:!!A.war[T.id],T1:T1.owner,T2:T2.owner,N:N.owner,O:O.id,T:T.id,reason:G.warLedger.fronts.find(f=>f.id===F).endReason,moves,prom:(G.warLedger.promises||[]).map(p=>[p.sys,p.state]),notes:__log.filter(l=>/YORGUNLU|barış imzalandı|kendiliğinden durdu/.test(l)&&!/[-+][0-9]+ — /.test(l))}`);
+  console.log('  C7 '+JSON.stringify(r));
+  assert.equal(r.war,false);assert.match(r.reason,/^exhaustion-lock\|actor:1/);
+  assert.equal(r.T1,0,'hedef sistem kazananda kalır');assert.equal(r.N,r.T,'hedef dışı işgal iade edilir');assert.equal(r.T2,r.O,'vaat edilen hedef sistem ortağa devredilir');
+  for(const id of J(h,'[T1.id,T2.id,N.id]'))assert.ok(r.moves.filter(x=>x[0]===id).length<=1,'tek devir: '+id);
+  h.run('month(2)');assert.equal(J(h,'moves.length'),r.moves.length,'kapanıştan sonra ikinci devir yok');assert.equal(r.notes.length,1,'tek bildirim: '+JSON.stringify(r.notes));
+});
 console.log(`GEÇEN: ${pass} KALAN: ${fail}`);if(fail)process.exitCode=1;

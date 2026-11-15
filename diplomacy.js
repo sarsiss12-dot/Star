@@ -11185,8 +11185,10 @@ function warSurrenderGrace(sub){const c=sub?.vassalContract;return !!(c&&c.statu
 function warExhaustionClose(e,o){
  if(!e||!o||!e.war[o.id])return false;
  const lock=!canPeace(e,o),f=warLedgerFind(e.id,o.id);
- if(lock){if(e.wg)delete e.wg[o.id];if(o.wg)delete o.wg[e.id];if(e.proxyWar)delete e.proxyWar[o.id];if(o.proxyWar)delete o.proxyWar[e.id];}
  makePeace(e,o,lock?'exhaustion-lock':'exhaustion',e.id,{force:true,quiet:true});
+ /* WAR-COALITION.0: kilidi kıran hedef/vekil kayıt temizliği makePeace'ten SONRA — önce silinince warFetihSettle hedefi göremiyor, hedef dışı işgal
+    iade edilmiyordu (C7). Ateşkes Fetih barışıyla aynı sahiplik kuralını uygular. */
+ if(lock){if(e.wg)delete e.wg[o.id];if(o.wg)delete o.wg[e.id];if(e.proxyWar)delete e.proxyWar[o.id];if(o.proxyWar)delete o.proxyWar[e.id];}
  e.exh[o.id]=55;o.exh=o.exh||{};o.exh[e.id]=Math.min(o.exh[e.id]||0,55);
  const pid=G.p?.id,mode=lock?'zorunlu ateşkes (doktrin barış antlaşmasını yasaklıyor)':'zorunlu barış',tag=f?' · Savaş #'+f.id:'';
  if(e.id===pid)say('SAVAŞ YORGUNLUĞU %100 — '+o.name+' ile '+mode+'. Ordun savaşamıyor; yorgunluk %55\'ten barışta ayda 2,5 azalır'+tag,'war');
