@@ -127,6 +127,17 @@ Hiçbir madde TAMAMLANDI değildir; kullanıcı kabulü bekler.
 - Alt şerit sabit (`.coalFoot`, `position:sticky`): seçilen davet sayısı, ana ilan düğmesi, Desteksiz İlan Et, Hazırlığı Kaydet ve Çık, Vazgeç.
 - `max-height:430px` sorgusu 844×390 ve 740×360 yatay ekranlar içindir.
 - Hazırlığı Kaydet ve Çık → DİPLOMASİ / Savaş Merkezi'nden ya da SAVAŞ İLAN ET'ten devam edilir.
+- **Eski son onay sözleşmesi korunur.** Yeni akış her çizimde tek kullanımlık `warFinalConfirm` jetonu kaydeder. Jetonu şunlar geçersiz kılar: pencerenin kapanması ya da yeniden açılması, dünyanın yüklenmesi, akışın değişmesi.
+  - Karar aynı `launch` → `direct` / `warLaunch` yolundan geçer.
+  - Yüklenen dünyada eski pencerenin düğmesi ilan etmez.
+  - Koşul değiştiyse (federasyon yükümlülüğü, Etki, Konsey, doktrin, hedefin ölmesi) bedel ve RNG çekilmeden güncel özet yeniden çizilir.
+  - Bunu `faz95d_war_preview_test` (19 vaka) sınar. İlk tam regresyonda bu paket **10/9 FAIL** verdi (kanca yoktu); düzeltmeden sonra 19/0.
+- **Son onay özetinde görünür:**
+  - SAVAŞ YORGUNLUĞU (senin ve rakibin, tahmin dayanağı, "ayda 2,5" taşınma);
+  - meşruiyet düzeyi ve gerekçe adları;
+  - hedef tarafının kesin / koşullu destekçileri ve gerekçeleri ("Savunma oylaması veya gönüllü yardım gerekli");
+  - BİLİNMEYENLER: "Bu bölüm gizli devlet sayısını göstermez".
+  - İlk tam regresyonda `browser-field-war-siege0` 2/1 ve `browser-war-goals0` 3/2 FAIL verdi: bu bilgiler kapalı ayrıntı bölümündeydi. Düzeltmeden sonra 3/0 ve 5/0 (`evidence/war-coalition0/regresyon/ilk-kosu/`).
 - Değişiklik görüldüğünde host yeniden doğrular. Bütçe, rota, pakt, hedef ya da katılımcı değişirse kart gerekçe verir. Özet güncellenir, damga değişir; sessiz kadro/bedel değişikliği yok.
 - Gelen kutusu kartı (`diplomaticBrief`) host etiketini kullanır (`MP71Dip.offerByKey`): "Savaş katılım daveti", hedef, desteklenen taraf, amaç, başlangıç, süre.
 
