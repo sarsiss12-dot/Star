@@ -1,0 +1,11 @@
+PASS N1 AI–AI devir çakışma denetimine girmez; insan taraflı devirde kendi toprak vaadi çakışması dealQuote'ta yakalanır
+PASS N2 Barış + Sistem Devri + Haraç: misafir C → misafir B, karşı teklif, kabul; sistem B'nin, haraç kaydı, barış; ikinci kabul yok
+PASS N3 bilinmeyen sahiplikteki sistem istenemez (gerekçede gizli sahip yok); devredenin kendi toprak vaadi gönderene açık yazılır
+PASS N4 teklif beklerken sistem sahibi değişir → teklif geçersizleşir, iki tarafa neden; kabul işlenmez
+PASS N5 haraç: ay başında bir kez; eksik stokta kısmi ödeme + bildirim; kayıt → yükleme → sonraki ödeme tek kez; takvim satırları
+PASS N6 birleşik teklifte bir madde geçersizse hiçbiri uygulanmaz (kısmi barış / devir / ödeme yok)
+PASS N7 ayna: alıcıya kendisine ödenen haraç, ödeyene kendi yükümlülüğü (π); üçüncü misafire hiçbiri
+PASS N8 karşı teklif: karşı tarafın önceki teklifinde açıkça sunduğu sistem, sahipliği gözlenmemiş olsa da istenebilir; başka gizli sistem istenemez
+  N9 geç kabul yanıtı: {"to":"D","v":1,"type":"result","seq":1,"cid":"fed0D000001","status":"rejected","code":"rules:closed","rev":6}
+PASS N9 Savaş Merkezi Destek İste (warJoin, seçili cephe): savaş bekleyen teklif sırasında kapanırsa geç kabul işlenmez, katılım / savaş yok
+GEÇEN: 9 KALAN: 0

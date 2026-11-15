@@ -6,7 +6,8 @@
    N4 teklif beklerken sistem sahibi değişir → teklif geçersizleşir, iki tarafa neden; kabul işlenmez
    N5 haraç ödemesi: ay başında bir kez; eksik stokta kısmi ödeme + bildirim; kayıt → yükleme → sonraki ödeme tek kez; takvim satırları
    N6 birleşik teklifte bir madde geçersizse hiçbiri uygulanmaz (kısmi barış / devir / ödeme yok)
-   N7 ayna: alıcıya kendisine ödenen haraç, ödeyene kendi yükümlülüğü (π kimlikleri); üçüncü misafire hiçbiri */
+   N7 ayna: alıcıya kendisine ödenen haraç, ödeyene kendi yükümlülüğü (π kimlikleri); üçüncü misafire hiçbiri
+   N8 karşı teklifte önceki teklifte açıklanan sistem · N9 Destek İste (warJoin) teklifi beklerken savaş kapanırsa geç kabul işlenmez */
 const assert=require('assert/strict'),{world,cmd,J}=require('./helpers/beta-fed-found0-mp-world.cjs');
 let pass=0,fail=0;const test=(n,f)=>{try{f();pass++;console.log('PASS '+n);}catch(e){fail++;console.log('FAIL '+n+'\n'+(e&&e.stack||e));}};
 const prep=h=>h.run(`for(const e of G.emps){for(const o of G.emps)if(e!==o&&!o.wild){e.ally[o.id]=false;e.rel[o.id]=40;e.war[o.id]=false;e.contact[o.id]=true;}}
@@ -109,5 +110,13 @@ test('N8 karşı teklif: karşı tarafın önceki teklifinde açıkça sunduğu 
   const ok=cmd(h,'B',{kind:'counter',offer:r.id,give:[{t:'res',r:'min',v:5}],want:[{t:'sys',id:s[0]}]});assert.equal(ok.status,'ok',JSON.stringify(ok));
   const r2=last(h);const bad=cmd(h,'C',{kind:'counter',offer:r2.id,give:[{t:'sys',id:s[0]}],want:[{t:'res',r:'min',v:5}]});assert.equal(bad.status,'ok','C kendi sistemini yeniden sunabilir');
   const r3=last(h);const hidden=cmd(h,'B',{kind:'counter',offer:r3.id,give:[],want:[{t:'sys',id:s[1]}]});assert.equal(hidden.status,'rejected');assert.match(JSON.stringify(hidden.detail),/bilinmiyor/);
+});
+test('N9 Savaş Merkezi Destek İste (warJoin, seçili cephe): savaş bekleyen teklif sırasında kapanırsa geç kabul işlenmez, katılım / savaş yok',()=>{
+  const h=world();prep(h);war(h);const f=J(h,'(warLedgerFind(1,3)||{}).id');assert(f,'B–C cephesi');
+  const o=cmd(h,'B',{kind:'offer',to:4,give:[{t:'res',r:'min',v:50}],want:[{t:'warJoin',front:f,target:3}]});assert.equal(o.status,'ok',JSON.stringify(o));const r=last(h);
+  h.run('makePeace(G.emps[1],G.emps[3],{force:true,quiet:true});MP.publish&&MP.publish();');assert.equal(J(h,'!!G.emps[1].war[3]'),false,'barış');
+  const min0=J(h,'G.emps[1].res.min');const acc=cmd(h,'D',{kind:'respond',offer:r.id,action:'accept'});
+  assert.notEqual(acc.status,'ok','kapanmış cepheye geç kabul işlenmez: '+JSON.stringify(acc));console.log('  N9 geç kabul yanıtı: '+JSON.stringify(acc).slice(0,240));
+  assert.equal(J(h,'!!G.emps[4].war[3]'),false,'D savaşa girmedi');assert.equal(J(h,'G.emps[1].res.min'),min0,'bedel ödenmedi');
 });
 console.log(`GEÇEN: ${pass} KALAN: ${fail}`);if(fail)process.exitCode=1;

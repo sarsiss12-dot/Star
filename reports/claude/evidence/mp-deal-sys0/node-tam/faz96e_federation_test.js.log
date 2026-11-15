@@ -1,0 +1,43 @@
+✓ invite uses existing motion, explicit player vote and actual membership
+✓ AI candidate can reject after affirmative membership ballot with reason
+✓ multiple member votes reject without absolute majority and retain reasons
+✓ request via nonfounder resolves correct federation; explicit final player acceptance
+✓ incoming player invitation reject from inbox leaves state independent
+✓ AI-originated application asks player for vote and does not assign that vote
+✓ AI monthly politics actually sends eligible application
+✓ duplicate motion cannot charge funds or consume RNG
+✓ duplicate application cannot charge again
+✓ admission rejects war and preserves world
+✗ admission rejects allies and preserves world — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at eq (/home/user/Star/tests/faz96e_federation_test.js:3:31)
+    at /home/user/Star/tests/faz96e_federation_test.js:13:518
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/faz96e_federation_test.js:13:83)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+✓ admission rejects vassal and preserves world
+✓ admission rejects dead and preserves world
+✓ admission rejects purifier and preserves world
+✓ admission rejects funds and preserves world
+✓ admission rejects contact and preserves world
+✓ contact charter permits applicant without automatic alliance until actual join
+✓ pending vote and application survive v8 load and finish via inbox
+✓ pending invitation survives v8 with fractional dates and no NaN
+✓ repeated inbox sync never duplicates result/invitation rows
+✓ expiry blocks acceptance and marks result expired
+✓ changed charter invalidates invitation and no stale rejection overwrites terminal state
+✓ informational application record offers no accept/reject bypass
+✓ new war while invitation pending blocks membership
+✓ legacy direct invite entry uses ballot and cannot force player consent
+✓ deterministic assessment exposes relevant factors and consumes no RNG
+✓ closed origin reduces score; common enemy and treaties improve score
+✓ unknown foreign stock/tech/fleets do not affect admission score
+✓ diplomacy action labels and reasons are grouped with existing actions
+GEÇEN: 28 KALAN: 1

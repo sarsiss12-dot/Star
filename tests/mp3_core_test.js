@@ -85,7 +85,7 @@ test('authorization and validation: third party, forged empire, bad items, self/
     [C,{kind:'withdraw',offer:id},'no-offer'],
     [A,{kind:'offer',to:B,give:[res1('min',-5)],want:[]},'bad-params'],[A,{kind:'offer',to:B,give:[res1('min',0)],want:[]},'bad-params'],
     [A,{kind:'offer',to:B,give:[res1('gold',5)],want:[]},'bad-params'],[A,{kind:'offer',to:B,give:[res1('min',1e9)],want:[]},'bad-params'],
-    [A,{kind:'offer',to:B,give:[{t:'res',r:'min',v:5,x:1}],want:[]},'bad-params'],[A,{kind:'offer',to:B,give:[{t:'sys',id:1}],want:[]},'bad-params'],
+    [A,{kind:'offer',to:B,give:[{t:'res',r:'min',v:5,x:1}],want:[]},'bad-params'],[A,{kind:'offer',to:B,give:[{t:'sys',id:1,x:1}],want:[]},'bad-params'],[A,{kind:'offer',to:B,give:[{t:'sys',id:-1}],want:[]},'bad-params'],[A,{kind:'offer',to:B,give:[{t:'sys',id:1}],want:[]},'rules:quote'],   /* MP-DEAL-SYS.0: Sistem Devri artık MP maddesi; biçimsiz madde yine bad-params, verenin olmayan sistemi motor kapısında (yan etkisiz) */
     [A,{kind:'offer',to:B,give:[],want:[]},'bad-params'],[A,{kind:'offer',to:B,give:[res1('min',5)],want:[],from:1},'bad-params'],
     [A,{kind:'offer',to:A,give:[res1('min',5)],want:[]},'rules:no-target'],[A,{kind:'offer',to:wild,give:[res1('min',5)],want:[]},'rules:no-target'],
     [A,{kind:'offer',to:C,give:[res1('min',5)],want:[]},'rules:no-target'],[A,{kind:'offer',to:B,give:[res1('min',9999999)],want:[]},'rules:quote']];
