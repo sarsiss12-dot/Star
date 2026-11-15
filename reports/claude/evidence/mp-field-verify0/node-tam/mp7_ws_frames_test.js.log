@@ -1,0 +1,7 @@
+✓ tek parça metin çerçevesi aynen iletilir (eski davranış)
+✓ parçalı mesaj (op=1 FIN=0, op=0 devam, son FIN=1) birleştirilir; araya giren ping yanıtlanır, pong yok sayılır; bağlantı açık kalır
+✓ akış TCP parçalarına bölünmüş gelse de (bayt bayt) parçalı mesaj doğru birleşir; UTF-8 çok baytlı karakter parça sınırında bölünür
+✓ protokol hataları: başlangıçsız devam, parçalı mesaj sürerken yeni metin, parçalı kontrol çerçevesi, 125 bayttan uzun ping → 1002; ikili → 1003
+✓ boyut sınırı parçaların TOPLAMINA uygulanır (küçük parçalarla sınır aşılamaz) → 1009; tek çerçeve sınırı da aynen
+✓ maskesiz istemci çerçevesi yine reddedilir (1002)
+GEÇEN: 6 KALAN: 0

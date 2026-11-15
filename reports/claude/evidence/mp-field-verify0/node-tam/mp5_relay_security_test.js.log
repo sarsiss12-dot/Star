@@ -1,0 +1,15 @@
+✓ çökme: bozuk istekler AYRI relay sürecini düşürmez; açık oda ve bağlı misafir etkilenmez; hata sayılır, ayrıntı günlüğe yazılmaz
+✓ çerçeve sınırı rol başına: misafir 32 KiB üstü çerçeveyi gönderemez (1009, tamponlanmaz); host büyük anlık görüntü gönderebilir
+✓ tahmin sınırı: bir IP 10 dakikada 60 yanlış kod/anahtar denemesinden sonra el sıkışmada 429; doğru kod da o IP için kapanır; vekil arkasında başka telefon etkilenmez; kapanmış gerçek oda kodu tahmin sayılmaz
+✓ MP1_IP_HEADER: CDN önlü platformda istemci IP'si ayrı başlıktan okunur (aynı kenar IP'sindeki farklı telefonlar birbirini engellemez); güvenilen vekil yokken başlık yok sayılır
+   kod uzayı 2.86e+7; 10 açık odada günlük isabet: tek IP 1.01e-3, relay geneli 6.02e-3
+✓ kaba kuvvet hesabı (MP.7.4): 31^5 kod uzayı; IP başı 20 / 10 dk + relay geneli 120 / 10 dk yanlış deneme sınırı
+✓ MP.7.4 relay geneli yanlış kod sınırı: aşılınca yanlış denemesi olan IP bekletilir; temiz IP doğru kodla katılır
+✓ MP.7.4 çift KATIL: aynı sekme etiketiyle (dev) gelen ikinci soket öncekinin yerine geçer (koltuk tek); başka sekme oda doluyken reddedilir; geçersiz etiket yok sayılır
+✓ toplam bağlantı sınırı (MP1_MAX_CONNS): dolunca yeni el sıkışma 503; bağlantı kapanınca yer açılır
+✓ bellek: kapanan bağlantıların sayaçları silinir (uzun süre açık relay'de birikmez); kapanmış kod belleği sınırlı
+✓ host ağ değişimi: sessiz kalan (ölü) eski host bağlantısının yerine doğru anahtarlı yeni bağlantı geçer; canlı host'un yerine geçilemez (host-exists); yanlış anahtar hiçbir zaman geçemez
+✓ misafir ağ değişimi: oda doluyken sessiz kalmış (ölü) eski misafir soketi çıkarılır ve yeniden bağlanan telefon girer; canlı misafir asla çıkarılmaz
+✓ sızıntı: relay günlüğe hiçbir şey yazmaz; oda kodu yalnız davet URL'sinde, host anahtarı ve oyuncu jetonu hiçbir URL'de yok (ilk çerçeve / H içerikleri)
+✓ relay logs nothing while serving all of the above
+GEÇEN: 13 KALAN: 0

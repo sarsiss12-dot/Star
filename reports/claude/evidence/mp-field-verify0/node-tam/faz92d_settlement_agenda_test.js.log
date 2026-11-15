@@ -1,0 +1,15 @@
+✓ AI proposal leaves player ownership and vote unchanged, survives repeated tick
+✓ Player yes still requires explicit application
+✓ AI-only coalition uses canonical approval and actual transfer once
+✓ Player rejection is not resubmitted by AI after reload or expiry
+✓ No proposal during active war, legacy front, unknown partner or unseen land
+✓ Old peace and unchanged default distribution do not generate busywork
+✓ New war, death, or expired proposal cannot auto-transfer
+✓ Submission failure rolls back; no notice or lost offer id
+✓ Application failure leaves approved offer retriable with intact ownership
+✓ Notification failure does not undo successful pending proposal or interrupt agenda
+✓ Save/load does not auto-vote or auto-apply; pure directory reaches pending proposal
+✓ Unrelated player sees no AI-only agenda or secret participant names
+✓ Real monthTick reaches agenda after peace without player consent
+✓ Nested transaction and game-over skip agenda completely
+GEÇEN: 14 KALAN: 0

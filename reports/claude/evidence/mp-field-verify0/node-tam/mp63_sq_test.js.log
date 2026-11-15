@@ -1,0 +1,5 @@
+✓ A → B statüko teklifi; host kaydeder; yeni süreçte devam: B aynı devlete döner, bekleyen teklifini görür; reddi BİR KEZ işlenir; Save8 teklif içermez
+✓ kabul de bir kez: yüklemeden sonra B kabul eder → motorun statusQuoPeace'i ya da motorun gerekçesi; tekrar yanıt "yok"
+✓ süre yapay uzamaz: kayıt 180 gün sonra yüklenirse teklif "expired"; yanıt "yok"; misafir görünümünde süresi dolmuş
+✓ geriye uyum: teklifsiz paket MP.6.2 biçimindedir (sq alanı yok) ve aynen yüklenir; bozuk sq (uzatılmış süre) reddedilir
+GEÇEN: 4 KALAN: 0

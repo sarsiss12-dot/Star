@@ -1,0 +1,22 @@
+✓ korsan filosu savaş ilanı olmadan gerçek muharebeye girer
+✓ korsan husumeti iki yönlü ve RNG tüketmeden hesaplanır
+✓ normal taraflar savaş ilanı olmadan çatışmaz
+✓ olmayan/ölü korsan tarafı hedef olamaz
+✓ muhafızsız yuva hasar alır ve oyuncuya karşı ateş eder
+✓ filo sırası yuvanın erken kaybetmesine yol açmaz false
+✓ filo sırası yuvanın erken kaybetmesine yol açmaz true
+✓ yuvanın dayanımı bitince kaldırılır ve ödül tekrarlanmaz
+✓ iki normal devletin savaşı taraf olmayan yuvaya hasar vermez
+✓ korsan yuvası sistemin normal sahibini hayatta tutan savunma sayılmaz
+✓ normal devletin savaşı taraf olmayan kalıntıya hasar vermez
+✓ silahlı filo uyanan kalıntıyla karşılıklı savaşır
+✓ korsanın sahip olduğu sisteme saldırı rotası engellenmez
+✓ yuvanın varlığı tarafsız üçüncü devletin sınırını açmaz
+✓ gerçek SALDIR eylemi rota kurar ve varıştan sonra yuvaya ateş açılır
+✓ korsan filosu AI tehdit hesabına girer, barıştaki normal filo girmez
+✓ yuvadan gerçek ricat saldırganı hasardan önce çıkarır
+✓ muhafız ricat etse de yuva aynı turda savaşa devam eder
+✓ geri çekilemeyen düşük gövdeli filo yuvaya karşı donmaz
+✓ panel salt varlığı sürmekte olan kuşatma diye göstermez
+✓ v8 yüklemeden sonra korsan çatışması ve yuva dayanımı devam eder
+GEÇEN: 21 KALAN: 0

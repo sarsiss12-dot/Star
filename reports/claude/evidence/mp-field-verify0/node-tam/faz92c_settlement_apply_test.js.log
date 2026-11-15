@@ -1,0 +1,29 @@
+✓ Real coalition empty systems transfer exactly once with no resource/RNG/fleet cost
+✓ Application quote is pure; pending/rejected/withdrawn/expired are rejected
+✓ Only a current living participant can apply
+✓ Unknown land prevents application without changing accepted offer
+✓ Mixed system moves selected colony only, preserving foreign colony, orbit and fleets
+✓ Governors remain with former empire; automation stops; capital relocates safely
+✓ Last-colony surrender rejected before mutations
+✓ Ownership away and back invalidates consent, including direct non-war writer
+✓ Foreign colony owner change in same system invalidates the agreed footprint
+✓ Renewed war, death, membership change and expiry invalidate approval
+✓ Edited recipient or recomputed rows cannot reuse existing consent
+✓ Duplicate or missing unanimous votes cannot authorize transfer
+✓ Malformed colony index and occupied empty-system queue reject without mutation
+✓ Injected before:apply restores world, aliases, governor, RNG and suppresses presentation
+✓ Injected first:asset restores world, aliases, governor, RNG and suppresses presentation
+✓ Injected after:items restores world, aliases, governor, RNG and suppresses presentation
+✓ Injected after:recalc restores world, aliases, governor, RNG and suppresses presentation
+✓ Injected after:receipt restores world, aliases, governor, RNG and suppresses presentation
+✓ Injected after:log restores world, aliases, governor, RNG and suppresses presentation
+✓ Injected son restores world, aliases, governor, RNG and suppresses presentation
+✓ Nested deal/apply cannot execute inside transfer transaction
+✓ Presentation exceptions after commit cannot turn success into retry or duplicate logs
+✓ Approved save loads with identical consent and applies; receipt survives reload without replay
+✓ Broken receipt fails load atomically; later ownership changes do not erase valid history
+✓ Old 92B approval without bound terms becomes invalid, never auto-applied
+✓ Applied campaign cannot submit a second proposal, including no-op distribution
+✓ Real UI apply action works; old callback after load has no effect
+✓ Production ownership assignment audit has only the canonical setter
+GEÇEN: 28 KALAN: 0

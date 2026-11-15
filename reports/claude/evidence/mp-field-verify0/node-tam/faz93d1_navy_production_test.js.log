@@ -1,0 +1,18 @@
+✓ peace buys below 500 alloy with payment
+✓ multiple yards, bounded monthly orders
+✓ same month and save gate prevent double spending
+✓ pending sizes count toward capacity
+✓ grouped science hulls and pending jobs count
+✓ grouped colony hulls stop unnecessary replacement
+✓ science renewal waits after loss
+✓ completed AI science ships remain independent fleets
+✓ peace upkeep deficit blocks new expenses
+✓ war respects cash runway
+✓ funded war replacement exceeds peace rate
+✓ strategic alloy reserve survives
+✓ sabotaged yards excluded
+✓ legacy template preserved and reinforced with correct class
+✓ AI template evolves on research unlock
+✓ template design survives Save v8
+✓ paid costs reconcile, locked classes excluded, production uses no RNG
+GEÇEN: 17 KALAN: 0

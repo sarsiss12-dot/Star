@@ -1,0 +1,10 @@
+✓ actual day2370 chooses an ineffective farm rather than the essential mine
+✓ actual day2370 AI queues safe demolition, actual completion keeps mineral production
+✓ a food-consuming colony protects a farm whose loss would create a food deficit
+✓ queued demolitions count against availability and projected resource safety
+✓ an impossible safe replacement terminates and does not remove the last utility/yard/port
+✓ last productive lab and last defence are retained while one ineffective farm can be removed
+✓ a deep treasury never permits slot replacement to worsen an existing energy deficit
+✓ blocked full colony records a bounded v8-compatible retry instead of repeated attempts
+✓ demolition refunds only on completion and cancelled demolition refunds nothing
+GEÇEN: 9 KALAN: 0

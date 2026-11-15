@@ -1,0 +1,6 @@
+✓ gemi siparişi iptali: B kendi sistemindeki siparişini sırasıyla iptal eder (motorun cancelShipOrders'ı, iade); başkasının sistemi "not-owner", bayat sıra "stale"
+✓ toplanma noktası ve sürekli üretim: B kendi tersane sistemine ralli/döngü kurar ve kaldırır; C'nin sistemi reddedilir; erişilemeyen sınıf motor gerekçesiyle
+✓ onarım ve takviye: B kendi filosunda onarımı açar/kapatır, takviye ister (motorun reinforceFleet'i ya da gerekçesi); C'nin filosu reddedilir
+✓ lider: B işe alır (Etki), kendi filosuna amiral atar, görevden alır; C'nin filosuna atama ve C'nin liderine dokunma reddedilir
+✓ terraform / habitat: motorun koşulları (teknoloji, gezegen, sahiplik); geçerli durumda motor işlevi; başkasının sistemi motor gerekçesiyle
+GEÇEN: 5 KALAN: 0

@@ -1,0 +1,8 @@
+✓ one-way intel transfers historic exploration and current colony/fleet sensors immediately
+✓ shared vision follows range and nebula rather than remote target or hidden fleet
+✓ monthly refresh and real fleet departures/arrivals update without granting destination early
+✓ revoked, dead or wartime providers lose live view immediately but retain discovered stars
+✓ mutual pact remains distinct; spynet grants no sensor vision; no third-party relay
+✓ war ends both sharing models and loading v8 rebuilds derived vision only
+✓ cached pVis never rescans galaxy per frame and cannot change routes or RNG
+GEÇEN: 7 KALAN: 0

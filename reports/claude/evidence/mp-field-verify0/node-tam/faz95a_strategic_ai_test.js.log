@@ -1,0 +1,52 @@
+✓ hidden fleet mutation cannot alter low-intel power, war ratio or threat
+✓ visible hostile fleet affects local threat; hidden neighbour does not
+✓ level three intelligence permits actual force assessment
+✓ deception changes estimates; stolen fleet plans defeat deception until expiry
+✓ sensor observations retain stale ownership without reading hidden changes
+✓ unseen ownership is absent from target catalogue
+✓ observed fleet strength is remembered without reading remote reinforcements
+✓ hidden stocks are excluded, explicit resource offers are known
+✓ technology identity requires catalogue intel or an explicit offer
+✓ third-party war requires contact and infiltrated knowledge
+✓ known route refuses a hidden intermediate shortcut
+✓ AI route respects closed military borders and known pirate intermediates
+✓ protector route cannot learn a hidden foreign gate upgrade
+✓ low-intel help ETA cannot read a foreign engine technology upgrade
+✓ known-path orders validate continuity and cannot teleport
+✓ elective war requires reachable force; prospective enemy border is traversable only in planning
+✓ insufficient fleets gather without individual suicide orders
+✓ sufficient co-located fleets commit together
+✓ defending a visibly threatened home precedes offensive allocation
+✓ staging excludes locked Colossus escorts and retreating forces
+✓ campaign validity window refreshes after target review
+✓ unreachable protector is rejected regardless of its hidden strength
+✓ reachable strong protector has explicit assistance ETA
+✓ ally blocks active theft and hostile sabotage but permits passive information
+✓ vassal blocks active theft and hostile sabotage but permits passive information
+✓ friendly blocks active theft and hostile sabotage but permits passive information
+✓ neutral relations alone do not authorize heavy sabotage
+✓ AI assigns passive spies through canonical slot limits
+✓ passive spy assignment increases real intelligence without creating resources
+✓ friendly pair is excluded from whisper targets
+✓ automatic repeated proposal is held without consuming resources or RNG
+✓ invalid automatic proposal is blocked before payment and held for reevaluation
+✓ new independence protection prevents automatic resubjugation without charging
+✓ null negotiation remains a safe no-op
+✓ builder starts one actual job, charges once and becomes unavailable
+✓ duplicate job is refused even with a second builder
+✓ construction completion releases builder and applies real structure
+✓ selected doctrine remains authoritative: militarist
+✓ selected doctrine remains authoritative: tuccar
+✓ selected doctrine remains authoritative: pasifist
+✓ selected doctrine remains authoritative: yayilmaci
+✓ selected doctrine remains authoritative: izolasyonist
+✓ selected doctrine remains authoritative: teknokrasi
+✓ selected doctrine remains authoritative: kriminal
+✓ selected doctrine remains authoritative: teokrasi
+✓ strategy survives quiet monthly changes; real shortage triggers recovery immediately
+✓ AI council initiative uses existing prerequisites and pays existing influence cost
+✓ stable unsafe wait backs off graph work but threat removal resumes within five days
+✓ Save v8 preserves fractional observation times, strategy, campaign and proposal cooldowns
+✓ old Save v8 without strategic fields initializes safely
+✓ knowledge and route calculations consume no gameplay RNG
+GEÇEN: 51 KALAN: 0

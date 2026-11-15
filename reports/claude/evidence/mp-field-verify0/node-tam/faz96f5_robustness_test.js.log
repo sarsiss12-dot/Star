@@ -1,0 +1,3 @@
+✓ full transaction retains descriptors, getter silence, prototype, Date, typed buffer and symbol aliases
+✓ waiting settlement survives multiple poor months and reload, then consumes exactly once without second fee
+GEÇEN: 2 KALAN: 0

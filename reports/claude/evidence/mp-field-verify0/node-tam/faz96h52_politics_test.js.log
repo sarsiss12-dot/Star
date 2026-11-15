@@ -1,0 +1,28 @@
+✓ federation defense enters one campaign with explicit origins
+✓ forced capitulation closes proven common federation fronts and avoids ally betrayal on next protection tick
+✓ root victim may also win capitulation without leaving federation support fronts open
+✓ independent third-party war survives and contract defense protects new subject
+✓ separate declaration by a federation peer is not erased as common campaign
+✓ missing historical provenance does not erase observed legacy fronts
+✓ existing diplomatic proxy ends through original proxy resolution
+✓ independent bilateral capitulation preserves unrelated wars and clears ended war authority
+✓ automatic boyun completion uses actual goal progress; no new goal is invented by defense
+✓ war Save8 before capitulation yields identical contracts, fronts and RNG on both paths
+✓ new attack on protected subject still summons lord through real declaration
+✓ no-defense clause keeps independent war without conscripting lord
+✓ bounded section renders alone: general
+✓ bounded section renders alone: members
+✓ bounded section renders alone: votes
+✓ bounded section renders alone: laws
+✓ bounded section renders alone: military
+✓ bounded section renders alone: manage
+✓ opening leave confirmation does not leave; confirmation executes once
+✓ stale leave confirmation cannot leave newly loaded federation
+✓ vote context names target, proposer, actual rule and effect without mutating RNG
+✓ expired or replaced vote record does not display new unrelated vote terms
+✓ vassal management is visible directly and shows actual remaining renewal months
+✓ fleet grouping and filters never merge objects or modify orders, Save8 or RNG
+✓ trade notification opens same preserved record and cannot double execute
+✓ federation vote from panel and archive uses same record and guarded resolver
+✓ cancelled leave closure cannot later apply
+GEÇEN: 27 KALAN: 0

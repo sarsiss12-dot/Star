@@ -1,0 +1,7 @@
+PASS S1 federal filo türüne göre bölünür (splitType): yeni filo aynı federasyonda; başkanın kişisel bakımı/kapasitesi ve fon bakımı değişmez
+PASS S2 MP split komutu (misafir başkan, gerçek mp-core): yarıya bölünen federal filo federal kalır
+PASS S3 federal ve kişisel filo birleşmez (motor reddi, açık gerekçe); aynı federasyonun iki filosu birleşir; AI otomatik birleştirmesi federali kişisele katmaz
+PASS S4 başkan sipariş sürerken federasyondan ayrılır (tamamlanma önce): eski başkanın tersanesinde gemi teslim edilmez, bedel fona BİR KEZ döner; başkanlık devredilir
+PASS S4 başkan sipariş sürerken federasyondan ayrılır (aylık tarama önce): eski başkanın tersanesinde gemi teslim edilmez, bedel fona BİR KEZ döner; başkanlık devredilir
+PASS S5 başkan değişir ama üye kalır: geçerli sipariş devralınır, gemi O ANKİ başkana federal doğar (F6 ile aynı kural), ödeme bir kez
+GEÇEN: 6 KALAN: 0

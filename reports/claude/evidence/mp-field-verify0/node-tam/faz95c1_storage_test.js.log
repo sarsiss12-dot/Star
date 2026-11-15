@@ -1,0 +1,16 @@
+✓ actual local storage acknowledgement is separate from session memory
+✓ no persistent backend reports failure while retaining a recoverable session copy
+✓ blocked storage access neither deletes nor falsely confirms a save
+✓ quota exhaustion preserves the previous durable save and the failed new session copy
+✓ silent local write failure is detected by read-back
+✓ host backend success needs its acknowledgement and records the actual backend
+✓ explicit host rejection cannot count as durable memory
+✓ host object failure can fall back to a real local write
+✓ host exception and local quota failure leave the existing save intact
+✓ failed manual save says session-only, not saved successfully
+✓ successful manual save explicitly reports persistent storage
+✓ text import is playable but explicitly warns when its durable copy fails
+✓ Save v8 serialization and RNG survive real durable save/load
+✓ failed storage attempt consumes no economic stock or RNG
+✓ war-layer preference persists independently across reload and Save v8
+GEÇEN: 15 KALAN: 0

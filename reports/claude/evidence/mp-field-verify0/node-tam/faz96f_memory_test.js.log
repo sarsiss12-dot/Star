@@ -1,0 +1,22 @@
+✓ real evidence adds a small memory to the existing trust list once
+✓ many small deliveries in one month cannot flood memory or trust
+✓ new evidence after six months remains modest and bounded
+✓ dishonest baseline exists before any memory; first small action causes only its own small delta
+✓ a missing contact cannot receive evidence or reveal another state
+✓ old hostility fades through the existing monthly memory mechanism
+✓ real helper battle damage credits the beneficiary, declaration alone does not
+✓ repeated rounds in the same campaign cannot double-credit support
+✓ a rejected/unavailable request is never automatically betrayal
+✓ own war is an inability reason, not an alliance betrayal
+✓ low intelligence cannot accuse a helper based on its private capability
+✓ accepted support left idle despite observed ability receives a small broken-promise memory, not betrayal
+✓ economic inability to fulfill support does not receive a broken-promise accusation
+✓ actual alliance-breaking attack still produces the existing betrayal memory
+✓ a young freight contract gives no unearned reliability
+✓ mature actual freight delivery raises reliability without minting resources
+✓ repeated receipt cannot produce a second cargo reward or memory
+✓ paid tribute earns gradual fulfillment memory; inability to pay is not betrayal
+✓ support receipt and diplomatic memories survive Save v8 without re-awarding
+✓ more than fourteen distinct records retain the existing bounded list
+✓ overlord war declaration alone does not receive a second physical-help reward
+GEÇEN: 21 KALAN: 0

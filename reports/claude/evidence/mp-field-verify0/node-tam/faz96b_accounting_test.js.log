@@ -1,0 +1,10 @@
+✓ real tribute conserves both stocks and distinct participant ledgers
+✓ market records actual sold and quoted received amounts
+✓ negative recurring output and stock floor are recorded as two distinct real effects
+✓ anonymous economic event callback is attributed without second resource transfer
+✓ negative production modifier, battle blockade and network output do not create cargo income
+✓ completed history has exact balances after outside mutation and save/load
+✓ malformed cargo event and period dates reject whole load without changing stock or history
+✓ newly completed building changes the next real income calculation without panel-side recomputation
+✓ long negative and zero periods render no invalid number, date or invented positive depletion
+GEÇEN: 9 KALAN: 0

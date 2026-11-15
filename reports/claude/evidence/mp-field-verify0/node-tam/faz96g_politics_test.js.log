@@ -1,0 +1,35 @@
+✓ equal uses real ballot, explicit human vote, bounded frozen weights and Save8
+✓ equal one president cannot impose a law after human abstention
+✓ hegemonic uses real ballot, explicit human vote, bounded frozen weights and Save8
+✓ hegemonic one president cannot impose a law after human abstention
+✓ economic uses real ballot, explicit human vote, bounded frozen weights and Save8
+✓ economic one president cannot impose a law after human abstention
+✓ mixed uses real ballot, explicit human vote, bounded frozen weights and Save8
+✓ mixed one president cannot impose a law after human abstention
+✓ equal representation ignores civic double vote but old weighted retains it
+✓ stocks alone never grant economic votes, recurring production and deficits matter
+✓ military and economy each affect mixed representation through public mandates
+✓ weights change real five-member outcome without overriding head majority
+✓ new charter needs 75 percent of heads AND frozen vote weight
+✓ paid regime reform applies only after ballot and fee is charged once
+✓ power and production changes cannot move weights of an open ballot
+✓ dead/departed members and duplicate foreign votes cannot corrupt denominator
+✓ malformed saved weights cannot fabricate overwhelming vote totals
+✓ open membership ballot expires, records reason, never assigns human vote
+✓ unknown applicant armies, stocks and output never improve membership assessment
+✓ strong and small states have distinct regime interests and deterministic reasons
+✓ admit actual AI vote is reasoned; existing actions retain RNG schedule
+✓ expel actual AI vote is reasoned; existing actions retain RNG schedule
+✓ elect actual AI vote is reasoned; existing actions retain RNG schedule
+✓ reform actual AI vote is reasoned; existing actions retain RNG schedule
+✓ charter actual AI vote is reasoned; existing actions retain RNG schedule
+✓ joinWar actual AI vote is reasoned; existing actions retain RNG schedule
+✓ newWar actual AI vote is reasoned; existing actions retain RNG schedule
+✓ all existing basic and inner laws produce deterministic explanations
+✓ failed founding fully rolls back fee, membership, public mandates and RNG
+✓ 360px existing pane exposes four founding choices and real request action
+✓ reserved random samples never select AI yes/no votes
+✓ legacy loaded ballot freezes electorate as well as weights
+✓ recovery plans reject a new automatic war duty while existing defense duty remains
+✓ failed final invitation acceptance restores membership, result, alliances, fee and RNG
+GEÇEN: 34 KALAN: 0

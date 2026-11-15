@@ -1,0 +1,13 @@
+✓ real seed42 decision rejects unfunded future colony despite affordable hull
+✓ forecast matches actual colony income including administration and consumer demand
+✓ forecast is pure across repeated probes and Save v8 roundtrip
+✓ hull price appears exactly once at purchase and never again at settlement
+✓ well funded expansion remains available with a real paid colony hull
+✓ already assigned settlers count once and target duplicate is not double charged
+✓ unexplored settlement does not expose planetary economy
+✓ real humanoid physiology is used rather than fictitious generic food
+✓ real lithoid physiology is used rather than fictitious generic food
+✓ real machine physiology is used rather than fictitious generic food
+✓ funded observed strategic defence may take bounded risk but never a free colony
+✓ arrival waits through Save v8 and retries settlement after the economy recovers
+GEÇEN: 12 KALAN: 0

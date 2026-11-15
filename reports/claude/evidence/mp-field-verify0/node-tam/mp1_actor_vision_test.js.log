@@ -1,0 +1,3 @@
+✓ isHumanActor is exactly the single-player human (empire 0) over 120 months, seeds 11/23/42, and is not an id check
+✓ actor-general vision equals updateVision for the local player (120 months, seeds 11/23/42)
+GEÇEN: 2 KALAN: 0

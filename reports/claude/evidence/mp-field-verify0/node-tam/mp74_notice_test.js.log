@@ -1,0 +1,7 @@
+✓ ticaret teklifi kartında KABUL / REDDET / KARŞI TEKLİF; KABUL bir kez uygulanır, kayıt sonuçlanır, kart kalkar; ikinci dokunuş etkisiz
+✓ REDDET kaydı reddedilmiş olarak sonuçlandırır (gelen kutusunda aynı kayıt, ikinci kayıt yok)
+✓ KARŞI TEKLİF gerçek anlaşma penceresini (aiDealOpen) karşı teklif kipinde açar; kayıt bekler
+✓ kaydırma: teklif kartı kalkar, karar Gelen kutusunda bekler (yeni kayıt yok); karar bekleyen olay kaydırılınca gizlenir ve durum listesinden açılır (MP.7.5); bilgi kartı kalkar
+✓ federasyon oyu / daveti kartında EVET-HAYIR / KABUL-RET; vasallık, barış, statüko ve savaş kararı kartlarında hızlı düğme yok (gerçek pencere)
+✓ duraklatan kart karar / kaydırma ile kapanınca önceki hıza döner; elle duraklatma korunur
+GEÇEN: 6 KALAN: 0

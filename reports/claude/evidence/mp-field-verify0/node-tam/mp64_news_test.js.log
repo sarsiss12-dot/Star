@@ -1,0 +1,5 @@
+✓ taraf olan uzak insan kendi savaş ilanını "doğrudan katılım" ile görür; temassız C görmez; host'un listesi ayrı
+✓ üçüncü taraf savaşı (AI 2 ↔ AI 1) motorun kuralıyla: B ancak istihbarat ≥3 ile görür; ≤2 iken görmez
+✓ sistem olayı: B'nin keşfetmediği / görmediği sistemdeki olay gitmez; kendi sistemindeki olay "doğrudan katılım"; host'un oyuncu kapsamlı haberi misafire gitmez
+✓ ayna: haberler motorun Save8 biçiminde (news.records), π ile numaralandırılmış; motorun deserialize'ı kabul eder; host günlüğü/haberleri girmez; RNG/Save8 değişmez
+GEÇEN: 4 KALAN: 0

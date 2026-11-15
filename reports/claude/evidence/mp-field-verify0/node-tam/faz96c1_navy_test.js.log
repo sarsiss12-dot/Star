@@ -1,0 +1,13 @@
+✓ zero net alloy permanent budget deadlock buys one genuinely paid basic hull
+✓ same month cannot replay the fallback payment
+✓ insufficient stock does not pay or grant a hull
+✓ energy crisis and consumer collapse retain existing gates
+✓ military capacity and technology remain hard limits
+✓ construction commitment cannot be spent by fallback navy order
+✓ positive production preserves ordinary 96C budget policy
+✓ no AI planning or route memo enters Save v8
+✓ lazy construction permissions retain canonical choice and RNG for 60 world cases
+✓ search threat snapshot excludes invisible hostile fleet
+✓ actual canonical 96C in-flight v8 save preserves cargo/history/stock/RNG exactly
+✓ new diagnostic census leaves game save, decisions and RNG untouched
+GEÇEN: 12 KALAN: 0

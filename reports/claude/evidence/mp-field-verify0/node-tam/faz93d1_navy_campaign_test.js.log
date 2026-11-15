@@ -1,0 +1,9 @@
+✓ 11: real 120 months, bounded science, stronger navy, no negative resources
+✓ 11: civilian inventory reconciles every hull and yard usage stays bounded
+✓ 99: real 120 months, bounded science, stronger navy, no negative resources
+✓ 99: civilian inventory reconciles every hull and yard usage stays bounded
+✓ 404: real 120 months, bounded science, stronger navy, no negative resources
+✓ 404: civilian inventory reconciles every hull and yard usage stays bounded
+✓ deterministic 120-month replay
+✓ observer preserves full save and RNG
+GEÇEN: 8 KALAN: 0

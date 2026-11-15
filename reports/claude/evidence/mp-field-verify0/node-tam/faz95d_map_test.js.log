@@ -1,0 +1,24 @@
+✓ independent layers 000
+✓ independent layers 100
+✓ independent layers 010
+✓ independent layers 001
+✓ independent layers 111
+✓ independent layers 101
+✓ independent layers 011
+✓ independent layers 110
+✓ known contact alone reveals no foreign federation or alliance
+✓ unknown federation member and unknown position are excluded independently
+✓ member knows own federation bond without needing espionage level3
+✓ low zoom hides relation detail and high density is bounded
+✓ federation topology uses hub spokes, not quadratic member lines
+✓ save/load preserves all three visibility choices; failed load does not change them
+✓ toolbar exposes three distinct aria-pressed toggles and preserves camera mode
+✓ long state names and neighboring capitals share collision placement with badges
+✓ map label or badge tap opens corresponding diplomatic relation without selecting a fleet
+✓ uncontacted state identity remains generic, emblem cannot open a relationship
+✓ map rendering and opening diplomatic views never alter game RNG or serialized state
+✓ known member can display federation badge even when its first member is unknown
+✓ loaded war preference updates the existing toggle aria state as well as rendering
+✓ same-day ownership change invalidates cached diplomatic endpoints
+✓ identity badge does not intercept active single-fleet target selection
+GEÇEN: 23 KALAN: 0

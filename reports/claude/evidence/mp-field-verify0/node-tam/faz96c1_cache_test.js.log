@@ -1,0 +1,11 @@
+✓ unchanged topology reuses a route without additional BFS
+✓ same-day war invalidates cached geometry
+✓ same-day ownership change refreshes a route
+✓ forgotten knowledge invalidates positive path
+✓ newly discovered path invalidates a negative result
+✓ raid expiry invalidates negative cache even without changed raid keys
+✓ lane removal invalidates same-day cached path
+✓ new visible danger is checked live despite geometry cache
+✓ port loss and embargo remain live gates at contract dispatch
+✓ new world, exception and repeated load cannot retain active memo scope
+GEÇEN: 10 KALAN: 0

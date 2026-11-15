@@ -1,0 +1,68 @@
+  ✓ Native pixels: siyasi, radar=false, logistics=false
+  ✓ Native pixels: siyasi, radar=false, logistics=true
+  ✓ Native pixels: siyasi, radar=true, logistics=false
+  ✓ Native pixels: siyasi, radar=true, logistics=true
+  ✓ Native pixels: diplomasi, radar=false, logistics=false
+  ✓ Native pixels: diplomasi, radar=false, logistics=true
+  ✓ Native pixels: diplomasi, radar=true, logistics=false
+  ✓ Native pixels: diplomasi, radar=true, logistics=true
+  ✓ Native pixels: savas, radar=false, logistics=false
+  ✓ Native pixels: savas, radar=false, logistics=true
+  ✓ Native pixels: savas, radar=true, logistics=false
+  ✓ Native pixels: savas, radar=true, logistics=true
+  ✓ Real save: 6881 world and every system reachable at all supported zooms
+  ✓ Fullscreen event does not erase existing pixels before recovery
+  ✓ Fullscreen recovery draws real pixels and preserves the save/RNG
+  ✓ Native canvas reset really produces transparent pixels
+  ✓ Manual recovery replaces unavailable surface and restores real pixels
+  ✓ Before-recovery report retains original transparent samples
+  ✓ Retired native surface has zero event listeners
+  ✓ Native replacement: real fleet tap selects exactly once
+  ✓ Native replacement: 40px pan is exactly 40 world units
+  ✓ Native replacement: pinch and following one-finger pan work
+  ✓ Mixed surface 0: expected outcome and references
+  ✓ Mixed surface 0: retired callback stays inert
+  ✓ Mixed surface 0: real tap
+  ✓ Mixed surface 0: pan/pinch after rollback or replacement
+  ✓ Mixed surface 1: expected outcome and references
+  ✓ Mixed surface 1: retired callback stays inert
+  ✓ Mixed surface 1: real tap
+  ✓ Mixed surface 1: pan/pinch after rollback or replacement
+  ✓ Mixed surface 2: expected outcome and references
+  ✓ Mixed surface 2: retired callback stays inert
+  ✓ Mixed surface 2: real tap
+  ✓ Mixed surface 2: pan/pinch after rollback or replacement
+  ✓ Mixed surface 3: expected outcome and references
+  ✓ Mixed surface 3: retired callback stays inert
+  ✓ Mixed surface 3: real tap
+  ✓ Mixed surface 3: pan/pinch after rollback or replacement
+  ✓ Mixed surface 4: expected outcome and references
+  ✓ Mixed surface 4: retired callback stays inert
+  ✓ Mixed surface 4: real tap
+  ✓ Mixed surface 4: pan/pinch after rollback or replacement
+  ✓ Mixed surface 5: expected outcome and references
+  ✓ Mixed surface 5: retired callback stays inert
+  ✓ Mixed surface 5: real tap
+  ✓ Mixed surface 5: pan/pinch after rollback or replacement
+  ✓ Mixed surface 6: expected outcome and references
+  ✓ Mixed surface 6: retired callback stays inert
+  ✓ Mixed surface 6: real tap
+  ✓ Mixed surface 6: pan/pinch after rollback or replacement
+  ✓ Mixed surface 7: expected outcome and references
+  ✓ Mixed surface 7: retired callback stays inert
+  ✓ Mixed surface 7: real tap
+  ✓ Mixed surface 7: pan/pinch after rollback or replacement
+  ✓ Mixed surface 8: expected outcome and references
+  ✓ Mixed surface 8: retired callback stays inert
+  ✓ Mixed surface 8: real tap
+  ✓ Mixed surface 8: pan/pinch after rollback or replacement
+  ✓ Mixed surface 9: expected outcome and references
+  ✓ Mixed surface 9: retired callback stays inert
+  ✓ Mixed surface 9: real tap
+  ✓ Mixed surface 9: pan/pinch after rollback or replacement
+  ✓ Mixed native sequence covered both outcomes
+  ✓ Partial listener installation rolls back to coherent old surface
+  ✓ Partial-bind rollback: tap/pan/pinch remain usable
+  ✓ Existing resize error reaches a new native drawing surface
+
+GEÇEN: 66 KALAN: 0

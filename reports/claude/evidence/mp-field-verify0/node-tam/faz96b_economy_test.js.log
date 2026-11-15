@@ -1,0 +1,22 @@
+✓ original income equals instrumented arithmetic: human
+✓ original income equals instrumented arithmetic: machine
+✓ original income equals instrumented arithmetic: rock
+✓ original income equals instrumented arithmetic: negative
+✓ original income equals instrumented arithmetic: war
+✓ original income equals instrumented arithmetic: civic
+✓ original income equals instrumented arithmetic: federation
+✓ all seven real stocks and net rates render, no placeholders or invalid numbers
+✓ view, repeated render, filters and global pane are read-only for full save and RNG
+✓ finite depletion estimate only for a negative recurring net
+✓ physical load, arrival, loss and plunder are separate from recurring production
+✓ real cargo attack records one loss, no second source stock debit
+✓ ship order debit and cancellation refund reconcile actual stock without phantom reservation
+✓ building start and cancel use actual paid receipt
+✓ unknown legacy mutation is explicit, never fabricated as colony production
+✓ canonical diplomatic transfer records both real participants, rollback records no transfer
+✓ monthly clamp, research allocation and period accounting stay distinct
+✓ old v8 has no invented history, repeated save/load neither advances nor pays
+✓ twelve months and bounded event details retain exact period totals
+✓ malformed economic record is rejected atomically
+✓ derived income and modifier caches are available but excluded from Save v8
+GEÇEN: 21 KALAN: 0

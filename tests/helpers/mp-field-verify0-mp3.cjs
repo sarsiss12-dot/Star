@@ -122,7 +122,8 @@ module.exports=async(X,{E,M,ready,where,closeUI,cards,ensure})=>{const {test,pg,
    assert.notEqual((await cmd('B',{kind:'respond',offer:cid,action:'accept'})).status,'ok','ikinci kabul yok');
    /* (d) savaş kapanınca (B–hedef barış) bekleyen eski teklifin gecikmiş kabulü işlenmez */
    await H().evaluate(([b,t])=>{makePeace(G.emps[b],G.emps[t],{force:true,quiet:true});MP1Host.host.publish();},[E.B,T]);const pr1=await H().evaluate(()=>(G.warLedger.promises||[]).length);
-   await hostRecInstall();const late=await H().evaluate(([id])=>{const r=window.__hostRec(id);return r?{via:'inbox',...DiplomaticInbox.resolve(r.id,true)}:{via:'local',...MP1Host.host.local({kind:'respond',offer:id,action:'accept'})};},[V.closing.offer]);V.late=late;
+   await hostRecInstall();const late=await H().evaluate(([id])=>{const r=window.__hostRec(id);return r?{via:'inbox',...DiplomaticInbox.resolve(r.id,true,undefined,G.emps)}:{via:'local',...MP1Host.host.local({kind:'respond',offer:id,action:'accept'})};},[V.closing.offer]);V.late=late;
+   V.lateEngine=await H().evaluate(id=>MP1Host.host.local({kind:'respond',offer:id,action:'accept'}),V.closing.offer);assert.notEqual(V.lateEngine&&V.lateEngine.ok,true,'motor yolu da gecikmiş kabulü reddeder: '+JSON.stringify(V.lateEngine));
    assert.notEqual(late&&late.ok,true,'kapanan cepheye gecikmiş kabul işlenmez: '+JSON.stringify(late));assert.equal(await H().evaluate(()=>(G.warLedger.promises||[]).length),pr1,'yeni vaat yazılmadı');});
 
  await test('Z13 ikinci kayıt/devam: DAVET PAYLAŞ bağlantısı (B) + aynı profilde ikinci sekme (yeni sekme alır, eski sekme nedenini gösterir, KATIL ile geri alır) + eski oda kodu (host yok → oda aşaması, kod düzenlenebilir) + C ana menüden; DEVAM ET; aynı odada C kopar/döner → aynı devlet, tarih ilerler, C filo emri host\'ta ve C haritasında',async()=>{
@@ -142,7 +143,8 @@ module.exports=async(X,{E,M,ready,where,closeUI,cards,ensure})=>{const {test,pg,
    await B().goto(shareUrl);await wait(B(),()=>window.MP1Join&&document.getElementById('jName'));if(await B().evaluate(()=>!MP1Join.ws))await tap(B(),'[data-j="go"]');
    await wait(B(),e=>MP1Join.empireId===e,E.B,40000);V.rejoin2.bLobby=await where(B());assert.match(V.rejoin2.bLobby.search,new RegExp('code='+code2));
    /* aynı profilde ikinci sekme: koltuk başka sekmede — ilk sekme koltuğunu korur */
-   const b2=await ctx.B.newPage();await b2.goto(origin.B+'/mp/play?code='+code2);await wait(b2,()=>window.MP1Join&&document.getElementById('jName'));if(await b2.evaluate(()=>!MP1Join.ws))await tap(b2,'[data-j="go"]');
+   const b2=await ctx.B.newPage();await b2.goto(origin.B+'/mp/play?code='+code2);await wait(b2,()=>window.MP1Join&&(MP1Join.ws||document.getElementById('jName')));   /* kimlik bulunursa sekme kendiliğinden bağlanır */
+   if(await b2.evaluate(()=>!MP1Join.ws&&!!document.querySelector('[data-j="go"]')))await tap(b2,'[data-j="go"]');
    await wait(b2,()=>!!MP1Join.err||MP1Join.empireId!==null,undefined,30000);await sleep(2000);V.rejoin2.secondTab=await where(b2);await shot(b2,'z13-ikinci-sekme');
    V.rejoin2.firstTab=await where(B());await shot(B(),'z13-ilk-sekme');
    /* yeni sekme koltuğu alır; eski sekme nedenini (kimlik aşaması) gösterir ve KATIL ile koltuğu geri alabilir */

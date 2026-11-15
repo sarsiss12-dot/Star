@@ -1,0 +1,289 @@
+{
+ "results": [
+  {
+   "name": "E0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 11251
+  },
+  {
+   "name": "E1 fikstür: B + 2 AI federasyonu (host ve C üye değil), AI başkanın gerçek yasa önerisi → B'nin üst çubuğunda \"Federasyon oylaması\" kartı (hızlı EVET / HAYIR); C'de ve host'ta kart yok",
+   "status": "PASS",
+   "ms": 3818
+  },
+  {
+   "name": "E2 B karttan hızlı EVET (gerçek dokunma) → host castFedVote tam bir kez; bekleme durumu görünür; çift dokunma ikinci komut göndermez; oy verilince kart düşer",
+   "status": "PASS",
+   "ms": 2246
+  },
+  {
+   "name": "E3 oylama sonuçlanınca (AI üyeler motorla oy verir) B'de \"Federasyon oylaması sonuçlandı\" bilgi kartı; C'de yok; host hızı değişmez; kart tekil, ayna yenilemesi / yeniden bağlanma yeniden doğurmaz; dokununca federasyon paneli",
+   "status": "PASS",
+   "ms": 8424
+  },
+  {
+   "name": "E4 Konsey: host + B + C + AI üyeler; gerçek startCouncilVote → host, B ve C'de \"KONSEY OYLAMASI\" kartı; C karttan HAYIR, B karttan EVET (gerçek dokunma) → host castCouncilVote tam bir kez; sonuçlanınca kamu \"Konsey kararı\" bilgi kartı herkeste",
+   "status": "PASS",
+   "ms": 5039
+  },
+  {
+   "name": "E5 P0 koruması: olaylar sonrasında misafir dünyası güncel, eşitleme notu yok, kurulum istisnası yok; misafir gemi emri host ACK'iyle sıraya girer; sayfa hatası yok",
+   "status": "PASS",
+   "ms": 1105
+  }
+ ],
+ "metrics": {
+  "scen": "E",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 6,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 876,
+    "buildMs": 932,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 1027,
+    "buildMs": 1094,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 5.5,
+      "p95": 7.2,
+      "max": 7.2
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 16,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 46.9,
+       "p95": 46.9,
+       "max": 46.9
+      },
+      "refresh": {
+       "n": 1,
+       "med": 3.2,
+       "p95": 3.2,
+       "max": 3.2
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 28,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 65.1,
+       "p95": 65.1,
+       "max": 65.1
+      },
+      "refresh": {
+       "n": 1,
+       "med": 4.7,
+       "p95": 4.7,
+       "max": 4.7
+      },
+      "longtask": {
+       "n": 2,
+       "med": 71,
+       "p95": 71,
+       "max": 71
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 721,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 24,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 18067,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "eux": {
+   "seats": {
+    "B": 1,
+    "C": 2
+   },
+   "fed": {
+    "ai": [
+     3,
+     4
+    ],
+    "k": "savunma",
+    "tok": "1",
+    "wait": [
+     1
+    ]
+   },
+   "e1": {
+    "b": {
+     "inbox": [
+      {
+       "kind": "fedvote",
+       "key": "fed:100:1",
+       "uid": 1
+      }
+     ],
+     "info": []
+    },
+    "c": {
+     "inbox": [],
+     "info": []
+    },
+    "h": 0
+   },
+   "e2": {
+    "wait1": "(kart kalktı)",
+    "yes": 1,
+    "sent": 1,
+    "said": [
+     "Karar gönderildi — yanıt bekleniyor"
+    ]
+   },
+   "e3": {
+    "b": [
+     "🏛 Federasyon oylaması sonuçlandı — EUX BirliğiSavunma Paktı: KABUL · Gerekli üye ve oy çoğunluğu sağlandı ›"
+    ],
+    "c": [],
+    "spd0": {
+     "g": 1,
+     "want": 1
+    },
+    "spd1": {
+     "g": 1,
+     "want": 1
+    }
+   },
+   "e3open": {
+    "diplo": true,
+    "fed": true,
+    "left": 0
+   },
+   "cnc": {
+    "key": "krizHazir",
+    "done": false,
+    "yes": [],
+    "no": [
+     3,
+     4
+    ]
+   },
+   "e4": {
+    "counts": {
+     "b": 1,
+     "c": 1
+    },
+    "done": {
+     "open": false,
+     "last": {
+      "passed": false,
+      "key": "council:krizHazir:10.389347999999963"
+     }
+    },
+    "info": {
+     "B": [
+      "🌐 Konsey kararı — Kriz HazırlığıReddedildi · EVET 19.0 / HAYIR 32.0 · gün 10 ›"
+     ],
+     "C": [
+      "🌐 Konsey kararı — Kriz HazırlığıReddedildi · EVET 19.0 / HAYIR 32.0 · gün 10 ›"
+     ]
+    }
+   },
+   "e5": {
+    "y": 5,
+    "q0": 0,
+    "status": "ok",
+    "sync": {
+     "pendingMirrorAtPublish": true,
+     "waitMs": 848
+    }
+   }
+  },
+  "errors": []
+ }
+}

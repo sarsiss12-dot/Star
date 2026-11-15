@@ -1,0 +1,9 @@
+✓ eight native silhouettes have nonempty unique output at small and large sizes
+✓ same identity is exact, seed and public accent vary pixels
+✓ three leader identities vary within all eight looks
+✓ rank is restricted to insignia and does not reroll face
+✓ portrait calls never consume simulation RNG
+✓ LRU remains bounded under 1000 unique leaders
+✓ unknown and hostile prototype look input uses safe existing silhouette
+✓ new and legacy v8 states preserve their cosmetic identity
+GEÇEN: 8 KALAN: 0

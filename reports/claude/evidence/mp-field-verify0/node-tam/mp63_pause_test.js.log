@@ -1,0 +1,8 @@
+✓ politika: 3× → karar penceresi 1× → misafir duraklatır → pencere kapanır, oyun DURAKLI kalır → duraklatma kaldırılınca seçilen hız
+✓ politika: karar bitince önceki geçerli hız döner; otomatik duraklatma açıksa 0; aynı pencere iki kez açılınca birikmez
+✓ politika: birden çok neden — bir pencerenin kapanması başkasının nedenini silmez; arka plan/ağ birbirinden bağımsız
+✓ politika: açık hız komutu bekleyen kararları "görüldü" sayar, ekrandaki karar penceresi kapanana dek tutar; küçültülen karar yeniden bekler
+✓ mp-core + politika: 3× → host karar penceresi 1× (misafire "decision", ad yok) → misafir duraklatır → pencere kapanır, herkes duraklı → misafir 3× seçer
+✓ mp-core + politika: tutulan seçim — "same" ortak hıza göre; iletide want/hold; artan n; kayıt paketine ortak hız; dönen oyuncu bildirimsiz güncel durum
+✓ politika yoksa (opts.speedInfo verilmez) MP.6.1 davranışı aynen: same G.speed'e göre, iletide want/hold yok
+GEÇEN: 7 KALAN: 0

@@ -1,0 +1,65 @@
+✓ civic burokrasi real mechanics
+✓ civic gen_oncu real mechanics
+✓ civic kale_dok real mechanics
+✓ civic sinyal_avci real mechanics
+✓ civic maden_lonca real mechanics
+✓ civic golge_kons real mechanics
+✓ civic lojistik_k real mechanics
+✓ civic enkaz_muh real mechanics
+✓ civic panoptikon real mechanics
+✓ civic kan_hukuku real mechanics
+✓ civic taht_gemi real mechanics
+✓ civic tek_urun real mechanics
+✓ civic yildiz_yiyen real mechanics
+✓ race insan every natural modifier reaches common actual state
+✓ race klan every natural modifier reaches common actual state
+✓ race suru every natural modifier reaches common actual state
+✓ race makine every natural modifier reaches common actual state
+✓ race meclis every natural modifier reaches common actual state
+✓ race lonca every natural modifier reaches common actual state
+✓ race teknokrasi every natural modifier reaches common actual state
+✓ race kasif every natural modifier reaches common actual state
+✓ physiology humanoid food growth habitability ground effects
+✓ physiology lithoid food growth habitability ground effects
+✓ physiology aquatic food growth habitability ground effects
+✓ physiology avian food growth habitability ground effects
+✓ physiology hive food growth habitability ground effects
+✓ physiology machine food growth habitability ground effects
+✓ physiology plantoid food growth habitability ground effects
+✓ trait ustun_zeka real modifier, repeated recalculation and finite outputs
+✓ trait endustriyel real modifier, repeated recalculation and finite outputs
+✓ trait verimli real modifier, repeated recalculation and finite outputs
+✓ trait savascı real modifier, repeated recalculation and finite outputs
+✓ trait dayanikli real modifier, repeated recalculation and finite outputs
+✓ trait hizli_ureyen real modifier, repeated recalculation and finite outputs
+✓ trait uyumlu real modifier, repeated recalculation and finite outputs
+✓ trait karizmatik real modifier, repeated recalculation and finite outputs
+✓ trait tuccar real modifier, repeated recalculation and finite outputs
+✓ trait gocebe real modifier, repeated recalculation and finite outputs
+✓ trait kirilgan real modifier, repeated recalculation and finite outputs
+✓ trait yavas_ureyen real modifier, repeated recalculation and finite outputs
+✓ trait obur real modifier, repeated recalculation and finite outputs
+✓ trait itici real modifier, repeated recalculation and finite outputs
+✓ trait savurgan real modifier, repeated recalculation and finite outputs
+✓ trait tutumlu real modifier, repeated recalculation and finite outputs
+✓ trait cevher_sezgi real modifier, repeated recalculation and finite outputs
+✓ trait elektrotrof real modifier, repeated recalculation and finite outputs
+✓ trait bereketli real modifier, repeated recalculation and finite outputs
+✓ trait ogrenen_sinaps real modifier, repeated recalculation and finite outputs
+✓ trait uzun_omurlu real modifier, repeated recalculation and finite outputs
+✓ trait savas_korosu real modifier, repeated recalculation and finite outputs
+✓ trait doyumsuz real modifier, repeated recalculation and finite outputs
+✓ trait cevher_kor real modifier, repeated recalculation and finite outputs
+✓ trait kisa_omurlu real modifier, repeated recalculation and finite outputs
+✓ trait yavas_cogalan real modifier, repeated recalculation and finite outputs
+✓ trait sinyal_sizinti real modifier, repeated recalculation and finite outputs
+✓ trait savas_panigi real modifier, repeated recalculation and finite outputs
+✓ actual growth speed differs for fast and slow genetic traits
+✓ Savaş Korosu affects actual firing output and capacity
+✓ lithoid and avian ground armor/frailty are applied exactly once in actual defence and invasion
+✓ aquatic actual colony production and habitability match the displayed favourite and dry-world rules
+✓ machine and lithoid actual feeding debit energy or minerals rather than food
+✓ plantoid photosynthesis spends twice the energy on cold worlds
+✓ hive physiology uses the high stability target even outside the Zhal archetype
+✓ actual colony shock duration consumes the learning trait
+GEÇEN: 64 KALAN: 0

@@ -1,0 +1,12 @@
+✓ B0 bulgular (P27): Ortak Filo katkısı federal fona gider; federal filo başkanın kişisel bakımına girmez; fon enerji + alaşım bakımını ayda bir öder
+✓ F1 eski hazine: f.treasury yüklemede bir kez fona; art arda kaydet/yükle döngülerinde toplam kaynak değişmez
+✓ F2 aylık fon: tür oranı + Ortak Filo yasası + hibe katkısı kaydedilir; panel gerçek oranı ve harcanabilir bakiyeyi verir
+✓ F3 yetersiz fon: ödenebilen alınır, negatif bakiye yok; en zayıf federal filo dağıtılır; başkanın kasası federal bakım ödemez
+✓ F4 sipariş: yalnız başkan / kendi tersanesi / savaş gemisi; bedel bir kez fondan; süre sonunda TEK federal gemi; ayda bir; kapasite üye×4 (kuyruk dahil); 3 aylık rezerv
+✓ F5 iptal: ödeme federal fona bir kez döner; kişisel kasaya gitmez; yinelenen iptal ikinci iade yapmaz; kişisel sipariş aynen
+✓ F6 üretim sürerken başkan değişir: iş federasyona bağlı kalır, gemi O ANKİ başkana federal doğar; eski başkan yeni sipariş veremez
+✓ F7 kayıttan devam: üretim ortasında kaydet → yükle → tamamla: tek gemi, fon ve kaynak aynı
+✓ F8 dağılma: bekleyen iş fona, federal filo dağıtılır (kişisel olmaz), fon katkı oranıyla iade; katkı kaydı yoksa eşit; toplam kaynak korunur
+✓ F9 AI başkan: savaş / savunma yükümlülüğü yoksa sipariş yok; varsa eşikle ayda en çok bir; aynı yol (kuyruk); RNG tüketmez
+✓ F10 tersane el değiştirir / sipariş veren üyelikten çıkar: iş aylık taramada kapanır, ödeme fona bir kez döner
+GEÇEN: 11 KALAN: 0

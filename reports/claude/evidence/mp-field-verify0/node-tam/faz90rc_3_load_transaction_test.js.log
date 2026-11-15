@@ -1,0 +1,49 @@
+✓ oracle detects equal-value replacement of original objects
+✓ rollback before:apply restores G/RNG/View/UI/timers/refs
+✓ rollback after:roots restores G/RNG/View/UI/timers/refs
+✓ rollback after:treaties restores G/RNG/View/UI/timers/refs
+✓ rollback after:world restores G/RNG/View/UI/timers/refs
+✓ rollback after:crisis restores G/RNG/View/UI/timers/refs
+✓ rollback after:campaign restores G/RNG/View/UI/timers/refs
+✓ rollback after:simulation restores G/RNG/View/UI/timers/refs
+✓ rollback after:events restores G/RNG/View/UI/timers/refs
+✓ rollback after:mods restores G/RNG/View/UI/timers/refs
+✓ rollback after:derived restores G/RNG/View/UI/timers/refs
+✓ rollback after:economy restores G/RNG/View/UI/timers/refs
+✓ rollback before:commit restores G/RNG/View/UI/timers/refs
+✓ real malformed save: null colony reference
+✓ real malformed save: colony missing system
+✓ real malformed save: unknown race
+✓ real malformed save: unknown colony building
+✓ real malformed save: invalid fleet system
+✓ real normalizeEnvoys executes then throws; full rollback
+✓ real restorePoliticalWorld executes then throws; full rollback
+✓ real restoreCrisisWorld executes then throws; full rollback
+✓ real restoreCampaignWorld executes then throws; full rollback
+✓ real restoreSimulationWorld executes then throws; full rollback
+✓ real restoreEventsWorld executes then throws; full rollback
+✓ real recalcMods executes then throws; full rollback
+✓ real rebuildDerivedStateAfterLoad executes then throws; full rollback
+✓ real economyTick executes then throws; full rollback
+✓ deep/cyclic/Map/Set old graph mutations and aliases restore
+✓ zero RNG is restored exactly, not reseeded to one
+✓ snapshot failure is safe and unlocks the next load
+✓ malformed JSON returns false without mutation
+✓ nested load rejected while outer transaction continues
+✓ load inside an active deal is rejected without mutation
+✓ load does not take over another side-effect buffer
+✓ native texture generation failure leaves old world untouched
+✓ failed first load leaves title-world null player and empty collections
+✓ diagnostic failure cannot escape or strand the load guard
+✓ current preflight field-presence of side buffer restored on both outcomes
+✓ post-commit resetGesture error is diagnostic, not load rejection
+✓ post-commit invalidateRenderCaches error is diagnostic, not load rejection
+✓ post-commit updateFrustum error is diagnostic, not load rejection
+✓ buffered effects publish once only on commit: false
+✓ buffered effects publish once only on commit: true
+✓ successful load preserves camera/layers/surface, rebinds selection and clears gesture
+✓ failed load retains live pointer capture and native Canvas pixels
+✓ real legacy save repeated load preserves day/resources/RNG
+✓ failed loadGame keeps stored text and old live world intact
+✓ post-commit alert/audio errors do not turn a successful load into failure
+GEÇEN: 48 KALAN: 0

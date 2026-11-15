@@ -1,0 +1,4 @@
+PASS SP aynı insanın oyu iki kez listeye yazılamaz
+PASS eski Konsey düğmesi aynı kanunun yeni oylamasına oy veremez
+PASS sonuçlanmış oylamada düğme pasif; ikinci dokunma panel değiştirmez
+GEÇEN: 3 KALAN: 0

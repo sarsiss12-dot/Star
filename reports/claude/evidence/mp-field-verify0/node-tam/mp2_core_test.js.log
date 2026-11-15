@@ -1,0 +1,8 @@
+✓ guest fleet move runs the real orderMove: same Save8 as calling the engine directly, and the fleet arrives in game time
+✓ move rules from the engine: closed borders (passage) for warships but not for science ships; unreachable, same system, foreign and missing fleets refused without any side effect
+✓ duplicate and stale move commands never apply twice; paused host refuses
+✓ guest research target runs the real researchTarget: same Save8 as the direct engine call; progress and completion happen in game time
+✓ research rules from the engine: access-locked, completed, invalid, bad position and same mode refused without side effects; mode and removal work
+✓ guest view privacy: own fleets carry route/power, foreign fleets only id/empire/system/count; uncontacted empires are masked; no foreign research or economy
+✓ single player is untouched: lobby host with no remote human and the guards installed keeps Save8 identical to the plain engine over 120 days (research tick wrapper inert)
+GEÇEN: 7 KALAN: 0

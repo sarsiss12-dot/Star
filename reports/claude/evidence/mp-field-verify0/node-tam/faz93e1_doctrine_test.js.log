@@ -1,0 +1,33 @@
+✓ militarist: permanent doctrine matrix, route, acquisition and history
+✓ tuccar: permanent doctrine matrix, route, acquisition and history
+✓ pasifist: permanent doctrine matrix, route, acquisition and history
+✓ yayilmaci: permanent doctrine matrix, route, acquisition and history
+✓ izolasyonist: permanent doctrine matrix, route, acquisition and history
+✓ teknokrasi: permanent doctrine matrix, route, acquisition and history
+✓ kriminal: permanent doctrine matrix, route, acquisition and history
+✓ teokrasi: permanent doctrine matrix, route, acquisition and history
+✓ 93E catalog records preserved including requirements and effects
+✓ militarist ethic is independent of militarist doctrine
+✓ doctrine change banks points and blocked goal resumes across modes
+✓ militarist: remote route completes, without special science victory requirement
+✓ tuccar: remote route completes, without special science victory requirement
+✓ pasifist: remote route completes, without special science victory requirement
+✓ izolasyonist: remote route completes, without special science victory requirement
+✓ kriminal: remote route completes, without special science victory requirement
+✓ teokrasi: remote route completes, without special science victory requirement
+✓ military duration changes paid order and estimator, preserves civilians and old jobs
+✓ admiralty increases capacity modifier and reduces maintenance modifier
+✓ doctrine defense stacks with independently earned ethic upgrade
+✓ intelligence reduces actual operation cost, without zero or negative receipts
+✓ iktisat_b: real paid construction, output, upkeep, one per colony and retained unlock
+✓ iktisat_b: AI queues unlocked affordable building
+✓ sinod_e: real paid construction, output, upkeep, one per colony and retained unlock
+✓ sinod_e: AI queues unlocked affordable building
+✓ doctrine tech trading fails before resources move for wrong doctrine
+✓ AI selects own doctrine technology without reading rival research
+✓ doctrine queue, bank and history survive v8 round trip
+✓ admiralty reduces real energy/alloy upkeep and increases actual fleet cap
+✓ new buildings charge real monthly energy maintenance
+✓ intelligence improves actual sabotage chance and stacked costs remain positive
+✓ tree and history show doctrine sources and usable content benefits
+GEÇEN: 32 KALAN: 0

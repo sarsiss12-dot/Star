@@ -1,0 +1,59 @@
+✓ Eski true kaydı Yakınlaşma olur; false silinir, olmayan alan eklenmez
+✓ Göç iki kez aynı sonucu verir; ilişkiler, RNG ve gün ilerlemez
+✓ Göç savaşta atamayı korur, katkıyı duraklatır
+✓ Geçersiz tür/görev/hedef temizlenir; gelecekteki ay ve negatif kıdem düzelir
+✓ Geçerli görev kaydı nesne kimliğiyle korunur; üst kıdem sınırı uygulanır
+✓ Yeni kayıt yüklemesi ve tekrarı görev/kıdem/ilişki/RNG korur
+✓ yakinlasma atanır, ücret/RNG/ilişki değiştirmez
+✓ ticaret atanır, ücret/RNG/ilişki değiştirmez
+✓ guvenlik atanır, ücret/RNG/ilişki değiştirmez
+✓ Atama kapısı: temas yok → mutasyonsuz ret
+✓ Atama kapısı: kaynak savaşta → mutasyonsuz ret
+✓ Atama kapısı: hedef savaşta → mutasyonsuz ret
+✓ Atama kapısı: kaynak Arındırıcı → mutasyonsuz ret
+✓ Atama kapısı: hedef Arındırıcı → mutasyonsuz ret
+✓ Atama kapısı: hedef ölü → mutasyonsuz ret
+✓ Atama kapısı: kaynak ölü → mutasyonsuz ret
+✓ Atama kapısı: korsan → mutasyonsuz ret
+✓ Atama kapısı: kriz → mutasyonsuz ret
+✓ Kendine, olmayan hedefe ve bilinmeyen göreve atama yapılamaz
+✓ Kapasite doluyken yeni atama reddedilir, görev değişimi yer kullanmaz
+✓ Aynı görevi seçmek kaydı, kıdemi ve aylık işaretini değiştirmez
+✓ Savaşta görev değişmez; geri çekme yer açar; yeniden atama kıdem 0
+✓ Eski assignEnvoy toggle çağıranları boolean dönüşle çalışır
+✓ Ölen hedef kapasiteyi boşaltır; aylık temizlik kaydı siler
+✓ yakinlasma ilk aktif ay: gerçek ilişki kazancı ve karşılıklı oran
+✓ ticaret ilk aktif ay: gerçek ilişki kazancı ve karşılıklı oran
+✓ guvenlik ilk aktif ay: gerçek ilişki kazancı ve karşılıklı oran
+✓ Kıdem 12 ve 36 aktif ayda artar; yakınlaşma doygunluğu korunur
+✓ savaş: kıdem/ilişki durur, dönüşte geçmiş aylar verilmez
+✓ temas kesilmesi: kıdem/ilişki durur, dönüşte geçmiş aylar verilmez
+✓ doktrin kilidi: kıdem/ilişki durur, dönüşte geçmiş aylar verilmez
+✓ Gerçek monthTick atamayı tam bir ay ilerletir; araya UI/quote çağrısı ay eklemez
+✓ Gerçek spyTick: aktif elçi +0.35, savaşta yalnız mevcut temas katkısı
+✓ Elçi yok → aynı nötr değerlendirme
+✓ yakinlasma uzman: sys kapsamı
+✓ ticaret uzman: res kapsamı
+✓ ticaret uzman: ally kapsamı
+✓ guvenlik uzman: ally kapsamı
+✓ guvenlik uzman: res kapsamı
+✓ Gerçek evalOffer ticaret görevini ve kıdem artışını kullanır
+✓ 1 birim kaynak + 999 birim ittifak: ticaret bonusu tüm pakete yayılmaz
+✓ İki elçi aynı faydaya yığılmaz; farklı görevler maddelere ayrı uygulanır
+✓ Negatif/sıfır fayda veya redundant madde bonus alamaz
+✓ Savaş ve doktrin elçi faktörünü sıfırlar; hardLock ayrı kalır
+✓ Yetersiz Etki elçiyle aşılamaz; gerçek aiRespond geçersiz teklifi reddeder
+✓ Saf durum/faktör 100 çağrıda G ve RNG değiştirmez (legacy dahil)
+✓ Gerçek aiRespond aynı geçerli teklife aynı yanıtı verir; kıdemi tüketmez
+✓ Anlaşma rollback elçi nesnesini/alias/kıdemi korur
+✓ Elçi menüsünü aç/kapat: atama yapmaz, duraklamayı korur, hedef adını kaçırır
+✓ UI atama/değişim/aynı görev/geri çekme gerçek kaydı ve doğru logu üretir
+✓ UI kapasite/savaş retlerinde menü kalır, kıdem kaybolmaz
+✓ Sistem paneli ve ilişki sayfası görev/kıdem özetini gösterir
+✓ Devlet listesinde görev özeti, ilişki sayfasında görev düğmesi bulunur
+✓ AI görev seçimi: düşük ilişki; deterministik ve RNG tüketmez
+✓ AI görev seçimi: ticaret ortağı; deterministik ve RNG tüketmez
+✓ AI görev seçimi: ortak düşman; deterministik ve RNG tüketmez
+✓ Gerçek aiEnvoyTurn tek RNG kapısıyla nesne kaydı atar, yeniden atamaz
+✓ Gerçek aiTurn elçi görev hattına ulaşır (üretim planlayıcısı)
+GEÇEN: 58 KALAN: 0
