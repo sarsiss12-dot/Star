@@ -120,7 +120,7 @@ Saha vakası tek oyunculu yolda ve host'un misafirsiz devamında yerelde **yenid
 
 **Değişiklik**
 - `diplomacy.js`:
-  - `warGoalSees`: uzak insan (`e !== G.p`, `e.mapOwners` var) yalnız bildiği sahipliği hedefler. Host her görüş adımında bu bilgiyi günceller. Tek oyunculu oyuncu ve AI kuralı aynı.
+  - `warGoalSees` + `warHumanKnownOwners`: uzak insan (`e !== G.p`) yalnız bildiği sahipliği hedefler. Hesap misafirin aynasıyla aynıdır (`humanMapKnowledge(görüş)`; `warPure` içinde, salt okuma). Tek oyunculu oyuncu ve AI kuralı aynı.
   - `warFetihMax`: başkent sahibi bilinmese de sayılır. Host, tek oyunculu ve AI'da değer aynı (`sysCount − 1`). Host'un `warGoalOptions` doğrulaması gerçek sayımla aynen sürer.
 - `ui.js` / `index.html`:
   - hedef seçme penceresi `liveWorld`: açıkken yerinde yenilenir, seçim ve kaydırma korunur;
@@ -186,16 +186,38 @@ Saha vakası tek oyunculu yolda ve host'un misafirsiz devamında yerelde **yenid
 
 ## 7. Regresyon
 
-REGRESYON_YER
+Günlükler: `evidence/mp-field-fix0/regresyon/`.
+- İlk tam koşu `ilk-kosu/` (betik `reg34.sh`).
+- Fetih kuralı düzeltmesinden sonraki son koşu `son/` (betik `reg34b.sh`).
+- p33 kontrolü aynı makinede `kontrol-p33-*.log`.
+
+| Küme | p33 (`0ec5720`) | p34 aday |
+|---|---|---|
+| Node tam koşu | 205 paket · 6322 / 275 | **206 · 6325 / 275** (iki koşuda da aynı). Fark yalnız yeni `mp_field_fix0` (3/0); öteki 205 paket aynı |
+| Chromium | — | İlk koşu **12/12** (yeni `browser-mp-field-fix0-sp` 1/0, war-coalition0 5/0, field-war-siege0 3/0, war-goals0 5/0, rival-blocs0 9/0, pregame-galaxy0 10/0, bgreturn-galaxy0 14/0, share-galaxy0 8/0, sp-map-war 4/0, fed-fleet0-sp 4/0, mobile-hud0 4/0, event-ux0 11/0). Son koşuda savaş ve SP dörtlüsü yine 1/0, 5/0, 3/0, 5/0 |
+| MP8, ilk koşu | — | K 3/0, D 5/0, G 5/0, L 6/0, S 4/0, E 6/0, F 6/0, R (6 ay, kayıt/relay/devam) 5/0, N (ağ kopmaları) 9/0, Z 10/0, P (500/16/2/15 dk, DESYNC) 8/0. **W 2/2 ve Q 3/5 FAIL** (aşağıda) |
+| MP8, son koşu | — | **Z 10/0, W 4/0**, K 3/0, R 5/0, N 9/0, Q **7/1** (Q6; tekrar koşular 8/0 ve 8/0) |
+| `browser-mp74` (bildirim kaydırma / karttan karar) · `browser-mp75` | — | 7/0 · 6/0 |
+| `browser-mp4` (MP.4 kayıt/devam, basit istemci `?basic=1`) | **8/5** | **8/5**. FAIL'ler aynı ve bu fazdan önce de vardı (ekran ölçüsü, eski host paneli seçicisi) |
+| `browser-mp71` (MP.7.1 gerçek anlaşma penceresi) | **7/5** | **8/4**. FAIL'ler bu fazdan önce de vardı; aday bir vaka daha geçiyor |
+
+**İlk koşudaki W / Q FAIL'i (kanıt korunur, `ilk-kosu/mp8-W.log`, `mp8-Q.log`):**
+- Belirti: misafirin seçtiği Fetih hedefi host'ta "Geçersiz savaş hedefi seçimi" ile reddedildi.
+- Kök neden: ilk sürümde host uzak insanın bilgisini yalnız son görüş adımında yazılan `e.mapOwners` kaydından okuyordu. Misafirin aynası ise yayın anında `humanMapKnowledge(görüş)` hesaplıyor: görünür sistemde güncel gerçek sahip, değilse anı. Görüş adımından sonra değişen sahiplikte iki taraf ayrıştı; bu testlerde fikstür sahipliği hemen verdiği için görüldü, gerçek oyunda da en fazla bir günlük pencere vardı.
+- Düzeltme: host aynı hesabı `warPure` içinde yapar (salt okuma). Tekrar: W 4/0, Q 8/0.
+
+**Q6 aralıklı FAIL** (son koşu, `son/mp8-Q.log`): misafirin toprak vaadi teklifi 20 sn içinde host'a ulaşmadı. Aynı kodla iki tekrar koşu 8/0 (`mp8-Q-tekrar2.log`, `tekrar3.log`). Teklif gönderilmezse durumu kaydeden tanı FAIL'den sonra eklendi; FAIL yeniden üretilemediği için kök neden **doğrulanmadı** (açık).
+
+İsteğe bağlı eski senaryolar (`WAR_CENTER0`, `FEDFOUND0` vb.) ve `browser-95e3.js` bu fazda **NOT RUN**.
 
 ## 8. Yayın
 
 | | |
 |---|---|
 | ZIP | `releases/stars-faz96h10p34.zip` (20 girdi: 19 runtime + `RELEASE-MANIFEST.json`) |
-| ZIP SHA-256 | `042cde0e518bf90fabb17843899b164b971ae5ee45342ca3e8ff3d7092496095` |
-| ZIP CRC32 | `5CAC690A` (dosyanın tamamı) |
-| Manifest SHA-256 | `0f62fbf4be0ee01466a0a0ac913885a88dcfde0030ec6152d07a7d344ef1c825` |
+| ZIP SHA-256 | `1288a372d922e282c5fbd691aa5e95253dff73e7bdbf818bd21e423f235b35d4` |
+| ZIP CRC32 | `F1E95EAB` (dosyanın tamamı) |
+| Manifest SHA-256 | `23d522a5fb95761bc0b23702ef0d4390554d5103af643db6e7a51f0f2c3316f8` |
 | Belirlenimlilik | `tools/package-release.py` iki kez → bayt bayt aynı |
 | Doğrulama | ZIP çıkarılıp `python3 tools/verify-release.py --root <dizin>` → **DOĞRULANDI: 19 dosya; oyun build 96h10p34**; çalışma ağacında da aynı |
 | Manifest | `parent_commit` `0ec5720…`, `parent_zip_sha256` p33 ZIP `c13dc793…76bd` |
@@ -208,6 +230,8 @@ REGRESYON_YER
   - Tek oyunculu ve host'un misafirsiz devamında "olay penceresi boş" yerelde yeniden üretilemedi (p33'te de PASS).
   - "İkinci denemede giremedi"nin gerçek nedeni doğrulanamadı; artık aşamasıyla ekranda.
 - Kaydırılan kart kaydı misafir **cihazındadır**. Başka cihazdan katılınca kart yeniden görünür; karar ve kayıt host'ta doğrudur.
+- MP8 Q6 bir koşuda aralıklı FAIL verdi (3 koşuda 1); kök neden doğrulanmadı (§7).
+- Eski `browser-mp4` (8/5) ve `browser-mp71` (7/5 → 8/4) FAIL'leri p33'te de var; bu fazda düzeltilmedi.
 - Fetih adayı oyuncunun **gözlem** bilgisidir; istihbarat düzeyi tek başına sahiplik bilgisi eklemez. Oyuncu bir sistemi gözlemediyse, istihbaratı olsa bile o sistem aday listesinde görünmez.
 - Genel savaş sözü (`warOn`) MP insan müzakeresinde hâlâ yok. Bilerek pasif ve gerekçeli; tek oyunculuda aynen.
 - Gerçek Render, fiziksel Android / PC ve LAN: **NOT RUN**. Kullanıcı kabulü yok; main'e birleştirme ya da dağıtım yapılmadı.
