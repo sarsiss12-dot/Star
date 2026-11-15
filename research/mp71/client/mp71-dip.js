@@ -31,7 +31,8 @@ function stateText(o,all){const s=stateOf(o);
   if(s==='countered'){const c=all.find(x=>x.prev===o.id);if(c&&c.from!==o.from)return 'Karşı teklif geldi'+(c.status==='pending'?' · senin yanıtın bekleniyor':' · '+(STATE[stateOf(c)]||c.status).toLowerCase());}
   return STATE[s]||s;}
 function why(res){const d=res&&res.detail&&res.detail.length?' — '+res.detail.slice(0,2).join(' · '):'';const c=res&&res.code;
-  return (CODE[c]||(typeof MP1View!=='undefined'&&MP1View.ERR[c])||c||'işlem yapılmadı')+d;}
+  if(c==='rules:engine'&&res.detail&&res.detail.length)return res.detail.slice(0,2).join(' · ');   /* MP-FIELD-FIX.0: motorun gerekçesi, ham kod değil */
+  return (CODE[c]||(typeof MP1View!=='undefined'&&MP1View.ERR[c])||(/^rules:/.test(String(c))?'Kural izin vermedi ('+String(c).slice(6)+')':c)||'işlem yapılmadı')+d;}
 const terms=l=>(l||[]).map(i=>i.l||(typeof dealLabel==='function'?String(dealLabel(i)).replace(/<[^>]*>/g,''):i.t)).join(', ')||'—';
 const all=()=>{try{return M.ad.offers()||[];}catch{return [];}};
 const mine=()=>{const me=M.ad.me();return all().filter(o=>o.from===me).sort((a,b)=>b.id-a.id);};

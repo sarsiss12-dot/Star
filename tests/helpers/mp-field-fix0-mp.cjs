@@ -84,10 +84,11 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
    const again=await cmd('B',{kind:'eventChoice',id:dec.id,choice:0});M.events.again=again;assert.notEqual(again.status,'ok','ikinci karar işlenmez');});
 
  await test('Z4 takviye sevkiyatındaki filoyu birleştirme: host kuralı geçerli (ret), gerekçe Türkçe, art arda aynı uyarı tek satırda birleşir; karar kartları etkilenmez',async()=>{
-   await ensure('B');await closeUI(B());
+   await ensure('B');await closeUI(B());await B().evaluate(()=>{document.getElementById('alerts').innerHTML='';});   /* önceki adımların uyarıları bu ölçüme karışmaz */
    const fx=await H().evaluate(b=>{const e=G.emps[b],home=G.sys[e.home];const a=newFleet(e,home.id,[{c:'kor'}]),t=newFleet(e,home.id,[{c:'kor'}]);
      a.shipment={fleet:t.id,state:'ready',attempts:0,next:0};   /* FİKSTÜR: takviye sevkiyatındaki filo (motorun sevkiyat kaydı biçimi) */MP1Host.host.publish();return {a:a.id,t:t.id,sys:home.id,has:hasShipment(a)};},E.B);M.ship={fx};
    const direct=await cmd('B',{kind:'merge',fleet:fx.a});M.ship.direct=direct;assert.equal(direct.code,'rules:shipment','kök: sevkiyattaki filo birleştirilmek istenince host rules:shipment döner');
+   const st=await H().evaluate(([a,t])=>({a:!!G.fleets.find(f=>f.id===a),t:!!G.fleets.find(f=>f.id===t)}),[fx.a,fx.t]);assert.deepEqual(st,{a:true,t:true},'ret: birleştirme komutu filolara dokunmadı');
    await settle('z4');const cards0=await cards(B());
    await B().evaluate(f=>{View.sel=G.fleets.find(x=>x.id===f);},fx.a);
    for(let i=0;i<3;i++){await B().evaluate(()=>UI.act('merge'));await B().waitForTimeout(250);}
@@ -95,8 +96,7 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
    const al=await B().evaluate(()=>[...document.querySelectorAll('#alerts .alert')].map(d=>d.textContent));M.ship.alerts=al;await shot(B(),'z4-uyari');
    assert(!al.some(t=>/rules:/.test(t)),'ham kod gösterilmez: '+JSON.stringify(al));assert(al.some(t=>/sevkiyat/i.test(t)),'Türkçe sevkiyat gerekçesi');
    assert(al.filter(t=>/Önce sevkiyatı iptal et/.test(t)).length<=1,'aynı uyarı tek satırda: '+JSON.stringify(al));
-   assert.deepEqual(await cards(B()),cards0,'ret uyarıları karar kartlarına dokunmaz');
-   const st=await H().evaluate(([a,t])=>({a:!!G.fleets.find(f=>f.id===a),t:!!G.fleets.find(f=>f.id===t)}),[fx.a,fx.t]);assert.deepEqual(st,{a:true,t:true},'ret: filolar değişmedi');});
+   assert.deepEqual(await cards(B()),cards0,'ret uyarıları karar kartlarına dokunmaz');});
 
  if(process.env.FIELD_STOP==='4')return;
  await require('./mp-field-fix0-mp2.cjs')(X,{E,M,ready,where,closeUI,cards,swipe});

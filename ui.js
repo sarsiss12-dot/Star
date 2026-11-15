@@ -10009,13 +10009,13 @@ UI.warGoalPick=function(id,key){
   if(key==='fetih'){
     /* MP-FIELD-FIX.0: adaylar oyuncunun bildiği sahiplikten (warFetihCandidates; misafirde aynadaki bilgi, host'ta aynı kural). Açık seçim korunur;
        pencere açıkken geçerliliği değişen hedef düşer ve nedeni yazılır, yeni keşfedilen sistem listeye girer. */
-    const c=warFetihCandidates(e,o),ids=new Set(c.map(x=>x.id)),max=Math.min(WAR_FETIH_MAX,Math.max(0,sysCount(o)-1));
+    const c=warFetihCandidates(e,o),ids=new Set(c.map(x=>x.id)),max=warFetihMax(o);
     const gone=s.targets.filter(t=>!ids.has(t));if(gone.length){s.targets=s.targets.filter(t=>ids.has(t));s.note=gone.map(t=>G.sys[t]?.name||'?').join(', ')+' artık hedef olamaz (sahipliği değişti ya da bilgin güncellendi).';}
     if(s.targets.length>max)s.targets=s.targets.slice(0,max);
     h+=`<div class="lead">Talep edilecek sistemleri seç (${s.targets.length}/${max}). Başkent hedef olamaz; hedefe en az bir sistem kalır.</div>`;
     if(s.note)h+=`<div class="mini warnTxt wgNote">⚠ ${esc(s.note)}</div>`;
     if(c.length)h+=c.map(x=>`<button class="ch wgT ${s.targets.includes(x.id)?'pri':''}" data-a="wgTarget" data-x="${x.id}"><div class="cht">${s.targets.includes(x.id)?'☑':'☐'} ${esc(x.name)}<span style="float:right;color:#7d90ad">${x.col} koloni</span></div></button>`).join('');
-    else{why=sysCount(o)<=1?'Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı.':'Bilinen başkent dışı sistemi yok: önce keşif ya da istihbarat.';
+    else{why=warFetihMax(o)<1?'Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı.':'Bilinen başkent dışı sistemi yok: önce keşif ya da istihbarat.';
       h+=`<div class="mini wgWhy">${esc(why)}</div><button class="ch" data-a="setwg" data-x="${id}:boyun"><div class="cht">👑 Vasallaştırmaya dön</div><div class="chd">Toprak talep etmeden hedefi vasalın yapmayı öner.</div></button>`;}
     if(!why&&!s.targets.length)why='Önizleme için en az bir hedef sistem seç.';
   } else {
@@ -10057,7 +10057,7 @@ UI.dealSupportPick=function(x){
 UI.warGoalPickRefresh=function(){const m=$('modal'),s=this._wgSel;if(!s||m.classList.contains('hidden')||!m.querySelector('.mbox.wgPick')||this._wgOpen!==s.id+':'+s.key)return;this.warGoalPick(s.id,s.key);};
 UI.warGoalAct=function(a,x){
   const s=this._wgSel;if(!s)return;const o=G.emps[s.id];
-  if(a==='wgTarget'){const id=+x,i=s.targets.indexOf(id);if(i>=0)s.targets.splice(i,1);else if(s.targets.length<Math.min(WAR_FETIH_MAX,sysCount(o)-1))s.targets.push(id);else say('En çok '+Math.min(WAR_FETIH_MAX,sysCount(o)-1)+' hedef sistem','war');}
+  if(a==='wgTarget'){const id=+x,i=s.targets.indexOf(id);if(i>=0)s.targets.splice(i,1);else if(s.targets.length<warFetihMax(o))s.targets.push(id);else say('En çok '+warFetihMax(o)+' hedef sistem','war');}
   if(a==='wgVtype'&&VASSAL_TYPES[x]){s.vtype=x;s.war=WAR_VASSAL_WAR[x];}
   if(a==='wgVwar'&&warVassalGoalTerms(s.vtype,x))s.war=x;
   if(a==='wgGo'){this.warDeclarationPreview(s.id,s.key,s.key==='fetih'?{targets:s.targets.slice()}:{vtype:s.vtype,war:s.war});return;}

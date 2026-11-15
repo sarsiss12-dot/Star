@@ -1,0 +1,64 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":740,"buildMs":776,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":860,"buildMs":918,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":23.6,"p95":23.6,"max":23.6},"longtask":{"n":0},"heapMB":15,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":37.7,"p95":37.7,"max":37.7},"refresh":{"n":1,"med":4.2,"p95":4.2,"max":4.2},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":27,"joinErrors":0},"C":{"build":{"n":2,"med":43.1,"p95":43.1,"max":43.1},"refresh":{"n":1,"med":3.5,"p95":3.5,"max":3.5},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":721,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS Z0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS Z1 katılım yolları: B ana menü ÇOK OYUNCULU → ODAYA KATIL, C eski /mp/join?code= bağlantısı → ikisi de tam STARS arayüzü (/mp/play), oda kodu korunur, kendi devleti
+PASS Z2 katılım başarısızlığında aşama ekranda: yanlış kod → ODA BULUNAMADI; bağlantı yok → BAĞLANTI KESİLDİ (X: ayrı profil, bu odada kimliği yok)
+PASS Z3 canlı MP olay şeridi: B kartı FAREYLE, sonra DOKUNARAK kaydırır → kart kalkar, karar ☰ listesinde; host ayna yeniler, bağlantı kopup döner, sayfa yenilenir → kart geri gelmez; sonraki olay görünür; karar host'ta bir kez
+FAIL Z4 takviye sevkiyatındaki filoyu birleştirme: host kuralı geçerli (ret), gerekçe Türkçe, art arda aynı uyarı tek satırda birleşir; karar kartları etkilenmez
+AssertionError [ERR_ASSERTION]: ham kod gösterilmez: ["Host reddetti: rules:engine — Olay artık beklemiyor veya yetkiniz yok","Host reddetti: Bu filo sevkiyatta (takviye / toplanma rotasında). Birleştirmeden önce sevkiyatı iptal et."]
+    at /home/user/Star/tests/helpers/mp-field-fix0-mp.cjs:96:4
+    at async test (/home/user/Star/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp.cjs:86:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:429:17
+FAIL Z5 kaydet → host ve misafirler kapanır → relay yeniden başlar → host kaydı YENİ odada açar ve misafir yokken devam eder: bekleyen / gizlenen olay doğru, tarih ilerlerken yeni olay ve anomali şeritte ve listede
+page.evaluate: TypeError: Cannot read properties of undefined (reading 'n')
+    at Object.event (https://localhost:33471/ui.js:7425:16)
+    at eval (eval at evaluate (:311:30), <anonymous>:1:120)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /home/user/Star/tests/helpers/mp-field-fix0-mp2.cjs:11:23
+    at async test (/home/user/Star/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp2.cjs:9:2)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp.cjs:102:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:429:17
+FAIL Z6 misafirler yeni odaya döner: B ana menü ODAYA KATIL + yeni kod, C eski /mp/join bağlantısı → aynı devletler; tarih ve bekleyen kararlar korunur; kaydırılan kart geri gelmez; kimliksiz X "OYUNCU KİMLİĞİ DOĞRULANAMADI"
+browserType.launchPersistentContext: Failed to create a ProcessSingleton for your profile directory. This usually means that the profile is already in use by another instance of Chromium.
+Call log:
+[2m  - <launching> /opt/pw-browsers/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-gpu --disable-dev-shm-usage --enable-precise-memory-info --ignore-certificate-errors-spki-list=6fhmkps9b2xWe5I9jOMZwG6ug52E6uMFFzqA871XC3Y= --user-data-dir=/tmp/mp8-B-L68Eof --remote-debugging-pipe about:blank[22m
+[2m  - <launched> pid=7450[22m
+[2m  - [pid=7450][err] [7450:7450:1115/122125.222920:ERROR:chrome/browser/process_singleton_posix.cc:347] Failed to create /tmp/mp8-B-L68Eof/SingletonLock: File exists (17)[22m
+[2m  - [pid=7450][err] [7450:7450:1115/122125.224399:ERROR:chrome/app/chrome_main_delegate.cc:550] Failed to create a ProcessSingleton for your profile directory. This means that running multiple instances would start multiple browser processes rather than opening a new window in the existing process. Aborting now to avoid profile corruption.[22m
+[2m  - [pid=7450] <gracefully close start>[22m
+[2m  - [pid=7450] <kill>[22m
+[2m  - [pid=7450] <will force kill>[22m
+[2m  - [pid=7450] <process did exit: exitCode=21, signal=null>[22m
+[2m  - [pid=7450] starting temporary directories cleanup[22m
+[2m  - [pid=7450] finished temporary directories cleanup[22m
+[2m  - [pid=7450] <gracefully close end>[22m
+
+    at async open (/home/user/Star/tests/browser-mp8.cjs:73:32)
+    at async /home/user/Star/tests/helpers/mp-field-fix0-mp2.cjs:39:12
+    at async test (/home/user/Star/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp2.cjs:37:2)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp.cjs:102:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:429:17
+FAIL Z7 Fetih hedef seçimi: tek sistemli hedefte 0/0 + neden + pasif düğme + Vasallaştırmaya dön; pencere AÇIKKEN keşfedilen sistem listeye girer; başkent dışı hedefle seçim → önizleme → onay → gerçek savaş (misafir); host'ta aynı kural
+AssertionError [ERR_ASSERTION]: fikstür: üç uygun AI
+    at /home/user/Star/tests/helpers/mp-field-fix0-mp2.cjs:68:17
+    at async test (/home/user/Star/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp2.cjs:55:2)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp.cjs:102:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:429:17
+FAIL Z8 müzakere masası: genel Savaş sözü MP'de pasif + neden; Savaşa Destek İste → B'nin aktif cephesi; C ret → yeniden teklif → C karşı teklif → B kabul → C savaşta (tek kez); host → B daveti kabul; kapanan savaşa gecikmiş kabul işlenmez
+page.evaluate: TypeError: Cannot read properties of null (reading 'id')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:28)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /home/user/Star/tests/helpers/mp-field-fix0-mp2.cjs:98:22
+    at async test (/home/user/Star/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp2.cjs:96:2)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp.cjs:102:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:429:17
+PASS Z9 dünya ilerler ve emirler uygulanır: B gerçek komut yolundan filo emri verir; host günleri ilerler; emir host dünyasında, misafir aynası host ile aynı
+GEÇEN: 5 KALAN: 5

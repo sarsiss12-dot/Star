@@ -140,7 +140,7 @@ const ACT={
   spd:x=>send({kind:'speed',value:+x|0}),
   stop:()=>{const f=sel();return f&&send({kind:'stop',fleet:f.id});},
   stance:()=>{const f=sel();return f&&send({kind:'stance',fleet:f.id});},
-  merge:()=>{const f=sel();if(f&&typeof hasShipment==='function'&&hasShipment(f)){say('Önce sevkiyatı iptal et');return false;}return f&&send({kind:'merge',fleet:f.id});},   /* MP-FIELD-FIX.0: tek oyunculu mergeFleets ile aynı ön koşul (host kuralı aynı) */
+  merge:()=>{const f=sel();if(f&&typeof hasShipment==='function'&&hasShipment(f)){toast('Önce sevkiyatı iptal et',true);return false;}return f&&send({kind:'merge',fleet:f.id});},   /* MP-FIELD-FIX.0: tek oyunculu mergeFleets ile aynı ön koşul (host kuralı aynı) */
   split:()=>{const f=sel();return f&&send({kind:'split',fleet:f.id});},
   splitOne:x=>{const f=sel();return f&&send({kind:'splitType',fleet:f.id,cls:String(x),all:false});},
   splitAll:x=>{const f=sel();return f&&send({kind:'splitType',fleet:f.id,cls:String(x),all:true});},
@@ -579,7 +579,9 @@ function coalLocal(x){if(!x||typeof x!=='object')return x;const o={...x};
   if(o.results)o.results=o.results.map(r=>({...r,member:local(r.member)}));return o;}
 function warLocal(p){const m=x=>x&&{...x,id:local(x.id)};return {...p,target:m(p.target),certain:(p.certain||[]).map(m),conditional:(p.conditional||[]).map(m),...(p.stances?{stances:p.stances.map(m)}:{})};}
 const vasTerms=(type,t)=>{const o={};for(const k of ['tax','science','defense','war','autonomy','duration','renegotiate','sensors'])if(t&&t[k]!==undefined)o[k]=JSON.parse(JSON.stringify(t[k]));return o;};
-function why(res){const d=res.detail&&res.detail.length?' — '+res.detail.join(' · '):'';return (MP1View.ERR[res.code]||res.code)+d;}
+/* MP-FIELD-FIX.0: oyuncuya ham kod gösterilmez — motorun kendi gerekçesi varsa o; bilinmeyen kural kodunda "Kural izin vermedi" (kod tanı için parantezde) */
+function why(res){const det=res.detail&&res.detail.length?res.detail.join(' · '):'',c=String(res.code||'');
+  if(c==='rules:engine'&&det)return det;const base=MP1View.ERR[c]||(/^rules:/.test(c)?'Kural izin vermedi ('+c.slice(6)+')':c);return base+(det?' — '+det:'');}
 function send(cmd){const J=S.J;if(!J)return null;const r=J.cmd(cmd);S.stats.sent[cmd.kind]=(S.stats.sent[cmd.kind]||0)+1;
   if(!r.ok){toast(r.why==='host-yok'?'Host bağlı değil; emir gönderilmedi.':r.why==='stale-world'?'Dünya güncel değil — emir gönderilmedi. Önce MP çubuğundan YENİDEN EŞİTLE.':r.why==='guard-active'?'Geçici AI koruması sürüyor — dünyan eşitlenince kontrol sana döner; emir gönderilmedi.':'Emir gönderilemedi.',true);return null;}
   S.pend.set(r.cid,{kind:cmd.kind,at:Date.now()});if(S.pend.size>64)S.pend.delete(S.pend.keys().next().value);   // MP-P0: host ACK'i gelene dek bekleyen emir

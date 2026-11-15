@@ -10778,7 +10778,10 @@ function warFetihCandidates(e,foe){
  return G.sys.filter(s=>s.id!==foe.home&&warGoalSees(e,s,foe)).map(s=>({id:s.id,name:s.name,col:s.planets.filter(p=>p.col&&p.owner===foe.id).length,d:near(s)}))
   .sort((a,b)=>a.d-b.d||a.id-b.id).slice(0,12);
 }
-function warFetihDefault(e,foe){return warFetihCandidates(e,foe).slice(0,Math.max(1,Math.min(3,sysCount(foe)-1))).map(x=>x.id);}
+/* MP-FIELD-FIX.0: seçilebilecek en çok hedef. Başkent hedef olamaz ve hedefte kalır; sahibi bilinmese de (misafirin görüşü dışında) sayılır — host / tek oyunculu /
+   AI'da başkentin sahibi zaten hedef olduğundan değer aynıdır (sysCount − 1). */
+function warFetihMax(foe){return foe?Math.min(WAR_FETIH_MAX,Math.max(0,sysCount(foe)+(G.sys[foe.home]?.owner===foe.id?0:1)-1)):0;}
+function warFetihDefault(e,foe){return warFetihCandidates(e,foe).slice(0,Math.max(1,Math.min(3,warFetihMax(foe)))).map(x=>x.id);}
 function warVassalGoalTerms(type,war){
  if(!Object.hasOwn(VASSAL_TYPES,type))return null;
  return vassalTerms(type,{...vassalDefaultTerms(type),war:war??WAR_VASSAL_WAR[type]});

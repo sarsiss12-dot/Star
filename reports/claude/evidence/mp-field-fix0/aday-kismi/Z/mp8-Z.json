@@ -1,0 +1,292 @@
+{
+ "results": [
+  {
+   "name": "Z0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 9934
+  },
+  {
+   "name": "Z7 Fetih hedef seçimi: tek sistemli hedefte 0/0 + neden + pasif düğme + Vasallaştırmaya dön; pencere AÇIKKEN keşfedilen sistem listeye girer; başkent dışı hedefle seçim → önizleme → onay → gerçek savaş (misafir); host'ta aynı kural",
+   "status": "PASS",
+   "ms": 6252
+  },
+  {
+   "name": "Z8 müzakere masası: genel Savaş sözü MP'de pasif + neden; Savaşa Destek İste → B'nin aktif cephesi; C ret → yeniden teklif → C karşı teklif → B kabul → C savaşta (tek kez); host → B daveti kabul; kapanan savaşa gecikmiş kabul işlenmez",
+   "status": "PASS",
+   "ms": 8123
+  }
+ ],
+ "metrics": {
+  "scen": "Z",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 729,
+    "buildMs": 770,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 850,
+    "buildMs": 907,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 7.9,
+      "p95": 7.9,
+      "max": 7.9
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 17,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 50.9,
+       "p95": 50.9,
+       "max": 50.9
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.2,
+       "p95": 1.2,
+       "max": 1.2
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 27,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 45.1,
+       "p95": 45.1,
+       "max": 45.1
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.9,
+       "p95": 1.9,
+       "max": 1.9
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 721,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 10465,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "field": {
+   "fetih": {
+    "fx": {
+     "t1": 3,
+     "t2": 4,
+     "t3": 5,
+     "s2": 25,
+     "s3": 0
+    },
+    "t1": {
+     "lead": "Talep edilecek sistemleri seç (0/0). Başkent hedef olamaz; hedefe en az bir sistem kalır.",
+     "why": [
+      "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı.",
+      "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı."
+     ],
+     "n": 0,
+     "ids": [],
+     "off": true,
+     "op": 0.38,
+     "vas": true,
+     "live": true
+    },
+    "toVassal": true,
+    "t3": {
+     "before": {
+      "lead": "Talep edilecek sistemleri seç (0/0). Başkent hedef olamaz; hedefe en az bir sistem kalır.",
+      "why": [
+       "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı.",
+       "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı."
+      ],
+      "n": 0,
+      "ids": [],
+      "off": true,
+      "op": 0.38,
+      "vas": true,
+      "live": true
+     },
+     "after": {
+      "lead": "Talep edilecek sistemleri seç (0/1). Başkent hedef olamaz; hedefe en az bir sistem kalır.",
+      "why": [
+       "Önizleme için en az bir hedef sistem seç."
+      ],
+      "n": 1,
+      "ids": [
+       0
+      ],
+      "off": true,
+      "op": 0.38,
+      "vas": false,
+      "live": true
+     }
+    },
+    "t2pick": {
+     "lead": "Talep edilecek sistemleri seç (1/1). Başkent hedef olamaz; hedefe en az bir sistem kalır.",
+     "why": [],
+     "n": 1,
+     "ids": [
+      25
+     ],
+     "off": false,
+     "op": 1,
+     "vas": false,
+     "live": true
+    },
+    "t2": {
+     "sel": [
+      25
+     ],
+     "wg": {
+      "t": "fetih",
+      "start": 1.3731440000000006,
+      "targets": [
+       25
+      ],
+      "v": 2
+     }
+    },
+    "host": {
+     "off": true,
+     "why": [
+      "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı.",
+      "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı."
+     ]
+    }
+   },
+   "support": {
+    "F": 1,
+    "warOn": {
+     "warOn": [
+      true,
+      true
+     ],
+     "why": "⚔ Genel savaş sözü çok oyunculuda gönderilemez. Belirli bir savaşa katılım için Savaşa Destek İste."
+    },
+    "o1": {
+     "id": 1,
+     "want": [
+      {
+       "t": "warJoin",
+       "front": 1,
+       "target": 4
+      }
+     ]
+    },
+    "T4": {
+     "id": 6,
+     "r": {
+      "ok": true,
+      "extra": {
+       "front": 3
+      }
+     }
+    },
+    "late": {
+     "status": "rejected",
+     "code": "rules:closed",
+     "ms": 43,
+     "cid": "jmwht7lh2qfeljh0o"
+    }
+   }
+  },
+  "errors": []
+ }
+}

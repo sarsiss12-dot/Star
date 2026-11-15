@@ -1,0 +1,30 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":238,"buildMs":269,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":329,"buildMs":344,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":10.1,"p95":11,"max":11},"longtask":{"n":0},"heapMB":16,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":51.9,"p95":51.9,"max":51.9},"refresh":{"n":1,"med":2.3,"p95":2.3,"max":2.3},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":68.7,"p95":68.7,"max":68.7},"refresh":{"n":1,"med":5.9,"p95":5.9,"max":5.9},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":721,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS Z0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+NOT RUN Z1 katılım yolları: B ana menü ÇOK OYUNCULU → ODAYA KATIL, C eski /mp/join?code= bağlantısı → ikisi de tam STARS arayüzü (/mp/play), oda kodu korunur, kendi devleti
+NOT RUN Z2 katılım başarısızlığında aşama ekranda: yanlış kod → ODA BULUNAMADI; bağlantı yok → BAĞLANTI KESİLDİ (X: ayrı profil, bu odada kimliği yok)
+NOT RUN Z3 canlı MP olay şeridi: B kartı FAREYLE, sonra DOKUNARAK kaydırır → kart kalkar, karar ☰ listesinde; host ayna yeniler, bağlantı kopup döner, sayfa yenilenir → kart geri gelmez; sonraki olay görünür; karar host'ta bir kez
+NOT RUN Z4 takviye sevkiyatındaki filoyu birleştirme: host kuralı geçerli (ret), gerekçe Türkçe, art arda aynı uyarı tek satırda birleşir; karar kartları etkilenmez
+NOT RUN Z5 kaydet → host ve misafirler kapanır → relay yeniden başlar → host kaydı YENİ odada açar ve misafir yokken devam eder: bekleyen / gizlenen olay doğru, tarih ilerlerken yeni olay ve anomali şeritte ve listede
+NOT RUN Z6 misafirler yeni odaya döner: B ana menü ODAYA KATIL + yeni kod, C eski /mp/join bağlantısı → aynı devletler; tarih ve bekleyen kararlar korunur; kaydırılan kart geri gelmez; kimliksiz X "OYUNCU KİMLİĞİ DOĞRULANAMADI"
+FAIL Z7 Fetih hedef seçimi: tek sistemli hedefte 0/0 + neden + pasif düğme + Vasallaştırmaya dön; pencere AÇIKKEN keşfedilen sistem listeye girer; başkent dışı hedefle seçim → önizleme → onay → gerçek savaş (misafir); host'ta aynı kural
+page.waitForFunction: Timeout 15000ms exceeded.
+    at wait (/home/user/Star/tests/browser-mp8.cjs:51:40)
+    at /home/user/Star/tests/helpers/mp-field-fix0-mp2.cjs:93:28
+    at async test (/home/user/Star/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp2.cjs:56:2)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp.cjs:102:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:429:17
+FAIL Z8 müzakere masası: genel Savaş sözü MP'de pasif + neden; Savaşa Destek İste → B'nin aktif cephesi; C ret → yeniden teklif → C karşı teklif → B kabul → C savaşta (tek kez); host → B daveti kabul; kapanan savaşa gecikmiş kabul işlenmez
+page.evaluate: TypeError: Cannot read properties of null (reading 'id')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:28)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /home/user/Star/tests/helpers/mp-field-fix0-mp2.cjs:104:22
+    at async test (/home/user/Star/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp2.cjs:102:2)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp.cjs:102:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:429:17
+NOT RUN Z9 dünya ilerler ve emirler uygulanır: B gerçek komut yolundan filo emri verir; host günleri ilerler; emir host dünyasında, misafir aynası host ile aynı
+GEÇEN: 1 KALAN: 2

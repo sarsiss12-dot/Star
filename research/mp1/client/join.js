@@ -80,7 +80,9 @@ function receive(t,t0){
     return render();}
   if(t[0]!=='H')return;let m;try{m=JSON.parse(t.slice(1));}catch{return;}if(m.v!==1)return;
   if(window.MP6Stars&&MP6Stars.onMessage(m))return;   // MP.6: ayna dünya (gerçek STARS arayüzü)
-  if(m.type==='assign'){if(window.MP6Stars)MP6Stars.onAssign();J.assigned=true;J.playerId=m.playerId;J.empireId=m.empireId;J.saveId=m.saveId;save({token:m.token,seq:Math.max(J.seq,m.lastSeq||0)});J.seq=Math.max(J.seq,m.lastSeq||0);saveSeat(m.saveId,m.token,m.empireId);}
+  if(m.type==='assign'){if(window.MP6Stars)MP6Stars.onAssign();J.assigned=true;
+    /* MP-FIELD-FIX.0: kod elle yazıldıysa adres oda kodunu taşısın — sayfa yenilenince / Android sekmeyi yeniden yükleyince aynı odaya kendiliğinden döner (öteki parametreler korunur) */
+    try{const u=new URL(location.href),c=J.code.replace(/-/g,'');if(u.searchParams.get('code')!==c){u.searchParams.set('code',c);history.replaceState(history.state,'',u.pathname+u.search+u.hash);}}catch{}J.playerId=m.playerId;J.empireId=m.empireId;J.saveId=m.saveId;save({token:m.token,seq:Math.max(J.seq,m.lastSeq||0)});J.seq=Math.max(J.seq,m.lastSeq||0);saveSeat(m.saveId,m.token,m.empireId);}
   else if(m.type==='resume'){   // MP.4: devam lobisi bu bağlantıyı tanımadı; cihazda bu kayıt için kimlik varsa bir kez gönder
     const s=seatOf(m.saveId);J.resumeTried=J.resumeTried||{};
     if(s&&s.token&&!J.resumeTried[m.saveId]){J.resumeTried[m.saveId]=1;raw({v:1,type:'hello',name:J.name,token:s.token});}
