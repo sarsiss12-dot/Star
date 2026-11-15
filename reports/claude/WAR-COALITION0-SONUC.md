@@ -211,21 +211,41 @@ Ekran görüntüleri:
 | Koşu | Sonuç | En uzun dünya gecikmesi | Donma | Emir yansıması (gemi siparişi) | Yeniden eşitleme | Host günü / son ay |
 |---|---|---|---|---|---|---|
 | Normal (`mp8-P-normal.log`) | **8/0** | **16,9 gün** | 0 | 20/20 · medyan 755 ms · en uzun 4478 ms | 0 | 6360 / 4,5 sn |
-| DESYNC (p32 ile aynı ayar) | §7 | | | | | |
-| Kasıtlı açık pencere (`MP8_P_MODAL=1`: her emir ölçümünde misafirde İç İstikrar penceresi açılır, kapanmadan ölçülür) | §7 | | | | | |
+| DESYNC (p32 ile aynı ayar; `mp8-P.log`) | **8/0** | **18,5 gün** | 0 | 20/20 · medyan 554 ms · en uzun 1038 ms | 0 | 6776 / 3,3 sn |
+| Kasıtlı açık pencere (`MP8_P_MODAL=1`, `mp8-M.log`) | **8/0** | **20,6 gün** | 0 | 20/20 · medyan 534 ms · en uzun 1870 ms | 0 | 6031 / 4,2 sn |
+
+**Açık pencere koşusu.** Her emir ölçümünde misafirde İç İstikrar penceresi (`mbox sci liveWorld`) açılır. Hareket ve gemi emri pencere kapanmadan gönderilir.
+- 20 ölçümün **20'sinde** pencere yansıma anında hâlâ açıktı (`modalStillOpen`).
+- Bütün gemi siparişleri aynaya pencere açıkken yansıdı.
+- p32'de aynı ölçüm pencereyi önce kapatıyordu. p32'nin ilk P koşusundaki 7/1 FAIL'i açık İç İstikrar penceresinin aynayı bekletmesiydi; bu pencerede o durum artık yok.
+
+P normal koşusu son onay sözleşmesi düzeltmesinden önceki ui.js ile koşuldu (fark yalnız savaş ilanı penceresinde; P bu pencereyi açmaz). DESYNC ve açık pencere koşuları son kodla.
 
 ## 7. Regresyon
 
-REGRESYON_YER
+Günlükler: `evidence/war-coalition0/regresyon/` (betik `reg33.sh` = p32'nin `reg32.sh`'i + `browser-war-coalition0` + MP8 Q + P açık pencere). İlk tam koşunun FAIL'leri `regresyon/ilk-kosu/` altında korunur (§3).
+
+| Küme | p32 (`a20d531`) | p33 aday (son koşu) |
+|---|---|---|
+| Node tam koşu | 203 paket · 6300 geçen / 280 kalan | **205 paket · 6322 / 275** |
+| Paket paket fark | — | `war_coalition0` 7/0, `war_coalition0_mp` 3/0 (yeni); `field_war_siege0` 19/0 → 20/0; `faz86b_deal_engine` 109/27 → **120/22**. Eski genel matris parametreli dört maddeyi parametresiz deniyor ve 5 sahte FAIL üretiyordu; yerine olumlu + eksik parametre reddi testleri geldi. Kalan 22 FAIL p32'de de aynı. Öteki 201 paket aynı. |
+| Node ilk tam koşu (düzeltmeden önce) | — | 205 · 6313 / 284: **`faz95d_war_preview` 10/9 FAIL** (eski son onay kancası yoktu) → düzeltildi |
+| Chromium | 10 test PASS | **11/11 PASS**: war-coalition0 5/0 (yeni), field-war-siege0 3/0, war-goals0 5/0, rival-blocs0 9/0, pregame-galaxy0 10/0, bgreturn-galaxy0 14/0, share-galaxy0 8/0, sp-map-war 4/0, fed-fleet0-sp 4/0, mobile-hud0 4/0, event-ux0 11/0 |
+| Chromium ilk tam koşu | — | field-war-siege0 **2/1**, war-goals0 **3/2** (yorgunluk / gerekçe kapalı bölümdeydi) → düzeltildi |
+| MP8 | K 3/0, W 4/0, D 5/0, G 5/0, L 6/0, S 4/0, E 6/0, F 6/0, P 8/0 (tekrar) | **K 3/0, W 4/0, D 5/0, G 5/0, L 6/0, S 4/0, E 6/0, F 6/0, Q 8/0 (yeni), P 8/0, P açık pencere 8/0** |
+| `browser-95e3.js` (eski 95E.3 tarayıcı testi, standart kümede değil) | kontrol a20d531: 13/10 | aday 13/10. Aynı 10 savaş tıklama FAIL'i p32'de de var (eski test eski önizleme varsayımıyla yazılmış); bu fazdan bağımsız. |
+| `WAR_CENTER0=1 browser-mp73.cjs` (p18 isteğe bağlı senaryo) | — | **NOT RUN**. Senaryo eski önizlemenin "ilandan sonra davet" kutucuklarını (`data-war-invite`) ve eski Önce Koalisyon Hazırla zincirini kullanır. Bu akış istenen tek akışla bilerek değiştirildi; yerini MP8 Q aldı. Test silinmedi. |
+
+Eşdeğerlik testleri `beta_war_center0_equivalence` ve `beta_fed_ai0_equivalence` p32'de de 1/5'tir (run-all dışında; değişmedi).
 
 ## 8. Yayın
 
 | | |
 |---|---|
 | ZIP | `releases/stars-faz96h10p33.zip` (20 girdi: 19 runtime + `RELEASE-MANIFEST.json`) |
-| ZIP SHA-256 | `85715805ee53f0e2c88ccee10ea35cbee410865dc3182fad70e6f6ed4bcaaeb8` |
-| ZIP CRC32 | `BFB200C8` (dosyanın tamamı) |
-| Manifest SHA-256 | `16565ce24c4bb1db8cba10f28d1ccdd08e0248d1246e3652989daab13520daca` |
+| ZIP SHA-256 | `c13dc7933863c08b9be3af0ada649adb23cd7b299f5551cb064db40761bf76bd` |
+| ZIP CRC32 | `359D2E9A` (dosyanın tamamı) |
+| Manifest SHA-256 | `0411fdedbda234c0f9f069fa1a2aae44c5ab492c543e5e7430ffb2dce74071fd` |
 | Belirlenimlilik | `tools/package-release.py` iki kez → bayt bayt aynı |
 | Doğrulama | ZIP çıkarılıp `python3 tools/verify-release.py --root <dizin>` → **DOĞRULANDI: 19 dosya; oyun build 96h10p33**; çalışma ağacında da aynı |
 | Manifest | `parent_commit` `a20d531…`, `parent_zip_sha256` p32 ZIP `dd0de3f7…1765` |
