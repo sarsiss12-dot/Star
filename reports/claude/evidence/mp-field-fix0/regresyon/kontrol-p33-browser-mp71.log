@@ -7,3 +7,11 @@ page.waitForFunction: Timeout 30000ms exceeded.
     at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:145:11
     at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:13:7)
     at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:133:3
+PASS A5 GERİ ÇEK: host anlaşma sayfasındaki "BEKLEYEN TEKLİFLERİN" kutusundan iki adımlı onayla geri çeker; B'nin kartı kalkar, gelen kutusu geçmişinde Geçersizleşti · Gönderen geri çekti; çift dokunuş tek komut
+PASS A6 açık pencere korunur: B Gönderilen sekmesi açıkken host B'nin teklifini kabul eder → satır yerinde "Kabul edildi" olur (pencere kapanmaz, liste öğesi aynı); B'nin anlaşma taslağı yeni ayna gelince korunur
+PASS A7 yetkisiz ve yinelenen kararlar host'ta reddedilir (kendi teklifine yanıt, başkasının teklifini geri çekme, sonuçlanmış teklife ikinci kabul); bağlantı kopması sırasında gelen teklif dönüşte kartta, tek uygulama
+FAIL A8 kayıt: MP.4 paketi teklif deposunu (Gönderilen / geçmiş durumları) ve host'un gerçek gelen kutusu kayıtlarını (Save8) taşır; paket doğrulanır
+AssertionError [ERR_ASSERTION]: ["accepted","accepted","accepted","countered","invalid"]
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:194:29
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:13:7)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:191:3
