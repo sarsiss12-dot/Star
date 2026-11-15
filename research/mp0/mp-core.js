@@ -1081,6 +1081,8 @@ function createHost(opts){
       else if(it.t==='warJoin'&&onlyKeys(it,['t','target','front','plan'])&&int(it.target,0,63)&&((int(it.front,1,2147483647)&&!has(it,'plan'))||(int(it.plan,1,2147483647)&&!has(it,'front'))))out.push({t:'warJoin',target:it.target,...(it.plan?{plan:it.plan}:{front:it.front})});
       else if(DIP_TREATY.includes(it.t)&&onlyKeys(it,['t']))out.push({t:it.t});   // MP.6.2: barış + antlaşmalar (motorun dealQuote / executeDeal'i)
       else if((it.t==='vassal'||it.t==='landPromise'||it.t==='fedPeace')&&warItemOk(it))out.push({...it});   // BETA-WAR-GOALS.0
+      else if(it.t==='sys'&&onlyKeys(it,['t','id'])&&int(it.id,0,100000))out.push({t:'sys',id:it.id});   /* MP-DEAL-SYS.0: Sistem Devri (motorun 'sys' maddesi) */
+      else if(it.t==='tribute'&&onlyKeys(it,['t','r','v'])&&DIP_RES.includes(it.r)&&int(it.v,1,100000))out.push({t:'tribute',r:it.r,v:it.v});   /* MP-DEAL-SYS.0: Haraç (aylık, 10 yıl) */
       else return null;}
     return out;
   }
@@ -1102,7 +1104,15 @@ function createHost(opts){
     if(own.length<all.length)own.push('Karşı taraf bu şartları şu an karşılayamıyor');return own.slice(0,4).map(x=>x.slice(0,160));}
   /* Gönderim kapısı: insan alıcıda yalnız GÖNDERENİN kendi yükümlülükleri denetlenir (karşı tarafın stoğu gizli kalır,
      kabulde dealQuote tam denetler); AI alıcıda tek oyunculu dealSend gibi tam quote. */
+  /* MP-DEAL-SYS.0: insan gönderen karşı tarafın sistemini yalnız BİLDİĞİ sahiplikle isteyebilir (Fetih aday kuralı: warGoalSees + oyuncu
+     gözlemi); gizli sahiplik gerekçede görünmez. Kendi verdiği sistemin çakışmaları (vaat / Fetih / işgal) gönderene açık yazılır. */
+  function dipSysGate(norm,A,B){
+    for(const it of norm.want||[])if(it.t==='sys'){const s=G.sys[it.id];if(!s||!(isHumanActor(A)?warGoalSees(A,s,B,A===G.p?null:warHumanKnownOwners(A)):true))return {code:'quote',detail:['Sistem Devri: bu sistemin '+B.name+' devletine ait olduğu bilinmiyor; yalnız sahipliği bilinen sistemler istenebilir']};}
+    for(const it of norm.give||[])if(it.t==='sys'){const x=dealSysIssues(A,B,it.id);if(x.length)return {code:'quote',detail:x.slice(0,3).map(m=>'Sistem Devri: '+m)};}
+    return null;
+  }
   function dipGate(q,A,B){
+    {const sg=dipSysGate(q.norm||{},A,B);if(sg)return sg;}
     for(const it of q.norm.give||[])if(it.t==='warJoin'){const known=it.front&&warCenterIndex(A).some(f=>f.id===it.front),invited=D.offers.some(r=>r.from===B.id&&r.to===A.id&&r.expires>G.day&&r.give.concat(r.want).some(x=>x.t==='warJoin'&&x.target===it.target&&(it.plan?x.plan===it.plan:x.front===it.front)));if(!known&&!invited)return {code:'no-target',detail:['Bu savaş için bilinen kayıt veya sana gönderilmiş davet gerekli']};}
     if(isHumanActor(B)){const pre=String(B.name)+' → ',bad=(q.reasons||[]).map(String).filter(x=>!x.startsWith(pre));return bad.length?{code:'quote',detail:bad.slice(0,4)}:null;}
     return q.ok?null:{code:'quote',detail:(q.reasons||[]).slice(0,4).map(String)};
@@ -1164,7 +1174,9 @@ function createHost(opts){
       else if(!dipParty(a)||!dipParty(b)||!a.contact[b.id]||!b.contact[a.id]){r.status='invalid';r.finished=G.day;r.why='Taraflardan biri artık anlaşma yapamaz';
         dipNotify(r.from,'Teklif geçersizleşti');dipNotify(r.to,'Teklif geçersizleşti');}
       else if([[a,b,r.give],[b,a,r.want]].some(([giver,taker,items])=>items.some(it=>it.t==='warJoin'&&!warSupportGate(giver,taker,it).ok))){r.status='invalid';r.finished=G.day;r.why='Hedef savaş veya katılım koşulları değişti';dipNotify(r.from,r.why);dipNotify(r.to,r.why);}
-      else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it))){r.status='invalid';r.finished=G.day;r.why='Bu anlaşma artık yürürlükte';   // ör. barış başka teklifle imzalandı
+      else if([[a,b,r.give],[b,a,r.want]].some(([giver,taker,items])=>items.some(it=>it.t==='sys'&&dealSysIssues(giver,taker,it.id).length))){r.status='invalid';r.finished=G.day;r.why='Sistem Devri artık uygulanamıyor (devredilecek sistemin durumu değişti)';   /* MP-DEAL-SYS.0 */
+        for(const [giver,taker,items] of [[a,b,r.give],[b,a,r.want]])for(const it of items)if(it.t==='sys'){const x=dealSysIssues(giver,taker,it.id);if(x.length){dipNotify(giver.id,'Teklif geçersizleşti — Sistem Devri: '+x[0],'war');dipNotify(taker.id,'Teklif geçersizleşti — '+r.why,'war');}}}
+else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it))){r.status='invalid';r.finished=G.day;r.why='Bu anlaşma artık yürürlükte';   // ör. barış başka teklifle imzalandı
         dipNotify(r.from,'Teklif geçersizleşti — anlaşma zaten yürürlükte');dipNotify(r.to,'Teklif geçersizleşti — anlaşma zaten yürürlükte');}}
   }
   /* Oyuncuya özel diplomasi görünümü: yalnız tarafı olduğu teklifler ve temas kurduğu devletler. */
@@ -1576,6 +1588,9 @@ function createHost(opts){
       e.mapHabitats=k.habitats;e.mapOwners=k.owners;
     }return result;};
     const month0=monthTick;monthTick=function(){const r=month0.apply(this,arguments);for(const e of G.emps)if(RH(e)&&!e.dead)remoteDecisionTick(e);return r;};
+    /* MP-DEAL-SYS.0: haraç eksik ödeme / sona erme bildirimi uzak insan tarafa da (motorun metniyle; tek oyunculu oyuncu yolu aynen) */
+    for(const nm of ['tributeShortNote','tributeEndNote'])if(typeof root[nm]==='function'&&!root[nm].__mp){const f0=root[nm],w=function(giver,b){const m=f0.apply(this,arguments);
+      const taker=nm==='tributeEndNote'?G.emps[b&&b.to]:b;for(const x of [giver,taker])if(x&&RH(x))NOTE(x.id,m,nm==='tributeEndNote'?'sci':'war');return m;};w.__mp=true;root[nm]=w;}
     const neg=aiNegotiate,resp=aiRespond;
     /* MP.2: uzak insanın araştırma bildirimleri (researchTick içindeki say) host günlüğüne değil o oyuncunun
        kendi bildirim listesine gider. Yalnız uzak insan için; tek oyunculu ve AI yolu aynen çalışır. */

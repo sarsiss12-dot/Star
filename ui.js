@@ -3557,6 +3557,26 @@ const UI = {
     this.stashDiploDraft();this.diploTarget=id;this.diploPage=page;
     if (page==='deal') this.openDeal(id);else this.openDiplo();
   },
+  /* ═══ MP-DEAL-SYS.0 ═══ aktif haraç yükümlülükleri (ödeyen, alan, aylık, kalan ödeme, sonraki ödeme, bitiş, son ödeme eksiği) */
+  tributeHtml(o){
+    if(typeof tributeRows!=='function'||!o)return '';const rows=tributeRows(G.p,o.id);if(!rows.length)return '';
+    return `<div class="box dealTribute"><b>⏳ AKTİF HARAÇ</b>${rows.map(t=>`<div class="mini">${esc(tributeRowText(t,G.p.id))}</div>`).join('')}
+      <div class="mini">Ödeme her ay başında host / oyun motoru tarafından kesilir; stok yetmezse yalnız mevcut kaynak ödenir (borç birikmez). Süre dolunca anlaşma kendiliğinden biter.</div></div>`;
+  },
+  /* Teklif özeti: her Sistem Devri maddesinin nihai sonucu + çakışma, aynı anlaşmadaki barışın iade edeceği işgaller, haraç toplam yükü,
+     Sistem Devri (kabulde) ile Toprak Vaadi (cephe kazanılınca / teslimde) farkı */
+  dealTermsHtml(d,e,o){
+    const all=d.give.concat(d.want);if(!all.some(i=>i.t==='sys'||i.t==='tribute'||i.t==='landPromise'))return '';
+    const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?');let h='<div class="box dealTerms"><b>DEVİR VE YÜKÜMLÜLÜK SONUCU</b>';
+    const pv=typeof dealSysPreview==='function'?dealSysPreview({from:e.id,to:o.id,give:d.give,want:d.want}):{rows:[],returns:[]};
+    for(const r of pv.rows)h+=`<div class="mini">★ <b>Sistem Devri</b>: ${esc(r.name)} · ${r.cols} bilinen koloni · şimdiki sahip ${esc(nm(r.owner))} → yeni sahip <b>${esc(nm(r.to))}</b> · <b>kabul anında</b> devredilir${
+      r.issues.length&&(r.from===e.id||r.issues[0]==='sistem artık ona ait değil'||r.issues[0]==='başkent verilemez')?` <span style="color:#ff5f6d">⛔ ${esc(r.issues[0])}</span>`:''}</div>`;
+    for(const x of pv.returns)h+=`<div class="mini">↺ Barışla iade: ${esc(x.name)} → ${esc(nm(x.to))} (Fetih hedefi dışındaki işgal)</div>`;
+    for(const [giver,taker,list] of [[e,o,d.give],[o,e,d.want]])for(const it of list){
+      if(it.t==='tribute'&&RES[it.r])h+=`<div class="mini">⏳ <b>Haraç</b>: ödeyen ${esc(nm(giver.id))} → alan ${esc(nm(taker.id))} · ${it.v} ${esc(RES[it.r].n)}/ay · 10 yıl (120 ödeme) · toplam yük ${Math.round(it.v*120)} ${esc(RES[it.r].n)} · ilk ödeme kabulden sonraki ay başı</div>`;
+      if(it.t==='landPromise')h+=`<div class="mini">⚑ <b>Toprak Vaadi</b>: ${esc(G.sys[it.sys]?.name||'?')} · Cephe #${it.front} · kabulde devir YOK; ${esc(nm(giver.id))} sistemi bu cephede ele geçirince ya da teslimde ${esc(nm(taker.id))} devletine geçer</div>`;}
+    return h+'</div>';
+  },
   diploHeader(page,o){
     return `<div class="dpBox dcBox"><div class="dpHd"><span>DİPLOMASİ${o?' · <canvas class="identityBadge" data-identity="state" data-id="'+o.id+'" width="28" height="28"></canvas> '+esc(o.name):''}</span>
       <button class="riX" data-a="closeDiplo" aria-label="Diplomasiyi kapat">✕</button></div>
@@ -3832,7 +3852,7 @@ const UI = {
     const page=this.diploPage||'states';
     if (page==='deal'&&o){this.openDeal(o.id);return;}
     let h=this.diploHeader(page,o);
-    h+=page==='relation'&&o?this.diploRelationship(G.p,o):this.diploDirectory();
+    h+=page==='relation'&&o?this.tributeHtml(o)+this.diploRelationship(G.p,o):this.diploDirectory();   /* MP-DEAL-SYS.0: aktif haraç takvimi */
     this.renderDiplo(h+'</div></div>',page==='states'?'states:'+(this.diploFilter||'all'):'relation:'+o.id);
   },
 
@@ -5631,6 +5651,7 @@ const UI = {
         <b style="color:#ff5f6d">${bad.join(' · ')}</b></div>`;
     }
     if (this.dealMsg) h += `<div class="mini" style="color:#ff9b3d;margin-bottom:8px">${esc(this.dealMsg)}</div>`;
+    h += this.tributeHtml(o);   /* MP-DEAL-SYS.0 */
 
     h += `<div class="dealCols">`;
     // --- sen ne veriyorsun ---
@@ -5671,6 +5692,7 @@ const UI = {
     </div></div></div>`;
 
     h += this.dealSupportHtml(d,e,o);   // MP-FIELD-FIX.0: belirli savaşa destek daveti
+    h += this.dealTermsHtml(d,e,o);   /* MP-DEAL-SYS.0: Sistem Devri sonucu, Toprak Vaadi farkı, haraç yükü */
     h += this.warDealHtml(d,e,o);   // BETA-WAR-GOALS.0: savaş şartları
     // --- anlaşma türleri ---
     h += `<div class="ph">ANLAŞMA MADDELERİ</div><div class="act2">`;

@@ -1179,8 +1179,8 @@ function dealLabel(it){
   switch(it.t){
     case 'res':     return RES[it.r].ico + ' ' + it.v + ' ' + RES[it.r].n;
     case 'freight': return '▱ '+it.v+' '+RES[it.r].n+'/sefer · '+(G.sys[it.source]?.name||'?')+' → '+(G.sys[it.target]?.name||'?')+' · '+it.every+' günde / '+it.months+' ay';
-    case 'tribute': return '⏳ ' + it.v + ' ' + RES[it.r].n + '/ay · 10 yıl';
-    case 'sys':     return '★ ' + (G.sys[it.id] ? G.sys[it.id].name : '?') + ' sistemi';
+    case 'tribute': return '⏳ Haraç: ' + it.v + ' ' + RES[it.r].n + '/ay · 10 yıl · toplam ' + Math.round(it.v*120) + ' ' + RES[it.r].n;
+    case 'sys':     return '★ Sistem Devri: ' + (G.sys[it.id] ? G.sys[it.id].name : '?') + ' sistemi · kabulde devredilir';
     case 'tech':    return '✦ ' + (TECHS[it.id] ? TECHS[it.id].n : '?');
     case 'lux':     return (LUXURY[it.k] ? LUXURY[it.k].ico + ' ' + LUXURY[it.k].n : '❖') + ' erişimi';
     case 'peace':   return '🕊 Barış';
@@ -1196,7 +1196,7 @@ function dealLabel(it){
     case 'passage': return '🚪 Sınır geçiş izni';
     case 'vassal':  return '👑 Teslim: '+(VASSAL_TYPES[it.type]?.n||'?')+' vasallık · '+({none:'savaşlara katılmaz',defense:'yalnız savunma',all:'saldırı savaşlarına da katılır'}[it.war]||'?');   // BETA-WAR-GOALS.0
     case 'fedPeace': return '🕊 Ortak barış: iki federasyonun kampanya cepheleri';   // BETA-WAR-GOALS.0
-    case 'landPromise': return '⚑ Toprak vaadi: '+(G.sys[it.sys]?.name||'?')+' · Cephe #'+it.front;   // BETA-WAR-GOALS.0
+    case 'landPromise': return '⚑ Toprak vaadi: '+(G.sys[it.sys]?.name||'?')+' · Cephe #'+it.front+' · cephe kazanılınca / teslimde';   // BETA-WAR-GOALS.0
   }
   return '?';
 }
@@ -1879,6 +1879,7 @@ function dealValidity(offer){
           const sy = G.sys[it.id];
           if (!sy || sy.owner !== veren.id) hata = 'sistem artık ona ait değil';
           else if (veren.home === it.id)    hata = 'başkent verilemez';
+          else if (dealHumanParty(veren,alan)){const x=dealSysIssues(veren,alan,it.id);if(x.length)hata=x[0];}   /* MP-DEAL-SYS.0: insan taraflı devirde vaat / Fetih / işgal çakışması */
           break;
         }
         case 'tech': if (!veren.techs[it.id]) hata = 'teknoloji elinde değil'; else if(!researchAccess(alan,it.id).ok)hata=researchAccess(alan,it.id).why; break;
@@ -11414,3 +11415,74 @@ function warSupportOptions(e,o){
  return rows.slice(0,16);
 }
 /* END MP-FIELD-FIX.0 */
+/* ═══ MP-DEAL-SYS.0 — Sistem Devri ve Haraç: ortak denetim ve görünüm (tek oyunculu + çok oyunculu aynı kural) ═══
+   Motorun mevcut 'sys' (captureSystem 'transfer') ve 'tribute' (giver.tribute, aylık tributeTick, 10 yıl) maddeleri kullanılır; yeni
+   anlaşma motoru yok. dealSysIssues saf denetimdir (RNG/Save8 yazmaz) ve dealQuote'a YALNIZ insan taraflı anlaşmada girer: AI–AI
+   anlaşmaları ve kararları aynen sürer. Çakışmalar: devredenin kendi verdiği açık toprak vaadi, devredene karşı süren v2 Fetih
+   savaşının hedefi, devredenin savaşta işgal edip barışta iade edeceği sistem (alıcı o savaşın karşı tarafıysa çakışma yok). */
+function dealHumanParty(a,b){return !!(a&&a.ai===false||b&&b.ai===false);}
+function warFetihSettlePreview(a,b){
+ const out=[];
+ for(const [x,y] of [[a,b],[b,a]]){
+  const g=x?.wg?.[y?.id],f=warLedgerFind(x?.id,y?.id);
+  if(!g||g.t!=='fetih'||g.v!==2||!f||!y||y.dead)continue;
+  const keep=new Set(g.targets||[]),seen=new Set();
+  for(const o of (f.occupation||[]).slice().reverse()){
+   if(o.to!==x.id||o.from!==y.id||seen.has(o.sys))continue;seen.add(o.sys);
+   const s=G.sys[o.sys];if(!s||keep.has(s.id)||s.owner!==x.id||s.id===x.home)continue;
+   out.push({sys:s.id,from:x.id,to:y.id});
+  }
+ }
+ return out;
+}
+function dealSysIssues(giver,taker,id){
+ const s=G.sys[id];if(!s||!giver||!taker)return ['sistem bulunamadı'];
+ if(s.owner!==giver.id)return ['sistem artık ona ait değil'];
+ if(giver.home===id)return ['başkent verilemez'];
+ const out=[];
+ for(const p of (G.warLedger&&G.warLedger.promises)||[])if(p&&p.state==='open'&&p.sys===id&&p.giver===giver.id&&p.taker!==taker.id)
+  out.push(s.name+' '+(G.emps[p.taker]?G.emps[p.taker].name:'başka bir devlet')+' devletine toprak vaadi olarak verildi');
+ for(const z of G.emps){if(!z||z===giver||z===taker||z.dead||!(z.war&&z.war[giver.id]))continue;const g=z.wg&&z.wg[giver.id];
+  if(g&&g.t==='fetih'&&g.v===2&&(g.targets||[]).includes(id))out.push(s.name+' süren bir Fetih savaşının hedefi ('+z.name+'); savaş bitmeden üçüncü devlete devredilemez');}
+ for(const y of G.emps){if(!y||y===giver||y===taker||y.dead||!(giver.war&&giver.war[y.id]))continue;
+  if(warFetihSettlePreview(giver,y).some(x=>x.sys===id&&x.from===giver.id))out.push(s.name+' '+y.name+' ile savaşta işgal altında; barışta '+y.name+' devletine iade edilecek');}
+ return out;
+}
+/* Teklif önizlemesi: her Sistem Devri maddesinin nihai sonucu ve aynı anlaşmadaki barışın iade edeceği işgaller */
+function dealSysPreview(offer){
+ const a=G.emps[offer&&offer.from],b=G.emps[offer&&offer.to];if(!a||!b)return {rows:[],returns:[]};
+ const rows=[];
+ for(const [giver,taker,list] of [[a,b,offer.give||[]],[b,a,offer.want||[]]])for(const it of list)if(it&&it.t==='sys'&&G.sys[it.id]){const s=G.sys[it.id];
+  rows.push({sys:s.id,name:s.name,from:giver.id,to:taker.id,cols:s.planets.filter(p=>p.col).length,owner:s.owner,issues:dealSysIssues(giver,taker,s.id)});}
+ const peace=(offer.give||[]).concat(offer.want||[]).some(it=>it&&it.t==='peace');
+ const returns=peace&&a.war&&a.war[b.id]?warFetihSettlePreview(a,b).map(x=>({...x,name:G.sys[x.sys]?G.sys[x.sys].name:'?'})):[];
+ return {rows,returns};
+}
+const TRIBUTE_MONTH_DAYS=30;
+function tributeDate(day){const m=Math.floor(Math.max(0,day)/TRIBUTE_MONTH_DAYS);return (2210+Math.floor(m/12))+'/'+String(m%12+1).padStart(2,'0');}
+/* e'nin taraf olduğu aktif haraçlar: ödeyen, alan, aylık miktar, kalan ödeme, sonraki ödeme ve bitiş tarihi, son ödeme kaydı */
+function tributeRows(e,other){
+ const out=[];if(!e)return out;
+ for(const g of G.emps){if(!g||!Array.isArray(g.tribute)||g.dead)continue;
+  for(const t of g.tribute){if(!t||!(G.day<=t.until))continue;if(g!==e&&t.to!==e.id)continue;
+   if(other!==undefined&&other!==null&&!(g.id===other||t.to===other))continue;
+   const m=Math.floor(G.day/TRIBUTE_MONTH_DAYS),pays=Math.max(0,Math.floor(t.until/TRIBUTE_MONTH_DAYS)-m);
+   out.push({from:g.id,to:t.to,r:t.r,v:t.v,until:t.until,pays,next:pays?(m+1)*TRIBUTE_MONTH_DAYS:null,total:Math.round(t.v*pays),last:t.last&&Number.isFinite(t.last.p)?{d:t.last.d,p:t.last.p}:null});}}
+ return out;
+}
+function tributeRowText(t,viewer){
+ const nm=id=>id===viewer?'Sen':(G.emps[id]?G.emps[id].name:'?'),r=RES[t.r]?RES[t.r].n:t.r;
+ return nm(t.from)+' → '+nm(t.to)+' · '+t.v+' '+r+'/ay · kalan '+t.pays+' ödeme ('+t.total+' '+r+')'+(t.next!==null?' · sonraki '+tributeDate(t.next):'')+' · bitiş '+tributeDate(t.until)+
+  (t.last&&t.last.p<t.v?' · son ödeme eksik: '+Math.round(t.last.p)+'/'+t.v+' (stok yetersiz)':'');
+}
+/* Haraç bildirimleri (yalnız insan taraflı yükümlülük; tributeTick çağırır). Tek oyunculu oyuncuya günlük satırı; çok oyunculuda
+   mp-core bu işlevleri uzak insanlara da yönlendirir. */
+function tributeShortNote(giver,taker,t,pay){
+ const r=RES[t.r]?RES[t.r].n:t.r,m='Haraç eksik ödendi: '+giver.name+' → '+taker.name+' · '+Math.round(pay)+'/'+t.v+' '+r+' (stok yetersiz; borç birikmez)';
+ if(giver===G.p||taker===G.p)say(m,'war');return m;
+}
+function tributeEndNote(giver,t){
+ const taker=G.emps[t.to],r=RES[t.r]?RES[t.r].n:t.r,m='Haraç anlaşması sona erdi: '+giver.name+' → '+(taker?taker.name:'?')+' · '+t.v+' '+r+'/ay';
+ if(giver===G.p||taker===G.p)say(m,'sci');return m;
+}
+/* END MP-DEAL-SYS.0 */

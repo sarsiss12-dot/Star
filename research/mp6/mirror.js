@@ -75,6 +75,7 @@ function build(meId,o={}){
   const mine=J(me);const risk=internalRiskSummary(me);if(risk.ownVassal)mine.mpInternalSelf=J(risk.ownVassal);if(risk.subjects.length)mine.mpInternalSubjects=risk.subjects.map(v=>({...v,id:piN(v.id)}));for(const k of STRIP_ME)delete mine[k];
   mine.mapHabitats=knowledge.habitats;mine.mapOwners=Object.fromEntries(Object.entries(knowledge.owners).map(([id,owner])=>[id,piN(owner)]));
   mine.id=0;mine.ai=false;for(const k of EMP_MAPS)if(mine[k])mine[k]=remapKeys(mine[k]);
+  if(Array.isArray(mine.tribute))mine.tribute=mine.tribute.filter(t=>t&&Number.isInteger(t.to)).map(t=>({...t,to:piN(t.to)}));   /* MP-DEAL-SYS.0: kendi haraç yükümlülükleri (alıcı kimliği π) */
   /* MP.6.4 gizlilik: mağdur kaydında fail yalnız BİLİNİYORSA (yakalandı / soruşturmayla çözüldü) gider; tespit edilmemiş
      operasyonun faili ve sahte kanıtın gerçek yerleştiricisi (framed: "gerçeği yalnız biz biliriz") misafire gitmez. */
   for(const k of ['hitLog'])if(Array.isArray(mine[k]))for(const h of mine[k]){if(!h)continue;delete h.framed;if(!h.known)delete h.by;else if(Number.isInteger(h.by))h.by=piN(h.by);}
@@ -89,6 +90,7 @@ function build(meId,o={}){
     /* misafirin vasalı (ya da senyörü): sözleşme ve misafirin taraf olduğu müzakere — gerçek STARS vasallık penceresi ve gelen kutusu */
     if(e.overlord===meId){s.overlord=0;s.vassalType=e.vassalType;if(e.vassalContract)s.vassalContract=vasC(e.vassalContract);}
     if(party(e.vassalTalk))s.vassalTalk=vasQ(e.vassalTalk);
+    {const inc=Array.isArray(e.tribute)?e.tribute.filter(t=>t&&t.to===meId):[];if(inc.length)s.tribute=inc.map(t=>({...J(t),to:0}));}   /* MP-DEAL-SYS.0: misafire ödenen haraç (yalnız alıcı olduğu kayıtlar) */
     emps[pi(e.id)]=s;}
   /* ---- filolar ---- */
   const fl=[];
