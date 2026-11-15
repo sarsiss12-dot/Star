@@ -400,6 +400,14 @@ function gate(){
   wrap('shipmentRetryAll',(o,e)=>{if(!mine(e))return NOT_MP;const cid=send({kind:'shipmentRetryAll'});if(!cid)return {ok:false,why:'Host bağlı değil; emir gönderilmedi.'};
     waits[cid]=res=>{try{UI._shipmentRetryPending=false;UI._shipmentRetryResult=res.status==='ok'?res.extra.text:'Host reddetti: '+why(res);if(res.status==='ok')say('SEVKİYAT — '+res.extra.text,'sci');else toast(UI._shipmentRetryResult,true);UI.keepScroll=true;UI.refresh();}catch{}};
     return {ok:false,pending:true,why:'Host denetliyor…'};});
+  /* WAR-COALITION.0: misafirin müzakere masasında savaş kutuları (ayrı barış, toprak vaadi, federasyonlar arası ortak barış) host'un yetkili
+     kısaltılmış defteriyle çizilir (warDealRead); defter yalnız o çizim çağrısı boyunca G.warLedger'a konur, sonra geri alınır (MP.7.2 ortak destek paneli gibi). */
+  {const DL={};const ledgerLocal=x=>({next:0,fronts:(x.fronts||[]).map(f=>({...f,sides:f.sides.map(local),sponsor:Number.isInteger(f.sponsor)?local(f.sponsor):f.sponsor,occupation:(f.occupation||[]).map(o=>({...o,from:local(o.from),to:local(o.to)}))})),
+     promises:(x.promises||[]).map(p=>({...p,giver:local(p.giver),taker:local(p.taker),...(Number.isInteger(p.enemy)?{enemy:local(p.enemy)}:{})}))});
+   const dh=UI.warDealHtml;UI.warDealHtml=function(d,e,o){if(!S.on||!S.started||!o)return dh.apply(this,arguments);const k=o.id,c=DL[k];
+     if(!c||Date.now()-c.at>2500){if(!c||!c.busy){const cid=send({kind:'warDealRead',to:real(k)});if(cid){DL[k]={...(c||{}),busy:true,at:c?c.at:0};waits[cid]=res=>{DL[k]={at:Date.now(),busy:false,led:res.status==='ok'?ledgerLocal(res.extra):null};if(UI.deal&&UI.deal.to===k)try{UI.drawDeal();}catch{}};}}}
+     const led=DL[k]&&DL[k].led;if(!led)return dh.apply(this,arguments);const had=Object.hasOwn(G,'warLedger'),old=G.warLedger;G.warLedger=led;
+     try{return dh.apply(this,arguments);}finally{if(had)G.warLedger=old;else delete G.warLedger;}};}
   wrap('shipOrderToken',(o,q)=>S.on&&typeof q?._mpOrderToken==='string'?q._mpOrderToken:o(q));
   wrap('cancelShipOrders',(o,e,sys,orders,all)=>{if(!mine(e)||!sys)return NOT_MP;const own=(sys.queue||[]).filter(q=>q.e===0),tokens=(orders||[]).map(q=>own.includes(q)&&q._mpOrderToken);
     if(tokens.some(t=>typeof t!=='string'))return {ok:false,why:'Kuyruk değişti; siparişi yeniden seç.'};const x=r({kind:'shipCancel',sys:sys.id,orders:tokens,all:!!all});return x.ok?{...x,count:tokens.length}:x;});
@@ -897,7 +905,7 @@ function reconnect(){const J=S.J,y=S.sync;y.reconnects++;syncLog('reconnect');sy
    üstüne uygulanır ve sınırlı aralıkla yeniden denenir), dünyayı değiştiren yeni emirler gönderilmez (gönderilmiş emirler kendiliğinden
    yeniden gönderilmez). İlk tepki TAM ayna istemektir (fark birikimi bozulmuş olabilir). TAM ayna da aynı nedenle reddedilirse sorun host
    verisindedir: en çok 3 otomatik istek, sonra istek durur (sonsuz yeniden bağlanma yok); oyuncu YENİDEN EŞİTLE ile tekrar isteyebilir. */
-const RO_CMDS=new Set(['quote','warQuote','warCenterRead','warCoalition','fedFoundPlan','fedFoundQuote','vassalQuote','internalQuote','spyQuote','settleQuote','remoteQuote','speed']);
+const RO_CMDS=new Set(['quote','warQuote','warCenterRead','warCoalition','warDealRead','fedFoundPlan','fedFoundQuote','vassalQuote','internalQuote','spyQuote','settleQuote','remoteQuote','speed']);
 const DS_WAIT=[0,3000,10000,30000];
 function staleWorld(why){
   const d=S.desync,now=Date.now(),rj=S.lastReject||{stage:'unknown',code:'false',path:''},code=rj.stage+':'+rj.code;

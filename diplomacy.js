@@ -11374,4 +11374,14 @@ function warCoalitionCommand(e,c,hooks={}){
  if(c.kind==='warPrepare')return wrap(warPrepareCreate(e,c.target,c.goal,warCoalOpts(c)));
  return {ok:false,why:'Bilinmeyen savaş hazırlığı komutu'};
 }
+/* MP misafiri: müzakere masasındaki savaş kutuları (ayrı barış, toprak vaadi, ortak barış) için kısaltılmış defter. Yalnız misafirin bildiği
+   açık cepheler (warFrontKnown) ve tarafı olduğu vaatler; işgal kayıtlarından yalnız kendisinin ve masadaki karşı tarafın el değiştirmeleri. */
+function warDealLedger(e,o){
+ if(!e||!o||!G.warLedger)return {fronts:[],promises:[]};
+ const fronts=(G.warLedger.fronts||[]).filter(f=>f.ended===null&&warFrontKnown(e,f));const ids=new Set(fronts.map(f=>f.campaign));
+ const roots=(G.warLedger.fronts||[]).filter(f=>ids.has(f.id)&&!fronts.includes(f)&&warFrontKnown(e,f));
+ const row=f=>({id:f.id,campaign:f.campaign,sides:f.sides.slice(),roles:f.roles.slice(),sponsor:f.sponsor,parent:f.parent,entryKind:f.entryKind,opened:f.opened,ended:f.ended,
+  ...(f.fedWar?{fedWar:{...f.fedWar}}:{}),occupation:(f.occupation||[]).filter(x=>[e.id,o.id].includes(x.to)||[e.id,o.id].includes(x.from)).slice(-40).map(x=>({...x}))});
+ return {fronts:fronts.concat(roots).map(row),promises:(G.warLedger.promises||[]).filter(p=>p.giver===e.id||p.taker===e.id).slice(-16).map(p=>({...p}))};
+}
 /* END WAR-COALITION.0 */
