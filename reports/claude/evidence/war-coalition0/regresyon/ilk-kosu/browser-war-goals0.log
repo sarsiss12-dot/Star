@@ -1,0 +1,44 @@
+PASS 390x844 B1 GALAKTİK GERİLİM: Dengeli varsayılan; Sakin / Çalkantılı dokunuşla seçilir; Dengeli cfg'ye yazılmaz; seçim başlangıçta G.cfg'ye geçer
+PASS 800x360 B1 GALAKTİK GERİLİM: Dengeli varsayılan; Sakin / Çalkantılı dokunuşla seçilir; Dengeli cfg'ye yazılmaz; seçim başlangıçta G.cfg'ye geçer
+FAIL B2 SAVAŞ HEDEFİ SEÇ → yalnız Fetih / Vasallaştırma → hedef sistem seçimi → ÖNİZLEME (hedef, gerekçe, tutum) → ONAYLA; v2 kaydı
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Kaybedilen toprak/. Input:
+
+'⚔ SAVAŞ İLANI · Karvar Egemenliği\n' +
+  '✕\n' +
+  '1 Hedef ✓ · 2 Müttefikler (isteğe bağlı) · 3 Son onay\n' +
+  '1 · HEDEF\n' +
+  'Hedefi değiştir\n' +
+  'HEDEF: FETİH\n' +
+  'Hydeiphor-47 · Lyrumir\n' +
+  'Barışta hedef sistemler sende kalır; hedef dışı işgaller iade edilir. Başkent hedef olamaz; hedef devlet yok edilmez.\n' +
+  '2 · MÜTTEFİKLERİ ÇAĞIR · isteğe bağlı\n' +
+  '3 · SON ONAY\n' +
+  'Hedef\n' +
+  'Karvar Egemenliği · Fetih\n' +
+  'Kesin destek\n' +
+  '—\n' +
+  'Hedefin bilinen destekçileri\n' +
+  'Bilinen yok\n' +
+  'Savaş yorgunluğu\n' +
+  'Senin %0 · Karvar Egemenliği bilinmiyor\n' +
+  'Toplam bedel\n' +
+  '◈ 25 Etki\n' +
+  'Meşruiyet\n' +
+  '75 / gereken 31\n' +
+  'GEREKÇELER VE MEŞRUİYET · TAHMİNİ TUTUMLAR · AYRINTI\n' +
+  'Savaş İlan Et\n' +
+  'Vazgeç'
+
+    at /home/user/Star/tests/browser-war-goals0.cjs:63:89
+    at async test (/home/user/Star/tests/browser-war-goals0.cjs:15:42)
+    at async run (/home/user/Star/tests/browser-war-goals0.cjs:52:5)
+FAIL B3 müzakere masası: "Teslim iste" → TESLİM ÖNİZLEMESİ (vergi, özerklik, kapanan/süren cephe, katılım hükmü); destek ortağının AYRI BARIŞ kutusu yalnız kendi cephesini kapatır
+page.waitForSelector: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="dealVassal"][data-x="want:bekci"]') to be visible[22m
+
+    at /home/user/Star/tests/browser-war-goals0.cjs:68:77
+    at async test (/home/user/Star/tests/browser-war-goals0.cjs:15:42)
+    at async run (/home/user/Star/tests/browser-war-goals0.cjs:67:5)
+PASS B4 iki federasyon: FEDERASYONA KARŞI SAVAŞ ÖNER → hedef üye + Vasallaştırma → OYLAMAYA SUN → AI üye oyu → karar UYGULA → ilan; ORTAK BARIŞ kutusu; karşı federasyonun kesin savunmacıları önizlemede
+GEÇEN: 3 KALAN: 2

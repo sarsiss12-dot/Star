@@ -10129,7 +10129,7 @@ const WarCoal={st:null,req:0,last:0,view:null,
  open(id,key,opts){
   const same=this.st&&this.st.id===id&&this.st.key===key;
   const sel=key==='fetih'?{targets:(opts&&Array.isArray(opts.targets)&&opts.targets.length?opts.targets:(G.emps[id]?warFetihDefault(G.p,G.emps[id]):[])).slice()}:{vtype:opts?.vtype||'haracguzar',war:opts?.war||WAR_VASSAL_WAR.haracguzar};
-  this.st=same?{...this.st,sel,explicit:!!opts}:{id,key,sel,picks:[],terms:{},editing:null,msg:'',busy:false,others:false,explicit:!!opts};
+  this.st=same?{...this.st,sel,explicit:!!opts,world:G.sys,player:G.p}:{id,key,sel,picks:[],terms:{},editing:null,msg:'',busy:false,others:false,explicit:!!opts,world:G.sys,player:G.p};
   this.view=null;this.req++;UI.openModal(`<div class="mhd"><span>⚔ SAVAŞ İLANI · ${esc(G.emps[id]?.name||'')}</span><button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warCoalRoot">Önizleme hazırlanıyor…</div>`,'war liveWorld');
   this.load();
  },
@@ -10192,14 +10192,15 @@ const WarCoal={st:null,req:0,last:0,view:null,
   if(pend.length)h+=`<div class="mini">Koşullu / bekleyen: ${pend.map(c=>esc(c.name)+' ('+esc(this.STATE[c.state])+')').join(' · ')}. İlan edersen bu davetler ilan öncesi teklif olarak kapanır; savaş başladıktan sonra Savaş Merkezi'nden ayrıca davet edebilirsin.</div>`;
   if(q&&q.invalid&&q.invalid.length)h+=q.invalid.map(x=>`<div class="mini warnTxt coalInvalid" data-member="${x.member}">${esc(name(x.member))}: ${esc(x.why)} — son onaya girmez.</div>`).join('');
   h+=`<div class="row"><span>Hedefin bilinen destekçileri</span><b>${defense.length?defense.map(r=>esc(r.name)).join(', '):'Bilinen yok'}</b></div>`;
-  if(p.exh)h+=`<div class="row"><span>Savaş yorgunluğu</span><b>Senin %${p.exh.own} · ${esc(o.name)} ${p.exh.foe===null?'bilinmiyor':'%'+p.exh.foe}</b></div>`;
+  for(const [lab,rows] of [['kesin',p.certain],['koşullu',p.conditional]]){const d=rows.filter(r=>r.side==='defense');if(d.length)h+=`<div class="mini coalFoe">Hedef tarafı, ${lab}: ${d.map(r=>esc(r.name)+' — '+esc(r.why||'')).join(' · ')}</div>`;}
+  if(p.exh){const x=p.exh;h+=`<div class="row"><span>SAVAŞ YORGUNLUĞU</span><b>Senin %${x.own} · ${esc(o.name)}: ${x.foe===null?'bilinmiyor':'%'+x.foe}</b></div><div class="mini">${x.foe===null?'Rakibin yorgunluğu SIZILMIŞ istihbarat olmadan bilinmez.':esc(x.basis)+'.'} Taraflardan biri %100'e ulaşınca savaş zorunlu barışla durur; önceki savaşın yorgunluğu barışta ayda 2,5 azalarak taşınır.</div>`;}
   h+=`<div class="row"><span>Toplam bedel</span><b id="coalCost">${esc(costTxt)}</b></div>`;
-  if(p.legit)h+=`<div class="row"><span>Meşruiyet</span><b>${Math.round(p.legit.score*100)} / gereken ${Math.round(p.legit.need*100)}</b></div>`;
+  if(p.legit){const L=p.legit;h+=`<div class="row"><span>Meşruiyet</span><b>${Math.round(L.score*100)} / gereken ${Math.round(L.need*100)} · ${esc(L.level)}</b></div><div class="mini">Gerekçe: ${L.list.length?L.list.map(j=>esc(j.n)).join(' · '):'kayıtlı gerekçe yok'}</div>`;}
   h+=p.risks.map(x=>`<div class="mini">⚠ ${esc(x)}</div>`).join('')+p.blockers.map(x=>`<div class="mini warnTxt">Engel: ${esc(x)}</div>`).join('');
   if(prep&&q&&!q.ok)h+=`<div class="mini warnTxt">${esc(q.why)}</div>`;
   if(prep)h+=`<button class="abtn" data-a="coalCancel">Hazırlığı İptal Et · bekleyen davetleri kapat</button>`;
   h+='</section>';
-  h+=`<details class="dcDetails coalDetail"><summary>GEREKÇELER VE MEŞRUİYET · TAHMİNİ TUTUMLAR · AYRINTI</summary>${UI.warPreviewGoalHtml({...p,goal:null})}<div class="ph">BİLİNMEYENLER</div><div class="mini">İstihbarat kapsamı dışındaki bağlar ve gizli taahhütler belirlenemez.</div></details>`;
+  h+=`<details class="dcDetails coalDetail"><summary>GEREKÇELER VE MEŞRUİYET · TAHMİNİ TUTUMLAR · AYRINTI</summary>${UI.warPreviewGoalHtml({...p,goal:null})}<div class="ph">BİLİNMEYENLER</div><div class="mini">İstihbarat kapsamı dışındaki siyasi bağlantılar ve gizli taahhütler belirlenemez. Bu bölüm gizli devlet sayısını göstermez.</div></details>`;
   h+='</div>';
   const main=n?`${n} Destekçiyle Savaş İlan Et`:prep&&accepted.length===0&&cands.some(c=>['pending','countered','accepted','stale'].includes(c.state))?'Desteksiz Savaş İlan Et':'Savaş İlan Et';
   h+=`<div class="mft coalFoot"><button id="warFinalConfirm" class="ch pri" data-a="coalLaunch" data-x="${n}" ${canGo&&!st.busy?'':'disabled'}>${esc(main)}</button>`;
@@ -10208,8 +10209,14 @@ const WarCoal={st:null,req:0,last:0,view:null,
   h+=`<button class="ch coalX" data-a="closem">Vazgeç</button></div>`;
   UI.surfaceRender(WarCoal.box(),h,'war-coal',true);
   this.signature=q&&q.ok?q.stamp:p.signature;
+  /* Son onay jetonu (eski önizlemenin sözleşmesi): tek kullanımlık; pencere kapanınca / yeniden açılınca (openModal/closeModal _warPreview'u siler),
+     dünya yüklenince ya da akış değişince geçersiz. Karar aynı launch → direct / warLaunch yolundan; koşullar değiştiyse güncel özet yeniden çizilir. */
+  if(!this.guest()){const pending={world:G.sys,player:G.p,st,n};UI._warPreview=pending;
+   UI._hook('warFinalConfirm',()=>{if(UI._warPreview!==pending||G.sys!==pending.world||G.p!==pending.player||WarCoal.st!==pending.st)return;UI._warPreview=null;WarCoal.launch(pending.n);});}
  },
  launch(x){const st=this.st,v=this.view;if(!st||!v||st.busy)return;const p=v.preview;
+  /* Yüklenen / değişen dünyada eski pencerenin düğmesi ilan etmez (misafirde ayna her kurulumda yeni G.sys yaratır; karar host'ta yeniden denetlenir). */
+  if(!this.guest()&&(st.world!==G.sys||st.player!==G.p)){this.st=null;this.view=null;UI.closeModal();return;}
   const solo=x==='solo',prep=v.prep;
   if(!prep||solo&&!prep){return this.direct();}
   const q=v.quote;if(!q||!q.ok){st.msg=q?.why||'Koşullar değişti';this.render();return;}

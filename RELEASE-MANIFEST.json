@@ -26,7 +26,7 @@
     "map.js": "5b40278d2e0c34a25db5838c87c691f0b23738b0f3b3af7b87ae1fcd85badddc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
     "sw.js": "d700bec57ba32f2032ef63fc0ea5f409f8dec0713dbfc53061223454bcc36223",
-    "ui.js": "bb547b69a229b5226b57b86fd1cddd381731fafa5dae36508e5ee0664ebf5e97"
+    "ui.js": "e72540bd9985a94bb9b158cf628499eb495a273ff36f3746f2663d1c584aaaba"
   },
   "description": "WAR-COALITION.0: tek savaş ilanı akışı (hedef → müttefikleri çağır → son onay, aynı pencerede; tek başına iki adım), toplu davet, durum kartları (davet edilebilir / cevap bekleniyor / karşı teklif / kabul / ret / süresi doldu / engellendi), şart ekleme, kısmi son onay (\"N Destekçiyle Savaş İlan Et\" / desteksiz), hazırlığı kaydet ve dön, hedef şartı değişince yeniden onay; hazırlıkta Fetih/Vasallaştırma seçenekleri ilana taşınır; misafirde açık pencere dünyayı bekletmez; Kan Hukuku ateşkesinde hedef dışı işgal iadesi. Save8 v8, paket 4, protokol 1."
 }

@@ -2,7 +2,15 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — FIELD-WAR-SIEGE.0 (p32 / MP.8.9b29, 14 Kasım 2026)
+## Son teslim — WAR-COALITION.0 (p33 / MP.8.9b30, 15 Kasım 2026)
+
+- Ayrıntı: `reports/claude/WAR-COALITION0-SONUC.md`, kanıt `reports/claude/evidence/war-coalition0/`. Dal `claude/stars-war-coalition0` (p32 `a20d531` üstünde). Save8v8/paket4/protokol1; p33 paket yükleyicisi p6–p32, p25u1, p27s1 kabul eder.
+- Tek savaş ilanı akışı `WarCoal` (ui.js, `UI.warDeclarationPreview` → `WarCoal.open`; pencere `.mbox.war.liveWorld`): hedef → müttefikleri çağır → son onay. Ana düğme `#warFinalConfirm` ("N Destekçiyle Savaş İlan Et" / "Desteksiz…" / "Savaş İlan Et"). Seçimler `UI._wgSels` (`id:key`).
+- Motor (diplomacy.js sonu "WAR-COALITION.0"): hazırlıkta `p.opts` (Fetih hedefleri / vtype+war) → `setWarGoal`; kabul imzası `c.sig` (şart değişince `warCommitStale`); `p.invites` (≤16, pending/accepted/countered/rejected/expired/closed); kısmi teklif/onay `warPrepareQuote/Launch(…,'partial')` → `warCoalitionQuote`, damga `warStampHash` (misafir 8192 sınırı). Alanlar yalnız kullanıldığında yazılır (`warCoalitionFieldsValid`); AI ve eski kayıt aynı. Adaylar `warCoalitionCandidates` (yalnız temaslı, `WAR_COAL_REACH` önbelleği). Kan Hukuku: `warExhaustionClose` wg/proxyWar'ı makePeace'ten SONRA siler.
+- MP: `warCoalition`/`warDealRead` (salt okuma), `warInvite`, `warInviteReply`, `warPrepareGoal`, `warLaunch mode:'partial'`; `coalMark/coalCloseOffers` MP teklifini davete bağlar. Misafir `holdBuild` `.mbox.liveWorld` pencerelerinde aynayı bekletmez (savaş akışı, arşiv/gelen kutusu, İç İstikrar). `warDealHtml` sarmalayıcısı host'un budanmış defterini yalnız çizimde kullanır.
+- Test: `node tests/war_coalition0_test.js` (7; kontrol a20d531 1/6), `_mp_test.js` (3), faz86b E bölümü; Chromium `browser-war-coalition0.cjs` (5; 844×390 + 740×360), `MP8_SCEN=Q node tests/browser-mp8.cjs` (8; host + 2 misafir). P açık pencere: `MP8_P_MODAL=1 MP8_SCEN=P`. Koruma: `war-coalition0-reviewed` ← `field-war-siege0-reviewed` ← `beta-war-goals0-reviewed` ← …
+
+## Önceki teslim — FIELD-WAR-SIEGE.0 (p32 / MP.8.9b29, 14 Kasım 2026)
 
 - Ayrıntı: `reports/claude/FIELD-WAR-SIEGE0-SONUC.md`, kanıt `reports/claude/evidence/field-war-siege0/`. Dal `claude/stars-field-war-siege0` (p31 `03a3aa4` üstünde). Save8v8/paket4/protokol1; p32 paket yükleyicisi p6–p31, p25u1, p27s1 kabul eder.
 - %100 yorgunluk kapanışı tek yol `warExhaustionClose` (diplomacy.js): her durumda `makePeace(…,{force:true,quiet:true})`; doktrin kilidinde (Kan Hukuku `kan_hukuku`, `canPeace` false) neden `exhaustion-lock`, değilse `exhaustion`; `actor` = çekilen taraf; tek bildirim ("Savaş #n"). `makePeace` `opts.force` olmadan `canPeace`'i aynen denetler. Önizleme `warExhaustionForecast` (rakip: SIZILMIŞ istihbaratla kesin, yoksa son zorunlu barıştan tahmin).
