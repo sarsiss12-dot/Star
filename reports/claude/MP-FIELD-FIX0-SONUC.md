@@ -31,7 +31,7 @@
 | Doğrulanmış taban | GitHub'da taslak PR **#47** açık. `claude/stars-war-coalition0` HEAD = **`0ec57209d2d6bc9d02c72b4452dec3f05d05f678`** (p33; API ile doğrulandı; daha yeni PR yok). |
 | Başlangıç HEAD | `0ec57209d2d6bc9d02c72b4452dec3f05d05f678` |
 | Çalışma dalı / Render Branch | **`claude/stars-mp-field-fix0`**. Oturumun önerdiği `claude/stars-project-takeover-y9x8m9` 96H.8 döneminden kalma ve p33'ü içermiyor; onu güncellemek force-push gerektirirdi. |
-| Bitiş HEAD ve PR | Sonuç raporunda ve PR'da (taban #47 `claude/stars-war-coalition0`) |
+| Bitiş HEAD ve PR | Taslak PR **#48** — https://github.com/sarsiss12-dot/Star/pull/48 (taban #47 `claude/stars-war-coalition0`); son commit PR'da ve sonuç raporunda |
 | Sürüm | oyun **96h10p34** · PWA `stars-v96h10p34` · Save8 **v8** · MP **MP.8.9b31** · paket **4** · protokol **1** |
 | Paket uyumu | p34 yükleyicisi p6–p33, p25u1 ve p27s1 paketlerini kabul eder |
 | Save8 | Yeni alan yok. Kaydırılan kartlar misafir cihazında (`mp:swiped:<saveId>:<devlet>`) tutulur; Save8, paket ya da ayna değişmez. |
