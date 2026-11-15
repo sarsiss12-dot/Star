@@ -1,0 +1,4 @@
+{"cfg":{"re":true,"auto":true},"n":19,"kinds":{"anomaly:":1,"notify:aideal":11,"event:":2,"chain:":2,"notify:chain":2,"notify:pact":1},"inbox":["chain:Derin Uzay Sinyali","aideal:Teklif — Rhyvaur Şurası","aideal:Teklif — Sylraen Meclisi","chain:Sessiz Gemi","aideal:Teklif — Tharaeth Lejyonu","aideal:Teklif — Rhyvaur Şurası"]}
+chain Derin Uzay Sinyali {"len":487,"ch":5,"head":"▁\nDerin Uzay Sinyali\nZorootar dinleme istasyonumuz galaksinin dışından bir yayın"}
+chain Sessiz Gemi {"len":443,"ch":5,"head":"▁\nSessiz Gemi\nWynaevos sınırında, hiçbir imparatorluğa ait olmayan devasa bir ge"}
+errs []

@@ -19,8 +19,13 @@ function seatOf(id){try{return JSON.parse(localStorage.getItem(saveKey(id)))||nu
 try{J.name=localStorage.getItem('mp1:name')||'';}catch{}
 function raw(obj){if(!J.ws||J.ws.readyState!==1)return false;J.ws.send(JSON.stringify(obj));return true;}
 J.sendRaw=raw;
-J.cmd=function(cmd){if(!J.hostOnline)return {ok:false,why:'host-yok'};J.seq++;save({seq:J.seq});const m={v:1,type:'cmd',seq:J.seq,cid:'j'+Date.now().toString(36)+Math.random().toString(36).slice(2,10),cmd};
-  m.at=performance.now();J.pending=m;raw({v:1,type:'cmd',seq:m.seq,cid:m.cid,cmd});return {ok:true,cid:m.cid};};
+/* MP-FIELD-VERIFY.0: soket AÇIK değilken (yeniden bağlanma / kapanış sürüyor, hostOnline henüz düşmedi) komut sessizce kayboluyor ama
+   {ok:true} dönüyordu → misafir "gönderildi" deyip taslağı siliyordu (Q6 saha: teklif host'a ulaşmadı). Artık açık hata döner.
+   cid0: aynı işlemin yeniden gönderimi (yeni seq, AYNI cid) — host sonuç önbelleği (cid) ikinci kaydı engeller. */
+J.cmd=function(cmd,cid0){if(!J.hostOnline)return {ok:false,why:'host-yok'};if(!J.ws||J.ws.readyState!==1)return {ok:false,why:'baglanti'};
+  const cid=typeof cid0==='string'&&/^j[a-z0-9]{6,40}$/.test(cid0)?cid0:'j'+Date.now().toString(36)+Math.random().toString(36).slice(2,10);
+  const m={v:1,type:'cmd',seq:J.seq+1,cid,cmd};m.at=performance.now();
+  if(!raw({v:1,type:'cmd',seq:m.seq,cid:m.cid,cmd}))return {ok:false,why:'baglanti'};J.seq=m.seq;save({seq:J.seq});J.pending=m;return {ok:true,cid:m.cid};};
 J.ready=v=>raw({v:1,type:'ready',value:!!v});
 J.claim=id=>raw({v:1,type:'claim',empire:id});
 J.presence=t=>{J.tab=t;raw({v:1,type:'presence',tab:t});render();};

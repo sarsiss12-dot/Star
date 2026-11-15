@@ -2,7 +2,15 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — MP-FIELD-FIX.0 (p34 / MP.8.9b31, 15 Kasım 2026)
+## Son teslim — MP-FIELD-VERIFY.0 (p34 / MP.8.9b32, 15 Kasım 2026)
+
+- Ayrıntı: `reports/claude/MP-FIELD-VERIFY0-SONUC.md`, kanıt `reports/claude/evidence/mp-field-verify0/`. Dal `claude/stars-mp-field-verify0` (p34 `0ec6017` üstünde). **Runtime 19 dosya ve p34 ZIP'i değişmedi** (build 96h10p34); yalnız MP istemcisi + relay sürüm işareti.
+- Canlı Render (stars-zhdu) bu doğrulamada p33 sunuyordu (`/mp/version` MP.8.9b30 / 96h10p33, 8 dosya özeti 0ec5720): saha belirtileri p33 ile tutarlı. Render dalı `claude/stars-mp-field-verify0` seçilmeli.
+- Q6 kökü: `join.js` `J.cmd` soket AÇIK değilken (kapanış / yeniden bağlanma, `hostOnline` henüz düşmemiş) `raw()` false dönse de `{ok:true}` veriyordu; misafir teklif taslağını silip "gönderildi" diyordu. Artık `{ok:false,why:'baglanti'}`; `J.cmd(cmd,cid0)` aynı cid ile yeniden gönderim (yeni seq; host sonuç önbelleği cid'e göre ikinci kaydı engeller).
+- Misafir teklifi tek işlem `S.dealTx` (guest-stars `UI.dealSend`): taslak host YANITINA kadar korunur; yanıtsız teklif `S.dealTxTick` (syncWatch) ile aynı cid'le yeniden gider (≤6); ret / bağlantı hatasında taslak düzenlenebilir; aynı içerik yeniden basışta aynı işlem; `duplicate` = "zaten bekliyor". İz `MP6Stars.S.dealTrace` (draft/send/resend/reply/msg, işlem kimliği).
+- Test: `MP8_SCEN=Z node tests/browser-mp8.cjs` Z10–Z13 (`tests/helpers/mp-field-verify0-mp3.cjs`: olay kararı + filo emri, toprak vaadi + destek izi, donan / kapanan hat, ret, karşı teklif, gecikmiş kabul, DAVET PAYLAŞ, eski kod, ikinci sekme, aynı oda kopma). Olay probu `evidence/mp-field-verify0/olay-prob/`. Koruma: `mp-field-verify0-reviewed` ← `mp-field-fix0-reviewed` ← `war-coalition0-reviewed` ← …
+
+## Önceki teslim — MP-FIELD-FIX.0 (p34 / MP.8.9b31, 15 Kasım 2026)
 
 - Ayrıntı: `reports/claude/MP-FIELD-FIX0-SONUC.md`, kanıt `reports/claude/evidence/mp-field-fix0/`. Dal `claude/stars-mp-field-fix0` (p33 `0ec5720` üstünde). Save8v8/paket4/protokol1; p34 paket yükleyicisi p6–p33, p25u1, p27s1 kabul eder.
 - Katılım: relay `GET /mp/join` → `302 /mp/play`+sorgu; basit MP.2 istemcisi yalnız `?basic=1` (eski MP.1–MP.5 tarayıcı testleri bu adresi kullanır). Ana menü ODAYA KATIL → `/mp/play`. `join.js` `fail(code,text)` → `J.errStage` (`oda`/`kimlik`/`baglanti`), `#jStatus[data-stage]`; katılımda adres `?code=` alır (yenilemede aynı oda).
