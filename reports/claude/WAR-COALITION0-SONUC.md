@@ -64,7 +64,7 @@ Hiçbir madde TAMAMLANDI değildir; kullanıcı kabulü bekler.
 | Başlangıç HEAD | `a20d531aa1945b743da44fb6776b56f319362fd0` |
 | Aday dal | **`claude/stars-war-coalition0`** |
 | Render Branch adı | `claude/stars-war-coalition0` (dağıtım yapılmadı) |
-| Bitiş HEAD ve PR | Sonuç raporunda ve PR'da (taban #46 `claude/stars-field-war-siege0`) |
+| Bitiş HEAD ve PR | Taslak PR **#47** — https://github.com/sarsiss12-dot/Star/pull/47 (taban #46 `claude/stars-field-war-siege0`); son commit PR'da ve sonuç raporunda |
 | Sürüm | oyun **96h10p33** · PWA `stars-v96h10p33` · Save8 **v8** · MP **MP.8.9b30** · paket **4** · protokol **1** |
 | Paket uyumu | p33 yükleyicisi p6–p32, p25u1 ve p27s1 paketlerini kabul eder |
 | Save8 | Yeni zorunlu alan yok. Hazırlık kaydına yalnız kullanıldığında `opts` (Fetih hedefleri / vasallık türü + savaş hükmü), `invites` (≤16) ve kabulde `sig` eklenir; doğrulayıcı `warCoalitionFieldsValid`. AI yolu ve eski kayıtlar bayt bayt aynı yazılır; eski seçeneksiz hazırlık eski kurallarıyla açılır ve başlar (C4, C6). |
