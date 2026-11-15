@@ -125,6 +125,10 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,wait,tap}){
   await test('Q6 misafir B gerçek masada TOPRAK VAADİ: cepheye katılım isteğine sistem vaadi ekler (dokunuş) ve sunar; host teklifi doğru cephe kimliğiyle kaydeder',async()=>{
     const Z=await H.evaluate(([b,x,y,c])=>{const Z=G.emps.find(e=>e.ai&&!e.wild&&!e.dead&&![0,b,x,y,c].includes(e.id)&&!e.war[x]);return Z.id;},[eB,fx.X,fx.Y,eC]);
     const F=await H.evaluate(([b,x])=>warLedgerFind(b,x).id,[eB,fx.X]);const zB=await lid(B,await nameOf(Z));M.Q6={Z,F};M.Q6.hostX=await H.evaluate(([x,b])=>G.sys.filter(s=>s.owner===x||[12,14].includes(s.id)).map(s=>[s.id,s.owner,s.seen.includes(b),s.id===G.emps[x].home]),[fx.X,eB]);
+    /* FİKSTÜR: Q4'teki 75 günde C hedef sistemleri ele geçirebilir (X'e yalnız başkent kalır → "Bilinen düşman sistemi yok" doğru davranış).
+       Vaat edilecek sistem için X'e B'nin şu an GÖRDÜĞÜ sahipsiz bir sistem verilir (motorun territoryOwnerSet'i). */
+    M.Q6.added=await H.evaluate(([x,b])=>{if(warFetihCandidates(G.emps[b],G.emps[x]).length)return null;const v=humanVisionContext(G.emps[b]).visible;
+      const s=G.sys.find(s=>v.has(s.id)&&s.owner<0&&s.seen.includes(b));if(!s)return 'yok';territoryOwnerSet(s,x);MP1Host.host.publish();return s.id;},[fx.X,eB]);
     await clean(B);await synced(B);
     /* WarCenterUI.compose ile aynı taslak: B'nin cephesine katılım isteği (Savaş Merkezi → ASKERÎ DESTEK İSTE yolu) */
     await B.evaluate(([z,f,x])=>{UI.openDeal(z);UI.deal.give=[];UI.deal.want=[{t:'warJoin',front:f,target:x}];UI.drawDeal();},[zB,F,xB]);
