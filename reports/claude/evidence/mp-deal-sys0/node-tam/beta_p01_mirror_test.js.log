@@ -1,0 +1,33 @@
+FAIL misafir kamu savaş kimliği ve kendi gözlem özetini alır; host katkı ve filo verisi aktarılmaz AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+... Skipped lines
+
+  [
+    'actor',
+    'asOf',
++   'campaign',
+    'ended',
++   'entryKind',
+    'fronts',
+    'goals',
+    'id',
+    'legacy',
+    'opened',
+...
+    'sides',
++   'sponsor'
+  ]
+
+    at /home/user/Star/tests/beta_p01_mirror_test.js:5:277
+    at test (/home/user/Star/tests/beta_p01_mirror_test.js:3:24)
+    at Object.<anonymous> (/home/user/Star/tests/beta_p01_mirror_test.js:5:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+PASS eski savaş biter ve aynı çift yeniden savaşırsa eski haber aynada kapalı kalır
+PASS kamu haber eki oyun RNG tüketmez
+GEÇEN: 2 KALAN: 1

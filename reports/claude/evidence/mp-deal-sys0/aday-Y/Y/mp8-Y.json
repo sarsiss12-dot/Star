@@ -1,0 +1,438 @@
+{
+ "results": [
+  {
+   "name": "Y0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 11128
+  },
+  {
+   "name": "Y1 Barış + Sistem Devri + Haraç: C gerçek masada (dokunuş) hazırlar, özet sonucu gösterir; B karşı teklif; C karttan kabul; host + B + C aynı yeni sahip ve aynı ödeme takvimi",
+   "status": "PASS",
+   "ms": 9131
+  },
+  {
+   "name": "Y2 bir ödeme → kaydet → host kapanır → YENİ odada devam → misafirler döner → sonraki ödeme doğru ayda BİR kez",
+   "status": "PASS",
+   "ms": 10810
+  },
+  {
+   "name": "Y3 teklif beklerken sahiplik değişir → geçersiz + iki tarafa neden; aynı kabul iki kez + yanıt sırasında hat donar/kopar → tek uygulama",
+   "status": "PASS",
+   "ms": 6820
+  },
+  {
+   "name": "Y4 Federasyon: tek dokunuş İttifak Daveti (misafir → misafir bekliyor → kabul; misafir → AI sonuç satırda; çift dokunuş tek teklif); host masaüstünde misafire; bekleyen federasyon oyu üstte",
+   "status": "PASS",
+   "ms": 11346
+  },
+  {
+   "name": "Y5 Savaş Merkezi: seçili cepheden destekçi kartı (uygunluk / ret nedeni / kaynak + toprak vaadi şartı) → Destek İste doğru cepheye → kabul; AI adayı sonucu kartta; çift dokunuş tek teklif",
+   "status": "PASS",
+   "ms": 6843
+  }
+ ],
+ "metrics": {
+  "scen": "Y",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 653,
+    "buildMs": 706,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 780,
+    "buildMs": 840,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 11,
+      "p95": 11.9,
+      "max": 11.9
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 17,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 59,
+       "p95": 59,
+       "max": 59
+      },
+      "refresh": {
+       "n": 1,
+       "med": 10.3,
+       "p95": 10.3,
+       "max": 10.3
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 28,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 66,
+       "p95": 66,
+       "max": 66
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.6,
+       "p95": 2.6,
+       "max": 2.6
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 721,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 24,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 6995,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "deal": {
+   "y1": {
+    "sysName": "Dranex (0 koloni)",
+    "sum": "DEVİR VE YÜKÜMLÜLÜK SONUCU\n★ Sistem Devri: Dranex · 0 bilinen koloni · şimdiki sahip Sen → yeni sahip Saf Akıl Ağı · kabul anında devredilir\n⏳ Haraç: ödeyen Sen → alan Saf Akıl Ağı · 20 Mineral/ay · 10 yıl (120 ödeme) · toplam yük 2400 Mineral · ilk ödeme kabulden sonraki ay başı",
+    "o1": {
+     "id": 1,
+     "from": 2,
+     "to": 1,
+     "status": "pending",
+     "why": "",
+     "give": [
+      "sys:2",
+      "tribute:min:20"
+     ],
+     "want": [
+      "peace"
+     ]
+    },
+    "sys": 2,
+    "accept": {
+     "ok": true,
+     "pending": true
+    },
+    "host": {
+     "own": 1,
+     "war": false,
+     "trib": [
+      {
+       "to": 1,
+       "r": "min",
+       "v": 30
+      }
+     ]
+    },
+    "owners": {
+     "B": 0,
+     "C": 1
+    },
+    "sched": {
+     "sH": [
+      {
+       "r": "min",
+       "v": 30,
+       "pays": 120,
+       "next": 30,
+       "until": 3601.4264
+      }
+     ],
+     "sB": [
+      {
+       "r": "min",
+       "v": 30,
+       "pays": 120,
+       "next": 30,
+       "until": 3601.4264
+      }
+     ],
+     "sC": [
+      {
+       "r": "min",
+       "v": 30,
+       "pays": 120,
+       "next": 30,
+       "until": 3601.4264
+      }
+     ]
+    },
+    "bBox": "⏳ AKTİF HARAÇ\nYeşil Birlik → Sen · 30 Mineral/ay · kalan 120 ödeme (3600 Mineral) · sonraki 2210/02 · bitiş 2220/01\nÖdeme her ay başında host / oyun motoru tarafından kesilir; stok yetmezse yalnız mevcut kaynak ödenir (borç birikmez). Süre dolunca anlaşma kendiliğinden biter."
+   },
+   "y2": {
+    "l1": {
+     "d": 30,
+     "p": 30
+    },
+    "resume": {
+     "sv": {
+      "day": 31.4264,
+      "trib": "[{\"to\":1,\"r\":\"min\",\"v\":30,\"until\":3601.4264,\"last\":{\"d\":30,\"p\":30},\"reliabilitySince\":1}]"
+     },
+     "after": {
+      "day": 31.4264,
+      "trib": "[{\"to\":1,\"r\":\"min\",\"v\":30,\"until\":3601.4264,\"last\":{\"d\":30,\"p\":30},\"reliabilitySince\":1}]"
+     }
+    },
+    "second": {
+     "n": 1,
+     "last": {
+      "d": 60,
+      "p": 30
+     }
+    }
+   },
+   "y3": {
+    "invalid": {
+     "status": "invalid",
+     "why": "Sistem Devri artık uygulanamıyor (devredilecek sistemin durumu değişti)"
+    },
+    "bView": [
+     [
+      "pending",
+      ""
+     ],
+     [
+      "pending",
+      ""
+     ],
+     [
+      "invalid",
+      "Sistem Devri artık uygulanamıyor (devredilecek sistemin durumu değişti)"
+     ]
+    ],
+    "frozen": {
+     "a1": {
+      "ok": true,
+      "pending": true
+     },
+     "a2": {
+      "ok": false,
+      "why": "Karar gönderildi; host yanıtı bekleniyor"
+     }
+    },
+    "retry": {
+     "ok": true,
+     "pending": true
+    },
+    "again": {
+     "status": "rejected",
+     "code": "rules:closed",
+     "ms": 28,
+     "cid": "jmwi6cpff8tx1su9m"
+    },
+    "fin": {
+     "own": 1,
+     "t": 2,
+     "status": "accepted"
+    }
+   },
+   "y4": {
+    "rows": [
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "7"
+    ],
+    "offers": [
+     {
+      "id": 10,
+      "from": 1,
+      "to": 2,
+      "status": "pending",
+      "why": "",
+      "give": [
+       "ally"
+      ],
+      "want": []
+     }
+    ],
+    "bAccepted": true,
+    "ai": "Kabul edildi — ittifak kuruldu",
+    "hostCands": {
+     "ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "human": 1,
+     "why": [
+      [
+       1,
+       false,
+       false,
+       true,
+       false
+      ],
+      [
+       2,
+       false,
+       false,
+       true,
+       false
+      ]
+     ]
+    },
+    "host": "Bekliyor — Saf Akıl Ağı kararını veriyor (Gelen kutusu → Gönderilen)",
+    "fed": {
+     "fid": 1,
+     "r": true,
+     "vote": true
+    },
+    "pending": "⏳ BEKLEYEN İŞLER (1)\nOyun bekleniyor: Ortak Araştırma Fonu OY VER",
+    "voteWin": "GALAKTİK HABER AĞI\n✕\nHaberler · 7\nGelen kutusu · 5\nGönderilen · 0\nKARAR · Federasyon oylaması — Test Birliği\n2210.03 · gün 65 · Yeşil Birlik · Federasyon oylaması · Bekliyor\n\nOrtak Araştırma Fonu\n\nKAB"
+   },
+   "y5": {
+    "T": 3,
+    "F": 2,
+    "cards": [
+     {
+      "id": "1",
+      "gate": "✔ Uygun: Cephe #2 · İxir Tahtı karşısında katılım istenebilir",
+      "ok": "1"
+     },
+     {
+      "id": "2",
+      "gate": "✔ Uygun: Cephe #2 · İxir Tahtı karşısında katılım istenebilir",
+      "ok": "1"
+     },
+     {
+      "id": "4",
+      "gate": "✔ Uygun: Cephe #2 · İxir Tahtı karşısında katılım istenebilir",
+      "ok": "1"
+     },
+     {
+      "id": "5",
+      "gate": "⛔ doktrini vekâlet savaşını yasaklar",
+      "ok": "0"
+     },
+     {
+      "id": "6",
+      "gate": "✔ Uygun: Cephe #2 · İxir Tahtı karşısında katılım istenebilir",
+      "ok": "1"
+     },
+     {
+      "id": "7",
+      "gate": "✔ Uygun: Cephe #2 · İxir Tahtı karşısında katılım istenebilir",
+      "ok": "1"
+     }
+    ],
+    "head": "Şartlı teklifte verebileceklerin: ◆ 6067 · ▰ 6008 · ⚡ 5962 · toprak vaadine uygun bilinen düşman sistemi: 1",
+    "offers": [
+     {
+      "id": 13,
+      "from": 1,
+      "to": 2,
+      "status": "pending",
+      "why": "",
+      "give": [],
+      "want": [
+       "warJoin:f2"
+      ]
+     }
+    ],
+    "accepted": "Kabul edildi — cepheye katıldı",
+    "ai": "Reddedildi"
+   }
+  },
+  "errors": []
+ }
+}

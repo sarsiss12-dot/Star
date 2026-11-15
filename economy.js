@@ -1398,12 +1398,13 @@ function tributeTick(){
     if (e.dead || !e.tribute || !e.tribute.length) continue;
     for (let i = e.tribute.length - 1; i >= 0; i--){
       const t = e.tribute[i];
-      if (G.day > t.until){ e.tribute.splice(i, 1); continue; }
-      const to = G.emps[t.to];
+      const to = G.emps[t.to],human = e.ai === false || !!(to && to.ai === false);   /* MP-DEAL-SYS.0: insan taraflı yükümlülükte son ödeme kaydı + bildirim (AI–AI aynen) */
+      if (G.day > t.until){ if (human && to && typeof tributeEndNote === 'function') tributeEndNote(e, t); e.tribute.splice(i, 1); continue; }
       if (!to || to.dead){ e.tribute.splice(i, 1); continue; }
       const pay = Math.min(t.v, e.res[t.r] || 0);
       e.res[t.r] = (e.res[t.r] || 0) - pay;
       to.res[t.r] = (to.res[t.r] || 0) + pay;
+      if (human){ t.last = {d: Math.floor(G.day), p: pay}; if (pay < t.v && typeof tributeShortNote === 'function') tributeShortNote(e, to, t, pay); }
       if(pay>0&&pay>=t.v&&typeof rememberEvidence==='function'){
         if(t.reliabilitySince===undefined)t.reliabilitySince=G.memAge||0;
         if((G.memAge||0)-t.reliabilitySince>=6)rememberEvidence(to,e,'yukumluluk','tribute:'+e.id+':'+to.id+':'+t.r+':'+Math.floor(G.day/180),6);

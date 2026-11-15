@@ -1,0 +1,100 @@
+✗ C kuruluş (GERÇEK): B, iki bağımsız AI müttefikiyle (2, 4) motorun foundFederation'ıyla federasyon kurar; başkan B, oy rejimi seçilen; kontrol: gözlem kaydı yoksa motor kendi gerekçesiyle reddeder — AssertionError [ERR_ASSERTION]: control: engine condition, not an MP error
+    at /home/user/Star/tests/mp63_polvas_test.js:49:43
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/mp63_polvas_test.js:47:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+✗ C oylama: üye kabulünde uzak insan B'nin oyu OTOMATİK DEĞİL (AI üyeler kendi değerlendirmesiyle); B kendi oyunu verir; ikinci oy reddedilir; A daveti kendisi kabul eder — AssertionError [ERR_ASSERTION]:  {"v":1,"type":"result","seq":1,"cid":"m63pcB00001","status":"rejected","code":"rules:fed","rev":2,"detail":["Açık kuruluş daveti, ortak rızaları ve son onay gerekli"]}
+
+'rejected' !== 'ok'
+
+    at ok (/home/user/Star/tests/mp63_polvas_test.js:35:24)
+    at /home/user/Star/tests/mp63_polvas_test.js:55:19
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/mp63_polvas_test.js:54:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+✗ C anayasa / oy rejimi: A önerir (karma); oylama kuralı federasyonun (≥%75) — B HAYIR derken 3/4 ile kabul; oybirliğine çevrilmez; rejim değişir — AssertionError [ERR_ASSERTION]: found {"v":1,"type":"result","seq":1,"cid":"m63pcB00001","status":"rejected","code":"rules:fed","rev":2,"detail":["Açık kuruluş daveti, ortak rızaları ve son onay gerekli"]}
+
+'rejected' !== 'ok'
+
+    at ok (/home/user/Star/tests/mp63_polvas_test.js:35:24)
+    at fed4 (/home/user/Star/tests/mp63_polvas_test.js:41:3)
+    at /home/user/Star/tests/mp63_polvas_test.js:63:19
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/mp63_polvas_test.js:62:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+✗ C reform ve başkan seçimi: B tür reformu önerir (motor: 12 ay geçiş kaydı); A kendini başkanlığa önerir; insanlar kendi oyunu verir — AssertionError [ERR_ASSERTION]: found {"v":1,"type":"result","seq":1,"cid":"m63pcB00001","status":"rejected","code":"rules:fed","rev":2,"detail":["Açık kuruluş daveti, ortak rızaları ve son onay gerekli"]}
+
+'rejected' !== 'ok'
+
+    at ok (/home/user/Star/tests/mp63_polvas_test.js:35:24)
+    at fed4 (/home/user/Star/tests/mp63_polvas_test.js:41:3)
+    at /home/user/Star/tests/mp63_polvas_test.js:71:29
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/mp63_polvas_test.js:70:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+✗ C ihraç: A, AI 4'ün ihracını önerir; hedef oy veremez; sonuç federasyonun kuralıyla; ihraç edilen üye çıkar — AssertionError [ERR_ASSERTION]: found {"v":1,"type":"result","seq":1,"cid":"m63pcB00001","status":"rejected","code":"rules:fed","rev":2,"detail":["Açık kuruluş daveti, ortak rızaları ve son onay gerekli"]}
+
+'rejected' !== 'ok'
+
+    at ok (/home/user/Star/tests/mp63_polvas_test.js:35:24)
+    at fed4 (/home/user/Star/tests/mp63_polvas_test.js:41:3)
+    at /home/user/Star/tests/mp63_polvas_test.js:82:29
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/mp63_polvas_test.js:81:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+✗ C ortak savaş: üye 2 savaştayken B "mevcut savaşa katılma" önerir; kabul → hazır karar; uygulamayı yalnız önerici/başkan yapar (A reddedilir); B uygular → motor sonucu — AssertionError [ERR_ASSERTION]: found {"v":1,"type":"result","seq":1,"cid":"m63pcB00001","status":"rejected","code":"rules:fed","rev":2,"detail":["Açık kuruluş daveti, ortak rızaları ve son onay gerekli"]}
+
+'rejected' !== 'ok'
+
+    at ok (/home/user/Star/tests/mp63_polvas_test.js:35:24)
+    at fed4 (/home/user/Star/tests/mp63_polvas_test.js:41:3)
+    at /home/user/Star/tests/mp63_polvas_test.js:89:29
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/mp63_polvas_test.js:88:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+✗ C acil hibe: yalnız başkan (B) kendi kaynağından; A reddedilir (motor gerekçesi); B'ye kendi bildirimi — AssertionError [ERR_ASSERTION]: found {"v":1,"type":"result","seq":1,"cid":"m63pcB00001","status":"rejected","code":"rules:fed","rev":2,"detail":["Açık kuruluş daveti, ortak rızaları ve son onay gerekli"]}
+
+'rejected' !== 'ok'
+
+    at ok (/home/user/Star/tests/mp63_polvas_test.js:35:24)
+    at fed4 (/home/user/Star/tests/mp63_polvas_test.js:41:3)
+    at /home/user/Star/tests/mp63_polvas_test.js:101:19
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/mp63_polvas_test.js:100:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+✓ D himaye talebi: A (zayıf) B'den (güçlü) himaye ister; karar B'nin (AI karar vermez); kabul → A, B'nin vasalı; yanlış devlet adına yanıt yok
+✓ D yeniden müzakere: 12 ay soğuma ve 24 aylık tarih motorun; önce reddedilir; tarihler 25 ay geriye alınınca (fikstür) B yenileme önerir, A kabul eder
+✓ D barışçıl bağımsızlık: talebi yalnız vasal yapar; soğuma süresi motorun; senyör B kabul eder → A bağımsız, savaş yok
+✓ D bağımsızlık desteği: host, B'nin vasalı A'ya söz verir (host.local = aynı komut; motor: canSupportIndep, Etki, %40 sızma — motorun RNG'si); senyör kendi vasalını destekleyemez, tekrar destek reddedilir; sızarsa senyör B kendi listesinde görür; üçüncü taraf sözleşme ayrıntısını görmez
+GEÇEN: 4 KALAN: 7

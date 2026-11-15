@@ -1,0 +1,100 @@
+FAIL N1 AI–AI devir çakışma denetimine girmez; insan taraflı devirde kendi toprak vaadi çakışması dealQuote'ta yakalanır
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+true !== false
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:28:107
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:11:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:20:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL N2 Barış + Sistem Devri + Haraç: misafir C → misafir B, karşı teklif, kabul; sistem B'nin, haraç kaydı, barış; ikinci kabul yok
+AssertionError [ERR_ASSERTION]: {"to":"C","v":1,"type":"result","seq":1,"cid":"fed0C000001","status":"rejected","code":"bad-params","rev":3}
+
+'rejected' !== 'ok'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:33:118
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:11:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:31:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL N3 bilinmeyen sahiplikteki sistem istenemez (gerekçede gizli sahip yok); devredenin kendi toprak vaadi gönderene açık yazılır
+AssertionError [ERR_ASSERTION]: The "string" argument must be of type string. Received type undefined (undefined)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:52:120
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:11:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:48:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL N4 teklif beklerken sistem sahibi değişir → teklif geçersizleşir, iki tarafa neden; kabul işlenmez
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'rejected' !== 'ok'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:60:10
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:11:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:58:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL N5 haraç: ay başında bir kez; eksik stokta kısmi ödeme + bildirim; kayıt → yükleme → sonraki ödeme tek kez; takvim satırları
+AssertionError [ERR_ASSERTION]: bir ödeme
+
+0 !== 1
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:71:18
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:11:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:66:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL N6 birleşik teklifte bir madde geçersizse hiçbiri uygulanmaz (kısmi barış / devir / ödeme yok)
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'rejected' !== 'ok'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:88:10
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:11:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:86:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL N7 ayna: alıcıya kendisine ödenen haraç, ödeyene kendi yükümlülüğü (π); üçüncü misafire hiçbiri
+AssertionError [ERR_ASSERTION]: B aynasında ödeyen kabuğunda haraç
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:101:43
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:11:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl34/tests/mp_deal_sys0_test.js:97:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+GEÇEN: 0 KALAN: 7

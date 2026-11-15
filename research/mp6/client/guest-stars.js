@@ -88,7 +88,7 @@ function restoreObservation(m){
 /* ---- 1. eylem kapısı ---- */
 /* Yalnız görünüm/gezinme (dünyayı değiştirmeyen) eylemler yerelde çalışır. MP.6.1: arşiv/gelen kutusu görünümleri, anlaşma,
    vasallık ve federasyon taslak ekranları da görünümdür (gönderim motor işlevinde MP komutuna çevrilir). */
-const VIEW=new Set(['dealSupport','dealSupportPick','coalPick','coalTerms','coalTermsDone','coalAmt','coalPassage','coalEdit','coalReply','coalWithdraw','coalSend','coalLaunch','coalSave','coalCancel','coalOthersFold','coalAlliesFold','warCenter','warCenterTab','warCenterDetail','warCenterSupport','warCenterCompose','warCenterPeace','warPrepare','warPreparation','warPrepareInvite','warPrepareCompose','warPrepareLaunchAsk','warPrepareLaunch','warPrepareWithdraw','colonies','colonySelect','colonyMap','colonySort','colonyDetails','borderDiplo','noteOptions','noteChoice','activeWars','activeWarDiplo','noteQuick','noteSwipe','tab','full','cameraReset','cameraFocus','home','fit','topStatus','diploPane','globalPane','advClose','advShow','advNever','planetFold',
+const VIEW=new Set(['dealSupport','dealSupportPick','coalPick','coalTerms','coalTermsDone','coalAmt','coalPassage','coalEdit','coalReply','coalWithdraw','coalSend','coalLaunch','coalSave','coalCancel','coalOthersFold','coalAlliesFold','warCenter','warCenterTab','warCenterDetail','warCenterAsk','warCenterSupport','warCenterCompose','warCenterPeace','warPrepare','warPreparation','warPrepareInvite','warPrepareCompose','warPrepareLaunchAsk','warPrepareLaunch','warPrepareWithdraw','colonies','colonySelect','colonyMap','colonySort','colonyDetails','borderDiplo','noteOptions','noteChoice','activeWars','activeWarDiplo','noteQuick','noteSwipe','tab','full','cameraReset','cameraFocus','home','fit','topStatus','diploPane','globalPane','advClose','advShow','advNever','planetFold',
   'radarTog','fleetNamesToggle','grpTog','fedLinksToggle','allyLinksToggle','warLinksToggle','logiToggle','mapMode','bgTog','diploView','diploPick',
   'diploRelation','diploNav','diploFilter','bmPick','bmCancel','vsCurrent','vsInspect','vsType','vsEdit','vsBack','fleetFilter','fedTab','fedMember',
   'closeFed','closeDeal','closeMarket','closeDiplo','memTog','intelView','intelGroup','upInfo','crisInfo','selsys','selfleet','route','fedPane',
@@ -102,7 +102,7 @@ const VIEW=new Set(['dealSupport','dealSupportPick','coalPick','coalTerms','coal
   'sendhere','ship','fedShip','focus','cancelBuild','demolish','foundFed','fedDipInvite','fedDipRequest','fedMotion','fedInviteAccept','fedInviteReject',
   'fedLawPropose','fedLawRepeal','fedAgendaWithdraw','fedLeave','vsSend','vsReply','dealSend',
   /* MP.6.2 — savaş ve ikili siyaset: gerçek pencere açılır, son çağrı MP komutuna iner */
-  'war','ally','pact','dealPact','endAlliance','unpact','embargo','unembargo','gift',
+  'war','ally','allyInvite','pact','dealPact','endAlliance','unpact','embargo','unembargo','gift',   /* MP-DEAL-SYS.0: allyInvite → UI.mpQuickOffer (offer) */
   /* BETA-WAR-GOALS.0 — hedef/tür seçimi ve müzakere taslağı görünümdür; önizleme host'un warQuote'u, son çağrı 'war' / 'offer' */
   'setwg','wgTarget','wgVtype','wgVwar','dealVassal','dealPromise','dealFedPeace','fedWarOpen','fwTarget','fwGoal','fwPropose',
   /* MP.6.3 — ortak savaş paylaşımı penceresi (taslak/oy/uygula düğmeleri _hook; son çağrılar MP komutuna iner) */
@@ -412,8 +412,9 @@ function gate(){
   /* WAR-COALITION.0: misafirin müzakere masasında savaş kutuları (ayrı barış, toprak vaadi, federasyonlar arası ortak barış) host'un yetkili
      kısaltılmış defteriyle çizilir (warDealRead); defter yalnız o çizim çağrısı boyunca G.warLedger'a konur, sonra geri alınır (MP.7.2 ortak destek paneli gibi). */
   /* MP-FIELD-FIX.0: "Savaşa Destek İste" seçenekleri host'tan (aynada savaş defteri yok); kimlikler yerel numaraya çevrilir */
-  {const SR={};UI.dealSupportRows=function(o){if(!S.on||!S.started||!o)return [];const k=o.id,c=SR[k];
-     if(!c||Date.now()-c.at>2500){if(!c||!c.busy){const cid=send({kind:'warSupportList',to:real(k)});if(cid){SR[k]={...(c||{}),busy:true,at:c?c.at:0};waits[cid]=res=>{SR[k]={at:Date.now(),busy:false,rows:res.status==='ok'?(res.extra.rows||[]).map(r=>({...r,target:local(r.target)})):[]};if(UI.deal&&UI.deal.to===k)try{UI.drawDeal();}catch{}};}}}
+  {const SR={};UI.dealSupportReady=o=>!!(o&&SR[o.id]&&SR[o.id].at);   /* MP-DEAL-SYS.0: host yanıtı geldi mi (boş liste = uygun satır yok) */
+   UI.dealSupportRows=function(o){if(!S.on||!S.started||!o)return [];const k=o.id,c=SR[k];
+     if(!c||Date.now()-c.at>2500){if(!c||!c.busy){const cid=send({kind:'warSupportList',to:real(k)});if(cid){SR[k]={...(c||{}),busy:true,at:c?c.at:0};waits[cid]=res=>{SR[k]={at:Date.now(),busy:false,rows:res.status==='ok'?(res.extra.rows||[]).map(r=>({...r,target:local(r.target)})):[]};if(UI.deal&&UI.deal.to===k)try{UI.drawDeal();}catch{}const wc=typeof WarCenterUI!=='undefined'&&WarCenterUI._supCtx;if(wc&&document.getElementById('warSupportRoot'))try{WarCenterUI.support(wc.front,wc.sponsor);}catch{}};}}}
      return SR[k]&&SR[k].rows?SR[k].rows:null;};}
   {const DL={};const ledgerLocal=x=>({next:0,fronts:(x.fronts||[]).map(f=>({...f,sides:f.sides.map(local),sponsor:Number.isInteger(f.sponsor)?local(f.sponsor):f.sponsor,occupation:(f.occupation||[]).map(o=>({...o,from:local(o.from),to:local(o.to)}))})),
      promises:(x.promises||[]).map(p=>({...p,giver:local(p.giver),taker:local(p.taker),...(Number.isInteger(p.enemy)?{enemy:local(p.enemy)}:{})}))});
@@ -478,7 +479,7 @@ function gate(){
      Artık tek işlem (S.dealTx: cid + içerik imzası): taslak host'un YANITINA kadar korunur; yanıt gelmezse aynı cid yeniden gönderilir
      (host sonuç önbelleği cid'e göre ikinci kaydı engeller; içerik aynıysa motor 'duplicate' der) — çift teklif oluşmaz. Ret / bağlantı
      hatasında taslak düzenlenebilir kalır. İz: S.dealTrace (işlem kimliğiyle taslak → dokunuş → gönderim → host yanıtı → kayıt → ileti). */
-  const dealItems=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&TREATY.includes(i.t)?{t:i.t}:null);
+  const dealItems=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&i.t==='sys'&&Number.isInteger(i.id)?{t:'sys',id:i.id}:i&&i.t==='tribute'&&Number.isInteger(i.v)?{t:'tribute',r:i.r,v:i.v}:i&&TREATY.includes(i.t)?{t:i.t}:null);
   const dealCmd=d=>{const give=dealItems(d.give),want=dealItems(d.want);if(give.includes(null)||want.includes(null))return {bad:true};if(!give.length&&!want.length)return {empty:true};
     const ctr=S.counter&&S.counter.to===d.to?S.counter:null;const cmd=ctr?{kind:'counter',offer:ctr.offer,give,want}:{kind:'offer',to:real(d.to),give,want};return {cmd,ctr,sig:JSON.stringify(cmd)};};
   const dealTrace=(tx,step,x)=>{S.dealTrace=S.dealTrace||[];S.dealTrace.push({tx:tx&&tx.id||null,step,at:Date.now(),day:Math.floor(G.day||0),...(x||{})});if(S.dealTrace.length>60)S.dealTrace.shift();};
@@ -502,7 +503,7 @@ function gate(){
     dealTxSend(tx,'resend');};
   UI.dealSend=function(){if(!S.on)return dealSend0();this.ensureDiploWorld();const d=this.deal;if(!d)return;
     const c=dealCmd(d),it=l=>(l||[]).map(i=>({t:i.t,...(i.front!==undefined?{front:i.front}:{}),...(i.plan!==undefined?{plan:i.plan}:{}),...(i.sys!==undefined?{sys:i.sys}:{}),...(i.target!==undefined?{target:real(i.target)}:{})}));
-    if(c.bad){this.dealMsg='Çok oyunculuda kaynak, barış ve antlaşma maddeleri (saldırmazlık, ticaret, ittifak, sensör, geçiş) cephe kimliğine bağlı savaş desteği, savaş içi teslim, toprak vaadi ve federasyonlar arası ortak barış gönderilebilir; teknoloji, sistem, haraç, lüks, savaş sözü ve casusluk ağı henüz yok.';this.drawDeal();return;}
+    if(c.bad){this.dealMsg='Çok oyunculuda kaynak, barış, antlaşma maddeleri (saldırmazlık, ticaret, ittifak, sensör, geçiş), Sistem Devri, Haraç, cephe kimliğine bağlı savaş desteği, savaş içi teslim, toprak vaadi ve federasyonlar arası ortak barış gönderilebilir; teknoloji, lüks, savaş sözü ve casusluk ağı henüz yok.';this.drawDeal();return;}
     if(c.empty){this.dealMsg='Teklif boş.';this.drawDeal();return;}
     const tx0=S.dealTx;
     if(tx0){dealTrace(tx0,'tap',{same:tx0.sig===c.sig});

@@ -2,7 +2,15 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — MP-FIELD-VERIFY.0 (p34 / MP.8.9b32, 15 Kasım 2026)
+## Son teslim — MP-DEAL-SYS.0 (p35 / MP.8.9b33, 15 Kasım 2026)
+
+- Ayrıntı: `reports/claude/MP-DEAL-SYS0-SONUC.md`, kanıt `reports/claude/evidence/mp-deal-sys0/`. Dal `claude/stars-mp-deal-sys0` (p34 / PR #49 `043b9c3` üstünde). Save8v8/paket4/protokol1; p35 paket yükleyicisi p6–p34, p25u1, p27s1 kabul eder. Sonraki faz görevleri `reports/claude/SONRAKI-FAZ-GOREVLERI.md` (NF-1…NF-5, #33'e yorumla bağlandı; pano satırları değişmedi).
+- Sistem Devri / Haraç MP'de: `dipItems` `{t:'sys',id}` ve `{t:'tribute',r,v}`; `dipSysGate` (istenen sistem yalnız istenenin BİLDİĞİ sahiplikle, karşı teklifte önceki teklifte açıklanan sistemler `shown`), verilen sistemde `dealSysIssues` (diplomacy.js sonu "MP-DEAL-SYS.0": sahiplik, başkent, kendi açık toprak vaadi, üçüncü tarafın v2 Fetih hedefi, barışta iade edilecek işgal — önizleme `warFetihSettlePreview`). Yalnız insan taraflı anlaşmada (`dealHumanParty`); AI–AI aynen. `dipSweep` bekleyen teklifi gerekçeyle geçersiz kılar.
+- Haraç süresi SP'deki gibi sabit 10 yıl (`until=G.day+3600`); `tributeTick` yalnız insan taraflıda `t.last={d,p}` yazar, eksik ödeme / bitiş bildirimi (`tributeShortNote/EndNote`, MP'de uzak insana NOTE). Görünüm `tributeRows`/`tributeHtml` (ödeyen, alan, aylık, kalan, sonraki tarih), teklif özeti `UI.dealTermsHtml` (Sistem Devri kabulde; Toprak Vaadi kabulde devir YOK). Ayna `mine.tribute.to` π'li, kabuklara gelen haraç.
+- `UI.allyInviteSend/State` (aday satırı `.allyCand`, tek dokunuş, çift dokunuş korumalı, MP'de `UI.mpQuickOffer`), `UI.fedPendingItems/Html` (`.fedPending` üstte), `WarCenterUI.support` aday kartları `.supCand` (misafirde uygunluk host `warSupportList`'ten `UI.dealSupportRows/Ready`; `(…||[])` yüklenmemişte).
+- Test: `node tests/mp_deal_sys0_test.js` (9; kontrol p34 0/7; N9 geç kabul `rules:closed`), `mp_deal_sys0_sp_test.js` (4), `mp_deal_sys0_equivalence_test.js` (`STARS_CONTROL_ROOT`=p34 sabit kopya; 3 tohum × 48 ay Save8/RNG), `MP8_SCEN=Y node tests/browser-mp8.cjs` Y1–Y5 (`tests/helpers/mp-deal-sys0-mp.cjs`). Koruma: `mp-deal-sys0-reviewed` ← `mp-field-verify0-reviewed` ← `mp-field-fix0-reviewed` ← …
+
+## Önceki teslim — MP-FIELD-VERIFY.0 (p34 / MP.8.9b32, 15 Kasım 2026)
 
 - Ayrıntı: `reports/claude/MP-FIELD-VERIFY0-SONUC.md`, kanıt `reports/claude/evidence/mp-field-verify0/`. Dal `claude/stars-mp-field-verify0` (p34 `0ec6017` üstünde). **Runtime 19 dosya ve p34 ZIP'i değişmedi** (build 96h10p34); yalnız MP istemcisi + relay sürüm işareti.
 - Canlı Render (stars-zhdu) bu doğrulamada p33 sunuyordu (`/mp/version` MP.8.9b30 / 96h10p33, 8 dosya özeti 0ec5720): saha belirtileri p33 ile tutarlı. Render dalı `claude/stars-mp-field-verify0` seçilmeli.
