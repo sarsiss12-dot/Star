@@ -15,3 +15,27 @@ AssertionError [ERR_ASSERTION]: ["accepted","accepted","accepted","countered","i
     at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:194:29
     at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:13:7)
     at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:191:3
+FAIL B1 host + 2 misafir: B, C'ye gerçek anlaşma penceresinden teklif; C 915×412'de gerçek gelen kutusu kartından açar, Karşı teklif hazırla → TEKLİFİ SUN; B karşı teklifi kartından KABUL EDER; host uygular
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:17:40)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:208:41
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:13:7)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:202:3
+FAIL B2 gizlilik ve yetki: host'un gelen kutusunda / görünümünde B–C teklifi yok; C'nin aynasında B'nin stoğu yok; C, B–C karşı teklifini (kendi gönderdiği) kabul edemez
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'bad-params'
+- 'rules:not-recipient'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:225:12
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:13:7)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:220:3
+FAIL B3 B'nin Gönderilen sekmesi (yatay 800×360): satır, şartlar, durum; ayrıntıda yanıt ve geri dönüş düğmeleri ekranda
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:17:40)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:229:11
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:13:7)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl33/tests/browser-mp71.cjs:227:3
+PASS sayfa hataları yok
+GEÇEN: 7 KALAN: 5
