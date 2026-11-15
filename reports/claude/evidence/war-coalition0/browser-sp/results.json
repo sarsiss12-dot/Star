@@ -28,6 +28,34 @@
   ]
  },
  {
+  "name": "844x390 S4 tek başına Vasallaştırma ilanı iki adımda: Akademik + Katılmaz → tek akış → \"Savaş İlan Et\"; tür ve hüküm ilana taşınır; davet/hazırlık yok",
+  "status": "PASS",
+  "wg": {
+   "t": "boyun",
+   "start": 1.5596000000000005,
+   "home": 9,
+   "base": 367,
+   "v": 2,
+   "vtype": "akademik",
+   "terms": {
+    "tax": {
+     "ene": 0,
+     "min": 0,
+     "ala": 0,
+     "yiy": 0,
+     "tuk": 0
+    },
+    "science": 0.22,
+    "defense": true,
+    "war": "none",
+    "autonomy": "free",
+    "duration": 0,
+    "renegotiate": 24,
+    "sensors": false
+   }
+  }
+ },
+ {
   "name": "740x360 S3 karışık koalisyon tek ekrandan: kaynaklı kabul, karşı teklif → Kabul Et, ret, engelli aday; kaydet-çık-devam; kaydet/yükle; hedef değişince yeniden onay; ilan bedeli bir kez",
   "status": "PASS",
   "spent": {

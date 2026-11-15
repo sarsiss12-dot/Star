@@ -2,6 +2,7 @@
 /* WAR-COALITION.0 — gerçek Chromium (yerel), tek oyunculu gerçek STARS arayüzü, gerçek dokunma. Yatay 844×390 ve daha dar yatay 740×360.
    S1 tek başına ilan iki adımda: SAVAŞ → Fetih (sistem seç) → tek akış → "Savaş İlan Et"; seçilen sistemler ilana taşınır; davet / hazırlık yok.
    S2 Vasallaştırma seçimi (tür + savaşa katılım) akıştan "Hedefi değiştir" ile geri gidince korunur.
+   S4 (844×390) tek başına Vasallaştırma ilanı iki adımda; tür ve hüküm ilana taşınır.
    S3 karışık koalisyon: kaynaklı kabul (Şart ekle, ±50 düğmeleri), karşı teklif → Kabul Et, ret, engelli aday (hedefle saldırmazlık paktı);
       "Hazırlığı Kaydet ve Çık" → oyuna dönüş → diplomasi SAVAŞ düğmesinden aynı hazırlığa devam; kaydet/yükle sonrası Savaş Merkezi'nden devam;
       hedef değişince kabuller "Yeniden onay gerekli"; yeniden davet → kabul; "1 Destekçiyle Savaş İlan Et" çift dokunuş → tek savaş, bedel bir kez.
@@ -84,6 +85,13 @@ async function run(){
       const g=await page.evaluate(()=>({war:!!G.p.war[1],w2:!!G.emps[2].war[1],w3:!!G.emps[3].war[1],fronts:G.warLedger.fronts.filter(f=>f.sides.includes(0)&&f.sides.includes(1)).length,ala:G.p.res.ala,etk:G.p.res.etk,targets:G.p.wg[1].targets}));
       assert.equal(g.war,true);assert.equal(g.w2,true);assert.equal(g.w3,false,'yeniden onay vermeyen 3 katılmaz');assert.equal(g.fronts,1,'tek savaş');assert.equal(r0.ala-g.ala,400,'kaynak bedeli bir kez');
       return {spent:{ala:r0.ala-g.ala,etk:r0.etk-g.etk},targets:g.targets};});
+    if(W===844)await test(V+' S4 tek başına Vasallaştırma ilanı iki adımda: Akademik + Katılmaz → tek akış → "Savaş İlan Et"; tür ve hüküm ilana taşınır; davet/hazırlık yok',async()=>{
+      const pre=await page.evaluate(()=>(G.warLedger.preparations||[]).length);
+      await openWar(5);await tap('#modal [data-a="setwg"][data-x="5:boyun"]');await tap('#modal [data-a="wgVtype"][data-x="akademik"]');await tap('#modal [data-a="wgVwar"][data-x="none"]');
+      await tap('#modal [data-a="wgGo"]');await page.waitForSelector('#warCoalRoot .coalSummary');
+      const btn=await page.locator('#warFinalConfirm').innerText();assert.equal(btn.trim(),'Savaş İlan Et');await page.screenshot({path:path.join(out,V+'-s4-vasal-tek-basina.png')});
+      await tap('#warFinalConfirm');const g=await page.evaluate(()=>({war:!!G.p.war[5],wg:G.p.wg[5],preps:(G.warLedger.preparations||[]).length}));
+      assert.equal(g.war,true);assert.equal(g.wg.t,'boyun');assert.equal(g.wg.vtype,'akademik');assert.equal(g.wg.terms.war,'none');assert.equal(g.preps,pre,'yeni hazırlık açılmadı');return {wg:g.wg};});
     assert.deepEqual(errors,[],errors.join('\n'));await ctx.close();}
   }finally{await browser.close();server.close();}
   fs.writeFileSync(path.join(out,'results.json'),JSON.stringify(rows,null,1));console.log(`GEÇEN: ${pass} KALAN: ${fail}`);if(fail)process.exitCode=1;
