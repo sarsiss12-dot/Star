@@ -1,0 +1,18 @@
+✓ humanoid: every current building add/remove forecast equals actual income without changing save
+✓ lithoid: every current building add/remove forecast equals actual income without changing save
+✓ aquatic: every current building add/remove forecast equals actual income without changing save
+✓ avian: every current building add/remove forecast equals actual income without changing save
+✓ hive: every current building add/remove forecast equals actual income without changing save
+✓ machine: every current building add/remove forecast equals actual income without changing save
+✓ plantoid: every current building add/remove forecast equals actual income without changing save
+✓ devourer: real multipliers, input use and nonlinear income laws apply exactly once
+✓ throneship: real multipliers, input use and nonlinear income laws apply exactly once
+✓ federation: real multipliers, input use and nonlinear income laws apply exactly once
+✓ cold-photo: real multipliers, input use and nonlinear income laws apply exactly once
+✓ understaffed: real multipliers, input use and nonlinear income laws apply exactly once
+✓ actual seed 11 day 330: no new useless farm is paid, real resources remain accounted
+✓ actual seed 11 day 450: no new useless farm is paid, real resources remain accounted
+✓ actual seed 11 day 570: no new useless farm is paid, real resources remain accounted
+✓ food-consuming economy may still build a productive farm for surplus/trade
+✓ queued construction and demolition forecast the completed buildings, not current stock
+GEÇEN: 17 KALAN: 0

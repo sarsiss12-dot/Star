@@ -1,0 +1,10 @@
+✓ motor bulgusu ve koruma: AI ortağın önerisinde uzak insan adına OTOMATİK OY YOK (motor yalnız devlet 0'ı atlıyordu); AI ortağın kendi değerlendirmesi kalır; RNG tüketilmez
+✓ aylık gündem: AI önerir ama insan katılımlı teklifi KENDİ uygulamaz; uzak insan önerici olmaz
+✓ yalnız katılımcı görür: A (sefer dışı) için taslak/teklif yok, komutları "yok" (no-offer); B görünümünde teklif + taslak; damga ve mizaç gitmez
+✓ B kendi oyunu verir: EVET yalnız B adına; ikinci oy reddedilir; host oyu gelince oybirliği → B UYGULA → devir bir kez; ikinci uygulama reddedilir
+✓ B önerir: host taslağı (settleQuote) → eski damga "stale" → doğru damgayla sun; oyu B'nin; AI ortak kendi değerlendirmesiyle; B'nin alıcı değişikliği motor önizlemesinden
+✓ gerçek devir: B host'un sistemini kendine alan taslağı sunar; AI ortak kendi değerlendirmesiyle, host kendi oyuyla onaylar; B uygular → sahiplik ve devlet indeksleri değişir, bir kez
+✓ ret hakkı ve geri çekme: B reddeder → teklif reddedildi, host artık oy veremez; geri çekmeyi yalnız önerici yapar
+✓ görünmeyen toprak: satır kimliği maskelenir (h<n>, sistem yok); B bu durumda kabul edemez (motor: keşif gerekli)
+✓ MP.4 kayıt/yükleme: bekleyen teklif Save8 ile kalır; yeni süreçte B aynı devlete döner ve KENDİ oyunu verir; süre uzamaz
+GEÇEN: 9 KALAN: 0

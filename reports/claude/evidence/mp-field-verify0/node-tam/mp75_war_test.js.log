@@ -1,0 +1,6 @@
+✓ aynı devletten ikinci barış teklifi eskisinin yerine geçer; kabul savaşı bitirir, kalan barış kaydı "Savaş sona erdi" ile kapanır, kartı kalkar
+✓ savaş başka yoldan bittiyse (motorun makePeace'i) bekleyen barış kaydı ve kartı kapanır
+✓ savaş sürerken bekleyen tek barış kaydı açık kalır (yanlışlıkla kapanmaz)
+✓ AKTİF SAVAŞLAR: üst sayaç ile aynı liste; temas kurulmamış düşman "Bilinmeyen düşman"; cephe / tek taraflı durum / barış teklifi gösterilir
+✓ yeni savaş bildirimi kimliği açıklar; stok/özel istihbarat açmaz, eski bilinmeyenle karışmaz
+GEÇEN: 5 KALAN: 0

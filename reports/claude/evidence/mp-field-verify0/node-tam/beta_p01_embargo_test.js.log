@@ -1,0 +1,6 @@
+PASS host ve uzak insan adına düşük güvende kişisel ambargo uygulanmaz
+PASS AI otomatik ambargo davranışı korunur
+PASS insanın bilinçli ambargosu yüksek güvende kendiliğinden kaldırılmaz
+PASS Konsey yaptırımı kişisel ambargo tablosundan bağımsız kalır
+PASS kriz insanın manuel ambargosunu kaldırmaz; AI gevşemesi korunur
+GEÇEN: 5 KALAN: 0

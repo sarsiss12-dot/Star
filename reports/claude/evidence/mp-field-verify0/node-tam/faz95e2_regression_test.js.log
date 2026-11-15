@@ -1,0 +1,9 @@
+✓ date sources include zero and born; invalid values never render NaN
+✓ creation dates remain equal after repeated sync, advancing calendar and reload
+✓ direct notification detail preserves separate news and inbox list filters
+✓ new world resets all archive filters, selected record, scroll and unread state
+✓ randomEvents false preserves actual diplomacy, spying, war, crisis and survey
+✓ randomEvents true preserves actual diplomacy, spying, war, crisis and survey
+✓ disabled passive events remain blocked over a thousand ticks without RNG use
+✓ old Save v8 without randomEvents keeps default enabled behavior
+GEÇEN: 8 KALAN: 0

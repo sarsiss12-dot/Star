@@ -1,0 +1,39 @@
+✓ 0: kapalı hedef askeri filoya geçiş vermez
+✓ 0: ulaşılamayan yeni hedef eski rotayı korur
+✓ 0: kapalı ara sistem yerine izinli yol
+✓ 0: iki kapı arasındaki sanal yol gerçekten biter
+✓ 0: izin hareket başlamadan geri çekilirse sınır aşılmaz
+✓ 1: kapalı hedef askeri filoya geçiş vermez
+✓ 1: ulaşılamayan yeni hedef eski rotayı korur
+✓ 1: kapalı ara sistem yerine izinli yol
+✓ 1: iki kapı arasındaki sanal yol gerçekten biter
+✓ 1: izin hareket başlamadan geri çekilirse sınır aşılmaz
+✓ reddedilen ek durak mevcut güzergâhı bozmaz
+✓ hareket sırasında yeni rota ilk yeni durağı atlamaz
+✓ ek duraklar gerçek varış sırasını korur
+✓ geçersiz hedef false döner ve filoyu değiştirmez
+✓ sivil gemi kapalı sınırdan geçmeye devam eder
+✓ savaş hedefi ve geri çekilme koridoru açık kalır
+✓ kapı izni sahibin yolcuya verdiği yönde okunur
+✓ yolcunun karşı tarafa verdiği izin onun kapısını açmaz
+✓ kapılar kapalı ayarı lojistik kapı listesini de kapatır
+✓ aynı gün iptal edilen izin kapı önbelleğinde kalmaz
+✓ savaşta kalan eski geçiş alanı ikmal sağlamaz
+✓ kapı inşa edilince eski yapı indeksi yolu saklamaz
+✓ kapı kapanırsa komşu olmayan düğüme ışınlanılmaz
+✓ alternatif yol kapı bağlantılarını korur
+✓ hareketli ana filoyu takipte ilk yeni sıçrama tüketilmez
+✓ başka devletin filosuyla birleşme yok
+✓ ana filo çatışmadayken ikmal hedefini unutmaz
+✓ yıkılmış ana filo takibi açık iş bırakmaz
+✓ v8 hareket ortası yükleme rota sırasını korur
+✓ alternatif aramada radyasyon cezası değişmez
+✓ izin kalkınca kapalı durağa dolambaçlı yol da giremez
+✓ planlanmış bağlantı silinirse aynı durağa izinli alternatif bulunur
+✓ başlamış bacak iptal edilmez; sonraki kapalı sınır durdurur
+✓ saf yol araması oyun verisi ve RNG değiştirmez
+✓ ikmal ana filonun hareket halindeki varışını izler
+✓ tek yeni bacakta konum koordinatları varışla eşleşir
+✓ gerçek AI lojistik tikinde yıpranmış filo ikmale döner
+✓ bilim gemisi ikmal tabanında durur; koloni gemisi muaf kalır
+GEÇEN: 38 KALAN: 0

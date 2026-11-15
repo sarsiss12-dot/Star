@@ -1,0 +1,32 @@
+✓ 0: kapalı üretim çıkışı hedefi ve eksik sayacını korur
+✓ 1: kapalı üretim çıkışı hedefi ve eksik sayacını korur
+✓ retry beklemesi kare başına yol aramaz, 4 denemede durur
+✓ rota açılınca otomatik retry gerçek gemiyi bir kez teslim eder
+✓ genel sistem hedefi kapalıyken korunur ve açılınca varır
+✓ yolda sınır kapanması hedefi kaybettirmez
+✓ ana filo kaybı aktif bacağı bitirir, eski hedefe devam etmez
+✓ üretimde ana filo kaybı gemiyi korur ve gizli sistem fallback yapmaz
+✓ iptal kaynak iade etmez, gemiyi silmez, tekrar işlem reddedilir
+✓ yeni filo hedefi sayacı aktarır, tersane ayarını değiştirmez
+✓ yeni sistem hedefi kapalı rotada kabul edilip bekler
+✓ yabancı, kendi kendisi, sevkiyat ve bilinmeyen hedef değişmez
+✓ hareketli ana filonun yeni varışı izlenir
+✓ çatışmadaki ana filoya savaş bitmeden birleşmez
+✓ v8 bekleme ve retry bütçesi yüklemede sıfırlanmaz
+✓ eski v8 joinFleet ve rallyTo teslimatları tembel olarak alınır
+✓ geçersiz yeni kayıt retry alanları sınırlanır
+✓ bir tikte en fazla 8 bekleyen rota sorgusu
+✓ normal üretim bekleyen sevkiyata gemi eklemez
+✓ AI bekleyen sevkiyatı otomatik birleştirmez
+✓ başarılı manuel hareket eski teslimatı kaldırır, başarısız korur
+✓ manuel retry durmuş sevkiyatı yeniden başlatır
+✓ UI iptal gerçek motora bağlıdır, eski düğme tekrar çalışmaz
+✓ UI hedef seçimi ve panel bekleme gerekçesi bağlıdır
+✓ yükleme öncesi modal yeni dünyadaki aynı IDye işlem yapmaz
+✓ DUR emri otomatik teslimatın yeniden başlamasını engeller
+✓ UI vazgeç oyun hızını ve sevkiyatı korur, eski düğme geçersizdir
+✓ sevkiyat gemisine ikinci bir takviye zinciri açılamaz
+✓ hareket ortasında iptal mevcut bacağı bitirir ve tekrar sevk etmez
+✓ hareket ortasında yeniden hedefleme bacak atlamaz ve doğru filoya katılır
+✓ retry kapalı kısa yol yerine geçerli alternatif hiper-yolu kullanır
+GEÇEN: 31 KALAN: 0

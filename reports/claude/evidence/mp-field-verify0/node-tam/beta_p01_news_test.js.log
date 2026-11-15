@@ -1,0 +1,5 @@
+PASS eski savaş bildirimi aynı iki devletin yeni savaşına bağlanmaz
+PASS arşiv savaş haberi sabit cephe kimliğiyle özel durum paneli açar
+PASS eksik tarihsel savaş bilgisi yeni aktif savaştan uydurulmaz
+PASS üçüncü devletin gizli filo bilgisi savaş haberine girmez; UI RNG kullanmaz
+GEÇEN: 4 KALAN: 0

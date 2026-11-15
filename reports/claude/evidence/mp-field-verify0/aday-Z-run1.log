@@ -1,0 +1,124 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":751,"buildMs":787,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":863,"buildMs":898,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":4.9,"p95":8.2,"max":8.2},"longtask":{"n":0},"heapMB":16,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":50.2,"p95":50.2,"max":50.2},"refresh":{"n":1,"med":1.6,"p95":1.6,"max":1.6},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":27,"joinErrors":0},"C":{"build":{"n":2,"med":37.7,"p95":37.7,"max":37.7},"refresh":{"n":1,"med":2,"p95":2,"max":2},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":721,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS Z0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS Z1 katılım yolları: B ana menü ÇOK OYUNCULU → ODAYA KATIL, C eski /mp/join?code= bağlantısı → ikisi de tam STARS arayüzü (/mp/play), oda kodu korunur, kendi devleti
+PASS Z2 katılım başarısızlığında aşama ekranda: yanlış kod → ODA BULUNAMADI; bağlantı yok → BAĞLANTI KESİLDİ (X: ayrı profil, bu odada kimliği yok)
+PASS Z3 canlı MP olay şeridi: B kartı FAREYLE, sonra DOKUNARAK kaydırır → kart kalkar, karar ☰ listesinde; host ayna yeniler, bağlantı kopup döner, sayfa yenilenir → kart geri gelmez; sonraki olay görünür; karar host'ta bir kez
+PASS Z4 takviye sevkiyatındaki filoyu birleştirme: host kuralı geçerli (ret), gerekçe Türkçe, art arda aynı uyarı tek satırda birleşir; karar kartları etkilenmez
+PASS Z5 kaydet → host ve misafirler kapanır → relay yeniden başlar → host kaydı YENİ odada açar ve misafir yokken devam eder: bekleyen / gizlenen olay doğru, tarih ilerlerken yeni olay ve anomali şeritte ve listede
+PASS Z6 misafirler yeni odaya döner: B ana menü ODAYA KATIL + yeni kod, C eski /mp/join bağlantısı → aynı devletler; tarih ve bekleyen kararlar korunur; kaydırılan kart geri gelmez; kimliksiz X "OYUNCU KİMLİĞİ DOĞRULANAMADI"
+PASS Z7 Fetih hedef seçimi: tek sistemli hedefte 0/0 + neden + pasif düğme + Vasallaştırmaya dön; pencere AÇIKKEN keşfedilen sistem listeye girer; başkent dışı hedefle seçim → önizleme → onay → gerçek savaş (misafir); host'ta aynı kural
+PASS Z8 müzakere masası: genel Savaş sözü MP'de pasif + neden; Savaşa Destek İste → B'nin aktif cephesi; C ret → yeniden teklif → C karşı teklif → B kabul → C savaşta (tek kez); host → B daveti kabul; kapanan savaşa gecikmiş kabul işlenmez
+PASS Z9 dünya ilerler ve emirler uygulanır: B gerçek komut yolundan filo emri verir; host günleri ilerler; emir host dünyasında, misafir aynası host ile aynı
+FAIL Z10 dönen misafir B: olay kartına dokunup karar verir (host'ta bir kez, kart kalkar); filo emri gerçek motor işlevinden → host uygular, B haritasında aynı
+locator.tap: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#inbox .nCard[data-x="76"]').first()[22m
+[2m    - locator resolved to <button data-x="76" class="nCard sci" data-a="openNote">…</button>[22m
+[2m  - attempting tap action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <button class="" role="tab" data-x="states" data-a="diploNav" aria-selected="false">DEVLETLER</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m    - waiting 20ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <button class="" role="tab" data-x="states" data-a="diploNav" aria-selected="false">DEVLETLER</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m  2 × retrying tap action[22m
+[2m      - waiting 100ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div class="dpHd">…</div> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m  3 × retrying tap action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <button class="" role="tab" data-x="states" data-a="diploNav" aria-selected="false">DEVLETLER</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <button class="" role="tab" data-x="states" data-a="diploNav" aria-selected="false">DEVLETLER</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div class="dpHd">…</div> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div class="dpHd">…</div> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m  2 × retrying tap action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <button class="" role="tab" data-x="states" data-a="diploNav" aria-selected="false">DEVLETLER</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m  - retrying tap action[22m
+[2m    - waiting 500ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <div class="dpHd">…</div> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m  - retrying tap action[22m
+[2m    - waiting 500ms[22m
+
+    at tap (/home/user/Star/tests/browser-mp8.cjs:53:244)
+    at async /home/user/Star/tests/helpers/mp-field-verify0-mp3.cjs:38:4
+    at async test (/home/user/Star/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-verify0-mp3.cjs:33:2)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp.cjs:103:34)
+    at async /home/user/Star/tests/browser-mp8.cjs:429:17
+PASS Z11 Q6 toprak vaadi + destek teklifi: gerçek masada dokunuşla taslak; canlı dünyada taslak korunur; hat donunca gönderim kaybolsa da taslak + "yanıt bekleniyor"; tekrar basış ve yeniden bağlanma ÇİFT KAYIT üretmez; host'ta tek kayıt doğru cephe/sistemle, host gelen kutusunda
+FAIL Z12 ret ve bağlantı hatası taslağı korur; karşı teklif + kabul vaadi TEK kez yazar; savaş kapanınca gecikmiş kabul işlenmez
+page.waitForFunction: Timeout 20000ms exceeded.
+    at wait (/home/user/Star/tests/browser-mp8.cjs:51:40)
+    at /home/user/Star/tests/helpers/mp-field-verify0-mp3.cjs:91:50
+    at async test (/home/user/Star/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-verify0-mp3.cjs:86:2)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp.cjs:103:34)
+    at async /home/user/Star/tests/browser-mp8.cjs:429:17
+FAIL Z13 ikinci kayıt/devam: DAVET PAYLAŞ bağlantısı (B) + eski oda kodu + aynı profilde ikinci sekme + C ana menüden; DEVAM ET; aynı odada C kopar/döner → aynı devlet, tarih ilerler, C filo emri host'ta ve C haritasında
+page.fill: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#jCode')[22m
+[2m    - locator resolved to <input disabled id="jCode" maxlength="5" class="mp1-in" enterkeyhint="go" autocomplete="off" spellcheck="false" placeholder="K7M2P" autocapitalize="characters"/>[22m
+[2m    - fill("JV5TF")[22m
+[2m  - attempting fill action[22m
+[2m    2 × waiting for element to be visible, enabled and editable[22m
+[2m      - element is not enabled[22m
+[2m    - retrying fill action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and editable[22m
+[2m      - element is not enabled[22m
+[2m    - retrying fill action[22m
+[2m      - waiting 100ms[22m
+[2m    59 × waiting for element to be visible, enabled and editable[22m
+[2m       - element is not enabled[22m
+[2m     - retrying fill action[22m
+[2m       - waiting 500ms[22m
+
+    at /home/user/Star/tests/helpers/mp-field-verify0-mp3.cjs:149:12
+    at async test (/home/user/Star/tests/browser-mp8.cjs:46:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-verify0-mp3.cjs:123:2)
+    at async module.exports (/home/user/Star/tests/helpers/mp-field-fix0-mp.cjs:103:34)
+    at async /home/user/Star/tests/browser-mp8.cjs:429:17
+GEÇEN: 11 KALAN: 3

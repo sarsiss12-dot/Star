@@ -1,0 +1,6 @@
+✓ kapalı borsa: motorun gerekçesi; görünümde open 0; reddedilen komut Save8/RNG değiştirmez
+✓ alım-satım: B min → ala (motorun marketTrade'i; komisyon, fiyat kayması motorun); C ala satar; muhasebe tam, kaynak çoğalmaz; bildirim kendine
+✓ eşzamanlı: B ve C aynı anda aynı fiyatı görüp ala alır; host sırayla işler — ikinci istek fiyat kaydığı için "stale" (güncel teklifle), yeniden onayla geçer; toplam doğru
+✓ geçersiz: yetersiz bakiye, sıfır/negatif/ondalık miktar, aynı kaynak, bilinmeyen kaynak, fazla alan — işlem yok; aynı cid ikinci kez uygulanmaz
+✓ MP.4: fiyat çarpanları (Save8 G.market) kayıt/yükleme sonrası aynı; görünüm yeniden kurulur
+GEÇEN: 5 KALAN: 0

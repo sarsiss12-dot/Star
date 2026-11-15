@@ -1,0 +1,4 @@
+PASS C0 fikstür gerçek p27 kaynağında: Ortak Filo katkısı tüketicisiz hazinede birikmiş (taban davranışı)
+PASS C1 p27 Save8 adayda yüklenir; eski hazine BİR KEZ fona geçer; iki ardışık kaydet/yükle toplamı değiştirmez; federal filo korunur
+PASS C2 p27 MP paketi (mpVersion 4) adayda doğrulanır ve yüklenir (aynı hazine aktarımı); bozuk bütünlük reddedilir
+GEÇEN: 3 KALAN: 0

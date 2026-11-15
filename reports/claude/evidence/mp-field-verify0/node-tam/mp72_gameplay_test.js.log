@@ -1,0 +1,13 @@
+✓ elçi: A gerçek elçi penceresinin motor işlevleriyle (setEnvoyTask / recallEnvoy) gönderir, görev değiştirir, geri çağırır; dünya motor çağrısıyla bayt-bayt aynı; Save8 içinde
+✓ elçi yetkisi: temas yoksa "yok", bilinmeyen görev bad-params, kapasite dolunca motorun gerekçesi, başka devlet adına alan yok
+✓ filo bileşimi: kendi filosunda setFleetTemplate (kaydet / otomatik); başkasının filosu not-owner; geçersiz sayı bad-params
+✓ koloni otomasyonu (dirTog) ve bombardıman kipi: yalnız kendi kolonisi / filosu; başkasınınki not-owner; geçersiz kip bad-params
+✓ inşaat gemisiyle yapı (build2 → startStruct): başkasının gemisi not-owner, görmediği sistem "yok", koşul yoksa motorun gerekçesi; hiçbir şey değişmez
+✓ ültimatom / himaye: insan hedefe reddedilir (insan adına zar yok — host'un kendi arayüzü de); AI hedefte motorun kendi kapısı
+✓ federasyon savaş izni (fedWarRequest → proposeFedWar): federasyonsuz devlete motorun gerekçesi; görünmeyen hedef "yok"
+✓ insan müttefik kararı: A federasyonda savaş izni önerir (fedWar → proposeFedWar); öteki insan üye B'nin oyu AI tarafından VERİLMEZ, B'nin bekleyen kararı olur; B kendi oyunu fedVote ile verir
+✓ ortak destek görünümü: yalnız bu oyuncunun destek bağı olan AI müttefikleri ve kendi planları; komut motorun devlet-0 engeline takılmaz (seferi yoksa motorun gerekçesi)
+✓ ortak destek: uzak insan (devlet 2) motorun kendi yoluyla AI müttefikten destek ister; plan gerçek AI filosunu kullanır, insanın hiçbir filosu ayrılmaz; yalnız kendi talebini iptal eder; gemiler korunur
+✓ ortak destek "filomu destekle": uzak insanın kendi filosu dayanak; dayanak gücü sahibinin bakışıyla sayılır (motorun devlet-0 varsayımı yalnız uzak insan için genişletildi)
+✓ ortak destek eşdeğerliği: uzak insan yokken yamalı motor tek oyunculuyla aynı (oyuncu talebi + 20 gün: Save8 ve RNG birebir); insan olmayan devlet 2 hâlâ reddedilir
+GEÇEN: 12 KALAN: 0

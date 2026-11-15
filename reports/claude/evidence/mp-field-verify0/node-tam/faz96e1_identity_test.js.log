@@ -1,0 +1,23 @@
+✓ canonical civic capacity is two slots; every radical fills both alone
+✓ same shared genetic net budget rejects double negative credit
+✓ five traits, two disadvantages and three negative credits are actual shared limits
+✓ incompatible traits dayanikli / kirilgan reject symmetrically
+✓ incompatible traits verimli / obur reject symmetrically
+✓ incompatible traits karizmatik / itici reject symmetrically
+✓ incompatible traits hizli_ureyen / yavas_ureyen reject symmetrically
+✓ incompatible traits hizli_ureyen / yavas_cogalan reject symmetrically
+✓ incompatible traits bereketli / yavas_cogalan reject symmetrically
+✓ incompatible traits ustun_zeka / kisa_omurlu reject symmetrically
+✓ incompatible traits endustriyel / cevher_kor reject symmetrically
+✓ food effects cannot buy free points for machines or lithoids
+✓ closed diplomacy cannot fund genetic advantages with an unused diplomacy penalty
+✓ council start retains a lawful pacifist after identity assignment
+✓ Shadow Council and Purifier incompatibility uses shared civic gate
+✓ hostile prototype keys and duplicate new inputs cannot add modifiers twice
+✓ 440 generated AI identities satisfy slots, traits, ethics, species and useful negatives
+✓ distribution includes every civic, honest/dishonest extremes and many combinations
+✓ same seed reproduces full initial save including genetic choices
+✓ legacy v8 civic overflow and traits remain intact; missing ahl becomes neutral without RNG
+✓ dishonest ethics infer criminal persona without closing diplomacy as Purifier
+✓ new player setup enforces same civic and genetic limits
+GEÇEN: 22 KALAN: 0

@@ -1,0 +1,7 @@
+✓ A1 bir misafirin aynası kurulamıyor: öteki misafir dünya almaya devam eder, emir ACK'i ve etkisi gider, hata sayılır; arıza kalkınca TAM ayna
+✓ A2 bir süpürme (savaş bildirimi taraması) istisna atıyor: yayın sürer, bütün misafirler dünya alır, aşama adı kaydedilir
+✓ B nabız yalnız sayaç taşır: dünya revizyonu, o oyuncunun ayna revizyonu, tam gün, hız, hata sayısı; host'a ve koltuksuz bağlantıya gitmez
+✓ C düz Save8 "bozuk" değildir: misafir aynası / host kaydı / tek oyunculu kayıt ayrı nedenle ayırt edilir; gerçek MP paketi geçerli kalır
+✓ D host'un oyun içi Save8'i → devam paketi: dünya baytı baytına aynı; yeni vm'de devam lobisi; ziyaretçi kendiliğinden koltuk alamaz, host atar; aynı gün ve devlet
+✓ D2 gerçek MP paketi (ÇOK OYUNCULU → OYUNU KAYDET) aynı dünyada: kimlik özeti korunur, misafir kendi jetonuyla kendiliğinden döner
+GEÇEN: 6 KALAN: 0

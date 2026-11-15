@@ -100,4 +100,5 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
 
  if(process.env.FIELD_STOP==='4')return;
  await require('./mp-field-fix0-mp2.cjs')(X,{E,M,ready,where,closeUI,cards,swipe});
+ if(process.env.FIELD_STOP!=='9')await require('./mp-field-verify0-mp3.cjs')(X,{E,M,ready,where,closeUI,cards,ensure});
 };

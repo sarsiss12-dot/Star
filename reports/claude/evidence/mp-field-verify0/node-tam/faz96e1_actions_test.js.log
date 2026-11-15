@@ -1,0 +1,18 @@
+✓ actual devour awards real size-based resources and reduces hunger exactly once
+✓ devour invalid foreign object changes neither resources nor RNG
+✓ devour invalid moving fleet changes neither resources nor RNG
+✓ devour invalid foreign colony changes neither resources nor RNG
+✓ devour invalid home colony changes neither resources nor RNG
+✓ devour invalid already destroyed changes neither resources nor RNG
+✓ devour invalid no civic changes neither resources nor RNG
+✓ AI special action uses actual devour motor on own empty barren planet
+✓ AI protects future habitable planets and inhabited colonies
+✓ special action cooldown and calm hunger do not repeat actions
+✓ actual aiTurn reaches civic action
+✓ devoured planet and action cooldown persist through v8; load does not award again
+✓ AI can rebuild lost throne only through paid accessible production
+✓ identity affects planner but resource deficit overrides science preference
+✓ traits and civics alter strategic profile without granting resources
+✓ hidden player stocks and technologies do not change own identity decisions
+✓ same seeded geography as canonical 96E
+GEÇEN: 17 KALAN: 0

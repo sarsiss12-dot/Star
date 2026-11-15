@@ -1,0 +1,6 @@
+✓ kapasite 2/3/4: host + 1/2/3 misafir girer; bir fazlası "oda dolu"
+✓ çift KATIL (host tarafı): ilk soketin bağsız kaydı koltuk tutmaz — ikinci soket kapasite 2'de lobiye girer
+✓ bağlı oyuncu ve jetonla dönen oyuncu korunur: bağlı misafir varken yeni gelen reddedilir; bağsız misafir jetonuyla kendi kaydına döner
+✓ kapasite değişimi bağlı oyuncuyu atmaz; odada fazla oyuncu varken düşürülemez
+✓ oyun başladıktan sonra bağsız koltuk yeni gelene verilmez (game-started)
+GEÇEN: 5 KALAN: 0

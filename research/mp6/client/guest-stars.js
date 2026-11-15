@@ -473,18 +473,49 @@ function gate(){
      Karşı tarafın stoğu aynada yok; uygunluğu host denetler ve sonucu bildirir. */
   wrap('warSupportGate',(o,e,s,it)=>mine(e)&&it?.t==='warJoin'&&(Number.isSafeInteger(it.front)||Number.isSafeInteger(it.plan))&&G.p.contact[it.target]?{ok:true,why:'Kesin katılım koşullarını host doğrular'}:o(e,s,it));
   const dealSend0=UI.dealSend.bind(UI);
+  /* MP-FIELD-VERIFY.0 (Q6 saha: "toprak vaadi + destek teklifi bazen host'a ulaşmıyor"): taslak eskiden gönderildiği AN silinip "gönderildi"
+     yazılıyordu; komut kaybolursa (kapanan / yarı ölü soket) ya da host reddederse oyuncunun elinde ne teklif ne taslak kalıyordu.
+     Artık tek işlem (S.dealTx: cid + içerik imzası): taslak host'un YANITINA kadar korunur; yanıt gelmezse aynı cid yeniden gönderilir
+     (host sonuç önbelleği cid'e göre ikinci kaydı engeller; içerik aynıysa motor 'duplicate' der) — çift teklif oluşmaz. Ret / bağlantı
+     hatasında taslak düzenlenebilir kalır. İz: S.dealTrace (işlem kimliğiyle taslak → dokunuş → gönderim → host yanıtı → kayıt → ileti). */
+  const dealItems=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&TREATY.includes(i.t)?{t:i.t}:null);
+  const dealCmd=d=>{const give=dealItems(d.give),want=dealItems(d.want);if(give.includes(null)||want.includes(null))return {bad:true};if(!give.length&&!want.length)return {empty:true};
+    const ctr=S.counter&&S.counter.to===d.to?S.counter:null;const cmd=ctr?{kind:'counter',offer:ctr.offer,give,want}:{kind:'offer',to:real(d.to),give,want};return {cmd,ctr,sig:JSON.stringify(cmd)};};
+  const dealTrace=(tx,step,x)=>{S.dealTrace=S.dealTrace||[];S.dealTrace.push({tx:tx&&tx.id||null,step,at:Date.now(),day:Math.floor(G.day||0),...(x||{})});if(S.dealTrace.length>60)S.dealTrace.shift();};
+  const dealShown=to=>UI.deal&&UI.deal.to===to&&doc.getElementById('diploPane')?.classList.contains('show')&&UI.diploPage==='deal';
+  const dealRedraw=to=>{if(dealShown(to))try{UI.drawDeal();}catch{}};
+  function dealTxDone(tx,res){if(S.dealTx!==tx)return;S.dealTx=null;S.dealDone=S.dealDone||new Set();S.dealDone.add(tx.cid);if(S.dealDone.size>16)S.dealDone.delete(S.dealDone.values().next().value);
+    const dup=res.status!=='ok'&&res.code==='duplicate',ok=res.status==='ok'||dup,ai=res.status==='ok'&&res.extra&&res.extra.ai,R=window.MP71Dip?MP71Dip.AI_REPLY:{},nm=G.emps[tx.to]?.name||'';
+    const msg=ok?(dup?'Bu teklif zaten bekliyor — '+nm+'. Durum: Gelen kutusu → Gönderilen.':ai?nm+' '+(R[ai]||ai):'Teklif gönderildi — '+nm+'. Durum: Gelen kutusu → Gönderilen.'):'Host reddetti: '+(window.MP71Dip?MP71Dip.why(res):why(res))+' — taslak korunuyor; düzenleyip yeniden sunabilirsin.';
+    dealTrace(tx,'reply',{status:res.status,code:res.code||null,offer:res.extra&&res.extra.offer||null,dup:!!res.dup});
+    if(ok){if(tx.ctr&&S.counter&&S.counter.offer===tx.ctr)S.counter=null;
+      /* taslak yalnız GÖNDERİLEN içerikle aynıysa temizlenir (yanıt beklerken düzenlenen taslak korunur) */
+      const cur=UI.deal&&UI.deal.to===tx.to?dealCmd(UI.deal):null,saved=UI._diploDrafts&&UI._diploDrafts[tx.to],same=cur?cur.sig===tx.sig:saved?dealCmd(saved.deal).sig===tx.sig:false;
+      if(same){const shown=dealShown(tx.to);UI.forgetDeal(tx.to);if(shown){UI.openDeal(tx.to);UI.dealMsg=msg;}}
+      else if(UI.deal&&UI.deal.to===tx.to)UI.dealMsg=msg+' (Düzenlediğin taslak korunuyor.)';}
+    else if(UI.deal&&UI.deal.to===tx.to)UI.dealMsg=msg;else if(UI._diploDrafts&&UI._diploDrafts[tx.to])UI._diploDrafts[tx.to].msg=msg;
+    toast(msg,!ok);dealTrace(tx,'msg',{ok,msg:msg.slice(0,160)});dealRedraw(tx.to);}
+  function dealTxSend(tx,why){const cid=send(tx.cmd,tx.cid,true);tx.tries++;tx.last=Date.now();tx.sent=!!cid;dealTrace(tx,why,{cid:tx.cid,sent:!!cid,err:cid?null:S.lastSendWhy||null});return !!cid;}
+  /* bağlantı dönünce ya da yanıt gecikince aynı işlem (aynı cid) yeniden gider — syncWatch her turda çağırır */
+  S.dealTxTick=now=>{const tx=S.dealTx;if(!tx)return;const J=S.J;if(!(J&&J.ws&&J.ws.readyState===1&&J.hostOnline))return;
+    if(now-tx.last<(tx.sent?8000:1500))return;if(tx.tries>=6){if(!tx.stuck){tx.stuck=true;const m='Host yanıt vermedi — taslak korunuyor. TEKLİFİ SUN aynı işlemi yeniden gönderir (çift teklif oluşmaz).';if(UI.deal&&UI.deal.to===tx.to)UI.dealMsg=m;dealTrace(tx,'stuck');dealRedraw(tx.to);}return;}
+    dealTxSend(tx,'resend');};
   UI.dealSend=function(){if(!S.on)return dealSend0();this.ensureDiploWorld();const d=this.deal;if(!d)return;
-    const items=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&TREATY.includes(i.t)?{t:i.t}:null);
-    const give=items(d.give),want=items(d.want);
-    if(give.includes(null)||want.includes(null)){this.dealMsg='Çok oyunculuda kaynak, barış ve antlaşma maddeleri (saldırmazlık, ticaret, ittifak, sensör, geçiş) cephe kimliğine bağlı savaş desteği, savaş içi teslim, toprak vaadi ve federasyonlar arası ortak barış gönderilebilir; teknoloji, sistem, haraç, lüks, savaş sözü ve casusluk ağı henüz yok.';this.drawDeal();return;}
-    if(!give.length&&!want.length){this.dealMsg='Teklif boş.';this.drawDeal();return;}
-    const ctr=S.counter&&S.counter.to===d.to?S.counter:null;
-    const cid=send(ctr?{kind:'counter',offer:ctr.offer,give,want}:{kind:'offer',to:real(d.to),give,want});if(ctr)S.counter=null;
-    this.dealMsg=cid?'Teklif host\'a gönderildi; yanıt gelen kutuna ve bildirimlere düşer.':'Host bağlı değil; teklif gönderilmedi.';
-    if(cid)waits[cid]=res=>{const ai=res.status==='ok'&&res.extra&&res.extra.ai,R=window.MP71Dip?MP71Dip.AI_REPLY:{};
-      toast(res.status==='ok'?(ai?(G.emps[d.to]?.name||'')+' '+(R[ai]||ai):'Teklif gönderildi — '+(G.emps[d.to]?.name||'')+'. Durum: Gelen kutusu → Gönderilen.'):'Host reddetti: '+(window.MP71Dip?MP71Dip.why(res):why(res)),res.status!=='ok');};
-    if(cid){const to=d.to,m=this.dealMsg;this.forgetDeal(to);this.openDeal(to);this.dealMsg=m;}   // gönderilen taslak temizlenir (tek oyunculuda imzada forgetDeal)
-    this.drawDeal();};
+    const c=dealCmd(d),it=l=>(l||[]).map(i=>({t:i.t,...(i.front!==undefined?{front:i.front}:{}),...(i.plan!==undefined?{plan:i.plan}:{}),...(i.sys!==undefined?{sys:i.sys}:{}),...(i.target!==undefined?{target:real(i.target)}:{})}));
+    if(c.bad){this.dealMsg='Çok oyunculuda kaynak, barış ve antlaşma maddeleri (saldırmazlık, ticaret, ittifak, sensör, geçiş) cephe kimliğine bağlı savaş desteği, savaş içi teslim, toprak vaadi ve federasyonlar arası ortak barış gönderilebilir; teknoloji, sistem, haraç, lüks, savaş sözü ve casusluk ağı henüz yok.';this.drawDeal();return;}
+    if(c.empty){this.dealMsg='Teklif boş.';this.drawDeal();return;}
+    const tx0=S.dealTx;
+    if(tx0){dealTrace(tx0,'tap',{same:tx0.sig===c.sig});
+      if(tx0.sig===c.sig&&tx0.to===d.to){const okSend=dealTxSend(tx0,'resend-tap');tx0.stuck=false;
+        this.dealMsg=okSend?'Teklif yanıt bekliyor — aynı işlem yeniden gönderildi (çift teklif oluşmaz). İşlem '+tx0.id+'.':'Bağlantı yok; taslak korunuyor — bağlantı dönünce aynı işlem kendiliğinden yeniden gider.';this.drawDeal();return;}
+      this.dealMsg='Önceki teklifin host yanıtı bekleniyor (işlem '+tx0.id+'); yanıt gelince bunu sunabilirsin. Taslak korunuyor.';this.drawDeal();return;}
+    const cid=send(c.cmd,undefined,true);
+    if(!cid){this.dealMsg=(S.lastSendWhy==='stale-world'?'Dünya güncel değil — teklif gönderilmedi; önce MP çubuğundan YENİDEN EŞİTLE.':S.lastSendWhy==='guard-active'?'Geçici AI koruması sürüyor — teklif gönderilmedi.':'Bağlantı yok; teklif gönderilmedi.')+' Taslak korunuyor.';
+      dealTrace(null,'send-fail',{err:S.lastSendWhy||null});toast(this.dealMsg,true);this.drawDeal();return;}
+    const tx={id:cid.slice(-6),cid,to:d.to,sig:c.sig,cmd:c.cmd,ctr:c.ctr?c.ctr.offer:null,at:Date.now(),last:Date.now(),tries:1,sent:true};S.dealTx=tx;
+    dealTrace(tx,'draft',{to:real(d.to),give:it(d.give),want:it(d.want)});dealTrace(tx,'send',{cid,kind:c.cmd.kind});
+    waits[cid]=res=>dealTxDone(tx,res);
+    this.dealMsg='Teklif host\'a gönderildi — yanıt bekleniyor (işlem '+tx.id+'). Taslak yanıt gelene dek korunur.';this.drawDeal();};
   /* anlaşma penceresinin yerel önizlemesi: karşı tarafın stoğu aynada yok (kabuk). MP.3 dipGate ile aynı kural: misafirde yalnız
      KENDİ yükümlülükleri denetlenir, karşı tarafın kaynak satırları ("Ad → …") düşer; kesin denetim host'ta (offer / respond). */
   wrap('dealQuote',(o,offer)=>{const q=o(offer);if(!q||!offer||offer.from!==0||!G.emps[offer.to])return q;
@@ -582,8 +613,9 @@ const vasTerms=(type,t)=>{const o={};for(const k of ['tax','science','defense','
 /* MP-FIELD-FIX.0: oyuncuya ham kod gösterilmez — motorun kendi gerekçesi varsa o; bilinmeyen kural kodunda "Kural izin vermedi" (kod tanı için parantezde) */
 function why(res){const det=res.detail&&res.detail.length?res.detail.join(' · '):'',c=String(res.code||'');
   if(c==='rules:engine'&&det)return det;const base=MP1View.ERR[c]||(/^rules:/.test(c)?'Kural izin vermedi ('+c.slice(6)+')':c);return base+(det?' — '+det:'');}
-function send(cmd){const J=S.J;if(!J)return null;const r=J.cmd(cmd);S.stats.sent[cmd.kind]=(S.stats.sent[cmd.kind]||0)+1;
-  if(!r.ok){toast(r.why==='host-yok'?'Host bağlı değil; emir gönderilmedi.':r.why==='stale-world'?'Dünya güncel değil — emir gönderilmedi. Önce MP çubuğundan YENİDEN EŞİTLE.':r.why==='guard-active'?'Geçici AI koruması sürüyor — dünyan eşitlenince kontrol sana döner; emir gönderilmedi.':'Emir gönderilemedi.',true);return null;}
+function send(cmd,cid0,quiet){const J=S.J;if(!J)return null;const r=J.cmd(cmd,cid0);S.stats.sent[cmd.kind]=(S.stats.sent[cmd.kind]||0)+1;
+  if(!r.ok&&quiet){S.lastSendWhy=r.why;return null;}
+  if(!r.ok){toast(r.why==='host-yok'?'Host bağlı değil; emir gönderilmedi.':r.why==='baglanti'?'Bağlantı yeniden kuruluyor; emir gönderilmedi.':r.why==='stale-world'?'Dünya güncel değil — emir gönderilmedi. Önce MP çubuğundan YENİDEN EŞİTLE.':r.why==='guard-active'?'Geçici AI koruması sürüyor — dünyan eşitlenince kontrol sana döner; emir gönderilmedi.':'Emir gönderilemedi.',true);return null;}
   S.pend.set(r.cid,{kind:cmd.kind,at:Date.now()});if(S.pend.size>64)S.pend.delete(S.pend.keys().next().value);   // MP-P0: host ACK'i gelene dek bekleyen emir
   return r.cid;}
 
@@ -862,7 +894,8 @@ function update(statusHtml){
   for(;S.seenResults<J.results.length;S.seenResults++){const r=J.results[S.seenResults],pk=S.pend.get(r.cid);S.pend.delete(r.cid);
     /* MP-P0-DESYNC1: host ACK'i (onay) ile etkinin şu anki dünyada görünmesi ayrı izlenir: onaylı emrin dünya revizyonu uygulanan aynadan büyükse "onaylı, dünyada bekliyor" */
     if(r.status==='ok'&&pk&&!RO_CMDS.has(pk.kind)&&Number.isSafeInteger(r.rev)&&!r.dup){S.acks.push({cid:r.cid,kind:pk.kind,rev:r.rev,at:Date.now()});if(S.acks.length>32)S.acks.shift();}
-    if(waits[r.cid]){const w=waits[r.cid];delete waits[r.cid];try{w(r);}catch{}continue;}   // MP diplomasi paneli / gelen kutusu kendi sonucunu gösterir
+    if(waits[r.cid]){const w=waits[r.cid];delete waits[r.cid];try{w(r);}catch{}continue;}
+    if(S.dealDone&&S.dealDone.has(r.cid))continue;   // MP-FIELD-VERIFY.0: aynı işlemin yeniden gönderiminin (dup) ikinci yanıtı   // MP diplomasi paneli / gelen kutusu kendi sonucunu gösterir
     if(r.status!=='ok'&&r.code!=='rules:same')toast('Host reddetti: '+why(r),true);}
   /* MP.7.3 tanı: son reddedilen komutun KODU (içerik / jeton yok) — MP çubuğunun ipucunda */
   for(let i=J.results.length-1;i>=0&&i>=J.results.length-5;i--){const r=J.results[i];if(r.status!=='ok'&&r.code!=='rules:same'){S.lastErr=r.code;break;}}
@@ -976,6 +1009,7 @@ function syncWatch(){
   const now=Date.now(),live=J.ws&&J.ws.readyState===1&&J.hostOnline,paused=J.lobby&&J.lobby.phase==='paused';
   if(!live||paused){y.since=0;y.asks=0;y.behindAt=0;if(y.note)syncNote('');return;}   // bağlantı / duraklatma kendi iletisini gösterir
   for(const [cid,p] of S.pend)if(now-p.at>60000)S.pend.delete(cid);
+  try{S.dealTxTick&&S.dealTxTick(now);}catch{}   // MP-FIELD-VERIFY.0: yanıtı gelmeyen teklif aynı cid ile yeniden
   S.acks=S.acks.filter(a=>now-a.at<120000&&a.rev>(S.appliedWorldRev|0));
   syncReport(false);
   if(S.guard&&!S.desync.on)syncNote('AI koruması devrede — dünyan eşitlenince kontrol sana döner','guard');

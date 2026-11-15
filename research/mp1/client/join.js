@@ -19,8 +19,13 @@ function seatOf(id){try{return JSON.parse(localStorage.getItem(saveKey(id)))||nu
 try{J.name=localStorage.getItem('mp1:name')||'';}catch{}
 function raw(obj){if(!J.ws||J.ws.readyState!==1)return false;J.ws.send(JSON.stringify(obj));return true;}
 J.sendRaw=raw;
-J.cmd=function(cmd){if(!J.hostOnline)return {ok:false,why:'host-yok'};J.seq++;save({seq:J.seq});const m={v:1,type:'cmd',seq:J.seq,cid:'j'+Date.now().toString(36)+Math.random().toString(36).slice(2,10),cmd};
-  m.at=performance.now();J.pending=m;raw({v:1,type:'cmd',seq:m.seq,cid:m.cid,cmd});return {ok:true,cid:m.cid};};
+/* MP-FIELD-VERIFY.0: soket AÇIK değilken (yeniden bağlanma / kapanış sürüyor, hostOnline henüz düşmedi) komut sessizce kayboluyor ama
+   {ok:true} dönüyordu → misafir "gönderildi" deyip taslağı siliyordu (Q6 saha: teklif host'a ulaşmadı). Artık açık hata döner.
+   cid0: aynı işlemin yeniden gönderimi (yeni seq, AYNI cid) — host sonuç önbelleği (cid) ikinci kaydı engeller. */
+J.cmd=function(cmd,cid0){if(!J.hostOnline)return {ok:false,why:'host-yok'};if(!J.ws||J.ws.readyState!==1)return {ok:false,why:'baglanti'};
+  const cid=typeof cid0==='string'&&/^j[a-z0-9]{6,40}$/.test(cid0)?cid0:'j'+Date.now().toString(36)+Math.random().toString(36).slice(2,10);
+  const m={v:1,type:'cmd',seq:J.seq+1,cid,cmd};m.at=performance.now();
+  if(!raw({v:1,type:'cmd',seq:m.seq,cid:m.cid,cmd}))return {ok:false,why:'baglanti'};J.seq=m.seq;save({seq:J.seq});J.pending=m;return {ok:true,cid:m.cid};};
 J.ready=v=>raw({v:1,type:'ready',value:!!v});
 J.claim=id=>raw({v:1,type:'claim',empire:id});
 J.presence=t=>{J.tab=t;raw({v:1,type:'presence',tab:t});render();};
@@ -58,7 +63,7 @@ function connect(){
 const FINAL={4001:'room-closed',4004:'invalid-code',4005:'room-full',4008:'rate-limited',4029:'rate-limited'};
 /* MP-FIELD-FIX.0: katılım hangi aşamada durdu — oda, oyuncu kimliği ya da bağlantı. Ekranda aşama başlığı + motorun/relay'in Türkçe gerekçesi. */
 const STAGE={oda:'ODA BULUNAMADI',kimlik:'OYUNCU KİMLİĞİ DOĞRULANAMADI',baglanti:'BAĞLANTI KESİLDİ'};
-const STAGE_OF={'invalid-code':'oda','room-closed':'oda','room-full':'oda','game-started':'oda','server-restart':'oda','seat-elsewhere':'kimlik','no-save-id':'kimlik',kicked:'kimlik',left:'kimlik',replaced:'kimlik',
+const STAGE_OF={'invalid-code':'oda','room-closed':'oda','room-full':'oda','game-started':'oda','server-restart':'oda','room-no-host':'oda','seat-elsewhere':'kimlik','no-save-id':'kimlik',kicked:'kimlik',left:'kimlik',replaced:'kimlik',
   'rate-limited':'baglanti','server-full':'baglanti','no-host':'baglanti',net:'baglanti'};
 function fail(code,text){J.errCode=code;J.errStage=STAGE_OF[code]||null;J.err=text;}
 J.stageText=()=>J.err?(J.errStage?STAGE[J.errStage]+' · ':'')+J.err:'';
@@ -70,7 +75,13 @@ function hello(){const s=load();raw({v:1,type:'hello',name:J.name,...(s.token?{t
 function receive(t,t0){
   J.stats.msgs++;J.stats.bytes+=t.length;J.packets.push(t);if(J.packets.length>3000)J.packets.shift();
   if(t[0]==='R'){let m;try{m=JSON.parse(t.slice(1));}catch{return;}
-    if(m.t==='welcome'){J.hostOnline=!!m.host;J.retry=0;J.reconnecting=false;if(J.stats.connectMs===null&&t0)J.stats.connectMs=Math.round(performance.now()-t0);if(J.hostOnline)hello();else fail('no-host',V.ERR['no-host']);}
+    if(m.t==='welcome'){J.hostOnline=!!m.host;J.retry=0;J.reconnecting=false;if(J.stats.connectMs===null&&t0)J.stats.connectMs=Math.round(performance.now()-t0);if(J.hostOnline)hello();
+      /* MP-FIELD-VERIFY.0 (saha: "birlikte yeniden giremedik"): host ayrılan oda relay'de MP1_HOST_GRACE_MS (10 dk) açık kalır. Host kaydı YENİ odada
+         açınca eski kodla (adresteki ?code= / otomatik dönüş) ilk katılım "Bağlanıyor…" ekranında, kod/ad kutusu ve KATIL pasifken süresiz bekliyordu.
+         İlk katılımda host yoksa soket kapanır, giriş ekranı düzenlenebilir döner ve neden yazılır; lobide/oyundayken yeniden bağlanma host'u beklemeye devam eder. */
+      else if(J.screen==='connecting'){const w=J.ws;J.ws=null;J.closed=true;if(w){w.onclose=null;w.onmessage=null;try{w.close(4000,'no-host');}catch{try{w.close();}catch{}}}J.screen='join';J.auto=false;
+        fail('room-no-host','Bu odada host yok. Host oyunu kayıttan yeni bir odada açtıysa YENİ kodu gir; aynı odaya dönecekse biraz sonra KATIL\'a yeniden dokun.');}
+      else fail('no-host',V.ERR['no-host']);}
     else if(m.t==='host-up'){J.hostOnline=true;J.err='';hello();}
     else if(m.t==='host-left'){J.hostOnline=false;}
     else if(m.t==='room-closed'){J.closed=true;J.screen='join';J.lobby=null;const c=m.reason==='server-restart'?'server-restart':'room-closed';fail(c,V.ERR[c]);}

@@ -1,0 +1,23 @@
+✓ economic plan distinguishes stock, recurring deficit and runway
+✓ energy crisis investment outranks mineral surplus foundries
+✓ consumer goods deficit chooses a real factory and cannot pay phantom stock
+✓ pending paid building affects plan, not current income or stocks
+✓ queued ships and unpaid construction are included without debit
+✓ paid production finishes and real next income reflects investment
+✓ same plan and diagnostics are deterministic and do not consume RNG
+✓ low alloys never grant a ship or bypass research locks
+✓ critical consumer and energy upkeep blocks spending during recovery
+✓ construction assignments do not pile up and actually finish
+✓ visible pirate blocks local construction and does not charge resources
+✓ poor or unreachable builders create neither work nor repeated funded replacements
+✓ completed AI construction hulls remain separate and all costs are paid
+✓ old 96B v8 save remains readable and plans are not serialized
+✓ paused modal close preserves zero speed and a running notification returns its speed
+✓ a mild deficit with a deep treasury does not displace ordinary research investment
+✓ queued demolition projects lost production, never a fabricated new building
+✓ canonical 96B cargo/history save loads without moving, duplicating or charging
+✓ repeated v8 reload preserves AI retry state, in-flight loads and completed history
+✓ stock-zero converter deadlock recovers through actual demolition/refund, not a resource gift
+✓ recovery demolition has a persistent cooldown and leaves solvent AI/player intact
+✓ a solvent underdefended yard can spend marginal alloy while retaining its real reserve
+GEÇEN: 22 KALAN: 0

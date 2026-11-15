@@ -1,0 +1,11 @@
+✓ known relations draw to explored positions outside current radar
+✓ same-day federation joins, departures and leader changes update links
+✓ same-day alliances, breakup and war cleanup invalidate cached bonds
+✓ federation has priority on duplicate pair only while its layer is on
+✓ contact and visible endpoint alone cannot expose unknown foreign relationships
+✓ zoom gates preserve bounded output and never mutate simulation state
+✓ sensor-only corrupt v8 wartime treaties normalize without touching war or charging resources
+✓ sensor sharing grants neither surveys, research, contact, level3 intelligence nor spy networks
+✓ false grants do not copy exploration or activate live view
+✓ pVis reads cached sets only and derived data is excluded from Save v8
+GEÇEN: 10 KALAN: 0

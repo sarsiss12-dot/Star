@@ -1,0 +1,44 @@
+✓ militarist valid actual setup preserves doctrine and government
+✓ militarist real Save8 preserves identity, stock, research gates and RNG
+✓ militarist player engine market follows existing doctrine rule
+✓ militarist ai engine market follows existing doctrine rule
+✓ tuccar valid actual setup preserves doctrine and government
+✓ tuccar real Save8 preserves identity, stock, research gates and RNG
+✓ tuccar player engine market follows existing doctrine rule
+✓ tuccar ai engine market follows existing doctrine rule
+✓ pasifist valid actual setup preserves doctrine and government
+✓ pasifist real Save8 preserves identity, stock, research gates and RNG
+✓ pasifist player engine market follows existing doctrine rule
+✓ pasifist ai engine market follows existing doctrine rule
+✓ yayilmaci valid actual setup preserves doctrine and government
+✓ yayilmaci real Save8 preserves identity, stock, research gates and RNG
+✓ yayilmaci player engine market follows existing doctrine rule
+✓ yayilmaci ai engine market follows existing doctrine rule
+✓ izolasyonist valid actual setup preserves doctrine and government
+✓ izolasyonist real Save8 preserves identity, stock, research gates and RNG
+✓ izolasyonist player engine market follows existing doctrine rule
+✓ izolasyonist ai engine market follows existing doctrine rule
+✓ teknokrasi valid actual setup preserves doctrine and government
+✓ teknokrasi real Save8 preserves identity, stock, research gates and RNG
+✓ teknokrasi player engine market follows existing doctrine rule
+✓ teknokrasi ai engine market follows existing doctrine rule
+✓ kriminal valid actual setup preserves doctrine and government
+✓ kriminal real Save8 preserves identity, stock, research gates and RNG
+✓ kriminal player engine market follows existing doctrine rule
+✓ kriminal ai engine market follows existing doctrine rule
+✓ teokrasi valid actual setup preserves doctrine and government
+✓ teokrasi real Save8 preserves identity, stock, research gates and RNG
+✓ teokrasi player engine market follows existing doctrine rule
+✓ teokrasi ai engine market follows existing doctrine rule
+✓ purifier rejection is atomic for ene to min
+✓ purifier rejection is atomic for ene to ala
+✓ purifier rejection is atomic for min to ene
+✓ purifier rejection is atomic for min to ala
+✓ purifier rejection is atomic for ala to ene
+✓ purifier rejection is atomic for ala to min
+✓ closed market remains unavailable to ordinary doctrine
+✓ stale UI trade action cannot debit a purifier
+✓ pacifist blood-law civic retains existing peace restriction
+✓ explicit doctrine survives paid ethics reform without arbitrary combination ban
+✓ unseen counterpart resources do not enter AI known-resource snapshot
+GEÇEN: 43 KALAN: 0

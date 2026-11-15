@@ -1,0 +1,44 @@
+✓ H3 action, limit, queue, price, lock and detail contracts preserved: normal
+✓ H3 action, limit, queue, price, lock and detail contracts preserved: poor
+✓ H3 action, limit, queue, price, lock and detail contracts preserved: limit
+✓ H3 action, limit, queue, price, lock and detail contracts preserved: queue
+✓ H3 action, limit, queue, price, lock and detail contracts preserved: empty
+✓ H3 action, limit, queue, price, lock and detail contracts preserved: locked
+✓ H3 action, limit, queue, price, lock and detail contracts preserved: researched
+✓ new grouping remains inside the build target with all22 named cards
+✓ rendering preserves full Save8, RNG, stock, queues and AI state
+✗ H3 simulation bytes are preserved except the separately tested H5 market guard AssertionError [ERR_ASSERTION]: ai.js
++ actual - expected
+
++ '86acd6a817f36eed79a009fd7a826167e621ae1aae779906c55d2dce83393273'
+- '27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739'
+
+    at /home/user/Star/tests/faz96h31_compact_construction_test.js:10:1387
+    at test (/home/user/Star/tests/faz96h31_compact_construction_test.js:3:24)
+    at Object.<anonymous> (/home/user/Star/tests/faz96h31_compact_construction_test.js:10:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+✗ review guard rejects compact height and hit-shape regressions AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(guard(html))
+
+    at /home/user/Star/tests/faz96h31_compact_construction_test.js:11:195
+    at test (/home/user/Star/tests/faz96h31_compact_construction_test.js:3:24)
+    at Object.<anonymous> (/home/user/Star/tests/faz96h31_compact_construction_test.js:11:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+✓ same-point second confirmation click cannot fall through while another position stays usable
+✓ release protection expires and keyboard activation remains available
+✓ only demolition cancellation arms protection; ordinary modal closes stay unchanged
+✓ physical-click release memory is transient and never enters Save8 or RNG
+GEÇEN: 13 KALAN: 2

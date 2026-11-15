@@ -1,0 +1,8 @@
+✓ lobby host with no remote human is a no-op: same Save8 as the plain engine after 120 days (observeHumans + publish each month)
+✓ state machine: created → waiting → ready → starting → ingame; start is applied once; commands only in game
+✓ ready is idempotent, belongs to the sender only, and resets when the empire or the galaxy changes
+✓ host-only operations cannot be reached from the network; capacity, game-started, kick and close are enforced
+✓ presence: tab changes are broadcast, invalid tabs refused, rate limited, and never touch Save8 or RNG
+✓ lobby packets carry only public pregame data: no tokens, no player ids, no positions or economies; prep card only for the own claim
+✓ remote human gets its own exploration memory; AI never plays or negotiates for it; others are unaffected
+GEÇEN: 7 KALAN: 0

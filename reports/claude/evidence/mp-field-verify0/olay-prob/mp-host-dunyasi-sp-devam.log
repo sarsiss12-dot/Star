@@ -1,0 +1,16 @@
+reloaded {
+  humans: 1,
+  ai: [
+    false, false,
+    true,  true,
+    true,  true,
+    true
+  ]
+}
+{"cfg":{"re":true,"auto":false},"n":21,"kinds":{"anomaly:":3,"notify:anomaly":2,"notify:aideal":10,"event:":2,"notify:event":2,"chain:":1,"notify:chain":1},"inbox":["anomaly:Anomali — Arephor","anomaly:Anomali — Elaran-14","event:Göçmen Filosu","chain:Yörüngedeki Laboratuvar","aideal:Teklif — Sylraen Federasyonu","event:Bilim Konseyi Talebi"]}
+anomaly Anomali — Arephor {"len":224,"ch":3,"head":"▁\nANOMALİ · Arephor\nAsteroidin göbeğine oyulmuş, dışarıdan mühürlenmiş bir oda. "}
+anomaly Anomali — Elaran-14 {"len":213,"ch":3,"head":"▁\nANOMALİ · Elaran-14\nYıldızın etrafında hâlâ dönen, kilometrelerce çaplı bir ha"}
+event Göçmen Filosu {"len":197,"ch":4,"head":"▁\nOLAY\nYersiz yurtsuz bir mülteci filosu sınırlarında beliriyor. Sığınma istiyor"}
+chain Yörüngedeki Laboratuvar {"len":344,"ch":4,"head":"▁\nYörüngedeki Laboratuvar\nWynsha sisteminde, hâlâ enerji üreten kapalı bir araşt"}
+event Bilim Konseyi Talebi {"len":181,"ch":4,"head":"▁\nOLAY\nBaş bilimcin, riskli bir hızlandırılmış araştırma programı için bütçe ist"}
+errs []

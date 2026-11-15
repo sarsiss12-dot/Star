@@ -1,0 +1,38 @@
+✓ stealTech UI basari broken alert
+✓ stealTech UI basari broken eventArt
+✓ stealTech UI basari broken audio
+✓ stealTech UI basari broken refresh
+✓ stealTech UI ifsa broken alert
+✓ stealTech UI ifsa broken eventArt
+✓ stealTech UI ifsa broken audio
+✓ stealTech UI ifsa broken refresh
+✓ stealTech UI sonucsuz broken alert
+✓ stealTech UI sonucsuz broken eventArt
+✓ stealTech UI sonucsuz broken audio
+✓ stealTech UI sonucsuz broken refresh
+✓ incite UI basari broken alert
+✓ incite UI basari broken eventArt
+✓ incite UI basari broken audio
+✓ incite UI basari broken refresh
+✓ incite UI ifsa broken alert
+✓ incite UI ifsa broken eventArt
+✓ incite UI ifsa broken audio
+✓ incite UI ifsa broken refresh
+✓ incite UI sonucsuz broken alert
+✓ incite UI sonucsuz broken eventArt
+✓ incite UI sonucsuz broken audio
+✓ incite UI sonucsuz broken refresh
+✓ stealTech direct return with alert failure basari
+✓ stealTech direct return with alert failure ifsa
+✓ incite direct return with alert failure basari
+✓ incite direct return with alert failure ifsa
+✓ stealTech AI victim alert failure preserves resolved count and quota
+✓ incite AI victim alert failure preserves resolved count and quota
+✓ stealTech invalid precondition no cost/effect/RNG/presentation
+✓ incite invalid precondition no cost/effect/RNG/presentation
+✓ notification ordering and eventArt receiver retained after alert throws
+✓ diagnostic errors cannot turn a resolved operation into rejection
+✓ existing side buffer retains ownership and delays presentation
+✓ mechanical exceptions remain visible, not converted into success
+✓ successful and caught direct notifications retain anonymous/known victim policy
+GEÇEN: 37 KALAN: 0

@@ -1,0 +1,21 @@
+✓ kritik: uzak insan B oy vermeden federasyon onun adına evet/hayır kaydetmez; AI değerlendirmesi ve rezerve RNG yalnız AI seçmenler için; motorun eski davranışı insanı AI gibi oylatıyordu
+✓ oy = motor: ağdan castFedVote ile doğrudan castFedVote aynı Save8 ve RNG; çift oy, sahte token, süresi dolmuş gündem, üye olmayan ve sahte federasyon reddi
+✓ üyelik başvurusu: A, AI üye 5 üzerinden başvurur (60 Etki) → gerçek kabul oylaması → B kendi oyunu verir → davet A'ya gider, A kendisi kabul eder → gerçek üyelik
+✓ davet: üye B, A'yı davet eder (kabul oylaması) → A reddeder; davetin süresi dolunca kabul edilemez; aday başka yükümlülükle ya da vasal olunca davet geçersiz; başarısız işlem üyelik oluşturmaz
+   rejimler: equal {"2":1,"3":1,"5":1} KABUL 3/0 · hegemonic {"2":2,"3":1.857,"5":1.84} KABUL 5.697/0 · economic {"2":1.185,"3":1.185,"5":2} KABUL 4.37/0 · mixed {"2":1.592,"3":1.521,"5":1.92} KABUL 5.033/0 · weighted {"2":1,"3":1,"5":1} KABUL 3/0
+✓ oy rejimleri: aynı üyelerde eşit / hegemonik / ekonomik / karma / ağırlıklı ağırlıklar motorun fedVoteCounts'u ile aynı; çoğunluk kuralı metni motordan; sonuç motorla aynı
+✓ ayrılma: B kendi isteğiyle ayrılır (motorun leaveFederation'ı = aynı Save8); başkası B'yi çıkaramaz; açık oylamada B'nin oyu sayılmaz, diğer oylar silinmez
+✓ kuruluş koruması: AI kurucu adayı listesinde uzak insan AI eğilimiyle değil "oyuncunun açık onayı" ile görünür; insan kurucu motor şartlarını (iki AI müttefik) karşılamazsa kuramaz
+   vergi aktarımı: {"day":30,"lord":1,"paid":{"ene":0,"min":0,"ala":0.43235175,"yiy":0,"tuk":0,"ara":0}}
+✓ vasallık insan–insan: B, A'dan himaye ister (haraçgüzar %20) → A karşı teklif (%10) → eski tur geçersiz → B kabul eder → gerçek sözleşme; ağdan = doğrudan motor (Save8+RNG); vergi sonraki ay motorla akar
+✓ yeniden müzakere ve barışçıl bağımsızlık: reddedilen yenileme sözleşmeyi değiştirmez; kabul edilen bağımsızlık freeVassal ile biter, savaş yok; reddedilen bağımsızlık bağımsızlık vermez
+   AI 2 → A himaye teklifi motor kuralıyla mümkün değil: Yeterince güçlü değil — seni koruyamaz
+   insan→AI biat isteği: AI kararı pending (tur 2)
+✓ AI ↔ insan vasallık: AI 2'nin motor işleviyle (seekProtection) insana teklifi insanın kutusunda bekler, AI karar vermez; insan → AI teklifinde vassalDriveAI karar verir
+✓ gizlilik: üçüncü oyuncu C, A–B vasallık müzakeresinin kimliğini, şartlarını, karşı teklifini ve F'nin oylamasını ağdan hiç almaz
+   üye B vasal olunca federasyon üyeliği (motor): sürüyor
+✓ çakışmalar motor kuralıyla: vasal federasyona başvuramaz; üye vasal olursa motor ne yapıyorsa o (raporlanır); oy sürerken ayrılan üyenin oyu sayılmaz; ölen insanın açık müzakeresi ve daveti geçersizleşir
+✓ kayıt: bekleyen federasyon oylaması ve vasallık müzakeresi kanonik G'de (Save8) — deserialize(serialize()) sonrası insan kendi kararını verir
+✓ yayın Save8'e dokunmaz: siyaset görünümü (polView) ve bildirim süpürmesi her gün yapılsa da 60 günde Save8 ve RNG yayınsız dünya ile aynı
+✓ tek oyunculu federasyon ve AI: MP korumaları kurulu ama uzak insan yokken federasyon oylaması, başvuru, yasa, ayrılma ve vasallık RNG/Save8 düz motorla aynı (96E fikstürü)
+GEÇEN: 15 KALAN: 0

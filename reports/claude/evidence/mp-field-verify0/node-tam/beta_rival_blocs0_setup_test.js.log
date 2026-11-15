@@ -1,0 +1,21 @@
+11 1× normal 333 korunan 92 toplam 425
+11 0.25× normal 83 korunan 92 toplam 175
+11 0.15× normal 50 korunan 92 toplam 142
+11 0.1× normal 33 korunan 92 toplam 125
+11 0.05× normal 17 korunan 92 toplam 109
+23 1× normal 381 korunan 84 toplam 465
+23 0.25× normal 95 korunan 84 toplam 179
+23 0.15× normal 57 korunan 84 toplam 141
+23 0.1× normal 38 korunan 84 toplam 122
+23 0.05× normal 19 korunan 84 toplam 103
+404 1× normal 379 korunan 93 toplam 472
+404 0.25× normal 95 korunan 93 toplam 188
+404 0.15× normal 57 korunan 93 toplam 150
+404 0.1× normal 38 korunan 93 toplam 131
+404 0.05× normal 19 korunan 93 toplam 112
+PASS K1 500 sistem / 16 AI, tohum 11/23/404: 0,05 / 0,10 / 0,15 / 0,25× — konum, hat, başkent ve toplam gezegen aynı; normal aday ≈ çarpan; korunan/nadir değişmez
+PASS K2 küçük harita 0,05×: normal aday sıfıra yuvarlanır; başlangıç dünyaları korunur; 36 ayda AI yalnız yaşanabilir/habitat hedefe koloni kurar, istisna yok
+PASS K3 Save8: 0,05× yeniden yüklenince galaksi YENİDEN ÜRETİLMEZ (aynı gezegenler); çarpansız eski kayıt 1× sayılır
+PASS K4 MP lobi: host 0,05× ayarı mp-core configure ile kabul edilir; geçersiz çarpan reddedilir
+PASS K5 Rakip Doktrinler: her n (0–16) ve her dokunuş dizisinde 0 ≤ En az ≤ En çok ≤ n; hazır seçimler geçerli; AI sayısı düşünce uyarlanır; seçim kurulum sonucuna yansır
+GEÇEN: 5 KALAN: 0

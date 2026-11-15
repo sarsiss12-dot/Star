@@ -1,0 +1,35 @@
+✓ 40 basic plus 18 special, exactly three branches, no civic conditions
+✓ original forty records byte-equivalent in runtime to source catalog
+✓ x_assault: access, grant, complete valid prerequisite route
+✓ x_shelter: access, grant, complete valid prerequisite route
+✓ x_automation: access, grant, complete valid prerequisite route
+✓ x_sanctuary: access, grant, complete valid prerequisite route
+✓ x_observer: access, grant, complete valid prerequisite route
+✓ x_frontier: access, grant, complete valid prerequisite route
+✓ x_machine: access, grant, complete valid prerequisite route
+✓ x_hive: access, grant, complete valid prerequisite route
+✓ x_lithoid: access, grant, complete valid prerequisite route
+✓ x_biome: access, grant, complete valid prerequisite route
+✓ x_avian: access, grant, complete valid prerequisite route
+✓ x_humanoid: access, grant, complete valid prerequisite route
+✓ dual doctrine and ethic gate uses AND; aquatic/plantoid uses explicit OR
+✓ ethic change parks active progress, retains target and resumes without duplication
+✓ doctrine changes block planned target but completed research stays usable
+✓ manual empty plan retains science income; selected branches operate in parallel
+✓ semi fills idle branches while respecting target; auto retains but ignores targets
+✓ remote special target auto advances all prerequisites until completion
+✓ manual mode, progress and dated history survive Save v8
+✓ legacy record gets semi mode without forging history dates or altering points
+✓ basic science victory and ascension do not require inaccessible specials
+✓ new escort is locked, paid once, completed and contributes combat power
+✓ building technology gate, real production, upkeep and max count
+✓ all eight specialized buildings can be paid and completed; real catalog effects exist
+✓ space structure needs technology, local constructor, real payment and one job
+✓ pacifist defense upgrade changes actual system defense
+✓ AI orders special escort through the same paid military budget
+✓ AI chooses affordable unlocked station and queues special building
+✓ unlock notification is emitted once; history exposes real source and benefits
+✓ mode buttons and blocked target details are visible, existing tree gestures retained
+✓ AI science follows its own species without reading hidden rival technology
+✓ ineligible special tech trade is rejected before payment
+GEÇEN: 34 KALAN: 0

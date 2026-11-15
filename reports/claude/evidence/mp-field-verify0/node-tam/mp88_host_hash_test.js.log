@@ -1,0 +1,6 @@
+✓ UI refresh changes only eight derived power/pressure day stamps; original serializer and RNG preserved
+✓ same full Save8 after explicit UI checkpoint on both sides, including every cache field
+✓ different UI refresh schedules preserve next-month decisions, full settled Save8 and RNG
+✓ fresh MP session from fixed world: exact host Save8, RNG and real mirror stream at every checkpoint
+✓ Save8 load alone does not reset an existing MP personal-notice observer history
+GEÇEN: 5 KALAN: 0

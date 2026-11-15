@@ -1,0 +1,4 @@
+PASS N1 uzak insan Fetih adayları: keşfedilmiş ama sahipliği BİLİNMEYEN sistem aday değil (host kabul etmez); oyuncu gözlemi sahipliği bildirince aday olur; tek oyunculu oyuncu ve AI kuralı aynı
+PASS N2 Savaşa Destek İste: aktif cephe + bekleyen hazırlık satırları warJoin maddesine bağlı; geçersiz satır gerekçeli; warSupportList salt okuma; teklif doğru cepheye bağlanır; kapanan savaşa gecikmiş kabul işlenmez
+PASS N3 sevkiyattaki filoyu birleştirme: host kuralı aynı (rules:shipment), filolar değişmez
+GEÇEN: 3 KALAN: 0

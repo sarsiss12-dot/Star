@@ -1,0 +1,20 @@
+✓ automatic military defenders match real declarations, not mere alliances
+✓ bilimsel federation has only conditional support, real motor adds no automatic war
+✓ ticaret federation has only conditional support, real motor adds no automatic war
+✓ plain alliance is conditional; it cannot silently become defense obligation
+✓ accepted offensive consent alone permits automatic attack-side entry
+✓ known overlord and border guard are shown and really defend
+✓ unknown member names, ids and member counts do not enter preview
+✓ no intelligence means a contacted foreign federation bond stays unknown
+✓ uncontacted target gives no identity even to direct preview API
+✓ opening preview and selecting goal spend no resources, day or RNG and start no war
+✓ one explicit final confirmation starts war and pays goal cost exactly once
+✓ cancelled confirmation callback cannot later declare war
+✓ loaded world invalidates the old confirmation token
+✓ changed federation obligation requires a new confirmation with the new summary
+✓ new resource deficit and doctrine blocker are revalidated before any cost
+✓ current federation war permission is displayed and actual declaration enforces same gate
+✓ Council risk is pure and later Council change forces reconfirmation
+✓ universal-peace doctrine rejects final action before any influence or RNG cost
+✓ final target death cannot create a goal or charge influence
+GEÇEN: 19 KALAN: 0

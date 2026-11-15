@@ -1,0 +1,25 @@
+✓ anlık ifşa eski komplo/sabotajı korur actor=0 success=false
+✓ anlık ifşa eski komplo/sabotajı korur actor=0 success=true
+✓ anlık ifşa eski komplo/sabotajı korur actor=2 success=false
+✓ anlık ifşa eski komplo/sabotajı korur actor=2 success=true
+✓ aynı ayın iki iftirası birleşmez; yalnız çözülen temizlenir
+✓ gecikmeli ifşa başka failin komplo izini korur
+✓ kaynak taşımayan eski v8 fısıltı ifşası anıları topluca silmez
+✓ gerçek falseFlag → deepInvestigate yalnız ilgili sabotajı siler actor=0
+✓ gerçek falseFlag → deepInvestigate yalnız ilgili sabotajı siler actor=2
+✓ eski kaynak taşımayan hitLog ifşası gerçek sabotajı korur
+✓ sahteKanit → hedefli sorusturma yalnız dosya anısını temizler
+✓ yakalanan sahteKanit önceki farklı masum dosyalarını doğru taraftan temizler
+✓ v8 kaynak kimliklerini ve sıradaki kimliği korur; yükleme RNG/günü değiştirmez
+✓ tür bazında normal anı birleştirmesi korunur
+✓ reddedilen fısıltı olay kimliği üretmez
+✓ fraksiyon günlüğü gerçek değişimi bildirir 98/18
+✓ fraksiyon günlüğü gerçek değişimi bildirir 3/-14
+✓ fraksiyon günlüğü gerçek değişimi bildirir 100/18
+✓ fraksiyon günlüğü gerçek değişimi bildirir 0/-14
+✓ fraksiyon günlüğü gerçek değişimi bildirir 50/18
+✓ Uzlaşı talep metni gerçekleşen ceza ile aynı
+✓ mutlu fraksiyon modları recalcMods içinde üretim etkisine bağlanır
+✓ 13 civic flag kendi katalog girdisini tanır; counter hâlâ kaldırılmıştır
+✓ Panoptikon karşı istihbaratı kendi mevcut formülüyle artırır
+GEÇEN: 24 KALAN: 0

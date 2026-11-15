@@ -1,0 +1,7 @@
+PASS M1 misafir B Fetih hedefleriyle savaş: warQuote host önizlemesi (meşruiyet + tutum), war yalnız geçerli hedeflerle; v2 kaydı; geçersiz hedef ve çift ilan reddedilir
+PASS M2 insan–insan savaş içi teslim: B → C "teslim iste" (offer want:vassal); C kabul eder → vasallık + cephe kapanır; ikinci kabul ve çift teklif reddedilir
+PASS M3 misafir C boyun eğme teklifi gönderir (give:vassal), misafir B kabul eder; B yetkisiz yanıt veremez
+  doktrin nedeniyle süren cephe: 2
+PASS M4 misafir başkan B federasyona karşı savaş önergesi (fedMotion fedWar) → misafir D oy → fedExecute; ortak barış iki insan başkan arasında offer/respond fedPeace
+PASS M5 Galaktik Gerilim lobi ayarı: configure kabul/ret; paket ayarı doğrulanır; Dengeli yazılmaz
+GEÇEN: 5 KALAN: 0

@@ -1,0 +1,7 @@
+✓ score has deterministic tonal phrases and breath at phrase ending
+✓ motif develops across phrases and four scenes differ
+✓ settings clamp, reject nonfinite, keep separate music/effects and mute
+✓ score observer and settings never affect save or game RNG
+✓ atmosphere reads only player-owned fleets, small war stays restrained
+✓ single delegated listener per event and no external assets
+GEÇEN: 6 KALAN: 0

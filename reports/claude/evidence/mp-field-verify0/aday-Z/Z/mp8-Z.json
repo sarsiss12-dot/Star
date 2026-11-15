@@ -1,0 +1,1166 @@
+{
+ "results": [
+  {
+   "name": "Z0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 10659
+  },
+  {
+   "name": "Z1 katılım yolları: B ana menü ÇOK OYUNCULU → ODAYA KATIL, C eski /mp/join?code= bağlantısı → ikisi de tam STARS arayüzü (/mp/play), oda kodu korunur, kendi devleti",
+   "status": "PASS",
+   "ms": 7192
+  },
+  {
+   "name": "Z2 katılım başarısızlığında aşama ekranda: yanlış kod → ODA BULUNAMADI; bağlantı yok → BAĞLANTI KESİLDİ (X: ayrı profil, bu odada kimliği yok)",
+   "status": "PASS",
+   "ms": 4579
+  },
+  {
+   "name": "Z3 canlı MP olay şeridi: B kartı FAREYLE, sonra DOKUNARAK kaydırır → kart kalkar, karar ☰ listesinde; host ayna yeniler, bağlantı kopup döner, sayfa yenilenir → kart geri gelmez; sonraki olay görünür; karar host'ta bir kez",
+   "status": "PASS",
+   "ms": 11937
+  },
+  {
+   "name": "Z4 takviye sevkiyatındaki filoyu birleştirme: host kuralı geçerli (ret), gerekçe Türkçe, art arda aynı uyarı tek satırda birleşir; karar kartları etkilenmez",
+   "status": "PASS",
+   "ms": 3440
+  },
+  {
+   "name": "Z5 kaydet → host ve misafirler kapanır → relay yeniden başlar → host kaydı YENİ odada açar ve misafir yokken devam eder: bekleyen / gizlenen olay doğru, tarih ilerlerken yeni olay ve anomali şeritte ve listede",
+   "status": "PASS",
+   "ms": 5353
+  },
+  {
+   "name": "Z6 misafirler yeni odaya döner: B ana menü ODAYA KATIL + yeni kod, C eski /mp/join bağlantısı → aynı devletler; tarih ve bekleyen kararlar korunur; kaydırılan kart geri gelmez; kimliksiz X \"OYUNCU KİMLİĞİ DOĞRULANAMADI\"",
+   "status": "PASS",
+   "ms": 9610
+  },
+  {
+   "name": "Z7 Fetih hedef seçimi: tek sistemli hedefte 0/0 + neden + pasif düğme + Vasallaştırmaya dön; pencere AÇIKKEN keşfedilen sistem listeye girer; başkent dışı hedefle seçim → önizleme → onay → gerçek savaş (misafir); host'ta aynı kural",
+   "status": "PASS",
+   "ms": 9218
+  },
+  {
+   "name": "Z8 müzakere masası: genel Savaş sözü MP'de pasif + neden; Savaşa Destek İste → B'nin aktif cephesi; C ret → yeniden teklif → C karşı teklif → B kabul → C savaşta (tek kez); host → B daveti kabul; kapanan savaşa gecikmiş kabul işlenmez",
+   "status": "PASS",
+   "ms": 9920
+  },
+  {
+   "name": "Z9 dünya ilerler ve emirler uygulanır: B gerçek komut yolundan filo emri verir; host günleri ilerler; emir host dünyasında, misafir aynası host ile aynı",
+   "status": "PASS",
+   "ms": 1252
+  },
+  {
+   "name": "Z10 dönen misafir B: olay kartına dokunup karar verir (host'ta bir kez, kart kalkar); filo emri gerçek motor işlevinden → host uygular, B haritasında aynı",
+   "status": "PASS",
+   "ms": 3386
+  },
+  {
+   "name": "Z11 Q6 toprak vaadi + destek teklifi: gerçek masada dokunuşla taslak; canlı dünyada taslak korunur; hat donunca gönderim kaybolsa da taslak + \"yanıt bekleniyor\"; tekrar basış ve yeniden bağlanma ÇİFT KAYIT üretmez; host'ta tek kayıt doğru cephe/sistemle, host gelen kutusunda",
+   "status": "PASS",
+   "ms": 31369
+  },
+  {
+   "name": "Z12 ret ve bağlantı hatası taslağı korur; karşı teklif + kabul vaadi TEK kez yazar; savaş kapanınca gecikmiş kabul işlenmez",
+   "status": "PASS",
+   "ms": 14305
+  },
+  {
+   "name": "Z13 ikinci kayıt/devam: DAVET PAYLAŞ bağlantısı (B) + aynı profilde ikinci sekme (yeni sekme alır, eski sekme nedenini gösterir, KATIL ile geri alır) + eski oda kodu (host yok → oda aşaması, kod düzenlenebilir) + C ana menüden; DEVAM ET; aynı odada C kopar/döner → aynı devlet, tarih ilerler, C filo emri host'ta ve C haritasında",
+   "status": "PASS",
+   "ms": 27115
+  }
+ ],
+ "metrics": {
+  "scen": "Z",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 729,
+    "buildMs": 795,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 867,
+    "buildMs": 924,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 8.6,
+      "p95": 8.6,
+      "max": 8.6
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 17,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 40.6,
+       "p95": 40.6,
+       "max": 40.6
+      },
+      "refresh": {
+       "n": 1,
+       "med": 3.2,
+       "p95": 3.2,
+       "max": 3.2
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 27,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 59.5,
+       "p95": 59.5,
+       "max": 59.5
+      },
+      "refresh": {
+       "n": 1,
+       "med": 4.6,
+       "p95": 4.6,
+       "max": 4.6
+      },
+      "longtask": {
+       "n": 1,
+       "med": 53,
+       "p95": 53,
+       "max": 53
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 721,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 25091,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "field": {
+   "E": {
+    "B": 1,
+    "C": 2
+   },
+   "menuJoin": {
+    "path": "/mp/play",
+    "search": "",
+    "full": true,
+    "basic": false,
+    "started": false,
+    "e": null,
+    "stage": null,
+    "status": "Kodu girip KATIL'a dokun."
+   },
+   "oldLink": {
+    "path": "/mp/play",
+    "search": "?code=XSJYA",
+    "full": true,
+    "basic": false,
+    "started": true,
+    "e": 2,
+    "stage": null,
+    "status": ""
+   },
+   "after": {
+    "B": {
+     "path": "/mp/play",
+     "search": "?code=XSJYA",
+     "full": true,
+     "basic": false,
+     "started": true,
+     "e": 1,
+     "stage": null,
+     "status": ""
+    },
+    "C": {
+     "path": "/mp/play",
+     "search": "?code=XSJYA",
+     "full": true,
+     "basic": false,
+     "started": true,
+     "e": 2,
+     "stage": null,
+     "status": ""
+    }
+   },
+   "badCode": {
+    "path": "/mp/play",
+    "search": "?code=ZZZZZ",
+    "full": true,
+    "basic": false,
+    "started": false,
+    "e": null,
+    "stage": "oda",
+    "status": "ODA BULUNAMADI · Oda kodu geçersiz ya da oda yok."
+   },
+   "offline": {
+    "path": "/mp/play",
+    "search": "?code=ZZZZZ",
+    "full": true,
+    "basic": false,
+    "started": false,
+    "e": null,
+    "stage": "baglanti",
+    "status": "BAĞLANTI KESİLDİ · Sunucuya bağlanılamadı. İnternet bağlantını ve davet adresini kontrol et."
+   },
+   "events": {
+    "enq": {
+     "r1": {
+      "ok": true,
+      "id": 1
+     },
+     "r2": {
+      "ok": true,
+      "id": 2
+     },
+     "pending": [
+      {
+       "id": 1,
+       "kind": "event"
+      },
+      {
+       "id": 2,
+       "kind": "anomaly"
+      }
+     ]
+    },
+    "cards0": [
+     {
+      "uid": 1,
+      "t": "Kayıp Sonda",
+      "kind": "event"
+     },
+     {
+      "uid": 2,
+      "t": "Terk Edilmiş İstasyon",
+      "kind": "anomaly"
+     }
+    ],
+    "afterMouse": [
+     {
+      "uid": 2,
+      "t": "Terk Edilmiş İstasyon",
+      "kind": "anomaly"
+     }
+    ],
+    "afterTouch": [],
+    "statusList": "Savaşlar, olaylar ve durumlar\n⚔ Savaş Merkezi · 0 düşman\n▣ Kayıp Sonda\n▣ Terk Edilmiş İstasyon\n📰 Galaktik Haber Ağı\nVazgeç",
+    "afterReload": [],
+    "next": [
+     {
+      "uid": 7,
+      "t": "Bilim Konseyi Talebi",
+      "kind": "event"
+     }
+    ],
+    "resolved": {
+     "before": "pending",
+     "after": {
+      "st": "resolved",
+      "done": 0
+     }
+    },
+    "again": {
+     "status": "rejected",
+     "code": "rules:engine",
+     "ms": 64,
+     "cid": "jmwi19wzabuirqm63"
+    }
+   },
+   "ship": {
+    "fx": {
+     "a": 28,
+     "t": 29,
+     "sys": 5,
+     "has": true
+    },
+    "direct": {
+     "status": "rejected",
+     "code": "rules:shipment",
+     "ms": 33,
+     "cid": "jmwi19x5giv5yfu64"
+    },
+    "alerts": [
+     "Host reddetti: Bu filo sevkiyatta (takviye / toplanma rotasında). Birleştirmeden önce sevkiyatı iptal et."
+    ]
+   },
+   "code1": "KYPF7",
+   "hostAlone": {
+    "saved": {
+     "a": "Bilim Konseyi Talebi",
+     "b": "Göçmen Filosu",
+     "keys": [
+      [
+       "ev:e1",
+       false
+      ],
+      [
+       "ev:e2",
+       true
+      ]
+     ]
+    },
+    "after": {
+     "day": 4,
+     "keys": [
+      [
+       "ev:e1",
+       false
+      ],
+      [
+       "ev:e2",
+       true
+      ]
+     ]
+    },
+    "cards": [
+     "Bilim Konseyi Talebi"
+    ],
+    "list": "Savaşlar, olaylar ve durumlar\n⚔ Savaş Merkezi · 0 düşman\n▣ Bilim Konseyi Talebi\n▣ Göçmen Filosu\n📰 Galaktik Haber Ağı\nVazgeç",
+    "newer": {
+     "neu": {
+      "ev": "Alaşım Grevi",
+      "an": "Anomali — Ithkrim-95",
+      "day": 7
+     },
+     "cards": [
+      "Bilim Konseyi Talebi",
+      "Alaşım Grevi",
+      "Anomali — Ithkrim-95"
+     ],
+     "list": "Savaşlar, olaylar ve durumlar\n⚔ Savaş Merkezi · 0 düşman\n▣ Bilim Konseyi Talebi\n▣ Göçmen Filosu\n▣ Alaşım Grevi\n▣ Anomali — Ithkrim-95\n📰 Galaktik Haber Ağı\nVazgeç"
+    }
+   },
+   "visitor": {
+    "path": "/mp/play",
+    "search": "?code=KYPF7",
+    "full": true,
+    "basic": false,
+    "started": false,
+    "e": null,
+    "stage": "kimlik",
+    "status": "OYUNCU KİMLİĞİ DOĞRULANAMADI · Oyun kayıttan devam ediyor ve bu cihazda bu kayda ait oyuncu kimliği yok. Host'tan kimliğini kurtarmasını iste."
+   },
+   "rejoin": {
+    "g": {
+     "day": 14,
+     "pending": [
+      2,
+      3
+     ],
+     "inbox": [
+      [
+       "personal:2",
+       true
+      ],
+      [
+       "personal:3",
+       false
+      ]
+     ],
+     "swiped": [
+      "personal:1",
+      "personal:2"
+     ]
+    },
+    "hd": 14,
+    "saved": {
+     "pending": [
+      2,
+      3
+     ],
+     "swiped": [
+      "personal:1",
+      "personal:2"
+     ]
+    }
+   },
+   "fetih": {
+    "fx": {
+     "t1": 3,
+     "t2": 4,
+     "t3": 5,
+     "s2": 25,
+     "s3": 0
+    },
+    "t1": {
+     "lead": "Talep edilecek sistemleri seç (0/0). Başkent hedef olamaz; hedefe en az bir sistem kalır.",
+     "why": [
+      "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı."
+     ],
+     "n": 0,
+     "ids": [],
+     "off": true,
+     "op": 0.38,
+     "vas": true,
+     "live": true
+    },
+    "toVassal": true,
+    "t3": {
+     "before": {
+      "lead": "Talep edilecek sistemleri seç (0/0). Başkent hedef olamaz; hedefe en az bir sistem kalır.",
+      "why": [
+       "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı."
+      ],
+      "n": 0,
+      "ids": [],
+      "off": true,
+      "op": 0.38,
+      "vas": true,
+      "live": true
+     },
+     "after": {
+      "lead": "Talep edilecek sistemleri seç (0/1). Başkent hedef olamaz; hedefe en az bir sistem kalır.",
+      "why": [],
+      "n": 1,
+      "ids": [
+       0
+      ],
+      "off": true,
+      "op": 0.38,
+      "vas": false,
+      "live": true
+     }
+    },
+    "t2pick": {
+     "lead": "Talep edilecek sistemleri seç (1/1). Başkent hedef olamaz; hedefe en az bir sistem kalır.",
+     "why": [],
+     "n": 1,
+     "ids": [
+      25
+     ],
+     "off": false,
+     "op": 1,
+     "vas": false,
+     "live": true
+    },
+    "t2": {
+     "sel": [
+      25
+     ],
+     "wg": {
+      "t": "fetih",
+      "start": 22.135680000000214,
+      "targets": [
+       25
+      ],
+      "v": 2
+     }
+    },
+    "host": {
+     "off": true,
+     "why": [
+      "Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı."
+     ]
+    }
+   },
+   "support": {
+    "F": 1,
+    "warOn": {
+     "warOn": [
+      true,
+      true
+     ],
+     "why": "⚔ Genel savaş sözü çok oyunculuda gönderilemez. Belirli bir savaşa katılım için Savaşa Destek İste."
+    },
+    "o1": {
+     "id": 1,
+     "want": [
+      {
+       "t": "warJoin",
+       "front": 1,
+       "target": 4
+      }
+     ]
+    },
+    "T4": {
+     "id": 6,
+     "r": {
+      "ok": true,
+      "extra": {
+       "front": 3
+      }
+     }
+    },
+    "late": {
+     "status": "rejected",
+     "code": "rules:closed",
+     "ms": 50,
+     "cid": "jmwi1apyasval5n1c"
+    }
+   },
+   "world": {
+    "mv": {
+     "fleet": 4,
+     "to": 37
+    },
+    "h": {
+     "day": 20.13336,
+     "at": 37,
+     "mv": null,
+     "path": []
+    },
+    "settle": {
+     "B": {
+      "e": 1,
+      "rev": 30,
+      "revMs": 480,
+      "buildMs": 533
+     },
+     "C": {
+      "e": 2,
+      "rev": 26,
+      "revMs": 600,
+      "buildMs": 667
+     }
+    }
+   },
+   "verify": {
+    "decision": {
+     "q": {
+      "id": 5,
+      "k": "e2"
+     },
+     "after": {
+      "card": false,
+      "modal": false
+     },
+     "again": {
+      "status": "rejected",
+      "code": "rules:engine",
+      "ms": 38,
+      "cid": "jmwi1at1oxup83lhl"
+     }
+    },
+    "move": {
+     "mv": {
+      "fleet": 4,
+      "from": 37,
+      "to": 5
+     },
+     "h": {
+      "sys": -1,
+      "mv": 5,
+      "path": [
+       5
+      ]
+     },
+     "g": {
+      "sys": -1,
+      "mv": 5,
+      "path": [
+       5
+      ]
+     }
+    },
+    "q6": {
+     "F": 1,
+     "T": 4,
+     "fx": {
+      "added": [
+       1,
+       3
+      ],
+      "cand": [
+       3,
+       1,
+       25
+      ]
+     },
+     "hostLocal": 1,
+     "picks": [
+      "3:1",
+      "1:1",
+      "25:1"
+     ],
+     "draft": {
+      "msg": "",
+      "tx": null,
+      "give": [
+       "landPromise:3"
+      ],
+      "want": [
+       "warJoin:1"
+      ],
+      "page": "deal",
+      "shown": true,
+      "builds": 34,
+      "trace": [
+       {
+        "tx": "5r7eo9",
+        "step": "draft",
+        "at": 1794759209105,
+        "day": 24,
+        "to": 2,
+        "give": [],
+        "want": [
+         {
+          "t": "warJoin",
+          "front": 1,
+          "target": 4
+         }
+        ]
+       },
+       {
+        "tx": "5r7eo9",
+        "step": "send",
+        "at": 1794759209105,
+        "day": 24,
+        "cid": "jmwi1akr43a5r7eo9",
+        "kind": "offer"
+       },
+       {
+        "tx": "5r7eo9",
+        "step": "reply",
+        "at": 1794759209145,
+        "day": 24,
+        "status": "ok",
+        "code": null,
+        "offer": 1,
+        "dup": false
+       },
+       {
+        "tx": "5r7eo9",
+        "step": "msg",
+        "at": 1794759209148,
+        "day": 24,
+        "ok": true,
+        "msg": "Teklif gönderildi — Yeşil Birlik. Durum: Gelen kutusu → Gönderilen."
+       },
+       {
+        "tx": "7wofay",
+        "step": "draft",
+        "at": 1794759210615,
+        "day": 25,
+        "to": 2,
+        "give": [],
+        "want": [
+         {
+          "t": "warJoin",
+          "front": 1,
+          "target": 4
+         }
+        ]
+       },
+       {
+        "tx": "7wofay",
+        "step": "send",
+        "at": 1794759210615,
+        "day": 25,
+        "cid": "jmwi1alx3dv7wofay",
+        "kind": "offer"
+       },
+       {
+        "tx": "7wofay",
+        "step": "reply",
+        "at": 1794759210670,
+        "day": 25,
+        "status": "ok",
+        "code": null,
+        "offer": 2,
+        "dup": false
+       },
+       {
+        "tx": "7wofay",
+        "step": "msg",
+        "at": 1794759210679,
+        "day": 25,
+        "ok": true,
+        "msg": "Teklif gönderildi — Yeşil Birlik. Durum: Gelen kutusu → Gönderilen."
+       }
+      ]
+     },
+     "live": {
+      "builds": 4,
+      "give": [
+       "landPromise:3"
+      ],
+      "want": [
+       "warJoin:1"
+      ],
+      "page": "deal",
+      "shown": true
+     },
+     "n0": 5,
+     "frozenSend": {
+      "msg": "Teklif host'a gönderildi — yanıt bekleniyor (işlem kvqds7). Taslak yanıt gelene dek korunur.",
+      "tx": {
+       "id": "kvqds7",
+       "tries": 1,
+       "sent": true
+      },
+      "give": [
+       "landPromise:3"
+      ],
+      "want": [
+       "warJoin:1"
+      ],
+      "page": "deal",
+      "shown": true,
+      "builds": 38,
+      "trace": [
+       {
+        "tx": "5r7eo9",
+        "step": "draft",
+        "at": 1794759209105,
+        "day": 24,
+        "to": 2,
+        "give": [],
+        "want": [
+         {
+          "t": "warJoin",
+          "front": 1,
+          "target": 4
+         }
+        ]
+       },
+       {
+        "tx": "5r7eo9",
+        "step": "send",
+        "at": 1794759209105,
+        "day": 24,
+        "cid": "jmwi1akr43a5r7eo9",
+        "kind": "offer"
+       },
+       {
+        "tx": "5r7eo9",
+        "step": "reply",
+        "at": 1794759209145,
+        "day": 24,
+        "status": "ok",
+        "code": null,
+        "offer": 1,
+        "dup": false
+       },
+       {
+        "tx": "5r7eo9",
+        "step": "msg",
+        "at": 1794759209148,
+        "day": 24,
+        "ok": true,
+        "msg": "Teklif gönderildi — Yeşil Birlik. Durum: Gelen kutusu → Gönderilen."
+       },
+       {
+        "tx": "7wofay",
+        "step": "draft",
+        "at": 1794759210615,
+        "day": 25,
+        "to": 2,
+        "give": [],
+        "want": [
+         {
+          "t": "warJoin",
+          "front": 1,
+          "target": 4
+         }
+        ]
+       },
+       {
+        "tx": "7wofay",
+        "step": "send",
+        "at": 1794759210615,
+        "day": 25,
+        "cid": "jmwi1alx3dv7wofay",
+        "kind": "offer"
+       },
+       {
+        "tx": "7wofay",
+        "step": "reply",
+        "at": 1794759210670,
+        "day": 25,
+        "status": "ok",
+        "code": null,
+        "offer": 2,
+        "dup": false
+       },
+       {
+        "tx": "7wofay",
+        "step": "msg",
+        "at": 1794759210679,
+        "day": 25,
+        "ok": true,
+        "msg": "Teklif gönderildi — Yeşil Birlik. Durum: Gelen kutusu → Gönderilen."
+       },
+       {
+        "tx": "kvqds7",
+        "step": "draft",
+        "at": 1794759227115,
+        "day": 59,
+        "to": 0,
+        "give": [
+         {
+          "t": "landPromise",
+          "front": 1,
+          "sys": 3
+         }
+        ],
+        "want": [
+         {
+          "t": "warJoin",
+          "front": 1,
+          "target": 4
+         }
+        ]
+       },
+       {
+        "tx": "kvqds7",
+        "step": "send",
+        "at": 1794759227115,
+        "day": 59,
+        "cid": "jmwi1aynf0ekvqds7",
+        "kind": "offer"
+       }
+      ]
+     },
+     "rePress": "Teklif yanıt bekliyor — aynı işlem yeniden gönderildi (çift teklif oluşmaz). İşlem kvqds7.",
+     "offers": [
+      {
+       "id": 6,
+       "from": 1,
+       "to": 0,
+       "status": "pending",
+       "give": [
+        {
+         "t": "landPromise",
+         "sys": 3,
+         "front": 1
+        }
+       ],
+       "want": [
+        {
+         "t": "warJoin",
+         "front": 1,
+         "target": 4
+        }
+       ]
+      }
+     ],
+     "offer": 6,
+     "final": {
+      "msg": "Teklif gönderildi — Kızıl Muhafız. Durum: Gelen kutusu → Gönderilen.",
+      "give": [],
+      "want": []
+     },
+     "trace": [
+      {
+       "tx": "kvqds7",
+       "step": "draft",
+       "at": 1794759227115,
+       "day": 59,
+       "to": 0,
+       "give": [
+        {
+         "t": "landPromise",
+         "front": 1,
+         "sys": 3
+        }
+       ],
+       "want": [
+        {
+         "t": "warJoin",
+         "front": 1,
+         "target": 4
+        }
+       ]
+      },
+      {
+       "tx": "kvqds7",
+       "step": "send",
+       "at": 1794759227115,
+       "day": 59,
+       "cid": "jmwi1aynf0ekvqds7",
+       "kind": "offer"
+      },
+      {
+       "tx": "kvqds7",
+       "step": "tap",
+       "at": 1794759229430,
+       "day": 59,
+       "same": true
+      },
+      {
+       "tx": "kvqds7",
+       "step": "resend-tap",
+       "at": 1794759229430,
+       "day": 59,
+       "cid": "jmwi1aynf0ekvqds7",
+       "sent": true,
+       "err": null
+      },
+      {
+       "tx": "kvqds7",
+       "step": "resend",
+       "at": 1794759238227,
+       "day": 59,
+       "cid": "jmwi1aynf0ekvqds7",
+       "sent": true,
+       "err": null
+      },
+      {
+       "tx": "kvqds7",
+       "step": "reply",
+       "at": 1794759238260,
+       "day": 59,
+       "status": "ok",
+       "code": null,
+       "offer": 6,
+       "dup": false
+      },
+      {
+       "tx": "kvqds7",
+       "step": "msg",
+       "at": 1794759238263,
+       "day": 59,
+       "ok": true,
+       "msg": "Teklif gönderildi — Kızıl Muhafız. Durum: Gelen kutusu → Gönderilen."
+      }
+     ],
+     "hostInbox": {
+      "record": {
+       "status": "pending",
+       "key": "deal:mp71:6"
+      },
+      "cards": 1
+     }
+    },
+    "reject": {
+     "msg": "Host reddetti: Oyun duraklatıldı; işlem yapılmadı. — taslak korunuyor; düzenleyip yeniden sunabilirsin.",
+     "give": [
+      "landPromise:25",
+      "res:min:1"
+     ],
+     "want": [
+      "warJoin:1"
+     ],
+     "offer": 7
+    },
+    "closing": {
+     "st0": 2,
+     "on0": true,
+     "msg": "Bağlantı yok; teklif gönderilmedi. Taslak korunuyor.",
+     "tx": false,
+     "give": 2,
+     "offer": 8
+    },
+    "counter": {
+     "ct": {
+      "ok": true,
+      "extra": {
+       "offer": 9
+      }
+     },
+     "accept": {
+      "ok": true,
+      "pending": true
+     },
+     "after": {
+      "min": 340.33659,
+      "promises": [
+       {
+        "sys": 3,
+        "front": 1,
+        "giver": 1,
+        "taker": 0,
+        "state": "open"
+       }
+      ],
+      "n": 1
+     }
+    },
+    "late": {
+     "via": "inbox",
+     "ok": false,
+     "why": "Host reddetti: Bu teklif artık açık değil."
+    },
+    "lateEngine": {
+     "ok": false,
+     "code": "rules:closed"
+    },
+    "rejoin2": {
+     "old": "KYPF7",
+     "code2": "JBH53",
+     "oldTab": {
+      "path": "/mp/play",
+      "search": "?code=KYPF7",
+      "full": true,
+      "basic": false,
+      "started": true,
+      "e": 2,
+      "stage": null,
+      "status": ""
+     },
+     "share": {
+      "title": "STARS odası",
+      "text": "STARS oda kodu: JBH53",
+      "url": "https://localhost:44405/mp/play?code=JBH53"
+     },
+     "bLobby": {
+      "path": "/mp/play",
+      "search": "?code=JBH53",
+      "full": true,
+      "basic": false,
+      "started": false,
+      "e": 1,
+      "stage": null,
+      "status": ""
+     },
+     "secondTab": {
+      "path": "/mp/play",
+      "search": "?code=JBH53",
+      "full": true,
+      "basic": false,
+      "started": false,
+      "e": 1,
+      "stage": null,
+      "status": ""
+     },
+     "firstTab": {
+      "path": "/mp/play",
+      "search": "?code=JBH53",
+      "full": true,
+      "basic": false,
+      "started": false,
+      "e": 1,
+      "stage": "kimlik",
+      "status": "OYUNCU KİMLİĞİ DOĞRULANAMADI · Bu oyuncu başka bir sekmede açıldı."
+     },
+     "firstBack": {
+      "path": "/mp/play",
+      "search": "?code=JBH53",
+      "full": true,
+      "basic": false,
+      "started": false,
+      "e": 1,
+      "stage": null,
+      "status": "Bağlanıyor…"
+     },
+     "oldCode": {
+      "path": "/mp/play",
+      "search": "",
+      "full": true,
+      "basic": false,
+      "started": false,
+      "e": null,
+      "stage": "oda",
+      "status": "ODA BULUNAMADI · Bu odada host yok. Host oyunu kayıttan yeni bir odada açtıysa YENİ kodu gir; aynı odaya dönecekse biraz sonra KATIL'a yeniden dokun.",
+      "inputs": {
+       "code": true,
+       "go": true
+      }
+     },
+     "move": {
+      "mv": {
+       "fleet": 7,
+       "from": 32,
+       "to": 2
+      },
+      "h": {
+       "sys": -1,
+       "mv": 2,
+       "path": [
+        2
+       ]
+      },
+      "g": {
+       "sys": -1,
+       "mv": 2,
+       "path": [
+        2
+       ]
+      }
+     }
+    }
+   }
+  },
+  "relayPid2": 25721,
+  "errors": []
+ }
+}

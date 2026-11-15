@@ -1,0 +1,8 @@
+{"cfg":{"re":true,"auto":false},"n":22,"kinds":{"anomaly:":1,"notify:anomaly":1,"notify:aideal":10,"chain:":2,"notify:chain":2,"event:":3,"notify:event":3},"inbox":["anomaly:Anomali — Xantar","chain:Derin Maden Kazası","chain:Derin Uzay Sinyali","event:Kayıp Sonda","event:Alaşım Grevi","event:Göçmen Filosu"]}
+anomaly Anomali — Xantar {"len":197,"ch":3,"head":"▁\nANOMALİ · Xantar\nYüzeyde binlerce yıl önce gömülmüş bir uygarlığın izleri. Baz"}
+chain Derin Maden Kazası {"len":708,"ch":5,"head":"▁\nDerin Maden Kazası\nIthkrim-95 I kolonisinde bir maden galerisi çöktü. Kurtarma"}
+chain Derin Uzay Sinyali {"len":487,"ch":5,"head":"▁\nDerin Uzay Sinyali\nZorootar dinleme istasyonumuz galaksinin dışından bir yayın"}
+event Kayıp Sonda {"len":163,"ch":4,"head":"▁\nOLAY\nYıllar önce fırlatılan bir sonda geri döndü. Hafızası şaşırtıcı derecede "}
+event Alaşım Grevi {"len":167,"ch":4,"head":"▁\nOLAY\nDökümhane işçileri üretimi durdurdu. Talepleri pahalı ama makul.\nAlaşım G"}
+event Göçmen Filosu {"len":197,"ch":4,"head":"▁\nOLAY\nYersiz yurtsuz bir mülteci filosu sınırlarında beliriyor. Sığınma istiyor"}
+errs []

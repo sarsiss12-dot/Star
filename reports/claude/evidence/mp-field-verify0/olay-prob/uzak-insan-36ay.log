@@ -1,0 +1,53 @@
+{
+ "humans": [
+  {
+   "id": 0,
+   "p": true,
+   "pend": [],
+   "inbox": [
+    "chain:Yörüngedeki Laboratuvar",
+    "chain:Sessiz Gemi",
+    "event:Kayıp Sonda",
+    "chain:Kayıp Koloni Sinyali"
+   ]
+  },
+  {
+   "id": 1,
+   "p": false,
+   "pend": [
+    "anomaly:a13:pending",
+    "chain:siyaset1:pending",
+    "event:e4:pending",
+    "event:e1:pending",
+    "event:e2:pending"
+   ],
+   "inbox": null,
+   "queue": 0
+  },
+  {
+   "id": 3,
+   "p": false,
+   "pend": [
+    "event:e1:pending",
+    "event:e4:pending",
+    "chain:hayalet1:pending",
+    "chain:salgin1:pending"
+   ],
+   "inbox": null,
+   "queue": 0
+  },
+  {
+   "id": 4,
+   "p": false,
+   "pend": [
+    "anomaly:a14:pending",
+    "event:e4:pending",
+    "chain:sinyal1:pending",
+    "event:e2:pending"
+   ],
+   "inbox": null,
+   "queue": 0
+  }
+ ],
+ "re": true
+}

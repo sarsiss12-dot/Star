@@ -1,0 +1,5 @@
+✓ 96B diagnostic census leaves full save, stocks and RNG unchanged
+✓ diagnostic counters deduplicate the same world/month and bound details
+✓ instrumented and uninstrumented 96B simulation produce identical full state
+✓ 96C production diagnostics on/off preserve actual monthly AI decisions and RNG
+GEÇEN: 4 KALAN: 0
