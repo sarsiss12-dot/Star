@@ -1,0 +1,37 @@
+FAIL F1 Synarth %100 yorgunluk: günlükte tek açık neden; yeniden ilanda ÖNİZLEME SAVAŞ YORGUNLUĞU bloğu
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /SAVAŞ YORGUNLUĞU/. Input:
+
+'⚔ SAVAŞ İLANI · Synarth Sığınağı\n' +
+  '✕\n' +
+  '1 Hedef ✓ · 2 Müttefikler (isteğe bağlı) · 3 Son onay\n' +
+  '1 · HEDEF\n' +
+  'Hedefi değiştir\n' +
+  'HEDEF: FETİH\n' +
+  'Dunipol-56 · Arephor · Corkar\n' +
+  'Barışta hedef sistemler sende kalır; hedef dışı işgaller iade edilir. Başkent hedef olamaz; hedef devlet yok edilmez.\n' +
+  '2 · MÜTTEFİKLERİ ÇAĞIR · isteğe bağlı\n' +
+  '3 · SON ONAY\n' +
+  'Hedef\n' +
+  'Synarth Sığınağı · Fetih\n' +
+  'Kesin destek\n' +
+  '—\n' +
+  'Hedefin bilinen destekçileri\n' +
+  'Bilinen yok\n' +
+  'Savaş yorgunluğu\n' +
+  'Senin %0 · Synarth Sığınağı %53\n' +
+  'Toplam bedel\n' +
+  '◈ 25 Etki\n' +
+  'Meşruiyet\n' +
+  '20 / gereken 39\n' +
+  "⚠ Synarth Sığınağı yorgunluğu ~%53 (son zorunlu barıştan tahmin): %100'de savaş zorunlu barışla durur; kayıpsız en geç 37 ay, gemi/sistem kaybıyla çok daha erken.\n" +
+  '⚠ Meşruiyet zayıf (20 / gereken 39): üçüncü taraflar kınayabilir.\n' +
+  'GEREKÇELER VE MEŞRUİYET · TAHMİNİ TUTUMLAR · AYRINTI\n' +
+  'Savaş İlan Et\n' +
+  'Vazgeç'
+
+    at /home/user/Star/tests/browser-field-war-siege0.cjs:42:14
+    at async test (/home/user/Star/tests/browser-field-war-siege0.cjs:15:42)
+    at async run (/home/user/Star/tests/browser-field-war-siege0.cjs:33:5)
+PASS F2 36K filo düşman başkentinde: SİSTEM paneli gerçek kuşatma durumu; barıştan sonra KUŞATMA DURDU + neden
+PASS F3 FİLO SEVKİYATLAR: tek liste, "Bekleyenleri Yeniden Dene (3)", çift gerçek dokunuş tek uygulama, doğru sonuç metni
+GEÇEN: 2 KALAN: 1

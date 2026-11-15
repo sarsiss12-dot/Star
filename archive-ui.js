@@ -21,7 +21,7 @@ const ArchiveUI = {
   shell(body,footer='',list=false,title='GALAKTİK HABER AĞI'){
     UI.openModal(`<div class="mhd"><span>${esc(title)}</span><button class="abtn" data-a="closem" aria-label="Haritaya dön">✕</button></div>
       <nav class="archiveTabs" aria-label="Haber ağı"><button class="abtn ${this.mode==='news'?'pri':''}" data-a="news" aria-pressed="${this.mode==='news'}">Haberler · ${GalacticNews.unread()}</button><button class="abtn ${this.mode==='inbox'?'pri':''}" data-a="diplomaticInbox" aria-pressed="${this.mode==='inbox'}">Gelen kutusu · ${DiplomaticInbox.pending()}</button></nav>
-      ${body}${list?'':`<div class="mft">${footer}<button class="ch" data-a="closem">Haritaya dön</button></div>`}`,'archiveShell');
+      ${body}${list?'':`<div class="mft">${footer}<button class="ch" data-a="closem">Haritaya dön</button></div>`}`,'archiveShell liveWorld');   /* WAR-COALITION.0: kimlikle çalışan pencere — misafirde dünya güncellemesini bekletmez */
     $('modal').classList.add('archiveHost');this.listVisible=list;
   },
   open(mode='news'){

@@ -1187,7 +1187,8 @@ function dealLabel(it){
     case 'nap':     return '🛡 Saldırmazlık paktı';
     case 'pact':    return '🤝 Ticaret anlaşması';
     case 'ally':    return '⚑ İttifak';
-    case 'warJoin': return '⚔ '+(it.plan?'Hazırlık #'+it.plan:'Cephe #'+it.front)+' · '+(G.emps[it.target]?.name||'Bilinmeyen devlet')+' karşısında destek';
+    case 'warJoin': {const p=it.plan&&typeof warCoalitionLabel==='function'?warCoalitionLabel(it):'';if(p)return p;   /* WAR-COALITION.0: davet kartı tek bakışta */
+      return '⚔ '+(it.plan?'Hazırlık #'+it.plan:'Cephe #'+it.front)+' · '+(G.emps[it.target]?.name||'Bilinmeyen devlet')+' karşısında destek';}
     case 'warOn':   return '⚔ ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + '\'a savaş ilanı';
     case 'peaceWith': return '🤲 ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + ' ile barış';
     case 'intel':   return '👁 Sensör anlaşması';
@@ -10559,6 +10560,7 @@ function warSupportGate(joiner,sponsor,it){
  if(!joiner||!sponsor||G.emps[joiner.id]!==joiner||G.emps[sponsor.id]!==sponsor||joiner===sponsor||joiner.dead||sponsor.dead||joiner.wild||sponsor.wild||joiner.crisisSide||sponsor.crisisSide)return no('Geçerli iki devlet gerekir');
  const plan=it?.plan&&warPreparation(it.plan);
  if(plan){if(plan.owner!==sponsor.id||plan.target!==it.target||warPreparationState(plan)!=='pending'||sponsor.war[it.target])return no('Savaş hazırlığı artık geçerli değil');}
+ else if(it?.draft===true&&!it.plan){if(!G.emps[it.target]||G.emps[it.target].dead||it.target===sponsor.id||sponsor.war[it.target])return no('Hedef geçerli değil');}   /* WAR-COALITION.0: ilan öncesi aday (teklif maddesi değil) */
  else if(it?.plan||!f||f.ended!==null||!warLedgerPair(...f.sides)||!f.sides.includes(sponsor.id)||!f.sides.includes(it.target)||it.target===sponsor.id)return no('Kaynak savaş sona erdi veya tarafı değişti');
  const enemy=G.emps[it.target];
  if(!joiner.contact[sponsor.id]||!sponsor.contact[joiner.id]||!joiner.contact[enemy.id]||!sponsor.contact[enemy.id])return no('Katılım için taraflarla temas gerekli');
@@ -10584,27 +10586,30 @@ function warPreparation(id){return G.warLedger?.preparations?.find(p=>p.id===id)
 function warPreparationState(p){return p.state==='pending'&&G.day>=p.expires?'expired':p.state;}
 function warPreparationsValid(rows){
  if(!Array.isArray(rows)||rows.length>64)return false;const ids=new Set();
- for(const p of rows){if(!p||!Number.isSafeInteger(p.id)||p.id<1||ids.has(p.id)||!G.emps[p.owner]||!G.emps[p.target]||p.owner===p.target||!Object.hasOwn(WAR_GOALS,p.goal)||!['pending','cancelled','launched'].includes(p.state)||!Number.isFinite(p.opened)||!Number.isFinite(p.expires)||p.opened<0||p.expires<=p.opened||!Array.isArray(p.commitments)||p.commitments.length>8)return false;ids.add(p.id);
+ for(const p of rows){if(!p||!Number.isSafeInteger(p.id)||p.id<1||ids.has(p.id)||!G.emps[p.owner]||!G.emps[p.target]||p.owner===p.target||!Object.hasOwn(WAR_GOALS,p.goal)||!['pending','cancelled','launched'].includes(p.state)||!Number.isFinite(p.opened)||!Number.isFinite(p.expires)||p.opened<0||p.expires<=p.opened||!Array.isArray(p.commitments)||p.commitments.length>8||!warCoalitionFieldsValid(p))return false;ids.add(p.id);
   const members=new Set();for(const c of p.commitments){const n=encodeOffer(c.terms),j=n&&n.give.concat(n.want).filter(i=>i.t==='warJoin');if(!n||!G.emps[n.from]||!G.emps[n.to]||!['accepted','applied','withdrawn'].includes(c.state)||!Number.isFinite(c.at)||j.length!==1||j[0].plan!==p.id||j[0].target!==p.target||j[0].front!==undefined||(n.give.includes(j[0])?n.from:n.to)!==c.member||(n.give.includes(j[0])?n.to:n.from)!==p.owner||n.give.concat(n.want).some(i=>!['res','passage','warJoin'].includes(i.t)||i.t==='res'&&(!RES[i.r]||!Number.isFinite(i.v)||i.v<=0||i.v>DEAL_AMOUNT_LIMIT))||!G.emps[c.member]||members.has(c.member)||![n.from,n.to].includes(p.owner)||![n.from,n.to].includes(c.member))return false;members.add(c.member);}
  }return true;
 }
-function warPrepareCreate(e,target,goal){
- const q=warDeclarationPreview(e,G.emps[target],goal);if(!q.ok||councilBlocksWar(e,G.emps[target]))return {ok:false,why:q.blockers.join(' · ')||'Konsey yasağı'};
+function warPrepareCreate(e,target,goal,opts=null){
+ const norm=opts?warPrepOptsNorm(e,G.emps[target],goal,opts):null;if(opts&&!norm)return {ok:false,why:'Geçersiz savaş hedefi seçimi'};   /* WAR-COALITION.0 */
+ const q=warDeclarationPreview(e,G.emps[target],goal,norm);if(!q.ok||councilBlocksWar(e,G.emps[target]))return {ok:false,why:q.blockers.join(' · ')||'Konsey yasağı'};
  const rows=G.warLedger?.preparations||[];if(rows.some(p=>p.owner===e.id&&p.target===target&&warPreparationState(p)==='pending'))return {ok:false,why:'Bu hedef için açık hazırlık var'};
  if(rows.filter(p=>warPreparationState(p)==='pending').length>=16)return {ok:false,why:'Bekleyen hazırlık sınırı'};
- const p={id:Math.max(0,...rows.map(x=>x.id))+1,owner:e.id,target,goal,opened:G.day,expires:G.day+180,state:'pending',commitments:[]};
+ const p={id:Math.max(0,...rows.map(x=>x.id))+1,owner:e.id,target,goal,opened:G.day,expires:G.day+180,state:'pending',commitments:[],...(norm?{opts:norm}:{})};
  if(!G.warLedger)G.warLedger=warLedgerEmpty();G.warLedger.preparations=rows.filter(x=>warPreparationState(x)==='pending').concat(rows.filter(x=>warPreparationState(x)!=='pending').slice(-47),p);return {ok:true,id:p.id};
 }
 function warPrepareAccept(offer,archived){
  if(G._sideBuf)return false;const q=dealQuote(offer);if(!q.ok)return false;const n=encodeOffer(q.norm),joins=n.give.concat(n.want).filter(x=>x.t==='warJoin'),j=joins[0],p=j&&warPreparation(j.plan);
  if(joins.length!==1||!p||n.give.concat(n.want).some(x=>!['res','passage','warJoin'].includes(x.t)))return false;
  const member=n.give.includes(j)?n.from:n.to; // encodeOffer allocates lists, j is an exact member of them
- if(p.owner===(member)||![n.from,n.to].includes(p.owner)||p.commitments.some(c=>c.member===member&&c.state!=='withdrawn')||p.commitments.length>=8)return false;
- const tx=dealTxBegin();try{p.commitments=p.commitments.filter(c=>c.member!==member);p.commitments.push({member,terms:n,at:G.day,state:'accepted'});if(archived){archived.status='accepted';archived.finished=G.day;}return true;}catch{dealTxRollback(tx);return false;}
+ if(p.owner===(member)||![n.from,n.to].includes(p.owner)||p.commitments.some(c=>c.member===member&&c.state!=='withdrawn'&&!warCommitStale(p,c))||p.commitments.filter(c=>c.member!==member).length>=8)return false;
+ if(p.invites&&p.invites.some(v=>v.member===member&&v.state==='closed'&&!p.invites.some(w=>w.member===member&&w.at>v.at)))return false;   /* WAR-COALITION.0: koşulları değişen davet eski şartla kabul edilemez */
+ const tx=dealTxBegin();try{p.commitments=p.commitments.filter(c=>c.member!==member);p.commitments.push({member,terms:n,at:G.day,state:'accepted',...(p.opts!==undefined?{sig:warPrepSig(p)}:{})});warInviteMark(p,member,'accepted');if(archived){archived.status='accepted';archived.finished=G.day;}return true;}catch{dealTxRollback(tx);return false;}
 }
-function warPrepareQuote(e,id){
+function warPrepareQuote(e,id,mode=null){
+ if(mode==='partial')return warCoalitionQuote(e,id);   /* WAR-COALITION.0 */
  const p=warPreparation(id),no=why=>({ok:false,why,stamp:''});if(!p||p.owner!==e.id||warPreparationState(p)!=='pending')return no('Hazırlık açık değil veya yetkin yok');
- const preview=warDeclarationPreview(e,G.emps[p.target],p.goal);if(!preview.ok||councilBlocksWar(e,G.emps[p.target]))return no(preview.blockers.join(' · ')||'Konsey yasağı');
+ const preview=warDeclarationPreview(e,G.emps[p.target],p.goal,p.opts||null);if(!preview.ok||councilBlocksWar(e,G.emps[p.target]))return no(preview.blockers.join(' · ')||'Konsey yasağı');
  const contracts=p.commitments.filter(c=>c.state==='accepted');if(!contracts.length)return no('En az bir açık kabul gerekli; basit ilan yolu ayrı kullanılabilir');
  const sums=new Map(),add=(id,r,n)=>{const k=id+':'+r;sums.set(k,(sums.get(k)||0)+n);};add(e.id,'etk',preview.cost);
  for(const c of contracts){const q=dealQuote(c.terms);if(!q.ok)return no('Bir katılımcının savaş veya anlaşma koşulları değişti; kabulü geri çekip yeniden müzakere et');
@@ -10612,24 +10617,24 @@ function warPrepareQuote(e,id){
   add(q.norm.from,'etk',q.cost);
  }
  for(const [key,n]of sums){const[id,r]=key.split(':');if((G.emps[+id].res[r]||0)<n)return no('Toplam taahhütler için kaynak yetersiz');}
- return {ok:true,why:'Son onayda ilan, bütün katılımlar ve bedeller birlikte uygulanır',stamp:JSON.stringify([p.id,p.goal,p.target,preview.signature,contracts.map(c=>c.terms)]),members:contracts.map(c=>c.member)};
+ return {ok:true,why:'Son onayda ilan, bütün katılımlar ve bedeller birlikte uygulanır',stamp:warStampHash(JSON.stringify([p.id,p.goal,p.target,preview.signature,contracts.map(c=>c.terms)])),members:contracts.map(c=>c.member)};   /* WAR-COALITION.0: özet damga (misafir 8192 karakter çerçeve sınırı) */
 }
 function warPrepareWithdraw(e,id,member=null){
  const p=warPreparation(id);if(!p||warPreparationState(p)!=='pending')return {ok:false,why:'Hazırlık kapalı'};
- if(member===null&&p.owner===e.id){p.state='cancelled';return {ok:true};}
+ if(member===null&&p.owner===e.id){p.state='cancelled';warInviteCloseAll(p,'Hazırlık iptal edildi');return {ok:true};}
  const c=p.commitments.find(x=>x.member===member&&x.state==='accepted');if(!c||e.id!==p.owner&&e.id!==member)return {ok:false,why:'Bu kabul üzerinde yetkin yok'};c.state='withdrawn';return {ok:true};
 }
-function warPrepareView(e){return (G.warLedger?.preparations||[]).filter(p=>p.owner===e.id||p.commitments.some(c=>c.member===e.id)).map(p=>({id:p.id,owner:p.owner,target:p.target,goal:p.goal,opened:p.opened,expires:p.expires,state:warPreparationState(p),commitments:p.commitments.filter(c=>p.owner===e.id||c.member===e.id).map(c=>({member:c.member,state:c.state,terms:encodeOffer(c.terms)})),...(p.owner===e.id?{quote:ColonyInfo.read(()=>warPrepareQuote(e,p.id))}:{})}));}
-function warPrepareLaunch(e,id,stamp){
- const p=warPreparation(id),q=warPrepareQuote(e,id);if(!q.ok||q.stamp!==stamp||_dealTxActive||_warLaunchBuffer||G._sideBuf)return {ok:false,why:q.why||'Koşullar değişti; yeniden önizle'};
+function warPrepareView(e){return (G.warLedger?.preparations||[]).filter(p=>p.owner===e.id||p.commitments.some(c=>c.member===e.id)).map(p=>({id:p.id,owner:p.owner,target:p.target,goal:p.goal,opened:p.opened,expires:p.expires,state:warPreparationState(p),commitments:p.commitments.filter(c=>p.owner===e.id||c.member===e.id).map(c=>({member:c.member,state:c.state,terms:encodeOffer(c.terms),...(warCommitStale(p,c)?{stale:true}:{})})),...(p.opts?{opts:JSON.parse(JSON.stringify(p.opts))}:{}),...(p.owner===e.id&&p.invites?{invites:p.invites.map(v=>warInviteView(p,v))}:{}),...(p.owner===e.id?{quote:ColonyInfo.read(()=>warPrepareQuote(e,p.id))}:{})}));}
+function warPrepareLaunch(e,id,stamp,mode=null){
+ const p=warPreparation(id),q=warPrepareQuote(e,id,mode);if(!q.ok||q.stamp!==stamp||_dealTxActive||_warLaunchBuffer||G._sideBuf)return {ok:false,why:q.why||'Koşullar değişti; yeniden önizle'};
  const tx=dealTxBegin(),buf=[];_warLaunchBuffer=buf;try{
   G._sideBuf=[];G._dealAuth=true;
-  if(!declareWar(e,G.emps[p.target])||!setWarGoal(e,G.emps[p.target],p.goal))throw Error('Savaş ilanı uygulanamadı');
+  if(!declareWar(e,G.emps[p.target])||!setWarGoal(e,G.emps[p.target],p.goal,p.opts||null))throw Error('Savaş ilanı uygulanamadı');
   commitSideBuffer(G._sideBuf);buf.push(...G._sideBuf);delete G._sideBuf;
   const front=warLedgerFind(e.id,p.target);if(!front)throw Error('Cephe oluşturulamadı');
-  for(const c of p.commitments.filter(c=>c.state==='accepted')){const n=encodeOffer(c.terms);for(const list of[n.give,n.want])for(let i=0;i<list.length;i++)if(list[i].t==='warJoin')list[i]={t:'warJoin',front:front.id,target:p.target};
+  for(const c of p.commitments.filter(c=>c.state==='accepted'&&(mode!=='partial'||q.members.includes(c.member)))){const n=encodeOffer(c.terms);for(const list of[n.give,n.want])for(let i=0;i<list.length;i++)if(list[i].t==='warJoin')list[i]={t:'warJoin',front:front.id,target:p.target};
    if(!executeDeal(n))throw Error('Katılım şartları son anda değişti');c.state='applied';}
-  p.state='launched';p.front=front.id;p.finished=G.day;
+  p.state='launched';p.front=front.id;p.finished=G.day;if(p.invites)warInviteCloseAll(p,'Savaş ilan edildi; ilan öncesi teklif kapandı');
  }catch(err){dealTxRollback(tx);return {ok:false,why:'Hazırlık uygulanamadı; savaş ve bütün bedeller geri alındı'};}
  finally{_warLaunchBuffer=null;dealTxRestoreAuth(tx);}
  flushSideBuffer(buf);return {ok:true,front:p.front};
@@ -11180,8 +11185,10 @@ function warSurrenderGrace(sub){const c=sub?.vassalContract;return !!(c&&c.statu
 function warExhaustionClose(e,o){
  if(!e||!o||!e.war[o.id])return false;
  const lock=!canPeace(e,o),f=warLedgerFind(e.id,o.id);
- if(lock){if(e.wg)delete e.wg[o.id];if(o.wg)delete o.wg[e.id];if(e.proxyWar)delete e.proxyWar[o.id];if(o.proxyWar)delete o.proxyWar[e.id];}
  makePeace(e,o,lock?'exhaustion-lock':'exhaustion',e.id,{force:true,quiet:true});
+ /* WAR-COALITION.0: kilidi kıran hedef/vekil kayıt temizliği makePeace'ten SONRA — önce silinince warFetihSettle hedefi göremiyor, hedef dışı işgal
+    iade edilmiyordu (C7). Ateşkes Fetih barışıyla aynı sahiplik kuralını uygular. */
+ if(lock){if(e.wg)delete e.wg[o.id];if(o.wg)delete o.wg[e.id];if(e.proxyWar)delete e.proxyWar[o.id];if(o.proxyWar)delete o.proxyWar[e.id];}
  e.exh[o.id]=55;o.exh=o.exh||{};o.exh[e.id]=Math.min(o.exh[e.id]||0,55);
  const pid=G.p?.id,mode=lock?'zorunlu ateşkes (doktrin barış antlaşmasını yasaklıyor)':'zorunlu barış',tag=f?' · Savaş #'+f.id:'';
  if(e.id===pid)say('SAVAŞ YORGUNLUĞU %100 — '+o.name+' ile '+mode+'. Ordun savaşamıyor; yorgunluk %55\'ten barışta ayda 2,5 azalır'+tag,'war');
@@ -11200,3 +11207,183 @@ function warExhaustionForecast(actor,target){
  return {own:Math.round(own),foe:foe===null?null:Math.round(foe),basis,ownMonths:months(own),foeMonths:months(foe)};
 }
 /* END FIELD-WAR-SIEGE.0 WAR */
+
+/* ═══ WAR-COALITION.0 — savaş ilanında koalisyon: aynı hazırlık kaydı (G.warLedger.preparations), yeni ikinci depo yok ═══
+   p.opts   : seçilen Fetih sistemleri / Vasallaştırma türü+hükmü (yalnız arayüzden açılan hazırlıkta; AI yolu eskisi gibi opts'suz)
+   p.invites: davet durumları (pending/accepted/countered/rejected/expired/closed) — yalnız kullanıldığında yazılır, en çok 16
+   c.sig    : kabulün hangi hedef şartlarıyla verildiği; şart değişince kabul "yeniden onay" bekler, son onaya sessizce girmez.
+   Kısmi son onay (warCoalitionQuote) yalnız güncel ve geçerli kabulleri sayar; damga bu kadroyu sabitler. RNG: yalnız davet anında
+   mevcut aiRespond (tek oyunculu müzakere masasıyla aynı yol). */
+function warPrepOptsNorm(e,foe,goal,opts){
+ const v=e&&foe?warGoalOptions(e,foe,goal,opts):null;if(!v)return null;
+ return goal==='fetih'?{targets:v.targets.slice()}:{vtype:opts.vtype,war:opts.war};
+}
+function warPrepSig(p){return JSON.stringify([p.goal,p.opts||null]);}
+function warCommitStale(p,c){return (p.opts!==undefined||c.sig!==undefined)&&c.sig!==warPrepSig(p);}
+function warCoalitionFieldsValid(p){
+ if(p.opts!==undefined&&(!p.opts||typeof p.opts!=='object'||(p.goal==='fetih'?!(Array.isArray(p.opts.targets)&&p.opts.targets.length>=1&&p.opts.targets.length<=WAR_FETIH_MAX&&p.opts.targets.every(id=>Number.isSafeInteger(id)&&G.sys[id])):p.goal==='boyun'?!warVassalGoalTerms(p.opts.vtype,p.opts.war):true)))return false;
+ if(p.commitments.some(c=>c.sig!==undefined&&(typeof c.sig!=='string'||c.sig.length>2000)))return false;
+ if(p.invites===undefined)return true;
+ return Array.isArray(p.invites)&&p.invites.length<=16&&p.invites.every(v=>v&&G.emps[v.member]&&v.member!==p.owner&&['pending','accepted','countered','rejected','expired','closed'].includes(v.state)&&Number.isFinite(v.at)&&Number.isFinite(v.expires)&&(v.why===undefined||typeof v.why==='string'&&v.why.length<=300)&&(v.counter===undefined||!!encodeOffer(v.counter))&&(v.terms===undefined||!!encodeOffer(v.terms))&&(v.offer===undefined||v.offer===null||Number.isSafeInteger(v.offer)));
+}
+function warInviteState(p,v){return ['pending','countered'].includes(v.state)&&G.day>=v.expires?'expired':v.state;}
+function warInviteLast(p,member){const r=(p.invites||[]).filter(v=>v.member===member);return r[r.length-1]||null;}
+function warInviteAdd(p,v){
+ const rows=(p.invites||[]).filter(x=>x.member!==v.member);rows.push(v);
+ while(rows.length>16){const i=rows.findIndex(x=>!['pending','countered'].includes(warInviteState(p,x)));rows.splice(i>=0?i:0,1);}
+ p.invites=rows;return v;
+}
+function warInviteMark(p,member,state,why){const v=p&&p.invites&&warInviteLast(p,member);if(!v)return;v.state=state;v.at=G.day;if(why)v.why=String(why).slice(0,300);else if(state==='accepted')delete v.why;if(state!=='countered')delete v.counter;}
+function warInviteCloseAll(p,why){for(const v of p.invites||[])if(['pending','countered'].includes(warInviteState(p,v))){v.state='closed';v.why=why;delete v.counter;}}
+function warInviteView(p,v){return {member:v.member,state:warInviteState(p,v),at:v.at,expires:v.expires,...(v.why?{why:v.why}:{}),...(v.counter?{counter:encodeOffer(v.counter)}:{}),...(v.terms?{terms:encodeOffer(v.terms)}:{}),...(v.human?{human:true}:{}),...(Number.isSafeInteger(v.offer)?{offer:v.offer}:{})};}
+function warCoalitionQuote(e,id){
+ const p=warPreparation(id),no=why=>({ok:false,why,stamp:'',members:[],invalid:[],own:{}});
+ if(!p||p.owner!==e.id||warPreparationState(p)!=='pending')return no('Hazırlık açık değil veya yetkin yok');
+ const target=G.emps[p.target];if(!target||target.dead)return no('Hedef devlet artık yok');
+ const preview=warDeclarationPreview(e,target,p.goal,p.opts||null);if(!preview.ok||councilBlocksWar(e,target))return no(preview.blockers.join(' · ')||'Konsey yasağı');
+ let valid=[];const invalid=[];
+ for(const c of p.commitments.filter(c=>c.state==='accepted')){
+  if(warCommitStale(p,c)){invalid.push({member:c.member,why:'Savaş hedefi değişti; güncel koşulları yeniden onaylaması gerekir'});continue;}
+  const q=dealQuote(c.terms);if(!q.ok){invalid.push({member:c.member,why:(q.reasons&&q.reasons[0])||'Koşulları değişti'});continue;}
+  valid.push({c,q});
+ }
+ const totals=list=>{const sums=new Map(),add=(id,r,n)=>{const k=id+':'+r;sums.set(k,(sums.get(k)||0)+n);};add(e.id,'etk',preview.cost);
+  for(const {q} of list){for(const [id,items]of[[q.norm.from,q.norm.effectiveGive],[q.norm.to,q.norm.effectiveWant]])for(const i of items)if(i.t==='res')add(id,i.r,i.v);add(q.norm.from,'etk',q.cost);}return sums;};
+ for(let guard=0;guard<9;guard++){const sums=totals(valid),short=[...sums].find(([k,n])=>(G.emps[+k.split(':')[0]].res[k.split(':')[1]]||0)<n);if(!short)break;
+  const who=+short[0].split(':')[0];if(who===e.id)return no('Toplam bedel için kaynağın yetersiz ('+(RES[short[0].split(':')[1]]?.n||short[0].split(':')[1])+')');
+  invalid.push({member:who,why:'Taahhüt ettiği kaynak artık yetmiyor'});valid=valid.filter(v=>v.c.member!==who);}
+ const own={};for(const [k,n] of totals(valid)){const [id,r]=k.split(':');if(+id===e.id)own[r]=Math.round(n);}
+ const pending=(p.invites||[]).filter(v=>['pending','countered'].includes(warInviteState(p,v))).map(v=>v.member);
+ return {ok:true,why:valid.length?'Son onayda ilan, geçerli kabuller ve bedeller birlikte uygulanır':'Kabul edilmiş destek yok; ilan tek başına yapılır',
+  stamp:warStampHash(JSON.stringify([p.id,p.goal,p.opts||null,p.target,preview.signature,valid.map(v=>v.c.terms)])),members:valid.map(v=>v.c.member),invalid,own,pending};
+}
+/* Damga: tam kanonik metnin iki bağımsız 32 bit özeti (MP'de istemci çerçeve sınırına sığar; aynı metin = aynı damga). Güvenlik değil, eşzamanlılık denetimi. */
+/* İnsan alıcının gelen kutusu kartı: desteklenen taraf, hedef, savaş amacı, katılımın başlangıcı ve hazırlığın son günü (yalnız yeni akışın seçenekli hazırlığında). */
+function warCoalitionLabel(it){const p=warPreparation(it.plan);if(!p||!p.opts||p.target!==it.target)return '';
+ const n=id=>G.emps[id]?.name||'Bilinmeyen devlet',goal=p.goal==='fetih'?'Fetih · '+(p.opts.targets||[]).map(id=>G.sys[id]?.name||'?').join(', '):'Vasallaştırma · '+(VASSAL_TYPES[p.opts.vtype]?.n||'?');
+ return '⚔ '+n(p.owner)+' yanında '+n(it.target)+' karşısına savaş · '+goal+' · katılım '+n(p.owner)+' savaşı ilan ettiği anda başlar (hazırlık #'+p.id+', en geç gün '+Math.floor(p.expires)+')';}
+function warStampHash(t){let a=0x811c9dc5,b=0x9747b28c;for(let i=0;i<t.length;i++){const c=t.charCodeAt(i);a=Math.imul(a^c,16777619)>>>0;b=Math.imul(b^c,2246822519)>>>0;b=(b<<13|b>>>19)>>>0;}return 'c'+t.length.toString(36)+'-'+a.toString(36)+'-'+b.toString(36);}
+function warPrepareUpdate(e,id,goal,opts){
+ const p=warPreparation(id);if(!p||p.owner!==e.id||warPreparationState(p)!=='pending')return {ok:false,why:'Hazırlık açık değil veya yetkin yok'};
+ const norm=warPrepOptsNorm(e,G.emps[p.target],goal,opts);if(!norm)return {ok:false,why:'Geçersiz savaş hedefi seçimi'};
+ if(warPrepSig(p)===JSON.stringify([goal,norm]))return {ok:true,same:true};
+ const q=warDeclarationPreview(e,G.emps[p.target],goal,norm);if(!q.ok)return {ok:false,why:q.blockers.join(' · ')};
+ p.goal=goal;p.opts=norm;warInviteCloseAll(p,'Savaş hedefi değişti; güncel şartlarla yeniden davet et');
+ return {ok:true,stale:p.commitments.filter(c=>c.state==='accepted'&&warCommitStale(p,c)).map(c=>c.member)};
+}
+function warCoalitionItems(p,x){
+ const res=(list,side)=>(Array.isArray(list)?list:[]).filter(i=>i&&(i.t==='passage'||i.t==='res'&&RES[i.r]&&Number.isSafeInteger(i.v)&&i.v>0&&i.v<=DEAL_AMOUNT_LIMIT)).slice(0,6).map(i=>i.t==='passage'?{t:'passage'}:{t:'res',r:i.r,v:i.v});
+ return {give:res(x.give),want:[{t:'warJoin',plan:p.id,target:p.target}].concat(res(x.want).filter(i=>i.t==='passage'))};
+}
+function warCoalitionInvite(e,id,list,hooks={}){
+ const p=warPreparation(id);if(!p||p.owner!==e.id||warPreparationState(p)!=='pending')return {ok:false,why:'Hazırlık açık değil veya yetkin yok'};
+ if(!Array.isArray(list)||!list.length||list.length>8||new Set(list.map(x=>x&&x.member)).size!==list.length)return {ok:false,why:'1–8 farklı devlet seç'};
+ const busy=()=>new Set([...p.commitments.filter(c=>c.state==='accepted'&&!warCommitStale(p,c)).map(c=>c.member),...(p.invites||[]).filter(v=>['pending','countered'].includes(warInviteState(p,v))).map(v=>v.member)]);
+ if(new Set([...busy(),...list.map(x=>x.member)]).size>8)return {ok:false,why:'Bir hazırlıkta en çok 8 destekçi / bekleyen davet'};
+ const out=[];
+ for(const x of list){const m=G.emps[x&&x.member];
+  if(!m||m===e||m.id===p.target||m.dead||m.wild||!e.contact[m.id]){out.push({member:x&&x.member,result:'blocked',why:'Geçerli temaslı devlet değil'});continue;}
+  if(busy().has(m.id)){out.push({member:m.id,result:'skip',why:'Zaten davet edildi veya kabul etti'});continue;}
+  const it=warCoalitionItems(p,x||{}),o={from:e.id,to:m.id,give:it.give,want:it.want,born:G.day,expires:Math.min(p.expires,G.day+180)},q=dealQuote(o);
+  if(!q.ok){out.push({member:m.id,result:'blocked',why:(q.reasons&&q.reasons[0])||'Davet uygulanamıyor'});continue;}
+  const base={member:m.id,at:G.day,expires:o.expires,terms:encodeOffer(q.norm)};
+  if(!m.ai){const r=hooks.human?hooks.human(m,o):{ok:false,why:'Bu insan oyuncu bağlı değil'};
+   if(r&&r.ok){warInviteAdd(p,{...base,state:'pending',human:true,offer:Number.isSafeInteger(r.offer)?r.offer:null});out.push({member:m.id,result:'pending'});}
+   else out.push({member:m.id,result:'blocked',why:(r&&r.why)||'Gönderilemedi'});continue;}
+  const r=aiRespond(m,q.norm);
+  if(r.v==='kabul'){warInviteAdd(p,{...base,state:'pending'});if(executeDeal(q.norm))out.push({member:m.id,result:'accepted'});else{warInviteMark(p,m.id,'rejected','Kabul uygulanamadı; koşullar değişti');out.push({member:m.id,result:'rejected',why:'Kabul uygulanamadı'});}continue;}
+  if(r.v==='karsi'&&Array.isArray(r.add)&&r.add.length){const c={from:m.id,to:e.id,give:q.norm.want.map(i=>({...i})),want:q.norm.give.concat(r.add).map(i=>({...i})),born:G.day,expires:o.expires},cq=dealQuote(c);
+   if(cq.ok){warInviteAdd(p,{...base,state:'countered',counter:encodeOffer(cq.norm),why:String(r.why||'Karşı teklif').slice(0,300)});out.push({member:m.id,result:'countered',why:r.why});continue;}}
+  warInviteAdd(p,{...base,state:'rejected',why:String(r.why||'Reddetti').slice(0,300)});out.push({member:m.id,result:'rejected',why:r.why});
+ }
+ return {ok:true,results:out};
+}
+function warCoalitionReply(e,id,member,action){
+ const p=warPreparation(id);if(!p||p.owner!==e.id||warPreparationState(p)!=='pending')return {ok:false,why:'Hazırlık açık değil veya yetkin yok'};
+ const v=warInviteLast(p,member);if(!v||warInviteState(p,v)!=='countered'||!v.counter)return {ok:false,why:'Yanıtlanacak güncel karşı teklif yok'};
+ if(v.human)return {ok:false,why:'İnsan oyuncunun karşı teklifi gelen kutusundan yanıtlanır'};
+ if(action==='reject'){v.state='rejected';v.why='Karşı teklifi reddettin';delete v.counter;return {ok:true};}
+ if(action!=='accept')return {ok:false,why:'Geçersiz yanıt'};
+ const q=dealQuote(v.counter);if(!q.ok)return {ok:false,why:(q.reasons&&q.reasons[0])||'Karşı teklif artık uygulanamıyor'};
+ return executeDeal(v.counter)?{ok:true}:{ok:false,why:'Karşı teklif uygulanamadı; koşullar değişti'};
+}
+const WAR_COAL_REACH=new WeakMap();
+function warCoalitionReach(m,target,e){
+ let c=WAR_COAL_REACH.get(G.sys);if(!c){c=new Map();WAR_COAL_REACH.set(G.sys,c);}
+ const k=Math.floor(G.day)+':'+m.id+':'+target.id+':'+e.id;if(c.has(k))return c.get(k);if(c.size>512)c.clear();
+ const v=warPure(()=>warSupportReach(m,target,e,[]));c.set(k,v);return v;
+}
+function warCoalitionWhy(m,target,e,why){
+ if(/ittifak veya saldırmazlık/.test(why))return m.ally[target.id]||target.ally[m.id]?'Hedefle ittifakı var':'Hedefle saldırmazlık paktı var';
+ if(/temas gerekli/.test(why))return !m.contact[target.id]?'Hedefle teması yok':'Seninle teması yok';
+ if(/Barış sonrası/.test(why))return 'Hedefle yakın zamanda barış yaptı; bekleme süresi sürüyor';
+ return why;
+}
+function warCoalitionCandidates(e,target,p,preview){
+ const fed=findFed(e),rows=[],order={accepted:0,countered:1,pending:2,stale:3,invitable:4,rejected:5,expired:6,closed:7,auto:8,sameSide:9,blocked:10};
+ for(const m of G.emps){if(m===e||m===target||m.dead||m.wild||m.crisisSide||!e.contact[m.id])continue;
+  const near=!!(e.ally[m.id]&&m.ally[e.id])||!!(fed&&fed.members.includes(m.id)&&knownFederationBond(e,fed,m.id));
+  const known=preview.certain.concat(preview.conditional).find(r=>r.id===m.id);
+  if(known&&known.side==='defense')continue;   // hedefin yanındakiler son onay özetinde gösterilir
+  const c=p&&p.commitments.find(c=>c.member===m.id&&c.state==='accepted'),inv=p&&warInviteLast(p,m.id),ist=inv&&warInviteState(p,inv);
+  const row={id:m.id,name:m.name,group:near?'near':'other',state:'',why:'',invitable:false};
+  if(m.war[target.id]&&!m.war[e.id]){row.state='sameSide';row.why='Hedefle zaten savaşta — aynı taraftasınız; ayrıca davet ve ödeme gerekmez';}
+  else if(known&&preview.certain.includes(known)){row.state='auto';row.why='Mevcut yükümlülükle katılır: '+known.why+'; ayrıca ödeme yok';}
+  else if(c&&!warCommitStale(p,c)){row.state='accepted';row.why='Kabul etti · '+(c.terms.give.concat(c.terms.want).filter(i=>i.t!=='warJoin').map(i=>dealLabel(i)).join(' · ')||'bedelsiz katılım');}
+  else if(ist==='pending'){row.state='pending';row.why='Cevap bekleniyor · son gün '+Math.floor(inv.expires);}
+  else if(ist==='countered'){row.state='countered';row.why=inv.why||'Karşı teklif';row.counter=encodeOffer(inv.counter);row.human=!!inv.human;if(Number.isSafeInteger(inv.offer))row.offer=inv.offer;}
+  else if(c){row.state='stale';row.why='Hedef şartları değişti; güncel koşulları yeniden onaylaması gerekir';row.invitable=true;
+   row.prior=(c.terms.from===e.id?c.terms.give:c.terms.want).filter(i=>i.t==='res'||i.t==='passage').map(i=>({...i}));}   /* yeniden davette önceki şartlar hazır gelir */
+  if(!row.state){
+   if(ist&&!row.state){row.state=ist;row.why=inv.why||({rejected:'Reddetti',expired:'Süresi doldu',closed:'Davet kapandı'}[ist]);}
+   const gate=warSupportGate(m,e,p?{plan:p.id,target:target.id}:{draft:true,target:target.id});
+   if(!gate.ok){if(!ist){row.state='blocked';}row.why=(ist?row.why+' · ':'')+warCoalitionWhy(m,target,e,gate.why);}
+   else{row.invitable=true;if(!ist){row.state='invitable';row.why=near?'Müttefik / federasyon ortağı':'Temaslı devlet';}
+    if(known)row.why+=' · '+known.why;
+    if(!warCoalitionReach(m,target,e))row.why+=' · Bilinen bilgilerle erişilebilir rota görünmüyor; geçiş izni gerekebilir (tahmin)';}
+  }
+  rows.push(row);
+ }
+ return rows.sort((a,b)=>(a.group==='near'?0:1)-(b.group==='near'?0:1)||order[a.state]-order[b.state]||a.id-b.id);
+}
+function warCoalitionView(e,targetId,goal,opts){
+ const target=G.emps[targetId];if(!e||!target||target===e||!e.contact[targetId])return {ok:false,why:'Hedefle temas yok'};
+ return ColonyInfo.read(()=>warPure(()=>{
+  const p=(G.warLedger?.preparations||[]).find(x=>x.owner===e.id&&x.target===targetId&&warPreparationState(x)==='pending')||null;
+  const g=p?p.goal:goal,o=p?(p.opts||null):(opts&&WAR_GOAL_MAIN.includes(goal)?warPrepOptsNorm(e,target,goal,opts):null);
+  const preview=warDeclarationPreview(e,target,g,o);
+  if(!p&&opts&&!o){preview.blockers.push('Geçersiz savaş hedefi seçimi');preview.ok=false;}   /* geçersiz seçim sessizce hedefsiz ilana dönmez */
+  return {ok:true,target:targetId,goal:g,opts:o,preview,prep:p?warPrepareView(e).find(x=>x.id===p.id):null,quote:p?warCoalitionQuote(e,p.id):null,
+   candidates:warCoalitionCandidates(e,target,p,preview),limit:8,council:councilBlocksWar(e,target),day:Math.floor(G.day)};
+ }));
+}
+/* Ortak komut uygulayıcı: tek oyunculu arayüz, host (MP1Host.local) ve mp-core aynı işlevi çağırır. Biçim {ok,extra|why}. */
+function warCoalOpts(c){return c.goal==='fetih'?(Array.isArray(c.targets)?{targets:c.targets.slice(0,WAR_FETIH_MAX)}:null):c.goal==='boyun'?{vtype:c.vtype,war:c.war}:null;}
+function warCoalitionPending(e,target){return (G.warLedger?.preparations||[]).find(x=>x.owner===e.id&&x.target===target&&warPreparationState(x)==='pending')||null;}
+function warCoalitionCommand(e,c,hooks={}){
+ const fail=r=>({ok:false,why:r&&r.why||'İşlem reddedildi'}),wrap=r=>r&&r.ok?{ok:true,extra:r}:fail(r);
+ if(c.kind==='warCoalition'){const v=warCoalitionView(e,c.target,c.goal,warCoalOpts(c));return v.ok?{ok:true,extra:v}:fail(v);}
+ if(c.kind==='warInvite'){
+  const opts=warCoalOpts(c);let p=warCoalitionPending(e,c.target);
+  if(!p){const r=warPrepareCreate(e,c.target,c.goal,opts);if(!r.ok)return fail(r);p=warPreparation(r.id);}
+  else if(opts){const u=warPrepareUpdate(e,p.id,c.goal,opts);if(!u.ok)return fail(u);}
+  const r=warCoalitionInvite(e,p.id,c.list,hooks);return r.ok?{ok:true,extra:{plan:p.id,results:r.results}}:fail(r);
+ }
+ if(c.kind==='warPrepareGoal')return wrap(warPrepareUpdate(e,c.id,c.goal,warCoalOpts(c)));
+ if(c.kind==='warInviteReply')return wrap(warCoalitionReply(e,c.id,c.member,c.action));
+ if(c.kind==='warLaunch')return wrap(warPrepareLaunch(e,c.id,c.stamp,c.mode==='partial'?'partial':null));
+ if(c.kind==='warPrepareWithdraw')return wrap(warPrepareWithdraw(e,c.id,c.member??null));
+ if(c.kind==='warPrepare')return wrap(warPrepareCreate(e,c.target,c.goal,warCoalOpts(c)));
+ return {ok:false,why:'Bilinmeyen savaş hazırlığı komutu'};
+}
+/* MP misafiri: müzakere masasındaki savaş kutuları (ayrı barış, toprak vaadi, ortak barış) için kısaltılmış defter. Yalnız misafirin bildiği
+   açık cepheler (warFrontKnown) ve tarafı olduğu vaatler; işgal kayıtlarından yalnız kendisinin ve masadaki karşı tarafın el değiştirmeleri. */
+function warDealLedger(e,o){
+ if(!e||!o||!G.warLedger)return {fronts:[],promises:[]};
+ const fronts=(G.warLedger.fronts||[]).filter(f=>f.ended===null&&warFrontKnown(e,f));const ids=new Set(fronts.map(f=>f.campaign));
+ const roots=(G.warLedger.fronts||[]).filter(f=>ids.has(f.id)&&!fronts.includes(f)&&warFrontKnown(e,f));
+ const row=f=>({id:f.id,campaign:f.campaign,sides:f.sides.slice(),roles:f.roles.slice(),sponsor:f.sponsor,parent:f.parent,entryKind:f.entryKind,opened:f.opened,ended:f.ended,
+  ...(f.fedWar?{fedWar:{...f.fedWar}}:{}),occupation:(f.occupation||[]).filter(x=>[e.id,o.id].includes(x.to)||[e.id,o.id].includes(x.from)).slice(-40).map(x=>({...x}))});
+ return {fronts:fronts.concat(roots).map(row),promises:(G.warLedger.promises||[]).filter(p=>p.giver===e.id||p.taker===e.id).slice(-16).map(p=>({...p}))};
+}
+/* END WAR-COALITION.0 */

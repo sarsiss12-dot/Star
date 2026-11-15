@@ -208,6 +208,8 @@ function attach(ad){
   if(ad.role==='guest'){const dd0=UI.drawDeal;UI.drawDeal=function(){const r=dd0.apply(this,arguments);if(on())dealBox();return r;};}
   else installHost();
 }
-const API={attach,tick,sync,openSent,stateOf,stateText,why,CODE,STATE,AI_REPLY,get stats(){return M.stats;},get counter(){return M.counter;},_M:M};
+/* WAR-COALITION.0: kart metni host'un etiketini (i.l: hedef, desteklenen taraf, amaç, başlangıç, son gün) kullanır — misafir aynasında hazırlık kaydı yok. */
+function offerByKey(key){const m=/^mp71:(\d+)$/.exec(String(key||''));if(!m||!M.ad)return null;const l=M.ad.raw?M.ad.raw():M.ad.offers?M.ad.offers():[];return l.find(o=>o.id===+m[1])||null;}
+const API={attach,tick,sync,openSent,stateOf,stateText,why,offerByKey,CODE,STATE,AI_REPLY,get stats(){return M.stats;},get counter(){return M.counter;},_M:M};
 globalThis.MP71Dip=API;if(typeof window!=='undefined')window.MP71Dip=API;
 })();

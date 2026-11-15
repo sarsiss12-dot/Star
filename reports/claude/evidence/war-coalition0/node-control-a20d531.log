@@ -1,0 +1,98 @@
+FAIL C1 tek başına: görünüm hazırlık açmaz, kaynak/teklif/savaş yok; önizleme doğrudan ilanla aynı imza; geçersiz Fetih seçimi engel olur
+evalmachine.<anonymous>:1
+JSON.stringify(warCoalitionCommand(A,{"kind":"warCoalition","target":1,"goal":"fetih","targets":[4]}))
+     ^
+
+ReferenceError: warCoalitionCommand is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:6:29)
+    at cmd (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:14:18)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:19:11
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:7:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:17:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+FAIL C2 karışık koalisyon: kaynaklı kabul, karşı teklif (kabul), ret, engelli aday; kısmi son onay yalnız geçerli kabullerle; bedel bir kez; bekleyen davet kapanır
+evalmachine.<anonymous>:1
+JSON.stringify(warCoalitionCommand(A,{"kind":"warCoalition","target":1,"goal":"fetih","targets":[4]}))
+     ^
+
+ReferenceError: warCoalitionCommand is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:6:29)
+    at cmd (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:14:18)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:27:12
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:7:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:25:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+FAIL C3 şart değişikliği: Fetih hedefi değişince kabul yeniden onay ister, son onaya girmez; bütçe düşünce kart gerekçe verir; damga değişir
+evalmachine.<anonymous>:1
+JSON.stringify(warCoalitionCommand(A,{"kind":"warInvite","target":1,"goal":"fetih","targets":[4],"list":[{"member":2,"give":[{"t":"res","r":"ala","v":400}]}]}))
+     ^
+
+ReferenceError: warCoalitionCommand is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:6:29)
+    at cmd (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:14:18)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:48:27
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:7:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:47:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+FAIL C4 kayıt/yükleme: açık hazırlık, hedef seçenekleri, davetler ve kabuller korunur; eski seçeneksiz hazırlık eski kurallarıyla açılır ve başlar
+evalmachine.<anonymous>:1
+JSON.stringify(warCoalitionCommand(A,{"kind":"warInvite","target":1,"goal":"fetih","targets":[4],"list":[{"member":2,"give":[{"t":"res","r":"ala","v":400}]},{"member":3}]}))
+     ^
+
+ReferenceError: warCoalitionCommand is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:6:29)
+    at cmd (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:14:18)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:60:27
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:7:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:59:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+FAIL C5 iptal / süre / eleme: kapanan hazırlığın daveti uygulanamaz; süre dolan davet "Süresi doldu"; hedef elenince başlatılamaz
+evalmachine.<anonymous>:1
+JSON.stringify(warCoalitionCommand(A,{"kind":"warInvite","target":1,"goal":"fetih","targets":[4],"list":[{"member":3}]}))
+     ^
+
+ReferenceError: warCoalitionCommand is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:6:29)
+    at cmd (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:14:18)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:71:27
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:7:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:70:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+PASS C6 AI ve eski çağrılar: seçeneksiz hazırlıkta kısmi olmayan warPrepareQuote/Launch eski davranışla aynı (kabul yoksa ret)
+  C7 {"war":false,"T1":0,"T2":2,"N":0,"O":2,"T":1,"reason":"exhaustion-lock|actor:1","moves":[[4,2,"transfer"]],"prom":[[4,"delivered"]],"notes":["Karvar Egemenliği SAVAŞ YORGUNLUĞU %100 — ordusu savaşamıyor; zorunlu ateşkes (doktrin barış antlaşmasını yasaklıyor) ile savaş durdu. Rakibin yorgunluğu %55'ten başlar ve barışta ayda 2,5 azalır · Savaş #1"]}
+FAIL C7 Kan Hukuku zorunlu ateşkesinde sahiplik (beklenen kural: Fetih barışıyla aynı): ele geçirilen HEDEF sistem kazananda kalır, HEDEF DIŞI işgal iade edilir, ortağa vaat edilen hedef sistem ortağa devredilir; her devir tam bir kez; neden exhaustion-lock, tek bildirim
+AssertionError [ERR_ASSERTION]: hedef dışı işgal iade edilir
+
+0 !== 1
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:97:62
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:7:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt32/tests/war_coalition0_test.js:83:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+GEÇEN: 1 KALAN: 6

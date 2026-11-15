@@ -7624,9 +7624,9 @@ const UI = {
      yolunu kullanır (DiplomaticInbox.resolve, karşı teklifte aiDealOpen).
      Kaydırmak yalnız kartı ekrandan kaldırır: karar vermez, kaydı silmez. */
   diplomaticBrief(it){
-    if(it.kind!=='aideal'||!it.data)return null;const o=it.data,all=[...(o.give||[]),...(o.want||[])],types=[...new Set(all.map(i=>i.t))];
-    const kind=types.includes('peace')?'Barış teklifi':types.includes('ally')?'İttifak teklifi':types.includes('nap')?'Saldırmazlık teklifi':'Diplomatik teklif';
-    const label=l=>l.slice(0,2).map(i=>dealLabel(i)).join(', ')||'yok',extra=Math.max(0,(o.give||[]).length-2)+Math.max(0,(o.want||[]).length-2),duty=types.includes('ally')?' · Karşılıklı ittifak yükümlülüğü':'';
+    if(it.kind!=='aideal'||!it.data)return null;const raw=typeof MP71Dip!=='undefined'&&MP71Dip.offerByKey?MP71Dip.offerByKey(it.key):null,o=raw?{...it.data,give:raw.give,want:raw.want}:it.data,all=[...(o.give||[]),...(o.want||[])],types=[...new Set(all.map(i=>i.t))];
+    const kind=types.includes('peace')?'Barış teklifi':types.includes('ally')?'İttifak teklifi':types.includes('nap')?'Saldırmazlık teklifi':all.some(i=>i.t==='warJoin'&&i.plan)?'Savaş katılım daveti':'Diplomatik teklif';   /* WAR-COALITION.0 */
+    const label=l=>l.slice(0,2).map(i=>i.l||dealLabel(i)).join(', ')||'yok',extra=Math.max(0,(o.give||[]).length-2)+Math.max(0,(o.want||[]).length-2),duty=types.includes('ally')?' · Karşılıklı ittifak yükümlülüğü':'';
     return {title:this.diploName(o.from)+' · '+kind,sub:'Veriyor: '+label(o.give||[])+' · İstiyor: '+label(o.want||[])+duty+(extra?' · +'+extra+' koşul · Ayrıntıları gör':'')+(Number.isFinite(o.expires)?' · '+Math.max(0,Math.ceil((o.expires-G.day)/30))+' ay':'')};
   },
   noteChoiceData(it){
@@ -10108,3 +10108,182 @@ function tensionSetupHtml(c){
   return h+`</div><div class="mini">${esc(TENSION_LEVELS[t].d)} Rakip Doktrinlerden ayrıdır; harita ve AI doktrinleri değişmez. Yapay sınır, zorunlu blok ya da gerekçesiz savaş yoktur.</div>`;
 }
 /* END BETA-WAR-GOALS.0 UI */
+/* ═══ WAR-COALITION.0 — tek savaş ilanı akışı: 1 Hedef → 2 Müttefikleri çağır (isteğe bağlı) → 3 Son onay ═══
+   Kaynak tek: motorun warDeclarationPreview / warCoalitionView / warCoalitionCommand'ı (SP doğrudan, host MP1Host.local, misafir host komutu).
+   Arayüz durumu (WarCoal.st: seçili adaylar, şart taslakları, hedef seçimi) yalnız bu pencerenin taslağıdır; Save8/ağ alanı değildir.
+   Ekranı açmak, kart incelemek veya yenilemek kaynak harcamaz, davet göndermez, savaş başlatmaz. */
+const WarCoal={st:null,req:0,last:0,view:null,
+ STATE:{invitable:'Davet edilebilir',pending:'Cevap bekleniyor',countered:'Karşı teklif',accepted:'Kabul etti',rejected:'Reddetti',expired:'Süresi doldu',closed:'Davet kapandı',blocked:'Katılım engellendi',stale:'Yeniden onay gerekli',auto:'Mevcut yükümlülük',sameSide:'Zaten aynı tarafta'},
+ box(){const m=$('modal');return m.querySelector('.mbox')||m;},
+ guest(){return typeof MP6Stars!=='undefined'&&!!MP6Stars.S?.started;},
+ host(){return typeof MP1Host!=='undefined'&&!!MP1Host.host&&!!MP1Host.started;},
+ cmd(c,done){
+  if(this.guest()){const f=MP6Stars.warCoalition||MP6Stars.warCommand;if(!f.call(MP6Stars,c,done))done({ok:false,why:'Host bağlı değil'});return;}
+  if(this.host()){const r=MP1Host.host.local(c);done(r&&r.ok?{ok:true,extra:r.extra||{}}:{ok:false,why:r&&(r.why||(r.detail&&r.detail.join(' · '))||r.code)||'Reddedildi'});return;}
+  const r=warCoalitionCommand(G.p,c);done(r);
+ },
+ optsOf(st){return st.key==='fetih'?{targets:st.sel.targets.slice()}:{vtype:st.sel.vtype,war:st.sel.war};},
+ cmdOpts(st){return st.key==='fetih'?{goal:'fetih',targets:st.sel.targets.slice()}:{goal:'boyun',vtype:st.sel.vtype,war:st.sel.war};},
+ /* Hedef seçimleri (Fetih sistemleri / Vasallaştırma türü+hükmü) hedef+tür anahtarıyla saklanır: geri gitmek, teklif gelmesi ya da MP yenilemesi varsayılana döndürmez. */
+ selFor(id,key){UI._wgSels=UI._wgSels||{};const k=id+':'+key;return UI._wgSels[k]||null;},
+ open(id,key,opts){
+  const same=this.st&&this.st.id===id&&this.st.key===key;
+  const sel=key==='fetih'?{targets:(opts&&Array.isArray(opts.targets)&&opts.targets.length?opts.targets:(G.emps[id]?warFetihDefault(G.p,G.emps[id]):[])).slice()}:{vtype:opts?.vtype||'haracguzar',war:opts?.war||WAR_VASSAL_WAR.haracguzar};
+  this.st=same?{...this.st,sel,explicit:!!opts,world:G.sys,player:G.p}:{id,key,sel,picks:[],terms:{},editing:null,msg:'',busy:false,others:false,explicit:!!opts,world:G.sys,player:G.p};
+  this.view=null;this.req++;UI.openModal(`<div class="mhd"><span>⚔ SAVAŞ İLANI · ${esc(G.emps[id]?.name||'')}</span><button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warCoalRoot">Önizleme hazırlanıyor…</div>`,'war liveWorld');
+  this.load();
+ },
+ load(after){const st=this.st;if(!st)return;const req=++this.req;this.last=Date.now();
+  this.cmd({kind:'warCoalition',target:st.id,...this.cmdOpts(st)},r=>{if(req!==this.req||this.st!==st)return;
+   if(!r.ok){this.view=null;st.msg=r.why||'Önizleme alınamadı';}
+   else{this.view=r.extra;const pr=this.view.prep;
+    /* Kayıtlı hazırlık varken oyuncu "Hedefi değiştir" ile yeni şart seçtiyse: açık hedef güncellemesi (host doğrular); önceki kabuller güncel şartları yeniden onaylamalı. */
+    if(pr&&pr.state==='pending'&&st.explicit&&JSON.stringify([st.key,this.optsOf(st)])!==JSON.stringify([pr.goal,pr.opts||null])){st.explicit=false;st.busy=true;
+     this.cmd({kind:'warPrepareGoal',id:pr.id,...this.cmdOpts(st)},u=>{st.busy=false;st.msg=u.ok?'Savaş hedefi güncellendi; önceki kabuller güncel şartları yeniden onaylamalı, bekleyen davetler kapandı.':'Hedef güncellenemedi: '+(u.why||'');this.load();});return;}
+    st.explicit=false;if(pr&&pr.opts){const o=pr.opts;st.key=this.view.goal;st.sel=st.key==='fetih'?{targets:o.targets.slice()}:{vtype:o.vtype,war:o.war};}}
+   if(after)after(r);this.render();});
+ },
+ refresh(){if(!this.st||!document.getElementById('warCoalRoot')||$('modal').classList.contains('hidden')||this.st.busy||Date.now()-this.last<2000)return;this.load();},
+ card(c){const st=this.st,picked=st.picks.includes(c.id),lab=this.STATE[c.state]||c.state,t=st.terms[c.id];
+  let h=`<div class="box coalCard" data-member="${c.id}" data-state="${c.state}"><div class="row"><b>${esc(c.name)}</b><span class="coalBadge" data-badge="${c.state}">${esc(lab)}</span></div><div class="mini coalWhy">${esc(c.why)}</div>`;
+  if(c.state==='countered'&&c.counter){const add=c.counter.want.filter(i=>i.t!=='warJoin').map(i=>dealLabel(i)).join(' · ')||'—';
+   h+=`<div class="mini">İstenen: <b>${esc(add)}</b></div><div class="act2">${c.human&&!Number.isSafeInteger(c.offer)?'<span class="mini">Gelen kutusundan yanıtla</span>':`<button class="abtn pri" data-a="coalReply" data-x="${c.id}:accept">Kabul Et</button><button class="abtn" data-a="coalReply" data-x="${c.id}:reject">Reddet</button>`}<button class="abtn" data-a="coalEdit" data-x="${c.id}">Teklifi Düzenle</button></div>`;}
+  if(c.invitable)h+=`<div class="act2"><button class="abtn ${picked?'pri':''}" data-a="coalPick" data-x="${c.id}" aria-pressed="${picked}">${picked?'☑ Seçili':'☐ Seç'}</button><button class="abtn" data-a="coalTerms" data-x="${c.id}">${t&&t.give.length?'Şartlar ('+t.give.length+')':'Şart ekle'}</button></div>`;
+  if(c.state==='accepted'&&this.view?.prep)h+=`<button class="abtn" data-a="coalWithdraw" data-x="${c.id}">Kabulü geri çek</button>`;
+  if(st.editing===c.id)h+=this.termsEditor(c.id);
+  return h+'</div>';
+ },
+ termsEditor(id){const st=this.st,t=st.terms[id]||(st.terms[id]={give:[]}),pas=t.give.some(i=>i.t==='passage');
+  const res=['min','ene','ala','yiy','tuk'].map(r=>{const v=(t.give.find(i=>i.t==='res'&&i.r===r)||{}).v||0;return `<div class="row coalRes"><span>${RES[r].ico} ${esc(RES[r].n)}</span><span class="act2"><button class="abtn" data-a="coalAmt" data-x="${id}:${r}:-50" aria-label="${esc(RES[r].n)} azalt">−50</button><b>${v}</b><button class="abtn" data-a="coalAmt" data-x="${id}:${r}:50" aria-label="${esc(RES[r].n)} artır">+50</button></span></div>`;}).join('');
+  return `<div class="box coalTerms"><b>ŞARTLAR · senin vereceklerin</b><div class="mini">Kaynaklar ve geçiş izni yalnız savaş başlarken, katılım uygulanırken aktarılır. Toprak vaadi savaş başladıktan sonra cepheye bağlanır.</div>${res}<button class="abtn ${pas?'pri':''}" data-a="coalPassage" data-x="${id}">${pas?'☑':'☐'} Geçiş izni ver</button><button class="abtn pri" data-a="coalTermsDone" data-x="${id}">Tamam</button></div>`;
+ },
+ render(){const st=this.st,v=this.view,root=document.getElementById('warCoalRoot');if(!st||!root)return;
+  const o=G.emps[st.id],p=v&&v.preview;
+  if(!v||!p){UI.surfaceRender(WarCoal.box(),`<div class="mhd"><span>⚔ SAVAŞ İLANI · ${esc(o?.name||'')}</span><button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warCoalRoot"><p>${esc(st.msg||'Önizleme alınamadı')}</p></div><div class="mft"><button class="ch" data-a="closem">Kapat</button></div>`,'war-coal',true);return;}
+  const prep=v.prep,q=v.quote,cands=v.candidates||[],near=cands.filter(c=>c.group==='near'),other=cands.filter(c=>c.group!=='near');
+  const name=id=>id===G.p.id?G.p.name:(G.emps[id]?.name||'Bilinmeyen devlet');
+  const accepted=q&&q.ok?q.members:[],auto=cands.filter(c=>c.state==='auto'||c.state==='sameSide'),pend=cands.filter(c=>c.state==='pending'||c.state==='countered');
+  const defense=p.certain.concat(p.conditional).filter(r=>r.side==='defense');
+  const n=accepted.length,canGo=p.ok&&(!prep||(q&&q.ok));
+  const own=q&&q.ok?q.own:{etk:p.cost};
+  const costTxt=Object.entries(own).filter(([,x])=>x>0).map(([r,x])=>(RES[r]?.ico||'')+' '+fmt(x)+' '+(RES[r]?.n||r)).join(' · ')||'Bedelsiz';
+  let h=`<div class="mhd"><span>⚔ SAVAŞ İLANI · ${esc(o.name)}</span><button class="riX" data-a="closem">✕</button></div><div class="mbd coalFlow" id="warCoalRoot">`;
+  h+=`<nav class="coalSteps mini" aria-label="Adımlar"><b>1 Hedef ✓</b> · <b>2 Müttefikler</b> (isteğe bağlı) · <b>3 Son onay</b></nav>`;
+  if(st.msg)h+=`<div class="mini warnTxt coalMsg" role="status">${esc(st.msg)}</div>`;
+  /* 1 — hedef */
+  h+=`<section class="box coalGoal"><div class="row"><b>1 · HEDEF</b><button class="abtn" data-a="setwg" data-x="${st.id}:${st.key}">Hedefi değiştir</button></div>`;
+  if(p.goal?.targets)h+=`<div class="ph">HEDEF: FETİH</div><div class="mini">${p.goal.targets.map(t=>esc(t.name)).join(' · ')}</div><div class="mini">${esc(p.goal.note)}</div>`;
+  else if(p.goal?.vtype)h+=`<div class="ph">HEDEF: VASALLAŞTIRMA · ${esc(p.goal.name)}</div><div class="mini">Vergi: ${esc(p.goal.terms.tax)} · ${esc(p.goal.terms.war)} · ${esc(p.goal.terms.autonomy)}</div><div class="mini">${esc(p.goal.note)}</div>`;
+  else h+=`<div class="mini">${esc(WAR_GOALS[v.goal]?.n||v.goal)}</div>`;
+  if(prep&&prep.commitments.some(c=>c.stale))h+='<div class="mini warnTxt">Hedef şartları değişti: önceki kabuller güncel koşullarla yeniden onaylanmalı.</div>';
+  h+='</section>';
+  /* 2 — müttefikler */
+  h+=`<details class="dcDetails coalAllies" ${st.allies||prep||st.picks.length?'open':''}><summary data-a="coalAlliesFold">2 · MÜTTEFİKLERİ ÇAĞIR · isteğe bağlı</summary>`;
+  if(v.council)h+='<div class="mini warnTxt">Galaktik Konsey yasağı varken koalisyon hazırlığı açılamaz; tek başına ilan Konsey cezasını göze alır.</div>';
+  h+=`<div class="mini">Önce müttefiklerin ve federasyon ortakların. Davet bedelsiz katılımdır; istersen şart eklersin. Gönderme ayrı onaydır; ilan ekranı tek başına teklif göndermez. En çok ${v.limit} destekçi / bekleyen davet.</div>`;
+  h+=near.length?near.map(c=>this.card(c)).join(''):'<div class="mini">Erişilebilen müttefik veya federasyon ortağı yok.</div>';
+  if(other.length){h+=`<details class="dcDetails coalOthers" ${st.others?'open':''}><summary data-a="coalOthersFold">Diğer devletler</summary><div class="mini">${other.length} temaslı devlet</div>${other.map(c=>this.card(c)).join('')}</details>`;}
+  h+=`<button class="abtn pri" id="coalSend" data-a="coalSend" ${st.picks.length&&!st.busy&&!v.council?'':'disabled'}>Davetleri Gönder (${st.picks.length})</button></details>`;
+  /* 3 — son onay */
+  h+=`<section class="box coalSummary"><b>3 · SON ONAY</b>`;
+  h+=`<div class="row"><span>Hedef</span><b>${esc(o.name)} · ${esc(WAR_GOALS[v.goal]?.n||v.goal)}</b></div>`;
+  h+=`<div class="row"><span>Kesin destek</span><b>${accepted.length?accepted.map(id=>esc(name(id))).join(', '):'—'}</b></div>`;
+  if(auto.length)h+=`<div class="mini">Ayrıca: ${auto.map(c=>esc(c.name)+' ('+esc(this.STATE[c.state])+')').join(' · ')} — ayrı ödeme yok.</div>`;
+  if(pend.length)h+=`<div class="mini">Koşullu / bekleyen: ${pend.map(c=>esc(c.name)+' ('+esc(this.STATE[c.state])+')').join(' · ')}. İlan edersen bu davetler ilan öncesi teklif olarak kapanır; savaş başladıktan sonra Savaş Merkezi'nden ayrıca davet edebilirsin.</div>`;
+  if(q&&q.invalid&&q.invalid.length)h+=q.invalid.map(x=>`<div class="mini warnTxt coalInvalid" data-member="${x.member}">${esc(name(x.member))}: ${esc(x.why)} — son onaya girmez.</div>`).join('');
+  h+=`<div class="row"><span>Hedefin bilinen destekçileri</span><b>${defense.length?defense.map(r=>esc(r.name)).join(', '):'Bilinen yok'}</b></div>`;
+  for(const [lab,rows] of [['kesin',p.certain],['koşullu',p.conditional]]){const d=rows.filter(r=>r.side==='defense');if(d.length)h+=`<div class="mini coalFoe">Hedef tarafı, ${lab}: ${d.map(r=>esc(r.name)+' — '+esc(r.why||'')).join(' · ')}</div>`;}
+  if(p.exh){const x=p.exh;h+=`<div class="row"><span>SAVAŞ YORGUNLUĞU</span><b>Senin %${x.own} · ${esc(o.name)}: ${x.foe===null?'bilinmiyor':'%'+x.foe}</b></div><div class="mini">${x.foe===null?'Rakibin yorgunluğu SIZILMIŞ istihbarat olmadan bilinmez.':esc(x.basis)+'.'} Taraflardan biri %100'e ulaşınca savaş zorunlu barışla durur; önceki savaşın yorgunluğu barışta ayda 2,5 azalarak taşınır.</div>`;}
+  h+=`<div class="row"><span>Toplam bedel</span><b id="coalCost">${esc(costTxt)}</b></div>`;
+  if(p.legit){const L=p.legit;h+=`<div class="row"><span>Meşruiyet</span><b>${Math.round(L.score*100)} / gereken ${Math.round(L.need*100)} · ${esc(L.level)}</b></div><div class="mini">Gerekçe: ${L.list.length?L.list.map(j=>esc(j.n)).join(' · '):'kayıtlı gerekçe yok'}</div>`;}
+  h+=p.risks.map(x=>`<div class="mini">⚠ ${esc(x)}</div>`).join('')+p.blockers.map(x=>`<div class="mini warnTxt">Engel: ${esc(x)}</div>`).join('');
+  if(prep&&q&&!q.ok)h+=`<div class="mini warnTxt">${esc(q.why)}</div>`;
+  if(prep)h+=`<button class="abtn" data-a="coalCancel">Hazırlığı İptal Et · bekleyen davetleri kapat</button>`;
+  h+='</section>';
+  h+=`<details class="dcDetails coalDetail"><summary>GEREKÇELER VE MEŞRUİYET · TAHMİNİ TUTUMLAR · AYRINTI</summary>${UI.warPreviewGoalHtml({...p,goal:null})}<div class="ph">BİLİNMEYENLER</div><div class="mini">İstihbarat kapsamı dışındaki siyasi bağlantılar ve gizli taahhütler belirlenemez. Bu bölüm gizli devlet sayısını göstermez.</div></details>`;
+  h+='</div>';
+  const main=n?`${n} Destekçiyle Savaş İlan Et`:prep&&accepted.length===0&&cands.some(c=>['pending','countered','accepted','stale'].includes(c.state))?'Desteksiz Savaş İlan Et':'Savaş İlan Et';
+  h+=`<div class="mft coalFoot"><button id="warFinalConfirm" class="ch pri" data-a="coalLaunch" data-x="${n}" ${canGo&&!st.busy?'':'disabled'}>${esc(main)}</button>`;
+  if(n)h+=`<button class="ch" data-a="coalLaunch" data-x="solo" ${canGo&&!st.busy?'':'disabled'}>Desteksiz İlan Et</button>`;
+  if(prep)h+=`<button class="ch" data-a="coalSave">Hazırlığı Kaydet ve Çık</button>`;
+  h+=`<button class="ch coalX" data-a="closem">Vazgeç</button></div>`;
+  UI.surfaceRender(WarCoal.box(),h,'war-coal',true);
+  this.signature=q&&q.ok?q.stamp:p.signature;
+  /* Son onay jetonu (eski önizlemenin sözleşmesi): tek kullanımlık; pencere kapanınca / yeniden açılınca (openModal/closeModal _warPreview'u siler),
+     dünya yüklenince ya da akış değişince geçersiz. Karar aynı launch → direct / warLaunch yolundan; koşullar değiştiyse güncel özet yeniden çizilir. */
+  if(!this.guest()){const pending={world:G.sys,player:G.p,st,n};UI._warPreview=pending;
+   UI._hook('warFinalConfirm',()=>{if(UI._warPreview!==pending||G.sys!==pending.world||G.p!==pending.player||WarCoal.st!==pending.st)return;UI._warPreview=null;WarCoal.launch(pending.n);});}
+ },
+ launch(x){const st=this.st,v=this.view;if(!st||!v||st.busy)return;const p=v.preview;
+  /* Yüklenen / değişen dünyada eski pencerenin düğmesi ilan etmez (misafirde ayna her kurulumda yeni G.sys yaratır; karar host'ta yeniden denetlenir). */
+  if(!this.guest()&&(st.world!==G.sys||st.player!==G.p)){this.st=null;this.view=null;UI.closeModal();return;}
+  const solo=x==='solo',prep=v.prep;
+  if(!prep||solo&&!prep){return this.direct();}
+  const q=v.quote;if(!q||!q.ok){st.msg=q?.why||'Koşullar değişti';this.render();return;}
+  if(solo&&q.members.length){st.busy=true;this.render();this.cmd({kind:'warPrepareWithdraw',id:prep.id,member:null},r=>{st.busy=false;if(!r.ok){st.msg=r.why;this.load();return;}this.view={...v,prep:null,quote:null};this.direct();});return;}
+  if(+x!==q.members.length){st.msg='Destekçi sayısı değişti; güncel özeti yeniden onayla.';this.load();return;}
+  st.busy=true;this.render();const stamp=q.stamp;
+  this.cmd({kind:'warLaunch',id:prep.id,stamp,mode:'partial'},r=>{st.busy=false;
+   if(!r.ok){st.msg='Koşullar değişti; güncel özeti yeniden onayla. ('+(r.why||'')+')';this.load();return;}
+   say('SAVAŞ İLAN EDİLDİ — '+G.emps[st.id].name+(q.members.length?' · '+q.members.length+' destekçiyle':''),'war');this.st=null;this.view=null;UI.closeModal();UI.openDiplo();});
+ },
+ /* Davetsiz ilan: önceki tek oyunculu son onay zinciriyle aynı doğrulama (warDeclarationPreview imzası → warDeclarationAccess → declareWar → setWarGoal). */
+ direct(){const st=this.st,v=this.view;if(!st||!v)return;const id=st.id,key=st.key,opts=this.optsOf(st),sig=v.preview.signature;
+  if(this.guest()){st.busy=true;this.render();this.cmd({kind:'war',target:id,goal:key,...opts},r=>{st.busy=false;if(!r.ok){st.msg='Host reddetti: '+(r.why||'');this.load();return;}say('Savaş ilanı host\'ta uygulandı — '+(G.emps[id]?.name||''),'war');this.st=null;this.view=null;UI.closeModal();UI.openDiplo();});return;}
+  const current=warDeclarationPreview(G.p,G.emps[id],key,opts);
+  if(!this.guest()&&(current.signature!==sig||!current.ok)){st.msg='Koşullar değişti; güncel önizlemeyi yeniden onayla.';this.load();return;}
+  const actor=G.p,target=G.emps[id];
+  if(!warDeclarationAccess(actor,target).ok||!declareWar(actor,target)){say('Savaş ilanı uygulanamadı; koşullar değişti.','war');this.load();return;}
+  if(setWarGoal(actor,target,key,opts))say('Savaş hedefi: '+WAR_GOALS[key].n,'war');
+  this.st=null;this.view=null;UI.closeModal();UI.openDiplo();
+ },
+ send(){const st=this.st,v=this.view;if(!st||!v||st.busy||!st.picks.length)return;
+  const list=st.picks.slice(0,8).map(id=>({member:id,give:(st.terms[id]?.give||[]).map(i=>({...i}))}));
+  st.busy=true;st.msg='Davetler gönderiliyor…';this.render();
+  this.cmd({kind:'warInvite',target:st.id,...this.cmdOpts(st),list},r=>{st.busy=false;
+   if(!r.ok){st.msg='Davet gönderilemedi: '+(r.why||'');this.load();return;}
+   const res=r.extra.results||[],L={accepted:'kabul etti',countered:'karşı teklif verdi',rejected:'reddetti',pending:'cevap bekleniyor',blocked:'gönderilemedi',skip:'zaten davetli'};
+   st.msg=res.map(x=>(G.emps[x.member]?.name||'?')+' '+(L[x.result]||x.result)).join(' · ');st.picks=[];st.editing=null;this.load();});
+ },
+ act(a,x){const st=this.st;if(!st&&a!=='coalOpen')return false;
+  if(a==='coalPick'){const id=+x,i=st.picks.indexOf(id);if(i>=0)st.picks.splice(i,1);else if(st.picks.length<8){st.picks.push(id);const c=(this.view?.candidates||[]).find(c=>c.id===id);if(c&&c.prior&&c.prior.length&&!(st.terms[id]&&st.terms[id].give.length))st.terms[id]={give:c.prior.map(i=>({...i}))};}else st.msg='En çok 8 devlet seçebilirsin';this.render();return true;}
+  if(a==='coalTerms'){st.editing=st.editing===+x?null:+x;this.render();return true;}
+  if(a==='coalTermsDone'){st.editing=null;if(!st.picks.includes(+x)&&st.picks.length<8)st.picks.push(+x);this.render();return true;}
+  if(a==='coalAmt'){const[id,r,d]=String(x).split(':');const t=st.terms[+id]||(st.terms[+id]={give:[]});let it=t.give.find(i=>i.t==='res'&&i.r===r);
+   if(!it&&RES[r]){it={t:'res',r,v:0};t.give.push(it);}if(it){it.v=Math.max(0,Math.min(Math.floor(G.p.res[r]||0),it.v+(+d)));if(!it.v)t.give.splice(t.give.indexOf(it),1);}this.render();return true;}
+  if(a==='coalPassage'){const t=st.terms[+x]||(st.terms[+x]={give:[]}),i=t.give.findIndex(i=>i.t==='passage');if(i>=0)t.give.splice(i,1);else t.give.push({t:'passage'});this.render();return true;}
+  if(a==='coalEdit'){const c=(this.view?.candidates||[]).find(c=>c.id===+x);if(c&&c.counter){st.terms[c.id]={give:c.counter.want.filter(i=>i.t==='res'||i.t==='passage').map(i=>({...i}))};st.editing=c.id;if(!st.picks.includes(c.id)&&st.picks.length<8)st.picks.push(c.id);st.allies=true;}this.render();return true;}
+  if(a==='coalReply'){const[id,act]=String(x).split(':'),prep=this.view?.prep,c=(this.view?.candidates||[]).find(c=>c.id===+id);if(!prep||st.busy)return true;st.busy=true;
+   const done=r=>{st.busy=false;st.msg=r.ok?(act==='accept'?'Karşı teklif kabul edildi':'Karşı teklif reddedildi'):(r.why||'Yanıt reddedildi');this.load();};
+   if(c&&c.human&&Number.isSafeInteger(c.offer))this.cmd({kind:'respond',offer:c.offer,action:act==='accept'?'accept':'reject'},done);else this.cmd({kind:'warInviteReply',id:prep.id,member:+id,action:act},done);return true;}
+  if(a==='coalWithdraw'){const prep=this.view?.prep;if(!prep||st.busy)return true;st.busy=true;this.cmd({kind:'warPrepareWithdraw',id:prep.id,member:+x},r=>{st.busy=false;st.msg=r.ok?'Kabul geri çekildi':(r.why||'');this.load();});return true;}
+  if(a==='coalSend'){this.send();return true;}
+  if(a==='coalLaunch'){this.launch(x);return true;}
+  if(a==='coalSave'){st.msg='';say('Koalisyon hazırlığı kaydedildi — '+G.emps[st.id].name+' · diplomasi ekranındaki SAVAŞ düğmesinden ya da Savaş Merkezi\'nden devam et','sci');this.st=null;this.view=null;UI.closeModal();return true;}
+  if(a==='coalCancel'){const prep=this.view?.prep;if(!prep||st.busy)return true;st.busy=true;this.cmd({kind:'warPrepareWithdraw',id:prep.id,member:null},r=>{st.busy=false;st.msg=r.ok?'Hazırlık iptal edildi; bekleyen davetler kapandı':(r.why||'');this.load();});return true;}
+  if(a==='coalOthersFold'){st.others=!st.others;return false;}
+  if(a==='coalAlliesFold'){st.allies=!st.allies;return false;}
+  return false;
+ }
+};
+(function(){
+ /* Önizleme = tek akış. Eski "ÖNCE KOALİSYON HAZIRLA" → Savaş Merkezi → Katılım Adayı → Genel Anlaşma → Son Savaş Onayı zinciri bu ekranda birleşti. */
+ UI.warDeclarationPreview=function(id,key,opts=null){WarCoal.open(id,key,opts);};
+ const act0=UI.act;UI.act=function(a,x,el){WarCoal.install();if(String(a).startsWith('coal')&&WarCoal.act(a,x))return;return act0.apply(this,arguments);};
+ const pick0=UI.warGoalPick;UI.warGoalPick=function(id,key){
+  /* Hedef seçimi hedef+tür başına saklanır (eski _wgSel yalnız son seçimi tutuyordu). Akıştan "Hedefi değiştir" ile dönülünce seçim korunur. */
+  this._wgSels=this._wgSels||{};const k=id+':'+key,keep=this._wgSels[k]||(WarCoal.st&&WarCoal.st.id===id&&WarCoal.st.key===key?{id,key,...JSON.parse(JSON.stringify(WarCoal.st.sel))}:null);
+  if(keep&&!(this._wgSel&&this._wgSel.id===id&&this._wgSel.key===key))this._wgSel=keep;
+  const r=pick0.apply(this,arguments);if(this._wgSel)this._wgSels[k]=this._wgSel;return r;};
+ const menu0=UI.warGoalMenu;UI.warGoalMenu=function(id){
+  /* Kayıtlı hazırlık varsa doğrudan akışa dön (tek oyunculu/host'ta motor kaydından; misafirde Savaş Merkezi bilgisiyle). */
+  const p=typeof warCoalitionPending==='function'&&!WarCoal.guest()?warCoalitionPending(G.p,id):(typeof WarCenterUI!=='undefined'&&WarCenterUI.preparations||[]).find(x=>x.owner===0&&x.target===id&&x.state==='pending');
+  if(p&&WAR_GOAL_MAIN.includes(p.goal)&&p.opts){WarCoal.open(id,p.goal,p.opts);return;}
+  return menu0.apply(this,arguments);};
+ const rf=UI.refresh;UI.refresh=function(){const r=rf.apply(this,arguments);WarCoal.refresh();return r;};
+ /* Savaş Merkezi'ndeki koalisyon hazırlığı kaydı: yeni hazırlıklar aynı akışa açılır; eski (seçeneksiz) hazırlıklar eski kabul ekranında sürer.
+    archive-ui.js ui.js'ten sonra yüklenir: sarmalama ilk eylemde bir kez kurulur. */
+ WarCoal.install=function(){if(this.installed||typeof WarCenterUI==='undefined')return;this.installed=true;
+  const pa=WarCenterUI.prepAct;WarCenterUI.prepAct=function(a,x){if(a==='warPreparation'){const p=this.preparations.find(p=>p.id===+x);if(p&&p.owner===0&&p.state==='pending'&&p.opts&&WAR_GOAL_MAIN.includes(p.goal)){WarCoal.open(p.target,p.goal,p.opts);return true;}}return pa.apply(this,arguments);};};
+})();
+/* END WAR-COALITION.0 UI */
