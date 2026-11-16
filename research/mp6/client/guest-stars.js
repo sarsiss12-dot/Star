@@ -96,7 +96,7 @@ const VIEW=new Set(['dealSupport','dealSupportPick','coalPick','coalTerms','coal
   'tech','build','sInfo','bInfo','showEv','minModal','restoreModal','openNote','instNote','instDecide','closem','marketPane','mktSel','mute','save','diagShow','opLogMenu',
   /* MP.6.1 — görünüm / taslak */
   'news','newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord',
-  'inboxEmpire','inboxReturn','inboxFederation','deal','dealAdd','dealRm','dealDiscard','dealBack','peace','vsOpen','vsCancel','vsCounter','fedBallot',
+  'inboxEmpire','inboxReturn','inboxFederation','deal','dealAdd','dealRm','dealPledgeDays','dealDiscard','dealBack','peace','vsOpen','vsCancel','vsCounter','fedBallot',
   'fedVoteYes','fedVoteNo','fedVoteNow','fedFoundType','fedFoundSelect','fedFoundEdit','fedFoundEditStop','fedFoundUpdate','fedFoundStart','fedFoundReply','fedFoundCancel','fedFoundFinish',
   /* MP.6.1 — motor işlevi MP komutuna çevrilen gerçek düğmeler */
   'sendhere','ship','fedShip','focus','cancelBuild','demolish','foundFed','fedDipInvite','fedDipRequest','fedMotion','fedInviteAccept','fedInviteReject',
@@ -479,7 +479,7 @@ function gate(){
      Artık tek işlem (S.dealTx: cid + içerik imzası): taslak host'un YANITINA kadar korunur; yanıt gelmezse aynı cid yeniden gönderilir
      (host sonuç önbelleği cid'e göre ikinci kaydı engeller; içerik aynıysa motor 'duplicate' der) — çift teklif oluşmaz. Ret / bağlantı
      hatasında taslak düzenlenebilir kalır. İz: S.dealTrace (işlem kimliğiyle taslak → dokunuş → gönderim → host yanıtı → kayıt → ileti). */
-  const dealItems=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&i.t==='sys'&&Number.isInteger(i.id)?{t:'sys',id:i.id}:i&&i.t==='tribute'&&Number.isInteger(i.v)?{t:'tribute',r:i.r,v:i.v}:i&&TREATY.includes(i.t)?{t:i.t}:null);
+  const dealItems=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&i.t==='sys'&&Number.isInteger(i.id)?{t:'sys',id:i.id}:i&&i.t==='tribute'&&Number.isInteger(i.v)?{t:'tribute',r:i.r,v:i.v}:i&&i.t==='warOn'&&Number.isInteger(i.target)?{t:'warOn',target:real(i.target),...(Number.isInteger(i.until)?{until:i.until}:{})}:i&&TREATY.includes(i.t)?{t:i.t}:null);
   const dealCmd=d=>{const give=dealItems(d.give),want=dealItems(d.want);if(give.includes(null)||want.includes(null))return {bad:true};if(!give.length&&!want.length)return {empty:true};
     const ctr=S.counter&&S.counter.to===d.to?S.counter:null;const cmd=ctr?{kind:'counter',offer:ctr.offer,give,want}:{kind:'offer',to:real(d.to),give,want};return {cmd,ctr,sig:JSON.stringify(cmd)};};
   const dealTrace=(tx,step,x)=>{S.dealTrace=S.dealTrace||[];S.dealTrace.push({tx:tx&&tx.id||null,step,at:Date.now(),day:Math.floor(G.day||0),...(x||{})});if(S.dealTrace.length>60)S.dealTrace.shift();};
@@ -503,7 +503,7 @@ function gate(){
     dealTxSend(tx,'resend');};
   UI.dealSend=function(){if(!S.on)return dealSend0();this.ensureDiploWorld();const d=this.deal;if(!d)return;
     const c=dealCmd(d),it=l=>(l||[]).map(i=>({t:i.t,...(i.front!==undefined?{front:i.front}:{}),...(i.plan!==undefined?{plan:i.plan}:{}),...(i.sys!==undefined?{sys:i.sys}:{}),...(i.target!==undefined?{target:real(i.target)}:{})}));
-    if(c.bad){this.dealMsg='Çok oyunculuda kaynak, barış, antlaşma maddeleri (saldırmazlık, ticaret, ittifak, sensör, geçiş), Sistem Devri, Haraç, cephe kimliğine bağlı savaş desteği, savaş içi teslim, toprak vaadi ve federasyonlar arası ortak barış gönderilebilir; teknoloji, lüks, savaş sözü ve casusluk ağı henüz yok.';this.drawDeal();return;}
+    if(c.bad){this.dealMsg='Çok oyunculuda kaynak, barış, antlaşma maddeleri (saldırmazlık, ticaret, ittifak, sensör, geçiş), Sistem Devri, Haraç, cephe kimliğine bağlı savaş desteği, savaş içi teslim, toprak vaadi ve federasyonlar arası ortak barış ve son tarihli Genel Savaş Sözü gönderilebilir; teknoloji, lüks ve casusluk ağı henüz yok.';this.drawDeal();return;}
     if(c.empty){this.dealMsg='Teklif boş.';this.drawDeal();return;}
     const tx0=S.dealTx;
     if(tx0){dealTrace(tx0,'tap',{same:tx0.sig===c.sig});
@@ -766,7 +766,7 @@ function inboxOffers(){
   const v=S.J&&S.J.game.view,me=S.J&&S.J.empireId;if(!v||!v.dip||typeof DiplomaticInbox==='undefined')return;
   /* MP.7.1: sonuçlanan teklifler de (geçmiş) gerçek gelen kutusunda; durum ve yanıt host'un teklif deposundan. Önce eskiler. */
   for(const o of v.dip.offers.slice().sort((a,b)=>a.id-b.id)){if(o.to!==me||!G.emps[local(o.from)])continue;
-    const strip=l=>l.map(({l:_,...i})=>i.t==='warJoin'?{...i,target:local(i.target)}:i),data={from:local(o.from),to:0,give:strip(o.give),want:strip(o.want),born:o.born,expires:o.expires};
+    const strip=l=>l.map(({l:_,...i})=>i.t==='warJoin'||i.t==='warOn'?{...i,target:local(i.target)}:i),data={from:local(o.from),to:0,give:strip(o.give),want:strip(o.want),born:o.born,expires:o.expires};
     let rec=DiplomaticInbox.state().records.find(r=>r.mp===o.id);
     if(!rec)rec=DiplomaticInbox.capture({kind:'aideal',data,key:'mp71:'+o.id,born:o.born,title:(o.round>1?'Karşı teklif':'Teklif')+' — '+o.fn,sub:'Çok oyunculu teklif · tur '+o.round});
     if(!rec)continue;rec.mp=o.id;
@@ -777,7 +777,7 @@ function inboxOffers(){
   const live=new Set(v.dip.offers.filter(o=>o.to===me&&o.status==='pending').map(o=>'mp71:'+o.id));
   const before=(G.inbox||[]).length;G.inbox=(G.inbox||[]).filter(n=>!(typeof n.key==='string'&&n.key.startsWith('mp71:'))||live.has(n.key));let changed=G.inbox.length!==before;
   for(const o of v.dip.offers){if(!live.has('mp71:'+o.id)||G.inbox.some(n=>n.key==='mp71:'+o.id)||!G.emps[local(o.from)])continue;
-    const strip=l=>l.map(({l:_,...i})=>i.t==='warJoin'?{...i,target:local(i.target)}:i);G.inboxUid=(G.inboxUid||0)+1;
+    const strip=l=>l.map(({l:_,...i})=>i.t==='warJoin'||i.t==='warOn'?{...i,target:local(i.target)}:i);G.inboxUid=(G.inboxUid||0)+1;
     const rec=DiplomaticInbox.state().records.find(r=>r.mp===o.id);
     G.inbox.push({kind:'aideal',data:{from:local(o.from),to:0,give:strip(o.give),want:strip(o.want),born:o.born,expires:o.expires},ico:'📜',cls:'sci',pause:false,uid:G.inboxUid,born:o.born,rec:rec?rec.id:undefined,
       title:(o.round>1?'Karşı teklif':'Teklif')+' — '+o.fn,sub:'Çok oyunculu teklif · '+(o.want.map(i=>i.l).join(', ')||'anlaşma')+' istiyor',key:'mp71:'+o.id});changed=true;}

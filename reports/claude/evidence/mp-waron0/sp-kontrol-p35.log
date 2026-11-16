@@ -1,0 +1,6 @@
+PASS S1 tek oyunculu: oyuncunun AI'ya verdiği savaş sözü kabulde hemen ilan 
+FAIL S2 tek oyunculu masa: Savaş sözü etkin, son tarih yok; özet "kabul anı
+FAIL S3 çok oyunculu masa: son tarih seçimi + ⏱ değişimi; özet İLAN EDİ
+FAIL S4 aktif söz paneli: veren için normal savaş akışı düğmesi, alan i�
+FAIL S5 gelen kutusu kaydı / karşı teklif taslağı son tarihi korur (encodeO
+GEÇEN: 1 KALAN: 4

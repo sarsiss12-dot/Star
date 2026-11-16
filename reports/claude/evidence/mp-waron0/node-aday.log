@@ -1,0 +1,10 @@
+PASS W1 söz + karşılık: karşı teklifte son tarih değişir, kabulde tek söz kaydı (savaş yok), karşılık bir kez, ikinci kabul yok
+PASS W2 söz normal savaş ilanıyla tutulur: C savaş komutu → "tutuldu", iki tarafa bildirim
+PASS W3 son tarih geçer: "çiğnendi", B paktBozdu hatırlar, ilişki −20, haberde hedef adı yok
+PASS W4 imkânsızlaşma: hedef elenir → düştü; son tarihte Konsey yasağı → düştü; ikisinde ceza yok
+PASS W5 geçersiz şartlar gerekçeli; bekleyen teklifteki söz uygulanamaz olursa teklif geçersizleşir
+PASS W6 birleşik teklif: söz kabulde geçersizse kaynak / Sistem Devri / Haraç uygulanmaz
+PASS W7 ayna / gizlilik: veren ve alan görür, hedef insan ve üçüncü taraf görmez
+PASS W8 kayıt: Save8 gidiş-dönüş aynı söz ve kalan süre; yüklemeden sonra süre dolumu bir kez
+PASS W9 insan → AI: AI'dan söz (son tarihsiz) aiRespond kararıyla; AI'ya son tarihli söz kayıt olur; aynı cid tek teklif
+GEÇEN: 9 KALAN: 0

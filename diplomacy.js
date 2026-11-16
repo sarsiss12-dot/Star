@@ -791,6 +791,7 @@ function declareWar(a, b, support = null){
   if (typeof judgeCasusBelli === 'function') judgeCasusBelli(a, b);
   warStartNotice(a,b,support);
   if(typeof aiPlanEvent==='function')aiPlanEvent(a,'war-started',{other:b.id,support:!!support});
+  if(a.warPledges||b.warPledges)warPledgeWar(a,b);   /* MP-WARON.0: söz tutuldu (yalnız kayıt varken) */
   return true;
 }
 function peaceAlwaysAccepted(a, b){
@@ -1189,7 +1190,8 @@ function dealLabel(it){
     case 'ally':    return '⚑ İttifak';
     case 'warJoin': {const p=it.plan&&typeof warCoalitionLabel==='function'?warCoalitionLabel(it):'';if(p)return p;   /* WAR-COALITION.0: davet kartı tek bakışta */
       return '⚔ '+(it.plan?'Hazırlık #'+it.plan:'Cephe #'+it.front)+' · '+(G.emps[it.target]?.name||'Bilinmeyen devlet')+' karşısında destek';}
-    case 'warOn':   return '⚔ ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + '\'a savaş ilanı';
+    case 'warOn':   if(it.until!==undefined)return warPledgeLabel(it);   /* MP-WARON.0 */
+                    return '⚔ ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + '\'a savaş ilanı';
     case 'peaceWith': return '🤲 ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + ' ile barış';
     case 'intel':   return '👁 Sensör anlaşması';
     case 'spynet':  return '🕸 Casusluk ağı paktı';
@@ -1485,6 +1487,7 @@ function applyItems(giver, taker, items){
       case 'landPromise': warPromiseAdd(giver,taker,it); break;      // BETA-WAR-GOALS.0
       case 'fedPeace': fedPeaceApply(giver,taker); break;           // BETA-WAR-GOALS.0
       case 'warOn': {
+        if(it.until!==undefined&&giver.ai===false){warPledgeAdd(giver,taker,it);break;}   /* MP-WARON.0: insan veren — kabulde söz kaydı, savaş kendi onayıyla */
         const t = G.emps[it.target];
         if (t && !t.dead && declareWar(giver, t, {sponsor:taker.id, enemy:t.id, kind:'promise'})){
           // bu savaş "taker adına" açıldı: taker barışırsa bu da biter
@@ -1708,6 +1711,7 @@ function normalizeDeal(offer){
       if(it.t==='freight')for(const k of ['source','target','every','months'])it[k]=raw[k];
       if(it.t==='vassal'){it.type=raw.type;it.war=raw.war;if(!warVassalItemValid(it)){errors.push('Geçersiz teslim maddesi');continue;}}   // BETA-WAR-GOALS.0
       if(it.t==='landPromise'){it.sys=raw.sys;it.front=raw.front;if(!Number.isSafeInteger(it.sys)||!G.sys[it.sys]||!Number.isSafeInteger(it.front)||it.front<1){errors.push('Geçersiz toprak vaadi');continue;}}   // BETA-WAR-GOALS.0
+      if(it.t==='warOn'&&raw.until!==undefined){if(!Number.isSafeInteger(raw.until)||raw.until<0){errors.push('Geçersiz savaş sözü son tarihi');continue;}it.until=raw.until;}   /* MP-WARON.0: son tarihli söz (yalnız alan verildiyse) */
       if (raw.r !== undefined) it.r = raw.r;
       if (raw.k !== undefined) it.k = raw.k;
       if (raw.id !== undefined) it.id = raw.id;
@@ -1897,6 +1901,7 @@ function dealValidity(offer){
           const t = G.emps[it.target];
           const pr = canPromiseWarOn(veren, t);
           if (!pr.ok) hata = pr.why;
+          else if (it.until!==undefined){const g=warPledgeGate(veren,alan,it);if(!g.ok)hata=g.why;}   /* MP-WARON.0 */
           break;
         }
         case 'peaceWith': {
@@ -2260,6 +2265,7 @@ function dealPostcondition(giver, taker, it){
                                taker.spynet && taker.spynet[giver.id]);
     case 'warJoin': {const t=T(it.target),f=warLedgerFind(giver.id,it.target),src=(G.warLedger?.fronts||[]).find(x=>x.id===it.front);return !!(t&&f&&src&&f.campaign===src.campaign&&giver.war[t.id]&&t.war[giver.id]);}
     case 'warOn': {
+      if(it.until!==undefined&&giver.ai===false)return warPledgeOpen(giver,taker,it.target);   /* MP-WARON.0 */
       const t = T(it.target);
       return !!(t && giver.war[t.id] && t.war[giver.id]);
     }
@@ -11486,3 +11492,79 @@ function tributeEndNote(giver,t){
  if(giver===G.p||taker===G.p)say(m,'sci');return m;
 }
 /* END MP-DEAL-SYS.0 */
+
+/* ═══ MP-WARON.0 — Genel Savaş Sözü (son tarihli, insan veren) ═══
+   Tek oyunculu warOn (kabulde hemen savaş ilanı) aynen sürer: madde son tarih (until, mutlak gün) TAŞIMAZSA hiçbir şey değişmez.
+   until taşıyan maddede VEREN insansa kabulde savaş ilan EDİLMEZ; veren devletin e.warPledges kaydına açık söz yazılır ve insan
+   savaşı kendi onayıyla normal savaş ilanı akışından açar. AI veren son tarihli söz veremez (AI kabulde hemen ilan eder: motorun
+   aiRespond + declareWar kuralları). Hedefle savaş başlayınca (declareWar) söz tutulur. Son tarih geçince tutulmamışsa mevcut söz
+   bozma kuralı (toprak vaadiyle aynı: alan 'paktBozdu' hatırlar, alanın ilişkisi −20, kamu haberi hedefin adını vermez). Hedef / taraf
+   elenir ya da veren ile alan birbiriyle savaşa girerse söz DÜŞER (ceza yok); son tarihte Konsey savaş yasağı sürüyorsa söz engellenmiş
+   sayılır (ceza yok). Karşılık (kabulde ödenen) iade edilmez — toprak vaadi gibi. Denetim ay başında (warPledgeTick) ve savaş ilanında.
+   Kayıt yalnız kullanıldığında yazılır; RNG yok. */
+const WAR_PLEDGE_MAX=720,WAR_PLEDGE_KEEP=16,WAR_PLEDGE_OPEN=8,WAR_PLEDGE_DAYS=[90,180,360];
+const WAR_PLEDGE_TEXT={open:'Açık',kept:'Tutuldu',broken:'Çiğnendi',void:'Düştü'};
+function warPledgeOpen(giver,taker,target){return Array.isArray(giver?.warPledges)&&giver.warPledges.some(p=>p&&p.state==='open'&&p.to===taker.id&&p.target===target);}
+function warPledgeLabel(it){const t=G.emps[it.target];return '⚔ Savaş sözü: '+(t?t.name:'?')+' · son tarih '+tributeDate(it.until)+' ('+Math.max(0,Math.ceil(it.until-G.day))+' gün)';}
+function warPledgeGate(giver,taker,it){
+ const no=why=>({ok:false,why}),t=G.emps[it.target];
+ if(!giver||!taker||!t||t.dead)return no('Hedef devlet yok');
+ if(giver.ai!==false)return no('AI savaş sözünü kabulde hemen yerine getirir; son tarihli söz yalnız insan oyuncu verir');
+ if(t.id===taker.id||t.id===giver.id)return no('Savaş sözü taraflardan birine karşı verilemez');
+ if(!Number.isSafeInteger(it.until))return no('Geçersiz son tarih');
+ const left=it.until-G.day;if(left<1)return no('Savaş sözünün son tarihi geçti');if(left>WAR_PLEDGE_MAX+30)return no('Son tarih en çok '+WAR_PLEDGE_MAX+' gün sonra olabilir');
+ if(giver.war[t.id])return no('Zaten '+t.name+' ile savaşta — söz yeni bir yükümlülük doğurmaz');
+ if(giver.war[taker.id])return no('Savaştığın devlete savaş sözü verilemez');
+ if(warPledgeOpen(giver,taker,t.id))return no('Aynı savaş sözü zaten açık');
+ if((giver.warPledges||[]).filter(p=>p&&p.state==='open').length>=WAR_PLEDGE_OPEN)return no('En çok '+WAR_PLEDGE_OPEN+' açık savaş sözü olabilir');
+ return {ok:true};
+}
+/* Sözü tutmayı etkileyen bilinen durumlar (engellemez; teklif özetinde gösterilir). Meşruiyet salt okunur (warPure). */
+function warPledgeWarnings(giver,t){
+ const out=[];if(!giver||!t)return out;
+ if(giver.ally?.[t.id])out.push('İttifakın var: sözü tutmak ittifakı çiğnemek olur');
+ else if(giver.nap?.[t.id]>G.day)out.push('Saldırmazlık antlaşman var: sözü tutmak antlaşmayı çiğnemek olur');
+ if(giver.pact?.[t.id])out.push('Ticaret paktı savaşla sona erer');
+ if(typeof councilBlocksWar==='function'&&councilBlocksWar(giver,t))out.push('Konsey savaş yasağı yürürlükte');
+ try{const L=warPure(()=>warLegitimacy(giver,t));if(L&&L.level!=='yeterli')out.push('Savaş gerekçesi '+L.level+' (meşruiyet önizlemesi)');}catch(_){}
+ return out;
+}
+function warPledgeTrim(e){const l=e.warPledges;if(!Array.isArray(l))return;while(l.length>WAR_PLEDGE_KEEP){const i=l.findIndex(p=>!p||p.state!=='open');if(i<0)break;l.splice(i,1);}}
+function warPledgeNote(ids,text,cls){if(G.p&&ids.includes(G.p.id))say(text,cls||'war');return text;}
+function warPledgeAdd(giver,taker,it){
+ const g=warPledgeGate(giver,taker,it);if(!g.ok)throw Error(g.why);const t=G.emps[it.target];
+ const l=giver.warPledges=Array.isArray(giver.warPledges)?giver.warPledges:[];
+ l.push({id:l.reduce((n,p)=>Math.max(n,p&&p.id|0),0)+1,to:taker.id,target:t.id,day:Math.floor(G.day),until:it.until,state:'open'});warPledgeTrim(giver);
+ warPledgeNote([giver.id,taker.id],'Savaş sözü kabul edildi: '+giver.name+', '+tributeDate(it.until)+' tarihine kadar '+t.name+' ile savaşa girecek ('+taker.name+' için)');
+}
+function warPledgeClose(e,p,state,why){
+ p.state=state;p.end=Math.floor(G.day);p.why=why;const taker=G.emps[p.to],t=G.emps[p.target],tn=t?t.name:'?';
+ warPledgeNote([e.id,p.to],'Savaş sözü '+WAR_PLEDGE_TEXT[state].toLocaleLowerCase('tr')+': '+e.name+' → '+(taker?taker.name:'?')+' · hedef '+tn+' — '+why,state==='kept'?'win':'war');
+}
+function warPledgeWar(a,b){
+ for(const [x,o] of [[a,b],[b,a]])for(const p of (Array.isArray(x.warPledges)?x.warPledges:[]))if(p&&p.state==='open'&&p.target===o.id)warPledgeClose(x,p,'kept','Savaş başladı');
+}
+function warPledgeTick(){
+ for(const e of G.emps){if(!e||!Array.isArray(e.warPledges))continue;
+  for(const p of e.warPledges){if(!p||p.state!=='open')continue;const taker=G.emps[p.to],t=G.emps[p.target];
+   if(!t||t.dead)warPledgeClose(e,p,'void','Hedef elendi — söz imkânsızlaştı');
+   else if(e.dead||!taker||taker.dead)warPledgeClose(e,p,'void','Taraf artık yok');
+   else if(e.war[t.id])warPledgeClose(e,p,'kept','Savaş sürüyor');
+   else if(e.war[taker.id])warPledgeClose(e,p,'void','Söz veren ile alan birbiriyle savaşa girdi');
+   else if(G.day>p.until){
+    if(typeof councilBlocksWar==='function'&&councilBlocksWar(e,t))warPledgeClose(e,p,'void','Son tarihte Konsey savaş yasağı sürüyordu — söz engellendi');
+    else{warPledgeClose(e,p,'broken','Son tarihe kadar savaş açılmadı');remember(taker,e.id,'paktBozdu');taker.rel[e.id]=clamp((taker.rel[e.id]||0)-20,-100,100);
+     if(typeof GalacticNews!=='undefined')GalacticNews.emit({category:'politics',empires:[e.id,taker.id],key:'pledge:'+e.id+':'+p.id,important:true,title:'Savaş sözü çiğnendi',text:e.name+', '+taker.name+' devletine verdiği savaş sözünü son tarihe kadar tutmadı'});}
+   }}
+  warPledgeTrim(e);}
+}
+/* Gösterim: e'nin taraf olduğu ve o'yu ilgilendiren sözler (veren e → alan/hedef o, ya da veren o → alan e). Hedefe hiçbir satır gitmez. */
+function warPledgeRows(e,o){
+ const out=[];if(!e)return out;
+ for(const g of G.emps){if(!g||!Array.isArray(g.warPledges))continue;
+  for(const p of g.warPledges){if(!p)continue;const mine=g.id===e.id,theirs=p.to===e.id;if(!mine&&!theirs)continue;
+   if(o&&!(mine&&(p.to===o.id||p.target===o.id))&&!(theirs&&(g.id===o.id||p.target===o.id)))continue;
+   out.push({id:p.id,giver:g.id,to:p.to,target:p.target,day:p.day,until:p.until,state:p.state,why:p.why||'',end:p.end,left:Math.max(0,Math.ceil(p.until-G.day)),mine});}}
+ return out;
+}
+/* END MP-WARON.0 */

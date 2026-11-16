@@ -7894,6 +7894,7 @@ function encodeOffer(o){
       if(t==='freight')for(const k of ['source','every','months'])if(_num(it[k])!==null)e[k]=it[k];
       if(t==='vassal'){if(_str(it.type)!==null)e.type=it.type;if(_str(it.war)!==null)e.war=it.war;}   // BETA-WAR-GOALS.0
       if(t==='landPromise'){if(Number.isSafeInteger(it.sys))e.sys=it.sys;if(Number.isSafeInteger(it.front))e.front=it.front;}   // BETA-WAR-GOALS.0
+      if(t==='warOn'&&Number.isSafeInteger(it.until))e.until=it.until;   /* MP-WARON.0: son tarihli söz kartta / karşı teklifte korunur */
       if (_str(it.r) !== null) e.r = it.r;
       if (_num(it.v) !== null) e.v = it.v;
       if (_num(it.n) !== null) e.n = it.n;
@@ -9019,7 +9020,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p35';
+const BUILD_ID = '96h10p36';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
@@ -9831,6 +9832,7 @@ function monthTick(){
   warExhTick();
   planetCharTick();
   tributeTick();
+  if(typeof warPledgeTick==='function')warPledgeTick();   /* MP-WARON.0 */
   tradeFlowTick();
   fedTick();
   borderFriction();
