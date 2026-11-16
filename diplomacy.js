@@ -1126,6 +1126,7 @@ function endTreatiesForWar(a, b){
   for(const key of ['visionFrom','shareVis','spynet','passage']){
     if(a[key])delete a[key][b.id];if(b[key])delete b[key][a.id];
   }
+  if((a.luxGrant||b.luxGrant)&&typeof luxGrantEndWar==='function')luxGrantEndWar(a,b);   /* MP-DIPLO5 NF-2b: savaş lüks hakkını bitirir */
 }
 /* Eski v8 kayıtlarındaki savaş+antlaşma çakışmasını ay ilerletmeden,
    bildirim üretmeden ve RNG tüketmeden onarır. Savaş kaydı korunur. */
@@ -1451,7 +1452,9 @@ function applyItems(giver, taker, items){
         break;
       case 'lux':
         taker.luxGrant = taker.luxGrant || {};
+        if (Number.isInteger(taker.luxGrant[it.k]) && taker.luxGrant[it.k] !== giver.id && typeof luxGrantLogAdd === 'function') luxGrantLogAdd(taker, it.k, taker.luxGrant[it.k], 'replaced');
         taker.luxGrant[it.k] = giver.id;
+        if (typeof refreshLuxury === 'function') refreshLuxury(taker);   /* MP-DIPLO5 NF-2b: bonus kabulde açılır (işlem içinde; geri alınırsa grafik geri gelir) */
         break;
       case 'peace': if(giver.war[taker.id]||taker.war[giver.id])makePeace(giver, taker); break;
       case 'nap':
@@ -11587,3 +11590,74 @@ function warPledgeRows(e,o){
  return out;
 }
 /* END MP-WARON.0 (MP-WARON.1 son tarih kuralı dahil) */
+/* ═══ MP-DIPLO5 NF-2b — lüks mal erişim hakkının (luxGrant) ekonomik etkisi ═══
+   Anlaşmanın `lux` maddesi alıcıya `luxGrant[k]=veren` yazar. p37'ye kadar refreshLuxury bu kaydı okumuyordu (bonus yoktu, SP ve MP).
+   Kural (SP ve MP aynı; MP'de sonucu host üretir):
+   - Geçerli hak alıcıda mevcut lüks bonusunu açar; açık anlaşma yeterli (ticaret limanı / rota gerekmez).
+   - Veren malı KENDİ kolonisinden sağlamalı (ownLuxury); yalnız ithal ya da kendisine hak olarak gelen mal yeni zincir kurmaz.
+   - Aynı mal koloni + ticaret paktı + hak ile erişilse de bonus bir kez (e.luxury boolean); biri düşse öteki sürer.
+   - Askıya alır (kayıt kalır, koşul dönünce yeniden çalışır): ambargo / Konsey yaptırımı (tradeBlocked; kaçakçılık hattı açık tutar),
+     verenin kendi kaynağını kaybetmesi.
+   - Bitirir (kayıt silinir, alıcıya kısa geçmiş `luxGrantLog`): savaş (endTreatiesForWar — pakt / geçiş / sensör paylaşımıyla aynı kural),
+     verenin elenmesi, geçersiz eski kayıt (bilinmeyen mal, olmayan / kendisi olan veren).
+   - Yalnız `luxGrant` varken çalışır: hak yoksa refreshLuxury, Save8 ve RNG p37 ile aynı. RNG kullanmaz. */
+const LUX_GRANT_WHY={war:'taraflar savaşa girdi',embargo:'ambargo / ticaret yaptırımı (hak askıda)',source:'veren bu malın kendi kaynağını kaybetti (hak askıda)',
+  dead:'veren devlet elendi',bad:'geçersiz eski kayıt',replaced:'aynı mal için yeni hak'};
+const LUX_GRANT_LOG=8;
+function luxGrantStatus(e,k){
+  const g=e&&e.luxGrant?e.luxGrant[k]:undefined;
+  /* MP misafiri: hakkın durumunu yetkili host hesaplar (ayna `mpLuxGrant`); misafir verenin gizli kolonilerini bilmez */
+  if(e&&e.mpLuxGrant&&Object.hasOwn(e.mpLuxGrant,k)){const s=e.mpLuxGrant[k]||{};return {k,giver:g,ok:!!s.ok,code:s.ok?'':String(s.code||''),end:false};}
+  if(!Object.hasOwn(LUXURY,k)||!Number.isInteger(g)||!G.emps[g]||g===e.id)return {k,giver:g,ok:false,code:'bad',end:true};
+  const v=G.emps[g];
+  if(v.dead)return {k,giver:g,ok:false,code:'dead',end:true};
+  if((e.war&&e.war[g])||(v.war&&v.war[e.id]))return {k,giver:g,ok:false,code:'war',end:false};
+  if(typeof tradeBlocked==='function'&&tradeBlocked(e,v))return {k,giver:g,ok:false,code:'embargo',end:false};
+  if(!ownLuxury(v)[k])return {k,giver:g,ok:false,code:'source',end:false};
+  return {k,giver:g,ok:true,code:'',end:false};
+}
+function luxGrantLogAdd(e,k,g,code){
+  if(!e)return;e.luxGrantLog=Array.isArray(e.luxGrantLog)?e.luxGrantLog:[];
+  e.luxGrantLog.push({k:String(k),g:Number.isInteger(g)?g:-1,d:Math.floor(G.day||0),why:code});
+  if(e.luxGrantLog.length>LUX_GRANT_LOG)e.luxGrantLog.splice(0,e.luxGrantLog.length-LUX_GRANT_LOG);
+}
+/* refreshLuxury'nin sonunda (pakt ithalatından sonra) çağrılır: geçerli hak got/imported'a eklenir, biten kayıt silinir. */
+function luxGrantApply(e,got,imported){
+  const lg=e.luxGrant;
+  if(!lg||typeof lg!=='object'||Array.isArray(lg)){delete e.luxGrant;return;}
+  for(const k of Object.keys(lg)){
+    const s=luxGrantStatus(e,k);
+    if(s.end&&!e.mpLuxGrant){delete lg[k];luxGrantLogAdd(e,k,s.giver,s.code);continue;}
+    if(s.ok&&!got[k]){got[k]=true;imported[k]=s.giver;}
+  }
+}
+/* Savaş: iki taraf arasındaki lüks hakları biter (endTreatiesForWar kancası). Silinen varsa alıcının erişimi hemen yeniden hesaplanır. */
+function luxGrantEndWar(a,b){
+  for(const [x,y] of [[a,b],[b,a]]){
+    if(!x||!y||!x.luxGrant||typeof x.luxGrant!=='object')continue;let n=0;
+    for(const k of Object.keys(x.luxGrant))if(x.luxGrant[k]===y.id){delete x.luxGrant[k];luxGrantLogAdd(x,k,y.id,'war');n++;}
+    if(n&&!x.dead&&typeof refreshLuxury==='function')refreshLuxury(x);
+  }
+}
+/* refreshLuxury'nin ticaret paktı kuralıyla aynı denetim (salt okunur): malı pakt üzerinden sağlayan ilk ortak, yoksa −1 */
+function luxTradeSource(e,k){
+  const tr=e.trade;if(!(tr&&tr.links&&tr.links.some(l=>l.dis&&!l.bl)))return -1;
+  for(const o of G.emps){
+    if(o.dead||o.id===e.id||e.war[o.id])continue;if(!(e.pact&&e.pact[o.id]))continue;
+    if(typeof tradeBlocked==='function'&&tradeBlocked(e,o))continue;if(ownLuxury(o)[k])return o.id;
+  }
+  return -1;
+}
+/* Görünüm (salt okunur): her lüks mal için erişim kanalları ve hakkın durumu. Ekonomi ekranı / Lüks mal ağın. */
+function luxChannels(e){
+  const own=e.luxOwn||{},out=[];
+  for(const k of LUX_KEYS){
+    const ch=[];if(own[k])ch.push('koloni');
+    const s=e.luxGrant&&Object.hasOwn(e.luxGrant,k)?luxGrantStatus(e,k):null;
+    if(luxTradeSource(e,k)>=0)ch.push('ticaret');
+    if(s&&s.ok)ch.push('hak');
+    out.push({k,on:!!(e.luxury&&e.luxury[k]),ch,grant:s?{giver:s.giver,ok:s.ok,code:s.code,why:s.ok?'':(LUX_GRANT_WHY[s.code]||s.code)}:null});
+  }
+  return out;
+}
+/* END MP-DIPLO5 NF-2b */

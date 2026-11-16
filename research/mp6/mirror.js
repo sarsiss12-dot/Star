@@ -76,6 +76,8 @@ function build(meId,o={}){
   mine.mapHabitats=knowledge.habitats;mine.mapOwners=Object.fromEntries(Object.entries(knowledge.owners).map(([id,owner])=>[id,piN(owner)]));
   mine.id=0;mine.ai=false;for(const k of EMP_MAPS)if(mine[k])mine[k]=remapKeys(mine[k]);
   if(mine.luxGrant&&typeof mine.luxGrant==='object')mine.luxGrant=Object.fromEntries(Object.entries(mine.luxGrant).map(([k,g])=>[k,piN(g)]));   /* MP-TECHLUX.0: kendisine verilen lüks erişimleri (veren kimliği π) */
+  if(me.luxGrant&&typeof me.luxGrant==='object'&&typeof luxGrantStatus==='function')mine.mpLuxGrant=Object.fromEntries(Object.keys(me.luxGrant).map(k=>{const s=luxGrantStatus(me,k);return [k,s.ok?{ok:true}:{ok:false,code:s.code}];}));   /* MP-DIPLO5 NF-2b: hakkın durumunu host hesaplar (misafir verenin kolonilerini bilmez); yalnız durum kodu */
+  if(Array.isArray(mine.luxGrantLog))mine.luxGrantLog=mine.luxGrantLog.filter(r=>r&&typeof r==='object').map(r=>({k:String(r.k),g:Number.isInteger(r.g)&&r.g>=0?piN(r.g):-1,d:r.d,why:String(r.why||'')}));   /* MP-DIPLO5 NF-2b: biten haklar (veren π) */
   if(Array.isArray(mine.warPledges))mine.warPledges=mine.warPledges.filter(p=>p&&Number.isInteger(p.to)&&Number.isInteger(p.target)).map(p=>({...p,to:piN(p.to),target:piN(p.target)}));   /* MP-WARON.0: kendi verdiği savaş sözleri */
   if(Array.isArray(mine.tribute))mine.tribute=mine.tribute.filter(t=>t&&Number.isInteger(t.to)).map(t=>({...t,to:piN(t.to)}));   /* MP-DEAL-SYS.0: kendi haraç yükümlülükleri (alıcı kimliği π) */
   /* MP.6.4 gizlilik: mağdur kaydında fail yalnız BİLİNİYORSA (yakalandı / soruşturmayla çözüldü) gider; tespit edilmemiş

@@ -1,0 +1,11 @@
+PASS L1 ipek vakası: AI → oyuncu ipek erişimi kabulde alıcıda bonus açar
+PASS L2 tekillik: kendi koloni + hak → bonus bir kez; kendi kaynağı düşünce hak sürdürür
+PASS L3 kaynak kaybı askıya alır, geri gelince sürer; alıcı hakkı başkasına veremez
+PASS L4 savaş hakkı bitirir: kayıt silinir, bonus hemen kalkar; barış geri getirmez
+PASS L5 ambargo askıya alır; kalkınca bonus geri gelir
+PASS L6 veren elenir → hak biter
+PASS L7 eski Save8: geçerli hak bonus üretir, geçersiz kayıtlar güvenle temizlenir
+PASS L8 tekrar kabul ve kayıt → yükleme bonusu çoğaltmaz
+PASS L9 AI → AI hak aynı kural; hak yoksa refreshLuxury sonucu aynı
+PASS L10 arayüz: teklif özeti açılan bonus; Lüks mal ağın + ekonomi paneli kanal ve askı nedeni
+GEÇEN: 10 KALAN: 0

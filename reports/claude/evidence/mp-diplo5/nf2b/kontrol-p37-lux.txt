@@ -1,0 +1,142 @@
+FAIL L1 ipek vakası: AI → oyuncu ipek erişimi kabulde alıcıda bonus açar
+AssertionError [ERR_ASSERTION]: alıcıda luxury.ipek (p37: false — NF-2b)
+
+false !== true
+
+    at /home/user/Star/tests/mp_diplo5_lux_test.js:33:10
+    at test (/home/user/Star/tests/mp_diplo5_lux_test.js:17:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_diplo5_lux_test.js:29:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL L2 tekillik: kendi koloni + hak → bonus bir kez; kendi kaynağı düşünce hak sürdürür
+evalmachine.<anonymous>:2
+    __pl(G.p).lux=null;refreshLuxury(G.p);const mGrant=__m(G.p);return {m0,mOwn,mBoth,mGrant,ch:luxChannels(G.p).find(c=>c.k==='ipek')};})())
+                                                                                                                 ^
+
+ReferenceError: luxChannels is not defined
+    at evalmachine.<anonymous>:2:114
+    at evalmachine.<anonymous>:2:139
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/mp_diplo5_lux_test.js:18:29)
+    at /home/user/Star/tests/mp_diplo5_lux_test.js:38:11
+    at test (/home/user/Star/tests/mp_diplo5_lux_test.js:17:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_diplo5_lux_test.js:37:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+FAIL L3 kaynak kaybı askıya alır, geri gelince sürer; alıcı hakkı başkasına veremez
+evalmachine.<anonymous>:2
+    const off={lux:!!G.p.luxury.ipek,kept:G.p.luxGrant.ipek,st:luxGrantStatus(G.p,'ipek').code};__pl(__g).lux='ipek';refreshLuxury(__g);refreshLuxury(G.p);
+                                                                                         ^
+
+ReferenceError: luxGrantStatus is not defined
+    at evalmachine.<anonymous>:2:90
+    at evalmachine.<anonymous>:4:63
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/mp_diplo5_lux_test.js:18:29)
+    at /home/user/Star/tests/mp_diplo5_lux_test.js:44:11
+    at test (/home/user/Star/tests/mp_diplo5_lux_test.js:17:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_diplo5_lux_test.js:43:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+FAIL L4 savaş hakkı bitirir: kayıt silinir, bonus hemen kalkar; barış geri getirmez
+AssertionError [ERR_ASSERTION]: savaş hakkı siler
+
+true !== false
+
+    at /home/user/Star/tests/mp_diplo5_lux_test.js:55:10
+    at test (/home/user/Star/tests/mp_diplo5_lux_test.js:17:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_diplo5_lux_test.js:51:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL L5 ambargo askıya alır; kalkınca bonus geri gelir
+evalmachine.<anonymous>:1
+JSON.stringify((()=>{__deal(__g,G.p,'ipek');setEmbargo(G.p,__g,true);refreshLuxury(G.p);const a={lux:!!G.p.luxury.ipek,code:luxGrantStatus(G.p,'ipek').code,kept:Object.hasOwn(G.p.luxGrant,'ipek')};
+                                                                                                                                                      ^
+
+ReferenceError: luxGrantStatus is not defined
+    at evalmachine.<anonymous>:1:151
+    at evalmachine.<anonymous>:2:83
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/mp_diplo5_lux_test.js:18:29)
+    at /home/user/Star/tests/mp_diplo5_lux_test.js:59:11
+    at test (/home/user/Star/tests/mp_diplo5_lux_test.js:17:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_diplo5_lux_test.js:58:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+FAIL L6 veren elenir → hak biter
+evalmachine.<anonymous>:1
+JSON.stringify((()=>{__deal(__g,G.p,'ipek');__g.dead=true;refreshLuxury(G.p);return {has:Object.hasOwn(G.p.luxGrant,'ipek'),lux:!!G.p.luxury.ipek,log:G.p.luxGrantLog.at(-1).why};})())
+                                                                                                                                                                      ^
+
+TypeError: Cannot read properties of undefined (reading 'at')
+    at evalmachine.<anonymous>:1:167
+    at evalmachine.<anonymous>:1:181
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/mp_diplo5_lux_test.js:18:29)
+    at /home/user/Star/tests/mp_diplo5_lux_test.js:64:11
+    at test (/home/user/Star/tests/mp_diplo5_lux_test.js:17:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_diplo5_lux_test.js:63:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+FAIL L7 eski Save8: geçerli hak bonus üretir, geçersiz kayıtlar güvenle temizlenir
+AssertionError [ERR_ASSERTION]: geçerli eski hak bonus üretir
+
+false !== true
+
+    at /home/user/Star/tests/mp_diplo5_lux_test.js:70:58
+    at test (/home/user/Star/tests/mp_diplo5_lux_test.js:17:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_diplo5_lux_test.js:67:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+PASS L8 tekrar kabul ve kayıt → yükleme bonusu çoğaltmaz
+FAIL L9 AI → AI hak aynı kural; hak yoksa refreshLuxury sonucu aynı
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at /home/user/Star/tests/mp_diplo5_lux_test.js:81:44
+    at test (/home/user/Star/tests/mp_diplo5_lux_test.js:17:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_diplo5_lux_test.js:79:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL L10 arayüz: teklif özeti açılan bonus; Lüks mal ağın + ekonomi paneli kanal ve askı nedeni
+evalmachine.<anonymous>:1
+JSON.stringify((()=>{const row=UI.dealTermsHtml({give:[{t:'lux',k:'ipek'}],want:[]},__g,G.p);__deal(__g,G.p,'ipek');refreshLuxury(G.p);const on=UI.luxGrantHtml(G.p);const dir=UI.diploDirectory();
+                                                                                                                                                   ^
+
+TypeError: UI.luxGrantHtml is not a function
+    at evalmachine.<anonymous>:1:148
+    at evalmachine.<anonymous>:2:131
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/mp_diplo5_lux_test.js:18:29)
+    at /home/user/Star/tests/mp_diplo5_lux_test.js:84:11
+    at test (/home/user/Star/tests/mp_diplo5_lux_test.js:17:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_diplo5_lux_test.js:83:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+GEÇEN: 1 KALAN: 9

@@ -166,6 +166,8 @@ function refreshLuxury(e){
       for (const k in theirs) if (!got[k]){ got[k] = true; imported[k] = o.id; }
     }
   }
+  /* MP-DIPLO5 NF-2b: anlaşmayla verilen lüks erişim hakkı (yalnız kayıt varken; aksi hâlde p37 ile aynı) */
+  if (e.luxGrant && typeof luxGrantApply === 'function') luxGrantApply(e, got, imported);
   e.luxury = got;
   e.luxOwn = own;
   e.luxImport = imported;

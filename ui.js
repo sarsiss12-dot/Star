@@ -3690,9 +3690,11 @@ const UI = {
     const fed=findFed(e);
     if (fed) h+=`<div class="mini">Federasyonun: ${esc(fed.name)} · ${fed.members.length} üye</div>`;
     h+='<details class="dcDetails"><summary>Lüks mal ağın</summary><div class="luxRow">';
-    for (const k of LUX_KEYS){const L=LUXURY[k],own=e.luxOwn&&e.luxOwn[k],imp=e.luxImport&&e.luxImport[k]!==undefined;
+    if(typeof luxChannels==='function'){for(const c of luxChannels(e)){const L=LUXURY[c.k],t=c.ch.length?c.ch.map(x=>x==='koloni'?'yerli':x==='hak'?'erişim hakkı':x).join(' + '):(c.grant?'hak askıda':'yok');
+      h+=`<span class="luxChip ${c.ch.includes('koloni')?'have':c.on?'imp':'miss'}" data-lux="${c.k}">${L.ico} ${esc(L.n)} · ${esc(t)}</span>`;}}
+    else for (const k of LUX_KEYS){const L=LUXURY[k],own=e.luxOwn&&e.luxOwn[k],imp=e.luxImport&&e.luxImport[k]!==undefined;
       h+=`<span class="luxChip ${own?'have':imp?'imp':'miss'}">${L.ico} ${esc(L.n)} · ${own?'yerli':imp?'ithal':'yok'}</span>`;}
-    return h+'</div></details>';
+    return h+'</div>'+(UI.luxGrantHtml?UI.luxGrantHtml(e):'')+'</details>';
   },
   diploSovereignty(e,owner){
     let h=sovereignPair(e,owner)?this.vsContract(e.overlord===owner.id?e:owner):'';
@@ -7185,6 +7187,7 @@ const UI = {
     h += `<div class="row"><span>Lüks mal çeşidi</span><b style="color:#e0a8ff">${lx} / ${LUX_KEYS.length}</b></div>`;
     if (lx) h += `<div class="luxRow">` + Object.keys(e.luxury).map(k=>
       `<span class="luxChip ${(e.luxOwn&&e.luxOwn[k])?'have':'imp'}"><span style="color:${LUXURY[k].c}">${LUXURY[k].ico}</span>${LUXURY[k].n}</span>`).join('') + `</div>`;
+    if (UI.luxGrantHtml) h += UI.luxGrantHtml(e);   /* MP-DIPLO5 NF-2b: erişim hakkı kanalı / askı nedeni */
     if (tr.cut) h += `<div class="mini" style="color:#ff5f6d">⚠ ${tr.cut} rota düşman kontrolünde kesik</div>`;
     else if (tr.n === 0) h += `<div class="mini">Ticaret için kolonilere <b>Ticaret Limanı</b> kur. Limanlar 3 sıçrama içinde birbirine bağlanır; diplomasiden ticaret anlaşması yaparak yabancı limanlara da bağlanabilirsin.</div>`;
 
@@ -10125,15 +10128,28 @@ UI.dealPledgeDays=function(x){
   if(!it||it.t!=='warOn'||it.until===undefined)return;const left=it.until-Math.floor(G.day),next=WAR_PLEDGE_DAYS.find(n=>n>left+1)||WAR_PLEDGE_DAYS[0];
   it.until=Math.floor(G.day)+next;this.drawDeal();
 };
-/* MP-TECHLUX.0 — teklif özeti: teknolojinin alıcıya tam olarak ne sağladığı (techBenefits) ve alıcının erişim koşulu; lüks mal erişiminin motordaki
-   gerçek etkisi (alıcının luxGrant kaydı; lüks bonusu motorda ticaret paktı + açık rota ile gelir, erişim kaydının kendisi bonus üretmez). */
+/* MP-TECHLUX.0 — teklif özeti: teknolojinin alıcıya tam olarak ne sağladığı (techBenefits) ve alıcının erişim koşulu; lüks mal erişiminin
+   gerçek etkisi (MP-DIPLO5 NF-2b: geçerli hak alıcıda lüks bonusunu açar; savaşta biter, ambargo / kaynak kaybında askıda). */
 UI.dealAssetTermsRow=function(giver,taker,it,e){
   const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?');
   if(it.t==='tech'){const T=TECHS[it.id];if(!T)return '';const b=typeof techBenefits==='function'?techBenefits(it.id):{effects:[],unlocks:[]},gain=[...b.effects,...b.unlocks],
     ra=taker.id===e.id&&typeof researchAccess==='function'?researchAccess(taker,it.id):null;
     return `<div class="mini dealAssetRow" data-kind="tech">✦ <b>Teknoloji</b>: ${esc(T.n)} · ${esc(nm(giver.id))} → ${esc(nm(taker.id))} · <b>kabul anında</b> alıcının araştırmasına eklenir (verende kalır)${gain.length?' · sağladığı: '+esc(gain.join(', ')):''}${ra&&!ra.ok?` <span style="color:#ff5f6d">⛔ ${esc(ra.why)}</span>`:''}</div>`;}
   const L=LUXURY[it.k];if(!L)return '';
-  return `<div class="mini dealAssetRow" data-kind="lux">❖ <b>Lüks mal erişimi</b>: ${esc(L.ico||'')} ${esc(L.n)} · ${esc(nm(giver.id))} → ${esc(nm(taker.id))} · kabulde alıcının erişim kaydına yazılır (veren malı kaybetmez) · lüks bonusu motorda ticaret paktı + açık rota ile gelir; erişim kaydının kendisi bonus üretmez (mevcut motor davranışı)</div>`;
+  /* MP-DIPLO5 NF-2b: hak artık alıcıda lüks bonusunu açar (refreshLuxury → luxGrantApply) */
+  const has=!!(taker.luxury&&taker.luxury[it.k]),src=!!(giver.luxOwn&&giver.luxOwn[it.k]);
+  return `<div class="mini dealAssetRow" data-kind="lux" data-opens="${has?'backup':'bonus'}">❖ <b>Lüks mal erişimi</b>: ${esc(L.ico||'')} ${esc(L.n)} · ${esc(nm(giver.id))} → ${esc(nm(taker.id))} · ${
+    has?`alıcı bu mala zaten erişiyor: hak <b>yedek kanal</b> olur (bonus bir kez sayılır)`:`kabulde alıcıda <b>${esc(L.d||'')}</b> bonusu açılır`} · veren malı kaybetmez, kendi kolonisinden sağlamalı (ithal mal hak olarak verilemez) · savaşta hak biter; ambargo ya da verenin kaynağını kaybetmesi hakkı askıya alır${
+    src?'':` <span style="color:#ff5f6d">⛔ veren bu malın kendi kaynağına sahip değil</span>`}</div>`;
+};
+UI.luxGrantHtml=function(e){
+  if(typeof luxChannels!=='function'||!e)return '';const nm=id=>Number.isInteger(id)&&G.emps[id]?G.emps[id].name:'?';let h='';
+  for(const c of luxChannels(e)){if(!c.grant)continue;const L=LUXURY[c.k],g=c.grant;
+    h+=`<div class="mini luxGrantRow" data-lux="${c.k}" data-state="${g.ok?'on':'off'}">${L.ico} ${esc(L.n)} · erişim hakkı: ${esc(nm(g.giver))} · ${
+      g.ok?(c.ch.length>1?`etkin (bonus bir kez; kanallar: ${esc(c.ch.join(' + '))})`:'<b>etkin</b> — bonus bu haktan'):`<span class="luxGrantWhy" style="color:#ff9b3d">askıda — ${esc(g.why)}</span>${c.on?' (mal başka kanaldan geliyor, bonus sürüyor)':''}`}</div>`;}
+  const log=Array.isArray(e.luxGrantLog)?e.luxGrantLog.slice(-3):[];
+  for(const r of log){const L=LUXURY[r.k];if(!L)continue;h+=`<div class="mini luxGrantRow" data-lux="${esc(r.k)}" data-state="end">${L.ico} ${esc(L.n)} · hak sona erdi (${esc(nm(r.g))}): ${esc((typeof LUX_GRANT_WHY!=='undefined'&&LUX_GRANT_WHY[r.why])||r.why)}</div>`;}
+  return h;
 };
 UI.warPledgeTermsRow=function(giver,taker,it,e){
   const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?'),t=G.emps[it.target],tn=esc(t?t.name:'?');
