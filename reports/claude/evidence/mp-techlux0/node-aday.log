@@ -1,0 +1,11 @@
+PASS T1 C teknoloji verir + B'den lüks ister (İZLENİYOR); B karşı teklif; C kabul → B'de teknoloji, C'de erişim kaydı; ikinci kabul yok
+PASS T2 İZLENİYOR yoksa istek reddi (varlık söylenmez); dealAssets istihbaratsız liste döndürmez
+PASS T3 dealAssets İZLENİYOR ile: isteyende olmayan teknolojiler (erişim koşuluyla) ve lüks mallar
+PASS T4 karşı teklifte açıkça sunulan madde istihbaratsız istenebilir; sunulmayan istenemez
+PASS T5 bekleyen teklif: veren lüks malın kaynağını kaybeder → geçersiz + iki tarafa neden; kabul işlenmez
+PASS T6 birleşik teklif (teknoloji + lüks + kaynak): kabulde teknoloji geçersiz → hiçbir madde uygulanmaz
+PASS T7 ayna / gizlilik: alana teknoloji ve erişim kaydı (π), verene verdiği erişim; üçüncü misafire hiçbiri; kabukta ağaç yok
+PASS T8 insan → AI: AI'dan teknoloji isteme / AI'ya verme motorun aiRespond kararıyla; kabulde gerçek etki
+PASS T9 kayıt: Save8 gidiş-dönüş aynı; aynı cid tek teklif
+PASS T10 kabul anında isteyenin istihbaratı düşmüşse kabul gerekçeyle reddedilir
+GEÇEN: 10 KALAN: 0

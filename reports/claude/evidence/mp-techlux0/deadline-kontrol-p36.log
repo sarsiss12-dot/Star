@@ -1,0 +1,75 @@
+PASS D1 son tarihten bir gün önce ilan → Tutuldu
+FAIL D2 son günün başında ve sonunda ilan → Tutuldu; son gün içinde ay başı denetimi sözü bozmaz
+AssertionError [ERR_ASSERTION]: son gün (0.5) denetimi açık bırakır
+
+'broken' !== 'open'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:32:12
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:29:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL D3 ertesi gün, ay başı denetiminden ÖNCE veren ilan eder → Tutuldu DEĞİL; Çiğnendi bir kez; savaş yine başlar
+AssertionError [ERR_ASSERTION]: geç ilan sözü tutmaz
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:39:75
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:34:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL D4 hedef verene ilan eder: süresinde → Tutuldu; süre sonrası → Tutuldu değil
+AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to:
+
+'kept'
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:44:168
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:42:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL D5 ay başı denetimi geç: süre sonrası başlayan savaş → Çiğnendi; süresinde kancasız başlayan savaş (warStart) → Tutuldu
+AssertionError [ERR_ASSERTION]: {"id":1,"to":1,"target":2,"day":100,"until":150,"state":"kept","end":180,"why":"Savaş sürüyor"}
+
+'kept' !== 'broken'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:48:10
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:46:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+PASS D6 sınırda Düştü kuralları: hedef elenir / taraflar savaşır / son günde Konsey yasağı → Düştü, ceza yok
+PASS D7 kayıt → yükleme → denetim: sonuçlanmış söz ikinci kez sonuçlanmaz; ceza ve bildirim bir kez
+FAIL D8 arayüz: kalan gün aynı kurala göre; son gün "son gün"; son günde teklif geçerli, ertesi gün geçersiz
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /son gün/. Input:
+
+'⚔ Savaş sözü: Tharaeth Lejyonu · son tarih 2210/06 (0 gün)'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:67:10
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl36/tests/mp_waron1_deadline_test.js:64:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+GEÇEN: 3 KALAN: 5

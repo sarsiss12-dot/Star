@@ -1,0 +1,356 @@
+{
+ "results": [
+  {
+   "name": "T0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 8528
+  },
+  {
+   "name": "T1 C gerçek masada teknoloji verir + B'den lüks ister (host listesi, İZLENİYOR); özet; B karşı teklif; C kabul → B'de teknoloji, C'de erişim kaydı",
+   "status": "PASS",
+   "ms": 6829
+  },
+  {
+   "name": "T2 istihbaratı yetmeyen B: \"İstiyorum\" teknoloji / lüks pasif + görünür neden; host listesi dönmez",
+   "status": "PASS",
+   "ms": 401
+  },
+  {
+   "name": "T3 birleşik teklif (teknoloji + kaynak) beklerken veren teknolojiyi kaybeder → geçersiz (iki tarafta neden), kabul işlenmez, hiçbir madde uygulanmaz",
+   "status": "PASS",
+   "ms": 1149
+  },
+  {
+   "name": "T4 C'nin lüks teklifini B iki kez kabul eder + hat donar / kopar → tek erişim kaydı, tek ödeme",
+   "status": "PASS",
+   "ms": 4584
+  },
+  {
+   "name": "T5 👁 İstihbarat: C gerçek masada B'den görüş ister → B kabul → B filosu yeni sisteme → C haritasında görünür; host ve B haritasında değil (paylaşım yönü)",
+   "status": "PASS",
+   "ms": 3301
+  },
+  {
+   "name": "T6 kaydet → host kapanır → YENİ oda → misafirler döner → teknoloji, erişim kayıtları ve sensör paylaşımı aynı",
+   "status": "PASS",
+   "ms": 6269
+  },
+  {
+   "name": "T7 insan → AI: C gerçek masada AI'ya teknoloji verir; sonuç motorun aiRespond kararı; kabulde AI'da teknoloji",
+   "status": "PASS",
+   "ms": 1252
+  }
+ ],
+ "metrics": {
+  "scen": "T",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 268,
+    "buildMs": 289,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 337,
+    "buildMs": 356,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 10.9,
+      "p95": 10.9,
+      "max": 10.9
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 18,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 36.9,
+       "p95": 36.9,
+       "max": 36.9
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.6,
+       "p95": 1.6,
+       "max": 1.6
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 14,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 26,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 54.5,
+       "p95": 54.5,
+       "max": 54.5
+      },
+      "refresh": {
+       "n": 1,
+       "med": 8.3,
+       "p95": 8.3,
+       "max": 8.3
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 722,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 4162,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "techlux": {
+   "fx": {
+    "tC": "f_reaktor",
+    "tC2": "f_lazer1",
+    "tB": "f_kalkan1",
+    "nC": "Verimli Reaktörler",
+    "nC2": "Lazer Bataryaları",
+    "K0": "zerrin",
+    "K1": "kristal",
+    "L0": "Zerrin Baharatı",
+    "L1": "Canlı Kristal",
+    "X": 1,
+    "AI": 3
+   },
+   "t1": {
+    "sum": "✦ Teknoloji: Verimli Reaktörler · Sen → Saf Akıl Ağı · kabul anında alıcının araştırmasına eklenir (verende kalır) · sağladığı: Enerji +%15 | ❖ Lüks mal erişimi: ✿ Zerrin Baharatı · Saf Akıl Ağı → Sen · kabulde alıcının erişim kaydına yazılır (veren malı kaybetmez) · lüks bonusu motorda ticaret paktı + açık rota ile gelir; erişim kaydının kendisi bonus üretmez (mevcut motor davranışı)",
+    "o1": {
+     "id": 1,
+     "give": [
+      {
+       "t": "tech",
+       "id": "f_reaktor"
+      }
+     ],
+     "want": [
+      {
+       "t": "lux",
+       "k": "zerrin"
+      }
+     ]
+    },
+    "bCard": "✦ Verimli Reaktörler | ✿ Zerrin Baharatı erişimi",
+    "o2": {
+     "id": 2,
+     "from": 1,
+     "give": [
+      {
+       "t": "lux",
+       "k": "zerrin"
+      }
+     ],
+     "want": [
+      {
+       "t": "tech",
+       "id": "f_reaktor"
+      },
+      {
+       "t": "res",
+       "r": "min",
+       "v": 15
+      }
+     ]
+    },
+    "accept": {
+     "ok": true,
+     "pending": true
+    },
+    "host": {
+     "bt": true,
+     "ct": true,
+     "g": 1,
+     "bown": true
+    },
+    "mirror": {
+     "bm": true,
+     "cm": 1,
+     "bLocal": 1
+    }
+   },
+   "t2": {
+    "ui": {
+     "tech": true,
+     "lux": true,
+     "why": "✦ Teknoloji / ❖ Lüks mal istemek için İZLENİYOR istihbaratı gerekir"
+    },
+    "ro": {
+     "status": "ok",
+     "code": null,
+     "ms": 18,
+     "cid": "jmwjccitra1thyws5"
+    },
+    "extra": {
+     "intel": false,
+     "why": "İZLENİYOR istihbaratı gerekir"
+    }
+   },
+   "t3": {
+    "status": "invalid",
+    "why": "Teknoloji / lüks mal koşulu değişti",
+    "views": {
+     "B": [
+      [
+       "countered",
+       ""
+      ],
+      [
+       "accepted",
+       ""
+      ],
+      [
+       "invalid",
+       "Teknoloji / lüks mal koşulu değişti"
+      ]
+     ],
+     "C": [
+      [
+       "countered",
+       ""
+      ],
+      [
+       "accepted",
+       ""
+      ],
+      [
+       "invalid",
+       "Teknoloji / lüks mal koşulu değişti"
+      ]
+     ]
+    }
+   },
+   "t4": {
+    "a1": {
+     "ok": true,
+     "pending": true
+    },
+    "a2": {
+     "ok": false,
+     "why": "Karar gönderildi; host yanıtı bekleniyor"
+    },
+    "retry": {
+     "ok": true,
+     "pending": true
+    },
+    "host": {
+     "g": 2,
+     "min": 5990,
+     "st": "accepted",
+     "min0": 6015
+    }
+   },
+   "t5": {
+    "before": false,
+    "after": true,
+    "hostSees": false,
+    "bDir": false
+   },
+   "t6": {
+    "before": "{\"bt\":[\"f_kalkan1\",\"f_reaktor\"],\"cg\":{\"zerrin\":1},\"cv\":{\"1\":true}}",
+    "after": "{\"bt\":[\"f_kalkan1\",\"f_reaktor\"],\"cg\":{\"zerrin\":1},\"cv\":{\"1\":true}}",
+    "c": {
+     "g": 1,
+     "vis": true
+    }
+   },
+   "t7": {
+    "status": "accepted",
+    "by": "human",
+    "has": true
+   }
+  },
+  "errors": []
+ }
+}

@@ -1,0 +1,12 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":268,"buildMs":289,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":337,"buildMs":356,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":10.9,"p95":10.9,"max":10.9},"longtask":{"n":0},"heapMB":18,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":36.9,"p95":36.9,"max":36.9},"refresh":{"n":1,"med":1.6,"p95":1.6,"max":1.6},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":54.5,"p95":54.5,"max":54.5},"refresh":{"n":1,"med":8.3,"p95":8.3,"max":8.3},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":722,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS T0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS T1 C gerçek masada teknoloji verir + B'den lüks ister (host listesi, İZLENİYOR); özet; B karşı teklif; C kabul → B'de teknoloji, C'de erişim kaydı
+PASS T2 istihbaratı yetmeyen B: "İstiyorum" teknoloji / lüks pasif + görünür neden; host listesi dönmez
+PASS T3 birleşik teklif (teknoloji + kaynak) beklerken veren teknolojiyi kaybeder → geçersiz (iki tarafta neden), kabul işlenmez, hiçbir madde uygulanmaz
+PASS T4 C'nin lüks teklifini B iki kez kabul eder + hat donar / kopar → tek erişim kaydı, tek ödeme
+PASS T5 👁 İstihbarat: C gerçek masada B'den görüş ister → B kabul → B filosu yeni sisteme → C haritasında görünür; host ve B haritasında değil (paylaşım yönü)
+PASS T6 kaydet → host kapanır → YENİ oda → misafirler döner → teknoloji, erişim kayıtları ve sensör paylaşımı aynı
+PASS T7 insan → AI: C gerçek masada AI'ya teknoloji verir; sonuç motorun aiRespond kararı; kabulde AI'da teknoloji
+GEÇEN: 8 KALAN: 0
