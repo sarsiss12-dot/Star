@@ -1797,6 +1797,8 @@ const UI = {
       case 'peace': this.diploAct('peace', +x); break;
       case 'ally': this.diploAct('ally', +x); break;
       case 'allyInvite': this.allyInviteSend(+x); break;   /* MP-DEAL-SYS.0 */
+      case 'quickTreaty': {const [k,i]=String(x).split(':');this.quickTreatySend(k,+i);break;}   /* MP-DIPLO5 NF-4 */
+      case 'quickTreatyCond': {const [k,i]=String(x).split(':');this.quickTreatyCond(k,+i);break;}
       case 'gift': this.giftMenu(+x); break;
       case 'giftDo': {
         const [id, r, v] = x.split(':');
@@ -3805,6 +3807,7 @@ const UI = {
     h+='<div class="mini">Bunlar senin hafızandaki olaylardır; ilişki puanının bütün bileşenleri veya karşı tarafın gizli değerlendirmesi değildir.</div>';
     h+=this.envoySummary(e,o.id);
     if (blocked) h+='<div class="empty">Doktrin bu devletle elçi ve anlaşma görüşmesini yasaklıyor. İstihbarat ayrı işler.</div>';
+    h+=this.quickTreatyHtml(e,o);   /* MP-DIPLO5 NF-4: tek dokunuş Saldırmazlık / Ticaret Paktı / Geçiş */
     h+=`<div class="act2">
       <button class="abtn pri" data-a="deal" data-x="${o.id}" ${blocked?'disabled':''}>📜 MÜZAKERE MASASI</button>
       <button class="abtn" data-a="spyOpen" data-x="${o.id}">🕵 İSTİHBARAT MERKEZİ</button>`;
@@ -10147,6 +10150,65 @@ UI.dealAssetTermsRow=function(giver,taker,it,e){
   return `<div class="mini dealAssetRow" data-kind="lux" data-opens="${has?'backup':'bonus'}">❖ <b>Lüks mal erişimi</b>: ${esc(L.ico||'')} ${esc(L.n)} · ${esc(nm(giver.id))} → ${esc(nm(taker.id))} · ${
     has?`alıcı bu mala zaten erişiyor: hak <b>yedek kanal</b> olur (bonus bir kez sayılır)`:`kabulde alıcıda <b>${esc(L.d||'')}</b> bonusu açılır`} · veren malı kaybetmez, kendi kolonisinden sağlamalı (ithal mal hak olarak verilemez) · savaşta hak biter; ambargo ya da verenin kaynağını kaybetmesi hakkı askıya alır${
     src?'':` <span style="color:#ff5f6d">⛔ veren bu malın kendi kaynağına sahip değil</span>`}</div>`;
+};
+/* ═══ MP-DIPLO5 NF-4 — Diplomasi kısayolları (p35 tek dokunuş İttifak Daveti kalıbı) ═══
+   Standart teklif tek dokunuşla: tek oyunculuda / AI alıcıda dealQuote → aiRespond → executeDeal (UI.dealSend ile aynı karar yolu);
+   MP insan alıcıda / misafirde host'un 'offer' komutu (UI.mpQuickOffer). "Şartlı Teklif…" müzakere masasını aynı maddeyle açar.
+   Durum aynı satırda: gönderiliyor / bekliyor / karşı teklif / kabul / ret / gönderilemedi; kilit (doktrin, savaş, zaten yürürlükte)
+   gerekçesiyle pasif. Çift dokunuş, bağlantı dönüşü ve pencere yenilemesi ikinci teklif üretmez (bekleyen teklif host listesinden bulunur;
+   host aynı teklifi 'duplicate' ile reddeder). Federasyon kuruluşu / üyeliği (p30, ön ittifak gerekmez) bu satırdan etkilenmez. */
+const QUICK_TREATY={
+  nap:{n:'🛡 Saldırmazlık',give:[{t:'nap'}],want:[],what:'karşılıklı 10 yıllık saldırmazlık'},
+  pact:{n:'🤝 Ticaret Paktı',give:[{t:'pact'}],want:[],what:'karşılıklı ticaret paktı (açık rota ile lüks ithalatı ve kargo)'},
+  passWant:{n:'🚪 Geçiş İste',give:[],want:[{t:'passage'}],what:'veren: KARŞI TARAF → alan: SEN · onun sınırı sana açılır'},
+  passGive:{n:'🚪 Geçiş Ver',give:[{t:'passage'}],want:[],what:'veren: SEN → alan: KARŞI TARAF · senin sınırın ona açılır'}};
+UI.quickTreatyOffer=function(kind,o){const q=QUICK_TREATY[kind];return q&&o?{from:G.p.id,to:o.id,give:q.give.map(x=>({...x})),want:q.want.map(x=>({...x})),born:G.day,expires:G.day+(typeof DEAL_OFFER_LIFE==='number'?DEAL_OFFER_LIFE:540)}:null;};
+UI.quickTreatyGate=function(kind,o){
+  const e=G.p,d=this.quickTreatyOffer(kind,o);if(!d)return {ok:false,why:'Bilinmeyen kısayol'};
+  if(typeof diploBlocked==='function'&&(diploBlocked(e,o)||diploBlocked(o,e)))return {ok:false,why:'Doktrin bu devletle anlaşmayı yasaklıyor'};
+  const it=(d.give[0]||d.want[0]),giver=d.give.length?e:o,taker=d.give.length?o:e;
+  if(typeof treatyAlreadyActive==='function'&&treatyAlreadyActive(giver,taker,it))return {ok:false,why:'Zaten yürürlükte'};
+  const q=dealQuote(d);return q.ok?{ok:true,cost:Math.round(q.cost||0)}:{ok:false,why:String((q.reasons||[])[0]||'Teklif geçersiz')};
+};
+UI.quickTreatyState=function(kind,id){
+  const key=kind+':'+id,inv=this._qtInv||(this._qtInv={});let st=inv[key];
+  if(!st&&typeof this.mpPendingFind==='function'){const d=this.quickTreatyOffer(kind,G.emps[id]);const r=d&&this.mpPendingFind(id,d.give,d.want);if(r)st=inv[key]={state:'pending',offer:r.id,day:G.day};}   /* pencere yenilendi / yeniden bağlanıldı */
+  if(!st)return {state:'',text:''};
+  if(st.state==='pending'&&st.offer&&typeof this.mpOfferState==='function'){const r=this.mpOfferState(st.offer);
+    if(r&&r.status&&r.status!=='pending'){st.state=r.status==='accepted'?'accepted':r.status==='countered'?'countered':'rejected';st.why=r.why||'';}}
+  const o=G.emps[id],nm=o?o.name:'',T=QUICK_TREATY[kind];
+  const text={sending:'Gönderiliyor…',pending:'Bekliyor — '+nm+' kararını veriyor (Gelen kutusu → Gönderilen)',accepted:'Kabul edildi — '+T.n.replace(/^\S+ /,'')+' yürürlükte',
+    countered:'Karşı teklif geldi'+(st.why?': '+st.why:'')+' — Şartlı Teklif… ile müzakere et',rejected:'Reddedildi'+(st.why?': '+st.why:''),error:'Gönderilemedi: '+(st.why||'bilinmeyen neden')}[st.state]||'';
+  return {state:st.state,text};
+};
+UI.quickTreatySend=function(kind,id){
+  const e=G.p,o=this.diploKnown(+id);if(!o||!QUICK_TREATY[kind])return;const inv=this._qtInv||(this._qtInv={}),key=kind+':'+o.id,cur=this.quickTreatyState(kind,o.id);
+  if(cur.state==='sending'||cur.state==='pending')return;   /* çift dokunuş: ikinci teklif yok */
+  const redraw=()=>{try{if($('diploPane').classList.contains('show')&&this.diploPage==='relation'&&this.diploTarget===o.id)this.selectDiplo(o.id,'relation');}catch{}};
+  const set=x=>{inv[key]={...x,day:G.day};redraw();};
+  const g=this.quickTreatyGate(kind,o);if(!g.ok)return set({state:'error',why:g.why});
+  const d=this.quickTreatyOffer(kind,o);
+  if(typeof this.mpQuickOffer==='function'){inv[key]={state:'sending',day:G.day};
+    const handled=this.mpQuickOffer(o.id,d.give,d.want,res=>{const ai=res&&res.extra&&res.extra.ai;
+      if(res&&res.code==='rules:duplicate'||res&&res.code==='duplicate'){const r=this.mpPendingFind&&this.mpPendingFind(o.id,d.give,d.want);return set({state:'pending',offer:r?r.id:null,why:''});}   /* zaten bekliyor */
+      if(!res||res.status!=='ok')set({state:'error',why:res&&res.why||(typeof MP71Dip!=='undefined'?MP71Dip.why(res||{}):'host yanıt vermedi')});
+      else set({state:ai==='kabul'?'accepted':ai==='red'?'rejected':ai==='karsi'?'countered':'pending',offer:res.extra.offer||null,why:''});});
+    if(handled){redraw();return;}delete inv[key];}
+  const q=dealQuote(d);if(!q.ok)return set({state:'error',why:q.reasons[0]||'Teklif geçersiz'});
+  const r=aiRespond(o,q.norm);
+  if(r.v==='kabul'){if(executeDeal(q.norm)){say('ANLAŞMA İMZALANDI — '+o.name,'win');set({state:'accepted'});}else set({state:'error',why:'Anlaşma uygulanamadı'});this.refresh();return;}
+  set({state:r.v==='karsi'?'countered':'rejected',why:r.why||''});
+};
+UI.quickTreatyCond=function(kind,id){const T=QUICK_TREATY[kind];if(!T||!this.diploKnown(+id))return;this.dealOpenWith(+id,T.give.map(x=>({...x})));if(this.deal&&T.want.length){this.deal.want=T.want.map(x=>({...x}));this.drawDeal();}};
+UI.quickTreatyHtml=function(e,o){
+  if(!e||!o||o.dead||o.wild)return '';let h='<div class="ph">HIZLI ANTLAŞMA</div><div class="quickTreaties">';
+  for(const kind of Object.keys(QUICK_TREATY)){const T=QUICK_TREATY[kind],g=this.quickTreatyGate(kind,o),st=this.quickTreatyState(kind,o.id),busy=st.state==='sending'||st.state==='pending';
+    h+=`<div class="dpCard quickTreaty" data-kind="${kind}" data-to="${o.id}"><div class="mini">${esc(T.what)}</div><div class="act2">
+      <button class="abtn pri" data-a="quickTreaty" data-x="${kind}:${o.id}" ${busy||!g.ok?'disabled':''}>${esc(T.n)}${g.ok?' · '+g.cost+'◈':''}</button>
+      <button class="abtn" data-a="quickTreatyCond" data-x="${kind}:${o.id}">Şartlı Teklif…</button></div>${
+      !g.ok&&!st.text?`<div class="mini quickTreatyWhy" style="color:#ff9b3d">⛔ ${esc(g.why)}</div>`:''}${
+      st.text?`<div class="mini quickTreatyState" data-state="${st.state}" role="status" style="color:${st.state==='accepted'?'#65e08a':st.state==='error'||st.state==='rejected'?'#ff5f6d':'#ff9b3d'}">${esc(st.text)}</div>`:''}</div>`;}
+  return h+'</div>';
 };
 /* MP-DIPLO5 NF-3 — Casusluk Ağı ve Sensör Paylaşımı satırı: neyi açar, hangi yön, ne zaman biter, kim öder */
 UI.dealIntelTermsRow=function(giver,taker,it,e,fromMe){

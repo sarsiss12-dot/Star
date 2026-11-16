@@ -206,6 +206,9 @@ function attach(ad){
     let done=false;const fin=r=>{if(done)return;done=true;cb(r&&r.status!=='ok'?{...r,why:why(r)}:r);};
     const cid=A.send({kind:'offer',to:A.real(to),give,want},fin);if(!cid)fin({status:'rejected',code:'host-yok'});return true;};
   UI.mpHumanOf=function(id){return on()&&!!M.ad.human(id);};   /* MP-WARON.0: müzakere masası insan karşı taraf (son tarihli savaş sözü) */
+  /* MP-DIPLO5 NF-4: aynı maddelerle bekleyen kendi teklifim (pencere yenilenince / yeniden bağlanınca kısayol durumu) */
+  UI.mpPendingFind=function(to,give,want){if(!on())return null;const A=M.ad,me=A.me(),rt=A.real(to),k=l=>(l||[]).map(i=>typeof dealItemKey==='function'?dealItemKey(i):i.t).sort().join('|');
+    const l=A.offers?A.offers():[];const o=l.find(x=>x.status==='pending'&&x.from===me&&x.to===rt&&k(x.give)===k(give)&&k(x.want)===k(want));return o?{id:o.id,status:o.status}:null;};
   UI.mpOfferState=function(id){if(!on())return null;const l=M.ad.role==='host'?(M.ad.raw?M.ad.raw():[]):(M.ad.offers?M.ad.offers():[]);const o=l.find(x=>x.id===id);return o?{status:o.status,why:o.why||''}:null;};
   doc.addEventListener('click',onClick,true);
   const shell0=ArchiveUI.shell;ArchiveUI.shell=function(){const r=shell0.apply(this,arguments);if(this.mode!=='mpsent')M.mode=null;else M.mode='sent';if(this.mode!=='mpsent'){M.detail=null;M.confirm=null;}addTab();return r;};

@@ -1,0 +1,72 @@
+[
+ {
+  "name": "B1 masaüstü 1280×800: HIZLI ANTLAŞMA gerçek tıklama",
+  "status": "PASS",
+  "s1": {
+   "st": "accepted",
+   "txt": "Kabul edildi — Saldırmazlık yürürlükte",
+   "deals": 1,
+   "nap": true
+  },
+  "s2": {
+   "mine": true,
+   "theirs": false,
+   "st": "accepted"
+  },
+  "s3": {
+   "dis": true,
+   "why": "⛔ Saldırmazlık: savaş sürerken imzalanamaz — pakete barış ekle"
+  },
+  "s4": {
+   "page": "deal",
+   "want": [
+    {
+     "t": "passage"
+    }
+   ]
+  }
+ },
+ {
+  "name": "B2 yatay telefon 844×390: HIZLI ANTLAŞMA gerçek dokunma",
+  "status": "PASS",
+  "s1": {
+   "st": "accepted",
+   "txt": "Kabul edildi — Saldırmazlık yürürlükte",
+   "deals": 1,
+   "nap": true
+  },
+  "s2": {
+   "mine": true,
+   "theirs": false,
+   "st": "accepted"
+  },
+  "s3": {
+   "dis": true,
+   "why": "⛔ Saldırmazlık: savaş sürerken imzalanamaz — pakete barış ekle"
+  },
+  "s4": {
+   "page": "deal",
+   "want": [
+    {
+     "t": "passage"
+    }
+   ]
+  }
+ },
+ {
+  "name": "B3 masa: Lüks mal bonusu, Casusluk Ağı yönü, Barıştırma bilinen savaş + Cephe #",
+  "status": "PASS",
+  "rows": {
+   "lux": "❖ Lüks mal erişimi: ≋ Vakum İpeği · Karvar Egemenliği → Sen · kabulde alıcıda Endüstriyel dokuma: +%10 mineral, +%8 alaşım bonusu açılır · veren malı kaybetmez, kendi kolonisinden sağlamalı (ithal mal hak olarak verilemez) · savaşta hak biter; ambargo ya da verenin kaynağını kaybetmesi hakkı askıya alır",
+   "spy": "🕸 Casusluk Ağı Paktı: İKİ YÖNLÜ · Sen ↔ Karvar Egemenliği · iki taraf da ortağın üçüncü devletler üzerindeki istihbarat düzeyini haritada (filo ayrıntısı) kullanır — yalnız en yüksek düzey, kimin hangi ağa sahip olduğu gösterilmez; karşı tarafın casusları ve operasyonları paylaşılmaz · süresiz; taraflar savaşa girince biter, ortak elenirse etkisiz · savaş sürerken kurulamaz · imza bedeli teklifi gönderenden 120 Etki (çok maddeli teklifte indirim kuralı)"
+  },
+  "pw": {
+   "item": {
+    "t": "peaceWith",
+    "target": 2,
+    "front": 1
+   },
+   "row": "🤲 Barıştırma: aracı Sen · savaşı bitiren Karvar Egemenliği · diğer savaşan Tharaeth Lejyonu · Cephe #1 · Tharaeth Lejyonu AI: kabul anında kendi barış değerlendirmesiyle karar verir · doktrin / Kan Hukuku kilidi son kararda yeniden denetlenir · savaş başka yolla biterse teklif kapanır (yeni savaşa uygulanmaz)"
+  }
+ }
+]
