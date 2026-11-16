@@ -1,0 +1,427 @@
+{
+ "results": [
+  {
+   "name": "V0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 8386
+  },
+  {
+   "name": "V1 C gerçek masada son tarihli savaş sözü + karşılık; özet İLAN EDİLMEZ; B karttan \"Masaya otur\" → ⏱ → karşı teklif; C kabul → tek söz, savaş yok; B/C aynada, host satırı yok",
+   "status": "PASS",
+   "ms": 7762
+  },
+  {
+   "name": "V2 kaydet → host kapanır → YENİ oda → misafirler döner → aynı söz; C söz panelinden NORMAL savaş ilanı → \"Tutuldu\" (B de görür)",
+   "status": "PASS",
+   "ms": 8942
+  },
+  {
+   "name": "V3 ikinci söz (hedef Y) son tarihe kadar tutulmaz → \"Çiğnendi\": B sözünü çiğnedi hatırlar, ilişki −20; iki aynada durum",
+   "status": "PASS",
+   "ms": 2283
+  },
+  {
+   "name": "V4 geçersiz şart gerekçeli; hedef elenince \"Düştü\" (ceza yok); aynı kabul iki kez + hat donar / kopar → tek söz",
+   "status": "PASS",
+   "ms": 5878
+  },
+  {
+   "name": "V5 Savaş Merkezi \"Şartlı Teklif…\" taslağı: düzenlenir, ayna yeniden kurulur ve masa yeniden açılır → taslak korunur",
+   "status": "PASS",
+   "ms": 3799
+  },
+  {
+   "name": "V6 host → misafir (masaüstü masası): söz → B reddeder → host yeniden gönderir ve geri çeker (iptal); misafir → host: B söz verir, host kabul eder → kayıt + iki panel",
+   "status": "PASS",
+   "ms": 5659
+  }
+ ],
+ "metrics": {
+  "scen": "V",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 280,
+    "buildMs": 284,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 321,
+    "buildMs": 357,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 2.6,
+      "p95": 4.8,
+      "max": 4.8
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 16,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 31.4,
+       "p95": 31.4,
+       "max": 31.4
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.3,
+       "p95": 1.3,
+       "max": 1.3
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 26,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 25.6,
+       "p95": 25.6,
+       "max": 25.6
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.7,
+       "p95": 1.7,
+       "max": 1.7
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 14,
+      "dom": 721,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 12250,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "waron": {
+   "fx": {
+    "X": 3,
+    "Y": 4,
+    "Z": 5,
+    "W": 6
+   },
+   "v1": {
+    "sum": "⚔ Genel Savaş Sözü: söz veren Sen → alan Saf Akıl Ağı · hedef İxir Tahtı · son tarih 2210/04 (90 gün) · kabulde savaş İLAN EDİLMEZ; Sen savaşı kendi onayıyla normal savaş ilanı akışından açar, hedefle savaş başlayınca söz tutulmuş sayılır · tutulmazsa: Saf Akıl Ağı \"sözünü çiğnedi\" hatırlar ve ilişkisi −20 düşer · karşılık iade edilmez · hedef elenirse ya da son tarihte Konsey yasağı sürerse söz düşer (ceza yok)\n⚠ Savaş gerekçesi gerekçesiz (meşruiyet önizlemesi)",
+    "o1": {
+     "id": 1,
+     "give": [
+      {
+       "t": "warOn",
+       "target": 3,
+       "until": 91
+      }
+     ],
+     "want": [
+      {
+       "t": "res",
+       "r": "min",
+       "v": 100
+      }
+     ]
+    },
+    "bLabel": "⚔ Savaş sözü: İxir Tahtı · son tarih 2210/04 (90 gün)",
+    "counterDays": {
+     "u0": 91,
+     "u1": 181
+    },
+    "o2": {
+     "id": 2,
+     "from": 1,
+     "want": [
+      {
+       "t": "warOn",
+       "target": 3,
+       "until": 181
+      }
+     ]
+    },
+    "accept": {
+     "ok": true,
+     "pending": true
+    },
+    "host": [
+     {
+      "id": 1,
+      "to": 1,
+      "target": 3,
+      "until": 181,
+      "state": "open",
+      "why": ""
+     }
+    ],
+    "min": {
+     "min0": [
+      6000,
+      6000
+     ],
+     "min1": [
+      5900,
+      6100
+     ]
+    },
+    "bBox": "⚔ SAVAŞ SÖZLERİ\nSana verilen söz: Yeşil Birlik → Sen · hedef İxir Tahtı · son tarih 2210/07 · kalan 180 gün\nSöz kabulde bağlayıcıdır; savaş kendiliğinden başlamaz. Durum ay başında ve savaş ilanında denetlenir.",
+    "cBox": "⚔ SAVAŞ SÖZLERİ\nSenin sözün: Sen → Saf Akıl Ağı · hedef İxir Tahtı · son tarih 2210/07 · kalan 180 gün\n⚔ Sözü yerine getir: İxir Tahtı ile savaş ilanı (normal akış, son onay sende)\nSöz kabulde bağlayıcıdır; savaş kendiliğinden başlamaz. Durum ay başında ve savaş ilanında denetlenir."
+   },
+   "v2": {
+    "before": "[{\"id\":1,\"giver\":2,\"to\":1,\"target\":3,\"day\":1,\"until\":181,\"state\":\"open\",\"why\":\"\",\"left\":180,\"mine\":false}]",
+    "after": "[{\"id\":1,\"giver\":2,\"to\":1,\"target\":3,\"day\":1,\"until\":181,\"state\":\"open\",\"why\":\"\",\"left\":180,\"mine\":false}]",
+    "cBox": "⚔ SAVAŞ SÖZLERİ\nSenin sözün: Sen → Saf Akıl Ağı · hedef İxir Tahtı · son tarih 2210/07 · kalan 180 gün\n⚔ Sözü yerine getir: İxir Tahtı ile savaş ilanı (normal akış, son onay sende)\nSöz kabulde bağlayıcıdır; savaş kendiliğinden başlamaz. Durum ay başında ve savaş ilanında denetlenir.",
+    "host": [
+     {
+      "id": 1,
+      "to": 1,
+      "target": 3,
+      "until": 181,
+      "state": "kept",
+      "why": "Savaş başladı"
+     }
+    ],
+    "bBox": "⚔ SAVAŞ SÖZLERİ\nSana verilen söz: Yeşil Birlik → Sen · hedef İxir Tahtı · son tarih 2210/07 · Tutuldu — Savaş başladı\nSöz kabulde bağlayıcıdır; savaş kendiliğinden başlamaz. Durum ay başında ve savaş ilanında denetlenir."
+   },
+   "v3": {
+    "p": {
+     "id": 2,
+     "to": 1,
+     "target": 4,
+     "until": 41,
+     "state": "broken",
+     "why": "Son tarihe kadar savaş açılmadı"
+    },
+    "h": {
+     "rel": 2.593389622947999,
+     "mem": [
+      "paktBozdu"
+     ]
+    },
+    "rel0": 24,
+    "bBox": "⚔ SAVAŞ SÖZLERİ\nSana verilen söz: Yeşil Birlik → Sen · hedef İxir Tahtı · son tarih 2210/07 · Tutuldu — Savaş başladı\nSana verilen söz: Yeşil Birlik → Sen · hedef Rhyvaur Şurası · son tarih 2210/02 · Çiğnendi — Son tarihe kadar savaş açılmadı\nSöz kabulde bağlayıcıdır; savaş kendiliğinden başlamaz. Durum ay başında ve savaş ilanında denetlenir.",
+    "cBox": "⚔ SAVAŞ SÖZLERİ\nSenin sözün: Sen → Saf Akıl Ağı · hedef İxir Tahtı · son tarih 2210/07 · Tutuldu — Savaş başladı\nSenin sözün: Sen → Saf Akıl Ağı · hedef Rhyvaur Şurası · son tarih 2210/02 · Çiğnendi — Son tarihe kadar savaş açılmadı\nSöz kabulde bağlayıcıdır; savaş kendiliğinden başlamaz. Durum ay başında ve savaş ilanında denetlenir."
+   },
+   "v4": {
+    "bad": {
+     "status": "rejected",
+     "code": "rules:quote",
+     "ms": 16,
+     "cid": "jmwiun4c71kg9azjf"
+    },
+    "det": [
+     "Genel Savaş Sözü: çok oyunculuda insan oyuncu son tarihli söz verir; kabulde savaş ilan edilmez, savaşı kendi onayıyla açar"
+    ],
+    "frozen": {
+     "a1": {
+      "ok": true,
+      "pending": true
+     },
+     "a2": {
+      "ok": false,
+      "why": "Karar gönderildi; host yanıtı bekleniyor"
+     }
+    },
+    "retry": {
+     "ok": true,
+     "pending": true
+    },
+    "again": {
+     "status": "rejected",
+     "code": "rules:closed",
+     "ms": 24,
+     "cid": "jmwiun87dvp3h45zs"
+    },
+    "after": [
+     {
+      "id": 1,
+      "to": 1,
+      "target": 3,
+      "until": 181,
+      "state": "kept",
+      "why": "Savaş başladı"
+     },
+     {
+      "id": 2,
+      "to": 1,
+      "target": 4,
+      "until": 41,
+      "state": "broken",
+      "why": "Son tarihe kadar savaş açılmadı"
+     },
+     {
+      "id": 3,
+      "to": 1,
+      "target": 5,
+      "until": 276,
+      "state": "open",
+      "why": ""
+     }
+    ],
+    "void": {
+     "id": 3,
+     "to": 1,
+     "target": 5,
+     "until": 276,
+     "state": "void",
+     "why": "Hedef elendi — söz imkânsızlaştı"
+    },
+    "bBox": "⚔ SAVAŞ SÖZLERİ\nSana verilen söz: Yeşil Birlik → Sen · hedef İxir Tahtı · son tarih 2210/07 · Tutuldu — Savaş başladı\nSana verilen söz: Yeşil Birlik → Sen · hedef Rhyvaur Şurası · son tarih 2210/02 · Çiğnendi — Son tarihe kadar savaş açılmadı\nSana verilen söz: Yeşil Birlik → Sen · hedef Sylraen Meclisi · son tarih 2210/10 · Düştü — Hedef elendi — söz imkânsızlaştı\nSöz kabulde bağlayıcıdır; savaş kendiliğinden başlamaz. Durum ay başında ve savaş ilanında denetlenir."
+   },
+   "v5": {
+    "f": 1,
+    "d1": "{\"from\":0,\"to\":1,\"give\":[{\"t\":\"res\",\"r\":\"min\",\"v\":40}],\"want\":[{\"t\":\"warJoin\",\"front\":1,\"target\":3}]}",
+    "d2": "{\"from\":0,\"to\":1,\"give\":[{\"t\":\"res\",\"r\":\"min\",\"v\":40}],\"want\":[{\"t\":\"warJoin\",\"front\":1,\"target\":3}]}",
+    "d3": "{\"from\":0,\"to\":1,\"give\":[{\"t\":\"res\",\"r\":\"min\",\"v\":40}],\"want\":[{\"t\":\"warJoin\",\"front\":1,\"target\":3}]}",
+    "items": [
+     "◆ 40 Mineral",
+     "⚔ Cephe #1 · İxir Tahtı karşısında destek"
+    ]
+   },
+   "v6": {
+    "hostSum": "⚔ Genel Savaş Sözü: söz veren Sen → alan Saf Akıl Ağı · hedef Oriar Sendikası · son tarih 2210/09 (180 gün) · kabulde savaş İLAN EDİLMEZ; Sen savaşı kendi onayıyla normal savaş ilanı akışından açar, hedefle savaş başlayınca söz tutulmuş sayılır · tutulmazsa: Saf Akıl Ağı \"sözünü çiğnedi\" hatırlar ve",
+    "o1": {
+     "id": 10,
+     "from": 0,
+     "to": 1,
+     "give": [
+      {
+       "t": "warOn",
+       "target": 6,
+       "until": 256
+      }
+     ]
+    },
+    "reject": {
+     "ok": true,
+     "pending": true
+    },
+    "withdraw": {
+     "ok": true
+    },
+    "late": {
+     "status": "rejected",
+     "code": "rules:closed",
+     "ms": 16,
+     "cid": "jmwiundzj1th0mjoa"
+    },
+    "o3": {
+     "id": 12,
+     "from": 1,
+     "to": 0,
+     "give": [
+      {
+       "t": "warOn",
+       "target": 4,
+       "until": 166
+      }
+     ]
+    },
+    "hostAccept": {
+     "ok": true
+    },
+    "pb": [
+     {
+      "id": 1,
+      "to": 0,
+      "target": 4,
+      "until": 166,
+      "state": "open",
+      "why": ""
+     }
+    ],
+    "hostBox": "⚔ SAVAŞ SÖZLERİ\nSana verilen söz: Saf Akıl Ağı → Sen · hedef Rhyvaur Şurası · son tarih 2210/06 · kalan 90 gün\nSöz kabulde bağlayıcıdır; savaş kendiliğinden başlamaz. Durum ay başında ve savaş ilanında denetlenir.",
+    "bBox": "⚔ SAVAŞ SÖZLERİ\nSenin sözün: Sen → Kızıl Muhafız · hedef Rhyvaur Şurası · son tarih 2210/06 · kalan 90 gün\n⚔ Sözü yerine getir: Rhyvaur Şurası ile savaş ilanı (normal akış, son onay sende)\nSöz kabulde bağlayıcıdır; savaş kendiliğinden başlamaz. Durum ay başında ve savaş ilanında denetlenir."
+   }
+  },
+  "errors": []
+ }
+}
