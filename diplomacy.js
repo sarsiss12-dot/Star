@@ -1194,7 +1194,7 @@ function dealLabel(it){
       return '⚔ '+(it.plan?'Hazırlık #'+it.plan:'Cephe #'+it.front)+' · '+(G.emps[it.target]?.name||'Bilinmeyen devlet')+' karşısında destek';}
     case 'warOn':   if(it.until!==undefined)return warPledgeLabel(it);   /* MP-WARON.0 */
                     return '⚔ ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + '\'a savaş ilanı';
-    case 'peaceWith': return '🤲 ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + ' ile barış';
+    case 'peaceWith': return '🤲 ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + ' ile barış' + (it.front ? ' (Cephe #' + it.front + ')' : '');   /* MP-DIPLO5 NF-6 */
     case 'intel':   return '👁 Sensör anlaşması';
     case 'spynet':  return '🕸 Casusluk ağı paktı';
     case 'passage': return '🚪 Sınır geçiş izni';
@@ -1716,6 +1716,7 @@ function normalizeDeal(offer){
       if(it.t==='vassal'){it.type=raw.type;it.war=raw.war;if(!warVassalItemValid(it)){errors.push('Geçersiz teslim maddesi');continue;}}   // BETA-WAR-GOALS.0
       if(it.t==='landPromise'){it.sys=raw.sys;it.front=raw.front;if(!Number.isSafeInteger(it.sys)||!G.sys[it.sys]||!Number.isSafeInteger(it.front)||it.front<1){errors.push('Geçersiz toprak vaadi');continue;}}   // BETA-WAR-GOALS.0
       if(it.t==='warOn'&&raw.until!==undefined){if(!Number.isSafeInteger(raw.until)||raw.until<0){errors.push('Geçersiz savaş sözü son tarihi');continue;}it.until=raw.until;}   /* MP-WARON.0: son tarihli söz (yalnız alan verildiyse) */
+      if(it.t==='peaceWith'&&raw.front!==undefined){if(!Number.isSafeInteger(raw.front)||raw.front<1){errors.push('Geçersiz Barıştırma cephe kimliği');continue;}it.front=raw.front;}   /* MP-DIPLO5 NF-6: madde savaş defteri cephesine bağlı */
       if (raw.r !== undefined) it.r = raw.r;
       if (raw.k !== undefined) it.k = raw.k;
       if (raw.id !== undefined) it.id = raw.id;
@@ -1914,6 +1915,8 @@ function dealValidity(offer){
           else if (!veren.war[t.id]) hata = 'o devletle zaten savaşta değil';
           else if (typeof canPeace === 'function' && !canPeace(veren, t))
             hata = 'o devletle barış mümkün değil';
+          else if (it.front !== undefined && peaceWithFront(veren, t) !== it.front) hata = 'o savaş (Cephe #' + it.front + ') artık sürmüyor';   /* MP-DIPLO5 NF-6 */
+          else { const c = peaceWithConsent(veren, t, alan); if (!c.ok) hata = c.why; }   /* MP-DIPLO5 NF-6: diğer savaşanın onayı */
           break;
         }
       }
@@ -11691,3 +11694,46 @@ function spynetPoolView(e){
   return out;
 }
 /* END MP-DIPLO5 NF-3 */
+/* ═══ MP-DIPLO5 NF-6 — Barıştırma (peaceWith): üçüncü tarafla süren savaşı bitirme ═══
+   Madde `{t:'peaceWith', target, front?}`: VEREN, `target` ile süren savaşını (savaş defteri cephesi `front`) bitirir; ALAN (aracı)
+   karşılık öder. İkili barıştan (`peace`, tarafların kendi savaşı) ve federasyon ortak barışından (`fedPeace`) ayrıdır.
+   Diğer savaşanın onayı (yeni kural; tek oyunculuda da): alan zaten o devletse örtük; AI ise mevcut barış değerlendirmesi
+   (aiRespond: verenin ikili barış teklifi, RNG yok); insan ise ayrı onay (MP iki aşamalı işlem, peaceWithAuthorize). Doktrin /
+   Kan Hukuku (canPeace) ve cephe kimliği her quote'ta, son kararda yeniden denetlenir. `front` yoksa (eski kayıt / AI teklifi)
+   cephe denetimi yapılmaz. Barış + karşılık executeDeal içinde birlikte (kısmi ödeme / kısmi barış yok). */
+let PEACE_WITH_OK = null, PEACE_WITH_DEFER = false;
+function peaceWithFront(giver, t){ const f = (giver && t && typeof warLedgerFind === 'function') ? warLedgerFind(giver.id, t.id) : null; return f ? f.id : 0; }
+function peaceWithConsent(giver, t, taker){
+  if (taker && t.id === taker.id) return {ok:true, by:'taker'};
+  if (t.ai !== false){
+    const r = (typeof aiRespond === 'function') ? aiRespond(t, {from:giver.id, to:t.id, give:[{t:'peace'}], want:[], born:G.day, expires:G.day + 300}) : {v:'red'};
+    return r.v === 'kabul' ? {ok:true, by:'ai'} : {ok:false, why:t.name + ' şu an barışı kabul etmiyor'};
+  }
+  if (PEACE_WITH_OK && PEACE_WITH_OK.has(giver.id + '>' + t.id)) return {ok:true, by:'human'};
+  if (PEACE_WITH_DEFER) return {ok:true, by:'pending', pending:true};
+  return {ok:false, human:true, why:t.name + ' (insan oyuncu) barışı kendisi onaylamalı'};
+}
+/* İnsan onayı bekleyen Barıştırma maddeleri (MP iki aşamalı işlem için) */
+function peaceWithHumanItems(offer){
+  const out = [], A = G.emps[offer.from], B = G.emps[offer.to];
+  for (const [giver, taker, list] of [[A, B, offer.give || []], [B, A, offer.want || []]]) for (const it of list){
+    if (it.t !== 'peaceWith') continue; const t = G.emps[it.target];
+    if (giver && taker && t && t.ai === false && t.id !== taker.id) out.push({giver:giver.id, taker:taker.id, t:t.id, front:it.front || peaceWithFront(giver, t)});
+  }
+  return out;
+}
+function peaceWithDefer(fn){ const was = PEACE_WITH_DEFER; PEACE_WITH_DEFER = true; try { return fn(); } finally { PEACE_WITH_DEFER = was; } }
+function peaceWithAuthorize(keys, fn){ const was = PEACE_WITH_OK; PEACE_WITH_OK = new Set(keys); try { return fn(); } finally { PEACE_WITH_OK = was; } }
+/* İzleyicinin bildiği, `giver` devletinin sürdürdüğü savaşlar (knownWarPairs kuralı) — Barıştırma seçim listesi */
+function peaceWithChoices(viewer, giver){
+  const out = []; if (!viewer || !giver) return out;
+  const pairs = viewer === giver ? null : knownWarPairs(viewer);
+  for (const t of G.emps){
+    if (!t || t === giver || !warLedgerPair(giver.id, t.id)) continue;
+    const known = viewer === giver || viewer === t || pairs.some(p => (p.a === giver.id && p.b === t.id) || (p.a === t.id && p.b === giver.id));
+    if (!known) continue;
+    out.push({target:t.id, front:peaceWithFront(giver, t), name:String(t.name), human:t.ai === false});
+  }
+  return out;
+}
+/* END MP-DIPLO5 NF-6 */

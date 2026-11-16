@@ -3568,7 +3568,7 @@ const UI = {
   /* Teklif özeti: her Sistem Devri maddesinin nihai sonucu + çakışma, aynı anlaşmadaki barışın iade edeceği işgaller, haraç toplam yükü,
      Sistem Devri (kabulde) ile Toprak Vaadi (cephe kazanılınca / teslimde) farkı */
   dealTermsHtml(d,e,o){
-    const all=d.give.concat(d.want);if(!all.some(i=>i.t==='sys'||i.t==='tribute'||i.t==='landPromise'||i.t==='warOn'||i.t==='warJoin'||i.t==='tech'||i.t==='lux'||i.t==='spynet'||i.t==='intel'))return '';   /* MP-DIPLO5 NF-3: + casusluk ağı / sensör */   /* MP-TECHLUX.0: + teknoloji / lüks mal */   /* MP-WARON.0: + savaş sözü / destek */
+    const all=d.give.concat(d.want);if(!all.some(i=>i.t==='sys'||i.t==='tribute'||i.t==='landPromise'||i.t==='warOn'||i.t==='warJoin'||i.t==='tech'||i.t==='lux'||i.t==='spynet'||i.t==='intel'||i.t==='peaceWith'))return '';   /* MP-DIPLO5 NF-3: + casusluk ağı / sensör */   /* MP-TECHLUX.0: + teknoloji / lüks mal */   /* MP-WARON.0: + savaş sözü / destek */
     const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?');let h='<div class="box dealTerms"><b>DEVİR VE YÜKÜMLÜLÜK SONUCU</b>';
     const pv=typeof dealSysPreview==='function'?dealSysPreview({from:e.id,to:o.id,give:d.give,want:d.want}):{rows:[],returns:[]};
     for(const r of pv.rows)h+=`<div class="mini">★ <b>Sistem Devri</b>: ${esc(r.name)} · ${r.cols} bilinen koloni · şimdiki sahip ${esc(nm(r.owner))} → yeni sahip <b>${esc(nm(r.to))}</b> · <b>kabul anında</b> devredilir${
@@ -3579,6 +3579,7 @@ const UI = {
       if(it.t==='warOn')h+=this.warPledgeTermsRow(giver,taker,it,e);   /* MP-WARON.0 */
       if(it.t==='tech'||it.t==='lux')h+=this.dealAssetTermsRow(giver,taker,it,e);   /* MP-TECHLUX.0 */
       if(it.t==='spynet'||it.t==='intel')h+=this.dealIntelTermsRow(giver,taker,it,e,list===d.give);   /* MP-DIPLO5 NF-3 */
+      if(it.t==='peaceWith')h+=this.peaceWithTermsRow(giver,taker,it,e);   /* MP-DIPLO5 NF-6 */
       if(it.t==='warJoin')h+=`<div class="mini dealJoinRow">⚔ <b>Savaşa Destek</b>: ${esc(nm(giver.id))}, ${it.plan?'Hazırlık #'+it.plan:'Cephe #'+it.front} savaşında ${esc(G.emps[it.target]?.name||'?')} devletine karşı <b>kabul anında</b> katılır · savaş ya da hazırlık kapanırsa kabul işlenmez · Genel Savaş Sözü'nden ayrı madde</div>`;
       if(it.t==='landPromise')h+=`<div class="mini">⚑ <b>Toprak Vaadi</b>: ${esc(G.sys[it.sys]?.name||'?')} · Cephe #${it.front} · kabulde devir YOK; ${esc(nm(giver.id))} sistemi bu cephede ele geçirince ya da teslimde ${esc(nm(taker.id))} devletine geçer</div>`;}
     return h+'</div>';
@@ -5900,12 +5901,14 @@ const UI = {
       return;
     }
     if (kind === 'peaceWith'){
-      // src'nin savaşta olduğu taraflar
-      const cands = G.emps.filter(x=>!x.dead && !x.wild && !x.crisisSide && x.id !== src.id && (x.id===e.id||e.contact[x.id]) &&
-        (own?src.war[x.id]:lvl>=3?src.war[x.id]:true));
-      if (!cands.length){ say(side==='give' ? 'Savaşta olduğun kimse yok' : 'Onun savaşta olduğu kimse yok'); return; }
-      choose('Kiminle barışılsın?', cands.map(x=>x.name + (x.id===0?' (sen)':'')), i=>{
-        list.push({t:'peaceWith', target: cands[i].id}); this.drawDeal();
+      /* MP-DIPLO5 NF-6: yalnız BİLİNEN ve sürmekte olan savaşlar (knownWarPairs), cephe kimliğiyle; aracının kendi savaşı Barış maddesidir.
+         Eskiden bilinmeyen savaşlar için de tüm temaslar listeleniyor, hata metni savaşın varlığını söylüyordu. */
+      const other=side==='give'?G.emps[d.to]:G.p;
+      if(UI.peaceWithPick&&UI.peaceWithPick(d,side,src,other,list))return;   /* MP misafiri: liste host'tan */
+      const cands=(typeof peaceWithChoices==='function'?peaceWithChoices(e,src):[]).filter(c=>!other||c.target!==other.id);
+      if (!cands.length){ say(side==='give' ? 'Barıştırılacak bilinen savaşın yok (karşı tarafla kendi savaşın için Barış maddesini kullan)' : 'Onun bilinen, sürmekte olan bir savaşı yok'); return; }
+      choose('Hangi savaş bitsin?', cands.map(c=>c.name+' ile savaş · Cephe #'+c.front+(c.human?' (insan — ayrı onay)':'')), i=>{
+        list.push({t:'peaceWith', target: cands[i].target, front: cands[i].front}); this.drawDeal();
       });
       return;
     }
@@ -10151,6 +10154,14 @@ UI.dealIntelTermsRow=function(giver,taker,it,e,fromMe){
   if(it.t==='intel')return `<div class="mini dealIntelRow" data-kind="intel">👁 <b>Sensör Paylaşımı</b>: TEK YÖNLÜ · ${esc(nm(giver.id))} → ${esc(nm(taker.id))} · ${esc(nm(taker.id))}, ${esc(nm(giver.id))} devletinin sensör menzilini haritada görür (tersi değil) · süresiz; taraflar savaşa girince biter · imza bedeli teklifi gönderenden</div>`;
   const pair=[giver.id,taker.id].sort((a,b)=>a-b).map(nm).join(' ↔ ');
   return `<div class="mini dealIntelRow" data-kind="spynet">🕸 <b>Casusluk Ağı Paktı</b>: İKİ YÖNLÜ · ${esc(pair)} · iki taraf da ortağın üçüncü devletler üzerindeki istihbarat düzeyini haritada (filo ayrıntısı) kullanır — yalnız en yüksek düzey, kimin hangi ağa sahip olduğu gösterilmez; karşı tarafın casusları ve operasyonları paylaşılmaz · süresiz; taraflar savaşa girince biter, ortak elenirse etkisiz · savaş sürerken kurulamaz · imza bedeli teklifi gönderenden ${typeof DEAL_TREATY_COST!=='undefined'?DEAL_TREATY_COST.spynet:120} Etki (çok maddeli teklifte indirim kuralı)</div>`;
+};
+/* MP-DIPLO5 NF-6 — Barıştırma satırı: aracı, savaşı bitiren, diğer savaşan, cephe, onay yolu, karşılık */
+UI.peaceWithTermsRow=function(giver,taker,it,e){
+  const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?'),t=G.emps[it.target];
+  const human=t&&(t.ai===false||(this.mpIsHuman&&this.mpIsHuman(t.id)));
+  return `<div class="mini peaceWithRow" data-mode="${human?'human':'ai'}">🤲 <b>Barıştırma</b>: aracı ${esc(nm(taker.id))} · savaşı bitiren ${esc(nm(giver.id))} · diğer savaşan <b>${esc(nm(it.target))}</b>${it.front?' · Cephe #'+it.front:''} · ${
+    human?`${esc(nm(it.target))} insan oyuncu: kabulden sonra ayrı <b>barış onayı</b> kartı alır; onaylarsa barış ve karşılık BİRLİKTE uygulanır, reddederse ya da süre dolarsa hiçbir şey ödenmez`
+         :`${esc(nm(it.target))} AI: kabul anında kendi barış değerlendirmesiyle karar verir`} · doktrin / Kan Hukuku kilidi son kararda yeniden denetlenir · savaş başka yolla biterse teklif kapanır (yeni savaşa uygulanmaz)</div>`;
 };
 UI.luxGrantHtml=function(e){
   if(typeof luxChannels!=='function'||!e)return '';const nm=id=>Number.isInteger(id)&&G.emps[id]?G.emps[id].name:'?';let h='';

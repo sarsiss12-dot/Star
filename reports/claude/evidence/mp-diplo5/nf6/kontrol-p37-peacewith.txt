@@ -1,0 +1,209 @@
+FAIL P1 AI diğer savaşan: kabul → barış + ödeme birlikte; ret → geçersiz (gerekçe)
+evalmachine.<anonymous>:4
+  G._dealAuth=true;declareWar(__g,__t);G._dealAuth=false;var __f=()=>peaceWithFront(__g,__t);
+                                                                     ^
+
+ReferenceError: peaceWithFront is not defined
+    at __f (evalmachine.<anonymous>:4:70)
+    at __off (evalmachine.<anonymous>:5:112)
+    at evalmachine.<anonymous>:1:61
+    at evalmachine.<anonymous>:1:183
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/runtime.js:112:25)
+    at Jr (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:20:30)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:30:47
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:19:42)
+FAIL P2 cephe kimliği: savaş bitip yeniden başlarsa eski cepheli madde reddedilir
+evalmachine.<anonymous>:4
+  G._dealAuth=true;declareWar(__g,__t);G._dealAuth=false;var __f=()=>peaceWithFront(__g,__t);
+                                                                     ^
+
+ReferenceError: peaceWithFront is not defined
+    at __f (evalmachine.<anonymous>:4:70)
+    at evalmachine.<anonymous>:1:31
+    at evalmachine.<anonymous>:2:109
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/runtime.js:112:25)
+    at Jr (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:20:30)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:38:11
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:19:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:37:1)
+FAIL P3 Kan Hukuku / doktrin kilidi son kararda
+evalmachine.<anonymous>:4
+  G._dealAuth=true;declareWar(__g,__t);G._dealAuth=false;var __f=()=>peaceWithFront(__g,__t);
+                                                                     ^
+
+ReferenceError: peaceWithFront is not defined
+    at __f (evalmachine.<anonymous>:4:70)
+    at __off (evalmachine.<anonymous>:5:112)
+    at evalmachine.<anonymous>:1:30
+    at evalmachine.<anonymous>:1:229
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/runtime.js:112:25)
+    at Jr (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:20:30)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:43:11
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:19:42)
+FAIL P4 seçim listesi yalnız bilinen savaşlar
+evalmachine.<anonymous>:2
+    const a=peaceWithChoices(G.p,u).length;ensureIntel(G.p)[u.id]=3;const b=peaceWithChoices(G.p,u).map(c=>c.target);const own=peaceWithChoices(__g,__g).map(c=>c.target);return {a,b,v:v.id,own,t:__t.id};})())
+            ^
+
+ReferenceError: peaceWithChoices is not defined
+    at evalmachine.<anonymous>:2:13
+    at evalmachine.<anonymous>:2:206
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/runtime.js:112:25)
+    at Jr (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:20:30)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:47:11
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:19:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:46:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+FAIL M1 iki aşama: B kabul → mediating (değişiklik yok); D onay → barış + ödeme birlikte, bir kez
+evalmachine.<anonymous>:3
+  G._dealAuth=true;declareWar(G.emps[1],G.emps[4]);declareWar(G.emps[2],G.emps[4]);G._dealAuth=false;ensureIntel(G.emps[3])[1]=3;var __F=()=>peaceWithFront(G.emps[1],G.emps[4]);
+                                                                                                                                             ^
+
+ReferenceError: peaceWithFront is not defined
+    at __F (evalmachine.<anonymous>:3:142)
+    at evalmachine.<anonymous>:1:16
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/beta-fed-found0-mp-world.cjs:3:29)
+    at start (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:55:53)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:60:158
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:19:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:60:1)
+FAIL M2 D reddeder → ikisi kapanır, hiçbir şey uygulanmaz
+evalmachine.<anonymous>:3
+  G._dealAuth=true;declareWar(G.emps[1],G.emps[4]);declareWar(G.emps[2],G.emps[4]);G._dealAuth=false;ensureIntel(G.emps[3])[1]=3;var __F=()=>peaceWithFront(G.emps[1],G.emps[4]);
+                                                                                                                                             ^
+
+ReferenceError: peaceWithFront is not defined
+    at __F (evalmachine.<anonymous>:3:142)
+    at evalmachine.<anonymous>:1:16
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/beta-fed-found0-mp-world.cjs:3:29)
+    at start (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:55:53)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:68:116
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:19:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:68:1)
+FAIL M3 savaş başka yolla biter → kapanır; geç onay closed
+evalmachine.<anonymous>:3
+  G._dealAuth=true;declareWar(G.emps[1],G.emps[4]);declareWar(G.emps[2],G.emps[4]);G._dealAuth=false;ensureIntel(G.emps[3])[1]=3;var __F=()=>peaceWithFront(G.emps[1],G.emps[4]);
+                                                                                                                                             ^
+
+ReferenceError: peaceWithFront is not defined
+    at __F (evalmachine.<anonymous>:3:142)
+    at evalmachine.<anonymous>:1:16
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/beta-fed-found0-mp-world.cjs:3:29)
+    at start (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:55:53)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:72:103
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:19:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:72:1)
+FAIL M4 yeni savaş (yeni cephe) → eski işlem kapanır, yeni savaşa uygulanmaz
+evalmachine.<anonymous>:3
+  G._dealAuth=true;declareWar(G.emps[1],G.emps[4]);declareWar(G.emps[2],G.emps[4]);G._dealAuth=false;ensureIntel(G.emps[3])[1]=3;var __F=()=>peaceWithFront(G.emps[1],G.emps[4]);
+                                                                                                                                             ^
+
+ReferenceError: peaceWithFront is not defined
+    at __F (evalmachine.<anonymous>:3:142)
+    at evalmachine.<anonymous>:1:16
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/beta-fed-found0-mp-world.cjs:3:29)
+    at start (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:55:53)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:77:135
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:19:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:77:1)
+FAIL M5 iki aşama arasında MP paketi → yeni host: onay bir kez uygulanır
+evalmachine.<anonymous>:3
+  G._dealAuth=true;declareWar(G.emps[1],G.emps[4]);declareWar(G.emps[2],G.emps[4]);G._dealAuth=false;ensureIntel(G.emps[3])[1]=3;var __F=()=>peaceWithFront(G.emps[1],G.emps[4]);
+                                                                                                                                             ^
+
+ReferenceError: peaceWithFront is not defined
+    at __F (evalmachine.<anonymous>:3:142)
+    at evalmachine.<anonymous>:1:16
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/beta-fed-found0-mp-world.cjs:3:29)
+    at start (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:55:53)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:82:117
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:19:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:82:1)
+FAIL M6 AI veren: C, AI X'ten D ile barış ister; kabulse D onayı beklenir
+evalmachine.<anonymous>:1
+JSON.stringify(peaceWithFront(G.emps[2],G.emps[4]))
+     ^
+
+ReferenceError: peaceWithFront is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/beta-fed-found0-mp-world.cjs:3:29)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:93:115
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:19:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:93:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+FAIL M7 birleşik teklif: onay anında lüks maddesi geçersiz → hiçbir şey uygulanmaz
+evalmachine.<anonymous>:3
+  G._dealAuth=true;declareWar(G.emps[1],G.emps[4]);declareWar(G.emps[2],G.emps[4]);G._dealAuth=false;ensureIntel(G.emps[3])[1]=3;var __F=()=>peaceWithFront(G.emps[1],G.emps[4]);
+                                                                                                                                             ^
+
+ReferenceError: peaceWithFront is not defined
+    at __F (evalmachine.<anonymous>:3:142)
+    at evalmachine.<anonymous>:1:16
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/beta-fed-found0-mp-world.cjs:3:29)
+    at start (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:55:53)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:102:29
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:19:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:100:1)
+FAIL M8 gizlilik: savaşı bilmeyen görmez; bilinmeyen savaş genel gerekçe; ilgisiz oyuncuya ileti yok
+evalmachine.<anonymous>:3
+  G._dealAuth=true;declareWar(G.emps[1],G.emps[4]);declareWar(G.emps[2],G.emps[4]);G._dealAuth=false;ensureIntel(G.emps[3])[1]=3;var __F=()=>peaceWithFront(G.emps[1],G.emps[4]);
+                                                                                                                                             ^
+
+ReferenceError: peaceWithFront is not defined
+    at __F (evalmachine.<anonymous>:3:142)
+    at evalmachine.<anonymous>:1:16
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/beta-fed-found0-mp-world.cjs:3:29)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:109:106
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:19:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:106:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+FAIL M9 çift kabul / onay kaydına karşı teklif reddedilir
+evalmachine.<anonymous>:3
+  G._dealAuth=true;declareWar(G.emps[1],G.emps[4]);declareWar(G.emps[2],G.emps[4]);G._dealAuth=false;ensureIntel(G.emps[3])[1]=3;var __F=()=>peaceWithFront(G.emps[1],G.emps[4]);
+                                                                                                                                             ^
+
+ReferenceError: peaceWithFront is not defined
+    at __F (evalmachine.<anonymous>:3:142)
+    at evalmachine.<anonymous>:1:16
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/runtime.js:112:25)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/beta-fed-found0-mp-world.cjs:3:29)
+    at start (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:55:53)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:114:102
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:19:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_peacewith_test.js:114:1)
+GEÇEN: 0 KALAN: 13
