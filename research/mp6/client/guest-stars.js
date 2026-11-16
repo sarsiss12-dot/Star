@@ -584,7 +584,7 @@ function gate(){
     try{UI.drawInbox();}catch{}
     return {ok:true,pending:true};};
 }
-const TREATY=['peace','nap','pact','ally','intel','passage'];   // mp-core DIP_TREATY ile aynı
+const TREATY=['peace','nap','pact','ally','intel','passage','spynet'];   // mp-core DIP_TREATY ile aynı (MP-DIPLO5 NF-3: + spynet)
 /* MP.6.3 — ortak savaş paylaşımı: host görünümü (gerçek kimlikler) → aynadaki numaralar; teklif nesneleri kimlikle kalıcı
    (pencere onay düğmeleri settlementOffer(id)===o denetler) */
 const SET={offers:new Map(),quotes:{},wait:{},sig:null,last:null};

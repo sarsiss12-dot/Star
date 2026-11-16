@@ -1123,6 +1123,7 @@ function endTreatiesForWar(a, b){
   breakPact(a, b);
   if (a.ally) a.ally[b.id] = false;
   if (b.ally) b.ally[a.id] = false;
+  if(((a.spynet&&a.spynet[b.id])||(b.spynet&&b.spynet[a.id]))&&typeof spynetEndLog==='function'){spynetEndLog(a,b.id,'war');spynetEndLog(b,a.id,'war');}   /* MP-DIPLO5 NF-3: biten ağın nedeni */
   for(const key of ['visionFrom','shareVis','spynet','passage']){
     if(a[key])delete a[key][b.id];if(b[key])delete b[key][a.id];
   }
@@ -1971,6 +1972,9 @@ function dealValidity(offer){
         break;
       case 'passage':
         if (plan.savas) planHata('Geçiş hakkı: savaş sürerken verilemez');
+        break;
+      case 'spynet':   /* MP-DIPLO5 NF-3: savaş başında ağ biter (endTreatiesForWar) ve savaşta havuz çalışmaz — savaşta kurulan ağ etkisiz kalıyordu */
+        if (plan.savas) planHata('Casusluk ağı: savaş sürerken kurulamaz — pakete barış ekle');
         break;
     }
   }
@@ -9848,6 +9852,8 @@ function sabotageTick(){
    ═══════════════════════════════════════════════════════════════════ */
 function pooledIntel(e, targetId){
   let en = (typeof intelOf === 'function') ? intelOf(e, targetId) : 0;
+  /* MP-DIPLO5 NF-3: MP misafiri ortakların ağ düzeyini bilmez; havuz sonucunu yetkili host hesaplar (ayna mpPooled, yalnız düzey) */
+  if (e && e.mpPooled && Object.hasOwn(e.mpPooled, targetId)) return Math.max(en, clamp(e.mpPooled[targetId]|0, 0, 3));
   if (!e || !e.spynet) return en;
   for (const pid in e.spynet){
     if (!e.spynet[pid]) continue;
@@ -11661,3 +11667,27 @@ function luxChannels(e){
   return out;
 }
 /* END MP-DIPLO5 NF-2b */
+/* ═══ MP-DIPLO5 NF-3 — Casusluk Ağı Paktı (spynet) görünümü ═══
+   Tek oyunculu kural (değişmedi): simetrik, süresiz pakt; imzada teklifi GÖNDEREN 120 Etki öder (çok maddeli teklifte dealCost
+   indirim kuralı). Etkisi pooledIntel: iki taraf da ortağın üçüncü devletler üzerindeki istihbarat düzeyini haritada (filo ayrıntısı)
+   kullanır — en yüksek düzey; kimin hangi ağa sahip olduğu gösterilmez. Biter: taraflar savaşa girince (endTreatiesForWar).
+   Etkisiz: ortak elenirse (kayıt kalır). Yeni: savaş sürerken kurulamaz (dealValidity). Biten ağın nedeni `spynetLog` (≤8, yalnız
+   kullanıldığında). */
+const SPYNET_WHY={war:'taraflar savaşa girdi',dead:'ortak devlet elendi'};
+function spynetEndLog(e,o,why){
+  if(!e)return;e.spynetLog=Array.isArray(e.spynetLog)?e.spynetLog:[];
+  e.spynetLog.push({o,d:Math.floor(G.day||0),why});if(e.spynetLog.length>8)e.spynetLog.splice(0,e.spynetLog.length-8);
+}
+function spynetState(e,o){
+  if(!e||!o)return null;const on=!!(e.spynet&&e.spynet[o.id]);
+  if(on)return {on:true,ok:!o.dead&&!e.war[o.id],why:o.dead?SPYNET_WHY.dead:e.war[o.id]?SPYNET_WHY.war:''};
+  const last=(Array.isArray(e.spynetLog)?e.spynetLog:[]).filter(r=>r&&r.o===o.id).slice(-1)[0];
+  return last?{on:false,ok:false,ended:true,d:last.d,why:SPYNET_WHY[last.why]||String(last.why||'')}:null;
+}
+/* Ayna için: havuzun misafire kazandırdığı düzeyler (yalnız temaslı hedefler; ortak kimliği yok) */
+function spynetPoolView(e){
+  if(!e||!e.spynet||!Object.values(e.spynet).some(Boolean))return null;const out={};
+  for(const t of G.emps){if(!t||t.id===e.id||t.dead||t.wild||!(e.contact&&e.contact[t.id]))continue;const p=pooledIntel(e,t.id);if(p>intelOf(e,t.id))out[t.id]=p;}
+  return out;
+}
+/* END MP-DIPLO5 NF-3 */

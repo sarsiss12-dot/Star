@@ -3568,7 +3568,7 @@ const UI = {
   /* Teklif özeti: her Sistem Devri maddesinin nihai sonucu + çakışma, aynı anlaşmadaki barışın iade edeceği işgaller, haraç toplam yükü,
      Sistem Devri (kabulde) ile Toprak Vaadi (cephe kazanılınca / teslimde) farkı */
   dealTermsHtml(d,e,o){
-    const all=d.give.concat(d.want);if(!all.some(i=>i.t==='sys'||i.t==='tribute'||i.t==='landPromise'||i.t==='warOn'||i.t==='warJoin'||i.t==='tech'||i.t==='lux'))return '';   /* MP-TECHLUX.0: + teknoloji / lüks mal */   /* MP-WARON.0: + savaş sözü / destek */
+    const all=d.give.concat(d.want);if(!all.some(i=>i.t==='sys'||i.t==='tribute'||i.t==='landPromise'||i.t==='warOn'||i.t==='warJoin'||i.t==='tech'||i.t==='lux'||i.t==='spynet'||i.t==='intel'))return '';   /* MP-DIPLO5 NF-3: + casusluk ağı / sensör */   /* MP-TECHLUX.0: + teknoloji / lüks mal */   /* MP-WARON.0: + savaş sözü / destek */
     const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?');let h='<div class="box dealTerms"><b>DEVİR VE YÜKÜMLÜLÜK SONUCU</b>';
     const pv=typeof dealSysPreview==='function'?dealSysPreview({from:e.id,to:o.id,give:d.give,want:d.want}):{rows:[],returns:[]};
     for(const r of pv.rows)h+=`<div class="mini">★ <b>Sistem Devri</b>: ${esc(r.name)} · ${r.cols} bilinen koloni · şimdiki sahip ${esc(nm(r.owner))} → yeni sahip <b>${esc(nm(r.to))}</b> · <b>kabul anında</b> devredilir${
@@ -3578,6 +3578,7 @@ const UI = {
       if(it.t==='tribute'&&RES[it.r])h+=`<div class="mini">⏳ <b>Haraç</b>: ödeyen ${esc(nm(giver.id))} → alan ${esc(nm(taker.id))} · ${it.v} ${esc(RES[it.r].n)}/ay · 10 yıl (120 ödeme) · toplam yük ${Math.round(it.v*120)} ${esc(RES[it.r].n)} · ilk ödeme kabulden sonraki ay başı</div>`;
       if(it.t==='warOn')h+=this.warPledgeTermsRow(giver,taker,it,e);   /* MP-WARON.0 */
       if(it.t==='tech'||it.t==='lux')h+=this.dealAssetTermsRow(giver,taker,it,e);   /* MP-TECHLUX.0 */
+      if(it.t==='spynet'||it.t==='intel')h+=this.dealIntelTermsRow(giver,taker,it,e,list===d.give);   /* MP-DIPLO5 NF-3 */
       if(it.t==='warJoin')h+=`<div class="mini dealJoinRow">⚔ <b>Savaşa Destek</b>: ${esc(nm(giver.id))}, ${it.plan?'Hazırlık #'+it.plan:'Cephe #'+it.front} savaşında ${esc(G.emps[it.target]?.name||'?')} devletine karşı <b>kabul anında</b> katılır · savaş ya da hazırlık kapanırsa kabul işlenmez · Genel Savaş Sözü'nden ayrı madde</div>`;
       if(it.t==='landPromise')h+=`<div class="mini">⚑ <b>Toprak Vaadi</b>: ${esc(G.sys[it.sys]?.name||'?')} · Cephe #${it.front} · kabulde devir YOK; ${esc(nm(giver.id))} sistemi bu cephede ele geçirince ya da teslimde ${esc(nm(taker.id))} devletine geçer</div>`;}
     return h+'</div>';
@@ -3635,7 +3636,9 @@ const UI = {
     if (o.passage&&o.passage[e.id]) tags.push('🚪 Onun sınırı sana açık');
     if (e.passage&&e.passage[o.id]) tags.push('🚪 Senin sınırın ona açık');
     if (e.visionFrom&&e.visionFrom[o.id]) tags.push('👁 Sana sensör paylaşımı');
-    if (e.spynet&&e.spynet[o.id]) tags.push('🕸 Casusluk ağı');
+    {const sn=typeof spynetState==='function'?spynetState(e,o):(e.spynet&&e.spynet[o.id]?{on:true,ok:true}:null);   /* MP-DIPLO5 NF-3: durum + neden */
+      if(sn&&sn.on)tags.push('🕸 Casusluk ağı · iki yönlü istihbarat havuzu'+(sn.ok?'':' · etkisiz: '+sn.why));
+      else if(sn&&sn.ended)tags.push('🕸 Casusluk ağı sona erdi ('+(UI.dayText?UI.dayText(sn.d):'gün '+sn.d)+'): '+sn.why);}
     const fed=findFed(e),otherFed=findFed(o);
     if (fed&&otherFed&&fed.id===otherFed.id) tags.push('🏛 Aynı federasyon');
     /* FAZ 8: vasallık ilişkisi — kendi bağlarının yönetim özeti korunur. */
@@ -10141,6 +10144,13 @@ UI.dealAssetTermsRow=function(giver,taker,it,e){
   return `<div class="mini dealAssetRow" data-kind="lux" data-opens="${has?'backup':'bonus'}">❖ <b>Lüks mal erişimi</b>: ${esc(L.ico||'')} ${esc(L.n)} · ${esc(nm(giver.id))} → ${esc(nm(taker.id))} · ${
     has?`alıcı bu mala zaten erişiyor: hak <b>yedek kanal</b> olur (bonus bir kez sayılır)`:`kabulde alıcıda <b>${esc(L.d||'')}</b> bonusu açılır`} · veren malı kaybetmez, kendi kolonisinden sağlamalı (ithal mal hak olarak verilemez) · savaşta hak biter; ambargo ya da verenin kaynağını kaybetmesi hakkı askıya alır${
     src?'':` <span style="color:#ff5f6d">⛔ veren bu malın kendi kaynağına sahip değil</span>`}</div>`;
+};
+/* MP-DIPLO5 NF-3 — Casusluk Ağı ve Sensör Paylaşımı satırı: neyi açar, hangi yön, ne zaman biter, kim öder */
+UI.dealIntelTermsRow=function(giver,taker,it,e,fromMe){
+  const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?');
+  if(it.t==='intel')return `<div class="mini dealIntelRow" data-kind="intel">👁 <b>Sensör Paylaşımı</b>: TEK YÖNLÜ · ${esc(nm(giver.id))} → ${esc(nm(taker.id))} · ${esc(nm(taker.id))}, ${esc(nm(giver.id))} devletinin sensör menzilini haritada görür (tersi değil) · süresiz; taraflar savaşa girince biter · imza bedeli teklifi gönderenden</div>`;
+  const pair=[giver.id,taker.id].sort((a,b)=>a-b).map(nm).join(' ↔ ');
+  return `<div class="mini dealIntelRow" data-kind="spynet">🕸 <b>Casusluk Ağı Paktı</b>: İKİ YÖNLÜ · ${esc(pair)} · iki taraf da ortağın üçüncü devletler üzerindeki istihbarat düzeyini haritada (filo ayrıntısı) kullanır — yalnız en yüksek düzey, kimin hangi ağa sahip olduğu gösterilmez; karşı tarafın casusları ve operasyonları paylaşılmaz · süresiz; taraflar savaşa girince biter, ortak elenirse etkisiz · savaş sürerken kurulamaz · imza bedeli teklifi gönderenden ${typeof DEAL_TREATY_COST!=='undefined'?DEAL_TREATY_COST.spynet:120} Etki (çok maddeli teklifte indirim kuralı)</div>`;
 };
 UI.luxGrantHtml=function(e){
   if(typeof luxChannels!=='function'||!e)return '';const nm=id=>Number.isInteger(id)&&G.emps[id]?G.emps[id].name:'?';let h='';

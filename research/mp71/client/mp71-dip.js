@@ -21,7 +21,7 @@ const CODE={'rules:no-target':'Bu devletle anlaşma yapılamaz (temas yok ya da 
 const STATE={pending:'Bekliyor',accepted:'Kabul edildi',rejected:'Reddedildi',countered:'Karşı teklif',expired:'Süresi doldu',invalid:'Geçersizleşti',withdrawn:'Geri çekildi'};
 const FILTERS=[['','Tümü'],['pending','Bekliyor'],['done','Sonuçlanan'],['accepted','Kabul edildi'],['rejected','Reddedildi'],['countered','Karşı teklif'],['withdrawn','Geri çekildi'],['expired','Süresi doldu'],['invalid','Geçersizleşti']];
 const AI_REPLY={kabul:'kabul etti — anlaşma uygulandı',red:'reddetti',karsi:'karşı teklif verdi (gelen kutuna düştü)'};
-const TREATY=['peace','nap','pact','ally','intel','passage'];   // mp-core DIP_TREATY ile aynı (MP.6.2)
+const TREATY=['peace','nap','pact','ally','intel','passage','spynet'];   // mp-core DIP_TREATY ile aynı (MP.6.2; MP-DIPLO5 NF-3: + spynet)
 const M={ad:null,installed:false,mode:null,detail:null,confirm:null,confirmAt:0,busy:new Set(),dealAsk:null,dealAskAt:0,counter:null,sig:null,dealSig:null,
   filter:'',stats:{offers:0,counters:0,withdraws:0,responds:0,notified:0,synced:0,sentRenders:0,dealBoxes:0,blocked:0}};
 const on=()=>!!(M.ad&&M.ad.on());

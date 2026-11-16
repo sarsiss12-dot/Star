@@ -1,0 +1,142 @@
+FAIL N1 misafir↔misafir: kabulde iki yönlü ağ; bedel gönderenden bir kez
+AssertionError [ERR_ASSERTION]: {"to":"C","v":1,"type":"result","seq":1,"cid":"fed0C000001","status":"rejected","code":"bad-params","rev":1}
+
+'rejected' !== 'ok'
+
+    at offerAccept (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:21:109)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:25:67
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:24:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+FAIL N2 havuz iki yönlü haritada; ilgisiz D görmez
+AssertionError [ERR_ASSERTION]: {"to":"C","v":1,"type":"result","seq":1,"cid":"fed0C000001","status":"rejected","code":"bad-params","rev":1}
+
+'rejected' !== 'ok'
+
+    at offerAccept (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:21:109)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:29:83
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:29:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+FAIL N3 karşı teklif + yinelenen kabul: tek uygulama, bedel bir kez
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'rejected' !== 'ok'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:39:10
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:38:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL N4 kayıt → yükleme ve tam ayna: ağ ve havuz aynı
+AssertionError [ERR_ASSERTION]: {"to":"C","v":1,"type":"result","seq":1,"cid":"fed0C000001","status":"rejected","code":"bad-params","rev":1}
+
+'rejected' !== 'ok'
+
+    at offerAccept (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:21:109)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:46:86
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:46:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+FAIL N5 savaş ağı bitirir; neden iki tarafta (π), panelde görünür
+AssertionError [ERR_ASSERTION]: {"to":"C","v":1,"type":"result","seq":1,"cid":"fed0C000001","status":"rejected","code":"bad-params","rev":1}
+
+'rejected' !== 'ok'
+
+    at offerAccept (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:21:109)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:50:98
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:50:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+FAIL N6 savaş sürerken ağ reddedilir (gerekçe); barış + ağ aynı pakette kabul
+AssertionError [ERR_ASSERTION]: []
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:58:108
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:56:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL N7 insan → AI: AI kendi değerlendirmesiyle; kabulse iki yönlü, bedel bir kez
+TypeError: Cannot read properties of undefined (reading 'status')
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:66:78
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:62:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL N8 gizlilik: D'ye ileti yok; gerekçe üçüncü devlet ağ düzeyini söylemez
+AssertionError [ERR_ASSERTION]: {"to":"C","v":1,"type":"result","seq":1,"cid":"fed0C000001","status":"rejected","code":"bad-params","rev":1}
+
+'rejected' !== 'ok'
+
+    at offerAccept (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:21:109)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:68:135
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:68:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+FAIL N9 masa satırları: Casusluk Ağı İKİ YÖNLÜ, Sensör TEK YÖNLÜ; bitiş ve bedel
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Casusluk Ağı Paktı<\/b>: İKİ YÖNLÜ/. Input:
+
+''
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:76:10
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:74:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL N10 host ↔ misafir: host teklif eder, misafir B kabul eder
+SyntaxError: "undefined" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at J (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/helpers/beta-fed-found0-mp-world.cjs:3:21)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:82:11
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:15:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl37/tests/mp_diplo5_spynet_test.js:79:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+GEÇEN: 0 KALAN: 10

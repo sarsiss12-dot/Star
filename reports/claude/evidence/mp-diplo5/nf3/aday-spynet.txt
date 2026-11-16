@@ -1,0 +1,12 @@
+PASS N1 misafir↔misafir: kabulde iki yönlü ağ; bedel gönderenden bir kez
+PASS N2 havuz iki yönlü haritada; ilgisiz D görmez
+PASS N3 karşı teklif + yinelenen kabul: tek uygulama, bedel bir kez
+PASS N4 kayıt → yükleme ve tam ayna: ağ ve havuz aynı
+PASS N5 savaş ağı bitirir; neden iki tarafta (π), panelde görünür
+PASS N6 savaş sürerken ağ reddedilir (gerekçe); barış + ağ aynı pakette kabul
+  N7 AI kararı: kabul · durum accepted · {"to":"C","v":1,"type":"result","seq":1,"cid":"fed0C000001","status":"ok","code":null,"rev":2,"extra":{"offer":1,"ai":"k
+PASS N7 insan → AI: AI kendi değerlendirmesiyle; kabulse iki yönlü, bedel bir kez
+PASS N8 gizlilik: D'ye ileti yok; gerekçe üçüncü devlet ağ düzeyini söylemez
+PASS N9 masa satırları: Casusluk Ağı İKİ YÖNLÜ, Sensör TEK YÖNLÜ; bitiş ve bedel
+PASS N10 host ↔ misafir: host teklif eder, misafir B kabul eder
+GEÇEN: 10 KALAN: 0

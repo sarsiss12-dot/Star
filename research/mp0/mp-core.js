@@ -1076,8 +1076,8 @@ function createHost(opts){
   const PERM_HUMANS='Daimi hükümdarlık oylamasında üyelerin oyu motorda zarla belirlenir; başka insan üye varken çok oyunculuda talep edilemez.';
   /* ═══ MP.3 diplomasi durumu (oturum; Save8'e girmez — kalıcılık MP.4) ═══ */
   const DIP_ROUNDS=6,DIP_PENDING_OUT=8,DIP_KEEP=160,DIP_RES=['min','ene','yiy','ala','tuk','ara','etk'];
-  /* MP.6.2: parametresiz antlaşma maddeleri — saldırmazlık, ticaret, ittifak, sensör paylaşımı, sınır geçişi (casusluk ağı kapsam dışı) */
-  const DIP_TREATY=['peace','nap','pact','ally','intel','passage'];
+  /* MP.6.2: parametresiz antlaşma maddeleri — saldırmazlık, ticaret, ittifak, sensör paylaşımı, sınır geçişi; MP-DIPLO5 NF-3: + casusluk ağı */
+  const DIP_TREATY=['peace','nap','pact','ally','intel','passage','spynet'];
   const D={next:1,offers:[]};
   const dipLife=()=>typeof DEAL_OFFER_LIFE==='number'?DEAL_OFFER_LIFE:540;   // tek oyunculuyla aynı ömür (oyun günü)
   /* insanın kurabileceği maddeler: kaynak, barış ve MP.6.2 antlaşmaları (kanonik motorun desteklediği; kaynak kataloğu RES) */
