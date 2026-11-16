@@ -1,0 +1,7 @@
+PASS A1 erişim yok → ret, gerekçe askerî erişim (p37: kabul)
+PASS A2 erişim + düşmanlık + bütçe → kabul; kabulde savaş ilan edilir
+PASS A3 bilinen güç oranı çok elverişsiz → ret (güç oranı)
+  A4: bu haritada geçişle açılan rota yok — kural kod düzeyinde aynı (warSupportReach(…,offer.give))
+PASS A4 geçiş izni terimi erişim hesabına girer (warJoin ile aynı warSupportReach)
+PASS A5 son tarihli insan sözü ve warJoin kararı değişmedi
+GEÇEN: 5 KALAN: 0
