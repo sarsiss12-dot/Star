@@ -21,7 +21,7 @@ const CODE={'rules:no-target':'Bu devletle anlaşma yapılamaz (temas yok ya da 
 const STATE={pending:'Bekliyor',accepted:'Kabul edildi',rejected:'Reddedildi',countered:'Karşı teklif',expired:'Süresi doldu',invalid:'Geçersizleşti',withdrawn:'Geri çekildi'};
 const FILTERS=[['','Tümü'],['pending','Bekliyor'],['done','Sonuçlanan'],['accepted','Kabul edildi'],['rejected','Reddedildi'],['countered','Karşı teklif'],['withdrawn','Geri çekildi'],['expired','Süresi doldu'],['invalid','Geçersizleşti']];
 const AI_REPLY={kabul:'kabul etti — anlaşma uygulandı',red:'reddetti',karsi:'karşı teklif verdi (gelen kutuna düştü)'};
-const TREATY=['peace','nap','pact','ally','intel','passage'];   // mp-core DIP_TREATY ile aynı (MP.6.2)
+const TREATY=['peace','nap','pact','ally','intel','passage','spynet'];   // mp-core DIP_TREATY ile aynı (MP.6.2; MP-DIPLO5 NF-3: + spynet)
 const M={ad:null,installed:false,mode:null,detail:null,confirm:null,confirmAt:0,busy:new Set(),dealAsk:null,dealAskAt:0,counter:null,sig:null,dealSig:null,
   filter:'',stats:{offers:0,counters:0,withdraws:0,responds:0,notified:0,synced:0,sentRenders:0,dealBoxes:0,blocked:0}};
 const on=()=>!!(M.ad&&M.ad.on());
@@ -137,7 +137,7 @@ function installHost(){
   /* TEKLİFİ SUN → 'offer' (karşı teklif bağlamında 'counter') */
   const ds0=UI.dealSend;
   UI.dealSend=function(){if(!on())return ds0.apply(this,arguments);this.ensureDiploWorld();const d=this.deal;if(!d||!A.human(d.to))return ds0.apply(this,arguments);
-    const items=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:A.real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&i.t==='sys'&&Number.isInteger(i.id)?{t:'sys',id:i.id}:i&&i.t==='tribute'&&Number.isInteger(i.v)?{t:'tribute',r:i.r,v:i.v}:i&&i.t==='warOn'&&Number.isInteger(i.target)?{t:'warOn',target:A.real(i.target),...(Number.isInteger(i.until)?{until:i.until}:{})}:i&&i.t==='tech'&&typeof i.id==='string'?{t:'tech',id:i.id}:i&&i.t==='lux'&&typeof i.k==='string'?{t:'lux',k:i.k}:i&&TREATY.includes(i.t)?{t:i.t}:null),give=items(d.give),want=items(d.want);
+    const items=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:A.real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&i.t==='sys'&&Number.isInteger(i.id)?{t:'sys',id:i.id}:i&&i.t==='tribute'&&Number.isInteger(i.v)?{t:'tribute',r:i.r,v:i.v}:i&&i.t==='warOn'&&Number.isInteger(i.target)?{t:'warOn',target:A.real(i.target),...(Number.isInteger(i.until)?{until:i.until}:{})}:i&&i.t==='tech'&&typeof i.id==='string'?{t:'tech',id:i.id}:i&&i.t==='lux'&&typeof i.k==='string'?{t:'lux',k:i.k}:i&&i.t==='peaceWith'&&Number.isInteger(i.target)&&Number.isInteger(i.front)?{t:'peaceWith',target:A.real(i.target),front:i.front}:i&&TREATY.includes(i.t)?{t:i.t}:null),give=items(d.give),want=items(d.want);
     if(give.includes(null)||want.includes(null)){this.dealMsg='Çok oyunculuda kaynak, barış, antlaşma maddeleri (saldırmazlık, ticaret, ittifak, sensör, geçiş), Sistem Devri, Haraç, cephe kimliğine bağlı savaş desteği, savaş içi teslim, toprak vaadi ve federasyonlar arası ortak barış gönderilebilir; teknoloji, lüks, savaş sözü ve casusluk ağı henüz yok.';M.stats.blocked++;this.drawDeal();return;}
     if(!give.length&&!want.length){this.dealMsg='Teklif boş.';this.drawDeal();return;}
     const ctr=M.counter&&M.counter.to===d.to?M.counter:null,to=d.to,o=G.emps[to];
@@ -184,7 +184,7 @@ function sync(){
     if(r&&r.key!==key){recs.delete(r.key);r.key=key;recs.set(key,r);} // exact old note ID, never signature/time guessing
     if(!r&&o.status==='pending'&&G.day<o.expires){const e=G.emps[o.from];
       UI.notify({kind:'aideal',data:{from:o.from,to:0,give:o.give.map(i=>({...i})),want:o.want.map(i=>({...i})),born:o.born,expires:o.expires},ico:'📜',pause:false,
-        title:(o.round>1?'Karşı teklif':'Teklif')+' — '+e.name,sub:'Çok oyunculu teklif · '+(o.want.map(dealLabel).join(', ')||'anlaşma')+' istiyor',key:'mp71:'+o.id});
+        title:o.link?'Barıştırma onayı — '+e.name:(o.round>1?'Karşı teklif':'Teklif')+' — '+e.name,sub:o.link?((()=>{const O=M.ad.raw().find(x=>x.id===o.link);const m=O&&G.emps[O.med&&O.med.giver===O.from?O.to:O.from];return (m?m.name:'Aracı');})())+' aracılığıyla barış: onaylarsan barış ve aracının karşılığı birlikte uygulanır':'Çok oyunculu teklif · '+(o.want.map(dealLabel).join(', ')||'anlaşma')+' istiyor',key:'mp71:'+o.id});   /* MP-DIPLO5 NF-6: onay kartı */
       r=DI.state().records.find(x=>x.key===key);if(r){M.stats.notified++;recs.set(key,r);}}
     if(o.status==='pending')continue;
     /* kabulde motorun executeDeal'i eşleşen kaydı (findDeal) kendisi "kabul edildi" yapar; kart yine de kaldırılmalı */
@@ -206,6 +206,9 @@ function attach(ad){
     let done=false;const fin=r=>{if(done)return;done=true;cb(r&&r.status!=='ok'?{...r,why:why(r)}:r);};
     const cid=A.send({kind:'offer',to:A.real(to),give,want},fin);if(!cid)fin({status:'rejected',code:'host-yok'});return true;};
   UI.mpHumanOf=function(id){return on()&&!!M.ad.human(id);};   /* MP-WARON.0: müzakere masası insan karşı taraf (son tarihli savaş sözü) */
+  /* MP-DIPLO5 NF-4: aynı maddelerle bekleyen kendi teklifim (pencere yenilenince / yeniden bağlanınca kısayol durumu) */
+  UI.mpPendingFind=function(to,give,want){if(!on())return null;const A=M.ad,me=A.me(),rt=A.real(to),k=l=>(l||[]).map(i=>typeof dealItemKey==='function'?dealItemKey(i):i.t).sort().join('|');
+    const l=A.offers?A.offers():[];const o=l.find(x=>x.status==='pending'&&x.from===me&&x.to===rt&&k(x.give)===k(give)&&k(x.want)===k(want));return o?{id:o.id,status:o.status}:null;};
   UI.mpOfferState=function(id){if(!on())return null;const l=M.ad.role==='host'?(M.ad.raw?M.ad.raw():[]):(M.ad.offers?M.ad.offers():[]);const o=l.find(x=>x.id===id);return o?{status:o.status,why:o.why||''}:null;};
   doc.addEventListener('click',onClick,true);
   const shell0=ArchiveUI.shell;ArchiveUI.shell=function(){const r=shell0.apply(this,arguments);if(this.mode!=='mpsent')M.mode=null;else M.mode='sent';if(this.mode!=='mpsent'){M.detail=null;M.confirm=null;}addTab();return r;};

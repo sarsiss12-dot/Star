@@ -1,0 +1,9 @@
+  Q1 AI kararları: {"nap":"accepted","pact":"accepted"}
+PASS Q1 AI alıcı: tek dokunuş → motor kararı; sonuç aynı satırda
+PASS Q2 geçiş yönü: Ver → senin sınırın ona; İste → onun sınırı sana
+PASS Q3 kilitler gerekçeli pasif: savaş / zaten yürürlükte / doktrin
+PASS Q4 çift dokunuş: gönderilirken / beklerken ikinci teklif yok
+PASS Q5 duplicate → Bekliyor; bağlantı yok → Gönderilemedi; yenilenen pencere bekleyen teklifi bulur
+PASS Q6 Şartlı Teklif… masayı doğru maddeyle açar
+PASS Q7 ilişki sayfası: dört kısayol + maliyet + yön metni; federasyon kuruluşu ön ittifak istemez
+GEÇEN: 7 KALAN: 0

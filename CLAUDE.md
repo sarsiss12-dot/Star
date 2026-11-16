@@ -2,7 +2,16 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — MP-TECHLUX.0 (p37 / MP.8.9b35, 16 Kasım 2026)
+## Son teslim — MP-DIPLO5 (p38 / MP.8.9b36, 16 Kasım 2026)
+
+- Ayrıntı: `reports/claude/MP-DIPLO5-SONUC.md`, kanıt `reports/claude/evidence/mp-diplo5/`. Dal `claude/stars-mp-diplo5` (p37 `f2e48eb` üstünde; beş kalem ayrı commit). Save8v8/paket4/protokol1; p38 paket yükleyicisi p6–p37, p25u1, p27s1 kabul eder. NF-2b/3/4/5/6 `TEST BEKLİYOR`; NF-7 (AI barışçıl biat daveti) karar bekliyor; NF-8 federasyon gündem kuyruğu.
+- NF-2b: `refreshLuxury` → `luxGrantApply` (yalnız `luxGrant` varken). Veren kendi kolonisinden sağlar (`ownLuxury`), bonus bir kez, ambargo / kaynak kaybı askı, savaş (`endTreatiesForWar` → `luxGrantEndWar`) ve eleme bitirir, `luxGrantLog` ≤8. MP: host `luxGrantStatus` → ayna `mpLuxGrant`. Görünüm `luxChannels`, `UI.luxGrantHtml`.
+- NF-3: `spynet` MP maddesi; savaşta kurulamaz (dealValidity); `spynetLog`/`spynetState`; misafir havuzu host `spynetPoolView` → ayna `mpPooled` → `pooledIntel`. Masa `UI.dealIntelTermsRow` (İKİ / TEK YÖNLÜ).
+- NF-6: `{t:'peaceWith',target,front}`; diğer savaşan onayı `peaceWithConsent` (AI: aiRespond barış; insan: `PEACE_WITH_OK` / `peaceWithAuthorize`, teklif aşamasında `peaceWithDefer`). MP iki aşama: asıl kayıt `mediating` + `med`, onay kaydı `link` (paket doğrulaması kabul eder); süpürme kapatır. Seçim `peaceWithChoices` / RO `peaceWithList`.
+- NF-4: `UI.quickTreaty*` (İLİŞKİ → HIZLI ANTLAŞMA: nap / pact / passWant / passGive), MP'de `UI.mpQuickOffer` + `UI.mpPendingFind` (mp71-dip). NF-5: `ai.js aiWarOnGate` (son tarihsiz warOn: erişim, 2,5× güç, `aiWarBudget`).
+- Test: `node tests/mp_diplo5_{lux,lux_mp,spynet,peacewith,quick,ai_support}_test.js` (10/3/10/13/7/5), Chromium `browser-mp-diplo5-sp.cjs` (3), `MP8_SCEN=U node tests/browser-mp8.cjs` (host + B + C + D; `guests:3`). Ölçüm `research/mp-diplo5/*.cjs`. Koruma: `mp-diplo5-reviewed` ← `mp-techlux0-reviewed` ← `mp-waron0-reviewed` ← …
+
+## Önceki teslim — MP-TECHLUX.0 (p37 / MP.8.9b35, 16 Kasım 2026)
 
 - Ayrıntı: `reports/claude/MP-TECHLUX0-SONUC.md`, kanıt `reports/claude/evidence/mp-techlux0/`. Dal `claude/stars-mp-techlux0` (p36 / PR #51 `81f5029` üstünde). Save8v8/paket4/protokol1; p37 paket yükleyicisi p6–p36, p25u1, p27s1 kabul eder. NF-2 `TEST BEKLİYOR`; NF-2b (lüks erişim etkisi) kullanıcı kararı bekliyor; NF-6 Barıştırma PLANLANDI.
 - Savaş Sözü son tarihi TEK kural: `warPledgeLeft(p,day)=floor(until)−floor(day)`, `warPledgeInTime` (son gün DAHİL). `warPledgeWar` (declareWar kancası) süresindeyse Tutuldu, değilse `warPledgeExpire(…,late)` (Çiğnendi / Düştü — geç savaş sözü tutmaz); `warPledgeTick` savaşı `warPledgeStartedInTime` (`warStart`, kancasız yolda bilinmiyorsa yalnız şu an süre içindeyse) ile değerlendirir. Kapı / etiket / panel aynı işlevlerle. Test `node tests/mp_waron1_deadline_test.js` (8; p36 3/5).

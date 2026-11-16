@@ -1,0 +1,8 @@
+PASS seed 11 48 ay · 8 nokta · lüks erişim + savaş sözü kayıtları [0,0,0,0,0,0,0,0]
+PASS seed 22 48 ay · 8 nokta · lüks erişim + savaş sözü kayıtları [0,0,0,0,0,0,0,0]
+PASS seed 404 48 ay · 8 nokta · lüks erişim + savaş sözü kayıtları [0,0,0,0,0,0,0,0]
+GEÇEN: 3 KALAN: 0
+
+real	0m20.537s
+user	0m40.387s
+sys	0m1.068s

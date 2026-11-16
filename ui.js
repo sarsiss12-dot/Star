@@ -1797,6 +1797,8 @@ const UI = {
       case 'peace': this.diploAct('peace', +x); break;
       case 'ally': this.diploAct('ally', +x); break;
       case 'allyInvite': this.allyInviteSend(+x); break;   /* MP-DEAL-SYS.0 */
+      case 'quickTreaty': {const [k,i]=String(x).split(':');this.quickTreatySend(k,+i);break;}   /* MP-DIPLO5 NF-4 */
+      case 'quickTreatyCond': {const [k,i]=String(x).split(':');this.quickTreatyCond(k,+i);break;}
       case 'gift': this.giftMenu(+x); break;
       case 'giftDo': {
         const [id, r, v] = x.split(':');
@@ -3568,7 +3570,7 @@ const UI = {
   /* Teklif özeti: her Sistem Devri maddesinin nihai sonucu + çakışma, aynı anlaşmadaki barışın iade edeceği işgaller, haraç toplam yükü,
      Sistem Devri (kabulde) ile Toprak Vaadi (cephe kazanılınca / teslimde) farkı */
   dealTermsHtml(d,e,o){
-    const all=d.give.concat(d.want);if(!all.some(i=>i.t==='sys'||i.t==='tribute'||i.t==='landPromise'||i.t==='warOn'||i.t==='warJoin'||i.t==='tech'||i.t==='lux'))return '';   /* MP-TECHLUX.0: + teknoloji / lüks mal */   /* MP-WARON.0: + savaş sözü / destek */
+    const all=d.give.concat(d.want);if(!all.some(i=>i.t==='sys'||i.t==='tribute'||i.t==='landPromise'||i.t==='warOn'||i.t==='warJoin'||i.t==='tech'||i.t==='lux'||i.t==='spynet'||i.t==='intel'||i.t==='peaceWith'))return '';   /* MP-DIPLO5 NF-3: + casusluk ağı / sensör */   /* MP-TECHLUX.0: + teknoloji / lüks mal */   /* MP-WARON.0: + savaş sözü / destek */
     const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?');let h='<div class="box dealTerms"><b>DEVİR VE YÜKÜMLÜLÜK SONUCU</b>';
     const pv=typeof dealSysPreview==='function'?dealSysPreview({from:e.id,to:o.id,give:d.give,want:d.want}):{rows:[],returns:[]};
     for(const r of pv.rows)h+=`<div class="mini">★ <b>Sistem Devri</b>: ${esc(r.name)} · ${r.cols} bilinen koloni · şimdiki sahip ${esc(nm(r.owner))} → yeni sahip <b>${esc(nm(r.to))}</b> · <b>kabul anında</b> devredilir${
@@ -3578,6 +3580,8 @@ const UI = {
       if(it.t==='tribute'&&RES[it.r])h+=`<div class="mini">⏳ <b>Haraç</b>: ödeyen ${esc(nm(giver.id))} → alan ${esc(nm(taker.id))} · ${it.v} ${esc(RES[it.r].n)}/ay · 10 yıl (120 ödeme) · toplam yük ${Math.round(it.v*120)} ${esc(RES[it.r].n)} · ilk ödeme kabulden sonraki ay başı</div>`;
       if(it.t==='warOn')h+=this.warPledgeTermsRow(giver,taker,it,e);   /* MP-WARON.0 */
       if(it.t==='tech'||it.t==='lux')h+=this.dealAssetTermsRow(giver,taker,it,e);   /* MP-TECHLUX.0 */
+      if(it.t==='spynet'||it.t==='intel')h+=this.dealIntelTermsRow(giver,taker,it,e,list===d.give);   /* MP-DIPLO5 NF-3 */
+      if(it.t==='peaceWith')h+=this.peaceWithTermsRow(giver,taker,it,e);   /* MP-DIPLO5 NF-6 */
       if(it.t==='warJoin')h+=`<div class="mini dealJoinRow">⚔ <b>Savaşa Destek</b>: ${esc(nm(giver.id))}, ${it.plan?'Hazırlık #'+it.plan:'Cephe #'+it.front} savaşında ${esc(G.emps[it.target]?.name||'?')} devletine karşı <b>kabul anında</b> katılır · savaş ya da hazırlık kapanırsa kabul işlenmez · Genel Savaş Sözü'nden ayrı madde</div>`;
       if(it.t==='landPromise')h+=`<div class="mini">⚑ <b>Toprak Vaadi</b>: ${esc(G.sys[it.sys]?.name||'?')} · Cephe #${it.front} · kabulde devir YOK; ${esc(nm(giver.id))} sistemi bu cephede ele geçirince ya da teslimde ${esc(nm(taker.id))} devletine geçer</div>`;}
     return h+'</div>';
@@ -3635,7 +3639,9 @@ const UI = {
     if (o.passage&&o.passage[e.id]) tags.push('🚪 Onun sınırı sana açık');
     if (e.passage&&e.passage[o.id]) tags.push('🚪 Senin sınırın ona açık');
     if (e.visionFrom&&e.visionFrom[o.id]) tags.push('👁 Sana sensör paylaşımı');
-    if (e.spynet&&e.spynet[o.id]) tags.push('🕸 Casusluk ağı');
+    {const sn=typeof spynetState==='function'?spynetState(e,o):(e.spynet&&e.spynet[o.id]?{on:true,ok:true}:null);   /* MP-DIPLO5 NF-3: durum + neden */
+      if(sn&&sn.on)tags.push('🕸 Casusluk ağı · iki yönlü istihbarat havuzu'+(sn.ok?'':' · etkisiz: '+sn.why));
+      else if(sn&&sn.ended)tags.push('🕸 Casusluk ağı sona erdi ('+(UI.dayText?UI.dayText(sn.d):'gün '+sn.d)+'): '+sn.why);}
     const fed=findFed(e),otherFed=findFed(o);
     if (fed&&otherFed&&fed.id===otherFed.id) tags.push('🏛 Aynı federasyon');
     /* FAZ 8: vasallık ilişkisi — kendi bağlarının yönetim özeti korunur. */
@@ -3690,9 +3696,11 @@ const UI = {
     const fed=findFed(e);
     if (fed) h+=`<div class="mini">Federasyonun: ${esc(fed.name)} · ${fed.members.length} üye</div>`;
     h+='<details class="dcDetails"><summary>Lüks mal ağın</summary><div class="luxRow">';
-    for (const k of LUX_KEYS){const L=LUXURY[k],own=e.luxOwn&&e.luxOwn[k],imp=e.luxImport&&e.luxImport[k]!==undefined;
+    if(typeof luxChannels==='function'){for(const c of luxChannels(e)){const L=LUXURY[c.k],t=c.ch.length?c.ch.map(x=>x==='koloni'?'yerli':x==='hak'?'erişim hakkı':x).join(' + '):(c.grant?'hak askıda':'yok');
+      h+=`<span class="luxChip ${c.ch.includes('koloni')?'have':c.on?'imp':'miss'}" data-lux="${c.k}">${L.ico} ${esc(L.n)} · ${esc(t)}</span>`;}}
+    else for (const k of LUX_KEYS){const L=LUXURY[k],own=e.luxOwn&&e.luxOwn[k],imp=e.luxImport&&e.luxImport[k]!==undefined;
       h+=`<span class="luxChip ${own?'have':imp?'imp':'miss'}">${L.ico} ${esc(L.n)} · ${own?'yerli':imp?'ithal':'yok'}</span>`;}
-    return h+'</div></details>';
+    return h+'</div>'+(UI.luxGrantHtml?UI.luxGrantHtml(e):'')+'</details>';
   },
   diploSovereignty(e,owner){
     let h=sovereignPair(e,owner)?this.vsContract(e.overlord===owner.id?e:owner):'';
@@ -3799,6 +3807,7 @@ const UI = {
     h+='<div class="mini">Bunlar senin hafızandaki olaylardır; ilişki puanının bütün bileşenleri veya karşı tarafın gizli değerlendirmesi değildir.</div>';
     h+=this.envoySummary(e,o.id);
     if (blocked) h+='<div class="empty">Doktrin bu devletle elçi ve anlaşma görüşmesini yasaklıyor. İstihbarat ayrı işler.</div>';
+    h+=this.quickTreatyHtml(e,o);   /* MP-DIPLO5 NF-4: tek dokunuş Saldırmazlık / Ticaret Paktı / Geçiş */
     h+=`<div class="act2">
       <button class="abtn pri" data-a="deal" data-x="${o.id}" ${blocked?'disabled':''}>📜 MÜZAKERE MASASI</button>
       <button class="abtn" data-a="spyOpen" data-x="${o.id}">🕵 İSTİHBARAT MERKEZİ</button>`;
@@ -5895,12 +5904,14 @@ const UI = {
       return;
     }
     if (kind === 'peaceWith'){
-      // src'nin savaşta olduğu taraflar
-      const cands = G.emps.filter(x=>!x.dead && !x.wild && !x.crisisSide && x.id !== src.id && (x.id===e.id||e.contact[x.id]) &&
-        (own?src.war[x.id]:lvl>=3?src.war[x.id]:true));
-      if (!cands.length){ say(side==='give' ? 'Savaşta olduğun kimse yok' : 'Onun savaşta olduğu kimse yok'); return; }
-      choose('Kiminle barışılsın?', cands.map(x=>x.name + (x.id===0?' (sen)':'')), i=>{
-        list.push({t:'peaceWith', target: cands[i].id}); this.drawDeal();
+      /* MP-DIPLO5 NF-6: yalnız BİLİNEN ve sürmekte olan savaşlar (knownWarPairs), cephe kimliğiyle; aracının kendi savaşı Barış maddesidir.
+         Eskiden bilinmeyen savaşlar için de tüm temaslar listeleniyor, hata metni savaşın varlığını söylüyordu. */
+      const other=side==='give'?G.emps[d.to]:G.p;
+      if(UI.peaceWithPick&&UI.peaceWithPick(d,side,src,other,list))return;   /* MP misafiri: liste host'tan */
+      const cands=(typeof peaceWithChoices==='function'?peaceWithChoices(e,src):[]).filter(c=>!other||c.target!==other.id);
+      if (!cands.length){ say(side==='give' ? 'Barıştırılacak bilinen savaşın yok (karşı tarafla kendi savaşın için Barış maddesini kullan)' : 'Onun bilinen, sürmekte olan bir savaşı yok'); return; }
+      choose('Hangi savaş bitsin?', cands.map(c=>c.name+' ile savaş · Cephe #'+c.front+(c.human?' (insan — ayrı onay)':'')), i=>{
+        list.push({t:'peaceWith', target: cands[i].target, front: cands[i].front}); this.drawDeal();
       });
       return;
     }
@@ -7185,6 +7196,7 @@ const UI = {
     h += `<div class="row"><span>Lüks mal çeşidi</span><b style="color:#e0a8ff">${lx} / ${LUX_KEYS.length}</b></div>`;
     if (lx) h += `<div class="luxRow">` + Object.keys(e.luxury).map(k=>
       `<span class="luxChip ${(e.luxOwn&&e.luxOwn[k])?'have':'imp'}"><span style="color:${LUXURY[k].c}">${LUXURY[k].ico}</span>${LUXURY[k].n}</span>`).join('') + `</div>`;
+    if (UI.luxGrantHtml) h += UI.luxGrantHtml(e);   /* MP-DIPLO5 NF-2b: erişim hakkı kanalı / askı nedeni */
     if (tr.cut) h += `<div class="mini" style="color:#ff5f6d">⚠ ${tr.cut} rota düşman kontrolünde kesik</div>`;
     else if (tr.n === 0) h += `<div class="mini">Ticaret için kolonilere <b>Ticaret Limanı</b> kur. Limanlar 3 sıçrama içinde birbirine bağlanır; diplomasiden ticaret anlaşması yaparak yabancı limanlara da bağlanabilirsin.</div>`;
 
@@ -10125,15 +10137,102 @@ UI.dealPledgeDays=function(x){
   if(!it||it.t!=='warOn'||it.until===undefined)return;const left=it.until-Math.floor(G.day),next=WAR_PLEDGE_DAYS.find(n=>n>left+1)||WAR_PLEDGE_DAYS[0];
   it.until=Math.floor(G.day)+next;this.drawDeal();
 };
-/* MP-TECHLUX.0 — teklif özeti: teknolojinin alıcıya tam olarak ne sağladığı (techBenefits) ve alıcının erişim koşulu; lüks mal erişiminin motordaki
-   gerçek etkisi (alıcının luxGrant kaydı; lüks bonusu motorda ticaret paktı + açık rota ile gelir, erişim kaydının kendisi bonus üretmez). */
+/* MP-TECHLUX.0 — teklif özeti: teknolojinin alıcıya tam olarak ne sağladığı (techBenefits) ve alıcının erişim koşulu; lüks mal erişiminin
+   gerçek etkisi (MP-DIPLO5 NF-2b: geçerli hak alıcıda lüks bonusunu açar; savaşta biter, ambargo / kaynak kaybında askıda). */
 UI.dealAssetTermsRow=function(giver,taker,it,e){
   const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?');
   if(it.t==='tech'){const T=TECHS[it.id];if(!T)return '';const b=typeof techBenefits==='function'?techBenefits(it.id):{effects:[],unlocks:[]},gain=[...b.effects,...b.unlocks],
     ra=taker.id===e.id&&typeof researchAccess==='function'?researchAccess(taker,it.id):null;
     return `<div class="mini dealAssetRow" data-kind="tech">✦ <b>Teknoloji</b>: ${esc(T.n)} · ${esc(nm(giver.id))} → ${esc(nm(taker.id))} · <b>kabul anında</b> alıcının araştırmasına eklenir (verende kalır)${gain.length?' · sağladığı: '+esc(gain.join(', ')):''}${ra&&!ra.ok?` <span style="color:#ff5f6d">⛔ ${esc(ra.why)}</span>`:''}</div>`;}
   const L=LUXURY[it.k];if(!L)return '';
-  return `<div class="mini dealAssetRow" data-kind="lux">❖ <b>Lüks mal erişimi</b>: ${esc(L.ico||'')} ${esc(L.n)} · ${esc(nm(giver.id))} → ${esc(nm(taker.id))} · kabulde alıcının erişim kaydına yazılır (veren malı kaybetmez) · lüks bonusu motorda ticaret paktı + açık rota ile gelir; erişim kaydının kendisi bonus üretmez (mevcut motor davranışı)</div>`;
+  /* MP-DIPLO5 NF-2b: hak artık alıcıda lüks bonusunu açar (refreshLuxury → luxGrantApply) */
+  const has=!!(taker.luxury&&taker.luxury[it.k]),src=!!(giver.luxOwn&&giver.luxOwn[it.k]);
+  return `<div class="mini dealAssetRow" data-kind="lux" data-opens="${has?'backup':'bonus'}">❖ <b>Lüks mal erişimi</b>: ${esc(L.ico||'')} ${esc(L.n)} · ${esc(nm(giver.id))} → ${esc(nm(taker.id))} · ${
+    has?`alıcı bu mala zaten erişiyor: hak <b>yedek kanal</b> olur (bonus bir kez sayılır)`:`kabulde alıcıda <b>${esc(L.d||'')}</b> bonusu açılır`} · veren malı kaybetmez, kendi kolonisinden sağlamalı (ithal mal hak olarak verilemez) · savaşta hak biter; ambargo ya da verenin kaynağını kaybetmesi hakkı askıya alır${
+    src?'':` <span style="color:#ff5f6d">⛔ veren bu malın kendi kaynağına sahip değil</span>`}</div>`;
+};
+/* ═══ MP-DIPLO5 NF-4 — Diplomasi kısayolları (p35 tek dokunuş İttifak Daveti kalıbı) ═══
+   Standart teklif tek dokunuşla: tek oyunculuda / AI alıcıda dealQuote → aiRespond → executeDeal (UI.dealSend ile aynı karar yolu);
+   MP insan alıcıda / misafirde host'un 'offer' komutu (UI.mpQuickOffer). "Şartlı Teklif…" müzakere masasını aynı maddeyle açar.
+   Durum aynı satırda: gönderiliyor / bekliyor / karşı teklif / kabul / ret / gönderilemedi; kilit (doktrin, savaş, zaten yürürlükte)
+   gerekçesiyle pasif. Çift dokunuş, bağlantı dönüşü ve pencere yenilemesi ikinci teklif üretmez (bekleyen teklif host listesinden bulunur;
+   host aynı teklifi 'duplicate' ile reddeder). Federasyon kuruluşu / üyeliği (p30, ön ittifak gerekmez) bu satırdan etkilenmez. */
+const QUICK_TREATY={
+  nap:{n:'🛡 Saldırmazlık',give:[{t:'nap'}],want:[],what:'karşılıklı 10 yıllık saldırmazlık'},
+  pact:{n:'🤝 Ticaret Paktı',give:[{t:'pact'}],want:[],what:'karşılıklı ticaret paktı (açık rota ile lüks ithalatı ve kargo)'},
+  passWant:{n:'🚪 Geçiş İste',give:[],want:[{t:'passage'}],what:'veren: KARŞI TARAF → alan: SEN · onun sınırı sana açılır'},
+  passGive:{n:'🚪 Geçiş Ver',give:[{t:'passage'}],want:[],what:'veren: SEN → alan: KARŞI TARAF · senin sınırın ona açılır'}};
+UI.quickTreatyOffer=function(kind,o){const q=QUICK_TREATY[kind];return q&&o?{from:G.p.id,to:o.id,give:q.give.map(x=>({...x})),want:q.want.map(x=>({...x})),born:G.day,expires:G.day+(typeof DEAL_OFFER_LIFE==='number'?DEAL_OFFER_LIFE:540)}:null;};
+UI.quickTreatyGate=function(kind,o){
+  const e=G.p,d=this.quickTreatyOffer(kind,o);if(!d)return {ok:false,why:'Bilinmeyen kısayol'};
+  if(typeof diploBlocked==='function'&&(diploBlocked(e,o)||diploBlocked(o,e)))return {ok:false,why:'Doktrin bu devletle anlaşmayı yasaklıyor'};
+  const it=(d.give[0]||d.want[0]),giver=d.give.length?e:o,taker=d.give.length?o:e;
+  if(typeof treatyAlreadyActive==='function'&&treatyAlreadyActive(giver,taker,it))return {ok:false,why:'Zaten yürürlükte'};
+  const q=dealQuote(d);return q.ok?{ok:true,cost:Math.round(q.cost||0)}:{ok:false,why:String((q.reasons||[])[0]||'Teklif geçersiz')};
+};
+UI.quickTreatyState=function(kind,id){
+  const key=kind+':'+id,inv=this._qtInv||(this._qtInv={});let st=inv[key];
+  if(!st&&typeof this.mpPendingFind==='function'){const d=this.quickTreatyOffer(kind,G.emps[id]);const r=d&&this.mpPendingFind(id,d.give,d.want);if(r)st=inv[key]={state:'pending',offer:r.id,day:G.day};}   /* pencere yenilendi / yeniden bağlanıldı */
+  if(!st)return {state:'',text:''};
+  if(st.state==='pending'&&st.offer&&typeof this.mpOfferState==='function'){const r=this.mpOfferState(st.offer);
+    if(r&&r.status&&r.status!=='pending'){st.state=r.status==='accepted'?'accepted':r.status==='countered'?'countered':'rejected';st.why=r.why||'';}}
+  const o=G.emps[id],nm=o?o.name:'',T=QUICK_TREATY[kind];
+  const text={sending:'Gönderiliyor…',pending:'Bekliyor — '+nm+' kararını veriyor (Gelen kutusu → Gönderilen)',accepted:'Kabul edildi — '+T.n.replace(/^\S+ /,'')+' yürürlükte',
+    countered:'Karşı teklif geldi'+(st.why?': '+st.why:'')+' — Şartlı Teklif… ile müzakere et',rejected:'Reddedildi'+(st.why?': '+st.why:''),error:'Gönderilemedi: '+(st.why||'bilinmeyen neden')}[st.state]||'';
+  return {state:st.state,text};
+};
+UI.quickTreatySend=function(kind,id){
+  const e=G.p,o=this.diploKnown(+id);if(!o||!QUICK_TREATY[kind])return;const inv=this._qtInv||(this._qtInv={}),key=kind+':'+o.id,cur=this.quickTreatyState(kind,o.id);
+  if(cur.state==='sending'||cur.state==='pending')return;   /* çift dokunuş: ikinci teklif yok */
+  const redraw=()=>{try{if($('diploPane').classList.contains('show')&&this.diploPage==='relation'&&this.diploTarget===o.id)this.selectDiplo(o.id,'relation');}catch{}};
+  const set=x=>{inv[key]={...x,day:G.day};redraw();};
+  const g=this.quickTreatyGate(kind,o);if(!g.ok)return set({state:'error',why:g.why});
+  const d=this.quickTreatyOffer(kind,o);
+  if(typeof this.mpQuickOffer==='function'){inv[key]={state:'sending',day:G.day};
+    const handled=this.mpQuickOffer(o.id,d.give,d.want,res=>{const ai=res&&res.extra&&res.extra.ai;
+      if(res&&res.code==='rules:duplicate'||res&&res.code==='duplicate'){const r=this.mpPendingFind&&this.mpPendingFind(o.id,d.give,d.want);return set({state:'pending',offer:r?r.id:null,why:''});}   /* zaten bekliyor */
+      if(!res||res.status!=='ok')set({state:'error',why:res&&res.why||(typeof MP71Dip!=='undefined'?MP71Dip.why(res||{}):'host yanıt vermedi')});
+      else set({state:ai==='kabul'?'accepted':ai==='red'?'rejected':ai==='karsi'?'countered':'pending',offer:res.extra.offer||null,why:''});});
+    if(handled){redraw();return;}delete inv[key];}
+  const q=dealQuote(d);if(!q.ok)return set({state:'error',why:q.reasons[0]||'Teklif geçersiz'});
+  const r=aiRespond(o,q.norm);
+  if(r.v==='kabul'){if(executeDeal(q.norm)){say('ANLAŞMA İMZALANDI — '+o.name,'win');set({state:'accepted'});}else set({state:'error',why:'Anlaşma uygulanamadı'});this.refresh();return;}
+  set({state:r.v==='karsi'?'countered':'rejected',why:r.why||''});
+};
+UI.quickTreatyCond=function(kind,id){const T=QUICK_TREATY[kind];if(!T||!this.diploKnown(+id))return;this.dealOpenWith(+id,T.give.map(x=>({...x})));if(this.deal&&T.want.length){this.deal.want=T.want.map(x=>({...x}));this.drawDeal();}};
+UI.quickTreatyHtml=function(e,o){
+  if(!e||!o||o.dead||o.wild)return '';let h='<div class="ph">HIZLI ANTLAŞMA</div><div class="quickTreaties">';
+  for(const kind of Object.keys(QUICK_TREATY)){const T=QUICK_TREATY[kind],g=this.quickTreatyGate(kind,o),st=this.quickTreatyState(kind,o.id),busy=st.state==='sending'||st.state==='pending';
+    h+=`<div class="dpCard quickTreaty" data-kind="${kind}" data-to="${o.id}"><div class="mini">${esc(T.what)}</div><div class="act2">
+      <button class="abtn pri" data-a="quickTreaty" data-x="${kind}:${o.id}" ${busy||!g.ok?'disabled':''}>${esc(T.n)}${g.ok?' · '+g.cost+'◈':''}</button>
+      <button class="abtn" data-a="quickTreatyCond" data-x="${kind}:${o.id}">Şartlı Teklif…</button></div>${
+      !g.ok&&!st.text?`<div class="mini quickTreatyWhy" style="color:#ff9b3d">⛔ ${esc(g.why)}</div>`:''}${
+      st.text?`<div class="mini quickTreatyState" data-state="${st.state}" role="status" style="color:${st.state==='accepted'?'#65e08a':st.state==='error'||st.state==='rejected'?'#ff5f6d':'#ff9b3d'}">${esc(st.text)}</div>`:''}</div>`;}
+  return h+'</div>';
+};
+/* MP-DIPLO5 NF-3 — Casusluk Ağı ve Sensör Paylaşımı satırı: neyi açar, hangi yön, ne zaman biter, kim öder */
+UI.dealIntelTermsRow=function(giver,taker,it,e,fromMe){
+  const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?');
+  if(it.t==='intel')return `<div class="mini dealIntelRow" data-kind="intel">👁 <b>Sensör Paylaşımı</b>: TEK YÖNLÜ · ${esc(nm(giver.id))} → ${esc(nm(taker.id))} · ${esc(nm(taker.id))}, ${esc(nm(giver.id))} devletinin sensör menzilini haritada görür (tersi değil) · süresiz; taraflar savaşa girince biter · imza bedeli teklifi gönderenden</div>`;
+  const pair=[giver.id,taker.id].sort((a,b)=>a-b).map(nm).join(' ↔ ');
+  return `<div class="mini dealIntelRow" data-kind="spynet">🕸 <b>Casusluk Ağı Paktı</b>: İKİ YÖNLÜ · ${esc(pair)} · iki taraf da ortağın üçüncü devletler üzerindeki istihbarat düzeyini haritada (filo ayrıntısı) kullanır — yalnız en yüksek düzey, kimin hangi ağa sahip olduğu gösterilmez; karşı tarafın casusları ve operasyonları paylaşılmaz · süresiz; taraflar savaşa girince biter, ortak elenirse etkisiz · savaş sürerken kurulamaz · imza bedeli teklifi gönderenden ${typeof DEAL_TREATY_COST!=='undefined'?DEAL_TREATY_COST.spynet:120} Etki (çok maddeli teklifte indirim kuralı)</div>`;
+};
+/* MP-DIPLO5 NF-6 — Barıştırma satırı: aracı, savaşı bitiren, diğer savaşan, cephe, onay yolu, karşılık */
+UI.peaceWithTermsRow=function(giver,taker,it,e){
+  const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?'),t=G.emps[it.target];
+  const human=t&&(t.ai===false||(this.mpIsHuman&&this.mpIsHuman(t.id)));
+  return `<div class="mini peaceWithRow" data-mode="${human?'human':'ai'}">🤲 <b>Barıştırma</b>: aracı ${esc(nm(taker.id))} · savaşı bitiren ${esc(nm(giver.id))} · diğer savaşan <b>${esc(nm(it.target))}</b>${it.front?' · Cephe #'+it.front:''} · ${
+    human?`${esc(nm(it.target))} insan oyuncu: kabulden sonra ayrı <b>barış onayı</b> kartı alır; onaylarsa barış ve karşılık BİRLİKTE uygulanır, reddederse ya da süre dolarsa hiçbir şey ödenmez`
+         :`${esc(nm(it.target))} AI: kabul anında kendi barış değerlendirmesiyle karar verir`} · doktrin / Kan Hukuku kilidi son kararda yeniden denetlenir · savaş başka yolla biterse teklif kapanır (yeni savaşa uygulanmaz)</div>`;
+};
+UI.luxGrantHtml=function(e){
+  if(typeof luxChannels!=='function'||!e)return '';const nm=id=>Number.isInteger(id)&&G.emps[id]?G.emps[id].name:'?';let h='';
+  for(const c of luxChannels(e)){if(!c.grant)continue;const L=LUXURY[c.k],g=c.grant;
+    h+=`<div class="mini luxGrantRow" data-lux="${c.k}" data-state="${g.ok?'on':'off'}">${L.ico} ${esc(L.n)} · erişim hakkı: ${esc(nm(g.giver))} · ${
+      g.ok?(c.ch.length>1?`etkin (bonus bir kez; kanallar: ${esc(c.ch.join(' + '))})`:'<b>etkin</b> — bonus bu haktan'):`<span class="luxGrantWhy" style="color:#ff9b3d">askıda — ${esc(g.why)}</span>${c.on?' (mal başka kanaldan geliyor, bonus sürüyor)':''}`}</div>`;}
+  const log=Array.isArray(e.luxGrantLog)?e.luxGrantLog.slice(-3):[];
+  for(const r of log){const L=LUXURY[r.k];if(!L)continue;h+=`<div class="mini luxGrantRow" data-lux="${esc(r.k)}" data-state="end">${L.ico} ${esc(L.n)} · hak sona erdi (${esc(nm(r.g))}): ${esc((typeof LUX_GRANT_WHY!=='undefined'&&LUX_GRANT_WHY[r.why])||r.why)}</div>`;}
+  return h;
 };
 UI.warPledgeTermsRow=function(giver,taker,it,e){
   const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?'),t=G.emps[it.target],tn=esc(t?t.name:'?');

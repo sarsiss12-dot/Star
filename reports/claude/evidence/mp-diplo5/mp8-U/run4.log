@@ -1,0 +1,12 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":462,"buildMs":514,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":650,"buildMs":724,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"D","e":3,"rev":[2,2],"mirrorEq":true,"revMs":832,"buildMs":892,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":11.1,"p95":11.1,"max":11.1},"longtask":{"n":1,"med":55,"p95":55,"max":55},"heapMB":17,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":49,"p95":49,"max":49},"refresh":{"n":2,"med":2,"p95":2,"max":2},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":688,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":32,"joinErrors":0},"C":{"build":{"n":2,"med":74.4,"p95":74.4,"max":74.4},"refresh":{"n":1,"med":2.9,"p95":2.9,"max":2.9},"longtask":{"n":1,"med":59,"p95":59,"max":59},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":16,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":29,"joinErrors":0},"D":{"build":{"n":2,"med":36.2,"p95":36.2,"max":36.2},"refresh":{"n":1,"med":1.3,"p95":1.3,"max":1.3},"longtask":{"n":1,"med":50,"p95":50,"max":50},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":16,"dom":722,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":25,"joinErrors":0}}}
+PASS U0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 4 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS U1 NF-2b: C lüks ister → B kabul → C'de bonus host ve misafir dünyasında aynı; D hak bilgisini görmez
+PASS U2 NF-3: B Casusluk Ağı önerir (İKİ YÖNLÜ); C çift kabul + hat donar / kopar → tek ağ, bedel bir kez; havuz C haritasında; D'ye sızmaz
+PASS U3 NF-6: C Barıştırma (yalnız bilinen savaş, Cephe #) → B kabul → mediating → kayıt → YENİ oda → D onaylar → barış + karşılık bir kez
+PASS U4 NF-4: B İLİŞKİ → C'ye tek dokunuş Saldırmazlık (çift dokunuş); sayfa yenilenir → "Bekliyor" sürer, ikinci teklif yok; C kabul → "Kabul edildi"
+PASS U5 birleşik teklif (lüks + kaynak) gönderilirken C hattı kopar → taslak korunur, tek kayıt; kabul anında lüks geçersizse hiçbir şey uygulanmaz
+PASS U6 NF-5: insan → AI son tarihsiz Savaş Sözü — erişimsiz hedefte AI gerekçeyle reddeder
+GEÇEN: 7 KALAN: 0

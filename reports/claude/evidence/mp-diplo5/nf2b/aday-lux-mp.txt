@@ -1,0 +1,4 @@
+PASS M1 host hak etkisini üretir; C aynası + misafir dünyası aynı bonus; D görmez
+PASS M2 B kaynağını kaybeder → C aynasında askıda (source), misafir dünyasında bonus yok
+PASS M3 tekrar kabul / tam ayna yeniden kurulum çoğaltmaz; savaş hakkı bitirir (geçmiş π)
+GEÇEN: 3 KALAN: 0

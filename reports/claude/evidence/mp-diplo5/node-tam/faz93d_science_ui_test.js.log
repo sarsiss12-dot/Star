@@ -1,0 +1,35 @@
+✓ all 58 nodes appear exactly once across the three trees
+✓ every same-branch prerequisite is drawn and placed before its child
+✓ global science action opens dedicated tree screen with history tab
+✓ node click selects remote target, shows detail and toggles it off
+✓ queue focus changes tree without removing target
+✓ queue controls reorder and remove targets and renumber display
+✓ collapsed queue retains goals and reopens
+✓ route panel lists implicit prerequisites without main goal numbers
+✓ completed node opens information without becoming a goal
+✓ history renders unknown dates, real benefits and filters
+✓ locked, planned, active and completed states are distinct
+✓ branch links and special origin condition can be inspected
+✓ bad catalog routes render an error rather than hanging the screen
+✓ tree, history and route rendering do not mutate save or random state
+✓ zoom buttons enforce bounds without touching galaxy camera or research
+✓ touch scroll suppresses selection; pinch changes only tree zoom
+✓ unchanged monthly refresh does not rebuild science DOM
+✓ mobile CSS scopes 44px targets, native scroll and compact landscape layout
+PERF 300 science renders: 261 ms (Node host, not Android FPS)
+✓ 58-node planning and rendering has bounded runtime; no catalog growth
+✗ preservation guard rejects edits to both original UI and new science CSS — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/home/user/Star/tests/faz93d_science_ui_test.js:4:47)
+    at /home/user/Star/tests/faz93d_science_ui_test.js:34:2
+    at test (/home/user/Star/tests/faz93d_science_ui_test.js:5:25)
+    at Object.<anonymous> (/home/user/Star/tests/faz93d_science_ui_test.js:33:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+GEÇEN: 19 KALAN: 1

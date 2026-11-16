@@ -1,0 +1,41 @@
+✗ 96H.6.1 source rejects its own save after federation dissolution (bug reproduced) — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'f461468c9bd96184cfe3755561e0e298f226cb5ec27bc196a78eac77a99ae6e7'
+- '27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739'
+
+    at /home/user/Star/tests/faz96h71_closed_joint_save_test.js:20:10
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/faz96h71_closed_joint_save_test.js:19:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+✓ closed single-member history loads; plan, wars, alliances and RNG preserved
+✓ second Save8 load is idempotent
+✓ resumed simulation after load matches uninterrupted simulation
+✓ active single-member plan is still rejected and rolls back atomically
+✓ malformed closed history still rejected: empty
+✓ malformed closed history still rejected: duplicate
+✓ malformed closed history still rejected: noSponsor
+✓ malformed closed history still rejected: strangerFleet
+✗ only the reviewed guard and 96H.8 campaign change differ from 96H.6.1 ai.js — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'f461468c9bd96184cfe3755561e0e298f226cb5ec27bc196a78eac77a99ae6e7'
+- '27ae25e44d66f5fdbfb04ea7db69aa75769a3165759b6feb0250b5b753e8c739'
+
+    at /home/user/Star/tests/faz96h71_closed_joint_save_test.js:37:10
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/faz96h71_closed_joint_save_test.js:35:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+GEÇEN: 8 KALAN: 2

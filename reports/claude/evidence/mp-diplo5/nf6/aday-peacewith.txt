@@ -1,0 +1,16 @@
+  P1 doğal AI barış değerlendirmesi: kabul
+PASS P1 AI diğer savaşan: kabul → barış + ödeme birlikte; ret → geçersiz (gerekçe)
+PASS P2 cephe kimliği: savaş bitip yeniden başlarsa eski cepheli madde reddedilir
+PASS P3 Kan Hukuku / doktrin kilidi son kararda
+PASS P4 seçim listesi yalnız bilinen savaşlar
+PASS M1 iki aşama: B kabul → mediating (değişiklik yok); D onay → barış + ödeme birlikte, bir kez
+PASS M2 D reddeder → ikisi kapanır, hiçbir şey uygulanmaz
+PASS M3 savaş başka yolla biter → kapanır; geç onay closed
+PASS M4 yeni savaş (yeni cephe) → eski işlem kapanır, yeni savaşa uygulanmaz
+PASS M5 iki aşama arasında MP paketi → yeni host: onay bir kez uygulanır
+  M6 AI X kararı: "kabul" · mediating,pending
+PASS M6 AI veren: C, AI X'ten D ile barış ister; kabulse D onayı beklenir
+PASS M7 birleşik teklif: onay anında lüks maddesi geçersiz → hiçbir şey uygulanmaz
+PASS M8 gizlilik: savaşı bilmeyen görmez; bilinmeyen savaş genel gerekçe; ilgisiz oyuncuya ileti yok
+PASS M9 çift kabul / onay kaydına karşı teklif reddedilir
+GEÇEN: 13 KALAN: 0

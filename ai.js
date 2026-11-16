@@ -2231,6 +2231,15 @@ function aiNegotiate(proposer, target, give, want, automatic=false){
   return sonuc;
 }
 
+/* MP-DIPLO5 NF-5 — AI'nın "şu devlete savaş ilan et" isteğine askerî kapısı (RNG yok, salt okunur). Gerekçeler ayrı ayrı. */
+function aiWarOnGate(ai,enemy,sender,give){
+  if(!enemy||enemy.dead)return {ok:false,why:'Hedef devlet yok'};
+  if(!warSupportReach(ai,enemy,sender,give))return {ok:false,why:'Hedefe askerî erişimimiz yok (bilinen hedef sistemi ya da rota yok; pakete geçiş izni eklemek erişimi açabilir)'};
+  const allied=sender&&sender.war&&sender.war[enemy.id]?aiKnownPower(ai,sender):0;
+  if(aiKnownPower(ai,enemy)>Math.max(1,aiKnownPower(ai,ai)+allied)*2.5)return {ok:false,why:'Bilinen güç oranı bu savaş için çok elverişsiz'};
+  if(typeof aiWarBudget==='function'&&!aiWarBudget(ai,enemy).ok)return {ok:false,why:'Savaş bütçemiz bu savaşı taşımıyor'};
+  return {ok:true};
+}
 function aiRespond(ai, offer){
   /* ═══ FAZ 86C.1: İŞE dealQuote İLE BAŞLA ═══
      ÖLÇÜLEN ZAFİYET: eski hâl yalnız `q.fatal` bakıyordu. fatal=[] ama
@@ -2244,6 +2253,9 @@ function aiRespond(ai, offer){
                   'Teklif uygulanabilir değil';
     return {v:'red', why:neden, quote:q};
   }
+  /* MP-DIPLO5 NF-5: AI'dan istenen son tarihsiz Savaş Sözü kabulde hemen ilan edilir; warJoin ile aynı askerî kapıdan (erişim, bilinen güç)
+     ve AI'nın kendi savaş bütçesinden geçer. p37'de yalnız ilişkiye bakılıyordu: erişimi olmayan hedefe karşı da ödemeyle kabul ediliyordu. */
+  {const won=(offer.want||[]).find(x=>x.t==='warOn'&&x.until===undefined);if(won){const g=aiWarOnGate(ai,G.emps[won.target],G.emps[offer.from],offer.give||[]);if(!g.ok)return {v:'red',why:g.why};}}
   const join=(offer.want||[]).find(x=>x.t==='warJoin');
   if(join){const enemy=G.emps[join.target],sender=G.emps[offer.from];if(!enemy||!warSupportReach(ai,enemy,sender,offer.give)||aiKnownPower(ai,enemy)>Math.max(1,aiKnownPower(ai,ai)+aiKnownPower(ai,sender))*2.5)return {v:'red',why:'Bilinen güç veya askerî erişim desteği karşılamıyor'};}
   const ev = evalOffer(ai, offer);

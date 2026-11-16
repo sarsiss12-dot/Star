@@ -1123,9 +1123,11 @@ function endTreatiesForWar(a, b){
   breakPact(a, b);
   if (a.ally) a.ally[b.id] = false;
   if (b.ally) b.ally[a.id] = false;
+  if(((a.spynet&&a.spynet[b.id])||(b.spynet&&b.spynet[a.id]))&&typeof spynetEndLog==='function'){spynetEndLog(a,b.id,'war');spynetEndLog(b,a.id,'war');}   /* MP-DIPLO5 NF-3: biten ağın nedeni */
   for(const key of ['visionFrom','shareVis','spynet','passage']){
     if(a[key])delete a[key][b.id];if(b[key])delete b[key][a.id];
   }
+  if((a.luxGrant||b.luxGrant)&&typeof luxGrantEndWar==='function')luxGrantEndWar(a,b);   /* MP-DIPLO5 NF-2b: savaş lüks hakkını bitirir */
 }
 /* Eski v8 kayıtlarındaki savaş+antlaşma çakışmasını ay ilerletmeden,
    bildirim üretmeden ve RNG tüketmeden onarır. Savaş kaydı korunur. */
@@ -1192,7 +1194,7 @@ function dealLabel(it){
       return '⚔ '+(it.plan?'Hazırlık #'+it.plan:'Cephe #'+it.front)+' · '+(G.emps[it.target]?.name||'Bilinmeyen devlet')+' karşısında destek';}
     case 'warOn':   if(it.until!==undefined)return warPledgeLabel(it);   /* MP-WARON.0 */
                     return '⚔ ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + '\'a savaş ilanı';
-    case 'peaceWith': return '🤲 ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + ' ile barış';
+    case 'peaceWith': return '🤲 ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + ' ile barış' + (it.front ? ' (Cephe #' + it.front + ')' : '');   /* MP-DIPLO5 NF-6 */
     case 'intel':   return '👁 Sensör anlaşması';
     case 'spynet':  return '🕸 Casusluk ağı paktı';
     case 'passage': return '🚪 Sınır geçiş izni';
@@ -1451,7 +1453,9 @@ function applyItems(giver, taker, items){
         break;
       case 'lux':
         taker.luxGrant = taker.luxGrant || {};
+        if (Number.isInteger(taker.luxGrant[it.k]) && taker.luxGrant[it.k] !== giver.id && typeof luxGrantLogAdd === 'function') luxGrantLogAdd(taker, it.k, taker.luxGrant[it.k], 'replaced');
         taker.luxGrant[it.k] = giver.id;
+        if (typeof refreshLuxury === 'function') refreshLuxury(taker);   /* MP-DIPLO5 NF-2b: bonus kabulde açılır (işlem içinde; geri alınırsa grafik geri gelir) */
         break;
       case 'peace': if(giver.war[taker.id]||taker.war[giver.id])makePeace(giver, taker); break;
       case 'nap':
@@ -1712,6 +1716,7 @@ function normalizeDeal(offer){
       if(it.t==='vassal'){it.type=raw.type;it.war=raw.war;if(!warVassalItemValid(it)){errors.push('Geçersiz teslim maddesi');continue;}}   // BETA-WAR-GOALS.0
       if(it.t==='landPromise'){it.sys=raw.sys;it.front=raw.front;if(!Number.isSafeInteger(it.sys)||!G.sys[it.sys]||!Number.isSafeInteger(it.front)||it.front<1){errors.push('Geçersiz toprak vaadi');continue;}}   // BETA-WAR-GOALS.0
       if(it.t==='warOn'&&raw.until!==undefined){if(!Number.isSafeInteger(raw.until)||raw.until<0){errors.push('Geçersiz savaş sözü son tarihi');continue;}it.until=raw.until;}   /* MP-WARON.0: son tarihli söz (yalnız alan verildiyse) */
+      if(it.t==='peaceWith'&&raw.front!==undefined){if(!Number.isSafeInteger(raw.front)||raw.front<1){errors.push('Geçersiz Barıştırma cephe kimliği');continue;}it.front=raw.front;}   /* MP-DIPLO5 NF-6: madde savaş defteri cephesine bağlı */
       if (raw.r !== undefined) it.r = raw.r;
       if (raw.k !== undefined) it.k = raw.k;
       if (raw.id !== undefined) it.id = raw.id;
@@ -1910,6 +1915,8 @@ function dealValidity(offer){
           else if (!veren.war[t.id]) hata = 'o devletle zaten savaşta değil';
           else if (typeof canPeace === 'function' && !canPeace(veren, t))
             hata = 'o devletle barış mümkün değil';
+          else if (it.front !== undefined && peaceWithFront(veren, t) !== it.front) hata = 'o savaş (Cephe #' + it.front + ') artık sürmüyor';   /* MP-DIPLO5 NF-6 */
+          else { const c = peaceWithConsent(veren, t, alan); if (!c.ok) hata = c.why; }   /* MP-DIPLO5 NF-6: diğer savaşanın onayı */
           break;
         }
       }
@@ -1968,6 +1975,9 @@ function dealValidity(offer){
         break;
       case 'passage':
         if (plan.savas) planHata('Geçiş hakkı: savaş sürerken verilemez');
+        break;
+      case 'spynet':   /* MP-DIPLO5 NF-3: savaş başında ağ biter (endTreatiesForWar) ve savaşta havuz çalışmaz — savaşta kurulan ağ etkisiz kalıyordu */
+        if (plan.savas) planHata('Casusluk ağı: savaş sürerken kurulamaz — pakete barış ekle');
         break;
     }
   }
@@ -9845,6 +9855,8 @@ function sabotageTick(){
    ═══════════════════════════════════════════════════════════════════ */
 function pooledIntel(e, targetId){
   let en = (typeof intelOf === 'function') ? intelOf(e, targetId) : 0;
+  /* MP-DIPLO5 NF-3: MP misafiri ortakların ağ düzeyini bilmez; havuz sonucunu yetkili host hesaplar (ayna mpPooled, yalnız düzey) */
+  if (e && e.mpPooled && Object.hasOwn(e.mpPooled, targetId)) return Math.max(en, clamp(e.mpPooled[targetId]|0, 0, 3));
   if (!e || !e.spynet) return en;
   for (const pid in e.spynet){
     if (!e.spynet[pid]) continue;
@@ -11587,3 +11599,141 @@ function warPledgeRows(e,o){
  return out;
 }
 /* END MP-WARON.0 (MP-WARON.1 son tarih kuralı dahil) */
+/* ═══ MP-DIPLO5 NF-2b — lüks mal erişim hakkının (luxGrant) ekonomik etkisi ═══
+   Anlaşmanın `lux` maddesi alıcıya `luxGrant[k]=veren` yazar. p37'ye kadar refreshLuxury bu kaydı okumuyordu (bonus yoktu, SP ve MP).
+   Kural (SP ve MP aynı; MP'de sonucu host üretir):
+   - Geçerli hak alıcıda mevcut lüks bonusunu açar; açık anlaşma yeterli (ticaret limanı / rota gerekmez).
+   - Veren malı KENDİ kolonisinden sağlamalı (ownLuxury); yalnız ithal ya da kendisine hak olarak gelen mal yeni zincir kurmaz.
+   - Aynı mal koloni + ticaret paktı + hak ile erişilse de bonus bir kez (e.luxury boolean); biri düşse öteki sürer.
+   - Askıya alır (kayıt kalır, koşul dönünce yeniden çalışır): ambargo / Konsey yaptırımı (tradeBlocked; kaçakçılık hattı açık tutar),
+     verenin kendi kaynağını kaybetmesi.
+   - Bitirir (kayıt silinir, alıcıya kısa geçmiş `luxGrantLog`): savaş (endTreatiesForWar — pakt / geçiş / sensör paylaşımıyla aynı kural),
+     verenin elenmesi, geçersiz eski kayıt (bilinmeyen mal, olmayan / kendisi olan veren).
+   - Yalnız `luxGrant` varken çalışır: hak yoksa refreshLuxury, Save8 ve RNG p37 ile aynı. RNG kullanmaz. */
+const LUX_GRANT_WHY={war:'taraflar savaşa girdi',embargo:'ambargo / ticaret yaptırımı (hak askıda)',source:'veren bu malın kendi kaynağını kaybetti (hak askıda)',
+  dead:'veren devlet elendi',bad:'geçersiz eski kayıt',replaced:'aynı mal için yeni hak'};
+const LUX_GRANT_LOG=8;
+function luxGrantStatus(e,k){
+  const g=e&&e.luxGrant?e.luxGrant[k]:undefined;
+  /* MP misafiri: hakkın durumunu yetkili host hesaplar (ayna `mpLuxGrant`); misafir verenin gizli kolonilerini bilmez */
+  if(e&&e.mpLuxGrant&&Object.hasOwn(e.mpLuxGrant,k)){const s=e.mpLuxGrant[k]||{};return {k,giver:g,ok:!!s.ok,code:s.ok?'':String(s.code||''),end:false};}
+  if(!Object.hasOwn(LUXURY,k)||!Number.isInteger(g)||!G.emps[g]||g===e.id)return {k,giver:g,ok:false,code:'bad',end:true};
+  const v=G.emps[g];
+  if(v.dead)return {k,giver:g,ok:false,code:'dead',end:true};
+  if((e.war&&e.war[g])||(v.war&&v.war[e.id]))return {k,giver:g,ok:false,code:'war',end:false};
+  if(typeof tradeBlocked==='function'&&tradeBlocked(e,v))return {k,giver:g,ok:false,code:'embargo',end:false};
+  if(!ownLuxury(v)[k])return {k,giver:g,ok:false,code:'source',end:false};
+  return {k,giver:g,ok:true,code:'',end:false};
+}
+function luxGrantLogAdd(e,k,g,code){
+  if(!e)return;e.luxGrantLog=Array.isArray(e.luxGrantLog)?e.luxGrantLog:[];
+  e.luxGrantLog.push({k:String(k),g:Number.isInteger(g)?g:-1,d:Math.floor(G.day||0),why:code});
+  if(e.luxGrantLog.length>LUX_GRANT_LOG)e.luxGrantLog.splice(0,e.luxGrantLog.length-LUX_GRANT_LOG);
+}
+/* refreshLuxury'nin sonunda (pakt ithalatından sonra) çağrılır: geçerli hak got/imported'a eklenir, biten kayıt silinir. */
+function luxGrantApply(e,got,imported){
+  const lg=e.luxGrant;
+  if(!lg||typeof lg!=='object'||Array.isArray(lg)){delete e.luxGrant;return;}
+  for(const k of Object.keys(lg)){
+    const s=luxGrantStatus(e,k);
+    if(s.end&&!e.mpLuxGrant){delete lg[k];luxGrantLogAdd(e,k,s.giver,s.code);continue;}
+    if(s.ok&&!got[k]){got[k]=true;imported[k]=s.giver;}
+  }
+}
+/* Savaş: iki taraf arasındaki lüks hakları biter (endTreatiesForWar kancası). Silinen varsa alıcının erişimi hemen yeniden hesaplanır. */
+function luxGrantEndWar(a,b){
+  for(const [x,y] of [[a,b],[b,a]]){
+    if(!x||!y||!x.luxGrant||typeof x.luxGrant!=='object')continue;let n=0;
+    for(const k of Object.keys(x.luxGrant))if(x.luxGrant[k]===y.id){delete x.luxGrant[k];luxGrantLogAdd(x,k,y.id,'war');n++;}
+    if(n&&!x.dead&&typeof refreshLuxury==='function')refreshLuxury(x);
+  }
+}
+/* refreshLuxury'nin ticaret paktı kuralıyla aynı denetim (salt okunur): malı pakt üzerinden sağlayan ilk ortak, yoksa −1 */
+function luxTradeSource(e,k){
+  const tr=e.trade;if(!(tr&&tr.links&&tr.links.some(l=>l.dis&&!l.bl)))return -1;
+  for(const o of G.emps){
+    if(o.dead||o.id===e.id||e.war[o.id])continue;if(!(e.pact&&e.pact[o.id]))continue;
+    if(typeof tradeBlocked==='function'&&tradeBlocked(e,o))continue;if(ownLuxury(o)[k])return o.id;
+  }
+  return -1;
+}
+/* Görünüm (salt okunur): her lüks mal için erişim kanalları ve hakkın durumu. Ekonomi ekranı / Lüks mal ağın. */
+function luxChannels(e){
+  const own=e.luxOwn||{},out=[];
+  for(const k of LUX_KEYS){
+    const ch=[];if(own[k])ch.push('koloni');
+    const s=e.luxGrant&&Object.hasOwn(e.luxGrant,k)?luxGrantStatus(e,k):null;
+    if(luxTradeSource(e,k)>=0)ch.push('ticaret');
+    if(s&&s.ok)ch.push('hak');
+    out.push({k,on:!!(e.luxury&&e.luxury[k]),ch,grant:s?{giver:s.giver,ok:s.ok,code:s.code,why:s.ok?'':(LUX_GRANT_WHY[s.code]||s.code)}:null});
+  }
+  return out;
+}
+/* END MP-DIPLO5 NF-2b */
+/* ═══ MP-DIPLO5 NF-3 — Casusluk Ağı Paktı (spynet) görünümü ═══
+   Tek oyunculu kural (değişmedi): simetrik, süresiz pakt; imzada teklifi GÖNDEREN 120 Etki öder (çok maddeli teklifte dealCost
+   indirim kuralı). Etkisi pooledIntel: iki taraf da ortağın üçüncü devletler üzerindeki istihbarat düzeyini haritada (filo ayrıntısı)
+   kullanır — en yüksek düzey; kimin hangi ağa sahip olduğu gösterilmez. Biter: taraflar savaşa girince (endTreatiesForWar).
+   Etkisiz: ortak elenirse (kayıt kalır). Yeni: savaş sürerken kurulamaz (dealValidity). Biten ağın nedeni `spynetLog` (≤8, yalnız
+   kullanıldığında). */
+const SPYNET_WHY={war:'taraflar savaşa girdi',dead:'ortak devlet elendi'};
+function spynetEndLog(e,o,why){
+  if(!e)return;e.spynetLog=Array.isArray(e.spynetLog)?e.spynetLog:[];
+  e.spynetLog.push({o,d:Math.floor(G.day||0),why});if(e.spynetLog.length>8)e.spynetLog.splice(0,e.spynetLog.length-8);
+}
+function spynetState(e,o){
+  if(!e||!o)return null;const on=!!(e.spynet&&e.spynet[o.id]);
+  if(on)return {on:true,ok:!o.dead&&!e.war[o.id],why:o.dead?SPYNET_WHY.dead:e.war[o.id]?SPYNET_WHY.war:''};
+  const last=(Array.isArray(e.spynetLog)?e.spynetLog:[]).filter(r=>r&&r.o===o.id).slice(-1)[0];
+  return last?{on:false,ok:false,ended:true,d:last.d,why:SPYNET_WHY[last.why]||String(last.why||'')}:null;
+}
+/* Ayna için: havuzun misafire kazandırdığı düzeyler (yalnız temaslı hedefler; ortak kimliği yok) */
+function spynetPoolView(e){
+  if(!e||!e.spynet||!Object.values(e.spynet).some(Boolean))return null;const out={};
+  for(const t of G.emps){if(!t||t.id===e.id||t.dead||t.wild||!(e.contact&&e.contact[t.id]))continue;const p=pooledIntel(e,t.id);if(p>intelOf(e,t.id))out[t.id]=p;}
+  return out;
+}
+/* END MP-DIPLO5 NF-3 */
+/* ═══ MP-DIPLO5 NF-6 — Barıştırma (peaceWith): üçüncü tarafla süren savaşı bitirme ═══
+   Madde `{t:'peaceWith', target, front?}`: VEREN, `target` ile süren savaşını (savaş defteri cephesi `front`) bitirir; ALAN (aracı)
+   karşılık öder. İkili barıştan (`peace`, tarafların kendi savaşı) ve federasyon ortak barışından (`fedPeace`) ayrıdır.
+   Diğer savaşanın onayı (yeni kural; tek oyunculuda da): alan zaten o devletse örtük; AI ise mevcut barış değerlendirmesi
+   (aiRespond: verenin ikili barış teklifi, RNG yok); insan ise ayrı onay (MP iki aşamalı işlem, peaceWithAuthorize). Doktrin /
+   Kan Hukuku (canPeace) ve cephe kimliği her quote'ta, son kararda yeniden denetlenir. `front` yoksa (eski kayıt / AI teklifi)
+   cephe denetimi yapılmaz. Barış + karşılık executeDeal içinde birlikte (kısmi ödeme / kısmi barış yok). */
+let PEACE_WITH_OK = null, PEACE_WITH_DEFER = false;
+function peaceWithFront(giver, t){ const f = (giver && t && typeof warLedgerFind === 'function') ? warLedgerFind(giver.id, t.id) : null; return f ? f.id : 0; }
+function peaceWithConsent(giver, t, taker){
+  if (taker && t.id === taker.id) return {ok:true, by:'taker'};
+  if (t.ai !== false){
+    const r = (typeof aiRespond === 'function') ? aiRespond(t, {from:giver.id, to:t.id, give:[{t:'peace'}], want:[], born:G.day, expires:G.day + 300}) : {v:'red'};
+    return r.v === 'kabul' ? {ok:true, by:'ai'} : {ok:false, why:t.name + ' şu an barışı kabul etmiyor'};
+  }
+  if (PEACE_WITH_OK && PEACE_WITH_OK.has(giver.id + '>' + t.id)) return {ok:true, by:'human'};
+  if (PEACE_WITH_DEFER) return {ok:true, by:'pending', pending:true};
+  return {ok:false, human:true, why:t.name + ' (insan oyuncu) barışı kendisi onaylamalı'};
+}
+/* İnsan onayı bekleyen Barıştırma maddeleri (MP iki aşamalı işlem için) */
+function peaceWithHumanItems(offer){
+  const out = [], A = G.emps[offer.from], B = G.emps[offer.to];
+  for (const [giver, taker, list] of [[A, B, offer.give || []], [B, A, offer.want || []]]) for (const it of list){
+    if (it.t !== 'peaceWith') continue; const t = G.emps[it.target];
+    if (giver && taker && t && t.ai === false && t.id !== taker.id) out.push({giver:giver.id, taker:taker.id, t:t.id, front:it.front || peaceWithFront(giver, t)});
+  }
+  return out;
+}
+function peaceWithDefer(fn){ const was = PEACE_WITH_DEFER; PEACE_WITH_DEFER = true; try { return fn(); } finally { PEACE_WITH_DEFER = was; } }
+function peaceWithAuthorize(keys, fn){ const was = PEACE_WITH_OK; PEACE_WITH_OK = new Set(keys); try { return fn(); } finally { PEACE_WITH_OK = was; } }
+/* İzleyicinin bildiği, `giver` devletinin sürdürdüğü savaşlar (knownWarPairs kuralı) — Barıştırma seçim listesi */
+function peaceWithChoices(viewer, giver){
+  const out = []; if (!viewer || !giver) return out;
+  const pairs = viewer === giver ? null : knownWarPairs(viewer);
+  for (const t of G.emps){
+    if (!t || t === giver || !warLedgerPair(giver.id, t.id)) continue;
+    const known = viewer === giver || viewer === t || pairs.some(p => (p.a === giver.id && p.b === t.id) || (p.a === t.id && p.b === giver.id));
+    if (!known) continue;
+    out.push({target:t.id, front:peaceWithFront(giver, t), name:String(t.name), human:t.ai === false});
+  }
+  return out;
+}
+/* END MP-DIPLO5 NF-6 */

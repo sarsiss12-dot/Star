@@ -1,0 +1,42 @@
+✓ 96H.8 month-66 siege of player colony sys6: actor1 never pays for an army and the garrison never falls (bug reproduced)
+✓ 96H.9 month-66: the army is ordered while the campaign gathers and sys6 falls cleanly to a ground landing
+✓ 96H.8 month-79 siege of sys5: the escort is recalled to rally 31 and the army reaches the regenerating shield alone (bug reproduced)
+✓ 96H.9 month-79: the force holds sys5 and the escorted army captures it cleanly on day 2430
+✓ invasion intent is read-only: the known colonised war target, nothing at peace
+✓ alloy-only shortfall reserves the army price from warships and grants nothing; 96H.8 spends it on a corvette
+✓ an affordable army is bought first and paid from the same alloy stock
+✓ any other failing gate (energy runway) leaves production and Save8 byte-identical to 96H.8
+✓ Save8 shape and RNG: 96H.9 stores no new state; a natural 96H.9 run reloads byte-identically
+✗ invasion, combat and diplomacy rules keep their 96H.8 bytes — AssertionError [ERR_ASSERTION]: economy.js
++ actual - expected
+
++ '157d568c82a32733bc41c46400d28631e5ae7b577fd957e823858e5104f8a8c0'
+- '5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22'
+
+    at /home/user/Star/tests/faz96h9_invasion_test.js:96:51
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/faz96h9_invasion_test.js:94:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+✗ only the reviewed 96H.9 invasion blocks differ from 96H.8 ai.js — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '90a3dadbebb04585af1829dac68bf66064d369a404557d2904548a47c1a5bbd9'
+- '8141a3fb691db340e66f267a9a94f942d3cb7e2cd542829bbb7493545bff16b0'
+
+    at /home/user/Star/tests/faz96h9_invasion_test.js:100:10
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/faz96h9_invasion_test.js:98:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+GEÇEN: 9 KALAN: 2

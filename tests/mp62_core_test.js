@@ -111,7 +111,9 @@ test('ittifak / saldırmazlık / ticaret paktı insan–insan: MP teklifi → ka
   const r=cmd(a,A,{kind:'offer',to:B,give:[],want:[{t:'ally'}]});
   if(r.status==='ok'){assert.equal(cmd(a,B,{kind:'respond',offer:r.extra.offer,action:'accept'}).status,'ok');assert.equal(J(a,`G.emps[${A}].ally[${B}]&&G.emps[${B}].ally[${A}]`),true);}
   else assert.equal(r.code.startsWith('rules:'),true,'engine gate for alliance: '+JSON.stringify(r.detail));
-  assert.equal(cmd(a,A,{kind:'offer',to:B,give:[],want:[{t:'spynet'}]}).code,'bad-params','espionage pact not in this phase');
+  /* MP-DIPLO5 NF-3: casusluk ağı artık MP maddesi (MP.6.2'de kapsam dışıydı) — biçim geçer, karar motorun dealQuote kapısında */
+  {const rs=cmd(a,A,{kind:'offer',to:B,give:[],want:[{t:'spynet'}]});assert.notEqual(rs.code,'bad-params','espionage pact accepted as MP item (NF-3)');assert(rs.status==='ok'||String(rs.code).startsWith('rules:'),JSON.stringify(rs));}
+  assert.equal(cmd(a,A,{kind:'offer',to:B,give:[],want:[{t:'spynet',x:1}]}).code,'bad-params','extra keys still rejected');
 });
 test('ittifakı sonlandır, ticaret anlaşmasını feshet, ambargo, hediye: motorun işlevleri / tek oyunculu satırları; yalnız kendi devleti; hediye alan uzak insan bildirim alır',()=>{
   const h=world();

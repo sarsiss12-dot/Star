@@ -1,8 +1,8 @@
 'use strict';
 /* MP-TECHLUX.0 — tek oyunculu yol ve masa arayüzü.
    S1 tek oyunculu teknoloji maddesi (AI veren / alan) motorun dealQuote → executeDeal yoluyla aynen: kabulde alıcının araştırmasına eklenir
-   S2 tek oyunculu lüks mal maddesi aynen: kabulde alıcının luxGrant kaydı veren devlete bağlanır; MEVCUT MOTOR bu kayıttan lüks bonusu üretmez
-      (refreshLuxury luxGrant'ı okumaz) — bu fazda değiştirilmedi, açık iş (NF-2b)
+   S2 tek oyunculu lüks mal maddesi: kabulde alıcının luxGrant kaydı veren devlete bağlanır. p37'de refreshLuxury bu kaydı okumuyordu
+      (bonus yok); MP-DIPLO5 NF-2b (kullanıcı kararı) ile geçerli hak alıcıda lüks bonusunu açar — beklenti buna göre güncellendi
    S3 teklif özeti: teknolojinin alıcıya sağladığı (techBenefits) ve erişim koşulu; lüks mal erişiminin motordaki gerçek etkisi
    S4 istihbarat yetmezken "İstiyorum" tarafında düğmenin yanında görünür neden */
 const assert=require('assert/strict'),{runtime}=require('./helpers/runtime');
@@ -17,16 +17,16 @@ test('S1 tek oyunculu teknoloji: AI → oyuncu kabulde araştırmaya eklenir (mo
     const o={from:g.id,to:0,give:[{t:'tech',id:t}],want:[],born:G.day,expires:G.day+300};const q=dealQuote(o);const ok=q.ok&&executeDeal(o);return {ok,has:!!G.p.techs[t],still:!!g.techs[t]};})()`);
   assert(!r.skip,'fikstür');assert.equal(r.ok,true);assert.equal(r.has,true);assert.equal(r.still,true);});
 
-test('S2 tek oyunculu lüks mal: kabulde luxGrant kaydı; mevcut motor bu kayıttan lüks bonusu üretmez (değiştirilmedi)',()=>{const h=game();
+test('S2 tek oyunculu lüks mal: kabulde luxGrant kaydı; hak alıcıda lüks bonusunu açar (NF-2b)',()=>{const h=game();
   const r=J(h,`(()=>{const g=__A.find(o=>Object.keys(o.luxOwn||{}).some(k=>!(G.p.luxOwn||{})[k]));if(!g)return {skip:1};const k=Object.keys(g.luxOwn).find(k=>!(G.p.luxOwn||{})[k]);
     const o={from:g.id,to:0,give:[{t:'lux',k}],want:[],born:G.day,expires:G.day+300};const ok=dealQuote(o).ok&&executeDeal(o);refreshLuxury(G.p);return {ok,grant:G.p.luxGrant[k]===g.id,lux:!!(G.p.luxury||{})[k]};})()`);
-  assert(!r.skip,'fikstür');assert.equal(r.ok,true);assert.equal(r.grant,true);assert.equal(r.lux,false,'mevcut motor: erişim kaydı bonus üretmez (NF-2b)');});
+  assert(!r.skip,'fikstür');assert.equal(r.ok,true);assert.equal(r.grant,true);assert.equal(r.lux,true,'NF-2b: geçerli hak bonus açar (p37: false)');});
 
 test('S3 teklif özeti: teknolojinin sağladığı + erişim koşulu; lüks erişiminin gerçek etkisi',()=>{const h=game();
   const r=J(h,`(()=>{const o=__A[0];const t=Object.keys(TECHS).find(t=>TECHS[t].e&&Object.keys(TECHS[t].e).length&&!G.p.techs[t]);const k=Object.keys(LUXURY)[0];
     return UI.dealTermsHtml({give:[{t:'lux',k}],want:[{t:'tech',id:t}]},G.p,o)+'|'+JSON.stringify(techBenefits(t));})()`);
   const [html,b]=r.split('|');const ben=JSON.parse(b);assert.match(html,/Teknoloji/);assert.match(html,/kabul anında/);assert(ben.effects.length&&html.includes(ben.effects[0].replace(/[<>&]/g,'')),'sağladığı etki satırda');
-  assert.match(html,/Lüks mal erişimi/);assert.match(html,/bonus üretmez/);});
+  assert.match(html,/Lüks mal erişimi/);assert.match(html,/bonusu açılır|yedek kanal/);});
 
 test('S4 istihbarat yetmezken "İstiyorum" tarafında görünür neden',()=>{const h=game();
   const r=J(h,`(()=>{const o=__A[0];G.p.intel={};UI.deal={from:0,to:o.id,give:[],want:[]};UI.diploPage='deal';let H='';const r0=UI.renderDiplo;UI.renderDiplo=(h)=>{H=h;};try{UI.drawDeal();}finally{UI.renderDiplo=r0;}return H;})()`);

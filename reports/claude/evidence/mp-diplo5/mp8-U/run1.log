@@ -1,0 +1,4 @@
+FATAL TypeError: VIEW[n] is not iterable (cannot read property undefined)
+    at open (/home/user/Star/tests/browser-mp8.cjs:80:93)
+    at /home/user/Star/tests/browser-mp8.cjs:277:55
+GEÇEN: 0 KALAN: 1

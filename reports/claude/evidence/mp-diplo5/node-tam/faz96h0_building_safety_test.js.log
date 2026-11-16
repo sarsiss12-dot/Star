@@ -1,0 +1,24 @@
+✓ demolition opens a named confirmation without modifying stock, buildings or queues
+✓ a cancelled confirmation cannot later execute through a stale callback
+✓ confirmation queues exactly one demolition for the requested system planet and building
+✓ duplicate acceptance cannot queue a second demolition
+✓ Save8 replacement invalidates the former destructive confirmation
+✓ a changed owner is checked again by the existing engine at confirmation
+✓ the final power plant retains its safety gate
+✓ only actual completion removes the building and pays the existing scrap refund
+✓ invalid former targets retain stock, buildings and queues while reporting rejection
+✗ the reviewed compact layout stays pinned and rejects loss of counter spacing or touch size — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(guard(html))
+
+    at /home/user/Star/tests/faz96h0_building_safety_test.js:13:270
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/faz96h0_building_safety_test.js:13:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+GEÇEN: 9 KALAN: 1

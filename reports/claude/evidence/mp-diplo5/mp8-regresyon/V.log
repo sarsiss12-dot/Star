@@ -1,0 +1,11 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":678,"buildMs":709,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":793,"buildMs":843,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":7,"p95":7,"max":7},"longtask":{"n":1,"med":63,"p95":63,"max":63},"heapMB":15,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":49,"p95":49,"max":49},"refresh":{"n":1,"med":4,"p95":4,"max":4},"longtask":{"n":1,"med":75,"p95":75,"max":75},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":28,"joinErrors":0},"C":{"build":{"n":2,"med":52.5,"p95":52.5,"max":52.5},"refresh":{"n":1,"med":2,"p95":2,"max":2},"longtask":{"n":2,"med":52,"p95":52,"max":52},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":16,"dom":722,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":24,"joinErrors":0}}}
+PASS V0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS V1 C gerçek masada son tarihli savaş sözü + karşılık; özet İLAN EDİLMEZ; B karttan "Masaya otur" → ⏱ → karşı teklif; C kabul → tek söz, savaş yok; B/C aynada, host satırı yok
+PASS V2 kaydet → host kapanır → YENİ oda → misafirler döner → aynı söz; C söz panelinden NORMAL savaş ilanı → "Tutuldu" (B de görür)
+PASS V3 ikinci söz (hedef Y) son tarihe kadar tutulmaz → "Çiğnendi": B sözünü çiğnedi hatırlar, ilişki −20; iki aynada durum
+PASS V4 geçersiz şart gerekçeli; hedef elenince "Düştü" (ceza yok); aynı kabul iki kez + hat donar / kopar → tek söz
+PASS V5 Savaş Merkezi "Şartlı Teklif…" taslağı: düzenlenir, ayna yeniden kurulur ve masa yeniden açılır → taslak korunur
+PASS V6 host → misafir (masaüstü masası): söz → B reddeder → host yeniden gönderir ve geri çeker (iptal); misafir → host: B söz verir, host kabul eder → kayıt + iki panel
+GEÇEN: 7 KALAN: 0

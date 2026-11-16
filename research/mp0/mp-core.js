@@ -113,7 +113,7 @@ function validatePackage(input,o={}){
   if(!onlyKeys(pkg,KEYS)||KEYS.some(k=>!has(pkg,k)))return fail('fields');
   if(pkg.format!==PKG_FORMAT)return fail('format');
   if(pkg.mpVersion!==PKG_VERSION)return fail('version');
-  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))||(build==='96h10p10'&&['96h10p6','96h10p7','96h10p8','96h10p9'].includes(pkg.build))||(build==='96h10p11'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10'].includes(pkg.build))||(build==='96h10p12'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11'].includes(pkg.build))||(build==='96h10p13'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12'].includes(pkg.build))||(build==='96h10p14'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13'].includes(pkg.build))||(build==='96h10p15'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14'].includes(pkg.build))||(build==='96h10p16'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15'].includes(pkg.build))||(build==='96h10p17'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16'].includes(pkg.build))||(build==='96h10p18'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17'].includes(pkg.build))||(build==='96h10p19'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18'].includes(pkg.build))||(build==='96h10p20'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19'].includes(pkg.build))||(build==='96h10p21'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20'].includes(pkg.build))||(build==='96h10p22'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21'].includes(pkg.build))||(build==='96h10p23'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22'].includes(pkg.build))||(build==='96h10p24'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23'].includes(pkg.build))||(build==='96h10p25'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24'].includes(pkg.build))||(build==='96h10p26'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25'].includes(pkg.build))||(build==='96h10p27'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26'].includes(pkg.build))||(build==='96h10p28'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27'].includes(pkg.build))||(build==='96h10p29'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1'].includes(pkg.build))||(build==='96h10p30'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29'].includes(pkg.build))||(build==='96h10p31'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30'].includes(pkg.build))||(build==='96h10p32'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31'].includes(pkg.build))||(build==='96h10p33'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32'].includes(pkg.build))||(build==='96h10p34'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33'].includes(pkg.build))||(build==='96h10p35'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33','96h10p34'].includes(pkg.build))||(build==='96h10p36'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33','96h10p34','96h10p35'].includes(pkg.build))||(build==='96h10p37'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33','96h10p34','96h10p35','96h10p36'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
+  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);if(pkg.build!==build&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))||(build==='96h10p10'&&['96h10p6','96h10p7','96h10p8','96h10p9'].includes(pkg.build))||(build==='96h10p11'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10'].includes(pkg.build))||(build==='96h10p12'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11'].includes(pkg.build))||(build==='96h10p13'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12'].includes(pkg.build))||(build==='96h10p14'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13'].includes(pkg.build))||(build==='96h10p15'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14'].includes(pkg.build))||(build==='96h10p16'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15'].includes(pkg.build))||(build==='96h10p17'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16'].includes(pkg.build))||(build==='96h10p18'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17'].includes(pkg.build))||(build==='96h10p19'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18'].includes(pkg.build))||(build==='96h10p20'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19'].includes(pkg.build))||(build==='96h10p21'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20'].includes(pkg.build))||(build==='96h10p22'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21'].includes(pkg.build))||(build==='96h10p23'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22'].includes(pkg.build))||(build==='96h10p24'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23'].includes(pkg.build))||(build==='96h10p25'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24'].includes(pkg.build))||(build==='96h10p26'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25'].includes(pkg.build))||(build==='96h10p27'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26'].includes(pkg.build))||(build==='96h10p28'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27'].includes(pkg.build))||(build==='96h10p29'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1'].includes(pkg.build))||(build==='96h10p30'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29'].includes(pkg.build))||(build==='96h10p31'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30'].includes(pkg.build))||(build==='96h10p32'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31'].includes(pkg.build))||(build==='96h10p33'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32'].includes(pkg.build))||(build==='96h10p34'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33'].includes(pkg.build))||(build==='96h10p35'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33','96h10p34'].includes(pkg.build))||(build==='96h10p36'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33','96h10p34','96h10p35'].includes(pkg.build))||(build==='96h10p37'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33','96h10p34','96h10p35','96h10p36'].includes(pkg.build))||(build==='96h10p38'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33','96h10p34','96h10p35','96h10p36','96h10p37'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
   if(typeof pkg.save8!=='string')return fail('fields');if(pkg.save8.length>MAX_SAVE8)return fail('too-big');
   if(!Number.isFinite(pkg.createdAt)||typeof pkg.saveId!=='string'||!/^s-[a-f0-9]{16}$/.test(pkg.saveId))return fail('fields');
   const I=pkg.integrity;if(!plain(I)||!onlyKeys(I,['alg','save8','body'])||I.alg!=='SHA-256'||!HEX(I.save8,64)||!HEX(I.body,64))return fail('integrity');
@@ -156,12 +156,14 @@ function validatePackage(input,o={}){
     if(new Set(dp.sq.filter(q=>q.status==='pending').map(q=>q.from+'>'+q.to)).size!==dp.sq.filter(q=>q.status==='pending').length)return fail('offers');}
   const ids=new Map();
   for(const r of dp.offers){
-    if(!plain(r)||!onlyKeys(r,['id','from','to','give','want','born','expires','round','prev','status','why','by','cost','finished']))return fail('offers');
+    if(!plain(r)||!onlyKeys(r,['id','from','to','give','want','born','expires','round','prev','status','why','by','cost','finished','med','link']))return fail('offers');
+    if(has(r,'med')&&(!plain(r.med)||!onlyKeys(r.med,['giver','t','front','link'])||!int(r.med.giver,0,63)||!int(r.med.t,0,63)||!int(r.med.front,0,2147483647)||!int(r.med.link,1,2147483647)))return fail('offers');   /* MP-DIPLO5 NF-6 */
+    if(has(r,'link')&&!int(r.link,1,2147483647)||r.status==='mediating'&&!has(r,'med'))return fail('offers');
     if(!int(r.id,1,dp.next-1)||ids.has(r.id)||!int(r.from,0,63)||!int(r.to,0,63)||r.from===r.to)return fail('offers');
     if(!Array.isArray(r.give)||!Array.isArray(r.want)||r.give.length+r.want.length<1||r.give.length+r.want.length>12)return fail('offers');
     for(const it of r.give.concat(r.want)){const e=pkgItem(it);if(e)return fail(e);}
     if(!Number.isFinite(r.born)||!Number.isFinite(r.expires)||r.expires<r.born||!int(r.round,1,6)||!(r.prev===null||int(r.prev,1,2147483647)))return fail('offers');
-    if(!['pending','accepted','rejected','countered','expired','invalid'].includes(r.status)||typeof r.why!=='string'||r.why.length>240||!['human','ai'].includes(r.by)||
+    if(!['pending','accepted','rejected','countered','expired','invalid','mediating'].includes(r.status)||typeof r.why!=='string'||r.why.length>240||!['human','ai'].includes(r.by)||
       !Number.isFinite(r.cost)||r.cost<0||(has(r,'finished')&&!Number.isFinite(r.finished)))return fail('offers');
     if(r.round===1&&r.prev!==null||r.round>1&&r.prev===null)return fail('round');
     ids.set(r.id,r);}
@@ -742,6 +744,9 @@ function createHost(opts){
       apply(e,at,c){const o=G.emps[c.to];if(intelOf(e,o.id)<2)return {ok:true,extra:{intel:false,why:'İZLENİYOR istihbaratı gerekir'}};
         return {ok:true,extra:{intel:true,tech:Object.keys(o.techs||{}).filter(t=>TECHS[t]&&!(e.techs&&e.techs[t])).map(t=>{const ra=researchAccess(e,t);return {id:t,n:String(TECHS[t].n),ok:!!ra.ok,why:ra.ok?'':String(ra.why).slice(0,160)};}),
           lux:Object.keys(o.luxOwn||{}).filter(k=>LUXURY[k]).map(k=>({k,n:String(LUXURY[k].n),ico:String(LUXURY[k].ico||'')}))}};}},
+    /* MP-DIPLO5 NF-6: Barıştırma seçimi — `side:'give'` isteyenin kendi savaşları, `'want'` karşı tarafın İSTEYENİN BİLDİĞİ savaşları (knownWarPairs) */
+    peaceWithList:{ro:true,keys:['kind','to','side'],check:c=>int(c.to,0,63)&&['give','want'].includes(c.side),locate:()=>({}),why:(e,at,c)=>{const o=G.emps[c.to];return !o||o===e||!e.contact[o.id]?'no-target':null;},roots:()=>[],
+      apply(e,at,c){const o=G.emps[c.to],giver=c.side==='give'?e:o,other=c.side==='give'?o:e;return {ok:true,extra:{rows:pure(()=>peaceWithChoices(e,giver)).filter(x=>x.target!==other.id)}};}},
     warSupportList:{ro:true,keys:['kind','to'],check:c=>int(c.to,0,63),locate:()=>({}),why:(e,at,c)=>{const o=G.emps[c.to];return !o||o===e||!e.contact[o.id]?'no-target':null;},roots:()=>[],apply(e,at,c){return {ok:true,extra:{rows:pure(()=>warSupportOptions(e,G.emps[c.to]))}};}},
     warDealRead:{ro:true,keys:['kind','to'],check:c=>int(c.to,0,63),locate:()=>({}),why:(e,at,c)=>{const o=G.emps[c.to];return !o||o===e||!e.contact[o.id]?'no-target':null;},roots:()=>[],apply(e,at,c){return {ok:true,extra:pure(()=>warDealLedger(e,G.emps[c.to]))};}},
     warPrepareGoal:{keys:['kind','id','goal','targets','vtype','war'],check:c=>int(c.id,1,2147483647)&&WAR_GOAL_MAIN.includes(c.goal)&&coalOptsOk(c),locate:()=>({}),why:()=>null,roots:()=>[],apply(e,at,c){const r=warCoalitionCommand(e,c);if(r.ok)coalCloseOffers(c.id,'Savaş hedefi değişti; güncel şartlarla yeniden davet gerekir');return r;}},
@@ -754,7 +759,7 @@ function createHost(opts){
         if(D.offers.filter(r=>r.status==='pending'&&r.from===e.id).length>=DIP_PENDING_OUT)return 'too-many';
         const o=dipNew(e,B,dipItems(c.give),dipItems(c.want));
         if(D.offers.some(r=>r.status==='pending'&&r.from===e.id&&r.to===B.id&&offerSignature(dipOffer(r))===offerSignature(o)))return 'duplicate';
-        return dipGate(dealQuote(o),e,B);},
+        return dipGate(dq(o),e,B);},
       roots:()=>[],
       apply:(e,at,c)=>dipSend(e,G.emps[c.to],dipItems(c.give),dipItems(c.want),null)},
     /* Gönderim öncesi önizleme (salt okuma: işlem, dergi, revizyon, yayın yok). Gösterilen Etki maliyeti ve engeller
@@ -764,18 +769,22 @@ function createHost(opts){
       locate:()=>({}),
       why(e,at,c){const B=G.emps[c.to];return !B||B===e||!dipParty(B)||!e.contact[B.id]||!B.contact[e.id]?'no-target':null;},
       roots:()=>[],
-      apply(e,at,c){const B=G.emps[c.to],q=dealQuote(dipNew(e,B,dipItems(c.give),dipItems(c.want))),g=dipGate(q,e,B);
+      apply(e,at,c){const B=G.emps[c.to],q=dq(dipNew(e,B,dipItems(c.give),dipItems(c.want))),g=dipGate(q,e,B);
         return {ok:true,extra:{ok:!g,cost:Math.round(q.cost||0),etk:Math.floor(e.res.etk||0),life:dipLife(),reasons:g?g.detail:[]}};}},
     respond:{keys:['kind','offer','action'],
       check:c=>int(c.offer,1,2147483647)&&['accept','reject'].includes(c.action),
       locate(e,c){const r=dipFind(e,c.offer);return r?{r}:{err:'no-offer'};},
       why(e,{r},c){if(r.to!==e.id)return 'not-recipient';if(r.status!=='pending')return 'closed';if(G.day>r.expires)return 'expired';
         const A=G.emps[r.from];if(!dipParty(A)||!dipParty(e))return 'invalid';
-        if(c.action==='accept'){const q=dealQuote(dipOffer(r));if(!q.ok)return {code:'quote',detail:dipReasons(q,A)};
+        if(r.link&&c.action==='accept'){const O=D.offers.find(x=>x.id===r.link);if(!O||O.status!=='mediating')return 'closed';const m=O.med;   /* MP-DIPLO5 NF-6: ikinci aşama — diğer savaşanın onayı */
+          const q=peaceWithAuthorize([m.giver+'>'+m.t],()=>dealQuote(dipOffer(O)));if(!q.ok)return {code:'quote',detail:['Barıştırma artık uygulanamıyor: '+String((q.reasons||[])[0]||'koşullar değişti').slice(0,140)]};return null;}
+        if(c.action==='accept'){const q=dq(dipOffer(r));if(!q.ok)return {code:'quote',detail:dipReasons(q,A)};
           const pv=r.prev&&D.offers.find(x=>x.id===r.prev),ag=dipAssetGate({want:r.want},A,e,new Set(pv&&pv.from===e.id?pv.give.map(i=>dealItemKey(i)):[]));if(ag)return ag;}return null;},   /* MP-TECHLUX.0: istihbarat şartı kabulde de */
       roots:()=>[],
       apply(e,{r},c){const A=G.emps[r.from];
+        if(r.link)return peaceWithLinkReply(e,r,c.action);   /* MP-DIPLO5 NF-6 */
         if(c.action==='reject'){r.status='rejected';r.finished=G.day;r.why='Reddedildi';coalMark(r,'rejected','Reddetti');dipNotify(A.id,'Teklif reddedildi — '+e.name,'war');return true;}
+        {const pw=peaceWithHumanItems(dipOffer(r));if(pw.length)return peaceWithStart(r,pw[0],A,e);}   /* MP-DIPLO5 NF-6: insan diğer savaşan → iki aşamalı işlem */
         if(!executeDeal(dipOffer(r),'deal:mp71:'+r.id))return false;                       // motorun kendi işlemi: başarısızlıkta kendisi geri alır
         r.status='accepted';r.finished=G.day;stats.deals=(stats.deals||0)+1;
         dipNotify(A.id,'Teklif kabul edildi — '+e.name,'win');dipNotify(e.id,'Anlaşma imzalandı — '+A.name,'win');return true;}},
@@ -785,15 +794,16 @@ function createHost(opts){
       why(e,{r},c){if(r.to!==e.id)return 'not-recipient';if(r.status!=='pending')return 'closed';if(G.day>r.expires)return 'expired';
         if(r.round>=DIP_ROUNDS)return 'round-limit';
         const B=G.emps[r.from];if(!dipParty(B)||!dipParty(e)||!e.contact[B.id]||!B.contact[e.id])return 'invalid';
-        return dipGate(dealQuote(dipNew(e,B,dipItems(c.give),dipItems(c.want))),e,B,new Set((r.give||[]).filter(i=>i.t==='sys').map(i=>i.id)),new Set((r.give||[]).map(i=>dealItemKey(i))));},   /* MP-TECHLUX.0: shownKeys */
+        if(r.link)return {code:'quote',detail:['Barıştırma onayı: yalnız kabul ya da ret']};   /* MP-DIPLO5 NF-6 */
+        return dipGate(dq(dipNew(e,B,dipItems(c.give),dipItems(c.want))),e,B,new Set((r.give||[]).filter(i=>i.t==='sys').map(i=>i.id)),new Set((r.give||[]).map(i=>dealItemKey(i))));},   /* MP-TECHLUX.0: shownKeys */
       roots:()=>[],
       apply(e,{r},c){const x=dipSend(e,G.emps[r.from],dipItems(c.give),dipItems(c.want),r);if(x&&x.ok&&isHumanActor(e)){const nr=D.offers.find(o=>o.id===x.extra.offer);if(nr)coalMark(nr,'countered','Karşı teklif verdi',true);}return x;}},
     withdraw:{keys:['kind','offer'],
       check:c=>int(c.offer,1,2147483647),
       locate(e,c){const r=dipFind(e,c.offer);return r?{r}:{err:'no-offer'};},
-      why:(e,{r})=>r.from!==e.id?'not-sender':r.status!=='pending'?'closed':null,
+      why:(e,{r})=>r.from!==e.id?'not-sender':r.status!=='pending'&&r.status!=='mediating'?'closed':null,
       roots:()=>[],
-      apply(e,{r}){r.status='invalid';r.why='Gönderen geri çekti';r.finished=G.day;coalMark(r,'closed','Davet geri çekildi');dipNotify(r.to,'Teklif geri çekildi — '+e.name);return true;}},
+      apply(e,{r}){const med=r.status==='mediating';r.status='invalid';r.why='Gönderen geri çekti';r.finished=G.day;coalMark(r,'closed','Davet geri çekildi');dipNotify(r.to,'Teklif geri çekildi — '+e.name);if(med)peaceWithClose(r,'Aracı teklifi geri çekti');return true;}},
     /* ═══ MP.3.1 — federasyon ve vasallık. Yeni siyasi motor yok: her komut motorun kendi işlevini çağırır
        (requestFederation, proposeFedMotion, acceptFedInvite / rejectFedInvite, castFedVote, leaveFederation, proposeFedLaw,
        foundFederation, vassalOffer, vassalReply). Bu işlevlerin kendi işlemi (fedChange / vassalTransaction) vardır; ikinci
@@ -1076,8 +1086,8 @@ function createHost(opts){
   const PERM_HUMANS='Daimi hükümdarlık oylamasında üyelerin oyu motorda zarla belirlenir; başka insan üye varken çok oyunculuda talep edilemez.';
   /* ═══ MP.3 diplomasi durumu (oturum; Save8'e girmez — kalıcılık MP.4) ═══ */
   const DIP_ROUNDS=6,DIP_PENDING_OUT=8,DIP_KEEP=160,DIP_RES=['min','ene','yiy','ala','tuk','ara','etk'];
-  /* MP.6.2: parametresiz antlaşma maddeleri — saldırmazlık, ticaret, ittifak, sensör paylaşımı, sınır geçişi (casusluk ağı kapsam dışı) */
-  const DIP_TREATY=['peace','nap','pact','ally','intel','passage'];
+  /* MP.6.2: parametresiz antlaşma maddeleri — saldırmazlık, ticaret, ittifak, sensör paylaşımı, sınır geçişi; MP-DIPLO5 NF-3: + casusluk ağı */
+  const DIP_TREATY=['peace','nap','pact','ally','intel','passage','spynet'];
   const D={next:1,offers:[]};
   const dipLife=()=>typeof DEAL_OFFER_LIFE==='number'?DEAL_OFFER_LIFE:540;   // tek oyunculuyla aynı ömür (oyun günü)
   /* insanın kurabileceği maddeler: kaynak, barış ve MP.6.2 antlaşmaları (kanonik motorun desteklediği; kaynak kataloğu RES) */
@@ -1092,6 +1102,7 @@ function createHost(opts){
       else if(it.t==='tribute'&&onlyKeys(it,['t','r','v'])&&DIP_RES.includes(it.r)&&int(it.v,1,100000))out.push({t:'tribute',r:it.r,v:it.v});   /* MP-DEAL-SYS.0: Haraç (aylık, 10 yıl) */
       else if(it.t==='tech'&&onlyKeys(it,['t','id'])&&typeof it.id==='string'&&it.id.length<=64&&typeof TECHS!=='undefined'&&has(TECHS,it.id))out.push({t:'tech',id:it.id});   /* MP-TECHLUX.0: teknoloji paylaşımı (motorun 'tech' maddesi) */
       else if(it.t==='lux'&&onlyKeys(it,['t','k'])&&typeof it.k==='string'&&typeof LUXURY!=='undefined'&&has(LUXURY,it.k))out.push({t:'lux',k:it.k});   /* MP-TECHLUX.0: lüks mal erişimi (motorun 'lux' maddesi) */
+      else if(it.t==='peaceWith'&&onlyKeys(it,['t','target','front'])&&int(it.target,0,63)&&int(it.front,1,2147483647))out.push({t:'peaceWith',target:it.target,front:it.front});   /* MP-DIPLO5 NF-6: Barıştırma (cephe kimliğiyle) */
       else if(it.t==='warOn'&&onlyKeys(it,['t','target','until'])&&int(it.target,0,63)&&(!has(it,'until')||int(it.until,0,100000000)))out.push({t:'warOn',target:it.target,...(has(it,'until')?{until:it.until}:{})});   /* MP-WARON.0: Genel Savaş Sözü (insan veren: son tarihli) */
       else return null;}
     return out;
@@ -1129,8 +1140,22 @@ function createHost(opts){
       return {code:'quote',detail:[(it.t==='tech'?'Teknoloji':'Lüks mal')+' istemek için '+B.name+' hakkında İZLENİYOR istihbaratı gerekir']};
     return null;
   }
+  /* MP-DIPLO5 NF-6: insan diğer savaşanın onayı ayrı aşamada alınır; teklif / karşı teklif / kabul öncesi quote bu onayı "bekliyor" sayar */
+  const dq=o=>typeof peaceWithDefer==='function'?peaceWithDefer(()=>dealQuote(o)):dealQuote(o);
+  function dipPeaceWithGate(norm,A,B,shownKeys){
+    const items=[...(norm.give||[]).map(it=>[A,B,it]),...(norm.want||[]).map(it=>[B,A,it])].filter(([,,it])=>it.t==='peaceWith');if(!items.length)return null;
+    for(const [giver,taker,it] of items){
+      if(it.front===undefined)return {code:'quote',detail:['Barıştırma: savaş (cephe) seçilmeli']};
+      if(it.target===taker.id)return {code:'quote',detail:['Barıştırma: aracının kendi savaşı için Barış maddesini kullan']};
+      if(isHumanActor(A)&&!(shownKeys&&shownKeys.has(dealItemKey(it)))&&!peaceWithChoices(A,giver).some(c=>c.target===it.target&&c.front===it.front))
+        return {code:'quote',detail:['Barıştırma: bu savaş bilinmiyor ya da artık sürmüyor']};}   /* gerekçe savaşın varlığını söylemez */
+    const hum=items.filter(([giver,taker,it])=>{const t=G.emps[it.target];return t&&t.ai===false&&t.id!==taker.id;});
+    if(hum.length>1)return {code:'quote',detail:['Barıştırma: bir teklifte en çok bir insan onayı beklenebilir']};
+    return null;
+  }
   function dipGate(q,A,B,shown,shownKeys){
     {const ag=dipAssetGate(q.norm||{},A,B,shownKeys);if(ag)return ag;}
+    {const pg=dipPeaceWithGate(q.norm||{},A,B,shownKeys);if(pg)return pg;}   /* MP-DIPLO5 NF-6 */
     /* MP-WARON.0: çok oyunculuda insan veren Genel Savaş Sözü son tarih taşır (kabulde savaş ilan edilmez; savaşı kendi onayıyla açar) */
     for(const [g,list] of [[A,(q.norm||{}).give||[]],[B,(q.norm||{}).want||[]]])for(const it of list)if(it.t==='warOn'&&it.until===undefined&&isHumanActor(g))return {code:'quote',detail:['Genel Savaş Sözü: çok oyunculuda insan oyuncu son tarihli söz verir; kabulde savaş ilan edilmez, savaşı kendi onayıyla açar']};
     {const sg=dipSysGate(q.norm||{},A,B,shown);if(sg)return sg;}   /* shown: karşı teklifte, karşı tarafın önceki teklifinde kendisinin açıkça sunduğu sistemler */
@@ -1145,7 +1170,33 @@ function createHost(opts){
     return null;
   }
   function dipNotify(id,m,c){const o=G.emps[id];if(!o)return;if(remoteHuman(o))note(id,m,c);else if(id===hostEmpireId&&opts.hostNotify)opts.hostNotify(m,c);}
-  function dipTrim(){const done=D.offers.filter(r=>r.status!=='pending');if(done.length>DIP_KEEP){const drop=new Set(done.slice(0,done.length-DIP_KEEP).map(r=>r.id));D.offers=D.offers.filter(r=>!drop.has(r.id));}}
+  function dipTrim(){const done=D.offers.filter(r=>r.status!=='pending'&&r.status!=='mediating');if(done.length>DIP_KEEP){const drop=new Set(done.slice(0,done.length-DIP_KEEP).map(r=>r.id));D.offers=D.offers.filter(r=>!drop.has(r.id));}}
+  /* ═══ MP-DIPLO5 NF-6 — Barıştırma iki aşamalı işlem ═══
+     1) Aracı teklifi kabul edilir → kayıt `mediating` (dünya DEĞİŞMEZ, karşılık ödenmez), diğer savaşana (insan) bağlı onay kaydı
+        `link` (veren → diğer savaşan, give:[peace]). 2) Diğer savaşan kabul eder → asıl teklif onun onayıyla executeDeal (barış +
+        karşılık birlikte, tek işlem); reddeder / süre dolar / savaş başka yolla biter / cephe değişir → ikisi de gerekçeyle kapanır. */
+  function peaceWithStart(r,m,A,B){
+    const giver=G.emps[m.giver],t=G.emps[m.t],taker=G.emps[m.taker];if(!giver||!t||!taker)return false;
+    const L=dipRecord(giver,t,{give:[{t:'peace'}],want:[],born:G.day,expires:G.day+dipLife()},null,isHumanActor(giver)?'human':'ai','pending');L.link=r.id;
+    r.status='mediating';r.why='Barıştırma: '+t.name+' onayı bekleniyor';r.med={giver:m.giver,t:m.t,front:m.front,link:L.id};
+    dipNotify(t.id,'Barıştırma onayı — '+taker.name+' aracılığıyla '+giver.name+' barış öneriyor (Cephe #'+m.front+')','sci');
+    for(const id of [A.id,B.id])dipNotify(id,'Barıştırma: '+t.name+' onayı bekleniyor; onaylarsa barış ve karşılık birlikte uygulanır','sci');
+    return true;
+  }
+  function peaceWithClose(O,why){
+    if(!O||!O.med)return;const L=D.offers.find(x=>x.id===O.med.link);
+    if(L&&L.status==='pending'){L.status='invalid';L.finished=G.day;L.why=why;dipNotify(L.to,'Barıştırma onayı kapandı — '+why,'war');}
+    if(O.status==='mediating'){O.status='invalid';O.finished=G.day;O.why=why;}
+    for(const id of [O.from,O.to])dipNotify(id,'Barıştırma kapandı — '+why+' (hiçbir şey uygulanmadı)','war');
+  }
+  function peaceWithLinkReply(e,L,action){
+    const O=D.offers.find(x=>x.id===L.link);if(!O||O.status!=='mediating')return false;const m=O.med;
+    if(action==='reject'){L.status='rejected';L.finished=G.day;L.why='Reddedildi';peaceWithClose(O,e.name+' barışı reddetti');return true;}
+    if(!peaceWithAuthorize([m.giver+'>'+m.t],()=>executeDeal(dipOffer(O),'deal:mp71:'+O.id)))return false;
+    L.status='accepted';L.finished=G.day;O.status='accepted';O.finished=G.day;O.why='Barıştırma tamamlandı';stats.deals=(stats.deals||0)+1;
+    for(const id of [O.from,O.to,L.to])dipNotify(id,'Barıştırma tamamlandı — '+G.emps[m.giver].name+' ile '+G.emps[m.t].name+' barıştı','win');
+    return true;
+  }
   function dipRecord(A,B,o,prev,by,status,why){
     const rec={id:D.next++,from:A.id,to:B.id,give:o.give.map(x=>({...x})),want:o.want.map(x=>({...x})),born:o.born,expires:o.expires,
       round:prev?prev.round+1:1,prev:prev?prev.id:null,status,why:why||'',by,cost:dealQuote(o).cost};
@@ -1160,8 +1211,9 @@ function createHost(opts){
       const rec=dipRecord(A,B,o,prev,'human','pending');
       dipNotify(B.id,(prev?'Karşı teklif — ':'Yeni teklif — ')+A.name,'sci');return {ok:true,extra:{offer:rec.id}};
     }
-    const q=dealQuote(o),r=aiRespond(B,q.norm);
+    const q=dq(o),r=typeof peaceWithDefer==='function'?peaceWithDefer(()=>aiRespond(B,q.norm)):aiRespond(B,q.norm);
     if(r.v==='kabul'){
+      {const pw=peaceWithHumanItems(q.norm);if(pw.length){if(prev){prev.status='countered';prev.finished=G.day;}const rec=dipRecord(A,B,o,prev,'human','pending');return peaceWithStart(rec,pw[0],A,B)?{ok:true,extra:{offer:rec.id,ai:'kabul',mediating:true}}:false;}}   /* MP-DIPLO5 NF-6 */
       if(!executeDeal(q.norm))return false;                              // dünya değişmedi; MP kaydı da yazılmaz
       if(prev){prev.status='countered';prev.finished=G.day;}
       const rec=dipRecord(A,B,o,prev,'human','accepted','Kabul edildi');stats.deals=(stats.deals||0)+1;
@@ -1196,6 +1248,11 @@ function createHost(opts){
   /* oyun zamanıyla ömür ve geçerlilik süpürmesi (her yayında) */
   function dipSweep(){
     for(const q of SQ)if(q.status==='pending'&&G.day>=q.expires)q.status='expired';   // MP.6.2 statüko teklifleri
+    for(const O of D.offers){if(O.status!=='mediating'||!O.med)continue;const m=O.med,L=D.offers.find(x=>x.id===m.link),g=G.emps[m.giver],t=G.emps[m.t];   /* MP-DIPLO5 NF-6 */
+      if(!g||!t||g.dead||t.dead)peaceWithClose(O,'Savaşan taraflardan biri artık yok');
+      else if(peaceWithFront(g,t)!==m.front)peaceWithClose(O,'Savaş başka yolla bitti ya da cephe değişti');
+      else if(!L||L.status!=='pending'||G.day>L.expires)peaceWithClose(O,'Barış onayı alınamadı (süre doldu)');
+      else{const q=peaceWithAuthorize([m.giver+'>'+m.t],()=>dealQuote(dipOffer(O)));if(!q.ok)peaceWithClose(O,'teklif artık uygulanamıyor ('+String((q.reasons||[])[0]||'koşullar değişti').slice(0,120)+')');}}
     for(const r of D.offers){if(r.status!=='pending')continue;const a=G.emps[r.from],b=G.emps[r.to];
       if(G.day>r.expires){r.status='expired';r.finished=G.day;r.why='Süre doldu';dipNotify(r.from,'Teklif süresi doldu — '+(b?b.name:''));dipNotify(r.to,'Teklif süresi doldu — '+(a?a.name:''));}
       else if(!dipParty(a)||!dipParty(b)||!a.contact[b.id]||!b.contact[a.id]){r.status='invalid';r.finished=G.day;r.why='Taraflardan biri artık anlaşma yapamaz';
@@ -1207,6 +1264,8 @@ else if([[a,b,r.give],[b,a,r.want]].some(([giver,taker,items])=>items.some(it=>d
         for(const [giver,taker,items] of [[a,b,r.give],[b,a,r.want]])for(const it of items){const x=dipAssetIssue(giver,taker,it);if(x){dipNotify(giver.id,'Teklif geçersizleşti — '+x,'war');dipNotify(taker.id,'Teklif geçersizleşti — '+x,'war');}}}
 else if([[a,b,r.give],[b,a,r.want]].some(([giver,taker,items])=>items.some(it=>it.t==='warOn'&&it.until!==undefined&&giver.ai===false&&!warPledgeGate(giver,taker,it).ok))){r.status='invalid';r.finished=G.day;r.why='Genel Savaş Sözü artık uygulanamıyor';   /* MP-WARON.0 */
         for(const [giver,taker,items] of [[a,b,r.give],[b,a,r.want]])for(const it of items)if(it.t==='warOn'&&it.until!==undefined&&giver.ai===false){const g=warPledgeGate(giver,taker,it);if(!g.ok){dipNotify(giver.id,'Teklif geçersizleşti — Savaş sözü: '+g.why,'war');dipNotify(taker.id,'Teklif geçersizleşti — '+r.why+': '+g.why,'war');}}}
+else if([[a,b,r.give],[b,a,r.want]].some(([giver,taker,items])=>items.some(it=>it.t==='peaceWith'&&it.front!==undefined&&peaceWithFront(giver,G.emps[it.target])!==it.front))){r.status='invalid';r.finished=G.day;r.why='Barıştırma: savaş başka yolla bitti';   /* MP-DIPLO5 NF-6 */
+        dipNotify(r.from,'Teklif geçersizleşti — '+r.why,'war');dipNotify(r.to,'Teklif geçersizleşti — '+r.why,'war');}
 else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it))){r.status='invalid';r.finished=G.day;r.why='Bu anlaşma artık yürürlükte';   // ör. barış başka teklifle imzalandı
         dipNotify(r.from,'Teklif geçersizleşti — anlaşma zaten yürürlükte');dipNotify(r.to,'Teklif geçersizleşti — anlaşma zaten yürürlükte');}}
   }
@@ -1214,7 +1273,8 @@ else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it)
   function dipView(e){
     const nm=id=>G.emps[id]?String(G.emps[id].name):'?',lb=it=>({...it,l:String(dealLabel(it)).replace(/<[^>]*>/g,'').slice(0,it.t==='warJoin'&&it.plan?260:90)});   /* WAR-COALITION.0: davet kartının hedef/başlangıç/son gün bilgisi kesilmez */
     const offers=D.offers.filter(r=>r.from===e.id||r.to===e.id).slice(-40).map(r=>({id:r.id,from:r.from,to:r.to,fn:nm(r.from),tn:nm(r.to),give:r.give.map(lb),want:r.want.map(lb),
-      born:Math.floor(r.born),expires:Math.floor(r.expires),round:r.round,prev:r.prev,status:r.status,why:r.why,by:r.by,cost:r.cost}));
+      born:Math.floor(r.born),expires:Math.floor(r.expires),round:r.round,prev:r.prev,status:r.status,why:r.why,by:r.by,cost:r.cost,
+      ...(r.link?{link:1,mn:(()=>{const O=D.offers.find(x=>x.id===r.link);return O?nm(O.med&&O.med.giver===O.from?O.to:O.from):'';})()}:{}),...(r.med?{med:{t:r.med.t,tn:nm(r.med.t),front:r.med.front}}:{})}));   /* MP-DIPLO5 NF-6 */
     const contacts=G.emps.filter(o=>o!==e&&dipParty(o)&&e.contact[o.id]).map(o=>{const sq=e.war[o.id]?canStatusQuo(e,o):null;   // MP.6.2: statüko kapısı host'ta (misafirin işgal verisi eksik)
       return {id:o.id,n:nm(o.id),col:o.col,h:isHumanActor(o)?1:0,rel:Math.round(e.rel[o.id]||0),bl:diploBlocked(e,o)?1:0,war:e.war[o.id]?1:0,peace:e.war[o.id]&&canPeace(e,o)?1:0,
         ...(sq?{sq:sq.ok?1:0,sqw:sq.ok?'':String(sq.why||'').slice(0,160)}:{})};});

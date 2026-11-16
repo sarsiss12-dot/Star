@@ -1,0 +1,35 @@
+FAIL A1 erişim yok → ret, gerekçe askerî erişim (p37: kabul)
+AssertionError [ERR_ASSERTION]: erişimsiz savaş sözü kabul edilmemeli: {"v":"kabul","ev":{"gain":268.8361411764706,"cost":-148.4,"net":417.2361411764706,"rawGain":304,"rawCost":-140,"factors":{"rel":1.08,"trust":0.8529411764705882,"ethic":1.0666666666666667,"honor":1,"persona":0.9,"greed":1.06,"foe":1,"envoy":1},"gainMul":0.884329411764706,"costMul":1.06,"why":["İlişki dostane","Geçmiş ihlaller ağır basıyor"],"rel":40,"trust":0,"ethicGap":0.16666666666666666,"honor":0,"sharedFoe":false,"hardLock":false}}
+
+'kabul' !== 'red'
+
+    at /home/user/Star/tests/mp_diplo5_ai_support_test.js:21:60
+    at test (/home/user/Star/tests/mp_diplo5_ai_support_test.js:11:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_diplo5_ai_support_test.js:19:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+PASS A2 erişim + düşmanlık + bütçe → kabul; kabulde savaş ilan edilir
+FAIL A3 bilinen güç oranı çok elverişsiz → ret (güç oranı)
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'kabul' !== 'red'
+
+    at /home/user/Star/tests/mp_diplo5_ai_support_test.js:30:30
+    at test (/home/user/Star/tests/mp_diplo5_ai_support_test.js:11:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_diplo5_ai_support_test.js:28:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+  A4: bu haritada geçişle açılan rota yok — kural kod düzeyinde aynı (warSupportReach(…,offer.give))
+PASS A4 geçiş izni terimi erişim hesabına girer (warJoin ile aynı warSupportReach)
+PASS A5 son tarihli insan sözü ve warJoin kararı değişmedi
+GEÇEN: 3 KALAN: 2
