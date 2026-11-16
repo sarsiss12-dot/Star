@@ -147,7 +147,8 @@ Paket paket fark yalnız 6 yeni paket (hepsi geçer). Kalan 275 FAIL p37 ile ayn
 
 ## 8. Teslim
 
-- Başlangıç HEAD `f2e48eba207a5a4bb3f10b37f70323a61105b3ad` (p37 / MP.8.9b35) → bitiş HEAD: bu raporun commit'i (dal `claude/stars-mp-diplo5`). Oyun `96h10p38`, MP `MP.8.9b36`, Save8 v8, paket 4, protokol 1. p38 paket yükleyicisi p6–p37, p25u1, p27s1 kabul eder.
+- Taslak PR: https://github.com/sarsiss12-dot/Star/pull/53 (taban `claude/stars-mp-techlux0`).
+- Başlangıç HEAD `f2e48eba207a5a4bb3f10b37f70323a61105b3ad` (p37 / MP.8.9b35) → bitiş HEAD: dal `claude/stars-mp-diplo5` ucu (bu bağlantı commit'i; kod ve kanıt `b3bebc9`). Oyun `96h10p38`, MP `MP.8.9b36`, Save8 v8, paket 4, protokol 1. p38 paket yükleyicisi p6–p37, p25u1, p27s1 kabul eder.
 - Render dalı: `claude/stars-mp-diplo5`. Beklenen `/mp/version`:
   `{"mp":"MP.8.9b36","build":"96h10p38","files":{"mp-core.js":"c8993d2942e8","relay.js":"c033d56564f0","mp1-host.js":"f5dc296c1a3d","join.js":"65c28db3714f","mirror.js":"f9043c6e87a3","guest-stars.js":"c7f05ccc2841","mp71-dip.js":"932c92d12cbc","mp7-setup.js":"a7391d21552c"}}`
 - ZIP `releases/stars-faz96h10p38.zip` — SHA-256 `1b1917831ff9e437ed1ce2c1ff6458f59145835bb0859f1a7a4bf5b970823253`, CRC32 `57A48A60`, 20 girdi; çıkarılmış ZIP `verify-release --root` DOĞRULANDI.
