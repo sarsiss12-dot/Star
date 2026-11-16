@@ -1,11 +1,11 @@
 {
-  "phase": "MP-WARON.0",
-  "build": "96h10p36",
+  "phase": "MP-TECHLUX.0",
+  "build": "96h10p37",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p36",
-  "parent_commit": "c2ab5f25e63bc00403465b2db187d6acba8fa2ab",
-  "parent_zip_sha256": "1af6ab0df169d7b11885c7b3e6fb98321e7dd586a8ab472c9f67855d65110e04",
+  "pwa_cache": "stars-v96h10p37",
+  "parent_commit": "81f50291ddd588d1786758d73b25a7467caecb54",
+  "parent_zip_sha256": "39e3d380ac1851ed95810a1b0805670d0a51aa5217778fc94d38763d8ea1e520",
   "file_count": 19,
   "files": {
     "ai.js": "74386043cb4091ff3e0639e03dfb1cc43066c0eb23bafc68a79c747300d3b3af",
@@ -15,18 +15,18 @@
     "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
     "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
     "construction.js": "920d6122c3d3e65ef2650c94a9a5a804c3d67b65411627e23184f0e1d5d60e08",
-    "diplomacy.js": "be2f96883fa0249add53ee6073fe8cc60327545b90847b2ac8ad0fb8d2c58c70",
+    "diplomacy.js": "25d9e5a4f419c61728e033e1b09e43968a7a0c1705b7555018506f5a1112e0c3",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
     "economy-ui.js": "68025b1bb388188435a51cca2319e92e7eb9ec6517b4e3c8437f335e2916763f",
     "economy.js": "2ed54bcabd31383f6dccda21874fc7e7358363f638f75ade2dceb3a869e2b537",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
     "index.html": "3bb3c8291d247981322a54cd347782a8d4d727e01a0e60c707667bcf95d63bc9",
-    "main.js": "47c5d9291b51d867cf40f24515fbbe00b877e9158854643a058ce15f7cf1c568",
+    "main.js": "daa45f7c0f875630cb4f2053a0d1de367181258819f73b8ed0d3f30d394481ce",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "5b40278d2e0c34a25db5838c87c691f0b23738b0f3b3af7b87ae1fcd85badddc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "593cf6eed3d562672f8abc923e7a2b00fccc15e201982e055e1cce558f360c0f",
-    "ui.js": "e31b4de0387d5ece186f30b1118324929eb8d8edb564ec1b1581149301a64502"
+    "sw.js": "ca6e7560c6f82f2877a51b386de3a43fb8ecdca7da959bcf63e22cb207fb2177",
+    "ui.js": "deee517181d06a163b21065ac44d5559d796fb76d4c5fe78dedc4f1a65f31d60"
   },
-  "description": "MP-WARON.0: çok oyunculu müzakerede Genel Savaş Sözü (warOn): insan veren son tarihli söz verir, kabulde savaş ilan edilmez; söz normal savaş ilanıyla tutulur, son tarih geçerse mevcut söz bozma kuralı (alan 'sözünü çiğnedi' hatırlar, ilişki −20), hedef / taraf elenir ya da Konsey yasağı sürerse söz düşer; müzakere masasında son tarih seçimi ve özet, aktif söz paneli. Tek oyunculu warOn (kabulde ilan) aynen. Save8 v8, paket 4, protokol 1."
+  "description": "MP-TECHLUX.0: Genel Savaş Sözü son tarih kuralı tek kaynak (son gün dahil; geç başlayan savaş sözü tutmaz, ay başı denetimi geç çalışsa da); çok oyunculu müzakerede Teknoloji ve Lüks Mal (İZLENİYOR şartı teklif / karşı teklif / kabulde, host salt okunur liste, bekleyen teklifte koşul değişince gerekçeyle geçersizleşme, teklif özetinde teknolojinin sağladığı ve lüks erişiminin gerçek etkisi); encodeOffer teknoloji kimliğini korur; ayna gezegen lüks kaynağı. Tek oyunculu müzakere davranışı aynı. Save8 v8, paket 4, protokol 1."
 }

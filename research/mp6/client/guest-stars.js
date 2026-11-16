@@ -479,7 +479,7 @@ function gate(){
      Artık tek işlem (S.dealTx: cid + içerik imzası): taslak host'un YANITINA kadar korunur; yanıt gelmezse aynı cid yeniden gönderilir
      (host sonuç önbelleği cid'e göre ikinci kaydı engeller; içerik aynıysa motor 'duplicate' der) — çift teklif oluşmaz. Ret / bağlantı
      hatasında taslak düzenlenebilir kalır. İz: S.dealTrace (işlem kimliğiyle taslak → dokunuş → gönderim → host yanıtı → kayıt → ileti). */
-  const dealItems=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&i.t==='sys'&&Number.isInteger(i.id)?{t:'sys',id:i.id}:i&&i.t==='tribute'&&Number.isInteger(i.v)?{t:'tribute',r:i.r,v:i.v}:i&&i.t==='warOn'&&Number.isInteger(i.target)?{t:'warOn',target:real(i.target),...(Number.isInteger(i.until)?{until:i.until}:{})}:i&&TREATY.includes(i.t)?{t:i.t}:null);
+  const dealItems=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&i.t==='sys'&&Number.isInteger(i.id)?{t:'sys',id:i.id}:i&&i.t==='tribute'&&Number.isInteger(i.v)?{t:'tribute',r:i.r,v:i.v}:i&&i.t==='warOn'&&Number.isInteger(i.target)?{t:'warOn',target:real(i.target),...(Number.isInteger(i.until)?{until:i.until}:{})}:i&&i.t==='tech'&&typeof i.id==='string'?{t:'tech',id:i.id}:i&&i.t==='lux'&&typeof i.k==='string'?{t:'lux',k:i.k}:i&&TREATY.includes(i.t)?{t:i.t}:null);
   const dealCmd=d=>{const give=dealItems(d.give),want=dealItems(d.want);if(give.includes(null)||want.includes(null))return {bad:true};if(!give.length&&!want.length)return {empty:true};
     const ctr=S.counter&&S.counter.to===d.to?S.counter:null;const cmd=ctr?{kind:'counter',offer:ctr.offer,give,want}:{kind:'offer',to:real(d.to),give,want};return {cmd,ctr,sig:JSON.stringify(cmd)};};
   const dealTrace=(tx,step,x)=>{S.dealTrace=S.dealTrace||[];S.dealTrace.push({tx:tx&&tx.id||null,step,at:Date.now(),day:Math.floor(G.day||0),...(x||{})});if(S.dealTrace.length>60)S.dealTrace.shift();};
@@ -503,7 +503,7 @@ function gate(){
     dealTxSend(tx,'resend');};
   UI.dealSend=function(){if(!S.on)return dealSend0();this.ensureDiploWorld();const d=this.deal;if(!d)return;
     const c=dealCmd(d),it=l=>(l||[]).map(i=>({t:i.t,...(i.front!==undefined?{front:i.front}:{}),...(i.plan!==undefined?{plan:i.plan}:{}),...(i.sys!==undefined?{sys:i.sys}:{}),...(i.target!==undefined?{target:real(i.target)}:{})}));
-    if(c.bad){this.dealMsg='Çok oyunculuda kaynak, barış, antlaşma maddeleri (saldırmazlık, ticaret, ittifak, sensör, geçiş), Sistem Devri, Haraç, cephe kimliğine bağlı savaş desteği, savaş içi teslim, toprak vaadi ve federasyonlar arası ortak barış ve son tarihli Genel Savaş Sözü gönderilebilir; teknoloji, lüks ve casusluk ağı henüz yok.';this.drawDeal();return;}
+    if(c.bad){this.dealMsg='Çok oyunculuda kaynak, barış, antlaşma maddeleri (saldırmazlık, ticaret, ittifak, sensör, geçiş), Sistem Devri, Haraç, cephe kimliğine bağlı savaş desteği, savaş içi teslim, toprak vaadi ve federasyonlar arası ortak barış, son tarihli Genel Savaş Sözü, teknoloji ve lüks mal erişimi gönderilebilir; casusluk ağı henüz yok.';this.drawDeal();return;}
     if(c.empty){this.dealMsg='Teklif boş.';this.drawDeal();return;}
     const tx0=S.dealTx;
     if(tx0){dealTrace(tx0,'tap',{same:tx0.sig===c.sig});
@@ -519,6 +519,14 @@ function gate(){
     this.dealMsg='Teklif host\'a gönderildi — yanıt bekleniyor (işlem '+tx.id+'). Taslak yanıt gelene dek korunur.';this.drawDeal();};
   /* anlaşma penceresinin yerel önizlemesi: karşı tarafın stoğu aynada yok (kabuk). MP.3 dipGate ile aynı kural: misafirde yalnız
      KENDİ yükümlülükleri denetlenir, karşı tarafın kaynak satırları ("Ad → …") düşer; kesin denetim host'ta (offer / respond). */
+  /* MP-TECHLUX.0: "İstiyorum" tarafında teknoloji / lüks mal listesi karşı tarafın gizli ağacı / varlığıdır — aynada yoktur; liste host'un
+     dealAssets yanıtından gelir (yalnız İZLENİYOR istihbaratla; altında host liste döndürmez, neden gösterilir). */
+  {const dealAdd0=UI.dealAdd.bind(UI);UI.dealAdd=function(x){const [side,kind]=String(x).split(':');if(!S.on||side!=='want'||(kind!=='tech'&&kind!=='lux'))return dealAdd0(x);
+    this.ensureDiploWorld();const d=this.deal;if(!d)return;const to=d.to;const cid=send({kind:'dealAssets',to:real(to)});if(!cid){toast('Bağlantı yok — liste host\'tan alınamadı',true);return;}
+    waits[cid]=res=>{if(res.status!=='ok'){toast('Host reddetti: '+why(res),true);return;}const ex=res.extra||{};if(!ex.intel){toast(ex.why||'İZLENİYOR istihbaratı gerekir',true);return;}
+      const rows=kind==='tech'?(ex.tech||[]):(ex.lux||[]);if(!rows.length){toast(kind==='tech'?'İstenebilecek teknoloji yok':'Bu tarafın lüks malı yok',true);return;}
+      UI.pickList(kind==='tech'?'Hangi teknoloji?':'Hangi mal?',rows.map(r=>kind==='tech'?esc(r.n)+(r.ok?'':' — ⛔ '+esc(r.why)):esc((r.ico||'')+' '+r.n)),i=>{if(!UI.deal||UI.deal.to!==to)return;const r=rows[i];if(!r)return;
+        if(kind==='tech'&&!r.ok){toast(r.why,true);return;}const it=kind==='tech'?{t:'tech',id:r.id}:{t:'lux',k:r.k};if(!UI.deal.want.some(w=>w.t===it.t&&(w.id===it.id||w.k===it.k&&it.k)))UI.deal.want.push(it);UI.drawDeal();});};};}
   wrap('dealQuote',(o,offer)=>{const q=o(offer);if(!q||!offer||offer.from!==0||!G.emps[offer.to])return q;
     const pre=String(G.emps[offer.to].name)+' → ',wf=[],reasons=(q.reasons||[]).filter(r=>!String(r).startsWith(pre));   // wantFail = karşı tarafın satırları
     if(!(q.wantFail||[]).length&&reasons.length===(q.reasons||[]).length)return q;

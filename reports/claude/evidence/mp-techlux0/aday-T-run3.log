@@ -1,0 +1,40 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":252,"buildMs":286,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":346,"buildMs":384,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":4.5,"p95":6.5,"max":6.5},"longtask":{"n":0},"heapMB":18,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":35.1,"p95":35.1,"max":35.1},"refresh":{"n":1,"med":3.2,"p95":3.2,"max":3.2},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":46.4,"p95":46.4,"max":46.4},"refresh":{"n":1,"med":1.5,"p95":1.5,"max":1.5},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":721,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS T0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+FAIL T1 C gerçek masada teknoloji verir + B'den lüks ister (host listesi, İZLENİYOR); özet; B karşı teklif; C kabul → B'de teknoloji, C'de erişim kaydı
+locator.tap: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="dealSend"]').first()[22m
+[2m    - locator resolved to <button disabled class="abtn pri" data-a="dealSend">TEKLİFİ SUN</button>[22m
+[2m  - attempting tap action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not enabled[22m
+[2m    - retrying tap action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not enabled[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 100ms[22m
+[2m    18 × waiting for element to be visible, enabled and stable[22m
+[2m       - element is not enabled[22m
+[2m     - retrying tap action[22m
+[2m       - waiting 500ms[22m
+
+    at tap (/home/user/Star/tests/browser-mp8.cjs:58:244)
+    at async /home/user/Star/tests/helpers/mp-techlux0-mp.cjs:52:29
+    at async test (/home/user/Star/tests/browser-mp8.cjs:51:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-techlux0-mp.cjs:38:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:436:17
+PASS T2 istihbaratı yetmeyen B: "İstiyorum" teknoloji / lüks pasif + görünür neden; host listesi dönmez
+PASS T3 birleşik teklif (teknoloji + kaynak) beklerken veren teknolojiyi kaybeder → geçersiz (iki tarafta neden), kabul işlenmez, hiçbir madde uygulanmaz
+PASS T4 C'nin lüks teklifini B iki kez kabul eder + hat donar / kopar → tek erişim kaydı, tek ödeme
+PASS T5 👁 İstihbarat: C gerçek masada B'den görüş ister → B kabul → B filosu yeni sisteme → C haritasında görünür; host ve B haritasında değil (paylaşım yönü)
+FAIL T6 kaydet → host kapanır → YENİ oda → misafirler döner → teknoloji, erişim kayıtları ve sensör paylaşımı aynı
+AssertionError [ERR_ASSERTION]: yeni odada C erişim kaydı
+    at /home/user/Star/tests/helpers/mp-techlux0-mp.cjs:110:163
+    at async test (/home/user/Star/tests/browser-mp8.cjs:51:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-techlux0-mp.cjs:99:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:436:17
+PASS T7 insan → AI: C gerçek masada AI'ya teknoloji verir; sonuç motorun aiRespond kararı; kabulde AI'da teknoloji
+GEÇEN: 6 KALAN: 2

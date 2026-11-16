@@ -3568,7 +3568,7 @@ const UI = {
   /* Teklif özeti: her Sistem Devri maddesinin nihai sonucu + çakışma, aynı anlaşmadaki barışın iade edeceği işgaller, haraç toplam yükü,
      Sistem Devri (kabulde) ile Toprak Vaadi (cephe kazanılınca / teslimde) farkı */
   dealTermsHtml(d,e,o){
-    const all=d.give.concat(d.want);if(!all.some(i=>i.t==='sys'||i.t==='tribute'||i.t==='landPromise'||i.t==='warOn'||i.t==='warJoin'))return '';   /* MP-WARON.0: + savaş sözü / destek */
+    const all=d.give.concat(d.want);if(!all.some(i=>i.t==='sys'||i.t==='tribute'||i.t==='landPromise'||i.t==='warOn'||i.t==='warJoin'||i.t==='tech'||i.t==='lux'))return '';   /* MP-TECHLUX.0: + teknoloji / lüks mal */   /* MP-WARON.0: + savaş sözü / destek */
     const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?');let h='<div class="box dealTerms"><b>DEVİR VE YÜKÜMLÜLÜK SONUCU</b>';
     const pv=typeof dealSysPreview==='function'?dealSysPreview({from:e.id,to:o.id,give:d.give,want:d.want}):{rows:[],returns:[]};
     for(const r of pv.rows)h+=`<div class="mini">★ <b>Sistem Devri</b>: ${esc(r.name)} · ${r.cols} bilinen koloni · şimdiki sahip ${esc(nm(r.owner))} → yeni sahip <b>${esc(nm(r.to))}</b> · <b>kabul anında</b> devredilir${
@@ -3577,6 +3577,7 @@ const UI = {
     for(const [giver,taker,list] of [[e,o,d.give],[o,e,d.want]])for(const it of list){
       if(it.t==='tribute'&&RES[it.r])h+=`<div class="mini">⏳ <b>Haraç</b>: ödeyen ${esc(nm(giver.id))} → alan ${esc(nm(taker.id))} · ${it.v} ${esc(RES[it.r].n)}/ay · 10 yıl (120 ödeme) · toplam yük ${Math.round(it.v*120)} ${esc(RES[it.r].n)} · ilk ödeme kabulden sonraki ay başı</div>`;
       if(it.t==='warOn')h+=this.warPledgeTermsRow(giver,taker,it,e);   /* MP-WARON.0 */
+      if(it.t==='tech'||it.t==='lux')h+=this.dealAssetTermsRow(giver,taker,it,e);   /* MP-TECHLUX.0 */
       if(it.t==='warJoin')h+=`<div class="mini dealJoinRow">⚔ <b>Savaşa Destek</b>: ${esc(nm(giver.id))}, ${it.plan?'Hazırlık #'+it.plan:'Cephe #'+it.front} savaşında ${esc(G.emps[it.target]?.name||'?')} devletine karşı <b>kabul anında</b> katılır · savaş ya da hazırlık kapanırsa kabul işlenmez · Genel Savaş Sözü'nden ayrı madde</div>`;
       if(it.t==='landPromise')h+=`<div class="mini">⚑ <b>Toprak Vaadi</b>: ${esc(G.sys[it.sys]?.name||'?')} · Cephe #${it.front} · kabulde devir YOK; ${esc(nm(giver.id))} sistemi bu cephede ele geçirince ya da teslimde ${esc(nm(taker.id))} devletine geçer</div>`;}
     return h+'</div>';
@@ -5740,7 +5741,7 @@ const UI = {
       <button class="abtn" data-a="dealAdd" data-x="want:tech" ${intelOf(e,o.id)<2?'disabled title="İZLENİYOR istihbaratı gerekir"':''}>✦ Teknoloji</button>
       <button class="abtn" data-a="dealAdd" data-x="want:sys">★ Sistem</button>
       <button class="abtn" data-a="dealAdd" data-x="want:tribute">⏳ Haraç</button>
-      <button class="abtn" data-a="dealAdd" data-x="want:lux" ${intelOf(e,o.id)<2?'disabled title="İZLENİYOR istihbaratı gerekir"':''}>❖ Lüks mal</button>
+      <button class="abtn" data-a="dealAdd" data-x="want:lux" ${intelOf(e,o.id)<2?'disabled title="İZLENİYOR istihbaratı gerekir"':''}>❖ Lüks mal</button>${intelOf(e,o.id)<2?'<span class="mini dealAssetWhy">✦ Teknoloji / ❖ Lüks mal istemek için İZLENİYOR istihbaratı gerekir</span>':''}
       <button class="abtn" data-a="dealAdd" data-x="want:intel">👁 İstihbarat</button>
       <button class="abtn" data-a="dealAdd" data-x="want:warOn">⚔ Savaş sözü</button>
       <button class="abtn ${this._dealSupport===o.id?'pri':''}" data-a="dealSupport" data-x="${o.id}">⚔ Savaşa Destek İste</button>
@@ -10124,18 +10125,28 @@ UI.dealPledgeDays=function(x){
   if(!it||it.t!=='warOn'||it.until===undefined)return;const left=it.until-Math.floor(G.day),next=WAR_PLEDGE_DAYS.find(n=>n>left+1)||WAR_PLEDGE_DAYS[0];
   it.until=Math.floor(G.day)+next;this.drawDeal();
 };
+/* MP-TECHLUX.0 — teklif özeti: teknolojinin alıcıya tam olarak ne sağladığı (techBenefits) ve alıcının erişim koşulu; lüks mal erişiminin motordaki
+   gerçek etkisi (alıcının luxGrant kaydı; lüks bonusu motorda ticaret paktı + açık rota ile gelir, erişim kaydının kendisi bonus üretmez). */
+UI.dealAssetTermsRow=function(giver,taker,it,e){
+  const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?');
+  if(it.t==='tech'){const T=TECHS[it.id];if(!T)return '';const b=typeof techBenefits==='function'?techBenefits(it.id):{effects:[],unlocks:[]},gain=[...b.effects,...b.unlocks],
+    ra=taker.id===e.id&&typeof researchAccess==='function'?researchAccess(taker,it.id):null;
+    return `<div class="mini dealAssetRow" data-kind="tech">✦ <b>Teknoloji</b>: ${esc(T.n)} · ${esc(nm(giver.id))} → ${esc(nm(taker.id))} · <b>kabul anında</b> alıcının araştırmasına eklenir (verende kalır)${gain.length?' · sağladığı: '+esc(gain.join(', ')):''}${ra&&!ra.ok?` <span style="color:#ff5f6d">⛔ ${esc(ra.why)}</span>`:''}</div>`;}
+  const L=LUXURY[it.k];if(!L)return '';
+  return `<div class="mini dealAssetRow" data-kind="lux">❖ <b>Lüks mal erişimi</b>: ${esc(L.ico||'')} ${esc(L.n)} · ${esc(nm(giver.id))} → ${esc(nm(taker.id))} · kabulde alıcının erişim kaydına yazılır (veren malı kaybetmez) · lüks bonusu motorda ticaret paktı + açık rota ile gelir; erişim kaydının kendisi bonus üretmez (mevcut motor davranışı)</div>`;
+};
 UI.warPledgeTermsRow=function(giver,taker,it,e){
   const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?'),t=G.emps[it.target],tn=esc(t?t.name:'?');
   if(it.until===undefined)return `<div class="mini dealPledgeRow" data-mode="now">⚔ <b>Savaş sözü</b>: ${esc(nm(giver.id))} kabul anında ${tn} devletine <b>savaş ilan eder</b>${giver.ai?' (AI kararı motor kurallarıyla)':''}</div>`;
-  const left=Math.max(0,Math.ceil(it.until-G.day)),warn=giver.id===e.id&&typeof warPledgeWarnings==='function'?warPledgeWarnings(giver,t):[];
-  return `<div class="mini dealPledgeRow" data-mode="pledge">⚔ <b>Genel Savaş Sözü</b>: söz veren ${esc(nm(giver.id))} → alan ${esc(nm(taker.id))} · hedef ${tn} · son tarih <b>${tributeDate(it.until)}</b> (${left} gün) · kabulde savaş <b>İLAN EDİLMEZ</b>; ${esc(nm(giver.id))} savaşı kendi onayıyla normal savaş ilanı akışından açar, hedefle savaş başlayınca söz tutulmuş sayılır · tutulmazsa: ${esc(nm(taker.id))} "sözünü çiğnedi" hatırlar ve ilişkisi −20 düşer · karşılık iade edilmez · hedef elenirse ya da son tarihte Konsey yasağı sürerse söz düşer (ceza yok)${
+  const left=Math.max(0,warPledgeLeft(it)),warn=giver.id===e.id&&typeof warPledgeWarnings==='function'?warPledgeWarnings(giver,t):[];
+  return `<div class="mini dealPledgeRow" data-mode="pledge">⚔ <b>Genel Savaş Sözü</b>: söz veren ${esc(nm(giver.id))} → alan ${esc(nm(taker.id))} · hedef ${tn} · son tarih <b>${tributeDate(it.until)}</b> (${warPledgeLeftText(left)}; son gün dahil) · kabulde savaş <b>İLAN EDİLMEZ</b>; ${esc(nm(giver.id))} savaşı kendi onayıyla normal savaş ilanı akışından açar, hedefle savaş başlayınca söz tutulmuş sayılır · tutulmazsa: ${esc(nm(taker.id))} "sözünü çiğnedi" hatırlar ve ilişkisi −20 düşer · karşılık iade edilmez · hedef elenirse ya da son tarihte Konsey yasağı sürerse söz düşer (ceza yok)${
     warn.length?`<br><span class="dealPledgeWarn" style="color:#ff9b3d">⚠ ${warn.map(esc).join(' · ')}</span>`:''}</div>`;
 };
 UI.warPledgeHtml=function(o){
   if(typeof warPledgeRows!=='function'||!o)return '';const rows=warPledgeRows(G.p,o);if(!rows.length)return '';
   const nm=id=>id===G.p.id?'Sen':(G.emps[id]?G.emps[id].name:'?'),open=rows.filter(r=>r.state==='open'),done=rows.filter(r=>r.state!=='open').slice(-4);
   const row=r=>`<div class="mini wpRow" data-state="${r.state}" data-pledge="${r.giver}:${r.id}">${r.mine?'Senin sözün':'Sana verilen söz'}: ${esc(nm(r.giver))} → ${esc(nm(r.to))} · hedef <b>${esc(nm(r.target))}</b> · son tarih ${tributeDate(r.until)}${
-    r.state==='open'?` · kalan <b>${r.left} gün</b>`:` · <b>${esc(WAR_PLEDGE_TEXT[r.state]||r.state)}</b>${r.why?' — '+esc(r.why):''}`}${
+    r.state==='open'?(r.left>0?` · kalan <b>${r.left} gün</b> (son gün dahil)`:' · <b>bugün son gün</b>'):` · <b>${esc(WAR_PLEDGE_TEXT[r.state]||r.state)}</b>${r.why?' — '+esc(r.why):''}`}${
     r.mine&&r.state==='open'?`<br><button class="abtn dgr wpWar" data-a="war" data-x="${r.target}">⚔ Sözü yerine getir: ${esc(nm(r.target))} ile savaş ilanı (normal akış, son onay sende)</button>`:''}</div>`;
   return `<div class="box warPledgeBox"><b>⚔ SAVAŞ SÖZLERİ</b>${open.map(row).join('')}${done.map(row).join('')}
     <div class="mini">Söz kabulde bağlayıcıdır; savaş kendiliğinden başlamaz. Durum ay başında ve savaş ilanında denetlenir.</div></div>`;

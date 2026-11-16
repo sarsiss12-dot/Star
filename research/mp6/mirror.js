@@ -36,7 +36,7 @@ function build(meId,o={}){
       l:s.lanes.filter(n=>k||known.has(n)),o:v||mine?piN(s.owner):k?piN(knowledge.owners[s.id]??-1):-1,sv:surv?[0]:[],se:k?[0]:[],q:mine?(s.queue||[]).map(x=>x&&Number.isInteger(x.e)?{...J(x),e:piN(x.e),...(x.e===meId?{_mpOrderToken:shipOrderToken(x)}:{})}:J(x)):[],
       an:surv?!!s.anom:false,ak:surv?s.anomK:'sinyal',d:v||mine?(s.def||0):0,pu:k?!!s.pulsar:false,nb:k?!!s.nebulaS:false};   // gizli alanlar motorun varsayılan biçiminde
     if(surv||mine)x.p=s.planets.map(p=>{
-      const q={i:p.i,t:p.t,dep:p.dep,sz:p.sz,seed:p.seed,name:p.name,owner:-1};
+      const q={i:p.i,t:p.t,dep:p.dep,sz:p.sz,seed:p.seed,name:p.name,owner:-1};if(p.lux)q.lux=p.lux;   /* MP-TECHLUX.0: lüks mal kaynağı gezegen türüyle aynı kural (taranmış / kendi); misafir luxOwn'unu bundan hesaplar */
       if(v||mine){q.owner=piN(p.owner);if(p.col){
         if(p.owner===meId){for(const k of ['martial_law','recent_conquest'])if(Number.isFinite(p[k]))q[k]=p[k];q.col=J(p.col);if(q.col.crisisPolicy)q.col.crisisPolicy.owner=piN(q.col.crisisPolicy.owner);if(q.col.internalWarning)q.col.internalWarning.owner=piN(q.col.internalWarning.owner);delete q.col.inciteBy;if(q.col.unrest)delete q.col.unrest.by;if(Number.isInteger(q.col.secessionNotice))q.col.secessionNotice=piN(q.col.secessionNotice);if(q.col.conflictNotice&&Number.isInteger(q.col.conflictNotice.owner))q.col.conflictNotice.owner=piN(q.col.conflictNotice.owner);}
         else q.col={...(me.war[p.owner]&&G.fleets.some(f=>f.e===meId&&f.sys===s.id&&!f.mv)?{siege:p.col.siege||0,...(p.col.truce!==undefined?{truce:p.col.truce,truceAge:p.col.truceAge||0}:{}),...((p.col.reinforced||0)>0?{reinforced:p.col.reinforced}:{})}:{}),...(typeof siegeEndView==='function'?siegeEndView(meId,s,p):{}),pop:Math.round(p.col.pop||0),stab:0,grow:0,b:{},cap:p.col.cap||0,name:p.col.name||p.name,f:null,fcd:0,shield:p.col.shield||0,
@@ -75,6 +75,7 @@ function build(meId,o={}){
   const mine=J(me);const risk=internalRiskSummary(me);if(risk.ownVassal)mine.mpInternalSelf=J(risk.ownVassal);if(risk.subjects.length)mine.mpInternalSubjects=risk.subjects.map(v=>({...v,id:piN(v.id)}));for(const k of STRIP_ME)delete mine[k];
   mine.mapHabitats=knowledge.habitats;mine.mapOwners=Object.fromEntries(Object.entries(knowledge.owners).map(([id,owner])=>[id,piN(owner)]));
   mine.id=0;mine.ai=false;for(const k of EMP_MAPS)if(mine[k])mine[k]=remapKeys(mine[k]);
+  if(mine.luxGrant&&typeof mine.luxGrant==='object')mine.luxGrant=Object.fromEntries(Object.entries(mine.luxGrant).map(([k,g])=>[k,piN(g)]));   /* MP-TECHLUX.0: kendisine verilen lüks erişimleri (veren kimliği π) */
   if(Array.isArray(mine.warPledges))mine.warPledges=mine.warPledges.filter(p=>p&&Number.isInteger(p.to)&&Number.isInteger(p.target)).map(p=>({...p,to:piN(p.to),target:piN(p.target)}));   /* MP-WARON.0: kendi verdiği savaş sözleri */
   if(Array.isArray(mine.tribute))mine.tribute=mine.tribute.filter(t=>t&&Number.isInteger(t.to)).map(t=>({...t,to:piN(t.to)}));   /* MP-DEAL-SYS.0: kendi haraç yükümlülükleri (alıcı kimliği π) */
   /* MP.6.4 gizlilik: mağdur kaydında fail yalnız BİLİNİYORSA (yakalandı / soruşturmayla çözüldü) gider; tespit edilmemiş
@@ -91,6 +92,7 @@ function build(meId,o={}){
     /* misafirin vasalı (ya da senyörü): sözleşme ve misafirin taraf olduğu müzakere — gerçek STARS vasallık penceresi ve gelen kutusu */
     if(e.overlord===meId){s.overlord=0;s.vassalType=e.vassalType;if(e.vassalContract)s.vassalContract=vasC(e.vassalContract);}
     if(party(e.vassalTalk))s.vassalTalk=vasQ(e.vassalTalk);
+    {const g=e.luxGrant&&Object.entries(e.luxGrant).filter(([,v])=>v===meId);if(g&&g.length)s.luxGrant=Object.fromEntries(g.map(([k])=>[k,0]));}   /* MP-TECHLUX.0: misafirin verdiği lüks erişimleri (yalnız veren olduğu kayıtlar) */
     {const inc=Array.isArray(e.warPledges)?e.warPledges.filter(p=>p&&p.to===meId&&Number.isInteger(p.target)):[];if(inc.length)s.warPledges=inc.map(p=>({...J(p),to:0,target:piN(p.target)}));}   /* MP-WARON.0: misafire verilen savaş sözleri (hedef ve üçüncü taraflar görmez) */
     {const inc=Array.isArray(e.tribute)?e.tribute.filter(t=>t&&t.to===meId):[];if(inc.length)s.tribute=inc.map(t=>({...J(t),to:0}));}   /* MP-DEAL-SYS.0: misafire ödenen haraç (yalnız alıcı olduğu kayıtlar) */
     emps[pi(e.id)]=s;}

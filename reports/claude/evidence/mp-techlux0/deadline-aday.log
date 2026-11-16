@@ -1,0 +1,9 @@
+PASS D1 son tarihten bir gün önce ilan → Tutuldu
+PASS D2 son günün başında ve sonunda ilan → Tutuldu; son gün içinde ay başı denetimi sözü bozmaz
+PASS D3 ertesi gün, ay başı denetiminden ÖNCE veren ilan eder → Tutuldu DEĞİL; Çiğnendi bir kez; savaş yine başlar
+PASS D4 hedef verene ilan eder: süresinde → Tutuldu; süre sonrası → Tutuldu değil
+PASS D5 ay başı denetimi geç: süre sonrası başlayan savaş → Çiğnendi; süresinde kancasız başlayan savaş (warStart) → Tutuldu
+PASS D6 sınırda Düştü kuralları: hedef elenir / taraflar savaşır / son günde Konsey yasağı → Düştü, ceza yok
+PASS D7 kayıt → yükleme → denetim: sonuçlanmış söz ikinci kez sonuçlanmaz; ceza ve bildirim bir kez
+PASS D8 arayüz: kalan gün aynı kurala göre; son gün "son gün"; son günde teklif geçerli, ertesi gün geçersiz
+GEÇEN: 8 KALAN: 0
