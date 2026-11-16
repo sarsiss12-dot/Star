@@ -3,37 +3,37 @@
   {
    "name": "U0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 4 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
    "status": "PASS",
-   "ms": 12559
+   "ms": 12180
   },
   {
    "name": "U1 NF-2b: C lüks ister → B kabul → C'de bonus host ve misafir dünyasında aynı; D hak bilgisini görmez",
    "status": "PASS",
-   "ms": 6800
+   "ms": 6671
   },
   {
    "name": "U2 NF-3: B Casusluk Ağı önerir (İKİ YÖNLÜ); C çift kabul + hat donar / kopar → tek ağ, bedel bir kez; havuz C haritasında; D'ye sızmaz",
    "status": "PASS",
-   "ms": 9385
+   "ms": 9530
   },
   {
    "name": "U3 NF-6: C Barıştırma (yalnız bilinen savaş, Cephe #) → B kabul → mediating → kayıt → YENİ oda → D onaylar → barış + karşılık bir kez",
    "status": "PASS",
-   "ms": 17783
+   "ms": 17739
   },
   {
    "name": "U4 NF-4: B İLİŞKİ → C'ye tek dokunuş Saldırmazlık (çift dokunuş); sayfa yenilenir → \"Bekliyor\" sürer, ikinci teklif yok; C kabul → \"Kabul edildi\"",
    "status": "PASS",
-   "ms": 8069
+   "ms": 7780
   },
   {
    "name": "U5 birleşik teklif (lüks + kaynak) gönderilirken C hattı kopar → taslak korunur, tek kayıt; kabul anında lüks geçersizse hiçbir şey uygulanmaz",
    "status": "PASS",
-   "ms": 11321
+   "ms": 10149
   },
   {
    "name": "U6 NF-5: insan → AI son tarihsiz Savaş Sözü — erişimsiz hedefte AI gerekçeyle reddeder",
    "status": "PASS",
-   "ms": 242
+   "ms": 260
   }
  ],
  "metrics": {
@@ -56,8 +56,8 @@
      2
     ],
     "mirrorEq": true,
-    "revMs": 348,
-    "buildMs": 396,
+    "revMs": 462,
+    "buildMs": 514,
     "diff": [],
     "leak": []
    },
@@ -70,8 +70,8 @@
      2
     ],
     "mirrorEq": true,
-    "revMs": 483,
-    "buildMs": 528,
+    "revMs": 650,
+    "buildMs": 724,
     "diff": [],
     "leak": []
    },
@@ -84,8 +84,8 @@
      2
     ],
     "mirrorEq": true,
-    "revMs": 592,
-    "buildMs": 647,
+    "revMs": 832,
+    "buildMs": 892,
     "diff": [],
     "leak": []
    }
@@ -101,17 +101,17 @@
      },
      "publish": {
       "n": 2,
-      "med": 18.8,
-      "p95": 18.8,
-      "max": 18.8
+      "med": 11.1,
+      "p95": 11.1,
+      "max": 11.1
      },
      "longtask": {
       "n": 1,
-      "med": 52,
-      "p95": 52,
-      "max": 52
+      "med": 55,
+      "p95": 55,
+      "max": 55
      },
-     "heapMB": 16,
+     "heapMB": 17,
      "dom": 725,
      "intervals": 2,
      "timeouts": 2,
@@ -125,12 +125,15 @@
      "B": {
       "build": {
        "n": 2,
-       "med": 60.8,
-       "p95": 60.8,
-       "max": 60.8
+       "med": 49,
+       "p95": 49,
+       "max": 49
       },
       "refresh": {
-       "n": 0
+       "n": 2,
+       "med": 2,
+       "p95": 2,
+       "max": 2
       },
       "longtask": {
        "n": 0
@@ -139,7 +142,7 @@
       "deltas": 1,
       "resyncs": 0,
       "minGap": 600,
-      "heapMB": 15,
+      "heapMB": 14,
       "dom": 688,
       "intervals": 3,
       "timeouts": 1,
@@ -151,24 +154,27 @@
      "C": {
       "build": {
        "n": 2,
-       "med": 63.5,
-       "p95": 63.5,
-       "max": 63.5
+       "med": 74.4,
+       "p95": 74.4,
+       "max": 74.4
       },
       "refresh": {
        "n": 1,
-       "med": 1.8,
-       "p95": 1.8,
-       "max": 1.8
+       "med": 2.9,
+       "p95": 2.9,
+       "max": 2.9
       },
       "longtask": {
-       "n": 0
+       "n": 1,
+       "med": 59,
+       "p95": 59,
+       "max": 59
       },
       "builds": 2,
       "deltas": 1,
       "resyncs": 0,
       "minGap": 600,
-      "heapMB": 15,
+      "heapMB": 16,
       "dom": 713,
       "intervals": 3,
       "timeouts": 1,
@@ -180,21 +186,27 @@
      "D": {
       "build": {
        "n": 2,
-       "med": 58.4,
-       "p95": 58.4,
-       "max": 58.4
+       "med": 36.2,
+       "p95": 36.2,
+       "max": 36.2
       },
       "refresh": {
-       "n": 0
+       "n": 1,
+       "med": 1.3,
+       "p95": 1.3,
+       "max": 1.3
       },
       "longtask": {
-       "n": 0
+       "n": 1,
+       "med": 50,
+       "p95": 50,
+       "max": 50
       },
       "builds": 2,
       "deltas": 1,
       "resyncs": 0,
       "minGap": 600,
-      "heapMB": 15,
+      "heapMB": 16,
       "dom": 722,
       "intervals": 3,
       "timeouts": 1,
@@ -209,7 +221,7 @@
   "notes": [],
   "net": {},
   "resume": {},
-  "relayPid1": 22609,
+  "relayPid1": 28618,
   "actualWorld": {
    "seed": 22,
    "size": "orta",
@@ -277,7 +289,11 @@
      "Derin Konsey ile savaş · Cephe #1 (insan — ayrı onay)"
     ],
     "front": 1,
-    "dCard": "🕊 Barış",
+    "dCard": {
+     "items": "🕊 Barış",
+     "title": "Barıştırma onayı — Saf Akıl Ağı",
+     "sub": "Yeşil Birlik aracılığıyla barış: onaylarsan barış ve aracının karşılığı birlikte uygulanır"
+    },
     "fin": {
      "o": "accepted",
      "l": "accepted",
@@ -298,9 +314,9 @@
     "added": 1,
     "trace": [
      {
-      "tx": "xc9uu2",
+      "tx": "f7p3pc",
       "step": "draft",
-      "at": 1794859154271,
+      "at": 1794860586412,
       "day": 1,
       "to": 1,
       "give": [
@@ -318,26 +334,26 @@
       ]
      },
      {
-      "tx": "xc9uu2",
+      "tx": "f7p3pc",
       "step": "send",
-      "at": 1794859154271,
+      "at": 1794860586412,
       "day": 1,
-      "cid": "jmwjosqxr6lxc9uu2",
+      "cid": "jmwjpnfzfcuf7p3pc",
       "kind": "offer"
      },
      {
-      "tx": "xc9uu2",
+      "tx": "f7p3pc",
       "step": "resend",
-      "at": 1794859163165,
+      "at": 1794860594466,
       "day": 1,
-      "cid": "jmwjosqxr6lxc9uu2",
+      "cid": "jmwjpnfzfcuf7p3pc",
       "sent": true,
       "err": null
      },
      {
-      "tx": "xc9uu2",
+      "tx": "f7p3pc",
       "step": "reply",
-      "at": 1794859163186,
+      "at": 1794860594483,
       "day": 1,
       "status": "ok",
       "code": null,
@@ -345,9 +361,9 @@
       "dup": false
      },
      {
-      "tx": "xc9uu2",
+      "tx": "f7p3pc",
       "step": "msg",
-      "at": 1794859163190,
+      "at": 1794860594488,
       "day": 1,
       "ok": true,
       "msg": "Teklif gönderildi — Saf Akıl Ağı. Durum: Gelen kutusu → Gönderilen."
@@ -363,8 +379,8 @@
     "r": {
      "status": "ok",
      "code": null,
-     "ms": 35,
-     "cid": "jmwjosz10r1erwegj"
+     "ms": 69,
+     "cid": "jmwjpnnaf1jjpdwz3"
     },
     "status": "rejected",
     "why": "Hedefe askerî erişimimiz yok (bilinen hedef sistemi ya da rota yok; pakete geçiş izni eklemek erişimi açabilir)",
