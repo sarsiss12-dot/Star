@@ -1502,6 +1502,7 @@ const UI = {
       case 'dealSupport': this._dealSupport=this._dealSupport===+x?null:+x;this.drawDeal();break;   // MP-FIELD-FIX.0
       case 'dealSupportPick': this.dealSupportPick(x);break;
       case 'dealRm': this.dealRm(x); break;
+      case 'dealPledgeDays': this.dealPledgeDays(x); break;   /* MP-WARON.0 */
       case 'dealPact': this.dealPact(x); break;
       case 'dealSend': this.dealSend(); break;
       /* FAZ 86B: karşı teklif kartı — orijinal teklif bozulmadı. */
@@ -3567,7 +3568,7 @@ const UI = {
   /* Teklif özeti: her Sistem Devri maddesinin nihai sonucu + çakışma, aynı anlaşmadaki barışın iade edeceği işgaller, haraç toplam yükü,
      Sistem Devri (kabulde) ile Toprak Vaadi (cephe kazanılınca / teslimde) farkı */
   dealTermsHtml(d,e,o){
-    const all=d.give.concat(d.want);if(!all.some(i=>i.t==='sys'||i.t==='tribute'||i.t==='landPromise'))return '';
+    const all=d.give.concat(d.want);if(!all.some(i=>i.t==='sys'||i.t==='tribute'||i.t==='landPromise'||i.t==='warOn'||i.t==='warJoin'))return '';   /* MP-WARON.0: + savaş sözü / destek */
     const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?');let h='<div class="box dealTerms"><b>DEVİR VE YÜKÜMLÜLÜK SONUCU</b>';
     const pv=typeof dealSysPreview==='function'?dealSysPreview({from:e.id,to:o.id,give:d.give,want:d.want}):{rows:[],returns:[]};
     for(const r of pv.rows)h+=`<div class="mini">★ <b>Sistem Devri</b>: ${esc(r.name)} · ${r.cols} bilinen koloni · şimdiki sahip ${esc(nm(r.owner))} → yeni sahip <b>${esc(nm(r.to))}</b> · <b>kabul anında</b> devredilir${
@@ -3575,6 +3576,8 @@ const UI = {
     for(const x of pv.returns)h+=`<div class="mini">↺ Barışla iade: ${esc(x.name)} → ${esc(nm(x.to))} (Fetih hedefi dışındaki işgal)</div>`;
     for(const [giver,taker,list] of [[e,o,d.give],[o,e,d.want]])for(const it of list){
       if(it.t==='tribute'&&RES[it.r])h+=`<div class="mini">⏳ <b>Haraç</b>: ödeyen ${esc(nm(giver.id))} → alan ${esc(nm(taker.id))} · ${it.v} ${esc(RES[it.r].n)}/ay · 10 yıl (120 ödeme) · toplam yük ${Math.round(it.v*120)} ${esc(RES[it.r].n)} · ilk ödeme kabulden sonraki ay başı</div>`;
+      if(it.t==='warOn')h+=this.warPledgeTermsRow(giver,taker,it,e);   /* MP-WARON.0 */
+      if(it.t==='warJoin')h+=`<div class="mini dealJoinRow">⚔ <b>Savaşa Destek</b>: ${esc(nm(giver.id))}, ${it.plan?'Hazırlık #'+it.plan:'Cephe #'+it.front} savaşında ${esc(G.emps[it.target]?.name||'?')} devletine karşı <b>kabul anında</b> katılır · savaş ya da hazırlık kapanırsa kabul işlenmez · Genel Savaş Sözü'nden ayrı madde</div>`;
       if(it.t==='landPromise')h+=`<div class="mini">⚑ <b>Toprak Vaadi</b>: ${esc(G.sys[it.sys]?.name||'?')} · Cephe #${it.front} · kabulde devir YOK; ${esc(nm(giver.id))} sistemi bu cephede ele geçirince ya da teslimde ${esc(nm(taker.id))} devletine geçer</div>`;}
     return h+'</div>';
   },
@@ -3853,7 +3856,7 @@ const UI = {
     const page=this.diploPage||'states';
     if (page==='deal'&&o){this.openDeal(o.id);return;}
     let h=this.diploHeader(page,o);
-    h+=page==='relation'&&o?this.tributeHtml(o)+this.diploRelationship(G.p,o):this.diploDirectory();   /* MP-DEAL-SYS.0: aktif haraç takvimi */
+    h+=page==='relation'&&o?this.tributeHtml(o)+this.warPledgeHtml(o)+this.diploRelationship(G.p,o):this.diploDirectory();   /* MP-WARON.0: savaş sözleri */   /* MP-DEAL-SYS.0: aktif haraç takvimi */
     this.renderDiplo(h+'</div></div>',page==='states'?'states:'+(this.diploFilter||'all'):'relation:'+o.id);
   },
 
@@ -5705,13 +5708,13 @@ const UI = {
         <b style="color:#ff5f6d">${bad.join(' · ')}</b></div>`;
     }
     if (this.dealMsg) h += `<div class="mini" style="color:#ff9b3d;margin-bottom:8px">${esc(this.dealMsg)}</div>`;
-    h += this.tributeHtml(o);   /* MP-DEAL-SYS.0 */
+    h += this.tributeHtml(o)+this.warPledgeHtml(o);   /* MP-DEAL-SYS.0 · MP-WARON.0 */
 
     h += `<div class="dealCols">`;
     // --- sen ne veriyorsun ---
     h += `<div class="dealCol"><div class="ph">SEN VERİYORSUN</div>`;
     h += d.give.length
-      ? d.give.map((it,i)=>`<div class="dealItem"><span>${dealLabel(it)}</span>
+      ? d.give.map((it,i)=>`<div class="dealItem"><span>${dealLabel(it)}</span>${it.t==='warOn'&&it.until!==undefined?`<button class="dealPledgeDays" data-a="dealPledgeDays" data-x="give:${i}" title="Son tarihi değiştir">⏱</button>`:''}
           <button data-a="dealRm" data-x="give:${i}">✕</button></div>`).join('')
       : `<div class="mini">— boş —</div>`;
     h += `<div class="act2">
@@ -5721,7 +5724,7 @@ const UI = {
       <button class="abtn" data-a="dealAdd" data-x="give:tribute">⏳ Haraç</button>
       <button class="abtn" data-a="dealAdd" data-x="give:lux">❖ Lüks mal</button>
       <button class="abtn" data-a="dealAdd" data-x="give:intel">👁 İstihbarat</button>
-      ${this.dealMpHuman(o)?'<button class="abtn dis dealWarOnOff" disabled title="Çok oyunculuda genel savaş sözü gönderilemez">⚔ Savaş sözü</button>':'<button class="abtn" data-a="dealAdd" data-x="give:warOn">⚔ Savaş sözü</button>'}
+      <button class="abtn" data-a="dealAdd" data-x="give:warOn">⚔ Savaş sözü</button>
       <button class="abtn" data-a="dealAdd" data-x="give:peaceWith">🤲 Barıştırma</button>
       <button class="abtn" data-a="dealAdd" data-x="give:passage">🚪 Geçiş izni</button>
     </div></div>`;
@@ -5729,7 +5732,7 @@ const UI = {
     // --- ne istiyorsun ---
     h += `<div class="dealCol"><div class="ph">SEN İSTİYORSUN</div>`;
     h += d.want.length
-      ? d.want.map((it,i)=>`<div class="dealItem"><span>${dealLabel(it)}</span>
+      ? d.want.map((it,i)=>`<div class="dealItem"><span>${dealLabel(it)}</span>${it.t==='warOn'&&it.until!==undefined?`<button class="dealPledgeDays" data-a="dealPledgeDays" data-x="want:${i}" title="Son tarihi değiştir">⏱</button>`:''}
           <button data-a="dealRm" data-x="want:${i}">✕</button></div>`).join('')
       : `<div class="mini">— boş —</div>`;
     h += `<div class="act2">
@@ -5739,7 +5742,7 @@ const UI = {
       <button class="abtn" data-a="dealAdd" data-x="want:tribute">⏳ Haraç</button>
       <button class="abtn" data-a="dealAdd" data-x="want:lux" ${intelOf(e,o.id)<2?'disabled title="İZLENİYOR istihbaratı gerekir"':''}>❖ Lüks mal</button>
       <button class="abtn" data-a="dealAdd" data-x="want:intel">👁 İstihbarat</button>
-      ${this.dealMpHuman(o)?'<button class="abtn dis dealWarOnOff" disabled title="Çok oyunculuda genel savaş sözü gönderilemez">⚔ Savaş sözü</button>':'<button class="abtn" data-a="dealAdd" data-x="want:warOn">⚔ Savaş sözü</button>'}
+      <button class="abtn" data-a="dealAdd" data-x="want:warOn">⚔ Savaş sözü</button>
       <button class="abtn ${this._dealSupport===o.id?'pri':''}" data-a="dealSupport" data-x="${o.id}">⚔ Savaşa Destek İste</button>
       <button class="abtn" data-a="dealAdd" data-x="want:peaceWith">🤲 Barıştırma</button>
       <button class="abtn" data-a="dealAdd" data-x="want:passage">🚪 Geçiş izni</button>
@@ -5884,7 +5887,9 @@ const UI = {
       const cands = G.emps.filter(x=>!x.dead && !x.wild && x.id !== 0 && x.id !== d.to && !x.crisisSide && e.contact[x.id] && (!own||!src.war[x.id]));
       if (!cands.length){ say('Savaş ilan edilecek uygun hedef yok'); return; }
       choose('Kime savaş ilan edilsin?', cands.map(x=>x.name), i=>{
-        list.push({t:'warOn', target: cands[i].id}); this.drawDeal();
+        const pick=cands[i].id;   /* MP-WARON.0: çok oyunculuda insan veren → son tarihli söz (kabulde savaş ilan edilmez) */
+        if(this.mpGame()&&(own||this.mpIsHuman(d.to))){choose('Son tarih (bu tarihe kadar '+cands[i].name+' ile savaşa girilir)',WAR_PLEDGE_DAYS.map(n=>n+' gün · '+tributeDate(Math.floor(G.day)+n)),j=>{list.push({t:'warOn',target:pick,until:Math.floor(G.day)+WAR_PLEDGE_DAYS[j]});this.drawDeal();});return;}
+        list.push({t:'warOn', target: pick}); this.drawDeal();
       });
       return;
     }
@@ -10111,9 +10116,33 @@ UI.warGoalPick=function(id,key){
 /* MP-FIELD-FIX.0 — müzakere masası: "Savaşa Destek İste" = karşı tarafı BELİRLİ bir savaşa (aktif cephe / bekleyen hazırlık) çağıran warJoin maddesi.
    Genel "Savaş sözü" (warOn) çok oyunculuda insanla müzakerede gönderilemez (MP teklif deposu cepheye bağlı maddeyi taşır); tek oyunculuda aynen. */
 UI.dealMpHuman=function(o){if(typeof MP6Stars!=='undefined'&&MP6Stars.S?.started)return true;return typeof MP1Host!=='undefined'&&!!MP1Host.started&&!!o&&!o.ai&&o.id!==G.p.id;};
+/* ═══ MP-WARON.0 — Genel Savaş Sözü arayüzü: çok oyunculuda insan veren son tarihli söz verir (motor warPledge*). ═══ */
+UI.mpGame=function(){return (typeof MP6Stars!=='undefined'&&!!MP6Stars.S?.started)||(typeof MP1Host!=='undefined'&&!!MP1Host.started);};
+UI.mpIsHuman=function(id){return typeof this.mpHumanOf==='function'?!!this.mpHumanOf(id):false;};
+UI.dealPledgeDays=function(x){
+  this.ensureDiploWorld();const d=this.deal;if(!d)return;const [side,i]=String(x).split(':'),list=side==='give'?d.give:side==='want'?d.want:null,it=list&&list[+i];
+  if(!it||it.t!=='warOn'||it.until===undefined)return;const left=it.until-Math.floor(G.day),next=WAR_PLEDGE_DAYS.find(n=>n>left+1)||WAR_PLEDGE_DAYS[0];
+  it.until=Math.floor(G.day)+next;this.drawDeal();
+};
+UI.warPledgeTermsRow=function(giver,taker,it,e){
+  const nm=id=>id===e.id?'Sen':(G.emps[id]?G.emps[id].name:'?'),t=G.emps[it.target],tn=esc(t?t.name:'?');
+  if(it.until===undefined)return `<div class="mini dealPledgeRow" data-mode="now">⚔ <b>Savaş sözü</b>: ${esc(nm(giver.id))} kabul anında ${tn} devletine <b>savaş ilan eder</b>${giver.ai?' (AI kararı motor kurallarıyla)':''}</div>`;
+  const left=Math.max(0,Math.ceil(it.until-G.day)),warn=giver.id===e.id&&typeof warPledgeWarnings==='function'?warPledgeWarnings(giver,t):[];
+  return `<div class="mini dealPledgeRow" data-mode="pledge">⚔ <b>Genel Savaş Sözü</b>: söz veren ${esc(nm(giver.id))} → alan ${esc(nm(taker.id))} · hedef ${tn} · son tarih <b>${tributeDate(it.until)}</b> (${left} gün) · kabulde savaş <b>İLAN EDİLMEZ</b>; ${esc(nm(giver.id))} savaşı kendi onayıyla normal savaş ilanı akışından açar, hedefle savaş başlayınca söz tutulmuş sayılır · tutulmazsa: ${esc(nm(taker.id))} "sözünü çiğnedi" hatırlar ve ilişkisi −20 düşer · karşılık iade edilmez · hedef elenirse ya da son tarihte Konsey yasağı sürerse söz düşer (ceza yok)${
+    warn.length?`<br><span class="dealPledgeWarn" style="color:#ff9b3d">⚠ ${warn.map(esc).join(' · ')}</span>`:''}</div>`;
+};
+UI.warPledgeHtml=function(o){
+  if(typeof warPledgeRows!=='function'||!o)return '';const rows=warPledgeRows(G.p,o);if(!rows.length)return '';
+  const nm=id=>id===G.p.id?'Sen':(G.emps[id]?G.emps[id].name:'?'),open=rows.filter(r=>r.state==='open'),done=rows.filter(r=>r.state!=='open').slice(-4);
+  const row=r=>`<div class="mini wpRow" data-state="${r.state}" data-pledge="${r.giver}:${r.id}">${r.mine?'Senin sözün':'Sana verilen söz'}: ${esc(nm(r.giver))} → ${esc(nm(r.to))} · hedef <b>${esc(nm(r.target))}</b> · son tarih ${tributeDate(r.until)}${
+    r.state==='open'?` · kalan <b>${r.left} gün</b>`:` · <b>${esc(WAR_PLEDGE_TEXT[r.state]||r.state)}</b>${r.why?' — '+esc(r.why):''}`}${
+    r.mine&&r.state==='open'?`<br><button class="abtn dgr wpWar" data-a="war" data-x="${r.target}">⚔ Sözü yerine getir: ${esc(nm(r.target))} ile savaş ilanı (normal akış, son onay sende)</button>`:''}</div>`;
+  return `<div class="box warPledgeBox"><b>⚔ SAVAŞ SÖZLERİ</b>${open.map(row).join('')}${done.map(row).join('')}
+    <div class="mini">Söz kabulde bağlayıcıdır; savaş kendiliğinden başlamaz. Durum ay başında ve savaş ilanında denetlenir.</div></div>`;
+};
 UI.dealSupportRows=function(o){return typeof warSupportOptions==='function'?warSupportOptions(G.p,o):[];};
 UI.dealSupportHtml=function(d,e,o){
-  let h='';if(this.dealMpHuman(o))h+='<div class="mini dealWarOnWhy">⚔ Genel savaş sözü çok oyunculuda gönderilemez. Belirli bir savaşa katılım için <b>Savaşa Destek İste</b>.</div>';
+  let h='';if(this.dealMpHuman(o))h+='<div class="mini dealWarOnWhy">⚔ <b>Savaş sözü</b> = son tarihe kadar üçüncü bir devletle savaşa girme sözü (kabulde savaş ilan edilmez). Belirli bir savaşa hemen katılım için <b>Savaşa Destek İste</b>.</div>';   /* MP-WARON.0 */
   if(this._dealSupport!==o.id)return h;
   const rows=this.dealSupportRows(o);
   h+=`<div class="box dealSupport"><b>SAVAŞA DESTEK İSTE · ${esc(o.name)}</b><div class="mini">Davet seçtiğin savaşa bağlanır; kabulde katılım ve anlaşma şartları birlikte uygulanır. Savaş ya da hazırlık kapanırsa gecikmiş kabul işlenmez.</div>`;

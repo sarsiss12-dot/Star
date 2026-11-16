@@ -1,0 +1,128 @@
+✓ same-state canonical insolvent voluntary war is deferred, all stocks intact
+✓ healthy aggressive actor still declares with identical chance state
+✓ defensive and federation obligation path bypasses voluntary economic gate
+✓ forecast retains complete cold save and RNG including missing caches
+✓ queued hull upkeep is considered without another payment
+✓ large treasury can sustain a small monthly deficit
+✓ trade network contribution and physical loading remain separate
+✓ hidden enemy stock and fleet cannot alter the own cost forecast
+✓ paid baseline emergency corvette escape and economic costs stay effective
+✓ energy crisis prevents new military upkeep and never pays free hulls
+✓ real build then ship orders cannot spend the same alloy twice
+✓ actual remote fleet upkeep exceeds local upkeep without a new modifier
+✓ peace and embargo removal permit fresh real trade, distrust not erased
+✓ paid loading, terminal delivery and repeated receipt conserve real cargo
+✓ active embargo prevents dispatch and never consumes stocks
+✓ save v8 restores the same economic forecast and decision
+✗ ledger and construction remain unchanged; cargo receipt memory is audited in 96F — AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+... Skipped lines
+
+  "'use strict';\n" +
+    '/* 95E — task orchestration only. startStruct/structTick remain the sole payer\n' +
+    '   and builder. No escrow/refund ledger, no second movement or camera engine. */\n' +
+    'const RemoteConstruction = {\n' +
+    '  queueLimit:16, historyLimit:128, retryLimit:4, routeBudget:4,\n' +
+...
+    "    if(!this.known(e,s))return no('Hedef keşfedilmedi');\n" +
++   "    if(key==='kapi'&&G.cfg?.gates===false)return no('Bu galakside yıldız kapısı inşası kapalı.');\n" +
+    "    if(!Object.hasOwn(STRUCTS,key)||!structAllowed(e,s,key))return no('Yapı, sahiplik, araştırma veya hak iddiası koşulu uygun değil');\n" +
+    "    if(Object.values(this.state().queues).flat().some(t=>t.system===sid&&t.key===key&&t.state!=='building'))return no('Bu yapı için zaten bir görev var');\n" +
+    '    const cost=structCost(e,key),afford=Object.keys(cost).every(k=>(e.res[k]||0)>=cost[k]);\n' +
+    "    if(!afford)return no('Kaynaklar yetersiz');\n" +
+    '    const start=from??(f.mv?f.mv.to:f.sys),path=route?this.route(e,f,s,start):null;\n' +
+...
+    "    if(state==='failed'||state==='lost')st.metrics.failed++;\n" +
++   "    if(G.emps[t.empire]?.ai===false){if(t.empire===0)say('İnşaat görevi · '+STRUCTS[t.key].n+' · '+t.systemName+' — '+why,state==='done'?'win':'');\n" +
++   "      recordNews({category:'construction',scope:'player',empires:[t.empire],system:t.system,key:'construction:'+t.id,title:STRUCTS[t.key].n+' — '+this.labels[state],text:why});}\n" +
+-   "    if(t.empire===0){say('İnşaat görevi · '+STRUCTS[t.key].n+' · '+t.systemName+' — '+why,state==='done'?'win':'');\n" +
+-   "      recordNews({category:'construction',scope:'player',empires:[0],system:t.system,key:'construction:'+t.id,title:STRUCTS[t.key].n+' — '+this.labels[state],text:why});}\n" +
+    '  },\n' +
+    '  completed(sys,w){\n' +
+    '    const st=this.state(),t=Object.values(st.queues).flat().find(t=>t.id===w.remoteTask),f=t&&G.fleets.find(f=>f.id===t.fleet);\n' +
+    "    if(t){this.finish(f,t,'done','Yapı tamamlandı');return;}\n" +
+    "    const old=st.history.find(t=>t.id===w.remoteTask);if(old?.state==='done')return;\n" +
+...
+    "    if(this.tasks(f)[0]===t&&t.state==='travel')f.path=f.mv?[f.mv.to]:[];this.finish(f,t,'cancelled','İptal edildi; kaynak harcanmadı');return {ok:true};},\n" +
++   '  /* BETA-RIVAL-BLOCS.0 — koloni panelinden otomatik gemi seçimi. Yalnız mevcut gate/enqueue/tick/startStruct yolunu kullanır;\n' +
++   '     yeni ödeme, hareket ya da kamera motoru yok. Rota SÜRESİ = explorationGraph maliyeti (uzaklık / hız, ikmal cezalı;\n' +
++   '     güvensiz / kapalı / ikmalsiz düğüm elenir). Sıradaki işi veya manuel emri kesmez: yalnız boştaki gemi seçilir;\n' +
++   '     isteğe bağlı olarak meşgul geminin kuyruğunun sonuna eklenir. */\n' +
++   '  idle(f){return !this.tasks(f).length&&!f.mv&&!f.path.length&&!f.combat&&f.building===undefined&&!f.ships.some(s=>s.busy!==undefined);},\n' +
++   '  eta(e,f,sid,from){const ctx=explorationContext(e);ctx.frontier=new Set(ctx.known);const c=explorationGraph(e,{...f,sys:from,mv:null},ctx).cost[sid];return Number.isFinite(c)?c:null;},\n' +
++   '  autoPick(e,sid,key,{queue=false}={}){\n' +
++   '    const no=(why,x={})=>({ok:false,why,...x}),s=G.sys[sid];\n' +
++   "    if(!e||e.dead||!s)return no('Geçerli hedef yok');\n" +
++   "    if(!Object.hasOwn(STRUCTS,key)||!structAllowed(e,s,key))return no('Yapı, sahiplik, araştırma veya hak iddiası koşulu uygun değil');\n" +
++   "    if(Object.values(this.state().queues).flat().some(t=>t.system===sid&&t.key===key&&t.state!=='building')||s.work?.some(w=>w.key===key))return no('Bu yapı için zaten bir görev veya süren inşaat var');\n" +
++   "    const ships=G.fleets.filter(f=>f.e===e.id&&f.ships.some(sh=>sh.c==='ins'));\n" +
++   "    if(!ships.length)return no('İnşaat gemisi gerekli',{noShips:true});\n" +
++   "    let best=null,busy=0,blocked=0,first='';\n" +
++   '    for(const f of ships){\n' +
++   '      if(!this.idle(f)){busy++;continue;}\n' +
++   '      const q=this.gate(f,sid,key);if(!q.ok){blocked++;first=first||q.why;continue;}\n' +
++   '      const eta=f.sys===sid?0:this.eta(e,f,sid,f.sys);if(eta===null){blocked++;continue;}\n' +
++   '      if(!best||eta<best.eta||eta===best.eta&&f.id<best.fleet.id)best={fleet:f,eta,cost:q.cost};\n' +
++   '    }\n' +
++   '    if(best)return {ok:true,...best,queued:false,busy,blocked};\n' +
++   '    if(busy&&queue){\n' +
++   '      let pick=null;for(const f of ships){if(this.idle(f)||this.tasks(f).length>=this.queueLimit)continue;const from=this.tasks(f).at(-1)?.system??(f.mv?f.mv.to:f.sys),q=this.gate(f,sid,key,{from});if(!q.ok){first=first||q.why;continue;}\n' +
++   '        const eta=this.eta(e,f,sid,from);if(eta===null)continue;if(!pick||this.tasks(f).length<this.tasks(pick.fleet).length||this.tasks(f).length===this.tasks(pick.fleet).length&&eta<pick.eta)pick={fleet:f,eta,cost:q.cost};}\n' +
++   '      if(pick)return {ok:true,...pick,queued:true,busy,blocked};\n' +
++   '    }\n' +
++   "    if(busy&&!blocked)return no('Bütün inşaat gemileri meşgul — istersen kuyruğa ekle',{busy,blocked,canQueue:true});\n" +
++   "    return no(first||'Güvenli, ikmalli ve erişilebilir rota yok',{busy,blocked,canQueue:busy>0});\n" +
++   '  },\n' +
++   '  autoOrder(e,sid,key,opts={}){\n' +
++   '    const p=this.autoPick(e,sid,key,opts);if(!p.ok)return p;\n' +
++   '    const r=this.enqueue(p.fleet,sid,key);if(!r.ok)return r;\n' +
++   '    r.task.auto=true;if(Number.isFinite(p.eta))r.task.eta=Math.round(p.eta*10)/10;\n' +
++   '    return {ok:true,task:r.task,fleet:p.fleet.id,eta:p.eta,queued:p.queued,cost:p.cost};\n' +
++   '  },\n' +
+    "  manual(f){for(const t of this.tasks(f).slice())if(t.state!=='building')this.finish(f,t,'cancelled','Manuel hareket emri görevin yerini aldı; kaynak harcanmadı');},\n" +
+    "  retry(f,t,why){t.attempts++;if(t.attempts>=this.retryLimit){this.finish(f,t,'failed',why+'; dört sınırlı denemeden sonra durduruldu');return;}t.state='waiting';t.why=why;t.next=G.day+[5,10,20][t.attempts-1];},\n" +
+    '  tick(){\n' +
+    '    const st=this.state();let budget=this.routeBudget;\n' +
+    '    for(const fid of Object.keys(st.queues)){\n' +
+...
+    '      const path=this.route(e,f,s,f.sys);\n' +
++   '      if(!pat'... 1932 more characters
+-   "      if(!path||!orderMove(f,s.id,false,true,path)){this.retry(f,t,'Güvenli, ikmalli ve erişilebilir rota yok');continue;}\n" +
+-   "      t.state='travel';t.why='Güvenli rota · '+path.length+' atlama';\n" +
+-   '    }\n' +
+-   '  },\n' +
+-   '  restore(raw){\n' +
+-   '    const st=this.empty(),ids=new Set(),parse=t=>{\n' +
+-   '      if(!t||!Number.isSafeInteger(t.id)||t.id<1||ids.has(t.id)||!Number.isInteger(t.fleet)||!Number.isInteger(t.empire)||!Number.isInteger(t.system)||!G.sys[t.system]||!Object.hasOwn(STRUCTS,t.key)||!Object.hasOwn(this.labels,t.state))return null;\n' +
+-   "      ids.add(t.id);return {id:t.id,fleet:t.fleet,empire:t.empire,system:t.system,systemName:String(t.systemName||G.sys[t.system].name).slice(0,120),key:t.key,state:t.state,born:Number.isFinite(t.born)?t.born:G.day,attempts:Math.min(4,Math.max(0,t.attempts|0)),next:Number.isFinite(t.next)?Math.min(t.next,G.day+20):G.day,why:String(t.why||'').slice(0,300),...(Number.isFinite(t.finished)?{finished:t.finished}:{})};\n" +
+-   '    };\n' +
+-   '    if(raw?.v===1){\n' +
+-   '      for(const [fid,list] of Object.entries(raw.queues||{}).slice(0,1024)){\n' +
+-   "        if(!/^\\d+$/.test(fid)||!Array.isArray(list))continue;const tasks=list.slice(0,this.queueLimit).map(parse).filter(t=>t&&String(t.fleet)===fid&&['queued','travel','waiting','building'].includes(t.state));if(tasks.length)st.queues[fid]=tasks;\n" +
+-   '      }\n' +
+-   "      st.history=(Array.isArray(raw.history)?raw.history:[]).slice(-this.historyLimit).map(parse).filter(t=>t&&!['queued','travel','waiting','building'].includes(t.state));\n" +
+-   '      for(const k of Object.keys(st.metrics))if(Number.isSafeInteger(raw.metrics?.[k])&&raw.metrics[k]>=0)st.metrics[k]=raw.metrics[k];\n' +
+-   '      st.aiBuilders=(Array.isArray(raw.aiBuilders)?raw.aiBuilders:[]).filter(Number.isSafeInteger).slice(-1024);\n' +
+-   '    }\n' +
+-   '    st.next=Math.max(1,Number.isSafeInteger(raw?.next)?raw.next:1,...[...ids].map(id=>id+1));G.construction=st;\n' +
+-   '  }\n' +
+-   '};\n'
+
+    at eq (/home/user/Star/tests/faz96c2_rebuild_test.js:2:219)
+    at /home/user/Star/tests/faz96c2_rebuild_test.js:20:150
+    at test (/home/user/Star/tests/faz96c2_rebuild_test.js:3:24)
+    at Object.<anonymous> (/home/user/Star/tests/faz96c2_rebuild_test.js:20:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+✓ pirate loss consists of real loot plus destruction with no second receipt
+✓ player freight proposal still requires an explicit inbox acceptance
+✓ a funded multi-month risk remains a valid aggressive choice
+✓ visible normal enemy adjacent to capital retains the local defence
+✓ hidden neighbouring normal enemy cannot create a defence warning
+✓ adjacent pirate does not change canonical local-only threat policy
+✓ local pirate defence retains canonical campaign policy and investment state
+GEÇEN: 23 KALAN: 1

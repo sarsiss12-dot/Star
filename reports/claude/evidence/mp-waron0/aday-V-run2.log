@@ -1,0 +1,10 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":214,"buildMs":230,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":261,"buildMs":271,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":6.6,"p95":6.6,"max":6.6},"longtask":{"n":0},"heapMB":16,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":35.1,"p95":35.1,"max":35.1},"refresh":{"n":1,"med":1.2,"p95":1.2,"max":1.2},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":43.1,"p95":43.1,"max":43.1},"refresh":{"n":1,"med":3.1,"p95":3.1,"max":3.1},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":721,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS V0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS V1 C gerçek masada son tarihli savaş sözü + karşılık; özet İLAN EDİLMEZ; B karttan "Masaya otur" → ⏱ → karşı teklif; C kabul → tek söz, savaş yok; B/C aynada, host satırı yok
+PASS V2 kaydet → host kapanır → YENİ oda → misafirler döner → aynı söz; C söz panelinden NORMAL savaş ilanı → "Tutuldu" (B de görür)
+PASS V3 ikinci söz (hedef Y) son tarihe kadar tutulmaz → "Çiğnendi": B sözünü çiğnedi hatırlar, ilişki −20; iki aynada durum
+PASS V4 geçersiz şart gerekçeli; hedef elenince "Düştü" (ceza yok); aynı kabul iki kez + hat donar / kopar → tek söz
+PASS V5 Savaş Merkezi "Şartlı Teklif…" taslağı: düzenlenir, ayna yeniden kurulur ve masa yeniden açılır → taslak korunur
+GEÇEN: 6 KALAN: 0

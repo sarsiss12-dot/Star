@@ -99,13 +99,14 @@ module.exports=async(X,{E,M,ready,where,closeUI,cards,swipe})=>{const {test,pg,m
    const hp=await H().evaluate(()=>({off:document.querySelector('#modal [data-a="wgGo"]').disabled,why:[...document.querySelectorAll('#modal .wgWhy')].map(x=>x.textContent)}));M.fetih.host=hp;await shot(H(),'z7-host');
    assert.equal(hp.off,true);assert(hp.why.length>0);await closeUI(H());});
 
- await test('Z8 müzakere masası: genel Savaş sözü MP\'de pasif + neden; Savaşa Destek İste → B\'nin aktif cephesi; C ret → yeniden teklif → C karşı teklif → B kabul → C savaşta (tek kez); host → B daveti kabul; kapanan savaşa gecikmiş kabul işlenmez',async()=>{
+ await test('Z8 müzakere masası: genel Savaş sözü MP\'de son tarihli söz (etkin) + açıklama; Savaşa Destek İste → B\'nin aktif cephesi; C ret → yeniden teklif → C karşı teklif → B kabul → C savaşta (tek kez); host → B daveti kabul; kapanan savaşa gecikmiş kabul işlenmez',async()=>{
    await closeUI(B());await closeUI(C());
    const F=await H().evaluate(([b,t])=>warLedgerFind(b,t).id,[E.B,M.fetih.fx.t2]);const cB=await lid(B(),E.C);M.support={F};
    await H().evaluate(([b,c,t])=>{for(const [x,y] of [[b,c],[c,t],[b,t]]){G.emps[x].contact[y]=G.emps[y].contact[x]=true;}MP1Host.host.publish();},[E.B,E.C,M.fetih.fx.t2]);await settle('z8');
    await B().evaluate(c=>{UI.openDeal(c);},cB);await wait(B(),()=>document.querySelector('[data-a="dealSupport"]'));
-   const off=await B().evaluate(()=>({warOn:[...document.querySelectorAll('.dealWarOnOff')].map(b=>b.disabled),why:document.querySelector('.dealWarOnWhy')?.textContent||''}));M.support.warOn=off;
-   assert(off.warOn.length===2&&off.warOn.every(Boolean),'genel savaş sözü pasif');assert.match(off.why,/Savaşa Destek İste/);
+   /* MP-WARON.0 (p36): genel Savaş sözü MP'de artık son tarihli söz olarak ETKİN (p34-p35'te pasifti); açıklama iki maddeyi ayırır */
+   const off=await B().evaluate(()=>({warOn:[...document.querySelectorAll('[data-a="dealAdd"][data-x$=":warOn"]')].map(b=>b.disabled),old:document.querySelectorAll('.dealWarOnOff').length,why:document.querySelector('.dealWarOnWhy')?.textContent||''}));M.support.warOn=off;
+   assert(off.warOn.length===2&&off.warOn.every(d=>!d)&&off.old===0,'genel savaş sözü etkin');assert.match(off.why,/Savaşa Destek İste/);assert.match(off.why,/son tarihe kadar/);
    await tap(B(),'[data-a="dealSupport"]');await wait(B(),F=>!!document.querySelector(`[data-a="dealSupportPick"][data-x^="front:${F}:"]`),F,20000);await shot(B(),'z8-destek-sec');
    const sendFrom=async()=>{await tap(B(),`[data-a="dealSupportPick"][data-x^="front:${F}:"]`);await wait(B(),F=>UI.deal.want.some(i=>i.t==='warJoin'&&i.front===F),F);
      const n0=await H().evaluate(()=>MP1Host.host.dip.offers.length);await tap(B(),'[data-a="dealSend"]');await wait(H(),n=>MP1Host.host.dip.offers.length>n,n0,20000);return H().evaluate(()=>MP1Host.host.dip.offers.at(-1));};

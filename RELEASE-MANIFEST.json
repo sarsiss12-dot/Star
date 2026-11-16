@@ -1,11 +1,11 @@
 {
-  "phase": "MP-DEAL-SYS.0",
-  "build": "96h10p35",
+  "phase": "MP-WARON.0",
+  "build": "96h10p36",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p35",
-  "parent_commit": "043b9c38621bdeb316a330cd23e5edf54d143a0a",
-  "parent_zip_sha256": "1288a372d922e282c5fbd691aa5e95253dff73e7bdbf818bd21e423f235b35d4",
+  "pwa_cache": "stars-v96h10p36",
+  "parent_commit": "c2ab5f25e63bc00403465b2db187d6acba8fa2ab",
+  "parent_zip_sha256": "1af6ab0df169d7b11885c7b3e6fb98321e7dd586a8ab472c9f67855d65110e04",
   "file_count": 19,
   "files": {
     "ai.js": "74386043cb4091ff3e0639e03dfb1cc43066c0eb23bafc68a79c747300d3b3af",
@@ -15,18 +15,18 @@
     "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
     "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
     "construction.js": "920d6122c3d3e65ef2650c94a9a5a804c3d67b65411627e23184f0e1d5d60e08",
-    "diplomacy.js": "e7b7bf09772d5edb75c3df8580537d963546558fbf17bb7920e89e3a5fa3d9b3",
+    "diplomacy.js": "be2f96883fa0249add53ee6073fe8cc60327545b90847b2ac8ad0fb8d2c58c70",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
     "economy-ui.js": "68025b1bb388188435a51cca2319e92e7eb9ec6517b4e3c8437f335e2916763f",
     "economy.js": "2ed54bcabd31383f6dccda21874fc7e7358363f638f75ade2dceb3a869e2b537",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
     "index.html": "3bb3c8291d247981322a54cd347782a8d4d727e01a0e60c707667bcf95d63bc9",
-    "main.js": "6cd60850a7fe2e04d871b8718e076389d71748b87cd885ae9ce434bf4a3a9b3b",
+    "main.js": "47c5d9291b51d867cf40f24515fbbe00b877e9158854643a058ce15f7cf1c568",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "5b40278d2e0c34a25db5838c87c691f0b23738b0f3b3af7b87ae1fcd85badddc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "858a534c20e6b57b1f7d41d01c5f7d5dce3e15e1c286794499ae25334831c853",
-    "ui.js": "a97062c5f3c35a25bd71100e9a85cf1390c52b4251612d8d874b3eb4014f1906"
+    "sw.js": "593cf6eed3d562672f8abc923e7a2b00fccc15e201982e055e1cce558f360c0f",
+    "ui.js": "e31b4de0387d5ece186f30b1118324929eb8d8edb564ec1b1581149301a64502"
   },
-  "description": "MP-DEAL-SYS.0: çok oyunculu müzakerede Sistem Devri ve Haraç (motorun sys / tribute maddeleri; insan taraflı devirde toprak vaadi, süren Fetih hedefi ve barışta iade edilecek işgal çakışması önizleme ve kabulde yakalanır; teklif özeti nihai sonucu ve Toprak Vaadi farkını gösterir; aktif haraç takvimi, eksik ödeme ve sona erme bildirimi), Federasyon ekranında tek dokunuşla İttifak Daveti ve bekleyen federasyon işleri, Savaş Merkezi seçili cepheden destekçi kartları. Save8 v8, paket 4, protokol 1."
+  "description": "MP-WARON.0: çok oyunculu müzakerede Genel Savaş Sözü (warOn): insan veren son tarihli söz verir, kabulde savaş ilan edilmez; söz normal savaş ilanıyla tutulur, son tarih geçerse mevcut söz bozma kuralı (alan 'sözünü çiğnedi' hatırlar, ilişki −20), hedef / taraf elenir ya da Konsey yasağı sürerse söz düşer; müzakere masasında son tarih seçimi ve özet, aktif söz paneli. Tek oyunculu warOn (kabulde ilan) aynen. Save8 v8, paket 4, protokol 1."
 }

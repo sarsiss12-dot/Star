@@ -137,7 +137,7 @@ function installHost(){
   /* TEKLİFİ SUN → 'offer' (karşı teklif bağlamında 'counter') */
   const ds0=UI.dealSend;
   UI.dealSend=function(){if(!on())return ds0.apply(this,arguments);this.ensureDiploWorld();const d=this.deal;if(!d||!A.human(d.to))return ds0.apply(this,arguments);
-    const items=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:A.real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&i.t==='sys'&&Number.isInteger(i.id)?{t:'sys',id:i.id}:i&&i.t==='tribute'&&Number.isInteger(i.v)?{t:'tribute',r:i.r,v:i.v}:i&&TREATY.includes(i.t)?{t:i.t}:null),give=items(d.give),want=items(d.want);
+    const items=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:A.real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&i.t==='sys'&&Number.isInteger(i.id)?{t:'sys',id:i.id}:i&&i.t==='tribute'&&Number.isInteger(i.v)?{t:'tribute',r:i.r,v:i.v}:i&&i.t==='warOn'&&Number.isInteger(i.target)?{t:'warOn',target:A.real(i.target),...(Number.isInteger(i.until)?{until:i.until}:{})}:i&&TREATY.includes(i.t)?{t:i.t}:null),give=items(d.give),want=items(d.want);
     if(give.includes(null)||want.includes(null)){this.dealMsg='Çok oyunculuda kaynak, barış, antlaşma maddeleri (saldırmazlık, ticaret, ittifak, sensör, geçiş), Sistem Devri, Haraç, cephe kimliğine bağlı savaş desteği, savaş içi teslim, toprak vaadi ve federasyonlar arası ortak barış gönderilebilir; teknoloji, lüks, savaş sözü ve casusluk ağı henüz yok.';M.stats.blocked++;this.drawDeal();return;}
     if(!give.length&&!want.length){this.dealMsg='Teklif boş.';this.drawDeal();return;}
     const ctr=M.counter&&M.counter.to===d.to?M.counter:null,to=d.to,o=G.emps[to];
@@ -205,6 +205,7 @@ function attach(ad){
   UI.mpQuickOffer=function(to,give,want,cb){if(!on())return false;const A=M.ad;if(A.role==='host'&&!A.human(to))return false;
     let done=false;const fin=r=>{if(done)return;done=true;cb(r&&r.status!=='ok'?{...r,why:why(r)}:r);};
     const cid=A.send({kind:'offer',to:A.real(to),give,want},fin);if(!cid)fin({status:'rejected',code:'host-yok'});return true;};
+  UI.mpHumanOf=function(id){return on()&&!!M.ad.human(id);};   /* MP-WARON.0: müzakere masası insan karşı taraf (son tarihli savaş sözü) */
   UI.mpOfferState=function(id){if(!on())return null;const l=M.ad.role==='host'?(M.ad.raw?M.ad.raw():[]):(M.ad.offers?M.ad.offers():[]);const o=l.find(x=>x.id===id);return o?{status:o.status,why:o.why||''}:null;};
   doc.addEventListener('click',onClick,true);
   const shell0=ArchiveUI.shell;ArchiveUI.shell=function(){const r=shell0.apply(this,arguments);if(this.mode!=='mpsent')M.mode=null;else M.mode='sent';if(this.mode!=='mpsent'){M.detail=null;M.confirm=null;}addTab();return r;};

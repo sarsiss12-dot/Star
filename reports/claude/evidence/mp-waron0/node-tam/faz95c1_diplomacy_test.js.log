@@ -1,0 +1,124 @@
+✗ askeri founding: live validator permits real paid founding and no automatic offense — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/home/user/Star/tests/faz95c1_diplomacy_test.js:3:47)
+    at /home/user/Star/tests/faz95c1_diplomacy_test.js:13:224
+    at test (/home/user/Star/tests/faz95c1_diplomacy_test.js:4:25)
+    at Object.<anonymous> (/home/user/Star/tests/faz95c1_diplomacy_test.js:13:2)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+✗ askeri candidate exclusion and all founder blockers are visible — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok(html.includes('Toplam müttefik')&&html.includes('Gerekli asgari üye / AI ortak'))
+
+    at /home/user/Star/tests/faz95c1_diplomacy_test.js:14:492
+    at test (/home/user/Star/tests/faz95c1_diplomacy_test.js:4:25)
+    at Object.<anonymous> (/home/user/Star/tests/faz95c1_diplomacy_test.js:14:2)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+✗ bilimsel founding: live validator permits real paid founding and no automatic offense — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/home/user/Star/tests/faz95c1_diplomacy_test.js:3:47)
+    at /home/user/Star/tests/faz95c1_diplomacy_test.js:13:224
+    at test (/home/user/Star/tests/faz95c1_diplomacy_test.js:4:25)
+    at Object.<anonymous> (/home/user/Star/tests/faz95c1_diplomacy_test.js:13:2)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+✗ bilimsel candidate exclusion and all founder blockers are visible — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok(html.includes('Toplam müttefik')&&html.includes('Gerekli asgari üye / AI ortak'))
+
+    at /home/user/Star/tests/faz95c1_diplomacy_test.js:14:492
+    at test (/home/user/Star/tests/faz95c1_diplomacy_test.js:4:25)
+    at Object.<anonymous> (/home/user/Star/tests/faz95c1_diplomacy_test.js:14:2)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+✗ ticaret founding: live validator permits real paid founding and no automatic offense — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/home/user/Star/tests/faz95c1_diplomacy_test.js:3:47)
+    at /home/user/Star/tests/faz95c1_diplomacy_test.js:13:224
+    at test (/home/user/Star/tests/faz95c1_diplomacy_test.js:4:25)
+    at Object.<anonymous> (/home/user/Star/tests/faz95c1_diplomacy_test.js:13:2)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+✗ ticaret candidate exclusion and all founder blockers are visible — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok(html.includes('Toplam müttefik')&&html.includes('Gerekli asgari üye / AI ortak'))
+
+    at /home/user/Star/tests/faz95c1_diplomacy_test.js:14:492
+    at test (/home/user/Star/tests/faz95c1_diplomacy_test.js:4:25)
+    at Object.<anonymous> (/home/user/Star/tests/faz95c1_diplomacy_test.js:14:2)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+✗ exact influence succeeds; failure then refreshed balance has no cached founder lock — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/home/user/Star/tests/faz95c1_diplomacy_test.js:3:47)
+    at /home/user/Star/tests/faz95c1_diplomacy_test.js:16:254
+    at test (/home/user/Star/tests/faz95c1_diplomacy_test.js:4:25)
+    at Object.<anonymous> (/home/user/Star/tests/faz95c1_diplomacy_test.js:16:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+✓ civic cost remains 130 and existing membership / leave cooldown remain blockers
+✓ several political blockers never mutate money, wars or RNG
+✓ AI nonconsent is distinct from the total ally count
+✓ Pariah prevents generation, quote, direct pact and execution; no stocks or RNG spent
+✓ stale pact is rejected at open and acceptance without losing original offer
+✓ sanction lift reopens trade; existing smuggling exception remains
+✓ bilateral embargo uses same gate as Council sanctions
+✓ unaffordable alliance / intel offer never enters inbox and does not consume RNG/resources
+✓ only sender pays 101; once signed the repeat is not charged
+✓ later sender spending is explained and stale offer execution cannot make negative stock
+✓ signature fee and influence transfer are checked together before any mutation
+✓ large one-off amount conserves stocks and duplicate rows are consolidated once
+✓ monthly capacity includes existing 10-year promises and simultaneous stock delivery
+✓ large monthly amount keeps 3600-day contract, deducts only available real stock
+✓ AI valuation remains finite and scales the actual large resource consideration
+✓ unsafe resource prototype keys are rejected as catalog errors
+✓ fatal invalid offers return a reason and never throw or enter the AI inbox
+✓ quantity cancel expires the old callback without editing the draft
+✓ unsafe amount Infinity fails before resources/RNG
+✓ unsafe amount NaN fails before resources/RNG
+✓ unsafe amount -1 fails before resources/RNG
+✓ unsafe amount 1e20 fails before resources/RNG
+✓ unsafe amount Number.MAX_SAFE_INTEGER fails before resources/RNG
+✓ manual quantity input and presets add a draft exactly once, never spend stock
+✓ manual quantity rejects overspend, fraction and stale world callback
+GEÇEN: 25 KALAN: 7

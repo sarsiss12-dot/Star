@@ -1,0 +1,6 @@
+PASS S1 tek oyunculu: oyuncunun AI'ya verdiği savaş sözü kabulde hemen ilan edilir, söz kaydı yazılmaz
+PASS S2 tek oyunculu masa: Savaş sözü etkin, son tarih yok; özet "kabul anında"; Savaşa Destek ayrı satır
+PASS S3 çok oyunculu masa: son tarih seçimi + ⏱ değişimi; özet İLAN EDİLMEZ + sonuç; saldırmazlık uyarısı yalnız verende
+PASS S4 aktif söz paneli: veren için normal savaş akışı düğmesi, alan için yalnız durum
+PASS S5 gelen kutusu kaydı / karşı teklif taslağı son tarihi korur (encodeOffer): kart etiketi "Savaş sözü · son tarih", taslakta aynı tarih
+GEÇEN: 5 KALAN: 0

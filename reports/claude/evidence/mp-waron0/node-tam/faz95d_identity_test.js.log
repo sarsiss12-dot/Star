@@ -1,0 +1,168 @@
+✓ 11 new galaxy has distinct names including player and saved distinct emblems
+✓ 11 generation repeats deterministically from the same configuration
+✓ 99 new galaxy has distinct names including player and saved distinct emblems
+✓ 99 generation repeats deterministically from the same configuration
+✓ 404 new galaxy has distinct names including player and saved distinct emblems
+✓ 404 generation repeats deterministically from the same configuration
+✗ 11 historical seeded geography preserved; identity normalization is observational — AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+... Skipped lines
+
+  [
+    [
+      0,
+      3819.1301459997685,
+      2210.029806240188,
+...
+      14,
++     3227.5950946477387,
++     210.84770825698297,
+-     3227.5950946477406,
+-     210.84770825698342,
+      [
+        32,
+        43,
+        21
+      ]
+...
+      2620.12349344276,
++     711.6206292989634,
+-     711.6206292989632,
+      [
+        6,
+        39,
+        43,
+        32
+...
+      2328.004790462811,
++     1880.381658406806,
+-     1880.3816584068059,
+      [
+        19,
+        18
+      ]
+    ],
+...
+      25,
++     1666.4005167263444,
+-     1666.4005167263451,
+      3571.758338923456,
+      [
+        8,
+        10,
+        38
+...
+      26,
++     4327.700922044775,
++     3753.489909502923,
+-     4327.700922044776,
+-     3753.4899095029214,
+      [
+        36,
+        27
+      ]
+    ],
+    [
+      27,
++     3946.8509870007697,
+-     3946.85098700077,
+      3235.7720588957845,
+      [
+        12,
+        26
+      ]
+
+    at /home/user/Star/tests/faz95d_identity_test.js:13:9
+    at test (/home/user/Star/tests/faz95d_identity_test.js:4:81)
+    at Object.<anonymous> (/home/user/Star/tests/faz95d_identity_test.js:9:31)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+✗ 99 historical seeded geography preserved; identity normalization is observational — AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+... Skipped lines
+
+  [
+    [
+      0,
+      2292.11334500799,
+      3509.166098517179,
+...
+      24,
++     3295.078225058493,
++     377.4041043911461,
+-     3295.078225058491,
+-     377.40410439114567,
+      [
+        6,
+        11,
+        33
+      ]
+...
+      2690.1895139591907,
++     648.5772683424702,
+-     648.57726834247,
+      [
+        6,
+        7,
+        11
+      ]
+
+    at /home/user/Star/tests/faz95d_identity_test.js:13:9
+    at test (/home/user/Star/tests/faz95d_identity_test.js:4:81)
+    at Object.<anonymous> (/home/user/Star/tests/faz95d_identity_test.js:9:31)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+✗ 404 historical seeded geography preserved; identity normalization is observational — AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+... Skipped lines
+
+  [
+    [
+      0,
+      764.1075075679851,
+      3470.3449687606962,
+...
+      3831.8667037788455,
++     2931.7701545187215,
+-     2931.770154518723,
+      [
+        1,
+        16,
+        21,
+        7
+
+    at /home/user/Star/tests/faz95d_identity_test.js:13:9
+    at test (/home/user/Star/tests/faz95d_identity_test.js:4:81)
+    at Object.<anonymous> (/home/user/Star/tests/faz95d_identity_test.js:9:31)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+✓ exhaustion with a constant random source still reserves every name
+✓ canonical case and whitespace collision includes player name
+✓ machine and hive character pools are selected rather than generic republics
+✓ repeated random emblem changes every component and never game RNG
+✓ editor lives in appearance, has all five controls and explicit random button
+✓ chosen emblem survives a new game, save v8 and load
+✓ legacy v8 missing emblem migrates deterministically without renaming or RNG
+✓ malformed emblem fields cannot become paths or arbitrary drawing input
+✓ askeri federation name, emblem and reform/presidency continuity
+✓ bilimsel federation name, emblem and reform/presidency continuity
+✓ ticaret federation name, emblem and reform/presidency continuity
+✓ large federation pool is unique despite repeated random input
+✓ state emblem normalization is cached and does not mutate serialized world
+✓ native atlas is cached, bounded, visibly distinct and generated without game RNG
+GEÇEN: 20 KALAN: 3

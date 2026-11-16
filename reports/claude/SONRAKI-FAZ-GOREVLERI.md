@@ -1,18 +1,22 @@
-# STARS — sonraki faz görevleri (MP-DEAL-SYS.0 sonrasında kaydedildi)
+# STARS — sonraki faz görevleri (MP-DEAL-SYS.0 sonrasında kaydedildi; MP-WARON.0 ile güncellendi)
 
-15 Kasım 2026 · p35 / MP.8.9b33 tabanı · Kanonik pano: [#33](https://github.com/sarsiss12-dot/Star/issues/33) (55 madde). Bu belge yeni kalemleri panonun ilgili açık maddelerine bağlar; panonun satır durumları bu fazda **değiştirilmedi** (hiçbiri TAMAMLANDI değildir).
+15 Kasım 2026 · p35 / MP.8.9b33 tabanı; 16 Kasım 2026 güncellemesi p36 / MP.8.9b34 (MP-WARON.0) · Kanonik pano: [#33](https://github.com/sarsiss12-dot/Star/issues/33) (55 madde). Bu belge yeni kalemleri panonun ilgili açık maddelerine bağlar; panonun satır durumları bu fazda **değiştirilmedi** (hiçbiri TAMAMLANDI değildir).
 
-Durum değerleri panonunkilerdir: `PLANLANDI` = kayda girdi, geliştirme başlamadı.
+Durum değerleri panonunkilerdir: `PLANLANDI` = kayda girdi, geliştirme başlamadı; `TEST BEKLİYOR` = geliştirildi ve yerelde doğrulandı, kullanıcı / saha kabulü bekliyor (TAMAMLANDI değildir).
+
+**Sıradaki geliştirme adayı: NF-2 (Teknoloji ve Lüks Mal MP müzakeresi).**
 
 | Kod | Görev | Bağlı pano maddesi | Durum | Bağımlılık |
 |---|---|---|---|---|
-| NF-1 | Genel Savaş Sözü (`warOn`) MP desteği | #16, #31, #40, #43 | `PLANLANDI` | MP-DEAL-SYS.0 (tek işlemli teklif), WAR-COALITION.0 / BETA-WAR-GOALS.0 savaş motoru |
-| NF-2 | Teknoloji ve Lüks Mal MP desteği | #40 (koalisyon pazarlığı), MP.3 müzakere | `PLANLANDI` | MP-DEAL-SYS.0 madde kapısı (`dipItems`), istihbarat düzeyi (`intelOf`) aynası |
+| NF-1 | Genel Savaş Sözü (`warOn`) MP desteği | #16, #31, #40, #43 | `TEST BEKLİYOR` (MP-WARON.0, p36; [rapor](MP-WARON0-SONUC.md)) | MP-DEAL-SYS.0 (tek işlemli teklif), WAR-COALITION.0 / BETA-WAR-GOALS.0 savaş motoru |
+| NF-2 | Teknoloji ve Lüks Mal MP desteği — **sıradaki aday** | #40 (koalisyon pazarlığı), MP.3 müzakere | `PLANLANDI` | MP-DEAL-SYS.0 madde kapısı (`dipItems`), istihbarat düzeyi (`intelOf`) aynası |
 | NF-3 | Casusluk Ağı / istihbarat maddeleri | #33 (casusluk paneli), MP.6.4 casusluk | `PLANLANDI` | Ayna gizlilik kuralı (`hitLog`, `framed`), MP.6.4 `spy*` komutları |
 | NF-4 | Diğer diplomasi kısayolları (saldırmazlık, ticaret paktı, geçiş izni) | #32 (MP insan oyuncuya ittifak daveti), #22 | `PLANLANDI` | MP-DEAL-SYS.0 tek dokunuş İttifak Daveti (`UI.allyInviteSend`, `UI.mpQuickOffer`) sahada kabul edilmeli |
 | NF-5 | AI müttefik desteği ve vasallık ölçümü | #40, #44 (ayrıca #16, #43) | `PLANLANDI` | Doğal kampanya düzeneği (`research/96h8/scripts/arm.js`, plasebo bandı), kontrol kökü sabit kopya |
 
 ## NF-1 — Genel Savaş Sözü (`warOn`) MP desteği
+
+**Durum (16 Kasım 2026, MP-WARON.0 / p36): `TEST BEKLİYOR`.** İlk sürüm şartı "bu devletle belirtilen tarihe kadar savaşa girme sözü". İnsan veren son tarihli söz verir (90 / 180 / 360 gün, karşı teklifte ⏱ ile değişir); kabulde savaş ilan EDİLMEZ, söz `e.warPledges` kaydına yazılır; veren savaşı kendi onayıyla normal savaş ilanı akışından açar → "Tutuldu". Son tarih geçerse mevcut söz bozma kuralı ("Çiğnendi": alan `paktBozdu` hatırlar, ilişki −20, hedefin adını vermeyen kamu haberi); hedef / taraf elenir, veren ile alan savaşa girer ya da son tarihte Konsey yasağı sürerse "Düştü" (ceza yok). Karşılık kabulde bir kez ödenir, iade edilmez (Toprak Vaadi ile aynı). AI veren son tarihli söz veremez: AI kabulde hemen ilan eder (tek oyunculu davranış). Tek oyunculuda son tarihsiz söz aynen kabulde ilan edilir. Yerel kanıt: Node 9/0 (p35 0/9), SP 5/0, eşdeğerlik 3/0, MP8 V 7/0. Açık: canlı Render, fiziksel cihaz, AI'nın kendiliğinden son tarihli söz istemesi / vermesi (yok; NF-5 ile ölçülür).
 
 Tasarım: üçüncü devlete karşı söz. Hedef devlet, yürürlük süresi (gün), tetikleme koşulu (ör. "hedef ile verenin müttefiki savaşa girerse" ya da "kabulden sonra N gün içinde"), yükümlülük (savaş ilanı + en az bir cephe), söz bozulursa sonuç (mevcut `oathBreakRecord` / güven kaybı, ödenen bedelin iadesi). Aktif cepheye veya hazırlığa bağlı `warJoin` ile ayrı madde olarak kalır; ikisi aynı teklifte birlikte bulunabilir ama biri diğerinin yerine geçmez.
 

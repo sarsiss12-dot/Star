@@ -75,6 +75,7 @@ function build(meId,o={}){
   const mine=J(me);const risk=internalRiskSummary(me);if(risk.ownVassal)mine.mpInternalSelf=J(risk.ownVassal);if(risk.subjects.length)mine.mpInternalSubjects=risk.subjects.map(v=>({...v,id:piN(v.id)}));for(const k of STRIP_ME)delete mine[k];
   mine.mapHabitats=knowledge.habitats;mine.mapOwners=Object.fromEntries(Object.entries(knowledge.owners).map(([id,owner])=>[id,piN(owner)]));
   mine.id=0;mine.ai=false;for(const k of EMP_MAPS)if(mine[k])mine[k]=remapKeys(mine[k]);
+  if(Array.isArray(mine.warPledges))mine.warPledges=mine.warPledges.filter(p=>p&&Number.isInteger(p.to)&&Number.isInteger(p.target)).map(p=>({...p,to:piN(p.to),target:piN(p.target)}));   /* MP-WARON.0: kendi verdiği savaş sözleri */
   if(Array.isArray(mine.tribute))mine.tribute=mine.tribute.filter(t=>t&&Number.isInteger(t.to)).map(t=>({...t,to:piN(t.to)}));   /* MP-DEAL-SYS.0: kendi haraç yükümlülükleri (alıcı kimliği π) */
   /* MP.6.4 gizlilik: mağdur kaydında fail yalnız BİLİNİYORSA (yakalandı / soruşturmayla çözüldü) gider; tespit edilmemiş
      operasyonun faili ve sahte kanıtın gerçek yerleştiricisi (framed: "gerçeği yalnız biz biliriz") misafire gitmez. */
@@ -90,6 +91,7 @@ function build(meId,o={}){
     /* misafirin vasalı (ya da senyörü): sözleşme ve misafirin taraf olduğu müzakere — gerçek STARS vasallık penceresi ve gelen kutusu */
     if(e.overlord===meId){s.overlord=0;s.vassalType=e.vassalType;if(e.vassalContract)s.vassalContract=vasC(e.vassalContract);}
     if(party(e.vassalTalk))s.vassalTalk=vasQ(e.vassalTalk);
+    {const inc=Array.isArray(e.warPledges)?e.warPledges.filter(p=>p&&p.to===meId&&Number.isInteger(p.target)):[];if(inc.length)s.warPledges=inc.map(p=>({...J(p),to:0,target:piN(p.target)}));}   /* MP-WARON.0: misafire verilen savaş sözleri (hedef ve üçüncü taraflar görmez) */
     {const inc=Array.isArray(e.tribute)?e.tribute.filter(t=>t&&t.to===meId):[];if(inc.length)s.tribute=inc.map(t=>({...J(t),to:0}));}   /* MP-DEAL-SYS.0: misafire ödenen haraç (yalnız alıcı olduğu kayıtlar) */
     emps[pi(e.id)]=s;}
   /* ---- filolar ---- */

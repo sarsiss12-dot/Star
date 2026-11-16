@@ -1,0 +1,133 @@
+FAIL W1 söz + karşılık: karşı teklifte son tarih değişir, kabulde tek söz kaydı (savaş yok), karşılık bir kez, ikinci kabul yok
+AssertionError [ERR_ASSERTION]: {"to":"C","v":1,"type":"result","seq":1,"cid":"fed0C000001","status":"rejected","code":"bad-params","rev":1}
+
+'rejected' !== 'ok'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:28:120
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:16:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:26:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL W2 söz normal savaş ilanıyla tutulur: C savaş komutu → "tutuldu", iki tarafa bildirim
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'rejected' !== 'ok'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:44:10
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:16:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:42:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL W3 son tarih geçer: "çiğnendi", B paktBozdu hatırlar, ilişki −20, haberde hedef adı yok
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'rejected' !== 'ok'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:55:10
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:16:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:53:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL W4 imkânsızlaşma: hedef elenir → düştü; son tarihte Konsey yasağı → düştü; ikisinde ceza yok
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'rejected' !== 'ok'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:67:33
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:16:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:65:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL W5 geçersiz şartlar gerekçeli; bekleyen teklifteki söz uygulanamaz olursa teklif geçersizleşir
+AssertionError [ERR_ASSERTION]: {"to":"C","v":1,"type":"result","seq":1,"cid":"fed0C000001","status":"rejected","code":"bad-params","rev":1}
+    at no (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:79:104)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:80:3
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:16:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:77:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+FAIL W6 birleşik teklif: söz kabulde geçersizse kaynak / Sistem Devri / Haraç uygulanmaz
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'rejected' !== 'ok'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:98:10
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:16:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:96:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL W7 ayna / gizlilik: veren ve alan görür, hedef insan ve üçüncü taraf görmez
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'rejected' !== 'ok'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:107:10
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:16:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:105:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL W8 kayıt: Save8 gidiş-dönüş aynı söz ve kalan süre; yüklemeden sonra süre dolumu bir kez
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'rejected' !== 'ok'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:120:10
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:16:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:118:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL W9 insan → AI: AI'dan söz (son tarihsiz) aiRespond kararıyla; AI'ya son tarihli söz kayıt olur; aynı cid tek teklif
+AssertionError [ERR_ASSERTION]: {"to":"C","v":1,"type":"result","seq":2,"cid":"fed0C000002","status":"rejected","code":"bad-params","rev":1}
+
+'rejected' !== 'ok'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:135:97
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:16:42)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl35/tests/mp_waron0_test.js:129:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+GEÇEN: 0 KALAN: 9

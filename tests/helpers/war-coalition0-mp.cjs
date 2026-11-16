@@ -123,7 +123,9 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,wait,tap}){
     assert.equal(r.from,eB);assert.equal(r.to,fx.X);assert.ok(r.give.concat(r.want).includes('peace'),JSON.stringify(r));await B.evaluate(()=>{try{UI.act('closeDiplo');}catch{}});});
 
   await test('Q6 misafir B gerçek masada TOPRAK VAADİ: cepheye katılım isteğine sistem vaadi ekler (dokunuş) ve sunar; host teklifi doğru cephe kimliğiyle kaydeder',async()=>{
-    const Z=await H.evaluate(([b,x,y,c])=>{const Z=G.emps.find(e=>e.ai&&!e.wild&&!e.dead&&![0,b,x,y,c].includes(e.id)&&!e.war[x]);return Z.id;},[eB,fx.X,fx.Y,eC]);
+    const Z=await H.evaluate(([b,x,y,c])=>{const X=G.emps[x],tie=e=>!!(e.ally[x]||X.ally[e.id]||(e.nap&&e.nap[x]>G.day)||(X.nap&&X.nap[e.id]>G.day)),pool=G.emps.filter(e=>e.ai&&!e.wild&&!e.dead&&![0,b,x,y,c].includes(e.id)&&!e.war[x]);const Z=pool.find(e=>!tie(e))||pool[0];   /* MP-WARON.0: hedefle iki yönlü ittifak / saldırmazlık katılımı motor kuralıyla engeller (aralıklı Q6 kökü) */
+      if(tie(Z)){Z.ally[x]=X.ally[Z.id]=false;if(Z.nap)delete Z.nap[x];if(X.nap)delete X.nap[Z.id];MP1Host.host.publish();}   /* FİKSTÜR: uygun aday yoksa bağ açıkça kaldırılır */
+      return Z.id;},[eB,fx.X,fx.Y,eC]);
     const F=await H.evaluate(([b,x])=>warLedgerFind(b,x).id,[eB,fx.X]);const zB=await lid(B,await nameOf(Z));M.Q6={Z,F};M.Q6.hostX=await H.evaluate(([x,b])=>G.sys.filter(s=>s.owner===x||[12,14].includes(s.id)).map(s=>[s.id,s.owner,s.seen.includes(b),s.id===G.emps[x].home]),[fx.X,eB]);
     /* FİKSTÜR: Q4'teki 75 günde C hedef sistemleri ele geçirebilir (X'e yalnız başkent kalır → "Bilinen düşman sistemi yok" doğru davranış).
        Vaat edilecek sistem için X'e B'nin şu an GÖRDÜĞÜ sahipsiz bir sistem verilir (motorun territoryOwnerSet'i). */

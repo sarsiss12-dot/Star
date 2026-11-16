@@ -1,0 +1,59 @@
+[
+ {
+  "name": "S1 tek oyunculu OYUNA DEVAM ET: bekleyen / kapatılmış / gizlenmiş olay kayıttan doğru döner; tarih ilerlerken yeni olay ve anomali şeritte ve listede; karar bir kez",
+  "status": "PASS",
+  "pre": {
+   "a": "Bilim Konseyi Talebi",
+   "b": "Göçmen Filosu",
+   "c": "Alaşım Grevi",
+   "ida": "e1",
+   "keys": [
+    [
+     "ev:e1",
+     false
+    ],
+    [
+     "ev:e2",
+     true
+    ],
+    [
+     "ev:e3",
+     false
+    ]
+   ],
+   "day": 0
+  },
+  "after": {
+   "day": 0,
+   "keys": [
+    [
+     "ev:e2",
+     true
+    ],
+    [
+     "ev:e3",
+     false
+    ],
+    [
+     "ev:e1",
+     false
+    ]
+   ]
+  },
+  "vis": [
+   "Alaşım Grevi",
+   "Bilim Konseyi Talebi"
+  ],
+  "neu": {
+   "ev": "Kayıp Sonda",
+   "sys": "Ithkrim-95",
+   "day": 3
+  },
+  "vis2": [
+   "Alaşım Grevi",
+   "Bilim Konseyi Talebi",
+   "Kayıp Sonda",
+   "Anomali — Ithkrim-95"
+  ]
+ }
+]

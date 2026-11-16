@@ -1,0 +1,42 @@
+[
+  {
+    "name": "1920x1080 scale80 open/reopen/tabs/detail/close",
+    "status": "PASS"
+  },
+  {
+    "name": "1920x1080 scale100 open/reopen/tabs/detail/close",
+    "status": "PASS"
+  },
+  {
+    "name": "1920x1080 scale125 open/reopen/tabs/detail/close",
+    "status": "PASS"
+  },
+  {
+    "name": "1920 historical news stable ID",
+    "status": "PASS"
+  },
+  {
+    "name": "800x360 scale100 open/reopen/tabs/detail/close",
+    "status": "PASS"
+  },
+  {
+    "name": "800 historical news stable ID",
+    "status": "PASS"
+  },
+  {
+    "name": "915x412 scale100 open/reopen/tabs/detail/close",
+    "status": "PASS"
+  },
+  {
+    "name": "915 historical news stable ID",
+    "status": "PASS"
+  },
+  {
+    "name": "960x540 scale100 open/reopen/tabs/detail/close",
+    "status": "PASS"
+  },
+  {
+    "name": "960 historical news stable ID",
+    "status": "PASS"
+  }
+]

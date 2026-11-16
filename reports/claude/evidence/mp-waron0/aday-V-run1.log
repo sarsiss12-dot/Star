@@ -1,0 +1,24 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":267,"buildMs":314,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":355,"buildMs":412,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":5,"p95":5,"max":5},"longtask":{"n":0},"heapMB":18,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":34.3,"p95":34.3,"max":34.3},"refresh":{"n":1,"med":1.7,"p95":1.7,"max":1.7},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":34.4,"p95":34.4,"max":34.4},"refresh":{"n":1,"med":2.1,"p95":2.1,"max":2.1},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":721,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS V0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS V1 C gerçek masada son tarihli savaş sözü + karşılık; özet İLAN EDİLMEZ; B karttan "Masaya otur" → ⏱ → karşı teklif; C kabul → tek söz, savaş yok; B/C aynada, host satırı yok
+PASS V2 kaydet → host kapanır → YENİ oda → misafirler döner → aynı söz; C söz panelinden NORMAL savaş ilanı → "Tutuldu" (B de görür)
+PASS V3 ikinci söz (hedef Y) son tarihe kadar tutulmaz → "Çiğnendi": B sözünü çiğnedi hatırlar, ilişki −20; iki aynada durum
+FAIL V4 geçersiz şart gerekçeli; hedef elenince "Düştü" (ceza yok); aynı kabul iki kez + hat donar / kopar → tek söz
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /son tarihli/. Input:
+
+'""'
+
+    at /home/user/Star/tests/helpers/mp-waron0-mp.cjs:94:141
+    at async test (/home/user/Star/tests/browser-mp8.cjs:49:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-waron0-mp.cjs:93:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:434:17
+FAIL V5 Savaş Merkezi "Şartlı Teklif…" taslağı: düzenlenir, ayna yeniden kurulur ve masa yeniden açılır → taslak korunur
+page.waitForFunction: Timeout 20000ms exceeded.
+    at wait (/home/user/Star/tests/browser-mp8.cjs:54:40)
+    at /home/user/Star/tests/helpers/mp-waron0-mp.cjs:111:10
+    at async test (/home/user/Star/tests/browser-mp8.cjs:49:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-waron0-mp.cjs:107:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:434:17
+GEÇEN: 4 KALAN: 2
