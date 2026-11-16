@@ -1,0 +1,8 @@
+p37 217 6379 275 fail suites 53
+p38 223 6427 275 fail suites 53
+mp_diplo5_ai_support_test.js None -> (5, 0)
+mp_diplo5_lux_mp_test.js None -> (3, 0)
+mp_diplo5_lux_test.js None -> (10, 0)
+mp_diplo5_peacewith_test.js None -> (13, 0)
+mp_diplo5_quick_test.js None -> (7, 0)
+mp_diplo5_spynet_test.js None -> (10, 0)

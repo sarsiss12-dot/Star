@@ -1,0 +1,28 @@
+✓ 96H.7.1 slides seed11 actor1 failed-target deadline on every deferred turn (bug reproduced)
+✓ recorded deadline stays fixed while the target waits; no RNG
+✓ expired failed target is retried with a new progress window
+✓ deployment upkeep estimate equals the real fleetUpkeep and fleetAlloyUpkeep change at the target
+✓ funded detachment keeps every ship, hull and RNG; detachment is capped at its own size
+✓ real month-72 decision: unfunded 24-ship stack stays home and a funded detachment attacks
+✓ funded full dispatch keeps the original all-together attack
+✓ unfundable attack waits in fund phase without orders or splits
+✓ deficit-funded deployment is recalled home before the disband crisis; healthy stock stays
+✓ natural 24 months from seed11 month 60: actor1 attacks, no disband, energy grows (96H.7 rejected unlock lost 22)
+✓ natural 24 months from seed11 month 40: actor3 keeps its navy instead of the 12-ship wartime disband
+✗ only the reviewed 96H.8 campaign blocks differ from 96H.7.1 ai.js — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '027fe840b697d992a04c8ba070dd32ef94f2a8c8e305f3ed4af48e0b2d6a34b3'
+- 'f48608cc82ca46b5028c637dcabbfb1b3e2ae09f1e3c1eb24bd2c4c1b326d8d0'
+
+    at /home/user/Star/tests/faz96h8_campaign_cost_test.js:91:10
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/faz96h8_campaign_cost_test.js:89:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+GEÇEN: 11 KALAN: 1

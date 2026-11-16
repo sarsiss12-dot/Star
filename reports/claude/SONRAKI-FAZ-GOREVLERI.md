@@ -1,20 +1,24 @@
-# STARS — sonraki faz görevleri (MP-DEAL-SYS.0 sonrasında kaydedildi; MP-WARON.0 ve MP-TECHLUX.0 ile güncellendi)
+# STARS — sonraki faz görevleri (MP-DEAL-SYS.0 sonrasında kaydedildi; MP-WARON.0, MP-TECHLUX.0 ve MP-DIPLO5 ile güncellendi)
 
 15 Kasım 2026 · p35 / MP.8.9b33 tabanı; 16 Kasım 2026 güncellemeleri p36 / MP.8.9b34 (MP-WARON.0) ve p37 / MP.8.9b35 (MP-TECHLUX.0) · Kanonik pano: [#33](https://github.com/sarsiss12-dot/Star/issues/33) (55 madde). Bu belge yeni kalemleri panonun ilgili açık maddelerine bağlar; panonun satır durumları bu fazda **değiştirilmedi** (hiçbiri TAMAMLANDI değildir).
 
 Durum değerleri panonunkilerdir: `PLANLANDI` = kayda girdi, geliştirme başlamadı; `TEST BEKLİYOR` = geliştirildi ve yerelde doğrulandı, kullanıcı / saha kabulü bekliyor (TAMAMLANDI değildir).
 
-**Sıradaki geliştirme adayı: kullanıcı kararına göre NF-2b (lüks erişim hakkının ekonomik etkisi) ya da NF-3 (Casusluk Ağı / istihbarat maddeleri).**
+**16 Kasım 2026 · MP-DIPLO5 (p38 / MP.8.9b36):** NF-2b, NF-3, NF-4, NF-6 geliştirildi ve yerelde doğrulandı (`TEST BEKLİYOR`); NF-5 ölçüldü, kanıtlanan tek kusur (AI'nın son tarihsiz Savaş Sözü kabulü) düzeltildi (`TEST BEKLİYOR`), barışçıl biat daveti eksikliği yeni kayıt NF-7 olarak kullanıcı kararına bırakıldı. Rapor: [MP-DIPLO5-SONUC.md](MP-DIPLO5-SONUC.md).
+
+**Sıradaki geliştirme adayı: kullanıcı kararına göre NF-7 (AI barışçıl biat daveti) ya da NF-8 (federasyon gündem kuyruğu ve acil teklif önceliği).**
 
 | Kod | Görev | Bağlı pano maddesi | Durum | Bağımlılık |
 |---|---|---|---|---|
 | NF-1 | Genel Savaş Sözü (`warOn`) MP desteği | #16, #31, #40, #43 | `TEST BEKLİYOR` (MP-WARON.0, p36; son tarih sınırı düzeltmesi MP-TECHLUX.0 / p37; [rapor](MP-WARON0-SONUC.md)) | MP-DEAL-SYS.0 (tek işlemli teklif), WAR-COALITION.0 / BETA-WAR-GOALS.0 savaş motoru |
 | NF-2 | Teknoloji ve Lüks Mal MP desteği | #40 (koalisyon pazarlığı), MP.3 müzakere | `TEST BEKLİYOR` (MP-TECHLUX.0, p37; [rapor](MP-TECHLUX0-SONUC.md)) | MP-DEAL-SYS.0 madde kapısı (`dipItems`), istihbarat düzeyi (`intelOf`) aynası |
-| NF-3 | Casusluk Ağı / istihbarat maddeleri | #33 (casusluk paneli), MP.6.4 casusluk | `PLANLANDI` | Ayna gizlilik kuralı (`hitLog`, `framed`), MP.6.4 `spy*` komutları |
-| NF-4 | Diğer diplomasi kısayolları (saldırmazlık, ticaret paktı, geçiş izni) | #32 (MP insan oyuncuya ittifak daveti), #22 | `PLANLANDI` | MP-DEAL-SYS.0 tek dokunuş İttifak Daveti (`UI.allyInviteSend`, `UI.mpQuickOffer`) sahada kabul edilmeli |
-| NF-5 | AI müttefik desteği ve vasallık ölçümü | #40, #44 (ayrıca #16, #43) | `PLANLANDI` | Doğal kampanya düzeneği (`research/96h8/scripts/arm.js`, plasebo bandı), kontrol kökü sabit kopya |
-| NF-2b | Lüks mal erişim hakkının (`luxGrant`) ekonomik etkisi — **kullanıcı kararı bekliyor** | #40, NF-2 | `PLANLANDI` | Tek oyunculu ekonomi davranış kararı (ayrı faz); kontrol–aday + plasebo bandı |
-| NF-6 | Barıştırma (`peaceWith`) MP müzakere maddesi | #40, MP.6.2 barış | `PLANLANDI` | Savaş defteri (`warLedger`) cephe kimliği, MP-DEAL-SYS.0 tek işlemli teklif |
+| NF-3 | Casusluk Ağı / istihbarat maddeleri | #33 (casusluk paneli), MP.6.4 casusluk | `TEST BEKLİYOR` (MP-DIPLO5, p38) | Ayna gizlilik kuralı (`hitLog`, `framed`), MP.6.4 `spy*` komutları |
+| NF-4 | Diğer diplomasi kısayolları (saldırmazlık, ticaret paktı, geçiş izni) | #32 (MP insan oyuncuya ittifak daveti), #22 | `TEST BEKLİYOR` (MP-DIPLO5, p38) | MP-DEAL-SYS.0 tek dokunuş İttifak Daveti (`UI.allyInviteSend`, `UI.mpQuickOffer`) sahada kabul edilmeli |
+| NF-5 | AI müttefik desteği ve vasallık ölçümü | #40, #44 (ayrıca #16, #43) | `TEST BEKLİYOR` (ölçüm + warOn kapısı, p38) | Doğal kampanya düzeneği (`research/96h8/scripts/arm.js`, plasebo bandı), kontrol kökü sabit kopya |
+| NF-2b | Lüks mal erişim hakkının (`luxGrant`) ekonomik etkisi | #40, NF-2 | `TEST BEKLİYOR` (MP-DIPLO5, p38; kullanıcı kararıyla) | Tek oyunculu ekonomi davranış kararı (ayrı faz); kontrol–aday + plasebo bandı |
+| NF-6 | Barıştırma (`peaceWith`) MP müzakere maddesi | #40, MP.6.2 barış | `TEST BEKLİYOR` (MP-DIPLO5, p38) | Savaş defteri (`warLedger`) cephe kimliği, MP-DEAL-SYS.0 tek işlemli teklif |
+| NF-7 | AI barışçıl biat daveti (güçlü AI → zayıf devlet / oyuncu `demandVassal`) — **kullanıcı kararı bekliyor** | #44 | `PLANLANDI` | NF-5 ölçümü: AI kodunda çağıran yol yok; yeni AI stratejisi ayrı faz kararı |
+| NF-8 | Federasyon gündem kuyruğu ve acil teklif önceliği (bağımsız sonraki faz) | #51, BETA-BOARD.1 kuyruğu | `PLANLANDI` | — |
 
 ## NF-1 — Genel Savaş Sözü (`warOn`) MP desteği
 
@@ -73,3 +77,12 @@ Kabul ölçütleri: çift dokunuş tek teklif; kilitli antlaşma (doktrin, sava�
 Doğal kampanyalarda ölçülecek: AI'nın hangi saldırı / savunma savaşına katıldığı, ne zaman ücret ya da geçiş izni istediği, cepheye ulaşabilirliği (rota / ikmal), koruma ve vasallık teklifleri (zayıf AI'nın kendiliğinden başvurusu).
 
 Kabul ölçütleri: aynı Save8'den kontrol ve aday kolları, plasebo bandı; fayda yalnız tetiklenen devlet ve bant dışı farklarda iddia edilir; mevcut davranışlar doğrulanır, açık kalan işler (ör. ücretsiz katılım beklentisi, ulaşılamayan cepheye söz) sonuçlara göre güncellenir; RNG tüketimi ve Save8 eşitliği korunmadan AI kuralı değiştirilmez.
+
+## MP-DIPLO5 sonuçları (16 Kasım 2026, p38 / MP.8.9b36)
+
+- **NF-2b** — `TEST BEKLİYOR`. Geçerli `luxGrant` alıcıda lüks bonusunu açar (SP ve MP aynı; MP'de sonucu host üretir, ayna `mpLuxGrant`). Veren malı kendi kolonisinden sağlamalı; bonus bir kez; ambargo / kaynak kaybı askıya alır, savaş ve eleme bitirir; geçersiz eski kayıt temizlenir. p37 ipek vakası kontrol kökünde 1/9, adayda 10/0.
+- **NF-3** — `TEST BEKLİYOR`. Casusluk Ağı MP maddesi; savaşta kurulamaz; biten ağın nedeni; havuz düzeyi host'tan (ortak kimliği yok). Süre düzenlenemez (tek oyunculu kural süresiz).
+- **NF-4** — `TEST BEKLİYOR`. İLİŞKİ sayfasında tek dokunuş Saldırmazlık / Ticaret Paktı / Geçiş İste / Ver; durum satırı, gerekçeli kilit, çift dokunuş ve pencere yenileme koruması.
+- **NF-5** — `TEST BEKLİYOR`. Ölçüm (8 doğal kampanya) + kanıtlanan kusurun düzeltmesi: AI son tarihsiz Savaş Sözünü erişim / güç oranı / bütçe kapısıyla değerlendirir. Federasyon savunmasında katılmayanlar kural gereği; barışçıl biat daveti hiç yok → NF-7.
+- **NF-6** — `TEST BEKLİYOR`. Barıştırma cephe kimliğine bağlı; diğer savaşanın onayı (AI: mevcut barış değerlendirmesi; insan: iki aşamalı işlem, paketle kalıcı).
+- Açık kalan saha işleri (gerçek oturum / gerçek kayıtla doğrulanana kadar açık): tek başına kayıttan dönüşte görünmeyen olaylar; uzun oturumda misafir haritasının donması.

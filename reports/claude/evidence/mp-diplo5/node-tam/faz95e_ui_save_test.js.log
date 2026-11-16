@@ -1,0 +1,31 @@
+✓ 740x360 archive input host preserves one existing camera and bounded markup
+✓ 360x740 archive input host preserves one existing camera and bounded markup
+✓ 900x420 archive input host preserves one existing camera and bounded markup
+✓ news pagination bounds DOM cards to thirty, then loads older known records
+✓ actual input event handlers filter rows while keeping search field mounted
+✓ loading a save makes captured accept closure inert
+✓ same accept closure can never execute resource grant twice
+✓ decision outside inbox updates same source receipt
+✓ active task, pending offer and read news survive one save together
+✓ failed load rolls back all three module roots and object identity
+✓ new PWA shell contains every independent 95E module and upgraded cache
+✗ reviewed mobile CSS is additive and rejects mutations — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at eq (/home/user/Star/tests/faz95e_ui_save_test.js:3:214)
+    at /home/user/Star/tests/faz95e_ui_save_test.js:13:194
+    at test (/home/user/Star/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/home/user/Star/tests/faz95e_ui_save_test.js:13:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+✓ archive and construction UI do not mutate gameplay RNG
+✓ orientation and background recovery keep persistent queues and one camera
+✓ closing modal invalidates archive and construction action tokens
+✓ construction fault pauses only its module and does not abort daily simulation
+✓ news fault leaves diplomatic decisions usable and resets on a successful load
+GEÇEN: 16 KALAN: 1
