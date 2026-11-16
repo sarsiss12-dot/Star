@@ -136,4 +136,8 @@ Belge: [`reports/claude/SONRAKI-FAZ-GOREVLERI.md`](https://github.com/sarsiss12-
 
 ## 10. Teslim
 
-Taslak PR ve bitiş HEAD bir sonraki commit ile yazılır.
+- Taslak PR: https://github.com/sarsiss12-dot/Star/pull/52 (head `claude/stars-mp-techlux0` → base `claude/stars-mp-waron0` / PR #51).
+- Commit'ler: `cb61e1b` (son tarih düzeltmesi, Teknoloji + Lüks Mal, encodeOffer, ayna, sürüm, pin, manifest, ZIP), `c63b35f` (regresyon, rapor, CLAUDE.md), ardından bu teslim satırını yazan commit (bitiş HEAD = dalın ucu).
+- Render'da seçilecek dal: `claude/stars-mp-techlux0`; beklenen `/mp/version` §1.
+- ZIP `releases/stars-faz96h10p37.zip`: SHA-256 `93cbc9e6606d61e64d9b7042f2ecedc130b6fdc3eed1d98aaea729da0e8b2c1f`, CRC32 `1792683F`, 926974 bayt, 20 girdi, iki üretim aynı SHA; çıkarılmış kopyada `verify-release.py --root` → DOĞRULANDI: 19 dosya; oyun build 96h10p37.
+- main'e merge, Render dağıtımı, force-push yapılmadı; kullanıcı kabulü bekliyor.
