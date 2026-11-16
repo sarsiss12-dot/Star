@@ -169,7 +169,7 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,origin,gues
       const t0=Date.now();while(MP1Join.results.length===res0&&Date.now()-t0<8000)await new Promise(r=>setTimeout(r,50));
       const res=MP1Join.results[MP1Join.results.length-1];await new Promise(r=>setTimeout(r,1200));
       const late=G.log.slice(n0).some(l=>/tezgâha kondu/.test(l.m));window.__drop=false;
-      return {yard:y.id,q0,ret,early,status:res&&res.status,late,dropped:window.__dropped|0,qNow:(G.sys[y.id].queue||[]).length};});
+      return {yard:y.id,q0,ret,early,status:res&&res.status,code:res&&res.code||null,detail:res&&res.detail||null,res:{ala:Math.floor(G.p.res.ala||0),min:Math.floor(G.p.res.min||0),ene:Math.floor(G.p.res.ene||0)},late,dropped:window.__dropped|0,qNow:(G.sys[y.id].queue||[]).length};});   /* MP-WARON.0: tanı — ret kodu ve misafir stoğu (meşru ret ile kusuru ayırmak için) */
     assert(!r.err,r.err);const hostQ=await H.evaluate(([id])=>(G.sys[id].queue||[]).length,[await H.evaluate(()=>{const p=[...MP1Host.host.state.players.values()].find(x=>x.playerId!=='host');const y=G.sys.find(s=>s.owner===p.empireId&&hasYard(s));return y.id;})]);
     const seen=await B.waitForFunction(a=>(G.sys[a.yard].queue||[]).length>a.q0,r,{timeout:20000,polling:250}).then(()=>true,()=>false);
     T.lostMirror={...r,hostQ,seen,sync:await B.evaluate(()=>({log:MP6Stars.S.sync.log.slice(-6).map(x=>x.what),resyncs:MP6Stars.S.stats.resyncs,pulse:MP6Stars.S.sync.pulse,rev:MP6Stars.S.rev}))};
