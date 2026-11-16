@@ -25,7 +25,7 @@ async function test(name,fn){try{const r=await fn();results.push({name,status:'P
  const closeAll=page=>page.evaluate(()=>{const seen=[];for(let i=0;i<8&&!document.getElementById('modal').classList.contains('hidden');i++){seen.push(document.getElementById('modal').innerText.slice(0,60));if(document.querySelector('#modal [data-a="advNever"]'))UI.act('advNever');else if(document.querySelector('#modal [data-a="advClose"]'))UI.act('advClose');else UI.closeModal();}return seen;});
  const relation=async page=>{await closeAll(page);await page.evaluate(()=>UI.selectDiplo(__o.id,'relation'));await page.waitForSelector('.quickTreaty[data-kind="nap"]');const s=await closeAll(page);if(s.length)console.log('  (kapatılan pencere: '+JSON.stringify(s)+')');};
  const quick=async(vp,touch,tag)=>{const {ctx,page,errors,tap}=await boot(vp,touch);try{
-   await relation(page);await page.screenshot({path:path.join(out,tag+'-satir.png')});
+   await relation(page);await page.locator('.quickTreaty[data-kind="nap"]').first().scrollIntoViewIfNeeded();await page.waitForTimeout(500);await page.screenshot({path:path.join(out,tag+'-satir.png')});
    const btn=`.quickTreaty[data-kind="nap"] [data-a="quickTreaty"]`;const l=page.locator(btn).first();await l.scrollIntoViewIfNeeded();
    if(touch){await l.tap();await l.tap({force:true,timeout:1500}).catch(()=>{});}else{await l.click();await l.click({force:true,timeout:1500}).catch(()=>{});}   /* çift dokunuş */
    await page.waitForSelector('.quickTreaty[data-kind="nap"] .quickTreatyState');const s1=await page.evaluate(()=>({st:document.querySelector('.quickTreaty[data-kind="nap"] .quickTreatyState').dataset.state,txt:document.querySelector('.quickTreaty[data-kind="nap"] .quickTreatyState').textContent,deals:__deals,nap:!!(G.p.nap&&G.p.nap[__o.id]>G.day)}));
@@ -34,7 +34,7 @@ async function test(name,fn){try{const r=await fn();results.push({name,status:'P
    const s2=await page.evaluate(()=>({mine:!!(G.p.passage||{})[__o.id],theirs:!!(__o.passage||{})[0],st:document.querySelector('.quickTreaty[data-kind="passGive"] .quickTreatyState')?.dataset.state}));assert.deepEqual(s2,{mine:true,theirs:false,st:'accepted'});
    await page.evaluate(()=>{aiRespond=__a0;const t=G.emps.find(o=>o.ai&&!o.wild&&!o.dead&&o!==__o);G.p.war[t.id]=t.war[0]=true;window.__t=t;UI.selectDiplo(t.id,'relation');});await page.waitForSelector('.quickTreaty[data-kind="nap"]');await closeAll(page);
    const s3=await page.evaluate(()=>({dis:document.querySelector('.quickTreaty[data-kind="nap"] [data-a="quickTreaty"]').disabled,why:(document.querySelector('.quickTreaty[data-kind="nap"] .quickTreatyWhy')||{}).textContent||''}));
-   assert.equal(s3.dis,true);assert.match(s3.why,/[Ss]avaş/);await page.screenshot({path:path.join(out,tag+'-savas-kilit.png')});
+   assert.equal(s3.dis,true);assert.match(s3.why,/[Ss]avaş/);await page.locator('.quickTreaty[data-kind="nap"]').first().scrollIntoViewIfNeeded();await page.waitForTimeout(500);await page.screenshot({path:path.join(out,tag+'-savas-kilit.png')});
    await page.evaluate(()=>{G.p.war[__t.id]=__t.war[0]=false;UI.selectDiplo(__o.id,'relation');});await page.waitForSelector('.quickTreaty[data-kind="passWant"]');await closeAll(page);await tap('.quickTreaty[data-kind="passWant"] [data-a="quickTreatyCond"]');
    const s4=await page.evaluate(()=>({page:UI.diploPage,want:UI.deal&&UI.deal.want}));assert.equal(s4.page,'deal');assert.deepEqual(s4.want,[{t:'passage'}]);
    assert.deepEqual(errors,[],errors.join('\n'));return {s1,s2,s3,s4};}finally{await ctx.close();}};
