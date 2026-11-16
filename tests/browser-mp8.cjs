@@ -41,7 +41,9 @@ const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'bu
   /* MP-WARON.0: Genel Savaş Sözü — host + B + C gerçek arayüz, karşı teklif, kayıt → yeni oda, normal savaş ilanıyla tutma, süre bozumu, hedef elenmesi, Savaş Merkezi taslağı */
   V:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
   /* MP-TECHLUX.0: Teknoloji + Lüks Mal + 👁 İstihbarat — host + B + C gerçek arayüz */
-  T:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6}}[SCEN];
+  T:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
+  /* MP-DIPLO5: Lüks hakkı bonusu, Casusluk Ağı, Barıştırma (iki aşama + kayıt-devam), tek dokunuş kısayollar, birleşik teklif — host + B + C + D (gizlilik profili) */
+  U:{size:'orta',ai:5,seed:22,months:0,guests:3,every:6}}[SCEN];
 if(!CONF)throw Error('MP8_SCEN A|B|C|R|N|P|E|F|D|G|L|S|W|K|Q|Z');
 if(process.env.FEDAI0_R==='1'||process.env.ER0_R==='1')CONF.ai=8;
 if(process.env.SCALE0_MP){const c=JSON.parse(process.env.SCALE0_MP);Object.assign(CONF,c);}
@@ -51,7 +53,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function test(name,fn){if(process.env.MP8_ONLY&&!new RegExp(process.env.MP8_ONLY).test(name)){console.log('NOT RUN '+name);return;}const t0=Date.now();try{await fn();results.push({name,status:'PASS',ms:Date.now()-t0});console.log('PASS '+name);}
   catch(e){results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,2400)});console.log('FAIL '+name+'\n'+(e&&e.stack||e));}}
 const PHONE=(w,h)=>({viewport:{width:w,height:h},isMobile:true,hasTouch:true,deviceScaleFactor:2,serviceWorkers:'allow'});
-const VIEW={H:[844,390],B:[800,360],C:[915,412],X:[844,390]};
+const VIEW={H:[844,390],B:[800,360],C:[915,412],D:[844,390],X:[844,390]};
 const freePort=()=>new Promise(r=>{const s=net.createServer().listen(0,'127.0.0.1',()=>{const p=s.address().port;s.close(()=>r(p));});});
 const wait=(p,fn,arg,timeout=30000)=>p.waitForFunction(fn,arg,{timeout,polling:100});
 const shot=(p,n)=>p.screenshot({path:path.join(out,n+'.png')}).catch(()=>{});
@@ -77,7 +79,7 @@ async function startRelay(){
 async function stopRelay(){if(!relayProc)return;const p=relayProc;relayProc=null;p.kill('SIGTERM');await new Promise(r=>p.on('exit',r));}
 async function open(n){const c=await chromium.launchPersistentContext(dirs[n],{...launch,...PHONE(...VIEW[n])});const p=c.pages()[0]||await c.newPage();
   p.on('pageerror',e=>errors.push(n+': '+e.message));ctx[n]=c;pg[n]=p;return p;}
-const guestNames=()=>CONF.guests===2?['B','C']:['B'];
+const guestNames=()=>CONF.guests===3?['B','C','D']:CONF.guests===2?['B','C']:['B'];   /* MP-DIPLO5: üçüncü misafir D (gizlilik profili) */
 
 /* kanonik özet (iki sayfada aynı işlev): anahtar sırasından bağımsız JSON + SHA-256 */
 const CANON=`window.__canon=v=>JSON.stringify(v,function(k,x){if(x&&typeof x==='object'&&!Array.isArray(x)){const o={};for(const q of Object.keys(x).sort())o[q]=x[q];return o;}return x;});
@@ -94,7 +96,8 @@ async function design(p,o){const vp=p.viewportSize();if(vp.width>vp.height)await
   finally{await p.setViewportSize(vp);}}
 const DESIGNS={H:{name:'Kızıl Muhafız',mizac:'militarist',origin:'standart',ethics:['mil:2'],civics:['kale_dok']},
   B:{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']},
-  C:{name:'Yeşil Birlik',mizac:'tuccar',origin:'standart',ethics:['aut:-1','mat:1'],civics:['maden_lonca']}};
+  C:{name:'Yeşil Birlik',mizac:'tuccar',origin:'standart',ethics:['aut:-1','mat:1'],civics:['maden_lonca']},
+  D:{name:'Derin Konsey',mizac:'teknokrasi',origin:'standart',ethics:['aut:1'],civics:['sinyal_avci']}};
 async function guestGo(n,c,name){const p=pg[n];await p.goto(origin[n]+'/mp/play?code='+c);await wait(p,()=>window.MP1Join&&document.getElementById('jName'));
   if(name)await p.fill('#jName',name);await tap(p,'[data-j="go"]');}
 async function room({cutAtStart}={}){
@@ -104,7 +107,7 @@ async function room({cutAtStart}={}){
   {const r=await H.evaluate(c=>{Object.assign(CFG,{size:c.size,aiCount:c.ai,seed:c.seed},c.shape?{shape:c.shape}:{},c.planetMul?{planetMul:c.planetMul}:{});return MP1Host.host.configure({size:c.size,aiCount:c.ai,seed:c.seed,...(c.shape?{shape:c.shape}:{}),...(c.planetMul?{planetMul:c.planetMul}:{})});},CONF);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
   if(SCEN==='G'||process.env.MP8_GUARD==='1'){await tap(H,'#mpGuard');await wait(H,()=>MP1Host.lobby.guard===true);metrics.guardOption=true;}   // MP-P0-DESYNC2: oda seçeneği gerçek dokunuşla
   await tap(H,'#mp7EditMe');await design(H,DESIGNS.H);code=await H.evaluate(()=>MP1Host.code);
-  for(const n of guestNames()){const p=pg[n];await guestGo(n,code,n==='B'?'Bora':'Cem');
+  for(const n of guestNames()){const p=pg[n];await guestGo(n,code,n==='B'?'Bora':n==='C'?'Cem':'Deniz');
     await wait(p,()=>MP1Join.screen==='lobby'&&MP1Join.lobby&&MP1Join.lobby.mode==='design'&&document.getElementById('jEditMe'),undefined,40000);
     await tap(p,'#jEditMe');await wait(p,()=>document.getElementById('mp7Head'));await design(p,DESIGNS[n]);
     await wait(p,()=>/kaydedildi/.test(document.getElementById('jDraft').textContent));await tap(p,'#jReady');}
@@ -267,7 +270,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
 (async()=>{tlsK=selfSigned();try{
   relayPort=await freePort();const pport=await freePort();
   px=await startProxy({target:relayPort,cert:tlsK.cert,key:tlsK.key,port:pport,fragment:4096});
-  for(const n of ['H','B','C','X']){lanes[n]=lane(pport);await lanes[n].up();origin[n]='https://localhost:'+lanes[n].port;dirs[n]=fs.mkdtempSync(path.join(os.tmpdir(),'mp8-'+n+'-'));}
+  for(const n of ['H','B','C','D','X']){lanes[n]=lane(pport);await lanes[n].up();origin[n]='https://localhost:'+lanes[n].port;dirs[n]=fs.mkdtempSync(path.join(os.tmpdir(),'mp8-'+n+'-'));}
   metrics.relayPid1=await startRelay();
   const spki=execSync(`openssl x509 -in ${tlsK.cert} -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | base64`).toString().trim();
   launch={executablePath:process.env.STARS_CHROMIUM_PATH||undefined,args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--enable-precise-memory-info','--ignore-certificate-errors-spki-list='+spki]};
@@ -433,6 +436,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
   if(SCEN==='Q')await require('./helpers/war-coalition0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
   if(SCEN==='Z')await require('./helpers/mp-field-fix0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,startRelay,stopRelay,getCode:()=>code,setCode:c=>{code=c;},
     CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance,guestGo,closeAll});
+  if(SCEN==='U')await require('./helpers/mp-diplo5-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});
   if(SCEN==='T')await require('./helpers/mp-techlux0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},
     CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});
   if(SCEN==='V')await require('./helpers/mp-waron0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},

@@ -184,7 +184,7 @@ function sync(){
     if(r&&r.key!==key){recs.delete(r.key);r.key=key;recs.set(key,r);} // exact old note ID, never signature/time guessing
     if(!r&&o.status==='pending'&&G.day<o.expires){const e=G.emps[o.from];
       UI.notify({kind:'aideal',data:{from:o.from,to:0,give:o.give.map(i=>({...i})),want:o.want.map(i=>({...i})),born:o.born,expires:o.expires},ico:'📜',pause:false,
-        title:(o.round>1?'Karşı teklif':'Teklif')+' — '+e.name,sub:'Çok oyunculu teklif · '+(o.want.map(dealLabel).join(', ')||'anlaşma')+' istiyor',key:'mp71:'+o.id});
+        title:o.link?'Barıştırma onayı — '+e.name:(o.round>1?'Karşı teklif':'Teklif')+' — '+e.name,sub:o.link?((()=>{const O=M.ad.raw().find(x=>x.id===o.link);const m=O&&G.emps[O.med&&O.med.giver===O.from?O.to:O.from];return (m?m.name:'Aracı');})())+' aracılığıyla barış: onaylarsan barış ve aracının karşılığı birlikte uygulanır':'Çok oyunculu teklif · '+(o.want.map(dealLabel).join(', ')||'anlaşma')+' istiyor',key:'mp71:'+o.id});   /* MP-DIPLO5 NF-6: onay kartı */
       r=DI.state().records.find(x=>x.key===key);if(r){M.stats.notified++;recs.set(key,r);}}
     if(o.status==='pending')continue;
     /* kabulde motorun executeDeal'i eşleşen kaydı (findDeal) kendisi "kabul edildi" yapar; kart yine de kaldırılmalı */

@@ -1,0 +1,376 @@
+{
+ "results": [
+  {
+   "name": "U0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 4 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 12559
+  },
+  {
+   "name": "U1 NF-2b: C lüks ister → B kabul → C'de bonus host ve misafir dünyasında aynı; D hak bilgisini görmez",
+   "status": "PASS",
+   "ms": 6800
+  },
+  {
+   "name": "U2 NF-3: B Casusluk Ağı önerir (İKİ YÖNLÜ); C çift kabul + hat donar / kopar → tek ağ, bedel bir kez; havuz C haritasında; D'ye sızmaz",
+   "status": "PASS",
+   "ms": 9385
+  },
+  {
+   "name": "U3 NF-6: C Barıştırma (yalnız bilinen savaş, Cephe #) → B kabul → mediating → kayıt → YENİ oda → D onaylar → barış + karşılık bir kez",
+   "status": "PASS",
+   "ms": 17783
+  },
+  {
+   "name": "U4 NF-4: B İLİŞKİ → C'ye tek dokunuş Saldırmazlık (çift dokunuş); sayfa yenilenir → \"Bekliyor\" sürer, ikinci teklif yok; C kabul → \"Kabul edildi\"",
+   "status": "PASS",
+   "ms": 8069
+  },
+  {
+   "name": "U5 birleşik teklif (lüks + kaynak) gönderilirken C hattı kopar → taslak korunur, tek kayıt; kabul anında lüks geçersizse hiçbir şey uygulanmaz",
+   "status": "PASS",
+   "ms": 11321
+  },
+  {
+   "name": "U6 NF-5: insan → AI son tarihsiz Savaş Sözü — erişimsiz hedefte AI gerekçeyle reddeder",
+   "status": "PASS",
+   "ms": 242
+  }
+ ],
+ "metrics": {
+  "scen": "U",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 3,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 348,
+    "buildMs": 396,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 483,
+    "buildMs": 528,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "D",
+    "e": 3,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 592,
+    "buildMs": 647,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 18.8,
+      "p95": 18.8,
+      "max": 18.8
+     },
+     "longtask": {
+      "n": 1,
+      "med": 52,
+      "p95": 52,
+      "max": 52
+     },
+     "heapMB": 16,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 60.8,
+       "p95": 60.8,
+       "max": 60.8
+      },
+      "refresh": {
+       "n": 0
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 688,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 32,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 63.5,
+       "p95": 63.5,
+       "max": 63.5
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.8,
+       "p95": 1.8,
+       "max": 1.8
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 29,
+      "joinErrors": 0
+     },
+     "D": {
+      "build": {
+       "n": 2,
+       "med": 58.4,
+       "p95": 58.4,
+       "max": 58.4
+      },
+      "refresh": {
+       "n": 0
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 722,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 25,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 22609,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 9
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   },
+   {
+    "e": 3,
+    "conn": true
+   }
+  ],
+  "diplo5": {
+   "fx": {
+    "X": 4,
+    "AI": 5
+   },
+   "u1": {
+    "row": "❖ Lüks mal erişimi: ≋ Vakum İpeği · Saf Akıl Ağı → Sen · kabulde alıcıda Endüstriyel dokuma: +%10 mineral, +%8 alaşım bonusu açılır · veren malı kaybetmez, kendi kolonisinden sağlamalı (ithal mal hak olarak verilemez) · savaşta hak biter; ambargo ya da verenin kaynağını kaybetmesi hakkı askıya alır ⛔ veren bu malın kendi kaynağına sahip değil",
+    "h": {
+     "lux": true,
+     "min": 0.42
+    },
+    "g": {
+     "lux": true,
+     "min": 0.42,
+     "net": true
+    },
+    "dLeak": false
+   },
+   "u2": {
+    "a1": {
+     "ok": true,
+     "pending": true
+    },
+    "a2": {
+     "ok": false,
+     "why": "Karar gönderildi; host yanıtı bekleniyor"
+    },
+    "h": {
+     "net": true,
+     "etk": 5880,
+     "pool": 3,
+     "etk0": 6000
+    },
+    "g": {
+     "pool": 3,
+     "own": 0
+    },
+    "dg": {
+     "pool": 0,
+     "mp": false
+    }
+   },
+   "u3": {
+    "list": [
+     "Derin Konsey ile savaş · Cephe #1 (insan — ayrı onay)"
+    ],
+    "front": 1,
+    "dCard": "🕊 Barış",
+    "fin": {
+     "o": "accepted",
+     "l": "accepted",
+     "cmin": 5770,
+     "bmin": 6230,
+     "cmin0": 5970
+    }
+   },
+   "u4": {
+    "st": {
+     "state": "pending",
+     "dis": true
+    },
+    "fin": "Kabul edildi — Saldırmazlık yürürlükte"
+   },
+   "u5": {
+    "kept": true,
+    "added": 1,
+    "trace": [
+     {
+      "tx": "xc9uu2",
+      "step": "draft",
+      "at": 1794859154271,
+      "day": 1,
+      "to": 1,
+      "give": [
+       {
+        "t": "lux"
+       },
+       {
+        "t": "res"
+       }
+      ],
+      "want": [
+       {
+        "t": "res"
+       }
+      ]
+     },
+     {
+      "tx": "xc9uu2",
+      "step": "send",
+      "at": 1794859154271,
+      "day": 1,
+      "cid": "jmwjosqxr6lxc9uu2",
+      "kind": "offer"
+     },
+     {
+      "tx": "xc9uu2",
+      "step": "resend",
+      "at": 1794859163165,
+      "day": 1,
+      "cid": "jmwjosqxr6lxc9uu2",
+      "sent": true,
+      "err": null
+     },
+     {
+      "tx": "xc9uu2",
+      "step": "reply",
+      "at": 1794859163186,
+      "day": 1,
+      "status": "ok",
+      "code": null,
+      "offer": 6,
+      "dup": false
+     },
+     {
+      "tx": "xc9uu2",
+      "step": "msg",
+      "at": 1794859163190,
+      "day": 1,
+      "ok": true,
+      "msg": "Teklif gönderildi — Saf Akıl Ağı. Durum: Gelen kutusu → Gönderilen."
+     }
+    ],
+    "why": "Teknoloji / lüks mal koşulu değişti"
+   },
+   "u6": {
+    "pair": {
+     "a": 4,
+     "x": 5
+    },
+    "r": {
+     "status": "ok",
+     "code": null,
+     "ms": 35,
+     "cid": "jmwjosz10r1erwegj"
+    },
+    "status": "rejected",
+    "why": "Hedefe askerî erişimimiz yok (bilinen hedef sistemi ya da rota yok; pakete geçiş izni eklemek erişimi açabilir)",
+    "war": false
+   }
+  },
+  "errors": []
+ }
+}
