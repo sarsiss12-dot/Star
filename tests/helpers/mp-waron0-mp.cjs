@@ -8,6 +8,7 @@
    V3 ikinci söz (hedef Y) son tarihe kadar tutulmaz → "Çiğnendi": B 'sözünü çiğnedi' hatırlar, ilişki −20; iki aynada durum
    V4 geçersiz şart (insan veren son tarihsiz) gerekçeli ret; hedef elenince söz "Düştü" (ceza yok); aynı kabul iki kez + yanıt sırasında hat
       donar / kopar → tek söz
+   V6 host → misafir (masaüstü): söz → ret → yeniden → geri çekme (iptal); misafir → host: söz → host kabul → kayıt + paneller
    V5 Savaş Merkezi "Şartlı Teklif…" taslağı (p35 açığı): taslak düzenlenir, ayna yeniden kurulur ve masa yeniden açılır → taslak korunur */
 module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,origin,open,ctx,getCode,setCode,CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance}=X;
  const M=metrics.waron={};const H=()=>pg.H,B=()=>pg.B,C=()=>pg.C;const E={};
@@ -118,4 +119,31 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
    const pick=s=>{const d=JSON.parse(s);return JSON.stringify({to:d.to,give:d.give,want:d.want});};
    assert.equal(pick(d2),pick(d1),'ayna yeniden kurulunca taslak aynı');assert.equal(pick(d3),pick(d1),'masa yeniden açılınca taslak aynı');
    assert(items.some(x=>/Destek|Katıl|Cephe/i.test(x))&&items.length>=2,'iki madde masada: '+JSON.stringify(items));await closeUI(C());});
+
+ await test('V6 host → misafir (masaüstü masası): söz → B reddeder → host yeniden gönderir ve geri çeker (iptal); misafir → host: B söz verir, host kabul eder → kayıt + iki panel',async()=>{
+   await closeUI(H());const wName=await H().evaluate(w=>G.emps[w].name,fx.W);
+   await H().evaluate(b=>{UI.forgetDeal(b);UI.openDeal(b);},E.B);await wait(H(),()=>document.querySelector('[data-a="dealSend"]'));
+   await tap(H(),'[data-a="dealAdd"][data-x="give:warOn"]');await wait(H(),()=>document.querySelector('#modal [data-a="pickOne"]'));
+   const idx=await H().evaluate(n=>[...document.querySelectorAll('#modal [data-a="pickOne"]')].findIndex(b=>b.innerText.trim().startsWith(n)),wName);assert(idx>=0,'host hedef listesinde: '+wName);
+   await tap(H(),`#modal [data-a="pickOne"][data-x="${idx}"]`);await wait(H(),()=>/Son tarih/.test(document.getElementById('modal')?.innerText||''));await tap(H(),'#modal [data-a="pickOne"][data-x="1"]');
+   await wait(H(),()=>UI.deal.give.some(i=>i.t==='warOn'&&Number.isInteger(i.until)));const hs=await H().evaluate(()=>document.querySelector('.dealPledgeRow')?.innerText||'');M.v6={hostSum:hs.slice(0,300)};assert.match(hs,/İLAN EDİLMEZ/);await shot(H(),'v6-host-masa');
+   const n0=await H().evaluate(()=>MP1Host.host.dip.offers.length);await tap(H(),'[data-a="dealSend"]');await wait(H(),n=>MP1Host.host.dip.offers.length>n,n0,20000);
+   const o1=await H().evaluate(()=>MP1Host.host.dip.offers.at(-1));M.v6.o1={id:o1.id,from:o1.from,to:o1.to,give:o1.give};assert.equal(o1.from,0);assert.equal(o1.to,E.B);assert(o1.give.some(i=>i.t==='warOn'&&i.target===fx.W&&i.until),'host sözü son tarihli');
+   await settle('v6-o1');const r1=await rec(B(),o1.id);M.v6.reject=await B().evaluate(id=>DiplomaticInbox.resolve(id,false,undefined,G.emps),r1);
+   await wait(H(),id=>MP1Host.host.dip.offers.find(o=>o.id===id).status==='rejected',o1.id,20000);assert.equal((await H().evaluate(()=>(G.p.warPledges||[]).length)),0,'ret: söz yok');
+   const re=await H().evaluate(([b,w,u])=>MP1Host.host.local({kind:'offer',to:b,give:[{t:'warOn',target:w,until:u}],want:[]}),[E.B,fx.W,o1.give.find(i=>i.t==='warOn').until]);assert.equal(re.ok,true,JSON.stringify(re));
+   const o2=await H().evaluate(()=>MP1Host.host.dip.offers.at(-1).id);const wd=await H().evaluate(id=>MP1Host.host.local({kind:'withdraw',offer:id}),o2);M.v6.withdraw=wd;assert.equal(wd.ok,true,JSON.stringify(wd));
+   await settle('v6-geri');const late=await cmd('B',{kind:'respond',offer:o2,action:'accept'});M.v6.late=late;assert.notEqual(late.status,'ok','geri çekilen teklif kabul edilemez');assert.equal((await H().evaluate(()=>(G.p.warPledges||[]).length)),0);
+   /* misafir → host */
+   const hB=await lid(B(),0),yB=await lid(B(),fx.Y),yName=await B().evaluate(y=>G.emps[y].name,yB);await closeUI(B());
+   await B().evaluate(h=>{UI.forgetDeal(h);UI.openDeal(h);},hB);await wait(B(),()=>document.querySelector('[data-a="dealSend"]'));
+   await tap(B(),'[data-a="dealAdd"][data-x="give:warOn"]');await wait(B(),()=>document.querySelector('#modal [data-a="pickOne"]'));
+   const j=await B().evaluate(n=>[...document.querySelectorAll('#modal [data-a="pickOne"]')].findIndex(b=>b.innerText.trim().startsWith(n)),yName);assert(j>=0,'B hedef listesinde: '+yName);
+   await tap(B(),`#modal [data-a="pickOne"][data-x="${j}"]`);await wait(B(),()=>/Son tarih/.test(document.getElementById('modal')?.innerText||''));await tap(B(),'#modal [data-a="pickOne"][data-x="0"]');
+   await wait(B(),()=>UI.deal.give.some(i=>i.t==='warOn'&&Number.isInteger(i.until)));const n1=await H().evaluate(()=>MP1Host.host.dip.offers.length);await tap(B(),'[data-a="dealSend"]');await wait(H(),n=>MP1Host.host.dip.offers.length>n,n1,20000);
+   const o3=await H().evaluate(()=>MP1Host.host.dip.offers.at(-1));M.v6.o3={id:o3.id,from:o3.from,to:o3.to,give:o3.give};assert.equal(o3.from,E.B);assert.equal(o3.to,0);
+   const hr=await waitv(H(),id=>{try{MP71Dip.tick();}catch{}const r=DiplomaticInbox.state().records.find(r=>r.kind==='aideal'&&r.status==='pending'&&(r.key==='deal:mp71:'+id||r.note&&r.note.key==='mp71:'+id));return r?r.id:null;},o3.id,20000);
+   M.v6.hostAccept=await H().evaluate(id=>DiplomaticInbox.resolve(id,true,undefined,G.emps),hr);await wait(H(),b=>(G.emps[b].warPledges||[]).length===1,E.B,20000);await settle('v6-kabul');
+   const pb=await pledges(E.B);M.v6.pb=pb;assert.deepEqual([pb[0].to,pb[0].target,pb[0].state],[0,fx.Y,'open']);
+   M.v6.hostBox=await box(H(),E.B);M.v6.bBox=await box(B(),hB);assert.match(M.v6.hostBox,/Sana verilen söz/);assert.match(M.v6.bBox,/Senin sözün/);await shot(H(),'v6-host-panel');await closeUI(H());await closeUI(B());});
 };

@@ -35,8 +35,12 @@
  },
  "main.js": {
   "beforeSha256": "6cd60850a7fe2e04d871b8718e076389d71748b87cd885ae9ce434bf4a3a9b3b",
-  "afterSha256": "e7328c36d508db0a58114ae546c1eb99e6e06542640ddec5f4472b3e0161e767",
+  "afterSha256": "47c5d9291b51d867cf40f24515fbbe00b877e9158854643a058ce15f7cf1c568",
   "hunks": [
+   {
+    "before": "      if(t==='freight')for(const k of ['source','every','months'])if(_num(it[k])!==null)e[k]=it[k];\n      if(t==='vassal'){if(_str(it.type)!==null)e.type=it.type;if(_str(it.war)!==null)e.war=it.war;}   // BETA-WAR-GOALS.0\n      if(t==='landPromise'){if(Number.isSafeInteger(it.sys))e.sys=it.sys;if(Number.isSafeInteger(it.front))e.front=it.front;}   // BETA-WAR-GOALS.0\n      if (_str(it.r) !== null) e.r = it.r;\n      if (_num(it.v) !== null) e.v = it.v;\n      if (_num(it.n) !== null) e.n = it.n;\n",
+    "after": "      if(t==='freight')for(const k of ['source','every','months'])if(_num(it[k])!==null)e[k]=it[k];\n      if(t==='vassal'){if(_str(it.type)!==null)e.type=it.type;if(_str(it.war)!==null)e.war=it.war;}   // BETA-WAR-GOALS.0\n      if(t==='landPromise'){if(Number.isSafeInteger(it.sys))e.sys=it.sys;if(Number.isSafeInteger(it.front))e.front=it.front;}   // BETA-WAR-GOALS.0\n      if(t==='warOn'&&Number.isSafeInteger(it.until))e.until=it.until;   /* MP-WARON.0: son tarihli söz kartta / karşı teklifte korunur */\n      if (_str(it.r) !== null) e.r = it.r;\n      if (_num(it.v) !== null) e.v = it.v;\n      if (_num(it.n) !== null) e.n = it.n;\n"
+   },
    {
     "before": "   Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺\n   Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */\n/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p35';\nconst DIAG_MAX = 40;\nconst DIAG = [];\nfunction logDiag(tur, mesaj){\n",
     "after": "   Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺\n   Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */\n/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p36';\nconst DIAG_MAX = 40;\nconst DIAG = [];\nfunction logDiag(tur, mesaj){\n"
