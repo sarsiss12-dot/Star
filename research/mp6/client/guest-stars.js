@@ -868,7 +868,10 @@ function chip(text,good){
       (open?'<div class="mp1-sub" id="mpVer">'+esc(diag)+'</div>':'')+
       /* MP-P0-DESYNC1: çubuk açıkken (ve dünya güncel değilken her zaman) elle kurtarma */
       (open&&S.started?'<div class="mp3-minirow mpds-row">'+(S.desync.on?'<b class="mpds-stale" id="mpdsStale">DÜNYA GÜNCEL DEĞİL</b>':'')+'<button class="mp1-btn'+(S.desync.on?' pri':'')+'" data-gds="resync" id="mpdsResync">YENİDEN EŞİTLE</button><button class="mp1-btn" data-gds="copy" id="mpdsCopy">TANIYI KOPYALA</button></div>':'');if(chipEl.innerHTML!==h)chipEl.innerHTML=h;
-    if(text!==undefined&&window.MP61)MP61.status(text,good);}
+    /* MP-SYNC-FED.0 S2: pencere açıkken MP çubuğu karartmanın ALTINDA kalır; eşitleme bekçisinin notu (ör. "Pencere açık — dünya, kapanınca
+       güncellenir") pencere üstü hapa da gider. Eskiden hapa yalnız bağlantı metni gidiyordu: hız bildirimleri görünürken dünyanın neden
+       durduğu görünmüyordu (sahadaki "hız değişiyor, harita donuk" belirtisi). */
+    if(window.MP61)MP61.status(S.sync.note||base.t,S.sync.note?false:base.g);}
   chipEl.title=diag;
   chipEl.style.display=S.started?'':'none';
   S.chipText=base.t;S.chipGood=base.g;

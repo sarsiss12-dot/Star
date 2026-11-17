@@ -1,0 +1,58 @@
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":3.2,"p95":6.1,"max":6.1},"longtask":{"n":0},"heapMB":15,"dom":725,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":35.3,"p95":35.3,"max":35.3},"refresh":{"n":1,"med":1.5,"p95":1.5,"max":1.5},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":53,"p95":53,"max":53},"refresh":{"n":1,"med":4.4,"p95":4.4,"max":4.4},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":722,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS O0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+FAIL O1 kısa kopma (3 sn): kopukken emir yerel reddedilir; dönüşte filo + tersane + bina emri host'ta bir kez, misafirde yansır
+AssertionError [ERR_ASSERTION]: O1-önce move host'ta uygulandı
+
+false !== true
+
+    at chain (/home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:54:138)
+    at async /home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:59:4
+    at async test (/home/user/Star/tests/browser-mp8.cjs:55:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:58:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:441:17
+FAIL O2 açık görünüp veri taşımayan hat (15 sn donma, oyun akarken): algılanır, kurtarılır; donmada verilen emir bir kez uygulanır
+AssertionError [ERR_ASSERTION]: O2-dönüş move host'ta uygulandı
+
+false !== true
+
+    at chain (/home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:54:138)
+    at async /home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:72:4
+    at async test (/home/user/Star/tests/browser-mp8.cjs:55:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:64:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:441:17
+FAIL O3 kayıp dünya güncellemesi (ayna 12 sn düşer, hız / nabız geçer): misafir eksik algılar, yeniden ister, harita ilerler
+AssertionError [ERR_ASSERTION]: O3-dönüş move host'ta uygulandı
+
+false !== true
+
+    at chain (/home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:54:138)
+    at async /home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:81:4
+    at async test (/home/user/Star/tests/browser-mp8.cjs:55:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:74:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:441:17
+PASS O4 kayıp host yanıtı: tersane siparişi host'ta bir kez, misafir sırada görür; ikinci gemi / ödeme yok
+FAIL O5 arka planda bekleyip öne dönme (sayfa 20 sn dondurulur, oyun akar) → dünya yetişir, emir zinciri çalışır
+AssertionError [ERR_ASSERTION]: O5-dönüş move host'ta uygulandı
+
+false !== true
+
+    at chain (/home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:54:138)
+    at async /home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:95:123
+    at async test (/home/user/Star/tests/browser-mp8.cjs:55:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:93:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:441:17
+FAIL O6 aynı odaya yeniden katılma (sayfa yenileme): aynı devlet; emir zinciri; insan → insan teklif kartı ve kabul bir kez
+AssertionError [ERR_ASSERTION]: O6-dönüş move host'ta uygulandı
+
+false !== true
+
+    at chain (/home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:54:138)
+    at async /home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:98:69
+    at async test (/home/user/Star/tests/browser-mp8.cjs:55:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:97:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:441:17
+PASS O7 misafirde açık pencere: ayna bekletilir, hız bildirimi gelir; misafir nedeni görür (sıkışık çubukta da) ve pencere kapanınca yetişir
+  O8: açık federasyon oyu kurulamadı — {"err":"kuruluş: {\"ok\":false,\"why\":\"Önce seçilen ortaklara kuruluş daveti gönder ve açık kabulleri topla\"}"}
+PASS O8 federasyon oyu: B'nin oyu yanıt kaybı ve kopmayla bir kez sayılır
+PASS O9 harita tutarlılığı: dönüşten ve yeni dünya güncellemesinden sonra kendi filo rotası / konumu ve görülebilir sistem sahipliği host ile aynı
+GEÇEN: 5 KALAN: 5

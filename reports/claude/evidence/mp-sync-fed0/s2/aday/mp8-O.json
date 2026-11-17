@@ -1,0 +1,1546 @@
+{
+ "results": [
+  {
+   "name": "O0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 8812
+  },
+  {
+   "name": "O1 kısa kopma (3 sn): kopukken emir yerel reddedilir; dönüşte filo + tersane + bina emri host'ta bir kez, misafirde yansır",
+   "status": "PASS",
+   "ms": 9910
+  },
+  {
+   "name": "O2 açık görünüp veri taşımayan hat (30 sn donma, oyun akarken): algılanır, kurtarılır; donmada verilen emir bir kez uygulanır",
+   "status": "PASS",
+   "ms": 40131
+  },
+  {
+   "name": "O3 kayıp dünya güncellemesi (ayna 12 sn düşer, hız / nabız geçer): misafir eksik algılar, yeniden ister, harita ilerler",
+   "status": "PASS",
+   "ms": 31581
+  },
+  {
+   "name": "O4 kayıp host yanıtı: tersane siparişi host'ta bir kez, misafir sırada görür; ikinci gemi / ödeme yok",
+   "status": "PASS",
+   "ms": 11179
+  },
+  {
+   "name": "O5 arka planda bekleyip öne dönme (sayfa 20 sn dondurulur, oyun akar) → dünya yetişir, emir zinciri çalışır",
+   "status": "PASS",
+   "ms": 25746
+  },
+  {
+   "name": "O6 aynı odaya yeniden katılma (sayfa yenileme): aynı devlet; emir zinciri; insan → insan teklif kartı ve kabul bir kez",
+   "status": "PASS",
+   "ms": 16718
+  },
+  {
+   "name": "O7 misafirde açık pencere: ayna bekletilir, hız bildirimi gelir; misafir nedeni görür (sıkışık çubukta da) ve pencere kapanınca yetişir",
+   "status": "FAIL",
+   "error": "AssertionError [ERR_ASSERTION]: misafir bekletmenin nedenini pencerenin ÜSTÜNDE görür: {\"txt\":\"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸ 2×\",\"top\":false}\n    at /home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:122:4\n    at async test (/home/user/Star/tests/browser-mp8.cjs:55:162)\n    at async module.exports (/home/user/Star/tests/helpers/mp-sync-fed0-mp.cjs:112:2)\n    at async /home/user/Star/tests/browser-mp8.cjs:441:17"
+  },
+  {
+   "name": "O8 federasyon oyu: B'nin oyu yanıt kaybı ve kopmayla bir kez sayılır; ikinci basış ikinci oy değil; sonuç misafir panelinde",
+   "status": "PASS",
+   "ms": 19623
+  },
+  {
+   "name": "O9 harita tutarlılığı: dönüşten ve yeni dünya güncellemesinden sonra kendi filo rotası / konumu ve görülebilir sistem sahipliği host ile aynı",
+   "status": "PASS",
+   "ms": 8080
+  }
+ ],
+ "metrics": {
+  "scen": "O",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 204,
+    "buildMs": 250,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 298,
+    "buildMs": 335,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 6.4,
+      "p95": 6.6,
+      "max": 6.6
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 17,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 47.1,
+       "p95": 47.1,
+       "max": 47.1
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.6,
+       "p95": 2.6,
+       "max": 2.6
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 14,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 26,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 41.9,
+       "p95": 41.9,
+       "max": 41.9
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.5,
+       "p95": 2.5,
+       "max": 2.5
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 722,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 7609,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "sync0": {
+   "orders": [
+    {
+     "label": "O1-önce:move",
+     "kind": "move",
+     "who": "B",
+     "args": {
+      "ok": true,
+      "fleet": 4,
+      "to": 37
+     },
+     "res": {
+      "cid": "jmwkog4et162etgv2",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 555,
+     "ms": 745,
+     "pre": {
+      "h": {
+       "day": 1.25,
+       "wrev": 8,
+       "mrev": 3,
+       "speed": 0
+      },
+      "g": {
+       "day": 1.25,
+       "rev": 3,
+       "applied": 3,
+       "mirrorAgeMs": 966,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 1
+      }
+     },
+     "post": {
+      "h": {
+       "day": 1.25,
+       "wrev": 10,
+       "mrev": 4,
+       "speed": 0
+      },
+      "g": {
+       "day": 1.25,
+       "rev": 4,
+       "applied": 4,
+       "mirrorAgeMs": 288,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 1
+      }
+     }
+    },
+    {
+     "label": "O1-önce:ship",
+     "kind": "ship",
+     "who": "B",
+     "args": {
+      "ok": false,
+      "cls": "kor",
+      "sys": 5,
+      "g0": 0
+     },
+     "res": {
+      "cid": "jmwkog510giku84ud",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 542,
+     "ms": 775,
+     "pre": {
+      "h": {
+       "day": 1.25,
+       "wrev": 10,
+       "mrev": 4,
+       "speed": 0
+      },
+      "g": {
+       "day": 1.25,
+       "rev": 4,
+       "applied": 4,
+       "mirrorAgeMs": 319,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 1
+      }
+     },
+     "post": {
+      "h": {
+       "day": 1.25,
+       "wrev": 12,
+       "mrev": 5,
+       "speed": 0
+      },
+      "g": {
+       "day": 1.25,
+       "rev": 5,
+       "applied": 5,
+       "mirrorAgeMs": 359,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 1
+      }
+     }
+    },
+    {
+     "label": "O1-önce:build",
+     "kind": "build",
+     "who": "B",
+     "args": {
+      "ok": false,
+      "key": "maden",
+      "sys": 5,
+      "pl": 0
+     },
+     "res": {
+      "cid": "jmwkog5m2sa43mcqi",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 23,
+     "ms": 301,
+     "pre": {
+      "h": {
+       "day": 1.25,
+       "wrev": 12,
+       "mrev": 5,
+       "speed": 0
+      },
+      "g": {
+       "day": 1.25,
+       "rev": 5,
+       "applied": 5,
+       "mirrorAgeMs": 377,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 1
+      }
+     },
+     "post": {
+      "h": {
+       "day": 1.25,
+       "wrev": 14,
+       "mrev": 5,
+       "speed": 0
+      },
+      "g": {
+       "day": 1.25,
+       "rev": 5,
+       "applied": 5,
+       "mirrorAgeMs": 659,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 1
+      }
+     }
+    },
+    {
+     "label": "O1-dönüş:move",
+     "kind": "move",
+     "who": "B",
+     "args": {
+      "ok": true,
+      "fleet": 4,
+      "to": 37
+     },
+     "res": {
+      "cid": "jmwkogbc8w4ikrcf4",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 14,
+     "ms": 153,
+     "pre": {
+      "h": {
+       "day": 1.25,
+       "wrev": 15,
+       "mrev": 7,
+       "speed": 0
+      },
+      "g": {
+       "day": 1.25,
+       "rev": 7,
+       "applied": 7,
+       "mirrorAgeMs": 767,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 2
+      }
+     },
+     "post": {
+      "h": {
+       "day": 1.25,
+       "wrev": 17,
+       "mrev": 7,
+       "speed": 0
+      },
+      "g": {
+       "day": 1.25,
+       "rev": 7,
+       "applied": 7,
+       "mirrorAgeMs": 907,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 2
+      }
+     }
+    },
+    {
+     "label": "O1-dönüş:ship",
+     "kind": "ship",
+     "who": "B",
+     "args": {
+      "ok": false,
+      "cls": "kor",
+      "sys": 5,
+      "g0": 1
+     },
+     "res": {
+      "cid": "jmwkogbfh15tq89td",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 579,
+     "ms": 782,
+     "pre": {
+      "h": {
+       "day": 1.25,
+       "wrev": 17,
+       "mrev": 7,
+       "speed": 0
+      },
+      "g": {
+       "day": 1.25,
+       "rev": 7,
+       "applied": 7,
+       "mirrorAgeMs": 921,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 2
+      }
+     },
+     "post": {
+      "h": {
+       "day": 1.25,
+       "wrev": 19,
+       "mrev": 8,
+       "speed": 0
+      },
+      "g": {
+       "day": 1.25,
+       "rev": 8,
+       "applied": 8,
+       "mirrorAgeMs": 335,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 2
+      }
+     }
+    },
+    {
+     "label": "O1-dönüş:build",
+     "kind": "build",
+     "skip": "yuva yok"
+    },
+    {
+     "label": "O2-dönüş:move",
+     "kind": "move",
+     "who": "B",
+     "args": {
+      "ok": true,
+      "fleet": 4,
+      "to": 5
+     },
+     "res": {
+      "cid": "jmwkoh4h8o3kwbyob",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 252,
+     "ms": 1499,
+     "pre": {
+      "h": {
+       "day": 62.84,
+       "wrev": 85,
+       "mrev": 55,
+       "speed": 0
+      },
+      "g": {
+       "day": 62.84,
+       "rev": 55,
+       "applied": 55,
+       "mirrorAgeMs": 1647,
+       "held": 0,
+       "resyncs": 2,
+       "note": "",
+       "speedMsgs": 5
+      }
+     },
+     "post": {
+      "h": {
+       "day": 62.84,
+       "wrev": 87,
+       "mrev": 56,
+       "speed": 0
+      },
+      "g": {
+       "day": 62.84,
+       "rev": 56,
+       "applied": 56,
+       "mirrorAgeMs": 1181,
+       "held": 0,
+       "resyncs": 2,
+       "note": "",
+       "speedMsgs": 5
+      }
+     }
+    },
+    {
+     "label": "O2-dönüş:ship",
+     "kind": "ship",
+     "who": "B",
+     "args": {
+      "ok": false,
+      "cls": "kor",
+      "sys": 5,
+      "g0": 1
+     },
+     "res": {
+      "cid": "jmwkoh5zztn5eyfgf",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 111,
+     "ms": 1696,
+     "pre": {
+      "h": {
+       "day": 62.84,
+       "wrev": 87,
+       "mrev": 56,
+       "speed": 0
+      },
+      "g": {
+       "day": 62.84,
+       "rev": 56,
+       "applied": 56,
+       "mirrorAgeMs": 1238,
+       "held": 0,
+       "resyncs": 2,
+       "note": "",
+       "speedMsgs": 5
+      }
+     },
+     "post": {
+      "h": {
+       "day": 62.84,
+       "wrev": 89,
+       "mrev": 57,
+       "speed": 0
+      },
+      "g": {
+       "day": 62.84,
+       "rev": 57,
+       "applied": 57,
+       "mirrorAgeMs": 662,
+       "held": 0,
+       "resyncs": 2,
+       "note": "",
+       "speedMsgs": 5
+      }
+     }
+    },
+    {
+     "label": "O2-dönüş:build",
+     "kind": "build",
+     "skip": "yuva yok"
+    },
+    {
+     "label": "O3-dönüş:move",
+     "kind": "move",
+     "who": "B",
+     "args": {
+      "ok": true,
+      "fleet": 4,
+      "to": 37
+     },
+     "res": {
+      "cid": "jmwkohuigpaqnwqkh",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 58,
+     "ms": 478,
+     "pre": {
+      "h": {
+       "day": 83.25,
+       "wrev": 115,
+       "mrev": 81,
+       "speed": 0
+      },
+      "g": {
+       "day": 83.25,
+       "rev": 81,
+       "applied": 81,
+       "mirrorAgeMs": 1330,
+       "held": 0,
+       "resyncs": 4,
+       "note": "",
+       "speedMsgs": 8
+      }
+     },
+     "post": {
+      "h": {
+       "day": 83.25,
+       "wrev": 117,
+       "mrev": 82,
+       "speed": 0
+      },
+      "g": {
+       "day": 83.25,
+       "rev": 82,
+       "applied": 82,
+       "mirrorAgeMs": 283,
+       "held": 0,
+       "resyncs": 4,
+       "note": "",
+       "speedMsgs": 8
+      }
+     }
+    },
+    {
+     "label": "O3-dönüş:ship",
+     "kind": "ship",
+     "who": "B",
+     "args": {
+      "ok": false,
+      "cls": "kor",
+      "sys": 5,
+      "g0": 1
+     },
+     "res": {
+      "cid": "jmwkohuwa0nf052st",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 21,
+     "ms": 635,
+     "pre": {
+      "h": {
+       "day": 83.25,
+       "wrev": 117,
+       "mrev": 82,
+       "speed": 0
+      },
+      "g": {
+       "day": 83.25,
+       "rev": 82,
+       "applied": 82,
+       "mirrorAgeMs": 321,
+       "held": 0,
+       "resyncs": 4,
+       "note": "",
+       "speedMsgs": 8
+      }
+     },
+     "post": {
+      "h": {
+       "day": 83.25,
+       "wrev": 119,
+       "mrev": 83,
+       "speed": 0
+      },
+      "g": {
+       "day": 83.25,
+       "rev": 83,
+       "applied": 83,
+       "mirrorAgeMs": 109,
+       "held": 0,
+       "resyncs": 4,
+       "note": "",
+       "speedMsgs": 8
+      }
+     }
+    },
+    {
+     "label": "O3-dönüş:build",
+     "kind": "build",
+     "skip": "yuva yok"
+    },
+    {
+     "label": "O5-dönüş:move",
+     "kind": "move",
+     "who": "B",
+     "args": {
+      "ok": true,
+      "fleet": 4,
+      "to": 5
+     },
+     "res": {
+      "cid": "jmwkoilci0wg51nfs",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 18,
+     "ms": 1518,
+     "pre": {
+      "h": {
+       "day": 118.65,
+       "wrev": 163,
+       "mrev": 113,
+       "speed": 0
+      },
+      "g": {
+       "day": 118.65,
+       "rev": 113,
+       "applied": 113,
+       "mirrorAgeMs": 1621,
+       "held": 0,
+       "resyncs": 5,
+       "note": "",
+       "speedMsgs": 10
+      }
+     },
+     "post": {
+      "h": {
+       "day": 118.65,
+       "wrev": 165,
+       "mrev": 114,
+       "speed": 0
+      },
+      "g": {
+       "day": 118.65,
+       "rev": 114,
+       "applied": 114,
+       "mirrorAgeMs": 868,
+       "held": 0,
+       "resyncs": 5,
+       "note": "",
+       "speedMsgs": 10
+      }
+     }
+    },
+    {
+     "label": "O5-dönüş:ship",
+     "kind": "ship",
+     "who": "B",
+     "args": {
+      "ok": false,
+      "cls": "kor",
+      "sys": 5,
+      "g0": 2
+     },
+     "res": {
+      "cid": "jmwkoinefymzyhrdl",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 26,
+     "ms": 1893,
+     "pre": {
+      "h": {
+       "day": 118.65,
+       "wrev": 165,
+       "mrev": 114,
+       "speed": 0
+      },
+      "g": {
+       "day": 118.65,
+       "rev": 114,
+       "applied": 114,
+       "mirrorAgeMs": 1820,
+       "held": 0,
+       "resyncs": 5,
+       "note": "",
+       "speedMsgs": 10
+      }
+     },
+     "post": {
+      "h": {
+       "day": 118.65,
+       "wrev": 167,
+       "mrev": 115,
+       "speed": 0
+      },
+      "g": {
+       "day": 118.65,
+       "rev": 115,
+       "applied": 115,
+       "mirrorAgeMs": 230,
+       "held": 0,
+       "resyncs": 5,
+       "note": "",
+       "speedMsgs": 10
+      }
+     }
+    },
+    {
+     "label": "O5-dönüş:build",
+     "kind": "build",
+     "skip": "yuva yok"
+    },
+    {
+     "label": "O6-dönüş:move",
+     "kind": "move",
+     "who": "B",
+     "args": {
+      "ok": true,
+      "fleet": 4,
+      "to": 5
+     },
+     "res": {
+      "cid": "jmwkoir1jmj4d8dlm",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 174,
+     "ms": 1233,
+     "pre": {
+      "h": {
+       "day": 118.65,
+       "wrev": 168,
+       "mrev": 117,
+       "speed": 0
+      },
+      "g": {
+       "day": 118.65,
+       "rev": 117,
+       "applied": 117,
+       "mirrorAgeMs": 1923,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 1
+      }
+     },
+     "post": {
+      "h": {
+       "day": 118.65,
+       "wrev": 170,
+       "mrev": 117,
+       "speed": 0
+      },
+      "g": {
+       "day": 118.65,
+       "rev": 117,
+       "applied": 117,
+       "mirrorAgeMs": 2876,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 1
+      }
+     }
+    },
+    {
+     "label": "O6-dönüş:ship",
+     "kind": "ship",
+     "who": "B",
+     "args": {
+      "ok": false,
+      "cls": "kor",
+      "sys": 5,
+      "g0": 3
+     },
+     "res": {
+      "cid": "jmwkois5xcz2x4itr",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 276,
+     "ms": 2621,
+     "pre": {
+      "h": {
+       "day": 118.65,
+       "wrev": 170,
+       "mrev": 117,
+       "speed": 0
+      },
+      "g": {
+       "day": 118.65,
+       "rev": 117,
+       "applied": 117,
+       "mirrorAgeMs": 3152,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 1
+      }
+     },
+     "post": {
+      "h": {
+       "day": 118.65,
+       "wrev": 172,
+       "mrev": 118,
+       "speed": 0
+      },
+      "g": {
+       "day": 118.65,
+       "rev": 118,
+       "applied": 118,
+       "mirrorAgeMs": 1814,
+       "held": 0,
+       "resyncs": 0,
+       "note": "",
+       "speedMsgs": 1
+      }
+     }
+    },
+    {
+     "label": "O6-dönüş:build",
+     "kind": "build",
+     "skip": "yuva yok"
+    }
+   ],
+   "events": [],
+   "fx": {
+    "home": 5
+   },
+   "o1": {
+    "local": {
+     "r": {
+      "ok": false,
+      "why": "host-yok"
+     },
+     "toast": ""
+    }
+   },
+   "o2": {
+    "sent": {
+     "fleet": 6,
+     "to": 37,
+     "ok": true
+    },
+    "firstNoteMs": 16492,
+    "firstNote": "Host yanıt vermiyor — yeniden eşitleniyor",
+    "notes": [
+     {
+      "t": 1794919043813,
+      "note": "",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919046850,
+      "note": "",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919049905,
+      "note": "",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919053108,
+      "note": "",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919056215,
+      "note": "",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919059288,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919060293,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919061312,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919062351,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919063374,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919064390,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919065421,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919066786,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919067974,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919068994,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919070017,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919071038,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919072053,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919073099,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     },
+     {
+      "t": 1794919074111,
+      "note": "Host yanıt vermiyor — yeniden eşitleniyor",
+      "rev": 10,
+      "day": 3,
+      "ws": 1
+     }
+    ],
+    "recoverMs": 33005,
+    "host": {
+     "mv": null
+    }
+   },
+   "o3": {
+    "dropped": {
+     "mirrorDelta": 10,
+     "mirror": 1
+    },
+    "series": [
+     {
+      "t": 0,
+      "hd": 65.18,
+      "gd": 62.84,
+      "hrev": 59,
+      "grev": 57,
+      "note": "",
+      "spd": 6,
+      "res": 2
+     },
+     {
+      "t": 1,
+      "hd": 66.53,
+      "gd": 62.84,
+      "hrev": 60,
+      "grev": 57,
+      "note": "",
+      "spd": 7,
+      "res": 2
+     },
+     {
+      "t": 2,
+      "hd": 66.83,
+      "gd": 62.84,
+      "hrev": 61,
+      "grev": 57,
+      "note": "",
+      "spd": 7,
+      "res": 2
+     },
+     {
+      "t": 3,
+      "hd": 67.39,
+      "gd": 62.84,
+      "hrev": 62,
+      "grev": 57,
+      "note": "",
+      "spd": 7,
+      "res": 2
+     },
+     {
+      "t": 4,
+      "hd": 68.27,
+      "gd": 62.84,
+      "hrev": 63,
+      "grev": 57,
+      "note": "",
+      "spd": 7,
+      "res": 3
+     },
+     {
+      "t": 5,
+      "hd": 69.43,
+      "gd": 62.84,
+      "hrev": 65,
+      "grev": 57,
+      "note": "",
+      "spd": 7,
+      "res": 3
+     },
+     {
+      "t": 6,
+      "hd": 70.35,
+      "gd": 62.84,
+      "hrev": 66,
+      "grev": 57,
+      "note": "",
+      "spd": 7,
+      "res": 3
+     },
+     {
+      "t": 7,
+      "hd": 71.48,
+      "gd": 62.84,
+      "hrev": 67,
+      "grev": 57,
+      "note": "Eşitleme gecikti — yeniden isteniyor",
+      "spd": 7,
+      "res": 3
+     },
+     {
+      "t": 8,
+      "hd": 72.56,
+      "gd": 62.84,
+      "hrev": 68,
+      "grev": 57,
+      "note": "Eşitleme gecikti — yeniden isteniyor",
+      "spd": 7,
+      "res": 3
+     },
+     {
+      "t": 9,
+      "hd": 73.34,
+      "gd": 73.23,
+      "hrev": 70,
+      "grev": 70,
+      "note": "Eşitleme gecikti — yeniden isteniyor",
+      "spd": 7,
+      "res": 4
+     },
+     {
+      "t": 10,
+      "hd": 74.17,
+      "gd": 74.05,
+      "hrev": 71,
+      "grev": 71,
+      "note": "",
+      "spd": 7,
+      "res": 4
+     },
+     {
+      "t": 11,
+      "hd": 74.88,
+      "gd": 74.05,
+      "hrev": 71,
+      "grev": 71,
+      "note": "",
+      "spd": 7,
+      "res": 4
+     },
+     {
+      "t": 12,
+      "hd": 75.52,
+      "gd": 75.04,
+      "hrev": 72,
+      "grev": 72,
+      "note": "",
+      "spd": 7,
+      "res": 4
+     },
+     {
+      "t": 13,
+      "hd": 76.01,
+      "gd": 75.04,
+      "hrev": 72,
+      "grev": 72,
+      "note": "",
+      "spd": 7,
+      "res": 4
+     },
+     {
+      "t": 14,
+      "hd": 77.03,
+      "gd": 76.07,
+      "hrev": 73,
+      "grev": 73,
+      "note": "",
+      "spd": 7,
+      "res": 4
+     },
+     {
+      "t": 15,
+      "hd": 77.93,
+      "gd": 77.06,
+      "hrev": 74,
+      "grev": 74,
+      "note": "",
+      "spd": 7,
+      "res": 4
+     },
+     {
+      "t": 16,
+      "hd": 79.33,
+      "gd": 79.1,
+      "hrev": 76,
+      "grev": 76,
+      "note": "",
+      "spd": 7,
+      "res": 4
+     },
+     {
+      "t": 17,
+      "hd": 80.12,
+      "gd": 79.1,
+      "hrev": 77,
+      "grev": 76,
+      "note": "",
+      "spd": 7,
+      "res": 4
+     },
+     {
+      "t": 18,
+      "hd": 80.87,
+      "gd": 80.12,
+      "hrev": 77,
+      "grev": 77,
+      "note": "",
+      "spd": 7,
+      "res": 4
+     },
+     {
+      "t": 19,
+      "hd": 81.49,
+      "gd": 81.02,
+      "hrev": 78,
+      "grev": 78,
+      "note": "",
+      "spd": 7,
+      "res": 4
+     },
+     {
+      "t": 20,
+      "hd": 82.4,
+      "gd": 82.04,
+      "hrev": 79,
+      "grev": 79,
+      "note": "",
+      "spd": 7,
+      "res": 4
+     },
+     {
+      "t": 21,
+      "hd": 83.21,
+      "gd": 83.02,
+      "hrev": 80,
+      "grev": 80,
+      "note": "",
+      "spd": 7,
+      "res": 4
+     }
+    ],
+    "s0": {
+     "h": {
+      "day": 62.84,
+      "wrev": 89,
+      "mrev": 57,
+      "speed": 0
+     },
+     "g": {
+      "day": 62.84,
+      "rev": 57,
+      "applied": 57,
+      "mirrorAgeMs": 948,
+      "held": 0,
+      "resyncs": 2,
+      "note": "",
+      "speedMsgs": 5
+     }
+    },
+    "s1": {
+     "h": {
+      "day": 83.25,
+      "wrev": 115,
+      "mrev": 81,
+      "speed": 0
+     },
+     "g": {
+      "day": 83.25,
+      "rev": 81,
+      "applied": 81,
+      "mirrorAgeMs": 1289,
+      "held": 0,
+      "resyncs": 4,
+      "note": "",
+      "speedMsgs": 8
+     }
+    }
+   },
+   "o4": {
+    "a": {
+     "ok": false,
+     "cls": "kor"
+    },
+    "before": {
+     "q": 2,
+     "ala": 8879.5007324,
+     "min": 8887.182760000002
+    },
+    "after": {
+     "q": 3,
+     "ala": 8847.5007324,
+     "min": 8887.182760000002,
+     "ships": 3
+    },
+    "dropped": {
+     "result": 1
+    },
+    "g": {
+     "pend": 1,
+     "last": "ok",
+     "trace": []
+    },
+    "spent": 32
+   },
+   "o5": {
+    "catchUpMs": 2238,
+    "s": {
+     "h": {
+      "day": 118.65,
+      "wrev": 163,
+      "mrev": 113,
+      "speed": 0
+     },
+     "g": {
+      "day": 118.65,
+      "rev": 113,
+      "applied": 113,
+      "mirrorAgeMs": 1580,
+      "held": 0,
+      "resyncs": 5,
+      "note": "",
+      "speedMsgs": 10
+     }
+    }
+   },
+   "o6": {
+    "st": "accepted",
+    "got": 11,
+    "n": 1
+   },
+   "o7": {
+    "s0": {
+     "hd": 118.65,
+     "gd": 118.65
+    },
+    "mid": {
+     "hd": 133.91,
+     "gd": 118.65,
+     "note": "Pencere açık — dünya, kapanınca güncellenir",
+     "held": 23,
+     "speedMsgs": 2
+    },
+    "s1": {
+     "hd": 153.3,
+     "gd": 153.3
+    },
+    "vis": {
+     "txt": "ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸ 2×",
+     "top": false
+    },
+    "visSpeed": {
+     "txt": "Kızıl Muhafız hızı 3× yaptı · Pencere açık — dünya, kapanınca güncellenir",
+     "top": false
+    }
+   },
+   "o8": {
+    "fx8": {
+     "k": "savunma",
+     "tok": "1",
+     "wait": [
+      1,
+      2
+     ]
+    },
+    "v1": {
+     "r1": "{\"ok\":true}",
+     "r2": "{\"ok\":true}",
+     "tok": "1"
+    },
+    "v2": "{\"ok\":true}",
+    "h": {
+     "open": true,
+     "yes": 1,
+     "no": 0,
+     "waiting": [
+      2
+     ]
+    },
+    "g": {
+     "open": true,
+     "mine": 1,
+     "waitMe": false
+    }
+   },
+   "o9": {
+    "h": {
+     "f": [
+      {
+       "id": 4,
+       "sys": 5,
+       "to": null,
+       "hp": 0
+      },
+      {
+       "id": 5,
+       "sys": -1,
+       "to": 36,
+       "hp": 0
+      },
+      {
+       "id": 6,
+       "sys": 5,
+       "to": null,
+       "hp": 0
+      },
+      {
+       "id": 28,
+       "sys": 5,
+       "to": null,
+       "hp": 0
+      }
+     ],
+     "own": [
+      5
+     ]
+    },
+    "g": {
+     "f": [
+      {
+       "id": 4,
+       "sys": 5,
+       "to": null,
+       "hp": 0
+      },
+      {
+       "id": 5,
+       "sys": -1,
+       "to": 36,
+       "hp": 0
+      },
+      {
+       "id": 6,
+       "sys": 5,
+       "to": null,
+       "hp": 0
+      },
+      {
+       "id": 28,
+       "sys": 5,
+       "to": null,
+       "hp": 0
+      }
+     ],
+     "own": [
+      5
+     ]
+    }
+   }
+  },
+  "errors": []
+ }
+}
