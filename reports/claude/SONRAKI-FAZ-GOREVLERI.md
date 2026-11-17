@@ -1,4 +1,4 @@
-# STARS — sonraki faz görevleri (MP-DEAL-SYS.0 sonrasında kaydedildi; MP-WARON.0, MP-TECHLUX.0 ve MP-DIPLO5 ile güncellendi)
+# STARS — sonraki faz görevleri (MP-DEAL-SYS.0 sonrasında kaydedildi; MP-WARON.0, MP-TECHLUX.0, MP-DIPLO5 ve MP-SYNC-FED.0 ile güncellendi)
 
 15 Kasım 2026 · p35 / MP.8.9b33 tabanı; 16 Kasım 2026 güncellemeleri p36 / MP.8.9b34 (MP-WARON.0) ve p37 / MP.8.9b35 (MP-TECHLUX.0) · Kanonik pano: [#33](https://github.com/sarsiss12-dot/Star/issues/33) (55 madde). Bu belge yeni kalemleri panonun ilgili açık maddelerine bağlar; panonun satır durumları bu fazda **değiştirilmedi** (hiçbiri TAMAMLANDI değildir).
 
@@ -6,7 +6,9 @@ Durum değerleri panonunkilerdir: `PLANLANDI` = kayda girdi, geliştirme başlam
 
 **16 Kasım 2026 · MP-DIPLO5 (p38 / MP.8.9b36):** NF-2b, NF-3, NF-4, NF-6 geliştirildi ve yerelde doğrulandı (`TEST BEKLİYOR`); NF-5 ölçüldü, kanıtlanan tek kusur (AI'nın son tarihsiz Savaş Sözü kabulü) düzeltildi (`TEST BEKLİYOR`), barışçıl biat daveti eksikliği yeni kayıt NF-7 olarak kullanıcı kararına bırakıldı. Rapor: [MP-DIPLO5-SONUC.md](MP-DIPLO5-SONUC.md).
 
-**Sıradaki geliştirme adayı: kullanıcı kararına göre NF-7 (AI barışçıl biat daveti) ya da NF-8 (federasyon gündem kuyruğu ve acil teklif önceliği).**
+**17 Kasım 2026 · MP-SYNC-FED.0 (p38 / MP.8.9b37):** Barıştırma son onayı istihbarat kapısı düzeltildi; misafirde açık pencere bekletmesinin nedeni pencere üstünde görünür; bağlantı / kayıt / gündem senaryoları eklendi. NF-8 bağlantısı düzeltildi: federasyon gündem kuyruğu **#50**, Galaktik Konsey iki aşamalı gündemi **#51** (ayrı iş, NF-10). Rapor: [MP-SYNC-FED0-SONUC.md](MP-SYNC-FED0-SONUC.md).
+
+**Sıradaki geliştirme adayı: kullanıcı kararına göre NF-7 (AI barışçıl biat daveti), NF-9 (federasyon üyesinin savunma savaşı bilgisi) ya da NF-10 (Konsey gündem seçimi).**
 
 | Kod | Görev | Bağlı pano maddesi | Durum | Bağımlılık |
 |---|---|---|---|---|
@@ -18,7 +20,11 @@ Durum değerleri panonunkilerdir: `PLANLANDI` = kayda girdi, geliştirme başlam
 | NF-2b | Lüks mal erişim hakkının (`luxGrant`) ekonomik etkisi | #40, NF-2 | `TEST BEKLİYOR` (MP-DIPLO5, p38; kullanıcı kararıyla) | Tek oyunculu ekonomi davranış kararı (ayrı faz); kontrol–aday + plasebo bandı |
 | NF-6 | Barıştırma (`peaceWith`) MP müzakere maddesi | #40, MP.6.2 barış | `TEST BEKLİYOR` (MP-DIPLO5, p38) | Savaş defteri (`warLedger`) cephe kimliği, MP-DEAL-SYS.0 tek işlemli teklif |
 | NF-7 | AI barışçıl biat daveti (güçlü AI → zayıf devlet / oyuncu `demandVassal`) — **kullanıcı kararı bekliyor** | #44 | `PLANLANDI` | NF-5 ölçümü: AI kodunda çağıran yol yok; yeni AI stratejisi ayrı faz kararı |
-| NF-8 | Federasyon gündem kuyruğu ve acil teklif önceliği (bağımsız sonraki faz) | #51, BETA-BOARD.1 kuyruğu | `PLANLANDI` | — |
+| NF-8 | Federasyon gündem kuyruğu ve acil teklif önceliği (p38'de mevcut `fedAgendaEnqueue` / `fedAdvanceAgenda` / `fedAgendaOrder` / `fedEmergencyId`) | #50 (BETA-BOARD.1 kuyruğu) | `TEST BEKLİYOR` (MP-SYNC-FED.0 doğrulaması; motor değişmedi) | — |
+| NF-9 | Federasyon üyesinin başka üyenin savunma savaşını bilmesi (bugün `knownWarPairs`: istihbarat ≥3; destek düğmesi yoksa görünmez) — **kullanıcı kararı bekliyor** | #50 | `PLANLANDI` | Gizlilik kuralı kararı (tek oyunculu da etkilenir) |
+| NF-10 | Galaktik Konsey gündem seçimi (iki aşamalı gündem) | #51 | `PLANLANDI` | — |
+| NF-11 | Tersane yerleşimi (kuyruk / sipariş düzeni) | — | `PLANLANDI` | — |
+| NF-12 | Gezegen ekonomisi dökümü (koloni başına gelir/gider kırılımı) | #19 (kısmî) | `PLANLANDI` | — |
 
 ## NF-1 — Genel Savaş Sözü (`warOn`) MP desteği
 
@@ -86,3 +92,10 @@ Kabul ölçütleri: aynı Save8'den kontrol ve aday kolları, plasebo bandı; fa
 - **NF-5** — `TEST BEKLİYOR`. Ölçüm (8 doğal kampanya) + kanıtlanan kusurun düzeltmesi: AI son tarihsiz Savaş Sözünü erişim / güç oranı / bütçe kapısıyla değerlendirir. Federasyon savunmasında katılmayanlar kural gereği; barışçıl biat daveti hiç yok → NF-7.
 - **NF-6** — `TEST BEKLİYOR`. Barıştırma cephe kimliğine bağlı; diğer savaşanın onayı (AI: mevcut barış değerlendirmesi; insan: iki aşamalı işlem, paketle kalıcı).
 - Açık kalan saha işleri (gerçek oturum / gerçek kayıtla doğrulanana kadar açık): tek başına kayıttan dönüşte görünmeyen olaylar; uzun oturumda misafir haritasının donması.
+
+## MP-SYNC-FED.0 sonuçları (17 Kasım 2026, p38 / MP.8.9b37)
+
+- **NF-6 (Barıştırma son onayı)** — `TEST BEKLİYOR`. İkinci aşamada asıl teklifin istihbarat şartı (`dipAssetGate`, karşı teklif istisnası dahil) yeniden denetlenir; geçersizse işlem gerekçeyle kapanır, hiçbir şey uygulanmaz; diğer savaşana yalnız genel metin gider.
+- **NF-8** — `TEST BEKLİYOR`. Kuyruk motoru p38'de doğru çalışıyor (yeni test p38'de de 6/0); savunma oyu açıkken başka destek talebi kuyruğa girer. Sahada destek talebinin verilememesi büyük olasılıkla bilgi kapısıdır (NF-9).
+- Misafir eşitlemesi: açık pencerede dünya bekletmesinin nedeni artık pencere üstü hapta (p38'de karartmanın altındaydı). Gerçek oturumda doğrulanana kadar saha vakası (uzun oturumda harita donması) açık.
+- Kayıt: p33 paketi adayda açılır; aday paketi eski sürümde "Kayıt başka bir oyun sürümüne ait." gerekçesiyle reddedilir. Kullanıcının gerçek kaydıyla doğrulama yapılmadı (dosya yok).

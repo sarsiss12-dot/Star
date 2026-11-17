@@ -1,0 +1,9 @@
+PASS V0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS V1 C gerçek masada son tarihli savaş sözü + karşılık; özet İLAN EDİLMEZ; B karttan "Masaya otur" → ⏱ → karşı teklif; C kabul → tek söz, savaş yok; B/C aynada, host satırı yok
+PASS V2 kaydet → host kapanır → YENİ oda → misafirler döner → aynı söz; C söz panelinden NORMAL savaş ilanı → "Tutuldu" (B de görür)
+PASS V3 ikinci söz (hedef Y) son tarihe kadar tutulmaz → "Çiğnendi": B sözünü çiğnedi hatırlar, ilişki −20; iki aynada durum
+PASS V4 geçersiz şart gerekçeli; hedef elenince "Düştü" (ceza yok); aynı kabul iki kez + hat donar / kopar → tek söz
+PASS V5 Savaş Merkezi "Şartlı Teklif…" taslağı: düzenlenir, ayna yeniden kurulur ve masa yeniden açılır → taslak korunur
+PASS V6 host → misafir (masaüstü masası): söz → B reddeder → host yeniden gönderir ve geri çeker (iptal); misafir → host: B söz verir, host kabul eder → kayıt + iki panel
+GEÇEN: 7 KALAN: 0
+EXIT 0

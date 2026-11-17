@@ -1,0 +1,10 @@
+PASS U0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 4 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS U1 NF-2b: C lüks ister → B kabul → C'de bonus host ve misafir dünyasında aynı; D hak bilgisini görmez
+PASS U2 NF-3: B Casusluk Ağı önerir (İKİ YÖNLÜ); C çift kabul + hat donar / kopar → tek ağ, bedel bir kez; havuz C haritasında; D'ye sızmaz
+PASS U3 NF-6: C Barıştırma (yalnız bilinen savaş, Cephe #) → B kabul → mediating → kayıt → YENİ oda → D onaylar → barış + karşılık bir kez
+PASS U4 NF-4: B İLİŞKİ → C'ye tek dokunuş Saldırmazlık (çift dokunuş); sayfa yenilenir → "Bekliyor" sürer, ikinci teklif yok; C kabul → "Kabul edildi"
+PASS U5 birleşik teklif (lüks + kaynak) gönderilirken C hattı kopar → taslak korunur, tek kayıt; kabul anında lüks geçersizse hiçbir şey uygulanmaz
+PASS U7 S1: C lüks + Barıştırma ister → B kabul (mediating) → C'nin B üzerindeki istihbaratı düşer → D gerçek karttan onaylar → hiçbir şey uygulanmaz; D'ye ayrıntı yok
+PASS U6 NF-5: insan → AI son tarihsiz Savaş Sözü — erişimsiz hedefte AI gerekçeyle reddeder
+GEÇEN: 8 KALAN: 0
+EXIT 0
