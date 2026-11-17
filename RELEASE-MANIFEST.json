@@ -1,15 +1,15 @@
 {
-  "phase": "MP-SYNC-FED.1",
-  "build": "96h10p39",
+  "phase": "REINF-ROUTE.0",
+  "build": "96h10p40",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p39",
-  "parent_commit": "1a6e404aa91215a9e037063c6ff33426747e9e29",
-  "parent_zip_sha256": "1b1917831ff9e437ed1ce2c1ff6458f59145835bb0859f1a7a4bf5b970823253",
+  "pwa_cache": "stars-v96h10p40",
+  "parent_commit": "293de5a38e579dc1e051dfe4282e2ab8fcf1aeaa",
+  "parent_zip_sha256": "3eabc1562c378ae3e841cc16466736cb8fdb023de26cabf85df629178623ab64",
   "file_count": 19,
   "files": {
     "ai.js": "3028fee904ae51f09f1de6937de0cd6c756ad50172d171eb32433e43074b201c",
-    "archive-ui.js": "b8eee56d855bdd7070be377382fa6fdcbf0ba73b3e15054fa06fdbf894f0bd90",
+    "archive-ui.js": "f6b98392e8b85c7717fe5b4e4c778f2c47304ce89fd84a93460b998df6582a3c",
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "e63f4d2889b866d02e4f366d7185d5396f51faa87cbdefa818f4a13d95c2b35a",
     "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
@@ -21,12 +21,12 @@
     "economy.js": "99c1d3c3a1e553230e559dce3df0e3874dddc9f1f6a4c22e878e95b45a711043",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
     "index.html": "3bb3c8291d247981322a54cd347782a8d4d727e01a0e60c707667bcf95d63bc9",
-    "main.js": "8b698c3f68fc8c696f10969d98e734c454e2c6193d2d56793253ac12964fc4d2",
+    "main.js": "33ad59fdeb3db01f0a221ce3626d02e88aa2da71abbea8d3c90dcc3164ff9b5a",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "5b40278d2e0c34a25db5838c87c691f0b23738b0f3b3af7b87ae1fcd85badddc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "82f05bdb26758993ebee9275354422e513f577cca4520fe82d2ec0e6dc8c2959",
-    "ui.js": "2f17c3ffb87e864883af1bcf64faf0e88fc70d7e2f789baed22e92cf8307d7d9"
+    "sw.js": "ef2c07eb14bca018b123a8160a73efa8ad1002709a9f5f83cedb6f9ab595c5cf",
+    "ui.js": "1b64fd32e5c9845e4c51e66df9afe13d943541124c4aed30d049fde94ef2a507"
   },
-  "description": "MP-SYNC-FED.1: Federasyon savunma çağrısı (NF-9) — üye, başka bir üyenin geçerli savunma savaşı için federasyon panelinden destek talebi açar; yalnız savunulan üye, saldırgan, cephe ve çağrının durumu gösterilir, uygunluk mevcut önerge ve gündem kurallarıyla (host, tek oyunculu ve misafir aynı işlev). Harita görünürlüğü, filo konumu ve istihbarat kuralları değişmedi. Save8 v8, paket 4, protokol 1."
+  "description": "REINF-ROUTE.0: Otomatik / elle filo takviyesi, kuşatma veya işgal için düşman sistemine giren ana filoya ulaşır — hedef sistem yalnız düşman sahipliği nedeniyle kapanmaz (görünür silahlı düşman filosu engellemeye devam eder); yolda tehdit görülünce aynı adımda güvenli sapma aranır, yoksa güvenli sistemde beklenir ve rota açılınca / ana filo yer değiştirince kendiliğinden devam edilir (insan oyuncu; AI seçimi değişmedi). Ana filo yok olunca ona giden sevkiyatlar Haberler → Sevkiyatlar ve FİLO → SEVKİYATLAR bölümünde eski hedef başına tek kartta (Toplu Kurtarma ile aynı gruplama). Save8 v8, paket 4, protokol 1."
 }

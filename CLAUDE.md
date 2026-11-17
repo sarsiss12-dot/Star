@@ -2,7 +2,16 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — MP-SYNC-FED.1 (p39 / MP.8.9b38, 17 Kasım 2026)
+## Son teslim — REINF-ROUTE.0 (p40 / MP.8.9b39, 17 Kasım 2026)
+
+- Ayrıntı: `reports/claude/REINF-ROUTE0-SONUC.md`, kanıt `reports/claude/evidence/reinf-route0/`. Dal `claude/stars-reinf-route0` (PR #55 `293de5a` üstünde). Save8v8/paket4/protokol1; p40 paket yükleyicisi p6–p39, p25u1, p27s1 kabul eder. ZIP `releases/stars-faz96h10p40.zip`.
+- Takviye rotası (main.js, yalnız insan; AI aynen): `reinforcementThreats` alt kümeleri `owned` / `armed` / `held`; `reinforcementPassable` (görünür silahlı düşman filosu her zaman kapalı; hedef, yalnız iddia edilen kolonisiz düşman sistemi ve kendi silahlı filonun tuttuğu sistem açık; kolonili ara sistem kapalı) `reinforcementRoutes` + adım denetiminde (yolda tehdit → aynı adımda `followRallyFleet` ile sapma). `shipmentAutoResume`: insanın güvenli filo takviyesi `paused` olmaz, 5 günde bir ve ana filo yer değiştirince (`f.rallyTo`) yeniden dener (`attempts`≤1). `shipmentStatus` "Bekleme yeri". `fleetAutoReinforceTick` her insan devlet (p39'da MP uzak insanın Otomatik Takviyesi sipariş vermiyordu).
+- Ek: AI dışı / devlet 0 dışı insanın filo tehdidi görünürlüğü `humanVisionContext(e).visible` (misafir haritasıyla aynı; müttefik sensör paylaşımı dahil, görünürlükten çıkan filo sayılmaz); `REINF_VIS_BUSY` explorationContext iç çağrısında eski küme. Test R12.
+- Kart: `UI.shipmentLostCards` (`fleetRecoveryGroups`, eski filo kimliği başına tek `<details class="shipLostCard">`, "Filo #id · Hedef kayıp · n takviye gemisi", TOPLU KURTARMA + her sevkiyatın SEVKİYATI YÖNET), `shipmentsSection` kayıp hedefli satırı tekrarlamaz; Haber ağında **Sevkiyatlar · n** sekmesi (`ArchiveUI.shipments`, eylem `shipmentsNews`, misafir VIEW).
+- Test: `node tests/reinf_route0_test.js` (11; p39 2/9), `_cards_test.js` (4; p39 0/4), `_equivalence_test.js` (`STARS_CONTROL_ROOT`=p39 sabit kopya; 3 tohum × 48 ay), `node tests/browser-reinf-route0-sp.cjs` (2; p39 0/2), `MP8_SCEN=X node tests/browser-mp8.cjs` (host + B; p39 2/3). `STARS_ROOT=<kök>` Node ve SP testlerinde eski sürümü koşar. faz93b "4 denemede durur" artık AI vakası + insan için ayrı vaka.
+- Koruma: `reinf-route0-reviewed` ← `mp-sync-fed1-reviewed` ← `mp-sync-fed0-reviewed` ← … (stripReviewedSyncFed1 önce stripReviewedReinfRoute0'ı çağırır).
+
+## Önceki teslim — MP-SYNC-FED.1 (p39 / MP.8.9b38, 17 Kasım 2026)
 
 - Ayrıntı: `reports/claude/MP-SYNC-FED1-SONUC.md`, kanıt `reports/claude/evidence/mp-sync-fed1/`. Dal `claude/stars-mp-sync-fed1` (PR #54 / `1a6e404` üstünde). Save8v8/paket4/protokol1; p39 paket yükleyicisi p6–p38, p25u1, p27s1 kabul eder. ZIP `releases/stars-faz96h10p39.zip`. Canlı Render p33 / MP.8.9b30 sunuyordu.
 - NF-9: `diplomacy.js fedDefenseCalls(viewer)` (üyelerin geçerli savunma savaşları — `fedEmergencyId` tanımı; savunulan, saldırgan, cephe, durum, `canFedMotion('joinWar')` gerekçesi; dünyaya yazmaz, RNG yok). `ui.js fedGovernance` ASKERÎ sekmesinde "🛡 Savunma çağrıları" (`.fedDefCall[data-front][data-state]`). MP: `pol.fed.defCalls` (host), guest-stars `fedDefenseCalls` / `canFedMotion(joinWar)` host satırı. Federasyon paneli `#diploPane` (modal değil); `openFed` dünya değişince sekmeyi sıfırlar — testte `openFed(); fedTab='military'; openFed()`.
@@ -10,7 +19,7 @@ Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strat
 - Test: `node tests/mp_sync_fed1_defcall_test.js` (7; p38 0/7), `mp_sync_fed1_equivalence_test.js` (`STARS_CONTROL_ROOT`=p38 sabit kopya; 3 tohum × 48 ay), `MP8_SCEN=J` (kayıt → yeni oda, olaylar, ilk tersane emri, yanıt kaybı), `MP8_SCEN=I MP8_I_MIN=15` (500 / 16 AI / host + 2 misafir; pencere açık bekleme ↔ kapalı donma ayrı; görsel tutarlılık; sensör), `MP8_SCEN=M` (NF-9 host + B + C + federasyon dışı D; p38 2/3).
 - Koruma: `mp-sync-fed1-reviewed` ← `mp-sync-fed0-reviewed` ← `mp-diplo5-reviewed` ← … (stripReviewedSyncFed0 önce stripReviewedSyncFed1'i çağırır).
 
-## Önceki teslim — MP-SYNC-FED.0 (p38 / MP.8.9b37, 17 Kasım 2026)
+## Daha önceki teslim — MP-SYNC-FED.0 (p38 / MP.8.9b37, 17 Kasım 2026)
 
 - Ayrıntı: `reports/claude/MP-SYNC-FED0-SONUC.md`, kanıt `reports/claude/evidence/mp-sync-fed0/`. Dal `claude/stars-mp-sync-fed0` (p38 `0ecb080` üstünde). **Runtime 19 dosya değişmedi** (build 96h10p38, ZIP yok); yalnız MP kaynakları + sürüm işareti. Canlı Render bu fazda p33 / MP.8.9b30 sunuyordu.
 - S1 Barıştırma son onayı: mp-core `peaceWithFinalGate` (asıl teklifin dealQuote + `dipAssetGate`, karşı teklif istisnası `O.prev`) üç yolda (`peaceWithLinkReply`, `respond` bağlı kayıt, `dipSweep` mediating); `peaceWithClose` diğer savaşana yalnız genel metin (`PW_PUBLIC`). Test `node tests/mp_sync_fed0_peacewith_test.js` (6; p38 3/3), MP8 U7.

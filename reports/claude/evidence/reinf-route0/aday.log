@@ -1,0 +1,19 @@
+== aday
+✓ R1 sipariş sınırdan önce, üretim sonra: takviye düşman sistemindeki ana filoya katılır
+✓ R2 ana filo düşman sistemindeyken otomatik takviye sipariş verir ve teslim eder
+✓ R3 yolda görünür düşman filosu: güvenli sapma rotasıyla ulaşır
+✓ R4 güvenli rota yok: bekler, yer ve neden görünür; rota açılınca kendiliğinden devam eder; ikinci sipariş / ödeme yok
+✓ R5 beklerken ana filo ulaşılabilir sisteme geçince hemen devam eder
+✓ R6 bekleyen takviye kayıt / devam sonrası korunur ve rota açılınca teslim edilir
+✓ R7 hedef sistemde görünür düşman filosu varken takviye girmez, bekler
+✓ R8 AI devleti: düşman sistemindeki ana filoya takviye kuralı eskisiyle aynı
+✓ R9 uzak insan devletin Otomatik Takviyesi sipariş verir, düşman sistemindeki ana filoya teslim eder
+✓ R10 düşman toprak iddiasındaki boş sistemlerden geçerek ana filoya ulaşır
+✓ R11 kolonili düşman ara sistemi kapalı; kendi silahlı filon tutuyorsa açık
+GEÇEN: 11 KALAN: 0
+✓ C1 40 gemi / tek eski hedef → tek kart; sınıf, sayı, bekleme sistemleri ve kurtarma düğmeleri kartta
+✓ C2 aynı adlı iki farklı eski filo → iki kart; toplamlar ayrı
+✓ C3 farklı sistemlere dağılmış + kayıt / devam sonrası toplam aynı
+✓ C4 Haberler penceresinde Sevkiyatlar sekmesi aynı bölümü açar
+GEÇEN: 4 KALAN: 0
+GEÇEN: 32 KALAN: 0

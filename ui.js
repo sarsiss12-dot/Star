@@ -155,8 +155,25 @@ const UI = {
     let h=`<section class="shipmentsAll"><div class="ph">SEVKİYATLAR (${rows.length})${n?' · '+n+' bekliyor':''}</div>`;
     h+=`<button class="abtn ${n?'pri':''}" data-a="shipmentRetryAll" ${n&&!busy?'':'disabled'}>${busy?'Host denetliyor…':'Bekleyenleri Yeniden Dene ('+n+')'}</button>`;
     if(this._shipmentRetryResult)h+=`<div class="mini shipmentRetryResult">${esc(this._shipmentRetryResult)}</div>`;
-    for(const {f,cls} of rows)h+=`<div class="box shipmentAllRow" data-cls="${cls}"><div class="mini"><b>${esc(f.name||('Filo '+f.id))}</b> · ${f.ships.length} gemi · ${lbl[cls]}</div><div class="mini">${esc(shipmentStatus(f))}</div><button class="abtn" data-a="shipmentMenu" data-x="${f.id}">SEVKİYATI YÖNET</button></div>`;
+    const lost=this.shipmentLostCards(),grouped=lost.ids;h+=lost.html;   /* REINF-ROUTE.0: kayıp hedef başına tek kart */
+    for(const {f,cls} of rows)if(!grouped.has(f.id))h+=`<div class="box shipmentAllRow" data-cls="${cls}"><div class="mini"><b>${esc(f.name||('Filo '+f.id))}</b> · ${f.ships.length} gemi · ${lbl[cls]}</div><div class="mini">${esc(shipmentStatus(f))}</div><button class="abtn" data-a="shipmentMenu" data-x="${f.id}">SEVKİYATI YÖNET</button></div>`;
     return h+'<div class="mini">Yolda, savaşta, geri çekilen ve birleşme bekleyen sevkiyatlar değişmez. Hedefi kaybolan sevkiyat için SEVKİYATI YÖNET → yeni hedef.</div></section>';
+  },
+  /* REINF-ROUTE.0 — ana filo yok olunca ona giden sevkiyatlar tek kartta: fleetRecoveryGroups (Toplu Kurtarma ile aynı gruplama,
+     eski filo kimliğine göre; aynı adlı iki eski filo iki kart). Eski filo adı kayıtta tutulmaz → başlıkta hedef kimliği.
+     Açılınca sınıf / sayı, bekleme sistemleri ve her sevkiyatın kendi SEVKİYATI YÖNET düğmesi; TOPLU KURTARMA mevcut pencere. */
+  shipmentLostCards(){
+    const groups=(typeof fleetRecoveryGroups==='function'?fleetRecoveryGroups(G.p):[]).filter(g=>g.ships.length),ids=new Set();let html='';
+    for(const g of groups){
+      const n=g.ships.reduce((a,f)=>a+f.ships.length,0),cls={},at=new Map();
+      for(const f of g.ships){ids.add(f.id);for(const s of f.ships)cls[s.c]=(cls[s.c]||0)+1;
+        const k=f.mv?'Yolda → '+(G.sys[f.mv.to]?.name||'?'):(G.sys[f.sys]?.name||'Yolda');if(!at.has(k))at.set(k,[]);at.get(k).push(f);}
+      html+=`<details class="box shipLostCard" data-group="${g.id}" data-ships="${n}"><summary class="mini"><b>Filo #${g.id} · Hedef kayıp · ${n} takviye gemisi</b>${g.jobs.length?' · '+g.jobs.length+' ödenmiş sipariş bekletiliyor':''}</summary>
+        <div class="mini">${Object.entries(cls).sort((a,b)=>b[1]-a[1]).map(([c,k])=>k+' × '+esc(SHIPS[c]?.n||c)).join(' · ')}</div>
+        ${[...at].map(([k,list])=>`<div class="mini shipLostAt">${esc(k)}: ${list.reduce((a,f)=>a+f.ships.length,0)} gemi · ${list.length} sevkiyat ${list.map(f=>`<button class="ch" data-a="shipmentMenu" data-x="${f.id}">${esc(f.name||('Filo '+f.id))}</button>`).join('')}</div>`).join('')}
+        <button class="abtn pri" data-a="fleetRecovery" data-x="${g.id}">TOPLU KURTARMA · yeni hedef / beklet / birleştir</button></details>`;
+    }
+    return {html,ids,groups:groups.length};
   },
   shipmentRow(f,action=true){
     const d=f.shipment||{},target=d.fleet??f.joinFleet,main=G.fleets.find(x=>x.id===target&&x.e===f.e&&x.ships.length);
@@ -571,7 +588,7 @@ const UI = {
         if(r&&r.pending){this._shipmentRetryResult=r.why||'';this.keepScroll=true;this.refresh();break;}
         this._shipmentRetryPending=false;
         this._shipmentRetryResult=r.ok?r.text:r.why;if(r.ok)say('SEVKİYAT — '+r.text,'sci');else say(r.why,'war');
-        this.keepScroll=true;this.refresh();break;
+        this.keepScroll=true;this.refresh();if(typeof ArchiveUI!=='undefined'&&ArchiveUI.mode==='ship'&&$('archiveShip'))ArchiveUI.shipments();break;
       }
       case 'shipmentApply': {
         const [token,choice]=String(x).split(':'),p=this._shipmentPending;

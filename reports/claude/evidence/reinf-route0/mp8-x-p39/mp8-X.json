@@ -1,0 +1,163 @@
+{
+ "results": [
+  {
+   "name": "X0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 6744
+  },
+  {
+   "name": "X0 fikstür: B ana filosu + bileşim, AI ile savaş, ulaşılabilir AI sistemi (host)",
+   "status": "PASS",
+   "ms": 343
+  },
+  {
+   "name": "X1 sipariş sınırdan önce (B gerçek dokunuş FİLO TAKVİYESİ), ana filo düşman sistemine geçer, üretim sonra biter → katılır; B aynasında 7",
+   "status": "FAIL",
+   "error": "AssertionError [ERR_ASSERTION]: yola çıktı: {\"ship\":1,\"moving\":0,\"st\":[\"Bilinen düşman tehdidi — güvenli rota yok · Otomatik deneme sınırına ulaşıldı; yeniden dene / hedef değiştir\"],\"main\":6}\n    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl39/tests/helpers/reinf-route0-mp.cjs:47:50\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl39/tests/browser-mp8.cjs:60:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl39/tests/helpers/reinf-route0-mp.cjs:41:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl39/tests/browser-mp8.cjs:447:17"
+  },
+  {
+   "name": "X2 ana filo düşman sistemindeyken B gerçek dokunuşla OTOMATİK TAKVİYE: AÇIK → host sipariş verir → teslim; B aynasında 8",
+   "status": "FAIL",
+   "error": "AssertionError [ERR_ASSERTION]: otomatik sipariş: undefined\n\n0 !== 1\n\n    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl39/tests/helpers/reinf-route0-mp.cjs:55:102\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl39/tests/browser-mp8.cjs:60:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl39/tests/helpers/reinf-route0-mp.cjs:50:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl39/tests/browser-mp8.cjs:447:17"
+  },
+  {
+   "name": "X3 ana filo yok olunca 4 sevkiyat → B Haberler → Sevkiyatlar: tek kart, host ile aynı başlık, TOPLU KURTARMA",
+   "status": "FAIL",
+   "error": "locator.tap: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.archiveTabs [data-a=\"shipmentsNews\"]').first()\u001b[22m\n\n    at tap (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl39/tests/browser-mp8.cjs:67:244)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl39/tests/helpers/reinf-route0-mp.cjs:65:80\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl39/tests/browser-mp8.cjs:60:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl39/tests/helpers/reinf-route0-mp.cjs:59:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl39/tests/browser-mp8.cjs:447:17"
+  }
+ ],
+ "metrics": {
+  "scen": "X",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 1,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 367,
+    "buildMs": 384,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 3.4,
+      "p95": 3.4,
+      "max": 3.4
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 16,
+     "dom": 724,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 31.5,
+       "p95": 31.5,
+       "max": 31.5
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.6,
+       "p95": 1.6,
+       "max": 1.6
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 21,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 9164,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 7
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   }
+  ],
+  "reinf": {
+   "fx": {
+    "fleet": 29,
+    "yard": 5,
+    "target": 44,
+    "ai": 3,
+    "t": true,
+    "name": "Orrrus-77",
+    "path": "20>12>44"
+   },
+   "x1finish": 1,
+   "x1": {
+    "before": 6,
+    "exit": 1,
+    "last": {
+     "ship": 1,
+     "moving": 0,
+     "st": [
+      "Bilinen düşman tehdidi — güvenli rota yok · Otomatik deneme sınırına ulaşıldı; yeniden dene / hedef değiştir"
+     ],
+     "main": 6
+    },
+    "main": 6
+   },
+   "x3": {
+    "groups": 1,
+    "ships": 5
+   }
+  },
+  "errors": []
+ }
+}
