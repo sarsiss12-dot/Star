@@ -1,0 +1,16 @@
+PASS Z0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS Z1 katılım yolları: B ana menü ÇOK OYUNCULU → ODAYA KATIL, C eski /mp/join?code= bağlantısı → ikisi de tam STARS arayüzü (/mp/play), oda kodu korunur, kendi devleti
+PASS Z2 katılım başarısızlığında aşama ekranda: yanlış kod → ODA BULUNAMADI; bağlantı yok → BAĞLANTI KESİLDİ (X: ayrı profil, bu odada kimliği yok)
+PASS Z3 canlı MP olay şeridi: B kartı FAREYLE, sonra DOKUNARAK kaydırır → kart kalkar, karar ☰ listesinde; host ayna yeniler, bağlantı kopup döner, sayfa yenilenir → kart geri gelmez; sonraki olay görünür; karar host'ta bir kez
+PASS Z4 takviye sevkiyatındaki filoyu birleştirme: host kuralı geçerli (ret), gerekçe Türkçe, art arda aynı uyarı tek satırda birleşir; karar kartları etkilenmez
+PASS Z5 kaydet → host ve misafirler kapanır → relay yeniden başlar → host kaydı YENİ odada açar ve misafir yokken devam eder: bekleyen / gizlenen olay doğru, tarih ilerlerken yeni olay ve anomali şeritte ve listede
+PASS Z6 misafirler yeni odaya döner: B ana menü ODAYA KATIL + yeni kod, C eski /mp/join bağlantısı → aynı devletler; tarih ve bekleyen kararlar korunur; kaydırılan kart geri gelmez; kimliksiz X "OYUNCU KİMLİĞİ DOĞRULANAMADI"
+PASS Z7 Fetih hedef seçimi: tek sistemli hedefte 0/0 + neden + pasif düğme + Vasallaştırmaya dön; pencere AÇIKKEN keşfedilen sistem listeye girer; başkent dışı hedefle seçim → önizleme → onay → gerçek savaş (misafir); host'ta aynı kural
+PASS Z8 müzakere masası: genel Savaş sözü MP'de son tarihli söz (etkin) + açıklama; Savaşa Destek İste → B'nin aktif cephesi; C ret → yeniden teklif → C karşı teklif → B kabul → C savaşta (tek kez); host → B daveti kabul; kapanan savaşa gecikmiş kabul işlenmez
+PASS Z9 dünya ilerler ve emirler uygulanır: B gerçek komut yolundan filo emri verir; host günleri ilerler; emir host dünyasında, misafir aynası host ile aynı
+PASS Z10 dönen misafir B: olay kartına dokunup karar verir (host'ta bir kez, kart kalkar); filo emri gerçek motor işlevinden → host uygular, B haritasında aynı
+PASS Z11 Q6 toprak vaadi + destek teklifi: gerçek masada dokunuşla taslak; canlı dünyada taslak korunur; hat donunca gönderim kaybolsa da taslak + "yanıt bekleniyor"; tekrar basış ve yeniden bağlanma ÇİFT KAYIT üretmez; host'ta tek kayıt doğru cephe/sistemle, host gelen kutusunda
+PASS Z12 ret ve bağlantı hatası taslağı korur; karşı teklif + kabul vaadi TEK kez yazar; savaş kapanınca gecikmiş kabul işlenmez
+PASS Z13 ikinci kayıt/devam: DAVET PAYLAŞ bağlantısı (B) + aynı profilde ikinci sekme (yeni sekme alır, eski sekme nedenini gösterir, KATIL ile geri alır) + eski oda kodu (host yok → oda aşaması, kod düzenlenebilir) + C ana menüden; DEVAM ET; aynı odada C kopar/döner → aynı devlet, tarih ilerler, C filo emri host'ta ve C haritasında
+GEÇEN: 14 KALAN: 0
+EXIT 0

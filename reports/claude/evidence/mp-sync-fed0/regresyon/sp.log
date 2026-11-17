@@ -1,0 +1,3 @@
+PASS S1 tek oyunculu OYUNA DEVAM ET: bekleyen / kapatılmış / gizlenmiş olay kayıttan doğru döner; tarih ilerlerken yeni olay ve anomali şeritte ve listede; karar bir kez
+GEÇEN: 1 KALAN: 0
+EXIT 0

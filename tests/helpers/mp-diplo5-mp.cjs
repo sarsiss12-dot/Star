@@ -115,6 +115,28 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
    assert.notEqual((await cmd('B',{kind:'respond',offer:oid,action:'accept'})).status,'ok');
    const post=await H().evaluate(([b,c])=>({ala:[G.emps[b].res.ala,G.emps[c].res.ala],g:JSON.stringify(G.emps[b].luxGrant||{})}),[E.B,E.C]);assert.deepEqual(post,pre,'kısmi uygulama yok');M.u5.why=st.why;});
 
+ /* MP-SYNC-FED.0 S1 — Barıştırma son onayı istihbarat kapısı (gerçek host + misafir akışı). p38'de D'nin onayı lüks + barış + ödemeyi
+    uyguluyordu; aday: hiçbir şey uygulanmaz, asıl teklif tarafları gerekçeyi görür, D'nin kartı / bildirimi yalnız genel neden. */
+ await test('U7 S1: C lüks + Barıştırma ister → B kabul (mediating) → C\'nin B üzerindeki istihbaratı düşer → D gerçek karttan onaylar → hiçbir şey uygulanmaz; D\'ye ayrıntı yok',async()=>{
+   const st0=await H().evaluate(([b,c,d])=>{for(const e of G.emps)if(!e.wild)for(const cc of e.colonies){const p=G.sys[cc.s].planets[cc.p];if(p.lux==='zerrin')p.lux=null;}
+     const pl=G.sys[G.emps[b].home].planets.find(p=>p.col&&p.owner===b);pl.lux='zerrin';refreshLuxury(G.emps[b]);G.emps[c].intel[b]=3;
+     if(!G.emps[b].war[d]){G._dealAuth=true;declareWar(G.emps[b],G.emps[d]);G._dealAuth=false;}MP1Host.host.publish();
+     return {f:peaceWithFront(G.emps[b],G.emps[d]),min:G.emps[c].res.min,lux:!!(G.emps[c].luxGrant||{}).zerrin};},[E.B,E.C,E.D]);await settle('u7-0');
+   const r0=await cmd('C',{kind:'offer',to:E.B,give:[{t:'res',r:'min',v:150}],want:[{t:'lux',k:'zerrin'},{t:'peaceWith',target:E.D,front:st0.f}]});assert.equal(r0.status,'ok',JSON.stringify(r0));
+   const oid=await H().evaluate(()=>MP1Host.host.dip.offers.at(-1).id);await settle('u7-o');const rid=await rec(B(),oid);await accept(B(),rid);
+   await wait(H(),id=>MP1Host.host.dip.offers.find(o=>o.id===id).status==='mediating',oid,20000);const lk=await H().evaluate(id=>MP1Host.host.dip.offers.find(o=>o.id===id).med.link,oid);
+   await settle('u7-med');const ridD=await rec(D(),lk);
+   await H().evaluate(([c,b])=>{G.emps[c].intel[b]=1;},[E.C,E.B]);   /* ilk kabulden sonra, D onaylamadan: aracının istihbaratı düşer (yayın yok — D'nin dokunuşu önce gelir) */
+   const n0=await H().evaluate(()=>MP1Host.host.dip.offers.length);await accept(D(),ridD);await sleep(1500);await settle('u7-onay');
+   const h=await H().evaluate(([id,lk,b,c,d])=>({o:MP1Host.host.dip.offers.find(o=>o.id===id),l:MP1Host.host.dip.offers.find(o=>o.id===lk),war:!!G.emps[b].war[d],min:G.emps[c].res.min,lux:!!(G.emps[c].luxGrant||{}).zerrin}),[oid,lk,E.B,E.C,E.D]);
+   const dView=await D().evaluate(lk=>{const r=DiplomaticInbox.state().records.find(r=>r.mp===lk);const v=MP6Stars.S.J.game.view.dip.offers.find(o=>o.id===lk);return {rec:r?{status:r.status,why:r.why||''}:null,view:v?{status:v.status,why:v.why}:null,toast:(document.querySelector('.toast')||{}).innerText||''};},lk);
+   const cView=await C().evaluate(id=>{const v=MP6Stars.S.J.game.view.dip.offers.find(o=>o.id===id);return v?{status:v.status,why:v.why}:null;},oid);
+   M.u7={st0,h:{o:{status:h.o.status,why:h.o.why},l:{status:h.l.status,why:h.l.why},war:h.war,min:h.min,lux:h.lux},dView,cView};
+   assert.equal(h.war,true,'barış uygulanmadı');assert.equal(h.lux,false,'lüks aktarılmadı');assert.equal(h.min,st0.min,'ödeme yok');
+   assert.equal(h.o.status,'invalid',JSON.stringify(M.u7));assert.match(h.o.why,/İZLENİYOR|istihbarat/,'aracı nedeni görür');
+   assert.equal(/İZLENİYOR|istihbarat|Işıyan|Zerrin|zerrin|lüks|mineral/i.test(JSON.stringify(dView)),false,'D\'ye aracının istihbaratı / pazarlık ayrıntısı gitmez: '+JSON.stringify(dView));
+   await shot(D(),'u7-d-sonuc');});
+
  await test('U6 NF-5: insan → AI son tarihsiz Savaş Sözü — erişimsiz hedefte AI gerekçeyle reddeder',async()=>{
    const pair=await H().evaluate(b=>{const B=G.emps[b];const A=G.emps.filter(e=>e.ai&&!e.wild&&!e.dead);for(const a of A)for(const x of A){if(a===x)continue;
      const o={from:b,to:a.id,give:[{t:'res',r:'min',v:900}],want:[{t:'warOn',target:x.id}],born:G.day,expires:G.day+300};const q=dealQuote(o);if(q.ok&&!warSupportReach(a,x,B,[]))return {a:a.id,x:x.id};}return null;},E.B);

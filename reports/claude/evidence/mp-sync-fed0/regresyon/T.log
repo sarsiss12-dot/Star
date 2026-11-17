@@ -1,0 +1,10 @@
+PASS T0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS T1 C gerçek masada teknoloji verir + B'den lüks ister (host listesi, İZLENİYOR); özet; B karşı teklif; C kabul → B'de teknoloji, C'de erişim kaydı
+PASS T2 istihbaratı yetmeyen B: "İstiyorum" teknoloji / lüks pasif + görünür neden; host listesi dönmez
+PASS T3 birleşik teklif (teknoloji + kaynak) beklerken veren teknolojiyi kaybeder → geçersiz (iki tarafta neden), kabul işlenmez, hiçbir madde uygulanmaz
+PASS T4 C'nin lüks teklifini B iki kez kabul eder + hat donar / kopar → tek erişim kaydı, tek ödeme
+PASS T5 👁 İstihbarat: C gerçek masada B'den görüş ister → B kabul → B filosu yeni sisteme → C haritasında görünür; host ve B haritasında değil (paylaşım yönü)
+PASS T6 kaydet → host kapanır → YENİ oda → misafirler döner → teknoloji, erişim kayıtları ve sensör paylaşımı aynı
+PASS T7 insan → AI: C gerçek masada AI'ya teknoloji verir; sonuç motorun aiRespond kararı; kabulde AI'da teknoloji
+GEÇEN: 8 KALAN: 0
+EXIT 0

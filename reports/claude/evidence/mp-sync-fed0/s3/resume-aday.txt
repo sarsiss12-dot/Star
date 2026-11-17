@@ -1,0 +1,6 @@
+PASS R1 aday paketi → yeni host: Barıştırma onayı, açık oy, gündem, tersane, bekleyen teklif korunur (son onayın yeni host'ta tek kez uygulanışı: mp_sync_fed0_peacewith W4)
+  R2 [{"root":"p37","ok":false,"why":"build","text":"Kayıt başka bir oyun sürümüne ait."},{"root":"p33","ok":false,"why":"build","text":"Kayıt başka bir oyun sürümüne ait."}]
+PASS R2 bekleyen Barıştırma içeren aday paketi eski sürümde çökmeden ve anlaşılır gerekçeyle reddedilir
+  R3 build 96h10p33 → aday; teklif 1, kuyruk 1, gündem 1
+PASS R3 p33 kökünde üretilen MP paketi adayda açılır: açık oy, bekleyen teklif, tersane kuyruğu korunur; oy verilebilir
+GEÇEN: 3 KALAN: 0

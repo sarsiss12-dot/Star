@@ -777,7 +777,7 @@ function createHost(opts){
       why(e,{r},c){if(r.to!==e.id)return 'not-recipient';if(r.status!=='pending')return 'closed';if(G.day>r.expires)return 'expired';
         const A=G.emps[r.from];if(!dipParty(A)||!dipParty(e))return 'invalid';
         if(r.link&&c.action==='accept'){const O=D.offers.find(x=>x.id===r.link);if(!O||O.status!=='mediating')return 'closed';const m=O.med;   /* MP-DIPLO5 NF-6: ikinci aşama — diğer savaşanın onayı */
-          const q=peaceWithAuthorize([m.giver+'>'+m.t],()=>dealQuote(dipOffer(O)));if(!q.ok)return {code:'quote',detail:['Barıştırma artık uygulanamıyor: '+String((q.reasons||[])[0]||'koşullar değişti').slice(0,140)]};return null;}
+          const g=peaceWithFinalGate(O);if(!g.ok)return {code:'quote',detail:[PW_PUBLIC]};return null;}   /* MP-SYNC-FED.0 S1: aynı kapı; D'ye genel neden */
         if(c.action==='accept'){const q=dq(dipOffer(r));if(!q.ok)return {code:'quote',detail:dipReasons(q,A)};
           const pv=r.prev&&D.offers.find(x=>x.id===r.prev),ag=dipAssetGate({want:r.want},A,e,new Set(pv&&pv.from===e.id?pv.give.map(i=>dealItemKey(i)):[]));if(ag)return ag;}return null;},   /* MP-TECHLUX.0: istihbarat şartı kabulde de */
       roots:()=>[],
@@ -1183,15 +1183,28 @@ function createHost(opts){
     for(const id of [A.id,B.id])dipNotify(id,'Barıştırma: '+t.name+' onayı bekleniyor; onaylarsa barış ve karşılık birlikte uygulanır','sci');
     return true;
   }
-  function peaceWithClose(O,why){
-    if(!O||!O.med)return;const L=D.offers.find(x=>x.id===O.med.link);
-    if(L&&L.status==='pending'){L.status='invalid';L.finished=G.day;L.why=why;dipNotify(L.to,'Barıştırma onayı kapandı — '+why,'war');}
+  /* MP-SYNC-FED.0 S1: diğer savaşana yalnız genel neden — aracının istihbaratı ve pazarlık maddeleri (asıl teklifin gerekçeleri) gitmez */
+  const PW_PUBLIC='Barıştırma koşulları değişti; hiçbir şey uygulanmadı';
+  function peaceWithClose(O,why,pub){
+    if(!O||!O.med)return;const L=D.offers.find(x=>x.id===O.med.link),pw=pub||PW_PUBLIC;
+    if(L&&L.status==='pending'){L.status='invalid';L.finished=G.day;L.why=pw;dipNotify(L.to,'Barıştırma onayı kapandı — '+pw,'war');}
     if(O.status==='mediating'){O.status='invalid';O.finished=G.day;O.why=why;}
     for(const id of [O.from,O.to])dipNotify(id,'Barıştırma kapandı — '+why+' (hiçbir şey uygulanmadı)','war');
+  }
+  /* MP-SYNC-FED.0 S1: son onay kapısı — asıl teklif (gönderen, alıcı, maddeler) için normal MP kabulüyle AYNI denetimler: dealQuote (diğer
+     savaşanın onay yetkisiyle) + dipAssetGate (İstiyorum teknoloji / lüks için İZLENİYOR; karşı tarafın önceki teklifte açıkça sunduğu madde
+     istisnası `r.prev` ile, paketle birlikte kalıcı). p38'de son onay yalnız dealQuote çağırıyordu. Dönen `why` yalnız asıl teklifin tarafları içindir. */
+  function peaceWithFinalGate(O){
+    const m=O.med,A=G.emps[O.from],B=G.emps[O.to];if(!A||!B)return {ok:false,why:'Taraflardan biri artık yok'};
+    const q=peaceWithAuthorize([m.giver+'>'+m.t],()=>dealQuote(dipOffer(O)));if(!q.ok)return {ok:false,why:'teklif artık uygulanamıyor ('+String((q.reasons||[])[0]||'koşullar değişti').slice(0,120)+')'};
+    const pv=O.prev&&D.offers.find(x=>x.id===O.prev),ag=dipAssetGate({want:O.want},A,B,new Set(pv&&pv.from===B.id?pv.give.map(i=>dealItemKey(i)):[]));
+    if(ag)return {ok:false,why:String((ag.detail||[])[0]||'istihbarat şartı artık karşılanmıyor').slice(0,160)};
+    return {ok:true};
   }
   function peaceWithLinkReply(e,L,action){
     const O=D.offers.find(x=>x.id===L.link);if(!O||O.status!=='mediating')return false;const m=O.med;
     if(action==='reject'){L.status='rejected';L.finished=G.day;L.why='Reddedildi';peaceWithClose(O,e.name+' barışı reddetti');return true;}
+    {const g=peaceWithFinalGate(O);if(!g.ok){L.status='invalid';L.finished=G.day;peaceWithClose(O,g.why);return false;}}   /* MP-SYNC-FED.0 S1 */
     if(!peaceWithAuthorize([m.giver+'>'+m.t],()=>executeDeal(dipOffer(O),'deal:mp71:'+O.id)))return false;
     L.status='accepted';L.finished=G.day;O.status='accepted';O.finished=G.day;O.why='Barıştırma tamamlandı';stats.deals=(stats.deals||0)+1;
     for(const id of [O.from,O.to,L.to])dipNotify(id,'Barıştırma tamamlandı — '+G.emps[m.giver].name+' ile '+G.emps[m.t].name+' barıştı','win');
@@ -1252,7 +1265,7 @@ function createHost(opts){
       if(!g||!t||g.dead||t.dead)peaceWithClose(O,'Savaşan taraflardan biri artık yok');
       else if(peaceWithFront(g,t)!==m.front)peaceWithClose(O,'Savaş başka yolla bitti ya da cephe değişti');
       else if(!L||L.status!=='pending'||G.day>L.expires)peaceWithClose(O,'Barış onayı alınamadı (süre doldu)');
-      else{const q=peaceWithAuthorize([m.giver+'>'+m.t],()=>dealQuote(dipOffer(O)));if(!q.ok)peaceWithClose(O,'teklif artık uygulanamıyor ('+String((q.reasons||[])[0]||'koşullar değişti').slice(0,120)+')');}}
+      else{const g=peaceWithFinalGate(O);if(!g.ok)peaceWithClose(O,g.why);}}   /* MP-SYNC-FED.0 S1 */
     for(const r of D.offers){if(r.status!=='pending')continue;const a=G.emps[r.from],b=G.emps[r.to];
       if(G.day>r.expires){r.status='expired';r.finished=G.day;r.why='Süre doldu';dipNotify(r.from,'Teklif süresi doldu — '+(b?b.name:''));dipNotify(r.to,'Teklif süresi doldu — '+(a?a.name:''));}
       else if(!dipParty(a)||!dipParty(b)||!a.contact[b.id]||!b.contact[a.id]){r.status='invalid';r.finished=G.day;r.why='Taraflardan biri artık anlaşma yapamaz';

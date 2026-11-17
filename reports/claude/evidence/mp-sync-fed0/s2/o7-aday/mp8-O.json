@@ -1,0 +1,198 @@
+{
+ "results": [
+  {
+   "name": "O0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 9769
+  },
+  {
+   "name": "O7 misafirde açık pencere: ayna bekletilir, hız bildirimi gelir; misafir nedeni görür (sıkışık çubukta da) ve pencere kapanınca yetişir",
+   "status": "PASS",
+   "ms": 16113
+  }
+ ],
+ "metrics": {
+  "scen": "O",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 810,
+    "buildMs": 853,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 945,
+    "buildMs": 977,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 5.9,
+      "p95": 8.3,
+      "max": 8.3
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 17,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 34.3,
+       "p95": 34.3,
+       "max": 34.3
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.4,
+       "p95": 1.4,
+       "max": 1.4
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 27,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 55.1,
+       "p95": 55.1,
+       "max": 55.1
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.5,
+       "p95": 2.5,
+       "max": 2.5
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 722,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 9092,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "sync0": {
+   "orders": [],
+   "events": [],
+   "fx": {
+    "home": 5
+   },
+   "o7": {
+    "s0": {
+     "hd": 1.25,
+     "gd": 1.25
+    },
+    "mid": {
+     "hd": 19.31,
+     "gd": 1.25,
+     "note": "Pencere açık — dünya, kapanınca güncellenir",
+     "held": 33,
+     "speedMsgs": 2
+    },
+    "s1": {
+     "hd": 40.2,
+     "gd": 40.2
+    },
+    "vis": {
+     "txt": "ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸ 2×",
+     "top": true
+    },
+    "visSpeed": {
+     "txt": "Kızıl Muhafız hızı 3× yaptı · Pencere açık — dünya, kapanınca güncellenir",
+     "top": true
+    }
+   }
+  },
+  "errors": []
+ }
+}

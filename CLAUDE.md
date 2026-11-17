@@ -2,7 +2,15 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — MP-DIPLO5 (p38 / MP.8.9b36, 16 Kasım 2026)
+## Son teslim — MP-SYNC-FED.0 (p38 / MP.8.9b37, 17 Kasım 2026)
+
+- Ayrıntı: `reports/claude/MP-SYNC-FED0-SONUC.md`, kanıt `reports/claude/evidence/mp-sync-fed0/`. Dal `claude/stars-mp-sync-fed0` (p38 `0ecb080` üstünde). **Runtime 19 dosya değişmedi** (build 96h10p38, ZIP yok); yalnız MP kaynakları + sürüm işareti. Canlı Render bu fazda p33 / MP.8.9b30 sunuyordu.
+- S1 Barıştırma son onayı: mp-core `peaceWithFinalGate` (asıl teklifin dealQuote + `dipAssetGate`, karşı teklif istisnası `O.prev`) üç yolda (`peaceWithLinkReply`, `respond` bağlı kayıt, `dipSweep` mediating); `peaceWithClose` diğer savaşana yalnız genel metin (`PW_PUBLIC`). Test `node tests/mp_sync_fed0_peacewith_test.js` (6; p38 3/3), MP8 U7.
+- S2 misafir: açık pencerede ayna bekletmesinin notu artık pencere üstü hapta (`guest-stars chip()` → `MP61.status(S.sync.note…)`, `mp61 paint()` hız bildirimi + sorun). `MP8_SCEN=O` (`tests/helpers/mp-sync-fed0-mp.cjs`, O0–O10: kopma, veri taşımayan hat, kayıp ayna / yanıt, arka plan, yeniden katılma, açık pencere, fed oyu, harita); emir kaydında cid / ret kodu / host'ta uygulandı / yansıma süresi ayrı. Misafir sayfası arka planda: `waitForFunction` yerine elle yoklama kullanılabilir; hap `pointer-events:none` olduğundan `elementFromPoint` için geçici aç.
+- S3 `node tests/mp_sync_fed0_resume_test.js` (eski kökler `STARS_OLD_ROOTS="p37:<kök>,p33:<kök>" STARS_P33_ROOT=<kök>`; yoksa NOT RUN). S4 `node tests/mp_sync_fed0_agenda_test.js` (6; p38 6/0, motor değişmedi). Başka üyenin savunma savaşına destek düğmesi yalnız `knownWarPairs` ile bilinen savaşta (NF-9 karar bekliyor).
+- Koruma: `mp-sync-fed0-reviewed` ← `mp-diplo5-reviewed` ← `mp-techlux0-reviewed` ← … (stripReviewedDiplo5 önce stripReviewedSyncFed0'ı çağırır).
+
+## Önceki teslim — MP-DIPLO5 (p38 / MP.8.9b36, 16 Kasım 2026)
 
 - Ayrıntı: `reports/claude/MP-DIPLO5-SONUC.md`, kanıt `reports/claude/evidence/mp-diplo5/`. Dal `claude/stars-mp-diplo5` (p37 `f2e48eb` üstünde; beş kalem ayrı commit). Save8v8/paket4/protokol1; p38 paket yükleyicisi p6–p37, p25u1, p27s1 kabul eder. NF-2b/3/4/5/6 `TEST BEKLİYOR`; NF-7 (AI barışçıl biat daveti) karar bekliyor; NF-8 federasyon gündem kuyruğu.
 - NF-2b: `refreshLuxury` → `luxGrantApply` (yalnız `luxGrant` varken). Veren kendi kolonisinden sağlar (`ownLuxury`), bonus bir kez, ambargo / kaynak kaybı askı, savaş (`endTreatiesForWar` → `luxGrantEndWar`) ve eleme bitirir, `luxGrantLog` ≤8. MP: host `luxGrantStatus` → ayna `mpLuxGrant`. Görünüm `luxChannels`, `UI.luxGrantHtml`.

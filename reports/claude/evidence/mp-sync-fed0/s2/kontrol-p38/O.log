@@ -1,0 +1,18 @@
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":9.1,"p95":9.1,"max":9.1},"longtask":{"n":19,"med":94,"p95":433,"max":433},"heapMB":17,"dom":724,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":3,"med":10.2,"p95":37,"max":37},"refresh":{"n":2,"med":5.6,"p95":5.6,"max":5.6},"longtask":{"n":3,"med":76,"p95":176,"max":176},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":17,"dom":713,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":32,"joinErrors":0},"C":{"build":{"n":3,"med":7.3,"p95":46.6,"max":46.6},"refresh":{"n":2,"med":0.9,"p95":0.9,"max":0.9},"longtask":{"n":10,"med":118,"p95":245,"max":245},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":15,"dom":722,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":28,"joinErrors":0}}}
+PASS O0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS O1 kısa kopma (3 sn): kopukken emir yerel reddedilir; dönüşte filo + tersane + bina emri host'ta bir kez, misafirde yansır
+PASS O2 açık görünüp veri taşımayan hat (30 sn donma, oyun akarken): algılanır, kurtarılır; donmada verilen emir bir kez uygulanır
+PASS O3 kayıp dünya güncellemesi (ayna 12 sn düşer, hız / nabız geçer): misafir eksik algılar, yeniden ister, harita ilerler
+PASS O4 kayıp host yanıtı: tersane siparişi host'ta bir kez, misafir sırada görür; ikinci gemi / ödeme yok
+PASS O5 arka planda bekleyip öne dönme (sayfa 20 sn dondurulur, oyun akar) → dünya yetişir, emir zinciri çalışır
+PASS O6 aynı odaya yeniden katılma (sayfa yenileme): aynı devlet; emir zinciri; insan → insan teklif kartı ve kabul bir kez
+FAIL O7 misafirde açık pencere: ayna bekletilir, hız bildirimi gelir; misafir nedeni görür (sıkışık çubukta da) ve pencere kapanınca yetişir
+AssertionError [ERR_ASSERTION]: misafir bekletmenin nedenini pencerenin ÜSTÜNDE görür: {"txt":"","top":false}
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/helpers/mp-sync-fed0-mp.cjs:122:4
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/browser-mp8.cjs:55:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/helpers/mp-sync-fed0-mp.cjs:112:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/browser-mp8.cjs:441:17
+PASS O8 federasyon oyu: B'nin oyu yanıt kaybı ve kopmayla bir kez sayılır; ikinci basış ikinci oy değil; sonuç misafir panelinde
+PASS O9 harita tutarlılığı: dönüşten ve yeni dünya güncellemesinden sonra kendi filo rotası / konumu ve görülebilir sistem sahipliği host ile aynı
+GEÇEN: 9 KALAN: 1
+EXIT 1

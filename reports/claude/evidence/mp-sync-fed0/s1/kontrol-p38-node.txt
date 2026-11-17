@@ -1,0 +1,61 @@
+FAIL W1 ilk kabulden sonra aracının istihbaratı düşer → D onayı hiçbir şey uygulamaz; iki tarafta gerekçe; D'ye ayrıntı gitmez
+AssertionError [ERR_ASSERTION]: p38: barış + lüks + ödeme uygulanıyordu — hiçbir madde uygulanmamalı ({"to":"D","v":1,"type":"result","seq":1,"cid":"fed0D000001","status":"ok","code":null,"rev":6})
++ actual - expected
+
+  {
++   bmin: 5300,
++   cmin: 4700,
++   lux: true,
++   war: false
+-   bmin: 5000,
+-   cmin: 5000,
+-   lux: false,
+-   war: true
+  }
+
+    at /home/user/Star/tests/mp_sync_fed0_peacewith_test.js:44:24
+    at test (/home/user/Star/tests/mp_sync_fed0_peacewith_test.js:16:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_sync_fed0_peacewith_test.js:42:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+FAIL W2 süpürme: D dokunmadan istihbarat düşer → yayında kapanır; D genel neden, C/B ayrıntılı neden
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'mediating'
+- 'invalid'
+
+    at /home/user/Star/tests/mp_sync_fed0_peacewith_test.js:51:39
+    at test (/home/user/Star/tests/mp_sync_fed0_peacewith_test.js:16:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_sync_fed0_peacewith_test.js:49:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+PASS W3 istisna: istenen madde karşı tarafın önceki teklifinde açıkça sunulmuşsa son onay geçer; paket → yeni host sonrasında da
+PASS W4 olumlu yol: paket → yeni host → D onayı → barış + lüks + ödeme bir kez; ikinci onay closed
+PASS W5 ret / geri çekme / çift dokunuş / gecikmiş onay: hiçbir şey uygulanmaz
+FAIL W6 cephe değişti / taraf elendi / birleşik maddenin kaynağı kayboldu → kapanır, kısmi yok, D'ye ayrıntı yok
+AssertionError [ERR_ASSERTION]: kaynak: D'ye pazarlık ayrıntısı gitmez
+
+true !== false
+
+    at /home/user/Star/tests/mp_sync_fed0_peacewith_test.js:85:12
+    at test (/home/user/Star/tests/mp_sync_fed0_peacewith_test.js:16:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_sync_fed0_peacewith_test.js:81:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+GEÇEN: 3 KALAN: 3

@@ -1,0 +1,198 @@
+{
+ "results": [
+  {
+   "name": "O0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 12453
+  },
+  {
+   "name": "O7 misafirde açık pencere: ayna bekletilir, hız bildirimi gelir; misafir nedeni görür (sıkışık çubukta da) ve pencere kapanınca yetişir",
+   "status": "FAIL",
+   "error": "AssertionError [ERR_ASSERTION]: misafir bekletmenin nedenini pencerenin ÜSTÜNDE görür: {\"txt\":\"\",\"top\":false}\n    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/helpers/mp-sync-fed0-mp.cjs:122:4\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/browser-mp8.cjs:55:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/helpers/mp-sync-fed0-mp.cjs:112:2)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/browser-mp8.cjs:441:17"
+  }
+ ],
+ "metrics": {
+  "scen": "O",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 885,
+    "buildMs": 942,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 1004,
+    "buildMs": 1059,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 7.2,
+      "p95": 7.2,
+      "max": 7.2
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 16,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 65,
+       "p95": 65,
+       "max": 65
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.4,
+       "p95": 1.4,
+       "max": 1.4
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 27,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 33.4,
+       "p95": 33.4,
+       "max": 33.4
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.3,
+       "p95": 2.3,
+       "max": 2.3
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 722,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 9542,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "sync0": {
+   "orders": [],
+   "events": [],
+   "fx": {
+    "home": 5
+   },
+   "o7": {
+    "s0": {
+     "hd": 1.41,
+     "gd": 1.41
+    },
+    "mid": {
+     "hd": 19.44,
+     "gd": 1.41,
+     "note": "Pencere açık — dünya, kapanınca güncellenir",
+     "held": 33,
+     "speedMsgs": 2
+    },
+    "s1": {
+     "hd": 39.12,
+     "gd": 39.12
+    },
+    "vis": {
+     "txt": "",
+     "top": false
+    },
+    "visSpeed": {
+     "txt": "Kızıl Muhafız hızı 3× yaptı",
+     "top": true
+    }
+   }
+  },
+  "errors": []
+ }
+}
