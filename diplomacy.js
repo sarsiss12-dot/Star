@@ -10744,6 +10744,28 @@ function fedAgendaOrder(f){
   const r=pending.splice(i,1)[0];ordered.push(r);streak=r.defenseFront?Math.min(2,streak+1):0;
  }return ordered;
 }
+/* ═══ MP-SYNC-FED.1 NF-9 — federasyon savunma çağrısı ═══
+   Üyenin GEÇERLİ savunma savaşları (fedEmergencyId ile aynı tanım: saldırıya uğrayan üye, açık cephe, savunma kaydı, en az bir üyenin destek
+   kapısı açık). Bilgi yalnız federasyon akışına özgü ve asgari: savunulan üye, saldırgan (izleyicinin temasına göre ad), cephe, çağrının durumu,
+   izleyicinin talep açıp açamayacağı ve gerekçesi. Harita görünürlüğü, filo konumu ve istihbarat düzeyi değişmez; dünyaya yazmaz, RNG çekmez.
+   Uygunluk mevcut canFedMotion('joinWar') + gündem kuralıdır (host, SP ve misafir aynı işlevi kullanır; misafirde host'un satırı). */
+function fedDefenseCalls(viewer){
+ const f=viewer&&!viewer.dead&&findFed(viewer);if(!f||fedOf(f.id)!==f)return [];
+ const out=[],items=f.agenda?.items||[],order=fedAgendaOrder(f),hist=f.agenda?.history||[],v=f.vote;
+ for(const sid of [...new Set(f.members)]){const m=G.emps[sid];if(!m||m.dead)continue;
+  for(const k of Object.keys(m.war||{})){const o=G.emps[k];if(!m.war[k]||!o||o.dead||o.wild||o.crisisSide||f.members.includes(o.id))continue;
+   const front=fedEmergencyId(f,m,'joinWar',{sponsor:m.id,target:o.id});if(!front)continue;
+   const same=r=>r.options?.kind==='joinWar'&&r.options.target===o.id&&(r.options.sponsor??r.by)===m.id;
+   let state='open',position=null;
+   const q=items.find(same);if(q){state='queued';position=order.indexOf(q)+1;}
+   else if(v&&v.motion==='joinWar'&&v.target===o.id&&(v.sponsor??v.proposer)===m.id)state='voting';
+   else if(Object.values(f.decisions||{}).some(d=>d.kind==='joinWar'&&d.target===o.id&&d.sponsor===m.id&&d.state==='ready'))state='approved';
+   else{const h=hist.filter(r=>r.defenseFront===front).at(-1);if(h)state=h.status==='active'?'voting':h.status==='resolved'?'decided':'closed';}
+   const g=canFedMotion(viewer,'joinWar',{target:o.id,sponsor:m.id});
+   const why=g.ok?'':!viewer.contact?.[o.id]?'Saldırganla temasın yok; destek talebi için temas gerekir':String(g.why||'').slice(0,160);
+   out.push({sponsor:m.id,enemy:o.id,known:viewer.contact?.[o.id]?1:0,front,state,position,ok:g.ok&&state==='open'?1:0,why:state!=='open'?({queued:'Bu savunma talebi gündem kuyruğunda (sıra '+position+')',voting:'Bu savunma talebi oylanıyor',approved:'Destek kararı onaylandı; uygulama bekliyor',decided:'Bu savunma olayı oylandı',closed:'Bu savunma olayı gündemden düştü'}[state]):why});}}
+ return out;
+}
 
 /* ═══ BETA-RIVAL-BLOCS.0 — tek işlemde ittifak + federasyon ═══
    Kuruluşta ve oylu üyelikte eksik karşılıklı ittifaklar federasyonla BİRLİKTE kurulur (foundFederation / acceptFedInvite'in

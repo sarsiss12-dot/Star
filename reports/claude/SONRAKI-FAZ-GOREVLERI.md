@@ -1,4 +1,4 @@
-# STARS — sonraki faz görevleri (MP-DEAL-SYS.0 sonrasında kaydedildi; MP-WARON.0, MP-TECHLUX.0, MP-DIPLO5 ve MP-SYNC-FED.0 ile güncellendi)
+# STARS — sonraki faz görevleri (MP-DEAL-SYS.0 sonrasında kaydedildi; MP-WARON.0, MP-TECHLUX.0, MP-DIPLO5, MP-SYNC-FED.0 ve MP-SYNC-FED.1 ile güncellendi)
 
 15 Kasım 2026 · p35 / MP.8.9b33 tabanı; 16 Kasım 2026 güncellemeleri p36 / MP.8.9b34 (MP-WARON.0) ve p37 / MP.8.9b35 (MP-TECHLUX.0) · Kanonik pano: [#33](https://github.com/sarsiss12-dot/Star/issues/33) (55 madde). Bu belge yeni kalemleri panonun ilgili açık maddelerine bağlar; panonun satır durumları bu fazda **değiştirilmedi** (hiçbiri TAMAMLANDI değildir).
 
@@ -8,7 +8,9 @@ Durum değerleri panonunkilerdir: `PLANLANDI` = kayda girdi, geliştirme başlam
 
 **17 Kasım 2026 · MP-SYNC-FED.0 (p38 / MP.8.9b37):** Barıştırma son onayı istihbarat kapısı düzeltildi; misafirde açık pencere bekletmesinin nedeni pencere üstünde görünür; bağlantı / kayıt / gündem senaryoları eklendi. NF-8 bağlantısı düzeltildi: federasyon gündem kuyruğu **#50**, Galaktik Konsey iki aşamalı gündemi **#51** (ayrı iş, NF-10). Rapor: [MP-SYNC-FED0-SONUC.md](MP-SYNC-FED0-SONUC.md).
 
-**Sıradaki geliştirme adayı: kullanıcı kararına göre NF-7 (AI barışçıl biat daveti), NF-9 (federasyon üyesinin savunma savaşı bilgisi) ya da NF-10 (Konsey gündem seçimi).**
+**17 Kasım 2026 · MP-SYNC-FED.1 (p39 / MP.8.9b38):** NF-9 federasyon savunma çağrısı geliştirildi; kayıt → yeni oda + ilk tersane emri (J), uzun oturum (I) ve çatışan yabancı filonun misafir haritasında görünmesi doğrulandı / düzeltildi. Rapor: [MP-SYNC-FED1-SONUC.md](MP-SYNC-FED1-SONUC.md).
+
+**Sıradaki geliştirme adayı: kullanıcı kararına göre NF-7 (AI barışçıl biat daveti) ya da NF-10 (Konsey gündem seçimi).**
 
 | Kod | Görev | Bağlı pano maddesi | Durum | Bağımlılık |
 |---|---|---|---|---|
@@ -21,7 +23,7 @@ Durum değerleri panonunkilerdir: `PLANLANDI` = kayda girdi, geliştirme başlam
 | NF-6 | Barıştırma (`peaceWith`) MP müzakere maddesi | #40, MP.6.2 barış | `TEST BEKLİYOR` (MP-DIPLO5, p38) | Savaş defteri (`warLedger`) cephe kimliği, MP-DEAL-SYS.0 tek işlemli teklif |
 | NF-7 | AI barışçıl biat daveti (güçlü AI → zayıf devlet / oyuncu `demandVassal`) — **kullanıcı kararı bekliyor** | #44 | `PLANLANDI` | NF-5 ölçümü: AI kodunda çağıran yol yok; yeni AI stratejisi ayrı faz kararı |
 | NF-8 | Federasyon gündem kuyruğu ve acil teklif önceliği (p38'de mevcut `fedAgendaEnqueue` / `fedAdvanceAgenda` / `fedAgendaOrder` / `fedEmergencyId`) | #50 (BETA-BOARD.1 kuyruğu) | `TEST BEKLİYOR` (MP-SYNC-FED.0 doğrulaması; motor değişmedi) | — |
-| NF-9 | Federasyon üyesinin başka üyenin savunma savaşını bilmesi (bugün `knownWarPairs`: istihbarat ≥3; destek düğmesi yoksa görünmez) — **kullanıcı kararı bekliyor** | #50 | `PLANLANDI` | Gizlilik kuralı kararı (tek oyunculu da etkilenir) |
+| NF-9 | Federasyon savunma çağrısı: üye, başka üyenin geçerli savunma savaşı için destek talebi açar (savunulan, saldırgan, cephe, durum — federasyon akışına özgü asgari bilgi; harita / filo / istihbarat kuralları aynı) | #50 | `TEST BEKLİYOR` (MP-SYNC-FED.1, p39) | Mevcut gündem kuyruğu ve acil öncelik (NF-8) |
 | NF-10 | Galaktik Konsey gündem seçimi (iki aşamalı gündem) | #51 | `PLANLANDI` | — |
 | NF-11 | Tersane yerleşimi (kuyruk / sipariş düzeni) | — | `PLANLANDI` | — |
 | NF-12 | Gezegen ekonomisi dökümü (koloni başına gelir/gider kırılımı) | #19 (kısmî) | `PLANLANDI` | — |

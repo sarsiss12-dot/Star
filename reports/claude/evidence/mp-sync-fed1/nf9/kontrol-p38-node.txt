@@ -1,0 +1,113 @@
+FAIL D1 host: C'nin savunma savaşı federasyon panelinde görünür ve talep düğmesi etkin; istihbarat gerekmez ve değişmez
+evalmachine.<anonymous>:1
+JSON.stringify(fedDefenseCalls(G.emps[0]).find(r=>r.enemy===2&&r.sponsor===3)||null)
+     ^
+
+ReferenceError: fedDefenseCalls is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:15:29)
+    at call (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:29:33)
+    at /home/user/Star/tests/mp_sync_fed1_defcall_test.js:33:11
+    at test (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:14:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:31:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+FAIL D2 misafir B: host görünümü aynı satır; B aynasında C'nin savaşı yok (eski kapı reddeder); B'nin komutu kabul → acil savunma oyu
+evalmachine.<anonymous>:1
+JSON.stringify(MP.polView(G.emps[1]).fed.defCalls.find(r=>r.enemy===2&&r.sponsor===3))
+                                                 ^
+
+TypeError: Cannot read properties of undefined (reading 'find')
+    at evalmachine.<anonymous>:1:50
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:15:29)
+    at /home/user/Star/tests/mp_sync_fed1_defcall_test.js:38:13
+    at test (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:14:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:37:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+FAIL D3 federasyon dışı D: satır yok, pol.fed yok; C'nin savaşı D'nin görünümüne savunma çağrısı olarak girmez
+evalmachine.<anonymous>:1
+JSON.stringify(fedDefenseCalls(G.emps[4]))
+     ^
+
+ReferenceError: fedDefenseCalls is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:15:29)
+    at /home/user/Star/tests/mp_sync_fed1_defcall_test.js:48:20
+    at test (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:14:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:47:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+FAIL D4 savunma oyu açıkken başka geçerli savunma talebi sıraya girer; durumlar voting ve queued (sıra 1)
+evalmachine.<anonymous>:1
+JSON.stringify(fedDefenseCalls(G.emps[3]).find(r=>r.enemy===2&&r.sponsor===3)||null)
+     ^
+
+ReferenceError: fedDefenseCalls is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:15:29)
+    at call (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:29:33)
+    at /home/user/Star/tests/mp_sync_fed1_defcall_test.js:54:16
+    at test (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:14:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:51:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+FAIL D5 gerekçeler: ikinci talep reddedilir ve satır durumu söyler; savaş biter → satır kalkar; üye ayrılır → satırı kalkar; temassız saldırgan → gerekçe
+evalmachine.<anonymous>:1
+JSON.stringify(fedDefenseCalls(G.emps[3]).find(r=>r.enemy===2&&r.sponsor===3)||null)
+     ^
+
+ReferenceError: fedDefenseCalls is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:15:29)
+    at call (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:29:33)
+    at /home/user/Star/tests/mp_sync_fed1_defcall_test.js:59:78
+    at test (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:14:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:57:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+FAIL D6 kayıt → yeni host: durumlar aynı; aynı cid yeniden gönderim ikinci kuyruk / oy / Etki kesintisi üretmez
+evalmachine.<anonymous>:1
+JSON.stringify(fedDefenseCalls(G.emps[1]).map(r=>[r.enemy,r.sponsor,r.state,r.position]))
+     ^
+
+ReferenceError: fedDefenseCalls is not defined
+    at evalmachine.<anonymous>:1:6
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at J (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:15:29)
+    at /home/user/Star/tests/mp_sync_fed1_defcall_test.js:67:16
+    at test (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:14:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:65:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+FAIL D7 saf işlev: fedDefenseCalls ve panel çizimi Save8 baytlarını ve RNG'yi değiştirmez
+evalmachine.<anonymous>:1
+var s0=serialize(),r0=RND_STATE;for(const id of [0,1,3,4])fedDefenseCalls(G.emps[id]);UI.fedGovernance(F,"military");MP.polView(G.emps[1]);
+                                                          ^
+
+ReferenceError: fedDefenseCalls is not defined
+    at evalmachine.<anonymous>:1:59
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/home/user/Star/tests/helpers/runtime.js:112:25)
+    at /home/user/Star/tests/mp_sync_fed1_defcall_test.js:76:117
+    at test (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:14:42)
+    at Object.<anonymous> (/home/user/Star/tests/mp_sync_fed1_defcall_test.js:76:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+GEÇEN: 0 KALAN: 7

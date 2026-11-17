@@ -1,0 +1,47 @@
+PASS I0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 16 AI, s500, seed 404; misafir gerçek STARS arayüzünde
+  OLAY {"kind":"speed","who":"B","t":20,"spd":4,"ok":true,"note":4}
+  OLAY {"kind":"window","who":"B","t":51,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"B","label":"pencere","ok":true,"ms":85,"hostDay":503.8}}
+  OLAY {"kind":"background","who":"B","t":81,"catch":{"who":"B","label":"arka plan","ok":true,"ms":54,"hostDay":527.1}}
+  OLAY {"kind":"cut","who":"B","t":111,"catch":{"who":"B","label":"kopma","ok":true,"ms":309,"hostDay":537.7}}
+  OLAY {"kind":"order","who":"B","t":141,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":637}
+  OLAY {"kind":"speed","who":"C","t":171,"spd":4,"ok":true,"note":6}
+  OLAY {"kind":"window","who":"C","t":201,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"C","label":"pencere","ok":true,"ms":315,"hostDay":716.5}}
+  OLAY {"kind":"background","who":"C","t":231,"catch":{"who":"C","label":"arka plan","ok":true,"ms":50,"hostDay":739.4}}
+  OLAY {"kind":"cut","who":"C","t":262,"catch":{"who":"C","label":"kopma","ok":true,"ms":601,"hostDay":749.9}}
+  OLAY {"kind":"order","who":"C","t":292,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":239}
+  OLAY {"kind":"speed","who":"B","t":322,"spd":2,"ok":true,"note":9}
+  OLAY {"kind":"window","who":"B","t":352,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"B","label":"pencere","ok":true,"ms":109,"hostDay":837}}
+  OLAY {"kind":"background","who":"B","t":382,"catch":{"who":"B","label":"arka plan","ok":true,"ms":51,"hostDay":860.2}}
+  OLAY {"kind":"cut","who":"B","t":412,"catch":{"who":"B","label":"kopma","ok":true,"ms":3589,"hostDay":872.5}}
+  OLAY {"kind":"order","who":"B","t":443,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":33}
+  OLAY {"kind":"speed","who":"C","t":473,"spd":4,"ok":true,"note":11}
+  OLAY {"kind":"window","who":"C","t":503,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"C","label":"pencere","ok":true,"ms":339,"hostDay":967.1}}
+  OLAY {"kind":"background","who":"C","t":533,"catch":{"who":"C","label":"arka plan","ok":true,"ms":51,"hostDay":990.6}}
+  OLAY {"kind":"cut","who":"C","t":563,"catch":{"who":"C","label":"kopma","ok":true,"ms":306,"hostDay":1001.1}}
+  OLAY {"kind":"order","who":"C","t":594,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":479}
+  OLAY {"kind":"speed","who":"B","t":624,"spd":4,"ok":true,"note":14}
+  OLAY {"kind":"window","who":"B","t":654,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"B","label":"pencere","ok":true,"ms":73,"hostDay":1156.3}}
+  OLAY {"kind":"background","who":"B","t":684,"catch":{"who":"B","label":"arka plan","ok":true,"ms":59,"hostDay":1179.3}}
+  OLAY {"kind":"cut","who":"B","t":714,"catch":{"who":"B","label":"kopma","ok":true,"ms":3654,"hostDay":1192.4}}
+  OLAY {"kind":"order","who":"B","t":744,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":452}
+  OLAY {"kind":"speed","who":"C","t":774,"spd":2,"ok":true,"note":16}
+  OLAY {"kind":"window","who":"C","t":805,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸ 2×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"C","label":"pencere","ok":true,"ms":308,"hostDay":1325.9}}
+  OLAY {"kind":"background","who":"C","t":835,"catch":{"who":"C","label":"arka plan","ok":true,"ms":65,"hostDay":1381.5}}
+  OLAY {"kind":"cut","who":"C","t":865,"catch":{"who":"C","label":"kopma","ok":true,"ms":548,"hostDay":1407.6}}
+  OLAY {"kind":"order","who":"C","t":895,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":707}
+  örnek 604 · olay 30 · kapalı-pencere donma 0 · açık-pencere bekleme 6 · en büyük gün farkı 7
+PASS I1 uzun oturum 15 dk (500 sistem / 16 AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası 20 sn'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür
+  I2 {"B":{"fleets":108,"seen":104,"seenMiss":0,"seenExtra":0,"hab":24,"habDiff":[],"ownDiff":[],"diff":{"route":[],"hp":[],"combat":[]}},"C":{"fleets":108,"seen":38,"seenMiss":0,"seenExtra":0,"hab":16,"habDiff":[],"ownDiff":[],"diff":{"route":[],"hp":[],"combat":[]}}}
+PASS I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)
+  I3 {"deal":{"ok":true,"share":true},"onlyB":69,"onlyC":5,"cGets":19,"bGets":0,"hostBefore":9,"hostAfter":9}
+FAIL I3 sensör paylaşımı tek yön: B → C; C, B'nin sensör sistemlerini görür, B C'ninkileri görmez, host'un kendi görüşü değişmez
+AssertionError [ERR_ASSERTION]: C, B'nin sensör sistemlerini görür
+
+19 !== 69
+
+    at /home/user/Star/tests/helpers/mp-sync-fed1-soak.cjs:118:11
+    at async test (/home/user/Star/tests/browser-mp8.cjs:57:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-sync-fed1-soak.cjs:107:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:443:17
+GEÇEN: 3 KALAN: 1
+EXIT 1

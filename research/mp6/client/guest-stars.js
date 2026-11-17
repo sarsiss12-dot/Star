@@ -362,7 +362,13 @@ function gate(){
   const hv=()=>S.J&&S.J.game&&S.J.game.view;
   wrap('canStatusQuo',(o,a,b)=>{if(mine(a)&&b){const c=hv()&&hv().dip&&hv().dip.contacts.find(x=>x.id===real(b.id));if(c&&c.sq!==undefined)return {ok:!!c.sq,why:c.sqw||''};}return o(a,b);});
   wrap('canRequestFederation',(o,e,via)=>{if(mine(e)&&via){const p=hv()&&hv().pol;const v=p&&(p.others||[]).flatMap(x=>x.vias||[]).find(x=>x.id===real(via.id));if(v)return {ok:!!v.ok,why:v.why||''};}return o(e,via);});   // aracı üyenin Etkisi kabukta yok: MP.3.1 polView kararı
-  wrap('canFedMotion',(o,e,kind,opt)=>{if(mine(e)&&kind==='admit'&&opt&&Number.isInteger(opt.target)){const f=hv()&&hv().pol&&hv().pol.fed,row=f&&(f.admit||[]).find(x=>x.id===real(opt.target));if(row)return {ok:!!row.ok,why:row.why};}return o(e,kind,opt);});
+  wrap('canFedMotion',(o,e,kind,opt)=>{if(mine(e)&&kind==='admit'&&opt&&Number.isInteger(opt.target)){const f=hv()&&hv().pol&&hv().pol.fed,row=f&&(f.admit||[]).find(x=>x.id===real(opt.target));if(row)return {ok:!!row.ok,why:row.why};}
+    /* MP-SYNC-FED.1 NF-9: başka üyenin savunma savaşına destek — host'un aynı kural satırı (aynada üçüncü taraf savaşı yok) */
+    if(mine(e)&&kind==='joinWar'&&opt&&Number.isInteger(opt.target)&&Number.isInteger(opt.sponsor)){const row=defCallRow(opt.target,opt.sponsor);if(row)return {ok:!!row.ok,why:row.why,fed:findFed(G.p)};}
+    return o(e,kind,opt);});
+  const defCalls=()=>{const f=hv()&&hv().pol&&hv().pol.fed;return f&&Array.isArray(f.defCalls)?f.defCalls:null;};
+  const defCallRow=(t,sp)=>{const rows=defCalls();return rows&&rows.find(r=>r.enemy===real(t)&&r.sponsor===real(sp))||null;};
+  wrap('fedDefenseCalls',(o,e)=>{const rows=defCalls();if(!mine(e)||!rows)return o(e);return rows.map(r=>({...r,sponsor:real(r.sponsor),enemy:real(r.enemy)}));});
   /* MP.6.3 — vasallık giriş kapıları: güç oranı ve karşı tarafın vasalları aynada eksik (kabuk) → MP.3.1 polView'daki host kararı */
   const vcand=o=>{const p=hv()&&hv().pol;return p&&p.vas&&(p.vas.cand||[]).find(x=>x.id===real(o.id));};
   wrap('canSeekProtection',(o,e,t)=>{if(mine(e)&&t){const c=vcand(t);if(c)return {ok:!c.seek,why:c.seek||''};}return o(e,t);});

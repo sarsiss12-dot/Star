@@ -111,10 +111,12 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
    await settle('i3');
    const after=await H().evaluate(([b,c])=>({h:[...humanVisionContext(G.p).visible].length,b:[...humanVisionContext(G.emps[b]).visible],c:[...humanVisionContext(G.emps[c]).visible]}),[E.B,E.C]);
    const gC=await pg.C.evaluate(()=>[...G.vis]),gB=await pg.B.evaluate(()=>[...G.vis]);
-   const onlyB=before.b.filter(id=>!before.c.includes(id)),onlyC=before.c.filter(id=>!before.b.includes(id));
-   I.sensor={deal:r,onlyB:onlyB.length,onlyC:onlyC.length,cGets:onlyB.filter(id=>gC.includes(id)).length,bGets:onlyC.filter(id=>gB.includes(id)).length,hostBefore:before.h,hostAfter:after.h};
+   /* motor kuralı: alan, verenin SENSÖR kaynaklarını alır (filo görüşü / başkasından gelen paylaşım aktarılmaz); doğruluk host'un C için hesapladığı görüşle */
+   const gained=after.c.filter(id=>!before.c.includes(id)),leakFrom3rd=gained.filter(id=>!before.b.includes(id));
+   const sameC=JSON.stringify([...gC].sort((a,b)=>a-b))===JSON.stringify(after.c.slice().sort((a,b)=>a-b));
+   I.sensor={deal:r,gained:gained.length,leakFrom3rd:leakFrom3rd.length,cMirrorEqHost:sameC,bChanged:JSON.stringify(after.b.slice().sort())!==JSON.stringify(before.b.slice().sort()),bGetsC:before.c.filter(id=>!before.b.includes(id)&&gB.includes(id)).length,hostBefore:before.h,hostAfter:after.h};
    console.log('  I3 '+JSON.stringify(I.sensor));
-   assert.equal(r.ok,true,'sensör paylaşımı anlaşması uygulandı');assert(onlyB.length>0,'fikstür: yalnız B\'nin gördüğü sistem var');
-   assert.equal(I.sensor.cGets,onlyB.length,'C, B\'nin sensör sistemlerini görür');assert.equal(I.sensor.bGets,0,'B, C\'ninkileri görmez (tek yön)');
+   assert.equal(r.ok,true,'sensör paylaşımı anlaşması uygulandı');assert(gained.length>0,'C yeni sistem gördü');assert.equal(leakFrom3rd.length,0,'C yalnız B\'nin gördüğü sistemleri kazanır');
+   assert.equal(sameC,true,'C misafir görüşü host\'un C için hesapladığıyla aynı');assert.equal(I.sensor.bChanged,false,'B\'nin görüşü değişmez (tek yön)');assert.equal(I.sensor.bGetsC,0,'B, C\'ninkileri görmez');
    assert.equal(after.h,before.h,'host\'un görüşü değişmez');});
 };

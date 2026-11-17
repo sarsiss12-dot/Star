@@ -1,0 +1,8 @@
+PASS D1 host: C'nin savunma savaşı federasyon panelinde görünür ve talep düğmesi etkin; istihbarat gerekmez ve değişmez
+PASS D2 misafir B: host görünümü aynı satır; B aynasında C'nin savaşı yok (eski kapı reddeder); B'nin komutu kabul → acil savunma oyu
+PASS D3 federasyon dışı D: satır yok, pol.fed yok; C'nin savaşı D'nin görünümüne savunma çağrısı olarak girmez
+PASS D4 savunma oyu açıkken başka geçerli savunma talebi sıraya girer; durumlar voting ve queued (sıra 1)
+PASS D5 gerekçeler: ikinci talep reddedilir ve satır durumu söyler; savaş biter → satır kalkar; üye ayrılır → satırı kalkar; temassız saldırgan → gerekçe
+PASS D6 kayıt → yeni host: durumlar aynı; aynı cid yeniden gönderim ikinci kuyruk / oy / Etki kesintisi üretmez
+PASS D7 saf işlev: fedDefenseCalls ve panel çizimi Save8 baytlarını ve RNG'yi değiştirmez
+GEÇEN: 7 KALAN: 0
