@@ -109,7 +109,8 @@ function build(meId,o={}){
     if(at<0||!visible.has(at))continue;
     const s=G.sys[at],moving=f.mv&&visible.has(f.mv.from)&&visible.has(f.mv.to);
     fl.push({id:f.id,e:pi(f.e),sys:moving?-1:at,x:moving?f.x:s.x,y:moving?f.y:s.y,ships:f.ships.map(x=>({c:x.c,h:Number.isFinite(x.h)?Math.max(0,Math.min(1,x.h)):1})),path:[],mv:moving?{from:f.mv.from,to:f.mv.to,t:f.mv.t}:null,ord:null,name:contacted(f.e)?f.name:'Bilinmeyen filo',
-      stance:'savunma',combat:0,surv:0,auto:false,repairing:0,supply:1});
+      /* MP-SYNC-FED.1: görünür sistemde ÇATIŞAN yabancı filo misafir haritasında da çatışmada (kırmızı halka + can çubuğu, host ile aynı); yolda / görünmeyende 0 */
+      stance:'savunma',combat:!moving&&f.combat?2:0,surv:0,auto:false,repairing:0,supply:1});
   }
   /* ---- federasyonlar: kamu kabuğu (üyelik haritada görünür). MP.6.1: ÜYE misafire kendi federasyonunun oylaması,
      davetleri ve son oy sonucu (gerçek STARS federasyon penceresi ve gelen kutusu); davet edilen misafire yalnız KENDİ daveti;

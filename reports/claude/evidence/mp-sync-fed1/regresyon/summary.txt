@@ -1,0 +1,22 @@
+== O 18:22:19
+GEÇEN: 11 KALAN: 0
+== U 18:25:08
+GEÇEN: 8 KALAN: 0
+== Z 18:26:22
+GEÇEN: 14 KALAN: 0
+== E 18:28:39
+GEÇEN: 6 KALAN: 0
+== F 18:29:12
+GEÇEN: 6 KALAN: 0
+== J 18:30:00
+GEÇEN: 5 KALAN: 0
+== M 18:30:35
+FAIL M2 B gerçek dokunuşla "Savunma desteği talep et" → host'ta acil savunma oyu; C'ye oy kartı, D'ye değil; ikinci dokunuş ikinci kuyruk / oy üretmez
+GEÇEN: 4 KALAN: 1
+== SP 18:31:08
+GEÇEN: 1 KALAN: 0
+== I15 18:31:12
+GEÇEN: 4 KALAN: 0
+== P 18:46:49
+GEÇEN: 8 KALAN: 0
+== DONE 18:54:31

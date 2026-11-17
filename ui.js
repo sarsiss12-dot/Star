@@ -6691,11 +6691,19 @@ const UI = {
     h+='<div class="mini">Tür reformu: 12 ay geçiş, kabulden sonra 120 ay yeni reform beklemesi. Eski yasalar korunur; geçmiş savaşlara yeni katılım yükümlülüğü uygulanmaz. Saldırı taahhüdüne hayır/çekimser kalan oyuncu otomatik katılmaz.</div></details>';
     }
     if(section!=='manage'){
+    /* MP-SYNC-FED.1 NF-9: üyelerin geçerli savunma savaşları — federasyon akışına özgü asgari bilgi; uygunluk canFedMotion ile (misafirde host'un satırı) */
+    const calls=typeof fedDefenseCalls==='function'?fedDefenseCalls(e):[],callKey=new Set(calls.map(r=>r.enemy+':'+r.sponsor));
+    if(calls.length){const ST={open:'Açık',queued:'Gündem kuyruğunda',voting:'Oylanıyor',approved:'Onaylandı',decided:'Oylandı',closed:'Düştü'};
+      h+='<div class="box fedDefCalls"><b>🛡 Savunma çağrıları</b><div class="mini">Saldırıya uğrayan üyenin savunma savaşı için federasyondan destek talebi. Yalnız savunulan üye, saldırgan ve çağrının durumu gösterilir; filo ve istihbarat bilgisi değişmez. Gerçek acil savunma sırada öne alınır; aktif oy kesilmez.</div>';
+      for(const r of calls){const who=r.sponsor===e.id?'Sen':this.diploName(r.sponsor),foe=r.known?this.diploName(r.enemy):'Bilinmeyen saldırgan';
+        h+=`<div class="fedDefCall" data-front="${r.front}" data-state="${r.state}"><div class="mini"><b>${esc(who)}</b> ← ${esc(foe)} · Cephe #${r.front} · ${esc(ST[r.state]||r.state)}${r.position?' · sıra '+r.position:''}</div>`;
+        h+=r.state==='open'?button('joinWar',{target:r.enemy,sponsor:r.sponsor},'Savunma desteği talep et'):`<div class="mini">${esc(r.why)}</div>`;h+='</div>';}
+      h+='</div>';}
     h+='<details class="dcDetails"><summary>Ortak savaş kararları</summary><div class="mini">Onay savaş başlatmaz. Yalnız evet oyu veren üyeler uygulama listesine girer; uygulamada antlaşma, Konsey, vasallık ve hedef yeniden denetlenir.</div>';
     for(const target of G.emps.filter(o=>e.contact[o.id]&&!o.dead&&!o.wild&&!o.crisisSide&&!f.members.includes(o.id))){
       h+=`<div class="box"><b>${esc(target.name)}</b>`;
       if(!e.war[target.id])h+=button('newWar',{target:target.id},'Ortak savaş izni öner');
-      for(const id of f.members)if(G.emps[id].war[target.id]&&(id===e.id||intelOf(e,id)>=3))h+=button('joinWar',{target:target.id,sponsor:id},G.emps[id].name+' savaşına destek öner');h+='</div>';
+      for(const id of f.members)if(G.emps[id].war[target.id]&&(id===e.id||intelOf(e,id)>=3)&&!callKey.has(target.id+':'+id))h+=button('joinWar',{target:target.id,sponsor:id},G.emps[id].name+' savaşına destek öner');h+='</div>';
     }
     h+=this.fedWarListHtml(f,e);   // BETA-WAR-GOALS.0
     for(const d of Object.values(f.decisions||{}))if(d.state==='ready')h+=`<div class="box"><b>${d.kind==='fedWar'?'Federasyona karşı savaş':d.kind==='newWar'?'Ortak savaş izni':'Mevcut savaşa destek'} · ${esc(e.contact[d.target]?G.emps[d.target]?.name:'Temassız hedef')}</b><div class="mini">${Math.ceil(Math.max(0,d.expires-G.day))} gün geçerli. Katılımcılar kendi evet oylarını verdi.</div><button class="abtn" data-a="fedExecute" data-x="${f.id}:${d.id}" ${e.id===f.leader||e.id===d.by?'':'disabled'}>KARARI UYGULA</button></div>`;

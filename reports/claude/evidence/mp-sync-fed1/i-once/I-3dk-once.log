@@ -1,0 +1,22 @@
+PASS I0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 16 AI, s500, seed 404; misafir gerçek STARS arayüzünde
+  OLAY {"kind":"speed","who":"B","t":20,"spd":4,"ok":true,"note":5}
+  OLAY {"kind":"window","who":"B","t":50,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"B","label":"pencere","ok":true,"ms":312,"hostDay":439.1}}
+  OLAY {"kind":"background","who":"B","t":81,"catch":{"who":"B","label":"arka plan","ok":true,"ms":51,"hostDay":462.9}}
+  OLAY {"kind":"cut","who":"B","t":111,"catch":{"who":"B","label":"kopma","ok":true,"ms":3637,"hostDay":475.9}}
+  OLAY {"kind":"order","who":"B","t":141,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":225}
+  OLAY {"kind":"speed","who":"C","t":171,"spd":4,"ok":true,"note":6}
+  örnek 128 · olay 6 · kapalı-pencere donma 0 · açık-pencere bekleme 1 · en büyük gün farkı 3.3
+PASS I1 uzun oturum 3 dk (500 sistem / 16 AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası 20 sn'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür
+  I2 {"B":{"fleets":107,"seen":64,"seenMiss":0,"seenExtra":0,"hab":16,"habDiff":[],"ownDiff":[],"diff":{"route":[],"hp":[],"combat":[[176,3]]}},"C":{"fleets":107,"seen":25,"seenMiss":0,"seenExtra":0,"hab":10,"habDiff":[],"ownDiff":[],"diff":{"route":[],"hp":[],"combat":[]}}}
+FAIL I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)
+AssertionError [ERR_ASSERTION]: B haritasında çatışan filolar çatışmada (host combat): [[176,3]]
+
+1 !== 0
+
+    at /home/user/Star/tests/helpers/mp-sync-fed1-soak.cjs:105:11
+    at async test (/home/user/Star/tests/browser-mp8.cjs:57:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-sync-fed1-soak.cjs:85:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:443:17
+  I3 {"deal":{"ok":true,"share":true},"onlyB":30,"onlyC":5,"cGets":30,"bGets":0,"hostBefore":4,"hostAfter":4}
+PASS I3 sensör paylaşımı tek yön: B → C; C, B'nin sensör sistemlerini görür, B C'ninkileri görmez, host'un kendi görüşü değişmez
+GEÇEN: 3 KALAN: 1

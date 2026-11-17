@@ -1,11 +1,11 @@
 {
-  "phase": "MP-DIPLO5",
-  "build": "96h10p38",
+  "phase": "MP-SYNC-FED.1",
+  "build": "96h10p39",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p38",
-  "parent_commit": "f2e48eba207a5a4bb3f10b37f70323a61105b3ad",
-  "parent_zip_sha256": "93cbc9e6606d61e64d9b7042f2ecedc130b6fdc3eed1d98aaea729da0e8b2c1f",
+  "pwa_cache": "stars-v96h10p39",
+  "parent_commit": "1a6e404aa91215a9e037063c6ff33426747e9e29",
+  "parent_zip_sha256": "1b1917831ff9e437ed1ce2c1ff6458f59145835bb0859f1a7a4bf5b970823253",
   "file_count": 19,
   "files": {
     "ai.js": "3028fee904ae51f09f1de6937de0cd6c756ad50172d171eb32433e43074b201c",
@@ -15,18 +15,18 @@
     "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
     "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
     "construction.js": "920d6122c3d3e65ef2650c94a9a5a804c3d67b65411627e23184f0e1d5d60e08",
-    "diplomacy.js": "e76d0dea57a46a914a1527871008837b097fed970ae47d9cb4ea2bd907a4dc3b",
+    "diplomacy.js": "a18b630af5b3a89fed2717b7f70c2141d7b5c10e623bd22d1cda48a6c94b2e52",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
     "economy-ui.js": "68025b1bb388188435a51cca2319e92e7eb9ec6517b4e3c8437f335e2916763f",
     "economy.js": "99c1d3c3a1e553230e559dce3df0e3874dddc9f1f6a4c22e878e95b45a711043",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
     "index.html": "3bb3c8291d247981322a54cd347782a8d4d727e01a0e60c707667bcf95d63bc9",
-    "main.js": "560194c1c6389cb19bbcbff8031b6fa71afd27a363b99bbe9f8a028f8f57b77b",
+    "main.js": "8b698c3f68fc8c696f10969d98e734c454e2c6193d2d56793253ac12964fc4d2",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "5b40278d2e0c34a25db5838c87c691f0b23738b0f3b3af7b87ae1fcd85badddc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "82f87731368112487392a38b44f0a21f686a40db063871428925dd578dab8e0e",
-    "ui.js": "954e88c063863c0d5c9737faf264599009cc04974fbf4e583d4e6bda77f4d1ea"
+    "sw.js": "82f05bdb26758993ebee9275354422e513f577cca4520fe82d2ec0e6dc8c2959",
+    "ui.js": "2f17c3ffb87e864883af1bcf64faf0e88fc70d7e2f789baed22e92cf8307d7d9"
   },
-  "description": "MP-DIPLO5: Lüks mal erişim hakkı (luxGrant) ekonomik etki verir (tek oyunculu ve çok oyunculu aynı kural; bir kez sayılır, veren kendi kaynağından sağlar, savaşta biter, ambargo / kaynak kaybında askıda, MP'de sonucu host üretir); Casusluk Ağı Paktı çok oyunculu müzakerede (savaşta kurulamaz, biten ağın nedeni, havuz düzeyi host'tan); Barıştırma cephe kimliğine bağlı ve diğer savaşanın onayıyla (insan için iki aşamalı işlem); İlişki sayfasında tek dokunuş Saldırmazlık / Ticaret Paktı / Geçiş İste / Ver; AI son tarihsiz Savaş Sözünü erişim, güç oranı ve bütçe kapısıyla değerlendirir. Save8 v8, paket 4, protokol 1."
+  "description": "MP-SYNC-FED.1: Federasyon savunma çağrısı (NF-9) — üye, başka bir üyenin geçerli savunma savaşı için federasyon panelinden destek talebi açar; yalnız savunulan üye, saldırgan, cephe ve çağrının durumu gösterilir, uygunluk mevcut önerge ve gündem kurallarıyla (host, tek oyunculu ve misafir aynı işlev). Harita görünürlüğü, filo konumu ve istihbarat kuralları değişmedi. Save8 v8, paket 4, protokol 1."
 }

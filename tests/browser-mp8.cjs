@@ -45,7 +45,10 @@ const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'bu
   /* MP-DIPLO5: Lüks hakkı bonusu, Casusluk Ağı, Barıştırma (iki aşama + kayıt-devam), tek dokunuş kısayollar, birleşik teklif — host + B + C + D (gizlilik profili) */
   U:{size:'orta',ai:5,seed:22,months:0,guests:3,every:6},
   /* MP-SYNC-FED.0: misafir eşitleme ve emir zinciri — kopma, donan hat, kayıp ayna / yanıt, arka plan, yeniden katılma, açık pencere, fed oyu — host + B + C */
-  O:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6}}[SCEN];
+  O:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
+  J:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
+  I:{size:'s500',ai:16,seed:404,months:0,guests:2,every:6},
+  M:{size:'orta',ai:5,seed:22,months:0,guests:3,every:6}}[SCEN];
 if(!CONF)throw Error('MP8_SCEN A|B|C|R|N|P|E|F|D|G|L|S|W|K|Q|Z');
 if(process.env.FEDAI0_R==='1'||process.env.ER0_R==='1')CONF.ai=8;
 if(process.env.SCALE0_MP){const c=JSON.parse(process.env.SCALE0_MP);Object.assign(CONF,c);}
@@ -437,6 +440,10 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
   if(SCEN==='K')await require('./helpers/field-war-siege0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
   if(SCEN==='Q')await require('./helpers/war-coalition0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
   if(SCEN==='Z')await require('./helpers/mp-field-fix0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,startRelay,stopRelay,getCode:()=>code,setCode:c=>{code=c;},
+    CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance,guestGo,closeAll});
+  if(SCEN==='M')await require('./helpers/mp-sync-fed1-nf9.cjs')({test,pg,metrics,sleep,shot,assert,wait,tap,settle});
+  if(SCEN==='I')await require('./helpers/mp-sync-fed1-soak.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,settle});
+  if(SCEN==='J')await require('./helpers/mp-sync-fed1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,startRelay,stopRelay,getCode:()=>code,setCode:c=>{code=c;},
     CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance,guestGo,closeAll});
   if(SCEN==='O')await require('./helpers/mp-sync-fed0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});
   if(SCEN==='U')await require('./helpers/mp-diplo5-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});
