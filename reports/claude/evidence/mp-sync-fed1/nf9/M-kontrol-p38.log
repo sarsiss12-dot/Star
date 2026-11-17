@@ -1,0 +1,25 @@
+PASS M0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 4 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS M1 fikstür: host / B / C federasyonu, AI C'ye saldırır; B aynasında C'nin savaşı yok, D federasyonda değil
+FAIL M2 B gerçek dokunuşla "Savunma desteği talep et" → host'ta acil savunma oyu; C'ye oy kartı, D'ye değil; ikinci dokunuş ikinci kuyruk / oy üretmez
+AssertionError [ERR_ASSERTION]: B panelinde açık savunma çağrısı ve etkin düğme: {"calls":[],"oldBtns":[]}
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/helpers/mp-sync-fed1-nf9.cjs:35:4
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/browser-mp8.cjs:58:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/helpers/mp-sync-fed1-nf9.cjs:28:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/browser-mp8.cjs:444:17
+FAIL M3 host paneli aynı satırı "Oylanıyor" gösterir; D'nin görünümünde savunma çağrısı yok
+AssertionError [ERR_ASSERTION]: host: oylanıyor []
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/helpers/mp-sync-fed1-nf9.cjs:48:19
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/browser-mp8.cjs:58:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/helpers/mp-sync-fed1-nf9.cjs:46:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/browser-mp8.cjs:444:17
+FAIL M4 oy açıkken AI host'a saldırır → C kendi panelinden talep açar → kuyrukta; B panelinde "Gündem kuyruğunda · sıra 1"
+locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#diploPane .fedDefCall [data-a="fedMotion"][data-x="joinWar:6:2"]')[22m
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/helpers/mp-sync-fed1-nf9.cjs:56:28
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/browser-mp8.cjs:58:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/helpers/mp-sync-fed1-nf9.cjs:51:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/ctl38/tests/browser-mp8.cjs:444:17
+GEÇEN: 2 KALAN: 3
+EXIT 1
