@@ -143,6 +143,27 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
    assert.equal(h.open,true,'C beklediği için oy açık kalır');assert.equal(h.yes,1,'B\'nin oyu host\'ta tam bir kez');assert.equal(h.no,0);
    assert.equal(g.mine,1,'misafir aynasında kendi oyu görünür');assert.equal(g.waitMe,false,'misafirde artık oy beklenmiyor');});
 
+ await test('O10 harita görünümü: kendi hareket eden filonun rotası host ile aynı, konum aynalar arasında akıcı ilerler; görünür sistem sahipliği (sınırlar) host gerçeğiyle aynı — kopma, yeni ayna ve açık panelden sonra da',async()=>{
+   const pick=await H().evaluate(b=>{for(const f of G.fleets.filter(f=>f.e===b&&f.ships.length&&!f.mv&&f.sys>=0&&!(f.path||[]).length)){const to=G.sys[f.sys].lanes.find(l=>__mp8.why(G.emps[b],{kind:'move',fleet:f.id,to:l})===null);if(to!==undefined)return {fleet:f.id,to};}return null;},E.B);
+   assert(pick,'hareket edebilen filo');await closeUI(B());assert.equal(await B().evaluate(([f,to])=>orderMove(G.fleets.find(x=>x.id===f),to),[pick.fleet,pick.to]),true);
+   await run(1);await wait(H(),f=>{const x=G.fleets.find(q=>q.id===f);return !!(x&&x.mv);},pick.fleet,20000);await sleep(1500);
+   const view=async label=>{const g=await B().evaluate(f=>{const x=G.fleets.find(q=>q.id===f);const pts=[];return {mv:x&&x.mv?{from:x.mv.from,to:x.mv.to}:null,path:x?(x.path||[]).slice():null,sys:x?x.sys:null};},pick.fleet);
+     const pts=[];for(let i=0;i<6;i++){pts.push(await B().evaluate(f=>{const x=G.fleets.find(q=>q.id===f);if(!x)return null;const p=View.fleetPoint(x);return [Math.round(p.x*100)/100,Math.round(p.y*100)/100,MP6Stars.S.rev];},pick.fleet));await sleep(220);}
+     const h=await H().evaluate(f=>{const x=G.fleets.find(q=>q.id===f);return {mv:x&&x.mv?{from:x.mv.from,to:x.mv.to}:null,path:x?(x.path||[]).slice():null,sys:x?x.sys:null};},pick.fleet);
+     const own=await B().evaluate(()=>{const v=[...G.vis];return v.map(id=>[id,G.sys[id].owner===undefined?null:G.sys[id].owner]);});
+     const hown=await H().evaluate(([b,ids])=>{const pi=x=>x===b?0:x===0?b:x;return ids.map(id=>[id,G.sys[id].owner===undefined||G.sys[id].owner===null?null:pi(G.sys[id].owner)]);},[E.B,own.map(x=>x[0])]);
+     const moving=pts.filter(Boolean),distinct=new Set(moving.map(p=>p[0]+','+p[1])).size,revs=new Set(moving.map(p=>p[2])).size;
+     M['o10_'+label]={g,h,distinct,revs,ownN:own.length,ownDiff:own.filter((x,i)=>JSON.stringify(x)!==JSON.stringify(hown[i])).slice(0,6)};return {g,h,distinct,revs,own,hown};};
+   const chk=(r,label)=>{if(r.h.mv){assert.deepEqual(r.g.mv,r.h.mv,label+': rota bacağı host ile aynı');assert(r.distinct>=3,label+': konum aynalar arasında akıcı ('+r.distinct+' farklı nokta, '+r.revs+' ayna)');}
+     assert.deepEqual(r.own,r.hown,label+': görünür sistem sahipliği host ile aynı');};
+   /* filo vardıysa aynı filoya komşu sisteme yeni emir (akıcılık her durumda ölçülsün) */
+   const again=async()=>{const to=await H().evaluate(([b,f])=>{const x=G.fleets.find(q=>q.id===f);if(!x||x.mv||x.sys<0)return null;return G.sys[x.sys].lanes.find(l=>__mp8.why(G.emps[b],{kind:'move',fleet:f,to:l})===null)??null;},[E.B,pick.fleet]);
+     if(to===null)return;await B().evaluate(([f,to])=>orderMove(G.fleets.find(x=>x.id===f),to),[pick.fleet,to]);await wait(H(),f=>{const x=G.fleets.find(q=>q.id===f);return !!(x&&x.mv);},pick.fleet,20000);await sleep(1500);};
+   chk(await view('once'),'önce');
+   await lanes.B.down();await sleep(2500);await lanes.B.up();await relink('B');await again();chk(await view('kopma'),'kopma sonrası');
+   await B().evaluate(()=>UI.act('topStatus'));await sleep(1500);await closeUI(B());await again();chk(await view('panel'),'açık panel sonrası');
+   await run(0);await shot(B(),'o10-harita');});
+
  await test('O9 harita tutarlılığı: dönüşten ve yeni dünya güncellemesinden sonra kendi filo rotası / konumu ve görülebilir sistem sahipliği host ile aynı',async()=>{
    await run(2);await sleep(4000);await run(0);await settle('o9');
    const h=await H().evaluate(e=>({f:G.fleets.filter(f=>f.e===e).map(f=>({id:f.id,sys:f.sys,to:f.mv?f.mv.to:null,hp:Math.round(f.ships.reduce((a,s)=>a+(s.hp||0),0))})),own:G.sys.filter(s=>s.owner===e).map(s=>s.id).sort((a,b)=>a-b)}),E.B);

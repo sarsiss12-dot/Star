@@ -1,0 +1,254 @@
+{
+ "results": [
+  {
+   "name": "O0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 10608
+  },
+  {
+   "name": "O10 harita görünümü: kendi hareket eden filonun rotası host ile aynı, konum aynalar arasında akıcı ilerler; görünür sistem sahipliği (sınırlar) host gerçeğiyle aynı — kopma, yeni ayna ve açık panelden sonra da",
+   "status": "PASS",
+   "ms": 12838
+  }
+ ],
+ "metrics": {
+  "scen": "O",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 739,
+    "buildMs": 775,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 869,
+    "buildMs": 942,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 8.3,
+      "p95": 8.3,
+      "max": 8.3
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 16,
+     "dom": 725,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 77.1,
+       "p95": 77.1,
+       "max": 77.1
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.5,
+       "p95": 1.5,
+       "max": 1.5
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 713,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 27,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 71.1,
+       "p95": 71.1,
+       "max": 71.1
+      },
+      "refresh": {
+       "n": 1,
+       "med": 6.7,
+       "p95": 6.7,
+       "max": 6.7
+      },
+      "longtask": {
+       "n": 1,
+       "med": 51,
+       "p95": 51,
+       "max": 51
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 722,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 11276,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "sync0": {
+   "orders": [],
+   "events": [],
+   "fx": {
+    "home": 5
+   },
+   "o10_once": {
+    "g": {
+     "mv": {
+      "from": 5,
+      "to": 37
+     },
+     "path": [
+      37
+     ],
+     "sys": -1
+    },
+    "h": {
+     "mv": {
+      "from": 5,
+      "to": 37
+     },
+     "path": [
+      37
+     ],
+     "sys": -1
+    },
+    "distinct": 6,
+    "revs": 2,
+    "ownN": 15,
+    "ownDiff": []
+   },
+   "o10_kopma": {
+    "g": {
+     "mv": {
+      "from": 37,
+      "to": 5
+     },
+     "path": [
+      5
+     ],
+     "sys": -1
+    },
+    "h": {
+     "mv": {
+      "from": 37,
+      "to": 5
+     },
+     "path": [
+      5
+     ],
+     "sys": -1
+    },
+    "distinct": 6,
+    "revs": 2,
+    "ownN": 15,
+    "ownDiff": []
+   },
+   "o10_panel": {
+    "g": {
+     "mv": {
+      "from": 37,
+      "to": 5
+     },
+     "path": [
+      5
+     ],
+     "sys": -1
+    },
+    "h": {
+     "mv": {
+      "from": 37,
+      "to": 5
+     },
+     "path": [
+      5
+     ],
+     "sys": -1
+    },
+    "distinct": 6,
+    "revs": 2,
+    "ownN": 15,
+    "ownDiff": []
+   }
+  },
+  "errors": []
+ }
+}
