@@ -20,9 +20,15 @@ const ArchiveUI = {
   },
   shell(body,footer='',list=false,title='GALAKTİK HABER AĞI'){
     UI.openModal(`<div class="mhd"><span>${esc(title)}</span><button class="abtn" data-a="closem" aria-label="Haritaya dön">✕</button></div>
-      <nav class="archiveTabs" aria-label="Haber ağı"><button class="abtn ${this.mode==='news'?'pri':''}" data-a="news" aria-pressed="${this.mode==='news'}">Haberler · ${GalacticNews.unread()}</button><button class="abtn ${this.mode==='inbox'?'pri':''}" data-a="diplomaticInbox" aria-pressed="${this.mode==='inbox'}">Gelen kutusu · ${DiplomaticInbox.pending()}</button></nav>
+      <nav class="archiveTabs" aria-label="Haber ağı"><button class="abtn ${this.mode==='news'?'pri':''}" data-a="news" aria-pressed="${this.mode==='news'}">Haberler · ${GalacticNews.unread()}</button><button class="abtn ${this.mode==='inbox'?'pri':''}" data-a="diplomaticInbox" aria-pressed="${this.mode==='inbox'}">Gelen kutusu · ${DiplomaticInbox.pending()}</button><button class="abtn ${this.mode==='ship'?'pri':''}" data-a="shipmentsNews" aria-pressed="${this.mode==='ship'}">Sevkiyatlar · ${typeof shipmentRetryList==='function'?shipmentRetryList(G.p).length:0}</button></nav>
       ${body}${list?'':`<div class="mft">${footer}<button class="ch" data-a="closem">Haritaya dön</button></div>`}`,'archiveShell liveWorld');   /* WAR-COALITION.0: kimlikle çalışan pencere — misafirde dünya güncellemesini bekletmez */
     $('modal').classList.add('archiveHost');this.listVisible=list;
+  },
+  /* REINF-ROUTE.0 — Haberler → Sevkiyatlar: FİLO sekmesindeki aynı SEVKİYATLAR bölümü (kayıp hedef başına tek kart). */
+  shipments(){
+    this.ensureWorld();this.remember();this.mode='ship';
+    const body=(typeof UI.shipmentsSection==='function'?UI.shipmentsSection():'')||'<div class="empty">Bekleyen sevkiyat yok.</div>';
+    this.shell(`<div id="archiveShip" class="mbd archiveShip">${body}</div>`);
   },
   open(mode='news'){
     this.ensureWorld();this.remember();
@@ -145,7 +151,8 @@ const ArchiveUI = {
     const world=G.emps,token=quoteToken;UI._hook('remoteConfirm',()=>{if(UI._constructionToken!==token||world!==G.emps)return;const q=RemoteConstruction.enqueue(f,+$('remoteTarget').value,$('remoteStructure').value);say(q.ok?'İnşaat görevi kuyruğa eklendi':q.why,q.ok?'win':'war');if(q.ok){UI.closeModal();UI.refresh();}else quote();});
   },
   act(a,x){
-    if(!['news','newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord','inboxEmpire','remoteBuild','remoteCancel','inboxReturn','inboxFederation'].includes(a))return false;
+    if(!['news','newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord','inboxEmpire','remoteBuild','remoteCancel','inboxReturn','inboxFederation','shipmentsNews'].includes(a))return false;
+    if(a==='shipmentsNews')this.shipments();
     if(a==='news'||a==='diplomaticInbox')this.open(a==='news'?'news':'inbox');
     if(a==='newsDetail')this.detail(+x);
     if(a==='newsReturn'){const r=this.newsReturnRecord();if(r)this.detail(r.id);}

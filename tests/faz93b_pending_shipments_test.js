@@ -7,9 +7,15 @@ function blocked(actor=0){const h=fresh(actor);h.run('reinforceFleet(E,A);G.sys[
 for(const actor of [0,1])test(actor+': kapalı üretim çıkışı hedefi ve eksik sayacını korur',()=>{
  const h=blocked(actor);eq(h.run('N.joinFleet===A.id'));eq(h.run('N.shipment.state'),'blocked');eq(h.run('fleetPendingCounts(E,A).inTransit'),1);eq(h.run('reinforceFleet(E,A).ok'),false);
 });
-test('retry beklemesi kare başına yol aramaz, 4 denemede durur',()=>{
- const h=blocked();h.run('var calls=0,orig=shipmentRoute;shipmentRoute=function(...a){calls++;return orig(...a)};for(let i=0;i<100;i++)stepFleets(.01);');eq(h.run('calls'),0);
+/* REINF-ROUTE.0: deneme sınırında durma (paused) AI ve elle sistem hedefi için aynen; insanın güvenli filo takviyesi
+   kullanıcı kararıyla güvenli sistemde bekleyip 5 günde bir (yine kare başına değil) yeniden rota arar — ayrı vaka aşağıda. */
+test('retry beklemesi kare başına yol aramaz, 4 denemede durur (AI)',()=>{
+ const h=blocked(1);h.run('var calls=0,orig=shipmentRoute;shipmentRoute=function(...a){calls++;return orig(...a)};for(let i=0;i<100;i++)stepFleets(.01);');eq(h.run('calls'),0);
  h.run('for(let i=0;i<10;i++){G.day+=40;stepFleets(.01);}');eq(h.run('calls'),3);eq(h.run('N.shipment.state'),'paused');eq(h.run('N.shipment.attempts'),4);
+});
+test('REINF-ROUTE.0 insan güvenli takviyesi: kare başına yol aramaz, deneme sınırında durmaz, 5 günde bir yeniden dener',()=>{
+ const h=blocked();h.run('var calls=0,orig=shipmentRoute;shipmentRoute=function(...a){calls++;return orig(...a)};for(let i=0;i<100;i++)stepFleets(.01);');eq(h.run('calls'),0);
+ h.run('for(let i=0;i<10;i++){G.day+=40;stepFleets(.01);}');eq(h.run('calls'),10);eq(h.run('N.shipment.state'),'blocked');eq(h.run('N.shipment.attempts'),1);
 });
 test('rota açılınca otomatik retry gerçek gemiyi bir kez teslim eder',()=>{
  const h=blocked();h.run('var res=JSON.stringify(E.res),rng=RND_STATE;G.sys[1].owner=E.id;G.day+=5;sail();sail();');eq(h.run('A.ships.length'),2);eq(h.run('N.ships.length'),0);eq(h.run('JSON.stringify(E.res)===res&&RND_STATE===rng'));

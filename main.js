@@ -3947,13 +3947,16 @@ function shipmentRecord(f){
   return f.shipment;
 }
 const FLEET_RECOVERY_DIRTY=new Set();
+/* REINF-ROUTE.0 — insan oyuncunun güvenli filo takviyesi (otomatik / elle sipariş) deneme sınırında durmaz: güvenli sistemde
+   bekler, 5 günde bir ve ana filo yer değiştirince hemen yeniden rota arar. Eski kayıttaki 'paused' de aynı yoldan sürer. */
+function shipmentAutoResume(f,d){return !!d&&d.safe===true&&d.fleet!==undefined&&!!G.emps[f.e]&&!G.emps[f.e].ai;}
 function holdShipment(f,reason,detail){
   const d=shipmentRecord(f); if(!d)return;
   f.path=f.mv?[f.mv.to]:[];
   d.state=reason;
   if(detail)d.reason=detail;
   if(reason==='blocked'){
-    d.attempts=Math.min(SHIPMENT_MAX_ATTEMPTS,(d.attempts||0)+1);
+    d.attempts=Math.min(shipmentAutoResume(f,d)?1:SHIPMENT_MAX_ATTEMPTS,(d.attempts||0)+1);
     d.next=G.day+5*Math.pow(2,d.attempts-1);
     if(d.attempts>=SHIPMENT_MAX_ATTEMPTS)d.state='paused';
   }
@@ -3968,6 +3971,8 @@ function followRallyFleet(f,budget){
   const target=d.fleet!==undefined ? fleetDeliveryTarget(empOf(f),ana) : d.sys;
   if(!Number.isInteger(target) || !G.sys[target]){holdShipment(f,'lost');return;}
   if(d.fleet!==undefined)f.joinFleet=d.fleet;
+  const auto=shipmentAutoResume(f,d);
+  if(auto&&(d.state==='blocked'||d.state==='paused')&&f.rallyTo!==target)d.next=0;   /* REINF-ROUTE.0: ana filo yer değiştirdi */
   f.rallyTo=target;
   if(f.mv || f.path.length || f.combat || f.retreating)return;
   if(target===f.sys){
@@ -3981,7 +3986,7 @@ function followRallyFleet(f,budget){
     } else clearShipment(f);
     return;
   }
-  if(d.state==='paused' || (d.state==='blocked' && G.day<d.next))return;
+  if(d.state==='paused'&&!auto || ((d.state==='blocked'||d.state==='paused') && G.day<d.next))return;
   if(budget && budget.left<=0)return;
   if(budget)budget.left--;
   const path=shipmentRoute(empOf(f),f,f.sys,target);
@@ -4216,8 +4221,10 @@ function shipmentStatus(f){
   if(f.retreating)return 'Geri çekilme tamamlanınca sevk edilecek';
   if(d.state==='waiting'&&main)return main.combat?'Hedef filo savaşta — birleşme bekliyor':main.retreating?
     'Hedef filo geri çekiliyor':main.mv?'Hedef sistem değişiyor — hareketli filo bekleniyor':'Ana filo bekleniyor';
-  const labels={lost:'Hedef kayıp — yeni hedef seç',paused:(d.reason||'Rota kapalı')+' · Otomatik deneme sınırına ulaşıldı; yeniden dene / hedef değiştir',
-    blocked:(d.reason||'Rota kapalı')+' — '+Math.max(0,Math.ceil(d.next-G.day))+' gün sonra yeniden denenecek',
+  const at=f.sys>=0&&G.sys[f.sys]&&(d.state==='blocked'||d.state==='paused')?' · Bekleme yeri: '+G.sys[f.sys].name:'';   /* REINF-ROUTE.0 */
+  if(at&&shipmentAutoResume(f,d))return (d.reason||'Rota kapalı')+at+' · rota açılınca / ana filo ulaşılabilir yere geçince kendiliğinden devam eder ('+Math.max(0,Math.ceil(d.next-G.day))+' gün içinde yeniden denenir)';
+  const labels={lost:'Hedef kayıp — yeni hedef seç',paused:(d.reason||'Rota kapalı')+at+' · Otomatik deneme sınırına ulaşıldı; yeniden dene / hedef değiştir',
+    blocked:(d.reason||'Rota kapalı')+at+' — '+Math.max(0,Math.ceil(d.next-G.day))+' gün sonra yeniden denenecek',
     waiting:'Ana filo bekleniyor',moving:'Takviye yolda · hareketli hedef izleniyor',ready:'Sevk sırası bekliyor — ralli atamak gerekmez'};
   return labels[d.state] || 'Sevk bekliyor';
 }
@@ -4421,7 +4428,11 @@ function stepFleets(dt){
       const nxt = f.path[0], eMove = empOf(f), here = G.sys[f.sys];
       if(f.shipment && f.shipment.safe){
         if(!safeThreats.has(f.e))safeThreats.set(f.e,reinforcementThreats(eMove));
-        if(safeThreats.get(f.e).has(nxt)){holdShipment(f,'blocked','Bilinen düşman tehdidi — güvenli rota yok');continue;}
+        const th=safeThreats.get(f.e);
+        if(th.has(nxt)&&!(f.shipment.fleet!==undefined&&reinforcementPassable(eMove,th,nxt,f.rallyTo))){
+          /* REINF-ROUTE.0: insan takviyesi yolda tehdit görünce aynı adımda güvenli başka rota arar; yoksa bulunduğu sistemde bekler */
+          if(!eMove.ai&&f.shipment.fleet!==undefined){f.path=[];Object.assign(f.shipment,{state:'ready',attempts:0,next:0});followRallyFleet(f,shipmentBudget);continue;}
+          holdShipment(f,'blocked','Bilinen düşman tehdidi — güvenli rota yok');continue;}
       }
       if(explorationEnabled(f)){
         if(!exploreChecks.has(f.e))exploreChecks.set(f.e,explorationContext(eMove));
@@ -5740,13 +5751,25 @@ function reinforcementThreats(e){
     for(const f of G.fleets)if(f.e===e.id && f.sys>=0)visible.add(f.sys);
     for(const id of [...visible])if(!G.sys[id].nebulaS)for(const n of G.sys[id].lanes)visible.add(n);
   }
+  blocked.owned=new Set();   /* REINF-ROUTE.0: kolonili (s.owner) düşman sistemleri; yalnız toprak iddiası (claimOf) olanlar bu kümede değil */
   for(const s of G.sys){
     const owner=s.owner>=0?s.owner:claimOf(s);
-    if(known(s) && owner>=0 && owner!==e.id && hostile(e.id,owner))blocked.add(s.id);
+    if(known(s) && owner>=0 && owner!==e.id && hostile(e.id,owner)){blocked.add(s.id);if(s.owner>=0)blocked.owned.add(s.id);}
   }
+  blocked.armed=new Set();   /* REINF-ROUTE.0: görünür silahlı düşman filosunun sistemleri ayrıca (sahiplikten ayrı) */
+  blocked.held=new Set();for(const x of G.fleets)if(x.e===e.id && x.sys>=0 && !x.mv && x.ships.length && isArmed(x))blocked.held.add(x.sys);   /* kendi silahlı filonun tuttuğu sistemler */
   for(const x of G.fleets)if(x.e!==e.id && x.sys>=0 && x.ships.length && isArmed(x) &&
-    hostile(e.id,x.e) && (e.id===0?pVis(G.sys[x.sys]):visible.has(x.sys)))blocked.add(x.sys);
+    hostile(e.id,x.e) && (e.id===0?pVis(G.sys[x.sys]):visible.has(x.sys))){blocked.add(x.sys);blocked.armed.add(x.sys);}
   return blocked;
+}
+/* REINF-ROUTE.0 — insan oyuncunun takviyesi: düşman SAHİPLİĞİ / toprak iddiası tek başına rotayı kapatmaz. Görünür silahlı düşman
+   filosu olan sistem her zaman kapalıdır (güvenli yaklaşım yok). Onun dışında geçilebilir: ana filonun bulunduğu (kuşattığı / işgal
+   ettiği) hedef sistem, yalnız toprak iddiasındaki (kolonisiz) düşman sistemi ve kendi silahlı filonun tuttuğu düşman sistemi. Kolonili
+   düşman sistemleri (gezegen savunması) ara durak olarak kaçınılmaya devam eder. Karar yalnız oyuncunun bildiği sahiplik ve gördüğü
+   filolarla verilir. AI'nın seçimi değişmez (askerî strateji ayrı faz kararı). */
+function reinforcementPassable(e,threats,id,target){
+  if(!e||e.ai||!threats.has(id)||!threats.armed||threats.armed.has(id))return false;
+  return id===target||!threats.owned.has(id)||threats.held.has(id);
 }
 /* One reverse, time-weighted graph per class, shared by every candidate yard.
    No per-ship or per-yard Dijkstra. Gate edges and live border rules included.
@@ -5758,7 +5781,8 @@ function reinforcementRoutes(e,ships,target){
   const speeds=G.sys.map(s=>{probe.sys=s.id;return Math.max(.001,fleetSpeed(probe));});
   const incoming=Array.from({length:n},()=>[]);
   for(const s of G.sys)for(const to of s.lanes)if(G.sys[to])incoming[to].push(s.id);
-  if(!G.sys[target] || threats.has(target))return {eta,next};
+  const bad=id=>threats.has(id)&&!reinforcementPassable(e,threats,id,target);
+  if(!G.sys[target] || bad(target))return {eta,next};
   eta[target]=0;
   for(let k=0;k<n;k++){
     let v=-1,best=Infinity;
@@ -5767,7 +5791,7 @@ function reinforcementRoutes(e,ships,target){
     const sources=new Set(incoming[v]);
     if(gates[v])for(let i=0;i<n;i++)if(gates[i])sources.add(i);
     for(const u of sources){
-      if(u===v || done[u] || threats.has(u) || threats.has(v))continue;
+      if(u===v || done[u] || bad(u) || bad(v))continue;
       if(!pathAllowed(e,probe,[v],u))continue;
       const len=(gates[u]&&gates[v]) ? .1 :Math.max(.1,dist(G.sys[u],G.sys[v]));
       // During a leg fleetSpeed uses the arrival nebula once sys becomes -1.
@@ -5848,15 +5872,21 @@ function fleetAutoReinforceTick(){
   if(fleetAutoWorld!==G.sys){fleetAutoWorld=G.sys;fleetAutoDay=-Infinity;}
   if(Math.floor(G.day)<=fleetAutoDay)return;
   fleetAutoDay=Math.floor(G.day);
-  const candidates=G.fleets.filter(f=>f.e===0 && f.composition && f.composition.auto &&
+  /* REINF-ROUTE.0: her insan devlet (tek oyunculuda yalnız devlet 0; MP'de uzak insanlar da) — p39'da uzak insanın Otomatik Takviyesi hiç sipariş vermiyordu.
+     Devlet başına günde en çok bir filo (devlet 0 için eski kural aynen). */
+  const human=id=>{const e=G.emps[id];return !!e&&!e.ai&&!e.dead&&!e.wild&&!e.crisisSide;};
+  const candidates=G.fleets.filter(f=>human(f.e) && f.composition && f.composition.auto &&
     f.composition.next<=G.day && f.ships.length && !hasShipment(f) && !f.federal && !f.guardLocked);
   candidates.sort((a,b)=>a.composition.next-b.composition.next||a.id-b.id);
-  const f=candidates[0];if(!f)return;
-  f.composition.next=G.day+5;
-  const sleep=navyAsleep(G.p);
-  if(sleep.uyku){f.composition.reason=sleep.why==='kasa'?'Alaşım rezervi yetersiz — otomatik üretim bekliyor':'Donanma kapasitesi dolu — otomatik üretim bekliyor';return;}
-  const result=reinforceFleet(G.p,f,{limit:4,automatic:true});
-  f.composition.reason=result.ok?'Üretim sürüyor; gemiler otomatik bu filoyu izler':result.why;
+  const done=new Set();
+  for(const f of candidates){
+    if(done.has(f.e))continue;done.add(f.e);const e=G.emps[f.e];
+    f.composition.next=G.day+5;
+    const sleep=navyAsleep(e);
+    if(sleep.uyku){f.composition.reason=sleep.why==='kasa'?'Alaşım rezervi yetersiz — otomatik üretim bekliyor':'Donanma kapasitesi dolu — otomatik üretim bekliyor';continue;}
+    const result=reinforceFleet(e,f,{limit:4,automatic:true});
+    f.composition.reason=result.ok?'Üretim sürüyor; gemiler otomatik bu filoyu izler':result.why;
+  }
 }
 
 /* Genel toplanma tercihi özel siparişlere geriye dönük uygulanmaz. */
@@ -9021,7 +9051,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p39';
+const BUILD_ID = '96h10p40';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

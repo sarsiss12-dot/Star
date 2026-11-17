@@ -1,0 +1,15 @@
+FAIL S1 sipariş sınırdan önce (FİLO TAKVİYESİ dokunuşu), ana filo düşman sistemine geçer; gerçek oyun döngüsünde tersane çıkışı → hareket → ana filo büyür
+AssertionError [ERR_ASSERTION]: yola çıktı: {"exit":true,"moving":false,"main":6,"st":"Bilinen düşman tehdidi — güvenli rota yok · Otomatik deneme sınırına ulaşıldı; yeniden dene / hedef değiştir","day":66.5696000000004}
+    at /home/user/Star/tests/browser-reinf-route0-sp.cjs:48:41
+    at async test (/home/user/Star/tests/browser-reinf-route0-sp.cjs:11:42)
+    at async /home/user/Star/tests/browser-reinf-route0-sp.cjs:24:3
+FAIL S2 ana filo yok → Haberler → Sevkiyatlar tek kart (dokunuş); kayıt → yenile → OYUNA DEVAM ET → aynı kart ve toplam
+locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.archiveTabs [data-a="shipmentsNews"]').first()[22m
+
+    at tap (/home/user/Star/tests/browser-reinf-route0-sp.cjs:19:67)
+    at /home/user/Star/tests/browser-reinf-route0-sp.cjs:56:50
+    at async test (/home/user/Star/tests/browser-reinf-route0-sp.cjs:11:42)
+    at async /home/user/Star/tests/browser-reinf-route0-sp.cjs:50:3
+GEÇEN: 0 KALAN: 2

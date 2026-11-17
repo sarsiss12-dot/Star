@@ -1,0 +1,18 @@
+== p39 (293de5a sabit kopya)
+✗ R1 sipariş sınırdan önce, üretim sonra: takviye düşman sistemindeki ana filoya katılır — yola çıktı — Bilinen düşman tehdidi — güvenli rota yok — 5 gün sonra yeniden denenecek
+✗ R2 ana filo düşman sistemindeyken otomatik takviye sipariş verir ve teslim eder — otomatik sipariş kuyrukta — Filoya giden rota kapalı veya tehlikeli — ulaşabilen tersane yok
+✗ R3 yolda görünür düşman filosu: güvenli sapma rotasıyla ulaşır — ilk rota düz hat
+✗ R4 güvenli rota yok: bekler, yer ve neden görünür; rota açılınca kendiliğinden devam eder; ikinci sipariş / ödeme yok — panelde bekleme yeri: Bilinen düşman tehdidi — güvenli rota yok — 4 gün sonra yeniden denenecek
+✗ R5 beklerken ana filo ulaşılabilir sisteme geçince hemen devam eder — ana filo yer değiştirince yeniden rota
+✗ R6 bekleyen takviye kayıt / devam sonrası korunur ve rota açılınca teslim edilir — yüklemeden sonra teslim
+✓ R7 hedef sistemde görünür düşman filosu varken takviye girmez, bekler
+✓ R8 AI devleti: düşman sistemindeki ana filoya takviye kuralı eskisiyle aynı
+✗ R9 uzak insan devletin Otomatik Takviyesi sipariş verir, düşman sistemindeki ana filoya teslim eder — sipariş — undefined
+✗ R10 düşman toprak iddiasındaki boş sistemlerden geçerek ana filoya ulaşır — Expected values to be strictly equal:
+✗ R11 kolonili düşman ara sistemi kapalı; kendi silahlı filon tutuyorsa açık — tutulan sistemden geçti
+GEÇEN: 2 KALAN: 9
+✗ C1 40 gemi / tek eski hedef → tek kart; sınıf, sayı, bekleme sistemleri ve kurtarma düğmeleri kartta — tek kart (ayrı satır: 35)
+✗ C2 aynı adlı iki farklı eski filo → iki kart; toplamlar ayrı — Expected values to be strictly equal:
+✗ C3 farklı sistemlere dağılmış + kayıt / devam sonrası toplam aynı — AssertionError [ERR_ASSERTION]: 
+✗ C4 Haberler penceresinde Sevkiyatlar sekmesi aynı bölümü açar — Expected values to be strictly equal:
+GEÇEN: 0 KALAN: 4
