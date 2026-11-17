@@ -2,7 +2,15 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — MP-SYNC-FED.0 (p38 / MP.8.9b37, 17 Kasım 2026)
+## Son teslim — MP-SYNC-FED.1 (p39 / MP.8.9b38, 17 Kasım 2026)
+
+- Ayrıntı: `reports/claude/MP-SYNC-FED1-SONUC.md`, kanıt `reports/claude/evidence/mp-sync-fed1/`. Dal `claude/stars-mp-sync-fed1` (PR #54 / `1a6e404` üstünde). Save8v8/paket4/protokol1; p39 paket yükleyicisi p6–p38, p25u1, p27s1 kabul eder. ZIP `releases/stars-faz96h10p39.zip`. Canlı Render p33 / MP.8.9b30 sunuyordu.
+- NF-9: `diplomacy.js fedDefenseCalls(viewer)` (üyelerin geçerli savunma savaşları — `fedEmergencyId` tanımı; savunulan, saldırgan, cephe, durum, `canFedMotion('joinWar')` gerekçesi; dünyaya yazmaz, RNG yok). `ui.js fedGovernance` ASKERÎ sekmesinde "🛡 Savunma çağrıları" (`.fedDefCall[data-front][data-state]`). MP: `pol.fed.defCalls` (host), guest-stars `fedDefenseCalls` / `canFedMotion(joinWar)` host satırı. Federasyon paneli `#diploPane` (modal değil); `openFed` dünya değişince sekmeyi sıfırlar — testte `openFed(); fedTab='military'; openFed()`.
+- Ayna: görünür sistemde çatışan yabancı filo `combat:2` (eskiden hep 0; misafir haritasında halka / can çubuğu yoktu).
+- Test: `node tests/mp_sync_fed1_defcall_test.js` (7; p38 0/7), `mp_sync_fed1_equivalence_test.js` (`STARS_CONTROL_ROOT`=p38 sabit kopya; 3 tohum × 48 ay), `MP8_SCEN=J` (kayıt → yeni oda, olaylar, ilk tersane emri, yanıt kaybı), `MP8_SCEN=I MP8_I_MIN=15` (500 / 16 AI / host + 2 misafir; pencere açık bekleme ↔ kapalı donma ayrı; görsel tutarlılık; sensör), `MP8_SCEN=M` (NF-9 host + B + C + federasyon dışı D; p38 2/3).
+- Koruma: `mp-sync-fed1-reviewed` ← `mp-sync-fed0-reviewed` ← `mp-diplo5-reviewed` ← … (stripReviewedSyncFed0 önce stripReviewedSyncFed1'i çağırır).
+
+## Önceki teslim — MP-SYNC-FED.0 (p38 / MP.8.9b37, 17 Kasım 2026)
 
 - Ayrıntı: `reports/claude/MP-SYNC-FED0-SONUC.md`, kanıt `reports/claude/evidence/mp-sync-fed0/`. Dal `claude/stars-mp-sync-fed0` (p38 `0ecb080` üstünde). **Runtime 19 dosya değişmedi** (build 96h10p38, ZIP yok); yalnız MP kaynakları + sürüm işareti. Canlı Render bu fazda p33 / MP.8.9b30 sunuyordu.
 - S1 Barıştırma son onayı: mp-core `peaceWithFinalGate` (asıl teklifin dealQuote + `dipAssetGate`, karşı teklif istisnası `O.prev`) üç yolda (`peaceWithLinkReply`, `respond` bağlı kayıt, `dipSweep` mediating); `peaceWithClose` diğer savaşana yalnız genel metin (`PW_PUBLIC`). Test `node tests/mp_sync_fed0_peacewith_test.js` (6; p38 3/3), MP8 U7.

@@ -36,8 +36,13 @@ module.exports=async X=>{const {test,pg,metrics,sleep,shot,assert,wait,tap,settl
    const sel='#diploPane .fedDefCall [data-a="fedMotion"][data-x="'+x+'"]';await pg.B.locator(sel).scrollIntoViewIfNeeded();await tap(pg.B,sel);
    await wait(H(),f=>!!(G.feds[0].vote&&G.feds[0].vote.motion==='joinWar'&&G.feds[0].vote.defenseFront===f),M.fx.front,20000);
    const h0=await H().evaluate(()=>({tok:fedVoteToken(G.feds[0].vote),agenda:JSON.stringify(G.feds[0].agenda||null)}));
+   /* ikinci dokunuş: misafirin görünümü host'un oyunu henüz yansıtmamışsa düğme kısa süre "Açık" kalabilir — dokunulursa host ikinci kaydı reddetmeli */
    await openMil('B');const again=await pg.B.locator(sel).count();M.secondTap={buttons:again};
-   if(again)await tap(pg.B,sel);await sleep(2000);
+   if(again){const box=await pg.B.locator(sel).first().boundingBox().catch(()=>null);if(box)await pg.B.touchscreen.tap(box.x+box.width/2,box.y+box.height/2).catch(()=>{});M.secondTap.tapped=!!box;}
+   await sleep(2000);
+   /* misafir paneli zamanla "Oylanıyor" gösterir (host'un aynı işlevi) */
+   const seen=await (async()=>{for(let i=0;i<20;i++){await openMil('B');const p=await panel('B');if(p.calls.some(c=>c.front===M.fx.front&&c.state==='voting'))return true;await sleep(500);}return false;})();M.secondTap.guestVoting=seen;
+   assert(seen,'misafir panelinde çağrı "Oylanıyor"');
    const h1=await H().evaluate(()=>({tok:fedVoteToken(G.feds[0].vote),agenda:JSON.stringify(G.feds[0].agenda||null)}));
    assert.deepEqual(h1,h0,'ikinci dokunuş ikinci kuyruk / oy üretmedi');await closeFed('B');await settle('m2');
    const cards=async n=>pg[n].evaluate(()=>G.inbox.filter(x=>x.kind==='fedvote').length);M.cards={C:await cards('C'),D:await cards('D')};

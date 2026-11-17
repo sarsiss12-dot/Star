@@ -1,0 +1,6 @@
+PASS M0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 4 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS M1 fikstür: host / B / C federasyonu, AI C'ye saldırır; B aynasında C'nin savaşı yok, D federasyonda değil
+PASS M2 B gerçek dokunuşla "Savunma desteği talep et" → host'ta acil savunma oyu; C'ye oy kartı, D'ye değil; ikinci dokunuş ikinci kuyruk / oy üretmez
+PASS M3 host paneli aynı satırı "Oylanıyor" gösterir; D'nin görünümünde savunma çağrısı yok
+PASS M4 oy açıkken AI host'a saldırır → C kendi panelinden talep açar → kuyrukta; B panelinde "Gündem kuyruğunda · sıra 1"
+GEÇEN: 5 KALAN: 0
