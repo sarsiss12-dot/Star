@@ -5742,11 +5742,17 @@ function fleetCompositionStatus(e,f){
   return data;
 }
 // Known hostiles only: no hidden enemy fleet information for the player.
+/* REINF-ROUTE.0: MP uzak insanın filo tehdidi, haritasını kuran aynı görünürlükten (humanVisionContext: kendi sensör menzili +
+   etkin müttefik / vasal sensör paylaşımı) gelir; yalnız ŞU AN görünen filo sayılır, görünürlükten çıkan filonun konumu sızmaz.
+   explorationContext → reinforcementThreats iç çağrısı bayrakla eski kümeyi kullanır (sonsuz döngü yok). AI ve devlet 0 aynen. */
+let REINF_VIS_BUSY=false;
 function reinforcementThreats(e){
   const blocked=new Set();
   const known=s=>e.id===0?pSeen(s):(s.seen||[]).includes(e.id);
-  const visible=new Set();
-  if(e.id!==0){
+  let visible=new Set();
+  if(e.id!==0 && !e.ai && !REINF_VIS_BUSY){
+    REINF_VIS_BUSY=true;try{visible=humanVisionContext(e).visible;}finally{REINF_VIS_BUSY=false;}
+  } else if(e.id!==0){
     for(const s of G.sys)if(s.owner===e.id)visible.add(s.id);
     for(const f of G.fleets)if(f.e===e.id && f.sys>=0)visible.add(f.sys);
     for(const id of [...visible])if(!G.sys[id].nebulaS)for(const n of G.sys[id].lanes)visible.add(n);

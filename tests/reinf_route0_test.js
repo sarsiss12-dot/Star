@@ -101,5 +101,21 @@ test('R11 kolonili düşman ara sistemi kapalı; kendi silahlı filon tutuyorsa 
   const r=h.run(`reinforceFleet(E,A);A.sys=5;finish();var N0=N();days(2);var s1=N0.shipment.state,m1=A.ships.length;var H=newFleet(E,4,[{c:'kor'}],'Tutan');days(40);({s1,m1,main:A.ships.length})`);
   assert.equal(r.m1,1,'kolonili ara sistemden geçmedi');assert.equal(r.s1,'blocked');assert.equal(r.main,2,'tutulan sistemden geçti');
 });
+/* 12) MP uzak insan: müttefik sensör paylaşımıyla HARİTADA gördüğü (humanVisionContext) silahlı düşman filosu rota kararında da tehdit;
+   aynı filo görünürlükten çıkınca (paylaşım biter) gizli konumu rotaya sızmaz. Harita: 0(tersane)-1-2-3-4-5(hedef, O); sapma 0-6-7-5.
+   1–4 sahipsiz; düşman filosu 3'te; müttefik G (devlet 2) 2'de koloni / filo ile 3'ü görür ve E'ye sensör paylaşır. */
+test('R12 müttefik sensörüyle görülen düşman filosu rota kararında tehdit; görünürlükten çıkınca gizli konum sızmaz',()=>{
+  const h=setup(1,`E.ai=false;for(const i of [1,2,3,4])G.sys[i].owner=-1;link(0,6);link(6,7);link(7,5);B.sys=8;A.sys=5;
+    var Al=G.emps[2];Al.dead=false;E.war[Al.id]=Al.war[E.id]=false;O.war[Al.id]=Al.war[O.id]=false;var AF=newFleet(Al,2,[{c:'kor'}],'Gözcü');
+    E.shareVis=E.shareVis||{};E.mods.sensor=0;var X=armed(3);`);
+  const r=h.run(`var vis=humanVisionContext(E).visible.has(3),shareOn=sensorShareActive(E,Al);E.shareVis[Al.id]=true;var visOn=humanVisionContext(E).visible.has(3),act=sensorShareActive(E,Al);
+    var th=reinforcementThreats(E).has(3);reinforceFleet(E,A);A.sys=5;finish();var N0=N(),p1=N0.path.join(',');
+    /* paylaşım biter: misafirin haritası 3'ü artık görmez; rota tehdidi de düşmeli (gizli bilgi sızmaz) */
+    delete E.shareVis[Al.id];var visOff=humanVisionContext(E).visible.has(3),thOff=reinforcementThreats(E).has(3);
+    ({vis,shareOn,visOn,act,th,p1,visOff,thOff})`);
+  assert.equal(r.vis,false,'paylaşımsız 3 görünmez');assert.equal(r.visOn,true,'paylaşımla misafir haritası 3 görür');
+  assert.equal(r.th,true,'haritada görülen silahlı düşman rota tehdidi');assert.ok(r.p1.includes('6')&&!r.p1.includes('3'),'güvenli sapma rotası: '+r.p1);
+  assert.equal(r.visOff,false);assert.equal(r.thOff,false,'görünmeyen filo tehdit sayılmaz (gizli bilgi yok)');
+});
 console.log(`GEÇEN: ${pass} KALAN: ${fail}`);
 process.exitCode=fail?1:0;

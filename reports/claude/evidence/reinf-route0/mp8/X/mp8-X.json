@@ -3,27 +3,27 @@
   {
    "name": "X0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
    "status": "PASS",
-   "ms": 6898
+   "ms": 7224
   },
   {
    "name": "X0 fikstür: B ana filosu + bileşim, AI ile savaş, ulaşılabilir AI sistemi (host)",
    "status": "PASS",
-   "ms": 402
+   "ms": 916
   },
   {
    "name": "X1 sipariş sınırdan önce (B gerçek dokunuş FİLO TAKVİYESİ), ana filo düşman sistemine geçer, üretim sonra biter → katılır; B aynasında 7",
    "status": "PASS",
-   "ms": 1856
+   "ms": 2110
   },
   {
    "name": "X2 ana filo düşman sistemindeyken B gerçek dokunuşla OTOMATİK TAKVİYE: AÇIK → host sipariş verir → teslim; B aynasında 8",
    "status": "PASS",
-   "ms": 1759
+   "ms": 1780
   },
   {
    "name": "X3 ana filo yok olunca 4 sevkiyat → B Haberler → Sevkiyatlar: tek kart, host ile aynı başlık, TOPLU KURTARMA",
    "status": "PASS",
-   "ms": 1424
+   "ms": 1203
   }
  ],
  "metrics": {
@@ -46,8 +46,8 @@
      2
     ],
     "mirrorEq": true,
-    "revMs": 427,
-    "buildMs": 455,
+    "revMs": 332,
+    "buildMs": 348,
     "diff": [],
     "leak": []
    }
@@ -62,15 +62,15 @@
       "n": 0
      },
      "publish": {
-      "n": 2,
-      "med": 3.3,
-      "p95": 3.3,
-      "max": 3.3
+      "n": 3,
+      "med": 3.2,
+      "p95": 5.8,
+      "max": 5.8
      },
      "longtask": {
       "n": 0
      },
-     "heapMB": 15,
+     "heapMB": 16,
      "dom": 725,
      "intervals": 2,
      "timeouts": 2,
@@ -84,15 +84,15 @@
      "B": {
       "build": {
        "n": 2,
-       "med": 35.8,
-       "p95": 35.8,
-       "max": 35.8
+       "med": 41.2,
+       "p95": 41.2,
+       "max": 41.2
       },
       "refresh": {
        "n": 1,
-       "med": 1.7,
-       "p95": 1.7,
-       "max": 1.7
+       "med": 1.3,
+       "p95": 1.3,
+       "max": 1.3
       },
       "longtask": {
        "n": 0
@@ -101,13 +101,13 @@
       "deltas": 1,
       "resyncs": 0,
       "minGap": 600,
-      "heapMB": 15,
+      "heapMB": 16,
       "dom": 713,
       "intervals": 3,
       "timeouts": 1,
       "notes": 0,
       "results": 0,
-      "packets": 21,
+      "packets": 22,
       "joinErrors": 0
      }
     }
@@ -116,7 +116,7 @@
   "notes": [],
   "net": {},
   "resume": {},
-  "relayPid1": 24191,
+  "relayPid1": 699,
   "actualWorld": {
    "seed": 22,
    "size": "orta",

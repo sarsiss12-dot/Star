@@ -131,6 +131,37 @@ Sonrası:
 - Beklenen `/mp/version` (yerel relay): `{"mp":"MP.8.9b39","build":"96h10p40","files":{"mp-core.js":"ce501dd07a85","relay.js":"9690f66b9819","mp1-host.js":"f5dc296c1a3d","join.js":"65c28db3714f","mirror.js":"56019070fa24","guest-stars.js":"ed4dfc4e4340","mp71-dip.js":"932c92d12cbc","mp7-setup.js":"a7391d21552c"}}`.
 - Render dalı `claude/stars-reinf-route0` seçilmeli. Render'a dağıtım yapılmadı.
 
+## 4.1 Ek: müttefik sensör paylaşımıyla görülen düşman filosu (17 Kasım 2026)
+
+**Bulgu (doğrulandı):** devlet 0 dışındaki insan oyuncunun (MP misafiri) "görünür silahlı düşman filosu" kümesi `reinforcementThreats` içinde yalnız kendi sistemleri, kendi filoları ve bunların komşularından kuruluyordu. Misafir haritasını kuran `humanVisionContext` ise (ayna, `mirror.js`) bunlara ek olarak şunları katar:
+
+- kendi sensör menzili (`mods.sensor`),
+- etkin müttefik / vasal sensör paylaşımı (`visionFrom`, `shareVis`).
+
+Sonuç: misafir düşman filosunu haritada görüyordu, ama takviyesi o sistemi güvenli sayıp düz yoldan gidiyordu. Durum ancak bir komşu sisteme varınca fark ediliyordu.
+
+**Düzeltme (main.js):**
+
+- AI dışı ve devlet 0 dışı devletlerin filo görünürlüğü artık `humanVisionContext(e).visible` kümesinden geliyor; misafirin haritasıyla birebir aynı küme.
+- Yalnız şu an görünen filo sayılıyor: paylaşım bitince ya da filo görünürlükten çıkınca rota kararı o filonun konumunu kullanmıyor.
+- `explorationContext` → `reinforcementThreats` iç çağrısı `REINF_VIS_BUSY` bayrağıyla eski kümeyi kullanıyor; sonsuz döngü yok.
+- Yan etki: uzak insanın keşif engeli de artık haritada gördüğü filoyu sayıyor.
+- AI ve devlet 0 (host / tek oyunculu, `pVis` zaten paylaşımı içerir) değişmedi.
+
+**Test:**
+
+- `R12` (`node tests/reinf_route0_test.js`): p40 öncesi **FAIL** ("haritada görülen silahlı düşman rota tehdidi"), sonrası **12/0**. p39 kopyasında R12 FAIL.
+- R12'de doğrulananlar:
+  - paylaşım yokken 3 görünmez;
+  - paylaşımla misafir haritası 3'ü görür ve rota tehdidi olur;
+  - ilk rota sapmadır (0-6-7-5);
+  - paylaşım bitince 3 ne haritada ne tehdit kümesinde.
+- İlgili testler: faz93b 32/0, faz93a 15/0, faz95c1 24/0, field_war_siege0 20/0, faz88a_1 30/0, faz93c 47/0, faz94b keşif 37/0, mp1_actor_vision 2/0 + 2/0, mp_techlux0_intel 3/0, mp_sync_fed1_defcall 7/0. faz96h9 9/2 tabandakiyle aynı (eski FAIL).
+- MP8 X: **5/0**.
+- Tam Node koşusu ve Save8 / RNG eşdeğerliği bu ek için yeniden **NOT RUN**. Değişen dal yalnız AI dışı ve devlet 0 dışı devlette çalışır; tek oyunculu ve AI yolunda kod aynı.
+
+**Paket (güncellendi, build aynı 96h10p40):** ZIP SHA-256 `e14ff859e48f305cb197bbe9bf13ea84cc1c3d4f117995d3a4971d85b9cc8793`, CRC32 `2B7C1EB2`, `verify-release --root` DOĞRULANDI. Önceki p40 ZIP özeti (`cfa143aa…`) geçersizdir.
+
 ## 5. Açık / NOT RUN
 
 - Kolonili düşman ARA sistemlerinden geçiş bilerek kapalı (gezegen savunması). Ana filo iki kolonili düşman sisteminin arkasındaysa ve ara sistemi kendi silahlı filon tutmuyorsa takviye bekler (panelde yer + neden görünür).
