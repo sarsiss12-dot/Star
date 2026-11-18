@@ -1,0 +1,78 @@
+{
+  "revision": "d91fb07978b951f90cd92692166b06d9f972bb05",
+  "suites": 14,
+  "pass": 148,
+  "fail": 0,
+  "tests": [
+    {
+      "file": "beta_board2_colony_test.cjs.log",
+      "pass": 5,
+      "fail": 0
+    },
+    {
+      "file": "beta_war_goals0_test.js.log",
+      "pass": 13,
+      "fail": 0
+    },
+    {
+      "file": "faz93c_fleet_composition_test.js.log",
+      "pass": 47,
+      "fail": 0
+    },
+    {
+      "file": "field_war_siege0_test.js.log",
+      "pass": 20,
+      "fail": 0
+    },
+    {
+      "file": "mp_p0_decisions_test.cjs.log",
+      "pass": 7,
+      "fail": 0
+    },
+    {
+      "file": "mp_p0_guest_test.cjs.log",
+      "pass": 7,
+      "fail": 0
+    },
+    {
+      "file": "mp_p0_motion_test.cjs.log",
+      "pass": 3,
+      "fail": 0
+    },
+    {
+      "file": "mp_sync_fed0_agenda_test.js.log",
+      "pass": 6,
+      "fail": 0
+    },
+    {
+      "file": "mp_sync_fed0_peacewith_test.js.log",
+      "pass": 6,
+      "fail": 0
+    },
+    {
+      "file": "mp_sync_fed1_defcall_test.js.log",
+      "pass": 7,
+      "fail": 0
+    },
+    {
+      "file": "mp_techlux0_intel_test.js.log",
+      "pass": 3,
+      "fail": 0
+    },
+    {
+      "file": "mp_waron1_deadline_test.js.log",
+      "pass": 8,
+      "fail": 0
+    },
+    {
+      "file": "reinf_route0_cards_test.js.log",
+      "pass": 4,
+      "fail": 0
+    },
+    {
+      "file": "reinf_route0_test.js.log",
+      "pass": 12,
+      "fail": 0
+    }
+  ]
+}

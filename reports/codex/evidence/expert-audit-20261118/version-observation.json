@@ -1,0 +1,46 @@
+{
+  "measuredAt": "2026-11-18T05:01:25.010764+00:00",
+  "http": 200,
+  "version": {
+    "mp": "MP.8.9b30",
+    "build": "96h10p33",
+    "files": {
+      "mp-core.js": "a16b64de5e1e",
+      "relay.js": "48d42b59c952",
+      "mp1-host.js": "a73cbbc86a4f",
+      "join.js": "bc2732493741",
+      "mirror.js": "c23a23d78ba3",
+      "guest-stars.js": "3b36f18c4520",
+      "mp71-dip.js": "38b13c6ece3d",
+      "mp7-setup.js": "a7391d21552c"
+    }
+  },
+  "comparisons": {
+    "0ec57209d2d6bc9d02c72b4452dec3f05d05f678": {
+      "files": {
+        "mp-core.js": "a16b64de5e1e",
+        "relay.js": "48d42b59c952",
+        "mp1-host.js": "a73cbbc86a4f",
+        "join.js": "bc2732493741",
+        "mirror.js": "c23a23d78ba3",
+        "guest-stars.js": "3b36f18c4520",
+        "mp71-dip.js": "38b13c6ece3d",
+        "mp7-setup.js": "a7391d21552c"
+      },
+      "matches": 8
+    },
+    "d91fb07978b951f90cd92692166b06d9f972bb05": {
+      "files": {
+        "mp-core.js": "ce501dd07a85",
+        "relay.js": "9690f66b9819",
+        "mp1-host.js": "f5dc296c1a3d",
+        "join.js": "65c28db3714f",
+        "mirror.js": "56019070fa24",
+        "guest-stars.js": "ed4dfc4e4340",
+        "mp71-dip.js": "932c92d12cbc",
+        "mp7-setup.js": "a7391d21552c"
+      },
+      "matches": 1
+    }
+  }
+}

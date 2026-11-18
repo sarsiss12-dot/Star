@@ -1,0 +1,17 @@
+evalmachine.<anonymous>:1
+var E=G.emps[1],SY=G.sys[E.home];for(const k in E.res)E.res[k]=100000;SY.planets.find(p=>p.col&&p.col.e===1).col.b.tersane=1;SY.queue=[];var auditSeq=0;
+                                                                                                            ^
+
+TypeError: Cannot read properties of undefined (reading 'col')
+    at evalmachine.<anonymous>:1:109
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.run (/workspace/scratch/886e95b23be9/Star/tests/helpers/runtime.js:112:25)
+    at setupMP (/workspace/scratch/886e95b23be9/Star/tests/expert_audit_20261118.cjs:9:38)
+    at /workspace/scratch/886e95b23be9/Star/tests/expert_audit_20261118.cjs:12:50
+    at probe (/workspace/scratch/886e95b23be9/Star/tests/expert_audit_20261118.cjs:8:34)
+    at Object.<anonymous> (/workspace/scratch/886e95b23be9/Star/tests/expert_audit_20261118.cjs:12:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+
+Node.js v24.22.3

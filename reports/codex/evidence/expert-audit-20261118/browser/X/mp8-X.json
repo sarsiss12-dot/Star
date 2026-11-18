@@ -1,0 +1,28 @@
+{
+ "results": [
+  {
+   "name": "FATAL",
+   "status": "FAIL",
+   "error": "browserType.launchPersistentContext: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-gpu --disable-dev-shm-usage --enable-precise-memory-info --ignore-certificate-errors-spki-list=PztMBRBbBHKRkAOQDu2GDJ4CBaPsXUHpV/9qJu5/MQA= --user-data-dir=/tmp/mp8-H-6SYW5P --remote-debugging-pipe about:blank\n<launched> pid=29\n[pid=29][err] /usr/bin/chromium: 9: [: 5225713664: unexpected operator\n[pid=29][err] [29:29:1118/080041.027843:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)\n[pid=29][err] [1118/080041.028584:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)\nCall log:\n\u001b[2m  - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-gpu --disable-dev-shm-usage --enable-precise-memory-info --ignore-certificate-errors-spki-list=PztMBRBbBHKRkAOQDu2GDJ4CBaPsXUHpV/9qJu5/MQA= --user-data-dir=/tmp/mp8-H-6SYW5P --remote-debugging-pipe about:blank\u001b[22m\n\u001b[2m  - <launched> pid=29\u001b[22m\n\u001b[2m  - [pid=29][err] /usr/bin/chromium: 9: [: 5225713664: unexpected operator\u001b[22m\n\u001b[2m  - [pid=29][err] [29:29:1118/080041.027843:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)\u001b[22m\n\u001b[2m  - [pid=29][err] [1118/080041.028584:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)\u001b[22m\n\u001b[2m  - [pid=29] <gracefully close start>\u001b[22m\n\u001b[2m  - [pid=29] <kill>\u001b[22m\n\u001b[2m  - [pid=29] <will force kill>\u001b[22m\n\u001b[2m  - [pid=29] <process did exit: exitCode=null, signal=SIGABRT>\u001b[22m\n\u001b[2m  - [pid=29] starting temporary directories cleanup\u001b[22m\n\u001b[2m  - [pid=29] finished temporary directories cleanup\u001b[22m\n\u001b[2m  - [pid=29] <gracefully close end>\u001b[22m\n\n    at async open (/workspace/scratch/886e95b23be9/Star/tests/browser-mp8.cjs:87:32)\n    at async /workspace/scratch/886e95b23be9/Star/tests/browser-mp8.cjs:284:49"
+  }
+ ],
+ "metrics": {
+  "scen": "X",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 1,
+   "every": 6
+  },
+  "sync": [],
+  "cmds": [],
+  "perf": [],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 12,
+  "errors": []
+ }
+}

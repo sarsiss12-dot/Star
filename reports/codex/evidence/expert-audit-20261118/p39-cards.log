@@ -1,0 +1,5 @@
+✗ C1 40 gemi / tek eski hedef → tek kart; sınıf, sayı, bekleme sistemleri ve kurtarma düğmeleri kartta — tek kart (ayrı satır: 35)
+✗ C2 aynı adlı iki farklı eski filo → iki kart; toplamlar ayrı — Expected values to be strictly equal:
+✗ C3 farklı sistemlere dağılmış + kayıt / devam sonrası toplam aynı — AssertionError [ERR_ASSERTION]: 
+✗ C4 Haberler penceresinde Sevkiyatlar sekmesi aynı bölümü açar — Expected values to be strictly equal:
+GEÇEN: 0 KALAN: 4

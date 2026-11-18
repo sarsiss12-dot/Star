@@ -1,0 +1,5 @@
+A1 immediate same CID retry CONFIRMED {"duplicate":1,"orders":1,"secondCharge":false}
+A2 same CID after 128 accepted reads CONFIRMED {"acceptedReads":128,"duplicate":0,"orders":2,"secondCharge":true}
+A3 same CID after save and new host CONFIRMED {"orders":2,"secondCharge":true,"duplicate":0}
+A4 occupied planet with enemy system owner delivers CONFIRMED {"accepted":true,"ships":2,"systemOwner":1,"planetOwner":0}
+A5 lost original name is absent after reload CONFIRMED {"cards":1,"originalNameSaved":false,"head":"Filo #72 · Hedef kayıp · 40 takviye gemisi","ships":40}

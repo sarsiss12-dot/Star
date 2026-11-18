@@ -1,0 +1,50 @@
+[
+  {
+    "id": "A1 immediate same CID retry",
+    "status": "CONFIRMED",
+    "data": {
+      "duplicate": 1,
+      "orders": 1,
+      "secondCharge": false
+    }
+  },
+  {
+    "id": "A2 same CID after 128 accepted reads",
+    "status": "CONFIRMED",
+    "data": {
+      "acceptedReads": 128,
+      "duplicate": 0,
+      "orders": 2,
+      "secondCharge": true
+    }
+  },
+  {
+    "id": "A3 same CID after save and new host",
+    "status": "CONFIRMED",
+    "data": {
+      "orders": 2,
+      "secondCharge": true,
+      "duplicate": 0
+    }
+  },
+  {
+    "id": "A4 occupied planet with enemy system owner delivers",
+    "status": "CONFIRMED",
+    "data": {
+      "accepted": true,
+      "ships": 2,
+      "systemOwner": 1,
+      "planetOwner": 0
+    }
+  },
+  {
+    "id": "A5 lost original name is absent after reload",
+    "status": "CONFIRMED",
+    "data": {
+      "cards": 1,
+      "originalNameSaved": false,
+      "head": "Filo #72 · Hedef kayıp · 40 takviye gemisi",
+      "ships": 40
+    }
+  }
+]
