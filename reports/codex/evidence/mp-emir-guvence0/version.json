@@ -1,0 +1,16 @@
+{
+  "mp": "MP.8.9b40",
+  "build": "96h10p41",
+  "runtime": "9d1a8de897a4",
+  "files": {
+    "main.js": "c85b8c5654bc",
+    "mp-core.js": "3b354162f8bf",
+    "relay.js": "ed451d920a92",
+    "mp1-host.js": "f5dc296c1a3d",
+    "join.js": "fa0be01352c2",
+    "mirror.js": "56019070fa24",
+    "guest-stars.js": "516688ec1005",
+    "mp71-dip.js": "932c92d12cbc",
+    "mp7-setup.js": "a7391d21552c"
+  }
+}

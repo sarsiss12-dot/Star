@@ -1,0 +1,7 @@
+PASS W1 ilk kabulden sonra aracının istihbaratı düşer → D onayı hiçbir şey uygulamaz; iki tarafta gerekçe; D'ye ayrıntı gitmez
+PASS W2 süpürme: D dokunmadan istihbarat düşer → yayında kapanır; D genel neden, C/B ayrıntılı neden
+PASS W3 istisna: istenen madde karşı tarafın önceki teklifinde açıkça sunulmuşsa son onay geçer; paket → yeni host sonrasında da
+PASS W4 olumlu yol: paket → yeni host → D onayı → barış + lüks + ödeme bir kez; ikinci onay closed
+PASS W5 ret / geri çekme / çift dokunuş / gecikmiş onay: hiçbir şey uygulanmaz
+PASS W6 cephe değişti / taraf elendi / birleşik maddenin kaynağı kayboldu → kapanır, kısmi yok, D'ye ayrıntı yok
+GEÇEN: 6 KALAN: 0

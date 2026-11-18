@@ -1,0 +1,3 @@
+A1 immediate same CID retry CONFIRMED {"duplicate":1,"orders":1,"secondCharge":false}
+A2 same CID after 128 accepted reads CONFIRMED {"acceptedReads":128,"duplicate":0,"orders":2,"secondCharge":true}
+A3 same CID after save and new host CONFIRMED {"orders":2,"secondCharge":true,"duplicate":0}

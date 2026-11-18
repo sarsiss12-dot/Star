@@ -1,0 +1,12 @@
+✓ views and publishing are read-only: Save8 bytes and RNG unchanged
+✓ MP host with no human player is a no-op: same Save8 as the plain engine after 120 days
+✓ network command path equals direct engine call: identical Save8 after 120 days (with rejected, duplicate and stale traffic)
+✓ router: unknown types, versions, malformed JSON, extra keys and prototype keys are refused without state change
+✓ authorization: identity comes from the bound connection, not from the packet
+✓ duplicate and stale commands: a command id applies exactly once; resources and queue change once
+✓ atomic commands: a rule failure or an exception inside the engine leaves no partial change
+✓ AI never decides for a remote human: negotiation and responses are blocked, AI-AI unchanged
+✓ ownership: one empire per player, one player per empire; release returns the empire to the AI with its automation
+✓ filtering: the client view carries only what the empire knows; unknown names, foreign economies and hidden fleets are absent
+✓ session metadata is separate from Save8, bound to it, and restores the same player-empire slots
+GEÇEN: 11 KALAN: 0

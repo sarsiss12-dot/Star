@@ -1,0 +1,8 @@
+PASS B anomali kararı yalnız B ekonomisine bir kez; C yetkisiz, G.p değişmez
+PASS özel olay ve sonuç yalnız sahibinin mirror kaydında, C ve host kaynakları yok
+PASS zincir sonraki aşaması doğru insan kuyruğunda, zamanı geldiğinde bir kez; host kuyruğu değişmez
+PASS Save8 pending/sonuç ve zincir tarihi korunur; eski kayıt fazladan karar alanı üretmez
+PASS callback arızası oyuncu kaynakları, durum ve RNG için atomik geri alınır
+PASS filo/ilişki etkileri oyuncu0 varsaymaz: risk B filosunu, diplomasi B ilişkisini etkiler
+PASS kişisel olay üretimi stratejik RNG çekmez; OFF zincir ve rastgele olayı kapatır
+GEÇEN: 7 KALAN: 0

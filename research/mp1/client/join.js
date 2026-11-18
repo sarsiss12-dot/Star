@@ -19,13 +19,32 @@ function seatOf(id){try{return JSON.parse(localStorage.getItem(saveKey(id)))||nu
 try{J.name=localStorage.getItem('mp1:name')||'';}catch{}
 function raw(obj){if(!J.ws||J.ws.readyState!==1)return false;J.ws.send(JSON.stringify(obj));return true;}
 J.sendRaw=raw;
+const sentCommands=new Map();
 /* MP-FIELD-VERIFY.0: soket AÇIK değilken (yeniden bağlanma / kapanış sürüyor, hostOnline henüz düşmedi) komut sessizce kayboluyor ama
    {ok:true} dönüyordu → misafir "gönderildi" deyip taslağı siliyordu (Q6 saha: teklif host'a ulaşmadı). Artık açık hata döner.
-   cid0: aynı işlemin yeniden gönderimi (yeni seq, AYNI cid) — host sonuç önbelleği (cid) ikinci kaydı engeller. */
+   Bir tekrar, ilk gönderimin kimliğini, sıra numarasını, içeriğini ve oyuncu/kayıt bağlamını korur. */
 J.cmd=function(cmd,cid0){if(!J.hostOnline)return {ok:false,why:'host-yok'};if(!J.ws||J.ws.readyState!==1)return {ok:false,why:'baglanti'};
-  const cid=typeof cid0==='string'&&/^j[a-z0-9]{6,40}$/.test(cid0)?cid0:'j'+Date.now().toString(36)+Math.random().toString(36).slice(2,10);
-  const m={v:1,type:'cmd',seq:J.seq+1,cid,cmd};m.at=performance.now();
-  if(!raw({v:1,type:'cmd',seq:m.seq,cid:m.cid,cmd}))return {ok:false,why:'baglanti'};J.seq=m.seq;save({seq:J.seq});J.pending=m;return {ok:true,cid:m.cid};};
+  const body=JSON.stringify(cmd);
+  let entry;
+  if(cid0!==undefined){
+    entry=sentCommands.get(cid0);
+    if(!entry||entry.saveId!==J.saveId||entry.playerId!==J.playerId||entry.body!==body)return {ok:false,why:'command-unconfirmed'};
+  }else{
+    const seq=J.seq+1;
+    const nonce=Math.random().toString(36).slice(2,12).padEnd(10,'0');
+    const cid='j1_'+seq+'_'+nonce;
+    entry={seq,cid,body,saveId:J.saveId,playerId:J.playerId};
+  }
+  const m={v:1,type:'cmd',seq:entry.seq,cid:entry.cid,cmd};
+  if(!raw(m))return {ok:false,why:'baglanti'};
+  if(cid0===undefined){
+    J.seq=entry.seq;
+    save({seq:J.seq});
+    sentCommands.set(entry.cid,entry);
+    if(sentCommands.size>128)sentCommands.delete(sentCommands.keys().next().value);
+  }
+  J.pending={...m,at:performance.now()};
+  return {ok:true,cid:m.cid};};
 J.ready=v=>raw({v:1,type:'ready',value:!!v});
 J.claim=id=>raw({v:1,type:'claim',empire:id});
 J.presence=t=>{J.tab=t;raw({v:1,type:'presence',tab:t});render();};

@@ -1,0 +1,4 @@
+PASS I1 C, B'den görüş ister; B kabul; B filosu yeni sisteme → C aynasında görünür (önce değil); D görmez; B, C'nin sensörlerini almaz
+PASS I2 yeniden kurulum aynı görüş; savaşta paylaşım kalkar
+PASS I3 kayıt yönü aynada: C kendi aynasında "B'den görüş", B'nin aynasında C kabuğunda görünür
+GEÇEN: 3 KALAN: 0

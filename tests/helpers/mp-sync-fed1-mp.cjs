@@ -103,15 +103,32 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
      WebSocket.prototype.send=function(d){const D=window.__drop;if(D&&typeof d==='string'&&d[0]==='T'&&Date.now()<D.until){const i=d.indexOf('\n');if(d.slice(1,i)===String(D.conn)){try{const m=JSON.parse(d.slice(i+1));if(D.types.includes(m.type)){window.__dropped[m.type]=(window.__dropped[m.type]||0)+1;return;}}catch{}}}return S0.call(this,d);};});
    const conn=await H().evaluate(e=>[...MP1Host.host.state.players.values()].find(p=>p.empireId===e).conn,E.B);
    await H().evaluate(c=>{window.__drop={conn:c,types:['result'],until:Date.now()+4000};},conn);
-   const first=await B().evaluate(([sid,k])=>{const c=MP1Join.cmd({kind:'ship',sys:sid,key:k});return c;},[sh.sys,sh.k]);
+   const capture=()=>B().evaluate(()=>window.__j4ShipFrames);
+   await B().evaluate(()=>{
+     const ws=MP1Join.ws,send=ws.send;
+     window.__j4ShipFrames=[];
+     ws.send=function(data){
+       const m=JSON.parse(data);
+       if(m.type==='cmd'&&m.cmd?.kind==='ship')window.__j4ShipFrames.push({cid:m.cid,seq:m.seq});
+       return send.call(this,data);
+     };
+   });
+   const sel='#panel [data-a="ship"][data-x="'+sh.sys+':'+sh.k+'"]';
+   await B().locator(sel).scrollIntoViewIfNeeded();const t0=Date.now();await tap(B(),sel);
+   const first=(await capture())[0];assert(first,'tersane dokunuşu gemi emri gönderdi');
    await wait(H(),([sid,e,k,n])=>G.sys[sid].queue.filter(q=>q.e===e&&q.cls===k).length>n,[sh.sys,E.B,sh.k,q0],20000);
+   const tHostQueueMs=Date.now()-t0;
    const lost=await B().evaluate(cid=>!MP1Join.results.some(r=>r.cid===cid),first.cid);await sleep(4200);
-   /* istemcinin yeniden gönderim yolu: aynı cid (MP-FIELD-VERIFY.0 J.cmd(cmd,cid0)) */
+   assert.equal((await capture()).length,1,'kayıp yanıt farklı kimlikle otomatik sipariş üretmez');
+   /* İstemcinin tekrar yolu, ilk komutun hem kimliğini hem sırasını korur. */
    const again=await B().evaluate(([sid,k,cid])=>MP1Join.cmd({kind:'ship',sys:sid,key:k},cid),[sh.sys,sh.k,first.cid]);
    const rep=await (await wait(B(),cid=>{const x=MP1Join.results.filter(r=>r.cid===cid);return x.length?x.map(r=>({status:r.status,dup:!!r.dup})):null;},first.cid,20000)).jsonValue();
+   const tAckMs=Date.now()-t0;
    await settle('j4');await openYard(sh.sys);
-   const q1=(await hostQ(sh.sys,E.B,sh.k)).length,res1=await hostRes(E.B),y1=await yardRows(sh.sys,sh.n);const paid={};for(const r in sh.cost)paid[r]=Math.round(res0[r]-res1[r]);
-   M.resend={lost,again:{ok:again.ok,cid:again.cid===first.cid},rep,q0,q1,y0,y1,paid,dropped:await H().evaluate(()=>window.__dropped)};
+   const y1=await yardRows(sh.sys,sh.n),tGuestYardMs=Date.now()-t0;
+   const q1=(await hostQ(sh.sys,E.B,sh.k)).length,res1=await hostRes(E.B);const paid={};for(const r in sh.cost)paid[r]=Math.round(res0[r]-res1[r]);
+   const frames=await capture();assert.deepEqual(frames,[first,first],'tekrar ilk cid ve seq ile gönderilir');
+   M.resend={lost,again:{ok:again.ok,cid:again.cid===first.cid},rep,q0,q1,y0,y1,paid,tHostQueueMs,tAckMs,tGuestYardMs,dropped:await H().evaluate(()=>window.__dropped)};
    assert.equal(lost,true,'ilk yanıt gerçekten kayboldu');assert.equal(again.cid,first.cid,'aynı cid');assert(rep.some(r=>r.status==='ok'),'yanıt geldi '+JSON.stringify(rep));
    assert.equal(q1,q0+1,'tek sipariş');assert.equal(y1,y0+1,'B tersanesinde tek yeni satır');
    for(const r in sh.cost)assert(Math.abs(paid[r]-Math.round(sh.cost[r]))<=1,'tek kaynak kesintisi: '+r+' '+paid[r]+'/'+sh.cost[r]);});
