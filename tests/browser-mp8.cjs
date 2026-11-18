@@ -105,6 +105,7 @@ const DESIGNS={H:{name:'Kızıl Muhafız',mizac:'militarist',origin:'standart',e
   B:{name:'Saf Akıl Ağı',mizac:'teknokrasi',origin:'standart',ethics:['mat:2','mil:-1'],civics:['sinyal_avci']},
   C:{name:'Yeşil Birlik',mizac:'tuccar',origin:'standart',ethics:['aut:-1','mat:1'],civics:['maden_lonca']},
   D:{name:'Derin Konsey',mizac:'teknokrasi',origin:'standart',ethics:['aut:1'],civics:['sinyal_avci']}};
+const designFor=n=>SCEN==='J'&&process.env.MP8_J_NATURAL==='1'&&(n==='H'||n==='B')?{...DESIGNS[n],origin:'kalinti'}:DESIGNS[n];
 async function guestGo(n,c,name){const p=pg[n];await p.goto(origin[n]+'/mp/play?code='+c);await wait(p,()=>window.MP1Join&&document.getElementById('jName'));
   if(name)await p.fill('#jName',name);await tap(p,'[data-j="go"]');}
 async function room({cutAtStart}={}){
@@ -113,10 +114,10 @@ async function room({cutAtStart}={}){
   if(CONF.guests>1){await H.selectOption('#mp7Cap',String(CONF.guests+1));await wait(H,c=>MP1Host.lobby.capacity===c,CONF.guests+1);}
   {const r=await H.evaluate(c=>{Object.assign(CFG,{size:c.size,aiCount:c.ai,seed:c.seed},c.shape?{shape:c.shape}:{},c.planetMul?{planetMul:c.planetMul}:{});return MP1Host.host.configure({size:c.size,aiCount:c.ai,seed:c.seed,...(c.shape?{shape:c.shape}:{}),...(c.planetMul?{planetMul:c.planetMul}:{})});},CONF);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
   if(SCEN==='G'||process.env.MP8_GUARD==='1'){await tap(H,'#mpGuard');await wait(H,()=>MP1Host.lobby.guard===true);metrics.guardOption=true;}   // MP-P0-DESYNC2: oda seçeneği gerçek dokunuşla
-  await tap(H,'#mp7EditMe');await design(H,DESIGNS.H);code=await H.evaluate(()=>MP1Host.code);
+  await tap(H,'#mp7EditMe');await design(H,designFor('H'));code=await H.evaluate(()=>MP1Host.code);
   for(const n of guestNames()){const p=pg[n];await guestGo(n,code,n==='B'?'Bora':n==='C'?'Cem':'Deniz');
     await wait(p,()=>MP1Join.screen==='lobby'&&MP1Join.lobby&&MP1Join.lobby.mode==='design'&&document.getElementById('jEditMe'),undefined,40000);
-    await tap(p,'#jEditMe');await wait(p,()=>document.getElementById('mp7Head'));await design(p,DESIGNS[n]);
+    await tap(p,'#jEditMe');await wait(p,()=>document.getElementById('mp7Head'));await design(p,designFor(n));
     await wait(p,()=>/kaydedildi/.test(document.getElementById('jDraft').textContent));await tap(p,'#jReady');}
   await wait(H,()=>MP1Host.host.canStart().ok);await H.waitForTimeout(300);
   await tap(H,'[data-m="start"]');

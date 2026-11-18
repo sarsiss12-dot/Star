@@ -10,6 +10,7 @@ const ROOT=path.resolve(__dirname,'..');
 const P40=process.env.STARS_P40_ROOT;
 const P41=process.env.STARS_P41_ROOT;
 const read=(root,file)=>fs.readFileSync(path.join(root,file),'utf8');
+const expectedBuild=JSON.parse(read(ROOT,'RELEASE-MANIFEST.json')).build;
 const json=(h,expr)=>JSON.parse(h.run('JSON.stringify('+expr+')'));
 const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const hash=body=>crypto.createHash('sha256').update(body).digest('base64');
@@ -266,6 +267,7 @@ async function main(){
     const page=await fetch(origin+href);
     const html=await page.text();
     const version=await (await fetch(origin+'/mp/version')).json();
+    assert.equal(version.build,expectedBuild);
     const sha12=file=>crypto.createHash('sha256').update(read(ROOT,file)).digest('hex').slice(0,12);
     assert.equal(version.files['main.js'],sha12('main.js'));
     assert.equal(version.runtime,sha12('RELEASE-MANIFEST.json'));
@@ -282,7 +284,7 @@ async function main(){
     assert.equal(await pwa.request(tags[0][1],'cors'),undefined);
     assert.equal(await pwa.request('/mp/version'),undefined);
     pwa.offline();
-    assert.match(await (await pwa.request('/main.js','cors')).text(),/96h10p42/);
+    assert((await (await pwa.request('/main.js','cors')).text()).includes(`const BUILD_ID = '${expectedBuild}'`));
     assert.equal((await pwa.request('/missing.js','cors')).type,'error');
     log('aday uç noktası, 25 gerçek bayt özeti ve MP önbellek dışı',{build:version.build,mp:version.mp,release:version.release,main:version.files['main.js']});
 
@@ -291,6 +293,8 @@ async function main(){
       stale=browser(P40,candidate,profile,href);
       stale.start();stale.join();
       await waitFor(()=>stale.app().innerHTML.includes('Oyun sürümü eski.'),'p40 uyarısı');
+      await waitFor(()=>stale.g.run('window.MP1Join.closed&&!window.MP1Join.ws'),'p40 katılımı sonlandı');
+      assert(stale.app().innerHTML.includes('Oyun sürümü eski.'),'kapalı sokette eski istemci uyarısı kalır');
       assert.equal(candidate.active.size,0);
       assert.equal(candidate.forwarded.length,0);
       assert.equal(stale.sent.filter(m=>m.type==='hello'||m.type==='cmd').length,0);
@@ -355,7 +359,7 @@ async function main(){
     let clean;
     try{
       clean=await openGuest(next,ROOT,saved41);
-      log('p41 kaydı p42 temiz istemciyle açılır ve ilk emir tek uygulanır',await submit(next,clean,saved41,'ok'));
+      log('p41 kaydı '+expectedBuild+' temiz istemciyle açılır ve ilk emir tek uygulanır',await submit(next,clean,saved41,'ok'));
     }finally{clean?.close();await next.stop();}
   }
 }

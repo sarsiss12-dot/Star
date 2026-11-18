@@ -18,6 +18,12 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
  const statusList=p=>p.evaluate(()=>{UI.act('topStatus');const t=document.getElementById('modal').innerText;UI.closeModal();return t;});
  const pendingOf=e=>H().evaluate(b=>(G.emps[b].decisions?.pending||[]).filter(n=>n.status==='pending').map(n=>({id:n.id,key:n.key})),e);
  for(const n of ['B','C'])E[n]=await pg[n].evaluate(()=>MP1Join.empireId);
+ const naturalSurvey=process.env.MP8_J_NATURAL==='1';
+ // Antik Kalıntı kökeni normal kurulumdan iki gerçek, süreli başlangıç taraması başlatır.
+ const naturalSurveys=()=>H().evaluate(b=>[0,b].map(owner=>{
+   const sys=G.sys[G.emps[owner].home],fleet=G.fleets.find(f=>f.e===owner&&f.sys===sys.id&&scienceExplorer(f));
+   return {owner,to:sys.id,type:sys.anomK,anomaly:sys.anom,remaining:fleet?.surv||0};
+ }),E.B);
 
  await test('J1 kayıt → kapanış → yeni oda → host tek başına: kayıt öncesi bekleyen/gizli olay korunur; tarih ilerler; host ve B için yeni olay/anomali/bilim zinciri üretilir',async()=>{
    await closeUI(H());
@@ -25,6 +31,7 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
      const nc=G.inbox.find(n=>n.key==='ev:'+c.id);UI.noteSwipe(nc.uid);UI.closeModal();
      const rb=UI.event(evs[3],G.emps[b]);MP1Host.host.publish();return {a:a.n,c:c.n,bEv:evs[3].n,rb,keys:G.inbox.map(n=>[n.key,!!n.hidden])};},E.B);
    assert(S.ev.rb&&S.ev.rb.ok,'B kararı kuyruğa girdi '+JSON.stringify(S.ev.rb));
+   if(naturalSurvey){M.surveysBeforeSave=await naturalSurveys();assert(M.surveysBeforeSave.every(s=>s.anomaly&&s.remaining>0),'doğal taramalar kayıt öncesinde tamamlanmamış');}
    S.bPend0=await pendingOf(E.B);S.day=await H().evaluate(()=>Math.floor(G.day));
    await H().evaluate(()=>MP1Host.mp4.saveNow('manual'));await wait(H(),()=>MP1Host.lastSave&&MP1Host.lastSave.ok);
    S.saveId=await H().evaluate(async()=>(await MP4Save.list())[0].saveId);
@@ -39,15 +46,30 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
    assert.equal(st.day,S.day,'kayıt tarihi korunur');
    for(const [k,hid] of S.ev.keys.filter(([k])=>/^ev:/.test(k)))assert(st.keys.some(([k2,h2])=>k2===k&&h2===hid),'olay '+k+' gizli='+hid+' korunur');
    assert.deepEqual(await pendingOf(E.B),S.bPend0,'B\'nin bekleyen kararı kayıtla korunur');
+   if(naturalSurvey){M.surveysReloaded=await naturalSurveys();assert.deepEqual(M.surveysReloaded,M.surveysBeforeSave,'anomali ve kalan tarama süresi yüklemede korunur');}
    const vis=await hostCards();assert(vis.includes(S.ev.a),'bekleyen olay şeritte');assert(!vis.includes(S.ev.c),'gizlenen olay şeritte değil');
    const list=await statusList(h);assert(list.includes(S.ev.c),'gizlenen olay ☰ listesinde');
-   /* gerçek döngü: olaylar açık (AUTO_EVENT kapalı, olay ayarı kayıttaki gibi); 2 ay ilerle, doğal kararları say */
+   /* Gerçek döngü. Antik Kalıntı'nın kaydedilen iki taraması host yalnızken tamamlanır. */
    const nat0=await h.evaluate(([b,c])=>({h:G.inbox.length,b:(G.emps[b].decisions?.pending||[]).filter(n=>n.status==='pending').length,c:(G.emps[c].decisions?.pending||[]).filter(n=>n.status==='pending').length}),[E.B,E.C]);
-   await h.evaluate(()=>MP1Host.host.local({kind:'speed',value:4}));await wait(h,d=>G.day>=d+30,S.day,180000);await h.evaluate(()=>MP1Host.host.local({kind:'speed',value:0}));
+   await h.evaluate(()=>MP1Host.host.local({kind:'speed',value:4}));
+   await wait(h,d=>G.day>=d+30,S.day,180000);
+   await h.evaluate(()=>MP1Host.host.local({kind:'speed',value:0}));
    const nat1=await h.evaluate(([b,c])=>({h:G.inbox.length,b:(G.emps[b].decisions?.pending||[]).filter(n=>n.status==='pending').length,c:(G.emps[c].decisions?.pending||[]).filter(n=>n.status==='pending').length,day:Math.floor(G.day)}),[E.B,E.C]);
    M.natural={before:nat0,after:nat1};
+   if(naturalSurvey){
+     const [host,guest]=M.surveysBeforeSave;
+     M.natural.survey=await h.evaluate(([a,b])=>{
+       const h=G.inbox.find(n=>n.key==='an:'+a.to),g=G.emps[b.owner].decisions.pending.find(n=>n.kind==='anomaly'&&n.sys===b.to);
+       return {host:{title:h?.title,born:h?.born,remainingAnomaly:G.sys[a.to].anom},
+         guest:{title:g&&decisionCatalog(g.kind,g.catalog).n,born:g?.born,id:g?.id,remainingAnomaly:G.sys[b.to].anom}};
+     },[host,guest]);
+     for(const n of Object.values(M.natural.survey)){assert(n.title&&n.born>S.day&&!n.remainingAnomaly,'normal tarama yeni karar üretir: '+JSON.stringify(M.natural.survey));}
+     const title=M.natural.survey.host.title;
+     assert((await hostCards()).includes(title)||(await statusList(h)).includes(title),'doğal host anomalisi şerit veya listede');
+   }
    S.neu=await h.evaluate(b=>{const evs=EVENTS.filter(e=>e.ch&&e.ch.length>1&&!e.chain);const c=evs[2];UI.event(c);UI.closeModal();
-     const an=ANOMALIES.find(a=>a.ch&&a.ch.length>1)||ANOMALIES[0];const s=G.sys.find(s=>s.owner===G.p.id&&s.id!==G.p.home)||G.sys[G.p.home];UI.anomaly(an,s);UI.closeModal();
+     const an=ANOMALIES.find(a=>a.ch&&a.ch.length>1)||ANOMALIES[0];const home=G.sys[G.p.home];
+     const s=G.sys.find(s=>s.owner===G.p.id&&s.id!==G.p.home)||G.sys[home.lanes[0]]||home;UI.anomaly(an,s);UI.closeModal();
      const chId=Object.keys(CHAINS)[0];UI.chain(chId);UI.closeModal();
      const be=G.emps[b],an2=ANOMALIES.filter(a=>a.ch&&a.ch.length>1)[1]||an,bs=G.sys[be.home];const chB=Object.keys(CHAINS).find(k=>k!==chId&&!(be.decisions?.pending||[]).some(n=>n.status==='pending'&&n.key==='chain:'+k+':'));const r1=UI.chain(chB,be),r2=UI.anomaly(an2,bs,be);MP1Host.host.publish();
      return {ev:c.n,an:s.name,chain:CHAINS[chId].n,bEv:CHAINS[chB].n,bAn:an2.n,r1,r2,day:Math.floor(G.day)};},E.B);
@@ -63,12 +85,22 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
    await b.waitForURL(u=>/\/mp\/play/.test(String(u)),{timeout:20000});await wait(b,()=>document.getElementById('jCode'));await b.fill('#jCode',code);await tap(b,'[data-j="go"]');await ready(b,E.B);
    const c=await open('C');await c.addInitScript(TIMERS);await c.goto(origin.C+'/mp/play?code='+code);await wait(c,()=>window.MP1Join&&document.getElementById('jName'));
    if(await c.evaluate(()=>!MP1Join.ws))await tap(c,'[data-j="go"]');await ready(c,E.C);
+   for(const p of [b,c])assert.equal(await p.evaluate(()=>MP1Join.saveId),S.saveId,'aynı kayıt kimliği');
    for(const p of [b,c])await p.evaluate(CANON+GUESTLIB);await settle('j2');
    const g=await b.evaluate(()=>({day:Math.floor(G.day),pending:(G.p.decisions?.pending||[]).filter(n=>n.status==='pending').map(n=>n.key),inbox:G.inbox.filter(n=>n.decisionId!==undefined).map(n=>[n.title,!!n.hidden])}));
    const bc=await guestCards(b),bl=await statusList(b),cc=await guestCards(c);M.rejoin={g,cards:bc,cCards:cc,list:bl.slice(0,600)};await shot(b,'j2-b-olaylar');
    assert.deepEqual(g.pending.slice().sort(),S.bPend1.map(r=>r.key).sort(),'B aynasında bekleyen kararlar host ile aynı');
    for(const t of [S.ev.bEv,S.neu.bEv])assert(bc.includes(t)||bl.includes(t),'B kendi olayını görür: '+t+' · '+JSON.stringify(bc));
    assert(bc.some(x=>x.includes(S.neu.bAn))||bl.includes(S.neu.bAn),'B kendi anomalisini görür');
+   if(naturalSurvey){
+     const {host,guest}=M.natural.survey;
+     M.natural.survey.guest.visible=bc.includes(guest.title)||bl.includes(guest.title);
+     assert(M.natural.survey.guest.visible,'B doğal anomalisini şerit veya listede görür');
+     const fromB=await b.evaluate(({id,title})=>G.inbox.some(n=>n.decisionId===id&&n.title===title),guest);
+     const cPending=await c.evaluate(s=>G.p.decisions?.pending.some(n=>n.kind==='anomaly'&&n.sys===s)||false,M.surveysBeforeSave[1].to);
+     assert(fromB,'doğal anomali doğru karar kimliğiyle yansır');
+     assert(!cPending&&!bc.includes(host.title),'doğal anomaliler başka oyuncuya sızmaz');
+   }
    for(const t of [S.ev.a,S.neu.ev])assert(!bc.includes(t),'host olayı B şeridinde değil: '+t);
    for(const t of [S.ev.bEv,S.neu.bEv])assert(!cc.includes(t),'B\'nin olayı C şeridinde değil');});
 

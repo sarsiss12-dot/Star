@@ -1,0 +1,82 @@
+{
+  "cases": {
+    "p40": {
+      "cache": "stars-v96h10p40",
+      "empire": 1,
+      "oldOrder": {
+        "accept": "ok",
+        "before": 0,
+        "host": 1,
+        "guest": 1,
+        "paid": {
+          "min": 0,
+          "ala": 32
+        },
+        "ackMs": 284,
+        "guestMs": 672
+      }
+    },
+    "invite": {
+      "elapsedMs": 34162,
+      "sockets": 1,
+      "warningBefore": true,
+      "warningAfter": true,
+      "socket": null,
+      "hostOnline": false,
+      "empire": null,
+      "hasCode": true,
+      "sameSaveAndEmpire": true
+    },
+    "manual": {
+      "elapsedMs": 33892,
+      "sockets": 1,
+      "warningBefore": true,
+      "warningAfter": true,
+      "socket": null,
+      "hostOnline": false,
+      "empire": null,
+      "hasCode": false,
+      "sameSaveAndEmpire": true
+    },
+    "reconnect": {
+      "newSocket": true,
+      "sameSaveAndEmpire": true
+    },
+    "mixed": {
+      "staleReplies": 1,
+      "sri": true,
+      "offlineRetry": true,
+      "sameSaveAndEmpire": true,
+      "firstOrder": {
+        "accept": "ok",
+        "before": 1,
+        "host": 2,
+        "guest": 2,
+        "paid": {
+          "min": 0,
+          "ala": 32
+        },
+        "ackMs": 218,
+        "guestMs": 497
+      }
+    }
+  },
+  "failures": [],
+  "version": {
+    "mp": "MP.8.9b42",
+    "build": "96h10p43",
+    "runtime": "b512c978e814",
+    "release": "787fe3bcd06c12aba5b02ffe0cf7a0bc9d84bee86616a2ab9c5d024e8f8039ef",
+    "files": {
+      "main.js": "d97b20c89aab",
+      "mp-core.js": "e625ac89f273",
+      "relay.js": "776c9da42b40",
+      "mp1-host.js": "f5dc296c1a3d",
+      "join.js": "afb2e1aaee8a",
+      "mirror.js": "56019070fa24",
+      "guest-stars.js": "516688ec1005",
+      "mp71-dip.js": "932c92d12cbc",
+      "mp7-setup.js": "a7391d21552c"
+    }
+  }
+}

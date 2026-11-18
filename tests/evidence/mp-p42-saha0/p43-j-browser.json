@@ -1,0 +1,229 @@
+{
+  "results": [
+    {
+      "name": "J0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+      "status": "PASS",
+      "ms": 11177
+    },
+    {
+      "name": "J1 kayıt → kapanış → yeni oda → host tek başına: kayıt öncesi bekleyen/gizli olay korunur; tarih ilerler; host ve B için yeni olay/anomali/bilim zinciri üretilir",
+      "status": "PASS",
+      "ms": 9908
+    },
+    {
+      "name": "J2 misafirler yeni kodla döner (B ana menü ODAYA KATIL, C davet bağlantısı): B'nin kayıt öncesi ve host-tek-başına kararları B'de; host / C olayları B'de değil",
+      "status": "PASS",
+      "ms": 6607
+    },
+    {
+      "name": "J3 B'nin ilk gemi siparişi gerçek dokunuşla: host kabulü, host tersane kuyruğu ve B'nin tersane ekranı ayrı ölçülür; kaynak bir kez düşer",
+      "status": "PASS",
+      "ms": 2651
+    },
+    {
+      "name": "J4 yanıt kaybı + AYNI cid ile yeniden gönderim: tek sipariş, tek kaynak kesintisi, yinelenen yanıt; B tersane ekranında tek yeni satır",
+      "status": "PASS",
+      "ms": 5760
+    }
+  ],
+  "world": {
+    "seed": 22,
+    "size": "orta",
+    "systems": 45,
+    "states": 8
+  },
+  "scenarios": {
+    "surveysBeforeSave": [
+      {
+        "owner": 0,
+        "to": 30,
+        "type": "kalinti",
+        "anomaly": true,
+        "remaining": 27.380052000000003
+      },
+      {
+        "owner": 1,
+        "to": 5,
+        "type": "kalinti",
+        "anomaly": true,
+        "remaining": 14.380051999999994
+      }
+    ],
+    "surveysReloaded": [
+      {
+        "owner": 0,
+        "to": 30,
+        "type": "kalinti",
+        "anomaly": true,
+        "remaining": 27.380052000000003
+      },
+      {
+        "owner": 1,
+        "to": 5,
+        "type": "kalinti",
+        "anomaly": true,
+        "remaining": 14.380051999999994
+      }
+    ],
+    "natural": {
+      "before": {
+        "h": 2,
+        "b": 1,
+        "c": 0
+      },
+      "after": {
+        "h": 4,
+        "b": 2,
+        "c": 0,
+        "day": 31
+      },
+      "survey": {
+        "host": {
+          "title": "Anomali — Ithkrim-95",
+          "born": 29.118948,
+          "remainingAnomaly": false
+        },
+        "guest": {
+          "title": "Antik Kalıntı Mezarlığı",
+          "born": 16.119948000000004,
+          "id": 2,
+          "remainingAnomaly": false,
+          "visible": true
+        }
+      }
+    },
+    "hostAlone": {
+      "saved": {
+        "a": "Bilim Konseyi Talebi",
+        "c": "Göçmen Filosu",
+        "bEv": "Kayıp Sonda",
+        "rb": {
+          "ok": true,
+          "id": 1
+        },
+        "keys": [
+          [
+            "ev:e1",
+            false
+          ],
+          [
+            "ev:e2",
+            true
+          ]
+        ]
+      },
+      "neu": {
+        "ev": "Alaşım Grevi",
+        "an": "Wynaevos",
+        "chain": "Sessiz Gemi",
+        "bEv": "Sessiz Gemi — Güverte",
+        "bAn": "Kristal Mezarlık",
+        "r1": {
+          "ok": true,
+          "id": 3
+        },
+        "r2": {
+          "ok": true,
+          "id": 4
+        },
+        "day": 31
+      },
+      "cards": [
+        "Bilim Konseyi Talebi",
+        "Anomali — Ithkrim-95",
+        "Alaşım Grevi",
+        "Anomali — Wynaevos",
+        "Sessiz Gemi"
+      ]
+    },
+    "rejoin": {
+      "g": {
+        "day": 31,
+        "pending": [
+          "event:e4:",
+          "anomaly:a13:5",
+          "chain:hayalet2a:",
+          "anomaly:a2:5"
+        ],
+        "inbox": [
+          [
+            "Kayıp Sonda",
+            false
+          ],
+          [
+            "Antik Kalıntı Mezarlığı",
+            false
+          ],
+          [
+            "Sessiz Gemi — Güverte",
+            false
+          ],
+          [
+            "Kristal Mezarlık",
+            false
+          ]
+        ]
+      },
+      "cards": [
+        "Kayıp Sonda",
+        "Antik Kalıntı Mezarlığı",
+        "Sessiz Gemi — Güverte",
+        "Kristal Mezarlık"
+      ],
+      "cCards": [],
+      "list": "Savaşlar, olaylar ve durumlar\n⚔ Savaş Merkezi · 0 düşman\n📰 Galaktik Haber Ağı\nVazgeç"
+    },
+    "firstOrder": {
+      "ship": "Koloni Gemisi",
+      "k": "kol",
+      "ack": {
+        "status": "ok",
+        "code": null
+      },
+      "tAckMs": 442,
+      "tHostQueueMs": 457,
+      "tGuestYardMs": 785,
+      "host": [
+        {
+          "left": 39,
+          "tot": 39
+        }
+      ],
+      "paid": {
+        "ala": 60,
+        "min": 265
+      },
+      "cost": {
+        "ala": 60,
+        "min": 265
+      }
+    },
+    "resend": {
+      "lost": true,
+      "again": {
+        "ok": true,
+        "cid": true
+      },
+      "rep": [
+        {
+          "status": "ok",
+          "dup": true
+        }
+      ],
+      "q0": 1,
+      "q1": 2,
+      "y0": 1,
+      "y1": 2,
+      "paid": {
+        "ala": 60,
+        "min": 265
+      },
+      "tHostQueueMs": 497,
+      "tAckMs": 4940,
+      "tGuestYardMs": 5473,
+      "dropped": {
+        "result": 1
+      }
+    }
+  }
+}

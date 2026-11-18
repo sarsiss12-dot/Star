@@ -72,7 +72,7 @@ function create(env=process.env){
   const assets=Object.fromEntries([...ALLOW].filter(f=>f.endsWith('.js')||f==='index.html').sort()
     .map(f=>[f,digest(fs.readFileSync(path.join(ROOT,f)),'base64')]));
   const release=digest(JSON.stringify([manifest,assets,digest(guard,'base64')]),'hex');
-  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b41',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),release,files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',
+  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b42',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),release,files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',
     'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});
   const guardHash="'sha256-"+digest(guard,'base64')+"'";
   // Uyarı, oyun CSS dosyası da eksik olduğunda üstte ve kullanılabilir kalır.
@@ -248,13 +248,13 @@ function create(env=process.env){
       if(guestRelease!==release){
         deny('update-required');
         if(guestRelease!==null)return end(4010,'update-required');
-        // Eski istemci yeni hata kodunu tanımaz. Mevcut lobi başlığı açıklamayı gösterebilir.
+        // p40 ve öncesi 4010'u tanımaz ve lobiden otomatik yeniden bağlanır.
+        // Önce bu katılımı sonlandır, ardından eski istemcinin lobi başlığında uyarıyı bırak.
         // Bu soket oda listesine girmez ve hiçbir iletisi host'a gönderilmez.
         dead=true;
+        ctl({t:'room-closed'});
         conn.send('H'+JSON.stringify({v:1,type:'lobby',phase:'Oyun sürümü eski. Sayfayı yenile ve yeniden katıl. Oda kodu '+code+'.',players:[],empires:[],capacity:0}));
-        authT=setTimeout(()=>end(4010,'update-required'),30000);
-        authT.unref?.();
-        return;
+        return conn.close(4010,'update-required');
       }
       /* MP.7.4: aynı sekmenin (cihaz anahtarı dev: tarayıcı sekmesinde rastgele 128 bit, yalnız relay'e gider) önceki soketi yeni bağlantıyla
          DEĞİŞTİRİLİR — çift KATIL dokunuşu ya da ağ değişimi ikinci koltuk tutmaz. Başka cihazın soketine dokunulmaz; kimlik doğrulaması host'ta (jeton). */

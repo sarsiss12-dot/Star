@@ -78,9 +78,12 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
    return {fl,seen:G.sys.filter(s=>(s.seen||[]).includes(0)).map(s=>s.id),hab:G.sys.map(s=>playerHabitatMark(s)),own:[...G.vis].map(id=>[id,G.sys[id].owner===undefined||G.sys[id].owner===null?null:G.sys[id].owner]).sort((a,b)=>a[0]-b[0]),vis:[...G.vis].sort((a,b)=>a-b)};});
  const truthFor=(e,vis)=>H().evaluate(([e,vis])=>{const pi=x=>x===e?0:x===0?e:x,V=new Set(vis);
    const fl=G.fleets.filter(f=>f.ships.length).map(f=>({id:f.id,e:pi(f.e),sys:f.sys,mv:f.mv?[f.mv.from,f.mv.to]:null,path:f.e===e?(f.path||[]).slice():null,hp:Math.round(fleetHealth(f)*1000),combat:f.combat?1:0,at:f.sys>=0?f.sys:f.mv?f.mv.from:-1}));
-   const E=G.emps[e];return {fl,seen:G.sys.filter(s=>(s.seen||[]).includes(e)).map(s=>s.id),hab:G.sys.map(s=>{const x=E.mapHabitats?.[s.id];return (s.seen||[]).includes(e)&&x&&Number.isInteger(x.mask)?x.mask:0;}),
+   // Kalıcı bellek, son sensör hareketini henüz içermeyebilir. Host'un o anda aktöre yetkilendirdiği görünümü ölç.
+   const E=G.emps[e],ctx=humanVisionContext(E),habitats=humanMapKnowledge(E,ctx).habitats;
+   return {fl,seen:[...ctx.known],hab:G.sys.map(s=>ctx.known.has(s.id)&&s.surv.includes(e)?habitats[s.id]?.mask||0:0),
      own:vis.map(id=>[id,G.sys[id].owner===undefined||G.sys[id].owner===null?null:pi(G.sys[id].owner)]).sort((a,b)=>a[0]-b[0])};},[e,vis]);
- const mirrorEq=async n=>{await pg[n].evaluate(()=>{try{UI.closeModal();}catch{}});await settle('i2-'+n);};
+ const mirrorEq=async n=>{await pg[n].evaluate(()=>{try{UI.closeModal();}catch{}});const all=await settle('i2-'+n);
+   await wait(pg[n],r=>MP6Stars.S.appliedRev===r&&MP6Stars.S.appliedGeneration===MP6Stars.S.gen,all[n].rev);};
 
  await test('I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)',async()=>{
    await setSpd(0);

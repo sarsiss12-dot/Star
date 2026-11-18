@@ -1,0 +1,366 @@
+{
+  "results": [
+    {
+      "name": "O0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+      "status": "PASS",
+      "ms": 11769
+    },
+    {
+      "name": "O1 kısa kopma (3 sn): kopukken emir yerel reddedilir; dönüşte filo + tersane + bina emri host'ta bir kez, misafirde yansır",
+      "status": "PASS",
+      "ms": 11028
+    },
+    {
+      "name": "O3 kayıp dünya güncellemesi (ayna 12 sn düşer, hız / nabız geçer): misafir eksik algılar, yeniden ister, harita ilerler",
+      "status": "PASS",
+      "ms": 25576
+    },
+    {
+      "name": "O7 misafirde açık pencere: ayna bekletilir, hız bildirimi gelir; misafir nedeni görür (sıkışık çubukta da) ve pencere kapanınca yetişir",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: hız bildirimi gelirken neden de görünür: {\"txt\":\"Host bir karar penceresinde — oyun 1× yavaşladı · Pencere açık — dünya, kapanınca güncellenir\",\"top\":true}\n    at /workspace/scratch/886e95b23be9/Star/tests/helpers/mp-sync-fed0-mp.cjs:123:4\n    at async test (/workspace/scratch/886e95b23be9/Star/tests/browser-mp8.cjs:60:162)\n    at async module.exports (/workspace/scratch/886e95b23be9/Star/tests/helpers/mp-sync-fed0-mp.cjs:112:2)\n    at async /workspace/scratch/886e95b23be9/Star/tests/browser-mp8.cjs:452:17"
+    }
+  ],
+  "cases": {
+    "o1": {
+      "local": {
+        "r": {
+          "ok": false,
+          "why": "host-yok"
+        },
+        "toast": ""
+      }
+    },
+    "o3": {
+      "dropped": {
+        "mirrorDelta": 16,
+        "mirror": 1
+      },
+      "series": [
+        {
+          "t": 0,
+          "hd": 4.21,
+          "gd": 1.56,
+          "hrev": 11,
+          "grev": 9,
+          "note": "",
+          "spd": 3,
+          "res": 0
+        },
+        {
+          "t": 1,
+          "hd": 6.3,
+          "gd": 1.56,
+          "hrev": 13,
+          "grev": 9,
+          "note": "",
+          "spd": 3,
+          "res": 0
+        },
+        {
+          "t": 2,
+          "hd": 8.37,
+          "gd": 1.56,
+          "hrev": 14,
+          "grev": 9,
+          "note": "",
+          "spd": 3,
+          "res": 0
+        },
+        {
+          "t": 3,
+          "hd": 10.43,
+          "gd": 1.56,
+          "hrev": 16,
+          "grev": 9,
+          "note": "",
+          "spd": 3,
+          "res": 0
+        },
+        {
+          "t": 4,
+          "hd": 12.47,
+          "gd": 1.56,
+          "hrev": 17,
+          "grev": 9,
+          "note": "",
+          "spd": 3,
+          "res": 0
+        },
+        {
+          "t": 5,
+          "hd": 14.53,
+          "gd": 1.56,
+          "hrev": 19,
+          "grev": 9,
+          "note": "",
+          "spd": 3,
+          "res": 1
+        },
+        {
+          "t": 6,
+          "hd": 16.57,
+          "gd": 1.56,
+          "hrev": 20,
+          "grev": 9,
+          "note": "",
+          "spd": 3,
+          "res": 1
+        },
+        {
+          "t": 7,
+          "hd": 18.67,
+          "gd": 1.56,
+          "hrev": 22,
+          "grev": 9,
+          "note": "",
+          "spd": 3,
+          "res": 1
+        },
+        {
+          "t": 8,
+          "hd": 20.77,
+          "gd": 1.56,
+          "hrev": 23,
+          "grev": 9,
+          "note": "Eşitleme gecikti — yeniden isteniyor",
+          "spd": 3,
+          "res": 1
+        },
+        {
+          "t": 9,
+          "hd": 22.83,
+          "gd": 1.56,
+          "hrev": 24,
+          "grev": 9,
+          "note": "Eşitleme gecikti — yeniden isteniyor",
+          "spd": 3,
+          "res": 1
+        },
+        {
+          "t": 10,
+          "hd": 24.87,
+          "gd": 1.56,
+          "hrev": 26,
+          "grev": 9,
+          "note": "Eşitleme gecikti — yeniden isteniyor",
+          "spd": 3,
+          "res": 1
+        },
+        {
+          "t": 11,
+          "hd": 26.9,
+          "gd": 26,
+          "hrev": 28,
+          "grev": 28,
+          "note": "",
+          "spd": 3,
+          "res": 2
+        },
+        {
+          "t": 12,
+          "hd": 28.97,
+          "gd": 27.5,
+          "hrev": 30,
+          "grev": 29,
+          "note": "",
+          "spd": 3,
+          "res": 2
+        },
+        {
+          "t": 13,
+          "hd": 30.79,
+          "gd": 30.19,
+          "hrev": 31,
+          "grev": 31,
+          "note": "",
+          "spd": 3,
+          "res": 2
+        },
+        {
+          "t": 14,
+          "hd": 32.85,
+          "gd": 31.69,
+          "hrev": 32,
+          "grev": 32,
+          "note": "",
+          "spd": 3,
+          "res": 2
+        },
+        {
+          "t": 15,
+          "hd": 34.92,
+          "gd": 34.55,
+          "hrev": 34,
+          "grev": 34,
+          "note": "",
+          "spd": 3,
+          "res": 2
+        },
+        {
+          "t": 16,
+          "hd": 36.95,
+          "gd": 35.99,
+          "hrev": 35,
+          "grev": 35,
+          "note": "",
+          "spd": 3,
+          "res": 2
+        },
+        {
+          "t": 17,
+          "hd": 39.02,
+          "gd": 38.92,
+          "hrev": 37,
+          "grev": 37,
+          "note": "",
+          "spd": 3,
+          "res": 2
+        },
+        {
+          "t": 18,
+          "hd": 41.05,
+          "gd": 40.35,
+          "hrev": 38,
+          "grev": 38,
+          "note": "",
+          "spd": 3,
+          "res": 2
+        },
+        {
+          "t": 19,
+          "hd": 43.07,
+          "gd": 41.78,
+          "hrev": 39,
+          "grev": 39,
+          "note": "",
+          "spd": 3,
+          "res": 2
+        },
+        {
+          "t": 20,
+          "hd": 45.17,
+          "gd": 44.7,
+          "hrev": 41,
+          "grev": 41,
+          "note": "",
+          "spd": 3,
+          "res": 2
+        },
+        {
+          "t": 21,
+          "hd": 47.19,
+          "gd": 46.07,
+          "hrev": 42,
+          "grev": 42,
+          "note": "",
+          "spd": 3,
+          "res": 2
+        }
+      ],
+      "s0": {
+        "h": {
+          "day": 1.56,
+          "wrev": 19,
+          "mrev": 9,
+          "speed": 0
+        },
+        "g": {
+          "day": 1.56,
+          "rev": 9,
+          "applied": 9,
+          "mirrorAgeMs": 424,
+          "held": 0,
+          "resyncs": 0,
+          "note": "",
+          "speedMsgs": 2
+        }
+      },
+      "s1": {
+        "h": {
+          "day": 47.22,
+          "wrev": 70,
+          "mrev": 43,
+          "speed": 0
+        },
+        "g": {
+          "day": 47.22,
+          "rev": 43,
+          "applied": 43,
+          "mirrorAgeMs": 366,
+          "held": 0,
+          "resyncs": 2,
+          "note": "",
+          "speedMsgs": 4
+        }
+      }
+    },
+    "o7": {
+      "s0": {
+        "hd": 47.22,
+        "gd": 47.22
+      },
+      "mid": {
+        "hd": 65.18,
+        "gd": 47.22,
+        "note": "Pencere açık — dünya, kapanınca güncellenir",
+        "held": 32,
+        "speedMsgs": 5
+      },
+      "s1": {
+        "hd": 69.81,
+        "gd": 69.81
+      },
+      "vis": {
+        "txt": "ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸ 2×",
+        "top": true
+      },
+      "visSpeed": {
+        "txt": "Host bir karar penceresinde — oyun 1× yavaşladı · Pencere açık — dünya, kapanınca güncellenir",
+        "top": true
+      }
+    }
+  },
+  "commandChain": [
+    {
+      "label": "O1-önce:move",
+      "kind": "move",
+      "status": "ok",
+      "hostApplied": true,
+      "guestReflectMs": 547
+    },
+    {
+      "label": "O1-önce:ship",
+      "kind": "ship",
+      "status": "ok",
+      "hostApplied": true,
+      "guestReflectMs": 643
+    },
+    {
+      "label": "O1-önce:build",
+      "kind": "build",
+      "status": "ok",
+      "hostApplied": true,
+      "guestReflectMs": 21
+    },
+    {
+      "label": "O1-dönüş:move",
+      "kind": "move",
+      "status": "ok",
+      "hostApplied": true,
+      "guestReflectMs": 21
+    },
+    {
+      "label": "O1-dönüş:ship",
+      "kind": "ship",
+      "status": "ok",
+      "hostApplied": true,
+      "guestReflectMs": 674
+    },
+    {
+      "label": "O1-dönüş:build",
+      "kind": "build",
+      "skip": "yuva yok"
+    }
+  ]
+}
