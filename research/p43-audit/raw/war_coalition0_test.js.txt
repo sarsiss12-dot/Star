@@ -1,0 +1,10 @@
+PASS C1 tek başına: görünüm hazırlık açmaz, kaynak/teklif/savaş yok; önizleme doğrudan ilanla aynı imza; geçersiz Fetih seçimi engel olur
+PASS C2 karışık koalisyon: kaynaklı kabul, karşı teklif (kabul), ret, engelli aday; kısmi son onay yalnız geçerli kabullerle; bedel bir kez; bekleyen davet kapanır
+  bütçe düşünce: Yeni Hanedan → Alaşım: toplam 400 gerekiyor, stok 100
+PASS C3 şart değişikliği: Fetih hedefi değişince kabul yeniden onay ister, son onaya girmez; bütçe düşünce kart gerekçe verir; damga değişir
+PASS C4 kayıt/yükleme: açık hazırlık, hedef seçenekleri, davetler ve kabuller korunur; eski seçeneksiz hazırlık eski kurallarıyla açılır ve başlar
+PASS C5 iptal / süre / eleme: kapanan hazırlığın daveti uygulanamaz; süre dolan davet "Süresi doldu"; hedef elenince başlatılamaz
+PASS C6 AI ve eski çağrılar: seçeneksiz hazırlıkta kısmi olmayan warPrepareQuote/Launch eski davranışla aynı (kabul yoksa ret)
+  C7 {"war":false,"T1":0,"T2":2,"N":1,"O":2,"T":1,"reason":"exhaustion-lock|actor:1","moves":[[13,1,"transfer"],[4,2,"transfer"]],"prom":[[4,"delivered"]],"notes":["Karvar Egemenliği SAVAŞ YORGUNLUĞU %100 — ordusu savaşamıyor; zorunlu ateşkes (doktrin barış antlaşmasını yasaklıyor) ile savaş durdu. Rakibin yorgunluğu %55'ten başlar ve barışta ayda 2,5 azalır · Savaş #1"]}
+PASS C7 Kan Hukuku zorunlu ateşkesinde sahiplik (beklenen kural: Fetih barışıyla aynı): ele geçirilen HEDEF sistem kazananda kalır, HEDEF DIŞI işgal iade edilir, ortağa vaat edilen hedef sistem ortağa devredilir; her devir tam bir kez; neden exhaustion-lock, tek bildirim
+GEÇEN: 7 KALAN: 0

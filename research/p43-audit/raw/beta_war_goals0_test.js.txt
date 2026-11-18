@@ -1,0 +1,16 @@
+PASS W1 iki devlet Fetih: hedef sistemler barışta kalır, hedef dışı işgal iade edilir, hedef devlet yok edilmez; eski hedef kaydı iade yapmaz
+PASS W2 Vasallaştırma: tür/hükümler önizlemede; geçersiz hüküm reddedilir; teslim teklifi baskıya göre kabul/ret; boyun eğme teklifi senyöre gider
+PASS W3 iki müttefikli sefer + üçüncü devletin bağımsız savaşı: teslim yalnız kampanya kapsamını kapatır, aylık adım yeniden açmaz
+PASS W4 ayrı barış: yalnız kendi cephesi kapanır; önizleme sona eren yükümlülük ve öteki cepheleri listeler
+PASS W5 toprak vaadi: teslim edilebilir → devredilir; karşılanamayan ve geçersiz vaat; sahtekâr AI değerli sistemi tutar → hafıza
+PASS W6 çift komut: aynı teslim teklifi ikinci kez uygulanmaz; ikinci vaat devri / ödeme yok
+PASS W7 Sahte Bayrak ifşası: kanıt düzeltilir, savaş kendiliğinden kapanmaz; başka gerekçe yoksa AI statüko barışı önerir
+PASS W8 federasyona karşı federasyon: önerge → oy → uygulama; cepheler ortak kampanyada; üyenin ayrı barışı yalnız kendi cephesi; ortak barış hepsini kapatır
+PASS W9 eski kayıt: 6 eski hedefli süren savaş yüklenir ve şartı değişmez; eski hedef yeni ilanda seçilemez
+PASS W10 Save8: vaat / işaret alanları doğrulanır; bozuk vaat reddedilir; alan kullanılmadıysa eklenmez
+PASS W11 Galaktik Gerilim: Dengeli cfg'ye yazılmaz; yalnız gerilim değişince harita ve doktrinler aynı; geçersiz değer reddedilir; çarpan
+  eski → yeni: {"boyun":{"key":"fetih","v":2,"targets":3,"vtype":null,"rng":true},"fetih":{"key":"fetih","v":2,"targets":3,"vtype":null,"rng":true},"harac":{"key":"fetih","v":2,"targets":3,"vtype":null,"rng":true},"bilgi":{"key":"fetih","v":2,"targets":3,"vtype":null,"rng":true},"yikim":{"key":"fetih","v":2,"targets":3,"vtype":null,"rng":true},"yoketme":{"key":"fetih","v":2,"targets":3,"vtype":null,"rng":true}}
+  ezici üstünlük (oran 11.76): boyun → {"key":"boyun","opts":{"vtype":"haracguzar"}} · yıkım → boyun
+PASS W12 AI hedef seçimi: eski 6 anahtarın her biri iki normal hedeften birine (v2) iner; savaş meclisi ve aiTurn bu yolu kullanır; RNG çekmez
+PASS W13 Dürüst–Sahtekâr: Sahte Bayrak SEÇİM çarpanı; operasyonun kendi başarı formülü değişmez
+GEÇEN: 13 KALAN: 0
