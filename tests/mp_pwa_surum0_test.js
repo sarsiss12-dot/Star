@@ -210,6 +210,7 @@ async function openGuest(r,root,fixture,href='?code='+r.code){
 async function main(){
   const old=P40||ROOT;
   const fixture=buildFixture(old);
+  let saved41;
   if(P40&&P41){
     const r=await room(P40,fixture);
     let b;
@@ -241,6 +242,7 @@ async function main(){
     try{
       clean=await openGuest(c41,P41,fixture);
       log('p41 temiz kaynak yeni emri kabul ediyor',await submit(c41,clean,fixture,'ok'));
+      saved41={...fixture,pkg:json(c41.h,'MP.snapshot({}).pkg'),profile:new Map(clean.g.local)};
     }finally{clean?.close();await c41.stop();}
     const m41=await room(P41,fixture);
     let mixed41;
@@ -284,8 +286,9 @@ async function main(){
     assert.equal((await pwa.request('/missing.js','cors')).type,'error');
     log('aday uç noktası, 25 gerçek bayt özeti ve MP önbellek dışı',{build:version.build,mp:version.mp,release:version.release,main:version.files['main.js']});
 
+    const profile=new Map(fixture.profile);
     if(P40){
-      stale=browser(P40,candidate,new Map(fixture.profile),href);
+      stale=browser(P40,candidate,profile,href);
       stale.start();stale.join();
       await waitFor(()=>stale.app().innerHTML.includes('Oyun sürümü eski.'),'p40 uyarısı');
       assert.equal(candidate.active.size,0);
@@ -295,7 +298,6 @@ async function main(){
       stale.close();
     }
 
-    const profile=new Map(fixture.profile);
     const previous=browser(ROOT,candidate,new Map(profile),href);
     previous.runGuard(html.replace('data-release="'+version.release+'"','data-release="'+'0'.repeat(64)+'"'));
     previous.start();previous.join();
@@ -335,6 +337,7 @@ async function main(){
     updated.runGuard(await (await fetch(url)).text());
     updated.start();await updated.seat(); // Yenileme işareti aynı davete otomatik döndürür.
     assert.equal(updated.g.run('window.MP1Join.saveId'),fixture.pkg.saveId);
+    assert.equal(updated.g.run('window.MP1Join.playerId'),fixture.pkg.session.players.find(p=>p.empireId===1).playerId);
     assert.equal(updated.sent.filter(m=>m.cmd?.kind==='ship').length,0);
     log('güncellemeden sonra ilk yeni tersane emri',await submit(candidate,updated,fixture,'ok'));
     updated.close();
@@ -346,5 +349,14 @@ async function main(){
     assert.equal(again.rows(fixture.ship.sys),candidate.h.run('SY.queue.length'));
     log('güncel temiz giriş ve tekrar bağlanma',{guestEmpire:1,rows:again.rows(fixture.ship.sys),automaticShipOrders:0});
   }finally{stale?.close();updated?.close();again?.close();await candidate.stop();}
+  if(saved41){
+    assert.equal(saved41.pkg.build,'96h10p41');
+    const next=await room(ROOT,saved41);
+    let clean;
+    try{
+      clean=await openGuest(next,ROOT,saved41);
+      log('p41 kaydı p42 temiz istemciyle açılır ve ilk emir tek uygulanır',await submit(next,clean,saved41,'ok'));
+    }finally{clean?.close();await next.stop();}
+  }
 }
 main().then(()=>console.log('GEÇEN: '+passed+' KALAN: 0')).catch(e=>{console.error(e.stack);console.log('GEÇEN: '+passed+' KALAN: 1');process.exitCode=1;});

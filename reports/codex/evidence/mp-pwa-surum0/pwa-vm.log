@@ -1,11 +1,12 @@
 PASS p40 profilinde önbellek ve bir eski sipariş {"hostResult":"ok","reason":null,"guestEmpire":1,"hostQueue":1,"guestRows":1,"newOrders":1,"charge":32,"tAck":15}
 PASS p41 tabanı eski istemciyi odaya alıyor {"hostResult":"rejected","reason":"command-unconfirmed","guestEmpire":1,"hostQueue":1,"guestRows":1,"newOrders":0,"charge":0,"tAck":12}
-PASS p41 temiz kaynak yeni emri kabul ediyor {"hostResult":"ok","reason":null,"guestEmpire":1,"hostQueue":2,"guestRows":2,"newOrders":1,"charge":32,"tAck":13}
-PASS p41 etiketi altında tek eski join.js sürüm kapısından geçiyor {"hostResult":"rejected","reason":"command-unconfirmed","guestEmpire":1,"hostQueue":1,"guestRows":1,"newOrders":0,"charge":0,"tAck":14}
+PASS p41 temiz kaynak yeni emri kabul ediyor {"hostResult":"ok","reason":null,"guestEmpire":1,"hostQueue":2,"guestRows":2,"newOrders":1,"charge":32,"tAck":12}
+PASS p41 etiketi altında tek eski join.js sürüm kapısından geçiyor {"hostResult":"rejected","reason":"command-unconfirmed","guestEmpire":1,"hostQueue":1,"guestRows":1,"newOrders":0,"charge":0,"tAck":12}
 PASS aday uç noktası, 25 gerçek bayt özeti ve MP önbellek dışı {"build":"96h10p42","mp":"MP.8.9b41","release":"47f43b78c5de2d126f13625ff226c3b069718c8f317a96fd40b08f4d7ca74d96","main":"7262237b5d9c"}
 PASS p40 tam eski sayfa uyarıyı görür ve odaya alınmaz {"roomClients":0,"hostFrames":0}
 PASS önceki içerik kimliği relayden geri çevrilir {"roomClients":0,"hostFrames":0}
 PASS tek eski JS, çevrimdışı uyarı, ardından güncelle ve yeniden katıl {"oldPath":"main.js","stampWithOldBytes":null,"roomPreserved":true}
-PASS güncellemeden sonra ilk yeni tersane emri {"hostResult":"ok","reason":null,"guestEmpire":1,"hostQueue":2,"guestRows":2,"newOrders":1,"charge":32,"tAck":23}
+PASS güncellemeden sonra ilk yeni tersane emri {"hostResult":"ok","reason":null,"guestEmpire":1,"hostQueue":2,"guestRows":2,"newOrders":1,"charge":32,"tAck":22}
 PASS güncel temiz giriş ve tekrar bağlanma {"guestEmpire":1,"rows":2,"automaticShipOrders":0}
-GEÇEN: 10 KALAN: 0
+PASS p41 kaydı p42 temiz istemciyle açılır ve ilk emir tek uygulanır {"hostResult":"ok","reason":null,"guestEmpire":1,"hostQueue":3,"guestRows":3,"newOrders":1,"charge":32,"tAck":11}
+GEÇEN: 11 KALAN: 0
