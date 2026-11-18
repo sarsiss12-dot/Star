@@ -1,5 +1,7 @@
 # Son rapor bağlantısı
 
+- **Son Codex teslimi** [MP Emir Güvencesi](reports/codex/MP-EMIR-GUVENCE0-SONUC.md) · p41 / MP.8.9b40 · [Taslak PR #57](https://github.com/sarsiss12-dot/Star/pull/57). Çift sipariş ve ödeme engellendi. Eski p40 kaydı ve yeni host dönüşü doğrulandı.
+
 - **Son teslim (Claude):** [REINF-ROUTE.0 — takviyenin düşman sistemindeki ana filoya ulaşması (güvenli sapma, güvenli sistemde bekleyip kendiliğinden devam, MP uzak insanın Otomatik Takviyesi) ve Haberler → Sevkiyatlar'da kayıp hedef başına tek kart (p40 / MP.8.9b39)](reports/claude/REINF-ROUTE0-SONUC.md)
 - **Önceki teslim (Claude):** [MP-FIELD-FIX.0 — dört MP saha bulgusu: kayıtlı oyuna tam arayüzle dönüş ve katılım aşaması, olay şeridi kalıcı kaydırma / gizli karar listede, Fetih hedef seçimi, masadan Savaşa Destek İste (p34 / MP.8.9b31)](reports/claude/MP-FIELD-FIX0-SONUC.md)
 - **Daha önceki teslim (Claude):** [WAR-COALITION.0 — tek savaş ilanı akışı (hedef → müttefikler → son onay), toplu davet ve durum kartları, kısmi son onay, açık pencerede güncel misafir dünyası, misafir savaş diplomasisi, Kan Hukuku sahipliği (p33 / MP.8.9b30)](reports/claude/WAR-COALITION0-SONUC.md)

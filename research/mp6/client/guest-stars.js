@@ -221,7 +221,7 @@ function gate(){
   wrap('orderMove',(o,f,target,append,automatic)=>{if(automatic||!f||f.e!==0)return false;if(S.aimCol===f.id+':'+(+target)){S.aimCol=null;return true;}return send({kind:'move',fleet:f.id,to:+target})!==null;});
   /* MP-P0: "tezgâha kondu / sıraya alındı" bildirimi eskiden emir GÖNDERİLİNCE çıkıyordu (host kabul etmeden). Artık motor işlevi
      false döner (yerel iyimser bildirim yok); bildirim host'un 'ok' yanıtıyla, ret gerçek nedeniyle gösterilir. */
-  const acked=(cmd,okMsg)=>{const cid=send(cmd);if(cid)waits[cid]=res=>{if(res.status==='ok'){try{say(okMsg());}catch{}}else if(res.code!=='rules:same')toast('Host reddetti: '+why(res),true);};return false;};
+  const acked=(cmd,okMsg)=>{const cid=send(cmd);if(cid)waits[cid]=res=>{if(res.status==='ok'){try{say(okMsg());}catch{}}else if(res.code!=='rules:same')toast(res.code==='command-unconfirmed'?why(res):'Host reddetti: '+why(res),true);};return false;};
   wrap('queueBuilding',(o,e,sys,pl,k)=>{if(!mine(e)||!sys||!pl)return false;return acked({kind:'build',sys:sys.id,planet:pl.i,key:String(k)},()=>((BUILDINGS[k]&&BUILDINGS[k].n)||'Bina')+' inşa sırasına alındı');});
   wrap('researchTarget',(o,e,id,action,position)=>{if(!mine(e))return {ok:false,why:'—'};const c={kind:'research',tech:String(id)};
     if(action&&action!=='toggle'){c.action=action;c.position=position|0;}return send(c)?{ok:true}:{ok:false,why:'Host bağlı değil'};});
@@ -494,7 +494,8 @@ function gate(){
   const dealRedraw=to=>{if(dealShown(to))try{UI.drawDeal();}catch{}};
   function dealTxDone(tx,res){if(S.dealTx!==tx)return;S.dealTx=null;S.dealDone=S.dealDone||new Set();S.dealDone.add(tx.cid);if(S.dealDone.size>16)S.dealDone.delete(S.dealDone.values().next().value);
     const dup=res.status!=='ok'&&res.code==='duplicate',ok=res.status==='ok'||dup,ai=res.status==='ok'&&res.extra&&res.extra.ai,R=window.MP71Dip?MP71Dip.AI_REPLY:{},nm=G.emps[tx.to]?.name||'';
-    const msg=ok?(dup?'Bu teklif zaten bekliyor — '+nm+'. Durum: Gelen kutusu → Gönderilen.':ai?nm+' '+(R[ai]||ai):'Teklif gönderildi — '+nm+'. Durum: Gelen kutusu → Gönderilen.'):'Host reddetti: '+(window.MP71Dip?MP71Dip.why(res):why(res))+' — taslak korunuyor; düzenleyip yeniden sunabilirsin.';
+    const msg=res.code==='command-unconfirmed'?why(res)+' Gelen kutusu → Gönderilen bölümüne bak. Taslak korunuyor.':
+      ok?(dup?'Bu teklif zaten bekliyor — '+nm+'. Durum: Gelen kutusu → Gönderilen.':ai?nm+' '+(R[ai]||ai):'Teklif gönderildi — '+nm+'. Durum: Gelen kutusu → Gönderilen.'):'Host reddetti: '+(window.MP71Dip?MP71Dip.why(res):why(res))+' — taslak korunuyor; düzenleyip yeniden sunabilirsin.';
     dealTrace(tx,'reply',{status:res.status,code:res.code||null,offer:res.extra&&res.extra.offer||null,dup:!!res.dup});
     if(ok){if(tx.ctr&&S.counter&&S.counter.offer===tx.ctr)S.counter=null;
       /* taslak yalnız GÖNDERİLEN içerikle aynıysa temizlenir (yanıt beklerken düzenlenen taslak korunur) */
@@ -503,7 +504,9 @@ function gate(){
       else if(UI.deal&&UI.deal.to===tx.to)UI.dealMsg=msg+' (Düzenlediğin taslak korunuyor.)';}
     else if(UI.deal&&UI.deal.to===tx.to)UI.dealMsg=msg;else if(UI._diploDrafts&&UI._diploDrafts[tx.to])UI._diploDrafts[tx.to].msg=msg;
     toast(msg,!ok);dealTrace(tx,'msg',{ok,msg:msg.slice(0,160)});dealRedraw(tx.to);}
-  function dealTxSend(tx,why){const cid=send(tx.cmd,tx.cid,true);tx.tries++;tx.last=Date.now();tx.sent=!!cid;dealTrace(tx,why,{cid:tx.cid,sent:!!cid,err:cid?null:S.lastSendWhy||null});return !!cid;}
+  function dealTxSend(tx,reason){const cid=send(tx.cmd,tx.cid,true);tx.tries++;tx.last=Date.now();tx.sent=!!cid;dealTrace(tx,reason,{cid:tx.cid,sent:!!cid,err:cid?null:S.lastSendWhy||null});
+    if(!cid&&S.lastSendWhy==='command-unconfirmed'){delete waits[tx.cid];dealTxDone(tx,{status:'rejected',code:'command-unconfirmed'});}
+    return !!cid;}
   /* bağlantı dönünce ya da yanıt gecikince aynı işlem (aynı cid) yeniden gider — syncWatch her turda çağırır */
   S.dealTxTick=now=>{const tx=S.dealTx;if(!tx)return;const J=S.J;if(!(J&&J.ws&&J.ws.readyState===1&&J.hostOnline))return;
     if(now-tx.last<(tx.sent?8000:1500))return;if(tx.tries>=6){if(!tx.stuck){tx.stuck=true;const m='Host yanıt vermedi — taslak korunuyor. TEKLİFİ SUN aynı işlemi yeniden gönderir (çift teklif oluşmaz).';if(UI.deal&&UI.deal.to===tx.to)UI.dealMsg=m;dealTrace(tx,'stuck');dealRedraw(tx.to);}return;}
@@ -514,7 +517,7 @@ function gate(){
     if(c.empty){this.dealMsg='Teklif boş.';this.drawDeal();return;}
     const tx0=S.dealTx;
     if(tx0){dealTrace(tx0,'tap',{same:tx0.sig===c.sig});
-      if(tx0.sig===c.sig&&tx0.to===d.to){const okSend=dealTxSend(tx0,'resend-tap');tx0.stuck=false;
+      if(tx0.sig===c.sig&&tx0.to===d.to){const okSend=dealTxSend(tx0,'resend-tap');if(S.dealTx!==tx0)return;tx0.stuck=false;
         this.dealMsg=okSend?'Teklif yanıt bekliyor — aynı işlem yeniden gönderildi (çift teklif oluşmaz). İşlem '+tx0.id+'.':'Bağlantı yok; taslak korunuyor — bağlantı dönünce aynı işlem kendiliğinden yeniden gider.';this.drawDeal();return;}
       this.dealMsg='Önceki teklifin host yanıtı bekleniyor (işlem '+tx0.id+'); yanıt gelince bunu sunabilirsin. Taslak korunuyor.';this.drawDeal();return;}
     const cid=send(c.cmd,undefined,true);
@@ -921,10 +924,10 @@ function update(statusHtml){
   /* host'un reddettiği komutlar: gerçek arayüzün kendi uyarısıyla */
   for(;S.seenResults<J.results.length;S.seenResults++){const r=J.results[S.seenResults],pk=S.pend.get(r.cid);S.pend.delete(r.cid);
     /* MP-P0-DESYNC1: host ACK'i (onay) ile etkinin şu anki dünyada görünmesi ayrı izlenir: onaylı emrin dünya revizyonu uygulanan aynadan büyükse "onaylı, dünyada bekliyor" */
-    if(r.status==='ok'&&pk&&!RO_CMDS.has(pk.kind)&&Number.isSafeInteger(r.rev)&&!r.dup){S.acks.push({cid:r.cid,kind:pk.kind,rev:r.rev,at:Date.now()});if(S.acks.length>32)S.acks.shift();}
+    if(r.status==='ok'&&pk&&!RO_CMDS.has(pk.kind)&&Number.isSafeInteger(r.rev)){S.acks.push({cid:r.cid,kind:pk.kind,rev:r.rev,at:Date.now()});if(S.acks.length>32)S.acks.shift();}
     if(waits[r.cid]){const w=waits[r.cid];delete waits[r.cid];try{w(r);}catch{}continue;}
     if(S.dealDone&&S.dealDone.has(r.cid))continue;   // MP-FIELD-VERIFY.0: aynı işlemin yeniden gönderiminin (dup) ikinci yanıtı   // MP diplomasi paneli / gelen kutusu kendi sonucunu gösterir
-    if(r.status!=='ok'&&r.code!=='rules:same')toast('Host reddetti: '+why(r),true);}
+    if(r.status!=='ok'&&r.code!=='rules:same')toast(r.code==='command-unconfirmed'?why(r):'Host reddetti: '+why(r),true);}
   /* MP.7.3 tanı: son reddedilen komutun KODU (içerik / jeton yok) — MP çubuğunun ipucunda */
   for(let i=J.results.length-1;i>=0&&i>=J.results.length-5;i--){const r=J.results[i];if(r.status!=='ok'&&r.code!=='rules:same'){S.lastErr=r.code;break;}}
   if(dipEl)dipTick(false);
@@ -1036,7 +1039,10 @@ function syncWatch(){
   const J=S.J,y=S.sync;if(!J||!S.started||!S.on){if(y.note)syncNote('');y.since=0;y.behindAt=0;return;}
   const now=Date.now(),live=J.ws&&J.ws.readyState===1&&J.hostOnline,paused=J.lobby&&J.lobby.phase==='paused';
   if(!live||paused){y.since=0;y.asks=0;y.behindAt=0;if(y.note)syncNote('');return;}   // bağlantı / duraklatma kendi iletisini gösterir
-  for(const [cid,p] of S.pend)if(now-p.at>60000)S.pend.delete(cid);
+  for(const [cid,p] of S.pend)if(now-p.at>60000){
+    S.pend.delete(cid);
+    if(p.kind==='ship')toast(MP1View.ERR['command-unconfirmed'],true);
+  }
   try{S.dealTxTick&&S.dealTxTick(now);}catch{}   // MP-FIELD-VERIFY.0: yanıtı gelmeyen teklif aynı cid ile yeniden
   S.acks=S.acks.filter(a=>now-a.at<120000&&a.rev>(S.appliedWorldRev|0));
   syncReport(false);

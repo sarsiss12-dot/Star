@@ -1,0 +1,93 @@
+[
+  {
+    "test": "reinf_route0_test.js",
+    "exit": 0,
+    "passed": 12,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "reinf_route0_cards_test.js",
+    "exit": 0,
+    "passed": 4,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp_p0_decisions_test.cjs",
+    "exit": 0,
+    "passed": 7,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp_sync_fed1_defcall_test.js",
+    "exit": 0,
+    "passed": 7,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp_sync_fed0_agenda_test.js",
+    "exit": 0,
+    "passed": 6,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp_sync_fed0_peacewith_test.js",
+    "exit": 0,
+    "passed": 6,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp4_core_test.js",
+    "exit": 0,
+    "passed": 14,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp_sync_fed0_resume_test.js",
+    "exit": 0,
+    "passed": 2,
+    "failed": 0,
+    "notRun": 1
+  },
+  {
+    "test": "mp_p0_sync_test.js",
+    "exit": 0,
+    "passed": 6,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp_techlux0_intel_test.js",
+    "exit": 0,
+    "passed": 3,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp_p0_guest_test.cjs",
+    "exit": 0,
+    "passed": 7,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp_p0_motion_test.cjs",
+    "exit": 0,
+    "passed": 3,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp0_core_test.js",
+    "exit": 0,
+    "passed": 11,
+    "failed": 0,
+    "notRun": 0
+  }
+]

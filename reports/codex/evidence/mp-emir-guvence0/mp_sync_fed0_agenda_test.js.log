@@ -1,0 +1,7 @@
+PASS A1 savunma oyu açıkken başka destek talepleri kuyruğa girer (sıra/durum görünür); aynı cephe ikinci kez gerekçeyle reddedilir
+PASS A2 acil savunma ile başlamamış savaş için saldırı izni ayrı; saldırı izni acil değildir
+PASS A3 açık oy + olağan kuyruk + acil öneri MP paketiyle yeni host: sıra, kimlik, belirteç aynı; kalan oylar tamamlanır ve sıradaki açılır
+PASS A4 düşme nedenleri: savaş biter / öneren ayrılır / hedef elenir / süre dolar — gerekçeyle, bedelsiz; sıradaki geçerli öneri açılır
+PASS A5 aynı cid tekrar, aynı öneri ikinci kez, kapanmış oya geç dokunma: ikinci kuyruk / oy / bedel yok
+PASS A6 host + misafir + AI aynı anda öneri: tek aktif oy, kimlik sırasıyla FIFO, aynada kendi satırı
+GEÇEN: 6 KALAN: 0
