@@ -11,7 +11,7 @@
    önbellekteki tek parça main.js temizlensin. */
 /* FAZ 83: sürüm yükseltildi — eski ve yeni JS dosyalarının
    karışmasını önler; activate'te eskiler siliniyor. */
-const CACHE = 'stars-v96h10p41';
+const CACHE = 'stars-v96h10p42';
 
 /* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */
 const KABUK = [
@@ -57,6 +57,9 @@ self.addEventListener('activate', ev => {
 self.addEventListener('fetch', ev => {
   const istek = ev.request;
   if (istek.method !== 'GET') return;
+  const url=new URL(istek.url);
+  // MP sayfaları, sürüm bilgisi ve içerik kimliği taşıyan betikler her zaman relay'den gelir.
+  if(url.origin!==self.location.origin||url.pathname.startsWith('/mp/')||url.pathname.startsWith('/mp1/')||url.searchParams.has('mp-release'))return;
 
   /* ÖNCE AĞ: her zaman en güncel dosya gelir. Ağ yoksa
      önbellekten servis edilir — oyun çevrimdışı da açılır. */
@@ -69,6 +72,12 @@ self.addEventListener('fetch', ev => {
         }
         return yanit;
       })
-      .catch(() => caches.match(istek).then(v => v || caches.match('./index.html')))
+      .catch(async () => {
+        const cache=await caches.open(CACHE);
+        const hit=await cache.match(istek);
+        if(hit)return hit;
+        if(istek.mode==='navigate')return await cache.match('./index.html')||Response.error();
+        return Response.error();
+      })
   );
 });

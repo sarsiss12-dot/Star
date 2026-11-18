@@ -49,7 +49,7 @@ function ws(port,query,{origin,host,secure,ca,xff,hdr}={}){
 async function reattach(r,code,frame){const h=await ws(r.port,'role=host&code='+code);if(frame!==undefined)h.send(frame);return h;}
 async function host(r,q=''){const h=await ws(r.port,'role=host'+q);const m=await h.ctl('room');return Object.assign(h,{code:m.code,key:m.key,cap:m.cap});}
 async function setCap(r,h,n){h.send('C'+JSON.stringify({cap:n}));const t0=Date.now();while(r.rooms.get(h.code).cap!==n){if(Date.now()-t0>2000)throw Error('cap not applied');await sleep(2);}}
-async function client(r,code){const c=await ws(r.port,'role=client&code='+encodeURIComponent(code));return c;}
+async function client(r,code){const c=await ws(r.port,'role=client&code='+encodeURIComponent(code)+'&release='+r.release);return c;}
 function get(port,p,{method='GET',secure,ca}={}){return new Promise((res,rej)=>{const req=(secure?https:http).request({host:'127.0.0.1',port,path:p,method,ca,servername:'localhost'},x=>{const b=[];x.on('data',d=>b.push(d));x.on('end',()=>res({status:x.statusCode,headers:x.headers,body:Buffer.concat(b)}));});req.on('error',rej);req.end();});}
 
 /* ham TCP: yanıtı ya da kapanışı bekle */
@@ -68,7 +68,8 @@ test('çökme: bozuk istekler AYRI relay sürecini düşürmez; açık oda ve ba
   let out='';p.stdout.on('data',d=>out+=d);p.stderr.on('data',d=>out+=d);
   try{for(let i=0;i<50&&!/relay http/.test(out);i++)await sleep(50);
     const h=await ws(port,'role=host');const m=await h.ctl('room');h.send('C'+JSON.stringify({cap:2}));await sleep(50);
-    const g=await ws(port,'role=client&code='+m.code);await g.ctl('welcome');
+    const v=JSON.parse((await get(port,'/mp/version')).body.toString());
+    const g=await ws(port,'role=client&code='+m.code+'&release='+v.release);await g.ctl('welcome');
     for(const [n,t] of Object.entries(CRASH)){await rawReq(port,t);await sleep(100);assert.equal(p.exitCode,null,'process alive after: '+n);assert.equal(await health(port),200,n);}
     g.send(JSON.stringify({v:1,type:'ping',t:1}));const f=await h.wait(x=>x[0]==='F');assert(f.includes('"ping"'),'room still relays');
     assert(!out.includes(m.code)&&!out.includes(m.key),'no code/key in output');assert.equal(out.trim().split('\n').length,1,'only the start line: '+out);
@@ -93,8 +94,8 @@ test('tahmin sınırı: bir IP 10 dakikada 60 yanlış kod/anahtar denemesinden 
     for(let i=0;i<relayMod.LIMITS.badPer10Min-1;i++){const c=await ws(r.port,'role=client&code=ZZZZ'+String(i).padStart(4,'2'),{xff:ip});assert.equal(c.status,101);assert.equal((await c.ctl('error')).code,'invalid-code');c.end();}
     const k=await ws(r.port,'role=host&code='+h.code,{xff:ip});k.send('A'+'0'.repeat(32));assert.equal((await k.ctl('error')).code,'bad-host-key');k.end();   // yanlış host anahtarı da tahmindir
     assert.equal((await ws(r.port,'role=client&code=ZZZZ9999',{xff:ip})).status,429);
-    assert.equal((await ws(r.port,'role=client&code='+h.code,{xff:ip})).status,429,'the guessing IP is blocked even with a real code');
-    const ok=await ws(r.port,'role=client&code='+h.code,{xff:ip+', 203.0.113.50'});assert.equal(ok.status,101);await ok.ctl('welcome');
+    assert.equal((await ws(r.port,'role=client&code='+h.code+'&release='+r.release,{xff:ip})).status,429,'the guessing IP is blocked even with a real code');
+    const ok=await ws(r.port,'role=client&code='+h.code+'&release='+r.release,{xff:ip+', 203.0.113.50'});assert.equal(ok.status,101);await ok.ctl('welcome');
     assert(r.stats.denied['guess-limit']>=2);
   }finally{relayMod.LIMITS.joinPerMin=jr;await stop(r);}
 });
@@ -129,8 +130,8 @@ test('MP.7.4 relay geneli yanlış kod sınırı: aşılınca yanlış denemesi 
     const h=await host(r);await setCap(r,h,3);
     for(let i=0;i<6;i++){const c=await ws(r.port,'role=client&code=ZZZZ'+(i+2),{xff:'198.51.100.'+(60+i)});assert.equal((await c.ctl('error')).code,'invalid-code');c.end();}
     assert.equal((await ws(r.port,'role=client&code=ZZZZ9',{xff:'198.51.100.60'})).status,429,'IP with a miss is held while the global budget is spent');
-    assert.equal((await ws(r.port,'role=client&code='+h.code,{xff:'198.51.100.61'})).status,429,'even with a real code');
-    const ok=await ws(r.port,'role=client&code='+h.code,{xff:'198.51.100.99'});assert.equal(ok.status,101);await ok.ctl('welcome');
+    assert.equal((await ws(r.port,'role=client&code='+h.code+'&release='+r.release,{xff:'198.51.100.61'})).status,429,'even with a real code');
+    const ok=await ws(r.port,'role=client&code='+h.code+'&release='+r.release,{xff:'198.51.100.99'});assert.equal(ok.status,101);await ok.ctl('welcome');
     assert(r.stats.denied['guess-limit-global']>=2);ok.end();
   }finally{relayMod.LIMITS.globalBadPer10Min=g;await stop(r);}
 });
@@ -138,13 +139,13 @@ test('MP.7.4 çift KATIL: aynı sekme etiketiyle (dev) gelen ikinci soket öncek
   const r=await relay();
   try{
     const h=await host(r);const dev='A'.repeat(11)+'b_-'+'9'.repeat(8);
-    const a1=await ws(r.port,'role=client&code='+h.code+'&dev='+dev);const w1=await a1.ctl('welcome');
-    const a2=await ws(r.port,'role=client&code='+h.code+'&dev='+dev);const w2=await a2.ctl('welcome');assert.notEqual(w1.conn,w2.conn);
+    const a1=await ws(r.port,'role=client&code='+h.code+'&release='+r.release+'&dev='+dev);const w1=await a1.ctl('welcome');
+    const a2=await ws(r.port,'role=client&code='+h.code+'&release='+r.release+'&dev='+dev);const w2=await a2.ctl('welcome');assert.notEqual(w1.conn,w2.conn);
     assert.equal((await a1.waitClose()).code,4009,'old socket of the same tab is closed');
     await h.wait(m=>m==='L'+w1.conn);assert.equal(r.rooms.get(h.code).clients.size,1);
-    const b=await ws(r.port,'role=client&code='+h.code+'&dev='+'B'.repeat(22));assert.equal((await b.ctl('error')).code,'room-full','another tab cannot take the seat');
-    const a3=await ws(r.port,'role=client&code='+h.code+'&dev=short');assert.equal((await a3.ctl('error')).code,'room-full','malformed tag is ignored (no replacement)');
-    const raceA=await ws(r.port,'role=client&code='+h.code+'&dev='+dev),raceB=await ws(r.port,'role=client&code='+h.code+'&dev='+dev);await raceA.ctl('welcome');await raceB.ctl('welcome');
+    const b=await ws(r.port,'role=client&code='+h.code+'&release='+r.release+'&dev='+'B'.repeat(22));assert.equal((await b.ctl('error')).code,'room-full','another tab cannot take the seat');
+    const a3=await ws(r.port,'role=client&code='+h.code+'&release='+r.release+'&dev=short');assert.equal((await a3.ctl('error')).code,'room-full','malformed tag is ignored (no replacement)');
+    const raceA=await ws(r.port,'role=client&code='+h.code+'&release='+r.release+'&dev='+dev),raceB=await ws(r.port,'role=client&code='+h.code+'&release='+r.release+'&dev='+dev);await raceA.ctl('welcome');await raceB.ctl('welcome');
     await raceA.waitClose();assert.equal(r.rooms.get(h.code).clients.size,1,'two quick taps still hold one seat');
     a2.end();raceB.end();
   }finally{await stop(r);}
@@ -201,7 +202,7 @@ test('misafir ağ değişimi: oda doluyken sessiz kalmış (ölü) eski misafir 
 test('sızıntı: relay günlüğe hiçbir şey yazmaz; oda kodu yalnız davet URL\'sinde, host anahtarı ve oyuncu jetonu hiçbir URL\'de yok (ilk çerçeve / H içerikleri)',async()=>{
   const join=fs.readFileSync(path.join(root,'research/mp1/client/join.js'),'utf8'),hostjs=fs.readFileSync(path.join(root,'research/mp1/client/mp1-host.js'),'utf8');
   const urls=src=>[...src.matchAll(/new WebSocket\(([^;]*)\)/g),...src.matchAll(/wsUrl\(([^)]*)\)/g)].map(m=>m[1]);
-  for(const u of urls(join))assert(!/token|key|name/i.test(u),'guest ws URL: '+u);assert.match(join,/\/mp1\/ws\?role=client&code='\+code\+'&dev='\+encodeURIComponent\(tabTag\(\)\)\);/);   // MP.7.4: sekme etiketi (gizli değil, jeton değil)
+  for(const u of urls(join))assert(!/token|key|name/i.test(u),'guest ws URL: '+u);assert.match(join,/\/mp1\/ws\?role=client&code='\+code\+'&dev='\+encodeURIComponent\(tabTag\(\)\)\+'\&release='\+version.stamp\);/);   // MP.7.4: sekme etiketi (gizli değil, jeton değil)
   for(const u of urls(hostjs))assert(!/API\.key|token/.test(u),'host ws URL: '+u);
   assert.match(hostjs,/ws\.onopen=\(\)=>ws\.send\('A'\+API\.key\)/);
 });

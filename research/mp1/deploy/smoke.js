@@ -11,6 +11,7 @@ const ROOT=path.resolve(__dirname,'../../..');
 async function main(argv){
   const base=new URL(argv[0]||'');const ca=argv.includes('--ca')?fs.readFileSync(argv[argv.indexOf('--ca')+1]):undefined;
   const origin=base.origin,secure=base.protocol==='https:',wsBase=(secure?'wss://':'ws://')+base.host+'/mp1/ws?';
+  let release;
   const res=[];const check=async(name,fn)=>{try{const d=await fn();res.push({name,ok:true,d});console.log('PASS '+name+(d?' — '+d:''));}catch(e){res.push({name,ok:false,e:e.message});console.log('FAIL '+name+' — '+e.message);}};
   const get=(p,u=base)=>new Promise((ok,no)=>{const U=new URL(p,u);(U.protocol==='https:'?https:http).get(U,{ca,servername:U.hostname},r=>{const b=[];r.on('data',d=>b.push(d));r.on('end',()=>ok({status:r.statusCode,h:r.headers,body:Buffer.concat(b)}));}).on('error',no);});
   const must=(c,m)=>{if(!c)throw Error(m);};
@@ -25,7 +26,8 @@ async function main(argv){
   /* MP.7.3: dağıtım doğrulaması — sunulan MP dosyaları bu çalışma ağacıyla aynı mı (eski imaj / eski dal tespit edilir) */
   await check('sürüm işareti /mp/version: MP sürümü, oyun build\'i ve MP dosyaları bu çalışma ağacıyla aynı',async()=>{const r=await get('/mp/version');must(r.status===200,'durum '+r.status+' (eski dağıtım?)');
     const v=JSON.parse(r.body.toString()),m=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE-MANIFEST.json')));must(v.build===m.build,'build '+v.build+' ≠ '+m.build);
-    const local={'mp-core.js':'research/mp0/mp-core.js','relay.js':'research/mp1/server/relay.js','mp1-host.js':'research/mp1/client/mp1-host.js','join.js':'research/mp1/client/join.js',
+    must(/^[a-f0-9]{64}$/.test(v.release),'içerik kimliği eksik');release=v.release;
+    const local={'main.js':'main.js','mp-core.js':'research/mp0/mp-core.js','relay.js':'research/mp1/server/relay.js','mp1-host.js':'research/mp1/client/mp1-host.js','join.js':'research/mp1/client/join.js',
       'mirror.js':'research/mp6/mirror.js','guest-stars.js':'research/mp6/client/guest-stars.js','mp71-dip.js':'research/mp71/client/mp71-dip.js','mp7-setup.js':'research/mp7/client/mp7-setup.js'};
     for(const [k,f] of Object.entries(local))must(v.files[k]===crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,f))).digest('hex').slice(0,12),k+' farklı (eski dağıtım ya da farklı dal)');
     return v.mp+' · '+v.build;});
@@ -36,7 +38,7 @@ async function main(argv){
   await check((secure?'WSS':'WS')+' oda kurma (host)',async()=>{const t0=Date.now();host=await connect(wsBase+'role=host',{origin,ca});must(host.status===101,'el sıkışma '+host.status);
     const m=await host.ctl('room');code=m.code;key=m.key;must(/^[A-Z2-9]{5}$/.test(code)&&key&&key.length>=32,'oda');return (Date.now()-t0)+' ms';});
   let guest,conn;
-  await check('misafir koda katılır, mesajlar iki yönde iletilir',async()=>{host.send('C{"cap":1}');const t0=Date.now();guest=await connect(wsBase+'role=client&code='+code.slice(0,4)+'-'+code.slice(4),{origin,ca});
+  await check('misafir koda katılır, mesajlar iki yönde iletilir',async()=>{host.send('C{"cap":1}');const t0=Date.now();guest=await connect(wsBase+'role=client&code='+code.slice(0,4)+'-'+code.slice(4)+'&release='+release,{origin,ca});
     const w=await guest.ctl('welcome');conn=w.conn;await host.wait(x=>x==='J'+conn);guest.send('{"v":1,"type":"ping","t":1}');await host.wait(x=>x==='F'+conn+'\n{"v":1,"type":"ping","t":1}');
     host.send('T'+conn+'\n{"ok":1}');await guest.wait(x=>x==='H{"ok":1}');must(!guest.msgs.join().includes(key),'anahtar misafirde');return 'katılım+gidiş-dönüş '+(Date.now()-t0)+' ms';});
   await check('yanlış host anahtarı reddedilir (kod tek başına yetmez)',async()=>{const x=await connect(wsBase+'role=host&code='+code,{origin,ca});x.send('Ayanlis');must((await x.ctl('error')).code==='bad-host-key','kabul edildi');x.end();});

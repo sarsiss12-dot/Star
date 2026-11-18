@@ -1,0 +1,65 @@
+[
+  {
+    "test": "mp_emir_guvence0_test.js",
+    "exit": 0,
+    "passed": 13,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp4_core_test.js",
+    "exit": 0,
+    "passed": 14,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp_sync_fed0_resume_test.js",
+    "exit": 0,
+    "passed": 2,
+    "failed": 0,
+    "notRun": 1
+  },
+  {
+    "test": "mp1_relay_test.js",
+    "exit": 0,
+    "passed": 14,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp11_online_test.js",
+    "exit": 0,
+    "passed": 9,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "mp5_relay_security_test.js",
+    "exit": 0,
+    "passed": 13,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "beta_scale0_relay_test.cjs",
+    "exit": 0,
+    "passed": 5,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "reinf_route0_test.js",
+    "exit": 0,
+    "passed": 12,
+    "failed": 0,
+    "notRun": 0
+  },
+  {
+    "test": "reinf_route0_cards_test.js",
+    "exit": 0,
+    "passed": 4,
+    "failed": 0,
+    "notRun": 0
+  }
+]

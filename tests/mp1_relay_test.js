@@ -51,7 +51,7 @@ function ws(port,query,{origin,host,secure,ca,xff}={}){
 async function reattach(r,code,frame){const h=await ws(r.port,'role=host&code='+code);if(frame!==undefined)h.send(frame);return h;}
 async function host(r,q=''){const h=await ws(r.port,'role=host'+q);const m=await h.ctl('room');return Object.assign(h,{code:m.code,key:m.key,cap:m.cap});}
 async function setCap(r,h,n){h.send('C'+JSON.stringify({cap:n}));const t0=Date.now();while(r.rooms.get(h.code).cap!==n){if(Date.now()-t0>2000)throw Error('cap not applied');await sleep(2);}}
-async function client(r,code){const c=await ws(r.port,'role=client&code='+encodeURIComponent(code));return c;}
+async function client(r,code){const c=await ws(r.port,'role=client&code='+encodeURIComponent(code)+'&release='+r.release);return c;}
 function get(port,p,{method='GET',secure,ca}={}){return new Promise((res,rej)=>{const req=(secure?https:http).request({host:'127.0.0.1',port,path:p,method,ca,servername:'localhost'},x=>{const b=[];x.on('data',d=>b.push(d));x.on('end',()=>res({status:x.statusCode,headers:x.headers,body:Buffer.concat(b)}));});req.on('error',rej);req.end();});}
 
 test('static: injected game page, exact runtime bytes, join page CSP, allowlist only, security headers, 405, stats hidden unless dev',async()=>{
@@ -207,7 +207,7 @@ test('TLS mode: HTTPS page and WSS room with a certificate (self-signed, test-on
     assert.ok(r.server instanceof https.Server);
     const p=await get(r.port,'/',{secure:true,ca});assert.equal(p.status,200);assert.match(p.body.toString(),/mp1-host\.js/);
     const h=await ws(r.port,'role=host',{secure:true,ca});const m=await h.ctl('room');assert.match(m.code,/^[A-Z2-9]{5}$/);
-    const c=await ws(r.port,'role=client&code='+m.code,{secure:true,ca});await c.ctl('welcome');
+    const c=await ws(r.port,'role=client&code='+m.code+'&release='+r.release,{secure:true,ca});await c.ctl('welcome');
     c.send('{"v":1}');assert.match(await h.wait(x=>x[0]==='F'),/\{"v":1\}$/);
     await assert.rejects(get(r.port,'/'));
   }finally{await stop(r);fs.rmSync(dir,{recursive:true,force:true});}

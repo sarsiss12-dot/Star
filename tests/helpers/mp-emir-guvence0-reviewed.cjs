@@ -6,6 +6,7 @@ const pins=require('./mp-emir-guvence0-reviewed.json');
 const sha=source=>createHash('sha256').update(source).digest('hex');
 
 exports.stripReviewedEmirGuvence0=(file,source)=>{
+  source=require('./mp-pwa-surum0-reviewed.cjs').stripReviewedPwaSurum0(file,source);
   const pin=pins[file];
   if(!pin||sha(source)!==pin.afterSha256)return source;
   for(const {before,after} of pin.hunks){

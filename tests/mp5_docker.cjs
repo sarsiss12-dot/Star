@@ -69,7 +69,8 @@ const memMB=name=>{const m=dk('stats','--no-stream','--format','{{.MemUsage}}',n
       px=await startProxy({target:port,cert:tlsKey.cert,key:tlsKey.key,port:pport});
       const t0=Date.now();const h=await wss(pport,'role=host',tlsKey.ca,origin);assert.equal(h.status,101);const m=await h.ctl('room');metrics.wssRoomMs=Date.now()-t0;
       h.send('C'+JSON.stringify({cap:2}));await sleep(100);
-      const t1=Date.now();const g=await wss(pport,'role=client&code='+m.code,tlsKey.ca,origin);const w=await g.ctl('welcome');metrics.wssJoinMs=Date.now()-t1;
+      const version=JSON.parse((await get(port,'/mp/version')).body.toString());
+      const t1=Date.now();const g=await wss(pport,'role=client&code='+m.code+'&release='+version.release,tlsKey.ca,origin);const w=await g.ctl('welcome');metrics.wssJoinMs=Date.now()-t1;
       const t2=Date.now();g.send('{"v":1,"type":"ping","t":1}');await h.wait(x=>x[0]==='F'&&x.includes('"ping"'));h.send('T'+w.conn+'\n{"v":1,"type":"pong","t":1}');await g.wait(x=>x[0]==='H');metrics.wssRoundTripMs=Date.now()-t2;
       for(const t of ['GET /%E0%A4%A HTTP/1.1\r\nHost: x\r\n\r\n','GET //a:99999/x HTTP/1.1\r\nHost: x\r\n\r\n'])await new Promise(r=>{const c=net.connect(port,'127.0.0.1',()=>c.write(t));c.on('data',()=>{});c.on('error',()=>{});c.on('close',r);setTimeout(()=>c.destroy(),500);});
       await healthy(port,3000);assert.equal(dk('inspect','mp5-relay','--format','{{.State.Running}}'),'true');
@@ -82,9 +83,10 @@ const memMB=name=>{const m=dk('stats','--no-stream','--format','{{.MemUsage}}',n
       /* ayrı konteyner: her telefon ayrı IP (MP1_IP_HEADER ile; aynı makineden 150 farklı istemci) — IP başı sınırlar gerçek kullanımdaki gibi */
       const mport=await freePort(),mpp=await freePort(),mo='https://localhost:'+mpp;run('mp5-mem',['-p','127.0.0.1:'+mport+':8080','-e','MP1_ORIGINS='+mo,'-e','MP1_IP_HEADER=x-test-client-ip']);await healthy(mport);
       const mpx=await startProxy({target:mport,cert:tlsKey.cert,key:tlsKey.key,port:mpp});let ipn=0;const ip=()=>({'x-test-client-ip':'10.1.'+(ipn>>8)+'.'+(ipn++&255)});
+      const version=JSON.parse((await get(mport,'/mp/version')).body.toString());
       metrics.memIdleMB=memMB('mp5-mem');const conns=[];let joined=0;
       for(let i=0;i<50;i++){const h=await wss(mpp,'role=host',tlsKey.ca,mo,ip());const m=await h.ctl('room');h.send('C'+JSON.stringify({cap:2}));conns.push(h);await sleep(20);
-        for(let k=0;k<2;k++){const g=await wss(mpp,'role=client&code='+m.code,tlsKey.ca,mo,ip());await g.ctl('welcome');joined++;conns.push(g);}}
+        for(let k=0;k<2;k++){const g=await wss(mpp,'role=client&code='+m.code+'&release='+version.release,tlsKey.ca,mo,ip());await g.ctl('welcome');joined++;conns.push(g);}}
       await sleep(1500);metrics.mem50RoomsMB=memMB('mp5-mem');metrics.mem50RoomsConns=conns.length;assert.equal(joined,100);
       for(const c of conns)c.end();await sleep(800);metrics.memAfterMB=memMB('mp5-mem');await mpx.close();
       assert(metrics.mem50RoomsMB<200,'mem '+metrics.mem50RoomsMB);
