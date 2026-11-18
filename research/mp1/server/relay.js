@@ -56,8 +56,6 @@ function create(env=process.env){
   const manifest=JSON.parse(fs.readFileSync(path.join(ROOT,'RELEASE-MANIFEST.json'),'utf8'));
   /* MP.7.3: dağıtım doğrulaması — çok oyunculu sürüm, oyun build'i ve sunulan MP dosyalarının kısa SHA-256 özetleri (gizli bilgi yok) */
   const sha12=f=>{try{return crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,f))).digest('hex').slice(0,12);}catch{return null;}};
-  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b40',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',
-    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});
   const ALLOW=new Set([...Object.keys(manifest.files),'research/mp0/mp-core.js',
     'research/mp1/client/mp1.css','research/mp1/client/mp1-host.js','research/mp1/client/join.js','research/mp1/client/view.js',
     'research/mp2/client/guest-game.js','research/mp2/client/mp2.css',   // MP.2 misafir haritası
@@ -69,6 +67,24 @@ function create(env=process.env){
     'research/mp63/client/mp63-pause.js',  // MP.6.3 akıllı duraklatma politikası (yalnız host sayfası)
     'research/mp7/client/mp7-setup.js','research/mp7/client/mp7.css',
     'research/mp71/client/mp71-dip.js']);  // MP.7.1 tek STARS arayüzü: insan teklifleri gerçek anlaşma penceresi / gelen kutusu (host + misafir)  // MP.7 tek oyunculu kurulum ekranıyla devlet tasarımı (host + misafir)
+  const digest=(bytes,encoding)=>crypto.createHash('sha256').update(bytes).digest(encoding);
+  const guard=fs.readFileSync(path.join(ROOT,'research/mp1/client/release-guard.js'),'utf8');
+  const assets=Object.fromEntries([...ALLOW].filter(f=>f.endsWith('.js')||f==='index.html').sort()
+    .map(f=>[f,digest(fs.readFileSync(path.join(ROOT,f)),'base64')]));
+  const release=digest(JSON.stringify([manifest,assets,digest(guard,'base64')]),'hex');
+  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b41',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),release,files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',
+    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});
+  const guardHash="'sha256-"+digest(guard,'base64')+"'";
+  // Uyarı, oyun CSS dosyası da eksik olduğunda üstte ve kullanılabilir kalır.
+  const notice='<section id="mpReleaseNotice" hidden aria-labelledby="mpReleaseMessage" style="position:fixed;inset:0;z-index:2147483647;overflow:auto;padding:24px;background:#05080f;color:#eef5ff;font:600 16px/1.5 system-ui,sans-serif"><p id="mpReleaseMessage" role="status"></p><button type="button" id="mpReleaseRetry" style="min-height:44px;padding:8px 14px;font:inherit">GÜNCELLE VE YENİDEN KATIL</button></section>';
+  function withGuestRelease(html){
+    const scripts=html.replace(/<script src="\/?([^"]+)"><\/script>/g,(_,file)=>{
+      if(!assets[file])throw Error('MP betiği bilinmiyor: '+file);
+      return '<script src="/'+file+'?mp-release='+release+'" integrity="sha256-'+assets[file]+'"></script>';
+    });
+    return scripts.replace('<head>','<head><script data-release="'+release+'" data-build="'+manifest.build+'">'+guard+'</script>')
+      .replace(/<body\b[^>]*>/,body=>body+notice);
+  }
   function page(){
     const html=fs.readFileSync(path.join(ROOT,'index.html'),'utf8');if(!html.includes('</body>'))throw Error('index.html');
     return html.replace('</body>','<link rel="stylesheet" href="/research/mp1/client/mp1.css"><link rel="stylesheet" href="/research/mp3/client/mp3.css"><link rel="stylesheet" href="/research/mp31/client/mp31.css"><link rel="stylesheet" href="/research/mp4/client/mp4.css"><link rel="stylesheet" href="/research/mp61/client/mp61.css"><link rel="stylesheet" href="/research/mp7/client/mp7.css"><script src="/research/mp0/mp-core.js"></script><script src="/research/mp1/client/view.js"></script><script src="/research/mp3/client/dip-ui.js"></script><script src="/research/mp31/client/pol-ui.js"></script><script src="/research/mp4/client/mp4-save.js"></script><script src="/research/mp6/mirror.js"></script><script src="/research/mp61/client/mp61.js"></script><script src="/research/mp63/client/mp63-pause.js"></script><script src="/research/mp7/client/mp7-setup.js"></script><script src="/research/mp71/client/mp71-dip.js"></script><script src="/research/mp1/client/mp1-host.js"></script></body>');
@@ -79,7 +95,7 @@ function create(env=process.env){
   const inlineHashes=(()=>{const html=fs.readFileSync(path.join(ROOT,'index.html'),'utf8'),h=t=>"'sha256-"+crypto.createHash('sha256').update(t).digest('base64')+"'";
     const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>h(m[1]));return {scripts,handlers:[h('forceFullscreen()')]};})();
   const GUEST_CSP="default-src 'self'; connect-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; worker-src 'self'; manifest-src 'self'; "+
-    "script-src 'self' 'unsafe-hashes' "+inlineHashes.scripts.concat(inlineHashes.handlers).join(' ');
+    "script-src 'self' 'unsafe-hashes' "+inlineHashes.scripts.concat(inlineHashes.handlers,guardHash).join(' ');
   function guestPage(){
     const html=fs.readFileSync(path.join(ROOT,'index.html'),'utf8');if(!html.includes('</body>')||!html.includes('<head>'))throw Error('index.html');
     return html.replace('<head>','<head><base href="/">').replace('</body>','<link rel="stylesheet" href="/research/mp1/client/mp1.css"><link rel="stylesheet" href="/research/mp3/client/mp3.css"><link rel="stylesheet" href="/research/mp31/client/mp31.css"><link rel="stylesheet" href="/research/mp6/client/mp6.css"><link rel="stylesheet" href="/research/mp61/client/mp61.css"><link rel="stylesheet" href="/research/mp7/client/mp7.css"><script src="/research/mp1/client/view.js"></script><script src="/research/mp3/client/dip-ui.js"></script><script src="/research/mp31/client/pol-ui.js"></script><script src="/research/mp6/mirror.js"></script><script src="/research/mp61/client/mp61.js"></script><script src="/research/mp6/client/guest-stars.js"></script><script src="/research/mp7/client/mp7-setup.js"></script><script src="/research/mp71/client/mp71-dip.js"></script><script src="/research/mp1/client/join.js"></script></body>');
@@ -127,12 +143,12 @@ function create(env=process.env){
     if(cfg.public)res.setHeader('Strict-Transport-Security','max-age=31536000');
     if(req.method!=='GET'){res.writeHead(405,SEC);return res.end();}
     if(n==='/'||n==='/index.html'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html']});return res.end(page());}
-    if(n==='/mp/play'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html'],'Content-Security-Policy':GUEST_CSP});return res.end(guestPage());}
+    if(n==='/mp/play'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html'],'Content-Security-Policy':GUEST_CSP});return res.end(withGuestRelease(guestPage()));}
     /* MP-FIELD-FIX.0: oyuncuya açık bütün katılım yolları tam STARS arayüzüne (/mp/play) gider. Eski davet / yer imi bağlantıları oda kodunu ve
        öteki parametreleri koruyarak yönlenir. Motor yüklemeyen basit istemci yalnız açıkça ?basic=1 ile (eski MP.1–MP.5 testleri) sunulur. */
     if(n==='/mp/join'&&url.searchParams.get('basic')!=='1'){res.writeHead(302,{...SEC,Location:'/mp/play'+url.search,'Cache-Control':'no-store'});return res.end();}
-    if(n==='/mp/join'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html'],'Content-Security-Policy':"default-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'"});
-      return res.end(fs.readFileSync(path.join(ROOT,'research/mp1/client/join.html')));}
+    if(n==='/mp/join'){res.writeHead(200,{...SEC,'Content-Type':TYPES['.html'],'Content-Security-Policy':"default-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' "+guardHash});
+      return res.end(withGuestRelease(fs.readFileSync(path.join(ROOT,'research/mp1/client/join.html'),'utf8')));}
     if(n==='/mp/stats'&&cfg.dev){res.writeHead(200,{...SEC,'Content-Type':TYPES['.json']});return res.end(JSON.stringify({...stats,rooms:rooms.size}));}
     const rel=n.replace(/^\/+/,'');
     if(!ALLOW.has(rel)){res.writeHead(404,SEC);return res.end();}
@@ -228,6 +244,18 @@ function create(env=process.env){
       I.joins.push(t);
       const code=norm(url.searchParams.get('code')),r=rooms.get(code);
       if(!r||r.closed){deny('invalid-code');if(!tomb.has(code))bad();return end(4004,tomb.has(code)?'room-closed':'invalid-code');}   // kapanmış gerçek oda kodu tahmin sayılmaz
+      const guestRelease=url.searchParams.get('release');
+      if(guestRelease!==release){
+        deny('update-required');
+        if(guestRelease!==null)return end(4010,'update-required');
+        // Eski istemci yeni hata kodunu tanımaz. Mevcut lobi başlığı açıklamayı gösterebilir.
+        // Bu soket oda listesine girmez ve hiçbir iletisi host'a gönderilmez.
+        dead=true;
+        conn.send('H'+JSON.stringify({v:1,type:'lobby',phase:'Oyun sürümü eski. Sayfayı yenile ve yeniden katıl. Oda kodu '+code+'.',players:[],empires:[],capacity:0}));
+        authT=setTimeout(()=>end(4010,'update-required'),30000);
+        authT.unref?.();
+        return;
+      }
       /* MP.7.4: aynı sekmenin (cihaz anahtarı dev: tarayıcı sekmesinde rastgele 128 bit, yalnız relay'e gider) önceki soketi yeni bağlantıyla
          DEĞİŞTİRİLİR — çift KATIL dokunuşu ya da ağ değişimi ikinci koltuk tutmaz. Başka cihazın soketine dokunulmaz; kimlik doğrulaması host'ta (jeton). */
       const dev=/^[A-Za-z0-9_-]{22,64}$/.test(url.searchParams.get('dev')||'')?url.searchParams.get('dev'):null;
@@ -253,7 +281,7 @@ function create(env=process.env){
   }
   /* Platform yeniden başlatması (SIGTERM): odaları nedenle kapat, yeni bağlantı alma. */
   function shutdown(reason='server-restart'){for(const r of [...rooms.values()])closeRoom(r,reason);if(server)server.close();}
-  return {start,shutdown,problems,rooms,stats,cfg,LIMITS,ALPHABET,CODE_LEN};
+  return {start,shutdown,problems,rooms,stats,cfg,release,LIMITS,ALPHABET,CODE_LEN};
 }
 module.exports={create,ALPHABET,CODE_LEN,LIMITS};
 if(require.main===module){

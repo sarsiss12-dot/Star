@@ -1,5 +1,7 @@
 # Son rapor bağlantısı
 
+- **Son Codex teslimi** [MP PWA Sürüm Uyumu](reports/codex/MP-PWA-SURUM0-SONUC.md) · p42 / MP.8.9b41 · [Taslak PR #58](https://github.com/sarsiss12-dot/Star/pull/58). Eski misafir katılımda uyarılır. Güncellemeden sonra aynı kayıt ve devlete dönüş ile tek kesinti doğrulandı.
+
 - **Son Codex teslimi** [MP Emir Güvencesi](reports/codex/MP-EMIR-GUVENCE0-SONUC.md) · p41 / MP.8.9b40 · [Taslak PR #57](https://github.com/sarsiss12-dot/Star/pull/57). Çift sipariş ve ödeme engellendi. Eski p40 kaydı ve yeni host dönüşü doğrulandı.
 
 - **Son teslim (Claude):** [REINF-ROUTE.0 — takviyenin düşman sistemindeki ana filoya ulaşması (güvenli sapma, güvenli sistemde bekleyip kendiliğinden devam, MP uzak insanın Otomatik Takviyesi) ve Haberler → Sevkiyatlar'da kayıp hedef başına tek kart (p40 / MP.8.9b39)](reports/claude/REINF-ROUTE0-SONUC.md)

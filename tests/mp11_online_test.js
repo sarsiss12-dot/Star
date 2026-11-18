@@ -58,7 +58,7 @@ test('room creation is limited per IP (10/min by default); guessing and joining 
 });
 test('platform restart (SIGTERM path): every room closes with reason server-restart and the CLI exits cleanly',async()=>{
   const r=await relay({});const h=await connect(`ws://127.0.0.1:${r.port}/mp1/ws?role=host`);const {code}=await h.ctl('room');
-  const g=await connect(`ws://127.0.0.1:${r.port}/mp1/ws?role=client&code=${code}`);await g.ctl('welcome');
+  const g=await connect(`ws://127.0.0.1:${r.port}/mp1/ws?role=client&code=${code}&release=${r.release}`);await g.ctl('welcome');
   r.shutdown();assert.equal((await g.ctl('room-closed')).reason,'server-restart');assert.equal((await g.waitClose()).code,4001);assert.equal((await h.ctl('room-closed')).reason,'server-restart');
   await new Promise(res=>r.server.close(()=>res()));
   const p=require('child_process').spawn(process.execPath,[path.join(root,'research/mp1/server/relay.js')],{env:{...process.env,MP1_PORT:'0'}});let out='';p.stdout.on('data',d=>out+=d);

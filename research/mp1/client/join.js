@@ -55,6 +55,20 @@ J.leave=()=>{J.leaving=true;raw({v:1,type:'leave'});setTimeout(()=>{try{J.ws&&J.
 function tabTag(){let d=null;try{d=sessionStorage.getItem('mp1:dev');}catch{}
   if(!/^[A-Za-z0-9_-]{22,64}$/.test(d||'')){const b=new Uint8Array(16);crypto.getRandomValues(b);d=btoa(String.fromCharCode(...b)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
     try{sessionStorage.setItem('mp1:dev',d);}catch{}}return d;}
+function keepRoomInUrl(assigned=false){
+  try{
+    const url=new URL(location.href);
+    url.searchParams.set('code',J.code.replace(/-/g,''));
+    if(assigned)url.searchParams.delete('mp-refresh');
+    if(url.href!==location.href)history.replaceState(history.state,'',url.pathname+url.search+url.hash);
+  }catch{}
+}
+function needsUpdate(){
+  J.closed=true;J.hostOnline=false;J.screen='join';J.lobby=null;J.pending=null;
+  sentCommands.clear();
+  fail('update-required',V.ERR['update-required']);
+  if(window.StarsMPRelease)window.StarsMPRelease.requireUpdate();
+}
 function connect(){
   /* MP.7.4 kök neden düzeltmesi: bağlantı sürerken ikinci KATIL dokunuşu ikinci soket açıyordu; ilk soket kapatılmadan koltuğu tuttuğu için
      ikincisi "oda dolu" alıyordu. Kurulmakta / açık olan soket varken yeni bağlantı açılmaz; eskisi varsa önce kapatılır. */
@@ -65,12 +79,18 @@ function connect(){
   const name=($('jName')&&$('jName').value||J.name).replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,24);
   if(!name){J.err='Bir oyuncu adı yaz.';return render();}
   J.name=name;try{localStorage.setItem('mp1:name',name);}catch{}
+  keepRoomInUrl();
+  const version=window.StarsMPRelease;
+  if(!version?.stamp||window.MP6Stars&&(typeof BUILD_ID==='undefined'||BUILD_ID!==version.build)){
+    needsUpdate();return render();
+  }
   /* MP.5: lobide/oyundayken kopan bağlantı yeniden kurulurken ekran korunur; başarısız deneme yeniden denemeyi bitirmez (eskiden ilk başarısız
      denemede giriş ekranına düşüp ağ dönünce de bağlanmıyordu). Yalnız ilk katılım "Bağlanıyor…" ekranını gösterir. */
   J.seq=load().seq||0;J.assigned=false;if(['lobby','game'].includes(J.screen))J.reconnecting=true;else J.screen='connecting';render();const t0=performance.now();
-  const ws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/mp1/ws?role=client&code='+code+'&dev='+encodeURIComponent(tabTag()));J.ws=ws;
+  const ws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/mp1/ws?role=client&code='+code+'&dev='+encodeURIComponent(tabTag())+'&release='+version.stamp);J.ws=ws;
   ws.onmessage=ev=>receive(String(ev.data),t0);
   ws.onclose=ev=>{ev=ev||{};if(J.ws!==ws)return;J.ws=null;J.hostOnline=false;
+    if(ev.code===4010){needsUpdate();return render();}
     /* Kapanış kodu son sözdür: neden çerçevesi yolda kaybolsa bile oda kapandı/atıldın/dolu döngüye girmez. */
     /* MP.5: yeniden bağlanırken "oda dolu" kalıcı değildir — relay eski (ölü) soketimizi henüz bırakmamış olabilir; denemeye devam */
     const retryFull=ev.code===4005&&J.reconnecting&&['lobby','game'].includes(J.screen);
@@ -105,14 +125,14 @@ function receive(t,t0){
     else if(m.t==='host-left'){J.hostOnline=false;}
     else if(m.t==='room-closed'){J.closed=true;J.screen='join';J.lobby=null;const c=m.reason==='server-restart'?'server-restart':'room-closed';fail(c,V.ERR[c]);}
     else if(m.t==='kicked'){J.closed=true;J.screen='join';J.lobby=null;fail(['left','replaced'].includes(m.reason)?m.reason:'kicked',kickMsg(m.reason));}   // relay K nedeni: host'un gerçek gerekçesi
-    else if(m.t==='error'){J.errors.push(m.code);if(m.code==='room-full'&&J.reconnecting&&['lobby','game'].includes(J.screen))return render();
+    else if(m.t==='error'){J.errors.push(m.code);if(m.code==='update-required'){needsUpdate();return render();}if(m.code==='room-full'&&J.reconnecting&&['lobby','game'].includes(J.screen))return render();
       if(['invalid-code','room-full','room-closed','rate-limited','server-full'].includes(m.code)){J.closed=true;J.screen='join';fail(m.code==='room-full'&&load().token?'seat-elsewhere':m.code,m.code==='room-full'?fullMsg():V.ERR[m.code]||m.code);}}
     return render();}
   if(t[0]!=='H')return;let m;try{m=JSON.parse(t.slice(1));}catch{return;}if(m.v!==1)return;
   if(window.MP6Stars&&MP6Stars.onMessage(m))return;   // MP.6: ayna dünya (gerçek STARS arayüzü)
   if(m.type==='assign'){if(window.MP6Stars)MP6Stars.onAssign();J.assigned=true;
     /* MP-FIELD-FIX.0: kod elle yazıldıysa adres oda kodunu taşısın — sayfa yenilenince / Android sekmeyi yeniden yükleyince aynı odaya kendiliğinden döner (öteki parametreler korunur) */
-    try{const u=new URL(location.href),c=J.code.replace(/-/g,'');if(u.searchParams.get('code')!==c){u.searchParams.set('code',c);history.replaceState(history.state,'',u.pathname+u.search+u.hash);}}catch{}J.playerId=m.playerId;J.empireId=m.empireId;J.saveId=m.saveId;save({token:m.token,seq:Math.max(J.seq,m.lastSeq||0)});J.seq=Math.max(J.seq,m.lastSeq||0);saveSeat(m.saveId,m.token,m.empireId);}
+    keepRoomInUrl(m.empireId!==null);J.playerId=m.playerId;J.empireId=m.empireId;J.saveId=m.saveId;save({token:m.token,seq:Math.max(J.seq,m.lastSeq||0)});J.seq=Math.max(J.seq,m.lastSeq||0);saveSeat(m.saveId,m.token,m.empireId);}
   else if(m.type==='resume'){   // MP.4: devam lobisi bu bağlantıyı tanımadı; cihazda bu kayıt için kimlik varsa bir kez gönder
     const s=seatOf(m.saveId);J.resumeTried=J.resumeTried||{};
     if(s&&s.token&&!J.resumeTried[m.saveId]){J.resumeTried[m.saveId]=1;raw({v:1,type:'hello',name:J.name,token:s.token});}
@@ -262,5 +282,5 @@ doc.addEventListener('focusin',e=>{if(e.target.matches&&e.target.matches('input'
 if(window.visualViewport)visualViewport.addEventListener('resize',()=>{const a=doc.activeElement;if(a&&a.matches&&a.matches('input'))a.scrollIntoView({block:'center'});});
 window.MP1Join=J;render();
 /* Android arka plandaki sekmeyi yeniden yükleyebilir: bu oda için koltuk jetonu varsa kendiliğinden geri bağlan. */
-if(J.code.length===V.CODE_LEN&&J.name&&load().token){J.auto=true;connect();}
+if(J.code.length===V.CODE_LEN&&J.name&&(load().token||q.has('mp-refresh'))){J.auto=true;connect();}
 })();
