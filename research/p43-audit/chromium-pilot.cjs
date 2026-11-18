@@ -6,8 +6,19 @@ const root=process.env.CHECKPOINT_DIR||'/tmp/stars-p43',sha=s=>crypto.createHash
 let br,relay;
 (async()=>{relay=create({MP1_BIND:'127.0.0.1',MP1_PORT:'0'});const srv=await relay.start(),url='http://127.0.0.1:'+srv.address().port;
  br=await chromium.launch({executablePath:process.env.STARS_CHROMIUM_PATH,args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage']});
- for(const key of ['100-9-11-m120','500-16-11-m3','500-16-11-m120']){
+ for(const key of (process.argv.length>2?process.argv.slice(2):['100-9-11-m120','500-16-11-m3','500-16-11-m120'])){
   const txt=fs.readFileSync(path.join(root,key+'.save'),'utf8'),result={key,sha:sha(txt),chrome:br.version(),runs:[]};
+  // Independent page for the normal production frame() loop at maximum speed.
+  {const ctx=await br.newContext({viewport:{width:844,height:390}}),p=await ctx.newPage();await p.goto(url);await p.waitForFunction(()=>typeof deserialize==='function');
+   await p.evaluate(txt=>{if(!deserialize(txt))throw Error('load');enterGame(true);UI.closeModal();UI.setSpeed(0);G.autoSave=false;
+    for(let i=0;i<56;i++){G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();}
+    const f=window.monthTick;window.live={months:[],frames:[],long:[],on:false};
+    window.monthTick=function(){const t=performance.now();try{return f.apply(this,arguments);}finally{if(live.on)live.months.push(performance.now()-t);}};
+    const raf=t=>{if(live.on&&live.last)live.frames.push(t-live.last);live.last=t;requestAnimationFrame(raf);};requestAnimationFrame(raf);
+    new PerformanceObserver(l=>{if(live.on)for(const x of l.getEntries())live.long.push(x.duration);}).observe({entryTypes:['longtask']});},txt);
+   await p.waitForTimeout(1200);await p.evaluate(()=>{live.on=true;live.startDay=G.day;UI.setSpeed(4);});const t=Date.now();
+   while(Date.now()-t<18000){await p.waitForTimeout(400);if(await p.evaluate(()=>{if(!$('modal').classList.contains('hidden'))UI.closeModal();if(G.speed!==4)UI.setSpeed(4);return live.months.length>=3||G.over;}))break;}
+   result.live=await p.evaluate(()=>{live.on=false;return {...live,endDay:G.day,heap:performance.memory.usedJSHeapSize};});await ctx.close();}
   for(const arm of ['base','pilot','pilot','base']){
    const ctx=await br.newContext({viewport:{width:844,height:390}}),p=await ctx.newPage();await p.goto(url);await p.waitForFunction(()=>typeof deserialize==='function');
    await p.evaluate(({txt,arm})=>{if(!deserialize(txt))throw Error('load');G.autoSave=false;G.speed=0;

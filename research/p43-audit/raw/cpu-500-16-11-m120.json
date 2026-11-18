@@ -1,0 +1,311 @@
+{
+ "root": "Star",
+ "save": "500-16-11-m120.save",
+ "months": 6,
+ "wallMs": 81791,
+ "msPerMonth": 13632,
+ "topSelf": [
+  {
+   "fn": "explorationContext main.js:4548",
+   "ms": 18699.2,
+   "pct": 22.9
+  },
+  {
+   "fn": "influenceAt diplomacy.js:41",
+   "ms": 14708.6,
+   "pct": 18
+  },
+  {
+   "fn": "reinforcementThreats main.js:5749",
+   "ms": 9277,
+   "pct": 11.3
+  },
+  {
+   "fn": "node main.js:3598",
+   "ms": 6924.3,
+   "pct": 8.5
+  },
+  {
+   "fn": "autoExploreTick main.js:4663",
+   "ms": 4271.1,
+   "pct": 5.2
+  },
+  {
+   "fn": "isSupplyNode main.js:3541",
+   "ms": 3667.9,
+   "pct": 4.5
+  },
+  {
+   "fn": "(garbage collector) :0",
+   "ms": 2277.4,
+   "pct": 2.8
+  },
+  {
+   "fn": "empireIncome economy.js:364",
+   "ms": 1833.9,
+   "pct": 2.2
+  },
+  {
+   "fn": "txCaptureGraph diplomacy.js:2176",
+   "ms": 1090.2,
+   "pct": 1.3
+  },
+  {
+   "fn": "stepFleets main.js:4409",
+   "ms": 1077.7,
+   "pct": 1.3
+  },
+  {
+   "fn": "colonyOutput economy.js:47",
+   "ms": 938,
+   "pct": 1.1
+  },
+  {
+   "fn": "supplyDistance main.js:3596",
+   "ms": 891.3,
+   "pct": 1.1
+  },
+  {
+   "fn": "claimOf diplomacy.js:62",
+   "ms": 775.3,
+   "pct": 0.9
+  },
+  {
+   "fn": "EconomyLedger.observe.sy.system economic-ledger.js:59",
+   "ms": 652.4,
+   "pct": 0.8
+  },
+  {
+   "fn": "tradeLinks economy.js:234",
+   "ms": 650.2,
+   "pct": 0.8
+  },
+  {
+   "fn": "aiBuildingDelta ai.js:194",
+   "ms": 609.9,
+   "pct": 0.7
+  },
+  {
+   "fn": "reinforcementRoutes main.js:5783",
+   "ms": 607.9,
+   "pct": 0.7
+  },
+  {
+   "fn": "structTick main.js:5516",
+   "ms": 563,
+   "pct": 0.7
+  },
+  {
+   "fn": "explorationGraph main.js:4607",
+   "ms": 517.9,
+   "pct": 0.6
+  },
+  {
+   "fn": "tick construction.js:92",
+   "ms": 509.4,
+   "pct": 0.6
+  },
+  {
+   "fn": "fleetUpkeep main.js:3707",
+   "ms": 483.1,
+   "pct": 0.6
+  },
+  {
+   "fn": "known main.js:5751",
+   "ms": 472.2,
+   "pct": 0.6
+  },
+  {
+   "fn": "aiView ai.js:26",
+   "ms": 417.7,
+   "pct": 0.5
+  },
+  {
+   "fn": "aiKnownRoute ai.js:86",
+   "ms": 416.3,
+   "pct": 0.5
+  },
+  {
+   "fn": "arrive main.js:4749",
+   "ms": 348.5,
+   "pct": 0.4
+  }
+ ],
+ "topTotal": [
+  {
+   "fn": "(anon) profile.cjs:11",
+   "ms": 79604.7,
+   "pct": 97.3
+  },
+  {
+   "fn": "run runtime.js:112",
+   "ms": 79406.6,
+   "pct": 97.1
+  },
+  {
+   "fn": "(anon) evalmachine.<anonymous>:0",
+   "ms": 79406.3,
+   "pct": 97.1
+  },
+  {
+   "fn": "obj.<computed> economic-ledger.js:59",
+   "ms": 43807.5,
+   "pct": 53.6
+  },
+  {
+   "fn": "observe economic-ledger.js:22",
+   "ms": 43731.7,
+   "pct": 53.5
+  },
+  {
+   "fn": "EconomyLedger.observe.sy.system economic-ledger.js:59",
+   "ms": 43593.1,
+   "pct": 53.3
+  },
+  {
+   "fn": "explorationContext main.js:4548",
+   "ms": 39927.7,
+   "pct": 48.8
+  },
+  {
+   "fn": "autoExploreTick main.js:4663",
+   "ms": 35579.4,
+   "pct": 43.5
+  },
+  {
+   "fn": "monthTick economic-ledger.js:139",
+   "ms": 28879.6,
+   "pct": 35.3
+  },
+  {
+   "fn": "monthTick main.js:9849",
+   "ms": 28876.5,
+   "pct": 35.3
+  },
+  {
+   "fn": "aiTurn ai.js:1616",
+   "ms": 21592.8,
+   "pct": 26.4
+  },
+  {
+   "fn": "(anon) ai.js:187",
+   "ms": 19301.1,
+   "pct": 23.6
+  },
+  {
+   "fn": "reinforcementThreats main.js:5749",
+   "ms": 18291.4,
+   "pct": 22.4
+  },
+  {
+   "fn": "empireIncome economy.js:364",
+   "ms": 18096.9,
+   "pct": 22.1
+  },
+  {
+   "fn": "aiBuildingDelta ai.js:194",
+   "ms": 17360.6,
+   "pct": 21.2
+  },
+  {
+   "fn": "aiEconomyPlan ai.js:244",
+   "ms": 16677.9,
+   "pct": 20.4
+  },
+  {
+   "fn": "claimOf diplomacy.js:62",
+   "ms": 16024.5,
+   "pct": 19.6
+  },
+  {
+   "fn": "fleetSupply main.js:3635",
+   "ms": 15359.6,
+   "pct": 18.8
+  },
+  {
+   "fn": "influenceAt diplomacy.js:41",
+   "ms": 15249.3,
+   "pct": 18.6
+  },
+  {
+   "fn": "supplyDistance main.js:3596",
+   "ms": 15107.4,
+   "pct": 18.5
+  },
+  {
+   "fn": "node main.js:3598",
+   "ms": 14206,
+   "pct": 17.4
+  },
+  {
+   "fn": "dailyTick main.js:4819",
+   "ms": 13488.5,
+   "pct": 16.5
+  },
+  {
+   "fn": "aiEconomicOrder ai.js:451",
+   "ms": 9140.5,
+   "pct": 11.2
+  },
+  {
+   "fn": "stepFleets main.js:4409",
+   "ms": 8315.1,
+   "pct": 10.2
+  },
+  {
+   "fn": "isSupplyNode main.js:3541",
+   "ms": 7283.8,
+   "pct": 8.9
+  },
+  {
+   "fn": "fleetUpkeep main.js:3707",
+   "ms": 6960.2,
+   "pct": 8.5
+  },
+  {
+   "fn": "fleetAlloyUpkeep main.js:3697",
+   "ms": 6498.2,
+   "pct": 7.9
+  },
+  {
+   "fn": "diploTick diplomacy.js:5887",
+   "ms": 5594.2,
+   "pct": 6.8
+  },
+  {
+   "fn": "aiColonyForecast ai.js:389",
+   "ms": 4998.8,
+   "pct": 6.1
+  },
+  {
+   "fn": "aiColonyPreparation ai.js:425",
+   "ms": 4558.2,
+   "pct": 5.6
+  },
+  {
+   "fn": "runModule95E main.js:3277",
+   "ms": 4022.1,
+   "pct": 4.9
+  },
+  {
+   "fn": "(anon) main.js:4823",
+   "ms": 4007.2,
+   "pct": 4.9
+  },
+  {
+   "fn": "tick construction.js:92",
+   "ms": 4002.5,
+   "pct": 4.9
+  },
+  {
+   "fn": "aiStrategicBuildingNeeds ai.js:622",
+   "ms": 3564.2,
+   "pct": 4.4
+  },
+  {
+   "fn": "aiShipProduction ai.js:1434",
+   "ms": 2891.8,
+   "pct": 3.5
+  }
+ ]
+}

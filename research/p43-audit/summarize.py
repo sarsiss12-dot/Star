@@ -55,11 +55,11 @@ def ai(r):
       if x['k']=='objective-selected':active[x['e']]=x['d']
       if x['k']=='milestone-complete' and x['e'] in active:times.append((x['d']-active[x['e']])/30)
     warlegs=[x for x in legs if x['war']]
-    return dict(months=len(months)-1,over=months[-1]['over'],ck={j:ck(m) for j,m in enumerate(months) if j in (0,3,120,180,240)},critical=crit,zero=zero,episodes=episodes,recovery=stats(x['duration'] for x in episodes if x['recovered']),
+    return dict(months=len(months)-1,over=months[-1]['over'],ck={j:ck(m) for j,m in enumerate(months) if j in (0,3,120,180,240,len(months)-1)},critical=crit,zero=zero,episodes=episodes,recovery=stats(x['duration'] for x in episodes if x['recovered']),
       actions=C.Counter(x['k'] for x in ev),milestone=stats(times),paid=paid,cycles=cycles,netMinerals=sum(x['paid'].get('min',0)-x['refund'].get('min',0) for x in cycles),lostDays=sum(x['done']-x['removed'] for x in cycles),
       ends=C.Counter(x['end'] for x in legs),arrival=stats(x['d']-x['start'] for x in legs if x['end']=='arrived'),warEnds=C.Counter(x['end'] for x in warlegs),warArrival=stats(x['d']-x['start'] for x in warlegs if x['end']=='arrived'),
       disbands=[x for x in ev if x['k']=='disband'],deals=C.Counter(tupleString(x) for x in ev if x['k']=='deal'),maxFed=max((len(f[2]) for m in months for f in m['feds']),default=0),siege=sum(len(m['siege']) for m in months),
-      fronts=[{k:v for k,v in f.items() if k in ('id','sides','started','ended','endReason','occupation','goal')} for f in r['fronts']])
+      fronts=[{k:v for k,v in f.items() if k in ('id','sides','opened','ended','endReason','occupation','goals','metrics')} for f in r['fronts']])
 def tupleString(x):
     return '/'.join(x['g'])+' → '+'/'.join(x['w'])+' '+str(x['applied'])
 def browser(r):
@@ -80,6 +80,7 @@ d={'worlds':{},'browser':{},'pilot':{}}
 for f in sorted(raw.iterdir()):
     if f.name[0].isdigit() and f.suffix=='.gz':d['worlds'][f.name.split('.')[0]]=ai(get(f))
     if f.name.startswith(('mp-','sp-')) and f.suffix=='.json':d['browser'][f.stem]=browser(get(f))
-    if f.name.startswith('pilot-'):
+    if f.name.startswith(('pilot-','chromium-')):
       r=get(f);d['pilot'][f.stem]={a:stats(x['ms'] for run in r['runs'] if run['arm']==a for x in run['rows']) for a in ('base','pilot')}
+      d['pilot'][f.stem]['equal']=all((x['day'],x['sha'],x['rng'])==(r['runs'][0]['rows'][i]['day'],r['runs'][0]['rows'][i]['sha'],r['runs'][0]['rows'][i]['rng']) for run in r['runs'] for i,x in enumerate(run['rows']))
 (raw/'summary.json').write_text(json.dumps(d,ensure_ascii=False,indent=1)+'\n')
