@@ -1,0 +1,85 @@
+{
+  "cases": {
+    "p40": {
+      "cache": "stars-v96h10p40",
+      "empire": 1,
+      "oldOrder": {
+        "accept": "ok",
+        "before": 0,
+        "host": 1,
+        "guest": 1,
+        "paid": {
+          "min": 0,
+          "ala": 32
+        },
+        "ackMs": 234,
+        "guestMs": 458
+      }
+    },
+    "invite": {
+      "elapsedMs": 34202,
+      "sockets": 2,
+      "warningBefore": true,
+      "warningAfter": true,
+      "socket": 1,
+      "hostOnline": false,
+      "empire": null,
+      "hasCode": true,
+      "sameSaveAndEmpire": true
+    },
+    "manual": {
+      "elapsedMs": 33894,
+      "sockets": 2,
+      "warningBefore": true,
+      "warningAfter": true,
+      "socket": 1,
+      "hostOnline": false,
+      "empire": null,
+      "hasCode": false,
+      "sameSaveAndEmpire": true
+    },
+    "reconnect": {
+      "newSocket": true,
+      "sameSaveAndEmpire": true
+    },
+    "mixed": {
+      "staleReplies": 1,
+      "sri": true,
+      "offlineRetry": true,
+      "sameSaveAndEmpire": true,
+      "firstOrder": {
+        "accept": "ok",
+        "before": 1,
+        "host": 2,
+        "guest": 2,
+        "paid": {
+          "min": 0,
+          "ala": 32
+        },
+        "ackMs": 237,
+        "guestMs": 633
+      }
+    }
+  },
+  "failures": [
+    "invite: sürüm reddinden sonra eski sayfa yeniden bağlandı veya soket açık kaldı",
+    "manual: sürüm reddinden sonra eski sayfa yeniden bağlandı veya soket açık kaldı"
+  ],
+  "version": {
+    "mp": "MP.8.9b41",
+    "build": "96h10p42",
+    "runtime": "30752f1e4eb3",
+    "release": "47f43b78c5de2d126f13625ff226c3b069718c8f317a96fd40b08f4d7ca74d96",
+    "files": {
+      "main.js": "7262237b5d9c",
+      "mp-core.js": "df22543f42bd",
+      "relay.js": "4338c2d835f6",
+      "mp1-host.js": "f5dc296c1a3d",
+      "join.js": "afb2e1aaee8a",
+      "mirror.js": "56019070fa24",
+      "guest-stars.js": "516688ec1005",
+      "mp71-dip.js": "932c92d12cbc",
+      "mp7-setup.js": "a7391d21552c"
+    }
+  }
+}

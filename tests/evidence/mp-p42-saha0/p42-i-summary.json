@@ -1,0 +1,76 @@
+{
+  "results": [
+    {
+      "name": "I0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 16 AI, s500, seed 404; misafir gerçek STARS arayüzünde",
+      "status": "PASS"
+    },
+    {
+      "name": "I1 uzun oturum 15 dk (500 sistem / 16 AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası 20 sn'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür",
+      "status": "FAIL"
+    },
+    {
+      "name": "I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)",
+      "status": "FAIL"
+    },
+    {
+      "name": "I3 sensör paylaşımı tek yön: B → C; C, B'nin sensör sistemlerini görür, B C'ninkileri görmez, host'un kendi görüşü değişmez",
+      "status": "PASS"
+    }
+  ],
+  "world": {
+    "seed": 404,
+    "size": "s500",
+    "systems": 500,
+    "states": 19
+  },
+  "visual": {
+    "B": {
+      "fleets": 103,
+      "seen": 74,
+      "seenMiss": 0,
+      "seenExtra": 0,
+      "hab": 27,
+      "habDiff": [],
+      "ownDiff": [],
+      "diff": {
+        "route": [],
+        "hp": [],
+        "combat": []
+      }
+    },
+    "C": {
+      "fleets": 103,
+      "seen": 85,
+      "seenMiss": 0,
+      "seenExtra": 1,
+      "hab": 11,
+      "habDiff": [
+        [
+          71,
+          1,
+          0
+        ]
+      ],
+      "ownDiff": [],
+      "diff": {
+        "route": [],
+        "hp": [],
+        "combat": []
+      }
+    }
+  },
+  "sensor": {
+    "deal": {
+      "ok": true,
+      "share": true
+    },
+    "gained": 27,
+    "leakFrom3rd": 0,
+    "cMirrorEqHost": true,
+    "bChanged": false,
+    "bGetsC": 0,
+    "hostBefore": 5,
+    "hostAfter": 5
+  },
+  "maxLagDays": 5.7
+}

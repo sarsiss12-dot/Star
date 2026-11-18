@@ -1,0 +1,23 @@
+{
+  "routes": [
+    {
+      "owner": 0,
+      "fleet": 2,
+      "to": 11,
+      "name": "Xantar",
+      "type": "kalinti"
+    },
+    {
+      "owner": 1,
+      "fleet": 5,
+      "to": 12,
+      "name": "Athdor",
+      "type": "sinyal"
+    }
+  ],
+  "day": 131,
+  "guestPending": [
+    "event:e4:"
+  ],
+  "conclusion": "Belirlenen rotalardan iki doğal anomali koşulunun sağlandığı ölçülemedi. Görevin varış ve tarama aşamaları bu koşuda ayrı kaydedilmedi."
+}

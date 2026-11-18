@@ -1,0 +1,39 @@
+{
+  "results": [
+    {
+      "name": "O0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+      "status": "PASS",
+      "ms": 11939
+    },
+    {
+      "name": "O7 misafirde açık pencere: ayna bekletilir, hız bildirimi gelir; misafir nedeni görür (sıkışık çubukta da) ve pencere kapanınca yetişir",
+      "status": "PASS",
+      "ms": 14393
+    }
+  ],
+  "case": {
+    "s0": {
+      "hd": 1.68,
+      "gd": 1.68
+    },
+    "mid": {
+      "hd": 19.71,
+      "gd": 1.68,
+      "note": "Pencere açık — dünya, kapanınca güncellenir",
+      "held": 33,
+      "speedMsgs": 2
+    },
+    "s1": {
+      "hd": 39.45,
+      "gd": 39.45
+    },
+    "vis": {
+      "txt": "ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸ 2×",
+      "top": true
+    },
+    "visSpeed": {
+      "txt": "Kızıl Muhafız hızı 3× yaptı · Pencere açık — dünya, kapanınca güncellenir",
+      "top": true
+    }
+  }
+}
