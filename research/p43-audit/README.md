@@ -62,3 +62,5 @@ python3 research/p43-audit/summarize.py
 Pilot yalnız deney sürecinde iki keşif/takviye yardımcısının çağrısı boyunca etkin olur. Her kol aynı girdiden başlar. Her ölçülen ayın gün, RNG ve tam Save8 SHA-256 değerleri `runs[].rows[]` içinde durur. Kontrollere ve adaya ait zamanlar ilk ısınma ayından sonradır. Chromium çıktılarındaki `live` alanı ise p43 kontrolünün normal oyun döngüsünde, en yüksek oyun hızında ayrı sayfada alınmıştır.
 
 Makineler arasında aynı duvar süresi beklenmez. Oyun sonu, karar dizileri, ödemeler ve aynı ortamdaki kol çiftlerinin Save8/RNG sonuçları ayrı doğrulanabilir. Özet tabloların girdisi [summary.json](raw/summary.json).
+
+Dosya bütünlüğünü doğrulamak için araştırma dizininde `sha256sum -c SHA256SUMS` çalıştırılabilir. Liste ham ölçümleri, sıkıştırılmış 120. ay tekrar girdisini ve ilk geç oyun koşusunun toplu tutanağını kapsar.

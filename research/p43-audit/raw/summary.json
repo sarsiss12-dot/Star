@@ -5238,7 +5238,7 @@
    ]
   },
   "500-16-11": {
-   "months": 120,
+   "months": 240,
    "over": false,
    "ck": {
     "0": {
@@ -5290,10 +5290,50 @@
       2
      ],
      "lords": 0
+    },
+    "180": {
+     "liveAI": 16,
+     "ships": 1064,
+     "colonies": 192,
+     "tech": 295,
+     "incomes": {
+      "ene": 14078.85,
+      "min": 7705.23,
+      "ala": 1361.71,
+      "tuk": 540.88,
+      "yiy": 1316.27
+     },
+     "feds": [
+      2,
+      4,
+      2,
+      2
+     ],
+     "lords": 0
+    },
+    "240": {
+     "liveAI": 16,
+     "ships": 1521,
+     "colonies": 272,
+     "tech": 444,
+     "incomes": {
+      "ene": 31201.15,
+      "min": 15576.02,
+      "ala": 3945.84,
+      "tuk": 599.8,
+      "yiy": 2085.02
+     },
+     "feds": [
+      6,
+      4,
+      2,
+      2
+     ],
+     "lords": 0
     }
    },
-   "critical": 2,
-   "zero": 0,
+   "critical": 6,
+   "zero": 2,
    "episodes": [
     {
      "actor": 2,
@@ -5303,49 +5343,77 @@
      "recovered": true,
      "lead": 0,
      "producer": 0
+    },
+    {
+     "actor": 9,
+     "res": "ala",
+     "start": 226,
+     "duration": 2,
+     "recovered": true,
+     "lead": 0,
+     "producer": 0
+    },
+    {
+     "actor": 9,
+     "res": "ala",
+     "start": 230,
+     "duration": 1,
+     "recovered": true,
+     "lead": 0,
+     "producer": 0
+    },
+    {
+     "actor": 11,
+     "res": "ala",
+     "start": 166,
+     "duration": 1,
+     "recovered": true,
+     "lead": 0,
+     "producer": 0
     }
    ],
    "recovery": {
-    "n": 1,
-    "p50": 2,
+    "n": 4,
+    "p50": 1.5,
     "p95": 2,
     "max": 2
    },
    "actions": {
-    "ship-paid": 1325,
+    "ship-paid": 2598,
     "disband": 19,
-    "building-paid": 840,
-    "objective-selected": 69,
-    "building-replacement": 162,
-    "fleet-order": 645,
-    "preparation-stage": 84,
-    "removed": 160,
-    "leg": 572,
-    "built": 754,
-    "leg-end": 564,
-    "milestone-complete": 46,
-    "deal": 90,
-    "research-completed": 172,
-    "diplomatic-proposal": 3,
-    "plan-reassessed": 3,
-    "internal-crisis": 4,
-    "war-started": 1,
-    "peace": 1
+    "building-paid": 4196,
+    "objective-selected": 87,
+    "building-replacement": 1175,
+    "fleet-order": 2139,
+    "preparation-stage": 122,
+    "removed": 1143,
+    "leg": 1332,
+    "built": 4026,
+    "leg-end": 1323,
+    "milestone-complete": 57,
+    "deal": 291,
+    "research-completed": 444,
+    "diplomatic-proposal": 5,
+    "plan-reassessed": 4,
+    "internal-crisis": 11,
+    "war-started": 2,
+    "peace": 6,
+    "campaign-reassessed": 1
    },
    "milestone": {
-    "n": 46,
+    "n": 57,
     "p50": 6.0,
-    "p95": 24.0,
+    "p95": 27.0,
     "max": 33.0
    },
    "paid": {
     "building-paid": {
-     "min": 140188,
-     "ala": 2787
+     "min": 768224,
+     "ala": 26771
     },
     "ship-paid": {
-     "ala": 48481,
-     "min": 17643
+     "ala": 133011,
+     "min": 61875
     }
    },
    "cycles": [
@@ -5382,6 +5450,70 @@
      }
     },
     {
+     "actor": 6,
+     "system": 293,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 3917,
+     "buy": 3930,
+     "done": 4048,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 6,
+     "system": 293,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 4127,
+     "buy": 4140,
+     "done": 4258,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 6,
+     "system": 293,
+     "planet": 0,
+     "key": "lab",
+     "wanted": "maden",
+     "removed": 6418,
+     "buy": 6420,
+     "done": 6640,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 6,
+     "system": 293,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6784,
+     "buy": 6810,
+     "done": 6971,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
      "actor": 1,
      "system": 25,
      "planet": 1,
@@ -5398,6 +5530,38 @@
      }
     },
     {
+     "actor": 1,
+     "system": 25,
+     "planet": 1,
+     "key": "lab",
+     "wanted": "liman",
+     "removed": 4534,
+     "buy": 4560,
+     "done": 4644,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 1,
+     "system": 25,
+     "planet": 1,
+     "key": "lab",
+     "wanted": "dokum",
+     "removed": 4804,
+     "buy": 4830,
+     "done": 4914,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
      "actor": 2,
      "system": 136,
      "planet": 0,
@@ -5406,6 +5570,166 @@
      "removed": 587,
      "buy": 600,
      "done": 718,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 2,
+     "system": 136,
+     "planet": 0,
+     "key": "liman",
+     "wanted": "lab",
+     "removed": 3612,
+     "buy": 3690,
+     "done": 3796,
+     "paid": {
+      "min": 180
+     },
+     "refund": {
+      "min": 63
+     }
+    },
+    {
+     "actor": 2,
+     "system": 136,
+     "planet": 0,
+     "key": "liman",
+     "wanted": "fabrika",
+     "removed": 5093,
+     "buy": 5100,
+     "done": 5232,
+     "paid": {
+      "min": 180
+     },
+     "refund": {
+      "min": 63
+     }
+    },
+    {
+     "actor": 2,
+     "system": 136,
+     "planet": 0,
+     "key": "liman",
+     "wanted": "fabrika",
+     "removed": 5612,
+     "buy": 5640,
+     "done": 5721,
+     "paid": {
+      "min": 180
+     },
+     "refund": {
+      "min": 63
+     }
+    },
+    {
+     "actor": 2,
+     "system": 136,
+     "planet": 0,
+     "key": "liman",
+     "wanted": "biyom_b",
+     "removed": 5882,
+     "buy": 5910,
+     "done": 5991,
+     "paid": {
+      "min": 180
+     },
+     "refund": {
+      "min": 63
+     }
+    },
+    {
+     "actor": 3,
+     "system": 211,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 4118,
+     "buy": 4140,
+     "done": 4235,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 3,
+     "system": 211,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 4328,
+     "buy": 4350,
+     "done": 4445,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 3,
+     "system": 211,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5408,
+     "buy": 5430,
+     "done": 5525,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 3,
+     "system": 211,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5588,
+     "buy": 5610,
+     "done": 5705,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 3,
+     "system": 211,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5828,
+     "buy": 5850,
+     "done": 5945,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 3,
+     "system": 211,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6068,
+     "buy": 6090,
+     "done": 6185,
      "paid": {
       "min": 210
      },
@@ -5462,6 +5786,70 @@
      }
     },
     {
+     "actor": 4,
+     "system": 268,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 3497,
+     "buy": 3510,
+     "done": 3628,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 243,
+     "planet": 0,
+     "key": "ciftlik",
+     "wanted": "maden",
+     "removed": 6564,
+     "buy": 6570,
+     "done": 6629,
+     "paid": {
+      "min": 110
+     },
+     "refund": {
+      "min": 39
+     }
+    },
+    {
+     "actor": 5,
+     "system": 243,
+     "planet": 0,
+     "key": "ciftlik",
+     "wanted": "maden",
+     "removed": 6654,
+     "buy": 6660,
+     "done": 6719,
+     "paid": {
+      "min": 110
+     },
+     "refund": {
+      "min": 39
+     }
+    },
+    {
+     "actor": 5,
+     "system": 243,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6805,
+     "buy": 6810,
+     "done": 6872,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
      "actor": 8,
      "system": 435,
      "planet": 0,
@@ -5494,6 +5882,54 @@
      }
     },
     {
+     "actor": 8,
+     "system": 435,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 4772,
+     "buy": 4800,
+     "done": 4880,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 9,
+     "system": 315,
+     "planet": 0,
+     "key": "liman",
+     "wanted": "dokum",
+     "removed": 5982,
+     "buy": 6000,
+     "done": 6106,
+     "paid": {
+      "min": 180
+     },
+     "refund": {
+      "min": 63
+     }
+    },
+    {
+     "actor": 9,
+     "system": 315,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 7037,
+     "buy": 7050,
+     "done": 7168,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
      "actor": 10,
      "system": 398,
      "planet": 0,
@@ -5502,6 +5938,38 @@
      "removed": 1723,
      "buy": 1740,
      "done": 1847,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 398,
+     "planet": 0,
+     "key": "ciftlik",
+     "wanted": "iktisat_b",
+     "removed": 6832,
+     "buy": 6840,
+     "done": 6894,
+     "paid": {
+      "min": 110
+     },
+     "refund": {
+      "min": 39
+     }
+    },
+    {
+     "actor": 11,
+     "system": 266,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 5948,
+     "buy": 5970,
+     "done": 6065,
      "paid": {
       "min": 210
      },
@@ -5526,6 +5994,38 @@
      }
     },
     {
+     "actor": 12,
+     "system": 113,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 3763,
+     "buy": 3780,
+     "done": 3887,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 410,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 4292,
+     "buy": 4320,
+     "done": 4400,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
      "actor": 14,
      "system": 284,
      "planet": 2,
@@ -5541,6 +6041,102 @@
      "refund": {
       "min": 81,
       "ala": 25
+     }
+    },
+    {
+     "actor": 14,
+     "system": 284,
+     "planet": 2,
+     "key": "liman",
+     "wanted": "lab",
+     "removed": 4182,
+     "buy": 4200,
+     "done": 4306,
+     "paid": {
+      "min": 180
+     },
+     "refund": {
+      "min": 63
+     }
+    },
+    {
+     "actor": 14,
+     "system": 284,
+     "planet": 2,
+     "key": "liman",
+     "wanted": "lab",
+     "removed": 5082,
+     "buy": 5100,
+     "done": 5206,
+     "paid": {
+      "min": 180
+     },
+     "refund": {
+      "min": 63
+     }
+    },
+    {
+     "actor": 14,
+     "system": 284,
+     "planet": 2,
+     "key": "lab",
+     "wanted": "fabrika",
+     "removed": 5354,
+     "buy": 5370,
+     "done": 5480,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 14,
+     "system": 284,
+     "planet": 2,
+     "key": "liman",
+     "wanted": "lab",
+     "removed": 5772,
+     "buy": 5790,
+     "done": 5896,
+     "paid": {
+      "min": 180
+     },
+     "refund": {
+      "min": 63
+     }
+    },
+    {
+     "actor": 14,
+     "system": 284,
+     "planet": 2,
+     "key": "liman",
+     "wanted": "lab",
+     "removed": 6012,
+     "buy": 6030,
+     "done": 6136,
+     "paid": {
+      "min": 180
+     },
+     "refund": {
+      "min": 63
+     }
+    },
+    {
+     "actor": 14,
+     "system": 284,
+     "planet": 2,
+     "key": "liman",
+     "wanted": "lab",
+     "removed": 6852,
+     "buy": 6870,
+     "done": 6976,
+     "paid": {
+      "min": 180
+     },
+     "refund": {
+      "min": 63
      }
     },
     {
@@ -5568,6 +6164,70 @@
      "removed": 450,
      "buy": 450,
      "done": 526,
+     "paid": {
+      "min": 110
+     },
+     "refund": {
+      "min": 39
+     }
+    },
+    {
+     "actor": 16,
+     "system": 262,
+     "planet": 0,
+     "key": "liman",
+     "wanted": "maden",
+     "removed": 5462,
+     "buy": 5490,
+     "done": 5571,
+     "paid": {
+      "min": 180
+     },
+     "refund": {
+      "min": 63
+     }
+    },
+    {
+     "actor": 16,
+     "system": 262,
+     "planet": 0,
+     "key": "liman",
+     "wanted": "maden",
+     "removed": 5942,
+     "buy": 5970,
+     "done": 6051,
+     "paid": {
+      "min": 180
+     },
+     "refund": {
+      "min": 63
+     }
+    },
+    {
+     "actor": 16,
+     "system": 262,
+     "planet": 0,
+     "key": "ciftlik",
+     "wanted": "birlik_k",
+     "removed": 6594,
+     "buy": 6600,
+     "done": 6659,
+     "paid": {
+      "min": 110
+     },
+     "refund": {
+      "min": 39
+     }
+    },
+    {
+     "actor": 16,
+     "system": 262,
+     "planet": 0,
+     "key": "ciftlik",
+     "wanted": "birlik_k",
+     "removed": 7104,
+     "buy": 7110,
+     "done": 7169,
      "paid": {
       "min": 110
      },
@@ -5608,6 +6268,22 @@
      }
     },
     {
+     "actor": 8,
+     "system": 435,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "biyom_b",
+     "removed": 4217,
+     "buy": 4230,
+     "done": 4348,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
      "actor": 6,
      "system": 347,
      "planet": 2,
@@ -5637,6 +6313,86 @@
      },
      "refund": {
       "min": 67
+     }
+    },
+    {
+     "actor": 6,
+     "system": 347,
+     "planet": 2,
+     "key": "lab",
+     "wanted": "dokum",
+     "removed": 4258,
+     "buy": 4260,
+     "done": 4480,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 6,
+     "system": 347,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5074,
+     "buy": 5100,
+     "done": 5336,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 6,
+     "system": 347,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5507,
+     "buy": 5520,
+     "done": 5638,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 6,
+     "system": 347,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6124,
+     "buy": 6150,
+     "done": 6386,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 6,
+     "system": 347,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6364,
+     "buy": 6390,
+     "done": 6626,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
      }
     },
     {
@@ -5688,6 +6444,38 @@
      }
     },
     {
+     "actor": 4,
+     "system": 59,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 3497,
+     "buy": 3510,
+     "done": 3628,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 4,
+     "system": 59,
+     "planet": 2,
+     "key": "lab",
+     "wanted": "fabrika",
+     "removed": 6814,
+     "buy": 6900,
+     "done": 6984,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
      "actor": 12,
      "system": 40,
      "planet": 0,
@@ -5720,6 +6508,70 @@
      }
     },
     {
+     "actor": 12,
+     "system": 40,
+     "planet": 0,
+     "key": "lab",
+     "wanted": "dokum",
+     "removed": 3610,
+     "buy": 3660,
+     "done": 3760,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 12,
+     "system": 40,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "sinaps_m",
+     "removed": 5659,
+     "buy": 5670,
+     "done": 5867,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 12,
+     "system": 40,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "ciftlik",
+     "removed": 6379,
+     "buy": 6390,
+     "done": 6587,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 12,
+     "system": 40,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "sinaps_m",
+     "removed": 6739,
+     "buy": 6750,
+     "done": 6947,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
      "actor": 16,
      "system": 306,
      "planet": 0,
@@ -5728,6 +6580,262 @@
      "removed": 2447,
      "buy": 2460,
      "done": 2578,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 306,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "liman",
+     "removed": 4592,
+     "buy": 4620,
+     "done": 4700,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 16,
+     "system": 306,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 5207,
+     "buy": 5220,
+     "done": 5338,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 306,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 5387,
+     "buy": 5400,
+     "done": 5491,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 306,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 5556,
+     "buy": 5580,
+     "done": 5671,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 306,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 5856,
+     "buy": 5880,
+     "done": 5971,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 306,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6036,
+     "buy": 6060,
+     "done": 6151,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 306,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6486,
+     "buy": 6510,
+     "done": 6601,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 306,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6846,
+     "buy": 6870,
+     "done": 6961,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 306,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 7026,
+     "buy": 7050,
+     "done": 7141,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 2,
+     "system": 443,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "biyom_b",
+     "removed": 4589,
+     "buy": 4590,
+     "done": 4738,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 2,
+     "system": 443,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 4799,
+     "buy": 4800,
+     "done": 4948,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 2,
+     "system": 443,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 5189,
+     "buy": 5190,
+     "done": 5338,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 2,
+     "system": 443,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 5376,
+     "buy": 5400,
+     "done": 5491,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 2,
+     "system": 443,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 5556,
+     "buy": 5580,
+     "done": 5671,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 2,
+     "system": 443,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "biyom_b",
+     "removed": 5886,
+     "buy": 5910,
+     "done": 6001,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 2,
+     "system": 443,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "iktisat_b",
+     "removed": 6959,
+     "buy": 6960,
+     "done": 7108,
      "paid": {
       "min": 210
      },
@@ -5749,6 +6857,118 @@
      },
      "refund": {
       "min": 67
+     }
+    },
+    {
+     "actor": 14,
+     "system": 403,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 4157,
+     "buy": 4170,
+     "done": 4288,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 403,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "kale",
+     "removed": 5477,
+     "buy": 5490,
+     "done": 5608,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 403,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5927,
+     "buy": 5940,
+     "done": 6058,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 403,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6107,
+     "buy": 6120,
+     "done": 6238,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 403,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6287,
+     "buy": 6300,
+     "done": 6418,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 403,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6557,
+     "buy": 6570,
+     "done": 6688,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 403,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6797,
+     "buy": 6810,
+     "done": 6928,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
      }
     },
     {
@@ -5784,6 +7004,22 @@
      }
     },
     {
+     "actor": 11,
+     "system": 92,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 6788,
+     "buy": 6810,
+     "done": 6905,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
      "actor": 13,
      "system": 152,
      "planet": 0,
@@ -5797,6 +7033,136 @@
      },
      "refund": {
       "min": 67
+     }
+    },
+    {
+     "actor": 13,
+     "system": 152,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6516,
+     "buy": 6540,
+     "done": 6631,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 152,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6756,
+     "buy": 6780,
+     "done": 6871,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 152,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6966,
+     "buy": 6990,
+     "done": 7081,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 9,
+     "system": 138,
+     "planet": 0,
+     "key": "kale",
+     "wanted": "dokum",
+     "removed": 6076,
+     "buy": 6090,
+     "done": 6281,
+     "paid": {
+      "min": 138,
+      "ala": 42
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 14,
+     "system": 238,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5837,
+     "buy": 5850,
+     "done": 5968,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 238,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6197,
+     "buy": 6210,
+     "done": 6328,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 238,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6557,
+     "buy": 6570,
+     "done": 6688,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 238,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6767,
+     "buy": 6780,
+     "done": 6898,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
      }
     },
     {
@@ -5824,6 +7190,150 @@
      "removed": 3426,
      "buy": 3450,
      "done": 3541,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 91,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 3786,
+     "buy": 3810,
+     "done": 3901,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 91,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 4776,
+     "buy": 4800,
+     "done": 4891,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 91,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 5136,
+     "buy": 5160,
+     "done": 5251,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 91,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 5646,
+     "buy": 5670,
+     "done": 5761,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 91,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5826,
+     "buy": 5850,
+     "done": 5941,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 91,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 6036,
+     "buy": 6060,
+     "done": 6151,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 91,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6276,
+     "buy": 6300,
+     "done": 6391,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 91,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6456,
+     "buy": 6480,
+     "done": 6571,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 91,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6906,
+     "buy": 6930,
+     "done": 6998,
      "paid": {
       "min": 210
      },
@@ -5880,6 +7390,86 @@
      }
     },
     {
+     "actor": 3,
+     "system": 62,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 3578,
+     "buy": 3600,
+     "done": 3695,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 3,
+     "system": 62,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 3788,
+     "buy": 3810,
+     "done": 3905,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 3,
+     "system": 62,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 4118,
+     "buy": 4140,
+     "done": 4235,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 3,
+     "system": 62,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5138,
+     "buy": 5160,
+     "done": 5255,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 3,
+     "system": 62,
+     "planet": 0,
+     "key": "lab",
+     "wanted": "dokum",
+     "removed": 5555,
+     "buy": 5580,
+     "done": 5668,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
      "actor": 14,
      "system": 238,
      "planet": 3,
@@ -5898,6 +7488,118 @@
      }
     },
     {
+     "actor": 14,
+     "system": 238,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5567,
+     "buy": 5580,
+     "done": 5698,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 238,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5867,
+     "buy": 5880,
+     "done": 5998,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 238,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6077,
+     "buy": 6090,
+     "done": 6208,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 238,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6257,
+     "buy": 6270,
+     "done": 6388,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 238,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6557,
+     "buy": 6570,
+     "done": 6688,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 238,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6827,
+     "buy": 6840,
+     "done": 6958,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 238,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 7067,
+     "buy": 7080,
+     "done": 7198,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
      "actor": 5,
      "system": 294,
      "planet": 1,
@@ -5912,24 +7614,5211 @@
      "refund": {
       "min": 42
      }
+    },
+    {
+     "actor": 5,
+     "system": 294,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 4776,
+     "buy": 4800,
+     "done": 4891,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 294,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 5076,
+     "buy": 5100,
+     "done": 5191,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 294,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 5406,
+     "buy": 5430,
+     "done": 5521,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 294,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 5676,
+     "buy": 5700,
+     "done": 5791,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 294,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6486,
+     "buy": 6510,
+     "done": 6601,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 294,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6786,
+     "buy": 6810,
+     "done": 6901,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 294,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 7047,
+     "buy": 7050,
+     "done": 7118,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 170,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 5886,
+     "buy": 5910,
+     "done": 6001,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 170,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6246,
+     "buy": 6270,
+     "done": 6361,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 170,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6546,
+     "buy": 6570,
+     "done": 6661,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 170,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6906,
+     "buy": 6930,
+     "done": 7021,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 249,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 4423,
+     "buy": 4440,
+     "done": 4547,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 249,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6694,
+     "buy": 6720,
+     "done": 6804,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 249,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6844,
+     "buy": 6870,
+     "done": 6954,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 249,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 7084,
+     "buy": 7110,
+     "done": 7194,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 5886,
+     "buy": 5910,
+     "done": 6001,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6186,
+     "buy": 6210,
+     "done": 6301,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6456,
+     "buy": 6480,
+     "done": 6571,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6816,
+     "buy": 6840,
+     "done": 6931,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 168,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6546,
+     "buy": 6570,
+     "done": 6661,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 168,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6906,
+     "buy": 6930,
+     "done": 7021,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 11,
+     "system": 123,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 4893,
+     "buy": 4920,
+     "done": 5078,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 11,
+     "system": 123,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5978,
+     "buy": 6000,
+     "done": 6095,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 38,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6516,
+     "buy": 6540,
+     "done": 6631,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 38,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6966,
+     "buy": 6990,
+     "done": 7081,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 231,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 4813,
+     "buy": 4830,
+     "done": 4937,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 231,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5794,
+     "buy": 5820,
+     "done": 5904,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 231,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6694,
+     "buy": 6720,
+     "done": 6804,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 231,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6904,
+     "buy": 6930,
+     "done": 7014,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 231,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 7054,
+     "buy": 7080,
+     "done": 7164,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 295,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "biyom_b",
+     "removed": 3857,
+     "buy": 3870,
+     "done": 3988,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 295,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "biyom_b",
+     "removed": 4187,
+     "buy": 4200,
+     "done": 4318,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 295,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5916,
+     "buy": 5940,
+     "done": 6031,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 295,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6366,
+     "buy": 6390,
+     "done": 6481,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 295,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6636,
+     "buy": 6660,
+     "done": 6751,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 295,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6876,
+     "buy": 6900,
+     "done": 6991,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 295,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 7056,
+     "buy": 7080,
+     "done": 7171,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 131,
+     "planet": 2,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 5545,
+     "buy": 5550,
+     "done": 5612,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 8,
+     "system": 131,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 7026,
+     "buy": 7050,
+     "done": 7141,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 289,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "iktisat_b",
+     "removed": 7054,
+     "buy": 7080,
+     "done": 7164,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 420,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5286,
+     "buy": 5310,
+     "done": 5401,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 420,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 5586,
+     "buy": 5610,
+     "done": 5701,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 420,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 5886,
+     "buy": 5910,
+     "done": 6001,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 420,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6186,
+     "buy": 6210,
+     "done": 6301,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 420,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6696,
+     "buy": 6720,
+     "done": 6811,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 420,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 7017,
+     "buy": 7020,
+     "done": 7088,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 4956,
+     "buy": 4980,
+     "done": 5071,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5376,
+     "buy": 5400,
+     "done": 5491,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5556,
+     "buy": 5580,
+     "done": 5671,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5736,
+     "buy": 5760,
+     "done": 5851,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 6036,
+     "buy": 6060,
+     "done": 6151,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6216,
+     "buy": 6240,
+     "done": 6331,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6606,
+     "buy": 6630,
+     "done": 6721,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6987,
+     "buy": 6990,
+     "done": 7058,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 4,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 4746,
+     "buy": 4770,
+     "done": 4861,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 4,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5106,
+     "buy": 5130,
+     "done": 5221,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 4,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 5436,
+     "buy": 5460,
+     "done": 5551,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 4,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 6036,
+     "buy": 6060,
+     "done": 6151,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 4,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6576,
+     "buy": 6600,
+     "done": 6691,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 21,
+     "planet": 4,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6786,
+     "buy": 6810,
+     "done": 6901,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 420,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 5616,
+     "buy": 5640,
+     "done": 5731,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 420,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 5826,
+     "buy": 5850,
+     "done": 5941,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 420,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6156,
+     "buy": 6180,
+     "done": 6271,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 420,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6516,
+     "buy": 6540,
+     "done": 6631,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 420,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6756,
+     "buy": 6780,
+     "done": 6871,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "biyom_b",
+     "removed": 3947,
+     "buy": 3960,
+     "done": 4078,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 4487,
+     "buy": 4500,
+     "done": 4618,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 4667,
+     "buy": 4680,
+     "done": 4798,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "biyom_b",
+     "removed": 5417,
+     "buy": 5430,
+     "done": 5521,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 5796,
+     "buy": 5820,
+     "done": 5911,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "biyom_b",
+     "removed": 5976,
+     "buy": 6000,
+     "done": 6091,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6186,
+     "buy": 6210,
+     "done": 6301,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6396,
+     "buy": 6420,
+     "done": 6511,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6576,
+     "buy": 6600,
+     "done": 6691,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 7056,
+     "buy": 7080,
+     "done": 7171,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 450,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 5027,
+     "buy": 5040,
+     "done": 5158,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 450,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5297,
+     "buy": 5310,
+     "done": 5428,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 450,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 5886,
+     "buy": 5910,
+     "done": 6001,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 450,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6096,
+     "buy": 6120,
+     "done": 6211,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 450,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6756,
+     "buy": 6780,
+     "done": 6871,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 450,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6966,
+     "buy": 6990,
+     "done": 7081,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "biyom_b",
+     "removed": 4007,
+     "buy": 4020,
+     "done": 4138,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 5357,
+     "buy": 5370,
+     "done": 5488,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5916,
+     "buy": 5940,
+     "done": 6031,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6246,
+     "buy": 6270,
+     "done": 6361,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 55,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6696,
+     "buy": 6720,
+     "done": 6811,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 309,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5346,
+     "buy": 5370,
+     "done": 5461,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 309,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 5736,
+     "buy": 5760,
+     "done": 5851,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 309,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 5976,
+     "buy": 6000,
+     "done": 6091,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 309,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6276,
+     "buy": 6300,
+     "done": 6391,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 309,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6546,
+     "buy": 6570,
+     "done": 6661,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 309,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6726,
+     "buy": 6750,
+     "done": 6841,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 172,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 4956,
+     "buy": 4980,
+     "done": 5071,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 172,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5316,
+     "buy": 5340,
+     "done": 5431,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 172,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 5586,
+     "buy": 5610,
+     "done": 5701,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 172,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6186,
+     "buy": 6210,
+     "done": 6301,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 172,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6606,
+     "buy": 6630,
+     "done": 6721,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 172,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6906,
+     "buy": 6930,
+     "done": 6998,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 172,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 7107,
+     "buy": 7110,
+     "done": 7178,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 307,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 5466,
+     "buy": 5490,
+     "done": 5581,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 307,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 5856,
+     "buy": 5880,
+     "done": 5971,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 307,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6036,
+     "buy": 6060,
+     "done": 6151,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 307,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6426,
+     "buy": 6450,
+     "done": 6541,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 307,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6606,
+     "buy": 6630,
+     "done": 6721,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 307,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6906,
+     "buy": 6930,
+     "done": 7021,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 2,
+     "system": 443,
+     "planet": 2,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 5695,
+     "buy": 5700,
+     "done": 5762,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 2,
+     "system": 443,
+     "planet": 2,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 5845,
+     "buy": 5850,
+     "done": 5912,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 2,
+     "system": 443,
+     "planet": 2,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 5965,
+     "buy": 5970,
+     "done": 6032,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 2,
+     "system": 443,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "iktisat_b",
+     "removed": 7049,
+     "buy": 7050,
+     "done": 7198,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 450,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 5886,
+     "buy": 5910,
+     "done": 6001,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 450,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6246,
+     "buy": 6270,
+     "done": 6361,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 450,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6606,
+     "buy": 6630,
+     "done": 6721,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 450,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6906,
+     "buy": 6930,
+     "done": 7021,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 170,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 4607,
+     "buy": 4620,
+     "done": 4738,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 170,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 4997,
+     "buy": 5010,
+     "done": 5128,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 170,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5177,
+     "buy": 5190,
+     "done": 5308,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 170,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6516,
+     "buy": 6540,
+     "done": 6631,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 170,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6696,
+     "buy": 6720,
+     "done": 6811,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 131,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6516,
+     "buy": 6540,
+     "done": 6631,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 131,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6726,
+     "buy": 6750,
+     "done": 6841,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 163,
+     "planet": 0,
+     "key": "lab",
+     "wanted": "maden",
+     "removed": 5324,
+     "buy": 5340,
+     "done": 5450,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 8,
+     "system": 163,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5856,
+     "buy": 5880,
+     "done": 5971,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 163,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6306,
+     "buy": 6330,
+     "done": 6421,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 163,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6486,
+     "buy": 6510,
+     "done": 6601,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 163,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6756,
+     "buy": 6780,
+     "done": 6871,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 163,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6936,
+     "buy": 6960,
+     "done": 7051,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 11,
+     "system": 483,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5618,
+     "buy": 5640,
+     "done": 5735,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 42,
+     "planet": 1,
+     "key": "lab",
+     "wanted": "dokum",
+     "removed": 6244,
+     "buy": 6270,
+     "done": 6354,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 13,
+     "system": 42,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6996,
+     "buy": 7020,
+     "done": 7111,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 491,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "oto_lab",
+     "removed": 5436,
+     "buy": 5460,
+     "done": 5551,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 491,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6876,
+     "buy": 6900,
+     "done": 6991,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 6,
+     "system": 326,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5597,
+     "buy": 5610,
+     "done": 5728,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 6,
+     "system": 326,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6274,
+     "buy": 6300,
+     "done": 6536,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 88,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "oto_lab",
+     "removed": 5207,
+     "buy": 5220,
+     "done": 5338,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 88,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "oto_lab",
+     "removed": 5376,
+     "buy": 5400,
+     "done": 5491,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 88,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6786,
+     "buy": 6810,
+     "done": 6901,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 88,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 7026,
+     "buy": 7050,
+     "done": 7141,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 178,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5046,
+     "buy": 5070,
+     "done": 5161,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 178,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5676,
+     "buy": 5700,
+     "done": 5791,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 178,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 5976,
+     "buy": 6000,
+     "done": 6091,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 265,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5826,
+     "buy": 5850,
+     "done": 5941,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 265,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6306,
+     "buy": 6330,
+     "done": 6421,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 6,
+     "system": 235,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 5944,
+     "buy": 5970,
+     "done": 6206,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 6,
+     "system": 235,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6874,
+     "buy": 6900,
+     "done": 7018,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 128,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5646,
+     "buy": 5670,
+     "done": 5761,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 128,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6096,
+     "buy": 6120,
+     "done": 6211,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 128,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6696,
+     "buy": 6720,
+     "done": 6811,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 128,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6966,
+     "buy": 6990,
+     "done": 7081,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 4,
+     "system": 458,
+     "planet": 2,
+     "key": "lab",
+     "wanted": "dokum",
+     "removed": 6544,
+     "buy": 6570,
+     "done": 6654,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 8,
+     "system": 460,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6516,
+     "buy": 6540,
+     "done": 6631,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 460,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6756,
+     "buy": 6780,
+     "done": 6871,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 460,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 7026,
+     "buy": 7050,
+     "done": 7141,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 95,
+     "planet": 0,
+     "key": "kale",
+     "wanted": "lab",
+     "removed": 6899,
+     "buy": 6900,
+     "done": 7047,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 498,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5916,
+     "buy": 5940,
+     "done": 6031,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 498,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6216,
+     "buy": 6240,
+     "done": 6331,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 498,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6636,
+     "buy": 6660,
+     "done": 6751,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 498,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6816,
+     "buy": 6840,
+     "done": 6931,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 498,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 7026,
+     "buy": 7050,
+     "done": 7141,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 225,
+     "planet": 1,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6389,
+     "buy": 6390,
+     "done": 6537,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 225,
+     "planet": 1,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6689,
+     "buy": 6690,
+     "done": 6837,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 8,
+     "system": 3,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5976,
+     "buy": 6000,
+     "done": 6091,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 3,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6456,
+     "buy": 6480,
+     "done": 6571,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 3,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6786,
+     "buy": 6810,
+     "done": 6901,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 3,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 7026,
+     "buy": 7050,
+     "done": 7141,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 4,
+     "system": 227,
+     "planet": 1,
+     "key": "lab",
+     "wanted": "fabrika",
+     "removed": 6814,
+     "buy": 6900,
+     "done": 6984,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 8,
+     "system": 3,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6696,
+     "buy": 6720,
+     "done": 6811,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 3,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6936,
+     "buy": 6960,
+     "done": 7051,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 145,
+     "planet": 2,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6119,
+     "buy": 6120,
+     "done": 6267,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 145,
+     "planet": 2,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6389,
+     "buy": 6390,
+     "done": 6537,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 145,
+     "planet": 2,
+     "key": "kale",
+     "wanted": "liman",
+     "removed": 6629,
+     "buy": 6630,
+     "done": 6777,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 355,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 4982,
+     "buy": 5010,
+     "done": 5090,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 16,
+     "system": 355,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 5222,
+     "buy": 5250,
+     "done": 5330,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 16,
+     "system": 355,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 5372,
+     "buy": 5400,
+     "done": 5462,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 16,
+     "system": 355,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6036,
+     "buy": 6060,
+     "done": 6151,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 355,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6216,
+     "buy": 6240,
+     "done": 6331,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 355,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6696,
+     "buy": 6720,
+     "done": 6811,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 80,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6306,
+     "buy": 6330,
+     "done": 6421,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 80,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6636,
+     "buy": 6660,
+     "done": 6751,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 80,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6987,
+     "buy": 6990,
+     "done": 7058,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 80,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 7107,
+     "buy": 7110,
+     "done": 7178,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 361,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6833,
+     "buy": 6840,
+     "done": 6897,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 16,
+     "system": 477,
+     "planet": 1,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6479,
+     "buy": 6480,
+     "done": 6627,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 477,
+     "planet": 1,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6719,
+     "buy": 6720,
+     "done": 6867,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 477,
+     "planet": 1,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6959,
+     "buy": 6960,
+     "done": 7107,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 5,
+     "system": 422,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6216,
+     "buy": 6240,
+     "done": 6331,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 490,
+     "planet": 0,
+     "key": "lab",
+     "wanted": "iktisat_b",
+     "removed": 6271,
+     "buy": 6330,
+     "done": 6490,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 10,
+     "system": 490,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6773,
+     "buy": 6780,
+     "done": 6837,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 13,
+     "system": 236,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6396,
+     "buy": 6420,
+     "done": 6511,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 236,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6756,
+     "buy": 6780,
+     "done": 6871,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 236,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6996,
+     "buy": 7020,
+     "done": 7111,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 495,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "fabrika",
+     "removed": 6036,
+     "buy": 6060,
+     "done": 6151,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 495,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6276,
+     "buy": 6300,
+     "done": 6391,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 495,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6456,
+     "buy": 6480,
+     "done": 6571,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 495,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6696,
+     "buy": 6720,
+     "done": 6811,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 495,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6906,
+     "buy": 6930,
+     "done": 6998,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 73,
+     "planet": 0,
+     "key": "lab",
+     "wanted": "maden",
+     "removed": 5354,
+     "buy": 5370,
+     "done": 5480,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 16,
+     "system": 73,
+     "planet": 0,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6419,
+     "buy": 6420,
+     "done": 6567,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 73,
+     "planet": 0,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6899,
+     "buy": 6900,
+     "done": 7047,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 477,
+     "planet": 2,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 5635,
+     "buy": 5640,
+     "done": 5702,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 16,
+     "system": 477,
+     "planet": 2,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6689,
+     "buy": 6690,
+     "done": 6837,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 477,
+     "planet": 2,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6959,
+     "buy": 6960,
+     "done": 7107,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 14,
+     "system": 81,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 5837,
+     "buy": 5850,
+     "done": 5968,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 81,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6377,
+     "buy": 6390,
+     "done": 6508,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 81,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6677,
+     "buy": 6690,
+     "done": 6808,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 81,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 7007,
+     "buy": 7020,
+     "done": 7138,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 267,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 5515,
+     "buy": 5520,
+     "done": 5582,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 8,
+     "system": 267,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6306,
+     "buy": 6330,
+     "done": 6421,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 267,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6786,
+     "buy": 6810,
+     "done": 6901,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 114,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6396,
+     "buy": 6420,
+     "done": 6511,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 114,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6756,
+     "buy": 6780,
+     "done": 6871,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 114,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6966,
+     "buy": 6990,
+     "done": 7081,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 81,
+     "planet": 1,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6452,
+     "buy": 6480,
+     "done": 6560,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 14,
+     "system": 81,
+     "planet": 1,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6602,
+     "buy": 6720,
+     "done": 6800,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 16,
+     "system": 353,
+     "planet": 1,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6899,
+     "buy": 6900,
+     "done": 7047,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 8,
+     "system": 449,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6786,
+     "buy": 6810,
+     "done": 6901,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 85,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6576,
+     "buy": 6600,
+     "done": 6691,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 85,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6786,
+     "buy": 6810,
+     "done": 6901,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 85,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 7026,
+     "buy": 7050,
+     "done": 7141,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 385,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6246,
+     "buy": 6270,
+     "done": 6361,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 385,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6426,
+     "buy": 6450,
+     "done": 6541,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 385,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 7047,
+     "buy": 7050,
+     "done": 7118,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 14,
+     "system": 68,
+     "planet": 0,
+     "key": "kale",
+     "wanted": "lab",
+     "removed": 6706,
+     "buy": 6720,
+     "done": 6911,
+     "paid": {
+      "min": 138,
+      "ala": 42
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 382,
+     "planet": 0,
+     "key": "kale",
+     "wanted": "maden",
+     "removed": 5999,
+     "buy": 6000,
+     "done": 6147,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 382,
+     "planet": 0,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6299,
+     "buy": 6300,
+     "done": 6447,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 382,
+     "planet": 0,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6959,
+     "buy": 6960,
+     "done": 7107,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 27,
+     "planet": 2,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6749,
+     "buy": 6750,
+     "done": 6897,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 8,
+     "system": 3,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 5905,
+     "buy": 5910,
+     "done": 5972,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 8,
+     "system": 3,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6606,
+     "buy": 6630,
+     "done": 6721,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 149,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6336,
+     "buy": 6360,
+     "done": 6451,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 149,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6666,
+     "buy": 6690,
+     "done": 6781,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 149,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6996,
+     "buy": 7020,
+     "done": 7111,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 172,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 5616,
+     "buy": 5640,
+     "done": 5731,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 172,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 5886,
+     "buy": 5910,
+     "done": 6001,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 172,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6486,
+     "buy": 6510,
+     "done": 6601,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 172,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6957,
+     "buy": 6960,
+     "done": 7028,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 105,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6096,
+     "buy": 6120,
+     "done": 6211,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 105,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6846,
+     "buy": 6870,
+     "done": 6961,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 105,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 7047,
+     "buy": 7050,
+     "done": 7118,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 207,
+     "planet": 1,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6419,
+     "buy": 6420,
+     "done": 6567,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 207,
+     "planet": 1,
+     "key": "kale",
+     "wanted": "liman",
+     "removed": 6809,
+     "buy": 6810,
+     "done": 6957,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 5,
+     "system": 286,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6205,
+     "buy": 6210,
+     "done": 6272,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 286,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6505,
+     "buy": 6510,
+     "done": 6572,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 286,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6655,
+     "buy": 6660,
+     "done": 6722,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 286,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6126,
+     "buy": 6150,
+     "done": 6241,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 286,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6306,
+     "buy": 6330,
+     "done": 6421,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 286,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6516,
+     "buy": 6540,
+     "done": 6631,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 286,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6726,
+     "buy": 6750,
+     "done": 6841,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 286,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6906,
+     "buy": 6930,
+     "done": 6998,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 226,
+     "planet": 1,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6869,
+     "buy": 6870,
+     "done": 7017,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 16,
+     "system": 200,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6726,
+     "buy": 6750,
+     "done": 6841,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 200,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6936,
+     "buy": 6960,
+     "done": 7051,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 74,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6486,
+     "buy": 6510,
+     "done": 6601,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 74,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6666,
+     "buy": 6690,
+     "done": 6781,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 80,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6276,
+     "buy": 6300,
+     "done": 6391,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 80,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6456,
+     "buy": 6480,
+     "done": 6571,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 80,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6756,
+     "buy": 6780,
+     "done": 6871,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 80,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6987,
+     "buy": 6990,
+     "done": 7058,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 80,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6156,
+     "buy": 6180,
+     "done": 6271,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 80,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6426,
+     "buy": 6450,
+     "done": 6541,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 80,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 7047,
+     "buy": 7050,
+     "done": 7118,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 426,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6786,
+     "buy": 6810,
+     "done": 6901,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 426,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6966,
+     "buy": 6990,
+     "done": 7081,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 149,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6846,
+     "buy": 6870,
+     "done": 6961,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 149,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 7026,
+     "buy": 7050,
+     "done": 7141,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 108,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6606,
+     "buy": 6630,
+     "done": 6721,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 108,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 7077,
+     "buy": 7080,
+     "done": 7148,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 16,
+     "system": 98,
+     "planet": 0,
+     "key": "kale",
+     "wanted": "birlik_k",
+     "removed": 6779,
+     "buy": 6780,
+     "done": 6927,
+     "paid": {
+      "min": 230,
+      "ala": 70
+     },
+     "refund": {
+      "min": 81,
+      "ala": 25
+     }
+    },
+    {
+     "actor": 13,
+     "system": 114,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6666,
+     "buy": 6690,
+     "done": 6781,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 13,
+     "system": 114,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 7056,
+     "buy": 7080,
+     "done": 7171,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 101,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6145,
+     "buy": 6150,
+     "done": 6212,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 101,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6265,
+     "buy": 6270,
+     "done": 6332,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 101,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6906,
+     "buy": 6930,
+     "done": 6998,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 448,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 7103,
+     "buy": 7110,
+     "done": 7167,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 495,
+     "planet": 4,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6246,
+     "buy": 6270,
+     "done": 6361,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 495,
+     "planet": 4,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6426,
+     "buy": 6450,
+     "done": 6541,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 495,
+     "planet": 4,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6696,
+     "buy": 6720,
+     "done": 6811,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 495,
+     "planet": 4,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6987,
+     "buy": 6990,
+     "done": 7058,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 231,
+     "planet": 4,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6844,
+     "buy": 6870,
+     "done": 6954,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 194,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6816,
+     "buy": 6840,
+     "done": 6931,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 194,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 7107,
+     "buy": 7110,
+     "done": 7178,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 74,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6606,
+     "buy": 6630,
+     "done": 6721,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 74,
+     "planet": 3,
+     "key": "dokum",
+     "wanted": "liman",
+     "removed": 6996,
+     "buy": 7020,
+     "done": 7111,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 66,
+     "planet": 2,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6983,
+     "buy": 6990,
+     "done": 7047,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 10,
+     "system": 219,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6964,
+     "buy": 6990,
+     "done": 7074,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 174,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6295,
+     "buy": 6300,
+     "done": 6362,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 174,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6655,
+     "buy": 6660,
+     "done": 6722,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 8,
+     "system": 436,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6636,
+     "buy": 6660,
+     "done": 6751,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 436,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6816,
+     "buy": 6840,
+     "done": 6931,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 8,
+     "system": 436,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 7056,
+     "buy": 7080,
+     "done": 7171,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 309,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 6576,
+     "buy": 6600,
+     "done": 6691,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 309,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6846,
+     "buy": 6870,
+     "done": 6961,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 342,
+     "planet": 4,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6835,
+     "buy": 6840,
+     "done": 6902,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 342,
+     "planet": 4,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6948,
+     "buy": 6960,
+     "done": 7006,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 10,
+     "system": 490,
+     "planet": 1,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6713,
+     "buy": 6720,
+     "done": 6777,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 10,
+     "system": 490,
+     "planet": 1,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6923,
+     "buy": 6930,
+     "done": 6987,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 309,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 6636,
+     "buy": 6660,
+     "done": 6751,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 309,
+     "planet": 2,
+     "key": "dokum",
+     "wanted": "lab",
+     "removed": 7047,
+     "buy": 7050,
+     "done": 7118,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 10,
+     "system": 473,
+     "planet": 0,
+     "key": "lab",
+     "wanted": "maden",
+     "removed": 6601,
+     "buy": 6630,
+     "done": 6679,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 5,
+     "system": 160,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6295,
+     "buy": 6300,
+     "done": 6362,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 160,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6655,
+     "buy": 6660,
+     "done": 6722,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 160,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 7038,
+     "buy": 7050,
+     "done": 7096,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 8,
+     "system": 179,
+     "planet": 0,
+     "key": "dokum",
+     "wanted": "birlik_k",
+     "removed": 6816,
+     "buy": 6840,
+     "done": 6931,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 4,
+     "system": 314,
+     "planet": 0,
+     "key": "lab",
+     "wanted": "fabrika",
+     "removed": 6814,
+     "buy": 6840,
+     "done": 6924,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 5,
+     "system": 457,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6685,
+     "buy": 6690,
+     "done": 6752,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 457,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 7128,
+     "buy": 7140,
+     "done": 7186,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 76,
+     "planet": 1,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 7008,
+     "buy": 7020,
+     "done": 7066,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 4,
+     "system": 425,
+     "planet": 1,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 7075,
+     "buy": 7080,
+     "done": 7142,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 4,
+     "system": 425,
+     "planet": 2,
+     "key": "lab",
+     "wanted": "maden",
+     "removed": 7024,
+     "buy": 7050,
+     "done": 7134,
+     "paid": {
+      "min": 190
+     },
+     "refund": {
+      "min": 67
+     }
+    },
+    {
+     "actor": 5,
+     "system": 16,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6445,
+     "buy": 6450,
+     "done": 6512,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 16,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6745,
+     "buy": 6750,
+     "done": 6812,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 102,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6895,
+     "buy": 6900,
+     "done": 6946,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 10,
+     "system": 22,
+     "planet": 1,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 7073,
+     "buy": 7080,
+     "done": 7137,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 102,
+     "planet": 1,
+     "key": "dokum",
+     "wanted": "maden",
+     "removed": 7107,
+     "buy": 7110,
+     "done": 7178,
+     "paid": {
+      "min": 210
+     },
+     "refund": {
+      "min": 74
+     }
+    },
+    {
+     "actor": 5,
+     "system": 203,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6715,
+     "buy": 6720,
+     "done": 6782,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 203,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6835,
+     "buy": 6840,
+     "done": 6902,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 13,
+     "system": 367,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6805,
+     "buy": 6810,
+     "done": 6872,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 10,
+     "system": 213,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6953,
+     "buy": 6960,
+     "done": 7017,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 100,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6775,
+     "buy": 6780,
+     "done": 6842,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 246,
+     "planet": 0,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 6775,
+     "buy": 6780,
+     "done": 6842,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 8,
+     "system": 373,
+     "planet": 1,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 7015,
+     "buy": 7020,
+     "done": 7082,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
+    },
+    {
+     "actor": 5,
+     "system": 246,
+     "planet": 1,
+     "key": "maden",
+     "wanted": "lab",
+     "removed": 7038,
+     "buy": 7050,
+     "done": 7096,
+     "paid": {
+      "min": 120
+     },
+     "refund": {
+      "min": 42
+     }
     }
    ],
-   "netMinerals": 4285,
-   "lostDays": 4801,
+   "netMinerals": 58209,
+   "lostDays": 53787,
    "ends": {
-    "arrived": 558,
-    "lost-or-merged": 5,
-    "retasked": 1
+    "arrived": 1308,
+    "lost-or-merged": 10,
+    "retasked": 5
    },
    "arrival": {
-    "n": 558,
-    "p50": 9.5,
-    "p95": 36.5,
-    "max": 194.5
+    "n": 1308,
+    "p50": 13.5,
+    "p95": 55.5,
+    "max": 1338.5
    },
-   "warEnds": {},
+   "warEnds": {
+    "arrived": 1
+   },
    "warArrival": {
-    "n": 0
+    "n": 1,
+    "p50": 12,
+    "p95": 12,
+    "max": 12
    },
    "disbands": [
     {
@@ -6105,13 +12994,14 @@
     }
    ],
    "deals": {
-    "nap →  True": 16,
-    "pact → res False": 7,
-    "ally → res False": 7,
-    "pact → res True": 41,
-    "ally → res True": 19
+    "nap →  True": 24,
+    "pact → res False": 16,
+    "ally → res False": 53,
+    "pact → res True": 135,
+    "ally → res True": 55,
+    "freight → freight True": 8
    },
-   "maxFed": 4,
+   "maxFed": 6,
    "siege": 1,
    "fronts": [
     {
@@ -6177,6 +13067,63 @@
        "from": 10,
        "to": 11,
        "day": 3161.5
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "sides": [
+      11,
+      10
+     ],
+     "opened": 3930,
+     "ended": 4020,
+     "endReason": "exhaustion|actor:10",
+     "goals": [
+      {
+       "by": 11,
+       "day": 3930,
+       "type": "boyun",
+       "targets": []
+      }
+     ],
+     "metrics": [
+      {
+       "rounds": 11,
+       "shipsLost": 10,
+       "shipsDestroyed": 33,
+       "damageDealt": 3829.5,
+       "damageTaken": 2264.3643751101,
+       "groundLost": 0,
+       "groundDestroyed": 0,
+       "garrisonLost": 0,
+       "garrisonReduced": 0,
+       "systems": [
+        "197"
+       ],
+       "planets": []
+      },
+      {
+       "rounds": 11,
+       "shipsLost": 33,
+       "shipsDestroyed": 10,
+       "damageDealt": 2264.3643751101,
+       "damageTaken": 3829.5,
+       "groundLost": 0,
+       "groundDestroyed": 0,
+       "garrisonLost": 0,
+       "garrisonReduced": 0,
+       "systems": [],
+       "planets": []
+      }
+     ],
+     "occupation": [
+      {
+       "sys": 197,
+       "planet": null,
+       "from": 10,
+       "to": 11,
+       "day": 3995.5
       }
      ]
     }
@@ -8796,6 +15743,21 @@
    },
    "equal": true
   },
+  "chromium-500-16-11-m120": {
+   "base": {
+    "n": 20,
+    "p50": 2394.75,
+    "p95": 2571.5,
+    "max": 2580.5
+   },
+   "pilot": {
+    "n": 20,
+    "p50": 2100.0,
+    "p95": 2213.3,
+    "max": 2276.9
+   },
+   "equal": true
+  },
   "chromium-500-16-11-m3": {
    "base": {
     "n": 20,
@@ -8823,6 +15785,21 @@
     "p50": 842.17,
     "p95": 1171.38,
     "max": 1343.97
+   },
+   "equal": true
+  },
+  "pilot-500-16-11-m120": {
+   "base": {
+    "n": 20,
+    "p50": 4732.73,
+    "p95": 5107.25,
+    "max": 5128.45
+   },
+   "pilot": {
+    "n": 20,
+    "p50": 3350.98,
+    "p95": 3698.13,
+    "max": 3806.9
    },
    "equal": true
   },
