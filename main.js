@@ -4546,7 +4546,8 @@ function cancelExploration(f){
   if(fleetHasRole(f,'bilim'))f.auto=false;
 }
 function explorationContext(e){
-  const known=new Set(),visible=new Set(),blocked=reinforcementThreats(e),pirates=new Set();
+  const claims=borderClaimRows();
+  const known=new Set(),visible=new Set(),blocked=reinforcementThreats(e,claims),pirates=new Set();
   // Aynı sensör menzili; görülmeyen düşman filoları veya yuvalar okunmaz.
   const q=[];
   for(const s of G.sys)if(s.owner===e.id)q.push([s.id,0]);
@@ -4564,7 +4565,7 @@ function explorationContext(e){
   }
   for(const id of known){const s=G.sys[id];
     if(s.nest||s.ruin){blocked.add(id);pirates.add(id);}
-    const owner=s.owner>=0?s.owner:claimOf(s);
+    const owner=s.owner>=0?s.owner:claimOf(s,claims);
     if(owner>=0&&owner!==e.id&&hostile(e.id,owner))blocked.add(id);
   }
   for(const f of G.fleets)if(f.e!==e.id&&f.sys>=0&&visible.has(f.sys)&&f.ships.length&&isArmed(f)&&hostile(e.id,f.e))blocked.add(f.sys);
@@ -5746,7 +5747,7 @@ function fleetCompositionStatus(e,f){
    etkin müttefik / vasal sensör paylaşımı) gelir; yalnız ŞU AN görünen filo sayılır, görünürlükten çıkan filonun konumu sızmaz.
    explorationContext → reinforcementThreats iç çağrısı bayrakla eski kümeyi kullanır (sonsuz döngü yok). AI ve devlet 0 aynen. */
 let REINF_VIS_BUSY=false;
-function reinforcementThreats(e){
+function reinforcementThreats(e,claims=borderClaimRows()){
   const blocked=new Set();
   const known=s=>e.id===0?pSeen(s):(s.seen||[]).includes(e.id);
   let visible=new Set();
@@ -5759,7 +5760,7 @@ function reinforcementThreats(e){
   }
   blocked.owned=new Set();   /* REINF-ROUTE.0: kolonili (s.owner) düşman sistemleri; yalnız toprak iddiası (claimOf) olanlar bu kümede değil */
   for(const s of G.sys){
-    const owner=s.owner>=0?s.owner:claimOf(s);
+    const owner=s.owner>=0?s.owner:claimOf(s,claims);
     if(known(s) && owner>=0 && owner!==e.id && hostile(e.id,owner)){blocked.add(s.id);if(s.owner>=0)blocked.owned.add(s.id);}
   }
   blocked.armed=new Set();   /* REINF-ROUTE.0: görünür silahlı düşman filosunun sistemleri ayrıca (sahiplikten ayrı) */
@@ -9057,7 +9058,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p43';
+const BUILD_ID = '96h10p44';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){
