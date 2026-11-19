@@ -1,0 +1,5 @@
+✓ C1 40 gemi / tek eski hedef → tek kart; sınıf, sayı, bekleme sistemleri ve kurtarma düğmeleri kartta
+✓ C2 aynı adlı iki farklı eski filo → iki kart; toplamlar ayrı
+✓ C3 farklı sistemlere dağılmış + kayıt / devam sonrası toplam aynı
+✓ C4 Haberler penceresinde Sevkiyatlar sekmesi aynı bölümü açar
+GEÇEN: 4 KALAN: 0

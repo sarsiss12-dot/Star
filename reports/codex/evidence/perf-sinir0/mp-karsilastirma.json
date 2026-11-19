@@ -1,0 +1,122 @@
+{
+  "equal": true,
+  "states": [
+    {
+      "label": "paylaşım-ve-sipariş",
+      "guests": [
+        {
+          "id": 1,
+          "sha": "ee9105cbd8cffb029064eeebe8ade359f26f74216fba6172e2e0d6385ad6ff0c",
+          "day": 0
+        },
+        {
+          "id": 2,
+          "sha": "e8a857d746562fb1f9ef9d08c9231348f3b283df2783cafe6b2db205715f01f0",
+          "day": 0
+        }
+      ]
+    },
+    {
+      "label": "yarım-gün-takviye",
+      "guests": [
+        {
+          "id": 1,
+          "sha": "99aad1bc09c1b2fa7521ef6e1c376af9696988131d2fc0213195b53c8fc33d19",
+          "day": 0.5
+        },
+        {
+          "id": 2,
+          "sha": "efdfaffed430de88344987b6cdc4918e3ea2b8cc5e14061641f1d07ff469f243",
+          "day": 0.5
+        }
+      ]
+    },
+    {
+      "label": "yeniden-bağlandı",
+      "guests": [
+        {
+          "id": 1,
+          "sha": "99aad1bc09c1b2fa7521ef6e1c376af9696988131d2fc0213195b53c8fc33d19",
+          "day": 0.5
+        },
+        {
+          "id": 2,
+          "sha": "efdfaffed430de88344987b6cdc4918e3ea2b8cc5e14061641f1d07ff469f243",
+          "day": 0.5
+        }
+      ]
+    },
+    {
+      "label": "tersane-sonrası",
+      "guests": [
+        {
+          "id": 1,
+          "sha": "478b7780659a5daffe04d75913ae26f862efc63ab695b67e659ae913b78d6df9",
+          "day": 0.5
+        },
+        {
+          "id": 2,
+          "sha": "728afec8c5859f2dcda617b87797e7128e95a5352ff6c088622462ca30168772",
+          "day": 0.5
+        }
+      ]
+    }
+  ],
+  "ids": [
+    1,
+    2
+  ],
+  "fixture": {
+    "b": 1,
+    "c": 2,
+    "yard": 281,
+    "remote": 23,
+    "threat": 92,
+    "scout": 5,
+    "scoutRoute": [
+      361
+    ],
+    "fleet": 93,
+    "route": [
+      10
+    ],
+    "queueClass": "kor"
+  },
+  "visible": {
+    "visible": true,
+    "threat": true,
+    "scout": [
+      361
+    ],
+    "route": [
+      10
+    ],
+    "queued": true
+  },
+  "secondGuestSeesNativeSystem": true,
+  "shipmentAfterStep": [
+    {
+      "id": 94,
+      "path": [
+        10
+      ],
+      "status": "moving"
+    }
+  ],
+  "order": {
+    "hostRows": [
+      0,
+      1
+    ],
+    "guestRows": [
+      0,
+      1
+    ],
+    "spent": {
+      "ala": 32
+    },
+    "price": {
+      "ala": 32
+    }
+  }
+}

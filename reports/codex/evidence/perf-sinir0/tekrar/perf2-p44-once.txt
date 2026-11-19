@@ -1,0 +1,16 @@
+✗ arındırılmış kaynaklar PERF.2 öncesi baytların kendisi: ai.js ve main.js MP.7.5 (96h10p4) özeti — AssertionError [ERR_ASSERTION]: main.js unreviewed REINF-ROUTE.0 source
+    at exports.stripReviewedReinfRoute0 (/workspace/scratch/0c4fbf591726/Star/tests/helpers/reinf-route0-reviewed.cjs:9:193)
+    at exports.stripReviewedSyncFed1 (/workspace/scratch/0c4fbf591726/Star/tests/helpers/mp-sync-fed1-reviewed.cjs:7:93)
+    at exports.stripReviewedSyncFed0 (/workspace/scratch/0c4fbf591726/Star/tests/helpers/mp-sync-fed0-reviewed.cjs:7:93)
+    at exports.stripReviewedDiplo5 (/workspace/scratch/0c4fbf591726/Star/tests/helpers/mp-diplo5-reviewed.cjs:10:91)
+    at exports.stripReviewedTechLux (/workspace/scratch/0c4fbf591726/Star/tests/helpers/mp-techlux0-reviewed.cjs:9:89)
+    at exports.stripReviewedWarOn (/workspace/scratch/0c4fbf591726/Star/tests/helpers/mp-waron0-reviewed.cjs:9:89)
+    at exports.stripReviewedDealSys (/workspace/scratch/0c4fbf591726/Star/tests/helpers/mp-deal-sys0-reviewed.cjs:9:89)
+    at exports.stripReviewedFieldVerify (/workspace/scratch/0c4fbf591726/Star/tests/helpers/mp-field-verify0-reviewed.cjs:7:96)
+    at exports.stripReviewedFieldFix (/workspace/scratch/0c4fbf591726/Star/tests/helpers/mp-field-fix0-reviewed.cjs:9:97)
+    at exports.stripReviewedWarCoalition (/workspace/scratch/0c4fbf591726/Star/tests/helpers/war-coalition0-reviewed.cjs:9:98)
+✓ kontrol ve aday aynı geç oyun Save8'inden 3 ay: her ay Save8 ve RNG birebir; karar çağrıları aynı, gelir hesabı daha az
+✓ AI penceresi: dışarıda saklama yok; içeride gölge gelir bir kez ve kopya; hata olsa da kapanır
+✓ pencere içi aiBuildingDelta = pencere kapalıyken (federasyon üyesi, her koloni ve bina); liman değişen aday ticaret sonucunu saklamaz
+✓ supplyDistance doğrudan geçit denetimi = gateSupplyNodes listesi (her filo, her sistem; geçit eklenince de)
+GEÇEN: 4 KALAN: 1

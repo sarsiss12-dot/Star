@@ -58,10 +58,61 @@ function influenceAt(wx, wy){
 function refreshReach(){
   for (const s of G.sys) s._reach = borderReach(s);
 }
+/* Keşif ve takviye yıldız merkezlerini sorgular. Büyük haritada her merkez
+   için yalnız erişen sistemleri, özgün galaksi sırasıyla hazırla. Geometri
+   paylaşılır; sahiplik sonucu ve sınır baskısı her sorguda hesaplanır. */
+const borderClaimCache = new WeakMap();
+function borderClaimRows(){
+  const systems = G.sys;
+  if (systems.length < 500) return null;
+  const cached = borderClaimCache.get(systems);
+  // Aynı gün fetih, rollback ve yüklemede takvim tek başına yeterli değildir.
+  if (cached && cached.geometry.length === systems.length){
+    let i = 0;
+    for (; i < systems.length; i++){
+      const s = systems[i], previous = cached.geometry[i];
+      if (s !== previous.system || s.x !== previous.x || s.y !== previous.y ||
+          s._reach !== previous.reach || s.owner !== previous.owner) break;
+    }
+    if (i === systems.length) return cached.rows;
+  }
+
+  const geometry = systems.map(s => ({system:s, x:s.x, y:s.y, reach:s._reach, owner:s.owner}));
+  const sources = geometry.filter(s => !(s.owner < 0) && s.reach);
+  const rows = [];
+  for (const target of geometry){
+    if (target.owner >= 0) continue;
+    const row = [];
+    for (const source of sources){
+      const dx = source.x - target.x, dy = source.y - target.y;
+      const d2 = dx*dx + dy*dy, reach = source.reach;
+      if (d2 > reach*reach) continue;
+      const d = Math.sqrt(d2);
+      if (d < CORE_RADIUS){
+        row.push(source.owner, -Infinity);
+        break;
+      }
+      row.push(source.owner, d / reach);
+    }
+    rows[target.system.id] = row;
+  }
+  borderClaimCache.set(systems, {geometry, rows});
+  return rows;
+}
 /* sahipsiz bir sistem kimin sınırları içinde kalıyor? */
-function claimOf(sys){
+function claimOf(sys, rows){
   if (sys.owner >= 0) return sys.owner;
-  return influenceAt(sys.x, sys.y);
+  const candidates = rows && rows[sys.id];
+  if (!candidates) return influenceAt(sys.x, sys.y);
+  let best = -1, bestScore = Infinity;
+  // Çiftler: kaynak sahibi ve normalize mesafe. -Infinity çekirdek isabetidir.
+  for (let i = 0; i < candidates.length; i += 2){
+    const owner = candidates[i], ratio = candidates[i+1];
+    if (ratio === -Infinity) return owner;
+    const score = ratio / borderPressure(G.emps[owner]);
+    if (score < bestScore){ bestScore = score; best = owner; }
+  }
+  return best;
 }
 
 /* ---------- SINIR SÜRTÜŞMESİ ----------

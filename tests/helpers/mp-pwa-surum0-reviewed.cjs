@@ -5,6 +5,7 @@ const {createHash}=require('node:crypto');
 const pins=require('./mp-pwa-surum0-reviewed.json');
 const sha=source=>createHash('sha256').update(source).digest('hex');
 exports.stripReviewedPwaSurum0=(file,source)=>{
+  source=require('./perf-sinir0-reviewed.cjs').stripReviewedPerfSinir0(file,source);
   const pin=pins[file];
   if(!pin||sha(source)!==pin.afterSha256)return source;
   for(const {before,after} of pin.hunks){

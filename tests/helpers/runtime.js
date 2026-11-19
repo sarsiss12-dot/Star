@@ -3,7 +3,7 @@
 // Skia Canvas pixels; this host does not simulate a browser compositor or GPU.
 const fs = require('fs'), path = require('path'), vm = require('vm');
 function runtime({root = path.resolve(__dirname, '../..'), native = false,
-                  local = new Map(), width = 900, height = 420, dpr = 1} = {}) {
+                  local = new Map(), width = 900, height = 420, dpr = 1, processGlobal = false} = {}) {
   let createCanvas;
   if (native) {
     const mod = require.resolve('@napi-rs/canvas', {
@@ -101,15 +101,27 @@ function runtime({root = path.resolve(__dirname, '../..'), native = false,
     clearTimeout:id=>timers.delete(id),setInterval:()=>0,clearInterval(){},
     requestAnimationFrame:fn=>{const id=++timerId;raf.set(id,fn);return id;},
     cancelAnimationFrame:id=>raf.delete(id)};
-  sb.globalThis=sb;
-  const context=vm.createContext(sb);
+  // Uzun kampanya işçisi ayrı Node sürecinde yalnız bir dünya taşır.
+  // Standart testler yalıtılmış VM kullanmaya devam eder.
+  let globals=sb, run;
+  if(processGlobal){
+    if(globalThis.document)throw Error('Kampanya işçisi tek dünya çalıştırır');
+    globals=globalThis;
+    for(const [key,value] of Object.entries(sb))
+      Object.defineProperty(globals,key,{value,writable:true,configurable:true});
+    run=(code, options)=>vm.runInThisContext(code, options);
+  }else{
+    sb.globalThis=sb;
+    const context=vm.createContext(sb);
+    run=(code, options)=>vm.runInContext(code,context,options);
+  }
   for(const file of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
                     'economy.js','commerce.js','news.js','inbox.js','construction.js','ui.js','archive-ui.js','commerce-ui.js','economic-ledger.js','economy-ui.js','audio.js'])
     if(!['commerce.js','commerce-ui.js','economic-ledger.js','economy-ui.js','news.js','inbox.js','construction.js','archive-ui.js'].includes(file)||fs.existsSync(path.join(root,file)))
-      vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
-  return {sb,doc,win,elements,canvases,timers,raf,downloads,messages,local,
+      run(fs.readFileSync(path.join(root,file),'utf8'),{filename:file});
+  return {sb:globals,doc,win,elements,canvases,timers,raf,downloads,messages,local,
     advance(ms){clock+=ms;},
-    run(code){return vm.runInContext(code,context);},
+    run,
     flushTimers(limit=50){let n=0;while(timers.size){if(++n>limit)throw Error('timer loop');
       const [id,job]=timers.entries().next().value;timers.delete(id);job.fn();}},
     loadSave(file){sb.__save=fs.readFileSync(file,'utf8');

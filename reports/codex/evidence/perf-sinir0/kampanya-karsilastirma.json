@@ -1,0 +1,44 @@
+[
+  {
+    "seed": 11,
+    "month": 240,
+    "day": 7200,
+    "matchedCheckpoints": 241,
+    "priorMatched": 181,
+    "equal": true,
+    "over": false,
+    "actionTraceRows": 21925,
+    "payments": 6794,
+    "save": "8cfb1b28d8fbba4bd7892770b167241d89d6fcf49d945caa67d6c8446f84e105",
+    "rng": -1745480003,
+    "trace": "df6e5637ac126e9061ae160a1de8f20550aa9c79559065fb28cb58f9a648d5ea"
+  },
+  {
+    "seed": 99,
+    "month": 240,
+    "day": 7200,
+    "matchedCheckpoints": 241,
+    "priorMatched": 181,
+    "equal": true,
+    "over": false,
+    "actionTraceRows": 26610,
+    "payments": 7870,
+    "save": "1b8f92e6348a0c62265f08ce641ac6a92a46a8c28e6bad2663dd4a222ea2aeef",
+    "rng": 885312766,
+    "trace": "2237d34150722cf4a009a0e60fd69546cad976c587bcacb50eabe630d45b71e4"
+  },
+  {
+    "seed": 404,
+    "month": 240,
+    "day": 7200,
+    "matchedCheckpoints": 241,
+    "priorMatched": 181,
+    "equal": true,
+    "over": false,
+    "actionTraceRows": 17242,
+    "payments": 5561,
+    "save": "1118e5dd13ccafedd1c242ab674d09eb1b87360d56a0da7ce3ee1533232e169c",
+    "rng": -769979439,
+    "trace": "e2399bbec542f09a76f0835b3307902514e1bf6bfc3e202a22d21f5c80055581"
+  }
+]

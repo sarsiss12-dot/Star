@@ -1,0 +1,191 @@
+{
+  "key": "500-16-11-m120",
+  "identity": {
+    "startDay": 3600,
+    "systems": 500,
+    "ai": 16,
+    "build": "96h10p43"
+  },
+  "times": [
+    2910.899999999994,
+    2532.600000000006,
+    2836
+  ],
+  "top": [
+    {
+      "fn": "claimOf /diplomacy.js:62",
+      "ms": 1729.792,
+      "percent": 20.466892949656394
+    },
+    {
+      "fn": "reinforcementThreats /main.js:5749",
+      "ms": 1667.509,
+      "percent": 19.72996070948911
+    },
+    {
+      "fn": "influenceAt /diplomacy.js:41",
+      "ms": 851.824,
+      "percent": 10.07877861612732
+    },
+    {
+      "fn": "isSupplyNode /main.js:3541",
+      "ms": 604.388,
+      "percent": 7.151116721580935
+    },
+    {
+      "fn": "node /main.js:3598",
+      "ms": 472.113,
+      "percent": 5.586039379960787
+    },
+    {
+      "fn": "supplyDistance /main.js:3596",
+      "ms": 450.401,
+      "percent": 5.329143071200577
+    },
+    {
+      "fn": "autoExploreTick /main.js:4663",
+      "ms": 410.078,
+      "percent": 4.852041474934093
+    },
+    {
+      "fn": "(program) :0",
+      "ms": 218.945,
+      "percent": 2.590556481277818
+    },
+    {
+      "fn": "explorationContext /main.js:4548",
+      "ms": 204.017,
+      "percent": 2.4139284370086393
+    },
+    {
+      "fn": "empireIncome /economy.js:364",
+      "ms": 195.273,
+      "percent": 2.310469459309705
+    },
+    {
+      "fn": "(garbage collector) :0",
+      "ms": 126.665,
+      "percent": 1.4986998410607906
+    },
+    {
+      "fn": "EconomyLedger.observe.sy.system /economic-ledger.js:59",
+      "ms": 98.259,
+      "percent": 1.1626001474976688
+    },
+    {
+      "fn": "colonyOutput /economy.js:47",
+      "ms": 88.87,
+      "percent": 1.0515095320338883
+    },
+    {
+      "fn": "tick /construction.js:92",
+      "ms": 80.638,
+      "percent": 0.9541085365606917
+    },
+    {
+      "fn": "stepFleets /main.js:4409",
+      "ms": 72.95,
+      "percent": 0.8631441472023422
+    },
+    {
+      "fn": "tradeLinks /economy.js:234",
+      "ms": 72.255,
+      "percent": 0.854920909610764
+    },
+    {
+      "fn": "explorationGraph /main.js:4607",
+      "ms": 67.71,
+      "percent": 0.8011444853608031
+    },
+    {
+      "fn": "aiBuildingDelta /ai.js:194",
+      "ms": 57.567,
+      "percent": 0.6811325445099004
+    },
+    {
+      "fn": "structTick /main.js:5516",
+      "ms": 53.822,
+      "percent": 0.6368217174876554
+    },
+    {
+      "fn": "aiView /ai.js:26",
+      "ms": 45.328,
+      "percent": 0.536320738922382
+    },
+    {
+      "fn": "arrive /main.js:4749",
+      "ms": 33.684,
+      "percent": 0.3985489712729773
+    },
+    {
+      "fn": "structAllowed /main.js:5452",
+      "ms": 33.542,
+      "percent": 0.3968688277650578
+    },
+    {
+      "fn": "tradeInfo /economy.js:313",
+      "ms": 32.883,
+      "percent": 0.3890715420487268
+    },
+    {
+      "fn": "txCaptureGraph /diplomacy.js:2176",
+      "ms": 31.85,
+      "percent": 0.37684908962843866
+    },
+    {
+      "fn": "aiKnownRoute /ai.js:86",
+      "ms": 31.706,
+      "percent": 0.3751452821274498
+    },
+    {
+      "fn": "fleetUpkeep /main.js:3707",
+      "ms": 28.069,
+      "percent": 0.33211231073094644
+    },
+    {
+      "fn": "canEnter /main.js:3841",
+      "ms": 25.465,
+      "percent": 0.3013017917547312
+    },
+    {
+      "fn": "aiEconomyPlan /ai.js:244",
+      "ms": 23.699,
+      "percent": 0.2804064858745484
+    },
+    {
+      "fn": "fleetSupply /main.js:3635",
+      "ms": 22.774,
+      "percent": 0.26946188908000196
+    },
+    {
+      "fn": "fleetAlloyUpkeep /main.js:3697",
+      "ms": 16.176,
+      "percent": 0.19139437594441516
+    },
+    {
+      "fn": "hasCivic /main.js:2417",
+      "ms": 15.619,
+      "percent": 0.18480395387461798
+    },
+    {
+      "fn": "combatTick /main.js:4903",
+      "ms": 13.128,
+      "percent": 0.15533045050681765
+    },
+    {
+      "fn": "aiTurn /ai.js:1616",
+      "ms": 12.916,
+      "percent": 0.15282206724147293
+    },
+    {
+      "fn": "reinforcementRoutes /main.js:5783",
+      "ms": 12.363,
+      "percent": 0.14627897315781435
+    },
+    {
+      "fn": "aiColonyForecast /ai.js:389",
+      "ms": 12.174,
+      "percent": 0.14404272581276648
+    }
+  ]
+}

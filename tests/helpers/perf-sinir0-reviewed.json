@@ -1,0 +1,136 @@
+[
+  {
+    "diplomacy.js": {
+      "beforeSha256": "a18b630af5b3a89fed2717b7f70c2141d7b5c10e623bd22d1cda48a6c94b2e52",
+      "afterSha256": "f1c5e1b3679b4ebb635d8ba86487ec62b96f515fed0571e4217577c4dd4569a5",
+      "hunks": [
+        {
+          "before": "  for (const s of G.sys) s._reach = borderReach(s);\n}\n/* sahipsiz bir sistem kimin sınırları içinde kalıyor? */\nfunction claimOf(sys){\n  if (sys.owner >= 0) return sys.owner;\n  return influenceAt(sys.x, sys.y);\n}\n\n",
+          "after": "  for (const s of G.sys) s._reach = borderReach(s);\n}\n/* Keşif ve takviye yıldız merkezlerini sorgular. Büyük haritada her merkez\n   için yalnız erişen sistemleri, özgün galaksi sırasıyla hazırla. Geometri\n   paylaşılır; sahiplik sonucu ve sınır baskısı her sorguda hesaplanır. */\nconst borderClaimCache = new WeakMap();\nfunction borderClaimRows(){\n  const systems = G.sys;\n  if (systems.length < 500) return null;\n  const cached = borderClaimCache.get(systems);\n  // Aynı gün fetih, rollback ve yüklemede takvim tek başına yeterli değildir.\n  if (cached && cached.geometry.length === systems.length){\n    let i = 0;\n    for (; i < systems.length; i++){\n      const s = systems[i], previous = cached.geometry[i];\n      if (s !== previous.system || s.x !== previous.x || s.y !== previous.y ||\n          s._reach !== previous.reach || s.owner !== previous.owner) break;\n    }\n    if (i === systems.length) return cached.rows;\n  }\n\n  const geometry = systems.map(s => ({system:s, x:s.x, y:s.y, reach:s._reach, owner:s.owner}));\n  const sources = geometry.filter(s => !(s.owner < 0) && s.reach);\n  const rows = [];\n  for (const target of geometry){\n    if (target.owner >= 0) continue;\n    const row = [];\n    for (const source of sources){\n      const dx = source.x - target.x, dy = source.y - target.y;\n      const d2 = dx*dx + dy*dy, reach = source.reach;\n      if (d2 > reach*reach) continue;\n      const d = Math.sqrt(d2);\n      if (d < CORE_RADIUS){\n        row.push(source.owner, -Infinity);\n        break;\n      }\n      row.push(source.owner, d / reach);\n    }\n    rows[target.system.id] = row;\n  }\n  borderClaimCache.set(systems, {geometry, rows});\n  return rows;\n}\n/* sahipsiz bir sistem kimin sınırları içinde kalıyor? */\nfunction claimOf(sys, rows){\n  if (sys.owner >= 0) return sys.owner;\n  const candidates = rows && rows[sys.id];\n  if (!candidates) return influenceAt(sys.x, sys.y);\n  let best = -1, bestScore = Infinity;\n  // Çiftler: kaynak sahibi ve normalize mesafe. -Infinity çekirdek isabetidir.\n  for (let i = 0; i < candidates.length; i += 2){\n    const owner = candidates[i], ratio = candidates[i+1];\n    if (ratio === -Infinity) return owner;\n    const score = ratio / borderPressure(G.emps[owner]);\n    if (score < bestScore){ bestScore = score; best = owner; }\n  }\n  return best;\n}\n\n"
+        }
+      ]
+    },
+    "main.js": {
+      "beforeSha256": "d97b20c89aaba3de5fe27705d198863bcb41bd63d0c4204482fd8e20ddfadf92",
+      "afterSha256": "c79c0b521344b9effe2b87f29e674c246dd27f0c72efb66f3b1eb59536af23b7",
+      "hunks": [
+        {
+          "before": "}\nfunction explorationContext(e){\n  const known=new Set(),visible=new Set(),blocked=reinforcementThreats(e),pirates=new Set();\n  // Aynı sensör menzili; görülmeyen düşman filoları veya yuvalar okunmaz.\n  const q=[];\n",
+          "after": "}\nfunction explorationContext(e){\n  const claims=borderClaimRows();\n  const known=new Set(),visible=new Set(),blocked=reinforcementThreats(e,claims),pirates=new Set();\n  // Aynı sensör menzili; görülmeyen düşman filoları veya yuvalar okunmaz.\n  const q=[];\n"
+        },
+        {
+          "before": "  for(const id of known){const s=G.sys[id];\n    if(s.nest||s.ruin){blocked.add(id);pirates.add(id);}\n    const owner=s.owner>=0?s.owner:claimOf(s);\n    if(owner>=0&&owner!==e.id&&hostile(e.id,owner))blocked.add(id);\n  }\n",
+          "after": "  for(const id of known){const s=G.sys[id];\n    if(s.nest||s.ruin){blocked.add(id);pirates.add(id);}\n    const owner=s.owner>=0?s.owner:claimOf(s,claims);\n    if(owner>=0&&owner!==e.id&&hostile(e.id,owner))blocked.add(id);\n  }\n"
+        },
+        {
+          "before": "   explorationContext → reinforcementThreats iç çağrısı bayrakla eski kümeyi kullanır (sonsuz döngü yok). AI ve devlet 0 aynen. */\nlet REINF_VIS_BUSY=false;\nfunction reinforcementThreats(e){\n  const blocked=new Set();\n  const known=s=>e.id===0?pSeen(s):(s.seen||[]).includes(e.id);\n",
+          "after": "   explorationContext → reinforcementThreats iç çağrısı bayrakla eski kümeyi kullanır (sonsuz döngü yok). AI ve devlet 0 aynen. */\nlet REINF_VIS_BUSY=false;\nfunction reinforcementThreats(e,claims=borderClaimRows()){\n  const blocked=new Set();\n  const known=s=>e.id===0?pSeen(s):(s.seen||[]).includes(e.id);\n"
+        },
+        {
+          "before": "  blocked.owned=new Set();   /* REINF-ROUTE.0: kolonili (s.owner) düşman sistemleri; yalnız toprak iddiası (claimOf) olanlar bu kümede değil */\n  for(const s of G.sys){\n    const owner=s.owner>=0?s.owner:claimOf(s);\n    if(known(s) && owner>=0 && owner!==e.id && hostile(e.id,owner)){blocked.add(s.id);if(s.owner>=0)blocked.owned.add(s.id);}\n  }\n",
+          "after": "  blocked.owned=new Set();   /* REINF-ROUTE.0: kolonili (s.owner) düşman sistemleri; yalnız toprak iddiası (claimOf) olanlar bu kümede değil */\n  for(const s of G.sys){\n    const owner=s.owner>=0?s.owner:claimOf(s,claims);\n    if(known(s) && owner>=0 && owner!==e.id && hostile(e.id,owner)){blocked.add(s.id);if(s.owner>=0)blocked.owned.add(s.id);}\n  }\n"
+        },
+        {
+          "before": "   Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */\n/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p43';\nconst DIAG_MAX = 40;\nconst DIAG = [];\n",
+          "after": "   Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */\n/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p44';\nconst DIAG_MAX = 40;\nconst DIAG = [];\n"
+        }
+      ]
+    },
+    "research/mp0/mp-core.js": {
+      "beforeSha256": "e625ac89f27310c544633664d4e525320c0473a5f24a92807c091e54d5797fd2",
+      "afterSha256": "6ea783b7b7a470094b803de45538f798c60ca6456f4b893837f14275365341ec",
+      "hunks": [
+        {
+          "before": "','96h10p43'].includes(build)&&typeof pkg.build==='string'&&(\n    /^96h10p(?:[6-9]|[1-3][0-9]|40)$/.test(pkg.build)||['96h10p25u1','96h10p27s1'].includes(pkg.build)||\n    build==='96h10p43'&&['96h10p41','96h10p42'].includes(",
+          "after": "','96h10p43','96h10p44'].includes(build)&&typeof pkg.build==='string'&&(\n    /^96h10p(?:[6-9]|[1-3][0-9]|40)$/.test(pkg.build)||['96h10p25u1','96h10p27s1'].includes(pkg.build)||\n    build==='96h10p43'&&['96h10p41','96h10p42'].includes(pkg.build)||\n    build==='96h10p44'&&['96h10p41','96h10p42','96h10p43'].includes("
+        }
+      ]
+    },
+    "research/mp1/server/relay.js": {
+      "beforeSha256": "776c9da42b402f73a92fab008808845a11395614b50ec747fb60ebecb1ff75a7",
+      "afterSha256": "6c7d557f595fae428bd1f7ee37ce9c6547dcd1284bbcc6bcd0f2dd4d775dda60",
+      "hunks": [
+        {
+          "before": "    .map(f=>[f,digest(fs.readFileSync(path.join(ROOT,f)),'base64')]));\n  const release=digest(JSON.stringify([manifest,assets,digest(guard,'base64')]),'hex');\n  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b42',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),release,files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',\n    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});\n  const guardHash=\"'sha256-\"+digest(guard,'base64')+\"'\";\n",
+          "after": "    .map(f=>[f,digest(fs.readFileSync(path.join(ROOT,f)),'base64')]));\n  const release=digest(JSON.stringify([manifest,assets,digest(guard,'base64')]),'hex');\n  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b43',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),release,files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',\n    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});\n  const guardHash=\"'sha256-\"+digest(guard,'base64')+\"'\";\n"
+        }
+      ]
+    },
+    "sw.js": {
+      "beforeSha256": "f6706271d6847bff4e438e23adb10a018ef7bac4f0bea48bfedd5685cc40fba1",
+      "afterSha256": "68a0910c1c95995b07791d3088559014b1e317dd63e8d3cfcab3c0d89da74f9b",
+      "hunks": [
+        {
+          "before": "/* FAZ 83: sürüm yükseltildi — eski ve yeni JS dosyalarının\n   karışmasını önler; activate'te eskiler siliniyor. */\nconst CACHE = 'stars-v96h10p43';\n\n/* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */\n",
+          "after": "/* FAZ 83: sürüm yükseltildi — eski ve yeni JS dosyalarının\n   karışmasını önler; activate'te eskiler siliniyor. */\nconst CACHE = 'stars-v96h10p44';\n\n/* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */\n"
+        }
+      ]
+    },
+    "research/mp1/client/view.js": {
+      "beforeSha256": "bead849346945d97908eb9471d08e34323c3f910ae698831184126891def5194",
+      "afterSha256": "01f27922ba89162589bbe8c0c39588687b2419540ddcf3719fed655667c23326",
+      "hunks": [
+        {
+          "before": "const MP_VERSION='MP.8.9b42';",
+          "after": "const MP_VERSION='MP.8.9b43';"
+        }
+      ]
+    }
+  },
+  {
+    "main.js": {
+      "beforeSha256": "7262237b5d9c90b0e6a3e29aaa2eff13c5dff1a53843c990306f65815e2d625e",
+      "afterSha256": "d97b20c89aaba3de5fe27705d198863bcb41bd63d0c4204482fd8e20ddfadf92",
+      "hunks": [
+        {
+          "before": "   Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */\n/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p42';\nconst DIAG_MAX = 40;\nconst DIAG = [];\n",
+          "after": "   Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */\n/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p43';\nconst DIAG_MAX = 40;\nconst DIAG = [];\n"
+        }
+      ]
+    },
+    "research/mp0/mp-core.js": {
+      "beforeSha256": "df22543f42bd99507043554bff0af42874443b456e98d6ef8432e7ac60bee31c",
+      "afterSha256": "e625ac89f27310c544633664d4e525320c0473a5f24a92807c091e54d5797fd2",
+      "hunks": [
+        {
+          "before": "eSaveFormat=(build==='96h10p41'||build==='96h10p42')&&typeof pkg.build==='string'&&(\n    /^96h10p(?:[6-9]|[1-3][0-9]|40)$/.test(pkg.build)||['96h10p25u1','96h10p27s1'].includes(",
+          "after": "eSaveFormat=['96h10p41','96h10p42','96h10p43'].includes(build)&&typeof pkg.build==='string'&&(\n    /^96h10p(?:[6-9]|[1-3][0-9]|40)$/.test(pkg.build)||['96h10p25u1','96h10p27s1'].includes(pkg.build)||\n    build==='96h10p43'&&['96h10p41','96h10p42'].includes("
+        }
+      ]
+    },
+    "research/mp1/client/view.js": {
+      "beforeSha256": "8a9faef497c0a85dabcf34f0bc15fc5877c5d96d1c2981756e8f30c75159701d",
+      "afterSha256": "bead849346945d97908eb9471d08e34323c3f910ae698831184126891def5194",
+      "hunks": [
+        {
+          "before": "}\n/* MP.7.3: salt okunur sürüm işareti — telefonda (bilgisayarsız) doğru dağıtımın açıldığını görmek için; relay /mp/version ile aynı */\nconst MP_VERSION='MP.8.9b41';\nconst verLine=()=>'STARS '+MP_VERSION+' · oyun '+(typeof BUILD_ID==='string'?BUILD_ID:'?');\n/* MP.7.5: kapalı çok oyunculu düğmesi sol araç sütununun (#tools) son öğesi olur; açık panel eski kaplama konumunda (#app).\n",
+          "after": "}\n/* MP.7.3: salt okunur sürüm işareti — telefonda (bilgisayarsız) doğru dağıtımın açıldığını görmek için; relay /mp/version ile aynı */\nconst MP_VERSION='MP.8.9b42';\nconst verLine=()=>'STARS '+MP_VERSION+' · oyun '+(typeof BUILD_ID==='string'?BUILD_ID:'?');\n/* MP.7.5: kapalı çok oyunculu düğmesi sol araç sütununun (#tools) son öğesi olur; açık panel eski kaplama konumunda (#app).\n"
+        }
+      ]
+    },
+    "research/mp1/server/relay.js": {
+      "beforeSha256": "4338c2d835f6607ee58c62ee034f03335c86dae4401a814b03a68f7b9509c1e5",
+      "afterSha256": "776c9da42b402f73a92fab008808845a11395614b50ec747fb60ebecb1ff75a7",
+      "hunks": [
+        {
+          "before": "    .map(f=>[f,digest(fs.readFileSync(path.join(ROOT,f)),'base64')]));\n  const release=digest(JSON.stringify([manifest,assets,digest(guard,'base64')]),'hex');\n  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b41',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),release,files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',\n    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});\n  const guardHash=\"'sha256-\"+digest(guard,'base64')+\"'\";\n",
+          "after": "    .map(f=>[f,digest(fs.readFileSync(path.join(ROOT,f)),'base64')]));\n  const release=digest(JSON.stringify([manifest,assets,digest(guard,'base64')]),'hex');\n  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b42',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),release,files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',\n    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});\n  const guardHash=\"'sha256-\"+digest(guard,'base64')+\"'\";\n"
+        },
+        {
+          "before": "        deny('update-required');\n        if(guestRelease!==null)return end(4010,'update-required');\n        // Eski istemci yeni hata kodunu tanımaz. Mevcut lobi başlığı açıklamayı gösterebilir.\n        // Bu soket oda listesine girmez ve hiçbir iletisi host'a gönderilmez.\n        dead=true;\n        conn.send('H'+JSON.stringify({v:1,type:'lobby',phase:'Oyun sürümü eski. Sayfayı yenile ve yeniden katıl. Oda kodu '+code+'.',players:[],empires:[],capacity:0}));\n        authT=setTimeout(()=>end(4010,'update-required'),30000);\n        authT.unref?.();\n        return;\n      }\n      /* MP.7.4: aynı sekmenin (cihaz anahtarı dev: tarayıcı sekmesinde rastgele 128 bit, yalnız relay'e gider) önceki soketi yeni bağlantıyla\n",
+          "after": "        deny('update-required');\n        if(guestRelease!==null)return end(4010,'update-required');\n        // p40 ve öncesi 4010'u tanımaz ve lobiden otomatik yeniden bağlanır.\n        // Önce bu katılımı sonlandır, ardından eski istemcinin lobi başlığında uyarıyı bırak.\n        // Bu soket oda listesine girmez ve hiçbir iletisi host'a gönderilmez.\n        dead=true;\n        ctl({t:'room-closed'});\n        conn.send('H'+JSON.stringify({v:1,type:'lobby',phase:'Oyun sürümü eski. Sayfayı yenile ve yeniden katıl. Oda kodu '+code+'.',players:[],empires:[],capacity:0}));\n        return conn.close(4010,'update-required');\n      }\n      /* MP.7.4: aynı sekmenin (cihaz anahtarı dev: tarayıcı sekmesinde rastgele 128 bit, yalnız relay'e gider) önceki soketi yeni bağlantıyla\n"
+        }
+      ]
+    },
+    "sw.js": {
+      "beforeSha256": "444ae327b6a2f931bddf1e40302f3646f40b31e8fc4a338edd4334bb073fa7eb",
+      "afterSha256": "f6706271d6847bff4e438e23adb10a018ef7bac4f0bea48bfedd5685cc40fba1",
+      "hunks": [
+        {
+          "before": "/* FAZ 83: sürüm yükseltildi — eski ve yeni JS dosyalarının\n   karışmasını önler; activate'te eskiler siliniyor. */\nconst CACHE = 'stars-v96h10p42';\n\n/* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */\n",
+          "after": "/* FAZ 83: sürüm yükseltildi — eski ve yeni JS dosyalarının\n   karışmasını önler; activate'te eskiler siliniyor. */\nconst CACHE = 'stars-v96h10p43';\n\n/* Oyunun tamamı — hepsi yerel dosya, dış bağımlılık yok */\n"
+        }
+      ]
+    }
+  }
+]

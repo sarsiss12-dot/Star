@@ -11,7 +11,7 @@
    R kayıt → tüm tarayıcılar + relay kapanır → yeni relay + yeni oda → aynı devletler · N ağ kopmaları (5 s, 30 s, başlarken, teklif
    açıkken, komuttan hemen sonra, host, relay, iki sekme). BU FİZİKSEL ANDROID / GERÇEK İNTERNET TESTİ DEĞİLDİR. */
 const fs=require('fs'),path=require('path'),os=require('os'),net=require('net'),crypto=require('crypto'),assert=require('assert/strict'),{execSync,spawn}=require('child_process'),{chromium}=require('playwright');
-const root=path.resolve(__dirname,'..'),{selfSigned,startProxy}=require('./helpers/mp11-tls-proxy.js');
+const root=path.resolve(process.env.STARS_RELAY_ROOT||path.join(__dirname,'..')),{selfSigned,startProxy}=require('./helpers/mp11-tls-proxy.js');
 const SCEN=(process.env.MP8_SCEN||'A').toUpperCase(),out=path.resolve(process.env.STARS_OUTPUT||path.join(root,'../evidence/mp8'),SCEN);fs.mkdirSync(out,{recursive:true});
 const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'buyuk',ai:8,seed:404,months:240,guests:1,every:12},
   C:{size:'buyuk',ai:6,seed:23,months:120,guests:2,every:6},R:{size:'orta',ai:5,seed:11,months:60,guests:2,every:6},N:{size:'orta',ai:5,seed:22,months:4,guests:2,every:2},
@@ -48,6 +48,7 @@ const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'bu
   O:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
   J:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
   I:{size:'s500',ai:16,seed:404,months:0,guests:2,every:6},
+  H:{size:'s500',ai:16,seed:404,months:0,guests:2,every:6},
   M:{size:'orta',ai:5,seed:22,months:0,guests:3,every:6},
   /* REINF-ROUTE.0: misafirin düşman sistemindeki ana filosuna takviye (elle + otomatik) ve kayıp hedef başına tek sevkiyat kartı — host + B */
   X:{size:'orta',ai:5,seed:22,months:0,guests:1,every:6}}[SCEN];
@@ -120,6 +121,11 @@ async function room({cutAtStart}={}){
     await tap(p,'#jEditMe');await wait(p,()=>document.getElementById('mp7Head'));await design(p,designFor(n));
     await wait(p,()=>/kaydedildi/.test(document.getElementById('jDraft').textContent));await tap(p,'#jReady');}
   await wait(H,()=>MP1Host.host.canStart().ok);await H.waitForTimeout(300);
+  if(SCEN==='H')await H.evaluate(()=>{
+    const enter=enterGame, mirror=StarsMirror.build;
+    enterGame=function(...args){enter.apply(this,args);MP1Host.host.local({kind:'speed',value:0});};
+    StarsMirror.build=(id,options)=>mirror(id,{...options,cosmeticSeed:1100+id});
+  });
   await tap(H,'[data-m="start"]');
   if(cutAtStart){await lanes[cutAtStart].down();metrics.net.cutAtStart={who:cutAtStart,at:Date.now()};await sleep(3000);await lanes[cutAtStart].up();}
   for(const n of guestNames())await wait(pg[n],()=>window.MP6Stars&&MP6Stars.S.started&&!document.getElementById('game').classList.contains('hidden'),undefined,60000);
@@ -292,6 +298,14 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
     assert.equal(new Set(seats.map(s=>s.e)).size,CONF.guests,'distinct empires');
     for(const n of guestNames()){const g=await pg[n].evaluate(()=>({e:MP1Join.empireId,name:G.p.name,url:location.pathname,engineRuns:G.speed}));
       assert.equal(g.url,'/mp/play');assert.equal(g.engineRuns,0,'guest runs no simulation');assert.equal(g.name,DESIGNS[n].name,'guest designed its own empire');}
+    if(SCEN==='H'){
+      const release=await pg.H.evaluate(async()=>{const r=await fetch('/mp/version');if(!r.ok)throw Error('MP sürüm bilgisi '+r.status);return r.json();});
+      const manifest=JSON.parse(fs.readFileSync(path.join(root,'RELEASE-MANIFEST.json'),'utf8'));
+      assert.equal(release.build,manifest.build);
+      const labels=await Promise.all(['H',...guestNames()].map(n=>pg[n].evaluate(()=>MP1View.verLine())));
+      assert.deepEqual(labels,Array(labels.length).fill('STARS '+release.mp+' · oyun '+release.build));
+      metrics.version={build:release.build,mp:release.mp,runtime:release.runtime,release:release.release,labels};
+    }
     if(SCEN==='N')metrics.notes.push('C başlarken 3 s kesildi; C kendi devletiyle oyuna girdi');
     await syncCheck('m0');await perfRow('m0');await shot(pg.B,'b-start');});
 
@@ -447,6 +461,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
   if(SCEN==='M')await require('./helpers/mp-sync-fed1-nf9.cjs')({test,pg,metrics,sleep,shot,assert,wait,tap,settle});
   if(SCEN==='X')await require('./helpers/reinf-route0-mp.cjs')({test,pg,metrics,sleep,shot,assert,wait,tap,settle,advance});
   if(SCEN==='I')await require('./helpers/mp-sync-fed1-soak.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,settle});
+  if(SCEN==='H')await require('./helpers/perf-sinir0-mp.cjs')({test,pg,metrics,out,sleep,assert,lanes,wait,tap,settle,syncCheck});
   if(SCEN==='J')await require('./helpers/mp-sync-fed1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,startRelay,stopRelay,getCode:()=>code,setCode:c=>{code=c;},
     CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance,guestGo,closeAll});
   if(SCEN==='O')await require('./helpers/mp-sync-fed0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});

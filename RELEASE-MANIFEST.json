@@ -1,11 +1,11 @@
 {
-  "phase": "MP-P42-SAHA.0",
-  "build": "96h10p43",
+  "phase": "PERF-SINIR.0",
+  "build": "96h10p44",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p43",
-  "parent_commit": "ad7cf06c49ce6753a23e46f6185df100da84ffb1",
-  "parent_zip_sha256": "a708a106f1ff37d904fa873225f36cb81ca868f46d0248d963fe6c3f78728d89",
+  "pwa_cache": "stars-v96h10p44",
+  "parent_commit": "54a52555c699d82507f6285580577571d4200380",
+  "parent_zip_sha256": "a24fdd28b5597dee4c54d1a7140be8cb5c3c2bafb42f9cdee7ed7d665971ce1c",
   "file_count": 19,
   "files": {
     "ai.js": "3028fee904ae51f09f1de6937de0cd6c756ad50172d171eb32433e43074b201c",
@@ -15,18 +15,18 @@
     "commerce-ui.js": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
     "commerce.js": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
     "construction.js": "920d6122c3d3e65ef2650c94a9a5a804c3d67b65411627e23184f0e1d5d60e08",
-    "diplomacy.js": "a18b630af5b3a89fed2717b7f70c2141d7b5c10e623bd22d1cda48a6c94b2e52",
+    "diplomacy.js": "f1c5e1b3679b4ebb635d8ba86487ec62b96f515fed0571e4217577c4dd4569a5",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
     "economy-ui.js": "68025b1bb388188435a51cca2319e92e7eb9ec6517b4e3c8437f335e2916763f",
     "economy.js": "99c1d3c3a1e553230e559dce3df0e3874dddc9f1f6a4c22e878e95b45a711043",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
     "index.html": "3bb3c8291d247981322a54cd347782a8d4d727e01a0e60c707667bcf95d63bc9",
-    "main.js": "d97b20c89aaba3de5fe27705d198863bcb41bd63d0c4204482fd8e20ddfadf92",
+    "main.js": "c79c0b521344b9effe2b87f29e674c246dd27f0c72efb66f3b1eb59536af23b7",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "5b40278d2e0c34a25db5838c87c691f0b23738b0f3b3af7b87ae1fcd85badddc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "f6706271d6847bff4e438e23adb10a018ef7bac4f0bea48bfedd5685cc40fba1",
+    "sw.js": "68a0910c1c95995b07791d3088559014b1e317dd63e8d3cfcab3c0d89da74f9b",
     "ui.js": "1b64fd32e5c9845e4c51e66df9afe13d943541124c4aed30d049fde94ef2a507"
   },
-  "description": "Eski PWA misafirinin sürüm reddi ve bağlantı kapanışı. Save8 v8, MP paket 4, protokol 1."
+  "description": "Büyük galaksilerde otomatik keşif ve filo takviyesi için sınır geometrisi paylaşımı. Save8 v8, MP paket 4, protokol 1."
 }

@@ -72,7 +72,7 @@ function create(env=process.env){
   const assets=Object.fromEntries([...ALLOW].filter(f=>f.endsWith('.js')||f==='index.html').sort()
     .map(f=>[f,digest(fs.readFileSync(path.join(ROOT,f)),'base64')]));
   const release=digest(JSON.stringify([manifest,assets,digest(guard,'base64')]),'hex');
-  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b42',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),release,files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',
+  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b43',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),release,files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',
     'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});
   const guardHash="'sha256-"+digest(guard,'base64')+"'";
   // Uyarı, oyun CSS dosyası da eksik olduğunda üstte ve kullanılabilir kalır.

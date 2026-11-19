@@ -1,0 +1,14 @@
+PASS A1 eski kimlik {"orders":1,"additionalCharge":0}
+PASS A2 eski kimlik {"orders":1,"additionalCharge":0,"reads":128}
+PASS A3 eski kimlik {"ordersAfterRetry":1,"additionalCharge":0,"ordersAfterNewCommand":2}
+PASS A1 güncel kimlik {"orders":1,"additionalCharge":0}
+PASS A2 güncel kimlik {"orders":1,"additionalCharge":0,"reads":128}
+PASS A3 güncel kimlik {"ordersAfterRetry":1,"additionalCharge":0,"ordersAfterNewCommand":2}
+PASS P40 eski kayıt {"source":"p40 şema fikstürü","ordersAfterRetry":1,"ordersAfterNewCommand":2}
+PASS Oyuncu ve kayıt kapsamı {"sameText":3,"accepted":3}
+PASS Sınırlı geçmiş {"legacyLimit":512,"currentOrders":1}
+PASS Karar ödülü yeni host {"reward":180,"additionalReward":0}
+PASS Federasyon oyu yeni host {"votesByPlayer":1}
+PASS Anlaşma kabulü yeni host {"mineralReceived":100,"energyPaid":50,"additionalTransfer":0}
+PASS J3/J4 yerel VM {"hostResultMs":44.78,"hostQueueMs":44.94,"guestYardHtmlMs":72.21,"orders":1,"guestRows":1,"cost":{"ala":32},"automaticRetries":0,"explicitRetrySameCidAndSeq":true}
+GEÇEN: 13 KALAN: 0
