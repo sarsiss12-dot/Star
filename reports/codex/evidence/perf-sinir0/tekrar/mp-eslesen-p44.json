@@ -1,0 +1,401 @@
+{
+ "results": [
+  {
+   "name": "H0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 16 AI, s500, seed 404; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 18423
+  },
+  {
+   "name": "H1 aynı gün: keşif, müttefik sensörü, rota ve takviye iki misafire yetkili aynadan yansır",
+   "status": "PASS",
+   "ms": 5324
+  },
+  {
+   "name": "H2 yeniden bağlanma ve tersane: bir satır ve bir kesinti",
+   "status": "PASS",
+   "ms": 6866
+  }
+ ],
+ "metrics": {
+  "scen": "H",
+  "conf": {
+   "size": "s500",
+   "ai": 16,
+   "seed": 404,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 362,
+    "buildMs": 448,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 539,
+    "buildMs": 572,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "paylaşım-ve-sipariş",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     3,
+     3
+    ],
+    "mirrorEq": true,
+    "revMs": 643,
+    "buildMs": 774,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "paylaşım-ve-sipariş",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     3,
+     3
+    ],
+    "mirrorEq": true,
+    "revMs": 961,
+    "buildMs": 1071,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "yarım-gün-takviye",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 456,
+    "buildMs": 556,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "yarım-gün-takviye",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 710,
+    "buildMs": 800,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "yeniden-bağlandı",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     6,
+     6
+    ],
+    "mirrorEq": true,
+    "revMs": 637,
+    "buildMs": 715,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "yeniden-bağlandı",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 793,
+    "buildMs": 878,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "tersane-sonrası",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     7,
+     7
+    ],
+    "mirrorEq": true,
+    "revMs": 248,
+    "buildMs": 301,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "tersane-sonrası",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     5,
+     5
+    ],
+    "mirrorEq": true,
+    "revMs": 493,
+    "buildMs": 575,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 44.3,
+      "p95": 44.3,
+      "max": 44.3
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 17,
+     "dom": 710,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 197.8,
+       "p95": 197.8,
+       "max": 197.8
+      },
+      "refresh": {
+       "n": 0
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 791,
+      "heapMB": 16,
+      "dom": 725,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 29,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 193.1,
+       "p95": 193.1,
+       "max": 193.1
+      },
+      "refresh": {
+       "n": 0
+      },
+      "longtask": {
+       "n": 3,
+       "med": 53,
+       "p95": 56,
+       "max": 56
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 772,
+      "heapMB": 13,
+      "dom": 723,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 24,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 333,
+  "actualWorld": {
+   "seed": 404,
+   "size": "s500",
+   "systems": 500,
+   "states": 19
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "border": {
+   "states": [
+    {
+     "label": "paylaşım-ve-sipariş",
+     "guests": [
+      {
+       "id": 1,
+       "sha": "ee9105cbd8cffb029064eeebe8ade359f26f74216fba6172e2e0d6385ad6ff0c",
+       "day": 0
+      },
+      {
+       "id": 2,
+       "sha": "e8a857d746562fb1f9ef9d08c9231348f3b283df2783cafe6b2db205715f01f0",
+       "day": 0
+      }
+     ]
+    },
+    {
+     "label": "yarım-gün-takviye",
+     "guests": [
+      {
+       "id": 1,
+       "sha": "99aad1bc09c1b2fa7521ef6e1c376af9696988131d2fc0213195b53c8fc33d19",
+       "day": 0.5
+      },
+      {
+       "id": 2,
+       "sha": "efdfaffed430de88344987b6cdc4918e3ea2b8cc5e14061641f1d07ff469f243",
+       "day": 0.5
+      }
+     ]
+    },
+    {
+     "label": "yeniden-bağlandı",
+     "guests": [
+      {
+       "id": 1,
+       "sha": "99aad1bc09c1b2fa7521ef6e1c376af9696988131d2fc0213195b53c8fc33d19",
+       "day": 0.5
+      },
+      {
+       "id": 2,
+       "sha": "efdfaffed430de88344987b6cdc4918e3ea2b8cc5e14061641f1d07ff469f243",
+       "day": 0.5
+      }
+     ]
+    },
+    {
+     "label": "tersane-sonrası",
+     "guests": [
+      {
+       "id": 1,
+       "sha": "478b7780659a5daffe04d75913ae26f862efc63ab695b67e659ae913b78d6df9",
+       "day": 0.5
+      },
+      {
+       "id": 2,
+       "sha": "728afec8c5859f2dcda617b87797e7128e95a5352ff6c088622462ca30168772",
+       "day": 0.5
+      }
+     ]
+    }
+   ],
+   "ids": [
+    1,
+    2
+   ],
+   "fixture": {
+    "b": 1,
+    "c": 2,
+    "yard": 281,
+    "remote": 23,
+    "threat": 92,
+    "scout": 5,
+    "scoutRoute": [
+     361
+    ],
+    "fleet": 93,
+    "route": [
+     10
+    ],
+    "queueClass": "kor"
+   },
+   "visible": {
+    "visible": true,
+    "threat": true,
+    "scout": [
+     361
+    ],
+    "route": [
+     10
+    ],
+    "queued": true
+   },
+   "secondGuestSeesNativeSystem": true,
+   "shipmentAfterStep": [
+    {
+     "id": 94,
+     "path": [
+      10
+     ],
+     "status": "moving"
+    }
+   ],
+   "order": {
+    "hostRows": [
+     0,
+     1
+    ],
+    "guestRows": [
+     0,
+     1
+    ],
+    "spent": {
+     "ala": 32
+    },
+    "price": {
+     "ala": 32
+    }
+   }
+  },
+  "errors": []
+ }
+}

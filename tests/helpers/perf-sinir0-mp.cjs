@@ -1,6 +1,9 @@
 'use strict';
 
-module.exports = async ({ test, pg, metrics, sleep, assert, lanes, wait, tap, settle, syncCheck }) => {
+const fs = require('node:fs');
+const path = require('node:path');
+
+module.exports = async ({ test, pg, metrics, out, sleep, assert, lanes, wait, tap, settle, syncCheck }) => {
   const host = pg.H, b = pg.B, c = pg.C;
   const ids = await Promise.all([b, c].map(page => page.evaluate(() => MP1Join.empireId)));
   const proof = metrics.border = { states: [], ids };
@@ -11,11 +14,13 @@ module.exports = async ({ test, pg, metrics, sleep, assert, lanes, wait, tap, se
     for (const [page, id] of [[b, ids[0]], [c, ids[1]]]) {
       const expected = await host.evaluate(e => __mp8.mirrorOf(e), id);
       await wait(page, rev => MP6Stars.S.appliedRev === rev, expected.rev);
-      const observed = await page.evaluate(async () => ({
-        sha: await __sha(__canon(MP6Stars.S.mirror)), day: G.day, speed: G.speed
-      }));
+      const observed = await page.evaluate(async capture => {
+        const json = __canon(MP6Stars.S.mirror);
+        return { sha: await __sha(json), day: G.day, speed: G.speed, ...(capture ? { json } : {}) };
+      }, process.env.STARS_H_RAW === '1');
       assert.equal(observed.sha, expected.sha, label + ' tam ayna');
       assert.equal(observed.speed, 0, label + ' misafir simülasyon yürütmüyor');
+      if (observed.json) fs.writeFileSync(path.join(out, label + '-' + id + '.json'), observed.json);
       states.push({ id, sha: observed.sha, day: observed.day });
     }
     proof.states.push({ label, guests: states });

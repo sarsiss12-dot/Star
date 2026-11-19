@@ -298,6 +298,14 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
     assert.equal(new Set(seats.map(s=>s.e)).size,CONF.guests,'distinct empires');
     for(const n of guestNames()){const g=await pg[n].evaluate(()=>({e:MP1Join.empireId,name:G.p.name,url:location.pathname,engineRuns:G.speed}));
       assert.equal(g.url,'/mp/play');assert.equal(g.engineRuns,0,'guest runs no simulation');assert.equal(g.name,DESIGNS[n].name,'guest designed its own empire');}
+    if(SCEN==='H'){
+      const release=await pg.H.evaluate(async()=>{const r=await fetch('/mp/version');if(!r.ok)throw Error('MP sürüm bilgisi '+r.status);return r.json();});
+      const manifest=JSON.parse(fs.readFileSync(path.join(root,'RELEASE-MANIFEST.json'),'utf8'));
+      assert.equal(release.build,manifest.build);
+      const labels=await Promise.all(['H',...guestNames()].map(n=>pg[n].evaluate(()=>MP1View.verLine())));
+      assert.deepEqual(labels,Array(labels.length).fill('STARS '+release.mp+' · oyun '+release.build));
+      metrics.version={build:release.build,mp:release.mp,runtime:release.runtime,release:release.release,labels};
+    }
     if(SCEN==='N')metrics.notes.push('C başlarken 3 s kesildi; C kendi devletiyle oyuna girdi');
     await syncCheck('m0');await perfRow('m0');await shot(pg.B,'b-start');});
 
@@ -453,7 +461,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
   if(SCEN==='M')await require('./helpers/mp-sync-fed1-nf9.cjs')({test,pg,metrics,sleep,shot,assert,wait,tap,settle});
   if(SCEN==='X')await require('./helpers/reinf-route0-mp.cjs')({test,pg,metrics,sleep,shot,assert,wait,tap,settle,advance});
   if(SCEN==='I')await require('./helpers/mp-sync-fed1-soak.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,settle});
-  if(SCEN==='H')await require('./helpers/perf-sinir0-mp.cjs')({test,pg,metrics,sleep,assert,lanes,wait,tap,settle,syncCheck});
+  if(SCEN==='H')await require('./helpers/perf-sinir0-mp.cjs')({test,pg,metrics,out,sleep,assert,lanes,wait,tap,settle,syncCheck});
   if(SCEN==='J')await require('./helpers/mp-sync-fed1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,startRelay,stopRelay,getCode:()=>code,setCode:c=>{code=c;},
     CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance,guestGo,closeAll});
   if(SCEN==='O')await require('./helpers/mp-sync-fed0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});

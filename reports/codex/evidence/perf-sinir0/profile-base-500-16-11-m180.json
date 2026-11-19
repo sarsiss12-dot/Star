@@ -1,0 +1,191 @@
+{
+  "key": "500-16-11-m180",
+  "identity": {
+    "startDay": 5400,
+    "systems": 500,
+    "ai": 16,
+    "build": "96h10p43"
+  },
+  "times": [
+    5950.399999999994,
+    5048.600000000006,
+    5168.5
+  ],
+  "top": [
+    {
+      "fn": "explorationContext /main.js:4548",
+      "ms": 2314.78,
+      "percent": 14.099375999156027
+    },
+    {
+      "fn": "reinforcementThreats /main.js:5749",
+      "ms": 1933.801,
+      "percent": 11.778824513147654
+    },
+    {
+      "fn": "isSupplyNode /main.js:3541",
+      "ms": 1775.669,
+      "percent": 10.815639015822406
+    },
+    {
+      "fn": "supplyDistance /main.js:3596",
+      "ms": 1642.42,
+      "percent": 10.004016419933576
+    },
+    {
+      "fn": "tradeLinks /economy.js:234",
+      "ms": 1403.286,
+      "percent": 8.547445955275087
+    },
+    {
+      "fn": "empireIncome /economy.js:364",
+      "ms": 975.418,
+      "percent": 5.941292536804696
+    },
+    {
+      "fn": "tradeInfo /economy.js:313",
+      "ms": 720.384,
+      "percent": 4.387874821700557
+    },
+    {
+      "fn": "autoExploreTick /main.js:4663",
+      "ms": 592.057,
+      "percent": 3.6062322362955963
+    },
+    {
+      "fn": "influenceAt /diplomacy.js:41",
+      "ms": 570.465,
+      "percent": 3.474714888394812
+    },
+    {
+      "fn": "colonyOutput /economy.js:47",
+      "ms": 540.266,
+      "percent": 3.290772113790524
+    },
+    {
+      "fn": "(garbage collector) :0",
+      "ms": 427.821,
+      "percent": 2.605867140434482
+    },
+    {
+      "fn": "aiBuildingDelta /ai.js:194",
+      "ms": 363.775,
+      "percent": 2.215761542821773
+    },
+    {
+      "fn": "(program) :0",
+      "ms": 352.241,
+      "percent": 2.145507694605413
+    },
+    {
+      "fn": "claimOf /diplomacy.js:62",
+      "ms": 338.396,
+      "percent": 2.0611774944532106
+    },
+    {
+      "fn": "fleetUpkeep /main.js:3707",
+      "ms": 159.782,
+      "percent": 0.9732356836922508
+    },
+    {
+      "fn": "stepFleets /main.js:4409",
+      "ms": 133.422,
+      "percent": 0.8126763427018532
+    },
+    {
+      "fn": "hasCivic /main.js:2417",
+      "ms": 128.009,
+      "percent": 0.779705640396048
+    },
+    {
+      "fn": "focusMods /economy.js:9",
+      "ms": 124.369,
+      "percent": 0.7575343201682389
+    },
+    {
+      "fn": "EconomyLedger.observe.sy.system /economic-ledger.js:59",
+      "ms": 121.057,
+      "percent": 0.7373608551697488
+    },
+    {
+      "fn": "routeVolume /economy.js:274",
+      "ms": 117.046,
+      "percent": 0.7129297657648745
+    },
+    {
+      "fn": "explorationGraph /main.js:4607",
+      "ms": 112.1,
+      "percent": 0.6828035707520329
+    },
+    {
+      "fn": "txCaptureGraph /diplomacy.js:2176",
+      "ms": 95.067,
+      "percent": 0.5790551923343757
+    },
+    {
+      "fn": "structTick /main.js:5516",
+      "ms": 58.899,
+      "percent": 0.3587551071697055
+    },
+    {
+      "fn": "structAllowed /main.js:5452",
+      "ms": 48.109,
+      "percent": 0.2930329793515571
+    },
+    {
+      "fn": "aiEconomyPlan /ai.js:244",
+      "ms": 46.8,
+      "percent": 0.2850598315004027
+    },
+    {
+      "fn": "arrive /main.js:4749",
+      "ms": 45.079,
+      "percent": 0.2745771825685182
+    },
+    {
+      "fn": "fleetAlloyUpkeep /main.js:3697",
+      "ms": 44.609,
+      "percent": 0.271714402209433
+    },
+    {
+      "fn": "fleetSupply /main.js:3635",
+      "ms": 42.787,
+      "percent": 0.2606165600514472
+    },
+    {
+      "fn": "tick /construction.js:92",
+      "ms": 41.526,
+      "percent": 0.2529357812582419
+    },
+    {
+      "fn": "tradeHubs /economy.js:183",
+      "ms": 39.613,
+      "percent": 0.24128365609456093
+    },
+    {
+      "fn": "aiView /ai.js:26",
+      "ms": 36.936,
+      "percent": 0.2249779900918563
+    },
+    {
+      "fn": "colonyUsed /economy.js:39",
+      "ms": 36.886,
+      "percent": 0.22467343898982592
+    },
+    {
+      "fn": "hungerMul /economy.js:3409",
+      "ms": 35.568,
+      "percent": 0.21664547194030606
+    },
+    {
+      "fn": "reinforcementRoutes /main.js:5783",
+      "ms": 34.546,
+      "percent": 0.21042044741480578
+    },
+    {
+      "fn": "recalcMods /main.js:2423",
+      "ms": 32.351,
+      "percent": 0.19705065403567368
+    }
+  ]
+}

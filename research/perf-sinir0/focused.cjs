@@ -50,14 +50,20 @@ const worlds = [control, candidate].map(root => {
   h.run(scenario);
   return h;
 });
+fs.mkdirSync(output, {recursive:true});
 const states = [];
 function check(label, code, observe = true) {
   const records = worlds.map(h => {
-    const value = h.run(code);
+    h.run(code);
     const observation = observe ? h.run('observation()') : null;
-    return { value, observation, save: h.run('serialize()'), rng: h.run('RND_STATE') };
+    return { observation, save: h.run('serialize()'), rng: h.run('RND_STATE') };
   });
-  assert.deepEqual(records[0], records[1], label);
+  if (records[0].save !== records[1].save){
+    records.forEach((record, index)=>fs.writeFileSync(path.join(output, 'focused-first-'+index+'.save'), record.save));
+    assert.fail(label + ' Save8 farkı');
+  }
+  assert.equal(records[0].observation, records[1].observation, label + ' gözlem');
+  assert.equal(records[0].rng, records[1].rng, label + ' RNG');
   const state = records[0];
   states.push({ label, day:JSON.parse(state.save).day, rng:state.rng, save:sha(state.save),
     ...(state.observation ? { observation:JSON.parse(state.observation) } : {}) });
@@ -90,6 +96,5 @@ const order = JSON.parse(h.run(`
   JSON.stringify({tie,tieCalls,core,coreCalls});
 `));
 assert.deepEqual(order, { tie:1,tieCalls:[1,2],core:2,coreCalls:[1] });
-fs.mkdirSync(output, {recursive:true});
 fs.writeFileSync(path.join(output,'focused.json'), JSON.stringify({ equal:true, states, order }, null, 2)+'\n');
 console.log('PASS', states.length, 'durum; eşit puan / çekirdek sırası aynı');

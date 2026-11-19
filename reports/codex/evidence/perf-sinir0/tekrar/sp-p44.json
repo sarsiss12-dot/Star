@@ -1,0 +1,38 @@
+{
+ "root": "/workspace/scratch/0c4fbf591726/Star",
+ "results": [
+  {
+   "name": "S1 sipariş sınırdan önce (FİLO TAKVİYESİ dokunuşu), ana filo düşman sistemine geçer; gerçek oyun döngüsünde tersane çıkışı → hareket → ana filo büyür",
+   "status": "FAIL",
+   "error": "Error: dokunma noktası başka öğede: [data-a=\"reinf\"][data-x=\"24\"]\n    at tap (/workspace/scratch/0c4fbf591726/Star/tests/browser-reinf-route0-sp.cjs:21:19)\n    at async /workspace/scratch/0c4fbf591726/Star/tests/browser-reinf-route0-sp.cjs:38:4\n    at async test (/workspace/scratch/0c4fbf591726/Star/tests/browser-reinf-route0-sp.cjs:11:42)\n    at async /workspace/scratch/0c4fbf591726/Star/tests/browser-reinf-route0-sp.cjs:24:3"
+  },
+  {
+   "name": "S2 ana filo yok → Haberler → Sevkiyatlar tek kart (dokunuş); kayıt → yenile → OYUNA DEVAM ET → aynı kart ve toplam",
+   "status": "PASS",
+   "c0": {
+    "n": 1,
+    "head": [
+     "Filo #24 · Hedef kayıp · 7 takviye gemisi"
+    ],
+    "at": [
+     [
+      "Ithkrim-95: 5 gemi",
+      "Wynaevos: 2 gemi"
+     ]
+    ]
+   },
+   "c1": {
+    "n": 1,
+    "head": [
+     "Filo #24 · Hedef kayıp · 7 takviye gemisi"
+    ],
+    "at": [
+     [
+      "Ithkrim-95: 5 gemi",
+      "Wynaevos: 2 gemi"
+     ]
+    ]
+   }
+  }
+ ]
+}

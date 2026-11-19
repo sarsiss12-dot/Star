@@ -1,0 +1,13 @@
+node:assert:152
+  throw new AssertionError(obj);
+  ^
+
+AssertionError [ERR_ASSERTION]: kaydet ve yeniden yükle
+
+... Skipped lines
+{
+  observation: '{"blocked":[6],"known":[5,6,15,18,19,24,25,35,54,82,89,115,121,133,143,144,176,193,209,210,224,239,241,244,258,259,263,279,298,300,317,333,334,337,351,354
+  rng: -32883311,
+  save: '{"v":8,"cfg":{"name":"Yeni Hanedan","race":"insan","traits":[],"size":"s500","shape":"sarmal","diff":"normal","seed":11,"color":null,"ethics":{"mil":0,"aut":0,"m
+  value: {
+    source: {
