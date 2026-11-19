@@ -41,6 +41,14 @@ node research/p43-audit/browser.cjs join 500
 
 `browser.cjs` MP için aynı odada iki gerçek tarayıcı süreci açar. Tersane düğmesi ve kuyruk doğrulaması deponun p42 saha testindeki `order` işlevindendir. Misafirin veri alımından çizime kadar geçen süre, panel satırını testin gözlediği süre ve host kabulü ayrı alanlardadır. Tek oyunculu geç sahnede insan filosu kalmadığında seçili rota sayılmaz. Kareler için `frames`, Canvas için `draw`, JS uzun işleri için `long`, örnek sonu JS belleği için `heap` alanlarını kullanın.
 
+500 sistem / 16 AI, tohum 11’in tam 120. ay girdisi [500-16-11-m120.save.gz](fixtures/500-16-11-m120.save.gz) dosyasında. Bu tek deneyi doğrudan çalıştırmak için aşağıdaki komutlar yeterlidir.
+
+```bash
+mkdir -p /tmp/stars-p43
+gzip -dc research/p43-audit/fixtures/500-16-11-m120.save.gz > /tmp/stars-p43/500-16-11-m120.save
+node research/p43-audit/chromium-pilot.cjs 500-16-11-m120
+```
+
 ## Eşleştirilmiş performans deneyi
 
 ```bash

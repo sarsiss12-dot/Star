@@ -1,0 +1,38 @@
+{
+  "tohum": 11,
+  "sistem": 500,
+  "ai": 16,
+  "taban": "54a52555c699d82507f6285580577571d4200380",
+  "ilk_ay": 0,
+  "son_ay": 120,
+  "aynı_olay": 5514,
+  "aynı_aylık_durum": 121,
+  "kontrol_noktaları": [
+    {
+      "month": 0,
+      "sha256": "bc95990e58cf45ef6274d921cd6c77e4c2d89fa1ccb0e66564d9f089d9234d98",
+      "rng": -1328947915
+    },
+    {
+      "month": 3,
+      "sha256": "18554dd9a9f89bbdb864f07dd9f98b791ec7ffb9b28a4761e8313cdf63c59b84",
+      "rng": 39876919
+    },
+    {
+      "month": 30,
+      "sha256": "bf262e0f9c3ad5d9c82d4b18e01048b7e55b36ff1aa06416a26bc45df8931d9c",
+      "rng": -291978896
+    },
+    {
+      "month": 60,
+      "sha256": "3f89fce2d64945442e9ba7ec4e37f79619c753ce62748a9fc03dba9242fdf392",
+      "rng": 997682766
+    },
+    {
+      "month": 120,
+      "sha256": "30b15d102f8faccf2307a8fbcaceca5117b6b380504e5802877ddbfb54965164",
+      "rng": -1823116925
+    }
+  ],
+  "gözlem": "P43 normal hazırlık ve yarım günlük üretim motoru. Aynı 120 aylık koşu ayrı Node sürecinde yinelendi. Oyun kaynağı aynı, ikinci koşunun test ortamı standart Node global nesnesi kullandı."
+}
