@@ -2,7 +2,7 @@
 
 18–19 Kasım 2026 · Araştırma raporu
 
-**1. Büyük galakside keşif ve takviyenin sınır taramasını daraltın.** Gerçek Chromium’da 500 sistem için erken oyun tam ay p95’i 1.850 → 688 ms, ilk geç oyun örneğinde 6.290 → 5.161 ms oldu. Kazanım sırasıyla %62,8 ve %17,9. Küçük haritada ortanca süre %6,7 arttı. Büyük galaksi pilotu için yayından önce geç oyun p95 kazanımını ve küçük harita korumasını doğrulamak gerekiyor.
+**1. Büyük galakside keşif ve takviyenin sınır taramasını daraltın.** Gerçek Chromium’da 500 sistem için erken oyun tam ay p95’i 1.850 → 688 ms, ilk geç oyun örneğinde 6.290 → 5.161 ms oldu. Erken oyun kazanımı %62,8. İki bağımsız geç oyun ölçümünde p95 kazancı %17,9 ve %13,9 oldu. Küçük haritada ortanca süre %6,7 arttı. Büyük galaksi pilotu için yayından önce geç oyun p95 kazanımını ve küçük harita korumasını doğrulamak gerekiyor.
 
 **2. AI için en yüksek öncelik, bir binayı başka bir ihtiyaç için yıkıp ilk fırsatta aynısını yeniden satın alma döngüsü.** Üç 100 sistem kampanyasında 915 tamamlanmış yıkımdan 261’inin ardından ilk ücretli iş aynı binaydı. Sipariş en geç altı ay içinde verildi ve bina yeniden tamamlandı. Devletlerin hurda iadesi sonrası toplam 32.803 minerali bu işlere gitti. 182 döngü dökümhaneydi. Faturaya üretimsiz günlerin değeri dahil değil.
 
@@ -158,6 +158,7 @@ Paket boyutu WebSocket uygulama yükü ve relay öneki dahil, IP/TLS gideri hari
 | Gerçek SP frame() | Gün | Ay geçişi n | rAF ms | En uzun kare ms | Uzun iş n · ms |
 |---|---|---|---|---|---|
 | [chromium-100-9-11-m120](../../research/p43-audit/raw/chromium-100-9-11-m120.json) | 3.628 → 3.693 | 3 | 16,7 / 16,8 | 350 | 3 · 337 / 345 |
+| [chromium-500-16-11-m120](../../research/p43-audit/raw/chromium-500-16-11-m120.json) | 3.628 → 3.691 | 3 | 16,7 / 33,4 | 967 | 7 · 59 / 957 |
 | [chromium-500-16-11-m3](../../research/p43-audit/raw/chromium-500-16-11-m3.json) | 118 → 181 | 3 | 16,7 / 33,3 | 250 | 4 · 248 / 263 |
 
 Fiziksel Android / mobil GPU, gerçek LAN, canlı Render ve bu adayla uzun oturum saha tekrarı **NOT RUN**. Önceki MP raporundaki Android donması açık. Bu rapordaki kontrollü yayın sıklığı veya yazılım çizimi bir telefon FPS garantisi sağlamaz.
@@ -175,16 +176,17 @@ Normal oyun döngüsünün ilk 500 sistem geç oyun koşusunda üç ay geçişi 
 | 500-16-11-m3 | Node | 4.378 / 5.767 | 1.284 / 1.955 | -70,7% | -66,1% |
 | 500-16-11-m3 | Chromium | 1.239 / 1.850 | 456 / 688 | -63,2% | -62,8% |
 | 500-16-11-m120 | Chromium · ilk koşu | 5.493 / 6.290 | 4.647 / 5.161 | -15,4% | -17,9% |
+| 500-16-11-m120 | Chromium · tekrar | 2.395 / 2.572 | 2.100 / 2.213 | -12,3% | -13,9% |
 
 120. ay Node örneklemesinde doğrudan CPU payları keşif bağlamı için %22,9, sınır etkisi için %18,0 ve takviye tehdidi için %11,3 idi. İç içe çağrıların toplam süresi yerine burada yalnız her işlevin kendi gövdesi sayıldı. [Geç oyun V8 örnekleri](../../research/p43-audit/raw/cpu-500-16-11-m120.json) · [Erken oyun V8 örnekleri](../../research/p43-audit/raw/cpu-500-16-11-m3.json)
 
-Sıra kontrol–pilot–pilot–kontrol. Her kol yeni dünya kopyası veya tarayıcı bağlamı, bir ay ısınma ve 10 örnek kullandı. Her ortam ve kayıt için kol başına 20 tam ay zamanlaması var. İki tekrar aynı 10 deterministik ayı izledi. Her ay gün, RNG ve serileştirilmiş Save8’in SHA-256 değeri karşılaştırıldı. Çiftlerin aynı içerikte kalması ile hız kazanımı ayrı koşullardır. Pilot için uçtan uca MP eşdeğerliği henüz **NOT RUN**. [Node 100-9-11-m120](../../research/p43-audit/raw/pilot-100-9-11-m120.json) · [Chromium 100-9-11-m120](../../research/p43-audit/raw/chromium-100-9-11-m120.json) · [Node 500-16-11-m3](../../research/p43-audit/raw/pilot-500-16-11-m3.json) · [Chromium 500-16-11-m3](../../research/p43-audit/raw/chromium-500-16-11-m3.json)
+Sıra kontrol–pilot–pilot–kontrol. Her kol yeni dünya kopyası veya tarayıcı bağlamı, bir ay ısınma ve 10 örnek kullandı. Her ortam ve kayıt için kol başına 20 tam ay zamanlaması var. İki tekrar aynı 10 deterministik ayı izledi. İlk koşu ile daha sonraki koşunun mutlak süreleri paylaşımlı makine yüküne duyarlıdır. Performans farkı her koşunun kendi denetimiyle hesaplandı. Her ay gün, RNG ve serileştirilmiş Save8’in SHA-256 değeri karşılaştırıldı. Çiftlerin aynı içerikte kalması ile hız kazanımı ayrı koşullardır. Pilot için uçtan uca MP eşdeğerliği henüz **NOT RUN**. [Node 100-9-11-m120](../../research/p43-audit/raw/pilot-100-9-11-m120.json) · [Chromium 100-9-11-m120](../../research/p43-audit/raw/chromium-100-9-11-m120.json) · [Node 500-16-11-m3](../../research/p43-audit/raw/pilot-500-16-11-m3.json) · [Chromium 500-16-11-m3](../../research/p43-audit/raw/chromium-500-16-11-m3.json)
 
-İlk geç oyun koşusunda her kolda 20 tam ay ölçüldü ve eşleştirilen gün, Save8 SHA-256 ve RNG değerleri aynıydı. Çalışma alanı yenilenince bu koşudan kalan toplu değerler ayrı dosyaya aktarıldı. [İlk koşunun özet kaydı](../../research/p43-audit/onceki-gec-oyun-olcumu.json)
+İlk geç oyun koşusunda her kolda 20 tam ay ölçüldü ve eşleştirilen gün, Save8 SHA-256 ve RNG değerleri aynıydı. Çalışma alanı yenilenince bu koşudan kalan toplu değerler ayrı dosyaya aktarıldı. Aynı girdinin bağımsız tekrarında kontrol p95’i 2.572 ms, pilot p95’i 2.213 ms oldu (-13,9%). Tekrarın 40 aylık ham zaman ve hash kaydı saklandı. [Tekrar · ham aylar, kareler, Save8 ve RNG](../../research/p43-audit/raw/chromium-500-16-11-m120.json) [İlk koşunun özet kaydı](../../research/p43-audit/onceki-gec-oyun-olcumu.json)
 
 ## İlk iki geliştirme işi ve kabul sırası
 
-**1. Performans — büyük haritada sınır etkisi aramasını daralt.** Önce 500 sistemde, keşif ve takviye yardımcılarının salt okunur çağrı ömründe pilotu ürün koduna taşı. Her sistem için etkili sahibi gün boyunca saklayan bir önbelleğe ihtiyaç yok. 100 sistemde pilotu açma kararını küçük haritanın kendi profilinden ver. Yayın kararını iki harita boyutunun kabul ölçütlerine birlikte bağla. İlk 120. ay koşusundaki %17,9 p95 kazanımı, önerilen %20 yayın eşiğinin altında kaldı.
+**1. Performans — büyük haritada sınır etkisi aramasını daralt.** Önce 500 sistemde, keşif ve takviye yardımcılarının salt okunur çağrı ömründe pilotu ürün koduna taşı. Her sistem için etkili sahibi gün boyunca saklayan bir önbelleğe ihtiyaç yok. 100 sistemde pilotu açma kararını küçük haritanın kendi profilinden ver. 100 sistemde ortanca için %5 üst sınırını ve 500 sistemde iki ayrı kayıt için %20 p95 hedefini birlikte uygula. İki 120. ay koşusunda p95 iyileşmesi %17,9 ve %13,9. Pilot bugünkü haliyle geç oyun yayın eşiğini karşılamıyor.
 
 **Kabul.** Aynı 3. ve 120. ay Save8’lerinden gerçek Chromium’da en az dört dengeli AB/BA çiftiyle 500 sistem tam ay p95’ini en az %20 azalt. 100 sistemde ortanca ve p95 gerilemesi en çok %5 olsun. Aynı makinede tek ölçüm işi koşsun. Ay ay Save8 baytları, RNG, AI emir sırası, hedefler ve ödemeler aynı olsun. 11/99/404 tohumlarını 120/240’a veya doğal sona kadar ilerlet. İlk değişikliği bulmak için özellikle 30→31. ayı, sahiplik devrini, aynı gün geri almayı ve kayıt yüklemeyi sına. MP’de host + iki misafirle yayımlanan görünür durum/ayna içeriğini, yetkili son revizyonu, tek sipariş ve tek kesintiyi karşılaştır. Taşıma zamanı veya rastgele ağ kimliği yerine aynı mantıksal dünya adımını eşleştir. Kayıt hashinden alan temizleme, görünmeyen veriyi misafire ekleme veya düşünme sıklığını azaltma kabul kapsamında yok.
 
