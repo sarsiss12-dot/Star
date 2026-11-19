@@ -1,7 +1,7 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {chromium}=require('playwright'),{create}=require('../../research/mp1/server/relay');
-const [mode,sys]=process.argv.slice(2),n=+sys,ai=n===100?9:16,mp=mode==='mp';
+const [mode,sys]=process.argv.slice(2),n=+sys,ai=n===100?9:16,mp=mode==='mp'||mode==='join';
 const data={mode,n,ai,seed:11,rows:[],errors:[]},browsers=[],out=path.join(__dirname,'raw',mode+'-'+n+'.json');
 function write(){fs.writeFileSync(out,JSON.stringify(data));}
 const viewport={width:844,height:390},wait=(p,f,x)=>p.waitForFunction(f,x,{timeout:20000}),tap=(p,s)=>p.locator(s).first().tap({timeout:8000});
@@ -34,7 +34,13 @@ const start=p=>p.evaluate(()=>{window.T={active:true};}),stop=p=>p.evaluate(()=>
 let relay;
 async function main(){relay=create({MP1_BIND:'127.0.0.1',MP1_PORT:'0'});const s=await relay.start(),url='http://127.0.0.1:'+s.address().port,h=await page(),g=mp?await page():null,wire=[];
  if(g)g.on('websocket',w=>w.on('framereceived',f=>{try{const m=JSON.parse(String(f.payload).slice(1));wire.push([m.type||m.t,Buffer.byteLength(f.payload)]);}catch{}}));
- if(mp)await room(h,g,url);else{await h.goto(url);await wait(h,()=>typeof deserialize==='function');}
+ if(mp)await room(h,g,url);
+ if(mode==='join'){
+  const full=wire.filter(([kind])=>kind==='mirror');
+  data.start={frames:wire.slice(),full,appliedRev:await g.evaluate(()=>MP6Stars.S.appliedRev)};
+  assert(full.length&&data.start.appliedRev>0,'Tam dünya ilk katılımda uygulanmadı');return;
+ }
+ if(!mp){await h.goto(url);await wait(h,()=>typeof deserialize==='function');}
  await h.evaluate(probes,false);if(g)await g.evaluate(probes,true);
  for(const month of [3,120]){
  if(mp){let st;do{st=await h.evaluate(t=>{UI.closeModal();G.speed=0;G.autoSave=false;step(Math.min(120,Math.max(0,Math.ceil((t*30-G.day)*2))));MP1Host.host.publish();return [G.day,!!G.over];},month);if(st[1])throw Error('world ended '+st[0]);}while(st[0]<month*30);}

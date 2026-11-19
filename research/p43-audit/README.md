@@ -35,6 +35,8 @@ node research/p43-audit/browser.cjs mp 100
 node research/p43-audit/browser.cjs mp 500
 node research/p43-audit/browser.cjs sp 100
 node research/p43-audit/browser.cjs sp 500
+node research/p43-audit/browser.cjs join 100
+node research/p43-audit/browser.cjs join 500
 ```
 
 `browser.cjs` MP için aynı odada iki gerçek tarayıcı süreci açar. Tersane düğmesi ve kuyruk doğrulaması deponun p42 saha testindeki `order` işlevindendir. Misafirin veri alımından çizime kadar geçen süre, panel satırını testin gözlediği süre ve host kabulü ayrı alanlardadır. Tek oyunculu geç sahnede insan filosu kalmadığında seçili rota sayılmaz. Kareler için `frames`, Canvas için `draw`, JS uzun işleri için `long`, örnek sonu JS belleği için `heap` alanlarını kullanın.

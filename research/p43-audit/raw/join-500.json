@@ -1,0 +1,1 @@
+{"mode":"join","n":500,"ai":16,"seed":11,"rows":[],"errors":[],"chromium":"146.0.7680.66","start":{"frames":[["welcome",51],["assign",194],["lobby",686],["lresult",64],["lobby",830],["lresult",64],["lobby",826],["assign",191],["snapshot",32953],["lobby",930],["delta",86],["lobby",930],["lobby",930],["pulse",65],["mirror",103866]],"full":[["mirror",103866]],"appliedRev":1}}

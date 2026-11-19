@@ -1,0 +1,31 @@
+{
+  "kaynak": "İlk Chromium koşusunun oturumda doğrulanan ve rapora aktarılan toplu çıktısı. Bu dosya aylık ham örnekleri içermez.",
+  "base": "54a52555c699d82507f6285580577571d4200380",
+  "chromium": "146.0.7680.66",
+  "fixture": "500-16-11-m120",
+  "armOrder": [
+    "base",
+    "pilot",
+    "pilot",
+    "base"
+  ],
+  "pairedMonthsPerArm": 20,
+  "sameSaveShaRngDay": true,
+  "ms": {
+    "base": {
+      "p50": 5493,
+      "p95": 6290
+    },
+    "pilot": {
+      "p50": 4647,
+      "p95": 5161
+    }
+  },
+  "normalLoop": {
+    "months": 3,
+    "rafP50Ms": 66.6,
+    "rafP95Ms": 133.3,
+    "maxFrameMs": 2333,
+    "longTaskCount": 87
+  }
+}

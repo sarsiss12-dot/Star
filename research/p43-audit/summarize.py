@@ -47,7 +47,8 @@ def ai(r):
         if not q or q['k']!='building-paid' or q['key']!=x['key'] or q['d']-x['d']>180:continue
         z=next((y for y in following if y['k'] in ('built','build-refund','removed') and y['key']==q['key'] and y['d']>=q['d']),None)
         if not z or z['k']!='built':continue
-        intent=next((y for y in reversed(records[:i]) if y['k']=='building-replacement' and y['removed']==x['key']),{})
+        prior=next((y for y in reversed(records[:i]) if y['k'] in ('building-replacement','removed')), {})
+        intent=prior if prior.get('k')=='building-replacement' and prior['removed']==x['key'] and 0<=x['d']-prior['d']<=120 else {}
         cycles.append(dict(actor=loc[0],system=loc[1],planet=loc[2],key=q['key'],wanted=intent.get('wanted'),removed=x['d'],buy=q['d'],done=z['d'],paid=q['paid'],refund=x['refund']))
     legs=[x for x in ev if x['k']=='leg-end']; active={};times=[];paid={k:C.Counter() for k in ('building-paid','ship-paid')}
     for x in ev:

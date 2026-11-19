@@ -2,7 +2,7 @@
 
 18–19 Kasım 2026 · Araştırma raporu
 
-**1. Önce büyük galakside keşif ve takviye sırasında yapılan sınır taramasını daraltın.** Node deneyinde 3. ay kaydında, 500 sistem / 16 AI için tam ay süresi ortanca 4.378 → 1.284 ms, p95 5.767 → 1.955 ms oldu. Eşleştirilen aylarda Save8 özeti ve RNG aynıydı. Küçük haritanın maliyetini ayrıca sınırlamak gerekiyor.
+**1. Büyük galakside keşif ve takviyenin sınır taramasını daraltın.** Gerçek Chromium’da 500 sistem için erken oyun tam ay p95’i 1.850 → 688 ms, ilk geç oyun örneğinde 6.290 → 5.161 ms oldu. Kazanım sırasıyla %62,8 ve %17,9. Küçük haritada ortanca süre %6,7 arttı. Büyük galaksi pilotu için yayından önce geç oyun p95 kazanımını ve küçük harita korumasını doğrulamak gerekiyor.
 
 **2. AI için en yüksek öncelik, bir binayı başka bir ihtiyaç için yıkıp ilk fırsatta aynısını yeniden satın alma döngüsü.** Üç 100 sistem kampanyasında 915 tamamlanmış yıkımdan 261’inin ardından ilk ücretli iş aynı binaydı. Sipariş en geç altı ay içinde verildi ve bina yeniden tamamlandı. Devletlerin hurda iadesi sonrası toplam 32.803 minerali bu işlere gitti. 182 döngü dökümhaneydi. Faturaya üretimsiz günlerin değeri dahil değil.
 
@@ -27,6 +27,8 @@ Kanonik kampanyalar p43’ün normal kurulumundan, varsayılan dengeli ayarlarla
 | 100 / 9 · 99 | 240 | 72 / 40 / 6 | 6 / 33 | 736 / 720 | 9,0 / 34,0 | 955 / 1474 |
 | 500 / 16 · 11 | 120 | 69 / 46 / 3 | 6 / 24 | 572 / 558 | 9,5 / 36,5 | 840 / 1325 |
 
+Üç 100 sistem kampanyasında toparlanma hedefi 59 kez seçildi ve motor 58 toparlanma eşiği kaydetti. Bölgesel hedefte aynı sayaçlar 36 ve 10 oldu. Devletin önceki durumuna göre iyileşmesi, kaynak açığını kalıcı kapatması ve bir savaş hedefini kazanması farklı sonuçlar. Aşağıdaki stok, kuyruk ve savaş defteri ölçümleri bu ayrımı gösteriyor.
+
 ¹ Son sayaç stratejik planın ilerlemesinin durmasıdır. Askerî seferin hedef bekleme süresi ayrı izlenir. Bir filosu izleme sırasında silinen durum birleşme veya kayıp olabilir. Savaş maliyetini bu kayıtlardan çıkarmak yerine savaş defterinin `shipsLost` alanını kullandım. [100-9-11](../../research/p43-audit/raw/100-9-11.json.gz) · [100-9-404](../../research/p43-audit/raw/100-9-404.json.gz) · [100-9-99](../../research/p43-audit/raw/100-9-99.json.gz) · [500-16-11](../../research/p43-audit/raw/500-16-11.json.gz)
 
 | Sistem / AI · tohum | 120. ay koloni / gemi | Son ay koloni / gemi | İnşa için ödenen mineral / alaşım | Gemi için ödenen mineral / alaşım | Kritik devlet-ay | Tamamlanan söküm / aynı binaya dönüş | Dönüşte net mineral |
@@ -43,6 +45,8 @@ Kanonik kampanyalar p43’ün normal kurulumundan, varsayılan dengeli ayarlarla
 Üretim getirisi için 120. ayın üç bağımsız kaydındaki uygun AI kolonilerinde gerçek `aiBuildingDelta` hesabını ayrı kopyada çalıştırdım. Bir ek madenin ortanca aylık etkisi +17,3 mineral ve −1,6 enerji. Santral +24,2 enerji. Dökümhane +13,9 alaşım karşılığı −16,8 mineral ve −3,2 enerji. Dolayısıyla daha çok dökümhane her ekonomiyi güçlendirmiyor. Tohum 11’de 120 → 240 arasında AI gemi sayısı 192 → 620, aylık alaşım 297 → 572 oldu. Bu beraber değişimdir. Tek binaya atfedilen etki yalnız gölge hesapta ölçüldü. [Koloni başına marjinal üretim](../../research/p43-audit/raw/choices.json)
 
 **Sökümün fırsat maliyeti.** Tohum 11, devlet 1, sistem 27, gezegen 1’de laboratuvar için sökülen dökümhane 2447. günde kalktı. 2460’ta yine dökümhaneye 210 mineral ödendi, 2578’de bitti. Hurda 74 mineral. Net 136 mineral ve aynı binanın 131 günlük yokluğu. Üç tohumda bu tür işlerin toplamı 32.146 bina-günü. Bu süreler ayrı kolonilerde eşzamanlı geçebildiği için kampanya takvimine eklenemez. Kimlik eşlemesi devlet + sistem + gezegen + bina türüyle yapıldı. Yıkım emri veya yarım inşaat tasarruf sayılmadı. [100-9-11](../../research/p43-audit/raw/100-9-11.json.gz)
+
+261 döngünün tamamında aynı koloni ve bina türü için önceki stratejik ikame kararı saptandı. Araya başka söküm girmedi. 92 döngüde hedef laboratuvar, 58’inde madendi. Kodda `pick.wanted` karar günlüğüne yazılıyor. Slot boşaldığında sonraki aylık tur ihtiyaçları yeniden sıralıyor ve parası yeten ilk binayı sipariş ediyor. [Yıkım ve sonraki inşa siparişi](https://github.com/sarsiss12-dot/Star/blob/54a52555c699d82507f6285580577571d4200380/ai.js#L1712)
 
 ### Savaş ve lojistikte dört karar zinciri
 
@@ -128,7 +132,7 @@ Paket boyutu WebSocket uygulama yükü ve relay öneki dahil, IP/TLS gideri hari
 | mp-500 | 3 | 24 | 54 | 0,16 / 0,37 | 94,4 |
 | mp-500 | 120 | 27 | 54 | 0,09 / 0,24 | 11,1 |
 
-Üç sahnede tam ayna aktarımı görülmedi. Ayrı dünya deltaları, ayna farkları ve bağlantı mesajları son sütuna dahildir. 500 sistemde küçük fark paketi, bağlantı açılırken tam dünyanın da aynı boyutta olacağı anlamına gelmez. İlk bağlantının tam ayna boyutu bu örneklemede ölçülmedi.
+Üç sahnede fark paketleri alındı. Ayrı temiz oda katılımında ilk tam dünya aynası 100 sistemde 31.650, 500 sistemde 103.866 bayttı. Eşlik eden başlangıç paketleri 18.457 ve 32.953 bayttı. İki misafir de ilk revizyonu uyguladı. Bu iki ilk katılım örneği erken oyuna ait. [100 sistem katılımı](../../research/p43-audit/raw/join-100.json) · [500 sistem katılımı](../../research/p43-audit/raw/join-500.json)
 
 500 sistemde 120. ay civarında MP host’un tam ayı ortanca 4.768 ms, ay geçişi 1.367 ms sürdü. Ayna yayını 15,6 ms, misafirde alınan güncellemenin çizilmesi 26,7 ms, korvet emrinin kabulü 254 ms ve tersane satırının gözlenmesi 596 ms idi. Host hesabı tek oyunculuda da belirgin. Loopback oturumunda yalnız paketi küçültmek, günler boyunca biriken simülasyon maliyetini karşılamaz. Bu satırda 16 AI ile açılan MP dünyasında sonradan 17 canlı AI gözlendi. Dört kuyruğun her birinde art arda beş kabulün her biri bir satır ve 32 alaşımlık tek ödeme oluşturdu.
 
@@ -158,6 +162,8 @@ Paket boyutu WebSocket uygulama yükü ve relay öneki dahil, IP/TLS gideri hari
 
 Fiziksel Android / mobil GPU, gerçek LAN, canlı Render ve bu adayla uzun oturum saha tekrarı **NOT RUN**. Önceki MP raporundaki Android donması açık. Bu rapordaki kontrollü yayın sıklığı veya yazılım çizimi bir telefon FPS garantisi sağlamaz.
 
+Normal oyun döngüsünün ilk 500 sistem geç oyun koşusunda üç ay geçişi gözlendi. Ortanca kare aralığı 66,6 ms, p95 133,3 ms ve en uzun kare 2.333 ms idi. Bu ölçü, ay boyunca kontrollü tek günlük adımlarla ölçülen harita sahnelerinden ayrıdır. [İlk geç oyun tarayıcı özeti](../../research/p43-audit/onceki-gec-oyun-olcumu.json)
+
 ### Dar performans deneyi
 
 500 sistemin erken örnekleme profilinde `influenceAt` kendi gövdesi CPU zamanının %28,7 kadarını aldı. `explorationContext → reinforcementThreats → claimOf → influenceAt` içinde her sahipsiz sistem sorgusunda bütün galaksi tekrar geziliyordu. Uygun her düğüm için aynı sınır baskısını, özgün sırada hesaplayan deneysel sürüm, yalnız bu eşzamanlı okuma boyunca sahipli ve erişim yarıçapı olan sistem listesini çıkardı. İç içe çağrılar listeyi paylaşır, çıkışta bırakır. `borderPressure` gibi kayıt alanına yazabilen hesapları, görünürlük kapılarını ve eşitlik sırasını korur. [influenceAt](https://github.com/sarsiss12-dot/Star/blob/54a52555c699d82507f6285580577571d4200380/diplomacy.js#L41) · [explorationContext](https://github.com/sarsiss12-dot/Star/blob/54a52555c699d82507f6285580577571d4200380/main.js#L4548) · [reinforcementThreats](https://github.com/sarsiss12-dot/Star/blob/54a52555c699d82507f6285580577571d4200380/main.js#L5749)
@@ -168,10 +174,13 @@ Fiziksel Android / mobil GPU, gerçek LAN, canlı Render ve bu adayla uzun oturu
 | 100-9-11-m120 | Chromium | 304 / 771 | 325 / 391 | 6,7% | -49,3% |
 | 500-16-11-m3 | Node | 4.378 / 5.767 | 1.284 / 1.955 | -70,7% | -66,1% |
 | 500-16-11-m3 | Chromium | 1.239 / 1.850 | 456 / 688 | -63,2% | -62,8% |
+| 500-16-11-m120 | Chromium · ilk koşu | 5.493 / 6.290 | 4.647 / 5.161 | -15,4% | -17,9% |
 
 120. ay Node örneklemesinde doğrudan CPU payları keşif bağlamı için %22,9, sınır etkisi için %18,0 ve takviye tehdidi için %11,3 idi. İç içe çağrıların toplam süresi yerine burada yalnız her işlevin kendi gövdesi sayıldı. [Geç oyun V8 örnekleri](../../research/p43-audit/raw/cpu-500-16-11-m120.json) · [Erken oyun V8 örnekleri](../../research/p43-audit/raw/cpu-500-16-11-m3.json)
 
 Sıra kontrol–pilot–pilot–kontrol. Her kol yeni dünya kopyası veya tarayıcı bağlamı, bir ay ısınma ve 10 örnek kullandı. Her ortam ve kayıt için kol başına 20 tam ay zamanlaması var. İki tekrar aynı 10 deterministik ayı izledi. Her ay gün, RNG ve serileştirilmiş Save8’in SHA-256 değeri karşılaştırıldı. Çiftlerin aynı içerikte kalması ile hız kazanımı ayrı koşullardır. Pilot için uçtan uca MP eşdeğerliği henüz **NOT RUN**. [Node 100-9-11-m120](../../research/p43-audit/raw/pilot-100-9-11-m120.json) · [Chromium 100-9-11-m120](../../research/p43-audit/raw/chromium-100-9-11-m120.json) · [Node 500-16-11-m3](../../research/p43-audit/raw/pilot-500-16-11-m3.json) · [Chromium 500-16-11-m3](../../research/p43-audit/raw/chromium-500-16-11-m3.json)
+
+İlk geç oyun koşusunda her kolda 20 tam ay ölçüldü ve eşleştirilen gün, Save8 SHA-256 ve RNG değerleri aynıydı. Çalışma alanı yenilenince bu koşudan kalan toplu değerler ayrı dosyaya aktarıldı. [İlk koşunun özet kaydı](../../research/p43-audit/onceki-gec-oyun-olcumu.json)
 
 ## İlk iki geliştirme işi ve kabul sırası
 
