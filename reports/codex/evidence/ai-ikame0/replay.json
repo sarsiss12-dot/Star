@@ -1,0 +1,419 @@
+{
+  "11": {
+    "equalThroughDay": 210,
+    "first": {
+      "kind": "replacement:committed",
+      "day": 240,
+      "actor": 4,
+      "system": 79,
+      "planet": 0,
+      "removed": "maden",
+      "wanted": "santral",
+      "first": "santral",
+      "reason": "funded-first-choice"
+    },
+    "p44": {
+      "kind": "demolition",
+      "day": 240,
+      "actor": 4,
+      "system": 79,
+      "planet": 0,
+      "key": "maden",
+      "paid": {}
+    },
+    "reload": [
+      {
+        "day": 270,
+        "equal": false,
+        "rngEqual": true,
+        "paths": []
+      },
+      {
+        "day": 300,
+        "equal": false,
+        "rngEqual": true,
+        "paths": []
+      },
+      {
+        "day": 330,
+        "equal": false,
+        "rngEqual": true,
+        "paths": []
+      },
+      {
+        "day": 360,
+        "equal": false,
+        "rngEqual": true,
+        "paths": []
+      },
+      {
+        "day": 390,
+        "equal": false,
+        "rngEqual": true,
+        "paths": []
+      },
+      {
+        "day": 420,
+        "equal": false,
+        "rngEqual": true,
+        "paths": []
+      }
+    ],
+    "payments": [],
+    "historical": {
+      "actor": 1,
+      "system": 27,
+      "planet": 1,
+      "p44": [
+        {
+          "kind": "demolition",
+          "day": 2400,
+          "actor": 1,
+          "system": 27,
+          "planet": 1,
+          "key": "dokum",
+          "paid": {}
+        },
+        {
+          "kind": "removed",
+          "day": 2447,
+          "actor": 1,
+          "system": 27,
+          "planet": 1,
+          "key": "dokum",
+          "refund": {
+            "min": 74
+          }
+        },
+        {
+          "kind": "paid",
+          "day": 2460,
+          "actor": 1,
+          "system": 27,
+          "planet": 1,
+          "key": "dokum",
+          "paid": {
+            "min": 210
+          }
+        }
+      ],
+      "candidate": [
+        {
+          "kind": "replacement:deferred",
+          "day": 2400,
+          "actor": 1,
+          "system": 27,
+          "planet": 1,
+          "removed": "dokum",
+          "wanted": "lab",
+          "first": "dokum",
+          "reason": "same-building"
+        }
+      ]
+    }
+  },
+  "99": {
+    "equalThroughDay": 90,
+    "first": {
+      "kind": "replacement:committed",
+      "day": 120,
+      "actor": 5,
+      "system": 95,
+      "planet": 0,
+      "removed": "kale",
+      "wanted": "santral",
+      "first": "santral",
+      "reason": "funded-first-choice"
+    },
+    "p44": {
+      "kind": "demolition",
+      "day": 120,
+      "actor": 5,
+      "system": 95,
+      "planet": 0,
+      "key": "kale",
+      "paid": {}
+    },
+    "reload": [
+      {
+        "day": 150,
+        "equal": false,
+        "rngEqual": true,
+        "paths": []
+      },
+      {
+        "day": 180,
+        "equal": false,
+        "rngEqual": true,
+        "paths": []
+      },
+      {
+        "day": 210,
+        "equal": false,
+        "rngEqual": true,
+        "paths": []
+      },
+      {
+        "day": 240,
+        "equal": false,
+        "rngEqual": true,
+        "paths": []
+      },
+      {
+        "day": 270,
+        "equal": false,
+        "rngEqual": true,
+        "paths": []
+      },
+      {
+        "day": 300,
+        "equal": false,
+        "rngEqual": true,
+        "paths": []
+      }
+    ],
+    "payments": [
+      {
+        "kind": "paid",
+        "day": 210,
+        "actor": 5,
+        "system": 95,
+        "planet": 0,
+        "key": "santral",
+        "paid": {
+          "min": 110
+        }
+      },
+      {
+        "kind": "paid",
+        "day": 270,
+        "actor": 5,
+        "system": 95,
+        "planet": 0,
+        "key": "santral",
+        "paid": {
+          "min": 110
+        }
+      }
+    ],
+    "historical": {
+      "actor": 1,
+      "system": 82,
+      "planet": 0,
+      "p44": [
+        {
+          "kind": "demolition",
+          "day": 2730,
+          "actor": 1,
+          "system": 82,
+          "planet": 0,
+          "key": "dokum",
+          "paid": {}
+        },
+        {
+          "kind": "removed",
+          "day": 2768,
+          "actor": 1,
+          "system": 82,
+          "planet": 0,
+          "key": "dokum",
+          "refund": {
+            "min": 74
+          }
+        },
+        {
+          "kind": "paid",
+          "day": 2790,
+          "actor": 1,
+          "system": 82,
+          "planet": 0,
+          "key": "dokum",
+          "paid": {
+            "min": 210
+          }
+        }
+      ],
+      "candidate": [
+        {
+          "kind": "replacement:deferred",
+          "day": 2730,
+          "actor": 1,
+          "system": 82,
+          "planet": 0,
+          "removed": "dokum",
+          "wanted": "santral",
+          "first": "dokum",
+          "reason": "same-building"
+        }
+      ]
+    }
+  },
+  "404": {
+    "equalThroughDay": 210,
+    "first": {
+      "kind": "replacement:committed",
+      "day": 240,
+      "actor": 7,
+      "system": 54,
+      "planet": 0,
+      "removed": "ciftlik",
+      "wanted": "santral",
+      "first": "santral",
+      "reason": "funded-first-choice"
+    },
+    "p44": {
+      "kind": "demolition",
+      "day": 240,
+      "actor": 7,
+      "system": 54,
+      "planet": 0,
+      "key": "ciftlik",
+      "paid": {}
+    },
+    "reload": [
+      {
+        "day": 270,
+        "equal": true,
+        "rngEqual": true
+      },
+      {
+        "day": 300,
+        "equal": true,
+        "rngEqual": true
+      },
+      {
+        "day": 330,
+        "equal": true,
+        "rngEqual": true
+      },
+      {
+        "day": 360,
+        "equal": true,
+        "rngEqual": true
+      },
+      {
+        "day": 390,
+        "equal": true,
+        "rngEqual": true
+      },
+      {
+        "day": 420,
+        "equal": true,
+        "rngEqual": true
+      }
+    ],
+    "payments": [
+      {
+        "kind": "paid",
+        "day": 270,
+        "actor": 7,
+        "system": 54,
+        "planet": 0,
+        "key": "santral",
+        "paid": {
+          "min": 110
+        }
+      },
+      {
+        "kind": "paid",
+        "day": 330,
+        "actor": 7,
+        "system": 54,
+        "planet": 0,
+        "key": "santral",
+        "paid": {
+          "min": 110
+        }
+      }
+    ],
+    "historical": {
+      "actor": 3,
+      "system": 1,
+      "planet": 0,
+      "p44": [
+        {
+          "kind": "demolition",
+          "day": 1020,
+          "actor": 3,
+          "system": 1,
+          "planet": 0,
+          "key": "dokum",
+          "paid": {}
+        },
+        {
+          "kind": "removed",
+          "day": 1067,
+          "actor": 3,
+          "system": 1,
+          "planet": 0,
+          "key": "dokum",
+          "refund": {
+            "min": 74
+          }
+        },
+        {
+          "kind": "paid",
+          "day": 1080,
+          "actor": 3,
+          "system": 1,
+          "planet": 0,
+          "key": "dokum",
+          "paid": {
+            "min": 210
+          }
+        }
+      ],
+      "candidate": [
+        {
+          "kind": "demolition",
+          "day": 1020,
+          "actor": 3,
+          "system": 1,
+          "planet": 0,
+          "key": "dokum",
+          "paid": {},
+          "replacement": {
+            "key": "fabrika",
+            "owner": 3,
+            "choices": {
+              "science": true
+            }
+          }
+        },
+        {
+          "kind": "replacement:committed",
+          "day": 1020,
+          "actor": 3,
+          "system": 1,
+          "planet": 0,
+          "removed": "dokum",
+          "wanted": "fabrika",
+          "first": "fabrika",
+          "reason": "funded-first-choice"
+        },
+        {
+          "kind": "paid",
+          "day": 1067,
+          "actor": 3,
+          "system": 1,
+          "planet": 0,
+          "key": "fabrika",
+          "paid": {
+            "min": 170
+          }
+        },
+        {
+          "kind": "removed",
+          "day": 1067,
+          "actor": 3,
+          "system": 1,
+          "planet": 0,
+          "key": "dokum",
+          "refund": {
+            "min": 74
+          }
+        }
+      ]
+    }
+  }
+}

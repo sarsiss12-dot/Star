@@ -1,0 +1,17 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[4,4],"mirrorEq":true,"revMs":549,"buildMs":681,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[4,4],"mirrorEq":true,"revMs":956,"buildMs":1163,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":59.5,"p95":59.5,"max":59.5},"longtask":{"n":29,"med":84,"p95":125,"max":145},"heapMB":17,"dom":724,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":4,"med":69.2,"p95":206.3,"max":206.3},"refresh":{"n":2,"med":15.1,"p95":15.1,"max":15.1},"longtask":{"n":26,"med":79,"p95":107,"max":147},"builds":4,"deltas":3,"resyncs":0,"minGap":600,"heapMB":17,"dom":717,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":37,"joinErrors":0},"C":{"build":{"n":3,"med":59.5,"p95":195,"max":195},"refresh":{"n":1,"med":0.8,"p95":0.8,"max":0.8},"longtask":{"n":26,"med":96,"p95":112,"max":132},"builds":3,"deltas":3,"resyncs":0,"minGap":600,"heapMB":16,"dom":726,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":31,"joinErrors":0}}}
+PASS J0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS J1 kayıt → kapanış → yeni oda → host tek başına: kayıt öncesi bekleyen/gizli olay korunur; tarih ilerler; host ve B için yeni olay/anomali/bilim zinciri üretilir
+PASS J2 misafirler yeni kodla döner (B ana menü ODAYA KATIL, C davet bağlantısı): B'nin kayıt öncesi ve host-tek-başına kararları B'de; host / C olayları B'de değil
+PASS J3 B'nin ilk gemi siparişi gerçek dokunuşla: host kabulü, host tersane kuyruğu ve B'nin tersane ekranı ayrı ölçülür; kaynak bir kez düşer
+FAIL J4 yanıt kaybı + AYNI cid ile yeniden gönderim: tek sipariş, tek kaynak kesintisi, yinelenen yanıt; B tersane ekranında tek yeni satır
+AssertionError [ERR_ASSERTION]: ilk yanıt gerçekten kayboldu
+
+false !== true
+
+    at /workspace/Star-p44/tests/helpers/mp-sync-fed1-mp.cjs:164:11
+    at async test (/workspace/Star-p44/tests/browser-mp8.cjs:61:162)
+    at async module.exports (/workspace/Star-p44/tests/helpers/mp-sync-fed1-mp.cjs:132:2)
+    at async /workspace/Star-p44/tests/browser-mp8.cjs:465:17
+GEÇEN: 4 KALAN: 1

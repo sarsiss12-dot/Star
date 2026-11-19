@@ -1,0 +1,25 @@
+DOĞRULANDI: 19 dosya; oyun build 96h10p45.
+KAPSAM: GitHub çalışma zamanı ve yayımlanan faz dosyaları; tarihsel arşivler kapsam dışıdır. Tam kanonik ZIP doğrulaması değildir.
+Bu bütünlük kontrolüdür; oyun/Android testleri yeniden çalıştırılmadı.
+Archive:  /workspace/star-ikame-evidence/stars-faz96h10p45.zip
+    testing: RELEASE-MANIFEST.json    OK
+    testing: ai.js                    OK
+    testing: archive-ui.js            OK
+    testing: audio.js                 OK
+    testing: combat.js                OK
+    testing: commerce-ui.js           OK
+    testing: commerce.js              OK
+    testing: construction.js          OK
+    testing: diplomacy.js             OK
+    testing: economic-ledger.js       OK
+    testing: economy-ui.js            OK
+    testing: economy.js               OK
+    testing: inbox.js                 OK
+    testing: index.html               OK
+    testing: main.js                  OK
+    testing: manifest.json            OK
+    testing: map.js                   OK
+    testing: news.js                  OK
+    testing: sw.js                    OK
+    testing: ui.js                    OK
+No errors detected in compressed data of /workspace/star-ikame-evidence/stars-faz96h10p45.zip.

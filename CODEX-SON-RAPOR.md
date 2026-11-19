@@ -1,3 +1,3 @@
 # Son Codex raporu
 
-[PERF-SINIR.0 — büyük galaksilerde keşif ve takviye performansı](reports/codex/PERF-SINIR0-SONUC.md)
+[AI-IKAME.0 — stratejik bina ikamesi ve yıkım döngüleri](reports/codex/AI-IKAME0-SONUC.md)

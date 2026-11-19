@@ -1,0 +1,12 @@
+✔ Stratejik ikame kaydedilir, sökümde bir yapı sırası ve bir ödeme oluşturur (2199.96455ms)
+✔ İkame ödenemediğinde söküm, ödeme ve hurda iadesi gerçekleşmez (872.215038ms)
+✔ Kayıptan sonra kalan dolu slot ve yeni bekleyen iş stratejik sökümü durdurur (1646.697988ms)
+✔ Savaş ve stok krizinin yıkımı, yeni stratejik ikame olmadan eski iade yolunu kullanır (583.030846ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5326.90293

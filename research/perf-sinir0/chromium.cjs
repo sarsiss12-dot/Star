@@ -6,7 +6,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { chromium } = require('playwright');
 
-const candidate = path.resolve(__dirname, '../..');
+const candidate = path.resolve(process.env.STARS_CANDIDATE_ROOT || path.join(__dirname, '../..'));
 const control = path.resolve(process.env.STARS_CONTROL_ROOT || '../Star');
 const inputs = path.resolve(process.env.CHECKPOINT_DIR || '/tmp/stars-p43');
 const output = path.resolve(process.env.STARS_OUTPUT || '/tmp/stars-border');
@@ -42,20 +42,53 @@ async function start(root) {
   return { relay, origin: 'http://127.0.0.1:' + srv.address().port };
 }
 
-async function open(browser, origin, save, warm) {
+async function open(browser, origin, save, warm, replacementCost = false) {
   const context = await browser.newContext({ serviceWorkers: 'block' });
   const page = await context.newPage();
   await page.goto(origin);
   await page.waitForFunction(() => typeof deserialize === 'function');
   await page.addScriptTag({ content: advanceMonth.toString() });
-  const identity = await page.evaluate(({ save, warm }) => {
+  const identity = await page.evaluate(({ save, warm, replacementCost }) => {
     if (!deserialize(save)) throw Error('Save8 açılamadı');
     G.autoSave = false;
     G.speed = 0;
+    if(replacementCost){
+      // Benchmark the new decision code on a matched workload. Apply the old
+      // demolition after measuring the new preview, on this test page only.
+      const demolish=queueDemolish,note=AIDiagnostics.note,pending=new Set();
+      queueDemolish=(e,s,p,key,replacement)=>{
+        const ok=demolish(e,s,p,key);
+        if(ok&&replacement&&typeof aiCanFinishReplacement==='function'){
+          pending.add({e,s,p,job:p.col.q.at(-1),replacement:{...replacement,owner:e.id}});
+        }
+        return ok;
+      };
+      const build=colonyBuildTick;
+      colonyBuildTick=function(dt){
+        for(const item of pending){
+          const {e,s,p,job,replacement}=item,q=p.col?.q;
+          if(e.dead||p.owner!==e.id||!q?.includes(job)){pending.delete(item);continue;}
+          if(q[0]!==job||job.left>dt)continue;
+          pending.delete(item);
+          if(q.length!==1)continue;
+          q.shift();
+          try{aiCanFinishReplacement(e,s,p,{...job,replacement});}
+          finally{q.unshift(job);}
+        }
+        build(dt);
+      };
+      AIDiagnostics.note=function(code,e,other,detail){
+        if(code==='replacement:deferred'){
+          const {system,planet,removed,wanted}=JSON.parse(detail),s=G.sys[system],p=s.planets[planet];
+          if(demolish(e,s,p,removed))aiPlanEvent(e,'building-replacement',{system,planet,removed,wanted});
+        }
+        note.call(this,code,e,other,detail);
+      };
+    }
     const settings = { startDay: G.day, systems: G.sys.length, ai: G.emps.filter(e => e.ai && !e.wild && !e.crisisSide).length, build: BUILD_ID };
     for (let i = 0; i < warm; i++) advanceMonth();
     return settings;
-  }, { save, warm });
+  }, { save, warm, replacementCost });
   return { context, page, identity };
 }
 
@@ -87,13 +120,13 @@ async function profile(browser, server, key, save) {
   }
 }
 
-async function compare(browser, servers, key, save) {
+async function compare(browser, servers, key, save, replacementCost = false) {
   const order = ['base', 'candidate', 'candidate', 'base', 'base', 'candidate', 'candidate', 'base'];
   const samples = 6;
-  const result = { key, sha: sha(save), chromium: browser.version(), warmMonths: 2, monthsPerArm: samples, runs: [] };
+  const result = { key, sha: sha(save), chromium: browser.version(), warmMonths: 2, monthsPerArm: samples, replacementCost, runs: [] };
   const reference = [];
   for (const arm of order) {
-    const { context, page, identity } = await open(browser, servers[arm].origin, save, result.warmMonths);
+    const { context, page, identity } = await open(browser, servers[arm].origin, save, result.warmMonths, replacementCost);
     try {
       const data = await page.evaluate(count => {
         const rows = [];
@@ -135,7 +168,7 @@ async function compare(browser, servers, key, save) {
 }
 
 async function main(mode, keys) {
-  assert(['profile-base', 'profile-candidate', 'compare'].includes(mode));
+  assert(['profile-base', 'profile-candidate', 'compare', 'compare-replacement-cost'].includes(mode));
   assert(keys.length);
   fs.mkdirSync(output, { recursive: true });
   const servers = {};
@@ -146,7 +179,8 @@ async function main(mode, keys) {
     browser = await chromium.launch({ executablePath: process.env.STARS_CHROMIUM_PATH, args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'] });
     for (const key of keys) {
       const save = fs.readFileSync(path.join(inputs, key + '.save'), 'utf8');
-      const result = mode === 'compare' ? await compare(browser, servers, key, save) : await profile(browser, servers[mode.split('-')[1]], key, save);
+      const result = mode.startsWith('compare') ?
+        await compare(browser, servers, key, save, mode==='compare-replacement-cost') : await profile(browser, servers[mode.split('-')[1]], key, save);
       fs.writeFileSync(path.join(output, mode + '-' + key + '.json'), JSON.stringify(result, null, 2) + '\n');
       console.log(key, result.arms || result.top.slice(0, 5));
     }

@@ -1,0 +1,128 @@
+{
+  "ai.js": {
+    "beforeSha256": "3028fee904ae51f09f1de6937de0cd6c756ad50172d171eb32433e43074b201c",
+    "afterSha256": "4a3ee01c1e0ddb972f9e4706ccb7eaa65cfdeb146757efdc4299915a51091c60",
+    "hunks": [
+      {
+        "before": "   and known partner links only; no receipts, RNG or persistent planning fields. */\nfunction aiWarBudget(e,o){\n const keys=['_powAt','_powC','_pressAt','_press'],saved=G.emps.map(x=>[x,keys.map(k=>Object.getOwnPropertyDescriptor(x,k))]);\n try{\n  const plan=aiEconomyPlan(e),known=aiView(e),hops=new Map(),queue=[];\n",
+        "after": "   and known partner links only; no receipts, RNG or persistent planning fields. */\nfunction aiWithPreservedPowerCache(preview){\n const keys=['_powAt','_powC','_pressAt','_press'],saved=G.emps.map(x=>[x,keys.map(k=>Object.getOwnPropertyDescriptor(x,k))]);\n try{return preview();}\n finally{for(const [x,values]of saved)keys.forEach((k,i)=>{if(values[i])Object.defineProperty(x,k,values[i]);else delete x[k];});}\n}\nfunction aiWarBudget(e,o){\n return aiWithPreservedPowerCache(()=>{\n  const plan=aiEconomyPlan(e),known=aiView(e),hops=new Map(),queue=[];\n"
+      },
+      {
+        "before": "  return {ok:reason==='sustainable',reason,energyNet,alloyNet,energyMonths,alloyMonths,extraEnergy,extraAlloy,lostNetworkEstimate:network,supplyEstimate:supply};\n }finally{for(const [x,values]of saved)keys.forEach((k,i)=>{if(values[i])Object.defineProperty(x,k,values[i]);else delete x[k];});}\n}\n",
+        "after": "  return {ok:reason==='sustainable',reason,energyNet,alloyNet,energyMonths,alloyMonths,extraEnergy,extraAlloy,lostNetworkEstimate:network,supplyEstimate:supply};\n });\n}\n"
+      },
+      {
+        "before": "   Already assigned settlers are included once; hull prices only at purchase. */\nfunction aiColonyForecast(e,sys,pl,{purchase=false,excludeFleet=null}={}){\n const plan=aiEconomyPlan(e),targets=new Map();\n",
+        "after": "   Already assigned settlers are included once; hull prices only at purchase. */\nfunction aiColonyForecast(e,sys,pl,{purchase=false,excludeFleet=null,observer=e}={}){\n const plan=aiEconomyPlan(e),targets=new Map();\n"
+      },
+      {
+        "before": " }finally{for(const {s,index,planet}of restore)s.planets[index]=planet;}\n const strategic=e.aiStrategy?.plan?.target===sys.id&&aiObservedThreat(e,sys.id)>0;\n const horizon=strategic?3:6+Math.ceil(buildDays(e,'santral')/30),cost=purchase?shipCost(e,'kol'):{},rows={};let reason=null;\n",
+        "after": " }finally{for(const {s,index,planet}of restore)s.planets[index]=planet;}\n const strategic=e.aiStrategy?.plan?.target===sys.id&&aiObservedThreat(observer,sys.id)>0;\n const horizon=strategic?3:6+Math.ceil(buildDays(e,'santral')/30),cost=purchase?shipCost(e,'kol'):{},rows={};let reason=null;\n"
+      },
+      {
+        "before": "   only an ordinary paid producer order and expires naturally as net improves. */\nfunction aiColonyPreparation(e,sys,pl){\n const target=colonizeTargets(e)[0];if(!target)return null;\n const forecast=aiColonyForecast(e,G.sys[target.s],G.sys[target.s].planets[target.p],{purchase:true});\n if(forecast.ok||forecast.reason!=='ene'||!forecast.rows.ene||forecast.rows.ene.net>=0)return null;\n",
+        "after": "   only an ordinary paid producer order and expires naturally as net improves. */\nfunction aiColonyPreparation(e,sys,pl,observer=e){\n const target=colonizeTargets(e)[0];if(!target)return null;\n const forecast=aiColonyForecast(e,G.sys[target.s],G.sys[target.s].planets[target.p],{purchase:true,observer});\n if(forecast.ok||forecast.reason!=='ene'||!forecast.rows.ene||forecast.rows.ene.net>=0)return null;\n"
+      },
+      {
+        "before": "}\nfunction aiEconomicOrder(e,sys,pl,legacy){\n const plan=aiEconomyPlan(e),resourceBuilding={ene:'santral',min:'maden',yiy:'ciftlik',ala:'dokum',tuk:'fabrika'};\n",
+        "after": "}\nfunction aiEconomicOrder(e,sys,pl,legacy,observer=e){\n const plan=aiEconomyPlan(e),resourceBuilding={ene:'santral',min:'maden',yiy:'ciftlik',ala:'dokum',tuk:'fabrika'};\n"
+      },
+      {
+        "before": " const urgent=ranked.map(r=>resourceBuilding[r]);\n const preparation=!plan.critical&&aiColonyPreparation(e,sys,pl);if(preparation)urgent.push(preparation);\n const saving=aiRecoveryInvestment(e,plan);\n",
+        "after": " const urgent=ranked.map(r=>resourceBuilding[r]);\n const preparation=!plan.critical&&aiColonyPreparation(e,sys,pl,observer);if(preparation)urgent.push(preparation);\n const saving=aiRecoveryInvestment(e,plan);\n"
+      },
+      {
+        "before": "}\nfunction aiStrategicBuildingNeeds(e,sys,pl){\n const p=e.aiStrategy?.plan;if(!p||p.stage==='stabilize')return [];\n",
+        "after": "}\nfunction aiStrategicBuildingNeeds(e,sys,pl,observer=e){\n const p=e.aiStrategy?.plan;if(!p||p.stage==='stabilize')return [];\n"
+      },
+      {
+        "before": "  if(key==='tersane'&&G.sys.some(s=>s.owner===e.id&&hasYard(s)))continue;\n  if(key==='kale'&&sys.id!==e.home&&!sys.lanes.some(id=>{const x=aiKnownSystem(e,G.sys[id]);return x&&x.owner>=0&&x.owner!==e.id&&(e.war[x.owner]||(e.rel[x.owner]||0)<-25);}))continue;\n  if(aiBuildingSustainable(e,sys,pl,key,eco))return [key];\n",
+        "after": "  if(key==='tersane'&&G.sys.some(s=>s.owner===e.id&&hasYard(s)))continue;\n  if(key==='kale'&&sys.id!==e.home&&!sys.lanes.some(id=>{const x=aiKnownSystem(observer,G.sys[id]);return x&&x.owner>=0&&x.owner!==e.id&&(e.war[x.owner]||(e.rel[x.owner]||0)<-25);}))continue;\n  if(aiBuildingSustainable(e,sys,pl,key,eco))return [key];\n"
+      },
+      {
+        "before": "}\nfunction aiTurn(e){\n",
+        "after": "}\nfunction aiColonyBuildingNeeds(e,sys,pl,prof,atWar,choose,observer=e){\n  const need = aiStrategicBuildingNeeds(e,sys,pl,observer);\n  if(e.aiStrategy?.goal==='war'&&(e.inc.ala||0)<30)need.push('dokum');\n  const unhappy=(e.factions||[]).filter(x=>x.mood<35&&x.pow>=20).sort((a,b)=>a.mood-b.mood)[0];\n  if(unhappy?.k==='bilim')need.push('lab');else if(unhappy?.k==='tuccar'&&(e.inc.ene||0)>6)need.push('liman');\n  // kriz varsa her şeyin önüne geçer\n  if (e.crisis === 'enerji') need.push('santral', 'santral');\n  if (identityEatsFood(e) && e.crisis === 'yiyecek') need.push('ciftlik', 'ciftlik');\n  if (identityEatsFood(e) && e.inc.yiy < 4) need.push('ciftlik');\n  if (e.inc.ene < 6) need.push('santral');\n  if (e.inc.min < 10) need.push('maden');\n  // alaşım darboğazı: mineral yığılıyorsa mutlaka dökümhane kur\n  /* ALAŞIM REFORMU: mineral fazlası artık dökümhaneyle alaşıma\n     çevrilebiliyor. AI mineral biriktirip alaşımsız kalmamalı. */\n  if (e.inc.ala < 4) need.push('dokum');\n  if (e.res.min > 1500 && e.inc.ala < 25) need.unshift('dokum', 'dokum');\n  if (e.res.min > 6000 && e.inc.ala < 60) need.unshift('dokum', 'dokum', 'dokum');\n  if (e.res.ala < 150 && e.inc.ala < 20) need.unshift('dokum');\n  /* Mineral dağı büyüyorsa sanayi odağına geç */\n  if (e.res.min > 9000 && e.inc.ala < 80) need.unshift('dokum');\n  if (e.inc.tuk < 1 || e.shortage) need.unshift('fabrika');\n  if ((pl.col.b.liman||0) < (prof.eco > .7 ? 2 : 1)) need.push('liman');\n  if(!e.crisis && e.inc.ene>8 && e.inc.min>15 && !e.shortage){\n    for(const [key,b] of Object.entries(BUILDINGS))if(b.tech&&e.techs[b.tech] && (!b.u||Object.entries(b.u).every(([res,v])=>(e.inc[res]||0)>v)) && !(pl.col.b[key]||0) && !colonyQueuedOf(pl.col,key))need.push(key);\n  }\n  // bilimci profiller laboratuvarı ciddiye alır, savaşçılar dökümhaneyi\n  if (prof.sci > .7) need.push('lab', 'lab');\n  else need.push(choose('science', () => rnd() < .35 + prof.sci*.40) ? 'lab' : 'maden');\n  if (prof.war > .8 && e.inc.ala < 12) need.push('dokum');\n  if (!hasYard(sys) && e.colonies.length > 1 && choose('yard', () => rnd()<.35)) need.unshift('tersane');\n  if ((atWar||prof.turtle>.55) && choose('defense', () => threatAt(e, sys.id) > 0 && rnd() < .5 + prof.turtle*.4)) need.unshift('kale');\n  return need;\n}\n\nfunction aiReplacementFirstBuilding(e,sys,pl,pick,prof,atWar,choices){\n  // Apply only the slot and production change of a completed demolition.\n  // Today's stocks and commitments still pay for the next order.\n  const original=pl.col, b={...original.b}, inc={...e.inc};\n  if(--b[pick.key]===0)delete b[pick.key];\n  for(const r in pick.delta)inc[r]=(inc[r]||0)+pick.delta[r];\n  const shadow={...e,inc,_trAt:-1,_trCache:null};\n  const observed=AI_VIEW_CACHE.get(e);\n  try{\n    pl.col={...original,b};\n    return aiWithPreservedPowerCache(()=>{\n      const needs=aiColonyBuildingNeeds(shadow,sys,pl,prof,atWar,key=>choices[key],e);\n      return aiEconomicOrder(shadow,sys,pl,needs,e).find(key=>buildingOrderCost(shadow,pl,key));\n    });\n  }finally{\n    pl.col=original;\n    if(observed)AI_VIEW_CACHE.set(e,observed);else AI_VIEW_CACHE.delete(e);\n  }\n}\n\nfunction aiCanFinishReplacement(e,sys,pl,job){\n  return aiWithPreservedPowerCache(()=>{\n    const wanted=job.replacement.key, pick=aiDemolitionChoice(e,sys,pl,[wanted]);\n    if(pick?.key!==job.key)return false;\n    const atWar=Object.values(e.war).some(Boolean);\n    return aiReplacementFirstBuilding(e,sys,pl,pick,aiProfile(e),atWar,job.replacement.choices||{})===wanted;\n  });\n}\n\nfunction aiUrgentReplacement(e,wanted,atWar){\n  if(atWar&&(wanted==='kale'||wanted==='tersane'||wanted==='dokum'&&e.aiStrategy?.goal==='war'))return true;\n  const resource={santral:'ene',maden:'min',ciftlik:'yiy',dokum:'ala',fabrika:'tuk'}[wanted];\n  if(!resource)return false;\n  if(e.crisis==='enerji'&&resource==='ene'||e.crisis==='mineral'&&resource==='min'||\n     e.crisis==='yiyecek'&&resource==='yiy'||e.shortage&&resource==='tuk')return true;\n  const row=aiEconomyPlan(e).rows[resource];\n  return row.net<0&&row.months<6;\n}\n\nfunction aiTurn(e){\n"
+      },
+      {
+        "before": "      ((typeof colonyQueued === 'function') ? colonyQueued(pl.col) : 0) >= slotsNow;\n    const need = aiStrategicBuildingNeeds(e,sys,pl);\n    if(e.aiStrategy?.goal==='war'&&(e.inc.ala||0)<30)need.push('dokum');\n    const unhappy=(e.factions||[]).filter(x=>x.mood<35&&x.pow>=20).sort((a,b)=>a.mood-b.mood)[0];\n    if(unhappy?.k==='bilim')need.push('lab');else if(unhappy?.k==='tuccar'&&(e.inc.ene||0)>6)need.push('liman');\n    // kriz varsa her şeyin önüne geçer\n    if (e.crisis === 'enerji') need.push('santral', 'santral');\n    if (identityEatsFood(e) && e.crisis === 'yiyecek') need.push('ciftlik', 'ciftlik');\n    if (identityEatsFood(e) && e.inc.yiy < 4) need.push('ciftlik');\n    if (e.inc.ene < 6) need.push('santral');\n    if (e.inc.min < 10) need.push('maden');\n    // alaşım darboğazı: mineral yığılıyorsa mutlaka dökümhane kur\n    /* ALAŞIM REFORMU: mineral fazlası artık dökümhaneyle alaşıma\n       çevrilebiliyor. AI mineral biriktirip alaşımsız kalmamalı. */\n    if (e.inc.ala < 4) need.push('dokum');\n    if (e.res.min > 1500 && e.inc.ala < 25) need.unshift('dokum', 'dokum');\n    if (e.res.min > 6000 && e.inc.ala < 60) need.unshift('dokum', 'dokum', 'dokum');\n    if (e.res.ala < 150 && e.inc.ala < 20) need.unshift('dokum');\n    /* Mineral dağı büyüyorsa sanayi odağına geç */\n    if (e.res.min > 9000 && e.inc.ala < 80) need.unshift('dokum');\n    if (e.inc.tuk < 1 || e.shortage) need.unshift('fabrika');\n    if ((pl.col.b.liman||0) < (prof.eco > .7 ? 2 : 1)) need.push('liman');\n    if(!e.crisis && e.inc.ene>8 && e.inc.min>15 && !e.shortage){\n      for(const [key,b] of Object.entries(BUILDINGS))if(b.tech&&e.techs[b.tech] && (!b.u||Object.entries(b.u).every(([res,v])=>(e.inc[res]||0)>v)) && !(pl.col.b[key]||0) && !colonyQueuedOf(pl.col,key))need.push(key);\n    }\n    // bilimci profiller laboratuvarı ciddiye alır, savaşçılar dökümhaneyi\n    if (prof.sci > .7) need.push('lab', 'lab');\n    else need.push(rnd() < .35 + prof.sci*.40 ? 'lab' : 'maden');\n    if (prof.war > .8 && e.inc.ala < 12) need.push('dokum');\n    if (!hasYard(sys) && e.colonies.length > 1 && rnd()<.35) need.unshift('tersane');\n    if ((atWarNow||prof.turtle>.55) && threatAt(e, sys.id) > 0 && rnd() < .5 + prof.turtle*.4) need.unshift('kale');\n    /* FAZ 13: kuyruk dolu değilse sipariş ver.\n",
+        "after": "      ((typeof colonyQueued === 'function') ? colonyQueued(pl.col) : 0) >= slotsNow;\n    const choices={};\n    const need=aiColonyBuildingNeeds(e,sys,pl,prof,atWarNow,(key,roll)=>choices[key]=roll());\n    /* FAZ 13: kuyruk dolu değilse sipariş ver.\n"
+      },
+      {
+        "before": "        AIDiagnostics.note('recovery:no-safe-slot',e,null,sys.id+':'+pl.i+'; retry in 90 days');\n      }else if(rnd()<.18&&queueDemolish(e,sys,pl,pick.key)){\n        aiPlanEvent(e,'building-replacement',{system:sys.id,planet:pl.i,removed:pick.key,wanted:pick.wanted});\n      }\n",
+        "after": "        AIDiagnostics.note('recovery:no-safe-slot',e,null,sys.id+':'+pl.i+'; retry in 90 days');\n      }else if(rnd()<.18){\n        const urgent=aiUrgentReplacement(e,pick.wanted,atWarNow);\n        const first=urgent?pick.wanted:aiReplacementFirstBuilding(e,sys,pl,pick,prof,atWarNow,choices);\n        if(first!==pick.wanted){\n          AIDiagnostics.note('replacement:deferred',e,null,JSON.stringify({\n            system:sys.id,planet:pl.i,removed:pick.key,wanted:pick.wanted,first:first??null,\n            reason:first===pick.key?'same-building':first?'different-priority':'unfunded-or-blocked'\n          }));\n        }else if(queueDemolish(e,sys,pl,pick.key,urgent?undefined:{key:pick.wanted,choices})){\n          if(!urgent)AIDiagnostics.note('replacement:committed',e,null,JSON.stringify({\n            system:sys.id,planet:pl.i,removed:pick.key,wanted:pick.wanted,first,reason:'funded-first-choice'\n          }));\n          aiPlanEvent(e,'building-replacement',{system:sys.id,planet:pl.i,removed:pick.key,wanted:pick.wanted});\n        }\n      }\n"
+      }
+    ]
+  },
+  "economy.js": {
+    "beforeSha256": "99c1d3c3a1e553230e559dce3df0e3874dddc9f1f6a4c22e878e95b45a711043",
+    "afterSha256": "5a364e79abc1cd8fbe7d1e6070b0e818bec1fea90aa98d2c729ed37060008cf8",
+    "hunks": [
+      {
+        "before": "function buildingCost(e,key){const B=BUILDINGS[key],factor=key==='kale'&&hasCivic(e,'fortress')?.60:1;return Object.fromEntries(Object.entries(B?.c||{}).map(([k,v])=>[k,Math.round(v*factor)]));}\nfunction queueBuilding(e, sys, pl, key){\n  const B = BUILDINGS[key], col = pl.col;\n  if (!B || !col || pl.owner !== e.id || (B.tech&&!e.techs[B.tech])) return false;\n  /* Kuyruktakiler de sayılır: aynı binadan max'ı aşacak sipariş verilemez */\n  if ((col.b[key]||0) + colonyQueuedOf(col, key) >= B.max) return false;\n  if (colonyUsed(col) + colonyQueued(col) >= colonySlots(col, e, pl)) return false;\n  const cost=buildingCost(e,key);\n  for (const r in cost) if (e.res[r] < cost[r]) return false;\n\n",
+        "after": "function buildingCost(e,key){const B=BUILDINGS[key],factor=key==='kale'&&hasCivic(e,'fortress')?.60:1;return Object.fromEntries(Object.entries(B?.c||{}).map(([k,v])=>[k,Math.round(v*factor)]));}\nfunction buildingOrderCost(e, pl, key){\n  const B = BUILDINGS[key], col = pl.col;\n  if (!B || !col || pl.owner !== e.id || (B.tech&&!e.techs[B.tech])) return null;\n  /* Kuyruktakiler de sayılır: aynı binadan max'ı aşacak sipariş verilemez */\n  if ((col.b[key]||0) + colonyQueuedOf(col, key) >= B.max) return null;\n  if (colonyUsed(col) + colonyQueued(col) >= colonySlots(col, e, pl)) return null;\n  const cost=buildingCost(e,key);\n  for (const r in cost) if (e.res[r] < cost[r]) return null;\n\n  return cost;\n}\nfunction queueBuilding(e, sys, pl, key){\n  const cost=buildingOrderCost(e,pl,key);\n  if (!cost) return false;\n  const col=pl.col;\n\n"
+      },
+      {
+        "before": "        if ((col.b[w.key] || 0) <= 0) continue;          // bina zaten yok\n        col.b[w.key]--;\n        if (col.b[w.key] <= 0) delete col.b[w.key];\n        for (const r in (w.refund || {})) e.res[r] = (e.res[r]||0) + w.refund[r];\n",
+        "after": "        if ((col.b[w.key] || 0) <= 0) continue;          // bina zaten yok\n        const replacement=w.replacement;\n        if(replacement){\n          // A strategic demolition frees its slot only if its intended\n          // building can be paid for and queued before any salvage credit.\n          if(!e.ai||replacement.owner!==e.id||colonyJobs(col)||\n             typeof replacement.key!=='string'||replacement.key===w.key||!Object.hasOwn(BUILDINGS,replacement.key)||\n             !aiCanFinishReplacement(e,sys,pl,w))continue;\n          const original=col.b;\n          col.b={...original,[w.key]:original[w.key]-1};\n          if(!col.b[w.key])delete col.b[w.key];\n          if(!queueBuilding(e,sys,pl,replacement.key)){col.b=original;continue;}\n        }else{\n          col.b[w.key]--;\n          if (col.b[w.key] <= 0) delete col.b[w.key];\n        }\n        for (const r in (w.refund || {})) e.res[r] = (e.res[r]||0) + w.refund[r];\n"
+      },
+      {
+        "before": "\nfunction queueDemolish(e, sys, pl, key){\n  const col = pl.col;\n",
+        "after": "\nfunction queueDemolish(e, sys, pl, key, replacement){\n  const col = pl.col;\n"
+      },
+      {
+        "before": "  col.q = col.q || [];\n  col.q.push({key, left: gun, tot: gun, dem: true,\n              paid: {}, refund: demolishRefund(key), s: sys.id, p: pl.i});\n  return true;\n",
+        "after": "  col.q = col.q || [];\n  const job={key, left: gun, tot: gun, dem: true,\n             paid: {}, refund: demolishRefund(key), s: sys.id, p: pl.i};\n  if(e.ai&&replacement&&replacement.key!==key&&Object.hasOwn(BUILDINGS,replacement.key)){\n    job.replacement={key:replacement.key,owner:e.id,choices:{...replacement.choices}};\n  }\n  col.q.push(job);\n  return true;\n"
+      }
+    ]
+  },
+  "main.js": {
+    "beforeSha256": "c79c0b521344b9effe2b87f29e674c246dd27f0c72efb66f3b1eb59536af23b7",
+    "afterSha256": "cd94495b2e006045650bde156b168f0a63a943d6bc8d01682260ee7bf89c4e7b",
+    "hunks": [
+      {
+        "before": "/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p44';\nconst DIAG_MAX = 40;\n",
+        "after": "/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p45';\nconst DIAG_MAX = 40;\n"
+      }
+    ]
+  },
+  "sw.js": {
+    "beforeSha256": "68a0910c1c95995b07791d3088559014b1e317dd63e8d3cfcab3c0d89da74f9b",
+    "afterSha256": "e0e90b00a9f268e41c2eb289a436aa88264e8b7f6553cde90486fbe3c0b7401a",
+    "hunks": [
+      {
+        "before": "   karışmasını önler; activate'te eskiler siliniyor. */\nconst CACHE = 'stars-v96h10p44';\n\n",
+        "after": "   karışmasını önler; activate'te eskiler siliniyor. */\nconst CACHE = 'stars-v96h10p45';\n\n"
+      }
+    ]
+  },
+  "research/mp0/mp-core.js": {
+    "beforeSha256": "6ea783b7b7a470094b803de45538f798c60ca6456f4b893837f14275365341ec",
+    "afterSha256": "d5855edd3c8fc8c30e5bba7d742fb91114310723db3b0c6d1a3e26c4ee710288",
+    "hunks": [
+      {
+        "before": "  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);\n  const sameSaveFormat=['96h10p41','96h10p42','96h10p43','96h10p44'].includes(build)&&typeof pkg.build==='string'&&(\n    /^96h10p(?:[6-9]|[1-3][0-9]|40)$/.test(pkg.build)||['96h10p25u1','96h10p27s1'].includes(pkg.build)||\n    build==='96h10p43'&&['96h10p41','96h10p42'].includes(pkg.build)||\n    build==='96h10p44'&&['96h10p41','96h10p42','96h10p43'].includes(pkg.build)\n  );\n",
+        "after": "  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);\n  const sameSaveFormat=['96h10p41','96h10p42','96h10p43','96h10p44','96h10p45'].includes(build)&&typeof pkg.build==='string'&&(\n    /^96h10p(?:[6-9]|[1-3][0-9]|40)$/.test(pkg.build)||['96h10p25u1','96h10p27s1'].includes(pkg.build)||\n    build==='96h10p43'&&['96h10p41','96h10p42'].includes(pkg.build)||\n    build==='96h10p44'&&['96h10p41','96h10p42','96h10p43'].includes(pkg.build)||\n    build==='96h10p45'&&['96h10p41','96h10p42','96h10p43','96h10p44'].includes(pkg.build)\n  );\n"
+      }
+    ]
+  },
+  "research/mp1/server/relay.js": {
+    "beforeSha256": "6c7d557f595fae428bd1f7ee37ce9c6547dcd1284bbcc6bcd0f2dd4d775dda60",
+    "afterSha256": "0b323b16d37c965a1035cbb6da44d97dc51e3e0c8182aa299fa97bc37b700405",
+    "hunks": [
+      {
+        "before": "  const release=digest(JSON.stringify([manifest,assets,digest(guard,'base64')]),'hex');\n  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b43',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),release,files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',\n    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});\n",
+        "after": "  const release=digest(JSON.stringify([manifest,assets,digest(guard,'base64')]),'hex');\n  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b44',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),release,files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',\n    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});\n"
+      }
+    ]
+  },
+  "research/mp1/client/view.js": {
+    "beforeSha256": "01f27922ba89162589bbe8c0c39588687b2419540ddcf3719fed655667c23326",
+    "afterSha256": "25b885e21cf4920a6fff2fcb3e9cd5d8d6c9313a004920c5d7ab947220066878",
+    "hunks": [
+      {
+        "before": "/* MP.7.3: salt okunur sürüm işareti — telefonda (bilgisayarsız) doğru dağıtımın açıldığını görmek için; relay /mp/version ile aynı */\nconst MP_VERSION='MP.8.9b43';\nconst verLine=()=>'STARS '+MP_VERSION+' · oyun '+(typeof BUILD_ID==='string'?BUILD_ID:'?');\n",
+        "after": "/* MP.7.3: salt okunur sürüm işareti — telefonda (bilgisayarsız) doğru dağıtımın açıldığını görmek için; relay /mp/version ile aynı */\nconst MP_VERSION='MP.8.9b44';\nconst verLine=()=>'STARS '+MP_VERSION+' · oyun '+(typeof BUILD_ID==='string'?BUILD_ID:'?');\n"
+      }
+    ]
+  }
+}

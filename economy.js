@@ -1119,14 +1119,21 @@ function buildDays(e, key){
 }
 
 function buildingCost(e,key){const B=BUILDINGS[key],factor=key==='kale'&&hasCivic(e,'fortress')?.60:1;return Object.fromEntries(Object.entries(B?.c||{}).map(([k,v])=>[k,Math.round(v*factor)]));}
-function queueBuilding(e, sys, pl, key){
+function buildingOrderCost(e, pl, key){
   const B = BUILDINGS[key], col = pl.col;
-  if (!B || !col || pl.owner !== e.id || (B.tech&&!e.techs[B.tech])) return false;
+  if (!B || !col || pl.owner !== e.id || (B.tech&&!e.techs[B.tech])) return null;
   /* Kuyruktakiler de sayılır: aynı binadan max'ı aşacak sipariş verilemez */
-  if ((col.b[key]||0) + colonyQueuedOf(col, key) >= B.max) return false;
-  if (colonyUsed(col) + colonyQueued(col) >= colonySlots(col, e, pl)) return false;
+  if ((col.b[key]||0) + colonyQueuedOf(col, key) >= B.max) return null;
+  if (colonyUsed(col) + colonyQueued(col) >= colonySlots(col, e, pl)) return null;
   const cost=buildingCost(e,key);
-  for (const r in cost) if (e.res[r] < cost[r]) return false;
+  for (const r in cost) if (e.res[r] < cost[r]) return null;
+
+  return cost;
+}
+function queueBuilding(e, sys, pl, key){
+  const cost=buildingOrderCost(e,pl,key);
+  if (!cost) return false;
+  const col=pl.col;
 
   /* Kaynak PEŞİN alınır — iptal edilirse birebir iade edilir */
   const odenen = {};
@@ -1159,8 +1166,21 @@ function colonyBuildTick(dt){
       /* ── YIKIM İŞİ ── */
       if (w.dem){
         if ((col.b[w.key] || 0) <= 0) continue;          // bina zaten yok
-        col.b[w.key]--;
-        if (col.b[w.key] <= 0) delete col.b[w.key];
+        const replacement=w.replacement;
+        if(replacement){
+          // A strategic demolition frees its slot only if its intended
+          // building can be paid for and queued before any salvage credit.
+          if(!e.ai||replacement.owner!==e.id||colonyJobs(col)||
+             typeof replacement.key!=='string'||replacement.key===w.key||!Object.hasOwn(BUILDINGS,replacement.key)||
+             !aiCanFinishReplacement(e,sys,pl,w))continue;
+          const original=col.b;
+          col.b={...original,[w.key]:original[w.key]-1};
+          if(!col.b[w.key])delete col.b[w.key];
+          if(!queueBuilding(e,sys,pl,replacement.key)){col.b=original;continue;}
+        }else{
+          col.b[w.key]--;
+          if (col.b[w.key] <= 0) delete col.b[w.key];
+        }
         for (const r in (w.refund || {})) e.res[r] = (e.res[r]||0) + w.refund[r];
         sys.def = sysDefense(sys);
         recalcMods(e);
@@ -1204,7 +1224,7 @@ function demolishRefund(key){
   return out;
 }
 
-function queueDemolish(e, sys, pl, key){
+function queueDemolish(e, sys, pl, key, replacement){
   const col = pl.col;
   if (!col || pl.owner !== e.id) return false;
   if (!BUILDINGS[key]) return false;
@@ -1217,8 +1237,12 @@ function queueDemolish(e, sys, pl, key){
 
   const gun = demolishDays(e, key);
   col.q = col.q || [];
-  col.q.push({key, left: gun, tot: gun, dem: true,
-              paid: {}, refund: demolishRefund(key), s: sys.id, p: pl.i});
+  const job={key, left: gun, tot: gun, dem: true,
+             paid: {}, refund: demolishRefund(key), s: sys.id, p: pl.i};
+  if(e.ai&&replacement&&replacement.key!==key&&Object.hasOwn(BUILDINGS,replacement.key)){
+    job.replacement={key:replacement.key,owner:e.id,choices:{...replacement.choices}};
+  }
+  col.q.push(job);
   return true;
 }
 

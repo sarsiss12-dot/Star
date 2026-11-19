@@ -1,0 +1,122 @@
+{
+  "equal": true,
+  "states": [
+    {
+      "label": "paylaşım-ve-sipariş",
+      "guests": [
+        {
+          "id": 1,
+          "sha": "38debb67e3332783951d5c31cc95627c38e6ecec25de8491f499be8e28ef337e",
+          "day": 0
+        },
+        {
+          "id": 2,
+          "sha": "cbf2fc9380110bb8877f608cfb2eef42844ffa362554c59f728d6e49fee4763e",
+          "day": 0
+        }
+      ]
+    },
+    {
+      "label": "yarım-gün-takviye",
+      "guests": [
+        {
+          "id": 1,
+          "sha": "01abbffcae3721a4f02e49d3c7d1a7d4f7ddc71f0b3f32699a3377bcdb229287",
+          "day": 0.5
+        },
+        {
+          "id": 2,
+          "sha": "09deb4cbde7a2942a814cf0f9210e4ba4726c73038a35f8fb753c526039b50f5",
+          "day": 0.5
+        }
+      ]
+    },
+    {
+      "label": "yeniden-bağlandı",
+      "guests": [
+        {
+          "id": 1,
+          "sha": "01abbffcae3721a4f02e49d3c7d1a7d4f7ddc71f0b3f32699a3377bcdb229287",
+          "day": 0.5
+        },
+        {
+          "id": 2,
+          "sha": "09deb4cbde7a2942a814cf0f9210e4ba4726c73038a35f8fb753c526039b50f5",
+          "day": 0.5
+        }
+      ]
+    },
+    {
+      "label": "tersane-sonrası",
+      "guests": [
+        {
+          "id": 1,
+          "sha": "6101af66c8c047e80f538da5f932ee6f834c0746b19e77121550d5e9e5b72248",
+          "day": 0.5
+        },
+        {
+          "id": 2,
+          "sha": "9c95e78f1c88ddd4361c539e4d20d84a17c1801ed3f59c46dcbd657f639d51a2",
+          "day": 0.5
+        }
+      ]
+    }
+  ],
+  "ids": [
+    1,
+    2
+  ],
+  "fixture": {
+    "b": 1,
+    "c": 2,
+    "yard": 75,
+    "remote": 404,
+    "threat": 92,
+    "scout": 5,
+    "scoutRoute": [
+      472
+    ],
+    "fleet": 93,
+    "route": [
+      415
+    ],
+    "queueClass": "kor"
+  },
+  "visible": {
+    "visible": true,
+    "threat": true,
+    "scout": [
+      472
+    ],
+    "route": [
+      415
+    ],
+    "queued": true
+  },
+  "secondGuestSeesNativeSystem": true,
+  "shipmentAfterStep": [
+    {
+      "id": 94,
+      "path": [
+        415
+      ],
+      "status": "moving"
+    }
+  ],
+  "order": {
+    "hostRows": [
+      0,
+      1
+    ],
+    "guestRows": [
+      0,
+      1
+    ],
+    "spent": {
+      "ala": 32
+    },
+    "price": {
+      "ala": 32
+    }
+  }
+}

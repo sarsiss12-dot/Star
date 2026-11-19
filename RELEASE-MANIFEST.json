@@ -1,14 +1,14 @@
 {
-  "phase": "PERF-SINIR.0",
-  "build": "96h10p44",
+  "phase": "AI-IKAME.0",
+  "build": "96h10p45",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p44",
-  "parent_commit": "54a52555c699d82507f6285580577571d4200380",
-  "parent_zip_sha256": "a24fdd28b5597dee4c54d1a7140be8cb5c3c2bafb42f9cdee7ed7d665971ce1c",
+  "pwa_cache": "stars-v96h10p45",
+  "parent_commit": "0559cfbeaac4cd4f458ccfaab23c3228de82b1cd",
+  "parent_zip_sha256": "2527e56f3888f8a22f16e6305aca2e9870eddf08cf8c19f4946631c15a0b7713",
   "file_count": 19,
   "files": {
-    "ai.js": "3028fee904ae51f09f1de6937de0cd6c756ad50172d171eb32433e43074b201c",
+    "ai.js": "4a3ee01c1e0ddb972f9e4706ccb7eaa65cfdeb146757efdc4299915a51091c60",
     "archive-ui.js": "f6b98392e8b85c7717fe5b4e4c778f2c47304ce89fd84a93460b998df6582a3c",
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "e63f4d2889b866d02e4f366d7185d5396f51faa87cbdefa818f4a13d95c2b35a",
@@ -18,15 +18,15 @@
     "diplomacy.js": "f1c5e1b3679b4ebb635d8ba86487ec62b96f515fed0571e4217577c4dd4569a5",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
     "economy-ui.js": "68025b1bb388188435a51cca2319e92e7eb9ec6517b4e3c8437f335e2916763f",
-    "economy.js": "99c1d3c3a1e553230e559dce3df0e3874dddc9f1f6a4c22e878e95b45a711043",
+    "economy.js": "5a364e79abc1cd8fbe7d1e6070b0e818bec1fea90aa98d2c729ed37060008cf8",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
     "index.html": "3bb3c8291d247981322a54cd347782a8d4d727e01a0e60c707667bcf95d63bc9",
-    "main.js": "c79c0b521344b9effe2b87f29e674c246dd27f0c72efb66f3b1eb59536af23b7",
+    "main.js": "cd94495b2e006045650bde156b168f0a63a943d6bc8d01682260ee7bf89c4e7b",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "5b40278d2e0c34a25db5838c87c691f0b23738b0f3b3af7b87ae1fcd85badddc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "68a0910c1c95995b07791d3088559014b1e317dd63e8d3cfcab3c0d89da74f9b",
+    "sw.js": "e0e90b00a9f268e41c2eb289a436aa88264e8b7f6553cde90486fbe3c0b7401a",
     "ui.js": "1b64fd32e5c9845e4c51e66df9afe13d943541124c4aed30d049fde94ef2a507"
   },
-  "description": "Büyük galaksilerde otomatik keşif ve filo takviyesi için sınır geometrisi paylaşımı. Save8 v8, MP paket 4, protokol 1."
+  "description": "Stratejik bina ikamesi için ödenebilir ilk tercih ve söküm sonunda geçerli sipariş doğrulaması. Save8 v8, MP paket 4, protokol 1."
 }
