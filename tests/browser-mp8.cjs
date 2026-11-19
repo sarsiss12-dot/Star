@@ -99,7 +99,11 @@ async function design(p,o){const vp=p.viewportSize();if(vp.width>vp.height)await
     await p.fill('#empName',o.name);await tap(p,'#setup [data-a="mizacSet"][data-x="'+o.mizac+'"]');
     await tap(p,'#setup [data-a="step"][data-x="etik"]');for(const x of o.ethics)await tap(p,'#setup [data-a="ethic"][data-x="'+x+'"]');
     await tap(p,'#setup [data-a="step"][data-x="civic"]');for(const c of o.civics)await tap(p,'#setup [data-a="civic"][data-x="'+c+'"]');
-    await tap(p,'#setup [data-a="step"][data-x="koken"]');await tap(p,'#setup [data-a="origin"][data-x="'+o.origin+'"]');
+    await tap(p,'#setup [data-a="step"][data-x="koken"]');
+    // H compares canonical mirrors across rooms. Use the same origin even
+    // when the setup page's touch and redraw shift the origin cards.
+    if(SCEN==='H')await p.evaluate(origin=>{CFG.origin=origin;safeRenderSetup();},o.origin);
+    else await tap(p,'#setup [data-a="origin"][data-x="'+o.origin+'"]');
     await tap(p,'#setup [data-a="start"]');await wait(p,()=>document.getElementById('menu').classList.contains('hidden'),undefined,10000);}
   finally{await p.setViewportSize(vp);}}
 const DESIGNS={H:{name:'Kızıl Muhafız',mizac:'militarist',origin:'standart',ethics:['mil:2'],civics:['kale_dok']},
@@ -127,6 +131,10 @@ async function room({cutAtStart}={}){
     StarsMirror.build=(id,options)=>mirror(id,{...options,cosmeticSeed:1100+id});
   });
   await tap(H,'[data-m="start"]');
+  if(SCEN==='H'){
+    const origins=await H.evaluate(()=>[G.cfg.origin,...G.cfg.humans.map(h=>h.origin)]);
+    assert.deepEqual(origins,['H',...guestNames()].map(n=>DESIGNS[n].origin),'H kurulum kökenleri');
+  }
   if(cutAtStart){await lanes[cutAtStart].down();metrics.net.cutAtStart={who:cutAtStart,at:Date.now()};await sleep(3000);await lanes[cutAtStart].up();}
   for(const n of guestNames())await wait(pg[n],()=>window.MP6Stars&&MP6Stars.S.started&&!document.getElementById('game').classList.contains('hidden'),undefined,60000);
   await H.evaluate(CANON);for(const n of guestNames())await pg[n].evaluate(CANON);
