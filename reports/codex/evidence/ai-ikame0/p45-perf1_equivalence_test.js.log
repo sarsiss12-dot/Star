@@ -1,0 +1,5 @@
+✓ arındırılmış kaynaklar PERF.1 öncesi baytların kendisi: economy.js 96H.9/96H.10 özeti, economic-ledger.js MP.6.4 özeti
+✓ kontrol ve aday aynı geç oyun Save8'inden 3 ay: her ay Save8 ve RNG birebir; aday ticaret rotasını yeniden hesaplamaz
+✓ ticaret rotası önbelleği: her saklı rota taze findPath ile aynı; radyasyon, şerit dizisi ve yeni dünya önbelleği sıfırlar
+✓ EconomyLedger: stock / snapshot / changedSince eski ifadelerle aynı (anahtar sırası, clean kuralı, eksik devlet, NaN/sonsuz)
+GEÇEN: 4 KALAN: 0
