@@ -1,0 +1,504 @@
+{
+  "location": {
+    "actor": 5,
+    "system": 95,
+    "planet": 0
+  },
+  "before": {
+    "day": 4470,
+    "sha256": "1beae729ddec64039da6e9bb160dc1994fe05fbd7dd89a55acf223fe1947683b",
+    "rng": -1512419162
+  },
+  "after": {
+    "day": 4500,
+    "sha256": "ff480fd4d4052bf0b835b6087a15d047c8bc1b70035a527692db5e6bb3ec82e2",
+    "rng": 1751912682
+  },
+  "decisions": {
+    "p45": [
+      {
+        "kind": "choice",
+        "day": 4500,
+        "key": "dokum",
+        "stock": {
+          "min": 86.84607694584729,
+          "ala": 93.64418877403911
+        },
+        "income": {
+          "min": -12.092858999999995,
+          "ene": 34.848291666941336,
+          "yiy": -2.5390593749999937,
+          "ala": 0.7001583750000044,
+          "ara": 21.630207000000002,
+          "etk": 6.341240000000001,
+          "tuk": 3.5344173000000048
+        },
+        "change": {
+          "ene": 3.2,
+          "min": 9.9,
+          "yiy": 0,
+          "ala": -4.999719375,
+          "tuk": 0,
+          "ara": 0,
+          "etk": 0
+        }
+      },
+      {
+        "kind": "choice",
+        "day": 4500,
+        "key": "fabrika",
+        "stock": {
+          "min": 86.84607694584729,
+          "ala": 93.64418877403911
+        },
+        "income": {
+          "min": -12.092858999999995,
+          "ene": 34.848291666941336,
+          "yiy": -2.5390593749999937,
+          "ala": 0.7001583750000044,
+          "ara": 21.630207000000002,
+          "etk": 6.341240000000001,
+          "tuk": 3.5344173000000048
+        },
+        "change": {
+          "ene": 3.2,
+          "min": 3.6,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": -9.237576750000002,
+          "ara": 0,
+          "etk": 0
+        }
+      },
+      {
+        "kind": "demolition",
+        "day": 4500,
+        "key": "dokum",
+        "left": 94,
+        "refund": {
+          "min": 74
+        }
+      }
+    ],
+    "candidate": [
+      {
+        "kind": "choice",
+        "day": 4500,
+        "key": "dokum",
+        "stock": {
+          "min": 86.84607694584729,
+          "ala": 93.64418877403911
+        },
+        "income": {
+          "min": -12.092858999999995,
+          "ene": 34.848291666941336,
+          "yiy": -2.5390593749999937,
+          "ala": 0.7001583750000044,
+          "ara": 21.630207000000002,
+          "etk": 6.341240000000001,
+          "tuk": 3.5344173000000048
+        },
+        "change": {
+          "ene": 3.2,
+          "min": 9.9,
+          "yiy": 0,
+          "ala": -4.999719375,
+          "tuk": 0,
+          "ara": 0,
+          "etk": 0
+        }
+      },
+      {
+        "kind": "choice",
+        "day": 4500,
+        "key": "fabrika",
+        "stock": {
+          "min": 86.84607694584729,
+          "ala": 93.64418877403911
+        },
+        "income": {
+          "min": -12.092858999999995,
+          "ene": 34.848291666941336,
+          "yiy": -2.5390593749999937,
+          "ala": 0.7001583750000044,
+          "ara": 21.630207000000002,
+          "etk": 6.341240000000001,
+          "tuk": 3.5344173000000048
+        },
+        "change": {
+          "ene": 3.2,
+          "min": 3.6,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": -9.237576750000002,
+          "ara": 0,
+          "etk": 0
+        }
+      },
+      {
+        "kind": "demolition",
+        "day": 4500,
+        "key": "fabrika",
+        "left": 81,
+        "refund": {
+          "min": 59
+        }
+      }
+    ],
+    "reloadedBefore": [
+      {
+        "kind": "choice",
+        "day": 4500,
+        "key": "dokum",
+        "stock": {
+          "min": 86.84607694584729,
+          "ala": 93.64418877403911
+        },
+        "income": {
+          "min": -12.092858999999995,
+          "ene": 34.848291666941336,
+          "yiy": -2.5390593749999937,
+          "ala": 0.7001583750000044,
+          "ara": 21.630207000000002,
+          "etk": 6.341240000000001,
+          "tuk": 3.5344173000000048
+        },
+        "change": {
+          "ene": 3.2,
+          "min": 9.9,
+          "yiy": 0,
+          "ala": -4.999719375,
+          "tuk": 0,
+          "ara": 0,
+          "etk": 0
+        }
+      },
+      {
+        "kind": "choice",
+        "day": 4500,
+        "key": "fabrika",
+        "stock": {
+          "min": 86.84607694584729,
+          "ala": 93.64418877403911
+        },
+        "income": {
+          "min": -12.092858999999995,
+          "ene": 34.848291666941336,
+          "yiy": -2.5390593749999937,
+          "ala": 0.7001583750000044,
+          "ara": 21.630207000000002,
+          "etk": 6.341240000000001,
+          "tuk": 3.5344173000000048
+        },
+        "change": {
+          "ene": 3.2,
+          "min": 3.6,
+          "yiy": 0,
+          "ala": 0,
+          "tuk": -9.237576750000002,
+          "ara": 0,
+          "etk": 0
+        }
+      },
+      {
+        "kind": "demolition",
+        "day": 4500,
+        "key": "fabrika",
+        "left": 81,
+        "refund": {
+          "min": 59
+        }
+      }
+    ]
+  },
+  "later": [
+    {
+      "day": 4530,
+      "rng": -542394110,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4560,
+      "rng": 1458266394,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4590,
+      "rng": -204204728,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4620,
+      "rng": -666945707,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4650,
+      "rng": -1257569080,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4680,
+      "rng": 47314557,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4710,
+      "rng": 1352198194,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4740,
+      "rng": 1393410491,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4770,
+      "rng": 234892645,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4800,
+      "rng": 276104942,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4830,
+      "rng": -1074236495,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4860,
+      "rng": -401188528,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4890,
+      "rng": 775812715,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4920,
+      "rng": -1646376471,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4950,
+      "rng": 2057967452,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 4980,
+      "rng": -428162931,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5010,
+      "rng": -1586680777,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5040,
+      "rng": 2117663146,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5070,
+      "rng": -1696079774,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5100,
+      "rng": -2094879556,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5130,
+      "rng": -2036098568,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5160,
+      "rng": 1859154240,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5190,
+      "rng": 429719006,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5220,
+      "rng": -2135505174,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5250,
+      "rng": -1669433398,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5280,
+      "rng": 1196098664,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5310,
+      "rng": 1848833822,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5340,
+      "rng": 415153085,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5370,
+      "rng": 162719094,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5400,
+      "rng": -1788566134,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5430,
+      "rng": 1488174192,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5460,
+      "rng": 2075138741,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5490,
+      "rng": -1793467691,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5520,
+      "rng": -77375790,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5550,
+      "rng": -1836837427,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5580,
+      "rng": 1741125487,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5610,
+      "rng": -907437993,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5640,
+      "rng": 1201706802,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5670,
+      "rng": -482906541,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5700,
+      "rng": -837163229,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5730,
+      "rng": -1172936520,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5760,
+      "rng": 2051684412,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5790,
+      "rng": -2144204305,
+      "equalBytes": true,
+      "equalValues": true
+    },
+    {
+      "day": 5820,
+      "rng": -262348510,
+      "equalBytes": true,
+      "equalValues": true
+    }
+  ],
+  "payments": [
+    {
+      "kind": "paid",
+      "day": 5550,
+      "key": "maden",
+      "paid": {
+        "min": 120
+      },
+      "debit": {
+        "min": 120
+      }
+    },
+    {
+      "kind": "paid",
+      "day": 5760,
+      "key": "maden",
+      "paid": {
+        "min": 120
+      },
+      "debit": {
+        "min": 120
+      }
+    }
+  ]
+}

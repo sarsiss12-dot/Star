@@ -1,0 +1,23 @@
+{
+  "file": "stars-faz96h10p46.zip",
+  "bytes": 942030,
+  "sha256": "9ab7f13bf5f9e88d03229b595edc31479d9709cb91afa252f50336ec46fe7836",
+  "crc": "PASS",
+  "members": 20,
+  "manifest_runtime_files": 19
+}
+{
+  "file": "stars-faz96h10p46.zip",
+  "bytes": 942030,
+  "sha256": "9ab7f13bf5f9e88d03229b595edc31479d9709cb91afa252f50336ec46fe7836",
+  "crc": "PASS",
+  "members": 20,
+  "manifest_runtime_files": 19
+}
+DOĞRULANDI: 19 dosya; oyun build 96h10p46.
+KAPSAM: GitHub çalışma zamanı ve yayımlanan faz dosyaları; tarihsel arşivler kapsam dışıdır. Tam kanonik ZIP doğrulaması değildir.
+Bu bütünlük kontrolüdür; oyun/Android testleri yeniden çalıştırılmadı.
+PASS, iki paket bayt düzeyinde aynı, ZIP, çıkarılan manifest ve kaynak commit eşleşiyor.
+SHA-256 9ab7f13bf5f9e88d03229b595edc31479d9709cb91afa252f50336ec46fe7836
+CRC32 F9158BF7
+Manifest SHA-256 14615a89dc48c15443e5f71b0edbcede15ff7c20faf1bb55706e8a90811533cc

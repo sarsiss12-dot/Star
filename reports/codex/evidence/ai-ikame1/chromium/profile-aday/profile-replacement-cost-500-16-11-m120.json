@@ -1,0 +1,229 @@
+{
+  "key": "500-16-11-m120",
+  "identity": {
+    "startDay": 3600,
+    "systems": 500,
+    "ai": 16,
+    "build": "96h10p45"
+  },
+  "times": [
+    1373,
+    1496.8999999985099,
+    1651.7000000029802
+  ],
+  "top": [
+    {
+      "fn": "claimOf /diplomacy.js:103",
+      "ms": 1325.471,
+      "percent": 28.216891846151032
+    },
+    {
+      "fn": "empireIncome /economy.js:364",
+      "ms": 264.362,
+      "percent": 5.627791149132783
+    },
+    {
+      "fn": "(program) :0",
+      "ms": 174.6,
+      "percent": 3.7169197336931323
+    },
+    {
+      "fn": "explorationContext /main.js:4548",
+      "ms": 172.541,
+      "percent": 3.6730873297316537
+    },
+    {
+      "fn": "supplyDistance /main.js:3596",
+      "ms": 169.612,
+      "percent": 3.610734191701945
+    },
+    {
+      "fn": "colonyOutput /economy.js:47",
+      "ms": 163.286,
+      "percent": 3.476065038005824
+    },
+    {
+      "fn": "(garbage collector) :0",
+      "ms": 155.988,
+      "percent": 3.3207037538334725
+    },
+    {
+      "fn": "autoExploreTick /main.js:4664",
+      "ms": 142.167,
+      "percent": 3.0264795405495506
+    },
+    {
+      "fn": "structTick /main.js:5517",
+      "ms": 121.836,
+      "percent": 2.593669144755077
+    },
+    {
+      "fn": "EconomyLedger.observe.sy.system /economic-ledger.js:59",
+      "ms": 91.734,
+      "percent": 1.9528517459943058
+    },
+    {
+      "fn": "tradeLinks /economy.js:234",
+      "ms": 82.933,
+      "percent": 1.765494297104081
+    },
+    {
+      "fn": "aiBuildingDelta /ai.js:198",
+      "ms": 81.344,
+      "percent": 1.7316673471794626
+    },
+    {
+      "fn": "explorationGraph /main.js:4608",
+      "ms": 75.539,
+      "percent": 1.6080893457242011
+    },
+    {
+      "fn": "reinforcementThreats /main.js:5750",
+      "ms": 73.575,
+      "percent": 1.5662793207701728
+    },
+    {
+      "fn": "hasCivic /main.js:2417",
+      "ms": 48.511,
+      "percent": 1.0327118740045105
+    },
+    {
+      "fn": "aiKnownRoute /ai.js:86",
+      "ms": 48.184,
+      "percent": 1.0257506325788652
+    },
+    {
+      "fn": "fleetUpkeep /main.js:3707",
+      "ms": 42.074,
+      "percent": 0.8956797300996842
+    },
+    {
+      "fn": "txCaptureGraph /diplomacy.js:2227",
+      "ms": 41.792,
+      "percent": 0.8896764576775681
+    },
+    {
+      "fn": "dailyTick /main.js:4820",
+      "ms": 41.6,
+      "percent": 0.8855891232625103
+    },
+    {
+      "fn": "window.<computed> :12",
+      "ms": 40.773,
+      "percent": 0.8679837817976522
+    },
+    {
+      "fn": "node /main.js:3598",
+      "ms": 40.119,
+      "percent": 0.8540612989463618
+    },
+    {
+      "fn": "tradeInfo /economy.js:313",
+      "ms": 40.021,
+      "percent": 0.8519750553386761
+    },
+    {
+      "fn": "fleetSupply /main.js:3635",
+      "ms": 34.661,
+      "percent": 0.7378703029183142
+    },
+    {
+      "fn": "fleetAlloyUpkeep /main.js:3697",
+      "ms": 34.299,
+      "percent": 0.7301639744899241
+    },
+    {
+      "fn": "aiEconomyPlan /ai.js:248",
+      "ms": 31.87,
+      "percent": 0.678454936499428
+    },
+    {
+      "fn": "dealCost /diplomacy.js:1648",
+      "ms": 30.401,
+      "percent": 0.6471825705842206
+    },
+    {
+      "fn": "colonyBuildTick /economy.js:1150",
+      "ms": 29.427,
+      "percent": 0.6264478637078339
+    },
+    {
+      "fn": "(anon) /construction.js:95",
+      "ms": 27.912,
+      "percent": 0.594196240589019
+    },
+    {
+      "fn": "tick /construction.js:92",
+      "ms": 24.804,
+      "percent": 0.5280325147452718
+    },
+    {
+      "fn": "recalcMods /main.js:2423",
+      "ms": 24.389,
+      "percent": 0.5191979117127251
+    },
+    {
+      "fn": "aiFedBudget /ai.js:224",
+      "ms": 24.07,
+      "percent": 0.5124069758877073
+    },
+    {
+      "fn": "researchReady /economy.js:674",
+      "ms": 24.057,
+      "percent": 0.5121302292866878
+    },
+    {
+      "fn": "reinforcementRoutes /main.js:5784",
+      "ms": 23.297,
+      "percent": 0.4959511972270842
+    },
+    {
+      "fn": "aiShipInventory /ai.js:1437",
+      "ms": 22.879,
+      "percent": 0.48705272959430224
+    },
+    {
+      "fn": "isSupplyNode /main.js:3541",
+      "ms": 21.777,
+      "percent": 0.46359313310787714
+    }
+  ],
+  "replacementCalls": {
+    "aiReplacementFirstBuilding": {
+      "calls": 14,
+      "ms": 25.799999989569187
+    },
+    "aiCanFinishReplacement": {
+      "calls": 5,
+      "ms": 22.99999999254942
+    },
+    "aiColonyBuildingNeeds": {
+      "calls": 14,
+      "ms": 0.6000000014901161
+    },
+    "aiEconomicOrder": {
+      "calls": 14,
+      "ms": 7.700000002980232
+    },
+    "aiEconomyPlan": {
+      "calls": 19,
+      "ms": 25.69999998062849
+    },
+    "aiBuildingDelta": {
+      "calls": 134,
+      "ms": 32.69999998807907
+    },
+    "aiDemolitionChoice": {
+      "calls": 5,
+      "ms": 16.49999999254942
+    },
+    "aiColonyForecast": {
+      "calls": 14,
+      "ms": 4.799999997019768
+    },
+    "empireIncome": {
+      "calls": 146,
+      "ms": 32.79999999701977
+    }
+  }
+}

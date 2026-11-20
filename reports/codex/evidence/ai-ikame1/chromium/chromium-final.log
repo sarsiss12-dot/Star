@@ -1,0 +1,58 @@
+500-16-11-m120 {
+  base: { p50: 1263.6499999985099, p95: 1557.3999999910593 },
+  candidate: { p50: 1073.25, p95: 1268.1000000089407 }
+}
+500-16-11-m180 {
+  base: { p50: 3788.4999999925494, p95: 4213.5 },
+  candidate: { p50: 2388.7999999970198, p95: 2966.5 }
+}
+500-16-11-m120 [
+  {
+    fn: 'claimOf /diplomacy.js:103',
+    ms: 887.393,
+    percent: 20.99272676948626
+  },
+  {
+    fn: 'empireIncome /economy.js:364',
+    ms: 223.31,
+    percent: 5.282761769468518
+  },
+  {
+    fn: 'explorationContext /main.js:4548',
+    ms: 219.74,
+    percent: 5.198307604778166
+  },
+  { fn: '(program) :0', ms: 204.342, percent: 4.834042835057704 },
+  {
+    fn: 'structTick /main.js:5517',
+    ms: 151.747,
+    percent: 3.5898224451728056
+  }
+]
+500-16-11-m180 [
+  {
+    fn: 'tradeLinks /economy.js:234',
+    ms: 1441.763,
+    percent: 15.170240817181174
+  },
+  {
+    fn: 'claimOf /diplomacy.js:103',
+    ms: 1275.043,
+    percent: 13.416011759395364
+  },
+  {
+    fn: 'empireIncome /economy.js:364',
+    ms: 764.331,
+    percent: 8.042296364962137
+  },
+  {
+    fn: '(garbage collector) :0',
+    ms: 704.632,
+    percent: 7.414143050898106
+  },
+  {
+    fn: 'colonyOutput /economy.js:47',
+    ms: 537.035,
+    percent: 5.650686192706355
+  }
+]

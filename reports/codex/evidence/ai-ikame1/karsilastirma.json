@@ -1,0 +1,1614 @@
+{
+  "100-9-11": {
+    "commonDays": 7200,
+    "firstChange": null,
+    "p44": {
+      "nativeDay": 7200,
+      "days": 7200,
+      "demolitions": 432,
+      "cycles": 130,
+      "netMinerals": 16365,
+      "critical": 32,
+      "actor2GoodsCritical": 0,
+      "alloyMedian": 374.8167270123905,
+      "finalAlloy": 572.0507671505161,
+      "delivered": 1336,
+      "militaryMedian": 27356.0,
+      "tradeDeliveries": 486,
+      "tech": 187,
+      "deferred": {},
+      "replacementCount": 429,
+      "replacementDone": 175,
+      "replacementCohort": 344,
+      "replacementCohortDone": {
+        "6": 136,
+        "12": 154,
+        "24": 156
+      },
+      "checkpoints": {
+        "6": {
+          "alloy": 52.975236495,
+          "hulls": 18
+        },
+        "12": {
+          "alloy": 42.555489830000006,
+          "hulls": 49
+        },
+        "24": {
+          "alloy": 44.7187673,
+          "hulls": 82
+        },
+        "120": {
+          "alloy": 296.94169040052185,
+          "hulls": 646
+        },
+        "180": {
+          "alloy": 377.5489263491811,
+          "hulls": 1023
+        },
+        "240": {
+          "alloy": 572.0507671505161,
+          "hulls": 1336
+        }
+      },
+      "warEnds": {
+        "proxy-peace|actor:auto": 1
+      },
+      "militaryFinal": 145926,
+      "resourceMonths": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "tuk": 19,
+        "ala": 13
+      },
+      "shortageRuns": {
+        "ene": [],
+        "min": [],
+        "yiy": [],
+        "tuk": [
+          {
+            "actor": 7,
+            "first": 189,
+            "last": 207,
+            "months": 19
+          }
+        ],
+        "ala": [
+          {
+            "actor": 2,
+            "first": 228,
+            "last": 240,
+            "months": 13
+          }
+        ]
+      },
+      "alloyFlows": null
+    },
+    "p45": {
+      "nativeDay": 7200,
+      "days": 7200,
+      "demolitions": 299,
+      "cycles": 0,
+      "netMinerals": 0,
+      "critical": 7,
+      "actor2GoodsCritical": 0,
+      "alloyMedian": 403.0481365976885,
+      "finalAlloy": 584.5015218187281,
+      "delivered": 1405,
+      "militaryMedian": 30583.5,
+      "tradeDeliveries": 837,
+      "tech": 171,
+      "deferred": {
+        "same-building": 155,
+        "unfunded-or-blocked": 27,
+        "different-priority": 3
+      },
+      "replacementCount": 297,
+      "replacementDone": 291,
+      "replacementCohort": 249,
+      "replacementCohortDone": {
+        "6": 239,
+        "12": 248,
+        "24": 248
+      },
+      "checkpoints": {
+        "6": {
+          "alloy": 52.975236495,
+          "hulls": 18
+        },
+        "12": {
+          "alloy": 42.555489830000006,
+          "hulls": 49
+        },
+        "24": {
+          "alloy": 41.2966409,
+          "hulls": 85
+        },
+        "120": {
+          "alloy": 389.09711593402795,
+          "hulls": 633
+        },
+        "180": {
+          "alloy": 545.7369721522956,
+          "hulls": 1071
+        },
+        "240": {
+          "alloy": 584.5015218187281,
+          "hulls": 1405
+        }
+      },
+      "warEnds": {
+        "exhaustion-lock|actor:7": 1,
+        "proxy-peace|actor:auto": 1,
+        "eliminated|actor:auto": 2
+      },
+      "militaryFinal": 152505,
+      "resourceMonths": {
+        "ene": 0,
+        "min": 4,
+        "yiy": 3,
+        "tuk": 0,
+        "ala": 0
+      },
+      "shortageRuns": {
+        "ene": [],
+        "min": [
+          {
+            "actor": 7,
+            "first": 186,
+            "last": 189,
+            "months": 4
+          }
+        ],
+        "yiy": [
+          {
+            "actor": 12,
+            "first": 224,
+            "last": 226,
+            "months": 3
+          }
+        ],
+        "tuk": [],
+        "ala": []
+      },
+      "alloyFlows": null
+    },
+    "aday": {
+      "nativeDay": 7200,
+      "days": 7200,
+      "demolitions": 299,
+      "cycles": 0,
+      "netMinerals": 0,
+      "critical": 7,
+      "actor2GoodsCritical": 0,
+      "alloyMedian": 403.0481365976885,
+      "finalAlloy": 584.5015218187281,
+      "delivered": 1405,
+      "militaryMedian": 30583.5,
+      "tradeDeliveries": 837,
+      "tech": 171,
+      "deferred": {
+        "same-building": 155,
+        "unfunded-or-blocked": 27,
+        "different-priority": 3
+      },
+      "replacementCount": 297,
+      "replacementDone": 291,
+      "replacementCohort": 249,
+      "replacementCohortDone": {
+        "6": 239,
+        "12": 248,
+        "24": 248
+      },
+      "checkpoints": {
+        "6": {
+          "alloy": 52.975236495,
+          "hulls": 18
+        },
+        "12": {
+          "alloy": 42.555489830000006,
+          "hulls": 49
+        },
+        "24": {
+          "alloy": 41.2966409,
+          "hulls": 85
+        },
+        "120": {
+          "alloy": 389.09711593402795,
+          "hulls": 633
+        },
+        "180": {
+          "alloy": 545.7369721522956,
+          "hulls": 1071
+        },
+        "240": {
+          "alloy": 584.5015218187281,
+          "hulls": 1405
+        }
+      },
+      "warEnds": {
+        "exhaustion-lock|actor:7": 1,
+        "proxy-peace|actor:auto": 1,
+        "eliminated|actor:auto": 2
+      },
+      "militaryFinal": 152505,
+      "resourceMonths": {
+        "ene": 0,
+        "min": 4,
+        "yiy": 3,
+        "tuk": 0,
+        "ala": 0
+      },
+      "shortageRuns": {
+        "ene": [],
+        "min": [
+          {
+            "actor": 7,
+            "first": 186,
+            "last": 189,
+            "months": 4
+          }
+        ],
+        "yiy": [
+          {
+            "actor": 12,
+            "first": 224,
+            "last": 226,
+            "months": 3
+          }
+        ],
+        "tuk": [],
+        "ala": []
+      },
+      "alloyFlows": {
+        "medianNet": 403.0481365976885,
+        "medianUpkeep": 160.62594908343544,
+        "medianBeforeUpkeep": 554.6014277781742,
+        "medianFoundryBase": 267.2668246153846,
+        "sumNet": 86739.83256716227,
+        "sumUpkeep": 53220.14576224825,
+        "sumBeforeUpkeep": 139959.97832941051,
+        "sumFoundryBase": 70636.43865185665,
+        "orders": 1411,
+        "paidShipAlloy": 59929,
+        "shipClasses": {
+          "ins": {
+            "orders": 35,
+            "alloy": 1575
+          },
+          "kor": {
+            "orders": 990,
+            "alloy": 31680
+          },
+          "bil": {
+            "orders": 71,
+            "alloy": 1704
+          },
+          "kol": {
+            "orders": 66,
+            "alloy": 3282
+          },
+          "ord": {
+            "orders": 16,
+            "alloy": 1120
+          },
+          "muh": {
+            "orders": 161,
+            "alloy": 11592
+          },
+          "kru": {
+            "orders": 48,
+            "alloy": 7440
+          },
+          "esk": {
+            "orders": 24,
+            "alloy": 1536
+          }
+        },
+        "deliveredClasses": {
+          "ins": 34,
+          "kor": 987,
+          "bil": 71,
+          "kol": 66,
+          "ord": 16,
+          "muh": 160,
+          "kru": 47,
+          "esk": 24
+        },
+        "ledger": {
+          "building/in": 112.0,
+          "building/out": 24902.0,
+          "cargoDelivery/in": 3463.3000000000047,
+          "cargoLoad/out": 3479.300000000007,
+          "diplomacy/in": 60.0,
+          "diplomacy/out": 60.0,
+          "event/in": 700.0,
+          "other/in": 8747.586888826165,
+          "other/out": 6163.738679193245,
+          "ship/out": 59929.0,
+          "tribute/in": 574.5813576145564,
+          "tribute/out": 574.5813576145571
+        },
+        "endingStock": 7299.847108207928
+      }
+    }
+  },
+  "100-9-99": {
+    "commonDays": 7200,
+    "firstChange": {
+      "day": 3900,
+      "previous": {
+        "day": 3870,
+        "sha256": "6a54f63a62f26d1cde0da8da43bbdec5e22ac173ddfec77d0d95e73c233174e6",
+        "rng": 1408891118
+      },
+      "firstRng": 4350,
+      "before": [
+        {
+          "kind": "demolition",
+          "day": 3900,
+          "actor": 5,
+          "system": 95,
+          "planet": 0,
+          "key": "dokum",
+          "id": 425,
+          "paid": {}
+        },
+        {
+          "kind": "demolition",
+          "day": 3900,
+          "actor": 11,
+          "system": 34,
+          "planet": 0,
+          "key": "dokum",
+          "id": 428,
+          "paid": {}
+        }
+      ],
+      "after": [
+        {
+          "kind": "demolition",
+          "day": 3900,
+          "actor": 5,
+          "system": 95,
+          "planet": 0,
+          "key": "dokum",
+          "id": 425,
+          "paid": {}
+        },
+        {
+          "kind": "recovery-demolition",
+          "day": 3900,
+          "actor": 11,
+          "system": 34,
+          "planet": 0,
+          "key": "fabrika",
+          "blocked": false,
+          "stock": {
+            "min": 36.051928008106714,
+            "ene": 411.1086586318116,
+            "yiy": 177.4929089636611,
+            "ala": 12.591121685402257,
+            "ara": 0,
+            "tuk": 131.7736468268544,
+            "etk": 154.52738387906666
+          },
+          "income": {
+            "min": -1.3766388981759952,
+            "ene": 13.375078719014144,
+            "yiy": -2.1124665231146613,
+            "ala": 4.357764710676001,
+            "ara": 6.955501294728002,
+            "etk": 8.347499202133333,
+            "tuk": 0.6685562657856039
+          },
+          "buildings": {
+            "maden": 2,
+            "santral": 1,
+            "ciftlik": 1,
+            "liman": 1,
+            "dokum": 1,
+            "tersane": 1,
+            "lab": 1,
+            "fabrika": 1
+          }
+        },
+        {
+          "kind": "demolition",
+          "day": 3900,
+          "actor": 11,
+          "system": 34,
+          "planet": 0,
+          "key": "fabrika",
+          "id": 428,
+          "paid": {}
+        }
+      ]
+    },
+    "p44": {
+      "nativeDay": 7200,
+      "days": 7200,
+      "demolitions": 336,
+      "cycles": 99,
+      "netMinerals": 12182,
+      "critical": 7,
+      "actor2GoodsCritical": 0,
+      "alloyMedian": 343.22207908874304,
+      "finalAlloy": 529.1294356769665,
+      "delivered": 1471,
+      "militaryMedian": 45482.5,
+      "tradeDeliveries": 96,
+      "tech": 182,
+      "deferred": {},
+      "replacementCount": 332,
+      "replacementDone": 129,
+      "replacementCohort": 253,
+      "replacementCohortDone": {
+        "6": 93,
+        "12": 112,
+        "24": 112
+      },
+      "checkpoints": {
+        "6": {
+          "alloy": 49.372729135,
+          "hulls": 15
+        },
+        "12": {
+          "alloy": 38.992882787499994,
+          "hulls": 46
+        },
+        "24": {
+          "alloy": 27.357896690000004,
+          "hulls": 99
+        },
+        "120": {
+          "alloy": 298.3947425156588,
+          "hulls": 743
+        },
+        "180": {
+          "alloy": 442.4712118161167,
+          "hulls": 1181
+        },
+        "240": {
+          "alloy": 529.1294356769665,
+          "hulls": 1471
+        }
+      },
+      "warEnds": {
+        "ai-peace|actor:9": 1,
+        "ai-peace|actor:2": 1,
+        "ai-peace|actor:5": 1
+      },
+      "militaryFinal": 164219,
+      "resourceMonths": {
+        "ene": 0,
+        "min": 2,
+        "yiy": 0,
+        "tuk": 0,
+        "ala": 5
+      },
+      "shortageRuns": {
+        "ene": [],
+        "min": [
+          {
+            "actor": 8,
+            "first": 145,
+            "last": 146,
+            "months": 2
+          }
+        ],
+        "yiy": [],
+        "tuk": [],
+        "ala": [
+          {
+            "actor": 8,
+            "first": 124,
+            "last": 128,
+            "months": 5
+          }
+        ]
+      },
+      "alloyFlows": null
+    },
+    "p45": {
+      "nativeDay": 7200,
+      "days": 7200,
+      "demolitions": 259,
+      "cycles": 3,
+      "netMinerals": 408,
+      "critical": 57,
+      "actor2GoodsCritical": 0,
+      "alloyMedian": 394.659348929139,
+      "finalAlloy": 808.5463058649485,
+      "delivered": 1397,
+      "militaryMedian": 51101.5,
+      "tradeDeliveries": 140,
+      "tech": 194,
+      "deferred": {
+        "same-building": 75,
+        "different-priority": 5,
+        "unfunded-or-blocked": 2
+      },
+      "replacementCount": 252,
+      "replacementDone": 239,
+      "replacementCohort": 185,
+      "replacementCohortDone": {
+        "6": 176,
+        "12": 181,
+        "24": 181
+      },
+      "checkpoints": {
+        "6": {
+          "alloy": 49.372729135,
+          "hulls": 15
+        },
+        "12": {
+          "alloy": 38.992882787499994,
+          "hulls": 46
+        },
+        "24": {
+          "alloy": 39.529209650000006,
+          "hulls": 104
+        },
+        "120": {
+          "alloy": 410.79102371080506,
+          "hulls": 735
+        },
+        "180": {
+          "alloy": 413.2942887398899,
+          "hulls": 1017
+        },
+        "240": {
+          "alloy": 808.5463058649485,
+          "hulls": 1397
+        }
+      },
+      "warEnds": {
+        "proxy-peace|actor:auto": 1
+      },
+      "militaryFinal": 165049,
+      "resourceMonths": {
+        "ene": 0,
+        "min": 10,
+        "yiy": 0,
+        "tuk": 0,
+        "ala": 47
+      },
+      "shortageRuns": {
+        "ene": [],
+        "min": [
+          {
+            "actor": 5,
+            "first": 153,
+            "last": 157,
+            "months": 5
+          },
+          {
+            "actor": 5,
+            "first": 226,
+            "last": 228,
+            "months": 3
+          },
+          {
+            "actor": 11,
+            "first": 147,
+            "last": 148,
+            "months": 2
+          }
+        ],
+        "yiy": [],
+        "tuk": [],
+        "ala": [
+          {
+            "actor": 2,
+            "first": 39,
+            "last": 39,
+            "months": 1
+          },
+          {
+            "actor": 5,
+            "first": 162,
+            "last": 207,
+            "months": 46
+          }
+        ]
+      },
+      "alloyFlows": null
+    },
+    "aday": {
+      "nativeDay": 7200,
+      "days": 7200,
+      "demolitions": 287,
+      "cycles": 5,
+      "netMinerals": 667,
+      "critical": 17,
+      "actor2GoodsCritical": 0,
+      "alloyMedian": 395.71194695426544,
+      "finalAlloy": 796.7008676715824,
+      "delivered": 1304,
+      "militaryMedian": 51101.5,
+      "tradeDeliveries": 268,
+      "tech": 193,
+      "deferred": {
+        "same-building": 75,
+        "different-priority": 5,
+        "unfunded-or-blocked": 2
+      },
+      "replacementCount": 278,
+      "replacementDone": 253,
+      "replacementCohort": 206,
+      "replacementCohortDone": {
+        "6": 192,
+        "12": 195,
+        "24": 195
+      },
+      "checkpoints": {
+        "6": {
+          "alloy": 49.372729135,
+          "hulls": 15
+        },
+        "12": {
+          "alloy": 38.992882787499994,
+          "hulls": 46
+        },
+        "24": {
+          "alloy": 39.529209650000006,
+          "hulls": 104
+        },
+        "120": {
+          "alloy": 410.79102371080506,
+          "hulls": 735
+        },
+        "180": {
+          "alloy": 405.87632448109446,
+          "hulls": 1008
+        },
+        "240": {
+          "alloy": 796.7008676715824,
+          "hulls": 1304
+        }
+      },
+      "warEnds": {},
+      "militaryFinal": 151797,
+      "resourceMonths": {
+        "ene": 0,
+        "min": 9,
+        "yiy": 0,
+        "tuk": 0,
+        "ala": 8
+      },
+      "shortageRuns": {
+        "ene": [],
+        "min": [
+          {
+            "actor": 5,
+            "first": 154,
+            "last": 156,
+            "months": 3
+          },
+          {
+            "actor": 11,
+            "first": 201,
+            "last": 201,
+            "months": 1
+          },
+          {
+            "actor": 11,
+            "first": 236,
+            "last": 240,
+            "months": 5
+          }
+        ],
+        "yiy": [],
+        "tuk": [],
+        "ala": [
+          {
+            "actor": 2,
+            "first": 39,
+            "last": 39,
+            "months": 1
+          },
+          {
+            "actor": 9,
+            "first": 179,
+            "last": 181,
+            "months": 3
+          },
+          {
+            "actor": 9,
+            "first": 183,
+            "last": 186,
+            "months": 4
+          }
+        ]
+      },
+      "alloyFlows": {
+        "medianNet": 395.71194695426544,
+        "medianUpkeep": 256.55170792075575,
+        "medianBeforeUpkeep": 681.8186778609229,
+        "medianFoundryBase": 326.53567675,
+        "sumNet": 90298.60105104717,
+        "sumUpkeep": 62270.17157702331,
+        "sumBeforeUpkeep": 152568.77262807047,
+        "sumFoundryBase": 76767.80489783487,
+        "orders": 1312,
+        "paidShipAlloy": 54107,
+        "shipClasses": {
+          "ins": {
+            "orders": 23,
+            "alloy": 1035
+          },
+          "bil": {
+            "orders": 52,
+            "alloy": 1248
+          },
+          "kor": {
+            "orders": 952,
+            "alloy": 30464
+          },
+          "ord": {
+            "orders": 12,
+            "alloy": 840
+          },
+          "kol": {
+            "orders": 71,
+            "alloy": 3534
+          },
+          "muh": {
+            "orders": 166,
+            "alloy": 11952
+          },
+          "kru": {
+            "orders": 30,
+            "alloy": 4650
+          },
+          "esk": {
+            "orders": 6,
+            "alloy": 384
+          }
+        },
+        "deliveredClasses": {
+          "ins": 23,
+          "bil": 52,
+          "kor": 948,
+          "ord": 11,
+          "kol": 70,
+          "muh": 164,
+          "kru": 30,
+          "esk": 6
+        },
+        "ledger": {
+          "building/in": 178.0,
+          "building/out": 23936.0,
+          "cargoDelivery/in": 951.5000000000008,
+          "cargoLoad/out": 951.4999999999992,
+          "clamp/in": 60.07240256066742,
+          "diplomacy/in": 489.0,
+          "diplomacy/out": 489.0,
+          "event/in": 700.0,
+          "other/in": 9566.64999999989,
+          "other/out": 13050.988677506188,
+          "ship/out": 54107.0
+        },
+        "endingStock": 12096.334776101607
+      }
+    }
+  },
+  "100-9-404": {
+    "commonDays": 5310,
+    "firstChange": null,
+    "p44": {
+      "nativeDay": 5400,
+      "days": 5310,
+      "demolitions": 141,
+      "cycles": 31,
+      "netMinerals": 4120,
+      "critical": 158,
+      "actor2GoodsCritical": 119,
+      "alloyMedian": 280.4522382099027,
+      "finalAlloy": 400.29338904316353,
+      "delivered": 1050,
+      "militaryMedian": 24407,
+      "tradeDeliveries": 274,
+      "tech": 156,
+      "deferred": {},
+      "replacementCount": 139,
+      "replacementDone": 64,
+      "replacementCohort": 93,
+      "replacementCohortDone": {
+        "6": 34,
+        "12": 40,
+        "24": 43
+      },
+      "checkpoints": {
+        "6": {
+          "alloy": 42.53422060025,
+          "hulls": 17
+        },
+        "12": {
+          "alloy": 45.771342808595,
+          "hulls": 46
+        },
+        "24": {
+          "alloy": 69.16932917740881,
+          "hulls": 91
+        },
+        "120": {
+          "alloy": 362.66100872374454,
+          "hulls": 600
+        }
+      },
+      "warEnds": {
+        "exhaustion-lock|actor:9": 1,
+        "exhaustion-lock|actor:1": 1
+      },
+      "militaryFinal": 88079,
+      "resourceMonths": {
+        "ene": 0,
+        "min": 42,
+        "yiy": 119,
+        "tuk": 119,
+        "ala": 2
+      },
+      "shortageRuns": {
+        "ene": [],
+        "min": [
+          {
+            "actor": 2,
+            "first": 136,
+            "last": 177,
+            "months": 42
+          }
+        ],
+        "yiy": [
+          {
+            "actor": 2,
+            "first": 96,
+            "last": 177,
+            "months": 82
+          },
+          {
+            "actor": 11,
+            "first": 113,
+            "last": 149,
+            "months": 37
+          }
+        ],
+        "tuk": [
+          {
+            "actor": 2,
+            "first": 59,
+            "last": 177,
+            "months": 119
+          }
+        ],
+        "ala": [
+          {
+            "actor": 6,
+            "first": 51,
+            "last": 52,
+            "months": 2
+          }
+        ]
+      },
+      "alloyFlows": null
+    },
+    "p45": {
+      "nativeDay": 5310,
+      "days": 5310,
+      "demolitions": 99,
+      "cycles": 0,
+      "netMinerals": 0,
+      "critical": 123,
+      "actor2GoodsCritical": 119,
+      "alloyMedian": 279.78871562524006,
+      "finalAlloy": 543.7964521356216,
+      "delivered": 981,
+      "militaryMedian": 26182,
+      "tradeDeliveries": 276,
+      "tech": 156,
+      "deferred": {
+        "same-building": 32,
+        "unfunded-or-blocked": 3
+      },
+      "replacementCount": 97,
+      "replacementDone": 93,
+      "replacementCohort": 65,
+      "replacementCohortDone": {
+        "6": 60,
+        "12": 65,
+        "24": 65
+      },
+      "checkpoints": {
+        "6": {
+          "alloy": 42.53422060025,
+          "hulls": 17
+        },
+        "12": {
+          "alloy": 45.771342808595,
+          "hulls": 46
+        },
+        "24": {
+          "alloy": 69.16932917740881,
+          "hulls": 91
+        },
+        "120": {
+          "alloy": 451.93569459397327,
+          "hulls": 666
+        }
+      },
+      "warEnds": {},
+      "militaryFinal": 93602,
+      "resourceMonths": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 78,
+        "tuk": 119,
+        "ala": 4
+      },
+      "shortageRuns": {
+        "ene": [],
+        "min": [],
+        "yiy": [
+          {
+            "actor": 2,
+            "first": 95,
+            "last": 172,
+            "months": 78
+          }
+        ],
+        "tuk": [
+          {
+            "actor": 2,
+            "first": 59,
+            "last": 177,
+            "months": 119
+          }
+        ],
+        "ala": [
+          {
+            "actor": 5,
+            "first": 172,
+            "last": 173,
+            "months": 2
+          },
+          {
+            "actor": 6,
+            "first": 51,
+            "last": 52,
+            "months": 2
+          }
+        ]
+      },
+      "alloyFlows": null
+    },
+    "aday": {
+      "nativeDay": 5310,
+      "days": 5310,
+      "demolitions": 99,
+      "cycles": 0,
+      "netMinerals": 0,
+      "critical": 123,
+      "actor2GoodsCritical": 119,
+      "alloyMedian": 279.78871562524006,
+      "finalAlloy": 543.7964521356216,
+      "delivered": 981,
+      "militaryMedian": 26182,
+      "tradeDeliveries": 276,
+      "tech": 156,
+      "deferred": {
+        "same-building": 32,
+        "unfunded-or-blocked": 3
+      },
+      "replacementCount": 97,
+      "replacementDone": 93,
+      "replacementCohort": 65,
+      "replacementCohortDone": {
+        "6": 60,
+        "12": 65,
+        "24": 65
+      },
+      "checkpoints": {
+        "6": {
+          "alloy": 42.53422060025,
+          "hulls": 17
+        },
+        "12": {
+          "alloy": 45.771342808595,
+          "hulls": 46
+        },
+        "24": {
+          "alloy": 69.16932917740881,
+          "hulls": 91
+        },
+        "120": {
+          "alloy": 451.93569459397327,
+          "hulls": 666
+        }
+      },
+      "warEnds": {},
+      "militaryFinal": 93602,
+      "resourceMonths": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 78,
+        "tuk": 119,
+        "ala": 4
+      },
+      "shortageRuns": {
+        "ene": [],
+        "min": [],
+        "yiy": [
+          {
+            "actor": 2,
+            "first": 95,
+            "last": 172,
+            "months": 78
+          }
+        ],
+        "tuk": [
+          {
+            "actor": 2,
+            "first": 59,
+            "last": 177,
+            "months": 119
+          }
+        ],
+        "ala": [
+          {
+            "actor": 5,
+            "first": 172,
+            "last": 173,
+            "months": 2
+          },
+          {
+            "actor": 6,
+            "first": 51,
+            "last": 52,
+            "months": 2
+          }
+        ]
+      },
+      "alloyFlows": {
+        "medianNet": 279.78871562524006,
+        "medianUpkeep": 145.19243416142348,
+        "medianBeforeUpkeep": 401.3366302658033,
+        "medianFoundryBase": 210.7962,
+        "sumNet": 49701.4593683776,
+        "sumUpkeep": 31276.174851205495,
+        "sumBeforeUpkeep": 80977.6342195831,
+        "sumFoundryBase": 39995.593120673075,
+        "orders": 991,
+        "paidShipAlloy": 36370,
+        "shipClasses": {
+          "ins": {
+            "orders": 18,
+            "alloy": 810
+          },
+          "kol": {
+            "orders": 39,
+            "alloy": 1983
+          },
+          "kor": {
+            "orders": 816,
+            "alloy": 26112
+          },
+          "bil": {
+            "orders": 33,
+            "alloy": 792
+          },
+          "ord": {
+            "orders": 14,
+            "alloy": 980
+          },
+          "muh": {
+            "orders": 64,
+            "alloy": 4608
+          },
+          "kru": {
+            "orders": 7,
+            "alloy": 1085
+          }
+        },
+        "deliveredClasses": {
+          "ins": 18,
+          "kor": 813,
+          "kol": 37,
+          "bil": 33,
+          "ord": 14,
+          "muh": 59,
+          "kru": 7
+        },
+        "ledger": {
+          "building/in": 64.0,
+          "building/out": 12069.0,
+          "cargoDelivery/in": 988.2,
+          "cargoLoad/out": 998.4000000000001,
+          "diplomacy/in": 490.0,
+          "diplomacy/out": 490.0,
+          "other/in": 4320.463194174808,
+          "other/out": 1649.502290617626,
+          "ship/out": 36370.0,
+          "tribute/in": 187.63923652425004,
+          "tribute/out": 187.63923652425026
+        },
+        "endingStock": 6726.220271934778
+      }
+    }
+  },
+  "500-16-11": {
+    "commonDays": 7200,
+    "firstChange": null,
+    "p44": {
+      "nativeDay": 7200,
+      "days": 7200,
+      "demolitions": 1143,
+      "cycles": 458,
+      "netMinerals": 58209,
+      "critical": 6,
+      "actor2GoodsCritical": 0,
+      "alloyMedian": 846.4509993512643,
+      "finalAlloy": 3945.8362939372837,
+      "delivered": 2583,
+      "militaryMedian": 90849.0,
+      "tradeDeliveries": 94,
+      "tech": 444,
+      "deferred": {},
+      "replacementCount": 1140,
+      "replacementDone": 289,
+      "replacementCohort": 770,
+      "replacementCohortDone": {
+        "6": 191,
+        "12": 245,
+        "24": 254
+      },
+      "checkpoints": {
+        "6": {
+          "alloy": 99.621255825,
+          "hulls": 24
+        },
+        "12": {
+          "alloy": 75.590916075,
+          "hulls": 70
+        },
+        "24": {
+          "alloy": 260.5665186381731,
+          "hulls": 161
+        },
+        "120": {
+          "alloy": 808.5715150678798,
+          "hulls": 1305
+        },
+        "180": {
+          "alloy": 1361.7092582478326,
+          "hulls": 2024
+        },
+        "240": {
+          "alloy": 3945.8362939372837,
+          "hulls": 2583
+        }
+      },
+      "warEnds": {
+        "ai-peace|actor:10": 1,
+        "exhaustion|actor:10": 1
+      },
+      "militaryFinal": 497469,
+      "resourceMonths": {
+        "ene": 0,
+        "min": 2,
+        "yiy": 0,
+        "tuk": 0,
+        "ala": 4
+      },
+      "shortageRuns": {
+        "ene": [],
+        "min": [
+          {
+            "actor": 2,
+            "first": 25,
+            "last": 26,
+            "months": 2
+          }
+        ],
+        "yiy": [],
+        "tuk": [],
+        "ala": [
+          {
+            "actor": 9,
+            "first": 226,
+            "last": 227,
+            "months": 2
+          },
+          {
+            "actor": 9,
+            "first": 230,
+            "last": 230,
+            "months": 1
+          },
+          {
+            "actor": 11,
+            "first": 166,
+            "last": 166,
+            "months": 1
+          }
+        ]
+      },
+      "alloyFlows": {
+        "medianNet": 846.4509993512643,
+        "medianUpkeep": 453.58694024971464,
+        "medianBeforeUpkeep": 1295.7478094684266,
+        "medianFoundryBase": 568.5452430194805,
+        "sumNet": 263873.00037158135,
+        "sumUpkeep": 145684.2843351906,
+        "sumBeforeUpkeep": 409557.28470677196,
+        "sumFoundryBase": 183639.27729187062,
+        "orders": 2598,
+        "paidShipAlloy": 133011,
+        "shipClasses": {
+          "ins": {
+            "orders": 47,
+            "alloy": 2115
+          },
+          "kor": {
+            "orders": 1550,
+            "alloy": 49600
+          },
+          "bil": {
+            "orders": 61,
+            "alloy": 1464
+          },
+          "kol": {
+            "orders": 252,
+            "alloy": 11961
+          },
+          "ord": {
+            "orders": 40,
+            "alloy": 2800
+          },
+          "muh": {
+            "orders": 464,
+            "alloy": 33408
+          },
+          "kru": {
+            "orders": 125,
+            "alloy": 19375
+          },
+          "esk": {
+            "orders": 27,
+            "alloy": 1728
+          },
+          "zir": {
+            "orders": 32,
+            "alloy": 10560
+          }
+        },
+        "deliveredClasses": {
+          "ins": 46,
+          "kor": 1548,
+          "bil": 61,
+          "kol": 249,
+          "ord": 40,
+          "muh": 460,
+          "kru": 124,
+          "esk": 25,
+          "zir": 30
+        },
+        "ledger": {
+          "building/in": 1669.0,
+          "building/out": 55825.0,
+          "cargoDelivery/in": 178.80000000000058,
+          "cargoLoad/out": 178.80000000000007,
+          "clamp/in": 25.727880829674376,
+          "diplomacy/in": 260.0,
+          "diplomacy/out": 260.0,
+          "event/in": 700.0,
+          "other/in": 30370.226843194752,
+          "other/out": 18649.904089330736,
+          "ship/out": 133011.0
+        },
+        "endingStock": 92804.05100627505
+      }
+    },
+    "p45": {
+      "nativeDay": 7200,
+      "days": 7200,
+      "demolitions": 646,
+      "cycles": 1,
+      "netMinerals": 136,
+      "critical": 0,
+      "actor2GoodsCritical": 0,
+      "alloyMedian": 651.2657372726221,
+      "finalAlloy": 1850.8005741963327,
+      "delivered": 2875,
+      "militaryMedian": 105159.0,
+      "tradeDeliveries": 222,
+      "tech": 429,
+      "deferred": {
+        "same-building": 95,
+        "unfunded-or-blocked": 9
+      },
+      "replacementCount": 644,
+      "replacementDone": 598,
+      "replacementCohort": 418,
+      "replacementCohortDone": {
+        "6": 331,
+        "12": 405,
+        "24": 405
+      },
+      "checkpoints": {
+        "6": {
+          "alloy": 99.621255825,
+          "hulls": 22
+        },
+        "12": {
+          "alloy": 76.46963927499999,
+          "hulls": 67
+        },
+        "24": {
+          "alloy": 175.29869129615386,
+          "hulls": 149
+        },
+        "120": {
+          "alloy": 694.4707143610171,
+          "hulls": 1328
+        },
+        "180": {
+          "alloy": 1207.9996727782425,
+          "hulls": 2094
+        },
+        "240": {
+          "alloy": 1850.8005741963327,
+          "hulls": 2875
+        }
+      },
+      "warEnds": {
+        "exhaustion-lock|actor:6": 2,
+        "exhaustion-lock|actor:13": 2,
+        "exhaustion-lock|actor:15": 2,
+        "crisis|actor:16": 1,
+        "exhaustion-lock|actor:4": 1,
+        "crisis|actor:14": 1
+      },
+      "militaryFinal": 437275,
+      "resourceMonths": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "tuk": 0,
+        "ala": 0
+      },
+      "shortageRuns": {
+        "ene": [],
+        "min": [],
+        "yiy": [],
+        "tuk": [],
+        "ala": []
+      },
+      "alloyFlows": {
+        "medianNet": 651.2657372726221,
+        "medianUpkeep": 499.3136116881843,
+        "medianBeforeUpkeep": 1153.7177666395498,
+        "medianFoundryBase": 578.1326215909091,
+        "sumNet": 196665.7457328119,
+        "sumUpkeep": 125349.74006872774,
+        "sumBeforeUpkeep": 322015.4858015396,
+        "sumFoundryBase": 153418.4289421873,
+        "orders": 2897,
+        "paidShipAlloy": 145059,
+        "shipClasses": {
+          "ins": {
+            "orders": 56,
+            "alloy": 2520
+          },
+          "kor": {
+            "orders": 1751,
+            "alloy": 56032
+          },
+          "bil": {
+            "orders": 77,
+            "alloy": 1848
+          },
+          "kol": {
+            "orders": 210,
+            "alloy": 9924
+          },
+          "ord": {
+            "orders": 50,
+            "alloy": 3500
+          },
+          "muh": {
+            "orders": 531,
+            "alloy": 38232
+          },
+          "kru": {
+            "orders": 151,
+            "alloy": 23405
+          },
+          "esk": {
+            "orders": 52,
+            "alloy": 3328
+          },
+          "zir": {
+            "orders": 19,
+            "alloy": 6270
+          }
+        },
+        "deliveredClasses": {
+          "ins": 55,
+          "kor": 1747,
+          "bil": 77,
+          "kol": 207,
+          "ord": 49,
+          "muh": 525,
+          "kru": 147,
+          "esk": 52,
+          "zir": 16
+        },
+        "ledger": {
+          "building/in": 545.0,
+          "building/out": 45552.0,
+          "cargoDelivery/in": 560.5999999999998,
+          "cargoLoad/out": 560.5999999999998,
+          "diplomacy/in": 560.0,
+          "diplomacy/out": 560.0,
+          "event/in": 700.0,
+          "other/in": 33202.745567638805,
+          "other/out": 11413.332573067388,
+          "ship/out": 145059.0
+        },
+        "endingStock": 32961.15872738334
+      }
+    },
+    "aday": {
+      "nativeDay": 7200,
+      "days": 7200,
+      "demolitions": 646,
+      "cycles": 1,
+      "netMinerals": 136,
+      "critical": 0,
+      "actor2GoodsCritical": 0,
+      "alloyMedian": 651.2657372726221,
+      "finalAlloy": 1850.8005741963327,
+      "delivered": 2875,
+      "militaryMedian": 105159.0,
+      "tradeDeliveries": 222,
+      "tech": 429,
+      "deferred": {
+        "same-building": 95,
+        "unfunded-or-blocked": 9
+      },
+      "replacementCount": 644,
+      "replacementDone": 598,
+      "replacementCohort": 418,
+      "replacementCohortDone": {
+        "6": 331,
+        "12": 405,
+        "24": 405
+      },
+      "checkpoints": {
+        "6": {
+          "alloy": 99.621255825,
+          "hulls": 22
+        },
+        "12": {
+          "alloy": 76.46963927499999,
+          "hulls": 67
+        },
+        "24": {
+          "alloy": 175.29869129615386,
+          "hulls": 149
+        },
+        "120": {
+          "alloy": 694.4707143610171,
+          "hulls": 1328
+        },
+        "180": {
+          "alloy": 1207.9996727782425,
+          "hulls": 2094
+        },
+        "240": {
+          "alloy": 1850.8005741963327,
+          "hulls": 2875
+        }
+      },
+      "warEnds": {
+        "exhaustion-lock|actor:6": 2,
+        "exhaustion-lock|actor:13": 2,
+        "exhaustion-lock|actor:15": 2,
+        "crisis|actor:16": 1,
+        "exhaustion-lock|actor:4": 1,
+        "crisis|actor:14": 1
+      },
+      "militaryFinal": 437275,
+      "resourceMonths": {
+        "ene": 0,
+        "min": 0,
+        "yiy": 0,
+        "tuk": 0,
+        "ala": 0
+      },
+      "shortageRuns": {
+        "ene": [],
+        "min": [],
+        "yiy": [],
+        "tuk": [],
+        "ala": []
+      },
+      "alloyFlows": {
+        "medianNet": 651.2657372726221,
+        "medianUpkeep": 499.3136116881843,
+        "medianBeforeUpkeep": 1153.7177666395498,
+        "medianFoundryBase": 578.1326215909091,
+        "sumNet": 196665.7457328119,
+        "sumUpkeep": 125349.74006872774,
+        "sumBeforeUpkeep": 322015.4858015396,
+        "sumFoundryBase": 153418.4289421873,
+        "orders": 2897,
+        "paidShipAlloy": 145059,
+        "shipClasses": {
+          "ins": {
+            "orders": 56,
+            "alloy": 2520
+          },
+          "kor": {
+            "orders": 1751,
+            "alloy": 56032
+          },
+          "bil": {
+            "orders": 77,
+            "alloy": 1848
+          },
+          "kol": {
+            "orders": 210,
+            "alloy": 9924
+          },
+          "ord": {
+            "orders": 50,
+            "alloy": 3500
+          },
+          "muh": {
+            "orders": 531,
+            "alloy": 38232
+          },
+          "kru": {
+            "orders": 151,
+            "alloy": 23405
+          },
+          "esk": {
+            "orders": 52,
+            "alloy": 3328
+          },
+          "zir": {
+            "orders": 19,
+            "alloy": 6270
+          }
+        },
+        "deliveredClasses": {
+          "ins": 55,
+          "kor": 1747,
+          "bil": 77,
+          "kol": 207,
+          "ord": 49,
+          "muh": 525,
+          "kru": 147,
+          "esk": 52,
+          "zir": 16
+        },
+        "ledger": {
+          "building/in": 545.0,
+          "building/out": 45552.0,
+          "cargoDelivery/in": 560.5999999999998,
+          "cargoLoad/out": 560.5999999999998,
+          "diplomacy/in": 560.0,
+          "diplomacy/out": 560.0,
+          "event/in": 700.0,
+          "other/in": 33202.745567638805,
+          "other/out": 11413.332573067388,
+          "ship/out": 145059.0
+        },
+        "endingStock": 32961.15872738334
+      }
+    }
+  }
+}
