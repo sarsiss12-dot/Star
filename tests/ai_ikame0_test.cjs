@@ -104,16 +104,16 @@ test('Savaş ve stok krizinin yıkımı, yeni stratejik ikame olmadan eski iade 
   assert.equal(result.stock,result.refund);
 });
 
-test('Mineral kurtarma, düşük alaşım stokuyla fabrikayı ve karşılanabilir kayıpla dökümhaneyi seçer', () => {
-  for(const [alloy,key,foundries,factories] of [[50,'fabrika',2,0],[500,'dokum',1,1]]) {
+test('Mineral kurtarma, 27 aylık alaşım stokuyla fabrikayı ve 29 ayla dökümhaneyi seçer', () => {
+  for(const [months,key,foundries,factories] of [[27,'fabrika',2,0],[29,'dokum',1,1]]) {
     const h = fixture();
-    h.sb.alloy = alloy;
+    h.sb.months = months;
     const result = JSON.parse(h.run(`JSON.stringify((()=>{
       planet.col.b.fabrika=1;
       planet.col.b.maden--;
       const loss=aiBuildingDelta(state,system,planet,'dokum',false,-1).ala;
       state.res.min=0;
-      state.res.ala=alloy;
+      state.res.ala=-loss/2*months;
       state.inc.min=-12;
       state.inc.ala=-loss/2;
       const queued=aiRecoverEconomy(state),job=planet.col.q[0];

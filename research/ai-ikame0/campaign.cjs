@@ -14,6 +14,7 @@ const finance = process.env.STARS_FINANCE ?? '';
 const checkpoints = new Set((process.env.STARS_CHECKPOINTS || '').split(',').filter(Boolean).map(Number));
 const from = process.env.STARS_FROM;
 const probe = process.env.STARS_RECOVERY_PROBE ?? '';
+const recordForecast = process.env.STARS_RECOVERY_FORECAST === '1';
 const firstMonth = from ? Math.floor(JSON.parse(fs.readFileSync(from, 'utf8')).day / 30) : 0;
 const h = runtime({ root: path.resolve(root), processGlobal: true });
 fs.mkdirSync(output, { recursive: true });
@@ -76,6 +77,12 @@ h.run(`
       recover=financeFor(e);
       try{return recovery(e);}finally{recover=false;}
     };
+    if(${recordForecast})auditWrap('aiBuildingDelta',(delta,e,s,p,key)=>{
+      if(!recover||key!=='dokum')return;
+      const stock=e.res.ala||0,net=e.inc.ala||0,after=net+delta.ala;
+      auditNote('recovery-forecast',e,{system:s.id,planet:p.i,key,stock,net,loss:delta.ala,after,
+        months:after<0?stock/-after:null});
+    });
     queueDemolish=function(e,s,p,key,...rest){
       if(recover){
         const blocked=key==='dokum'&&${JSON.stringify(probe)}==='keep-foundry';

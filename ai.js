@@ -279,6 +279,7 @@ function aiEconomyPlan(e){
    through the player's existing paid demolition/refund path, never a grant. */
 function aiRecoverEconomy(e){
  if(!e.ai||e.id===0||e.dead||e.aiTalk?.['economy-recovery']?.until>G.day)return false;
+ const recoveryCooldown=120;
  const min=e.res.min||0,stuck=min<BUILDINGS.maden.c.min&&((e.inc.min||0)<0||e.crisis==='enerji'&&(e.res.ene||0)<=0);
  if(!stuck)return false;
  const candidates=[];
@@ -286,9 +287,9 @@ function aiRecoverEconomy(e){
   for(const [key,n]of Object.entries(pl.col.b)){
    if(!n||['santral','maden','ciftlik','liman','tersane'].includes(key))continue;
    const d=aiBuildingDelta(e,sys,pl,key,false,-1);
-   // Protect the alloy reserve and the ship-order runway during recovery.
+   // Budget two years of upkeep plus the delay before another recovery order.
    const alloyAfter=(e.inc.ala||0)+d.ala;
-   if(d.ala<0&&alloyAfter<0&&(e.res.ala||0)<Math.max(100,-alloyAfter*18))continue;
+   if(d.ala<0&&alloyAfter<0&&(e.res.ala||0)<-alloyAfter*(24+recoveryCooldown/30))continue;
    const benefit=((e.inc.min||0)<0?Math.max(0,d.min)*3:0)+(e.crisis==='enerji'?Math.max(0,d.ene)*3:0);
    if(benefit<=0||d.yiy<0&&(e.inc.yiy||0)<0||d.tuk<0&&(e.inc.tuk||0)<0)continue;
    candidates.push({sys,pl,key,score:benefit-Math.max(0,-d.ala)*.4-Math.max(0,-d.ara)*.15});
@@ -296,7 +297,7 @@ function aiRecoverEconomy(e){
  }
  candidates.sort((a,b)=>b.score-a.score||a.sys.id-b.sys.id||a.key.localeCompare(b.key));
  const pick=candidates[0];if(!pick||pick.score<=0||!queueDemolish(e,pick.sys,pick.pl,pick.key))return false;
- (e.aiTalk||(e.aiTalk={}))['economy-recovery']={until:G.day+120,reason:'Paid demolition: '+pick.key};
+ (e.aiTalk||(e.aiTalk={}))['economy-recovery']={until:G.day+recoveryCooldown,reason:'Paid demolition: '+pick.key};
  AIDiagnostics.note('recovery:demolish',e,null,pick.key+'; inputs/upkeep stop only on completion; actual refund only');return true;
 }
 function aiBuildingSustainable(e,sys,pl,key,plan=aiEconomyPlan(e)){

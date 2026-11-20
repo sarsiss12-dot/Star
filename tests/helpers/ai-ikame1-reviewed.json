@@ -1,11 +1,19 @@
 {
   "ai.js": {
     "beforeSha256": "4a3ee01c1e0ddb972f9e4706ccb7eaa65cfdeb146757efdc4299915a51091c60",
-    "afterSha256": "8972f596462790643169331fd8316878412e518955852943f4e25a6cdf03a105",
+    "afterSha256": "667cf804ac243d09436ca4db78b87b23fe80a801edfd3a8823276744c55d5d37",
     "hunks": [
       {
+        "before": " if(!e.ai||e.id===0||e.dead||e.aiTalk?.['economy-recovery']?.until>G.day)return false;\n const min=e.res.min||0,stuck=min<BUILDINGS.maden.c.min&&((e.inc.min||0)<0||e.crisis==='enerji'&&(e.res.ene||0)<=0);\n",
+        "after": " if(!e.ai||e.id===0||e.dead||e.aiTalk?.['economy-recovery']?.until>G.day)return false;\n const recoveryCooldown=120;\n const min=e.res.min||0,stuck=min<BUILDINGS.maden.c.min&&((e.inc.min||0)<0||e.crisis==='enerji'&&(e.res.ene||0)<=0);\n"
+      },
+      {
         "before": "   const d=aiBuildingDelta(e,sys,pl,key,false,-1);\n   const benefit=((e.inc.min||0)<0?Math.max(0,d.min)*3:0)+(e.crisis==='enerji'?Math.max(0,d.ene)*3:0);\n",
-        "after": "   const d=aiBuildingDelta(e,sys,pl,key,false,-1);\n   // Protect the alloy reserve and the ship-order runway during recovery.\n   const alloyAfter=(e.inc.ala||0)+d.ala;\n   if(d.ala<0&&alloyAfter<0&&(e.res.ala||0)<Math.max(100,-alloyAfter*18))continue;\n   const benefit=((e.inc.min||0)<0?Math.max(0,d.min)*3:0)+(e.crisis==='enerji'?Math.max(0,d.ene)*3:0);\n"
+        "after": "   const d=aiBuildingDelta(e,sys,pl,key,false,-1);\n   // Budget two years of upkeep plus the delay before another recovery order.\n   const alloyAfter=(e.inc.ala||0)+d.ala;\n   if(d.ala<0&&alloyAfter<0&&(e.res.ala||0)<-alloyAfter*(24+recoveryCooldown/30))continue;\n   const benefit=((e.inc.min||0)<0?Math.max(0,d.min)*3:0)+(e.crisis==='enerji'?Math.max(0,d.ene)*3:0);\n"
+      },
+      {
+        "before": " const pick=candidates[0];if(!pick||pick.score<=0||!queueDemolish(e,pick.sys,pick.pl,pick.key))return false;\n (e.aiTalk||(e.aiTalk={}))['economy-recovery']={until:G.day+120,reason:'Paid demolition: '+pick.key};\n AIDiagnostics.note('recovery:demolish',e,null,pick.key+'; inputs/upkeep stop only on completion; actual refund only');return true;\n",
+        "after": " const pick=candidates[0];if(!pick||pick.score<=0||!queueDemolish(e,pick.sys,pick.pl,pick.key))return false;\n (e.aiTalk||(e.aiTalk={}))['economy-recovery']={until:G.day+recoveryCooldown,reason:'Paid demolition: '+pick.key};\n AIDiagnostics.note('recovery:demolish',e,null,pick.key+'; inputs/upkeep stop only on completion; actual refund only');return true;\n"
       },
       {
         "before": "   Already assigned settlers are included once; hull prices only at purchase. */\nfunction aiColonyForecast(e,sys,pl,{purchase=false,excludeFleet=null,observer=e}={}){\n const plan=aiEconomyPlan(e),targets=new Map();\n for(const f of G.fleets)if(f.e===e.id&&f!==excludeFleet&&f.ships.some(sh=>sh.c==='kol')&&f.ord?.t==='kol'){\n",
