@@ -1,11 +1,11 @@
 {
-  "phase": "AI-IKAME.1",
+  "phase": "MP-RAKIP-DOKTRINLER.0",
   "build": "96h10p47",
   "scope": "github-runtime-only",
   "save_version": 8,
   "pwa_cache": "stars-v96h10p47",
-  "parent_commit": "4f07699be811d5d300616ec6cf4de9171c97286e",
-  "parent_zip_sha256": "03682419baaa1a4d778660b6daf6da0bff2365ee07a8c3d9a10819c25da316a0",
+  "parent_commit": "8b2558d33c1ab6306618ae3e64018766f5bfeeba",
+  "parent_zip_sha256": "9ab7f13bf5f9e88d03229b595edc31479d9709cb91afa252f50336ec46fe7836",
   "file_count": 19,
   "files": {
     "ai.js": "667cf804ac243d09436ca4db78b87b23fe80a801edfd3a8823276744c55d5d37",
