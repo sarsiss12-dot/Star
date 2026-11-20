@@ -103,3 +103,50 @@ test('Savaş ve stok krizinin yıkımı, yeni stratejik ikame olmadan eski iade 
   assert.equal(result.marked,false);
   assert.equal(result.stock,result.refund);
 });
+
+test('Mineral kurtarma, 27 aylık alaşım stokuyla fabrikayı ve 29 ayla dökümhaneyi seçer', () => {
+  for(const [months,key,foundries,factories] of [[27,'fabrika',2,0],[29,'dokum',1,1]]) {
+    const h = fixture();
+    h.sb.months = months;
+    const result = JSON.parse(h.run(`JSON.stringify((()=>{
+      planet.col.b.fabrika=1;
+      planet.col.b.maden--;
+      const loss=aiBuildingDelta(state,system,planet,'dokum',false,-1).ala;
+      state.res.min=0;
+      state.res.ala=-loss/2*months;
+      state.inc.min=-12;
+      state.inc.ala=-loss/2;
+      const queued=aiRecoverEconomy(state),job=planet.col.q[0];
+      if(queued)colonyBuildTick(job.left);
+      return {loss,queued,key:job?.key,foundries:planet.col.b.dokum,factories:planet.col.b.fabrika||0,
+        stock:state.res.min,refund:job?.refund.min};
+    })())`));
+    assert(result.loss<0);
+    assert.equal(result.queued,true);
+    assert.equal(result.key,key);
+    assert.equal(result.foundries,foundries);
+    assert.equal(result.factories,factories);
+    assert.equal(result.stock,result.refund);
+  }
+});
+
+test('Teknoloji veya bina sınırı değişirse ikame işi sökülmeden iptal edilir', () => {
+  for(const [key,setup,change] of [
+    ['oto_lab', "state.techs.x_automation=true", "delete state.techs.x_automation"],
+    ['lab', "planet.col.b.lab=BUILDINGS.lab.max-1; planet.col.b.maden-=planet.col.b.lab",
+      "planet.col.b.lab++; planet.col.b.maden--"]
+  ]) {
+    const h = fixture();
+    h.sb.wanted = key;
+    h.run(setup);
+    assert.equal(h.run("queueDemolish(state,system,planet,'dokum',{key:wanted,choices:{science:true}})"),true);
+    h.run(`
+      const before=state.res.min;
+      ${change};
+      colonyBuildTick(planet.col.q[0].left);
+    `);
+    assert.equal(h.run('state.res.min'),h.run('before'));
+    assert.equal(h.run('planet.col.b.dokum'),2);
+    assert.equal(h.run('planet.col.q.length'),0);
+  }
+});

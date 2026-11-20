@@ -2,7 +2,7 @@
 // Tarihsel koruma testlerine onaylı p44 ve p43 farklarını tam baytlarıyla geri alır.
 const assert = require('node:assert/strict');
 const { createHash } = require('node:crypto');
-const steps = [require('./ai-ikame0-reviewed.json'), ...require('./perf-sinir0-reviewed.json')];
+const steps = [require('./ai-ikame1-reviewed.json'), require('./ai-ikame0-reviewed.json'), ...require('./perf-sinir0-reviewed.json')];
 const sha = source => createHash('sha256').update(source).digest('hex');
 
 exports.stripReviewedPerfSinir0 = (file, source) => {

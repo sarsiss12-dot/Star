@@ -37,6 +37,13 @@ function strip(source,blocks,marker,label){
  return source;
 }
 exports.reviewedP2Blocks={ai:ai.map(([c])=>c),main:main.map(([c])=>c)};
-exports.stripReviewedP2Ai=source=>strip(source,ai,'/* END PERF.2 A WINDOW */','ai.js');
+exports.stripReviewedP2Ai=source=>{
+ const replacementWrap='aiReplacementFirstBuilding=aiIncomeWindow(aiReplacementFirstBuilding);\n';
+ if(source.includes(replacementWrap)){
+  assert.equal(source.split(replacementWrap).length,2,'one reviewed PERF.2 wrapper for replacement');
+  source=source.replace(replacementWrap,'');
+ }
+ return strip(source,ai,'/* END PERF.2 A WINDOW */','ai.js');
+};
 exports.stripReviewedP2Main=source=>strip(source,main,'/* END PERF.2 B */','main.js');
 exports.stripReviewedP2=(name,source)=>name==='ai.js'?exports.stripReviewedP2Ai(source):name==='main.js'?exports.stripReviewedP2Main(source):source;

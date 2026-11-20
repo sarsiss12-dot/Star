@@ -1,0 +1,6 @@
+PASS 100 sistem döngü / mineral 5 97.9582%
+PASS dört doğal kampanyada yeni kalıcı kaynak açığı yok
+PASS 99. tohum devlet 5, alaşım krizi 46 → 0
+PASS 500 sistem, 240 ay. Üç kolda tersane ödemeleri defterle eşit
+PASS 500-16-11-m120 p95 -18.5758%
+PASS 500-16-11-m180 p95 -29.5953%

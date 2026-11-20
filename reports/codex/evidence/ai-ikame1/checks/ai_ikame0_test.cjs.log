@@ -1,0 +1,14 @@
+✔ Stratejik ikame kaydedilir, sökümde bir yapı sırası ve bir ödeme oluşturur (1604.329437ms)
+✔ İkame ödenemediğinde söküm, ödeme ve hurda iadesi gerçekleşmez (379.251999ms)
+✔ Kayıptan sonra kalan dolu slot ve yeni bekleyen iş stratejik sökümü durdurur (571.412438ms)
+✔ Savaş ve stok krizinin yıkımı, yeni stratejik ikame olmadan eski iade yolunu kullanır (183.582882ms)
+✔ Mineral kurtarma, 27 aylık alaşım stokuyla fabrikayı ve 29 ayla dökümhaneyi seçer (414.936596ms)
+✔ Teknoloji veya bina sınırı değişirse ikame işi sökülmeden iptal edilir (443.185118ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3620.201642

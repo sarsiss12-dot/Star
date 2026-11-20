@@ -279,6 +279,7 @@ function aiEconomyPlan(e){
    through the player's existing paid demolition/refund path, never a grant. */
 function aiRecoverEconomy(e){
  if(!e.ai||e.id===0||e.dead||e.aiTalk?.['economy-recovery']?.until>G.day)return false;
+ const recoveryCooldown=120;
  const min=e.res.min||0,stuck=min<BUILDINGS.maden.c.min&&((e.inc.min||0)<0||e.crisis==='enerji'&&(e.res.ene||0)<=0);
  if(!stuck)return false;
  const candidates=[];
@@ -286,6 +287,9 @@ function aiRecoverEconomy(e){
   for(const [key,n]of Object.entries(pl.col.b)){
    if(!n||['santral','maden','ciftlik','liman','tersane'].includes(key))continue;
    const d=aiBuildingDelta(e,sys,pl,key,false,-1);
+   // Budget two years of upkeep plus the delay before another recovery order.
+   const alloyAfter=(e.inc.ala||0)+d.ala;
+   if(d.ala<0&&alloyAfter<0&&(e.res.ala||0)<-alloyAfter*(24+recoveryCooldown/30))continue;
    const benefit=((e.inc.min||0)<0?Math.max(0,d.min)*3:0)+(e.crisis==='enerji'?Math.max(0,d.ene)*3:0);
    if(benefit<=0||d.yiy<0&&(e.inc.yiy||0)<0||d.tuk<0&&(e.inc.tuk||0)<0)continue;
    candidates.push({sys,pl,key,score:benefit-Math.max(0,-d.ala)*.4-Math.max(0,-d.ara)*.15});
@@ -293,7 +297,7 @@ function aiRecoverEconomy(e){
  }
  candidates.sort((a,b)=>b.score-a.score||a.sys.id-b.sys.id||a.key.localeCompare(b.key));
  const pick=candidates[0];if(!pick||pick.score<=0||!queueDemolish(e,pick.sys,pick.pl,pick.key))return false;
- (e.aiTalk||(e.aiTalk={}))['economy-recovery']={until:G.day+120,reason:'Paid demolition: '+pick.key};
+ (e.aiTalk||(e.aiTalk={}))['economy-recovery']={until:G.day+recoveryCooldown,reason:'Paid demolition: '+pick.key};
  AIDiagnostics.note('recovery:demolish',e,null,pick.key+'; inputs/upkeep stop only on completion; actual refund only');return true;
 }
 function aiBuildingSustainable(e,sys,pl,key,plan=aiEconomyPlan(e)){
@@ -390,8 +394,8 @@ function aiRecallUnfundedDeployment(e,free,my){
    actual starter colony and administration/physiology on restored shadow
    state. No future buildings, trade receipts or shock recovery are credited.
    Already assigned settlers are included once; hull prices only at purchase. */
-function aiColonyForecast(e,sys,pl,{purchase=false,excludeFleet=null,observer=e}={}){
- const plan=aiEconomyPlan(e),targets=new Map();
+function aiColonyForecast(e,sys,pl,{purchase=false,excludeFleet=null,observer=e,plan=aiEconomyPlan(e)}={}){
+ const targets=new Map();
  for(const f of G.fleets)if(f.e===e.id&&f!==excludeFleet&&f.ships.some(sh=>sh.c==='kol')&&f.ord?.t==='kol'){
   const s=G.sys[f.ord.s],p=s?.planets[f.ord.p];
   if(p&&p.owner<0&&s.surv.includes(e.id))targets.set(s.id+':'+p.i,{s,p});
@@ -426,11 +430,11 @@ function aiColonyReady(e,sys,pl,options){
 }
 /* Preparation is derived again from today's cash and queues. It creates
    only an ordinary paid producer order and expires naturally as net improves. */
-function aiColonyPreparation(e,sys,pl,observer=e){
+function aiColonyPreparation(e,sys,pl,observer=e,plan){
  const target=colonizeTargets(e)[0];if(!target)return null;
- const forecast=aiColonyForecast(e,G.sys[target.s],G.sys[target.s].planets[target.p],{purchase:true,observer});
+ const forecast=aiColonyForecast(e,G.sys[target.s],G.sys[target.s].planets[target.p],{purchase:true,observer,plan});
  if(forecast.ok||forecast.reason!=='ene'||!forecast.rows.ene||forecast.rows.ene.net>=0)return null;
- return ['santral','liman','kuyu'].find(key=>BUILDINGS[key]&&(pl.col.b[key]||0)+colonyQueuedOf(pl.col,key)<BUILDINGS[key].max&&aiBuildingDelta(e,sys,pl,key).ene>0&&aiBuildingSustainable(e,sys,pl,key))||null;
+ return ['santral','liman','kuyu'].find(key=>BUILDINGS[key]&&(pl.col.b[key]||0)+colonyQueuedOf(pl.col,key)<BUILDINGS[key].max&&aiBuildingDelta(e,sys,pl,key).ene>0&&aiBuildingSustainable(e,sys,pl,key,plan))||null;
 }
 
 /* A critical producer must not be perpetually undercut by cheaper growth
@@ -452,16 +456,22 @@ function aiRecoveryInvestment(e,plan){
  });
  return viable?{key,resource,months,cost:{...B.c}}:null;
 }
-function aiEconomicOrder(e,sys,pl,legacy,observer=e){
- const plan=aiEconomyPlan(e),resourceBuilding={ene:'santral',min:'maden',yiy:'ciftlik',ala:'dokum',tuk:'fabrika'};
+function aiEconomicOrder(e,sys,pl,legacy,observer=e,plan=aiEconomyPlan(e),firstOnly=false){
+ const resourceBuilding={ene:'santral',min:'maden',yiy:'ciftlik',ala:'dokum',tuk:'fabrika'};
  const ranked=Object.keys(resourceBuilding).filter(r=>{const row=plan.rows[r];return row.net<0&&row.months<12||row.stock<Math.max(120,row.reserve)&&row.urgency>12;}).sort((a,b)=>plan.rows[b].urgency-plan.rows[a].urgency||a.localeCompare(b));
  const urgent=ranked.map(r=>resourceBuilding[r]);
- const preparation=!plan.critical&&aiColonyPreparation(e,sys,pl,observer);if(preparation)urgent.push(preparation);
+ const preparation=!plan.critical&&aiColonyPreparation(e,sys,pl,observer,plan);if(preparation)urgent.push(preparation);
  const saving=aiRecoveryInvestment(e,plan);
- if(saving){AIDiagnostics.note('recovery:save-for-producer',e,null,saving.key+'; '+saving.months.toFixed(2)+' months from own income');return [saving.key];}
+ if(saving){
+  AIDiagnostics.note('recovery:save-for-producer',e,null,saving.key+'; '+saving.months.toFixed(2)+' months from own income');
+  return firstOnly?(buildingOrderCost(e,pl,saving.key)?saving.key:undefined):[saving.key];
+ }
  // A first port supplies energy/Etki and enables paid freight without extra upkeep.
  if(!(pl.col.b.liman||0)&&!colonyQueuedOf(pl.col,'liman')&&plan.rows.ene.urgency<30)urgent.splice(Math.min(1,urgent.length),0,'liman');
- return [...new Set(urgent.concat(legacy))].filter(k=>BUILDINGS[k]&&(k!=='ciftlik'||aiBuildingDelta(e,sys,pl,k).yiy>0)&&aiBuildingSustainable(e,sys,pl,k,plan));
+ const candidates=[...new Set(urgent.concat(legacy))];
+ const sustainable=k=>BUILDINGS[k]&&(k!=='ciftlik'||aiBuildingDelta(e,sys,pl,k).yiy>0)&&aiBuildingSustainable(e,sys,pl,k,plan);
+ if(firstOnly)return candidates.find(key=>buildingOrderCost(e,pl,key)&&sustainable(key));
+ return candidates.filter(sustainable);
 }
 /* A replacement uses the same marginal income as construction planning.
    Queued losses/gains are included, refunds are not counted before completion.
@@ -623,9 +633,9 @@ function aiUpdateStrategy(e){
   reason:needs.length?'Kaynak darboğazı: '+needs.join(','):danger?'Görülen askerî tehdit':war?'Mevcut savaşa hazırlık':'Doktrin ve iç ihtiyaçlar'};
  aiUpdateLongPlan(e);
 }
-function aiStrategicBuildingNeeds(e,sys,pl,observer=e){
+function aiStrategicBuildingNeeds(e,sys,pl,observer=e,plan){
  const p=e.aiStrategy?.plan;if(!p||p.stage==='stabilize')return [];
- const eco=aiEconomyPlan(e),net=k=>eco.rows[k]?.net||0;
+ const eco=plan||aiEconomyPlan(e),net=k=>eco.rows[k]?.net||0;
  for(const key of p.build||[]){
   if((pl.col.b[key]||0)+colonyQueuedOf(pl.col,key)>=(key==='lab'?3:1)&&['lab','liman','kale','tersane'].includes(key))continue;
   if(key==='santral'&&net('ene')>=12||key==='maden'&&net('min')>=16||key==='fabrika'&&net('tuk')>=4||key==='dokum'&&net('ala')>=(p.stage==='arm'?16:8))continue;
@@ -1617,8 +1627,8 @@ function aiCivicActions(e){
  }
  return false;
 }
-function aiColonyBuildingNeeds(e,sys,pl,prof,atWar,choose,observer=e){
-  const need = aiStrategicBuildingNeeds(e,sys,pl,observer);
+function aiColonyBuildingNeeds(e,sys,pl,prof,atWar,choose,observer=e,plan){
+  const need = aiStrategicBuildingNeeds(e,sys,pl,observer,plan);
   if(e.aiStrategy?.goal==='war'&&(e.inc.ala||0)<30)need.push('dokum');
   const unhappy=(e.factions||[]).filter(x=>x.mood<35&&x.pow>=20).sort((a,b)=>a.mood-b.mood)[0];
   if(unhappy?.k==='bilim')need.push('lab');else if(unhappy?.k==='tuccar'&&(e.inc.ene||0)>6)need.push('liman');
@@ -1662,14 +1672,16 @@ function aiReplacementFirstBuilding(e,sys,pl,pick,prof,atWar,choices){
   try{
     pl.col={...original,b};
     return aiWithPreservedPowerCache(()=>{
-      const needs=aiColonyBuildingNeeds(shadow,sys,pl,prof,atWar,key=>choices[key],e);
-      return aiEconomicOrder(shadow,sys,pl,needs,e).find(key=>buildingOrderCost(shadow,pl,key));
+      const plan=aiEconomyPlan(shadow);
+      const needs=aiColonyBuildingNeeds(shadow,sys,pl,prof,atWar,key=>choices[key],e,plan);
+      return aiEconomicOrder(shadow,sys,pl,needs,e,plan,true);
     });
   }finally{
     pl.col=original;
     if(observed)AI_VIEW_CACHE.set(e,observed);else AI_VIEW_CACHE.delete(e);
   }
 }
+aiReplacementFirstBuilding=aiIncomeWindow(aiReplacementFirstBuilding);
 
 function aiCanFinishReplacement(e,sys,pl,job){
   return aiWithPreservedPowerCache(()=>{
@@ -1680,13 +1692,13 @@ function aiCanFinishReplacement(e,sys,pl,job){
   });
 }
 
-function aiUrgentReplacement(e,wanted,atWar){
+function aiUrgentReplacement(e,wanted,atWar,plan){
   if(atWar&&(wanted==='kale'||wanted==='tersane'||wanted==='dokum'&&e.aiStrategy?.goal==='war'))return true;
   const resource={santral:'ene',maden:'min',ciftlik:'yiy',dokum:'ala',fabrika:'tuk'}[wanted];
   if(!resource)return false;
   if(e.crisis==='enerji'&&resource==='ene'||e.crisis==='mineral'&&resource==='min'||
      e.crisis==='yiyecek'&&resource==='yiy'||e.shortage&&resource==='tuk')return true;
-  const row=aiEconomyPlan(e).rows[resource];
+  const row=(plan||aiEconomyPlan(e)).rows[resource];
   return row.net<0&&row.months<6;
 }
 
@@ -1741,13 +1753,13 @@ function aiTurn(e){
     const slotsNow = colonySlots(pl.col, e, pl);
     const doluNow = colonyUsed(pl.col) +
       ((typeof colonyQueued === 'function') ? colonyQueued(pl.col) : 0) >= slotsNow;
-    const choices={};
-    const need=aiColonyBuildingNeeds(e,sys,pl,prof,atWarNow,(key,roll)=>choices[key]=roll());
+    const choices={},plan=aiEconomyPlan(e);
+    const need=aiColonyBuildingNeeds(e,sys,pl,prof,atWarNow,(key,roll)=>choices[key]=roll(),e,plan);
     /* FAZ 13: kuyruk dolu değilse sipariş ver.
        Kontrol artık KUYRUKTAKİLERİ de sayıyor — aksi hâlde AI aynı
        binayı defalarca sıraya alıp kaynağını kilitliyordu. Ayrıca
        kuyruk 2'yi geçmesin: uzun sıra ekonomiyi dondurur. */
-    const economicNeeds=aiEconomicOrder(e,sys,pl,need);need.splice(0,need.length,...economicNeeds);
+    const economicNeeds=aiEconomicOrder(e,sys,pl,need,e,plan);need.splice(0,need.length,...economicNeeds);
     const kuyruk = (typeof colonyQueued === 'function') ? colonyQueued(pl.col) : 0;
 
     /* ── FAZ 14: AI YIKIM KARARI ──
@@ -1758,12 +1770,12 @@ function aiTurn(e){
     const slotDolu = colonyUsed(pl.col) + kuyruk >= colonySlots(pl.col, e, pl);
     const slotRetry='economy-slot:'+sys.id+':'+pl.i;
     if (slotDolu && jobs === 0 && need.length && !(e.aiTalk?.[slotRetry]?.until>G.day) && typeof queueDemolish === 'function'){
-      const pick=aiDemolitionChoice(e,sys,pl,need);
+      const pick=aiDemolitionChoice(e,sys,pl,need,plan);
       if(!pick){
         (e.aiTalk||(e.aiTalk={}))[slotRetry]={until:G.day+90,reason:'No safe productive replacement'};
         AIDiagnostics.note('recovery:no-safe-slot',e,null,sys.id+':'+pl.i+'; retry in 90 days');
       }else if(rnd()<.18){
-        const urgent=aiUrgentReplacement(e,pick.wanted,atWarNow);
+        const urgent=aiUrgentReplacement(e,pick.wanted,atWarNow,plan);
         const first=urgent?pick.wanted:aiReplacementFirstBuilding(e,sys,pl,pick,prof,atWarNow,choices);
         if(first!==pick.wanted){
           AIDiagnostics.note('replacement:deferred',e,null,JSON.stringify({

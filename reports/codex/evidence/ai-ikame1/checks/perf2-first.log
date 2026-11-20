@@ -1,0 +1,20 @@
+✓ arındırılmış kaynaklar PERF.2 öncesi baytların kendisi: ai.js ve main.js MP.7.5 (96h10p4) özeti
+✗ kontrol ve aday aynı geç oyun Save8'inden 3 ay: her ay Save8 ve RNG birebir; karar çağrıları aynı, gelir hesabı daha az — ai.js:1663
+aiReplacementFirstBuilding=aiIncomeWindow(aiReplacementFirstBuilding);
+^
+
+ReferenceError: aiIncomeWindow is not defined
+    at ai.js:1663:1
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at run (/workspace/Star-ikame1/tests/helpers/runtime.js:116:29)
+    at runtime (/workspace/Star-ikame1/tests/helpers/runtime.js:121:7)
+    at world (/workspace/Star-ikame1/tests/perf2_equivalence_test.js:25:27)
+    at /workspace/Star-ikame1/tests/perf2_equivalence_test.js:36:13
+    at test (/workspace/Star-ikame1/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/workspace/Star-ikame1/tests/perf2_equivalence_test.js:34:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+✓ AI penceresi: dışarıda saklama yok; içeride gölge gelir bir kez ve kopya; hata olsa da kapanır
+✓ pencere içi aiBuildingDelta = pencere kapalıyken (federasyon üyesi, her koloni ve bina); liman değişen aday ticaret sonucunu saklamaz
+✓ supplyDistance doğrudan geçit denetimi = gateSupplyNodes listesi (her filo, her sistem; geçit eklenince de)
+GEÇEN: 4 KALAN: 1
