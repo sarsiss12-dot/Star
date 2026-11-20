@@ -1,14 +1,14 @@
 {
-  "phase": "AI-IKAME.0",
-  "build": "96h10p45",
+  "phase": "AI-IKAME.1",
+  "build": "96h10p46",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p45",
-  "parent_commit": "0559cfbeaac4cd4f458ccfaab23c3228de82b1cd",
-  "parent_zip_sha256": "2527e56f3888f8a22f16e6305aca2e9870eddf08cf8c19f4946631c15a0b7713",
+  "pwa_cache": "stars-v96h10p46",
+  "parent_commit": "4f07699be811d5d300616ec6cf4de9171c97286e",
+  "parent_zip_sha256": "03682419baaa1a4d778660b6daf6da0bff2365ee07a8c3d9a10819c25da316a0",
   "file_count": 19,
   "files": {
-    "ai.js": "4a3ee01c1e0ddb972f9e4706ccb7eaa65cfdeb146757efdc4299915a51091c60",
+    "ai.js": "c2314fea8de9be2256741dcd5ae378955e34f0ed6def63514b9c7ec445344966",
     "archive-ui.js": "f6b98392e8b85c7717fe5b4e4c778f2c47304ce89fd84a93460b998df6582a3c",
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "e63f4d2889b866d02e4f366d7185d5396f51faa87cbdefa818f4a13d95c2b35a",
@@ -21,12 +21,12 @@
     "economy.js": "5a364e79abc1cd8fbe7d1e6070b0e818bec1fea90aa98d2c729ed37060008cf8",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
     "index.html": "3bb3c8291d247981322a54cd347782a8d4d727e01a0e60c707667bcf95d63bc9",
-    "main.js": "cd94495b2e006045650bde156b168f0a63a943d6bc8d01682260ee7bf89c4e7b",
+    "main.js": "ed6e6235da82795d92507b3e2c19a6779160ed1e3c293d74a02f3a6862b79efe",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "5b40278d2e0c34a25db5838c87c691f0b23738b0f3b3af7b87ae1fcd85badddc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "e0e90b00a9f268e41c2eb289a436aa88264e8b7f6553cde90486fbe3c0b7401a",
+    "sw.js": "08ebbc5650f589de7e90fa48bae620b7f3f23cd8543ffda987cf181a3ee087ee",
     "ui.js": "1b64fd32e5c9845e4c51e66df9afe13d943541124c4aed30d049fde94ef2a507"
   },
-  "description": "Stratejik bina ikamesi için ödenebilir ilk tercih ve söküm sonunda geçerli sipariş doğrulaması. Save8 v8, MP paket 4, protokol 1."
+  "description": "Mineral kurtarmada alaşım üretimi koruması ve stratejik bina ikamesinde ortak gölge bütçe. Save8 v8, MP paket 4, protokol 1."
 }

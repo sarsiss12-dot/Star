@@ -7,6 +7,7 @@ const { createHash } = require('node:crypto');
 const { runtime } = require('../../tests/helpers/runtime');
 
 const control = path.resolve(process.argv[2]);
+const expectedBuild = process.argv[3] || '96h10p44';
 const candidate = path.resolve(__dirname, '../..');
 
 function engine(root) {
@@ -26,7 +27,7 @@ const text = source.run(`
   JSON.stringify(host.snapshot({}).pkg);
 `);
 const sourcePackage = JSON.parse(text);
-assert.equal(sourcePackage.build,'96h10p44');
+assert.equal(sourcePackage.build,expectedBuild);
 assert.equal(sourcePackage.mpVersion,4);
 assert.equal(JSON.parse(sourcePackage.save8).v,8);
 

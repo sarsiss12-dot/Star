@@ -92,9 +92,34 @@ async function open(browser, origin, save, warm, replacementCost = false) {
   return { context, page, identity };
 }
 
-async function profile(browser, server, key, save) {
-  const { context, page, identity } = await open(browser, server.origin, save, 1);
+async function profile(browser, server, key, save, replacementCost = false) {
+  const { context, page, identity } = await open(browser, server.origin, save, 1, replacementCost);
   try {
+    if(replacementCost)await page.evaluate(()=>{
+      const rootNames=['aiReplacementFirstBuilding','aiCanFinishReplacement'];
+      const children=['aiColonyBuildingNeeds','aiEconomicOrder','aiEconomyPlan','aiBuildingDelta',
+        'aiDemolitionChoice','aiColonyForecast','empireIncome'];
+      window.replacementCalls={};
+      let depth=0;
+      for(const name of [...rootNames,...children]){
+        const original=window[name];
+        if(typeof original!=='function')continue;
+        const root=rootNames.includes(name);
+        const meter=replacementCalls[name]={calls:0,ms:0,totalCalls:0};
+        window[name]=function(...args){
+          meter.totalCalls++;
+          if(!depth&&!root)return original.apply(this,args);
+          const started=performance.now();
+          if(root)depth++;
+          try{return original.apply(this,args);}
+          finally{
+            if(root)depth--;
+            meter.calls++;
+            meter.ms+=performance.now()-started;
+          }
+        };
+      }
+    });
     const cdp = await context.newCDPSession(page);
     await cdp.send('Profiler.enable');
     await cdp.send('Profiler.setSamplingInterval', { interval: 200 });
@@ -114,16 +139,20 @@ async function profile(browser, server, key, save) {
     });
     const total = profile.timeDeltas.reduce((sum, delta) => sum + delta, 0);
     const top = [...self].sort((a, b) => b[1] - a[1]).slice(0, 35).map(([fn, us]) => ({ fn, ms: us / 1000, percent: us / total * 100 }));
-    return { key, identity, times, top };
+    return { key, identity, times, top,
+      ...(replacementCost?{replacementCalls:await page.evaluate(()=>window.replacementCalls)}:{}) };
   } finally {
     await context.close();
   }
 }
 
 async function compare(browser, servers, key, save, replacementCost = false) {
-  const order = ['base', 'candidate', 'candidate', 'base', 'base', 'candidate', 'candidate', 'base'];
+  const block = ['base', 'candidate', 'candidate', 'base', 'base', 'candidate', 'candidate', 'base'];
+  const blocks = Number(process.env.STARS_BENCH_BLOCKS || 1);
+  assert(Number.isInteger(blocks) && blocks > 0, 'Dengeli tekrar sayısı');
+  const order = Array.from({length:blocks}, () => block).flat();
   const samples = 6;
-  const result = { key, sha: sha(save), chromium: browser.version(), warmMonths: 2, monthsPerArm: samples, replacementCost, runs: [] };
+  const result = { key, sha: sha(save), chromium: browser.version(), warmMonths: 2, monthsPerArm: samples, blocks, replacementCost, runs: [] };
   const reference = [];
   for (const arm of order) {
     const { context, page, identity } = await open(browser, servers[arm].origin, save, result.warmMonths, replacementCost);
@@ -157,7 +186,7 @@ async function compare(browser, servers, key, save, replacementCost = false) {
   }
   result.arms = Object.fromEntries(['base', 'candidate'].map(arm =>
     [arm, stats(result.runs.filter(run => run.arm === arm).flatMap(run => run.rows.map(row => row.ms)))]));
-  result.pairsPct = Array.from({ length: 4 }, (_, i) => {
+  result.pairsPct = Array.from({ length: order.length / 2 }, (_, i) => {
     const [a, b] = result.runs.slice(i * 2, i * 2 + 2);
     const control = a.arm === 'base' ? a : b;
     const candidate = a.arm === 'candidate' ? a : b;
@@ -168,19 +197,19 @@ async function compare(browser, servers, key, save, replacementCost = false) {
 }
 
 async function main(mode, keys) {
-  assert(['profile-base', 'profile-candidate', 'compare', 'compare-replacement-cost'].includes(mode));
+  assert(['profile-base', 'profile-candidate', 'profile-replacement-cost', 'compare', 'compare-replacement-cost'].includes(mode));
   assert(keys.length);
   fs.mkdirSync(output, { recursive: true });
   const servers = {};
   let browser;
   try {
-    if (mode !== 'profile-candidate') servers.base = await start(control);
+    if (mode !== 'profile-candidate' && mode !== 'profile-replacement-cost') servers.base = await start(control);
     if (mode !== 'profile-base') servers.candidate = await start(candidate);
     browser = await chromium.launch({ executablePath: process.env.STARS_CHROMIUM_PATH, args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'] });
     for (const key of keys) {
       const save = fs.readFileSync(path.join(inputs, key + '.save'), 'utf8');
       const result = mode.startsWith('compare') ?
-        await compare(browser, servers, key, save, mode==='compare-replacement-cost') : await profile(browser, servers[mode.split('-')[1]], key, save);
+        await compare(browser, servers, key, save, mode==='compare-replacement-cost') : await profile(browser, servers[mode==='profile-base'?'base':'candidate'], key, save, mode==='profile-replacement-cost');
       fs.writeFileSync(path.join(output, mode + '-' + key + '.json'), JSON.stringify(result, null, 2) + '\n');
       console.log(key, result.arms || result.top.slice(0, 5));
     }

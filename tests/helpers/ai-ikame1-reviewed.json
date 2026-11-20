@@ -1,0 +1,118 @@
+{
+  "ai.js": {
+    "beforeSha256": "4a3ee01c1e0ddb972f9e4706ccb7eaa65cfdeb146757efdc4299915a51091c60",
+    "afterSha256": "c2314fea8de9be2256741dcd5ae378955e34f0ed6def63514b9c7ec445344966",
+    "hunks": [
+      {
+        "before": "   const d=aiBuildingDelta(e,sys,pl,key,false,-1);\n   const benefit=((e.inc.min||0)<0?Math.max(0,d.min)*3:0)+(e.crisis==='enerji'?Math.max(0,d.ene)*3:0);\n",
+        "after": "   const d=aiBuildingDelta(e,sys,pl,key,false,-1);\n   // Mineral recovery must not create or deepen a recurring alloy deficit.\n   if(d.ala<0&&(e.inc.ala||0)+d.ala<0)continue;\n   const benefit=((e.inc.min||0)<0?Math.max(0,d.min)*3:0)+(e.crisis==='enerji'?Math.max(0,d.ene)*3:0);\n"
+      },
+      {
+        "before": "   Already assigned settlers are included once; hull prices only at purchase. */\nfunction aiColonyForecast(e,sys,pl,{purchase=false,excludeFleet=null,observer=e}={}){\n const plan=aiEconomyPlan(e),targets=new Map();\n for(const f of G.fleets)if(f.e===e.id&&f!==excludeFleet&&f.ships.some(sh=>sh.c==='kol')&&f.ord?.t==='kol'){\n",
+        "after": "   Already assigned settlers are included once; hull prices only at purchase. */\nfunction aiColonyForecast(e,sys,pl,{purchase=false,excludeFleet=null,observer=e,plan=aiEconomyPlan(e)}={}){\n const targets=new Map();\n for(const f of G.fleets)if(f.e===e.id&&f!==excludeFleet&&f.ships.some(sh=>sh.c==='kol')&&f.ord?.t==='kol'){\n"
+      },
+      {
+        "before": "   only an ordinary paid producer order and expires naturally as net improves. */\nfunction aiColonyPreparation(e,sys,pl,observer=e){\n const target=colonizeTargets(e)[0];if(!target)return null;\n const forecast=aiColonyForecast(e,G.sys[target.s],G.sys[target.s].planets[target.p],{purchase:true,observer});\n if(forecast.ok||forecast.reason!=='ene'||!forecast.rows.ene||forecast.rows.ene.net>=0)return null;\n return ['santral','liman','kuyu'].find(key=>BUILDINGS[key]&&(pl.col.b[key]||0)+colonyQueuedOf(pl.col,key)<BUILDINGS[key].max&&aiBuildingDelta(e,sys,pl,key).ene>0&&aiBuildingSustainable(e,sys,pl,key))||null;\n}\n",
+        "after": "   only an ordinary paid producer order and expires naturally as net improves. */\nfunction aiColonyPreparation(e,sys,pl,observer=e,plan){\n const target=colonizeTargets(e)[0];if(!target)return null;\n const forecast=aiColonyForecast(e,G.sys[target.s],G.sys[target.s].planets[target.p],{purchase:true,observer,plan});\n if(forecast.ok||forecast.reason!=='ene'||!forecast.rows.ene||forecast.rows.ene.net>=0)return null;\n return ['santral','liman','kuyu'].find(key=>BUILDINGS[key]&&(pl.col.b[key]||0)+colonyQueuedOf(pl.col,key)<BUILDINGS[key].max&&aiBuildingDelta(e,sys,pl,key).ene>0&&aiBuildingSustainable(e,sys,pl,key,plan))||null;\n}\n"
+      },
+      {
+        "before": "}\nfunction aiEconomicOrder(e,sys,pl,legacy,observer=e){\n const plan=aiEconomyPlan(e),resourceBuilding={ene:'santral',min:'maden',yiy:'ciftlik',ala:'dokum',tuk:'fabrika'};\n const ranked=Object.keys(resourceBuilding).filter(r=>{const row=plan.rows[r];return row.net<0&&row.months<12||row.stock<Math.max(120,row.reserve)&&row.urgency>12;}).sort((a,b)=>plan.rows[b].urgency-plan.rows[a].urgency||a.localeCompare(b));\n const urgent=ranked.map(r=>resourceBuilding[r]);\n const preparation=!plan.critical&&aiColonyPreparation(e,sys,pl,observer);if(preparation)urgent.push(preparation);\n const saving=aiRecoveryInvestment(e,plan);\n if(saving){AIDiagnostics.note('recovery:save-for-producer',e,null,saving.key+'; '+saving.months.toFixed(2)+' months from own income');return [saving.key];}\n // A first port supplies energy/Etki and enables paid freight without extra upkeep.\n if(!(pl.col.b.liman||0)&&!colonyQueuedOf(pl.col,'liman')&&plan.rows.ene.urgency<30)urgent.splice(Math.min(1,urgent.length),0,'liman');\n return [...new Set(urgent.concat(legacy))].filter(k=>BUILDINGS[k]&&(k!=='ciftlik'||aiBuildingDelta(e,sys,pl,k).yiy>0)&&aiBuildingSustainable(e,sys,pl,k,plan));\n}\n",
+        "after": "}\nfunction aiEconomicOrder(e,sys,pl,legacy,observer=e,plan=aiEconomyPlan(e),firstOnly=false){\n const resourceBuilding={ene:'santral',min:'maden',yiy:'ciftlik',ala:'dokum',tuk:'fabrika'};\n const ranked=Object.keys(resourceBuilding).filter(r=>{const row=plan.rows[r];return row.net<0&&row.months<12||row.stock<Math.max(120,row.reserve)&&row.urgency>12;}).sort((a,b)=>plan.rows[b].urgency-plan.rows[a].urgency||a.localeCompare(b));\n const urgent=ranked.map(r=>resourceBuilding[r]);\n const preparation=!plan.critical&&aiColonyPreparation(e,sys,pl,observer,plan);if(preparation)urgent.push(preparation);\n const saving=aiRecoveryInvestment(e,plan);\n if(saving){\n  AIDiagnostics.note('recovery:save-for-producer',e,null,saving.key+'; '+saving.months.toFixed(2)+' months from own income');\n  return firstOnly?(buildingOrderCost(e,pl,saving.key)?saving.key:undefined):[saving.key];\n }\n // A first port supplies energy/Etki and enables paid freight without extra upkeep.\n if(!(pl.col.b.liman||0)&&!colonyQueuedOf(pl.col,'liman')&&plan.rows.ene.urgency<30)urgent.splice(Math.min(1,urgent.length),0,'liman');\n const candidates=[...new Set(urgent.concat(legacy))];\n const sustainable=k=>BUILDINGS[k]&&(k!=='ciftlik'||aiBuildingDelta(e,sys,pl,k).yiy>0)&&aiBuildingSustainable(e,sys,pl,k,plan);\n if(firstOnly)return candidates.find(key=>buildingOrderCost(e,pl,key)&&sustainable(key));\n return candidates.filter(sustainable);\n}\n"
+      },
+      {
+        "before": "}\nfunction aiStrategicBuildingNeeds(e,sys,pl,observer=e){\n const p=e.aiStrategy?.plan;if(!p||p.stage==='stabilize')return [];\n const eco=aiEconomyPlan(e),net=k=>eco.rows[k]?.net||0;\n for(const key of p.build||[]){\n",
+        "after": "}\nfunction aiStrategicBuildingNeeds(e,sys,pl,observer=e,plan){\n const p=e.aiStrategy?.plan;if(!p||p.stage==='stabilize')return [];\n const eco=plan||aiEconomyPlan(e),net=k=>eco.rows[k]?.net||0;\n for(const key of p.build||[]){\n"
+      },
+      {
+        "before": "}\nfunction aiColonyBuildingNeeds(e,sys,pl,prof,atWar,choose,observer=e){\n  const need = aiStrategicBuildingNeeds(e,sys,pl,observer);\n  if(e.aiStrategy?.goal==='war'&&(e.inc.ala||0)<30)need.push('dokum');\n",
+        "after": "}\nfunction aiColonyBuildingNeeds(e,sys,pl,prof,atWar,choose,observer=e,plan){\n  const need = aiStrategicBuildingNeeds(e,sys,pl,observer,plan);\n  if(e.aiStrategy?.goal==='war'&&(e.inc.ala||0)<30)need.push('dokum');\n"
+      },
+      {
+        "before": "    return aiWithPreservedPowerCache(()=>{\n      const needs=aiColonyBuildingNeeds(shadow,sys,pl,prof,atWar,key=>choices[key],e);\n      return aiEconomicOrder(shadow,sys,pl,needs,e).find(key=>buildingOrderCost(shadow,pl,key));\n    });\n",
+        "after": "    return aiWithPreservedPowerCache(()=>{\n      const plan=aiEconomyPlan(shadow);\n      const needs=aiColonyBuildingNeeds(shadow,sys,pl,prof,atWar,key=>choices[key],e,plan);\n      return aiEconomicOrder(shadow,sys,pl,needs,e,plan,true);\n    });\n"
+      },
+      {
+        "before": "}\n\n",
+        "after": "}\naiReplacementFirstBuilding=aiIncomeWindow(aiReplacementFirstBuilding);\n\n"
+      },
+      {
+        "before": "\nfunction aiUrgentReplacement(e,wanted,atWar){\n  if(atWar&&(wanted==='kale'||wanted==='tersane'||wanted==='dokum'&&e.aiStrategy?.goal==='war'))return true;\n",
+        "after": "\nfunction aiUrgentReplacement(e,wanted,atWar,plan){\n  if(atWar&&(wanted==='kale'||wanted==='tersane'||wanted==='dokum'&&e.aiStrategy?.goal==='war'))return true;\n"
+      },
+      {
+        "before": "     e.crisis==='yiyecek'&&resource==='yiy'||e.shortage&&resource==='tuk')return true;\n  const row=aiEconomyPlan(e).rows[resource];\n  return row.net<0&&row.months<6;\n",
+        "after": "     e.crisis==='yiyecek'&&resource==='yiy'||e.shortage&&resource==='tuk')return true;\n  const row=(plan||aiEconomyPlan(e)).rows[resource];\n  return row.net<0&&row.months<6;\n"
+      },
+      {
+        "before": "      ((typeof colonyQueued === 'function') ? colonyQueued(pl.col) : 0) >= slotsNow;\n    const choices={};\n    const need=aiColonyBuildingNeeds(e,sys,pl,prof,atWarNow,(key,roll)=>choices[key]=roll());\n    /* FAZ 13: kuyruk dolu değilse sipariş ver.\n",
+        "after": "      ((typeof colonyQueued === 'function') ? colonyQueued(pl.col) : 0) >= slotsNow;\n    const choices={},plan=aiEconomyPlan(e);\n    const need=aiColonyBuildingNeeds(e,sys,pl,prof,atWarNow,(key,roll)=>choices[key]=roll(),e,plan);\n    /* FAZ 13: kuyruk dolu değilse sipariş ver.\n"
+      },
+      {
+        "before": "       kuyruk 2'yi geçmesin: uzun sıra ekonomiyi dondurur. */\n    const economicNeeds=aiEconomicOrder(e,sys,pl,need);need.splice(0,need.length,...economicNeeds);\n    const kuyruk = (typeof colonyQueued === 'function') ? colonyQueued(pl.col) : 0;\n",
+        "after": "       kuyruk 2'yi geçmesin: uzun sıra ekonomiyi dondurur. */\n    const economicNeeds=aiEconomicOrder(e,sys,pl,need,e,plan);need.splice(0,need.length,...economicNeeds);\n    const kuyruk = (typeof colonyQueued === 'function') ? colonyQueued(pl.col) : 0;\n"
+      },
+      {
+        "before": "    if (slotDolu && jobs === 0 && need.length && !(e.aiTalk?.[slotRetry]?.until>G.day) && typeof queueDemolish === 'function'){\n      const pick=aiDemolitionChoice(e,sys,pl,need);\n      if(!pick){\n",
+        "after": "    if (slotDolu && jobs === 0 && need.length && !(e.aiTalk?.[slotRetry]?.until>G.day) && typeof queueDemolish === 'function'){\n      const pick=aiDemolitionChoice(e,sys,pl,need,plan);\n      if(!pick){\n"
+      },
+      {
+        "before": "      }else if(rnd()<.18){\n        const urgent=aiUrgentReplacement(e,pick.wanted,atWarNow);\n        const first=urgent?pick.wanted:aiReplacementFirstBuilding(e,sys,pl,pick,prof,atWarNow,choices);\n",
+        "after": "      }else if(rnd()<.18){\n        const urgent=aiUrgentReplacement(e,pick.wanted,atWarNow,plan);\n        const first=urgent?pick.wanted:aiReplacementFirstBuilding(e,sys,pl,pick,prof,atWarNow,choices);\n"
+      }
+    ]
+  },
+  "main.js": {
+    "beforeSha256": "cd94495b2e006045650bde156b168f0a63a943d6bc8d01682260ee7bf89c4e7b",
+    "afterSha256": "ed6e6235da82795d92507b3e2c19a6779160ed1e3c293d74a02f3a6862b79efe",
+    "hunks": [
+      {
+        "before": "/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p45';\nconst DIAG_MAX = 40;\n",
+        "after": "/* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */\nconst BUILD_ID = '96h10p46';\nconst DIAG_MAX = 40;\n"
+      }
+    ]
+  },
+  "sw.js": {
+    "beforeSha256": "e0e90b00a9f268e41c2eb289a436aa88264e8b7f6553cde90486fbe3c0b7401a",
+    "afterSha256": "08ebbc5650f589de7e90fa48bae620b7f3f23cd8543ffda987cf181a3ee087ee",
+    "hunks": [
+      {
+        "before": "   karışmasını önler; activate'te eskiler siliniyor. */\nconst CACHE = 'stars-v96h10p45';\n\n",
+        "after": "   karışmasını önler; activate'te eskiler siliniyor. */\nconst CACHE = 'stars-v96h10p46';\n\n"
+      }
+    ]
+  },
+  "research/mp0/mp-core.js": {
+    "beforeSha256": "d5855edd3c8fc8c30e5bba7d742fb91114310723db3b0c6d1a3e26c4ee710288",
+    "afterSha256": "01d322c5214779186b2cec52b87cc2dcca3380b5bbacb8c26e428c9f253daaf8",
+    "hunks": [
+      {
+        "before": "  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);\n  const sameSaveFormat=['96h10p41','96h10p42','96h10p43','96h10p44','96h10p45'].includes(build)&&typeof pkg.build==='string'&&(\n    /^96h10p(?:[6-9]|[1-3][0-9]|40)$/.test(pkg.build)||['96h10p25u1','96h10p27s1'].includes(pkg.build)||\n",
+        "after": "  const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);\n  const sameSaveFormat=['96h10p41','96h10p42','96h10p43','96h10p44','96h10p45','96h10p46'].includes(build)&&typeof pkg.build==='string'&&(\n    /^96h10p(?:[6-9]|[1-3][0-9]|40)$/.test(pkg.build)||['96h10p25u1','96h10p27s1'].includes(pkg.build)||\n"
+      },
+      {
+        "before": "    build==='96h10p44'&&['96h10p41','96h10p42','96h10p43'].includes(pkg.build)||\n    build==='96h10p45'&&['96h10p41','96h10p42','96h10p43','96h10p44'].includes(pkg.build)\n  );\n",
+        "after": "    build==='96h10p44'&&['96h10p41','96h10p42','96h10p43'].includes(pkg.build)||\n    build==='96h10p45'&&['96h10p41','96h10p42','96h10p43','96h10p44'].includes(pkg.build)||\n    build==='96h10p46'&&['96h10p41','96h10p42','96h10p43','96h10p44','96h10p45'].includes(pkg.build)\n  );\n"
+      }
+    ]
+  },
+  "research/mp1/server/relay.js": {
+    "beforeSha256": "0b323b16d37c965a1035cbb6da44d97dc51e3e0c8182aa299fa97bc37b700405",
+    "afterSha256": "10079993d6869cb942f14f07398552e3560f977ef69600017793d86126b7cbf9",
+    "hunks": [
+      {
+        "before": "  const release=digest(JSON.stringify([manifest,assets,digest(guard,'base64')]),'hex');\n  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b44',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),release,files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',\n    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});\n",
+        "after": "  const release=digest(JSON.stringify([manifest,assets,digest(guard,'base64')]),'hex');\n  const MP_VERSION_JSON=JSON.stringify({mp:'MP.8.9b45',build:manifest.build,runtime:sha12('RELEASE-MANIFEST.json'),release,files:Object.fromEntries(['main.js','research/mp0/mp-core.js','research/mp1/server/relay.js','research/mp1/client/mp1-host.js','research/mp1/client/join.js',\n    'research/mp6/mirror.js','research/mp6/client/guest-stars.js','research/mp71/client/mp71-dip.js','research/mp7/client/mp7-setup.js'].map(f=>[f.split('/').pop(),sha12(f)]))});\n"
+      }
+    ]
+  },
+  "research/mp1/client/view.js": {
+    "beforeSha256": "25b885e21cf4920a6fff2fcb3e9cd5d8d6c9313a004920c5d7ab947220066878",
+    "afterSha256": "c9729b10413ec33b6ef65e07e7f63671eb77618275bb64a9e6e8fa6bf510d193",
+    "hunks": [
+      {
+        "before": "/* MP.7.3: salt okunur sürüm işareti — telefonda (bilgisayarsız) doğru dağıtımın açıldığını görmek için; relay /mp/version ile aynı */\nconst MP_VERSION='MP.8.9b44';\nconst verLine=()=>'STARS '+MP_VERSION+' · oyun '+(typeof BUILD_ID==='string'?BUILD_ID:'?');\n",
+        "after": "/* MP.7.3: salt okunur sürüm işareti — telefonda (bilgisayarsız) doğru dağıtımın açıldığını görmek için; relay /mp/version ile aynı */\nconst MP_VERSION='MP.8.9b45';\nconst verLine=()=>'STARS '+MP_VERSION+' · oyun '+(typeof BUILD_ID==='string'?BUILD_ID:'?');\n"
+      }
+    ]
+  }
+}
