@@ -1,0 +1,796 @@
+{
+ "sha256": "6373a93fba5c0cd94a15ffc7ffbad4ca854977bccc325d454f0474201cb119ea",
+ "arms": [
+  {
+   "enabled": false,
+   "rows": [
+    {
+     "fid": 1,
+     "id": 11,
+     "via": 5,
+     "legal": true,
+     "join": {
+      "ok": true,
+      "score": 0.5080513485670644,
+      "eta": 107.9867898829216,
+      "why": "İlişki, çıkar ve bilinen erişim uygun · Olumsuz: Güven -0.11 · Etik uyumu -0.10 · Bağımsızlık eğilimi -0.09"
+     },
+     "vote": 0.6902424937806451,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 12,
+     "via": 5,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Bilinen yardım/iş birliği rotası yetersiz"
+     },
+     "vote": 1.0610011551331628,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 1,
+     "via": 7,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Bilinen yardım/iş birliği rotası yetersiz"
+     },
+     "vote": 1.1226192108381725,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 11,
+     "via": 7,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Güven veya ilişki yetersiz"
+     },
+     "vote": 0.627976474111702,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 12,
+     "via": 7,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Güven veya ilişki yetersiz"
+     },
+     "vote": 1.0322797171829,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 14,
+     "via": 7,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": -10,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 11,
+     "via": 8,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Güven veya ilişki yetersiz"
+     },
+     "vote": 0.6288175747314864,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 12,
+     "via": 8,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Güven veya ilişki yetersiz"
+     },
+     "vote": 0.85947546516891,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 11,
+     "via": 10,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Güven veya ilişki yetersiz"
+     },
+     "vote": 0.6321057187307042,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 12,
+     "via": 10,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Güven veya ilişki yetersiz"
+     },
+     "vote": -0.2846078470571518,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 2,
+     "id": 4,
+     "via": 13,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 0.7840420165794552,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 2,
+     "id": 14,
+     "via": 13,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": -10,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 2,
+     "id": 16,
+     "via": 13,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 1.2600717540364037,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 2,
+     "id": 14,
+     "via": 15,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": -10,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 2,
+     "id": 16,
+     "via": 15,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 1.2512574969700534,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 1,
+     "via": 2,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Bilinen yardım/iş birliği rotası yetersiz"
+     },
+     "vote": 1.4242707831653534,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 4,
+     "via": 2,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 0.5795530049720043,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 14,
+     "via": 2,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": -10,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 16,
+     "via": 2,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 1.2275930067793392,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 4,
+     "via": 3,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 0.22594588986685868,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 14,
+     "via": 3,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": -10,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 16,
+     "via": 3,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 0.8797836723536777,
+     "penalty": 0,
+     "votePenalty": 0
+    }
+   ],
+   "before": {
+    "day": 5400,
+    "live": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16
+    ],
+    "feds": [
+     [
+      1,
+      "ticaret",
+      [
+       5,
+       7,
+       8,
+       10
+      ]
+     ],
+     [
+      2,
+      "bilimsel",
+      [
+       13,
+       15
+      ]
+     ],
+     [
+      5,
+      "ticaret",
+      [
+       2,
+       3
+      ]
+     ]
+    ],
+    "rng": -184825561
+   },
+   "after": {
+    "day": 5490,
+    "live": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16
+    ],
+    "feds": [
+     [
+      1,
+      "ticaret",
+      [
+       5,
+       7,
+       8,
+       10,
+       11
+      ]
+     ],
+     [
+      2,
+      "bilimsel",
+      [
+       13,
+       15
+      ]
+     ],
+     [
+      5,
+      "ticaret",
+      [
+       2,
+       3
+      ]
+     ]
+    ],
+    "rng": 1659735413
+   }
+  },
+  {
+   "enabled": true,
+   "rows": [
+    {
+     "fid": 1,
+     "id": 11,
+     "via": 5,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "score": -0.09194865143293574,
+      "eta": 107.9867898829216,
+      "why": "Olumsuz: Güven -0.11 · Etik uyumu -0.10 · Bağımsızlık eğilimi -0.09 · birlik uyumu / bilinen koruma -0.46 · Büyük federasyonda bağımsızlık maliyeti −0.60"
+     },
+     "vote": 0.09024249378064497,
+     "penalty": 0.6000000000000001,
+     "votePenalty": 0.6000000000000001
+    },
+    {
+     "fid": 1,
+     "id": 12,
+     "via": 5,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Bilinen yardım/iş birliği rotası yetersiz"
+     },
+     "vote": 0.46100115513316275,
+     "penalty": 0.6000000000000001,
+     "votePenalty": 0.6000000000000001
+    },
+    {
+     "fid": 1,
+     "id": 1,
+     "via": 7,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Bilinen yardım/iş birliği rotası yetersiz"
+     },
+     "vote": 1.1226192108381725,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 11,
+     "via": 7,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Güven veya ilişki yetersiz"
+     },
+     "vote": 0.627976474111702,
+     "penalty": 0.6000000000000001,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 12,
+     "via": 7,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Güven veya ilişki yetersiz"
+     },
+     "vote": 1.0322797171829,
+     "penalty": 0.6000000000000001,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 14,
+     "via": 7,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": -10,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 11,
+     "via": 8,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Güven veya ilişki yetersiz"
+     },
+     "vote": 0.6288175747314864,
+     "penalty": 0.6000000000000001,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 12,
+     "via": 8,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Güven veya ilişki yetersiz"
+     },
+     "vote": 0.85947546516891,
+     "penalty": 0.6000000000000001,
+     "votePenalty": 0
+    },
+    {
+     "fid": 1,
+     "id": 11,
+     "via": 10,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Güven veya ilişki yetersiz"
+     },
+     "vote": 0.032105718730704114,
+     "penalty": 0.6000000000000001,
+     "votePenalty": 0.6000000000000001
+    },
+    {
+     "fid": 1,
+     "id": 12,
+     "via": 10,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Güven veya ilişki yetersiz"
+     },
+     "vote": -0.8846078470571519,
+     "penalty": 0.6000000000000001,
+     "votePenalty": 0.6000000000000001
+    },
+    {
+     "fid": 2,
+     "id": 4,
+     "via": 13,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 0.7840420165794552,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 2,
+     "id": 14,
+     "via": 13,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": -10,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 2,
+     "id": 16,
+     "via": 13,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 1.2600717540364037,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 2,
+     "id": 14,
+     "via": 15,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": -10,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 2,
+     "id": 16,
+     "via": 15,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 1.2512574969700534,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 1,
+     "via": 2,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Bilinen yardım/iş birliği rotası yetersiz"
+     },
+     "vote": 1.4242707831653534,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 4,
+     "via": 2,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 0.5795530049720043,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 14,
+     "via": 2,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": -10,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 16,
+     "via": 2,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 1.2275930067793392,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 4,
+     "via": 3,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 0.22594588986685868,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 14,
+     "via": 3,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": -10,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 5,
+     "id": 16,
+     "via": 3,
+     "legal": false,
+     "join": {
+      "ok": false,
+      "why": "Siyasi koşullar uygun değil"
+     },
+     "vote": 0.8797836723536777,
+     "penalty": 0,
+     "votePenalty": 0
+    }
+   ],
+   "before": {
+    "day": 5400,
+    "live": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16
+    ],
+    "feds": [
+     [
+      1,
+      "ticaret",
+      [
+       5,
+       7,
+       8,
+       10
+      ]
+     ],
+     [
+      2,
+      "bilimsel",
+      [
+       13,
+       15
+      ]
+     ],
+     [
+      5,
+      "ticaret",
+      [
+       2,
+       3
+      ]
+     ]
+    ],
+    "rng": -184825561
+   },
+   "after": {
+    "day": 5490,
+    "live": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16
+    ],
+    "feds": [
+     [
+      1,
+      "ticaret",
+      [
+       5,
+       7,
+       8,
+       10
+      ]
+     ],
+     [
+      2,
+      "bilimsel",
+      [
+       13,
+       15
+      ]
+     ],
+     [
+      5,
+      "ticaret",
+      [
+       2,
+       3
+      ]
+     ]
+    ],
+    "rng": -1076084843
+   }
+  }
+ ]
+}

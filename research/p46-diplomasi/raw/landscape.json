@@ -1,0 +1,342 @@
+[
+  {
+    "name": "offer",
+    "taps": [
+      [
+        "[data-a=\"grpTog\"][data-x=\"emp\"]",
+        "👑"
+      ],
+      [
+        "#outEmp [data-a=\"diploPane\"]",
+        "🤝\nDiplomasi"
+      ],
+      [
+        "[data-a=\"diploPick\"][data-x=\"1\"]",
+        "Karvar Komünü\nBarış · -80 ›"
+      ],
+      [
+        "[data-a=\"diploNav\"][data-x=\"deal\"]",
+        "MÜZAKERE"
+      ],
+      [
+        "[data-a=\"dealAdd\"][data-x=\"want:res\"]",
+        "◆ Kaynak"
+      ],
+      [
+        "[data-a=\"pickOne\"][data-x=\"0\"]",
+        "◆ Mineral (stok bilinmiyor)"
+      ],
+      [
+        "[data-a=\"amountPreset\"][data-x=\"5000\"]",
+        "5.000"
+      ],
+      [
+        "[data-a=\"amountApply\"]",
+        "TASLAĞA EKLE"
+      ],
+      [
+        "[data-a=\"dealSend\"]",
+        "TEKLİFİ SUN"
+      ]
+    ],
+    "feedback": "Karvar Komünü: \"◆ 5000 Mineral için elindekiler yetersiz. Yaklaşık 1813 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin.\"",
+    "text": "\nDİPLOMASİ ·\nKarvar Komünü\n✕\nDEVLETLER\nİLİŞKİ\nMÜZAKERE\nTaslak bu oturumda saklanır; sekme değiştirirken kaybolmaz. Yalnız TEKLİFİ SUN düğmesi karşı tarafa gönderir.\nTutum tahmini için en az İZLENİYOR düzeyinde istihbarat gerekir.\nKarvar Komünü: \"◆ 5000 Mineral için elindekiler yetersiz. Yaklaşık 1813 değerinde daha fazlasını masaya koymalısın — ya da daha az şey istemelisin.\"\nSEN VERİYORSUN\n— boş —\n◆ Kaynak\n✦ Teknoloji\n★ Sistem\n⏳ Haraç\n❖ Lüks mal\n👁 İstihbarat\n⚔ Savaş sözü\n🤲 Barıştırma\n🚪 Geçiş izni\nSEN İSTİYORSUN\n◆ 5000 Mineral\n✕\n◆ Kaynak\n✦ Teknoloji\n★ Sistem\n⏳ Haraç\n❖ Lüks mal\n✦ Teknoloji / ❖ Lüks mal istemek için İZLENİYOR istihbaratı gerekir\n👁 İstihbarat\n⚔ Savaş sözü\n⚔ Savaşa Destek İste\n🤲 Barıştırma\n🚪 Geçiş izni\nANLAŞMA MADDELERİ\n🕊 Barış\n🛡 Saldırmazlık\n🤝 Ticaret\n⚑ İttifak\n🕸 Casusluk ağı\nSimetrik antlaşmalar iki tarafı da bağlar ve teklifte TEK madde olarak durur.\n🔒 Barış: Bütün maddeler zaten yürürlükte — yeni etki yok\nTEKLİF ÖZETİ\nİmzalama maliyeti\n0 ◈\nMaliyet YALNIZ imza gerçekleşirse ve teklifi GÖNDEREN taraftan (sen) tek kez düşer. Ret, iptal ve karşı teklifte Etki harcanmaz. Çok maddeli teklifte en pahalı benzersiz antlaşma ücreti tam, diğerlerinin %25'i eklenir; toplam en fazla 160 ◈. Zaten yürürlükteki maddeler ücretlendirilmez.\nTEKLİFİ SUN\nTASLAĞI TEMİZLE\n⚔ Ortak askerî koordinasyon\nVernex\nYıldız\nM Kırmızı Cüce\nSistem hâkimiyeti\nYeni Hanedan\nHiper yol\n3 bağlantı\n📦 Lojistik ağ\nKapsamda — dost toprak (%100)\nHarita: ◇ uygun boş dünya · ■ yerleşilmiş uygun dünya. Son taranmış gözlem; güncel görünmeyen durum değişebilir.\nGEZEGENLER\nVernex I\nÇorak · boyut 19\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Ergitilebilir Cevher (+2 Alaşım)\n▾\nVernex II\n🔨 1\nTropik · yaşanabilirlik %78 · boyut 18\n⚠ İÇ İSTİKRAR / MÜDAHALELER\nKoloni sahibi: Yeni Hanedan\n◈ Bereketli Ovalar (+5 Yiyecek)\nNüfus\n12 / 16\nİstikrar / moral\n60\nİç istikrar · Ayrıntılar / önlemler\nODAK — 🏛 Yönetim\n🏛\nYönetim\n⚒\nSanayi\n🔬\nAraştırma\n🌾\nTarım\n⚔\nGarnizon\nEtki +1.5/ay, tüm çıktı −%5. Başkent tipi koloni.\nİşgücü\n12 / 11 iş\n💤 OTOMATİK DONANMA UYKUDA — Kasa alaşımı 220 (500 altı). Elle inşa serbest.\n👤 VALİ\nBoşta vali yok.\n🏗 Otomatik inşa\nKAPALI · Manuel yönetim\nAçarsan boş yapı alanları Yönetim planına göre kendiliğinden dolar. Kaynak azalırsa duraklar.\n🏗 OTOMATİK İNŞAYI AÇ\n⬡\n0/22\n⚔\n0\nKalkan yörüngeden çıkarmayı engeller · Garnizon yüzeyde savaşır\nYAPILAR 11/12\nMaden\n2/6\n◆120\n⌫\nSantral\n2/6\n◆110\n⌫\nÇiftlik\n2/5\n◆110\n⌫\nLaboratuvar\n1/6\n◆190\n⌫\nDökümhane\n1/6\n◆210\n⌫\nTersane\n1/3\n◆260\n▰45\n⌫\nSavunma\n0/4\n◆230\n▰70\nArşiv\n0/1\n◆280\n▰40\nKlinik\n0/1\n◆230\nTermal Kuyu\n0/4\n◆200\nUzay Asansörü\n0/1\n◆520\n▰140\nHabitat\n0/1\n◆340\n▰90\nTüketim\n2/5\n◆170\n⌫\nTicaret Limanı\n0/3\n◆180\n🔒 İktisat\n0/1\n◆300\n▰45\n🔒 Sinod Evi\n0/1\n◆310\n▰50\n🔒 Otomasyon\n0/1\n◆280\n▰50\n🔒 Birlik\n0/1\n◆270\n▰35\n🔒 Üretim Hücresi\n0/1\n◆320\n▰60\n🔒 Sinaps\n0/1\n◆270\n▰40\n🔒 Derin Sondaj\n0/1\n◆280\n▰50\n🔒 Biyom\n0/1\n◆260\n▰35\nTerraform için İklim Mühendisliği araştır.\nVernex III\nBuzul · boyut 16\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Zengin Mineral Damarı (+5 Mineral)\nVernex IV\nÇöl · yaşanabilirlik %38 · boyut 11\nKolonileştirilebilir\nKOLONİ KUR\nTERSANE\n📍 RALLİ NOKTASI\nBu tersaneden çıkan askeri gemiler şu an genel üretimde yerinde kalır. Filo şablonu / takviye siparişleri hedef filosuna otomatik gider; her tersaneye ralli ataman gerekmez.\n📍 RALLİ NOKTASI SEÇ\nKRV\n▰32\nMHR\nKİLİTLİ\nKRV2\nKİLİTLİ\nZRH\nKİLİTLİ\nBLM\n▰24\nKLN\n▰60 ◆265\nİNŞ\n▰45 ◆90\nORD\n▰70 ◆120\nCLS\nKİLİTLİ\nESK\nKİLİTLİ\nUZAY YAPILARI\nUzay yapısı için İnşaat Gemisi gerekir (tersanede İNŞ).\nYÖRÜNGEDE\n1. Muhafız Filosu\n3 gemi · 320 güç\nBEKLİYOR\nKâşif Vela\n1 gemi · sivil\nBOŞTA · TARAMA BEKLİYOR\nYerleşim Konvoyu\n1 gemi · sivil\nBOŞTA · HEDEF BEKLİYOR\n",
+    "lat": [
+      {
+        "a": "grpTog",
+        "ms": 19.099999994039536
+      },
+      {
+        "a": "diploPane",
+        "ms": 26.700000002980232
+      },
+      {
+        "a": "diploPick",
+        "ms": 26.5
+      },
+      {
+        "a": "diploNav",
+        "ms": 28.900000005960464
+      },
+      {
+        "a": "dealAdd",
+        "ms": 28.799999997019768
+      },
+      {
+        "a": "pickOne",
+        "ms": 28.799999997019768
+      },
+      {
+        "a": "amountPreset",
+        "ms": 29.099999994039536
+      },
+      {
+        "a": "amountApply",
+        "ms": 27.400000005960464
+      },
+      {
+        "a": "dealSend",
+        "ms": 27.399999991059303
+      }
+    ]
+  },
+  {
+    "name": "counter",
+    "taps": [
+      [
+        "[data-a=\"grpTog\"][data-x=\"emp\"]",
+        "👑"
+      ],
+      [
+        "#outEmp [data-a=\"diplomaticInbox\"]",
+        "✉\nGelen kutusu"
+      ],
+      [
+        "[data-a=\"diplomaticRecord\"][data-x=\"1\"]",
+        "Teklif — Karvar Komünü\n⚡ 25 Enerji istiyor · 18 ay kaldı"
+      ],
+      [
+        "#inboxCounter",
+        "Karşı teklif hazırla"
+      ],
+      [
+        "[data-a=\"dealAdd\"][data-x=\"want:passage\"]",
+        "🚪 Geçiş izni"
+      ],
+      [
+        "[data-a=\"dealSend\"]",
+        "TEKLİFİ SUN"
+      ]
+    ],
+    "card": "GALAKTİK HABER AĞI\n✕\nHaberler · 0\nGelen kutusu · 1\nSevkiyatlar · 0\nKARAR · Teklif — Karvar Komünü\n2210.01 · gün 0 · Karvar Komünü · Diplomatik teklif · Bekliyor\n\n⚡ 25 Enerji istiyor · 18 ay kaldı\n\nKARARIN ETKİSİ\n\nKabul: aşağıdaki anlaşma hükümleri mevcut işlem motoruyla uygulanır. Ret: kaynak aktarımı veya yeni anlaşma gerçekleşmez. İmza Etkisini gönderen öder; senden istenen kaynaklar kabulde kendi stokundan alınır. İlk geçerli ret, aynı şartlar için 27 ay bekleme ve gönderenin sana ilişkisinde −5 değişim yaratır; aynı karar ikinci kez ceza vermez.\n\nSANA VERİYOR\n\n◆ 60 Mineral\n\nSENDEN İSTİYOR\n\n⚡ 25 Enerji\n\nİmza maliyeti: 0 Etki · gönderen öder\n540 gün · son gün 540\nDevleti incele · teklif saklanır\nKABUL ET\nREDDET\nKarşı teklif hazırla\nListeye dön\nHaritaya dön",
+    "feedback": "",
+    "text": "\n\n⚔ Ortak askerî koordinasyon\nVernex\nYıldız\nM Kırmızı Cüce\nSistem hâkimiyeti\nYeni Hanedan\nHiper yol\n3 bağlantı\n📦 Lojistik ağ\nKapsamda — dost toprak (%100)\nHarita: ◇ uygun boş dünya · ■ yerleşilmiş uygun dünya. Son taranmış gözlem; güncel görünmeyen durum değişebilir.\nGEZEGENLER\nVernex I\nÇorak · boyut 19\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Ergitilebilir Cevher (+2 Alaşım)\n▾\nVernex II\n🔨 1\nTropik · yaşanabilirlik %78 · boyut 18\n⚠ İÇ İSTİKRAR / MÜDAHALELER\nKoloni sahibi: Yeni Hanedan\n◈ Bereketli Ovalar (+5 Yiyecek)\nNüfus\n12 / 16\nİstikrar / moral\n60\nİç istikrar · Ayrıntılar / önlemler\nODAK — 🏛 Yönetim\n🏛\nYönetim\n⚒\nSanayi\n🔬\nAraştırma\n🌾\nTarım\n⚔\nGarnizon\nEtki +1.5/ay, tüm çıktı −%5. Başkent tipi koloni.\nİşgücü\n12 / 11 iş\n💤 OTOMATİK DONANMA UYKUDA — Kasa alaşımı 220 (500 altı). Elle inşa serbest.\n👤 VALİ\nBoşta vali yok.\n🏗 Otomatik inşa\nKAPALI · Manuel yönetim\nAçarsan boş yapı alanları Yönetim planına göre kendiliğinden dolar. Kaynak azalırsa duraklar.\n🏗 OTOMATİK İNŞAYI AÇ\n⬡\n0/22\n⚔\n0\nKalkan yörüngeden çıkarmayı engeller · Garnizon yüzeyde savaşır\nYAPILAR 11/12\nMaden\n2/6\n◆120\n⌫\nSantral\n2/6\n◆110\n⌫\nÇiftlik\n2/5\n◆110\n⌫\nLaboratuvar\n1/6\n◆190\n⌫\nDökümhane\n1/6\n◆210\n⌫\nTersane\n1/3\n◆260\n▰45\n⌫\nSavunma\n0/4\n◆230\n▰70\nArşiv\n0/1\n◆280\n▰40\nKlinik\n0/1\n◆230\nTermal Kuyu\n0/4\n◆200\nUzay Asansörü\n0/1\n◆520\n▰140\nHabitat\n0/1\n◆340\n▰90\nTüketim\n2/5\n◆170\n⌫\nTicaret Limanı\n0/3\n◆180\n🔒 İktisat\n0/1\n◆300\n▰45\n🔒 Sinod Evi\n0/1\n◆310\n▰50\n🔒 Otomasyon\n0/1\n◆280\n▰50\n🔒 Birlik\n0/1\n◆270\n▰35\n🔒 Üretim Hücresi\n0/1\n◆320\n▰60\n🔒 Sinaps\n0/1\n◆270\n▰40\n🔒 Derin Sondaj\n0/1\n◆280\n▰50\n🔒 Biyom\n0/1\n◆260\n▰35\nTerraform için İklim Mühendisliği araştır.\nVernex III\nBuzul · boyut 16\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Zengin Mineral Damarı (+5 Mineral)\nVernex IV\nÇöl · yaşanabilirlik %38 · boyut 11\nKolonileştirilebilir\nKOLONİ KUR\nTERSANE\n📍 RALLİ NOKTASI\nBu tersaneden çıkan askeri gemiler şu an genel üretimde yerinde kalır. Filo şablonu / takviye siparişleri hedef filosuna otomatik gider; her tersaneye ralli ataman gerekmez.\n📍 RALLİ NOKTASI SEÇ\nKRV\n▰32\nMHR\nKİLİTLİ\nKRV2\nKİLİTLİ\nZRH\nKİLİTLİ\nBLM\n▰24\nKLN\n▰60 ◆265\nİNŞ\n▰45 ◆90\nORD\n▰70 ◆120\nCLS\nKİLİTLİ\nESK\nKİLİTLİ\nUZAY YAPILARI\nUzay yapısı için İnşaat Gemisi gerekir (tersanede İNŞ).\nYÖRÜNGEDE\n1. Muhafız Filosu\n3 gemi · 320 güç\nBEKLİYOR\nKâşif Vela\n1 gemi · sivil\nBOŞTA · TARAMA BEKLİYOR\nYerleşim Konvoyu\n1 gemi · sivil\nBOŞTA · HEDEF BEKLİYOR\n",
+    "lat": [
+      {
+        "a": "grpTog",
+        "ms": 14.600000008940697
+      },
+      {
+        "a": "diplomaticInbox",
+        "ms": 28.299999997019768
+      },
+      {
+        "a": "diplomaticRecord",
+        "ms": 26.899999991059303
+      },
+      {
+        "a": "inboxCounter",
+        "ms": 28.400000005960464
+      },
+      {
+        "a": "dealAdd",
+        "ms": 27.799999997019768
+      },
+      {
+        "a": "dealSend",
+        "ms": 29.299999997019768
+      }
+    ]
+  },
+  {
+    "name": "vote",
+    "taps": [
+      [
+        "[data-a=\"grpTog\"][data-x=\"emp\"]",
+        "👑"
+      ],
+      [
+        "#outEmp [data-a=\"diplomaticInbox\"]",
+        "✉\nGelen kutusu"
+      ],
+      [
+        "[data-a=\"diplomaticRecord\"][data-x=\"1\"]",
+        "Federasyon oylaması\nSavunma Paktı"
+      ]
+    ],
+    "card": "GALAKTİK HABER AĞI\n✕\nHaberler · 0\nGelen kutusu · 1\nSevkiyatlar · 0\nKARAR · Federasyon oylaması\n2210.01 · gün 0 · Karvar Komünü · Federasyon oylaması · Bekliyor\n\nSavunma Paktı\n\nKABUL EDİLİRSE\n\nBir üyeye savaş açılırsa tüm üyeler otomatik savaşa girer.\n\nÖneren: Karvar Komünü · Federasyon: Ortak savunma\nHayır oyu öneriye karşıdır; sonuç mevcut çoğunluk hesabıyla belirlenir. Oy kullanmak için ek kaynak bedeli yoktur; öneri bedeli önerenden alınmıştır.\nMutlak üye çoğunluğu (2/2) ve toplam oy ağırlığının yarısından fazlası. Süre sonunda eksik oy çekimserdir.\nDestekleyenler: Karvar Komünü · Karşı çıkanlar: yok · Beklenen: Yeni Hanedan\n90 gün · son gün 90\nDevleti incele · teklif saklanır Federasyon bölümünü aç · karar saklanır\nEVET OYU VER\nHAYIR OYU VER\nListeye dön\nHaritaya dön",
+    "text": "GALAKTİK HABER AĞI\n✕\nHaberler · 0\nGelen kutusu · 1\nSevkiyatlar · 0\nKARAR · Federasyon oylaması\n2210.01 · gün 0 · Karvar Komünü · Federasyon oylaması · Bekliyor\n\nSavunma Paktı\n\nKABUL EDİLİRSE\n\nBir üyeye savaş açılırsa tüm üyeler otomatik savaşa girer.\n\nÖneren: Karvar Komünü · Federasyon: Ortak savunma\nHayır oyu öneriye karşıdır; sonuç mevcut çoğunluk hesabıyla belirlenir. Oy kullanmak için ek kaynak bedeli yoktur; öneri bedeli önerenden alınmıştır.\nMutlak üye çoğunluğu (2/2) ve toplam oy ağırlığının yarısından fazlası. Süre sonunda eksik oy çekimserdir.\nDestekleyenler: Karvar Komünü · Karşı çıkanlar: yok · Beklenen: Yeni Hanedan\n90 gün · son gün 90\nDevleti incele · teklif saklanır Federasyon bölümünü aç · karar saklanır\nEVET OYU VER\nHAYIR OYU VER\nListeye dön\nHaritaya dön\n\n⚔ Ortak askerî koordinasyon\nVernex\nYıldız\nM Kırmızı Cüce\nSistem hâkimiyeti\nYeni Hanedan\nHiper yol\n3 bağlantı\n📦 Lojistik ağ\nKapsamda — dost toprak (%100)\nHarita: ◇ uygun boş dünya · ■ yerleşilmiş uygun dünya. Son taranmış gözlem; güncel görünmeyen durum değişebilir.\nGEZEGENLER\nVernex I\nÇorak · boyut 19\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Ergitilebilir Cevher (+2 Alaşım)\n▾\nVernex II\n🔨 1\nTropik · yaşanabilirlik %78 · boyut 18\n⚠ İÇ İSTİKRAR / MÜDAHALELER\nKoloni sahibi: Yeni Hanedan\n◈ Bereketli Ovalar (+5 Yiyecek)\nNüfus\n12 / 16\nİstikrar / moral\n60\nİç istikrar · Ayrıntılar / önlemler\nODAK — 🏛 Yönetim\n🏛\nYönetim\n⚒\nSanayi\n🔬\nAraştırma\n🌾\nTarım\n⚔\nGarnizon\nEtki +1.5/ay, tüm çıktı −%5. Başkent tipi koloni.\nİşgücü\n12 / 11 iş\n💤 OTOMATİK DONANMA UYKUDA — Kasa alaşımı 220 (500 altı). Elle inşa serbest.\n👤 VALİ\nBoşta vali yok.\n🏗 Otomatik inşa\nKAPALI · Manuel yönetim\nAçarsan boş yapı alanları Yönetim planına göre kendiliğinden dolar. Kaynak azalırsa duraklar.\n🏗 OTOMATİK İNŞAYI AÇ\n⬡\n0/22\n⚔\n0\nKalkan yörüngeden çıkarmayı engeller · Garnizon yüzeyde savaşır\nYAPILAR 11/12\nMaden\n2/6\n◆120\n⌫\nSantral\n2/6\n◆110\n⌫\nÇiftlik\n2/5\n◆110\n⌫\nLaboratuvar\n1/6\n◆190\n⌫\nDökümhane\n1/6\n◆210\n⌫\nTersane\n1/3\n◆260\n▰45\n⌫\nSavunma\n0/4\n◆230\n▰70\nArşiv\n0/1\n◆280\n▰40\nKlinik\n0/1\n◆230\nTermal Kuyu\n0/4\n◆200\nUzay Asansörü\n0/1\n◆520\n▰140\nHabitat\n0/1\n◆340\n▰90\nTüketim\n2/5\n◆170\n⌫\nTicaret Limanı\n0/3\n◆180\n🔒 İktisat\n0/1\n◆300\n▰45\n🔒 Sinod Evi\n0/1\n◆310\n▰50\n🔒 Otomasyon\n0/1\n◆280\n▰50\n🔒 Birlik\n0/1\n◆270\n▰35\n🔒 Üretim Hücresi\n0/1\n◆320\n▰60\n🔒 Sinaps\n0/1\n◆270\n▰40\n🔒 Derin Sondaj\n0/1\n◆280\n▰50\n🔒 Biyom\n0/1\n◆260\n▰35\nTerraform için İklim Mühendisliği araştır.\nVernex III\nBuzul · boyut 16\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Zengin Mineral Damarı (+5 Mineral)\nVernex IV\nÇöl · yaşanabilirlik %38 · boyut 11\nKolonileştirilebilir\nKOLONİ KUR\nTERSANE\n📍 RALLİ NOKTASI\nBu tersaneden çıkan askeri gemiler şu an genel üretimde yerinde kalır. Filo şablonu / takviye siparişleri hedef filosuna otomatik gider; her tersaneye ralli ataman gerekmez.\n📍 RALLİ NOKTASI SEÇ\nKRV\n▰32\nMHR\nKİLİTLİ\nKRV2\nKİLİTLİ\nZRH\nKİLİTLİ\nBLM\n▰24\nKLN\n▰60 ◆265\nİNŞ\n▰45 ◆90\nORD\n▰70 ◆120\nCLS\nKİLİTLİ\nESK\nKİLİTLİ\nUZAY YAPILARI\nUzay yapısı için İnşaat Gemisi gerekir (tersanede İNŞ).\nYÖRÜNGEDE\n1. Muhafız Filosu\n3 gemi · 320 güç\nBEKLİYOR\nKâşif Vela\n1 gemi · sivil\nBOŞTA · TARAMA BEKLİYOR\nYerleşim Konvoyu\n1 gemi · sivil\nBOŞTA · HEDEF BEKLİYOR\n",
+    "lat": [
+      {
+        "a": "grpTog",
+        "ms": 16.69999998807907
+      },
+      {
+        "a": "diplomaticInbox",
+        "ms": 28.600000008940697
+      },
+      {
+        "a": "diplomaticRecord",
+        "ms": 27.100000008940697
+      }
+    ]
+  },
+  {
+    "name": "scheduledVote",
+    "taps": [
+      [
+        "[data-a=\"grpTog\"][data-x=\"emp\"]",
+        "👑"
+      ],
+      [
+        "#fedBtn",
+        "🏛\nFederasyon"
+      ],
+      [
+        "[data-a=\"fedVoteNow\"]",
+        "OY VER"
+      ]
+    ],
+    "pending": {
+      "vote": "ticaret",
+      "proposer": null,
+      "waiting": [
+        0
+      ],
+      "archived": 0
+    },
+    "text": "Ortak savunma\n🤝 Ticaret Birliği\nÜye limanları otomatik olarak birbirine bağlanır.\nKABUL EDİLİRSE\n\nÜye limanları otomatik olarak birbirine bağlanır.\n\nÖneren: Temassız devlet · Federasyon: Ortak savunma\nHayır oyu öneriye karşıdır; sonuç mevcut çoğunluk hesabıyla belirlenir. Oy kullanmak için ek kaynak bedeli yoktur; öneri bedeli önerenden alınmıştır.\nMutlak üye çoğunluğu (2/2) ve toplam oy ağırlığının yarısından fazlası. Süre sonunda eksik oy çekimserdir.\nDestekleyenler: Karvar Komünü · Karşı çıkanlar: yok · Beklenen: Yeni Hanedan\nEşit Temsil\nHer üye 1 oy. Küçük devletleri korur; büyük katkıya ek oy vermez.\nBu gündemin ağırlıkları açılışta sabitlendi.\nYeni Hanedan · SEN\n1 oy BEKLİYOR\nKarvar Komünü\n1 oy EVET\nDestek · Kişilik ve yasa yararı +0.21 · Önerene güven · Birlik uyumu +0.04 · Gerçek ekonomik hazırlık · Uzun vadeli hedef\nMutlak üye çoğunluğu (2/2) ve toplam oy ağırlığının yarısından fazlası. Süre sonunda eksik oy çekimserdir.\nSenin oyun: Bekleniyor — açık onayın gerekli.\nMevcut oylar\n1 evet · 0 hayır\nSeçmenler: Yeni Hanedan (bekliyor) · Karvar Komünü (evet)\nOyun bekleniyor. 90 gün kaldı. Eşitlikte ret; süre sonunda kullanılmayan oylar çekimser.\nEVET oy ver\nHAYIR oy ver\n🏛 FEDERASYON\n✕\nGENEL\nÜYELER\nOYLAMALAR\nYASALAR\nASKERÎ\nYÖNETİM\n⏳ BEKLEYEN İŞLER (1)\nOyun bekleniyor: Ticaret Birliği OY VER\nOrtak savunma · Askerî Federasyon\n2 üye\nBaşkan: Karvar Komünü · Oy rejimi: Eşit Temsil\n\nYeni saldırılara ortak savunma yükümlülüğü. Otomatik saldırı desteği yok; ayrı oylama/taahhüt gerekir.\n\nÜyelik: üye oylaması ve adayın ayrı rızası; önce bütün üyelerle ittifak gerekmez. Eski doğrudan davet koşulu: ortak müttefikler · savunma otomatik · saldırı oylama.\nBEKLEYEN OYLAMAYI İNCELE\nAKTİF SAVAŞLAR\nYok\nFEDERAL FON\n⚙ Ortak fon\n100 ala · 300 ene\nKatkı: gelirin %5'i · harcanabilir 100 ala / 300 ene (3 aylık bakım rezervi ayrıldı)\nFederal donanma 0 gemi / sınır 8 · aylık bakım 0 ene + 0 ala (fondan) · federal donanma yok\n⚔ Ortak askerî koordinasyon\nVernex\nYıldız\nM Kırmızı Cüce\nSistem hâkimiyeti\nYeni Hanedan\nHiper yol\n3 bağlantı\n📦 Lojistik ağ\nKapsamda — dost toprak (%100)\nHarita: ◇ uygun boş dünya · ■ yerleşilmiş uygun dünya. Son taranmış gözlem; güncel görünmeyen durum değişebilir.\nGEZEGENLER\nVernex I\nÇorak · boyut 19\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Ergitilebilir Cevher (+2 Alaşım)\n▾\nVernex II\n🔨 1\nTropik · yaşanabilirlik %78 · boyut 18\n⚠ İÇ İSTİKRAR / MÜDAHALELER\nKoloni sahibi: Yeni Hanedan\n◈ Bereketli Ovalar (+5 Yiyecek)\nNüfus\n12 / 16\nİstikrar / moral\n60\nİç istikrar · Ayrıntılar / önlemler\nODAK — 🏛 Yönetim\n🏛\nYönetim\n⚒\nSanayi\n🔬\nAraştırma\n🌾\nTarım\n⚔\nGarnizon\nEtki +1.5/ay, tüm çıktı −%5. Başkent tipi koloni.\nİşgücü\n12 / 11 iş\n💤 OTOMATİK DONANMA UYKUDA — Kasa alaşımı 220 (500 altı). Elle inşa serbest.\n👤 VALİ\nBoşta vali yok.\n🏗 Otomatik inşa\nKAPALI · Manuel yönetim\nAçarsan boş yapı alanları Yönetim planına göre kendiliğinden dolar. Kaynak azalırsa duraklar.\n🏗 OTOMATİK İNŞAYI AÇ\n⬡\n0/22\n⚔\n0\nKalkan yörüngeden çıkarmayı engeller · Garnizon yüzeyde savaşır\nYAPILAR 11/12\nMaden\n2/6\n◆120\n⌫\nSantral\n2/6\n◆110\n⌫\nÇiftlik\n2/5\n◆110\n⌫\nLaboratuvar\n1/6\n◆190\n⌫\nDökümhane\n1/6\n◆210\n⌫\nTersane\n1/3\n◆260\n▰45\n⌫\nSavunma\n0/4\n◆230\n▰70\nArşiv\n0/1\n◆280\n▰40\nKlinik\n0/1\n◆230\nTermal Kuyu\n0/4\n◆200\nUzay Asansörü\n0/1\n◆520\n▰140\nHabitat\n0/1\n◆340\n▰90\nTüketim\n2/5\n◆170\n⌫\nTicaret Limanı\n0/3\n◆180\n🔒 İktisat\n0/1\n◆300\n▰45\n🔒 Sinod Evi\n0/1\n◆310\n▰50\n🔒 Otomasyon\n0/1\n◆280\n▰50\n🔒 Birlik\n0/1\n◆270\n▰35\n🔒 Üretim Hücresi\n0/1\n◆320\n▰60\n🔒 Sinaps\n0/1\n◆270\n▰40\n🔒 Derin Sondaj\n0/1\n◆280\n▰50\n🔒 Biyom\n0/1\n◆260\n▰35\nTerraform için İklim Mühendisliği araştır.\nVernex III\nBuzul · boyut 16\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Zengin Mineral Damarı (+5 Mineral)\nVernex IV\nÇöl · yaşanabilirlik %38 · boyut 11\nKolonileştirilebilir\nKOLONİ KUR\nTERSANE\n📍 RALLİ NOKTASI\nBu tersaneden çıkan askeri gemiler şu an genel üretimde yerinde kalır. Filo şablonu / takviye siparişleri hedef filosuna otomatik gider; her tersaneye ralli ataman gerekmez.\n📍 RALLİ NOKTASI SEÇ\nKRV\n▰32\nMHR\nKİLİTLİ\nKRV2\nKİLİTLİ\nZRH\nKİLİTLİ\nBLM\n▰24\nKLN\n▰60 ◆265\nİNŞ\n▰45 ◆90\nORD\n▰70 ◆120\nCLS\nKİLİTLİ\nESK\nKİLİTLİ\nUZAY YAPILARI\nUzay yapısı için İnşaat Gemisi gerekir (tersanede İNŞ).\nYÖRÜNGEDE\n1. Muhafız Filosu\n3 gemi · 320 güç\nBEKLİYOR\nKâşif Vela\n1 gemi · sivil\nBOŞTA · TARAMA BEKLİYOR\nYerleşim Konvoyu\n1 gemi · sivil\nBOŞTA · HEDEF BEKLİYOR\n",
+    "lat": [
+      {
+        "a": "grpTog",
+        "ms": 14.599999994039536
+      },
+      {
+        "a": "fedPane",
+        "ms": 39.099999994039536
+      },
+      {
+        "a": "fedVoteNow",
+        "ms": 26.700000002980232
+      }
+    ]
+  },
+  {
+    "name": "peace",
+    "taps": [
+      [
+        "[data-a=\"grpTog\"][data-x=\"emp\"]",
+        "👑"
+      ],
+      [
+        "#outEmp [data-a=\"diploPane\"]",
+        "🤝\nDiplomasi"
+      ],
+      [
+        "[data-a=\"diploPick\"][data-x=\"1\"]",
+        "Karvar Komünü\n⚔ Savaş · -60 ›"
+      ],
+      [
+        "[data-a=\"diploNav\"][data-x=\"deal\"]",
+        "MÜZAKERE"
+      ],
+      [
+        "[data-a=\"dealPact\"][data-x=\"peace\"]",
+        "🕊 Barış"
+      ]
+    ],
+    "text": "\nDİPLOMASİ ·\nKarvar Komünü\n✕\nDEVLETLER\nİLİŞKİ\nMÜZAKERE\nTaslak bu oturumda saklanır; sekme değiştirirken kaybolmaz. Yalnız TEKLİFİ SUN düğmesi karşı tarafa gönderir.\nTutum tahmini için en az İZLENİYOR düzeyinde istihbarat gerekir.\nSEN VERİYORSUN\n— boş —\n◆ Kaynak\n✦ Teknoloji\n★ Sistem\n⏳ Haraç\n❖ Lüks mal\n👁 İstihbarat\n⚔ Savaş sözü\n🤲 Barıştırma\n🚪 Geçiş izni\nSEN İSTİYORSUN\n🕊 Barış\n✕\n◆ Kaynak\n✦ Teknoloji\n★ Sistem\n⏳ Haraç\n❖ Lüks mal\n✦ Teknoloji / ❖ Lüks mal istemek için İZLENİYOR istihbaratı gerekir\n👁 İstihbarat\n⚔ Savaş sözü\n⚔ Savaşa Destek İste\n🤲 Barıştırma\n🚪 Geçiş izni\nSAVAŞ ŞARTLARI\n👑 Teslim iste: Haraçgüzar\n👑 Teslim iste: Sınır Bekçisi\n👑 Teslim iste: Akademik Vasal\n🏳 Boyun eğ: Haraçgüzar\n🏳 Boyun eğ: Sınır Bekçisi\n🏳 Boyun eğ: Akademik Vasal\nTeslim maddesi savaşı kendisi bitirir; barış maddesi eklenmez. Haraç ve teknoloji aynı pakete eklenebilir.\nSenin Fetih hedefi: kalacak Nexrus · alınamayan Elrus-78, Belialith · iade Fentar\nANLAŞMA MADDELERİ\n🕊 Barış\n🛡 Saldırmazlık\n🤝 Ticaret\n⚑ İttifak\n🕸 Casusluk ağı\nSimetrik antlaşmalar iki tarafı da bağlar ve teklifte TEK madde olarak durur.\n🔒 Saldırmazlık Paktı: Saldırmazlık: savaş sürerken imzalanamaz — pakete barış ekle\n🔒 Ticaret Anlaşması: Yeni Hanedan → Ticaret Anlaşması: Savaş sürüyor\n🔒 İttifak: İttifak: savaş sürerken imzalanamaz — pakete barış ekle\n🔒 Casusluk Ağı Paktı: Casusluk ağı: savaş sürerken kurulamaz — pakete barış ekle\nTEKLİF ÖZETİ\nİmzalama maliyeti\n30 ◈\nMaliyet YALNIZ imza gerçekleşirse ve teklifi GÖNDEREN taraftan (sen) tek kez düşer. Ret, iptal ve karşı teklifte Etki harcanmaz. Çok maddeli teklifte en pahalı benzersiz antlaşma ücreti tam, diğerlerinin %25'i eklenir; toplam en fazla 160 ◈. Zaten yürürlükteki maddeler ücretlendirilmez.\nTEKLİFİ SUN\nTASLAĞI TEMİZLE\n⚔ Ortak askerî koordinasyon\nVernex\nYıldız\nM Kırmızı Cüce\nSistem hâkimiyeti\nYeni Hanedan\nHiper yol\n3 bağlantı\n📦 Lojistik ağ\nKapsamda — dost toprak (%100)\nHarita: ◇ uygun boş dünya · ■ yerleşilmiş uygun dünya. Son taranmış gözlem; güncel görünmeyen durum değişebilir.\nGEZEGENLER\nVernex I\nÇorak · boyut 19\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Ergitilebilir Cevher (+2 Alaşım)\n▾\nVernex II\n🔨 1\nTropik · yaşanabilirlik %78 · boyut 18\n⚠ İÇ İSTİKRAR / MÜDAHALELER\nKoloni sahibi: Yeni Hanedan\n◈ Bereketli Ovalar (+5 Yiyecek)\nNüfus\n12 / 16\nİstikrar / moral\n60\nİç istikrar · Ayrıntılar / önlemler\nODAK — 🏛 Yönetim\n🏛\nYönetim\n⚒\nSanayi\n🔬\nAraştırma\n🌾\nTarım\n⚔\nGarnizon\nEtki +1.5/ay, tüm çıktı −%5. Başkent tipi koloni.\nİşgücü\n12 / 11 iş\n💤 OTOMATİK DONANMA UYKUDA — Kasa alaşımı 220 (500 altı). Elle inşa serbest.\n👤 VALİ\nBoşta vali yok.\n🏗 Otomatik inşa\nKAPALI · Manuel yönetim\nAçarsan boş yapı alanları Yönetim planına göre kendiliğinden dolar. Kaynak azalırsa duraklar.\n🏗 OTOMATİK İNŞAYI AÇ\n⬡\n0/22\n⚔\n0\nKalkan yörüngeden çıkarmayı engeller · Garnizon yüzeyde savaşır\nYAPILAR 11/12\nMaden\n2/6\n◆120\n⌫\nSantral\n2/6\n◆110\n⌫\nÇiftlik\n2/5\n◆110\n⌫\nLaboratuvar\n1/6\n◆190\n⌫\nDökümhane\n1/6\n◆210\n⌫\nTersane\n1/3\n◆260\n▰45\n⌫\nSavunma\n0/4\n◆230\n▰70\nArşiv\n0/1\n◆280\n▰40\nKlinik\n0/1\n◆230\nTermal Kuyu\n0/4\n◆200\nUzay Asansörü\n0/1\n◆520\n▰140\nHabitat\n0/1\n◆340\n▰90\nTüketim\n2/5\n◆170\n⌫\nTicaret Limanı\n0/3\n◆180\n🔒 İktisat\n0/1\n◆300\n▰45\n🔒 Sinod Evi\n0/1\n◆310\n▰50\n🔒 Otomasyon\n0/1\n◆280\n▰50\n🔒 Birlik\n0/1\n◆270\n▰35\n🔒 Üretim Hücresi\n0/1\n◆320\n▰60\n🔒 Sinaps\n0/1\n◆270\n▰40\n🔒 Derin Sondaj\n0/1\n◆280\n▰50\n🔒 Biyom\n0/1\n◆260\n▰35\nTerraform için İklim Mühendisliği araştır.\nVernex III\nBuzul · boyut 16\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Zengin Mineral Damarı (+5 Mineral)\nVernex IV\nÇöl · yaşanabilirlik %38 · boyut 11\nKolonileştirilebilir\nKOLONİ KUR\nTERSANE\n📍 RALLİ NOKTASI\nBu tersaneden çıkan askeri gemiler şu an genel üretimde yerinde kalır. Filo şablonu / takviye siparişleri hedef filosuna otomatik gider; her tersaneye ralli ataman gerekmez.\n📍 RALLİ NOKTASI SEÇ\nKRV\n▰32\nMHR\nKİLİTLİ\nKRV2\nKİLİTLİ\nZRH\nKİLİTLİ\nBLM\n▰24\nKLN\n▰60 ◆265\nİNŞ\n▰45 ◆90\nORD\n▰70 ◆120\nCLS\nKİLİTLİ\nESK\nKİLİTLİ\nUZAY YAPILARI\nUzay yapısı için İnşaat Gemisi gerekir (tersanede İNŞ).\nYÖRÜNGEDE\n1. Muhafız Filosu\n3 gemi · 322 güç\nBEKLİYOR\nKâşif Vela\n1 gemi · sivil\nBOŞTA · TARAMA BEKLİYOR\nYerleşim Konvoyu\n1 gemi · sivil\nBOŞTA · HEDEF BEKLİYOR\n",
+    "lat": [
+      {
+        "a": "grpTog",
+        "ms": 23
+      },
+      {
+        "a": "diploPane",
+        "ms": 26.200000002980232
+      },
+      {
+        "a": "diploPick",
+        "ms": 28.599999994039536
+      },
+      {
+        "a": "diploNav",
+        "ms": 28.700000002980232
+      },
+      {
+        "a": "dealPact",
+        "ms": 28.200000002980232
+      }
+    ]
+  },
+  {
+    "name": "energy",
+    "taps": [
+      [
+        "[data-a=\"grpTog\"][data-x=\"emp\"]",
+        "👑"
+      ],
+      [
+        "#economyBtn",
+        "📊\nEkonomi"
+      ]
+    ],
+    "text": "\n📊 EKONOMİ MERKEZİ\n✕\n✦ BİLİM\n👑 DEVLET\n👤 LİDERLER\n📊 EKONOMİ\n⚡ Enerji\n⚡\n◆\n❋\n▰\n❖\n✦\n◈\nKaynak\tDepo\tAylık net\tSon ay Δ\n⚡ Enerji ⚠\t8\t-12\t—\n◆ Mineral\t5.000\t+3,3\t—\n❋ Yiyecek\t180\t+14,5\t—\n▰ Alaşım\t220\t+3,8\t—\n❖ Tüketim Malı\t150\t+9,5\t—\n✦ Araştırma\t0\t+13,9\t—\n◈ Etki\t5.000\t+9\t—\n\nAylık net, son simülasyon hesabıdır. Son ay Δ gerçek stok farkıdır; peşin harcama, teslimat ve bilim aktarımı içerir. Yeni yapılar ve değişen koşullar bir sonraki ekonomik hesapta orana yansır.\n\nEnerji ayrıntısı\nStok\n8\nÜretim / pozitif katkı\n+22,3\nTüketim / üretim azalması\n-38,6\nNet\n-12/ay\n\n⚠ Mevcut oranla yaklaşık 0,7 ay. Tahmin sabit aylık nete dayanır; inşaat, teslimat, savaş ve kriz bunu değiştirebilir.\n\nFilo enerji bakımını ve yönetim giderini incele.\n\nEnerji Santrali / Termal Kuyu üretim seçeneklerini kolonilerde incele; kaynak, işgücü ve yer gerekir.\n\nDevam eden gemi/bina işlerine ödenmiş: 0 (stokta ikinci kez ayrılmaz). Sözleşmelerin sonraki yük talebi: 0 (rezerv değildir; yüklemede stok/kota tekrar denetlenir).\n\nGerçek gelir / gider kaynakları\nNüfus taban üretimi Vernex ›\n+4,1\nBina üretimi: Enerji Santrali Vernex ›\n+13,1\nKoloni odağı ve vali (toplamsal) Vernex ›\n-0,9\nAnavatan çarpanı Vernex ›\n+4,9\nİstikrar çarpanı Vernex ›\n+0,2\nBina enerji bakımı: Maden Ocağı Vernex ›\n-3,2\nBina enerji bakımı: Hidroponik Çiftlik Vernex ›\n-3,2\nBina enerji bakımı: Araştırma Laboratuvarı Vernex ›\n-4,8\nBina enerji bakımı: Alaşım Dökümhanesi Vernex ›\n-3,2\nBina enerji bakımı: Tüketim Fabrikası Vernex ›\n-6,4\nBina enerji bakımı: Tersane Vernex ›\n-3,2\nFilo enerji bakımı\n-11,5\nYönetim maliyeti\n-2,2\n\nHenüz ayrıştırılmamış gerçek stok farkı: -292. Sebep uydurulmaz; sonraki simülasyon kontrolünde ayrı kayıt edilir.\n\nSon 12 dönem\n\nEkonomi geçmişi bu sürümden itibaren kaydediliyor. Eski aylara ait sayı oluşturulmaz.\n\nHenüz tamamlanmış dönem yok.\nHenüz tamamlanmış dönem yok.\nOlaylar\nBu kaynak\nTümü\nÇıkış / kayıp\nEn büyük kayıtlı stok çıkışları\nGerçek ticaret\nAktif sözleşme: 0 · Yoldaki konvoy: 0 · Bekleyen / engelli sözleşme: 0\nYolda: —\nYüklenen (depodan ayrılmış): —\nGerçek teslim alınan: —\nTeslim gönderilen: —\nKayıp: — · Yağmalanan: —\nAğ üretim katkısı: %0. Bu yüzde üretime dahildir; kargo teslimatları üretime eklenmez.\nSözleşmelere git\nAktif konvoylar\nÜretim / bakım konumları\nVernex · koloni / tersane\n1. Muhafız Filosu · filo\nKâşif Vela · filo\nYerleşim Konvoyu · filo\n⚔ Ortak askerî koordinasyon\nVernex\nYıldız\nM Kırmızı Cüce\nSistem hâkimiyeti\nYeni Hanedan\nHiper yol\n3 bağlantı\n📦 Lojistik ağ\nKapsamda — dost toprak (%100)\nHarita: ◇ uygun boş dünya · ■ yerleşilmiş uygun dünya. Son taranmış gözlem; güncel görünmeyen durum değişebilir.\nGEZEGENLER\nVernex I\nÇorak · boyut 19\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Ergitilebilir Cevher (+2 Alaşım)\n▾\nVernex II\n🔨 1\nTropik · yaşanabilirlik %78 · boyut 18\n⚠ İÇ İSTİKRAR / MÜDAHALELER\nKoloni sahibi: Yeni Hanedan\n◈ Bereketli Ovalar (+5 Yiyecek)\nNüfus\n12 / 16\nİstikrar / moral\n60\nİç istikrar · Ayrıntılar / önlemler\nODAK — 🏛 Yönetim\n🏛\nYönetim\n⚒\nSanayi\n🔬\nAraştırma\n🌾\nTarım\n⚔\nGarnizon\nEtki +1.5/ay, tüm çıktı −%5. Başkent tipi koloni.\nİşgücü\n12 / 11 iş\n💤 OTOMATİK DONANMA UYKUDA — Kasa alaşımı 220 (500 altı). Elle inşa serbest.\n👤 VALİ\nBoşta vali yok.\n🏗 Otomatik inşa\nKAPALI · Manuel yönetim\nAçarsan boş yapı alanları Yönetim planına göre kendiliğinden dolar. Kaynak azalırsa duraklar.\n🏗 OTOMATİK İNŞAYI AÇ\n⬡\n0/22\n⚔\n0\nKalkan yörüngeden çıkarmayı engeller · Garnizon yüzeyde savaşır\nYAPILAR 11/12\nMaden\n2/6\n◆120\n⌫\nSantral\n2/6\n◆110\n⌫\nÇiftlik\n2/5\n◆110\n⌫\nLaboratuvar\n1/6\n◆190\n⌫\nDökümhane\n1/6\n◆210\n⌫\nTersane\n1/3\n◆260\n▰45\n⌫\nSavunma\n0/4\n◆230\n▰70\nArşiv\n0/1\n◆280\n▰40\nKlinik\n0/1\n◆230\nTermal Kuyu\n0/4\n◆200\nUzay Asansörü\n0/1\n◆520\n▰140\nHabitat\n0/1\n◆340\n▰90\nTüketim\n2/5\n◆170\n⌫\nTicaret Limanı\n0/3\n◆180\n🔒 İktisat\n0/1\n◆300\n▰45\n🔒 Sinod Evi\n0/1\n◆310\n▰50\n🔒 Otomasyon\n0/1\n◆280\n▰50\n🔒 Birlik\n0/1\n◆270\n▰35\n🔒 Üretim Hücresi\n0/1\n◆320\n▰60\n🔒 Sinaps\n0/1\n◆270\n▰40\n🔒 Derin Sondaj\n0/1\n◆280\n▰50\n🔒 Biyom\n0/1\n◆260\n▰35\nTerraform için İklim Mühendisliği araştır.\nVernex III\nBuzul · boyut 16\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Zengin Mineral Damarı (+5 Mineral)\nVernex IV\nÇöl · yaşanabilirlik %38 · boyut 11\nKolonileştirilebilir\nKOLONİ KUR\nTERSANE\n📍 RALLİ NOKTASI\nBu tersaneden çıkan askeri gemiler şu an genel üretimde yerinde kalır. Filo şablonu / takviye siparişleri hedef filosuna otomatik gider; her tersaneye ralli ataman gerekmez.\n📍 RALLİ NOKTASI SEÇ\nKRV\n▰32\nMHR\nKİLİTLİ\nKRV2\nKİLİTLİ\nZRH\nKİLİTLİ\nBLM\n▰24\nKLN\n▰60 ◆265\nİNŞ\n▰45 ◆90\nORD\n▰70 ◆120\nCLS\nKİLİTLİ\nESK\nKİLİTLİ\nUZAY YAPILARI\nUzay yapısı için İnşaat Gemisi gerekir (tersanede İNŞ).\nYÖRÜNGEDE\n1. Muhafız Filosu\n3 gemi · 320 güç\nBEKLİYOR\nKâşif Vela\n1 gemi · sivil\nBOŞTA · TARAMA BEKLİYOR\nYerleşim Konvoyu\n1 gemi · sivil\nBOŞTA · HEDEF BEKLİYOR\n",
+    "lat": [
+      {
+        "a": "grpTog",
+        "ms": 23.799999997019768
+      },
+      {
+        "a": "globalPane",
+        "ms": 55.5
+      }
+    ]
+  },
+  {
+    "name": "colonies",
+    "taps": [
+      [
+        "[data-a=\"grpTog\"][data-x=\"emp\"]",
+        "👑"
+      ],
+      [
+        "#coloniesBtn",
+        "🌍\nGezegenler / Habitatlar"
+      ],
+      [
+        "[data-a=\"colonySort\"][data-x=\"ene\"]",
+        "Enerji"
+      ]
+    ],
+    "text": "\nGEZEGENLER / HABİTATLAR · 1\n✕\nYerel koloni neti; devletin ortak giderleri ve genel çarpanları ayrı bilançodadır. İnşa bedeli aylık gider değildir. Sağdaki yönetim paneli açık kalır.\nAd ▴\nNüfus\nİstikrar\nİnşa\nMaden\nEnerji\nAlaşım\nBilim\nGıda\nTüketim\nEtki\nVernex IITropik⌖ Göster\n12.0\n60\nBoşKAPALI · Manuel\n◆ +3,3 · ⚡ -2,6 · ❋ +28,3 · ▰ +6,1 · ✦ +12,7 · ◈ +2 · ❖ +16,7\nSEÇİLİ KOLONİ EKONOMİSİ\n⚔ Ortak askerî koordinasyon\nVernex\nYıldız\nM Kırmızı Cüce\nSistem hâkimiyeti\nYeni Hanedan\nHiper yol\n3 bağlantı\n📦 Lojistik ağ\nKapsamda — dost toprak (%100)\nHarita: ◇ uygun boş dünya · ■ yerleşilmiş uygun dünya. Son taranmış gözlem; güncel görünmeyen durum değişebilir.\nGEZEGENLER\nVernex I\nÇorak · boyut 19\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Ergitilebilir Cevher (+2 Alaşım)\n▾\nVernex II\n🔨 1\nTropik · yaşanabilirlik %78 · boyut 18\n⚠ İÇ İSTİKRAR / MÜDAHALELER\nKoloni sahibi: Yeni Hanedan\n◈ Bereketli Ovalar (+5 Yiyecek)\nNüfus\n12 / 16\nİstikrar / moral\n60\nİç istikrar · Ayrıntılar / önlemler\nODAK — 🏛 Yönetim\n🏛\nYönetim\n⚒\nSanayi\n🔬\nAraştırma\n🌾\nTarım\n⚔\nGarnizon\nEtki +1.5/ay, tüm çıktı −%5. Başkent tipi koloni.\nİşgücü\n12 / 11 iş\n💤 OTOMATİK DONANMA UYKUDA — Kasa alaşımı 220 (500 altı). Elle inşa serbest.\n👤 VALİ\nBoşta vali yok.\n🏗 Otomatik inşa\nKAPALI · Manuel yönetim\nAçarsan boş yapı alanları Yönetim planına göre kendiliğinden dolar. Kaynak azalırsa duraklar.\n🏗 OTOMATİK İNŞAYI AÇ\n⬡\n0/22\n⚔\n0\nKalkan yörüngeden çıkarmayı engeller · Garnizon yüzeyde savaşır\nYAPILAR 11/12\nMaden\n2/6\n◆120\n⌫\nSantral\n2/6\n◆110\n⌫\nÇiftlik\n2/5\n◆110\n⌫\nLaboratuvar\n1/6\n◆190\n⌫\nDökümhane\n1/6\n◆210\n⌫\nTersane\n1/3\n◆260\n▰45\n⌫\nSavunma\n0/4\n◆230\n▰70\nArşiv\n0/1\n◆280\n▰40\nKlinik\n0/1\n◆230\nTermal Kuyu\n0/4\n◆200\nUzay Asansörü\n0/1\n◆520\n▰140\nHabitat\n0/1\n◆340\n▰90\nTüketim\n2/5\n◆170\n⌫\nTicaret Limanı\n0/3\n◆180\n🔒 İktisat\n0/1\n◆300\n▰45\n🔒 Sinod Evi\n0/1\n◆310\n▰50\n🔒 Otomasyon\n0/1\n◆280\n▰50\n🔒 Birlik\n0/1\n◆270\n▰35\n🔒 Üretim Hücresi\n0/1\n◆320\n▰60\n🔒 Sinaps\n0/1\n◆270\n▰40\n🔒 Derin Sondaj\n0/1\n◆280\n▰50\n🔒 Biyom\n0/1\n◆260\n▰35\nTerraform için İklim Mühendisliği araştır.\nVernex III\nBuzul · boyut 16\nKolonileştirilemiyor: Yaşanabilirlik %35 altında\n◈ Zengin Mineral Damarı (+5 Mineral)\nVernex IV\nÇöl · yaşanabilirlik %38 · boyut 11\nKolonileştirilebilir\nKOLONİ KUR\nTERSANE\n📍 RALLİ NOKTASI\nBu tersaneden çıkan askeri gemiler şu an genel üretimde yerinde kalır. Filo şablonu / takviye siparişleri hedef filosuna otomatik gider; her tersaneye ralli ataman gerekmez.\n📍 RALLİ NOKTASI SEÇ\nKRV\n▰32\nMHR\nKİLİTLİ\nKRV2\nKİLİTLİ\nZRH\nKİLİTLİ\nBLM\n▰24\nKLN\n▰60 ◆265\nİNŞ\n▰45 ◆90\nORD\n▰70 ◆120\nCLS\nKİLİTLİ\nESK\nKİLİTLİ\nUZAY YAPILARI\nUzay yapısı için İnşaat Gemisi gerekir (tersanede İNŞ).\nYÖRÜNGEDE\n1. Muhafız Filosu\n3 gemi · 320 güç\nBEKLİYOR\nKâşif Vela\n1 gemi · sivil\nBOŞTA · TARAMA BEKLİYOR\nYerleşim Konvoyu\n1 gemi · sivil\nBOŞTA · HEDEF BEKLİYOR\n",
+    "lat": [
+      {
+        "a": "grpTog",
+        "ms": 18.400000005960464
+      },
+      {
+        "a": "colonies",
+        "ms": 81.3999999910593
+      },
+      {
+        "a": "colonySort",
+        "ms": 35.80000001192093
+      }
+    ]
+  },
+  {
+    "name": "fleet",
+    "taps": [
+      [
+        "#tabs [data-a=\"tab\"][data-x=\"filo\"]",
+        "FİLO"
+      ],
+      [
+        "#panel [data-a=\"selfleet\"]",
+        "1. Muhafız Filosu\nVernex · 3 gemi\nBEKLİYOR\n320"
+      ]
+    ],
+    "text": "\n\n⚔ Ortak askerî koordinasyon\n📋 Vernex · 3 FİLO\n⚔ 1. Muhafız Filosu\n3 gemi · BEKLİYOR\n320\n🛰 Kâşif Vela\n1 gemi · BOŞTA · TARAMA BEKLİYOR\n—\n🚀 Yerleşim Konvoyu\n1 gemi · BOŞTA · HEDEF BEKLİYOR\n—\n1. Muhafız Filosu\nDurum\nBEKLİYOR\nKonum\nVernex\nGövde bütünlüğü\n%100\n📦 Tedarik\n%100\nİkmal hattı\nTAM İKMAL (0 sıçrama)\nStratejik filo gücü\n320\nHız\n83 bg/gün\nDuruş\n⚔ AGRESİF\nHasar +%15, alınan hasar +%10. Asla geri çekilmez.\nROTA VER\nDURDUR\nDURUŞ\nBİRLEŞTİR\nAYIR\n👤 AMİRAL\nBoşta amiral yok. Devlet panelinden yeni lider alabilirsin.\nFİLO TAKVİYESİ\nKadro\n3 / 30\nÜretimde / sırada\n0\nFiloya katılmak üzere yolda / bekliyor\n0\nYeni sipariş gereken\n27\nTakviye gemileri bu filonun hareketini izler; tersanenin genel toplanma noktasını değiştirmez. Sipariş sınıfı: Korvet (filodaki baskın savaş sınıfı). Bu işlem yeni gemi üretir; mevcut gemilerin gövdesini veya erzağını doldurmaz.\n⚓ TAKVİYE SİPARİŞİ · 27 gemiBİLEŞİMİ OLUŞTUR\nGEMİLER\nKorvet ×3\nKRV\n⊟1\n⊟3\nortalama gövde 70/70 · kalkan kapasitesi 18 · hasar 15\n◎ YAKIN MUHAREBE\nTÜM FİLOLAR\nTümü (3)\nSavaş (1)\nBilim (1)\nKoloni (1)\nİnşaat (0)\nBekleyen (2)\n1. Muhafız Filosu\nVernex · 3 gemi\nBEKLİYOR\n320\nKâşif Vela\nVernex · 1 gemi\nBOŞTA · TARAMA BEKLİYOR🔄 OTO\nBLM\nYerleşim Konvoyu\nVernex · 1 gemi\nBOŞTA · HEDEF BEKLİYOR\nKLN\n1. Muhafız Filosu · 320 güç\nROTA\nDUR\nSİSTEM ›",
+    "lat": [
+      {
+        "a": "tab",
+        "ms": 22.799999997019768
+      },
+      {
+        "a": "selfleet",
+        "ms": 30.200000002980232
+      }
+    ]
+  }
+]

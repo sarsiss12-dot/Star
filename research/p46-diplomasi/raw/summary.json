@@ -1,0 +1,1239 @@
+[
+ {
+  "seed": 11,
+  "mode": "medium",
+  "comparison": 180.0,
+  "last": 180.0,
+  "rivals": 2,
+  "first": 12.0,
+  "blocks": 3,
+  "peak": 3,
+  "largest": 4,
+  "live": 11,
+  "independent": [
+   0,
+   1,
+   6
+  ],
+  "peakShare": 0.36363636363636365,
+  "lifetimes": {
+   "1": {
+    "first": 12.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "ticaret"
+    ],
+    "initial": [
+     8,
+     2
+    ],
+    "final": [
+     8,
+     2,
+     4,
+     11
+    ],
+    "adds": 2,
+    "losses": 0
+   },
+   "2": {
+    "first": 18.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "bilimsel"
+    ],
+    "initial": [
+     5,
+     9
+    ],
+    "final": [
+     5,
+     9
+    ],
+    "adds": 0,
+    "losses": 0
+   },
+   "3": {
+    "first": 47.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "ticaret"
+    ],
+    "initial": [
+     7,
+     3
+    ],
+    "final": [
+     7,
+     3
+    ],
+    "adds": 0,
+    "losses": 0
+   }
+  },
+  "talks": {
+   "pact+res": {
+    "bekle": 2,
+    "kabul": 25,
+    "applied": 25
+   },
+   "nap": {
+    "kabul": 14,
+    "applied": 14
+   },
+   "freight": {
+    "kabul": 45,
+    "applied": 45
+   },
+   "ally+res": {
+    "bekle": 4,
+    "kabul": 6,
+    "applied": 6,
+    "red": 4
+   }
+  },
+  "politics": {
+   "ticaret": {
+    "founded": 2,
+    "vote:arastirma:True": 2,
+    "vote:filo:False": 11,
+    "vote:savunma:False": 2,
+    "vote:serbest:True": 2,
+    "vote:savasOnay:True": 1,
+    "vote:ticaret:True": 2,
+    "vote:uyumProgrami:True": 2,
+    "vote:savunma:True": 2,
+    "vote:refah:True": 1,
+    "vote:ortakDon:True": 2,
+    "vote:ikmalStandardi:True": 2,
+    "vote:motion:False": 3,
+    "vote:motion:True": 2,
+    "join": 2,
+    "motion:admit": 2,
+    "vote:bilimAgi:True": 1
+   },
+   "bilimsel": {
+    "founded": 1,
+    "vote:serbest:True": 1,
+    "vote:filo:False": 7,
+    "vote:ticaret:True": 1,
+    "vote:arastirma:True": 1,
+    "vote:savasOnay:True": 1,
+    "vote:savunma:True": 1,
+    "vote:uyumProgrami:True": 1,
+    "vote:refah:True": 1,
+    "vote:ortakDon:True": 1,
+    "vote:bilimAgi:True": 1,
+    "vote:ikmalStandardi:True": 1,
+    "vote:filo:True": 1
+   }
+  },
+  "events": {
+   "choice": 199,
+   "talk": 100,
+   "deal": 90,
+   "politics": 60,
+   "playerOffer": 54,
+   "arrival": 542,
+   "vassal": 3,
+   "vassalOffer": 4,
+   "peace": 3
+  },
+  "deliveries": 542
+ },
+ {
+  "seed": 404,
+  "mode": "medium",
+  "comparison": 172.0,
+  "last": 180.0,
+  "rivals": 3,
+  "first": 15.0,
+  "blocks": 2,
+  "peak": 2,
+  "largest": 4,
+  "live": 11,
+  "independent": [
+   0,
+   1,
+   6,
+   7,
+   11
+  ],
+  "peakShare": 0.36363636363636365,
+  "lifetimes": {
+   "1": {
+    "first": 15.0,
+    "last": 172.0,
+    "ongoing": true,
+    "types": [
+     "bilimsel"
+    ],
+    "initial": [
+     2,
+     9
+    ],
+    "final": [
+     2,
+     9,
+     4,
+     8
+    ],
+    "adds": 2,
+    "losses": 0
+   },
+   "2": {
+    "first": 17.0,
+    "last": 172.0,
+    "ongoing": true,
+    "types": [
+     "ticaret"
+    ],
+    "initial": [
+     5,
+     3
+    ],
+    "final": [
+     5,
+     3
+    ],
+    "adds": 0,
+    "losses": 0
+   }
+  },
+  "talks": {
+   "pact+res": {
+    "kabul": 33,
+    "applied": 33,
+    "bekle": 4
+   },
+   "nap": {
+    "kabul": 17,
+    "applied": 17
+   },
+   "ally+res": {
+    "kabul": 11,
+    "applied": 13,
+    "bekle": 23,
+    "red": 4,
+    "karsi-red": 1,
+    "karsi-kabul": 2
+   },
+   "freight": {
+    "kabul": 32,
+    "applied": 32
+   }
+  },
+  "politics": {
+   "bilimsel": {
+    "founded": 1,
+    "vote:motion:False": 4,
+    "vote:filo:False": 5,
+    "vote:motion:True": 2,
+    "join": 2,
+    "motion:admit": 2,
+    "vote:savasOnay:True": 1,
+    "vote:serbest:True": 1,
+    "vote:arastirma:True": 1,
+    "vote:savunma:True": 1,
+    "vote:uyumProgrami:True": 1,
+    "vote:refah:True": 1,
+    "vote:ortakDon:True": 1,
+    "vote:ticaret:True": 1,
+    "vote:bilimAgi:True": 1,
+    "vote:ikmalStandardi:True": 1
+   },
+   "ticaret": {
+    "founded": 1,
+    "vote:motion:False": 21,
+    "vote:serbest:True": 1,
+    "vote:arastirma:True": 1,
+    "vote:filo:False": 2,
+    "vote:sivilFon:True": 1,
+    "vote:uyumProgrami:True": 1,
+    "vote:patentOzerk:True": 1,
+    "vote:savunma:True": 1,
+    "vote:ikmalStandardi:True": 1,
+    "vote:refah:True": 1,
+    "vote:ticaret:True": 1
+   }
+  },
+  "events": {
+   "choice": 314,
+   "deal": 95,
+   "talk": 127,
+   "politics": 59,
+   "playerOffer": 51,
+   "arrival": 375,
+   "war": 7,
+   "vassal": 3,
+   "vassalOffer": 2,
+   "peaceOutcome": 8,
+   "peace": 10,
+   "supportEvidence": 75
+  },
+  "deliveries": 375
+ },
+ {
+  "seed": 99,
+  "mode": "medium",
+  "comparison": 180.0,
+  "last": 180.0,
+  "rivals": 4,
+  "first": 12.0,
+  "blocks": 2,
+  "peak": 2,
+  "largest": 5,
+  "live": 12,
+  "independent": [
+   0,
+   1,
+   5,
+   11,
+   12
+  ],
+  "peakShare": 0.4166666666666667,
+  "lifetimes": {
+   "1": {
+    "first": 12.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "ticaret"
+    ],
+    "initial": [
+     4,
+     2
+    ],
+    "final": [
+     4,
+     2
+    ],
+    "adds": 0,
+    "losses": 0
+   },
+   "2": {
+    "first": 27.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "bilimsel"
+    ],
+    "initial": [
+     8,
+     9
+    ],
+    "final": [
+     8,
+     9,
+     6,
+     7,
+     3
+    ],
+    "adds": 3,
+    "losses": 0
+   }
+  },
+  "talks": {
+   "pact+res": {
+    "kabul": 50,
+    "applied": 54,
+    "bekle": 8,
+    "karsi-kabul": 4
+   },
+   "nap": {
+    "kabul": 18,
+    "applied": 18
+   },
+   "ally+res": {
+    "bekle": 19,
+    "red": 9,
+    "kabul": 22,
+    "applied": 23,
+    "karsi-red": 5,
+    "karsi-kabul": 1
+   },
+   "freight": {
+    "kabul": 11,
+    "applied": 11
+   }
+  },
+  "politics": {
+   "ticaret": {
+    "founded": 1,
+    "vote:serbest:True": 1,
+    "vote:savunma:True": 1,
+    "vote:ticaret:True": 1,
+    "vote:arastirma:True": 1,
+    "vote:sivilFon:True": 1,
+    "vote:filo:False": 7,
+    "vote:uyumProgrami:True": 1,
+    "vote:patentOzerk:True": 1,
+    "vote:ikmalStandardi:True": 1,
+    "vote:refah:True": 1,
+    "vote:filo:True": 1
+   },
+   "bilimsel": {
+    "founded": 1,
+    "vote:savunma:True": 1,
+    "vote:motion:False": 16,
+    "vote:ortakDon:True": 1,
+    "vote:ticaret:True": 1,
+    "vote:arastirma:True": 1,
+    "vote:filo:False": 3,
+    "vote:savasOnay:True": 1,
+    "vote:ortakDoktrin:True": 1,
+    "vote:warPermit:False": 33,
+    "vote:refah:True": 1,
+    "vote:motion:True": 3,
+    "join": 3,
+    "motion:admit": 3,
+    "vote:patentOzerk:True": 1,
+    "vote:ikmalStandardi:True": 1,
+    "vote:uyumProgrami:True": 1,
+    "vote:serbest:True": 1
+   }
+  },
+  "events": {
+   "choice": 376,
+   "deal": 106,
+   "talk": 147,
+   "playerOffer": 36,
+   "politics": 91,
+   "vassal": 1,
+   "vassalOffer": 2,
+   "arrival": 104,
+   "war": 1,
+   "peaceOutcome": 1,
+   "peace": 6
+  },
+  "deliveries": 104
+ },
+ {
+  "seed": 11,
+  "mode": "normal",
+  "comparison": 180.0,
+  "last": 180.0,
+  "rivals": 3,
+  "first": 18.0,
+  "blocks": 2,
+  "peak": 2,
+  "largest": 4,
+  "live": 10,
+  "independent": [
+   0,
+   1,
+   3,
+   7
+  ],
+  "peakShare": 0.4,
+  "lifetimes": {
+   "1": {
+    "first": 18.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "bilimsel"
+    ],
+    "initial": [
+     5,
+     9
+    ],
+    "final": [
+     5,
+     9
+    ],
+    "adds": 0,
+    "losses": 0
+   },
+   "2": {
+    "first": 22.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "ticaret"
+    ],
+    "initial": [
+     8,
+     2
+    ],
+    "final": [
+     8,
+     2,
+     6,
+     4
+    ],
+    "adds": 2,
+    "losses": 0
+   }
+  },
+  "talks": {
+   "pact+res": {
+    "bekle": 4,
+    "kabul": 22,
+    "applied": 22
+   },
+   "nap": {
+    "kabul": 7,
+    "applied": 7
+   },
+   "ally+res": {
+    "kabul": 9,
+    "applied": 9,
+    "karsi-red": 1
+   },
+   "freight": {
+    "kabul": 36,
+    "applied": 36
+   }
+  },
+  "politics": {
+   "bilimsel": {
+    "founded": 1,
+    "vote:serbest:True": 1,
+    "vote:ticaret:True": 1,
+    "vote:arastirma:True": 1,
+    "vote:filo:False": 8,
+    "vote:savasOnay:True": 1,
+    "vote:uyumProgrami:True": 1,
+    "vote:savunma:True": 1,
+    "vote:refah:True": 1,
+    "vote:ortakDon:True": 1,
+    "vote:bilimAgi:True": 1,
+    "vote:ikmalStandardi:True": 1,
+    "vote:filo:True": 1
+   },
+   "ticaret": {
+    "founded": 1,
+    "vote:motion:True": 2,
+    "join": 2,
+    "motion:admit": 2,
+    "vote:arastirma:True": 1,
+    "vote:ticaret:True": 1,
+    "vote:serbest:True": 1,
+    "vote:savasOnay:True": 1,
+    "vote:savunma:True": 1,
+    "vote:refah:True": 1,
+    "vote:filo:False": 3,
+    "vote:ortakDon:True": 1,
+    "vote:uyumProgrami:True": 1,
+    "vote:bilimAgi:True": 1,
+    "vote:ortakDoktrin:True": 1,
+    "vote:ikmalStandardi:True": 1,
+    "vote:warPermit:False": 1,
+    "vote:motion:False": 1
+   }
+  },
+  "events": {
+   "choice": 295,
+   "talk": 79,
+   "deal": 74,
+   "playerOffer": 45,
+   "politics": 43,
+   "arrival": 472,
+   "war": 2,
+   "peaceOutcome": 2,
+   "peace": 4,
+   "vassal": 2,
+   "vassalOffer": 34
+  },
+  "deliveries": 472
+ },
+ {
+  "seed": 404,
+  "mode": "normal",
+  "comparison": 172.0,
+  "last": 177.0,
+  "rivals": 2,
+  "first": 17.0,
+  "blocks": 2,
+  "peak": 2,
+  "largest": 4,
+  "live": 12,
+  "independent": [
+   0,
+   3,
+   7,
+   8,
+   11,
+   12
+  ],
+  "peakShare": 0.3333333333333333,
+  "lifetimes": {
+   "1": {
+    "first": 17.0,
+    "last": 172.0,
+    "ongoing": true,
+    "types": [
+     "bilimsel"
+    ],
+    "initial": [
+     2,
+     4
+    ],
+    "final": [
+     2,
+     4,
+     9,
+     6
+    ],
+    "adds": 2,
+    "losses": 0
+   },
+   "2": {
+    "first": 38.0,
+    "last": 172.0,
+    "ongoing": true,
+    "types": [
+     "ticaret"
+    ],
+    "initial": [
+     5,
+     1
+    ],
+    "final": [
+     5,
+     1
+    ],
+    "adds": 0,
+    "losses": 0
+   }
+  },
+  "talks": {
+   "pact+res": {
+    "kabul": 42,
+    "applied": 42,
+    "bekle": 20,
+    "red": 4
+   },
+   "ally+res": {
+    "kabul": 16,
+    "applied": 18,
+    "red": 15,
+    "bekle": 47,
+    "karsi-kabul": 2,
+    "karsi-red": 12
+   },
+   "nap": {
+    "kabul": 25,
+    "applied": 25
+   },
+   "freight": {
+    "kabul": 25,
+    "applied": 25
+   }
+  },
+  "politics": {
+   "bilimsel": {
+    "founded": 1,
+    "vote:motion:False": 2,
+    "vote:savasOnay:True": 1,
+    "vote:motion:True": 2,
+    "join": 2,
+    "motion:admit": 2,
+    "vote:filo:False": 5,
+    "vote:serbest:True": 1,
+    "vote:arastirma:True": 1,
+    "vote:refah:True": 1,
+    "vote:uyumProgrami:True": 1,
+    "vote:savunma:False": 4,
+    "vote:ticaret:True": 1,
+    "vote:bilimAgi:True": 1,
+    "vote:sivilFon:True": 1
+   },
+   "ticaret": {
+    "founded": 1,
+    "vote:savasOnay:True": 1,
+    "vote:ticaret:True": 1,
+    "vote:savunma:False": 2,
+    "vote:sivilFon:True": 1,
+    "vote:arastirma:True": 1,
+    "vote:filo:False": 5,
+    "vote:patentOzerk:True": 1,
+    "vote:savunma:True": 1,
+    "vote:refah:True": 1,
+    "vote:uyumProgrami:True": 1,
+    "vote:serbest:True": 1
+   }
+  },
+  "events": {
+   "choice": 287,
+   "deal": 110,
+   "talk": 208,
+   "playerOffer": 36,
+   "politics": 43,
+   "arrival": 264,
+   "vassalOffer": 3,
+   "vassal": 2,
+   "peace": 4
+  },
+  "deliveries": 264
+ },
+ {
+  "seed": 99,
+  "mode": "normal",
+  "comparison": 180.0,
+  "last": 180.0,
+  "rivals": 5,
+  "first": 10.0,
+  "blocks": 3,
+  "peak": 3,
+  "largest": 4,
+  "live": 11,
+  "independent": [
+   0,
+   5,
+   11
+  ],
+  "peakShare": 0.36363636363636365,
+  "lifetimes": {
+   "1": {
+    "first": 10.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "ticaret"
+    ],
+    "initial": [
+     2,
+     4
+    ],
+    "final": [
+     2,
+     4
+    ],
+    "adds": 0,
+    "losses": 0
+   },
+   "2": {
+    "first": 12.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "ticaret"
+    ],
+    "initial": [
+     7,
+     3
+    ],
+    "final": [
+     7,
+     3
+    ],
+    "adds": 0,
+    "losses": 0
+   },
+   "3": {
+    "first": 30.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "bilimsel"
+    ],
+    "initial": [
+     8,
+     9
+    ],
+    "final": [
+     8,
+     9,
+     6,
+     1
+    ],
+    "adds": 2,
+    "losses": 0
+   }
+  },
+  "talks": {
+   "pact+res": {
+    "kabul": 51,
+    "applied": 53,
+    "bekle": 7,
+    "karsi-kabul": 2
+   },
+   "nap": {
+    "kabul": 21,
+    "applied": 21
+   },
+   "ally+res": {
+    "bekle": 51,
+    "kabul": 18,
+    "applied": 21,
+    "red": 5,
+    "karsi-red": 10,
+    "karsi-kabul": 3
+   },
+   "freight": {
+    "kabul": 6,
+    "applied": 6
+   }
+  },
+  "politics": {
+   "ticaret": {
+    "founded": 2,
+    "vote:filo:False": 14,
+    "vote:savunma:False": 4,
+    "vote:sivilFon:True": 1,
+    "vote:savunma:True": 2,
+    "vote:serbest:True": 2,
+    "vote:ticaret:True": 2,
+    "vote:savasOnay:True": 1,
+    "vote:arastirma:True": 2,
+    "vote:patentOzerk:True": 1,
+    "vote:uyumProgrami:True": 2,
+    "vote:refah:True": 2,
+    "vote:motion:False": 1,
+    "vote:ortakDon:True": 1,
+    "vote:ikmalStandardi:True": 2,
+    "vote:bilimAgi:True": 1,
+    "vote:ikmalStandardi:False": 1,
+    "vote:filo:True": 1
+   },
+   "bilimsel": {
+    "founded": 1,
+    "vote:motion:True": 2,
+    "join": 2,
+    "motion:admit": 2,
+    "vote:arastirma:True": 1,
+    "vote:savasOnay:True": 1,
+    "vote:savunma:True": 1,
+    "vote:ortakDon:True": 1,
+    "vote:ticaret:True": 1,
+    "vote:filo:False": 4,
+    "vote:patentOzerk:True": 1,
+    "vote:ortakDoktrin:True": 1,
+    "vote:warPermit:False": 24,
+    "vote:refah:True": 1,
+    "vote:serbest:True": 1,
+    "vote:ikmalStandardi:True": 1,
+    "vote:uyumProgrami:True": 1
+   }
+  },
+  "events": {
+   "choice": 223,
+   "deal": 101,
+   "talk": 174,
+   "playerOffer": 43,
+   "politics": 88,
+   "arrival": 34,
+   "peace": 7
+  },
+  "deliveries": 34
+ },
+ {
+  "seed": 11,
+  "mode": "turbulent",
+  "comparison": 180.0,
+  "last": 180.0,
+  "rivals": 3,
+  "first": 18.0,
+  "blocks": 2,
+  "peak": 2,
+  "largest": 4,
+  "live": 10,
+  "independent": [
+   0,
+   1,
+   3,
+   7
+  ],
+  "peakShare": 0.4,
+  "lifetimes": {
+   "1": {
+    "first": 18.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "bilimsel"
+    ],
+    "initial": [
+     5,
+     9
+    ],
+    "final": [
+     5,
+     9
+    ],
+    "adds": 0,
+    "losses": 0
+   },
+   "2": {
+    "first": 22.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "ticaret"
+    ],
+    "initial": [
+     8,
+     2
+    ],
+    "final": [
+     8,
+     2,
+     6,
+     4
+    ],
+    "adds": 2,
+    "losses": 0
+   }
+  },
+  "talks": {
+   "pact+res": {
+    "bekle": 4,
+    "kabul": 20,
+    "applied": 20
+   },
+   "nap": {
+    "kabul": 4,
+    "applied": 4
+   },
+   "ally+res": {
+    "kabul": 8,
+    "applied": 8,
+    "bekle": 4
+   },
+   "freight": {
+    "kabul": 42,
+    "applied": 42
+   }
+  },
+  "politics": {
+   "bilimsel": {
+    "founded": 1,
+    "vote:serbest:True": 1,
+    "vote:ticaret:True": 1,
+    "vote:savunma:True": 1,
+    "vote:filo:False": 7,
+    "vote:savasOnay:True": 1,
+    "vote:arastirma:True": 1,
+    "vote:uyumProgrami:True": 1,
+    "vote:refah:True": 1,
+    "vote:ortakDon:True": 1,
+    "vote:bilimAgi:True": 1,
+    "vote:motion:False": 6,
+    "vote:ikmalStandardi:True": 1,
+    "vote:filo:True": 1
+   },
+   "ticaret": {
+    "founded": 1,
+    "vote:motion:True": 2,
+    "join": 2,
+    "motion:admit": 2,
+    "vote:arastirma:True": 1,
+    "vote:ticaret:True": 1,
+    "vote:serbest:True": 1,
+    "vote:savasOnay:True": 1,
+    "vote:filo:False": 6,
+    "vote:refah:True": 1,
+    "vote:savunma:False": 1,
+    "vote:uyumProgrami:True": 1,
+    "vote:bilimAgi:True": 1,
+    "vote:savunma:True": 1,
+    "vote:ortakDon:True": 1,
+    "vote:ikmalStandardi:True": 1,
+    "vote:ortakDoktrin:True": 1
+   }
+  },
+  "events": {
+   "choice": 300,
+   "talk": 82,
+   "deal": 74,
+   "playerOffer": 56,
+   "politics": 50,
+   "arrival": 550,
+   "war": 1,
+   "peaceOutcome": 1,
+   "vassal": 1,
+   "peace": 1
+  },
+  "deliveries": 550
+ },
+ {
+  "seed": 404,
+  "mode": "turbulent",
+  "comparison": 172.0,
+  "last": 172.0,
+  "rivals": 2,
+  "first": 17.0,
+  "blocks": 2,
+  "peak": 2,
+  "largest": 5,
+  "live": 11,
+  "independent": [
+   0,
+   3,
+   7,
+   11
+  ],
+  "peakShare": 0.45454545454545453,
+  "lifetimes": {
+   "1": {
+    "first": 17.0,
+    "last": 172.0,
+    "ongoing": true,
+    "types": [
+     "bilimsel"
+    ],
+    "initial": [
+     2,
+     4
+    ],
+    "final": [
+     2,
+     4,
+     9,
+     8,
+     6
+    ],
+    "adds": 3,
+    "losses": 0
+   },
+   "2": {
+    "first": 38.0,
+    "last": 172.0,
+    "ongoing": true,
+    "types": [
+     "ticaret"
+    ],
+    "initial": [
+     5,
+     1
+    ],
+    "final": [
+     5,
+     1
+    ],
+    "adds": 0,
+    "losses": 0
+   }
+  },
+  "talks": {
+   "pact+res": {
+    "kabul": 46,
+    "applied": 46,
+    "bekle": 21,
+    "red": 5
+   },
+   "ally+res": {
+    "kabul": 17,
+    "applied": 17,
+    "red": 13,
+    "bekle": 44
+   },
+   "nap": {
+    "kabul": 21,
+    "applied": 21
+   },
+   "freight": {
+    "kabul": 17,
+    "applied": 17
+   }
+  },
+  "politics": {
+   "bilimsel": {
+    "founded": 1,
+    "vote:motion:False": 3,
+    "vote:savasOnay:True": 1,
+    "vote:motion:True": 3,
+    "join": 3,
+    "motion:admit": 3,
+    "vote:ticaret:True": 1,
+    "vote:serbest:True": 1,
+    "vote:refah:True": 1,
+    "vote:filo:False": 5,
+    "vote:uyumProgrami:True": 1,
+    "vote:savunma:False": 4,
+    "vote:bilimAgi:True": 1,
+    "vote:arastirma:True": 1,
+    "vote:ortakDon:True": 1,
+    "vote:ikmalStandardi:True": 1,
+    "vote:savunma:True": 1
+   },
+   "ticaret": {
+    "founded": 1,
+    "vote:filo:False": 5,
+    "vote:sivilFon:True": 1,
+    "vote:arastirma:True": 1,
+    "vote:ticaret:True": 1,
+    "vote:savunma:False": 1,
+    "vote:savasOnay:True": 1,
+    "vote:savunma:True": 1,
+    "vote:patentOzerk:True": 1,
+    "vote:refah:True": 1,
+    "vote:serbest:True": 1
+   }
+  },
+  "events": {
+   "choice": 300,
+   "deal": 101,
+   "talk": 184,
+   "playerOffer": 40,
+   "politics": 47,
+   "arrival": 193,
+   "vassal": 2,
+   "vassalOffer": 3,
+   "war": 4,
+   "peaceOutcome": 4,
+   "peace": 9
+  },
+  "deliveries": 193
+ },
+ {
+  "seed": 99,
+  "mode": "turbulent",
+  "comparison": 180.0,
+  "last": 180.0,
+  "rivals": 5,
+  "first": 10.0,
+  "blocks": 3,
+  "peak": 3,
+  "largest": 3,
+  "live": 10,
+  "independent": [
+   0,
+   1,
+   5
+  ],
+  "peakShare": 0.3,
+  "lifetimes": {
+   "1": {
+    "first": 10.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "ticaret"
+    ],
+    "initial": [
+     2,
+     4
+    ],
+    "final": [
+     2,
+     4
+    ],
+    "adds": 0,
+    "losses": 0
+   },
+   "2": {
+    "first": 12.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "ticaret"
+    ],
+    "initial": [
+     7,
+     3
+    ],
+    "final": [
+     7,
+     3
+    ],
+    "adds": 0,
+    "losses": 0
+   },
+   "3": {
+    "first": 29.0,
+    "last": 180.0,
+    "ongoing": true,
+    "types": [
+     "bilimsel"
+    ],
+    "initial": [
+     6,
+     9,
+     8
+    ],
+    "final": [
+     6,
+     9,
+     8
+    ],
+    "adds": 0,
+    "losses": 0
+   }
+  },
+  "talks": {
+   "pact+res": {
+    "kabul": 45,
+    "applied": 47,
+    "bekle": 9,
+    "karsi-kabul": 2
+   },
+   "nap": {
+    "kabul": 16,
+    "applied": 16
+   },
+   "ally+res": {
+    "bekle": 14,
+    "kabul": 16,
+    "applied": 17,
+    "karsi-kabul": 1,
+    "red": 2
+   },
+   "freight": {
+    "kabul": 5,
+    "applied": 5
+   },
+   "vassal": {
+    "kabul": 1,
+    "applied": 1
+   }
+  },
+  "politics": {
+   "ticaret": {
+    "founded": 2,
+    "vote:filo:False": 14,
+    "vote:savunma:False": 5,
+    "vote:sivilFon:True": 1,
+    "vote:savunma:True": 2,
+    "vote:arastirma:True": 2,
+    "vote:serbest:True": 2,
+    "vote:ticaret:True": 2,
+    "vote:savasOnay:True": 1,
+    "vote:patentOzerk:True": 1,
+    "vote:uyumProgrami:True": 2,
+    "vote:refah:True": 2,
+    "vote:motion:False": 2,
+    "vote:ortakDon:True": 1,
+    "vote:ikmalStandardi:True": 2,
+    "vote:filo:True": 1
+   },
+   "bilimsel": {
+    "founded": 1,
+    "vote:motion:True": 1,
+    "join": 1,
+    "motion:admit": 1,
+    "vote:savasOnay:True": 1,
+    "vote:savunma:True": 1,
+    "vote:ticaret:True": 1,
+    "vote:filo:False": 8,
+    "vote:arastirma:True": 1,
+    "vote:refah:True": 1,
+    "vote:ortakDon:True": 1,
+    "vote:patentOzerk:True": 1,
+    "vote:uyumProgrami:True": 1,
+    "vote:ortakDoktrin:True": 1,
+    "vote:serbest:True": 1,
+    "vote:ikmalStandardi:True": 1
+   }
+  },
+  "events": {
+   "choice": 158,
+   "deal": 86,
+   "talk": 111,
+   "playerOffer": 29,
+   "politics": 65,
+   "vassal": 2,
+   "vassalOffer": 1,
+   "war": 1,
+   "arrival": 42,
+   "peaceOutcome": 1,
+   "peace": 5
+  },
+  "deliveries": 42
+ }
+]

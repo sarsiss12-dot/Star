@@ -1,0 +1,93 @@
+[
+ {
+  "type": "askeri",
+  "fund": {
+   "ene": 10,
+   "ala": 10
+  },
+  "law": 0.7423933333333333,
+  "warVote": 0.74557,
+  "defense": "auto",
+  "declared": true,
+  "defenderJoined": true,
+  "fronts": [
+   {
+    "sides": [
+     2,
+     1
+    ],
+    "parent": null
+   },
+   {
+    "sides": [
+     3,
+     2
+    ],
+    "parent": 1
+   }
+  ]
+ },
+ {
+  "type": "bilimsel",
+  "fund": {
+   "ene": 10,
+   "ala": 10
+  },
+  "law": 0.7423933333333333,
+  "warVote": 0.74557,
+  "defense": "vote",
+  "declared": true,
+  "defenderJoined": false,
+  "fronts": [
+   {
+    "sides": [
+     2,
+     1
+    ],
+    "parent": null
+   }
+  ]
+ },
+ {
+  "type": "ticaret",
+  "fund": {
+   "ene": 8,
+   "ala": 8
+  },
+  "law": 0.7423933333333333,
+  "warVote": 0.74557,
+  "defense": "vote",
+  "declared": true,
+  "defenderJoined": false,
+  "fronts": [
+   {
+    "sides": [
+     2,
+     1
+    ],
+    "parent": null
+   }
+  ]
+ },
+ {
+  "type": "yagmaci",
+  "fund": {
+   "ene": 12,
+   "ala": 12
+  },
+  "law": 0.7423933333333333,
+  "warVote": 0.74557,
+  "defense": "vote",
+  "declared": true,
+  "defenderJoined": false,
+  "fronts": [
+   {
+    "sides": [
+     2,
+     1
+    ],
+    "parent": null
+   }
+  ]
+ }
+]

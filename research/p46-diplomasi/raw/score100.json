@@ -1,0 +1,233 @@
+{
+ "sha256": "415f82eba6a619a7fc1646d3e0f1a8c31ff34912ce80cdb7557378b5622a6651",
+ "arms": [
+  {
+   "enabled": false,
+   "rows": [
+    {
+     "fid": 2,
+     "id": 4,
+     "via": 8,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Bilinen yardım/iş birliği rotası yetersiz"
+     },
+     "vote": 1.4700752574667617,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 2,
+     "id": 4,
+     "via": 2,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Bilinen yardım/iş birliği rotası yetersiz"
+     },
+     "vote": 1.3302202336366622,
+     "penalty": 0,
+     "votePenalty": 0
+    },
+    {
+     "fid": 2,
+     "id": 4,
+     "via": 6,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Bilinen yardım/iş birliği rotası yetersiz"
+     },
+     "vote": 1.278548335497741,
+     "penalty": 0,
+     "votePenalty": 0
+    }
+   ],
+   "before": {
+    "day": 2040,
+    "live": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "feds": [
+     [
+      1,
+      "bilimsel",
+      [
+       5,
+       9
+      ]
+     ],
+     [
+      2,
+      "ticaret",
+      [
+       8,
+       2,
+       6
+      ]
+     ]
+    ],
+    "rng": 1354096893
+   },
+   "after": {
+    "day": 2040,
+    "live": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "feds": [
+     [
+      1,
+      "bilimsel",
+      [
+       5,
+       9
+      ]
+     ],
+     [
+      2,
+      "ticaret",
+      [
+       8,
+       2,
+       6
+      ]
+     ]
+    ],
+    "rng": 1354096893
+   }
+  },
+  {
+   "enabled": true,
+   "rows": [
+    {
+     "fid": 2,
+     "id": 4,
+     "via": 8,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Bilinen yardım/iş birliği rotası yetersiz"
+     },
+     "vote": 0.5700752574667617,
+     "penalty": 0.9,
+     "votePenalty": 0.9
+    },
+    {
+     "fid": 2,
+     "id": 4,
+     "via": 2,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Bilinen yardım/iş birliği rotası yetersiz"
+     },
+     "vote": 0.4302202336366622,
+     "penalty": 0.9,
+     "votePenalty": 0.9
+    },
+    {
+     "fid": 2,
+     "id": 4,
+     "via": 6,
+     "legal": true,
+     "join": {
+      "ok": false,
+      "why": "Bilinen yardım/iş birliği rotası yetersiz"
+     },
+     "vote": 0.3785483354977409,
+     "penalty": 0.9,
+     "votePenalty": 0.9
+    }
+   ],
+   "before": {
+    "day": 2040,
+    "live": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "feds": [
+     [
+      1,
+      "bilimsel",
+      [
+       5,
+       9
+      ]
+     ],
+     [
+      2,
+      "ticaret",
+      [
+       8,
+       2,
+       6
+      ]
+     ]
+    ],
+    "rng": 1354096893
+   },
+   "after": {
+    "day": 2040,
+    "live": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "feds": [
+     [
+      1,
+      "bilimsel",
+      [
+       5,
+       9
+      ]
+     ],
+     [
+      2,
+      "ticaret",
+      [
+       8,
+       2,
+       6
+      ]
+     ]
+    ],
+    "rng": 1354096893
+   }
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "natural": {
+  "ok": true
+ },
+ "medium": {
+  "ok": false,
+  "why": "bad-settings"
+ },
+ "storm": {
+  "ok": true
+ },
+ "final": {
+  "size": "ulu",
+  "aiCount": 9,
+  "seed": 11,
+  "tension": "calkantili"
+ }
+}

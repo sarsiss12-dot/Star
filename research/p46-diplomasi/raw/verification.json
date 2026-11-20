@@ -1,0 +1,45 @@
+{
+  "source": "8b2558d33c1ab6306618ae3e64018766f5bfeeba",
+  "normal": [
+    {
+      "seed": 11,
+      "matchingMonthlyRng": 181,
+      "matchingSave8Sha256ByMonth": {
+        "0": "f49503334e9f43c27e3ea5cda70e19840a316042915abf9cf26a218cf61f1bf8",
+        "30": "3dd32519830aa8f44e93fdcf239db0a831a31515fe1d28a6ef2c1a234e48a2ec",
+        "60": "66827d3afdac601bb802723177b40a3f9b6101cd7437032c3846d42c0de2f9bb",
+        "90": "feecd4f0976a7c30b474942c531107485a02dc7ee0b11b8584004fcbb9c78204",
+        "120": "fd74b105cbb40939a5cf642b4de2e60b2ac86e84dcfaab8755d5499a88e990ef",
+        "150": "08cc722c487810460741f8fde8155e151551c0b65a04eab4d17e2299e2f6aeb1",
+        "180": "949339f7a8ba6795be557ba2ef5aa0739436faf6f310a05b7580f2c441e85477"
+      }
+    },
+    {
+      "seed": 99,
+      "matchingMonthlyRng": 181,
+      "matchingSave8Sha256ByMonth": {
+        "0": "494b9eff7754f6371e0b98f9cfc56cc2e0daa92e6200827112f88abbfa23529d",
+        "30": "7ebc1a9c765be7669ed938751f918e28e8867c721c43e1acaf7148c0a44d898c",
+        "60": "61c9aa9d6e9163412c78482748ed797ec509b3964e5170a19e7d4367b4fd5c74",
+        "90": "e6cfa4e50bc4bccae7fab83fb7020caa0643a75290f967ff33fd19b1a1ffd6b8",
+        "120": "469a80a81cb886cdad09200f41431fcf627000e8e691a64eb73264a87319591e",
+        "150": "aba9c1212565d3512ac4125f913ff1a47f0c3b90daeeb10fd930dd60922d74a3",
+        "180": "f784909755896c0095d2ddde63edff06c47ee743b60a9e312c0a63466068f219"
+      }
+    },
+    {
+      "seed": 404,
+      "matchingMonthlyRng": 178,
+      "matchingSave8Sha256ByMonth": {
+        "0": "51ed93db17a4dfbb9489a4c9042e7ebbd7a4bedb984575f7c3b864908e95ccbb",
+        "30": "727e9d5c66e50a7cae98e29715377bed32e520f4fc1c31a74fd35beda2b59109",
+        "60": "4db04a070da46c43ac703605ee8d16f5658be8e18eb71fb3aafcdbde187b87ed",
+        "90": "9cac30a60d94da2b998c40b962cd3add67c3224e571e39feca06ec60d6aa7c02",
+        "120": "e1e93cf920553e39fc144128463ae6d4c62bc47dd0373bd3047bc15088d36133",
+        "150": "6477d495155a7e26c4df3ed900e709c0ec981d9405a09f476eddc34ec259801b",
+        "177": "17934eb6be59cba2ad5d40843233174306fc3979127fd0de2d8fc638ca02407f"
+      }
+    }
+  ],
+  "matchedLateSave8Sha256": "6373a93fba5c0cd94a15ffc7ffbad4ca854977bccc325d454f0474201cb119ea"
+}
