@@ -1,0 +1,641 @@
+{
+ "results": [
+  {
+   "name": "O0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 24073
+  },
+  {
+   "name": "O3 kayıp dünya güncellemesi (ayna 12 sn düşer, hız / nabız geçer): misafir eksik algılar, yeniden ister, harita ilerler",
+   "status": "PASS",
+   "ms": 29653
+  },
+  {
+   "name": "O7 misafirde açık pencere: ayna bekletilir, hız bildirimi gelir; misafir nedeni görür (sıkışık çubukta da) ve pencere kapanınca yetişir",
+   "status": "PASS",
+   "ms": 17754
+  }
+ ],
+ "metrics": {
+  "scen": "O",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 709,
+    "buildMs": 873,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 1072,
+    "buildMs": 1165,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 50.2,
+      "p95": 50.2,
+      "max": 50.2
+     },
+     "longtask": {
+      "n": 21,
+      "med": 72,
+      "p95": 91,
+      "max": 98
+     },
+     "heapMB": 17,
+     "dom": 724,
+     "intervals": 2,
+     "timeouts": 1,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 4,
+       "med": 33,
+       "p95": 101.1,
+       "max": 101.1
+      },
+      "refresh": {
+       "n": 2,
+       "med": 5.2,
+       "p95": 5.2,
+       "max": 5.2
+      },
+      "longtask": {
+       "n": 20,
+       "med": 60,
+       "p95": 108,
+       "max": 108
+      },
+      "builds": 4,
+      "deltas": 3,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 18,
+      "dom": 717,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 35,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 4,
+       "med": 62.6,
+       "p95": 160.2,
+       "max": 160.2
+      },
+      "refresh": {
+       "n": 3,
+       "med": 7,
+       "p95": 8.9,
+       "max": 8.9
+      },
+      "longtask": {
+       "n": 20,
+       "med": 70,
+       "p95": 92,
+       "max": 92
+      },
+      "builds": 4,
+      "deltas": 3,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 17,
+      "dom": 726,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 30,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 47373,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "sync0": {
+   "orders": [
+    {
+     "label": "O3-dönüş:move",
+     "kind": "move",
+     "who": "B",
+     "args": {
+      "ok": true,
+      "fleet": 4,
+      "to": 37
+     },
+     "res": {
+      "cid": "j1_1_xea669sr6z",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 31,
+     "ms": 690,
+     "pre": {
+      "h": {
+       "day": 43.81,
+       "wrev": 55,
+       "mrev": 39,
+       "speed": 0
+      },
+      "g": {
+       "day": 43.81,
+       "rev": 39,
+       "applied": 39,
+       "mirrorAgeMs": 1900,
+       "held": 0,
+       "resyncs": 2,
+       "note": "",
+       "speedMsgs": 3
+      }
+     },
+     "post": {
+      "h": {
+       "day": 43.81,
+       "wrev": 57,
+       "mrev": 40,
+       "speed": 0
+      },
+      "g": {
+       "day": 43.81,
+       "rev": 40,
+       "applied": 40,
+       "mirrorAgeMs": 294,
+       "held": 0,
+       "resyncs": 2,
+       "note": "",
+       "speedMsgs": 3
+      }
+     }
+    },
+    {
+     "label": "O3-dönüş:ship",
+     "kind": "ship",
+     "who": "B",
+     "args": {
+      "ok": false,
+      "cls": "kor",
+      "sys": 5,
+      "g0": 0
+     },
+     "res": {
+      "cid": "j1_2_nbbvyaw3cv",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 184,
+     "ms": 872,
+     "pre": {
+      "h": {
+       "day": 43.81,
+       "wrev": 57,
+       "mrev": 40,
+       "speed": 0
+      },
+      "g": {
+       "day": 43.81,
+       "rev": 40,
+       "applied": 40,
+       "mirrorAgeMs": 374,
+       "held": 0,
+       "resyncs": 2,
+       "note": "",
+       "speedMsgs": 3
+      }
+     },
+     "post": {
+      "h": {
+       "day": 43.81,
+       "wrev": 59,
+       "mrev": 41,
+       "speed": 0
+      },
+      "g": {
+       "day": 43.81,
+       "rev": 41,
+       "applied": 41,
+       "mirrorAgeMs": 372,
+       "held": 0,
+       "resyncs": 2,
+       "note": "",
+       "speedMsgs": 3
+      }
+     }
+    },
+    {
+     "label": "O3-dönüş:build",
+     "kind": "build",
+     "who": "B",
+     "args": {
+      "ok": false,
+      "key": "maden",
+      "sys": 5,
+      "pl": 0
+     },
+     "res": {
+      "cid": "j1_3_jfvznaiqdn",
+      "status": "ok",
+      "code": null
+     },
+     "hostApplied": true,
+     "guestReflectMs": 118,
+     "ms": 896,
+     "pre": {
+      "h": {
+       "day": 43.81,
+       "wrev": 59,
+       "mrev": 41,
+       "speed": 0
+      },
+      "g": {
+       "day": 43.81,
+       "rev": 41,
+       "applied": 41,
+       "mirrorAgeMs": 421,
+       "held": 0,
+       "resyncs": 2,
+       "note": "",
+       "speedMsgs": 3
+      }
+     },
+     "post": {
+      "h": {
+       "day": 43.81,
+       "wrev": 61,
+       "mrev": 42,
+       "speed": 0
+      },
+      "g": {
+       "day": 43.81,
+       "rev": 42,
+       "applied": 42,
+       "mirrorAgeMs": 543,
+       "held": 0,
+       "resyncs": 2,
+       "note": "",
+       "speedMsgs": 3
+      }
+     }
+    }
+   ],
+   "events": [],
+   "fx": {
+    "home": 5
+   },
+   "o3": {
+    "dropped": {
+     "mirrorDelta": 15,
+     "mirror": 1
+    },
+    "series": [
+     {
+      "t": 0,
+      "hd": 5.71,
+      "gd": 2.88,
+      "hrev": 7,
+      "grev": 5,
+      "note": "",
+      "spd": 2,
+      "res": 0
+     },
+     {
+      "t": 1,
+      "hd": 7.43,
+      "gd": 2.88,
+      "hrev": 8,
+      "grev": 5,
+      "note": "",
+      "spd": 2,
+      "res": 0
+     },
+     {
+      "t": 2,
+      "hd": 9.45,
+      "gd": 2.88,
+      "hrev": 9,
+      "grev": 5,
+      "note": "",
+      "spd": 2,
+      "res": 0
+     },
+     {
+      "t": 3,
+      "hd": 11.43,
+      "gd": 2.88,
+      "hrev": 11,
+      "grev": 5,
+      "note": "",
+      "spd": 2,
+      "res": 0
+     },
+     {
+      "t": 4,
+      "hd": 13.55,
+      "gd": 2.88,
+      "hrev": 12,
+      "grev": 5,
+      "note": "",
+      "spd": 2,
+      "res": 0
+     },
+     {
+      "t": 5,
+      "hd": 15.41,
+      "gd": 2.88,
+      "hrev": 14,
+      "grev": 5,
+      "note": "",
+      "spd": 2,
+      "res": 1
+     },
+     {
+      "t": 6,
+      "hd": 17.53,
+      "gd": 2.88,
+      "hrev": 16,
+      "grev": 5,
+      "note": "",
+      "spd": 2,
+      "res": 1
+     },
+     {
+      "t": 7,
+      "hd": 19.61,
+      "gd": 2.88,
+      "hrev": 17,
+      "grev": 5,
+      "note": "Eşitleme gecikti — yeniden isteniyor",
+      "spd": 2,
+      "res": 1
+     },
+     {
+      "t": 8,
+      "hd": 21.65,
+      "gd": 2.88,
+      "hrev": 19,
+      "grev": 5,
+      "note": "Eşitleme gecikti — yeniden isteniyor",
+      "spd": 2,
+      "res": 1
+     },
+     {
+      "t": 9,
+      "hd": 23.63,
+      "gd": 2.88,
+      "hrev": 20,
+      "grev": 5,
+      "note": "Eşitleme gecikti — yeniden isteniyor",
+      "spd": 2,
+      "res": 1
+     },
+     {
+      "t": 10,
+      "hd": 25.71,
+      "gd": 2.88,
+      "hrev": 23,
+      "grev": 5,
+      "note": "Eşitleme gecikti — yeniden isteniyor",
+      "spd": 2,
+      "res": 2
+     },
+     {
+      "t": 11,
+      "hd": 27.61,
+      "gd": 26.43,
+      "hrev": 24,
+      "grev": 24,
+      "note": "",
+      "spd": 2,
+      "res": 2
+     },
+     {
+      "t": 12,
+      "hd": 29.44,
+      "gd": 29.01,
+      "hrev": 26,
+      "grev": 26,
+      "note": "",
+      "spd": 2,
+      "res": 2
+     },
+     {
+      "t": 13,
+      "hd": 30.63,
+      "gd": 30.17,
+      "hrev": 27,
+      "grev": 27,
+      "note": "",
+      "spd": 2,
+      "res": 2
+     },
+     {
+      "t": 14,
+      "hd": 32.27,
+      "gd": 31.53,
+      "hrev": 28,
+      "grev": 28,
+      "note": "",
+      "spd": 2,
+      "res": 2
+     },
+     {
+      "t": 15,
+      "hd": 34.01,
+      "gd": 33.65,
+      "hrev": 30,
+      "grev": 30,
+      "note": "",
+      "spd": 2,
+      "res": 2
+     },
+     {
+      "t": 16,
+      "hd": 35.37,
+      "gd": 34.59,
+      "hrev": 31,
+      "grev": 31,
+      "note": "",
+      "spd": 2,
+      "res": 2
+     },
+     {
+      "t": 17,
+      "hd": 37.09,
+      "gd": 37.02,
+      "hrev": 33,
+      "grev": 33,
+      "note": "",
+      "spd": 2,
+      "res": 2
+     },
+     {
+      "t": 18,
+      "hd": 38.82,
+      "gd": 38.11,
+      "hrev": 34,
+      "grev": 34,
+      "note": "",
+      "spd": 2,
+      "res": 2
+     },
+     {
+      "t": 19,
+      "hd": 40.39,
+      "gd": 39.5,
+      "hrev": 35,
+      "grev": 35,
+      "note": "",
+      "spd": 2,
+      "res": 2
+     },
+     {
+      "t": 20,
+      "hd": 41.95,
+      "gd": 40.63,
+      "hrev": 37,
+      "grev": 37,
+      "note": "",
+      "spd": 2,
+      "res": 2
+     },
+     {
+      "t": 21,
+      "hd": 43.69,
+      "gd": 42.89,
+      "hrev": 38,
+      "grev": 38,
+      "note": "",
+      "spd": 2,
+      "res": 2
+     }
+    ],
+    "s0": {
+     "h": {
+      "day": 2.88,
+      "wrev": 9,
+      "mrev": 5,
+      "speed": 0
+     },
+     "g": {
+      "day": 2.88,
+      "rev": 5,
+      "applied": 5,
+      "mirrorAgeMs": 1345,
+      "held": 0,
+      "resyncs": 0,
+      "note": "",
+      "speedMsgs": 1
+     }
+    },
+    "s1": {
+     "h": {
+      "day": 43.81,
+      "wrev": 55,
+      "mrev": 39,
+      "speed": 0
+     },
+     "g": {
+      "day": 43.81,
+      "rev": 39,
+      "applied": 39,
+      "mirrorAgeMs": 1795,
+      "held": 0,
+      "resyncs": 2,
+      "note": "",
+      "speedMsgs": 3
+     }
+    }
+   },
+   "o7": {
+    "s0": {
+     "hd": 43.81,
+     "gd": 43.81
+    },
+    "mid": {
+     "hd": 58.35,
+     "gd": 43.81,
+     "note": "Pencere açık — dünya, kapanınca güncellenir",
+     "held": 27,
+     "speedMsgs": 4
+    },
+    "s1": {
+     "hd": 68.83,
+     "gd": 68.83
+    },
+    "vis": {
+     "txt": "ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸ 2×",
+     "top": true
+    },
+    "visSpeed": {
+     "txt": "Kızıl Muhafız hızı 3× yaptı · Pencere açık — dünya, kapanınca güncellenir",
+     "top": true
+    }
+   }
+  },
+  "errors": []
+ }
+}

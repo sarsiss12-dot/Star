@@ -1,0 +1,424 @@
+{
+ "results": [
+  {
+   "name": "H0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 16 AI, s500, seed 404; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 24612
+  },
+  {
+   "name": "H1 aynı gün: keşif, müttefik sensörü, rota ve takviye iki misafire yetkili aynadan yansır",
+   "status": "PASS",
+   "ms": 6721
+  },
+  {
+   "name": "H2 yeniden bağlanma ve tersane: bir satır ve bir kesinti",
+   "status": "PASS",
+   "ms": 9287
+  }
+ ],
+ "metrics": {
+  "scen": "H",
+  "conf": {
+   "size": "s500",
+   "ai": 16,
+   "seed": 404,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 493,
+    "buildMs": 593,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 883,
+    "buildMs": 1010,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "paylaşım-ve-sipariş",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     3,
+     3
+    ],
+    "mirrorEq": true,
+    "revMs": 473,
+    "buildMs": 599,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "paylaşım-ve-sipariş",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     3,
+     3
+    ],
+    "mirrorEq": true,
+    "revMs": 900,
+    "buildMs": 1054,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "yarım-gün-takviye",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 855,
+    "buildMs": 1041,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "yarım-gün-takviye",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 1301,
+    "buildMs": 1418,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "yeniden-bağlandı",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     6,
+     6
+    ],
+    "mirrorEq": true,
+    "revMs": 927,
+    "buildMs": 1030,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "yeniden-bağlandı",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 1207,
+    "buildMs": 1315,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "tersane-sonrası",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     7,
+     7
+    ],
+    "mirrorEq": true,
+    "revMs": 314,
+    "buildMs": 439,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "tersane-sonrası",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     5,
+     5
+    ],
+    "mirrorEq": true,
+    "revMs": 645,
+    "buildMs": 832,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 91.1,
+      "p95": 91.1,
+      "max": 91.1
+     },
+     "longtask": {
+      "n": 27,
+      "med": 75,
+      "p95": 108,
+      "max": 128
+     },
+     "heapMB": 22,
+     "dom": 748,
+     "intervals": 2,
+     "timeouts": 1,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 222.3,
+       "p95": 222.3,
+       "max": 222.3
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.4,
+       "p95": 1.4,
+       "max": 1.4
+      },
+      "longtask": {
+       "n": 24,
+       "med": 72,
+       "p95": 90,
+       "max": 107
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 889,
+      "heapMB": 23,
+      "dom": 710,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 31,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 146.1,
+       "p95": 146.1,
+       "max": 146.1
+      },
+      "refresh": {
+       "n": 1,
+       "med": 10.2,
+       "p95": 10.2,
+       "max": 10.2
+      },
+      "longtask": {
+       "n": 29,
+       "med": 75,
+       "p95": 111,
+       "max": 111
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 18,
+      "dom": 715,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 26,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 47940,
+  "actualWorld": {
+   "seed": 404,
+   "size": "s500",
+   "systems": 500,
+   "states": 19
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "version": {
+   "build": "96h10p47",
+   "mp": "MP.8.9b46",
+   "runtime": "b8f8f1b98cb0",
+   "release": "2af33fb508b4cf54b40020cad9584588a5c874673656cd44b96fdd807cb2bd66",
+   "labels": [
+    "STARS MP.8.9b46 · oyun 96h10p47",
+    "STARS MP.8.9b46 · oyun 96h10p47",
+    "STARS MP.8.9b46 · oyun 96h10p47"
+   ]
+  },
+  "border": {
+   "states": [
+    {
+     "label": "paylaşım-ve-sipariş",
+     "guests": [
+      {
+       "id": 1,
+       "sha": "38debb67e3332783951d5c31cc95627c38e6ecec25de8491f499be8e28ef337e",
+       "day": 0
+      },
+      {
+       "id": 2,
+       "sha": "cbf2fc9380110bb8877f608cfb2eef42844ffa362554c59f728d6e49fee4763e",
+       "day": 0
+      }
+     ]
+    },
+    {
+     "label": "yarım-gün-takviye",
+     "guests": [
+      {
+       "id": 1,
+       "sha": "01abbffcae3721a4f02e49d3c7d1a7d4f7ddc71f0b3f32699a3377bcdb229287",
+       "day": 0.5
+      },
+      {
+       "id": 2,
+       "sha": "09deb4cbde7a2942a814cf0f9210e4ba4726c73038a35f8fb753c526039b50f5",
+       "day": 0.5
+      }
+     ]
+    },
+    {
+     "label": "yeniden-bağlandı",
+     "guests": [
+      {
+       "id": 1,
+       "sha": "01abbffcae3721a4f02e49d3c7d1a7d4f7ddc71f0b3f32699a3377bcdb229287",
+       "day": 0.5
+      },
+      {
+       "id": 2,
+       "sha": "09deb4cbde7a2942a814cf0f9210e4ba4726c73038a35f8fb753c526039b50f5",
+       "day": 0.5
+      }
+     ]
+    },
+    {
+     "label": "tersane-sonrası",
+     "guests": [
+      {
+       "id": 1,
+       "sha": "6101af66c8c047e80f538da5f932ee6f834c0746b19e77121550d5e9e5b72248",
+       "day": 0.5
+      },
+      {
+       "id": 2,
+       "sha": "9c95e78f1c88ddd4361c539e4d20d84a17c1801ed3f59c46dcbd657f639d51a2",
+       "day": 0.5
+      }
+     ]
+    }
+   ],
+   "ids": [
+    1,
+    2
+   ],
+   "fixture": {
+    "b": 1,
+    "c": 2,
+    "yard": 75,
+    "remote": 404,
+    "threat": 92,
+    "scout": 5,
+    "scoutRoute": [
+     472
+    ],
+    "fleet": 93,
+    "route": [
+     415
+    ],
+    "queueClass": "kor"
+   },
+   "visible": {
+    "visible": true,
+    "threat": true,
+    "scout": [
+     472
+    ],
+    "route": [
+     415
+    ],
+    "queued": true
+   },
+   "secondGuestSeesNativeSystem": true,
+   "shipmentAfterStep": [
+    {
+     "id": 94,
+     "path": [
+      415
+     ],
+     "status": "moving"
+    }
+   ],
+   "order": {
+    "hostRows": [
+     0,
+     1
+    ],
+    "guestRows": [
+     0,
+     1
+    ],
+    "spent": {
+     "ala": 32
+    },
+    "price": {
+     "ala": 32
+    }
+   }
+  },
+  "errors": []
+ }
+}

@@ -1,0 +1,1105 @@
+[
+  {
+    "seed": 11,
+    "mode": "natural",
+    "equalMonths": 181,
+    "common": {
+      "month": 180,
+      "day": 5400,
+      "over": false,
+      "live": 14,
+      "largest": 2,
+      "percent": 14.29,
+      "federations": [
+        {
+          "id": 1,
+          "type": "bilimsel",
+          "members": [
+            5,
+            7
+          ]
+        },
+        {
+          "id": 2,
+          "type": "ticaret",
+          "members": [
+            13,
+            9
+          ]
+        },
+        {
+          "id": 3,
+          "type": "bilimsel",
+          "members": [
+            10,
+            8
+          ]
+        }
+      ]
+    },
+    "checkpoints": [
+      {
+        "month": 0,
+        "day": 0,
+        "over": false,
+        "live": 12,
+        "largest": 0,
+        "percent": 0.0,
+        "federations": []
+      },
+      {
+        "month": 30,
+        "day": 900,
+        "over": false,
+        "live": 12,
+        "largest": 2,
+        "percent": 16.67,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              5,
+              7
+            ]
+          }
+        ]
+      },
+      {
+        "month": 60,
+        "day": 1800,
+        "over": false,
+        "live": 12,
+        "largest": 2,
+        "percent": 16.67,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              5,
+              7
+            ]
+          }
+        ]
+      },
+      {
+        "month": 90,
+        "day": 2700,
+        "over": false,
+        "live": 12,
+        "largest": 2,
+        "percent": 16.67,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              5,
+              7
+            ]
+          }
+        ]
+      },
+      {
+        "month": 120,
+        "day": 3600,
+        "over": false,
+        "live": 14,
+        "largest": 2,
+        "percent": 14.29,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              5,
+              7
+            ]
+          }
+        ]
+      },
+      {
+        "month": 150,
+        "day": 4500,
+        "over": false,
+        "live": 14,
+        "largest": 2,
+        "percent": 14.29,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              5,
+              7
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              13,
+              9
+            ]
+          }
+        ]
+      },
+      {
+        "month": 180,
+        "day": 5400,
+        "over": false,
+        "live": 14,
+        "largest": 2,
+        "percent": 14.29,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              5,
+              7
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              13,
+              9
+            ]
+          },
+          {
+            "id": 3,
+            "type": "bilimsel",
+            "members": [
+              10,
+              8
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 11,
+    "mode": "medium",
+    "equalMonths": 181,
+    "common": {
+      "month": 180,
+      "day": 5400,
+      "over": false,
+      "live": 12,
+      "largest": 3,
+      "percent": 25.0,
+      "federations": [
+        {
+          "id": 1,
+          "type": "bilimsel",
+          "members": [
+            5,
+            7,
+            3
+          ]
+        },
+        {
+          "id": 2,
+          "type": "ticaret",
+          "members": [
+            6,
+            4,
+            11
+          ]
+        }
+      ]
+    },
+    "checkpoints": [
+      {
+        "month": 0,
+        "day": 0,
+        "over": false,
+        "live": 12,
+        "largest": 0,
+        "percent": 0.0,
+        "federations": []
+      },
+      {
+        "month": 30,
+        "day": 900,
+        "over": false,
+        "live": 12,
+        "largest": 2,
+        "percent": 16.67,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              5,
+              7
+            ]
+          }
+        ]
+      },
+      {
+        "month": 60,
+        "day": 1800,
+        "over": false,
+        "live": 12,
+        "largest": 3,
+        "percent": 25.0,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              5,
+              7
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              6,
+              4,
+              11
+            ]
+          }
+        ]
+      },
+      {
+        "month": 90,
+        "day": 2700,
+        "over": false,
+        "live": 12,
+        "largest": 3,
+        "percent": 25.0,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              5,
+              7,
+              3
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              6,
+              4,
+              11
+            ]
+          }
+        ]
+      },
+      {
+        "month": 120,
+        "day": 3600,
+        "over": false,
+        "live": 12,
+        "largest": 3,
+        "percent": 25.0,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              5,
+              7,
+              3
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              6,
+              4,
+              11
+            ]
+          }
+        ]
+      },
+      {
+        "month": 150,
+        "day": 4500,
+        "over": false,
+        "live": 12,
+        "largest": 3,
+        "percent": 25.0,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              5,
+              7,
+              3
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              6,
+              4,
+              11
+            ]
+          }
+        ]
+      },
+      {
+        "month": 180,
+        "day": 5400,
+        "over": false,
+        "live": 12,
+        "largest": 3,
+        "percent": 25.0,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              5,
+              7,
+              3
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              6,
+              4,
+              11
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 99,
+    "mode": "natural",
+    "equalMonths": 181,
+    "common": {
+      "month": 180,
+      "day": 5400,
+      "over": false,
+      "live": 12,
+      "largest": 3,
+      "percent": 25.0,
+      "federations": [
+        {
+          "id": 1,
+          "type": "ticaret",
+          "members": [
+            10,
+            8,
+            3
+          ]
+        },
+        {
+          "id": 2,
+          "type": "ticaret",
+          "members": [
+            4,
+            6
+          ]
+        }
+      ]
+    },
+    "checkpoints": [
+      {
+        "month": 0,
+        "day": 0,
+        "over": false,
+        "live": 12,
+        "largest": 0,
+        "percent": 0.0,
+        "federations": []
+      },
+      {
+        "month": 30,
+        "day": 900,
+        "over": false,
+        "live": 12,
+        "largest": 4,
+        "percent": 33.33,
+        "federations": [
+          {
+            "id": 1,
+            "type": "ticaret",
+            "members": [
+              10,
+              8,
+              7,
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "month": 60,
+        "day": 1800,
+        "over": false,
+        "live": 12,
+        "largest": 4,
+        "percent": 33.33,
+        "federations": [
+          {
+            "id": 1,
+            "type": "ticaret",
+            "members": [
+              10,
+              8,
+              7,
+              3
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              4,
+              6
+            ]
+          }
+        ]
+      },
+      {
+        "month": 90,
+        "day": 2700,
+        "over": false,
+        "live": 12,
+        "largest": 4,
+        "percent": 33.33,
+        "federations": [
+          {
+            "id": 1,
+            "type": "ticaret",
+            "members": [
+              10,
+              8,
+              7,
+              3
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              4,
+              6
+            ]
+          }
+        ]
+      },
+      {
+        "month": 120,
+        "day": 3600,
+        "over": false,
+        "live": 12,
+        "largest": 4,
+        "percent": 33.33,
+        "federations": [
+          {
+            "id": 1,
+            "type": "ticaret",
+            "members": [
+              10,
+              8,
+              7,
+              3
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              4,
+              6
+            ]
+          }
+        ]
+      },
+      {
+        "month": 150,
+        "day": 4500,
+        "over": false,
+        "live": 12,
+        "largest": 4,
+        "percent": 33.33,
+        "federations": [
+          {
+            "id": 1,
+            "type": "ticaret",
+            "members": [
+              10,
+              8,
+              7,
+              3
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              4,
+              6
+            ]
+          }
+        ]
+      },
+      {
+        "month": 180,
+        "day": 5400,
+        "over": false,
+        "live": 12,
+        "largest": 3,
+        "percent": 25.0,
+        "federations": [
+          {
+            "id": 1,
+            "type": "ticaret",
+            "members": [
+              10,
+              8,
+              3
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              4,
+              6
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 99,
+    "mode": "medium",
+    "equalMonths": 181,
+    "common": {
+      "month": 180,
+      "day": 5400,
+      "over": false,
+      "live": 11,
+      "largest": 3,
+      "percent": 27.27,
+      "federations": [
+        {
+          "id": 1,
+          "type": "bilimsel",
+          "members": [
+            6,
+            8,
+            10
+          ]
+        }
+      ]
+    },
+    "checkpoints": [
+      {
+        "month": 0,
+        "day": 0,
+        "over": false,
+        "live": 12,
+        "largest": 0,
+        "percent": 0.0,
+        "federations": []
+      },
+      {
+        "month": 30,
+        "day": 900,
+        "over": false,
+        "live": 12,
+        "largest": 0,
+        "percent": 0.0,
+        "federations": []
+      },
+      {
+        "month": 60,
+        "day": 1800,
+        "over": false,
+        "live": 12,
+        "largest": 0,
+        "percent": 0.0,
+        "federations": []
+      },
+      {
+        "month": 90,
+        "day": 2700,
+        "over": false,
+        "live": 12,
+        "largest": 2,
+        "percent": 16.67,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              6,
+              8
+            ]
+          }
+        ]
+      },
+      {
+        "month": 120,
+        "day": 3600,
+        "over": false,
+        "live": 12,
+        "largest": 3,
+        "percent": 25.0,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              6,
+              8,
+              10
+            ]
+          }
+        ]
+      },
+      {
+        "month": 150,
+        "day": 4500,
+        "over": false,
+        "live": 11,
+        "largest": 3,
+        "percent": 27.27,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              6,
+              8,
+              10
+            ]
+          }
+        ]
+      },
+      {
+        "month": 180,
+        "day": 5400,
+        "over": false,
+        "live": 11,
+        "largest": 3,
+        "percent": 27.27,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              6,
+              8,
+              10
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "mode": "natural",
+    "equalMonths": 179,
+    "common": {
+      "month": 178,
+      "day": 5340,
+      "over": true,
+      "live": 14,
+      "largest": 4,
+      "percent": 28.57,
+      "federations": [
+        {
+          "id": 1,
+          "type": "bilimsel",
+          "members": [
+            10,
+            11,
+            6,
+            8
+          ]
+        },
+        {
+          "id": 3,
+          "type": "bilimsel",
+          "members": [
+            5,
+            3
+          ]
+        }
+      ]
+    },
+    "checkpoints": [
+      {
+        "month": 0,
+        "day": 0,
+        "over": false,
+        "live": 12,
+        "largest": 0,
+        "percent": 0.0,
+        "federations": []
+      },
+      {
+        "month": 30,
+        "day": 900,
+        "over": false,
+        "live": 12,
+        "largest": 3,
+        "percent": 25.0,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              10,
+              11,
+              6
+            ]
+          }
+        ]
+      },
+      {
+        "month": 60,
+        "day": 1800,
+        "over": false,
+        "live": 12,
+        "largest": 3,
+        "percent": 25.0,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              10,
+              11,
+              6
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              4,
+              8
+            ]
+          }
+        ]
+      },
+      {
+        "month": 90,
+        "day": 2700,
+        "over": false,
+        "live": 12,
+        "largest": 3,
+        "percent": 25.0,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              10,
+              11,
+              6
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              4,
+              8
+            ]
+          }
+        ]
+      },
+      {
+        "month": 120,
+        "day": 3600,
+        "over": false,
+        "live": 12,
+        "largest": 3,
+        "percent": 25.0,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              10,
+              11,
+              6
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              4,
+              8
+            ]
+          }
+        ]
+      },
+      {
+        "month": 150,
+        "day": 4500,
+        "over": false,
+        "live": 13,
+        "largest": 3,
+        "percent": 23.08,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              10,
+              11,
+              6
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              4,
+              8
+            ]
+          },
+          {
+            "id": 3,
+            "type": "bilimsel",
+            "members": [
+              5,
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "month": 178,
+        "day": 5340,
+        "over": true,
+        "live": 14,
+        "largest": 4,
+        "percent": 28.57,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              10,
+              11,
+              6,
+              8
+            ]
+          },
+          {
+            "id": 3,
+            "type": "bilimsel",
+            "members": [
+              5,
+              3
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 404,
+    "mode": "medium",
+    "equalMonths": 181,
+    "common": {
+      "month": 178,
+      "day": 5340,
+      "over": false,
+      "live": 14,
+      "largest": 6,
+      "percent": 42.86,
+      "federations": [
+        {
+          "id": 1,
+          "type": "bilimsel",
+          "members": [
+            10,
+            7,
+            4,
+            8,
+            6,
+            11
+          ]
+        },
+        {
+          "id": 2,
+          "type": "ticaret",
+          "members": [
+            5,
+            3
+          ]
+        }
+      ]
+    },
+    "checkpoints": [
+      {
+        "month": 0,
+        "day": 0,
+        "over": false,
+        "live": 12,
+        "largest": 0,
+        "percent": 0.0,
+        "federations": []
+      },
+      {
+        "month": 30,
+        "day": 900,
+        "over": false,
+        "live": 12,
+        "largest": 3,
+        "percent": 25.0,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              10,
+              7,
+              4
+            ]
+          }
+        ]
+      },
+      {
+        "month": 60,
+        "day": 1800,
+        "over": false,
+        "live": 12,
+        "largest": 4,
+        "percent": 33.33,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              10,
+              7,
+              4,
+              8
+            ]
+          }
+        ]
+      },
+      {
+        "month": 90,
+        "day": 2700,
+        "over": false,
+        "live": 12,
+        "largest": 4,
+        "percent": 33.33,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              10,
+              7,
+              4,
+              8
+            ]
+          }
+        ]
+      },
+      {
+        "month": 120,
+        "day": 3600,
+        "over": false,
+        "live": 12,
+        "largest": 4,
+        "percent": 33.33,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              10,
+              7,
+              4,
+              8
+            ]
+          }
+        ]
+      },
+      {
+        "month": 150,
+        "day": 4500,
+        "over": false,
+        "live": 12,
+        "largest": 4,
+        "percent": 33.33,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              10,
+              7,
+              4,
+              8
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              5,
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "month": 180,
+        "day": 5400,
+        "over": false,
+        "live": 14,
+        "largest": 6,
+        "percent": 42.86,
+        "federations": [
+          {
+            "id": 1,
+            "type": "bilimsel",
+            "members": [
+              10,
+              7,
+              4,
+              8,
+              6,
+              11
+            ]
+          },
+          {
+            "id": 2,
+            "type": "ticaret",
+            "members": [
+              5,
+              3
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

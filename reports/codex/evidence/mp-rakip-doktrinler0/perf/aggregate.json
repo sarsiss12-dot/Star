@@ -1,0 +1,62 @@
+[
+  {
+    "key": "100-9-11-m120",
+    "sampleCountPerArm": 24,
+    "fixtureSha256": "6a243769bc0a535e690fc6901a09e046a079d5ee5094cf2eabcf3d51bdbb4a00",
+    "initialP95ChangePct": -1.009,
+    "arms": {
+      "base": {
+        "p50": 302.6,
+        "p95": 366.8
+      },
+      "candidate": {
+        "p50": 288.15,
+        "p95": 363.1
+      }
+    },
+    "p95ChangePct": -1.009,
+    "pairedMedianP95ChangePct": -4.874,
+    "pairs": 4,
+    "candidateP95LowerPairs": 2
+  },
+  {
+    "key": "500-16-11-m120",
+    "sampleCountPerArm": 72,
+    "fixtureSha256": "30b15d102f8faccf2307a8fbcaceca5117b6b380504e5802877ddbfb54965164",
+    "initialP95ChangePct": 10.218,
+    "arms": {
+      "base": {
+        "p50": 951.05,
+        "p95": 1245.3
+      },
+      "candidate": {
+        "p50": 978.0,
+        "p95": 1280.9
+      }
+    },
+    "p95ChangePct": 2.859,
+    "pairedMedianP95ChangePct": -0.531,
+    "pairs": 12,
+    "candidateP95LowerPairs": 6
+  },
+  {
+    "key": "500-16-11-m180",
+    "sampleCountPerArm": 24,
+    "fixtureSha256": "bad8c32428e8a77007e7f226b69db81d369179f39b3d9f35c9e7ee69ba5a874e",
+    "initialP95ChangePct": -7.047,
+    "arms": {
+      "base": {
+        "p50": 2411.4,
+        "p95": 2893.6
+      },
+      "candidate": {
+        "p50": 2294.8,
+        "p95": 2689.7
+      }
+    },
+    "p95ChangePct": -7.047,
+    "pairedMedianP95ChangePct": -7.052,
+    "pairs": 4,
+    "candidateP95LowerPairs": 4
+  }
+]

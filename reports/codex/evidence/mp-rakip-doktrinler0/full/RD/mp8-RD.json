@@ -1,0 +1,348 @@
+{
+ "results": [
+  {
+   "name": "RD0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 11; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 19273
+  }
+ ],
+ "metrics": {
+  "scen": "RD",
+  "conf": {
+   "size": "ulu",
+   "ai": 9,
+   "seed": 11,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 224,
+    "buildMs": 258,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 403,
+    "buildMs": 498,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 11.1,
+      "p95": 11.1,
+      "max": 11.1
+     },
+     "longtask": {
+      "n": 9,
+      "med": 60,
+      "p95": 78,
+      "max": 78
+     },
+     "heapMB": 16,
+     "dom": 1369,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 90.4,
+       "p95": 90.4,
+       "max": 90.4
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.7,
+       "p95": 1.7,
+       "max": 1.7
+      },
+      "longtask": {
+       "n": 17,
+       "med": 59,
+       "p95": 120,
+       "max": 120
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 715,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 46,
+      "joinErrors": 1
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 43.8,
+       "p95": 43.8,
+       "max": 43.8
+      },
+      "refresh": {
+       "n": 1,
+       "med": 3.2,
+       "p95": 3.2,
+       "max": 3.2
+      },
+      "longtask": {
+       "n": 17,
+       "med": 63,
+       "p95": 95,
+       "max": 95
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 17,
+      "dom": 723,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 40,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 44751,
+  "rivalLobby": [
+   {
+    "label": "Doğal",
+    "rev": 11
+   },
+   {
+    "label": "Özel · 0 AI",
+    "range": {
+     "min": 0,
+     "max": 0
+    },
+    "rev": 12
+   },
+   {
+    "label": "Az · 0–2 AI",
+    "range": {
+     "min": 0,
+     "max": 2
+    },
+    "rev": 13
+   },
+   {
+    "label": "Orta · 2–4 AI",
+    "range": {
+     "min": 2,
+     "max": 4
+    },
+    "rev": 14
+   },
+   {
+    "label": "Çok · 5–7 AI",
+    "range": {
+     "min": 5,
+     "max": 7
+    },
+    "rev": 15
+   },
+   {
+    "label": "Doğal",
+    "rev": 16
+   },
+   {
+    "label": "Özel · 3–5 AI",
+    "range": {
+     "min": 3,
+     "max": 5
+    },
+    "tension": "calkantili",
+    "rev": 17
+   },
+   {
+    "label": "Özel · 3–5 AI",
+    "range": {
+     "min": 3,
+     "max": 5
+    },
+    "tension": "calkantili",
+    "rev": 19
+   },
+   {
+    "label": "Özel · 3–5 AI",
+    "range": {
+     "min": 3,
+     "max": 5
+    },
+    "tension": "calkantili",
+    "rev": 21
+   },
+   {
+    "invalid": [
+     {
+      "min": -1,
+      "max": 2
+     },
+     {
+      "min": 4,
+      "max": 2
+     },
+     {
+      "min": 2,
+      "max": 10
+     },
+     {
+      "min": 1.5,
+      "max": 3
+     },
+     {
+      "min": "1",
+      "max": 3
+     },
+     null,
+     {
+      "min": 0,
+      "max": 3,
+      "extra": true
+     },
+     [
+      0,
+      3
+     ],
+     {
+      "min": 0
+     }
+    ],
+    "reconnected": true,
+    "cancelPreserved": true
+   },
+   {
+    "label": "Özel · 3 AI",
+    "range": {
+     "min": 3,
+     "max": 3
+    },
+    "rev": 22
+   }
+  ],
+  "actualWorld": {
+   "seed": 11,
+   "size": "ulu",
+   "systems": 100,
+   "states": 12
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "rivalStart": {
+   "seed": 11,
+   "range": {
+    "min": 3,
+    "max": 3
+   },
+   "rivalCount": 3,
+   "ai": [
+    [
+     3,
+     "yayilmaci"
+    ],
+    [
+     4,
+     "yayilmaci"
+    ],
+    [
+     5,
+     "pasifist"
+    ],
+    [
+     6,
+     "pasifist"
+    ],
+    [
+     7,
+     "kriminal"
+    ],
+    [
+     8,
+     "kriminal"
+    ],
+    [
+     9,
+     "izolasyonist"
+    ],
+    [
+     10,
+     "yayilmaci"
+    ],
+    [
+     11,
+     "yayilmaci"
+    ]
+   ],
+   "humans": [
+    [
+     0,
+     "militarist"
+    ],
+    [
+     1,
+     "teknokrasi"
+    ],
+    [
+     2,
+     "tuccar"
+    ]
+   ],
+   "rng": 1958112829,
+   "spEqual": true
+  },
+  "errors": []
+ }
+}

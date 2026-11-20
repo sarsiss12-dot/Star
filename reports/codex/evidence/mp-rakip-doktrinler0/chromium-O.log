@@ -1,0 +1,15 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[4,4],"mirrorEq":true,"revMs":709,"buildMs":873,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[4,4],"mirrorEq":true,"revMs":1072,"buildMs":1165,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":50.2,"p95":50.2,"max":50.2},"longtask":{"n":21,"med":72,"p95":91,"max":98},"heapMB":17,"dom":724,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":4,"med":33,"p95":101.1,"max":101.1},"refresh":{"n":2,"med":5.2,"p95":5.2,"max":5.2},"longtask":{"n":20,"med":60,"p95":108,"max":108},"builds":4,"deltas":3,"resyncs":0,"minGap":600,"heapMB":18,"dom":717,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":35,"joinErrors":0},"C":{"build":{"n":4,"med":62.6,"p95":160.2,"max":160.2},"refresh":{"n":3,"med":7,"p95":8.9,"max":8.9},"longtask":{"n":20,"med":70,"p95":92,"max":92},"builds":4,"deltas":3,"resyncs":0,"minGap":600,"heapMB":17,"dom":726,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":30,"joinErrors":0}}}
+PASS O0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+NOT RUN O1 kısa kopma (3 sn): kopukken emir yerel reddedilir; dönüşte filo + tersane + bina emri host'ta bir kez, misafirde yansır
+NOT RUN O2 açık görünüp veri taşımayan hat (30 sn donma, oyun akarken): algılanır, kurtarılır; donmada verilen emir bir kez uygulanır
+PASS O3 kayıp dünya güncellemesi (ayna 12 sn düşer, hız / nabız geçer): misafir eksik algılar, yeniden ister, harita ilerler
+NOT RUN O4 kayıp host yanıtı: tersane siparişi host'ta bir kez, misafir sırada görür; ikinci gemi / ödeme yok
+NOT RUN O5 arka planda bekleyip öne dönme (sayfa 20 sn dondurulur, oyun akar) → dünya yetişir, emir zinciri çalışır
+NOT RUN O6 aynı odaya yeniden katılma (sayfa yenileme): aynı devlet; emir zinciri; insan → insan teklif kartı ve kabul bir kez
+PASS O7 misafirde açık pencere: ayna bekletilir, hız bildirimi gelir; misafir nedeni görür (sıkışık çubukta da) ve pencere kapanınca yetişir
+NOT RUN O8 federasyon oyu: B'nin oyu yanıt kaybı ve kopmayla bir kez sayılır; ikinci basış ikinci oy değil; sonuç misafir panelinde
+NOT RUN O10 harita görünümü: kendi hareket eden filonun rotası host ile aynı, konum aynalar arasında akıcı ilerler; görünür sistem sahipliği (sınırlar) host gerçeğiyle aynı — kopma, yeni ayna ve açık panelden sonra da
+NOT RUN O9 harita tutarlılığı: dönüşten ve yeni dünya güncellemesinden sonra kendi filo rotası / konumu ve görülebilir sistem sahipliği host ile aynı
+GEÇEN: 3 KALAN: 0

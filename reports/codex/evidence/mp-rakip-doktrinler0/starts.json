@@ -1,0 +1,557 @@
+[
+  {
+    "mode": "natural",
+    "seed": 11,
+    "rivalCount": 4,
+    "ai": [
+      [
+        3,
+        "izolasyonist"
+      ],
+      [
+        4,
+        "militarist"
+      ],
+      [
+        5,
+        "pasifist"
+      ],
+      [
+        6,
+        "pasifist"
+      ],
+      [
+        7,
+        "kriminal"
+      ],
+      [
+        8,
+        "pasifist"
+      ],
+      [
+        9,
+        "yayilmaci"
+      ],
+      [
+        10,
+        "yayilmaci"
+      ],
+      [
+        11,
+        "izolasyonist"
+      ]
+    ],
+    "humans": [
+      [
+        0,
+        "militarist"
+      ],
+      [
+        1,
+        "teknokrasi"
+      ],
+      [
+        2,
+        "tuccar"
+      ]
+    ],
+    "rng": 1958112829,
+    "spEqual": true
+  },
+  {
+    "mode": "medium",
+    "seed": 11,
+    "range": {
+      "min": 2,
+      "max": 4
+    },
+    "rivalCount": 2,
+    "ai": [
+      [
+        3,
+        "yayilmaci"
+      ],
+      [
+        4,
+        "yayilmaci"
+      ],
+      [
+        5,
+        "pasifist"
+      ],
+      [
+        6,
+        "pasifist"
+      ],
+      [
+        7,
+        "yayilmaci"
+      ],
+      [
+        8,
+        "kriminal"
+      ],
+      [
+        9,
+        "izolasyonist"
+      ],
+      [
+        10,
+        "yayilmaci"
+      ],
+      [
+        11,
+        "yayilmaci"
+      ]
+    ],
+    "humans": [
+      [
+        0,
+        "militarist"
+      ],
+      [
+        1,
+        "teknokrasi"
+      ],
+      [
+        2,
+        "tuccar"
+      ]
+    ],
+    "rng": 1958112829,
+    "spEqual": true
+  },
+  {
+    "mode": "fixed",
+    "seed": 11,
+    "range": {
+      "min": 3,
+      "max": 3
+    },
+    "rivalCount": 3,
+    "ai": [
+      [
+        3,
+        "yayilmaci"
+      ],
+      [
+        4,
+        "yayilmaci"
+      ],
+      [
+        5,
+        "pasifist"
+      ],
+      [
+        6,
+        "pasifist"
+      ],
+      [
+        7,
+        "kriminal"
+      ],
+      [
+        8,
+        "kriminal"
+      ],
+      [
+        9,
+        "izolasyonist"
+      ],
+      [
+        10,
+        "yayilmaci"
+      ],
+      [
+        11,
+        "yayilmaci"
+      ]
+    ],
+    "humans": [
+      [
+        0,
+        "militarist"
+      ],
+      [
+        1,
+        "teknokrasi"
+      ],
+      [
+        2,
+        "tuccar"
+      ]
+    ],
+    "rng": 1958112829,
+    "spEqual": true
+  },
+  {
+    "mode": "natural",
+    "seed": 99,
+    "rivalCount": 5,
+    "ai": [
+      [
+        3,
+        "kriminal"
+      ],
+      [
+        4,
+        "tuccar"
+      ],
+      [
+        5,
+        "militarist"
+      ],
+      [
+        6,
+        "tuccar"
+      ],
+      [
+        7,
+        "pasifist"
+      ],
+      [
+        8,
+        "pasifist"
+      ],
+      [
+        9,
+        "militarist"
+      ],
+      [
+        10,
+        "kriminal"
+      ],
+      [
+        11,
+        "militarist"
+      ]
+    ],
+    "humans": [
+      [
+        0,
+        "militarist"
+      ],
+      [
+        1,
+        "teknokrasi"
+      ],
+      [
+        2,
+        "tuccar"
+      ]
+    ],
+    "rng": 1958112917,
+    "spEqual": true
+  },
+  {
+    "mode": "medium",
+    "seed": 99,
+    "range": {
+      "min": 2,
+      "max": 4
+    },
+    "rivalCount": 4,
+    "ai": [
+      [
+        3,
+        "yayilmaci"
+      ],
+      [
+        4,
+        "izolasyonist"
+      ],
+      [
+        5,
+        "militarist"
+      ],
+      [
+        6,
+        "tuccar"
+      ],
+      [
+        7,
+        "izolasyonist"
+      ],
+      [
+        8,
+        "pasifist"
+      ],
+      [
+        9,
+        "yayilmaci"
+      ],
+      [
+        10,
+        "yayilmaci"
+      ],
+      [
+        11,
+        "militarist"
+      ]
+    ],
+    "humans": [
+      [
+        0,
+        "militarist"
+      ],
+      [
+        1,
+        "teknokrasi"
+      ],
+      [
+        2,
+        "tuccar"
+      ]
+    ],
+    "rng": 1958112917,
+    "spEqual": true
+  },
+  {
+    "mode": "fixed",
+    "seed": 99,
+    "range": {
+      "min": 3,
+      "max": 3
+    },
+    "rivalCount": 3,
+    "ai": [
+      [
+        3,
+        "yayilmaci"
+      ],
+      [
+        4,
+        "izolasyonist"
+      ],
+      [
+        5,
+        "militarist"
+      ],
+      [
+        6,
+        "tuccar"
+      ],
+      [
+        7,
+        "pasifist"
+      ],
+      [
+        8,
+        "pasifist"
+      ],
+      [
+        9,
+        "yayilmaci"
+      ],
+      [
+        10,
+        "yayilmaci"
+      ],
+      [
+        11,
+        "militarist"
+      ]
+    ],
+    "humans": [
+      [
+        0,
+        "militarist"
+      ],
+      [
+        1,
+        "teknokrasi"
+      ],
+      [
+        2,
+        "tuccar"
+      ]
+    ],
+    "rng": 1958112917,
+    "spEqual": true
+  },
+  {
+    "mode": "natural",
+    "seed": 404,
+    "rivalCount": 2,
+    "ai": [
+      [
+        3,
+        "yayilmaci"
+      ],
+      [
+        4,
+        "pasifist"
+      ],
+      [
+        5,
+        "tuccar"
+      ],
+      [
+        6,
+        "tuccar"
+      ],
+      [
+        7,
+        "izolasyonist"
+      ],
+      [
+        8,
+        "kriminal"
+      ],
+      [
+        9,
+        "pasifist"
+      ],
+      [
+        10,
+        "pasifist"
+      ],
+      [
+        11,
+        "yayilmaci"
+      ]
+    ],
+    "humans": [
+      [
+        0,
+        "militarist"
+      ],
+      [
+        1,
+        "teknokrasi"
+      ],
+      [
+        2,
+        "tuccar"
+      ]
+    ],
+    "rng": 1958112936,
+    "spEqual": true
+  },
+  {
+    "mode": "medium",
+    "seed": 404,
+    "range": {
+      "min": 2,
+      "max": 4
+    },
+    "rivalCount": 3,
+    "ai": [
+      [
+        3,
+        "yayilmaci"
+      ],
+      [
+        4,
+        "pasifist"
+      ],
+      [
+        5,
+        "tuccar"
+      ],
+      [
+        6,
+        "tuccar"
+      ],
+      [
+        7,
+        "yayilmaci"
+      ],
+      [
+        8,
+        "kriminal"
+      ],
+      [
+        9,
+        "militarist"
+      ],
+      [
+        10,
+        "pasifist"
+      ],
+      [
+        11,
+        "kriminal"
+      ]
+    ],
+    "humans": [
+      [
+        0,
+        "militarist"
+      ],
+      [
+        1,
+        "teknokrasi"
+      ],
+      [
+        2,
+        "tuccar"
+      ]
+    ],
+    "rng": 1958112936,
+    "spEqual": true
+  },
+  {
+    "mode": "fixed",
+    "seed": 404,
+    "range": {
+      "min": 3,
+      "max": 3
+    },
+    "rivalCount": 3,
+    "ai": [
+      [
+        3,
+        "yayilmaci"
+      ],
+      [
+        4,
+        "pasifist"
+      ],
+      [
+        5,
+        "tuccar"
+      ],
+      [
+        6,
+        "tuccar"
+      ],
+      [
+        7,
+        "yayilmaci"
+      ],
+      [
+        8,
+        "kriminal"
+      ],
+      [
+        9,
+        "militarist"
+      ],
+      [
+        10,
+        "pasifist"
+      ],
+      [
+        11,
+        "kriminal"
+      ]
+    ],
+    "humans": [
+      [
+        0,
+        "militarist"
+      ],
+      [
+        1,
+        "teknokrasi"
+      ],
+      [
+        2,
+        "tuccar"
+      ]
+    ],
+    "rng": 1958112936,
+    "spEqual": true
+  }
+]
