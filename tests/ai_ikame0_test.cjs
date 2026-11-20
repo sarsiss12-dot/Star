@@ -104,26 +104,30 @@ test('Savaş ve stok krizinin yıkımı, yeni stratejik ikame olmadan eski iade 
   assert.equal(result.stock,result.refund);
 });
 
-test('Mineral kurtarma, dökümhane bakım eşiğine gelince fabrikayı seçer', () => {
-  const h = fixture();
-  const result = JSON.parse(h.run(`JSON.stringify((()=>{
-    planet.col.b.fabrika=1;
-    planet.col.b.maden--;
-    const loss=aiBuildingDelta(state,system,planet,'dokum',false,-1).ala;
-    state.res.min=0;
-    state.inc.min=-12;
-    state.inc.ala=-loss/2;
-    const queued=aiRecoverEconomy(state),job=planet.col.q[0];
-    if(queued)colonyBuildTick(job.left);
-    return {loss,queued,key:job?.key,foundries:planet.col.b.dokum,factories:planet.col.b.fabrika||0,
-      stock:state.res.min,refund:job?.refund.min};
-  })())`));
-  assert(result.loss<0);
-  assert.equal(result.queued,true);
-  assert.equal(result.key,'fabrika');
-  assert.equal(result.foundries,2);
-  assert.equal(result.factories,0);
-  assert.equal(result.stock,result.refund);
+test('Mineral kurtarma, düşük alaşım stokuyla fabrikayı ve karşılanabilir kayıpla dökümhaneyi seçer', () => {
+  for(const [alloy,key,foundries,factories] of [[50,'fabrika',2,0],[500,'dokum',1,1]]) {
+    const h = fixture();
+    h.sb.alloy = alloy;
+    const result = JSON.parse(h.run(`JSON.stringify((()=>{
+      planet.col.b.fabrika=1;
+      planet.col.b.maden--;
+      const loss=aiBuildingDelta(state,system,planet,'dokum',false,-1).ala;
+      state.res.min=0;
+      state.res.ala=alloy;
+      state.inc.min=-12;
+      state.inc.ala=-loss/2;
+      const queued=aiRecoverEconomy(state),job=planet.col.q[0];
+      if(queued)colonyBuildTick(job.left);
+      return {loss,queued,key:job?.key,foundries:planet.col.b.dokum,factories:planet.col.b.fabrika||0,
+        stock:state.res.min,refund:job?.refund.min};
+    })())`));
+    assert(result.loss<0);
+    assert.equal(result.queued,true);
+    assert.equal(result.key,key);
+    assert.equal(result.foundries,foundries);
+    assert.equal(result.factories,factories);
+    assert.equal(result.stock,result.refund);
+  }
 });
 
 test('Teknoloji veya bina sınırı değişirse ikame işi sökülmeden iptal edilir', () => {

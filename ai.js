@@ -286,8 +286,9 @@ function aiRecoverEconomy(e){
   for(const [key,n]of Object.entries(pl.col.b)){
    if(!n||['santral','maden','ciftlik','liman','tersane'].includes(key))continue;
    const d=aiBuildingDelta(e,sys,pl,key,false,-1);
-   // Mineral recovery must not create or deepen a recurring alloy deficit.
-   if(d.ala<0&&(e.inc.ala||0)+d.ala<0)continue;
+   // Protect the alloy reserve and the ship-order runway during recovery.
+   const alloyAfter=(e.inc.ala||0)+d.ala;
+   if(d.ala<0&&alloyAfter<0&&(e.res.ala||0)<Math.max(100,-alloyAfter*18))continue;
    const benefit=((e.inc.min||0)<0?Math.max(0,d.min)*3:0)+(e.crisis==='enerji'?Math.max(0,d.ene)*3:0);
    if(benefit<=0||d.yiy<0&&(e.inc.yiy||0)<0||d.tuk<0&&(e.inc.tuk||0)<0)continue;
    candidates.push({sys,pl,key,score:benefit-Math.max(0,-d.ala)*.4-Math.max(0,-d.ara)*.15});

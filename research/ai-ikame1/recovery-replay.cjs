@@ -7,14 +7,18 @@ const {runtime} = require('../../tests/helpers/runtime');
 
 const [p45, candidate, file] = process.argv.slice(2);
 const input = fs.readFileSync(file, 'utf8');
+const location = JSON.parse(process.env.STARS_REPLAY_LOCATION || '{"actor":5,"system":88,"planet":0}');
+const expected = process.env.STARS_REPLAY_AFTER || 'fabrika';
+const followUp = Number(process.env.STARS_REPLAY_MONTHS || 8);
 
 function open(root, save) {
   const h = runtime({root});
   h.sb.input = save;
+  h.sb.location = location;
   assert.equal(h.run('deserialize(input)'), true);
   h.run(`
     G.autoSave=false;
-    const audit=[], actor=5, system=88, planet=0;
+    const audit=[], {actor,system,planet}=location;
     let recovery=false;
     const recover=aiRecoverEconomy, delta=aiBuildingDelta, dem=queueDemolish, build=queueBuilding;
     aiRecoverEconomy=function(e){
@@ -24,7 +28,7 @@ function open(root, save) {
     aiBuildingDelta=function(e,s,p,key,...args){
       const change=delta(e,s,p,key,...args);
       if(recovery&&s.id===system&&p.i===planet&&['dokum','fabrika'].includes(key)){
-        audit.push({kind:'choice',day:G.day,key,stock:e.res.min,income:{...e.inc},change});
+        audit.push({kind:'choice',day:G.day,key,stock:{min:e.res.min,ala:e.res.ala},income:{...e.inc},change});
       }
       return change;
     };
@@ -70,14 +74,14 @@ const decisions = Object.fromEntries([['p45', base], ['candidate', live], ['relo
   .map(([name, h]) => [name, trace(h)]));
 assert.deepEqual(decisions.candidate, decisions.reloadedBefore);
 assert.equal(decisions.p45.find(e => e.kind === 'demolition')?.key, 'dokum');
-assert.equal(decisions.candidate.find(e => e.kind === 'demolition')?.key, 'fabrika');
+assert.equal(decisions.candidate.find(e => e.kind === 'demolition')?.key ?? 'none', expected);
 assert(decisions.candidate.some(e => e.kind === 'choice' && e.key === 'dokum' && e.income.ala + e.change.ala < 0));
 const reloaded = open(candidate, bytes(live));
 const after = {day:live.run('G.day'), sha256:sha(bytes(live)), rng:live.run('RND_STATE')};
 assert.equal(reloaded.run('RND_STATE'), after.rng);
 live.run('audit.length=0');
 const later = [];
-for (let i = 0; i < 8; i++) {
+for (let i = 0; i < followUp; i++) {
   for (const h of [live, reloaded]) h.run('month()');
   const a = bytes(live), b = bytes(reloaded);
   const rng = live.run('RND_STATE');
@@ -87,8 +91,8 @@ for (let i = 0; i < 8; i++) {
 }
 const payments = trace(live).filter(e => e.kind === 'paid');
 assert.deepEqual(payments, trace(reloaded).filter(e => e.kind === 'paid'));
-assert(payments.length);
+if(process.env.STARS_REPLAY_EXPECT_PAYMENT !== '0')assert(payments.length);
 for (const {paid, debit} of payments) {
   for (const r in paid) assert(Math.abs(paid[r] - debit[r]) < 1e-8);
 }
-console.log(JSON.stringify({before, after, decisions, later, payments}, null, 2));
+console.log(JSON.stringify({location, before, after, decisions, later, payments}, null, 2));

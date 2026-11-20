@@ -1,6 +1,6 @@
 """Compare the three campaign arms over the same in-game months."""
 import argparse
-from collections import defaultdict
+from collections import Counter, defaultdict
 import json
 from pathlib import Path
 from statistics import median
@@ -38,6 +38,12 @@ def alloy_flows(run, days):
     foundry = [sum(row['n'] for e in empires for row in e['alloy']['lines']
                    if row['name'] == 'Bina üretimi: Alaşım Dökümhanesi') for empires in living]
     orders = [e for e in run['events'] if e['kind'] == 'ship-order' and e['day'] <= days]
+    ship_classes = defaultdict(lambda: dict(orders=0, alloy=0))
+    for order in orders:
+        row = ship_classes[order['cls']]
+        row['orders'] += 1
+        row['alloy'] += order['paid'].get('ala', 0)
+    delivered = Counter(e['key'] for e in run['events'] if e['kind'] == 'ship-delivered' and e['day'] <= days)
     ledger = defaultdict(float)
     for event in run['events']:
         if event['kind'] == 'stock-alloy' and event['day'] <= days:
@@ -47,6 +53,7 @@ def alloy_flows(run, days):
                 medianFoundryBase=median(foundry), sumNet=sum(net), sumUpkeep=sum(upkeep),
                 sumBeforeUpkeep=sum(before_upkeep), sumFoundryBase=sum(foundry), orders=len(orders),
                 paidShipAlloy=sum(e['paid'].get('ala', 0) for e in orders),
+                shipClasses=dict(ship_classes), deliveredClasses=dict(delivered),
                 ledger={f'{kind}/{sign}': value for (kind, sign), value in sorted(ledger.items())},
                 endingStock=sum(e['res']['ala'] for e in living[-1]))
 

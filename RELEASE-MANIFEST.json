@@ -8,7 +8,7 @@
   "parent_zip_sha256": "03682419baaa1a4d778660b6daf6da0bff2365ee07a8c3d9a10819c25da316a0",
   "file_count": 19,
   "files": {
-    "ai.js": "c2314fea8de9be2256741dcd5ae378955e34f0ed6def63514b9c7ec445344966",
+    "ai.js": "8972f596462790643169331fd8316878412e518955852943f4e25a6cdf03a105",
     "archive-ui.js": "f6b98392e8b85c7717fe5b4e4c778f2c47304ce89fd84a93460b998df6582a3c",
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "e63f4d2889b866d02e4f366d7185d5396f51faa87cbdefa818f4a13d95c2b35a",
@@ -28,5 +28,5 @@
     "sw.js": "08ebbc5650f589de7e90fa48bae620b7f3f23cd8543ffda987cf181a3ee087ee",
     "ui.js": "1b64fd32e5c9845e4c51e66df9afe13d943541124c4aed30d049fde94ef2a507"
   },
-  "description": "Mineral kurtarmada alaşım üretimi koruması ve stratejik bina ikamesinde ortak gölge bütçe. Save8 v8, MP paket 4, protokol 1."
+  "description": "Mineral kurtarmada alaşım rezervi ve stratejik bina ikamesinde ortak gölge bütçe. Save8 v8, MP paket 4, protokol 1."
 }
