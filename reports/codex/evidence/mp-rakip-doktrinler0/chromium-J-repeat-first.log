@@ -1,0 +1,35 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[3,3],"mirrorEq":true,"revMs":780,"buildMs":884,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[3,3],"mirrorEq":true,"revMs":1012,"buildMs":1162,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":16,"p95":16,"max":16},"longtask":{"n":11,"med":56,"p95":192,"max":192},"heapMB":16,"dom":732,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":3,"med":47.7,"p95":53.4,"max":53.4},"refresh":{"n":2,"med":4.4,"p95":4.4,"max":4.4},"longtask":{"n":10,"med":55,"p95":71,"max":71},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":17,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":32,"joinErrors":0},"C":{"build":{"n":3,"med":21.8,"p95":121,"max":121},"refresh":{"n":2,"med":3,"p95":3,"max":3},"longtask":{"n":18,"med":58,"p95":196,"max":196},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":16,"dom":726,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":27,"joinErrors":0}}}
+PASS J0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+FAIL J1 kayıt → kapanış → yeni oda → host tek başına: kayıt öncesi bekleyen/gizli olay korunur; tarih ilerler; host ve B için yeni olay/anomali/bilim zinciri üretilir
+AssertionError [ERR_ASSERTION]: doğal taramalar kayıt öncesinde tamamlanmamış
+    at /workspace/Star-mp-rakip/tests/helpers/mp-sync-fed1-mp.cjs:34:65
+    at async test (/workspace/Star-mp-rakip/tests/browser-mp8.cjs:62:162)
+    at async module.exports (/workspace/Star-mp-rakip/tests/helpers/mp-sync-fed1-mp.cjs:28:2)
+    at async /workspace/Star-mp-rakip/tests/browser-mp8.cjs:545:17
+FAIL J2 misafirler yeni kodla döner (B ana menü ODAYA KATIL, C davet bağlantısı): B'nin kayıt öncesi ve host-tek-başına kararları B'de; host / C olayları B'de değil
+browserType.launchPersistentContext: Failed to create a ProcessSingleton for your profile directory. This usually means that the profile is already in use by another instance of Chromium.
+Call log:
+[2m  - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-gpu --disable-dev-shm-usage --enable-precise-memory-info --ignore-certificate-errors-spki-list=xoJyNYKjNvEtkB0EutcEOVONSCWcEqH/E3wCjozThe0= --user-data-dir=/tmp/mp8-B-tliBsy --remote-debugging-pipe about:blank[22m
+[2m  - <launched> pid=48920[22m
+[2m  - [pid=48920][err] [48920:48920:1120/215538.874971:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open /home/agent/.config/chromium/Crash Reports/settings.dat: Read-only file system (30)[22m
+[2m  - [pid=48920][err] [48920:48920:1120/215538.875062:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:208] open /home/agent/.config/chromium/Crash Reports/settings.dat: Read-only file system (30)[22m
+[2m  - [pid=48920][err] [48920:48920:1120/215538.899410:ERROR:chrome/browser/process_singleton_posix.cc:347] Failed to create /tmp/mp8-B-tliBsy/SingletonLock: File exists (17)[22m
+[2m  - [pid=48920][err] [48920:48920:1120/215538.899742:ERROR:chrome/app/chrome_main_delegate.cc:569] Failed to create a ProcessSingleton for your profile directory. This means that running multiple instances would start multiple browser processes rather than opening a new window in the existing process. Aborting now to avoid profile corruption.[22m
+[2m  - [pid=48920] <gracefully close start>[22m
+[2m  - [pid=48920] <kill>[22m
+[2m  - [pid=48920] <will force kill>[22m
+[2m  - [pid=48920] <process did exit: exitCode=21, signal=null>[22m
+[2m  - [pid=48920] starting temporary directories cleanup[22m
+[2m  - [pid=48920] finished temporary directories cleanup[22m
+[2m  - [pid=48920] <gracefully close end>[22m
+
+    at async open (/workspace/Star-mp-rakip/tests/browser-mp8.cjs:89:32)
+    at async /workspace/Star-mp-rakip/tests/helpers/mp-sync-fed1-mp.cjs:84:12
+    at async test (/workspace/Star-mp-rakip/tests/browser-mp8.cjs:62:162)
+    at async module.exports (/workspace/Star-mp-rakip/tests/helpers/mp-sync-fed1-mp.cjs:82:2)
+    at async /workspace/Star-mp-rakip/tests/browser-mp8.cjs:545:17
+PASS J3 B'nin ilk gemi siparişi gerçek dokunuşla: host kabulü, host tersane kuyruğu ve B'nin tersane ekranı ayrı ölçülür; kaynak bir kez düşer
+PASS J4 yanıt kaybı + AYNI cid ile yeniden gönderim: tek sipariş, tek kaynak kesintisi, yinelenen yanıt; B tersane ekranında tek yeni satır
+GEÇEN: 3 KALAN: 2

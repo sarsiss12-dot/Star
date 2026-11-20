@@ -1,0 +1,4 @@
+PASS M1 misafir B, misafir C ile ittifaksız kuruluş: fedFoundStart → C fedFoundReply → B fedFoundFinish; ittifak + federasyon birlikte, tek bedel, çift son onay reddedilir
+PASS M2 misafir C reddeder: federasyon ve ittifak yok; misafir B yetkisiz yanıt veremez
+PASS M3 ittifaksız üye daveti: misafir B federasyonuna ittifaksız misafir D'yi fedInvite ile önerir; oy + D fedReply kabul → üyelik ve bütün üyelerle ittifak; ikinci kabul reddedilir
+GEÇEN: 3 KALAN: 0

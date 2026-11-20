@@ -1,0 +1,8 @@
+PASS C1 gemi hedefte: tahmini varış 0, görev inşa başlar, bedel BİR KEZ kesilir; aynı yapı ikinci kez kuyruğa girmez
+PASS C2 daha yakın geminin yolu bilinen yuvayla kapalı: rota süresiyle en erken varacak GÜVENLİ gemi seçilir
+PASS C3 bütün gemiler meşgul: açık neden + isteğe bağlı kuyruk; mevcut iş kesilmez
+PASS C4 gemi yok: "İnşaat gemisi gerekli" — panel seçenekleri görünür ama pasif; ilk üretim bilgisi (insReady) Save8'de korunur
+PASS C5 tersaneden ilk İNŞ çıkınca insReady yazılır (yalnız insan; AI alanı değişmez)
+PASS C6 Save8: otomatik görev (auto, eta) yüklenir ve inşa sürer; kayıttan sonra rota panel çiziminde HESAPLANMAZ
+PASS C7 MP: misafir B gerçek remoteAuto komutu — gemiyi host seçer; çift tıklama ikinci görevi reddeder
+GEÇEN: 7 KALAN: 0

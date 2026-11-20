@@ -1,0 +1,1 @@
+{"mode":"host","seed":99,"months":181,"final":{"day":5400,"over":false,"rng":-2063987677,"live":[0,1,2,3,4,5,6,7,8,9,10,11],"feds":[{"id":1,"type":"ticaret","members":[10,8,3]},{"id":2,"type":"ticaret","members":[4,6]}],"largest":3,"save8":"5dbcfd77fa136cea8542f495ccf18aa1db9298b848123bbb7a4478b2beaf82ce"}}

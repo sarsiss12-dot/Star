@@ -1,0 +1,10 @@
+FAIL RD0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 99; misafir gerçek STARS arayüzünde
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/workspace/Star-mp-rakip/tests/browser-mp8.cjs:67:40)
+    at check (/workspace/Star-mp-rakip/tests/helpers/mp-rakip-doktrinler0-browser.cjs:19:28)
+    at async rivalLobby (/workspace/Star-mp-rakip/tests/helpers/mp-rakip-doktrinler0-browser.cjs:41:3)
+    at async room (/workspace/Star-mp-rakip/tests/browser-mp8.cjs:145:24)
+    at async /workspace/Star-mp-rakip/tests/browser-mp8.cjs:327:5
+    at async test (/workspace/Star-mp-rakip/tests/browser-mp8.cjs:62:162)
+    at async /workspace/Star-mp-rakip/tests/browser-mp8.cjs:326:3
+GEÇEN: 0 KALAN: 1

@@ -1,0 +1,15 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":208,"buildMs":288,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":401,"buildMs":474,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":25.2,"p95":25.2,"max":25.2},"longtask":{"n":6,"med":53,"p95":56,"max":56},"heapMB":18,"dom":749,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":67.8,"p95":67.8,"max":67.8},"refresh":{"n":0},"longtask":{"n":6,"med":54,"p95":108,"max":108},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":19,"dom":710,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":27,"joinErrors":0},"C":{"build":{"n":2,"med":68.2,"p95":68.2,"max":68.2},"refresh":{"n":0},"longtask":{"n":7,"med":53,"p95":71,"max":71},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":19,"dom":715,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS H0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 16 AI, s500, seed 404; misafir gerçek STARS arayüzünde
+SYNC {"label":"paylaşım-ve-sipariş","who":"B","e":1,"rev":[3,3],"mirrorEq":true,"revMs":803,"buildMs":889,"diff":[],"leak":[]}
+SYNC {"label":"paylaşım-ve-sipariş","who":"C","e":2,"rev":[3,3],"mirrorEq":true,"revMs":987,"buildMs":1071,"diff":[],"leak":[]}
+SYNC {"label":"yarım-gün-takviye","who":"B","e":1,"rev":[4,4],"mirrorEq":true,"revMs":692,"buildMs":771,"diff":[],"leak":[]}
+SYNC {"label":"yarım-gün-takviye","who":"C","e":2,"rev":[4,4],"mirrorEq":true,"revMs":859,"buildMs":912,"diff":[],"leak":[]}
+PASS H1 aynı gün: keşif, müttefik sensörü, rota ve takviye iki misafire yetkili aynadan yansır
+SYNC {"label":"yeniden-bağlandı","who":"B","e":1,"rev":[6,6],"mirrorEq":true,"revMs":785,"buildMs":896,"diff":[],"leak":[]}
+SYNC {"label":"yeniden-bağlandı","who":"C","e":2,"rev":[4,4],"mirrorEq":true,"revMs":985,"buildMs":1064,"diff":[],"leak":[]}
+SYNC {"label":"tersane-sonrası","who":"B","e":1,"rev":[7,7],"mirrorEq":true,"revMs":195,"buildMs":275,"diff":[],"leak":[]}
+SYNC {"label":"tersane-sonrası","who":"C","e":2,"rev":[5,5],"mirrorEq":true,"revMs":357,"buildMs":448,"diff":[],"leak":[]}
+PASS H2 yeniden bağlanma ve tersane: bir satır ve bir kesinti
+GEÇEN: 3 KALAN: 0

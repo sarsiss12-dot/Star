@@ -196,7 +196,7 @@ J.sendDraft=sendDraft;
 function designLobby(app){
   const L=J.lobby,me=L.players.find(p=>L.you&&p.seat===L.you.seat)||{},cards=new Map((L.designs||[]).map(d=>[d.seat,d.card])),s=L.settings||{};
   const last=J.lresults.filter(r=>r.action==='draft').slice(-1)[0];
-  if(!window.MP7Setup){app.innerHTML=statusBar()+'<div class="mp1-h">STARS — ÇOK OYUNCULU LOBİ</div><div class="mp1-card"><b>Devletini tasarlamak için oyun sayfasından katıl</b><p class="mp1-sub">Bu basit sayfada kurulum ekranı yok.</p><a class="mp1-btn pri" href="/mp/play?code='+esc(J.code.replace(/-/g,''))+'">OYUN SAYFASINI AÇ</a></div>';return;}
+  if(!window.MP7Setup){app.innerHTML=statusBar()+'<div class="mp1-h">STARS — ÇOK OYUNCULU LOBİ</div><div class="mp1-card"><b>Devletini tasarlamak için oyun sayfasından katıl</b><p class="mp1-sub">Bu basit sayfada kurulum ekranı yok.</p>'+V.rivalSummary(L)+'<a class="mp1-btn pri" href="/mp/play?code='+esc(J.code.replace(/-/g,''))+'">OYUN SAYFASINI AÇ</a></div>';return;}
   const rows=L.players.slice().sort((a,b)=>a.seat-b.seat).map(p=>{const c=cards.get(p.seat);
     const st=!p.online?'<span class="st off">bağlantı yok</span>':!c?'<span class="st wait">devlet hazırlanıyor</span>':p.host||p.ready?'<span class="st ok">hazır</span>':'<span class="st wait">hazır değil</span>';
     return '<div class="mp7-pl" data-seat="'+(+p.seat)+'"><span class="dot" style="background:'+esc(c&&c.col||p.color)+'"></span><div class="who">'+esc(p.name)+(p.host?' (host)':'')+(p.seat===me.seat?' (sen)':'')+'<br>'+MP7Setup.card(c)+'</div>'+st+'</div>';}).join('');
@@ -205,7 +205,7 @@ function designLobby(app){
     '<div class="mp1-card" id="jPlayers"><b>Oyuncular — '+L.players.length+'/'+L.capacity+'</b>'+rows+'</div>'+
     '<button class="mp1-btn '+(has?'':'pri')+'" data-j="editMe" id="jEditMe">DEVLETİMİ DÜZENLE</button>'+
     '<div class="mp1-status'+(last&&!last.ok?' bad':has?' ok':'')+'" id="jDraft">'+esc(last?draftMsg(last):has?'Devletin host\'a kaydedildi.':'Önce devletini tasarla ve kaydet.')+'</div>'+
-    '<div class="mp1-card" id="jGalaxy"><b>Galaksi</b> (host ayarlar)<div>'+esc((SIZE_N[s.size])||s.size||'—')+' · '+(+s.aiCount||0)+' AI + '+L.capacity+' insan</div></div>'+
+    '<div class="mp1-card" id="jGalaxy"><b>Galaksi</b> (host ayarlar)<div>'+esc((SIZE_N[s.size])||s.size||'—')+' · '+(+s.aiCount||0)+' AI + '+L.capacity+' insan</div>'+V.rivalSummary(L)+'</div>'+
     '<button class="mp1-btn '+(me.ready?'':'pri')+'" data-j="ready" id="jReady"'+(has?'':' disabled')+'>'+(me.ready?'HAZIR DEĞİLİM':'HAZIRIM')+'</button>'+
     '<button class="mp1-btn warn" data-j="leave">ODADAN AYRIL</button><div class="mp1-sub" id="mpVer">'+esc(V.verLine())+'</div></div>';
 }
@@ -216,11 +216,11 @@ function lobby(app){
   const tabs=['lobi','doktrin','gorunus','fizyoloji','etik','civic','koken','galaksi'];
   let body='';
   if(J.tab==='lobi'){
-    body=V.players(L)+'<div class="mp1-card"><b>Devlet seç</b><p class="mp1-sub">Galaksideki gerçek AI devletlerinden birini yönetirsin. Konum bilgisi oyun başlayınca kendi keşfinle gelir.</p>'+
+    body=V.players(L)+'<div class="mp1-card">'+V.rivalSummary(L)+'</div><div class="mp1-card"><b>Devlet seç</b><p class="mp1-sub">Galaksideki gerçek AI devletlerinden birini yönetirsin. Konum bilgisi oyun başlayınca kendi keşfinle gelir.</p>'+
       (L.empires.length?L.empires.map(e=>'<div class="mp1-emp"><span><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'+V.color(e.col)+'"></span> '+esc(e.n)+'<br><small class="mp1-sub">'+esc(e.race)+(e.doc?' · '+esc(e.doc):'')+'</small></span>'+
         (e.seat===me.seat?'<button class="mp1-btn" data-j="unclaim">BIRAK</button>':e.seat!==null?'<button class="mp1-btn" disabled>DOLU</button>':'<button class="mp1-btn pri" data-j="claim" data-e="'+(+e.id)+'">SEÇ</button>')+'</div>').join(''):'<div class="mp1-sub">Host galaksiyi hazırlıyor…</div>')+'</div>';
   }else if(J.tab==='galaksi'){
-    const s=L.settings||{};body='<div class="mp1-card"><b>Galaksi ayarları</b> (yalnız host değiştirir)<div>Boyut: '+esc((SIZE_N[s.size])||s.size||'—')+'</div><div>AI devlet: '+esc(s.aiCount??'—')+'</div><div>Kapasite: '+esc(L.capacity)+' insan</div></div>';
+    const s=L.settings||{};body='<div class="mp1-card"><b>Galaksi ayarları</b> (yalnız host değiştirir)<div>Boyut: '+esc((SIZE_N[s.size])||s.size||'—')+'</div><div>AI devlet: '+esc(s.aiCount??'—')+'</div><div>Kapasite: '+esc(L.capacity)+' insan</div>'+V.rivalSummary(L)+'</div>';
   }else{
     const x=L.mine;body='<div class="mp1-card"><b>'+esc(V.TAB[J.tab])+'</b><div>'+(x?esc(J.tab==='etik'?Object.entries(x.etik||{}).map(([k,v])=>k+' '+v).join(' · '):J.tab==='civic'?(x.civic||[]).join(', '):x[J.tab]||'—'):'Önce bir devlet seç.')+'</div>'+
       '<p class="mp1-sub">MP.1: seçtiğin devletin gerçek özellikleri. Kurulum özelleştirmesi sonraki fazda.</p></div>';
@@ -236,6 +236,7 @@ function resumeLobby(app){
   app.innerHTML=statusBar()+'<div class="mp1-h">KAYITLI OYUN — DEVAM LOBİSİ</div><div class="mp1-sub">'+esc(R.name||'Galaksi')+' · Yıl '+(+R.year||0)+' · Ay '+(+R.month||0)+' · oda '+esc(J.code)+'</div>'+
     '<div class="mp1-card" id="jResume">'+(mine?'<b>Eski devletin bulundu: '+esc(R.you)+'</b><p class="mp1-sub">Kimliğin bu cihazda saklı kayıtla doğrulandı. Host DEVAM ET dediğinde oyun kaldığı yerden sürer.</p>':
       '<b>Kimliğin doğrulanmadı</b><p class="mp1-sub">Bu cihazda bu kayda ait oyuncu kimliği yok. Kaydı oynadığın cihazdan katıl ya da host\'tan kimliğini onaylamasını iste. Başka oyuncunun devleti alınamaz.</p>')+'</div>'+
+    '<div class="mp1-card">'+V.rivalSummary(L)+'</div>'+
     '<div class="mp1-status'+(J.hostOnline?'':' bad')+'" id="jWait">'+(J.hostOnline?'Host\'un DEVAM ET demesi bekleniyor…':'Host bağlı değil — bekleniyor')+'</div>'+
     V.players(L)+(mine?'':'<button class="mp1-btn warn" data-j="leave">ODADAN AYRIL</button>');
 }

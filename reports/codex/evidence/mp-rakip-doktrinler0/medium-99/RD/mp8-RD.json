@@ -1,0 +1,246 @@
+{
+ "results": [
+  {
+   "name": "RD0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 99; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 16189
+  }
+ ],
+ "metrics": {
+  "scen": "RD",
+  "conf": {
+   "size": "ulu",
+   "ai": 9,
+   "seed": 99,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 425,
+    "buildMs": 573,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 719,
+    "buildMs": 883,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 46,
+      "p95": 46,
+      "max": 46
+     },
+     "longtask": {
+      "n": 19,
+      "med": 72,
+      "p95": 115,
+      "max": 115
+     },
+     "heapMB": 19,
+     "dom": 1340,
+     "intervals": 2,
+     "timeouts": 1,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 89.6,
+       "p95": 89.6,
+       "max": 89.6
+      },
+      "refresh": {
+       "n": 1,
+       "med": 6.7,
+       "p95": 6.7,
+       "max": 6.7
+      },
+      "longtask": {
+       "n": 32,
+       "med": 78,
+       "p95": 101,
+       "max": 102
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 17,
+      "dom": 699,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 33,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 44.6,
+       "p95": 44.6,
+       "max": 44.6
+      },
+      "refresh": {
+       "n": 1,
+       "med": 13.3,
+       "p95": 13.3,
+       "max": 13.3
+      },
+      "longtask": {
+       "n": 37,
+       "med": 78,
+       "p95": 120,
+       "max": 153
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 29,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 45737,
+  "rivalLobby": [
+   {
+    "label": "Doğal",
+    "rev": 11
+   },
+   {
+    "label": "Orta · 2–4 AI",
+    "range": {
+     "min": 2,
+     "max": 4
+    },
+    "rev": 12
+   }
+  ],
+  "actualWorld": {
+   "seed": 99,
+   "size": "ulu",
+   "systems": 100,
+   "states": 12
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "rivalStart": {
+   "seed": 99,
+   "range": {
+    "min": 2,
+    "max": 4
+   },
+   "rivalCount": 4,
+   "ai": [
+    [
+     3,
+     "yayilmaci"
+    ],
+    [
+     4,
+     "izolasyonist"
+    ],
+    [
+     5,
+     "militarist"
+    ],
+    [
+     6,
+     "tuccar"
+    ],
+    [
+     7,
+     "izolasyonist"
+    ],
+    [
+     8,
+     "pasifist"
+    ],
+    [
+     9,
+     "yayilmaci"
+    ],
+    [
+     10,
+     "yayilmaci"
+    ],
+    [
+     11,
+     "militarist"
+    ]
+   ],
+   "humans": [
+    [
+     0,
+     "militarist"
+    ],
+    [
+     1,
+     "teknokrasi"
+    ],
+    [
+     2,
+     "tuccar"
+    ]
+   ],
+   "rng": 1958112917,
+   "spEqual": true
+  },
+  "errors": []
+ }
+}

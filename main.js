@@ -1442,6 +1442,10 @@ function extendedEmpireColor(i){const h=(i*137.508)%360,s=.55,l=.48+(i%3)*.07,c=
 // Missing field retains each historical size default; explicit values never clamp.
 function aiCountFor(cfg){return cfg.aiCount===undefined?SIZES[cfg.size]?.ai:cfg.aiCount;}
 const RIVAL_PERSONAS=['militarist','kriminal','izolasyonist'];
+function rivalPreset(k,n){
+  const r=k==='az'?[0,Math.ceil(n*.2)]:k==='cok'?[Math.round(n*.5),Math.round(n*.75)]:[Math.round(n*.25),Math.round(n*.45)];
+  const max=Math.min(n,Math.max(r[0],r[1]));return {min:Math.min(r[0],max),max};
+}
 function rivalSetupError(cfg, count){
  if(cfg.aiRivals===undefined)return '';
  const r=cfg.aiRivals;
@@ -9058,7 +9062,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p46';
+const BUILD_ID = '96h10p47';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

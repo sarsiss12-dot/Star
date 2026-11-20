@@ -46,6 +46,7 @@ const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'bu
   U:{size:'orta',ai:5,seed:22,months:0,guests:3,every:6},
   /* MP-SYNC-FED.0: misafir eşitleme ve emir zinciri — kopma, donan hat, kayıp ayna / yanıt, arka plan, yeniden katılma, açık pencere, fed oyu — host + B + C */
   O:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
+  RD:{size:'ulu',ai:9,seed:Number(process.env.MP8_RIVAL_SEED||11),months:0,guests:2,every:6},
   J:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
   I:{size:'s500',ai:16,seed:404,months:0,guests:2,every:6},
   H:{size:'s500',ai:16,seed:404,months:0,guests:2,every:6},
@@ -103,7 +104,16 @@ async function design(p,o){const vp=p.viewportSize();if(vp.width>vp.height)await
     // H compares canonical mirrors across rooms. Use the same origin even
     // when the setup page's touch and redraw shift the origin cards.
     if(SCEN==='H')await p.evaluate(origin=>{CFG.origin=origin;safeRenderSetup();},o.origin);
-    else await tap(p,'#setup [data-a="origin"][data-x="'+o.origin+'"]');
+    else {
+      const originButton='#setup [data-a="origin"][data-x="'+o.origin+'"]';
+      await tap(p,originButton);
+      // On a narrow screen the redraw can move the card under the first touch.
+      // Confirm the actual selection before recording the natural survey fixture.
+      if(SCEN==='J'&&o.origin==='kalinti'){
+        if(!await p.evaluate(key=>CFG.origin===key,o.origin))await tap(p,originButton);
+        assert.equal(await p.evaluate(()=>CFG.origin),o.origin);
+      }
+    }
     await tap(p,'#setup [data-a="start"]');await wait(p,()=>document.getElementById('menu').classList.contains('hidden'),undefined,10000);}
   finally{await p.setViewportSize(vp);}}
 const DESIGNS={H:{name:'Kızıl Muhafız',mizac:'militarist',origin:'standart',ethics:['mil:2'],civics:['kale_dok']},
@@ -117,13 +127,37 @@ async function room({cutAtStart}={}){
   const H=pg.H;await H.goto(origin.H+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn')&&window.MP7Setup);
   await tap(H,'#mp1Btn');await tap(H,'[data-m="create"]');await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.mode==='design'&&MP1Host.lobby.phase==='waiting');
   if(CONF.guests>1){await H.selectOption('#mp7Cap',String(CONF.guests+1));await wait(H,c=>MP1Host.lobby.capacity===c,CONF.guests+1);}
-  {const r=await H.evaluate(c=>{Object.assign(CFG,{size:c.size,aiCount:c.ai,seed:c.seed},c.shape?{shape:c.shape}:{},c.planetMul?{planetMul:c.planetMul}:{});return MP1Host.host.configure({size:c.size,aiCount:c.ai,seed:c.seed,...(c.shape?{shape:c.shape}:{}),...(c.planetMul?{planetMul:c.planetMul}:{})});},CONF);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
+  if(SCEN!=='RD'){const r=await H.evaluate(c=>{Object.assign(CFG,{size:c.size,aiCount:c.ai,seed:c.seed},c.shape?{shape:c.shape}:{},c.planetMul?{planetMul:c.planetMul}:{});return MP1Host.host.configure({size:c.size,aiCount:c.ai,seed:c.seed,...(c.shape?{shape:c.shape}:{}),...(c.planetMul?{planetMul:c.planetMul}:{})});},CONF);if(!r.ok)throw Error('configure '+JSON.stringify(r));}
   if(SCEN==='G'||process.env.MP8_GUARD==='1'){await tap(H,'#mpGuard');await wait(H,()=>MP1Host.lobby.guard===true);metrics.guardOption=true;}   // MP-P0-DESYNC2: oda seçeneği gerçek dokunuşla
   await tap(H,'#mp7EditMe');await design(H,designFor('H'));code=await H.evaluate(()=>MP1Host.code);
+  if(SCEN==='RD'){
+    await tap(H,'#mp7GalaxyBtn');
+    await tap(H,'#setup [data-a="size"][data-x="ulu"]');
+    let count=await H.evaluate(()=>aiCountFor(CFG));
+    while(count!==CONF.ai){
+      await tap(H,'#setup [data-a="aiCount"][data-x="'+(count<CONF.ai?'1':'-1')+'"]');
+      count=await H.evaluate(()=>aiCountFor(CFG));
+    }
+    await H.evaluate(seed=>{CFG.seed=seed;},CONF.seed);
+    await tap(H,'#setup [data-a="start"]');
+  }
+  if(SCEN==='R'&&process.env.MP8_RIVAL_RESUME){
+    await tap(H,'#mp7GalaxyBtn');
+    await tap(H,'#setup [data-a="rivalPreset"][data-x="orta"]');
+    await tap(H,'#setup [data-a="start"]');
+  }
   for(const n of guestNames()){const p=pg[n];await guestGo(n,code,n==='B'?'Bora':n==='C'?'Cem':'Deniz');
     await wait(p,()=>MP1Join.screen==='lobby'&&MP1Join.lobby&&MP1Join.lobby.mode==='design'&&document.getElementById('jEditMe'),undefined,40000);
     await tap(p,'#jEditMe');await wait(p,()=>document.getElementById('mp7Head'));await design(p,designFor(n));
     await wait(p,()=>/kaydedildi/.test(document.getElementById('jDraft').textContent));await tap(p,'#jReady');}
+  if(SCEN==='RD'){
+    metrics.rivalLobby=await require('./helpers/mp-rakip-doktrinler0-browser.cjs')({pg,tap,wait,shot,lanes,code,mode:process.env.MP8_RIVAL_MODE});
+    await H.evaluate(()=>{
+      const setup=setupGame,enter=enterGame;
+      setupGame=function(config){window.rivalSetupInput=structuredClone(config);return setup(config);};
+      enterGame=function(...args){enter.apply(this,args);MP1Host.host.local({kind:'speed',value:0});};
+    });
+  }
   await wait(H,()=>MP1Host.host.canStart().ok);await H.waitForTimeout(300);
   if(SCEN==='H')await H.evaluate(()=>{
     const enter=enterGame, mirror=StarsMirror.build;
@@ -314,6 +348,32 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
       assert.deepEqual(labels,Array(labels.length).fill('STARS '+release.mp+' · oyun '+release.build));
       metrics.version={build:release.build,mp:release.mp,runtime:release.runtime,release:release.release,labels};
     }
+    if(SCEN==='RD'){
+      const state=await pg.H.evaluate(()=>({cfg:rivalSetupInput,rng:RND_STATE,
+        ai:G.emps.filter(e=>e.ai&&!e.wild&&!e.crisisSide).map(e=>[e.id,personaKey(e)]),
+        humans:G.emps.filter(StarsMP.isHumanActor).map(e=>[e.id,personaKey(e)]),
+        geography:G.sys.map(s=>[s.x,s.y,s.lanes,s.owner]),day:G.day}));
+      assert.equal(state.ai.length,9);
+      assert.deepEqual(state.humans,[[0,'militarist'],[1,'teknokrasi'],[2,'tuccar']]);
+      assert.equal(state.day,0);
+      const range=state.cfg.aiRivals;
+      const rivalCount=state.ai.filter(([,p])=>['militarist','kriminal','izolasyonist'].includes(p)).length;
+      if(range)assert(rivalCount>=range.min&&rivalCount<=range.max);
+      const reference=await ctx.H.newPage();
+      try{
+        await reference.goto(origin.H+'/');
+        await wait(reference,()=>typeof setupGame==='function');
+        const local=await reference.evaluate(cfg=>{
+          setupGame(cfg);
+          return {cfg,rng:RND_STATE,ai:G.emps.filter(e=>e.ai&&!e.wild&&!e.crisisSide).map(e=>[e.id,personaKey(e)]),
+            humans:G.emps.filter(e=>!e.ai&&!e.wild&&!e.crisisSide).map(e=>[e.id,personaKey(e)]),
+            geography:G.sys.map(s=>[s.x,s.y,s.lanes,s.owner]),day:G.day};
+        },state.cfg);
+        assert.deepEqual(local,state);
+      }finally{await reference.close();}
+      metrics.rivalStart={seed:state.cfg.seed,range,rivalCount,ai:state.ai,humans:state.humans,rng:state.rng,spEqual:true};
+      fs.writeFileSync(path.join(out,'setup-'+state.cfg.seed+'-'+(process.env.MP8_RIVAL_MODE||'full')+'.json'),JSON.stringify(state.cfg));
+    }
     if(SCEN==='N')metrics.notes.push('C başlarken 3 s kesildi; C kendi devletiyle oyuna girdi');
     await syncCheck('m0');await perfRow('m0');await shot(pg.B,'b-start');});
 
@@ -332,6 +392,15 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
     await test(`R1 ${MONTHS} ay kampanya + bekleyen insan teklifi (C → B), savaş, federasyon/konsey denemeleri; senkron`,async()=>{
       await campaign(0,MONTHS);const e={B:await pg.B.evaluate(()=>MP1Join.empireId),C:await pg.C.evaluate(()=>MP1Join.empireId)};saved.e=e;
       if(process.env.MP89_R_STATE==='1')metrics.resume.explicitFixture=await require('./helpers/mp89-resume-fixture.cjs')(pg.H);
+      if(process.env.MP8_RIVAL_RESUME){
+        metrics.resume.pendingVote=await pg.H.evaluate(()=>{
+          const federation=G.feds.find(f=>f.members.includes(0));
+          if(!startFedVote(federation).ok||!federation.vote)throw Error('waiting federation vote fixture');
+          UI.closeModal();MP1Host.host.publish();
+          return {law:federation.vote.law,waiting:fedVoteCounts(federation).waiting};
+        });
+        assert(metrics.resume.pendingVote.waiting.length);
+      }
       if(process.env.WARFIX0_HISTORY==='1')await pg.H.evaluate(b=>{const enemy=G.emps.find(x=>x.ai&&!x.dead&&!x.wild&&!x.crisisSide&&!x.war[b]&&!x.ally[b]);if(!enemy)throw Error('private history needs a live AI');warAuthorize(enemy,G.emps[b],{n:'Kayıtlı misafir savaş geçmişi'});try{if(!declareWar(enemy,G.emps[b]))throw Error('guest history war rejected');}finally{warAuthClear();}MP1Host.host.publish();},e.B);
       if(process.env.STABILITY0_R==='1')saved.stability=await require('./helpers/beta-stability0-resume.cjs').prepare(pg.H,pg.B,pg.C,e);
       if(process.env.ER0_R==='1')saved.er0=await require('./helpers/beta-er0-resume.cjs').prepare(pg.H,pg.B,pg.C,e);
@@ -358,11 +427,23 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
     await test('R3 devam: yeni host süreci aynı profil → KAYITLI OYUNA DEVAM ET → yeni oda; misafirler yeni kodla gerçek STARS arayüzünden döner → aynı devletler; dünya, teklifler, savaşlar, federasyon, konsey, hız aynı',async()=>{
       const H=await open('H');await H.addInitScript(TIMERS);await H.goto(origin.H+'/');await wait(H,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn'));
       await tap(H,'#mp1Btn');await wait(H,()=>MP1Host.screen==='menu');await tap(H,'[data-m="saves"][data-mode="resume"]');await wait(H,()=>document.querySelector('#mp1 [data-save]'));
+      if(process.env.MP8_RIVAL_RESUME)await H.evaluate(()=>{
+        const assign=assignRivalPersonas;
+        window.rivalAssignments=0;
+        assignRivalPersonas=function(...args){window.rivalAssignments++;return assign(...args);};
+      });
       await tap(H,'#mp1 [data-save] [data-m="resume"]');await wait(H,()=>document.getElementById('mp1Sheet'));await tap(H,'#mp1Sheet [data-m="sheetOk"]');
       await wait(H,()=>MP1Host.lobby&&MP1Host.lobby.phase==='resume'&&document.getElementById('mp4Seats'));const code1=await H.evaluate(()=>MP1Host.code);assert.notEqual(code1,code,'new room code');
       await H.evaluate(CANON);await H.evaluate(HOSTLIB);
       for(const n of guestNames()){const p=await open(n);await p.addInitScript(TIMERS);await guestGo(n,code1,null);
         await wait(p,e=>MP1Join.screen==='lobby'&&MP1Join.lobby&&MP1Join.lobby.phase==='resume'&&MP1Join.empireId===e,saved.e[n],40000);}
+      if(process.env.MP8_RIVAL_RESUME){
+        const labels=await Promise.all(['H',...guestNames()].map(n=>pg[n].locator('.mp1-rivals b').textContent()));
+        assert.deepEqual(labels,['Rakip Doktrinler: Orta · 1–2 AI','Rakip Doktrinler: Orta · 1–2 AI','Rakip Doktrinler: Orta · 1–2 AI']);
+        assert.equal(await H.evaluate(()=>window.rivalAssignments),0);
+        metrics.resume.rivalLabels=labels;
+        metrics.resume.rivalAssignments=0;
+      }
       await tap(H,'[data-m="resumeGo"]');const sh=await H.$('#mp1Sheet [data-m="sheetOk"]');if(sh)await tap(H,'#mp1Sheet [data-m="sheetOk"]');
       await wait(H,()=>MP1Host.started&&MP1Host.host.lobby.phase==='ingame');
       for(const n of guestNames()){await wait(pg[n],()=>window.MP6Stars&&MP6Stars.S.started&&!document.getElementById('game').classList.contains('hidden'),undefined,60000);await pg[n].evaluate(CANON);await pg[n].evaluate(GUESTLIB);}

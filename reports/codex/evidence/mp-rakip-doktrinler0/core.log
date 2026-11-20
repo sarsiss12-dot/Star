@@ -1,0 +1,48 @@
+PASS 9/9, including 0–0 and independent tension
+PASS MP Save8, missing header, disagreement, no redistribution
+PASS p46 Doğal and SP fixed-zero Save8 import
+PASS p46 SP üyelik puanı, kabul oyu ve Gerilim bağımsızlığı
+{
+  "configureMatrix": "9/9, including 0–0 and independent tension",
+  "independentCreation": true,
+  "continue": {
+    "headerAbsentRecovered": true,
+    "reassignments": 0,
+    "conflict": "rival-mismatch",
+    "invalid": "rival-range",
+    "save": "b1030a160683a41da10e40be02b2b374373063137ae06ae791081b2bdbc0dcc2"
+  },
+  "oldPackage": {
+    "source": "96h10p46",
+    "nextMonthSave8": "9736d5b21c20db1904c2d9b1db9edb78597f006bc2d54648685b7db06aa37a4e",
+    "nextMonthRng": -1456830309
+  },
+  "score": [
+    {
+      "open": false,
+      "willing": 0.5080513485670644,
+      "vote": 0.6902424937806451,
+      "order": [
+        {
+          "id": 5,
+          "score": 0.5080513485670644,
+          "rel": 22.85833742460154
+        }
+      ],
+      "tension": 1,
+      "rng": -184825561
+    },
+    {
+      "open": true,
+      "willing": -0.09194865143293574,
+      "vote": 0.09024249378064497,
+      "order": [],
+      "tension": 1,
+      "rng": -184825561
+    }
+  ],
+  "ranking": {
+    "natural": 4,
+    "open": 5
+  }
+}

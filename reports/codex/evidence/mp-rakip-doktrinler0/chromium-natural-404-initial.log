@@ -1,0 +1,62 @@
+FAIL RD0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 404; misafir gerçek STARS arayüzünde
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+... Skipped lines
+
+  {
+    ai: [
+      [
+        3,
+        'yayilmaci'
+...
+      [
++       1194.8643287080504,
+-       1194.8643287080508,
+        5316.0985455349855,
+        [
+          0,
+          49
+        ],
+...
+      [
++       1474.501383039879,
+-       1474.5013830398796,
+        4889.047591596739,
+        [
+          0,
+          95,
+          76
+...
+      [
++       1721.7755106193574,
++       1827.4165020236567,
+-       1721.7755106193572,
+-       1827.4165020236564,
+        [
+          27,
+          7
+        ],
+        -1
+...
+        4516.236658379,
++       2262.938304704722,
+-       2262.9383047047218,
+        [
+          19,
+          68,
+          89
+        ],
+...
+        5292.148037491087,
++       5097.157698425384,
+-       5097.157698425383,
+        [
+          9,
+          12,
+          16
+        ],
+
+    at /workspace/Star-mp-rakip/tests/browser-mp8.cjs:355:14
+    at async test (/workspace/Star-mp-rakip/tests/browser-mp8.cjs:62:162)
+    at async /workspace/Star-mp-rakip/tests/browser-mp8.cjs:326:3
+GEÇEN: 0 KALAN: 1

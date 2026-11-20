@@ -18,6 +18,13 @@ const ERR={'invalid-code':'Oda kodu geçersiz ya da oda yok.','room-full':'Oda d
   'rules:none':'Bu sistemde bu işlem için uygun başka filo ya da gemi yok.','rules:too-small':'Filoda ayrılacak yeterli gemi yok.','rules:not-owner':'Bu filo senin değil.'};
 const CODE_LEN=5;   // MP.7.4: oda kodu 5 karakter (relay CODE_LEN ile aynı); tire yok
 const fmtCode=c=>{c=String(c||'');return c.length>CODE_LEN?c.replace(/^(.{4})(.+)$/,'$1-$2'):c;};
+function rivalSummary(lobby){
+  const label=lobby.rivalLabel||'Doğal';
+  const help=lobby.settings?.aiRivals
+    ?'Seçilen aralıkta Militarist, Kriminal veya İzolasyonist AI devletleri oluşabilir. Büyük federasyonların genişlemesi daha az cazip olur.'
+    :'AI doktrinleri galaksinin doğal dağılımıyla belirlenir.';
+  return '<div class="mp1-rivals"><b>Rakip Doktrinler: '+esc(label)+'</b><div class="mp1-sub">'+esc(help)+'</div></div>';
+}
 function players(L){
   return '<div class="mp1-plist">'+L.players.map(p=>{
     const e=L.empires.find(x=>x.id===p.claim);
@@ -45,10 +52,10 @@ function apply(st,m){
   return null;
 }
 /* MP.7.3: salt okunur sürüm işareti — telefonda (bilgisayarsız) doğru dağıtımın açıldığını görmek için; relay /mp/version ile aynı */
-const MP_VERSION='MP.8.9b45';
+const MP_VERSION='MP.8.9b46';
 const verLine=()=>'STARS '+MP_VERSION+' · oyun '+(typeof BUILD_ID==='string'?BUILD_ID:'?');
 /* MP.7.5: kapalı çok oyunculu düğmesi sol araç sütununun (#tools) son öğesi olur; açık panel eski kaplama konumunda (#app).
    Sütun yeniden çizilirse düğme bir sonraki durum güncellemesinde geri eklenir. */
 const dock=(el,compact)=>{const doc=root.document,tools=doc&&doc.getElementById('tools'),host=compact&&tools?tools:(doc.getElementById('app')||doc.body);if(el&&el.parentNode!==host)host.appendChild(el);};
-root.MP1View={esc,color,TAB,PHASE,ERR,fmtCode,CODE_LEN,dock,players,apply,MP_VERSION,verLine};
+root.MP1View={esc,color,TAB,PHASE,ERR,fmtCode,CODE_LEN,dock,players,rivalSummary,apply,MP_VERSION,verLine};
 })(typeof globalThis!=='undefined'?globalThis:this);

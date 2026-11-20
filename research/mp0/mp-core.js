@@ -31,6 +31,40 @@ const has=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 const plain=o=>{if(o===null||typeof o!=='object'||Array.isArray(o))return false;const pr=Object.getPrototypeOf(o);return pr===null||Object.getPrototypeOf(pr)===null;};
 const int=(x,lo,hi)=>Number.isInteger(x)&&x>=lo&&x<=hi;
 const onlyKeys=(o,keys)=>Object.keys(o).every(k=>keys.includes(k));
+const RIVAL_KEYS=['min','max'];
+function validRivals(range, aiCount){
+  return int(aiCount,1,48)&&plain(range)&&has(range,'min')&&has(range,'max')&&
+    onlyKeys(range,RIVAL_KEYS)&&int(range.min,0,aiCount)&&int(range.max,range.min,aiCount);
+}
+function copyRivals(settings){
+  return settings.aiRivals===undefined?{}:{aiRivals:{min:settings.aiRivals.min,max:settings.aiRivals.max}};
+}
+function worldAI(cfg){
+  return aiCountFor(cfg)-(Array.isArray(cfg.humans)?cfg.humans.length:0);
+}
+function publicGalaxy(settings){
+  const result={size:settings.size,aiCount:settings.aiCount};
+  for(const key of ['shape','planetMul','tension'])if(settings[key]!==undefined)result[key]=settings[key];
+  return {...result,...copyRivals(settings)};
+}
+function galaxyFromWorld(cfg){
+  const ai=worldAI(cfg);
+  if(typeof cfg.size!=='string'||!int(ai,1,48))return null;
+  const settings=publicGalaxy({...cfg,aiCount:ai});
+  if(settings.planetMul===1)delete settings.planetMul;
+  if(settings.tension==='dengeli')delete settings.tension;
+  return settings;
+}
+function rivalLabel(settings){
+  const {aiRivals:range,aiCount}=settings||{};
+  if(!range)return 'Doğal';
+  const preset=[['az','Az'],['orta','Orta'],['cok','Çok']].find(([key])=>{
+    const candidate=rivalPreset(key,aiCount);
+    return range.min===candidate.min&&range.max===candidate.max;
+  });
+  return (preset?.[1]||'Özel')+' · '+(range.min===range.max?range.min:range.min+'–'+range.max)+' AI';
+}
+
 const r1=x=>Math.round((+x||0)*10)/10;
 function table(o){const t=Object.create(null);for(const k of Object.keys(o))t[k]=o[k];return Object.freeze(t);}
 /* Bütünlük bağı için küçük FNV-1a (kriptografik değil; Save8 ↔ meta eşleşmesi). */
@@ -118,12 +152,13 @@ function validatePackage(input,o={}){
   if(pkg.format!==PKG_FORMAT)return fail('format');
   if(pkg.mpVersion!==PKG_VERSION)return fail('version');
   const build=has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null);
-  const sameSaveFormat=['96h10p41','96h10p42','96h10p43','96h10p44','96h10p45','96h10p46'].includes(build)&&typeof pkg.build==='string'&&(
+  const sameSaveFormat=['96h10p41','96h10p42','96h10p43','96h10p44','96h10p45','96h10p46','96h10p47'].includes(build)&&typeof pkg.build==='string'&&(
     /^96h10p(?:[6-9]|[1-3][0-9]|40)$/.test(pkg.build)||['96h10p25u1','96h10p27s1'].includes(pkg.build)||
     build==='96h10p43'&&['96h10p41','96h10p42'].includes(pkg.build)||
     build==='96h10p44'&&['96h10p41','96h10p42','96h10p43'].includes(pkg.build)||
     build==='96h10p45'&&['96h10p41','96h10p42','96h10p43','96h10p44'].includes(pkg.build)||
-    build==='96h10p46'&&['96h10p41','96h10p42','96h10p43','96h10p44','96h10p45'].includes(pkg.build)
+    build==='96h10p46'&&['96h10p41','96h10p42','96h10p43','96h10p44','96h10p45'].includes(pkg.build)||
+    build==='96h10p47'&&['96h10p41','96h10p42','96h10p43','96h10p44','96h10p45','96h10p46'].includes(pkg.build)
   );
   if(pkg.build!==build&&!(build==='96h10p42'&&pkg.build==='96h10p41')&&!sameSaveFormat&&!((build==='96h10p7'&&pkg.build==='96h10p6')||(build==='96h10p8'&&['96h10p6','96h10p7'].includes(pkg.build))||(build==='96h10p9'&&['96h10p6','96h10p7','96h10p8'].includes(pkg.build))||(build==='96h10p10'&&['96h10p6','96h10p7','96h10p8','96h10p9'].includes(pkg.build))||(build==='96h10p11'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10'].includes(pkg.build))||(build==='96h10p12'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11'].includes(pkg.build))||(build==='96h10p13'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12'].includes(pkg.build))||(build==='96h10p14'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13'].includes(pkg.build))||(build==='96h10p15'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14'].includes(pkg.build))||(build==='96h10p16'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15'].includes(pkg.build))||(build==='96h10p17'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16'].includes(pkg.build))||(build==='96h10p18'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17'].includes(pkg.build))||(build==='96h10p19'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18'].includes(pkg.build))||(build==='96h10p20'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19'].includes(pkg.build))||(build==='96h10p21'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20'].includes(pkg.build))||(build==='96h10p22'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21'].includes(pkg.build))||(build==='96h10p23'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22'].includes(pkg.build))||(build==='96h10p24'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23'].includes(pkg.build))||(build==='96h10p25'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24'].includes(pkg.build))||(build==='96h10p26'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25'].includes(pkg.build))||(build==='96h10p27'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26'].includes(pkg.build))||(build==='96h10p28'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27'].includes(pkg.build))||(build==='96h10p29'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1'].includes(pkg.build))||(build==='96h10p30'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29'].includes(pkg.build))||(build==='96h10p31'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30'].includes(pkg.build))||(build==='96h10p32'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31'].includes(pkg.build))||(build==='96h10p33'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32'].includes(pkg.build))||(build==='96h10p34'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33'].includes(pkg.build))||(build==='96h10p35'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33','96h10p34'].includes(pkg.build))||(build==='96h10p36'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33','96h10p34','96h10p35'].includes(pkg.build))||(build==='96h10p37'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33','96h10p34','96h10p35','96h10p36'].includes(pkg.build))||(build==='96h10p38'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33','96h10p34','96h10p35','96h10p36','96h10p37'].includes(pkg.build))||(build==='96h10p39'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33','96h10p34','96h10p35','96h10p36','96h10p37','96h10p38'].includes(pkg.build))||(build==='96h10p40'&&['96h10p6','96h10p7','96h10p8','96h10p9','96h10p10','96h10p11','96h10p12','96h10p13','96h10p14','96h10p15','96h10p16','96h10p17','96h10p18','96h10p19','96h10p20','96h10p21','96h10p22','96h10p23','96h10p24','96h10p25','96h10p25u1','96h10p26','96h10p27','96h10p28','96h10p27s1','96h10p29','96h10p30','96h10p31','96h10p32','96h10p33','96h10p34','96h10p35','96h10p36','96h10p37','96h10p38','96h10p39'].includes(pkg.build))))return fail('build'); // BETA-P0.1: explicit v8/package4 compatibility, all remaining checks still mandatory
   if(typeof pkg.save8!=='string')return fail('fields');if(pkg.save8.length>MAX_SAVE8)return fail('too-big');
@@ -137,7 +172,11 @@ function validatePackage(input,o={}){
   const ss=pkg.session;
   if(!plain(ss)||!onlyKeys(ss,['roomId','worldRevision','hostEmpireId','speed','capacity','settings','players','notes']))return fail('session');
   if(!int(ss.worldRevision,0,2147483647)||!int(ss.hostEmpireId,0,63)||!int(ss.speed,0,16)||!int(ss.capacity,2,8)||typeof ss.roomId!=='string'||ss.roomId.length>40)return fail('session');
-  if(ss.settings!==null&&(!plain(ss.settings)||!onlyKeys(ss.settings,['size','aiCount','shape','aiGuard','planetMul','tension'])||ss.settings.tension!==undefined&&!['sakin','calkantili'].includes(ss.settings.tension)||typeof ss.settings.size!=='string'||!int(ss.settings.aiCount,1,48)||(ss.settings.planetMul!==undefined&&!(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(ss.settings.planetMul)&&ss.settings.planetMul!==1))||ss.settings.aiGuard!==undefined&&ss.settings.aiGuard!==true))return fail('session');   // MP-P0-DESYNC2: aiGuard yalnız açıkken yazılır
+  if(ss.settings!==null&&(!plain(ss.settings)||!onlyKeys(ss.settings,['size','aiCount','shape','aiGuard','planetMul','tension','aiRivals'])||ss.settings.tension!==undefined&&!['sakin','calkantili'].includes(ss.settings.tension)||typeof ss.settings.size!=='string'||!int(ss.settings.aiCount,1,48)||(ss.settings.planetMul!==undefined&&!(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(ss.settings.planetMul)&&ss.settings.planetMul!==1))||ss.settings.aiGuard!==undefined&&ss.settings.aiGuard!==true))return fail('session');   // MP-P0-DESYNC2: aiGuard yalnız açıkken yazılır
+  const worldRange=d.cfg?.aiRivals, sessionRange=ss.settings?.aiRivals;
+  if(worldRange!==undefined&&!validRivals(worldRange,worldAI(d.cfg))||
+    sessionRange!==undefined&&!validRivals(sessionRange,ss.settings.aiCount))return fail('rival-range');
+  if(sessionRange!==undefined&&(!worldRange||sessionRange.min!==worldRange.min||sessionRange.max!==worldRange.max))return fail('rival-mismatch');
   if(!Array.isArray(ss.players)||ss.players.length<1||ss.players.length>8)return fail('session');
   if(ss.players.filter(x=>plain(x)&&x.playerId==='host').length!==1)return fail('host');
   const pids=new Set(),eids=new Set();let hosts=0;
@@ -207,14 +246,18 @@ function packageFromSave8(text,o={}){
   if(typeof text!=='string')return {ok:false,why:'json'};if(text.length>MAX_SAVE8)return {ok:false,why:'too-big'};
   let d;try{d=JSON.parse(text);}catch{return {ok:false,why:'json'};}
   if(!plain(d)||d.v!==8||!Array.isArray(d.emps)||!Array.isArray(d.sys))return {ok:false,why:'save-version'};
-  const kind=save8Kind(d);if(kind!=='host')return {ok:false,why:'save8-'+kind};
+  const kind=save8Kind(d);
+  // Açık doktrinli SP dünyası yalnız kendi host koltuğuyla devam eder.
+  const single=kind==='single'&&d.cfg?.aiRivals!==undefined&&!d.cfg.humans&&d.emps.filter(isHumanActor).length===1&&isHumanActor(d.emps[0]);
+  if(kind!=='host'&&!single)return {ok:false,why:'save8-'+kind};
+  if(d.cfg.aiRivals!==undefined&&!validRivals(d.cfg.aiRivals,worldAI(d.cfg)))return {ok:false,why:'rival-range'};
   const random=o.random;if(typeof random!=='function')return {ok:false,why:'fields'};
-  const hs=d.cfg.humans,nm=(e,f)=>String(e&&e.name||f).replace(/[\u0000-\u001f<>]/g,'').slice(0,24)||f;
+  const hs=d.cfg.humans||[],nm=(e,f)=>String(e&&e.name||f).replace(/[\u0000-\u001f<>]/g,'').slice(0,24)||f;
   const players=[{playerId:'host',name:'Host',empireId:0,seat:0,color:'',lastSeq:0}];
   hs.forEach((_,i)=>{const salt=random(16);players.push({playerId:'p-'+random(6),name:nm(d.emps[i+1],'Oyuncu '+(i+1)),empireId:i+1,seat:i+1,color:'',lastSeq:0,wasAI:false,takeover:null,auth:{salt,hash:sha256(salt+':'+random(16))}});});
-  const ai=(d.cfg.aiCount|0)-hs.length,size=typeof d.cfg.size==='string'?d.cfg.size:null;
+  const settings=galaxyFromWorld(d.cfg),size=settings?.size||null;
   const body={format:PKG_FORMAT,mpVersion:PKG_VERSION,build:has(o,'build')?o.build:(typeof BUILD_ID==='string'?BUILD_ID:null),createdAt:Number(o.now?o.now():Date.now()),saveId:'s-'+random(8),
-    session:{roomId:'',worldRevision:0,hostEmpireId:0,speed:0,capacity:Math.max(2,players.length),settings:size&&ai>=1&&ai<=48?{size,aiCount:ai,...(typeof d.cfg.shape==='string'?{shape:d.cfg.shape}:{}),...(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(d.cfg.planetMul)&&d.cfg.planetMul!==1?{planetMul:d.cfg.planetMul}:{}),...(['sakin','calkantili'].includes(d.cfg.tension)?{tension:d.cfg.tension}:{})}:null,players,notes:{}},
+    session:{roomId:'',worldRevision:0,hostEmpireId:0,speed:0,capacity:Math.max(2,players.length),settings,players,notes:{}},
     diplomacy:{next:1,offers:[]},
     display:{name:String(d.emps[0].name||'Galaksi').replace(/[\u0000-\u001f<>]/g,'').slice(0,40),year:d.year|0,month:d.month|0,day:Math.floor(d.day||0),size,systems:d.sys.length,
       humans:players.map(x=>({name:x.name,empire:x.playerId==='host'?String(d.emps[0].name||'?'):String(d.emps[x.empireId].name||'?'),host:x.playerId==='host'?1:0}))}};
@@ -1660,10 +1703,10 @@ else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it)
     const started=['starting','ingame','paused','resume'].includes(L.phase);
     const empires=L.galaxyRev&&(L.mode!=='design'||started)&&G.emps?G.emps.filter(e=>e.id!==hostEmpireId&&!e.wild&&!e.crisisSide&&!e.dead).map(e=>({...empireCard(e),seat:(gs.find(p=>p.playerId!=='host'&&(p.claim===e.id||p.empireId===e.id))||{}).seat??null})).filter(e=>!started||e.seat!==null):[];
     /* Tohum yalnız host'ta: tohum + açık motor kodu tüm galaksiyi (konumlar, AI devletleri) yeniden kurdurur. */
-    const settings=L.settings&&(viewer&&viewer.playerId==='host'?L.settings:{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{}),...(L.settings.planetMul!==undefined?{planetMul:L.settings.planetMul}:{}),...(L.settings.tension!==undefined?{tension:L.settings.tension}:{})});
+    const settings=L.settings&&(viewer&&viewer.playerId==='host'?{...L.settings,...copyRivals(L.settings)}:publicGalaxy(L.settings));
     const mine=viewer&&viewer.claim!==null&&G.emps&&G.emps[viewer.claim]?{empire:viewer.claim,...prepCard(G.emps[viewer.claim])}:null;
     const design=L.mode==='design',hd=design?hostDraftNow():null;
-    return {v:PROTOCOL,type:'lobby',rev:L.rev,mode:L.mode,phase:phaseNow(),pause:L.pause||null,capacity:L.capacity,settings,galaxyRev:L.galaxyRev,
+    return {v:PROTOCOL,type:'lobby',rev:L.rev,mode:L.mode,phase:phaseNow(),pause:L.pause||null,capacity:L.capacity,settings,rivalLabel:rivalLabel(settings),galaxyRev:L.galaxyRev,
       you:viewer?{seat:viewer.seat,...(design?{draftRev:viewer.draftRev||0,draft:!!viewer.draft}:{})}:null,canStart:canStart().ok,
       ...(design?{designs:gs.map(p=>({seat:p.seat,card:p.playerId==='host'?(hd.ok?draftCard(hd.draft):null):draftCard(p.draft)}))}:{}),
       players:gs.map(p=>({seat:p.seat,name:p.name,color:p.color,host:p.playerId==='host',online:p.playerId==='host'||!!p.conn,claim:p.empireId!==null?p.empireId:p.claim,ready:!!p.ready,tab:p.tab,...(p.visitor?{visitor:1}:{}),...(p.guard?{guarded:1}:{})})),
@@ -1896,7 +1939,7 @@ else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it)
       return x;});
     const hostE=G.emps[hostEmpireId],name=String(o.name||'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,40)||(hostE?String(hostE.name).slice(0,40):'Galaksi');   // tarih ayrı alanlarda (year/month)
     const body={format:PKG_FORMAT,mpVersion:PKG_VERSION,build:typeof BUILD_ID==='string'?BUILD_ID:null,createdAt:now(),saveId:S.saveId,
-      session:{roomId:S.roomId,worldRevision:S.worldRevision,hostEmpireId,speed:sharedSpeed().want,capacity:L?L.capacity:Math.max(2,players.length),settings:L&&L.settings?{size:L.settings.size,aiCount:L.settings.aiCount,...(L.settings.shape!==undefined?{shape:L.settings.shape}:{}),...(L.settings.planetMul!==undefined?{planetMul:L.settings.planetMul}:{}),...(L.settings.tension!==undefined?{tension:L.settings.tension}:{}),...(L.guard?{aiGuard:true}:{})}:null,
+      session:{roomId:S.roomId,worldRevision:S.worldRevision,hostEmpireId,speed:sharedSpeed().want,capacity:L?L.capacity:Math.max(2,players.length),settings:L&&L.settings?{...publicGalaxy(L.settings),...(L.guard?{aiGuard:true}:{})}:null,
         players,notes:Object.fromEntries([...notes].map(([k,v])=>[k,v.slice(-12)]))},
       diplomacy:{next:D.next,offers:JSON.parse(JSON.stringify(D.offers)),...(SQ.length?{sq:SQ.map(q=>({from:q.from,to:q.to,born:q.born,expires:q.expires,status:q.status}))}:{})},   // MP.6.3: statüko teklifleri
       display:{name,year:G.year,month:G.month,day:Math.floor(G.day),size:L&&L.settings?L.settings.size:null,systems:G.sys.length,
@@ -1913,7 +1956,10 @@ else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it)
     SQ.length=0;for(const q of pkg.diplomacy.sq||[])SQ.push({...q,...(q.status==='pending'&&G.day>=q.expires?{status:'expired'}:{})});   // MP.6.3: süresi dolan yapay uzatılmaz
     notes.clear();for(const [k,v] of Object.entries(ss.notes||{}))notes.set(+k,v.slice(-12));
     newsBy.clear();newsVisCache.clear();warSeen.clear();recoverWarNews();
-    if(L){L.phase='resume';L.capacity=ss.capacity;L.guard=!!(ss.settings&&ss.settings.aiGuard===true);L.settings=ss.settings?{size:ss.settings.size,aiCount:ss.settings.aiCount,...(ss.settings.shape!==undefined?{shape:ss.settings.shape}:{}),...(ss.settings.planetMul!==undefined?{planetMul:ss.settings.planetMul}:{}),...(ss.settings.tension!==undefined?{tension:ss.settings.tension}:{})}:null;L.galaxyRev=1;L.seatNext=Math.max(1,...ss.players.map(x=>(x.seat|0)+1));
+    if(L){L.phase='resume';L.capacity=ss.capacity;L.guard=ss.settings?.aiGuard===true;
+      const input=ss.settings?publicGalaxy(ss.settings):null, worldSettings=G.cfg&&galaxyFromWorld(G.cfg);
+      L.settings=worldSettings?.aiRivals?{...(input||worldSettings),aiCount:worldSettings.aiCount,...copyRivals(worldSettings)}:input;
+      L.galaxyRev=1;L.seatNext=Math.max(1,...ss.players.map(x=>(x.seat|0)+1));
       L.resume={name:pkg.display.name,year:pkg.display.year,month:pkg.display.month,size:pkg.display.size,createdAt:pkg.createdAt};}
   }
   /* Devam: host açıkça başlatır. Kimliği doğrulanmamış ziyaretçiler çıkar; bekleyen koltuklar ayrılmış kalır (AI yönetmez). */
@@ -1960,25 +2006,25 @@ else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it)
       if(typeof AI_VIEW_CACHE!=='undefined')AI_VIEW_CACHE.delete(e);}
     return n;}
   /* ---------- MP.1 lobi host API'si (ağdan erişilemez) ---------- */
-  const SETTINGS_KEYS=['size','shape','aiCount','seed','planetMul','tension'];   // BETA-WAR-GOALS.0: +tension
+  const SETTINGS_KEYS=['size','shape','aiCount','seed','planetMul','tension','aiRivals'];
   function configure(set){
     if(!L)return {ok:false,why:'no-lobby'};
     if(!['created','waiting','ready'].includes(L.phase))return {ok:false,why:'phase'};
-    if(!plain(set)||!onlyKeys(set,SETTINGS_KEYS))return {ok:false,why:'bad-settings'};
+    if(!plain(set)||!onlyKeys(set,SETTINGS_KEYS)||has(set,'aiRivals')&&!validRivals(set.aiRivals,set.aiCount))return {ok:false,why:'bad-settings'};
     if(!has(SIZES,set.size)||SIZES[set.size].available===false||(set.shape!==undefined&&!has(SHAPES,set.shape))||(set.planetMul!==undefined&&!(PLANET_MULS.includes(set.planetMul)&&set.planetMul!==1))||(set.tension!==undefined&&!['sakin','calkantili'].includes(set.tension))||!int(set.aiCount,1,48)||!int(set.seed,1,2147483647))return {ok:false,why:'bad-settings'};
     if(set.aiCount+(L.mode==='design'?L.capacity:1)>SIZES[set.size].sys)return {ok:false,why:'galaxy-too-small'};
     if(L.mode==='design'){
       /* MP.7: galaksi OYUN BAŞLARKEN taslaklarla kurulur; burada yalnız ayar doğrulanır. AI + insan ≤ 49 (ID 0–63 için özel taraf payı korunur). */
       if(set.aiCount+(L.capacity-1)>48)return {ok:false,why:'too-many-states'};
       if(set.aiCount>SCALE_ACCEPTANCE.maxAI)return {ok:false,why:'unverified-scale'};
-      L.settings={...set};L.galaxyRev++;L.phase='waiting';
+      L.settings={...set,...copyRivals(set)};L.galaxyRev++;L.phase='waiting';
       for(const p of guests()){if(p.draft&&!draftCheck(p.draft).ok)p.draft=null;p.ready=false;}   // ayar değişti: hazırlar sıfır, taslaklar yeniden denetlenir
       broadcastLobby();return {ok:true};
     }
     if(set.aiCount<L.capacity-1)return {ok:false,why:'ai-below-capacity'};
     if(set.aiCount>SCALE_ACCEPTANCE.maxAI)return {ok:false,why:'unverified-scale'};
-    const r=opts.lobby.generate({...set});if(!r||!r.ok)return {ok:false,why:'generate'};
-    L.settings={...set};L.galaxyRev++;L.phase='waiting';
+    const r=opts.lobby.generate({...set,...copyRivals(set)});if(!r||!r.ok)return {ok:false,why:'generate'};
+    L.settings={...set,...copyRivals(set)};L.galaxyRev++;L.phase='waiting';
     for(const p of guests()){p.claim=null;p.ready=false;}          // ayar değişti: seçim ve hazırlar sıfır
     broadcastLobby();return {ok:true};
   }
@@ -2002,7 +2048,7 @@ else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it)
       const gs=guests().sort((a,b)=>a.seat-b.seat),drafts=[];
       for(const p of gs){const c=draftCheck(p.draft);if(!c.ok){p.draft=null;p.ready=false;L.phase='waiting';broadcastLobby();return {ok:false,why:'guest-draft'};}drafts.push(c.draft);}
       const hd=hostDraftNow();if(!hd.ok){L.phase='waiting';broadcastLobby();return {ok:false,why:'host-draft'};}
-      let r;try{r=opts.lobby.generate({...L.settings,aiCount:L.settings.aiCount+drafts.length,humans:drafts,host:hd.draft});}catch(e){r={ok:false,why:String(e&&e.message||e)};}
+      let r;try{r=opts.lobby.generate({...L.settings,...copyRivals(L.settings),aiCount:L.settings.aiCount+drafts.length,humans:drafts,host:hd.draft});}catch(e){r={ok:false,why:String(e&&e.message||e)};}
       if(!r||!r.ok){L.phase='waiting';broadcastLobby();return {ok:false,why:'generate',detail:r&&r.why};}
       for(let i=0;i<gs.length;i++){const a=assign(gs[i].playerId,i+1);if(!a.ok){L.phase='waiting';broadcastLobby();return {ok:false,why:'assign:'+a.why};}}
       observeHumans();L.phase='ingame';broadcastLobby();publish();return {ok:true};

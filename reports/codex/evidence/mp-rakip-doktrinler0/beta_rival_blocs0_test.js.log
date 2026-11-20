@@ -1,0 +1,12 @@
+PASS R1 iki insan, önceden ittifak YOK: davet → açık kabul → son onay; federasyon ve eksik ittifak birlikte, tek bedel; öncesinde ittifak yazılmaz
+PASS R2 ret / süre sonu / iptal / şart değişikliği (kurucular arası savaş): yarım ittifak ve bedel yok
+PASS R3 tek insan + iki AI ortak, ittifaksız: AI gerçek stratejik kararla yanıt verir; kabulde federasyon + bütün karşılıklı ittifaklar
+PASS R4 ittifaksız üye kabulü: Federasyonuma Davet Et → üye oyu (insan oyu otomatik değil) → AI adayın kabulü → üyelik + bütün üyelerle ittifak
+PASS R5 insan aday: oydan sonra davet kartı; açık kabulle üyelik + ittifak; ikinci kabul ikinci üyelik yaratmaz; ret ittifak bırakmaz
+PASS R6 hedefli karşı blok: büyük federasyon karşısında iki küçük müttefik AI (savunma bağı) — eski kural engeli gösterilir, yeni yolla 2 kurucu ve denge birliği indirimiyle kurulur, sürer
+fren (ahl +3/0/−3): 2.89 2.33 1.77
+PASS R7 dürüst / sahtekâr aynı fırsat: söz bozma freni dürüstlükle ölçeklenir; düşük getiride ikisi de vazgeçer
+PASS R8 söz bozan savaş ilanı: gerekçe hafızada (paktBozdu), haber akışında ve devlet kaydında (oathLog)
+PASS R9 federasyon savunma yükümlülüğü: aynı koşulda dürüst üye savaşa girer, sahtekâr üye kaçar (hafıza + uyum + haber); düşük riskte ikisi de girer
+PASS R10 Save8: ittifaksız kuruluş davetinin bekleyen rızası ve oathLog korunur; eski kayıt alanları zorla doldurulmaz
+GEÇEN: 10 KALAN: 0
