@@ -1,9 +1,9 @@
 {
   "phase": "AI-IKAME.1",
-  "build": "96h10p46",
+  "build": "96h10p47",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p46",
+  "pwa_cache": "stars-v96h10p47",
   "parent_commit": "4f07699be811d5d300616ec6cf4de9171c97286e",
   "parent_zip_sha256": "03682419baaa1a4d778660b6daf6da0bff2365ee07a8c3d9a10819c25da316a0",
   "file_count": 19,
@@ -21,12 +21,12 @@
     "economy.js": "5a364e79abc1cd8fbe7d1e6070b0e818bec1fea90aa98d2c729ed37060008cf8",
     "inbox.js": "77c15604629491740a3e9f256293165692a9e2c0d28f0e15ff384966be605cc7",
     "index.html": "3bb3c8291d247981322a54cd347782a8d4d727e01a0e60c707667bcf95d63bc9",
-    "main.js": "ed6e6235da82795d92507b3e2c19a6779160ed1e3c293d74a02f3a6862b79efe",
+    "main.js": "6cdc31f42f19105f850a75a99cc6b864ef151d26c7e54ebc17e9e4279f608d96",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "5b40278d2e0c34a25db5838c87c691f0b23738b0f3b3af7b87ae1fcd85badddc",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "08ebbc5650f589de7e90fa48bae620b7f3f23cd8543ffda987cf181a3ee087ee",
-    "ui.js": "1b64fd32e5c9845e4c51e66df9afe13d943541124c4aed30d049fde94ef2a507"
+    "sw.js": "f3b113ec0b7d5ed49fe327b8103061fb06dec92274a27365b3f57d2b78f86052",
+    "ui.js": "466b8b444ef47cfc2277c4752061782ef2392c5782c6c5d9b0f062846ea4bee5"
   },
   "description": "Mineral kurtarmada alaşımın karşılanabilirliği ve stratejik bina ikamesinde ortak gölge bütçe. Save8 v8, MP paket 4, protokol 1."
 }

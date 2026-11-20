@@ -9028,7 +9028,7 @@ const UI = {
 
 function setupHumanSlots(){return window.MP7Setup?.active&&window.MP7Setup.role==='host'?(window.MP1Host?.lobby?.capacity||1):1;}
 function setupSelectionError(c){
- const why=setupConfigError(window.MP7Setup?.active?{...c,aiRivals:undefined}:c);if(why)return why;
+ const why=setupConfigError(c);if(why)return why;
  const humans=setupHumanSlots();
  if(humans>1&&aiCountFor(c)+humans>49)return 'Bu oturumda en fazla '+(49-humans)+' AI seçilebilir; insanlarla birlikte en fazla 49 normal devlet.';
  if(aiCountFor(c)+humans>SIZES[c.size].sys)return 'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.';
@@ -9478,9 +9478,7 @@ function renderSetup(){
     h += `</div><div class="mini">Normal yaşanabilir gezegen adaylarının sayısını değiştirir${pm<1?` (${String(pm).replace('.',',')}× ≈ normal adayların %${Math.round(pm*100)}'i kalır, kalanlar ölü dünyaya döner)`:''}. Sistem konumları, hiperhatlar, başkentler ve toplam gezegen sayısı aynı tohumda değişmez${pm>1?' (yalnız fazladan aday gerekirse boş sistemlere eklenir)':''}; başkent dünyaları, Gaia / Makine Dünyası gibi nadir dünyalar, özel yataklar ve tür kuralları korunur.</div></div>`;
 
     h += tensionSetupHtml(c);   // BETA-WAR-GOALS.0
-    if(!window.MP7Setup?.active){
-      h+=rivalSetupHtml(c);
-    }
+    if(!window.MP7Setup?.active||window.MP7Setup.role==='host')h+=rivalSetupHtml(c);
 
     h += `<div class="sect"><h2>ZORLUK</h2><div class="grid g4">`;
     for (const k in DIFFS) h += `<button class="opt ${c.diff===k?'on':''}" data-a="diff" data-x="${k}">${DIFFS[k].n}<small>${DIFFS[k].d}</small></button>`;
@@ -9748,7 +9746,7 @@ function setupClickHandler(e){
   else if (a === 'aiCount'){ CFG.aiCount=Math.max(1,Math.min(SCALE_ACCEPTANCE.maxAI,aiCountFor(CFG)+Number(x)));safeRenderSetup(); }
   else if(a==='aiPick'){if(Number.isInteger(+x)&&+x>=1&&+x<=SCALE_ACCEPTANCE.maxAI)CFG.aiCount=+x;safeRenderSetup();}
   else if(a==='rivalToggle'){if(CFG.aiRivals)delete CFG.aiRivals;else CFG.aiRivals=rivalPreset('orta',aiCountFor(CFG));safeRenderSetup();}
-  else if(a==='rivalPreset'){if(x==='auto')delete CFG.aiRivals;else CFG.aiRivals=rivalPreset(x,aiCountFor(CFG));safeRenderSetup();}
+  else if(a==='rivalPreset'){if(x==='auto')delete CFG.aiRivals;else if(x==='custom')CFG.aiRivals={min:0,max:0};else CFG.aiRivals=rivalPreset(x,aiCountFor(CFG));safeRenderSetup();}
   else if(a==='rivalStep'){rivalStep(CFG,x);safeRenderSetup();}
   else if(a==='sizeStep'){const steps=availableGalaxySteps(),i=steps.indexOf(SIZES[CFG.size]?.sys),n=steps[i+Number(x)];if(n){CFG.aiCount=aiCountFor(CFG);CFG.size=setupSizeKey(n);}safeRenderSetup();}
   else if (a === 'size'){ if(!SIZES[x]||SIZES[x].available===false)return;CFG.aiCount=aiCountFor(CFG);CFG.size = x; safeRenderSetup(); }
@@ -10060,10 +10058,6 @@ function physioEffects(P){
 /* ═══ BETA-RIVAL-BLOCS.0 — Rakip Doktrinler: klavyesiz aralık ═══
    Hazır seçim (Az / Orta / Çok) toplam AI sayısına göre aralık seçer; En az / En çok büyük −/+ ile; her dokunuşta
    0 ≤ En az ≤ En çok ≤ toplam AI korunur (sınırı geçen değer ötekini birlikte taşır). Doğal = CFG.aiRivals yok (eski davranış). */
-function rivalPreset(k,n){
-  const r=k==='az'?[0,Math.ceil(n*.2)]:k==='cok'?[Math.round(n*.5),Math.round(n*.75)]:[Math.round(n*.25),Math.round(n*.45)];
-  const max=Math.min(n,Math.max(r[0],r[1]));return {min:Math.min(r[0],max),max};
-}
 function rivalNormalize(c){
   const r=c.aiRivals;if(!r)return null;const n=aiCountFor(c);
   let min=Number.isInteger(r.min)?r.min:0,max=Number.isInteger(r.max)?r.max:min;
@@ -10080,11 +10074,13 @@ function rivalSetupHtml(c){
   let h=`<div class="sect rivalSect"><h2>RAKİP DOKTRİNLER</h2><div class="grid g4" id="rivalPresets"><button class="opt ${!r?'on':''}" data-a="rivalPreset" data-x="auto" aria-pressed="${!r}">Doğal<small>Otomatik dağılım</small></button>`;
   for(const k of presets){const p=rivalPreset(k,n);h+=`<button class="opt ${match===k?'on':''}" data-a="rivalPreset" data-x="${k}" aria-pressed="${match===k}">${names[k]}<small>${p.min===p.max?p.min:p.min+'–'+p.max} AI</small></button>`;}
   h+='</div>';
+  if(!r&&window.MP7Setup?.active&&window.MP7Setup.role==='host')
+    h+='<div class="btnrow"><button class="btn" data-a="rivalPreset" data-x="custom">ÖZEL ARALIK</button></div>';
   if(r){const step=(key,d,dis,label)=>`<button class="btn rivalStep" data-a="rivalStep" data-x="${key}:${d}" ${dis?'disabled':''} aria-label="${label}">${d>0?'+':'−'}</button>`;
     h+=`<div class="rivalRange"><div class="rivalRow"><span class="rivalLbl">En az</span>${step('min',-1,r.min<=0,'En az azalt')}<b class="rivalVal" id="rivalMinVal">${r.min}</b>${step('min',1,r.min>=n,'En az artır')}</div>
       <div class="rivalRow"><span class="rivalLbl">En çok</span>${step('max',-1,r.max<=0,'En çok azalt')}<b class="rivalVal" id="rivalMaxVal">${r.max}</b>${step('max',1,r.max>=n,'En çok artır')}</div>
       <div class="rivalSum" id="rivalSum" role="status">Seçili: ${r.min===r.max?r.min+' AI (sabit sayı)':r.min+'–'+r.max+' AI'} · toplam ${n} AI${match?'':' · özel aralık'}</div></div>`;}
-  return h+`<div class="mini">Ayar; Militarist, Kriminal Sendika ve Fanatik Arındırıcı AI devletlerinin TOPLAMINI belirler (geri kalan AI'lar öteki doktrinlerden). En az ile En çok eşitse sabit sayıdır. AI sayısı azalırsa aralık kendiliğinden uyarlanır. Doğal dağılım eski otomatik seçimdir. Özel dağılımda AI, bilinen devletlerin çoğunu toplayan federasyonlara katılmaya daha isteksiz olur.</div></div>`;
+  return h+`<div class="mini">Ayar; Militarist, Kriminal ve İzolasyonist AI devletlerinin TOPLAMINI belirler (geri kalan AI'lar öteki doktrinlerden). En az ile En çok eşitse sabit sayıdır. AI sayısı azalırsa aralık kendiliğinden uyarlanır. Doğal dağılım eski otomatik seçimdir. Özel dağılımda AI, bilinen devletlerin çoğunu toplayan federasyonlara katılmaya daha isteksiz olur.</div></div>`;
 }
 
 /* ═══ BETA-RIVAL-BLOCS.0 — koloni panelinden otomatik inşaat gemisi ═══

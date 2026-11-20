@@ -68,7 +68,7 @@ function lobbyScreen(){
     body='<div class="mp1-card"><label class="mp1-l">Galaksi boyutu</label><select class="mp1-sel" id="mp1Size">'+Object.entries(SIZES).map(([k,x])=>'<option value="'+k+'"'+(k===s.size?' selected':'')+'>'+esc(x.n+' · '+x.d)+'</option>').join('')+'</select>'+
       '<label class="mp1-l">AI devlet sayısı</label><select class="mp1-sel" id="mp1Ai">'+Array.from({length:48},(_,i)=>i+1).map(n=>'<option'+(n===s.aiCount?' selected':'')+(n>SCALE_ACCEPTANCE.maxAI?' disabled':'')+'>'+n+(n>SCALE_ACCEPTANCE.maxAI?' (deneysel)':'')+'</option>').join('')+'</select>'+
       '<label class="mp1-l">İnsan oyuncu kapasitesi (host dahil)</label><select class="mp1-sel" id="mp1Cap">'+[2,3,4].map(n=>'<option'+(n===L.capacity?' selected':'')+'>'+n+'</option>').join('')+'</select>'+
-      '<label class="mp1-l">Galaksi tohumu</label><input class="mp1-in name" id="mp1Seed" inputmode="numeric" value="'+(+s.seed||'')+'">'+
+      '<label class="mp1-l">Galaksi tohumu</label><input class="mp1-in name" id="mp1Seed" inputmode="numeric" value="'+(+s.seed||'')+'">'+V.rivalSummary(L)+
       '<p class="mp1-sub">Uygulamak galaksiyi yeniden kurar; misafirlerin devlet seçimi ve hazır durumu sıfırlanır.</p>'+
       '<button class="mp1-btn pri" data-m="apply">GALAKSİYİ UYGULA</button></div>';
   }else{
@@ -113,7 +113,15 @@ function onClick(e){
   if(m==='start'){startGame();return;}
   /* MP.7: tek oyunculu kurulum ekranı (aynı ekran, aynı kurallar); kaydedince galaksi ayarları lobiye uygulanır */
   if(m==='guard'){const r=API.host&&API.host.setGuard(!!el.checked);if(r&&!r.ok)toast(r.why);API.lobby=API.host.lobbyView();render();return;}   // MP-P0-DESYNC2
-  if(m==='editMe'||m==='galaxy'){if(window.MP7Setup)MP7Setup.open({role:'host',step:m==='galaxy'?'galaksi':'mizac',done(){applyHostSetup();}});return;}
+  if(m==='editMe'||m==='galaxy'){
+    if(window.MP7Setup){
+      restoreGalaxyDraft();
+      const done=()=>applyHostSetup();
+      done.cancel=restoreGalaxyDraft;
+      MP7Setup.open({role:'host',step:m==='galaxy'?'galaksi':'mizac',done});
+    }
+    return;
+  }
   if(m==='close'){sheet('Oda kapatılsın mı? Bağlı oyuncular çıkarılır.','Odayı kapat',closeRoom);return;}
 }
 function toast(t){const s=doc.getElementById('mp1Start');if(s){s.textContent=t;s.className='mp1-status bad';}}
@@ -163,20 +171,31 @@ function makeHost(){
     /* MP.7: tasarım kipi — host'un devleti kendi kurulum ekranındaki CFG, misafirlerinki kendi taslakları; galaksi OYUNU BAŞLAT'ta
        gerçek setupGame(cfg.humans) ile kurulur. MP7Setup yüklenmemişse (eski sayfa) MP.1 devralma kipi. */
     lobby:{design:!!window.MP7Setup&&!window.MP7Legacy,hostDraft:()=>window.MP7Setup?MP7Setup.draft():null,
-      generate(set){const {host:_h,...rest}=set,{aiRivals:_rivals,...defaults}=CFG;setupGame({...defaults,...rest});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
+      generate(set){const {host:_h,...rest}=set,{aiRivals:_rivals,tension:_tension,...defaults}=CFG;setupGame({...defaults,...rest});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
   API.host.installGuards();
   /* MP.8: son ay adımı süresi (yalnız performance.now ölçümü; argüman, dönüş, RNG, sıra aynı) — tanı satırında */
   if(!API._mtWrap&&typeof window.monthTick==='function'){const mt=window.monthTick;window.monthTick=function(){const t=performance.now();try{return mt.apply(this,arguments);}finally{API.lastMonthMs=Math.round(performance.now()-t);}};API._mtWrap=true;}
   if(window.MP61)MP61.source=()=>G.speed|0;
   if(resume){API.resumeInfo={display:resume.display,speed:resume.session.speed|0,saveId:resume.saveId};API.lobby=API.host.lobbyView();return;}
   const seed=1+(crypto.getRandomValues(new Uint32Array(1))[0]%2147483646);
-  if(API.host.lobby.mode==='design'){CFG.seed=seed;applyHostSetup();return;}
+  if(API.host.lobby.mode==='design'){CFG.seed=seed;delete CFG.aiRivals;applyHostSetup();return;}
   API.host.configure({size:'orta',aiCount:5,seed,...(CFG.shape?{shape:CFG.shape}:{})});
 }
 /* MP.7: host'un kurulum ekranındaki galaksi ayarları (aynı CFG) lobiye uygulanır; AI + insan ≤ 49 */
+function restoreGalaxyDraft(){
+  const settings=API.host.lobby.settings;
+  if(!settings)return;
+  for(const key of ['size','aiCount','seed','planetMul','tension']){
+    if(settings[key]===undefined)delete CFG[key];
+    else CFG[key]=settings[key];
+  }
+  CFG.shape=settings.shape||'sarmal';
+  if(settings.aiRivals)CFG.aiRivals={...settings.aiRivals};
+  else delete CFG.aiRivals;
+}
 function applyHostSetup(){
   const cap=API.host.lobby.capacity,ai=aiCountFor(CFG);
-  const r=API.host.configure({size:CFG.size,aiCount:ai,seed:Math.trunc(+CFG.seed)%2147483646||1,...(CFG.shape?{shape:CFG.shape}:{}),...(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(CFG.planetMul)&&CFG.planetMul!==1?{planetMul:CFG.planetMul}:{}),...(['sakin','calkantili'].includes(CFG.tension)?{tension:CFG.tension}:{})});   // BETA-WAR-GOALS.0
+  const r=API.host.configure({size:CFG.size,aiCount:ai,seed:Math.trunc(+CFG.seed)%2147483646||1,...(CFG.shape?{shape:CFG.shape}:{}),...(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(CFG.planetMul)&&CFG.planetMul!==1?{planetMul:CFG.planetMul}:{}),...(['sakin','calkantili'].includes(CFG.tension)?{tension:CFG.tension}:{}),...(CFG.aiRivals===undefined?{}:{aiRivals:CFG.aiRivals})});
   API.setupNote=r.ok?'':r.why==='too-many-states'?'Bu oturumda en fazla '+(49-cap)+' AI seçilebilir; insanlarla birlikte en fazla 49 normal devlet.':r.why==='galaxy-too-small'?'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.':(START_WHY[r.why]||r.why);
   if(API.screen==='lobby')render();
 }
@@ -191,7 +210,7 @@ function designLobby(){
     '<div class="mp1-sub" id="mp1Link">'+esc(link)+'</div>'+
     '<div class="mp1-card" id="mp7Players"><b>Oyuncular — '+L.players.length+'/'+L.capacity+'</b>'+rows+(L.players.length<2?'<div class="mp1-sub">Henüz oyuncu yok. Oda kodunu ya da davet bağlantısını paylaş.</div>':'')+'</div>'+
     '<button class="mp1-btn pri" data-m="editMe" id="mp7EditMe">DEVLETİMİ DÜZENLE</button>'+
-    '<div class="mp1-card" id="mp7Galaxy"><b>Galaksi</b><div>'+esc((SIZES[s.size]||{}).n||s.size||'—')+' · '+esc((SHAPES[s.shape]||{}).n||'')+' · '+(+s.aiCount||0)+' AI + '+L.capacity+' insan</div>'+
+    '<div class="mp1-card" id="mp7Galaxy"><b>Galaksi</b><div>'+esc((SIZES[s.size]||{}).n||s.size||'—')+' · '+esc((SHAPES[s.shape]||{}).n||'')+' · '+(+s.aiCount||0)+' AI + '+L.capacity+' insan</div>'+V.rivalSummary(L)+
       '<label class="mp1-l" for="mp7Cap">İnsan oyuncu kapasitesi (host dahil)</label><select class="mp1-sel" id="mp7Cap">'+[2,3,4].map(n=>'<option'+(n===L.capacity?' selected':'')+'>'+n+'</option>').join('')+'</select>'+
       '<button class="mp1-btn" data-m="galaxy" id="mp7GalaxyBtn">GALAKSİ AYARLARI</button>'+(API.setupNote?'<div class="mp1-sub">'+esc(API.setupNote)+'</div>':'')+
       '<label class="mp1-l mpgd-row" for="mpGuard"><input type="checkbox" id="mpGuard" data-m="guard"'+(L.guard?' checked':'')+'> Bağlantı kaybında geçici AI koruması</label>'+
@@ -382,6 +401,8 @@ const PKG_WHY={json:'Dosya okunamadı (geçersiz JSON).',fields:'Kayıt eksik ya
   legacy:'Eski MP.0 oturum metası doğrudan yüklenemez.','save8-apply':'Oyun motoru kaydı uygulayamadı; önceki durum korundu.','slot-state':'Kayıttaki insan devletleri dünyayla uyuşmuyor; önceki durum korundu.',
   'save8-guest':'Bu dosya bir MİSAFİR görünümü kaydı (misafirin oyun içi "Dosyaya kaydet"i). Galaksinin tamamını içermez; çok oyunculu oyun bununla sürdürülemez. Oyunu HOST\'un kaydı sürdürür: host\'un .starsmp.json dosyası, host cihazındaki kayıt listesi ya da host\'un oyun içi .sav dosyası.',
   'save8-single':'Bu bir tek oyunculu kayıt (.sav). Ana menüden DEVAM ET / Dosyadan yükle ile açılır; çok oyunculu oturum bilgisi içermez.',
+  'rival-range':'Kayıtta geçersiz Rakip Doktrinler aralığı var.',
+  'rival-mismatch':'Oturum ve dünya kayıtlarında Rakip Doktrinler ayarı farklı.',
   'save8-host':'Host\'un oyun içi kaydı (.sav).',
   busy:'Bir işlem sürüyor; birazdan yeniden dene.',phase:'Oyun başlamadan kaydedilemez.',full:'Kayıt sınırı doldu (12). Önce eski bir kaydı sil.',idb:'Telefonun tarayıcı deposu kullanılamıyor; DOSYAYA AKTAR ile sakla.'};
 const RECOVER_WHY={phase:'Bu aşamada yapılamaz.',visitor:'Bağlantı artık yok.',seat:'Geçersiz koltuk.','seat-online':'Bu koltuk şu an bağlı; devralınamaz.'};
@@ -407,8 +428,8 @@ async function resumeFromKey(key){try{const x=await MP4Save.get(key);if(!x)retur
 async function exportKey(key){try{const x=await MP4Save.get(key);if(x){const n=MP4Save.exportFile(x.text,x.display);saveErr('Dosya indirildi: '+n);}}catch{saveErr(PKG_WHY.idb);}}
 function onFile(input){const f=input.files&&input.files[0];if(!f)return;
   MP4Save.readFile(f).then(text=>{let v=StarsMP.validatePackage(text);
-      /* MP-P0: host'un oyun içi düz Save8'i (.sav) → devam paketi (dünya aynen; koltuklar host onayıyla kurtarılır). Misafir aynası ve tek oyunculu kayıt açık nedenle reddedilir. */
-      if(!v.ok&&v.why==='save8-host'){const w=StarsMP.packageFromSave8(text,{random:hex,now:()=>Date.now()});if(w.ok){v=w;text=JSON.stringify(w.pkg);}else v=w;}
+      /* MP-P0: host'un oyun içi düz Save8'i (.sav) → devam paketi (dünya aynen; koltuklar host onayıyla kurtarılır). Misafir aynası reddedilir. Açık doktrinli SP kaydı kendi host koltuğuyla açılır. */
+      if(!v.ok&&['save8-host','save8-single'].includes(v.why)){const w=StarsMP.packageFromSave8(text,{random:hex,now:()=>Date.now()});if(w.ok){v=w;text=JSON.stringify(w.pkg);}else v=w;}
       if(!v.ok){API.fileSave=null;saveErr(PKG_WHY[v.why]||v.why);render();return;}API.saveErr='';API.fileSave={text,v,name:f.name};render();},
     e=>saveErr(e&&e.message==='too-big'?PKG_WHY['too-big']:PKG_WHY.json));input.value='';}
 function confirmResume(text,v){
@@ -420,7 +441,7 @@ function confirmResume(text,v){
 function resumeLobby(){
   const L=API.lobby,R=API.resumeInfo||{display:{}},link=location.origin+'/mp/play?code='+API.code,ps=L.players.filter(p=>!p.host);
   const seats=ps.filter(p=>!p.visitor),offline=seats.filter(p=>!p.online),visitors=ps.filter(p=>p.visitor);
-  overlay.innerHTML='<div class="mp1-wrap mp4"><div class="mp1-h">DEVAM LOBİSİ</div><div class="mp1-card">'+saveCard(R.display)+'</div>'+
+  overlay.innerHTML='<div class="mp1-wrap mp4"><div class="mp1-h">DEVAM LOBİSİ</div><div class="mp1-card">'+saveCard(R.display)+V.rivalSummary(L)+'</div>'+
     '<div class="mp1-sub">Davet kodu — arkadaşların bu kodla yeniden katılır; cihazlarındaki kimlikle kendi devletlerine dönerler.</div><div class="mp1-code" id="mp1Code">'+esc(V.fmtCode(API.code))+'</div>'+
     '<div class="mp1-row"><button class="mp1-btn" data-m="copy">KODU KOPYALA</button><button class="mp1-btn" data-m="share">DAVET PAYLAŞ</button></div><div class="mp1-sub" id="mp1Link">'+esc(link)+'</div>'+
     '<div class="mp1-card" id="mp4Seats"><b>İnsan oyuncular</b>'+seats.map(p=>'<div class="mp4-seat" data-seat="'+(+p.seat)+'"><span>'+esc(p.name)+' — '+esc(G.emps[p.claim]?G.emps[p.claim].name:'?')+'</span><span class="'+(p.online?'ok':'bad')+'">'+(p.online?'bağlı':'bekleniyor')+'</span></div>').join('')+'</div>'+
