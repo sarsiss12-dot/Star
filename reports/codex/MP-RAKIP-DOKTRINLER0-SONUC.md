@@ -60,6 +60,8 @@ PERF-SINIR.0 ölçüm düzeneği, 100 sistem 120. ay ile p46'da yayımlanan 500 
 
 `stars-faz96h10p47.zip` 942.130 bayt. SHA-256 `fb3c7199f66f6b0b3caa68dd3697086724eb6e439d6f536a997aff236b0e79a8`. Arşiv CRC32 `D55090B3`. Manifest SHA-256 `b8f8f1b98cb0d2df75728ef1eaf5295dd8d9ec165b0fd5d9a2dd6ca851df54c5`. İki arşivleme bayt düzeyinde aynı. Yirmi arşiv üyesinin CRC32'si doğrulandı. Manifestteki 19 oyun dosyası SHA-256 ve kaynak Git nesnesiyle eşleşti. Oyun ZIP'i tek oyunculu çalışma dosyalarını içerir. MP.8.9b46 relay ve istemci kaynakları geliştirme dalındadır. [ZIP](../../releases/stars-faz96h10p47.zip) · [Üye bazında doğrulama](../../RELEASE-MP-RAKIP-DOKTRINLER0.json) · [GitHub geliştirme dalı](https://github.com/sarsiss12-dot/Star/tree/codex/stars-mp-rakip-doktrinler0)
 
+Geliştirme dalı GitHub’a gönderildi. Taslak PR #63, p46 oynanabilir dalını hedefliyor. [Taslak PR #63](https://github.com/sarsiss12-dot/Star/pull/63)
+
 ## FED-AI-SIYASET.0 yol haritası
 
 p46 araştırmasında dokuz kampanyadaki 21 federasyonun tamamı bilimsel veya ticariydi ve ortak gözlem sonuna kadar kaldı. Dengeli + Doğal'da 805 bağımsız devlet değerlendirmesinde katılmak ve kurmak aynı anda uygulanabilir çıkmadı. 69 değerlendirmede uygun ortak bulunmasına rağmen Etki yetmedi. AI–AI müzakeresinde geçiş ve ücretli katılım maddesi görülmedi. Kontrollü örneklerde geçiş rotayı açtı ve ücretli yardım 30 gemiyi hedefe ulaştırdı. Aşağıdaki sıra bu ölçümlere dayanıyor. [p46 araştırması](https://github.com/sarsiss12-dot/Star/blob/885dd68eaa2108490d57ef0b91623c85ae40e6ce/reports/codex/P46-DIPLOMASI-ARASTIRMA-SONUC.md)
