@@ -7,9 +7,10 @@ const h=runtime({root:path.resolve(root||'.'),processGlobal:true});
 const save=fs.readFileSync(file,'utf8');
 h.sb.inputSave=save;
 h.sb.followFreight=process.env.STARS_TRACE_FREIGHT==='1';
+h.sb.followConvoys=process.env.STARS_TRACE_CONVOYS==='1';
 h.run(`if(!deserialize(inputSave))throw Error('Save8');
  var tradeEvents={},uniqueContracts=new Set(),longJourneys=new Set(),finishedVoyages=new Set(),observations=[];
- var contractChanges=[],lastContract=new Map(),decisions=[];
+ var contractChanges=[],lastContract=new Map(),decisions=[],convoyChanges=[],lastVoyage=new Map();
  var prevNote=AIDiagnostics.note;
  AIDiagnostics.note=function(code,e,other,detail){
   if(code.startsWith('trade-')){
@@ -27,7 +28,12 @@ h.run(`if(!deserialize(inputSave))throw Error('Save8');
    const key=JSON.stringify(record);
    if(key!==lastContract.get(c.id)){lastContract.set(c.id,key);contractChanges.push([G.day,JSON.parse(key)]);}
   }
-  for(const v of st.convoys){if(v.route.length>4)longJourneys.add(v.id);if(v.status==='delivered')finishedVoyages.add(v.id);}
+  for(const v of st.convoys){if(v.route.length>4)longJourneys.add(v.id);if(v.status==='delivered')finishedVoyages.add(v.id);
+   if(followConvoys){
+    const row={id:v.id,contract:v.contract,e:v.e,to:v.to,r:v.r,route:v.route,started:v.started,status:v.status,loaded:v.loaded,delivered:v.delivered,lost:v.lost,receipt:v.receipt};
+    const key=JSON.stringify(row);if(lastVoyage.get(v.id)!==key){lastVoyage.set(v.id,key);convoyChanges.push([G.day,JSON.parse(key)]);}
+   }
+  }
   observations.push({day:G.day,ports:states.reduce((n,e)=>n+tradeHubs(e).length,0),empiresInCrisis:states.filter(e=>e.crisis).map(e=>e.id),
    trades:uniqueContracts.size,chain:longJourneys.size,deliveries:finishedVoyages.size,rng:RND_STATE});
  }
@@ -40,6 +46,6 @@ h.run(`if(!deserialize(inputSave))throw Error('Save8');
  }
  sample();`);
 for(let m=0;m<Number(months)&&!h.run('G.over');m++)h.run('month();sample()');
-const data=JSON.parse(h.run('JSON.stringify({seed:G.cfg.seed,systems:G.sys.length,observations,tradeEvents,...(followFreight?{contractChanges,decisions}:{})})'));
+const data=JSON.parse(h.run('JSON.stringify({seed:G.cfg.seed,systems:G.sys.length,observations,tradeEvents,...(followFreight?{contractChanges,decisions}:{}),...(followConvoys?{convoyChanges}:{})})'));
 data.file=path.basename(file);data.sha256=crypto.createHash('sha256').update(save).digest('hex');
 fs.writeFileSync(out,JSON.stringify(data,null,2)+'\n');

@@ -23,5 +23,25 @@ async function open(){const portrait=page.viewportSize().width===360;if(portrait
  await test('foreign third-party hidden cargo never appears in list, draw or hit targets',async()=>{await value('var c={id:999,e:2,to:3,status:"moving",amount:900,r:"ala",x:135,y:0};G.commerce.convoys.push(c);CommerceUI.open("convoys");View.draw()');assert.ok(!(await page.locator('#modal').innerText()).includes('#999'));eq(await value('CommerceUI.hits.some(h=>h.id===999)'),false);});
  await test('real physical attack updates lost cargo UI without double phantom penalty',async()=>{await value('sign96();advance96(2);var v=G.commerce.convoys[0],e=G.emps[2];e.wild=true;var f=newFleet(e,0,Array.from({length:20},()=>({c:"kor"})));window.before=G.p.res.ene;Commerce.attack(v,f);CommerceUI.open("convoys")');assert.ok((await page.locator('#modal').innerText()).includes('Yağmalandı'));eq(await value('G.p.res.ene'),await value('before'));eq(await value('G.commerce.convoys[0].amount'),0);});
  await test('PWA installs freight modules and reopens offline with persistent v8 cargo',async()=>{await value('sign96();advance96(2);advance96(6)');await page.evaluate(async()=>{await saveGame();await navigator.serviceWorker.register('./sw.js');await navigator.serviceWorker.ready;});await page.reload();await page.waitForFunction(()=>!!navigator.serviceWorker.controller);await context.setOffline(true);await page.reload();await page.waitForFunction(()=>typeof CommerceUI!=='undefined');eq(await page.evaluate(async()=>{const raw=await storeGet('yildiz:save');return JSON.parse(raw).v===8&&JSON.parse(raw).commerce.convoys.length===2}));await context.setOffline(false);});
+ await test('visible port badges follow real planet buildings and map zoom',async()=>{
+  await page.setViewportSize({width:844,height:390});
+  const labels=await page.evaluate(()=>{
+   const s=G.sys[0],pl=s.planets[0];s.name='Liman Deneyi';View.sel=null;View.selSys=s;UI.tab('sistem');
+   const sample=(count,zoom)=>{
+    pl.col.b.liman=count;View.cam={x:s.x,y:s.y,z:zoom};
+    UI.refresh();const planet=document.querySelector('.planetFoldName')?.textContent||'';
+    const rows=[],ctx=View.g,original=ctx.fillText;
+    ctx.fillText=function(text,...args){if(String(text).includes(s.name))rows.push(text);return original.call(this,text,...args);};
+    try{View.draw();}finally{ctx.fillText=original;}
+    return {planet,rows};
+   };
+   const full=sample(2,.85),far=sample(2,.2),gone=sample(0,.85);
+   sample(2,.85);return {full,far,gone};
+  });
+  assert.ok(labels.full.planet.includes('⚓ ×2'));assert.ok(labels.full.rows.some(t=>t.includes('⚓×2')));
+  assert.ok(!labels.far.rows.some(t=>t.includes('⚓')));assert.ok(!labels.gone.planet.includes('⚓'));
+  assert.ok(labels.gone.rows.some(t=>t==='Liman Deneyi'));
+  await page.screenshot({path:path.join(out,'liman-844x390.png')});
+ });
  const report={browser:browser.version(),physicalAndroid:false,viewportEmulation:true,pass:results.filter(x=>x.ok).length,fail:results.filter(x=>!x.ok).length,pageErrors:errors,results};fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify(report,null,2));console.log('BROWSER GEÇEN: '+report.pass+' KALAN: '+report.fail);process.exitCode=report.fail||errors.length?1:0;
 })().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{if(browser)await browser.close();if(server)server.close()});
