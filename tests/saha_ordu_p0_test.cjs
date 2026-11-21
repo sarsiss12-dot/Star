@@ -57,4 +57,26 @@ assert.equal(reloaded.run('deserialize(saveP0)'),true,'Save8 reload must succeed
 const first=reloaded.run('serialize()');
 assert.equal(reloaded.run('deserialize(first)'),true);
 assert.equal(reloaded.run('serialize()'),first,'Second Save8 round-trip must be a fixed point');
-console.log('PASS SAHA-ORDU-P0: retained army, nonduplicated garrison, replay, Save8/RNG');
+/* Mixed fleets are the reported 15K scenario: even one landing ship made
+   orbitForces classify the WHOLE combat + assault fleet as a transport. */
+{
+  const h=runtime({root});h.sb.mixedP0=save;
+  assert.equal(h.run('deserialize(mixedP0)'),true);
+  const state=JSON.parse(h.run(`JSON.stringify((()=>{
+    const S=G.sys[6],planet=S.planets.find(p=>p.col&&p.owner===0);
+    if(!planet) return {fixture:false};
+    G.emps[1].war[0]=G.emps[0].war[1]=true;
+    planet.col.garrison=0;planet.col.shield=0;
+    const mixed=newFleet(G.emps[1],S.id,[{c:'ord'},{c:'kor'}]);
+    const id=mixed.id,before=mixed.ships.map(sh=>({c:sh.c,h:sh.h}));
+    invasionTick();
+    const after=G.fleets.find(f=>f.id===id);
+    return {fixture:true,owner:planet.owner,before,after:after?.ships.map(sh=>({c:sh.c,h:sh.h}))||null,
+      lost:(G.fleetJournal||[]).filter(r=>r.fleet===id&&r.reason==='rule').length};
+  })())`));
+  assert(state.fixture,'Mixed assault fixture must have a defended planet');
+  assert.equal(state.owner,1,'Mixed assault must capture the enemy planet');
+  assert.deepEqual(state.after,state.before,'Conquest must not delete combat ships within a mixed assault fleet');
+  assert.equal(state.lost,0,'Mixed fleet must not be recorded as destroyed by successful conquest');
+}
+console.log('PASS SAHA-ORDU-P0: retained pure/mixed army, garrison, replay, Save8/RNG');
