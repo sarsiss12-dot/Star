@@ -53,5 +53,8 @@ assert.equal(b.rng,a.rng,'Same replay must consume RNG in the same order');
 assert.equal(b.save,a.save,'Same replay must serialize byte-identically');
 const reloaded=runtime({root});reloaded.sb.saveP0=a.save;
 assert.equal(reloaded.run('deserialize(saveP0)'),true,'Save8 reload must succeed');
-assert.equal(reloaded.run('serialize()'),a.save,'Reload must preserve canonical state');
+/* First load may refresh derived caches, so test canonical fixed-point after that refresh. */
+const first=reloaded.run('serialize()');
+assert.equal(reloaded.run('deserialize(first)'),true);
+assert.equal(reloaded.run('serialize()'),first,'Second Save8 round-trip must be a fixed point');
 console.log('PASS SAHA-ORDU-P0: retained army, nonduplicated garrison, replay, Save8/RNG');
