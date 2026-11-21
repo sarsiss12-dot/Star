@@ -95,14 +95,14 @@ const VIEW=new Set(['dealSupport','dealSupportPick','coalPick','coalTerms','coal
   'scienceTab','scienceNode','scienceFocus','scienceFilter','scienceMode','scienceQueue','scienceRoute','scienceMove','scienceRemove','scienceZoom',
   'tech','build','sInfo','bInfo','showEv','minModal','restoreModal','openNote','instNote','instDecide','closem','marketPane','mktSel','mute','save','diagShow','opLogMenu',
   /* MP.6.1 — görünüm / taslak */
-  'news','shipmentsNews','newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord',
+  'commerce','commerceConvoys','commerceNew','commercePropose','commerceConvoy','commerceLocate','commercePort','convoyToggle','news','shipmentsNews','newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord',
   'inboxEmpire','inboxReturn','inboxFederation','deal','dealAdd','dealRm','dealPledgeDays','dealDiscard','dealBack','peace','vsOpen','vsCancel','vsCounter','fedBallot',
   'fedVoteYes','fedVoteNo','fedVoteNow','fedFoundType','fedFoundSelect','fedFoundEdit','fedFoundEditStop','fedFoundUpdate','fedFoundStart','fedFoundReply','fedFoundCancel','fedFoundFinish',
   /* MP.6.1 — motor işlevi MP komutuna çevrilen gerçek düğmeler */
   'sendhere','ship','fedShip','focus','cancelBuild','demolish','foundFed','fedDipInvite','fedDipRequest','fedMotion','fedInviteAccept','fedInviteReject',
   'fedLawPropose','fedLawRepeal','fedAgendaWithdraw','fedLeave','vsSend','vsReply','dealSend',
   /* MP.6.2 — savaş ve ikili siyaset: gerçek pencere açılır, son çağrı MP komutuna iner */
-  'war','ally','allyInvite','pact','dealPact','endAlliance','unpact','embargo','unembargo','gift',   /* MP-DEAL-SYS.0: allyInvite → UI.mpQuickOffer (offer) */
+  'war','ally','allyInvite','pact','dealPact','endAlliance','unpact','revokePortTransit','embargo','unembargo','gift',   /* MP-DEAL-SYS.0: allyInvite → UI.mpQuickOffer (offer) */
   'quickTreaty','quickTreatyCond',   /* MP-DIPLO5 NF-4: tek dokunuş Saldırmazlık / Ticaret / Geçiş → UI.mpQuickOffer; Şartlı Teklif… masa */
   /* BETA-WAR-GOALS.0 — hedef/tür seçimi ve müzakere taslağı görünümdür; önizleme host'un warQuote'u, son çağrı 'war' / 'offer' */
   'setwg','wgTarget','wgVtype','wgVwar','dealVassal','dealPromise','dealFedPeace','fedWarOpen','fwTarget','fwGoal','fwPropose',
@@ -155,6 +155,7 @@ const ACT={
   wgGo:()=>{const s=UI._wgSel;if(!s)return;const id=s.id,key=s.key,opts=key==='fetih'?{targets:s.targets.slice()}:{vtype:s.vtype,war:s.war};   // BETA-WAR-GOALS.0
     const cid=send({kind:'warQuote',target:real(+id),goal:key,...opts});
     if(cid)waits[cid]=res=>{if(res.status!=='ok'){toast('Host reddetti: '+why(res),true);return;}S.warQuote[id+':'+key]=warLocal(res.extra);S.warOpts[id+':'+key]=opts;UI.warDeclarationPreview(+id,key,opts);};},
+  commerceCancel:x=>send({kind:'cancelCargo',id:+x}),
   giftDo:x=>{const [id,r,v]=String(x).split(':');const cid=send({kind:'gift',target:real(+id),r,v:+v});
     if(cid)waits[cid]=res=>toast(res.status==='ok'?'Hediye gönderildi; host uyguladı.':'Host reddetti: '+why(res),res.status!=='ok');try{UI.closeModal();}catch{}},
   statuko:x=>{const cid=send({kind:'statusQuo',target:real(+x)});if(cid)waits[cid]=res=>toast(res.status==='ok'?'Statüko barışı: host uyguladı ya da teklif karşı oyuncuya gitti.':'Host reddetti: '+why(res),res.status!=='ok');},
@@ -452,6 +453,17 @@ function gate(){
   /* MP.6.2 — ittifakı sonlandır, ticaret anlaşmasını feshet, ambargo: gerçek onay pencereleri → komut */
   wrap('endAlliance',(o,e,other)=>mine(e)&&other?r({kind:'endAlliance',target:real(other.id)}):NOT_MP);
   wrap('breakPact',(o,a,b)=>{if(!mine(a)||!b)return o(a,b);send({kind:'unpact',target:real(b.id)});});
+  UI.guestCargoPreview=(target,source,port,done)=>{
+   if(!S.on)return false;
+   const cid=send({kind:'cargoPreview',target:real(target),source,port});
+   if(cid)waits[cid]=res=>{
+    const row=res.extra;
+    if(res.status!=='ok'||!row){done(null);return;}
+    done({...row,missing:row.missing.map(local),stops:row.stops.map(s=>s.owner===undefined?s:{...s,owner:local(s.owner)})});
+   };else done(null);
+   return true;
+  };
+  wrap('revokePortTransit',(o,e,t)=>mine(e)&&t&&!!send({kind:'revokePortTransit',target:real(t.id)}));
   wrap('setEmbargo',(o,e,t,on)=>{if(!mine(e)||!t)return false;return !!send({kind:'embargo',target:real(t.id),on:!!on});});
   /* MP.6.3 — ortak savaş ganimeti paylaşımı: GERÇEK STARS penceresi (UI.openSettlement) host'un verisiyle çizilir. Aynada sefer
      kaydı yok; durum, görünürlük, uygulama kapısı ve teklif nesneleri host'un 'settle' görünümünden (yalnız katılımcıya),
@@ -603,7 +615,7 @@ function gate(){
     try{UI.drawInbox();}catch{}
     return {ok:true,pending:true};};
 }
-const TREATY=['peace','nap','pact','ally','intel','passage','spynet'];   // mp-core DIP_TREATY ile aynı (MP-DIPLO5 NF-3: + spynet)
+const TREATY=['peace','nap','pact','ally','intel','passage','portTransit','spynet'];   // mp-core DIP_TREATY ile aynı (MP-DIPLO5 NF-3: + spynet)
 /* MP.6.3 — ortak savaş paylaşımı: host görünümü (gerçek kimlikler) → aynadaki numaralar; teklif nesneleri kimlikle kalıcı
    (pencere onay düğmeleri settlementOffer(id)===o denetler) */
 const SET={offers:new Map(),quotes:{},wait:{},sig:null,last:null};

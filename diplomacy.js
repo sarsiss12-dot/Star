@@ -1167,6 +1167,10 @@ function breakPact(a, b){
    noktası. NAP süre alanı silinmezse UI aynı çifti hem savaşta hem NAP'ta
    gösteriyor, barıştan sonra eski söz yeniden canlanıyor ve yeni teklif
    yanlışlıkla redundant sayılıyordu. */
+function revokePortTransit(owner,user){
+  if(!owner||!user||!(owner.portTransit?.[user.id]>G.day))return false;
+  delete owner.portTransit[user.id];return true;
+}
 function endTreatiesForWar(a, b){
   if (!a || !b) return;
   if (a.nap) delete a.nap[b.id];
@@ -1175,7 +1179,7 @@ function endTreatiesForWar(a, b){
   if (a.ally) a.ally[b.id] = false;
   if (b.ally) b.ally[a.id] = false;
   if(((a.spynet&&a.spynet[b.id])||(b.spynet&&b.spynet[a.id]))&&typeof spynetEndLog==='function'){spynetEndLog(a,b.id,'war');spynetEndLog(b,a.id,'war');}   /* MP-DIPLO5 NF-3: biten ağın nedeni */
-  for(const key of ['visionFrom','shareVis','spynet','passage']){
+  for(const key of ['visionFrom','shareVis','spynet','passage','portTransit']){
     if(a[key])delete a[key][b.id];if(b[key])delete b[key][a.id];
   }
   if((a.luxGrant||b.luxGrant)&&typeof luxGrantEndWar==='function')luxGrantEndWar(a,b);   /* MP-DIPLO5 NF-2b: savaş lüks hakkını bitirir */
@@ -1226,6 +1230,7 @@ const DEAL_KINDS = {
   intel  :{n:'Sensör Verisi Paylaşımı', ico:'👁',
            d:'Tek yönlü: sensör verisi paylaşılır (ortak casus ağı değildir)'},
   spynet :{n:'Casusluk Ağı Paktı',  ico:'🕸'},
+  portTransit:{n:'Ticaret Limanı Transit İzni',ico:'⚓'},
   passage:{n:'Sınır Geçiş İzni',ico:'🚪'}
 };
 
@@ -1248,6 +1253,7 @@ function dealLabel(it){
     case 'peaceWith': return '🤲 ' + (G.emps[it.target] ? G.emps[it.target].name : '?') + ' ile barış' + (it.front ? ' (Cephe #' + it.front + ')' : '');   /* MP-DIPLO5 NF-6 */
     case 'intel':   return '👁 Sensör anlaşması';
     case 'spynet':  return '🕸 Casusluk ağı paktı';
+    case 'portTransit': return '⚓ Ticaret Limanı Transit İzni · 360 gün';
     case 'passage': return '🚪 Sınır geçiş izni';
     case 'vassal':  return '👑 Teslim: '+(VASSAL_TYPES[it.type]?.n||'?')+' vasallık · '+({none:'savaşlara katılmaz',defense:'yalnız savunma',all:'saldırı savaşlarına da katılır'}[it.war]||'?');   // BETA-WAR-GOALS.0
     case 'fedPeace': return '🕊 Ortak barış: iki federasyonun kampanya cepheleri';   // BETA-WAR-GOALS.0
@@ -1349,6 +1355,7 @@ function itemValue(e, it, other){
       // kaybediyorsa barış kıymetli, kazanıyorsa fedakârlık
       return ratio < 1 ? clamp(180 / Math.max(.35, ratio), 40, 500) : -90 * (ratio - 1);
     }
+    case 'portTransit': return 16 + Math.min(6,tradeHubs(e).length)*4;
     case 'passage': {
       // sınırını açmak risklidir: güçlü komşuya izin vermek pahalı
       if (e.passage && e.passage[other.id]) return 0;
@@ -1474,7 +1481,16 @@ function evalOffer(ai, offer){
 /* --------------------------------------------------------------------
    UYGULAMA — anlaşma kabul edilince maddeleri yürürlüğe koy
    -------------------------------------------------------------------- */
-function applyItems(giver, taker, items){
+// A validated accession to an identified war front preserves the immediate enlistment payment.
+function militarySettlement(n){
+ const sides=[n.effectiveGive||n.give,n.effectiveWant||n.want];
+ const items=sides.flat(),peace=items.filter(it=>['peace','vassal','fedPeace'].includes(it.t));
+ if(peace.length===1&&G.emps[n.from]?.war[n.to]&&items.every(it=>it===peace[0]||it.t==='res')&&
+    sides.filter(side=>side.some(it=>it.t==='res')).length===1)return true;
+ return sides.some((side,i)=>side.length===1&&side[0].t==='warJoin'&&
+  sides[1-i].every(it=>it.t==='res'||it.t==='passage'));
+}
+function applyItems(giver, taker, items,settlement=false){
   /* FAZ 86C: hata enjeksiyonu kancası — üretimde tanımsız, yalnız
      atomiklik testleri bunu geçici olarak atar. */
   for (const it of items){
@@ -1483,6 +1499,7 @@ function applyItems(giver, taker, items){
     switch(it.t){
       case 'freight': break; // Commerce.sign created the paired obligation atomically.
       case 'res':
+        if(!settlement&&Commerce.resources.includes(it.r))break; // Physical legs are committed by Commerce.sign.
         giver.res[it.r] = Math.max(0, (giver.res[it.r]||0) - it.v);
         taker.res[it.r] = (taker.res[it.r]||0) + it.v;
         break;
@@ -1581,6 +1598,9 @@ function applyItems(giver, taker, items){
         taker.visionFrom = taker.visionFrom || {};
         taker.visionFrom[giver.id] = true;
         if (typeof shareVision === 'function') shareVision(giver, taker);
+        break;
+      case 'portTransit':
+        (giver.portTransit||={})[taker.id]=G.day+360;
         break;
       case 'passage':
         // veren taraf kendi sınırını alana açar
@@ -1884,6 +1904,7 @@ function treatyAlreadyActive(a, b, it){
                            !!a.ally[b.id];
     case 'spynet':  return !!(a.spynet && a.spynet[b.id]);
     case 'intel':   return !!(b.visionFrom && b.visionFrom[a.id]);
+    case 'portTransit': return a.portTransit?.[b.id]>G.day;
     case 'passage': return !!(a.passage && a.passage[b.id]);
     default:        return false;
   }
@@ -1995,7 +2016,7 @@ function dealValidity(offer){
      sırası sonucu değiştirmez: "peace + nap" ile "nap + peace" aynı
      geçerli sonucu verir; savaş sürerken YALNIZ nap geçersizdir. */
   const hepsi = n.effectiveGive.concat(n.effectiveWant);
-  if(hepsi.some(it=>it.t==='freight')){const why=Commerce.quote(n);if(why)reasons.push(why);}
+  if(!militarySettlement(n)&&!hepsi.some(it=>it.t==='warJoin'&&it.plan!==undefined)&&hepsi.some(it=>it.t==='freight'||it.t==='res'&&Commerce.resources.includes(it.r))){const why=Commerce.quote(n);if(why)reasons.push(why);}
   const plan = {
     savas: !!a.war[b.id],
     pact:  !!(a.pact && a.pact[b.id]),
@@ -2023,6 +2044,9 @@ function dealValidity(offer){
         if (plan.savas) planHata('İttifak: savaş sürerken imzalanamaz — pakete barış ekle');
         if (typeof canAlly === 'function' && !canAlly(a, b) && !plan.savas)
           {/* zaten madde bazlı kontrolde yakalandı */}
+        break;
+      case 'portTransit':
+        if(plan.savas||embargoOn(a,b.id)||embargoOn(b,a.id))planHata('Ticaret limanı transit izni savaş veya ambargo sırasında verilemez');
         break;
       case 'passage':
         if (plan.savas) planHata('Geçiş hakkı: savaş sürerken verilemez');
@@ -2335,6 +2359,7 @@ function dealPostcondition(giver, taker, it){
     case 'landPromise': return (G.warLedger?.promises||[]).some(p=>p.state==='open'&&p.sys===it.sys&&p.giver===giver.id&&p.taker===taker.id);   // BETA-WAR-GOALS.0
     case 'intel':    return !!(taker.visionFrom && taker.visionFrom[giver.id]);
     /* applyItems: VEREN taraf kendi sınırını alana açar. */
+    case 'portTransit': return giver.portTransit?.[taker.id]>G.day;
     case 'passage':  return !!(giver.passage && giver.passage[taker.id]);
     default:         return true;
   }
@@ -2361,15 +2386,21 @@ function executeDeal(offer, inboxKey=null){
     tx = dealTxBegin();
     G._sideBuf = buf;
     G._dealAuth = true;
-    if(n.effectiveGive.concat(n.effectiveWant).some(it=>it.t==='freight'))Commerce.sign(n);
-    applyItems(a, b, n.effectiveGive);
-    applyItems(b, a, n.effectiveWant);
+    const settlement=militarySettlement(n);
+    const cargo=!settlement&&n.effectiveGive.concat(n.effectiveWant).some(it=>it.t==='freight'||it.t==='res'&&Commerce.resources.includes(it.r))?Commerce.sign(n):null;
+    applyItems(a, b, n.effectiveGive,settlement);
+    applyItems(b, a, n.effectiveWant,settlement);
+
+    if(cargo)for(const l of cargo.legs){const why=Commerce.legGate(G.emps[l.e],G.emps[l.to],l,{stock:true,once:cargo.once});if(why)throw Error(why);}
+    // A physical price for an immediately effective clause must leave the payer's control in the same transaction.
+    const mixed=cargo?.once&&n.effectiveGive.concat(n.effectiveWant).some(it=>it.t!=='res'||!Commerce.resources.includes(it.r));
+    if(mixed&&!Commerce.dispatch(cargo))throw Error(cargo.reason);
     if (typeof G._dealFailInject === 'function') G._dealFailInject('after:items');
     a.res.etk = (a.res.etk || 0) - q.cost;
     if (typeof G._dealFailInject === 'function') G._dealFailInject('after:cost');
 
-    const gwB = giftOnCooldown(a, b) ? 0 : dealGoodwill(b, a, n);
-    const gwA = giftOnCooldown(b, a) ? 0 : dealGoodwill(a, b, n);
+    const gwB = cargo?.once||giftOnCooldown(a, b) ? 0 : dealGoodwill(b, a, n);
+    const gwA = cargo?.once||giftOnCooldown(b, a) ? 0 : dealGoodwill(a, b, n);
     if (gwB > 0){
       b.rel[a.id] = clamp(b.rel[a.id] + gwB, -100, 100);
       a.giftAt = a.giftAt || {}; a.giftAt[b.id] = (G.memAge || 0);
