@@ -70,7 +70,7 @@ const Commerce={
     const n=G.sys[id];
     if(!relays.has(id))relays.set(id,this.relay(a,n,grants));
     const days=row.cost+Math.max(1,dist(s,n)/this.speed);
-    const fits=!volume||routeVolume(a,row.origin,id)>=volume;
+    const fits=!volume||id!==target&&!relays.get(id)||routeVolume(a,row.origin,id)>=volume;
     if(id===target&&!fits)continue;
     const stop=id!==target&&relays.get(id)&&fits;
     enqueue(id,stop?0:row.hops+1,days,row,stop?id:row.origin);
@@ -79,14 +79,14 @@ const Commerce={
   }
   return null;
  },
- legGate(a,b,it,{stock=false,once=false,pact=false,grants}={}){
+ legGate(a,b,it,{stock=false,once=false,pact=false,grants,live=false}={}){
   const why=this.pairGate(a,b,once||pact);if(why)return why;
   if(!this.resources.includes(it.r)||!Number.isFinite(it.v)||it.v<=0||it.v>1000)return 'Geçersiz kargo kaynağı / miktarı (1–1000)';
   if(!Number.isInteger(it.source)||!Number.isInteger(it.target)||!this.port(a,it.source)||!this.port(b,it.target)||it.source===it.target)return 'Çıkış veya varış limanı geçerli değil';
   if(G.sys[it.source].cr>0||G.sys[it.target].cr>0)return 'Ticaret limanı aktif çatışma / abluka altında';
   if(!Number.isInteger(it.every)||it.every<30||it.every>180||!Number.isInteger(it.months)||it.months<3||it.months>120)return 'Sıklık 30–180 gün, süre 3–120 ay olmalı';
   if(it.v>routeVolume(a,it.source,it.target))return 'Sefer miktarı yol kapasitesini aşıyor';
-  if(!(grants?.size?this.route(a,b,it.source,it.target,{grants,volume:it.v}):this.aiQuoteRoute(a,b,it.source,it.target,it.v)))return 'Limanlar arasında üç sıçrama içinde açık ve izinli bağlantı bulunamadı';
+  if(!(live||grants?.size?this.route(a,b,it.source,it.target,{grants,volume:it.v}):this.aiQuoteRoute(a,b,it.source,it.target,it.v)))return 'Limanlar arasında üç sıçrama içinde açık ve izinli bağlantı bulunamadı';
   if(stock&&(!Number.isFinite(a.res[it.r])||a.res[it.r]<it.v))return 'İlk sefer için depoda yeterli '+RES[it.r].n+' yok';return null;
  },
  signature(n){return JSON.stringify([n.from,n.to,n.give,n.want]);},
@@ -180,9 +180,19 @@ const Commerce={
   if(st.convoys.some(v=>v.contract===c.id&&!this.terminal(v))){c.status='waiting';c.reason='Önceki karşılıklı sefer tamamlanıyor';return false;}
   if(st.convoys.filter(v=>!this.terminal(v)).length+c.legs.length>this.maxConvoys){c.status='waiting';c.reason='256 aktif konvoy sınırı; yük depoda, sevkiyat bekliyor';return false;}
   const legs=[];
-  for(const l of c.legs){const a=G.emps[l.e],b=G.emps[l.to],why=this.legGate(a,b,l,{stock:true,once:c.once});if(why){c.status='blocked';c.reason=why;return false;}const used=st.convoys.filter(v=>v.e===l.e&&v.source===l.source&&v.target===l.target&&v.started>G.day-30).reduce((n,v)=>n+v.loaded,0);if(used+legs.filter(i=>i.e===l.e&&i.source===l.source&&i.target===l.target).reduce((sum,i)=>sum+i.v,0)+l.v>routeVolume(a,l.source,l.target)+1e-7){c.status='waiting';c.reason='Son 30 günlük rota kapasitesi dolu; yük depoda bekliyor';return false;}// Prefer the AI sender's observed safe alternate. An already agreed
-  // contract keeps the existing legal/risky fallback; this adds no launch ban.
-  const path=(a.ai&&a.id!==0?this.route(a,b,l.source,l.target,{avoidObserved:true,volume:l.v}):null)||this.route(a,b,l.source,l.target,{volume:l.v});legs.push({...l,route:path});}
+  for(const l of c.legs){
+   const a=G.emps[l.e],b=G.emps[l.to],why=this.legGate(a,b,l,{stock:true,once:c.once});
+   if(why){c.status='blocked';c.reason=why;return false;}
+   const sameLine=i=>i.e===l.e&&i.source===l.source&&i.target===l.target;
+   const used=st.convoys.filter(v=>sameLine(v)&&v.started>G.day-30).reduce((sum,v)=>sum+v.loaded,0);
+   const pending=legs.filter(sameLine).reduce((sum,i)=>sum+i.v,0);
+   if(used+pending+l.v>routeVolume(a,l.source,l.target)+1e-7){
+    c.status='waiting';c.reason='Son 30 günlük rota kapasitesi dolu; yük depoda bekliyor';return false;
+   }
+   const path=this.route(a,b,l.source,l.target,{avoidObserved:true,volume:l.v})||this.route(a,b,l.source,l.target,{volume:l.v});
+   if(!path){c.status='blocked';c.reason='Yüklemede liman erişimi değişti';return false;}
+   legs.push({...l,route:path});
+  }
   // Validate both outgoing loads before touching either stock. No partial cycle debt.
   for(const l of legs)G.emps[l.e].res[l.r]-=l.v;
   c.cycle++;c.next=G.day+c.legs[0].every;c.status='active';c.reason='İki yön ayrı teslim edilir; kayıp karşı seferi geri almaz';
@@ -347,13 +357,11 @@ const Commerce={
   if(a.colonies.some(c=>G.sys[c.s]?.planets[c.p]?.col?.q?.some(q=>q.key==='liman')))return false;
   const targets=tradeHubs(b).filter(id=>this.identifiedPort(a,G.sys[id],b));
   if(!targets.length)return false;
-  const plan=aiEconomyPlan(a);
-  if(plan.critical)return false;
+  let plan;
   const producer={ene:'santral',min:'maden',yiy:'ciftlik',ala:'dokum',tuk:'fabrika'};
   for(const col of a.colonies){
    const s=G.sys[col.s],p=s.planets[col.p],cost=buildingOrderCost(a,p,'liman');
-   if(!cost||p.col.q?.length||this.port(a,s.id)||!aiBuildingSustainable(a,s,p,'liman',plan))continue;
-   if(this.resources.some(r=>A[r].net<0&&buildingOrderCost(a,p,producer[r])&&aiBuildingDelta(a,s,p,producer[r])[r]>0))continue;
+   if(!cost||p.col.q?.length||this.port(a,s.id))continue;
    for(const target of targets){
     if(budget.routes<2)return false;budget.routes-=2;
     const path=this.aiPortRoute(a,b,s.id,target);
@@ -363,7 +371,10 @@ const Commerce={
     if(!n)continue;
     const value=this.aiValue(a,{from:b.id,to:a.id,give:n.want,want:n.give}).net;
     const price=Object.entries(cost).reduce((sum,[r,v])=>sum+itemValue(a,{t:'res',r,v},b),0);
-    if(value<=price||!queueBuilding(a,s,p,'liman'))continue;
+    if(value<=price)continue;
+    plan||=aiEconomyPlan(a);if(plan.critical)return false;
+    if(!aiBuildingSustainable(a,s,p,'liman',plan)||this.resources.some(r=>A[r].net<0&&buildingOrderCost(a,p,producer[r])&&aiBuildingDelta(a,s,p,producer[r])[r]>0))continue;
+    if(!queueBuilding(a,s,p,'liman'))continue;
     AIDiagnostics.note('trade-port-investment',a,b,'Bilinen hat · '+s.id+' → '+target);
     return true;
    }
@@ -461,7 +472,8 @@ const Commerce={
   const A=balances.get(a.id),quotes=new Map();
   if(!A||!this.resources.some(r=>A[r].need>0)||!tradeHubs(a).length)return quotes;
   // Only compare competing solvent offers. The other trader supplies its own export assessment.
-  const peers=partners.filter(b=>b.ai&&b.id>a.id&&balances.has(b.id)&&!this.pairGate(a,b)&&
+  const peers=partners.filter(b=>b.ai&&b.id>a.id&&balances.has(b.id)&&a.pact?.[b.id]&&!this.pairGate(a,b)&&
+    this.resources.some(r=>A[r].export>=1&&balances.get(b.id)[r].need>0||balances.get(b.id)[r].export>=1&&A[r].need>0)&&
     tradeHubs(b).length&&!(a.aiTalk?.['commerce:'+b.id]?.until>G.day));
   if(peers.length<2)return quotes;
   for(const b of peers.slice(0,4)){

@@ -2391,7 +2391,7 @@ function executeDeal(offer, inboxKey=null){
     applyItems(a, b, n.effectiveGive,settlement);
     applyItems(b, a, n.effectiveWant,settlement);
 
-    if(cargo)for(const l of cargo.legs){const why=Commerce.legGate(G.emps[l.e],G.emps[l.to],l,{stock:true,once:cargo.once});if(why)throw Error(why);}
+    if(cargo)for(const l of cargo.legs){const why=Commerce.legGate(G.emps[l.e],G.emps[l.to],l,{stock:true,once:cargo.once,live:true});if(why)throw Error(why);}
     // A physical price for an immediately effective clause must leave the payer's control in the same transaction.
     const mixed=cargo?.once&&n.effectiveGive.concat(n.effectiveWant).some(it=>it.t!=='res'||!Commerce.resources.includes(it.r));
     if(mixed&&!Commerce.dispatch(cargo))throw Error(cargo.reason);
