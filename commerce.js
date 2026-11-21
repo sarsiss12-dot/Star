@@ -415,10 +415,12 @@ const Commerce={
     if(!dealQuote(offer).ok||a.res.etk-payment<40)continue;
     (a.aiTalk||={})[key]={until:G.day+180,reason:'Transit izni değerlendirildi'};
     if(owner.id===0)return !!UI.aiOffer(offer);
-    if(!owner.ai)return false;
+    const guest=typeof __mpHumanVoter==='function'&&__mpHumanVoter(owner.id);
+    if(!owner.ai&&!guest)return false;
     const result=aiNegotiate(a,owner,offer.give,offer.want,true);
-    AIDiagnostics.note(result.uygulandi?'trade-transit-granted':'trade-transit-refused',a,owner,'Kargo ortağı '+b.id+' · '+path.length+' sistem');
-    return result.uygulandi;
+    const pending=guest&&result.tur>0&&result.karar==='bekle';
+    AIDiagnostics.note(result.uygulandi?'trade-transit-granted':pending?'trade-transit-pending':'trade-transit-refused',a,owner,'Kargo ortağı '+b.id+' · '+path.length+' sistem');
+    return result.uygulandi||pending;
    }
   }
   return false;

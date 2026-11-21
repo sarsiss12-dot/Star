@@ -176,3 +176,21 @@ test('izin iptali ile yükleme aynı gün işlenirken kargo bir defa düşülür
   assert.equal(h.run('G.commerce.convoys.length'),loadFirst?2:0);
  }
 });
+test('AI misafirin liman hakkını onun adına kabul edemez, izin host gelen kutusunda bekler',()=>{
+ const {world:mpWorld}=require('./helpers/beta-fed-found0-mp-world.cjs');
+ const h=mpWorld();
+ h.run('var template=JSON.parse(JSON.stringify(G.sys.flatMap(s=>s.planets).find(p=>p.col).col))');
+ h.run(require('./helpers/96a-fixture').setup);
+ h.run(`for(const e of G.emps){e.mizac=e._pers="yayilmaci";e._persAt=G.memAge;}for(const i of [1,3,4])G.emps[i].ai=false;
+ var a=G.emps[2],b=G.emps[5],owner=G.emps[1];
+ port(a,0);port(owner,3);port(owner,6);port(b,9);
+ for(let i=3;i<9;i++){G.sys[i].lanes.push(i+1);G.sys[i+1].lanes.push(i);}
+ a.pact[b.id]=b.pact[a.id]=true;owner.portTransit={[b.id]:G.day+360};
+ a.inc={min:100,ene:-5};b.inc={ene:100,min:-5};
+ a.res.min=b.res.ene=500;a.res.ene=b.res.min=30;a.res.etk=500;
+ var submitted=Commerce.aiTransitRequest(a,b,Commerce.aiBalance(a),Commerce.aiBalance(b),{routes:96});`);
+ assert.equal(h.run('submitted'),true);
+ assert.equal(h.run('MP.dip.offers.some(o=>o.to===owner.id&&o.from===a.id&&o.status==="pending"&&o.want.some(i=>i.t==="portTransit"))'),true);
+ assert.equal(h.run('!!owner.portTransit[a.id]'),false);
+ assert.equal(h.run('a.res.etk'),500);
+});
