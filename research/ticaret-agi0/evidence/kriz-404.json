@@ -1,0 +1,159 @@
+{
+  "seed": 404,
+  "systems": 100,
+  "observations": [
+    {
+      "day": 2880,
+      "ports": 29,
+      "empiresInCrisis": [],
+      "trades": 7,
+      "chain": 0,
+      "deliveries": 60,
+      "rng": -648392916
+    },
+    {
+      "day": 2910,
+      "ports": 29,
+      "empiresInCrisis": [],
+      "trades": 7,
+      "chain": 0,
+      "deliveries": 62,
+      "rng": -855369107
+    },
+    {
+      "day": 2940,
+      "ports": 29,
+      "empiresInCrisis": [
+        2
+      ],
+      "trades": 7,
+      "chain": 0,
+      "deliveries": 64,
+      "rng": 1273173791
+    },
+    {
+      "day": 2970,
+      "ports": 29,
+      "empiresInCrisis": [
+        2
+      ],
+      "trades": 7,
+      "chain": 0,
+      "deliveries": 68,
+      "rng": -2029039553
+    },
+    {
+      "day": 3000,
+      "ports": 29,
+      "empiresInCrisis": [
+        2
+      ],
+      "trades": 7,
+      "chain": 0,
+      "deliveries": 70,
+      "rng": 1588634273
+    },
+    {
+      "day": 3030,
+      "ports": 30,
+      "empiresInCrisis": [
+        2
+      ],
+      "trades": 7,
+      "chain": 0,
+      "deliveries": 72,
+      "rng": 1904094755
+    },
+    {
+      "day": 3060,
+      "ports": 30,
+      "empiresInCrisis": [
+        2
+      ],
+      "trades": 8,
+      "chain": 0,
+      "deliveries": 74,
+      "rng": -1029624007
+    },
+    {
+      "day": 3090,
+      "ports": 30,
+      "empiresInCrisis": [
+        2
+      ],
+      "trades": 8,
+      "chain": 0,
+      "deliveries": 76,
+      "rng": -1187811601
+    },
+    {
+      "day": 3120,
+      "ports": 30,
+      "empiresInCrisis": [
+        2
+      ],
+      "trades": 8,
+      "chain": 0,
+      "deliveries": 78,
+      "rng": 1053461091
+    },
+    {
+      "day": 3150,
+      "ports": 31,
+      "empiresInCrisis": [
+        2
+      ],
+      "trades": 9,
+      "chain": 0,
+      "deliveries": 82,
+      "rng": 767391103
+    },
+    {
+      "day": 3180,
+      "ports": 31,
+      "empiresInCrisis": [
+        2
+      ],
+      "trades": 9,
+      "chain": 0,
+      "deliveries": 84,
+      "rng": 545262312
+    },
+    {
+      "day": 3210,
+      "ports": 31,
+      "empiresInCrisis": [
+        2
+      ],
+      "trades": 9,
+      "chain": 0,
+      "deliveries": 86,
+      "rng": -1508432292
+    },
+    {
+      "day": 3240,
+      "ports": 31,
+      "empiresInCrisis": [
+        2
+      ],
+      "trades": 9,
+      "chain": 0,
+      "deliveries": 88,
+      "rng": 668899203
+    }
+  ],
+  "tradeEvents": {
+    "trade-no-port": 97,
+    "trade-route-not-exhausted": 24,
+    "trade-political": 144,
+    "trade-no-supply-demand": 23,
+    "trade-no-contact": 303,
+    "trade-existing": 21,
+    "trade-no-safe-route": 66,
+    "trade-route-budget": 94,
+    "trade-signed": 2,
+    "trade-agreed": 2
+  },
+  "file": "sp-100-9-404-m96.save",
+  "sha256": "72a068a13b0ecd1a84916019408b4ef05bc935468ae5a702069606f079a7736e"
+}

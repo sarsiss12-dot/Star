@@ -1,0 +1,329 @@
+{
+  "input": "bf262e0f9c3ad5d9c82d4b18e01048b7e55b36ff1aa06416a26bc45df8931d9c",
+  "first": 0,
+  "rows": [
+    {
+      "rng": -32883311,
+      "save": "f51475ba4b67e56c76aab96460ddc9393130995d58f6118e60e3088d677bbe9d",
+      "events": [
+        {
+          "day": 930,
+          "from": 2,
+          "to": 13,
+          "give": [
+            {
+              "t": "ally"
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 90
+            }
+          ],
+          "stage": "quote",
+          "ok": true,
+          "why": [],
+          "ports": [
+            [
+              136,
+              443
+            ],
+            [
+              410,
+              152
+            ]
+          ]
+        },
+        {
+          "day": 930,
+          "from": 2,
+          "to": 13,
+          "give": [
+            {
+              "t": "ally"
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 90
+            }
+          ],
+          "stage": "quote",
+          "ok": true,
+          "why": [],
+          "ports": [
+            [
+              136,
+              443
+            ],
+            [
+              410,
+              152
+            ]
+          ]
+        },
+        {
+          "day": 930,
+          "from": 2,
+          "to": 13,
+          "give": [
+            {
+              "t": "ally"
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 90
+            }
+          ],
+          "stage": "quote",
+          "ok": true,
+          "why": [],
+          "ports": [
+            [
+              136,
+              443
+            ],
+            [
+              410,
+              152
+            ]
+          ]
+        },
+        {
+          "day": 930,
+          "from": 2,
+          "to": 13,
+          "give": [
+            {
+              "t": "ally"
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 90
+            }
+          ],
+          "stage": "execute",
+          "ok": true
+        },
+        {
+          "day": 930,
+          "from": 11,
+          "to": 12,
+          "give": [
+            {
+              "t": "nap"
+            }
+          ],
+          "want": [],
+          "stage": "quote",
+          "ok": true,
+          "why": [],
+          "ports": [
+            [
+              266,
+              92
+            ],
+            [
+              113,
+              40
+            ]
+          ]
+        },
+        {
+          "day": 930,
+          "from": 11,
+          "to": 12,
+          "give": [
+            {
+              "t": "nap"
+            }
+          ],
+          "want": [],
+          "stage": "quote",
+          "ok": true,
+          "why": [],
+          "ports": [
+            [
+              266,
+              92
+            ],
+            [
+              113,
+              40
+            ]
+          ]
+        },
+        {
+          "day": 930,
+          "from": 11,
+          "to": 12,
+          "give": [
+            {
+              "t": "nap"
+            }
+          ],
+          "want": [],
+          "stage": "quote",
+          "ok": true,
+          "why": [],
+          "ports": [
+            [
+              266,
+              92
+            ],
+            [
+              113,
+              40
+            ]
+          ]
+        },
+        {
+          "day": 930,
+          "from": 11,
+          "to": 12,
+          "give": [
+            {
+              "t": "nap"
+            }
+          ],
+          "want": [],
+          "stage": "execute",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "rng": -32883311,
+      "save": "9a18bc97d5f991d94434ac51efcfe9ea730cec0fb74b8d4198a0fad0b603607f",
+      "events": [
+        {
+          "day": 930,
+          "from": 2,
+          "to": 13,
+          "give": [
+            {
+              "t": "ally"
+            }
+          ],
+          "want": [
+            {
+              "t": "res",
+              "r": "min",
+              "v": 90
+            }
+          ],
+          "stage": "quote",
+          "ok": false,
+          "why": [
+            "Tek seferlik yük için yeterli kapasiteli, açık ve izinli liman hattı yok"
+          ],
+          "ports": [
+            [
+              136,
+              443
+            ],
+            [
+              410,
+              152
+            ]
+          ]
+        },
+        {
+          "day": 930,
+          "from": 11,
+          "to": 12,
+          "give": [
+            {
+              "t": "nap"
+            }
+          ],
+          "want": [],
+          "stage": "quote",
+          "ok": true,
+          "why": [],
+          "ports": [
+            [
+              266,
+              92
+            ],
+            [
+              113,
+              40
+            ]
+          ]
+        },
+        {
+          "day": 930,
+          "from": 11,
+          "to": 12,
+          "give": [
+            {
+              "t": "nap"
+            }
+          ],
+          "want": [],
+          "stage": "quote",
+          "ok": true,
+          "why": [],
+          "ports": [
+            [
+              266,
+              92
+            ],
+            [
+              113,
+              40
+            ]
+          ]
+        },
+        {
+          "day": 930,
+          "from": 11,
+          "to": 12,
+          "give": [
+            {
+              "t": "nap"
+            }
+          ],
+          "want": [],
+          "stage": "quote",
+          "ok": true,
+          "why": [],
+          "ports": [
+            [
+              266,
+              92
+            ],
+            [
+              113,
+              40
+            ]
+          ]
+        },
+        {
+          "day": 930,
+          "from": 11,
+          "to": 12,
+          "give": [
+            {
+              "t": "nap"
+            }
+          ],
+          "want": [],
+          "stage": "execute",
+          "ok": true
+        }
+      ]
+    }
+  ]
+}

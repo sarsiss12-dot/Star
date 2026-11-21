@@ -1,0 +1,734 @@
+{
+  "seed": 99,
+  "systems": 100,
+  "observations": [
+    {
+      "day": 1080,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 6,
+      "rng": 870784541
+    },
+    {
+      "day": 1110,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 6,
+      "rng": 607443453
+    },
+    {
+      "day": 1140,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 6,
+      "rng": 344102365
+    },
+    {
+      "day": 1170,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": -551074393
+    },
+    {
+      "day": 1200,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": -1453827451
+    },
+    {
+      "day": 1230,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": 1235033620
+    },
+    {
+      "day": 1260,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": -859873281
+    },
+    {
+      "day": 1290,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": -1187155566
+    },
+    {
+      "day": 1320,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": -818660984
+    },
+    {
+      "day": 1350,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": -74095520
+    },
+    {
+      "day": 1380,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": -969272278
+    },
+    {
+      "day": 1410,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": 1783529990
+    },
+    {
+      "day": 1440,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": 1520188902
+    },
+    {
+      "day": 1470,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": 1824742287
+    },
+    {
+      "day": 1500,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": -902000284
+    },
+    {
+      "day": 1530,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": 1226542614
+    },
+    {
+      "day": 1560,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": 1531095999
+    },
+    {
+      "day": 1590,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": 1203813714
+    },
+    {
+      "day": 1620,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": -955034384
+    },
+    {
+      "day": 1650,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": -778363393
+    },
+    {
+      "day": 1680,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": 1278662008
+    },
+    {
+      "day": 1710,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 1,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": 191661659
+    },
+    {
+      "day": 1740,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": 1695945187
+    },
+    {
+      "day": 1770,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 8,
+      "rng": 2000498572
+    },
+    {
+      "day": 1800,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": -2053856536
+    },
+    {
+      "day": 1830,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": 1785946081
+    },
+    {
+      "day": 1860,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": 1706852284
+    },
+    {
+      "day": 1890,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": -515937011
+    },
+    {
+      "day": 1920,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": 164687256
+    },
+    {
+      "day": 1950,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": 326205647
+    },
+    {
+      "day": 1980,
+      "ports": 13,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": 1198653505
+    },
+    {
+      "day": 2010,
+      "ports": 14,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": -335935223
+    },
+    {
+      "day": 2040,
+      "ports": 14,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": -1358994375
+    },
+    {
+      "day": 2070,
+      "ports": 14,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": 81347956
+    },
+    {
+      "day": 2100,
+      "ports": 14,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": 1555326284
+    },
+    {
+      "day": 2130,
+      "ports": 14,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": -2055685948
+    },
+    {
+      "day": 2160,
+      "ports": 14,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": -55025444
+    },
+    {
+      "day": 2190,
+      "ports": 14,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": 1953211360
+    },
+    {
+      "day": 2220,
+      "ports": 14,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": -965354802
+    },
+    {
+      "day": 2250,
+      "ports": 14,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": -235941938
+    },
+    {
+      "day": 2280,
+      "ports": 15,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": 749235714
+    },
+    {
+      "day": 2310,
+      "ports": 15,
+      "empiresInCrisis": [
+        1,
+        11
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": -672623220
+    },
+    {
+      "day": 2340,
+      "ports": 15,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": -1206881696
+    },
+    {
+      "day": 2370,
+      "ports": 15,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": -1094151902
+    },
+    {
+      "day": 2400,
+      "ports": 15,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": -1549316581
+    },
+    {
+      "day": 2430,
+      "ports": 15,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 2,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": -2004481260
+    },
+    {
+      "day": 2460,
+      "ports": 15,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 3,
+      "chain": 0,
+      "deliveries": 9,
+      "rng": 748321008
+    },
+    {
+      "day": 2490,
+      "ports": 15,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 3,
+      "chain": 0,
+      "deliveries": 11,
+      "rng": -1929632966
+    },
+    {
+      "day": 2520,
+      "ports": 16,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 3,
+      "chain": 0,
+      "deliveries": 13,
+      "rng": -1752961975
+    },
+    {
+      "day": 2550,
+      "ports": 17,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 3,
+      "chain": 0,
+      "deliveries": 15,
+      "rng": -440502038
+    },
+    {
+      "day": 2580,
+      "ports": 17,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 3,
+      "chain": 0,
+      "deliveries": 17,
+      "rng": -1095066608
+    },
+    {
+      "day": 2610,
+      "ports": 17,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 3,
+      "chain": 0,
+      "deliveries": 19,
+      "rng": 1985017945
+    },
+    {
+      "day": 2640,
+      "ports": 17,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 3,
+      "chain": 0,
+      "deliveries": 21,
+      "rng": 138299532
+    },
+    {
+      "day": 2670,
+      "ports": 17,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 3,
+      "chain": 0,
+      "deliveries": 23,
+      "rng": -1986912569
+    },
+    {
+      "day": 2700,
+      "ports": 17,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 3,
+      "chain": 0,
+      "deliveries": 25,
+      "rng": 833161693
+    },
+    {
+      "day": 2730,
+      "ports": 19,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 3,
+      "chain": 0,
+      "deliveries": 27,
+      "rng": 219809420
+    },
+    {
+      "day": 2760,
+      "ports": 21,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 3,
+      "chain": 0,
+      "deliveries": 29,
+      "rng": 1573481654
+    },
+    {
+      "day": 2790,
+      "ports": 22,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 3,
+      "chain": 0,
+      "deliveries": 31,
+      "rng": 606787399
+    },
+    {
+      "day": 2820,
+      "ports": 22,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 4,
+      "chain": 0,
+      "deliveries": 33,
+      "rng": 1911671036
+    },
+    {
+      "day": 2850,
+      "ports": 22,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 4,
+      "chain": 0,
+      "deliveries": 35,
+      "rng": 1200741569
+    },
+    {
+      "day": 2880,
+      "ports": 22,
+      "empiresInCrisis": [
+        1
+      ],
+      "trades": 4,
+      "chain": 0,
+      "deliveries": 37,
+      "rng": 546176999
+    }
+  ],
+  "tradeEvents": {
+    "trade-no-contact": 1994,
+    "trade-political": 489,
+    "trade-no-port": 123,
+    "trade-existing": 15,
+    "trade-cooldown": 12,
+    "trade-no-fair-ratio": 8,
+    "trade-no-supply-demand": 20,
+    "trade-pact-rejected": 1,
+    "trade-signed": 2,
+    "trade-agreed": 2,
+    "trade-no-safe-route": 30
+  },
+  "file": "36.save",
+  "sha256": "24e18761883b2877ed7c3021b2a001bb5bc9ff6428ff993a7ffbca5cdcf02001"
+}

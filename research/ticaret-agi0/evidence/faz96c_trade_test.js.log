@@ -1,0 +1,11 @@
+✓ valid AI reciprocal contract goes through negotiation and real paid cargo
+✓ stock-rich low-production energy can pay for scarce goods
+✓ fair quantities use both canonical AI valuations
+✓ six-month deficit reserve prevents dumping stock despite large current depot
+✓ no port, war, embargo or unknown path never creates a contract
+✓ supply/price diagnostics leave RNG and full state unchanged
+✓ player receives inbox proposal with no auto acceptance or goods debit
+✓ same month and saved retry cooldown do not repeat decisions or charges
+✓ cancel harmful exporter keeps departed cargo without refund
+✓ AI imports scarce consumer goods against real energy and receives only on arrival
+GEÇEN: 10 KALAN: 0

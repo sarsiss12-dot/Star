@@ -1,0 +1,4 @@
+PASS K1 misafir planlayan B: koalisyon görünümü salt okunur; toplu davet (AI müttefik + insan C); C karşı teklif verir; B kabul eder; kısmi son onayla ilan; C ve AI savaşa girer
+PASS K2 gizlilik ve yetki: D, B'nin hazırlığını / davetlerini göremez ve yönetemez; davet edilmeyen D teklifi yanıtlayamaz
+PASS K3 hedef değişikliği ve iptal: bekleyen insan daveti kapanır (eski şartla kabul edilemez); iptalde açık davetler kapanır
+GEÇEN: 3 KALAN: 0
