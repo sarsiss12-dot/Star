@@ -1,3 +1,3 @@
 # Son Codex raporu
 
-[MP-RAKIP-DOKTRINLER.0 · Multiplayer kurulumu ve FED-AI-SIYASET.0 planı](reports/codex/MP-RAKIP-DOKTRINLER0-SONUC.md)
+[EKONOMIK-BASKI.0 · Nüfus, kaynak rekabeti, toprak hedefleri ve galaktik siyaset](reports/codex/EKONOMIK-BASKI0-SONUC.md)
