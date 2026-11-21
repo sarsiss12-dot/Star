@@ -41,7 +41,7 @@ const Commerce={
   return !!s&&G.sys[from]?.lanes.includes(to)&&!(s.cr>0)&&this.known(a,s)&&this.known(b,s)&&
    !(s.owner>=0&&(a.war[s.owner]||b.war[s.owner]));
  },
- route(a,b,source,target,{inFlight=false,avoidObserved=false,initialHops=0,grants,volume=0}={}){
+ route(a,b,source,target,{inFlight=false,avoidObserved=false,initialHops=0,initialPort=source,grants,volume=0}={}){
   if(!G.sys[source]||!G.sys[target]||source===target||initialHops>3)return null;
   if(!inFlight&&(!this.identifiedPort(a,G.sys[target],b)||!this.identifiedPort(b,G.sys[source],a)))return null;
   const risk=avoidObserved?this.aiHazards(a):null;
@@ -56,7 +56,7 @@ const Commerce={
    while(lo<hi){const mid=(lo+hi)>>1,q=queue[mid];if(q.cost>cost||q.cost===cost&&q.id>id)lo=mid+1;else hi=mid;}
    queue.splice(lo,0,row);
   };
-  enqueue(source,initialHops,0,null,source);
+  enqueue(source,initialHops,0,null,initialPort);
   while(queue.length){
    const row=queue.pop();
    if(best.get(row.key)!==row.cost)continue;
@@ -155,11 +155,11 @@ const Commerce={
   return {open,stops,missing:[...missing],days:Math.ceil(days)};
  },
  remainingRoute(v,a,b){
-  let hops=v.hops??v.step;
+  let hops=v.hops??v.step,origin=v.legSource??v.source;
   for(let i=v.step;i<v.route.length-1;i++){
    const here=G.sys[v.route[i]],next=v.route[i+1];
-   if((i!==v.step||v.t===0)&&this.relay(a,here))hops=0;
-   if(++hops>3||!this.openEdge(a,b,here.id,next))return here;
+   if((i!==v.step||v.t===0)&&this.relay(a,here)&&routeVolume(a,origin,here.id)>=v.amount){hops=0;origin=here.id;}
+   if(++hops>3||!this.openEdge(a,b,here.id,next)||next===v.target&&routeVolume(a,origin,next)<v.amount)return here;
   }
   return null;
  },
@@ -264,11 +264,14 @@ const Commerce={
     const at=moving?next:v.at;
     if(moving&&!this.openEdge(a,b,v.at,next)){this.block(v,'Konvoyun bulunduğu hiperhat kapalı');continue;}
     const used=v.hops??v.step;
-    const initialHops=this.relay(a,G.sys[at])?0:used+(moving?1:0);
+    const origin=v.legSource??v.source;
+    const stop=this.relay(a,G.sys[at])&&routeVolume(a,origin,at)>=v.amount;
+    const initialHops=stop?0:used+(moving?1:0);
     let choice=null;
     for(const target of targetLost?tradeHubs(b):[v.target]){
-     if(G.sys[target].cr>0||!this.known(a,G.sys[target]))continue;
-     const path=at===target?[at]:this.route(a,b,at,target,{inFlight:true,initialHops});
+     if(G.sys[target].cr>0||!this.identifiedPort(a,G.sys[target],b))continue;
+     if(at===target&&(used+(moving?1:0)>3||routeVolume(a,origin,target)<v.amount))continue;
+     const path=at===target?[at]:this.route(a,b,at,target,{inFlight:true,initialHops,initialPort:stop?at:origin,volume:v.amount});
      if(!path||moving&&path.includes(v.at))continue;
      const days=path.slice(1).reduce((sum,id,i)=>sum+Math.max(1,dist(G.sys[path[i]],G.sys[id])/this.speed),0);
      if(!choice||days<choice.days||days===choice.days&&target<choice.target)choice={target,path,days};
@@ -284,7 +287,9 @@ const Commerce={
     const from=G.sys[v.route[v.step]],next=G.sys[v.route[v.step+1]];
     if(!from||!next||!this.openEdge(a,b,from.id,next.id)){this.block(v,'Hiper-yol kapalı / düşman denetiminde');break;}
     if(next.cr>0){this.block(v,'Sonraki sistem muharebe / abluka altında');break;}
-    if(!v.t&&this.relay(a,from))v.hops=0;
+    if(!v.t&&this.relay(a,from)&&routeVolume(a,v.legSource??v.source,from.id)>=v.amount){
+     v.hops=0;if(from.id!==v.source)v.legSource=from.id;
+    }
     if((v.hops??v.step)>=3){this.block(v,'Aktarma limanına erişilemiyor · '+from.name);break;}
     v.blockedSince=null;
     const days=Math.max(1,dist(from,next)/this.speed),need=(1-v.t)*days;
@@ -400,6 +405,12 @@ const Commerce={
     const distance=path.slice(1).reduce((n,id,i)=>n+dist(G.sys[path[i]],G.sys[id]),0);
     const terms=this.aiTerms(a,b,A,B,{source,target,distance});
     if(!terms)continue;
+    // A paid grant must enable this actual load in both directions.
+    if(budget.routes<3)return false;
+    budget.routes-=3;
+    if(this.route(a,b,source,target,{avoidObserved:true,volume:terms.give[0].v})||
+       !this.route(a,b,source,target,{grants,avoidObserved:true,volume:terms.give[0].v})||
+       !this.route(b,a,target,source,{avoidObserved:true,volume:terms.want[0].v}))continue;
     const payment=36,offer={from:a.id,to:owner.id,give:[{t:'res',r:'etk',v:payment}],want:[{t:'portTransit'}]};
     if(!dealQuote(offer).ok||a.res.etk-payment<40)continue;
     (a.aiTalk||={})[key]={until:G.day+180,reason:'Transit izni değerlendirildi'};
@@ -543,7 +554,7 @@ const Commerce={
   if(raw.v!==1||!raw.stats||typeof raw.stats!=='object'||Array.isArray(raw.stats)||!raw.aiAt||typeof raw.aiAt!=='object'||!Array.isArray(raw.contracts)||!Array.isArray(raw.convoys)||raw.contracts.length>256||raw.convoys.length>this.maxConvoys+this.historyLimit)throw Error('Geçersiz ticaret kaydı');
   const st=JSON.parse(JSON.stringify(raw)),ids=new Set(),cids=new Set(),num=n=>Number.isFinite(n)&&n>=0&&n<=Number.MAX_SAFE_INTEGER;
   for(const c of st.contracts){if(!Number.isSafeInteger(c.id)||cids.has(c.id)||!Array.isArray(c.legs)||(c.once?c.legs.length<1||c.legs.length>10:c.legs.length!==2)||!num(c.next)||!num(c.until)||!num(c.cycle)||!this.labels[c.status])throw Error('Bozuk sözleşme');cids.add(c.id);for(const l of c.legs)if(!this.resources.includes(l.r)||!num(l.v)||l.v<=0||!G.emps[l.e]||!G.emps[l.to]||!G.sys[l.source]||!G.sys[l.target])throw Error('Bozuk sözleşme yükü');}
-  for(const v of st.convoys){if(!Number.isSafeInteger(v.id)||ids.has(v.id)||!cids.has(v.contract)||!G.emps[v.e]||!G.emps[v.to]||!this.resources.includes(v.r)||!Array.isArray(v.route)||v.route.length>G.sys.length||new Set(v.route).size!==v.route.length||v.hops!==undefined&&(!Number.isInteger(v.hops)||v.hops<0||v.hops>3)||!v.route.length||v.route.some(id=>!G.sys[id])||!Number.isInteger(v.step)||v.step<0||v.step>=v.route.length||!num(v.t)||v.t>1||!['loaded','amount','delivered','lost','plundered','x','y','started','depart','riskAt'].filter(k=>!['x','y','riskAt'].includes(k)).every(k=>num(v[k]))||!Number.isFinite(v.x)||!Number.isFinite(v.y)||!this.labels[v.status]||Math.abs(v.loaded-v.amount-v.delivered-v.lost)>1e-6||this.terminal(v)&&v.amount!==0)throw Error('Bozuk konvoy / kargo muhasebesi');ids.add(v.id);}
+  for(const v of st.convoys){if(!Number.isSafeInteger(v.id)||ids.has(v.id)||!cids.has(v.contract)||!G.emps[v.e]||!G.emps[v.to]||!this.resources.includes(v.r)||!Array.isArray(v.route)||v.route.length>G.sys.length||new Set(v.route).size!==v.route.length||v.legSource!==undefined&&(!Number.isInteger(v.legSource)||!G.sys[v.legSource])||v.hops!==undefined&&(!Number.isInteger(v.hops)||v.hops<0||v.hops>3)||!v.route.length||v.route.some(id=>!G.sys[id])||!Number.isInteger(v.step)||v.step<0||v.step>=v.route.length||!num(v.t)||v.t>1||!['loaded','amount','delivered','lost','plundered','x','y','started','depart','riskAt'].filter(k=>!['x','y','riskAt'].includes(k)).every(k=>num(v[k]))||!Number.isFinite(v.x)||!Number.isFinite(v.y)||!this.labels[v.status]||Math.abs(v.loaded-v.amount-v.delivered-v.lost)>1e-6||this.terminal(v)&&v.amount!==0)throw Error('Bozuk konvoy / kargo muhasebesi');ids.add(v.id);}
   for(const [id,stats] of Object.entries(st.stats||{})){if(!G.emps[id]||!stats||!Number.isSafeInteger(stats.deliveries)||stats.deliveries<0)throw Error('Bozuk ticaret sayacı');for(const key of ['loaded','sent','received','lost','destroyed','plundered','lootReceived']){if(!stats[key]||typeof stats[key]!=='object'||Array.isArray(stats[key])||Object.entries(stats[key]).some(([r,n])=>!this.resources.includes(r)||!num(n)))throw Error('Bozuk kargo toplamı');}}
   if(st.clock!==null&&!num(st.clock))throw Error('Bozuk ticaret saati');
   if(st.convoys.some(v=>v.at!==v.route[v.step]||!Array.isArray(v.attackers)||v.attackers.some(id=>!Number.isSafeInteger(id))||this.terminal(v)&&v.receipt!==v.id))throw Error('Bozuk konum / teslimat makbuzu');

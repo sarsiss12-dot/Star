@@ -120,4 +120,20 @@ test('AI gerçek ihtiyacı açan belirli bir izin için bütçeli teklif verir',
  assert.equal(h.run('!!Commerce.route(a,b,0,9)'),true);
  assert.equal(h.run('a.res.etk<before'),true);
  assert.equal(h.run('Commerce.aiTransitRequest(a,b,A,B,{routes:96})'),false);
+ assert.equal(h.run(`var quote=Commerce.aiTerms(a,b,A,B,Commerce.aiPorts(a,b,{routes:96}));
+ var signed=aiNegotiate(a,b,quote.give,quote.want,true);signed.uygulandi`),true);
+ h.run('sailDays(2);Commerce.cancel(1,a);sailDays(90)');
+ assert.equal(h.run('G.commerce.convoys.length===2&&G.commerce.convoys.every(v=>v.route.length>4&&v.receipt===v.id&&v.delivered===v.loaded)'),true);
+});
+test('kapasitesi yetersiz alternatif limana kargo yönlendirilmez',()=>{
+ const h=world();
+ h.run(`capacity();rights();executeDeal(swap);sailDays(10);
+ var ship=G.commerce.convoys[0],cargoId=ship.id;
+ port(G.emps[1],10);link(8,10);G.sys[10].planets[0].col.pop=1;
+ captureSystem(G.sys[9],4,'transfer');sailDays(60);`);
+ assert.equal(h.run('ship.status'),'blocked');
+ assert.equal(h.run('ship.amount'),100);
+ h.run('G.sys[10].planets[0].col.pop=120;sailDays(90)');
+ assert.equal(h.run('ship.target===10&&ship.receipt===cargoId&&ship.delivered===100'),true);
+ assert.equal(h.run('G.emps[4].res.min'),100);
 });
