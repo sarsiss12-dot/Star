@@ -1,0 +1,16 @@
+{
+  "natural-11": 61,
+  "medium-99": 55,
+  "natural-404": 101,
+  "Dreload": {
+    "rngMatches": 25,
+    "saveMatches": 0,
+    "total": 25
+  },
+  "sources": {
+    "natural-11/36.save": "e03d32063bb4ec79da480b38ee36e753d60fcfbb05af940c88a3b0fbae0da204",
+    "medium-99/48.save": "d86c2b43dee763419791b61ecba9f3b891daa5fa3ce91ad5b3bdb976c4c2ba04",
+    "sp-100-9-404-m96.save": "72a068a13b0ecd1a84916019408b4ef05bc935468ae5a702069606f079a7736e",
+    "medium-99/6.save": "bfaaa3de6ff3b350c1c276fa0848caef6ac60e8c5a5e33689ae07b24611d4f99"
+  }
+}

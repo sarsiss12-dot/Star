@@ -1,0 +1,42 @@
+{
+  "before": "d86c2b43dee763419791b61ecba9f3b891daa5fa3ce91ad5b3bdb976c4c2ba04",
+  "after": "6c03157ffa617aa346289288a3ea8e25f804d4626c472fec52998912d6665c59",
+  "counts": {
+    "save.emps.*.inc.min": 8,
+    "save.emps.*.inc.ene": 8,
+    "save.emps.*.inc.yiy": 5,
+    "save.emps.*.inc.ala": 5,
+    "save.emps.*.inc.ara": 10,
+    "save.emps.*.inc.etk": 7,
+    "save.emps.*.inc.tuk": 7,
+    "save.emps.*._supAt": 13,
+    "save.emps.*._gateAt": 13,
+    "save.emps.*.cgNeed": 2,
+    "save.emps.*.foodNeed": 2,
+    "save.emps.*._prof": 10,
+    "save.emps.*._powAt": 1,
+    "save.emps.*._pressAt": 1
+  },
+  "examples": [
+    "save.emps.0.inc.min",
+    "save.emps.0.inc.ene",
+    "save.emps.0.inc.yiy",
+    "save.emps.0.inc.ala",
+    "save.emps.0.inc.ara",
+    "save.emps.0.inc.etk",
+    "save.emps.0.inc.tuk",
+    "save.emps.0._supAt",
+    "save.emps.0._gateAt",
+    "save.emps.1.inc.ara",
+    "save.emps.1._supAt",
+    "save.emps.1._gateAt",
+    "save.emps.2.inc.min",
+    "save.emps.2.inc.ene",
+    "save.emps.2.inc.yiy",
+    "save.emps.2.inc.ala",
+    "save.emps.2.inc.ara",
+    "save.emps.2.inc.tuk",
+    "save.emps.2.cgNeed",
+    "save.emps.2.foodNeed"
+  ]
+}

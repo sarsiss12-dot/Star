@@ -1,0 +1,212 @@
+[
+  {
+    "race": "klan",
+    "physio": "humanoid",
+    "r": "yiy",
+    "shock": false,
+    "before": {
+      "net": 13.474221333333332,
+      "food": 13.474221333333332,
+      "cg": 25.2,
+      "line": -48.3
+    },
+    "after": {
+      "net": 13.554281333333329,
+      "food": 13.554281333333329,
+      "cg": 25.8,
+      "line": -49.449999999999996
+    },
+    "plan": {
+      "stock": 665.2976812724359,
+      "net": 13.474221333333332,
+      "months": null,
+      "urgency": 0,
+      "reserve": 60
+    },
+    "trade": {
+      "stock": 665.2976812724359,
+      "net": 13.474221333333332,
+      "reserve": 40,
+      "incoming": 0,
+      "export": 58.17153970603632,
+      "need": 0
+    },
+    "policy": "growth",
+    "foodEater": true
+  },
+  {
+    "race": "klan",
+    "physio": "humanoid",
+    "r": "yiy",
+    "shock": true,
+    "before": {
+      "net": -30.090959999999995,
+      "food": -30.090959999999995,
+      "cg": 25.2,
+      "line": -48.3
+    },
+    "after": {
+      "net": -30.944559999999996,
+      "food": -30.944559999999996,
+      "cg": 25.8,
+      "line": -49.449999999999996
+    },
+    "plan": {
+      "stock": 90.27287999999999,
+      "net": -30.090959999999995,
+      "months": 3,
+      "urgency": 60,
+      "reserve": 240.54575999999997
+    },
+    "trade": {
+      "stock": 90.27287999999999,
+      "net": -30.090959999999995,
+      "reserve": 220.54575999999997,
+      "incoming": 0,
+      "export": 0,
+      "need": 30.090959999999995
+    },
+    "policy": "recover",
+    "foodEater": true
+  },
+  {
+    "race": "makine",
+    "physio": "machine",
+    "r": "ene",
+    "shock": false,
+    "before": {
+      "net": -3.1156395038461397,
+      "food": 0,
+      "cg": 12.6,
+      "line": -26.564999999999998
+    },
+    "after": {
+      "net": -1.3144675038461315,
+      "food": 0,
+      "cg": 12.9,
+      "line": -27.197500000000005
+    },
+    "plan": {
+      "stock": 1154.6002655826928,
+      "net": -11.515639503846138,
+      "months": 100.26366883029509,
+      "urgency": 31.19684429464785,
+      "reserve": 189.09383702307684
+    },
+    "trade": {
+      "stock": 1154.6002655826928,
+      "net": -3.1156395038461397,
+      "reserve": 98.69383702307684,
+      "incoming": 0,
+      "export": 87.99220237996799,
+      "need": 3.1156395038461397
+    },
+    "policy": "growth",
+    "foodEater": false
+  },
+  {
+    "race": "makine",
+    "physio": "machine",
+    "r": "ene",
+    "shock": true,
+    "before": {
+      "net": -73.82325348846155,
+      "food": 0,
+      "cg": 12.6,
+      "line": -26.565
+    },
+    "after": {
+      "net": -73.66481008846154,
+      "food": 0,
+      "cg": 12.9,
+      "line": -27.1975
+    },
+    "plan": {
+      "stock": 221.46976046538464,
+      "net": -82.22325348846155,
+      "months": 2.693517357549755,
+      "urgency": 60,
+      "reserve": 613.3395209307694
+    },
+    "trade": {
+      "stock": 221.46976046538464,
+      "net": -73.82325348846155,
+      "reserve": 522.9395209307693,
+      "incoming": 0,
+      "export": 0,
+      "need": 73.82325348846155
+    },
+    "policy": "recover",
+    "foodEater": false
+  },
+  {
+    "race": "klan",
+    "physio": "lithoid",
+    "r": "min",
+    "shock": false,
+    "before": {
+      "net": 91.0686144,
+      "food": 0,
+      "cg": 25.2,
+      "line": -28.97999999999999
+    },
+    "after": {
+      "net": 93.36158399999997,
+      "food": 0,
+      "cg": 25.8,
+      "line": -29.67
+    },
+    "plan": {
+      "stock": 137.86681398846153,
+      "net": 61.1486144,
+      "months": null,
+      "urgency": 0,
+      "reserve": 120
+    },
+    "trade": {
+      "stock": 137.86681398846153,
+      "net": 91.0686144,
+      "reserve": 60,
+      "incoming": 0,
+      "export": 47.46977764570513,
+      "need": 0
+    },
+    "policy": "growth",
+    "foodEater": false
+  },
+  {
+    "race": "klan",
+    "physio": "lithoid",
+    "r": "min",
+    "shock": true,
+    "before": {
+      "net": -36.191807999999995,
+      "food": 0,
+      "cg": 25.2,
+      "line": -28.979999999999997
+    },
+    "after": {
+      "net": -36.075599999999994,
+      "food": 0,
+      "cg": 25.8,
+      "line": -29.669999999999995
+    },
+    "plan": {
+      "stock": 108.57542399999998,
+      "net": -66.111808,
+      "months": 1.6423000260407337,
+      "urgency": 60.7616384,
+      "reserve": 516.670848
+    },
+    "trade": {
+      "stock": 108.57542399999998,
+      "net": -36.191807999999995,
+      "reserve": 277.150848,
+      "incoming": 0,
+      "export": 0,
+      "need": 38.095904
+    },
+    "policy": "recover",
+    "foodEater": false
+  }
+]

@@ -1,0 +1,157 @@
+{
+  "casus": [
+    {
+      "room": "open",
+      "full": false,
+      "sites": 5,
+      "cb": null,
+      "border": true,
+      "own": 2,
+      "known": 2,
+      "tolerance": 0,
+      "rng": 738984671
+    },
+    {
+      "room": "open",
+      "full": true,
+      "sites": 5,
+      "cb": null,
+      "border": true,
+      "own": 2,
+      "known": 2,
+      "tolerance": 0,
+      "rng": 738984671
+    },
+    {
+      "room": "none",
+      "full": false,
+      "sites": 0,
+      "cb": {
+        "k": "yasamalani",
+        "w": 0.7,
+        "n": "Yaşam Alanı Talebi"
+      },
+      "border": true,
+      "own": 2,
+      "known": 2,
+      "tolerance": 0,
+      "rng": 738984671
+    },
+    {
+      "room": "none",
+      "full": true,
+      "sites": 0,
+      "cb": {
+        "k": "yasamalani",
+        "w": 0.7,
+        "n": "Yaşam Alanı Talebi"
+      },
+      "border": true,
+      "own": 2,
+      "known": 2,
+      "tolerance": 0,
+      "rng": 738984671
+    }
+  ],
+  "growth": [
+    {
+      "race": "klan",
+      "physio": "humanoid",
+      "scenario": "zero-food",
+      "r": "yiy",
+      "net": 2.1976072156862685,
+      "stock": 2.1976072156862685,
+      "crisis": null,
+      "grow": 0.31207136898063575,
+      "pop": 8
+    },
+    {
+      "race": "klan",
+      "physio": "humanoid",
+      "scenario": "ample-food",
+      "r": "yiy",
+      "net": 2.1976072156862685,
+      "stock": 5002.197607215686,
+      "crisis": null,
+      "grow": 0.4575535714285714,
+      "pop": 8
+    },
+    {
+      "race": "klan",
+      "physio": "humanoid",
+      "scenario": "own-fuel-empty",
+      "r": "yiy",
+      "net": -16.43336,
+      "stock": 0,
+      "crisis": "yiyecek",
+      "grow": -0.25,
+      "pop": 8
+    },
+    {
+      "race": "makine",
+      "physio": "machine",
+      "scenario": "zero-food",
+      "r": "ene",
+      "net": -52.53578776108597,
+      "stock": 4947.464212238914,
+      "crisis": null,
+      "grow": 0.17140178571428566,
+      "pop": 8
+    },
+    {
+      "race": "makine",
+      "physio": "machine",
+      "scenario": "ample-food",
+      "r": "ene",
+      "net": -52.53578776108597,
+      "stock": 4947.464212238914,
+      "crisis": null,
+      "grow": 0.3232767857142857,
+      "pop": 8
+    },
+    {
+      "race": "makine",
+      "physio": "machine",
+      "scenario": "own-fuel-empty",
+      "r": "ene",
+      "net": -78.52730024615384,
+      "stock": 0,
+      "crisis": "enerji",
+      "grow": 0,
+      "pop": 8
+    },
+    {
+      "race": "klan",
+      "physio": "lithoid",
+      "scenario": "zero-food",
+      "r": "min",
+      "net": 44.75694719999997,
+      "stock": 5044.7569472,
+      "crisis": null,
+      "grow": 0.26517857142857143,
+      "pop": 8
+    },
+    {
+      "race": "klan",
+      "physio": "lithoid",
+      "scenario": "ample-food",
+      "r": "min",
+      "net": 44.75694719999997,
+      "stock": 5044.7569472,
+      "crisis": null,
+      "grow": 0.45267857142857143,
+      "pop": 8
+    },
+    {
+      "race": "klan",
+      "physio": "lithoid",
+      "scenario": "own-fuel-empty",
+      "r": "min",
+      "net": -28.11267446153846,
+      "stock": 0,
+      "crisis": null,
+      "grow": 0.45267857142857143,
+      "pop": 8
+    }
+  ]
+}

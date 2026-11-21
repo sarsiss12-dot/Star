@@ -1,0 +1,614 @@
+{
+  "source": "bad8c32428e8a77007e7f226b69db81d369179f39b3d9f35c9e7ee69ba5a874e",
+  "arms": {
+    "original": {
+      "actor": 10,
+      "other": 11,
+      "cb": {
+        "k": "komplo",
+        "w": 1.2,
+        "n": "İstihbarat Sabotajı"
+      },
+      "appetite": -0.21881631856887057,
+      "access": {
+        "ok": false,
+        "why": "Ulaşabilir kuvvet ve bilgi yetersiz",
+        "need": 10488
+      },
+      "budget": {
+        "ok": true,
+        "reason": "sustainable",
+        "energyNet": 1064.562757929961,
+        "alloyNet": 50.20112873350885,
+        "energyMonths": null,
+        "alloyMonths": null,
+        "extraEnergy": 230.09500000000003,
+        "extraAlloy": 0,
+        "lostNetworkEstimate": 198.1260131133265,
+        "supplyEstimate": 1
+      },
+      "default": [
+        197,
+        123,
+        336
+      ],
+      "choice": {
+        "key": "fetih",
+        "opts": {
+          "targets": [
+            197,
+            123,
+            336
+          ]
+        }
+      },
+      "targets": [
+        {
+          "name": "Dunukrim",
+          "id": 123,
+          "rank": 2,
+          "d": 326.55564200947987,
+          "knownDefense": 180,
+          "lanes": 2,
+          "bypass": [
+            [
+              473,
+              483,
+              4
+            ]
+          ],
+          "planets": [
+            {
+              "type": "gay",
+              "hab": 100,
+              "deposit": "bereket",
+              "farms": 4
+            },
+            {
+              "type": "oky",
+              "hab": 42,
+              "deposit": null,
+              "farms": 0
+            },
+            {
+              "type": "vol",
+              "hab": 0,
+              "deposit": null,
+              "farms": 0
+            },
+            {
+              "type": "buz",
+              "hab": 0,
+              "deposit": null,
+              "farms": 0
+            }
+          ],
+          "nominalFood": 19.11
+        },
+        {
+          "name": "Ulvdor",
+          "id": 336,
+          "rank": 3,
+          "d": 364.9433617157761,
+          "knownDefense": 0,
+          "lanes": 4,
+          "bypass": [
+            [
+              66,
+              245,
+              3
+            ],
+            [
+              66,
+              51,
+              4
+            ],
+            [
+              66,
+              453,
+              4
+            ],
+            [
+              245,
+              51,
+              1
+            ],
+            [
+              245,
+              453,
+              4
+            ],
+            [
+              51,
+              453,
+              3
+            ]
+          ],
+          "planets": [
+            {
+              "type": "ast",
+              "hab": 0,
+              "deposit": null,
+              "farms": 0
+            }
+          ],
+          "nominalFood": 0
+        },
+        {
+          "name": "Elagath-43",
+          "id": 92,
+          "rank": 8,
+          "d": 536.9987462640315,
+          "knownDefense": 180,
+          "lanes": 4,
+          "bypass": [
+            [
+              22,
+              34,
+              1
+            ],
+            [
+              22,
+              51,
+              2
+            ],
+            [
+              22,
+              266,
+              5
+            ],
+            [
+              34,
+              51,
+              1
+            ],
+            [
+              34,
+              266,
+              4
+            ],
+            [
+              51,
+              266,
+              3
+            ]
+          ],
+          "planets": [
+            {
+              "type": "kur",
+              "hab": 86,
+              "deposit": null,
+              "farms": 1
+            },
+            {
+              "type": "tok",
+              "hab": 0,
+              "deposit": "zengin_maden",
+              "farms": 0
+            },
+            {
+              "type": "buz",
+              "hab": 0,
+              "deposit": null,
+              "farms": 0
+            },
+            {
+              "type": "buz",
+              "hab": 0,
+              "deposit": "kalinti",
+              "farms": 0
+            }
+          ],
+          "nominalFood": 12.285000000000002
+        }
+      ],
+      "rng": -1930894635
+    },
+    "soil-removed": {
+      "actor": 10,
+      "other": 11,
+      "cb": {
+        "k": "komplo",
+        "w": 1.2,
+        "n": "İstihbarat Sabotajı"
+      },
+      "appetite": -0.21881631856887057,
+      "access": {
+        "ok": false,
+        "why": "Ulaşabilir kuvvet ve bilgi yetersiz",
+        "need": 10488
+      },
+      "budget": {
+        "ok": true,
+        "reason": "sustainable",
+        "energyNet": 1064.562757929961,
+        "alloyNet": 50.20112873350885,
+        "energyMonths": null,
+        "alloyMonths": null,
+        "extraEnergy": 230.09500000000003,
+        "extraAlloy": 0,
+        "lostNetworkEstimate": 198.1260131133265,
+        "supplyEstimate": 1
+      },
+      "default": [
+        197,
+        123,
+        336
+      ],
+      "choice": {
+        "key": "fetih",
+        "opts": {
+          "targets": [
+            197,
+            123,
+            336
+          ]
+        }
+      },
+      "targets": [
+        {
+          "name": "Dunukrim",
+          "id": 123,
+          "rank": 2,
+          "d": 326.55564200947987,
+          "knownDefense": 180,
+          "lanes": 2,
+          "bypass": [
+            [
+              473,
+              483,
+              4
+            ]
+          ],
+          "planets": [
+            {
+              "type": "gay",
+              "hab": 100,
+              "deposit": null,
+              "farms": 4
+            },
+            {
+              "type": "oky",
+              "hab": 42,
+              "deposit": null,
+              "farms": 0
+            },
+            {
+              "type": "vol",
+              "hab": 0,
+              "deposit": null,
+              "farms": 0
+            },
+            {
+              "type": "buz",
+              "hab": 0,
+              "deposit": null,
+              "farms": 0
+            }
+          ],
+          "nominalFood": 12.285000000000002
+        },
+        {
+          "name": "Ulvdor",
+          "id": 336,
+          "rank": 3,
+          "d": 364.9433617157761,
+          "knownDefense": 0,
+          "lanes": 4,
+          "bypass": [
+            [
+              66,
+              245,
+              3
+            ],
+            [
+              66,
+              51,
+              4
+            ],
+            [
+              66,
+              453,
+              4
+            ],
+            [
+              245,
+              51,
+              1
+            ],
+            [
+              245,
+              453,
+              4
+            ],
+            [
+              51,
+              453,
+              3
+            ]
+          ],
+          "planets": [
+            {
+              "type": "ast",
+              "hab": 0,
+              "deposit": null,
+              "farms": 0
+            }
+          ],
+          "nominalFood": 0
+        },
+        {
+          "name": "Elagath-43",
+          "id": 92,
+          "rank": 8,
+          "d": 536.9987462640315,
+          "knownDefense": 180,
+          "lanes": 4,
+          "bypass": [
+            [
+              22,
+              34,
+              1
+            ],
+            [
+              22,
+              51,
+              2
+            ],
+            [
+              22,
+              266,
+              5
+            ],
+            [
+              34,
+              51,
+              1
+            ],
+            [
+              34,
+              266,
+              4
+            ],
+            [
+              51,
+              266,
+              3
+            ]
+          ],
+          "planets": [
+            {
+              "type": "kur",
+              "hab": 86,
+              "deposit": null,
+              "farms": 1
+            },
+            {
+              "type": "tok",
+              "hab": 0,
+              "deposit": "zengin_maden",
+              "farms": 0
+            },
+            {
+              "type": "buz",
+              "hab": 0,
+              "deposit": null,
+              "farms": 0
+            },
+            {
+              "type": "buz",
+              "hab": 0,
+              "deposit": "kalinti",
+              "farms": 0
+            }
+          ],
+          "nominalFood": 12.285000000000002
+        }
+      ],
+      "rng": -1930894635
+    },
+    "soil-added": {
+      "actor": 10,
+      "other": 11,
+      "cb": {
+        "k": "komplo",
+        "w": 1.2,
+        "n": "İstihbarat Sabotajı"
+      },
+      "appetite": -0.21881631856887057,
+      "access": {
+        "ok": false,
+        "why": "Ulaşabilir kuvvet ve bilgi yetersiz",
+        "need": 10488
+      },
+      "budget": {
+        "ok": true,
+        "reason": "sustainable",
+        "energyNet": 1064.562757929961,
+        "alloyNet": 50.20112873350885,
+        "energyMonths": null,
+        "alloyMonths": null,
+        "extraEnergy": 230.09500000000003,
+        "extraAlloy": 0,
+        "lostNetworkEstimate": 198.1260131133265,
+        "supplyEstimate": 1
+      },
+      "default": [
+        197,
+        123,
+        336
+      ],
+      "choice": {
+        "key": "fetih",
+        "opts": {
+          "targets": [
+            197,
+            123,
+            336
+          ]
+        }
+      },
+      "targets": [
+        {
+          "name": "Dunukrim",
+          "id": 123,
+          "rank": 2,
+          "d": 326.55564200947987,
+          "knownDefense": 180,
+          "lanes": 2,
+          "bypass": [
+            [
+              473,
+              483,
+              4
+            ]
+          ],
+          "planets": [
+            {
+              "type": "gay",
+              "hab": 100,
+              "deposit": "bereket",
+              "farms": 4
+            },
+            {
+              "type": "oky",
+              "hab": 42,
+              "deposit": null,
+              "farms": 0
+            },
+            {
+              "type": "vol",
+              "hab": 0,
+              "deposit": null,
+              "farms": 0
+            },
+            {
+              "type": "buz",
+              "hab": 0,
+              "deposit": null,
+              "farms": 0
+            }
+          ],
+          "nominalFood": 19.11
+        },
+        {
+          "name": "Ulvdor",
+          "id": 336,
+          "rank": 3,
+          "d": 364.9433617157761,
+          "knownDefense": 0,
+          "lanes": 4,
+          "bypass": [
+            [
+              66,
+              245,
+              3
+            ],
+            [
+              66,
+              51,
+              4
+            ],
+            [
+              66,
+              453,
+              4
+            ],
+            [
+              245,
+              51,
+              1
+            ],
+            [
+              245,
+              453,
+              4
+            ],
+            [
+              51,
+              453,
+              3
+            ]
+          ],
+          "planets": [
+            {
+              "type": "ast",
+              "hab": 0,
+              "deposit": null,
+              "farms": 0
+            }
+          ],
+          "nominalFood": 0
+        },
+        {
+          "name": "Elagath-43",
+          "id": 92,
+          "rank": 8,
+          "d": 536.9987462640315,
+          "knownDefense": 180,
+          "lanes": 4,
+          "bypass": [
+            [
+              22,
+              34,
+              1
+            ],
+            [
+              22,
+              51,
+              2
+            ],
+            [
+              22,
+              266,
+              5
+            ],
+            [
+              34,
+              51,
+              1
+            ],
+            [
+              34,
+              266,
+              4
+            ],
+            [
+              51,
+              266,
+              3
+            ]
+          ],
+          "planets": [
+            {
+              "type": "kur",
+              "hab": 86,
+              "deposit": "bereket",
+              "farms": 1
+            },
+            {
+              "type": "tok",
+              "hab": 0,
+              "deposit": "zengin_maden",
+              "farms": 0
+            },
+            {
+              "type": "buz",
+              "hab": 0,
+              "deposit": null,
+              "farms": 0
+            },
+            {
+              "type": "buz",
+              "hab": 0,
+              "deposit": "kalinti",
+              "farms": 0
+            }
+          ],
+          "nominalFood": 19.11
+        }
+      ],
+      "rng": -1930894635
+    }
+  }
+}
