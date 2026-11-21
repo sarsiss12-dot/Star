@@ -137,3 +137,42 @@ test('kapasitesi yetersiz alternatif limana kargo yönlendirilmez',()=>{
  assert.equal(h.run('ship.target===10&&ship.receipt===cargoId&&ship.delivered===100'),true);
  assert.equal(h.run('G.emps[4].res.min'),100);
 });
+test('misafir aynasında kişisel yük görünür, üçüncü taraf hattı ve keşfedilmemiş liman gizli kalır',()=>{
+ const h=world();
+ h.run(require('node:fs').readFileSync(require.resolve('../research/mp6/mirror.js'),'utf8'));
+ h.run(`rights();cargo();sailDays(6);port(G.emps[3],98);
+ G.sys[98].seen=[3];G.sys[98].surv=[3];G.sys[98].x=G.W*4;
+ var receiver=StarsMirror.build(1),observer=StarsMirror.build(4);`);
+ assert.equal(h.run('receiver.commerce.convoys.length'),2);
+ assert.equal(h.run('receiver.commerce.contracts.length'),1);
+ assert.equal(h.run('observer.commerce.convoys.length+observer.commerce.contracts.length'),0);
+ assert.equal(h.run('receiver.sys[98].p.length+observer.sys[98].p.length'),0);
+ assert.equal(h.run('observer.emps[2].portTransit?.[1]'),undefined);
+});
+test('aynı gün varış ile devir sırasını host belirler, ikinci tick stok yaratmaz',()=>{
+ for(const arrivalFirst of [true,false]){
+  const h=world();h.run('rights();cargo();sailDays(2);Commerce.cancel(1,G.p);');
+  h.run('var v=G.commerce.convoys[0];while(v.at!==8&&!Commerce.terminal(v))sailDays(1);');
+  const capture="captureSystem(G.sys[9],4,'transfer')";
+  if(!arrivalFirst)h.run(capture);
+  h.run('G.day+=8;Commerce.tick(8)');
+  if(arrivalFirst)h.run(capture);
+  h.run('Commerce.tick(8)');
+  assert.equal(h.run('G.emps[1].res.min'),arrivalFirst?112:100);
+  assert.equal(h.run('G.emps[4].res.min'),100);
+  assert.equal(h.run('v.receipt===v.id'),arrivalFirst);
+  assert.equal(h.run('v.delivered+v.amount+v.lost'),12);
+ }
+});
+test('izin iptali ile yükleme aynı gün işlenirken kargo bir defa düşülür',()=>{
+ for(const loadFirst of [true,false]){
+  const h=world();h.run('rights();cargo();G.day+=2');
+  const revoke='revokePortTransit(G.emps[2],G.p)';
+  if(!loadFirst)h.run(revoke);
+  h.run('Commerce.tick(2)');
+  if(loadFirst)h.run(revoke);
+  h.run('Commerce.tick(2)');
+  assert.equal(h.run('G.p.res.min'),loadFirst?88:100);
+  assert.equal(h.run('G.commerce.convoys.length'),loadFirst?2:0);
+ }
+});
