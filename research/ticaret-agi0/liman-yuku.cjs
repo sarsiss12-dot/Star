@@ -9,7 +9,7 @@ async function run(){
   browser=await chromium.launch({executablePath:process.env.STARS_CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage']});
   const p=await browser.newPage({viewport:{width:844,height:390},serviceWorkers:'block'});
   await p.goto('http://127.0.0.1:'+srv.address().port);
-  const result=await p.evaluate(save=>{
+  const result=await p.evaluate(async save=>{
    if(!deserialize(save))throw Error('Save8');G.speed=0;G.autoSave=false;
    const [a,b,d]=G.emps,normal=[a,b,d];for(const e of normal){e.dead=e.wild=e.crisisSide=false;e.civics=[];e.war={};e.pact={};e.embargo={};e.intel={};e.contact={};e.colonies=[];e.mizac=e._pers='yayilmaci';for(const o of normal){e.contact[o.id]=true;e.intel[o.id]=3;}}
    a.pact[b.id]=b.pact[a.id]=true;d.portTransit={0:G.day+360,1:G.day+360};G.feds=[];G.council=null;G.fleets=[];G.raids={};G.commerce=Commerce.empty();
@@ -36,7 +36,18 @@ async function run(){
    if(G.commerce.convoys.length!==2)throw Error('kargo');
    $('title').classList.add('hidden');enterGame(true);G.speed=0;View.cam={x:150,y:10,z:.7};CommerceUI.selected=G.commerce.convoys[0].id;
    const map={};for(const on of [false,true]){G.commerce.visible=on;map[on?'acik':'kapali']=sample(45,()=>View.draw());}
-   return {systems:G.sys.length,ports:d.colonies.length+2,hops:path.length-1,cold,cached,invalidation,move,map};
+   const frames={acik:[],kapali:[]};
+   const frame=()=>new Promise(resolve=>requestAnimationFrame(resolve));
+   for(const on of [false,true,true,false]){
+    G.commerce.visible=on;
+    for(let i=0;i<4;i++)await frame();
+    let previous=await frame();
+    for(let i=0;i<30;i++){
+     const stamp=await frame(),start=performance.now();View.draw();
+     frames[on?'acik':'kapali'].push({interval:stamp-previous,draw:performance.now()-start});previous=stamp;
+    }
+   }
+   return {systems:G.sys.length,ports:d.colonies.length+2,hops:path.length-1,cold,cached,invalidation,move,map,frames};
   },fs.readFileSync(input,'utf8'));
   result.chromium=browser.version();assert.equal(result.systems,500);fs.writeFileSync(out,JSON.stringify(result,null,2)+'\n');
  }finally{await browser?.close();relay.shutdown();}
