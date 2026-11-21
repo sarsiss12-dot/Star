@@ -19,10 +19,10 @@ function replay(){
     captureSystem=function(sys,by,cause,planet){
       const monitored=cause==='conquest'&&sys.id===6&&planet&&planet.col;
       const armies=monitored?G.fleets.filter(f=>f.e===by&&f.sys===sys.id&&isTransport(f))
-          .map(f=>({id:f.id,ships:f.ships.length,ground:groundPower(f)})):[];
+          .map(f=>({id:f.id,ships:f.ships.length,hulls:f.ships.map(sh=>sh.h)})):[];
       const result=originalCaptureP0.apply(this,arguments);
       if(monitored&&armies.length){
-        const after=armies.map(a=>{const f=G.fleets.find(x=>x.id===a.id);return {id:a.id,ships:f?f.ships.length:0,ground:f?groundPower(f):0};});
+        const after=armies.map(a=>{const f=G.fleets.find(x=>x.id===a.id);return {id:a.id,ships:f?f.ships.length:0,hulls:f?f.ships.map(sh=>sh.h):[]};});
         assaultCapturesP0.push({day:G.day,sys:sys.id,by,before:armies,after,
           garrison:planet.col.garrison,base:planet.col.garrisonBase,
           journal:(G.fleetJournal||[]).filter(r=>armies.some(a=>a.id===r.fleet)).map(r=>({reason:r.reason,detail:r.detail||''}))});
