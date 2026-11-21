@@ -11,7 +11,7 @@ async function run(){
   await p.goto('http://127.0.0.1:'+srv.address().port);
   const result=await p.evaluate(save=>{
    if(!deserialize(save))throw Error('Save8');G.speed=0;G.autoSave=false;
-   const [a,b,d]=G.emps,normal=[a,b,d];for(const e of normal){e.dead=e.wild=e.crisisSide=false;e.civics=[];e.war={};e.embargo={};e.intel={};e.contact={};e.colonies=[];e.mizac=e._pers='yayilmaci';for(const o of normal){e.contact[o.id]=true;e.intel[o.id]=3;}}
+   const [a,b,d]=G.emps,normal=[a,b,d];for(const e of normal){e.dead=e.wild=e.crisisSide=false;e.civics=[];e.war={};e.pact={};e.embargo={};e.intel={};e.contact={};e.colonies=[];e.mizac=e._pers='yayilmaci';for(const o of normal){e.contact[o.id]=true;e.intel[o.id]=3;}}
    a.pact[b.id]=b.pact[a.id]=true;d.portTransit={0:G.day+360,1:G.day+360};G.feds=[];G.council=null;G.fleets=[];G.raids={};G.commerce=Commerce.empty();
    const end=G.sys.length-1,template=JSON.parse(JSON.stringify(G.sys.flatMap(s=>s.planets).find(p=>p.col).col));
    for(const s of G.sys){
