@@ -2,6 +2,13 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
+## Son teslim — TİCARET-AĞ.2 (p50 / MP.8.9b49, 22 Kasım 2026)
+
+- Ayrıntı: `reports/claude/TICARET-AG2-SONUC.md`, devir `reports/claude/TICARET-AG2-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-ag2/`. Dal `claude/stars-ticaret-ag2` (PR #71 üstünde). ZIP `releases/stars-faz96h10p50.zip`, kayıt `RELEASE-TICARET-AG2.json`. p50 paket yükleyicisi p41–p49 kabul eder. Otomatik kabul; Android / Render NOT RUN.
+- Misafir gelen kutusu: `archive-ui.js` `resolve` misafirde (`MP6Stars.S.on`) dünya/kayıt yenilenince aynı `key`'li bekleyen kayıtla karar verir (eskiden KABUL sessizce düşüyordu → TL2–TL4). Tek oyunculu / host'ta kayıt yüklemesinden sonra eski düğme etkisiz KALMALI (faz87d/91e/95b/95e_ui_save).
+- `dealTxScope(n)` → `dealTxBegin(scope)`: AI–AI, maddeler yalnız freight/portTransit, gelen kutusu kaydı yok, G.commerce var ⇒ `[G.commerce,a,b,G.log]` kopyası. `pact` (haber + ekonomi geçmişi yazar) ve diğer her şey tam işlem. Kapsamı genişletmeden önce `tests/ticaret_ag2_tx_test.js` X1 mekanik yazma kümesi denetimine yeni biçim ekle. `G._dealTxFull=true` tam işlemi zorlar (yalnız test).
+- Test: `node tests/ticaret_ag2_tx_test.js` (6), `ticaret_ag2_mp_test.js` (2), `MP8_SCEN=TL` (5), `MP8_SCEN=TA` (6). Perf p95 tek koşu ±%10 oynuyor (500/180): 3 koşu birleştir.
+
 ## Geliştirme (yayınsız) — TİCARET-AĞ.1 (22 Kasım 2026)
 
 - Ayrıntı: `reports/claude/TICARET-AG1-SONUC.md`, devir `reports/claude/TICARET-AG1-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-ag1/`. Dal `claude/stars-ticaret-ag1` (PR #70 üstünde). Sürüm p49 KALDI (100 sistem p95 +%9,89 kapısı); güvenli oynanabilir dal p49 `claude/stars-saha-guvence1`.

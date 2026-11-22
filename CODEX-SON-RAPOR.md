@@ -1,6 +1,8 @@
 # Son Codex raporu
 
-[TİCARET-AĞ.1 (Claude, yayınsız) · Anlık takas korundu, fiziksel kargo açık seçenek, 40 regresyon paketi kapandı; 100 sistem p95 kapısı açık](reports/claude/TICARET-AG1-SONUC.md)
+[TİCARET-AĞ.2 (Claude, p50) · Misafir gelen kutusu KABUL düzeltmesi (TL 5/5), AI–AI ticaret sözleşmesinde daraltılmış işlem, perf kapısı geçti, p50 yayın adayı](reports/claude/TICARET-AG2-SONUC.md)
+
+Önceki: [TİCARET-AĞ.1 (Claude, yayınsız) · Anlık takas korundu, fiziksel kargo açık seçenek, 40 regresyon paketi kapandı; 100 sistem p95 kapısı açık](reports/claude/TICARET-AG1-SONUC.md)
 
 Önceki: [SAHA-GÜVENCE.1 (Claude, p49) · Eskortsuz imha görünür, toprak vaadi, İsyanı Bastır bedeli, sistem federasyon oyu, MP uzun oturum + insan–insan Savaşa Yardım](reports/claude/SAHA-GUVENCE1-SONUC.md)
 
