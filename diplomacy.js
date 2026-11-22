@@ -2288,13 +2288,26 @@ function txRestoreGraph(records){
     if (length) Object.defineProperty(obj,'length',length);
   }
 }
-function dealTxBegin(){
+/* TİCARET-AĞ.2: yalnız AI–AI düzenli ticaret sözleşmesi (bütün maddeler freight / portTransit; pact haber + ekonomi geçmişi yazdığından tam işlemde kalır) için kanıtlanmış yazma
+   kümesi: G.commerce, iki taraf devlet nesnesi ve G.log (commitSideBuffer). Kök tanımlayıcılar, RNG ve yetki alanları tam işlemdeki
+   gibi saklanır. İnsan taraf, gelen kutusu kaydı, başka madde ya da henüz kurulmamış G.commerce → null (tam işlem).
+   Kanıt: tests/ticaret_ag2_tx_test.js (değişen her nesne bu kapsamın yakalamasında; her hata kancasında bayt-bayt geri alma). */
+function dealTxScope(n){
+  if(G._dealTxFull||typeof Commerce==='undefined'||!G.commerce||!Array.isArray(G.log))return null;
+  const items=n.effectiveGive.concat(n.effectiveWant);
+  if(!items.length||!items.every(i=>i.t==='freight'||i.t==='portTransit'))return null;
+  const a=G.emps[n.from],b=G.emps[n.to];
+  if(!a||!b||a===b||!a.ai||!b.ai||a===G.p||b===G.p)return null;
+  return [G.commerce,a,b,G.log];
+}
+function dealTxBegin(scope){
   const roots = new Map(), auth = new Map(), values = [];
   for (const key of DEAL_TX_ROOTS){
     const d = Object.getOwnPropertyDescriptor(G,key);
     roots.set(key,d);
-    if (d && 'value' in d) values.push(d.value);
+    if (!scope && d && 'value' in d) values.push(d.value);
   }
+  if (scope) values.push(...scope);
   for (const key of DEAL_TX_AUTH) auth.set(key,Object.getOwnPropertyDescriptor(G,key));
   return {roots,auth,records:txCaptureGraph(values),rng:RND_STATE};
 }
@@ -2377,7 +2390,7 @@ function executeDeal(offer, inboxKey=null){
     if (!q.ok) return false;
     const n = q.norm, a = G.emps[n.from], b = G.emps[n.to];
     if (!a || !b) return false;
-    tx = dealTxBegin();
+    tx = dealTxBegin(archived?null:dealTxScope(n));
     G._sideBuf = buf;
     G._dealAuth = true;
     /* TİCARET-AĞ.1: yalnız açık kargo / sözleşme maddeleri Commerce'e gider; düz kaynak maddesi anlık aktarılır (p49) */
