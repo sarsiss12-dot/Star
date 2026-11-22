@@ -19,11 +19,15 @@ module.exports=async X=>{const {test,pg,metrics,sleep,shot,wait,tap,settle}=X;
    const uid=await H.evaluate(id=>G.inbox.find(n=>n.key==='mp71:'+id).uid,id);await hit(H,'[data-a="openNote"][data-x="'+uid+'"]');await hit(H,'#inboxYes');};
 
  await test('A0 fikstür (host): limanlar, host ↔ B hiperhat, kapasite, kaynak, temas',async()=>{
-   M.fx=await H.evaluate(([b,c])=>{MP1Host.host.local({kind:'speed',value:0});const E=[G.p,G.emps[b],G.emps[c]];
+   M.fx=await H.evaluate(([b,c])=>{MP1Host.host.local({kind:'speed',value:0});const E=[G.p,G.emps[b],G.emps[c]],B=G.emps[b];
      for(const x of E)for(const y of E)if(x!==y){x.contact[y.id]=true;x.war[y.id]=false;x.rel[y.id]=80;if(x.embargo)delete x.embargo[y.id];}
-     for(const x of E){const col=G.sys[x.home].planets.find(p=>p.col&&p.owner===x.id).col;col.b=col.b||{};col.b.liman=1;col.pop=Math.max(col.pop,120);for(const k of ['min','ene','ala'])x.res[k]=3000;}
-     const h=G.sys[G.p.home],bh=G.sys[G.emps[b].home];if(!h.lanes.includes(bh.id)){h.lanes=h.lanes.concat(bh.id);bh.lanes=bh.lanes.concat(h.id);}
-     MP1Host.host.publish();return {hostHome:h.id,bHome:bh.id,route:!!Commerce.route(G.emps[b],G.p,bh.id,h.id)};},[EB,EC]);
+     for(const x of E)for(const k of ['min','ene','ala'])x.res[k]=3000;
+     /* host limanı başkentte; B'ye host başkentinin hiperhat komşusu boş sistemde liman (96a fikstürü port() ile aynı kurgu) */
+     const hh=G.sys[G.p.home],hcol=hh.planets.find(p=>p.col&&p.owner===0);hcol.col.b.liman=1;hcol.col.pop=Math.max(hcol.col.pop,120);
+     const n=hh.lanes.map(i=>G.sys[i]).find(s=>s.owner<0&&s.planets.length&&!s.planets.some(p=>p.col));
+     const pl=n.planets[0];pl.owner=B.id;pl.col=JSON.parse(JSON.stringify(hcol.col));pl.col.e=B.id;pl.col.b={liman:1};pl.col.pop=120;pl.col.q=[];B.colonies.push({s:n.id,p:0});n.owner=B.id;
+     for(const s of [hh,n])for(const id of [0,b])if(!s.seen.includes(id))s.seen.push(id);
+     MP1Host.host.publish();return {hostHome:hh.id,bPort:n.id,route:!!Commerce.route(B,G.p,n.id,hh.id)};},[EB,EC]);
    await settle('a0');assert.equal(M.fx.route,true,'host ↔ B rota');});
 
  await test('A1 B (800×360) gerçek masa: 100 mineral + "Fiziksel Kargo ile Gönder" → host gelen kutusundan KABUL; dört aşama ayrı',async()=>{
@@ -35,6 +39,7 @@ module.exports=async X=>{const {test,pg,metrics,sleep,shot,wait,tap,settle}=X;
    const item=await B.evaluate(()=>UI.deal.give.map(i=>i.t));M.a1={vis,item};
    assert.equal(vis.in&&vis.top,true,'800×360: kargo düğmesi görünür ve üstte '+JSON.stringify(vis));assert.deepEqual(item,['cargo'],'madde fiziksel kargoya döndü');
    const before=await H.evaluate(b=>({h:G.p.res.min,b:G.emps[b].res.min,c:(G.commerce?.contracts||[]).length}),EB);
+   M.a1q=await B.evaluate(()=>{const d=UI.deal;const q=dealQuote({from:0,to:d.to,give:d.give,want:d.want});return {ok:q.ok,reasons:q.reasons,dis:document.querySelector('[data-a="dealSend"]')?.disabled};});console.log('  A1q '+JSON.stringify(M.a1q));
    await tap(B,'[data-a="dealSend"]');
    const id=await H.waitForFunction(b=>{const o=MP1Host.host.dip.offers.find(o=>o.from===b&&o.to===0&&o.status==='pending'&&o.give.some(i=>i.t==='cargo'));return o?o.id:0;},EB,{timeout:20000,polling:200}).then(h=>h.jsonValue());   /* (1) */
    await accept(id);

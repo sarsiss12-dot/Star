@@ -221,6 +221,12 @@ function gate(){
   /* motor eylemleri → MP komutu (yalnız misafirin kendi devleti: aynada 0) */
   const wrap=(name,fn)=>{const o=window[name];if(typeof o!=='function')return;window[name]=function(...a){if(!S.on||S.building)return o.apply(this,a);return fn(o,...a);};};
   const mine=e=>e&&e.id===0;
+  /* TİCARET-AĞ.1: fiziksel kargo / sözleşme maddelerinin liman-rota-kapasite denetimi misafir aynasında eksik veriyle yapılamaz
+     (yabancı limanların kapasitesi, izinler, hat bilgisi); yalnız bu Commerce gerekçesi yerelde engel sayılmaz, karar host'un
+     dealQuote'unda (dipGate) verilir ve ret gerekçesi taslağa döner. Diğer bütün gerekçeler aynen engeller. */
+  wrap('dealQuote',(o,offer,...rest)=>{const q=o(offer,...rest);if(q.ok||!offer)return q;const items=(offer.give||[]).concat(offer.want||[]);
+    if(!items.some(i=>i&&(i.t==='cargo'||i.t==='freight')))return q;let why=null;try{why=Commerce.quote(q.norm||offer);}catch{}
+    if(!why||q.reasons.some(r=>r!==why)||q.giveFail.length||q.wantFail.length)return q;return {...q,ok:true,reasons:[],hostCheck:why};});
   wrap('orderMove',(o,f,target,append,automatic)=>{if(automatic||!f||f.e!==0)return false;if(S.aimCol===f.id+':'+(+target)){S.aimCol=null;return true;}return send({kind:'move',fleet:f.id,to:+target})!==null;});
   /* MP-P0: "tezgâha kondu / sıraya alındı" bildirimi eskiden emir GÖNDERİLİNCE çıkıyordu (host kabul etmeden). Artık motor işlevi
      false döner (yerel iyimser bildirim yok); bildirim host'un 'ok' yanıtıyla, ret gerçek nedeniyle gösterilir. */

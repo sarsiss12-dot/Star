@@ -14,11 +14,16 @@ module.exports=async({test,pg,tap,wait,settle,assert,cmd,shot})=>{
    UI.forgetDeal(id);UI.openDeal(id);},id);
  }
  async function offer(page,to,side){
-  const n=await H.evaluate(()=>MP1Host.host.dip.offers.length);
+  /* TİCARET-AĞ.1: teklif sayısına değil içeriğe bakılır — host tamamlanmış teklifleri DIP_KEEP (160) üstünde budar (dipTrim),
+     dizi uzunluğu yeni teklifte artmayabilir (p49 + 9 AI 'ulu'da AI → insan teklifleri birikir). İddia aynı: teklif host'ta bekliyor olmalı. */
+  const from=await page.evaluate(()=>MP1Join.empireId),seen=await H.evaluate(()=>MP1Host.host.dip.offers.map(o=>o.id));
   await openDeal(page,to);await tap(page,'[data-a="dealAdd"][data-x="'+side+':portTransit"]');
   await tap(page,'[data-a="dealSend"]');
-  await wait(H,n=>MP1Host.host.dip.offers.length>n,n);
-  return H.evaluate(()=>MP1Host.host.dip.offers.at(-1).id);
+  try{await wait(H,a=>{const [from,to,side,seen]=a;return !!MP1Host.host.dip.offers.find(o=>!seen.includes(o.id)&&o.from===from&&o.to===to&&o.status==='pending'&&o[side].some(i=>i.t==='portTransit'));},[from,to,side,seen]);}
+  catch(e){const d=await page.evaluate(()=>({deal:UI.deal,msg:UI.dealMsg||null,trace:(MP6Stars.S.dealTrace||[]).slice(-5)})).catch(x=>String(x));
+    const hd=await H.evaluate(()=>({n:MP1Host.host.dip.offers.length,done:MP1Host.host.dip.offers.filter(o=>o.status!=='pending').length}));
+    throw Error('teklif host\'ta bekleyen olarak bulunamadı (tanı): '+JSON.stringify({hd,d}).slice(0,900));}
+  return H.evaluate(a=>{const [from,to,side,seen]=a;return MP1Host.host.dip.offers.find(o=>!seen.includes(o.id)&&o.from===from&&o.to===to&&o.status==='pending'&&o[side].some(i=>i.t==='portTransit')).id;},[from,to,side,seen]);
  }
  async function record(page,id){
   await wait(page,id=>{MP71Dip.tick();return DiplomaticInbox.state().records.some(r=>r.mp===id&&r.status==='pending');},id);

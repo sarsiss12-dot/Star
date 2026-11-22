@@ -90,4 +90,12 @@ test('K4 Save8: yoldaki kargo ve kayıt → yükleme sonrası aynı; yükleme ik
   g.run('sail(200)');h.run('sail(200)');assert.deepEqual(J(g,ST),J(h,ST),'yüklenen ve devam eden dünya aynı sonuca varır');
   assert.equal(J(g,ST).min1-a.min1,100,'tek teslim');});
 
+test('M1 MP host otoritesi: misafirin rotasız fiziksel kargo teklifi host\'ta gerekçeyle reddedilir, bekleyen teklif oluşmaz; aynı düz kaynak teklifi kabul edilir',()=>{
+  const src=fs.readFileSync(path.join(ROOT,'tests/saha_guvence1_war_test.js'),'utf8');const {runtime}=require('./helpers/runtime');
+  const fn=new Function('fs','path','crypto','runtime','ROOT','J',src.slice(src.indexOf('function mpWorld'),src.indexOf('const offerHelp'))+';return {mpWorld,cmd};');
+  const {mpWorld,cmd}=fn(fs,path,crypto,runtime,ROOT,J);const h=mpWorld();h.run('for(const s of G.sys)for(const p of s.planets)if(p.col&&p.col.b)p.col.b.liman=0');
+  const r=cmd(h,'B',{kind:'offer',to:3,give:[{t:'cargo',r:'min',v:50}],want:[]});const pend=h.run('MP.dip.offers.filter(o=>o.status==="pending").length');
+  assert.equal(r.status,'rejected','host reddeder: '+JSON.stringify(r).slice(0,200));assert.ok(/liman|hat/i.test(JSON.stringify(r.detail||r)),'gerekçe görünür');assert.equal(pend,0,'bekleyen teklif yok');
+  const ok=cmd(h,'B',{kind:'offer',to:3,give:[{t:'res',r:'min',v:50}],want:[]});assert.equal(ok.status,'ok','düz kaynak teklifi kabul: '+JSON.stringify(ok).slice(0,200));});
+
 console.log(`GEÇEN: ${pass} KALAN: ${fail}`);process.exitCode=fail?1:0;
