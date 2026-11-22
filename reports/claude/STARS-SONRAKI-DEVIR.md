@@ -21,6 +21,7 @@ Render'da denenecek dal: `claude/stars-saha-guvence1` (p49 / MP.8.9b48). `claude
 - **TİCARET-AĞ.0** (kısmi): Codex TİCARET-AĞI.0 p49'a birleştirildi, hedefli ticaret + SG testleri birleşik dalda geçti; performans kök nedeni bulundu (tam grafik `dealTxBegin`). Rapor `reports/claude/TICARET-AG0-SONUC.md` (ticaret dalında).
 
 ## Yarım kalan / başlanmayan işler
+- TİCARET-AĞ.0: tam Node koşusunda 40 pakette kötüleşme (279 → 441 FAIL; Codex dalında da aynı — anlık takas kapanışı eski fikstürleri bozuyor). Önce paket paket sınıflandırma, sonra performans.
 - TİCARET-AĞ.0: yazma günlüklü `dealTxBegin` (kod yok) → 100 / 500 sistem p95 ≤ %5; sonra sürüm p50 + ZIP.
 - **TİCARET-AI.0: BAŞLANMADI.** (AI'nın Transit İzni satın alması / zincirli liman yatırımı doğal kampanyada gözlenmedi — Codex bulgusu.)
 - **FED-AI-SİYASET.0: BAŞLANMADI.** (katıl / kur / bağımsız, tür farkları, ayrılma, AI ücretli savaş desteği ve geçiş, federasyon oyları, kampanyalar.)
@@ -46,4 +47,4 @@ Host tek yetki. Uzun oturum (100 / 500 sistem, 120. / 180. ay), kopma / yeniden 
 - Eski 279 Node FAIL'i gürültüsü yeni regresyonu gizleyebilir: her zaman paket paket taban karşılaştırması yapın.
 
 ## Sonraki oturumun ilk kesin görevi
-`claude/stars-ticaret-ag0` üstünde `dealTxBegin`'i yazma günlüklü işleme çevirmek: aynı Save8'den kontrol (p49 sabit kopya) – aday Save8 SHA-256 + RNG birebir (`research/perf1/scripts/bench.cjs` TRACE=1) + `faz96a_integrity` / anlaşma geri alma testleri, ardından 100 ve 500 sistem tam ay p95 (kapı %5). Kapı geçerse p50 sürümü; geçmezse ticaret dalı yayınlanmaz ve FED-AI-SİYASET.0'a SG1 (p49) tabanından başlanır.
+`claude/stars-ticaret-ag0` üstünde önce 40 kötüleşen Node paketini sınıflandırmak (tasarım değişikliği mi / gerçek regresyon mu; `reports/claude/TICARET-AG0-SONUC.md` §C), sonra `dealTxBegin`'i yazma günlüklü işleme çevirmek: aynı Save8'den kontrol (p49 sabit kopya) – aday Save8 SHA-256 + RNG birebir (`research/perf1/scripts/bench.cjs` TRACE=1) + `faz96a_integrity` / anlaşma geri alma testleri, ardından 100 ve 500 sistem tam ay p95 (kapı %5). Kapı geçerse p50 sürümü; geçmezse ticaret dalı yayınlanmaz ve FED-AI-SİYASET.0'a SG1 (p49) tabanından başlanır.
