@@ -10197,10 +10197,12 @@ UI.wgBindSearch=function(){
 UI.claimPickStart=function(id){
   const s=this._wgSel,o=G.emps[id];if(!s||s.id!==id||!o)return;
   const cand=new Set(warFetihCandidates(G.p,o,{capital:true}).map(x=>x.id));if(!cand.size)return say('Bilinen hedef sistem yok','war');
-  View.claimPick={id,cand,targets:s.targets,backup:s.targets.slice(),world:G.sys};this.closeModal();this.claimBar();UI.refresh();
+  /* misafirde her ayna kurulumu yeni G.sys / G.emps yaratır: kip dünya kimliğine değil hedef devlete bağlıdır, adaylar her dokunuşta yeniden hesaplanır */
+  View.claimPick={id,cand,targets:s.targets,backup:s.targets.slice()};this.closeModal();this.claimBar();UI.refresh();
 };
 UI.claimPickToggle=function(sys){
-  const c=View.claimPick;if(!c||c.world!==G.sys){this.claimPickEnd(false);return;}
+  const c=View.claimPick,o=c&&G.emps[c.id];if(!c||!o||o.dead){this.claimPickEnd(false);return;}
+  c.cand=new Set(warFetihCandidates(G.p,o,{capital:true}).map(x=>x.id));
   if(!sys||!c.cand.has(sys.id)){if(sys)say(sys.name+' bu savaşın hedefi olamaz (hedef devletin bildiğin sistemi değil)','war');return;}
   const i=c.targets.indexOf(sys.id);if(i>=0)c.targets.splice(i,1);else c.targets.push(sys.id);
   if(typeof UI.pulse==='function')UI.pulse(sys);this.claimBar();
@@ -10215,7 +10217,7 @@ UI.claimBar=function(){
 UI.claimPickEnd=function(ok){
   const c=View.claimPick;View.claimPick=null;this.claimBar();if(!c)return;
   const s=this._wgSel;if(!s||s.id!==c.id)return;if(!ok)s.targets=c.backup;else s.targets=c.targets;
-  if(c.world===G.sys&&G.emps[c.id])this.warGoalPick(c.id,'fetih');
+  if(G.emps[c.id]&&!G.emps[c.id].dead)this.warGoalPick(c.id,'fetih');
 };
 /* MP-FIELD-FIX.0 — müzakere masası: "Savaşa Destek İste" = karşı tarafı BELİRLİ bir savaşa (aktif cephe / bekleyen hazırlık) çağıran warJoin maddesi.
    Genel "Savaş sözü" (warOn) çok oyunculuda insanla müzakerede gönderilemez (MP teklif deposu cepheye bağlı maddeyi taşır); tek oyunculuda aynen. */
@@ -10544,7 +10546,7 @@ const WarCoal={st:null,req:0,last:0,view:null,
   if(st.msg)h+=`<div class="mini warnTxt coalMsg" role="status">${esc(st.msg)}</div>`;
   /* 1 — hedef */
   h+=`<section class="box coalGoal"><div class="row"><b>1 · HEDEF</b><button class="abtn" data-a="setwg" data-x="${st.id}:${st.key}">Hedefi değiştir</button></div>`;
-  if(p.goal?.targets)h+=`<div class="ph">HEDEF: FETİH</div><div class="mini">${p.goal.targets.map(t=>esc(t.name)).join(' · ')}</div><div class="mini">${esc(p.goal.note)}</div>`;
+  if(p.goal?.targets)h+=`<div class="ph">HEDEF: FETİH · ${p.goal.targets.length} sistem</div><div class="mini">${p.goal.targets.map(t=>esc(t.name)+(t.capital?' ★':'')).join(' · ')}</div><div class="mini">${esc(p.goal.note)}</div>${p.goal.claim?`<div class="mini wgClaimCost">Talep bedeli: <b>${p.goal.claim} Etki</b> (ilk ${p.goal.free} hedef bedelsiz) · toplam ${p.cost} Etki</div>`:''}`;   /* SAHA-ENTEGRE.0 */
   else if(p.goal?.vtype)h+=`<div class="ph">HEDEF: VASALLAŞTIRMA · ${esc(p.goal.name)}</div><div class="mini">Vergi: ${esc(p.goal.terms.tax)} · ${esc(p.goal.terms.war)} · ${esc(p.goal.terms.autonomy)}</div><div class="mini">${esc(p.goal.note)}</div>`;
   else h+=`<div class="mini">${esc(WAR_GOALS[v.goal]?.n||v.goal)}</div>`;
   if(prep&&prep.commitments.some(c=>c.stale))h+='<div class="mini warnTxt">Hedef şartları değişti: önceki kabuller güncel koşullarla yeniden onaylanmalı.</div>';

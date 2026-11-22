@@ -9069,7 +9069,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p47';
+const BUILD_ID = '96h10p48';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

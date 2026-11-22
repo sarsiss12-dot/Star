@@ -1190,6 +1190,8 @@ const View = {
      ve hit-test doğrudan parametreyi kullanıyor. */
   tap(screenPos){
     const sp = screenPos;
+    /* SAHA-ENTEGRE.0: haritadan fetih hedefi seçimi — bölge etiketi, çift dokunuş ve filo satırı dallarından ÖNCE; dokunuş yalnız seçimi değiştirir */
+    if (this.claimPick){ const h0 = this.hit(sp); if (h0.s && typeof UI.claimPickToggle === 'function') UI.claimPickToggle(h0.s); return; }
     // 95D: identity hit boxes share the same collision-resolved screen bounds.
     if(!this.route&&this.rallyForSys===undefined&&this.rallyFor===undefined&&this.panoptFor===undefined&&this.aimFleet===undefined){
       const label=(this._territoryLabels||[]).find(b=>b.kind==='region'&&sp.x>=b.x&&sp.x<=b.x+b.w&&sp.y>=b.y&&sp.y<=b.y+b.h);
@@ -1286,9 +1288,6 @@ const View = {
       UI.refresh();
       return;
     }
-
-    /* SAHA-ENTEGRE.0: haritadan fetih hedefi seçimi — dokunuş yalnız seçimi değiştirir */
-    if (this.claimPick){ if (s && typeof UI.claimPickToggle === 'function') UI.claimPickToggle(s); return; }
 
     /* FAZ 50: Panoptikon yeniden hedefleme */
     if (this.panoptFor !== undefined && s){
