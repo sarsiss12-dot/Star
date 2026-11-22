@@ -10858,6 +10858,7 @@ const WAR_FETIH_LIMIT=256;
 function warFetihReclaim(e,foe){return !!(e&&foe&&foe.sundered===e.id);}
 function warFetihClaimCost(e,foe,targets){
  if(!e||!foe||!Array.isArray(targets))return 0;
+ if(warFetihReclaim(e,foe))return 0;   /* SAHA-GÜVENCE.1: İsyanı Bastır — koptuğu devlete karşı bütün hedefler bedelsiz (arayüz metniyle aynı; eskiden 6. hedeften sonrası ücretliydi) */
  let c=0;targets.forEach((id,i)=>{const s=G.sys[id];if(!s)return;
   if(i>=WAR_FETIH_MAX)c+=10+5*(i-WAR_FETIH_MAX)+6*s.planets.filter(p=>p.col&&p.owner===foe.id).length;
   if(id===foe.home&&!warFetihReclaim(e,foe))c+=60;});
@@ -10936,6 +10937,9 @@ function warFetihSettle(a,b){
   const g=x?.wg?.[y?.id],f=warLedgerFind(x?.id,y?.id);
   if(!g||g.t!=='fetih'||g.v!==2||!f||y.dead)continue;
   const keep=new Set(g.targets||[]),seen=new Set();
+  /* SAHA-GÜVENCE.1: x'in bu düşmana karşı açık TOPRAK VAADİ verdiği sistemler hedef dışı olsa da iade edilmez; cephe kapanınca
+     warPromiseFrontEnded vaadi alana devreder. Eskiden önce düşmana iade ediliyor, vaat "Sistem ele geçirilmedi" diye düşüyordu. */
+  for(const p of G.warLedger?.promises||[])if(p.state==='open'&&p.giver===x.id&&p.enemy===y.id)keep.add(p.sys);
   for(const o of f.occupation.slice().reverse()){
    if(o.to!==x.id||o.from!==y.id||seen.has(o.sys))continue;seen.add(o.sys);
    const s=G.sys[o.sys];if(!s||keep.has(s.id)||s.owner!==x.id||s.id===x.home)continue;
