@@ -14,7 +14,7 @@ Durum dili: PASS / FAIL / NOT RUN ayrı. **Kullanıcı şu an test yapamıyor**:
 | Başlangıç HEAD | `347ef0d365ab3ffc65af2b8359de5bf64c34b405` (`claude/stars-saha-entegre0`, PR #68) — GitHub'da doğrulandı, üstünde yeni commit yok |
 | Bitiş HEAD | `claude/stars-saha-guvence1` son commit (kod / sürüm `b430b73`) |
 | Dal | `claude/stars-saha-guvence1` |
-| PR | bkz. GitHub taslak PR (taslak, taban `claude/stars-saha-entegre0`) |
+| PR | #69 (taslak, taban `claude/stars-saha-entegre0`) |
 | GitHub bulgusu | Codex `codex/stars-ticaret-agi0` dalında TİCARET-AĞI.0'ı **p47 tabanında** tamamlamış (10 commit, açık engel: 100 sistem p95 +%27,61). İkinci teslimat bu dalın p49'a entegrasyonu olarak planlandı (yeniden yazılmadı). |
 | Okunanlar | AGENTS.md, GPT-DEVIR.md, CLAUDE.md, PROJE-DURUMU.md, SAHA-ENTEGRE0 SONUC/DEVIR, MP-RAKIP-DOKTRINLER0-SONUC, P46-DIPLOMASI-ARASTIRMA-SONUC (`codex/stars-p46-diplomasi-arastirma` dalından), TICARET-AGI0-SONUC |
 
