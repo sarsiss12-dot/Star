@@ -16,7 +16,8 @@ Durum dili: PASS / FAIL / NOT RUN ayrı. Fiziksel Android ve canlı Render bu fa
 | PR #64 (taslak hotfix) | `codex/stars-saha-ordu-kaybi-p0` @ `0d50abc096d02375a367d9e9f1d610da9fc460ff` |
 | PR #64'ün durumu | Kod düzeltmesi **doğru**; testi iki hata nedeniyle hiç geçemiyordu (aşağıda C.1). Test düzeltildikten sonra p47'de FAIL, PR #64 kodunda PASS. Bu doğrulamadan sonra birleştirildi (`e03b8e7`). |
 | Yeni dal | `claude/stars-saha-entegre0` |
-| Bitiş HEAD | Bu raporu taşıyan commit (PR gövdesinde ve son geliştirici raporunda verilir) |
+| Bitiş HEAD | Dalın son commit'i (kod/paket `c01be57`; bu bağlantı commit'i yalnız belge) |
+| Taslak PR | #68 https://github.com/sarsiss12-dot/Star/pull/68 (taban `codex/stars-mp-rakip-doktrinler0`) |
 | Okunanlar | AGENTS.md, GPT-DEVIR.md, CLAUDE.md, PROJE-DURUMU.md, Issue #65/#66/#67 |
 
 Commit sırası (her faz ayrı):
