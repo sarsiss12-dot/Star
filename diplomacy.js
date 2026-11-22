@@ -1210,6 +1210,7 @@ function normalizeWarTreaties(){
 /* Masaya konabilecek öğe türleri. Her biri iki tarafa da konabilir. */
 const DEAL_KINDS = {
   freight:{n:'Kaynak Kargo Sözleşmesi',ico:'▱'},
+  cargo:{n:'Fiziksel Kargo (tek sefer)',ico:'▣'},   /* TİCARET-AĞ.1: açık seçim; düz kaynak maddesi (res) anlık kalır */
   res    :{n:'Kaynak',            ico:'◆'},
   tribute:{n:'Aylık Ödeme (10 yıl)',ico:'⏳'},
   sys    :{n:'Yıldız Sistemi',    ico:'★'},
@@ -1237,6 +1238,7 @@ const DEAL_KINDS = {
 function dealLabel(it){
   switch(it.t){
     case 'res':     return RES[it.r].ico + ' ' + it.v + ' ' + RES[it.r].n;
+    case 'cargo': return '▣ '+it.v+' '+RES[it.r].n+' · fiziksel kargo';
     case 'freight': return '▱ '+it.v+' '+RES[it.r].n+'/sefer · '+(G.sys[it.source]?.name||'?')+' → '+(G.sys[it.target]?.name||'?')+' · '+it.every+' günde / '+it.months+' ay';
     case 'tribute': return '⏳ Haraç: ' + it.v + ' ' + RES[it.r].n + '/ay · 10 yıl · toplam ' + Math.round(it.v*120) + ' ' + RES[it.r].n;
     case 'sys':     return '★ Sistem Devri: ' + (G.sys[it.id] ? G.sys[it.id].name : '?') + ' sistemi · kabulde devredilir';
@@ -1277,7 +1279,7 @@ function itemValue(e, it, other){
     return m;
   };
   switch(it.t){
-    case 'res':     return it.v * .38 * need(it.r);
+    case 'res': case 'cargo': return it.v * .38 * need(it.r);
     case 'freight': return it.v*.38*need(it.r)*Math.min(24,it.months*30/it.every);
     case 'tribute': return it.v * 16 * need(it.r);         // 10 yıllık akış
     case 'sys': {
@@ -1481,25 +1483,15 @@ function evalOffer(ai, offer){
 /* --------------------------------------------------------------------
    UYGULAMA — anlaşma kabul edilince maddeleri yürürlüğe koy
    -------------------------------------------------------------------- */
-// A validated accession to an identified war front preserves the immediate enlistment payment.
-function militarySettlement(n){
- const sides=[n.effectiveGive||n.give,n.effectiveWant||n.want];
- const items=sides.flat(),peace=items.filter(it=>['peace','vassal','fedPeace'].includes(it.t));
- if(peace.length===1&&G.emps[n.from]?.war[n.to]&&items.every(it=>it===peace[0]||it.t==='res')&&
-    sides.filter(side=>side.some(it=>it.t==='res')).length===1)return true;
- return sides.some((side,i)=>side.length===1&&side[0].t==='warJoin'&&
-  sides[1-i].every(it=>it.t==='res'||it.t==='passage'));
-}
-function applyItems(giver, taker, items,settlement=false){
+function applyItems(giver, taker, items){
   /* FAZ 86C: hata enjeksiyonu kancası — üretimde tanımsız, yalnız
      atomiklik testleri bunu geçici olarak atar. */
   for (const it of items){
     /* FAZ 86C.2: aşamalı kanca — `before:<tür>` mutasyondan ÖNCE. */
     if (typeof G._dealFailInject === 'function') G._dealFailInject('before:' + it.t);
     switch(it.t){
-      case 'freight': break; // Commerce.sign created the paired obligation atomically.
+      case 'freight': case 'cargo': break; // Commerce.sign created the physical obligation atomically.
       case 'res':
-        if(!settlement&&Commerce.resources.includes(it.r))break; // Physical legs are committed by Commerce.sign.
         giver.res[it.r] = Math.max(0, (giver.res[it.r]||0) - it.v);
         taker.res[it.r] = (taker.res[it.r]||0) + it.v;
         break;
@@ -1714,7 +1706,7 @@ function dealItemKey(it){
   if (!it || !it.t) return null;
   switch(it.t){
     case 'freight': return it.t+':'+it.r+':'+it.source+':'+it.target;
-    case 'res': case 'tribute': return it.t + ':' + it.r;
+    case 'res': case 'tribute': case 'cargo': return it.t + ':' + it.r;
     case 'sys': case 'tech':    return it.t + ':' + it.id;
     case 'lux':                 return it.t + ':' + it.k;
     case 'warJoin': return it.t+':'+(it.plan?'plan'+it.plan:it.front)+':'+it.target;
@@ -1799,11 +1791,13 @@ function normalizeDeal(offer){
         it.v = v;
       }
       /* ── ZORUNLU ALAN + KATALOG DOĞRULAMASI (gerçek kataloglar) ── */
-      if (it.t === 'res' || it.t === 'tribute' || it.t==='freight'){
+      if (it.t === 'res' || it.t === 'tribute' || it.t==='freight' || it.t==='cargo'){
         if (it.v === undefined || !it.r){
           errors.push(it.t + ': eksik kaynak veya miktar'); continue; }
         if (!Object.hasOwn(RES,it.r)){
           errors.push(it.t + ': bilinmeyen kaynak "' + String(it.r) + '"'); continue; }
+        if (it.t==='cargo' && !Commerce.resources.includes(it.r)){
+          errors.push('Fiziksel kargo yalnız taşınabilir mal içindir'); continue; }
       }
       if (it.t === 'sys'){
         const sy = (it.id !== undefined) ? G.sys[it.id] : null;
@@ -1825,7 +1819,7 @@ function normalizeDeal(offer){
       }
       const key = dealItemKey(it);
       if (idx[key] !== undefined){
-        if (it.t === 'res' || it.t === 'tribute'){
+        if (it.t === 'res' || it.t === 'tribute' || it.t==='cargo'){
           /* GÜVENLİ NORMALLEŞTİRME: aynı kaynağın satırları toplanır. */
           out[idx[key]].v += it.v;
           if(out[idx[key]].v>DEAL_AMOUNT_LIMIT)errors.push(it.t+': toplam miktar güvenli sınırı aşıyor');
@@ -1932,7 +1926,7 @@ function dealValidity(offer){
     /* TOPLAM kaynak/haraç yükümlülüğü */
     const resTop = {}, tribTop = {};
     for (const it of items){
-      if (it.t === 'res')     resTop[it.r]  = (resTop[it.r]  || 0) + it.v;
+      if (it.t === 'res' || it.t==='cargo') resTop[it.r] = (resTop[it.r] || 0) + it.v;   /* TİCARET-AĞ.1: kargo da verenin stoğundan çıkar */
       if (it.t === 'tribute') tribTop[it.r] = (tribTop[it.r] || 0) + it.v;
     }
     for (const r in resTop){
@@ -2016,7 +2010,7 @@ function dealValidity(offer){
      sırası sonucu değiştirmez: "peace + nap" ile "nap + peace" aynı
      geçerli sonucu verir; savaş sürerken YALNIZ nap geçersizdir. */
   const hepsi = n.effectiveGive.concat(n.effectiveWant);
-  if(!militarySettlement(n)&&!hepsi.some(it=>it.t==='warJoin'&&it.plan!==undefined)&&hepsi.some(it=>it.t==='freight'||it.t==='res'&&Commerce.resources.includes(it.r))){const why=Commerce.quote(n);if(why)reasons.push(why);}
+  if(hepsi.some(it=>it.t==='freight'||it.t==='cargo')){const why=Commerce.quote(n);if(why)reasons.push(why);}   /* TİCARET-AĞ.1: yalnız açık kargo maddeleri liman/rota ister; düz kaynak maddesi p49 gibi anlık */
   const plan = {
     savas: !!a.war[b.id],
     pact:  !!(a.pact && a.pact[b.id]),
@@ -2200,7 +2194,7 @@ function dealGiftValue(alan, veren, n){
   const say = (items, kaynak, hedef) => {
     let t = 0;
     for (const it of items){
-      if (it.t === 'res')     t += it.v;
+      if (it.t === 'res' || it.t==='cargo') t += it.v;
       else if (it.t === 'tribute') t += it.v * 6;
       else if (it.t === 'tech')    t += 60;
       else if (it.t === 'lux')     t += 40;
@@ -2324,7 +2318,7 @@ function dealPostcondition(giver, taker, it){
   const T = (x) => G.emps[x];
   switch(it.t){
     case 'freight': return Commerce.state().contracts.some(c=>!Commerce.closed(c)&&c.legs.some(l=>l.e===giver.id&&l.to===taker.id&&l.r===it.r&&l.v===it.v&&l.source===it.source&&l.target===it.target));
-    case 'res':      return true;   // miktar kontrolü akış içinde
+    case 'res': case 'cargo': return true;   // miktar kontrolü akış içinde
     /* applyItems: VEREN tarafın tribute listesine kayıt eklenir. */
     case 'tribute':  return Array.isArray(giver.tribute) &&
                             giver.tribute.some(x => x && x.to === taker.id &&
@@ -2386,14 +2380,14 @@ function executeDeal(offer, inboxKey=null){
     tx = dealTxBegin();
     G._sideBuf = buf;
     G._dealAuth = true;
-    const settlement=militarySettlement(n);
-    const cargo=!settlement&&n.effectiveGive.concat(n.effectiveWant).some(it=>it.t==='freight'||it.t==='res'&&Commerce.resources.includes(it.r))?Commerce.sign(n):null;
-    applyItems(a, b, n.effectiveGive,settlement);
-    applyItems(b, a, n.effectiveWant,settlement);
+    /* TİCARET-AĞ.1: yalnız açık kargo / sözleşme maddeleri Commerce'e gider; düz kaynak maddesi anlık aktarılır (p49) */
+    const cargo=n.effectiveGive.concat(n.effectiveWant).some(it=>it.t==='freight'||it.t==='cargo')?Commerce.sign(n):null;
+    applyItems(a, b, n.effectiveGive);
+    applyItems(b, a, n.effectiveWant);
 
     if(cargo)for(const l of cargo.legs){const why=Commerce.legGate(G.emps[l.e],G.emps[l.to],l,{stock:true,once:cargo.once,live:true});if(why)throw Error(why);}
     // A physical price for an immediately effective clause must leave the payer's control in the same transaction.
-    const mixed=cargo?.once&&n.effectiveGive.concat(n.effectiveWant).some(it=>it.t!=='res'||!Commerce.resources.includes(it.r));
+    const mixed=cargo?.once&&n.effectiveGive.concat(n.effectiveWant).some(it=>it.t!=='cargo');
     if(mixed&&!Commerce.dispatch(cargo))throw Error(cargo.reason);
     if (typeof G._dealFailInject === 'function') G._dealFailInject('after:items');
     a.res.etk = (a.res.etk || 0) - q.cost;

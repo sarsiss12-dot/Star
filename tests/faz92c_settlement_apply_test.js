@@ -59,7 +59,7 @@ test('Onaylı toprak paylaşımı liman hakkını değiştirir, yoldaki yükü y
  if(!src.lanes.includes(dest.id))src.lanes.push(dest.id);
  if(!dest.lanes.includes(src.id))dest.lanes.push(src.id);
  P.intel[M.id]=M.intel[P.id]=3;M.res.min=100;P.res.ene=100;G.raids={};
- var signed=executeDeal({from:M.id,to:P.id,give:[{t:'res',r:'min',v:10}],want:[{t:'res',r:'ene',v:5}]});
+ var signed=executeDeal({from:M.id,to:P.id,give:[{t:'cargo',r:'min',v:10}],want:[{t:'cargo',r:'ene',v:5}]}); /* TİCARET-AĞ.1: fiziksel takas açık 'cargo' maddesiyle */
  G.day+=2;Commerce.tick(2);var v=Commerce.state().convoys.find(v=>v.e===M.id);
  `);
  eq(h.run('signed'));eq(h.run('!!v'));

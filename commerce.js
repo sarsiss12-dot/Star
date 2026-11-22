@@ -98,7 +98,7 @@ const Commerce={
   for(const [from,to,items] of sides)if(items.some(i=>i.t==='portTransit'))grants.add(from.id+':'+to.id);
   if(!once&&all.some(i=>!['freight','portTransit','pact'].includes(i.t)))return {why:'Düzenli sözleşmeye yalnız sevkiyat, ticaret anlaşması ve liman izni eklenebilir'};
   for(const [from,to,items] of sides){
-   const goods=items.filter(i=>once?i.t==='res'&&this.resources.includes(i.r):i.t==='freight');
+   const goods=items.filter(i=>once?i.t==='cargo':i.t==='freight');
    if(!goods.length)continue;
    if(!once){for(const it of goods)legs.push({...it,e:from.id,to:to.id});continue;}
    const gate=this.pairGate(from,to,true);if(gate)return {why:gate};
@@ -169,7 +169,7 @@ const Commerce={
   const st=this.state(),c={id:st.nextContract++,a:n.from,b:n.to,signature:this.signature(n),legs,
    born:G.day,until:G.day+(once?180:legs[0].months*30),next:G.day+this.prepareDays,cycle:0,status:'active',
    reason:'İmzalandı · ilk yükleme bekleniyor',delivered:{},lost:{},lastDelivery:null};
-  if(once){c.once=true;if([n.give,n.want].some(items=>!items.length)&&n.give.concat(n.want).every(i=>i.t==='res'&&this.resources.includes(i.r)))c.gift=true;}
+  if(once){c.once=true;if([n.give,n.want].some(items=>!items.length)&&n.give.concat(n.want).every(i=>i.t==='cargo'))c.gift=true;}
   st.contracts.push(c);return c;
  },
  cancel(id,actor){const c=this.state().contracts.find(c=>c.id===+id);if(!c||![c.a,c.b].includes(actor?.id)||this.closed(c))return {ok:false,why:'Sözleşme yok veya yetkin yok'};c.status='cancelled';c.reason='Yeni sefer yok; yoldaki yük geçerli limana teslim edilir. Anlaşma/liman kapalıysa en çok 180 gün bekler.';return {ok:true};},

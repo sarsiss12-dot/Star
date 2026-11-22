@@ -127,7 +127,7 @@ function sha256(str){
 function canon(v){if(Array.isArray(v))return '['+v.map(x=>x===undefined?'null':canon(x)).join(',')+']';
   if(v&&typeof v==='object')return '{'+Object.keys(v).filter(k=>v[k]!==undefined).sort().map(k=>JSON.stringify(k)+':'+canon(v[k])).join(',')+'}';return JSON.stringify(v);}
 const HEX=(s,n)=>typeof s==='string'&&s.length===n&&/^[a-f0-9]+$/.test(s);
-const ITEM_T=['res','peace','nap','pact','ally','intel','spynet','passage','portTransit','tech','sys','lux','freight','tribute','warOn','peaceWith','warJoin','vassal','landPromise','fedPeace'];   // BETA-WAR-GOALS.0: +teslim, +toprak vaadi
+const ITEM_T=['res','cargo','peace','nap','pact','ally','intel','spynet','passage','portTransit','tech','sys','lux','freight','tribute','warOn','peaceWith','warJoin','vassal','landPromise','fedPeace'];   // BETA-WAR-GOALS.0: +teslim, +toprak vaadi
 const WAR_VTYPE=['haracguzar','bekci','akademik'],WAR_VWAR=['none','defense','all'];
 const warItemOk=it=>it.t==='fedPeace'?onlyKeys(it,['t']):it.t==='vassal'?onlyKeys(it,['t','type','war'])&&WAR_VTYPE.includes(it.type)&&WAR_VWAR.includes(it.war):it.t==='landPromise'?onlyKeys(it,['t','sys','front'])&&int(it.sys,0,4095)&&int(it.front,1,2147483647):true;
 const warGoalOpts=c=>Array.isArray(c.targets)?{targets:c.targets.slice()}:typeof c.vtype==='string'?{vtype:c.vtype,war:c.war}:null;
@@ -137,7 +137,7 @@ function pkgItem(it){if(!plain(it)||!ITEM_T.includes(it.t)||Object.keys(it).leng
   for(const [k,v] of Object.entries(it))if(!['number','string','boolean'].includes(typeof v)||typeof v==='number'&&!Number.isFinite(v)||typeof v==='string'&&v.length>40)return 'items';
   if(!warItemOk(it))return 'items';
   if(it.t==='warJoin'&&(!onlyKeys(it,['t','target','front','plan'])||!int(it.target,0,63)||!((int(it.front,1,2147483647)&&!has(it,'plan'))||(int(it.plan,1,2147483647)&&!has(it,'front')))))return 'items';
-  if(it.t==='res'&&(!RES_K.includes(it.r)||!Number.isFinite(it.v)||it.v<=0||it.v>1e7))return 'amount';return null;}
+  if((it.t==='res'||it.t==='cargo')&&(!RES_K.includes(it.r)||!Number.isFinite(it.v)||it.v<=0||it.v>1e7))return 'amount';return null;}
 /* Paketi doğrula (yan etkisiz). Metin ya da nesne alır. Önce boyut ve bütünlük, sonra şema. */
 const SQ_LIFE=180;   // MP.6.2 statüko teklifinin ömrü (gün)
 function validatePackage(input,o={}){
@@ -785,8 +785,12 @@ function createHost(opts){
       roots:()=>[],
       apply(e,at,c){if(!setEmbargo(e,G.emps[c.target],c.on,c.on?'kararın':undefined))return false;G.emps.forEach(z=>{if(!z.dead)recalcMods(z);});return true;}},
     gift:{say:'actor',keys:['kind','target','r','v'],check:c=>int(c.target,0,63)&&['min','ene','ala','tuk','yiy'].includes(c.r)&&int(c.v,1,10000000),locate:(e,c)=>{const o=diploTarget(e,c);return o?{o}:{err:'no-target'};},
-      why(e,{o},c){const q=dealQuote({from:e.id,to:o.id,give:[{t:'res',r:c.r,v:c.v}],want:[]});return q.ok?null:{code:'diplo',detail:q.reasons.slice(0,1)};},
-      roots:()=>[],apply:(e,{o},c)=>executeDeal({from:e.id,to:o.id,give:[{t:'res',r:c.r,v:c.v}],want:[]})},
+      why(e,at,c){const o=diploTarget(e,c);if(!o)return 'no-target';return (e.res[c.r]||0)<c.v?'resources':null;},
+      roots:(e,{o})=>[e.res,e.rel,o.res,o.rel],
+      apply(e,at,c){const o=G.emps[c.target],r=c.r,amt=c.v;e.res[r]-=amt;o.res[r]=(o.res[r]||0)+amt;
+        const base=itemValue(o,{t:'res',r,v:amt},e),gain=clamp(Math.round(base*.10*(1+e.mods.dipMul)),3,45);
+        e.rel[o.id]=clamp(e.rel[o.id]+gain,-100,100);o.rel[e.id]=clamp(o.rel[e.id]+gain,-100,100);say(o.name+' hediyeyi kabul etti (+'+gain+' ilişki)','win');
+        if(remoteHuman(o))note(o.id,'Hediye — '+e.name+': '+amt+' '+RES[r].n,'win');return true;}},
     /* statüko barışı: AI hedefe tek oyunculu 'statuko' gibi doğrudan (canStatusQuo kapısı); İNSAN hedefe teklif olur ve
        kararı o insan verir (statusQuoReply). AI'nın uzak insana teklifi de buraya düşer (installGuards). */
     statusQuo:{say:'actor',keys:['kind','target'],check:c=>int(c.target,0,63),locate:(e,c)=>{const o=diploTarget(e,c);return o?{o}:{err:'no-target'};},
@@ -1170,6 +1174,7 @@ function createHost(opts){
     if(!Array.isArray(list)||list.length>8)return null;const out=[];
     for(const it of list){if(!plain(it))return null;
       if(it.t==='res'&&onlyKeys(it,['t','r','v'])&&DIP_RES.includes(it.r)&&int(it.v,1,10000000))out.push({t:'res',r:it.r,v:it.v});
+      else if(it.t==='cargo'&&onlyKeys(it,['t','r','v'])&&['ene','min','yiy','ala','tuk'].includes(it.r)&&int(it.v,1,10000000))out.push({t:'cargo',r:it.r,v:it.v});   /* TİCARET-AĞ.1: açık fiziksel kargo */
       else if(it.t==='warJoin'&&onlyKeys(it,['t','target','front','plan'])&&int(it.target,0,63)&&((int(it.front,1,2147483647)&&!has(it,'plan'))||(int(it.plan,1,2147483647)&&!has(it,'front'))))out.push({t:'warJoin',target:it.target,...(it.plan?{plan:it.plan}:{front:it.front})});
       else if(it.t==='freight'&&onlyKeys(it,['t','r','v','source','target','every','months'])&&['ene','min','yiy','ala','tuk'].includes(it.r)&&int(it.v,1,1000)&&int(it.source,0,100000)&&int(it.target,0,100000)&&int(it.every,30,180)&&int(it.months,3,120))out.push({...it});
       else if(DIP_TREATY.includes(it.t)&&onlyKeys(it,['t']))out.push({t:it.t});   // MP.6.2: barış + antlaşmalar (motorun dealQuote / executeDeal'i)

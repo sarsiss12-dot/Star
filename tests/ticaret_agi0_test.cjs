@@ -13,11 +13,18 @@ function world(){
  function path(){return Commerce.route(G.p,G.emps[1],0,9);}
  function cargo(){return executeDeal(terms(0,1,0,9));}
  function sailDays(n){for(let i=0;i<n;i++)advanceCargo(1);}
- var swap={from:0,to:1,give:[{t:'res',r:'min',v:100}],want:[{t:'res',r:'ene',v:50}]};
+ /* TİCARET-AĞ.1: tek seferlik FİZİKSEL takas artık açık 'cargo' maddesiyle seçilir; düz 'res' maddesi p49 gibi anlık kalır (aşağıdaki ayrı test) */
+ var swap={from:0,to:1,give:[{t:'cargo',r:'min',v:100}],want:[{t:'cargo',r:'ene',v:50}]};
+ var instant={from:0,to:1,give:[{t:'res',r:'min',v:100}],want:[{t:'res',r:'ene',v:50}]};
  function capacity(){for(const id of [0,3,6,9])G.sys[id].planets[0].col.pop=120;}
  `);
  return h;
 }
+test('TİCARET-AĞ.1 düz kaynak takası anlık: liman izni / rota olmadan kabulde iki stok anında değişir, konvoy ve sözleşme açılmaz',()=>{
+ const h=world();const r=JSON.parse(h.run(`JSON.stringify((()=>{const a0=G.p.res.min,b0=G.emps[1].res.ene,c0=(G.commerce?.contracts||[]).length;const ok=executeDeal(instant);
+   return {ok,dMin:a0-G.p.res.min,dEne:G.emps[1].res.ene-b0,bMin:G.emps[1].res.min,contracts:(G.commerce?.contracts||[]).length-c0,convoys:(G.commerce?.convoys||[]).length,again:executeDeal(instant)};})())`));
+ assert.equal(r.ok,true,'anlık takas uygulandı');assert.equal(r.dMin,100);assert.equal(r.dEne,-50);assert.equal(r.contracts,0,'sözleşme yok');assert.equal(r.convoys,0,'konvoy yok');
+});
 test('100 sistem, dokuz sıçrama, iki yabancı ara liman ve gerçek teslimat',()=>{
  const h=world();assert.equal(h.run('G.sys.length'),100);
  assert.equal(h.run('path()'),null);assert.equal(h.run('rights();path().join()'),'0,1,2,3,4,5,6,7,8,9');

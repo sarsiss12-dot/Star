@@ -57,7 +57,8 @@ const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'bu
   /* SAHA-ENTEGRE.0: misafir büyük armalar, seçimsiz lojistik, Savaş Merkezi yorgunluğu, haritadan fetih seçimi, Tümünü Kenara Al, Savaşa Yardım Teklif Et — host + B */
   SE:{size:'orta',ai:5,seed:22,months:0,guests:1,every:6},
   /* SAHA-GÜVENCE.1: insan–insan Savaşa Yardım (host gelen kutusundan kabul, tek ödeme), misafire muharebe sonucu, sistemin açtığı federasyon oyu kartı — host + B */
-  SG:{size:'orta',ai:5,seed:22,months:0,guests:1,every:6}}[SCEN];
+  SG:{size:'orta',ai:5,seed:22,months:0,guests:1,every:6},
+  TA:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6}}[SCEN];   /* TİCARET-AĞ.1: anlık takas / fiziksel kargo */
 if(!CONF)throw Error('MP8_SCEN A|B|C|R|N|P|E|F|D|G|L|S|W|K|Q|Z');
 if(process.env.FEDAI0_R==='1'||process.env.ER0_R==='1')CONF.ai=8;
 if(process.env.SCALE0_MP){const c=JSON.parse(process.env.SCALE0_MP);Object.assign(CONF,c);}
@@ -555,6 +556,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
   if(SCEN==='M')await require('./helpers/mp-sync-fed1-nf9.cjs')({test,pg,metrics,sleep,shot,assert,wait,tap,settle});
   if(SCEN==='SE')await require('./helpers/saha-entegre0-mp.cjs')({test,pg,metrics,sleep,shot,assert,wait,tap,settle,advance});
   if(SCEN==='SG')await require('./helpers/saha-guvence1-mp.cjs')({test,pg,metrics,sleep,shot,wait,tap,settle});
+  if(SCEN==='TA')await require('./helpers/ticaret-ag1-mp.cjs')({test,pg,metrics,sleep,shot,wait,tap,settle});
   if(SCEN==='X')await require('./helpers/reinf-route0-mp.cjs')({test,pg,metrics,sleep,shot,assert,wait,tap,settle,advance});
   if(SCEN==='I')await require('./helpers/mp-sync-fed1-soak.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,settle});
   if(SCEN==='TL')await require('./helpers/ticaret-agi0-mp.cjs')({test,pg,tap,wait,settle,assert,cmd,shot});
