@@ -1,0 +1,30 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":174,"buildMs":315,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":334,"buildMs":374,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":4,"p95":4,"max":4},"longtask":{"n":0},"heapMB":19,"dom":742,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":25.7,"p95":25.7,"max":25.7},"refresh":{"n":1,"med":1.6,"p95":1.6,"max":1.6},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":16,"dom":711,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":26.6,"p95":26.6,"max":26.6},"refresh":{"n":1,"med":1.3,"p95":1.3,"max":1.3},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":16,"dom":719,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS TL0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 11; misafir gerçek STARS arayüzünde
+PASS TL1 B liman izni verir, C reddeder ve hiçbir hak oluşmaz
+FAIL TL2 C izin ister, B kabul eder, iki misafir aynı yön ve süreyi görür
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:73:40)
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-agi0-mp.cjs:40:9
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:68:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-agi0-mp.cjs:38:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:562:18
+FAIL TL3 izni veren misafir masadan geri alır
+locator.tap: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="revokePortTransit"]').first()[22m
+
+    at tap (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:75:244)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-agi0-mp.cjs:49:23
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:68:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-agi0-mp.cjs:48:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:562:18
+FAIL TL4 karşı teklif, kayıtlı izin ve süre sonu
+Error: teklif host'ta bekleyen olarak bulunamadı (tanı): {"hd":{"n":2,"done":1},"d":{"deal":{"from":0,"to":1,"give":[],"want":[{"t":"portTransit"}],"cargoMode":false},"msg":"Host reddetti: Aynı teklif zaten bekliyor. — taslak korunuyor; düzenleyip yeniden sunabilirsin.","trace":[{"tx":"8pjdrt","step":"msg","at":1795370562294,"day":1,"ok":true,"msg":"Teklif gönderildi — Saf Akıl Ağı. Durum: Gelen kutusu → Gönderilen."},{"tx":"gkms6r","step":"draft","at":1795370634247,"day":1,"to":1,"give":[],"want":[{"t":"portTransit"}]},{"tx":"gkms6r","step":"send","at":1795370634247,"day":1,"cid":"j1_5_jemqgkms6r","kind":"offer"},{"tx":"gkms6r","step":"reply","at":1795370634295,"day":1,"status":"rejected","code":"rules:duplicate","offer":null,"dup":false},{"tx":"gkms6r","step":"msg","at":1795370634295,"day":1,"ok":false,"msg":"Host reddetti: Aynı teklif zaten bekliyor. — taslak korunuyor; düzenleyip yeniden sunabilirsin."}]}}
+    at offer (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-agi0-mp.cjs:25:11)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-agi0-mp.cjs:53:12
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:68:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-agi0-mp.cjs:52:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:562:18
+GEÇEN: 2 KALAN: 3

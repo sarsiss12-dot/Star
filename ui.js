@@ -1517,6 +1517,7 @@ const UI = {
          (js + html) hiçbir data-a üreticisi veya çağrısı yoktu. */
       case 'closeDeal': this.stashDiploDraft();$('diploPane').classList.remove('show');break;
       case 'dealAdd': this.dealAdd(x); break;
+      case 'dealCargoMode': if(this.deal){this.deal.cargoMode=x==='on';this.drawDeal();} break;   /* TİCARET-AĞ.1 */
       case 'dealSupport': this._dealSupport=this._dealSupport===+x?null:+x;this.drawDeal();break;   // MP-FIELD-FIX.0
       case 'dealSupportPick': this.dealSupportPick(x);break;
       case 'dealHelp': this._dealHelp=this._dealHelp===+x?null:+x;this.drawDeal();break;   // SAHA-ENTEGRE.0
@@ -1826,10 +1827,14 @@ const UI = {
         const o = G.emps[+id], e = G.p;
         const amt = +v;
         if ((e.res[r]||0) < amt){ say('Yetersiz ' + RES[r].n); break; }
-        const offer={from:e.id,to:o.id,give:[{t:'res',r,v:amt}],want:[]};
-        const q=dealQuote(offer);
-        if(!q.ok||!executeDeal(offer)){say(q.reasons.join(' · ')||'Hediye gönderilemedi');break;}
-        say(o.name+' için hediye sevkiyatı imzalandı','win');
+        e.res[r] -= amt;
+        o.res[r] = (o.res[r]||0) + amt;
+        // değer ve ihtiyaç ilişkiyi belirler
+        const base = itemValue(o, {t:'res', r, v:amt}, e);
+        const gain = clamp(Math.round(base * .10 * (1 + e.mods.dipMul)), 3, 45);
+        e.rel[o.id] = clamp(e.rel[o.id] + gain, -100, 100);
+        o.rel[e.id] = clamp(o.rel[e.id] + gain, -100, 100);
+        say(o.name + ' hediyeyi kabul etti (+' + gain + ' ilişki)', 'win');
         this.closeModal();
         this.openDiplo();
         break;
@@ -5699,6 +5704,8 @@ const UI = {
     this.drawDeal();
   },
   drawDeal(){
+    {const d0=this.deal;if(d0){if(d0.cargoMode===undefined)d0.cargoMode=d0.give.concat(d0.want).some(i=>i.t==='cargo');   /* TİCARET-AĞ.1: seçilen teslim yöntemi maddelere yansır */
+      for(const it of d0.give.concat(d0.want)){if(d0.cargoMode&&it.t==='res'&&Commerce.resources.includes(it.r))it.t='cargo';else if(!d0.cargoMode&&it.t==='cargo')it.t='res';}}}
     this.ensureDiploWorld();
     const d = this.deal;
     if (!d) return;
@@ -5718,8 +5725,15 @@ const UI = {
     const qd = (typeof dealQuote === 'function')
       ? dealQuote({from:0, to:d.to, give:d.give, want:d.want,
                    born:d.born, expires:d.expires}) : null;
-    if(qd?.norm&&militarySettlement(qd.norm))h+='<p class="mini">Siyasi ödeme · Kabul edilen savaş katılımı veya barış tazminatı cephe işlemiyle birlikte ödenir.</p>';
-    if(qd?.norm&&!militarySettlement(qd.norm)&&d.give.concat(d.want).some(it=>it.t==='res'&&Commerce.resources.includes(it.r))){
+    /* TİCARET-AĞ.1: iki ayrı teslim yöntemi — anlık kaynak takası (p49 diplomasisi) / fiziksel kargo (liman + rota) */
+    if(d.give.concat(d.want).some(it=>(it.t==='res'||it.t==='cargo')&&Commerce.resources.includes(it.r))){
+      const cm=!!d.cargoMode;
+      h+=`<div class="dealCargoMode" data-mode="${cm?'cargo':'instant'}"><span class="mini">Mal teslimi:</span>
+        <button class="abtn ${cm?'':'pri'}" data-a="dealCargoMode" data-x="off">Anlık Kaynak Takası</button>
+        <button class="abtn ${cm?'pri':''}" data-a="dealCargoMode" data-x="on">▣ Fiziksel Kargo ile Gönder</button>
+        <p class="mini">${cm?'Liman ve açık rota gerekir. Mal yüklemede verenin deposundan çıkar, yalnız varışta alıcıya yazılır; yolda kaybolabilir.':'Kabulde iki tarafın stoğu doğrulanır ve kaynaklar anında aktarılır; liman gerekmez.'}</p></div>`;
+    }
+    if(qd?.norm&&d.give.concat(d.want).some(it=>it.t==='cargo')){
       const plan=Commerce.freightPlan(qd.norm);
       h+='<div class="mini">Tek seferlik kargo · İmza sevkiyatı açar. Mal yüklemede çıkar, varışta teslim edilir.</div>';
       for(const l of plan.legs||[]){const a=G.emps[l.e],b=G.emps[l.to];

@@ -293,7 +293,7 @@ console.log('\nD. 14 DEAL_KINDS HATTI');
   const H=harness(); H.R(KUR);
   const r=H.R([
     "var e=G.p, sonuc={};",
-    "var kinds=Object.keys(DEAL_KINDS).filter(k=>k!=='freight'&&!['warJoin','vassal','landPromise','fedPeace'].includes(k)); /* 96A paired freight is covered by faz96a_cargo_test. WAR-COALITION.0: parametreli savaş maddeleri (cephe/hazırlık kimliği, tür+hüküm, sistem+cephe, iki federasyon başkanı) parametresiz ölçülemez; aşağıdaki E bölümünde geçerli parametreyle olumlu ve eksik parametreyle ret olarak sınanır. */",
+    "var kinds=Object.keys(DEAL_KINDS).filter(k=>k!=='freight'&&k!=='cargo'&&!['warJoin','vassal','landPromise','fedPeace'].includes(k)); /* TİCARET-AĞ.1: tek seferlik fiziksel kargo (cargo) liman/rota fikstürü ister, tests/ticaret_ag1_test.js K1–K4'te sınanır. 96A paired freight is covered by faz96a_cargo_test. WAR-COALITION.0: parametreli savaş maddeleri (cephe/hazırlık kimliği, tür+hüküm, sistem+cephe, iki federasyon başkanı) parametresiz ölçülemez; aşağıdaki E bölümünde geçerli parametreyle olumlu ve eksik parametreyle ret olarak sınanır. */",
     "kinds.forEach(function(k,i){",
     "  var o=G.emps[(i%6)+1]; if(!o) return;",
     "  /* her tür için GERÇEK üretici verisiyle uygulanabilir madde kur */",
@@ -334,7 +334,7 @@ console.log('\nD. 14 DEAL_KINDS HATTI');
        'valid='+x.valid+' quote='+x.quote+' exec='+x.exec+
        ' maliyet='+x.cost+(x.neden?' · '+x.neden:''));
   });
-  ok('14 türün tamamı sınandı', Object.keys(d||{}).length===14,
+  ok('15 türün tamamı sınandı (TİCARET-AĞI.0 parametresiz portTransit eklendi)', Object.keys(d||{}).length===15,
      String(Object.keys(d||{}).length));
 }
 

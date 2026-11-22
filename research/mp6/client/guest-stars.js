@@ -96,7 +96,7 @@ const VIEW=new Set(['dealSupport','dealSupportPick','coalPick','coalTerms','coal
   'tech','build','sInfo','bInfo','showEv','minModal','restoreModal','openNote','instNote','instDecide','closem','marketPane','mktSel','mute','save','diagShow','opLogMenu',
   /* MP.6.1 — görünüm / taslak */
   'commerce','commerceConvoys','commerceNew','commercePropose','commerceConvoy','commerceLocate','commercePort','convoyToggle',   /* TİCARET-AĞI.0 (Codex) */
-  'news','shipmentsNews','noteStashAll','bigEmblemsToggle','dealHelp','dealHelpPick',   /* SAHA-ENTEGRE.0: büyük armalar yerel görünüm (kapı engelliyordu) */
+  'news','shipmentsNews','noteStashAll','bigEmblemsToggle','dealHelp','dealHelpPick','dealCargoMode',   /* SAHA-ENTEGRE.0: büyük armalar yerel görünüm (kapı engelliyordu) */
  'newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord',
   'inboxEmpire','inboxReturn','inboxFederation','deal','dealAdd','dealRm','dealPledgeDays','dealDiscard','dealBack','peace','vsOpen','vsCancel','vsCounter','fedBallot',
   'fedVoteYes','fedVoteNo','fedVoteNow','fedFoundType','fedFoundSelect','fedFoundEdit','fedFoundEditStop','fedFoundUpdate','fedFoundStart','fedFoundReply','fedFoundCancel','fedFoundFinish',
@@ -221,6 +221,12 @@ function gate(){
   /* motor eylemleri → MP komutu (yalnız misafirin kendi devleti: aynada 0) */
   const wrap=(name,fn)=>{const o=window[name];if(typeof o!=='function')return;window[name]=function(...a){if(!S.on||S.building)return o.apply(this,a);return fn(o,...a);};};
   const mine=e=>e&&e.id===0;
+  /* TİCARET-AĞ.1: fiziksel kargo / sözleşme maddelerinin liman-rota-kapasite denetimi misafir aynasında eksik veriyle yapılamaz
+     (yabancı limanların kapasitesi, izinler, hat bilgisi); yalnız bu Commerce gerekçesi yerelde engel sayılmaz, karar host'un
+     dealQuote'unda (dipGate) verilir ve ret gerekçesi taslağa döner. Diğer bütün gerekçeler aynen engeller. */
+  wrap('dealQuote',(o,offer,...rest)=>{const q=o(offer,...rest);if(q.ok||!offer)return q;const items=(offer.give||[]).concat(offer.want||[]);
+    if(!items.some(i=>i&&(i.t==='cargo'||i.t==='freight')))return q;let why=null;try{why=Commerce.quote(q.norm||offer);}catch{}
+    if(!why||q.reasons.some(r=>r!==why)||q.giveFail.length||q.wantFail.length)return q;return {...q,ok:true,reasons:[],hostCheck:why};});
   wrap('orderMove',(o,f,target,append,automatic)=>{if(automatic||!f||f.e!==0)return false;if(S.aimCol===f.id+':'+(+target)){S.aimCol=null;return true;}return send({kind:'move',fleet:f.id,to:+target})!==null;});
   /* MP-P0: "tezgâha kondu / sıraya alındı" bildirimi eskiden emir GÖNDERİLİNCE çıkıyordu (host kabul etmeden). Artık motor işlevi
      false döner (yerel iyimser bildirim yok); bildirim host'un 'ok' yanıtıyla, ret gerçek nedeniyle gösterilir. */
@@ -504,7 +510,7 @@ function gate(){
      Artık tek işlem (S.dealTx: cid + içerik imzası): taslak host'un YANITINA kadar korunur; yanıt gelmezse aynı cid yeniden gönderilir
      (host sonuç önbelleği cid'e göre ikinci kaydı engeller; içerik aynıysa motor 'duplicate' der) — çift teklif oluşmaz. Ret / bağlantı
      hatasında taslak düzenlenebilir kalır. İz: S.dealTrace (işlem kimliğiyle taslak → dokunuş → gönderim → host yanıtı → kayıt → ileti). */
-  const dealItems=l=>(l||[]).map(i=>i&&i.t==='res'&&Number.isInteger(i.v)?{t:'res',r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&i.t==='sys'&&Number.isInteger(i.id)?{t:'sys',id:i.id}:i&&i.t==='tribute'&&Number.isInteger(i.v)?{t:'tribute',r:i.r,v:i.v}:i&&i.t==='warOn'&&Number.isInteger(i.target)?{t:'warOn',target:real(i.target),...(Number.isInteger(i.until)?{until:i.until}:{})}:i&&i.t==='tech'&&typeof i.id==='string'?{t:'tech',id:i.id}:i&&i.t==='lux'&&typeof i.k==='string'?{t:'lux',k:i.k}:i&&i.t==='peaceWith'&&Number.isInteger(i.target)&&Number.isInteger(i.front)?{t:'peaceWith',target:real(i.target),front:i.front}:i&&TREATY.includes(i.t)?{t:i.t}:null);
+  const dealItems=l=>(l||[]).map(i=>i&&(i.t==='res'||i.t==='cargo')&&Number.isInteger(i.v)?{t:i.t,r:i.r,v:i.v}:i&&i.t==='warJoin'?{t:'warJoin',target:real(i.target),...(i.plan?{plan:i.plan}:{front:i.front})}:i&&i.t==='vassal'?{t:'vassal',type:i.type,war:i.war}:i&&i.t==='landPromise'?{t:'landPromise',sys:i.sys,front:i.front}:i&&i.t==='fedPeace'?{t:'fedPeace'}:i&&i.t==='sys'&&Number.isInteger(i.id)?{t:'sys',id:i.id}:i&&i.t==='tribute'&&Number.isInteger(i.v)?{t:'tribute',r:i.r,v:i.v}:i&&i.t==='warOn'&&Number.isInteger(i.target)?{t:'warOn',target:real(i.target),...(Number.isInteger(i.until)?{until:i.until}:{})}:i&&i.t==='tech'&&typeof i.id==='string'?{t:'tech',id:i.id}:i&&i.t==='lux'&&typeof i.k==='string'?{t:'lux',k:i.k}:i&&i.t==='peaceWith'&&Number.isInteger(i.target)&&Number.isInteger(i.front)?{t:'peaceWith',target:real(i.target),front:i.front}:i&&TREATY.includes(i.t)?{t:i.t}:null);
   const dealCmd=d=>{const give=dealItems(d.give),want=dealItems(d.want);if(give.includes(null)||want.includes(null))return {bad:true};if(!give.length&&!want.length)return {empty:true};
     const ctr=S.counter&&S.counter.to===d.to?S.counter:null;const cmd=ctr?{kind:'counter',offer:ctr.offer,give,want}:{kind:'offer',to:real(d.to),give,want};return {cmd,ctr,sig:JSON.stringify(cmd)};};
   const dealTrace=(tx,step,x)=>{S.dealTrace=S.dealTrace||[];S.dealTrace.push({tx:tx&&tx.id||null,step,at:Date.now(),day:Math.floor(G.day||0),...(x||{})});if(S.dealTrace.length>60)S.dealTrace.shift();};

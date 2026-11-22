@@ -1,0 +1,34 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":267,"buildMs":285,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":357,"buildMs":385,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":2.8,"p95":11.5,"max":11.5},"longtask":{"n":0},"heapMB":18,"dom":728,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":26.3,"p95":26.3,"max":26.3},"refresh":{"n":1,"med":1.2,"p95":1.2,"max":1.2},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":39,"p95":39,"max":39},"refresh":{"n":1,"med":3.9,"p95":3.9,"max":3.9},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":729,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS TA0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS A0 fikstür (host): limanlar, host ↔ B hiperhat, kapasite, kaynak, temas
+  A1q {"ok":false,"reasons":["Tek seferlik yük için yeterli kapasiteli, açık ve izinli liman hattı yok"],"dis":true}
+FAIL A1 B (800×360) gerçek masa: 100 mineral + "Fiziksel Kargo ile Gönder" → host gelen kutusundan KABUL; dört aşama ayrı
+locator.tap: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="dealSend"]').first()[22m
+[2m    - locator resolved to <button disabled class="abtn pri" data-a="dealSend">TEKLİFİ SUN</button>[22m
+[2m  - attempting tap action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not enabled[22m
+[2m    - retrying tap action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not enabled[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 100ms[22m
+[2m    18 × waiting for element to be visible, enabled and stable[22m
+[2m       - element is not enabled[22m
+[2m     - retrying tap action[22m
+[2m       - waiting 500ms[22m
+
+    at tap (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:75:244)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-ag1-mp.cjs:43:4
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:68:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-ag1-mp.cjs:33:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:559:18
+NOT RUN A2 yükleme B'den düşer, varışta host'a bir kez yazılır, B aynası teslimi görür; ikinci teslim / ikinci kabul yok
+NOT RUN A3 C varsayılan "Anlık Kaynak Takası" ile 40 enerji hediye teklifi → host KABUL → anlık; sözleşme / konvoy yok
+NOT RUN A4 gizlilik: C aynasında B'nin sözleşmesi / konvoyu yok
+GEÇEN: 2 KALAN: 1
