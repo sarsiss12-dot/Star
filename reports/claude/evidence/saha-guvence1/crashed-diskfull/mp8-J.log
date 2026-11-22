@@ -1,0 +1,17 @@
+FAIL J0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+page.goto: Target page, context or browser has been closed
+Call log:
+[2m  - navigating to "https://localhost:36679/mp/play?code=4VBTY", waiting until "load"[22m
+
+    at guestGo (/home/user/Star/tests/browser-mp8.cjs:128:56)
+    at room (/home/user/Star/tests/browser-mp8.cjs:153:52)
+    at async /home/user/Star/tests/browser-mp8.cjs:340:5
+    at async test (/home/user/Star/tests/browser-mp8.cjs:66:162)
+    at async /home/user/Star/tests/browser-mp8.cjs:339:3
+FATAL page.evaluate: Target page, context or browser has been closed
+    at module.exports (/home/user/Star/tests/helpers/mp-sync-fed1-mp.cjs:20:44)
+    at /home/user/Star/tests/browser-mp8.cjs:560:63 {
+  log: []
+}
+GEÇEN: 0 KALAN: 2
+EXIT 1

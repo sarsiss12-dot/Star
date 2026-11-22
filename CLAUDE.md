@@ -2,7 +2,18 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — SAHA-ENTEGRE.0 (p48 / MP.8.9b47, 22 Kasım 2026)
+## Son teslim — SAHA-GÜVENCE.1 (p49 / MP.8.9b48, 22 Kasım 2026)
+
+- Ayrıntı: `reports/claude/SAHA-GUVENCE1-SONUC.md`, program devri `reports/claude/STARS-SONRAKI-DEVIR.md`, kanıt `reports/claude/evidence/saha-guvence1/`. Dal `claude/stars-saha-guvence1` (taban `347ef0d` p48 / PR #68). Save8v8/paket4/protokol1; p49 paket yükleyicisi p41–p48 kabul eder. Kullanıcı test yapamıyordu: bütün kabul otomatik; Android / uzak internet / Render NOT RUN.
+- B2: muharebe sonunda silahlı gemisi kalmayan tarafın silahsız gemileri (`ord` dmg 0) hasarsız imha edilir (kural korundu). `combat.js battleUnarmedLost/battleUnarmedText` (filo günlüğünden salt okunur), muharebe raporunda açıklama, mp-core `battleReportFinish` sarmalayıcısı uzak insana ZAFER / YENİLGİ (motor yalnız devlet 0'a yazıyordu).
+- C2: `warFetihSettle` açık TOPRAK VAADİ sistemlerini iade etmez (eskiden düşmana iade, vaat "ele geçirilmedi"). C4: `warFetihClaimCost` koptuğu devlete karşı 0. C5: `inbox.js fedVoteSource` (önerensiz sistem oyu → kaynak federasyon başkanı; eskiden kayıt yok, misafirde kart yok).
+- Test: `node tests/saha_guvence1_{fleet,war,events}_test.js` (6/10/4; p47 4/2, 1/9, 2/2), `STARS_CONTROL_ROOT=<git archive 347ef0d> node tests/saha_guvence1_equivalence_test.js` (3), `MP8_SCEN=SG node tests/browser-mp8.cjs` (host + B: yardım teklifi host gelen kutusundan kabul, misafir YENİLGİ, sistem oyu kartı). Uzun oturum: `SCALE0_MP='{"size":"ulu","ai":9}' MP8_I_FF=120 MP8_I_MIN=8 MP8_SCEN=I`. Diplomasi paneli (`#diploPane`) modal değildir: kart şeridini örter, testte `UI.act('closeDiplo')`.
+- Koruma: `saha-guvence1-reviewed` (p49 → p48 tam bayt) ← `stripReviewedSahaEntegre0` önce bunu çağırır.
+- Disk: scratchpad'de eski kontrol kökleri birikince disk doldu (Chromium "Target crashed"); her fazda yalnız gerekli kökleri tut.
+- Ticaret: `claude/stars-ticaret-ag0` = Codex TİCARET-AĞI.0 (p47) + p49 birleşimi, YAYINLANMADI (100 sistem p95 +%27,61; kök neden her `executeDeal`'deki tam grafik `dealTxBegin` kopyası ~46–54 ms × fazladan AI sözleşmesi). Sonraki iş: yazma günlüklü işlem. Rapor o dalda `reports/claude/TICARET-AG0-SONUC.md`. TİCARET-AI.0 / FED-AI-SİYASET.0 başlanmadı.
+- I3 (500 sistem sensör paylaşımı) ön koşulu ayrı iddia (`pre.bNativeNew>0`); vm sandbox'ında `performance.now` deterministik saplamadır — süre ölçümünde `h.sb.__now=()=>Number(process.hrtime.bigint())/1e6`.
+
+## Önceki teslim — SAHA-ENTEGRE.0 (p48 / MP.8.9b47, 22 Kasım 2026)
 
 - Ayrıntı: `reports/claude/SAHA-ENTEGRE0-SONUC.md`, devir `reports/claude/SAHA-ENTEGRE0-DEVIR.md`, kanıt `reports/claude/evidence/saha-entegre0/`. Dal `claude/stars-saha-entegre0`, taslak PR #68 (taban `codex/stars-mp-rakip-doktrinler0` @ `8984b51` p47 + doğrulanmış PR #64 `0d50abc`). Save8v8/paket4/protokol1; p48 paket yükleyicisi p41–p47 kabul eder. ZIP `releases/stars-faz96h10p48.zip`, kayıt `RELEASE-SAHA-ENTEGRE0.json`.
 - Fetih filo kaybı (Issue #66): `invasionTick` TEMİZ İŞGAL dalı `K.tf` filolarını silmez (en az bir `ord` taşıyan karma filo da `K.tf` sayılır); garnizon yerel taban `garrisonOf` (≥10), yörüngedeki ordu ay sonu takviyesiyle. Sağ kalan ordu silinmediğinden AI onu yeniden kullanır (kampanya etkisi ölçülmedi). `faz92a` "before successful disband" ve `faz96h10` negatif kontrol beklenen listesi bu kurala göre güncellendi.

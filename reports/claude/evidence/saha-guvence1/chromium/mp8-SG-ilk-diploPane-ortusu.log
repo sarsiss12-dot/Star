@@ -1,0 +1,90 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":398,"buildMs":411,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":1.7,"p95":5.9,"max":5.9},"longtask":{"n":0},"heapMB":16,"dom":728,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":33,"p95":33,"max":33},"refresh":{"n":1,"med":2.9,"p95":2.9,"max":2.9},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":22,"joinErrors":0}}}
+PASS SG0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS G0 fikstür (host): AI X host'a savaş açar; B host'un müttefiki, X ile savaşta değil; kaynaklar
+PASS G1 B gerçek masadan "Savaşa Yardım Teklif Et" + 300 alaşım İSTE → host gelen kutusundan KABUL → tek ödeme, B savaşta, B aynası görür; ikinci kabul yok
+PASS G2 misafirin eskortsuz ordusu muharebede yok olur → misafirin bildirim listesinde YENİLGİ + eskortsuz imha açıklaması
+FAIL G3 sistemin açtığı federasyon oyu: misafirde kart + gelen kutusu; misafir KABUL → host oyu kaydeder
+locator.tap: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-a="openNote"][data-x="2"]').first()[22m
+[2m    - locator resolved to <button data-x="2" class="nCard sci" data-a="openNote">…</button>[22m
+[2m  - attempting tap action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <button class="abtn " data-x="spynet" data-a="dealPact">🕸 Casusluk ağı</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m    - waiting 20ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <button class="" role="tab" data-x="states" data-a="diploNav" aria-selected="false">DEVLETLER</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m  2 × retrying tap action[22m
+[2m      - waiting 100ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div class="dpHd">…</div> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m  2 × retrying tap action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <button class="abtn " data-x="spynet" data-a="dealPact">🕸 Casusluk ağı</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <button class="" role="tab" data-x="states" data-a="diploNav" aria-selected="false">DEVLETLER</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div class="dpHd">…</div> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m    - retrying tap action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div class="dpHd">…</div> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m  - retrying tap action[22m
+[2m    - waiting 500ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <button class="abtn " data-x="spynet" data-a="dealPact">🕸 Casusluk ağı</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m  - retrying tap action[22m
+[2m    - waiting 500ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <button class="" role="tab" data-x="states" data-a="diploNav" aria-selected="false">DEVLETLER</button> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m  - retrying tap action[22m
+[2m    - waiting 500ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is visible, enabled and stable[22m
+[2m    - scrolling into view if needed[22m
+[2m    - done scrolling[22m
+[2m    - <div class="dpHd">…</div> from <div class="show" id="diploPane">…</div> subtree intercepts pointer events[22m
+[2m  - retrying tap action[22m
+[2m    - waiting 500ms[22m
+
+    at hit (/home/user/Star/tests/helpers/saha-guvence1-mp.cjs:13:95)
+    at async /home/user/Star/tests/helpers/saha-guvence1-mp.cjs:59:94
+    at async test (/home/user/Star/tests/browser-mp8.cjs:66:162)
+    at async module.exports (/home/user/Star/tests/helpers/saha-guvence1-mp.cjs:50:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:556:18
+GEÇEN: 4 KALAN: 1
+EXIT 1
