@@ -1,0 +1,9 @@
+✗ B1 aday listesi 12 ile sınırlı değil (20+ bilinen sistem) — aday 12
+✗ B2 altıdan fazla hedef: geçerli, bedel artan Etki, ilanda bir kez düşülür — warFetihClaimCost is not defined
+✗ B3 ilk 5 hedef bedelsiz (eski kural); Etki yetmezse önizleme engeller ve ilan olmaz — warFetihClaimCost is not defined
+✗ B4 başkent hedeflenebilir (+60 Etki); tek sistemli devlet hedefsiz kalmaz — warFetihClaimCost is not defined
+✗ B5 İsyanı Bastır: koptuğu devlete karşı başkent dahil bedelsiz — warFetihClaimCost is not defined
+✓ B6 AI seçimi eskisiyle aynı: en çok 3 başkent dışı hedef, bedel 0
+✗ B7 arayüz: liste 40 satırla sayfalı, arama süzer; HARİTADAN HEDEF SEÇ dokunuşu seçimi değiştirir, İPTAL geri alır, TAMAM korur — UI.claimPickStart is not a function
+✗ B8 harita dokunuşu (View.tap) seçim kipinde sistem panelini açmaz, seçimi değiştirir — UI.claimPickStart is not a function
+GEÇEN: 1 KALAN: 7

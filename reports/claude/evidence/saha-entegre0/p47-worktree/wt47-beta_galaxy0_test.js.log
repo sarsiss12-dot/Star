@@ -1,0 +1,10 @@
+PASS G1 yeni şekiller × 2 tohum × (30 sistem/8 AI, 500 sistem/16 AI) + yıldız kapısı kapalı: tek bileşen, her başkentten bütün sistem ve gezegenler, belirlenimci
+PASS G2 eski üç şekil (sarmal/halka/küme) kontrol d64af78 ile ham Save8 + RNG birebir (çarpan 1×, rota denetimi işlem yapmaz)
+PASS G3 bilerek kopuk harita: denetim yakalar (birden çok bileşen, tek yönlü + geçersiz hat), onarım en az hatla birleştirir, düzeltilmiş rotada GERÇEK gemi emri (orderMove + dailyTick) hedefe varır
+PASS G4 onarım başarısızsa oyun başlamaz: setupGame açık RangeError + galaxyRoute özeti (MP host generate aynı istisnayı ok:false yapar)
+PASS G5 gezegen çarpanı: 3 tohum × 0,5/1/2 (+ uçlar 0,25/3): konum, hat, başkent aynı; normal aday sayısı ölçeklenir; başkent/nadir dünyalar korunur; 1× bayt-bayt aynı
+PASS G6 çarpan kayıt/yükleme: cfg.planetMul Save8'de kalır, yükleme galaksiyi yeniden üretmez; çarpansız eski kayıt 1× sayılır
+PASS G7 uçlarda AI kolonizasyonu (0,25× / 3×, 24 ay): koloni gemisi hedefleri gerçek normal adaylar, AI koloni kurar, hata yok
+PASS G8 MP: lobi configure şekil + çarpanı kabul eder (geçersizi reddeder), paket ayarına yalnız ≠1 çarpan yazılır ve doğrulanır, misafir host'un doğrulanmış galaksisini alır
+PASS G9 Rakip Doktrinler (#41): sabit sayı ve min–maks aralığı tohumla tutarlı; militarist/kriminal/fanatik toplamı aralıkta, aynı tohum aynı dağılım
+GEÇEN: 9 KALAN: 0

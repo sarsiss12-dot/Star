@@ -1,0 +1,69 @@
+✓ 96H.9 month 228: actor3 orders four armies into colony sys20 held by visible pirates; three die on arrival (bug reproduced)
+✓ 96H.10 month 228: no army is ordered into the occupied orbit; the armies wait at a safe colony and survive
+✓ 96H.9 month 173: actor1 army 397 keeps its order into visible enemy strength and is lost on day 5240.5 (bug reproduced)
+✓ 96H.10 month 173: the moving army is re-tasked on day 5220 to safe sys13 and survives
+✓ safety reads only visible hostile warships and counts own warships there or bound there; read-only, no RNG
+✓ a moving army re-decides only when its destination turned unsafe; joint-operation and delivery fleets are never re-tasked
+✗ negative control: the escorted 96H.9 invasions are unchanged (same army commands, no re-order while moving; sys5 and sys6 still fall cleanly) — AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
+    {
+      day: 2400,
+      fleet: 237,
+      ok: true,
+      to: 5
+    },
++   {
++     day: 2430,
++     fleet: 237,
++     ok: true,
++     to: 41
++   }
+  ]
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt64/tests/faz96h10_army_safety_test.js:83:10
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt64/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt64/tests/faz96h10_army_safety_test.js:79:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+✓ player armies are not commanded by the AI army tick
+✓ Save8 and RNG: 96H.10 stores no new state; a natural run reloads to a fixed point
+✗ invasion, combat and diplomacy rules keep their 96H.9 bytes — AssertionError [ERR_ASSERTION]: economy.js
++ actual - expected
+
++ 'a5c58d36862f88a663a30da8e8b895648b5d09710530e65b7a627dcf6f9ab5c7'
+- '5d412d488760ae2b7193b13822b747788130b63ed782e62bfbd3223154b69d22'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt64/tests/faz96h10_army_safety_test.js:104:51
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt64/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt64/tests/faz96h10_army_safety_test.js:102:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+✗ only the reviewed 96H.10 army-safety blocks differ from 96H.9 ai.js — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'aaf66c888a92c2a8a51835243564d3448848ba3e327ed53aa5f377469a088362'
+- '4d7270b6f84466db89fbf944a67c393861dda4485a421ddcabf145b84d6709ed'
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt64/tests/faz96h10_army_safety_test.js:108:10
+    at test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt64/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt64/tests/faz96h10_army_safety_test.js:106:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+GEÇEN: 8 KALAN: 3

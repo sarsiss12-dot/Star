@@ -1,0 +1,67 @@
+✓ Declaration opens one exact front; duplicate declaration cannot duplicate it
+✓ Rejected declaration records nothing
+✓ Federation defense joins exact campaign and keeps original sides
+✓ Independent attack on same enemy stays separate despite alliance
+✓ Overlord defensive entry carries verified sponsor
+✓ War promise joins sponsor campaign and proxy peace closes both
+✓ Support for someone not fighting does not invent a coalition
+✓ Membership changes append history without rewriting campaign side
+✓ Repeated sync and read are RNG-free and do not inflate history
+✓ Old ongoing wars begin partial measurement, without invented past losses
+✓ Direct legacy rebellion path is observed without guessed sponsor
+✓ Peace and new war create distinct episodes even on same day
+✓ Separate peace keeps other campaign front active
+✗ Empire elimination closes episode without crediting purged fleets as combat kills — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'eliminated|actor:auto'
+- 'eliminated'
+             ^
+
+    at eq (/home/user/Star/tests/faz92a_war_contribution_test.js:7:29)
+    at /home/user/Star/tests/faz92a_war_contribution_test.js:67:61
+    at test (/home/user/Star/tests/faz92a_war_contribution_test.js:6:25)
+    at Object.<anonymous> (/home/user/Star/tests/faz92a_war_contribution_test.js:66:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+✓ Real battle round uses actual hull damage and loss counts
+✓ Destroyed unarmed survivors are counted exactly once
+✓ Pirate fighting is excluded from state settlement contributions
+✓ Wartime system capture records all actual colony owners separately
+✓ Repeated capture of same asset cannot farm unique capture count
+✓ Peaceful transfer and wartime deal transfer do not masquerade as conquest
+✓ Fetih targets are recorded as claims, never invented as ownership
+✓ Old war goal cannot silently become a new campaign claim
+✓ Native serialized ledger survives reload, without RNG/tick changes
+✓ Malformed ledger is rejected with full load rollback
+✓ Duplicate active pair in save is rejected
+✓ Invalid zero sequence is rejected before creating an unloadable next save
+✓ WarOn transaction rollback restores ledger root identity and sequence
+✓ Peace transaction rollback reopens same episode
+✓ Contribution view cannot reveal unknown partners or foreign front metrics
+✓ UI shows own contribution and explicitly excludes automatic entitlement
+✓ Real invasion counts only destroyed assault strength before successful disband
+✓ Mixed ownership planet flip is recorded even if system already belongs to attacker
+✗ Status quo closes real episode without distributing coalition land — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'status-quo|actor:0'
+- 'status-quo'
+             ^
+
+    at eq (/home/user/Star/tests/faz92a_war_contribution_test.js:7:29)
+    at /home/user/Star/tests/faz92a_war_contribution_test.js:148:2
+    at test (/home/user/Star/tests/faz92a_war_contribution_test.js:6:25)
+    at Object.<anonymous> (/home/user/Star/tests/faz92a_war_contribution_test.js:146:1)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+✓ New game resets previous campaign ledger
+GEÇEN: 32 KALAN: 2

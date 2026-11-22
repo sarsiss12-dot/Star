@@ -1,0 +1,22 @@
+FAIL S1 kurulum: BİLİM ANOMALİLERİ → Kapalı (gerçek dokunuş); oyunda normal anomali yok
+AssertionError [ERR_ASSERTION]: kurulum ekranında anomali satırı
+    at /home/user/Star/tests/browser-saha-entegre0-sp.cjs:27:4
+    at async test (/home/user/Star/tests/browser-saha-entegre0-sp.cjs:11:42)
+    at async /home/user/Star/tests/browser-saha-entegre0-sp.cjs:24:3
+FAIL S2 Fetih HARİTADAN HEDEF SEÇ: 7 sistem gerçek harita dokunuşu → TAMAM → önizlemede talep bedeli
+page.evaluate: TypeError: Cannot read properties of null (reading 'contact')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:61)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /home/user/Star/tests/browser-saha-entegre0-sp.cjs:35:24
+    at test (/home/user/Star/tests/browser-saha-entegre0-sp.cjs:11:48)
+    at /home/user/Star/tests/browser-saha-entegre0-sp.cjs:34:9
+FAIL S3 TÜMÜNÜ KENARA AL (gerçek dokunuş): olay kararları gizlenir, kaynak değişmez, ☰ listesinde
+page.evaluate: TypeError: Cannot read properties of null (reading 'res')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:193)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /home/user/Star/tests/browser-saha-entegre0-sp.cjs:46:25
+    at test (/home/user/Star/tests/browser-saha-entegre0-sp.cjs:11:48)
+    at /home/user/Star/tests/browser-saha-entegre0-sp.cjs:45:9
+GEÇEN: 0 KALAN: 3

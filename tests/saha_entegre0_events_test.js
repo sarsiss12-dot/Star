@@ -46,4 +46,16 @@ test('F1 TÜMÜNÜ KENARA AL: karar verilmez, ödül uygulanmaz, teklif reddedil
       strip:(G.inbox||[]).filter(n=>!n.hidden).length,inList:/SAVAŞ İLANI/.test(list)&&list.includes(evs[0].n)};})()`);
   assert.equal(r.card,true,'şeritte TÜMÜNÜ KENARA AL kartı');assert.equal(r.res,true,'kaynak / ödül değişmedi');assert.equal(r.keep,true,'kayıt silinmedi');assert.equal(r.hidden,true,'kartlar gizlendi');
   assert.equal(r.strip,0,'şerit boş');assert.ok(r.pend2>=r.pend,'bekleyen teklif sayısı düşmedi');assert.equal(r.inList,true,'☰ listesinde olay ve savaş bildirimi');});
+test('E6 MP lobi: BİLİM ANOMALİLERİ host configure ile kabul / ret; "normal" yazılmaz; Kapalı oyunda normal anomali yok; 500 sistemde Seyrek ≈ %10, Normal ≈ %42',()=>{
+  const fs=require('fs');const h=runtime({root:ROOT});let n=0;h.sb.rand=k=>crypto.createHash('sha256').update(String(n++)).digest('hex').slice(0,k*2);
+  h.run(fs.readFileSync(path.join(ROOT,'research/mp0/mp-core.js'),'utf8'));
+  h.run(`var MP=StarsMP.createHost({roomId:'an',random:rand,send(){},kick(){},lobby:{generate(s){setupGame({...CFG,...s});G.autoSave=false;return {ok:true}}}});`);
+  assert.equal(J(h,`MP.configure({size:'orta',aiCount:5,seed:23,anomalies:'kapali'})`).ok,true);assert.equal(h.run('G.cfg.anomalies'),'kapali');
+  assert.equal(h.run(`G.sys.filter(s=>s.anom&&!G.emps.some(e=>e.home===s.id&&e.origin==='kalinti')).length`),0,'Kapalı: normal anomali yok');
+  assert.notEqual(J(h,`MP.configure({size:'orta',aiCount:5,seed:23,anomalies:'normal'})`).ok,true,'Normal varsayılandır, yazılmaz');
+  assert.notEqual(J(h,`MP.configure({size:'orta',aiCount:5,seed:23,anomalies:'x'})`).ok,true,'geçersiz değer reddedilir');
+  assert.equal(J(h,`MP.configure({size:'orta',aiCount:5,seed:23})`).ok,true);assert.equal(h.run('G.cfg.anomalies===undefined'),true);
+  const rate=k=>{const g=game({size:'s500',aiCount:16,seed:404,...(k?{anomalies:k}:{})});return J(g,`G.sys.filter(s=>s.anom&&!G.emps.some(e=>e.home===s.id&&e.origin==='kalinti')).length/G.sys.length`);};
+  const r={seyrek:rate('seyrek'),normal:rate(null),yogun:rate('yogun')};if(process.env.V)console.log(JSON.stringify(r));
+  assert.ok(r.seyrek>.06&&r.seyrek<.14,'Seyrek '+r.seyrek);assert.ok(r.normal>.37&&r.normal<.47,'Normal '+r.normal);assert.ok(r.yogun>.55&&r.yogun<.65,'Yoğun '+r.yogun);});
 console.log(`GEÇEN: ${pass} KALAN: ${fail}`);process.exitCode=fail?1:0;

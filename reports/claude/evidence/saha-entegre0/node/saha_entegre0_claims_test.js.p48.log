@@ -1,0 +1,9 @@
+✓ B1 aday listesi 12 ile sınırlı değil (20+ bilinen sistem)
+✓ B2 altıdan fazla hedef: geçerli, bedel artan Etki, ilanda bir kez düşülür
+✓ B3 ilk 5 hedef bedelsiz (eski kural); Etki yetmezse önizleme engeller ve ilan olmaz
+✓ B4 başkent hedeflenebilir (+60 Etki); tek sistemli devlet hedefsiz kalmaz
+✓ B5 İsyanı Bastır: koptuğu devlete karşı başkent dahil bedelsiz
+✓ B6 AI seçimi eskisiyle aynı: en çok 3 başkent dışı hedef, bedel 0
+✓ B7 arayüz: liste 40 satırla sayfalı, arama süzer; HARİTADAN HEDEF SEÇ dokunuşu seçimi değiştirir, İPTAL geri alır, TAMAM korur
+✓ B8 harita dokunuşu (View.tap) seçim kipinde sistem panelini açmaz, seçimi değiştirir
+GEÇEN: 8 KALAN: 0

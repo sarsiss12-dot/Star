@@ -1,0 +1,10 @@
+✓ E1 Normal (varsayılan) = eski %42: aynı tohumda Save8 ve RNG ayar yokken ve "normal" seçilince aynı; anomalies kayda yazılmaz
+✓ E2 Kapalı: hiçbir sistemde normal anomali yok, galaksi (yıldız/gezegen/hat) ve RNG sırası aynı
+✓ E3 oranlar: Seyrek < Az < Normal < Yoğun (aynı zarlarla), oran tablosu 0/10/20/42/60
+✓ E4 Kapalı: bilim gemisi taraması karar penceresi açmaz, ödül vermez; keşif sürer
+✓ E5 kurulum ekranında BİLİM ANOMALİLERİ ve özet satırı; Rastgele Hikâye Olayları ayrı
+✓ C1 Savaş Merkezi: kendi savaşında yorgunluk yüzdesi + çubuk; %85+ uyarı; rakip yorgunluğu istihbaratsız BİLİNMİYOR, istihbaratla değer
+✓ F1 TÜMÜNÜ KENARA AL: karar verilmez, ödül uygulanmaz, teklif reddedilmez, savaş bildirimi silinmez; ☰ / Gelen kutusundan yeniden açılır
+{"seyrek":0.102,"normal":0.412,"yogun":0.586}
+✓ E6 MP lobi: BİLİM ANOMALİLERİ host configure ile kabul / ret; "normal" yazılmaz; Kapalı oyunda normal anomali yok; 500 sistemde Seyrek ≈ %10, Normal ≈ %42
+GEÇEN: 8 KALAN: 0

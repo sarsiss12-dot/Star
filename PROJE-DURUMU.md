@@ -1,6 +1,11 @@
 # STARS — Güncel proje durumu
 
-Son güncelleme: 2026-11-11. Depo `sarsiss12-dot/Star`.
+Son güncelleme: 2026-11-22. Depo `sarsiss12-dot/Star`.
+
+## Güncel geliştirme adayı — p48 (SAHA-ENTEGRE.0)
+
+`claude/stars-saha-entegre0` (taban `codex/stars-mp-rakip-doktrinler0` @ `8984b51`, p47 + doğrulanmış PR #64). Oyun 96h10p48 / PWA stars-v96h10p48 / MP.8.9b47; Save8 v8, paket 4, protokol 1. ZIP `releases/stars-faz96h10p48.zip` (SHA-256 `fd1d8a3896c700bd4b97d7f36e679ff5a76f541e46099e0418987437939858e3`). [Sonuç raporu](reports/claude/SAHA-ENTEGRE0-SONUC.md) · [Devir](reports/claude/SAHA-ENTEGRE0-DEVIR.md).
+Fetih anında filo kaybı (Issue #66), fetih talebi + haritadan seçim, Savaş Merkezi yorgunluğu, BİLİM ANOMALİLERİ ayarı, TÜMÜNÜ KENARA AL, misafir büyük armalar / seçimsiz lojistik (Issue #65), Savaşa Yardım Teklif Et (Issue #67). Node hedefli + regresyon, Save8/RNG eşdeğerliği, SP ve MP Chromium PASS; fiziksel Android / Render NOT RUN; kullanıcı kabulü yok. p23 ile p47 arasındaki ara sürümler için CLAUDE.md ve `CODEX-SON-RAPOR.md` bağlantıları esastır.
 
 ## Güncel geliştirme adayı — p23
 

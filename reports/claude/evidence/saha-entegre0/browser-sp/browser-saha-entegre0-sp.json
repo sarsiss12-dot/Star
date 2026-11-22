@@ -1,0 +1,20 @@
+{
+ "root": "/home/user/Star",
+ "results": [
+  {
+   "name": "S1 kurulum: BİLİM ANOMALİLERİ → Kapalı (gerçek dokunuş); oyunda normal anomali yok",
+   "status": "PASS",
+   "anom": 0,
+   "cfg": "kapali"
+  },
+  {
+   "name": "S2 Fetih HARİTADAN HEDEF SEÇ: 7 sistem gerçek harita dokunuşu → TAMAM → önizlemede talep bedeli",
+   "status": "PASS",
+   "picked": 7
+  },
+  {
+   "name": "S3 TÜMÜNÜ KENARA AL (gerçek dokunuş): olay kararları gizlenir, kaynak değişmez, ☰ listesinde",
+   "status": "PASS"
+  }
+ ]
+}

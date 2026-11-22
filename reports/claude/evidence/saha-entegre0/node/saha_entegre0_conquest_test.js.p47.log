@@ -1,0 +1,12 @@
+✗ A1 yalnız Taarruz Ordusu (AI saldırgan) — A1: fetih anında filo 0 silindi ({"n":3,"cls":"ord,ord,ord","h":3,"p":254,"g":265,"w":0})
+✓ A2 yalnız savaş gemileri (bombardımanla düşüş, 6. kuşatma ayı)
+✗ A3 Taarruz Ordusu + korvet (karma, saha 15K varyantı) — A3: fetih anında filo 0 silindi ({"n":4,"cls":"ord,ord,kor,kor","h":4,"p":483,"g":177,"w":2})
+✗ A4 Taarruz Ordusu + farklı savaş gemileri — A4: fetih anında filo 0 silindi ({"n":6,"cls":"ord,ord,kor,muh,kru,zir","h":6,"p":3141,"g":177,"w":4})
+✗ A5 aynı sistemde iki ayrı oyuncu filosu (ordu + savaş) — A5: fetih anında filo 0 silindi ({"n":2,"cls":"ord,ord","h":2,"p":169,"g":177,"w":0})
+✗ A6 aynı sistemde müttefik filo — A6: fetih anında filo 0 silindi ({"n":2,"cls":"ord,kor","h":2,"p":241,"g":88,"w":1})
+✗ A7 host insan saldırgan (devlet 0 → devlet 1 gezegeni) — A7: fetih anında filo 0 silindi ({"n":4,"cls":"ord,ord,kor,muh","h":4,"p":479,"g":107,"w":2})
+✗ A8 MP misafir saldırgan (ai=false, devlet 0 değil) — A8: fetih anında filo 0 silindi ({"n":4,"cls":"ord,ord,kor,kru","h":4,"p":1094,"g":177,"w":2})
+✗ A9 fetih anında başka bir savaş sürüyor — A9: fetih anında filo 0 silindi ({"n":3,"cls":"ord,kor,muh","h":3,"p":591,"g":88,"w":2})
+✗ A10 gerçek kara savaşı zayiatı korunur: savaş gemisine dokunulmaz, yalnız ordu erir — filo var
+✗ A11 fetih sonrası garnizon: sıfır değil, aynı ordu iki kez sayılmaz; iki ay sonra taban + yörüngedeki ordu desteği — A11: fetih anında filo 0 silindi ({"n":6,"cls":"ord,ord,ord,ord,ord,ord","h":6,"p":508,"g":530,"w":0})
+GEÇEN: 1 KALAN: 10
