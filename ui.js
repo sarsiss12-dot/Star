@@ -1328,6 +1328,7 @@ const UI = {
         if(Object.hasOwn(FED_BALLOTS,x)&&x!=='weighted')this.fedBallotChoice=x;
         this.openFed();break;
       }
+      case 'noteStashAll': this.noteStashAll(); break;   /* SAHA-ENTEGRE.0 */
       case 'noteOptions':{const n=G.inbox.find(n=>n.uid===+x);if(!this.noteChoiceData(n))break;if(this._noteOptionsWorld!==G.emps){this._noteOptionsWorld=G.emps;this._noteOptions=new Set();}if(this._noteOptions.has(+x))this._noteOptions.delete(+x);else this._noteOptions.add(+x);this.drawInbox();break;}
       case 'noteChoice':{const [uid,index]=String(x).split(':').map(Number),n=G.inbox.find(n=>n.uid===uid);const r=this.applyEventChoice(n,index);if(!r.ok)say(r.why,'war');break;}
       case 'fedFoundType':this.fedFoundType=x;this.openFed();break;
@@ -7730,7 +7731,8 @@ const UI = {
     const info=this.instInfo();   // BETA-EVENT-UX.0: federasyon / Konsey bilgi kartları (Save8 ve G.inbox dışında)
     if (!list.length&&!info.length){this.surfaceReplace(box,'','inbox');box._inboxMarkup96d=null;box.classList.add('hidden');return; }
     box.classList.remove('hidden');
-    const markup = list.map(it =>{const brief=this.diplomaticBrief(it);return `<button class="nCard ${it.cls||''}" data-a="openNote" data-x="${it.uid}">
+    const stash=list.length+info.length>=2?`<button class="nCard nStash" data-a="noteStashAll" aria-label="Bütün bildirimleri kenara al"><span class="nIco">⤓</span><span class="nTxt"><b>TÜMÜNÜ KENARA AL · ${list.length+info.length}</b><i>Karar verilmez, hiçbir şey silinmez · ☰ / Gelen kutusundan aç</i></span></button>`:'';   /* SAHA-ENTEGRE.0 */
+    const markup = stash+list.map(it =>{const brief=this.diplomaticBrief(it);return `<button class="nCard ${it.cls||''}" data-a="openNote" data-x="${it.uid}">
          <span class="nIco">${it.ico||'✉'}</span>
          <span class="nTxt"><b>${esc(brief?.title||it.title)}</b><i>${esc(brief?.sub||it.sub||'')}</i></span>
          <span class="nGo">›</span>
@@ -7918,6 +7920,22 @@ const UI = {
     const out=DiplomaticInbox.resolve(r.id,c==='y','haracguzar',G.emps);
     say(out.ok?(out.pending?'Karar gönderildi — yanıt bekleniyor':'Diplomatik karar kaydedildi'):(out.why||'Karar verilemedi'),out.ok?'win':'war');
     this.noteResume();this.drawInbox();this.topbar();
+  },
+  /* SAHA-ENTEGRE.0 — TÜMÜNÜ KENARA AL: şeritteki bütün kartlar kenara alınır. Hiçbir karar verilmez / onaylanmaz / reddedilmez, ödül
+     uygulanmaz, hiçbir kayıt silinmez: diplomatik kayıt Gelen kutusuna alınır (DiplomaticInbox.capture — teklif bekler), öteki kartlar
+     (olay / anomali kararı, savaş bildirimi dahil) gizlenir ve ☰ listesinden aynı pencereyle açılır. Açık olay penceresi küçültülür.
+     Duraklatan kart kalmayınca önceki hız (noteResume; MP'de host akıllı duraklatma aynı yoldan). */
+  noteStashAll(){
+    const list=G.inbox||[];let hid=0,cap=0;
+    if(this._openNote&&!$('modal').classList.contains('hidden')){try{this.act('minModal');}catch(_){}}
+    for(const it of list.slice()){if(it.hidden)continue;
+      const dip=typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(it.kind);
+      if(dip&&(DiplomaticInbox.capture(it)||this.noteRecord(it))){const i=list.indexOf(it);if(i>=0)list.splice(i,1);cap++;continue;}
+      it.hidden=true;hid++;if(G.minNote===it.uid){G.minNote=null;}
+    }
+    for(const r of this.instInfo())if(/^i\d+$/.test(String(r.id))&&!r.decision){this.instInfoDismiss(r.id);hid++;}
+    say('Kenara alındı — '+(hid?hid+' kart ☰ listesinde':'')+(hid&&cap?' · ':'')+(cap?cap+' teklif Gelen kutusunda':'')+' (karar verilmedi)','sci');
+    this.noteResume();this.drawInbox();this.topbar();return {hid,cap};
   },
   noteSwipe(uid){
     if(/^i\d+$/.test(String(uid)))return this.instInfoDismiss(uid);
@@ -9445,8 +9463,8 @@ function renderSetup(){
              'togPirate', c.pirates !== false);
     h += tog('🌀 Yıldız Kapıları', 'Hazır ağ vermez. Açıkken devletler kapı inşa edebilir; izinli kapılar hızlı ulaşım ve ikmal sağlar. Kapalıyken yeni inşa ve kullanım yok',
              'togGate', c.gates !== false);
-    h += tog('🎲 Rastgele Olaylar',
-      'Maden kazası, salgın, tesadüfi hikâye zincirleri ve galaktik çalkantılar; diplomasi, casusluk, savaş ve keşif devam eder',
+    h += tog('🎲 Rastgele Hikâye Olayları',
+      'Maden kazası, salgın, tesadüfi hikâye zincirleri ve galaktik çalkantılar; diplomasi, casusluk, savaş ve keşif devam eder. Bilim anomalileri ayrı ayardır (aşağıda)',
       'togRandomEvents', c.randomEvents !== false);
     h+='</div><div class="mini">AI özel köken ihtimali · '+(c.aiOrigins===false?'Kapalı':aiOriginChance(c)+'%')+'</div><div class="grid g2">';
     for(const [chance,label]of [[20,'Düşük'],[35,'Normal'],[60,'Yüksek'],[100,'Her devlet']])h+=`<button class="opt ${aiOriginChance(c)===chance?'on':''}" data-a="aiOriginChance" data-x="${chance}" ${c.aiOrigins===false?'disabled':''}>${label} · %${chance}</button>`;
@@ -9479,6 +9497,7 @@ function renderSetup(){
     h += `</div><div class="mini">Normal yaşanabilir gezegen adaylarının sayısını değiştirir${pm<1?` (${String(pm).replace('.',',')}× ≈ normal adayların %${Math.round(pm*100)}'i kalır, kalanlar ölü dünyaya döner)`:''}. Sistem konumları, hiperhatlar, başkentler ve toplam gezegen sayısı aynı tohumda değişmez${pm>1?' (yalnız fazladan aday gerekirse boş sistemlere eklenir)':''}; başkent dünyaları, Gaia / Makine Dünyası gibi nadir dünyalar, özel yataklar ve tür kuralları korunur.</div></div>`;
 
     h += tensionSetupHtml(c);   // BETA-WAR-GOALS.0
+    h += anomalySetupHtml(c);   // SAHA-ENTEGRE.0
     if(!window.MP7Setup?.active||window.MP7Setup.role==='host')h+=rivalSetupHtml(c);
 
     h += `<div class="sect"><h2>ZORLUK</h2><div class="grid g4">`;
@@ -9543,7 +9562,8 @@ function renderSetup(){
   h += `<div class="sumRow"><span>Konsey</span><b>${COUNCIL_PACE[c.council]?COUNCIL_PACE[c.council].n:'NORMAL'}</b></div>`;
   h += `<div class="sumRow"><span>AI devlet sayısı</span><b>${aiCountFor(c)} AI · ${setupHumanSlots()} insan ile ${aiCountFor(c)+setupHumanSlots()} normal devlet</b></div>`;
   h += `<div class="sumRow"><span>AI kökenleri</span><b>${c.aiOrigins===false?'KAPALI':'AÇIK · %'+aiOriginChance(c)}</b></div>`;
-  h += `<div class="sumRow"><span>Rastgele olaylar</span><b>${c.randomEvents===false?'KAPALI':'AÇIK'}</b></div>`;
+  h += `<div class="sumRow"><span>Rastgele hikâye olayları</span><b>${c.randomEvents===false?'KAPALI':'AÇIK'}</b></div>`;
+  h += `<div class="sumRow"><span>Bilim anomalileri</span><b>${ANOMALY_LEVELS[anomalyLevel(c)].n} · %${Math.round(anomalyRate(c)*100)}</b></div>`;   // SAHA-ENTEGRE.0
   h += `</div>`;
 
   /* BETA-GALAXY.0: rota hatası ve YENİDEN ÜRET düğmesi gezinme satırının ALTINDA — başlat düğmesinin yeri değişmez
@@ -9752,6 +9772,7 @@ function setupClickHandler(e){
   else if(a==='sizeStep'){const steps=availableGalaxySteps(),i=steps.indexOf(SIZES[CFG.size]?.sys),n=steps[i+Number(x)];if(n){CFG.aiCount=aiCountFor(CFG);CFG.size=setupSizeKey(n);}safeRenderSetup();}
   else if (a === 'size'){ if(!SIZES[x]||SIZES[x].available===false)return;CFG.aiCount=aiCountFor(CFG);CFG.size = x; safeRenderSetup(); }
   else if (a === 'shape'){ if(!SHAPES[x])return; CFG.shape = x; safeRenderSetup(); }
+  else if (a === 'anomRate'){ if(!Object.hasOwn(ANOMALY_LEVELS,x))return; if(x==='normal')delete CFG.anomalies; else CFG.anomalies=x; safeRenderSetup(); }   // SAHA-ENTEGRE.0
   else if (a === 'tension'){ if(!Object.hasOwn(TENSION_LEVELS,x))return; if(x==='dengeli')delete CFG.tension; else CFG.tension=x; safeRenderSetup(); }   // BETA-WAR-GOALS.0
   else if (a === 'planetMul'){ const m=Number(x); if(!PLANET_MULS.includes(m))return; if(m===1)delete CFG.planetMul; else CFG.planetMul=m; safeRenderSetup(); }
   else if (a === 'regenGalaxy'){ CFG.seed = (Math.random()*1e9)|0; UI.setupError=''; UI.setupRegen=false; safeRenderSetup(); }
@@ -10425,6 +10446,12 @@ UI.fedWarAct=function(a,x){
   if(a==='fwPropose'){const r=proposeFedMotion(G.p,'fedWar',this._fwOpts||{});if(!r||r.ok===false)say(r?.why||'Önerge sunulamadı','war');this._fwSel=null;this.closeModal();this.openFed();return;}
   this.fedWarPick();
 };
+/* SAHA-ENTEGRE.0 — BİLİM ANOMALİLERİ: bilim gemilerinin karar penceresi açan anomali bulma sıklığı (Rastgele Hikâye Olayları'ndan bağımsız). */
+function anomalySetupHtml(c){
+  const k=anomalyLevel(c);let h='<h2 style="margin-top:12px">BİLİM ANOMALİLERİ</h2><div class="grid g3" id="anomRow">';
+  for(const [x,v] of Object.entries(ANOMALY_LEVELS))h+=`<button class="opt ${k===x?'on':''}" data-a="anomRate" data-x="${x}" aria-pressed="${k===x}">${v.n}<small>%${Math.round(v.p*100)}${x==='normal'?' · varsayılan':''}</small></button>`;
+  return h+'</div><p class="mini">Taranan sistemlerde karar isteyen anomali bulunma olasılığı. Kapalıyken bilim gemileri keşfe devam eder; anomali penceresi ve ödülü olmaz. Rastgele Hikâye Olayları ayrı ayardır.</p>';
+}
 function tensionSetupHtml(c){
   const t=tensionOf(c);let h='<h2 style="margin-top:12px">GALAKTİK GERİLİM</h2><div class="grid g3" id="tensionRow">';
   for(const k of Object.keys(TENSION_LEVELS))h+=`<button class="opt ${t===k?'on':''}" data-a="tension" data-x="${k}" aria-pressed="${t===k}">${TENSION_LEVELS[k].n}<small>${k==='dengeli'?'Varsayılan':k==='sakin'?'Daha az entrika':'Daha çok fırsat'}</small></button>`;

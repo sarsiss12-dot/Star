@@ -10625,7 +10625,9 @@ function warFrontKnown(e,f){
 function warCenterIndex(e){
  if(!e||G.emps[e.id]!==e)return [];
  const known=id=>id===e.id||!!e.contact[id];
- return (G.warLedger?.fronts||[]).filter(f=>warFrontKnown(e,f)).map(f=>({id:f.id,campaign:f.campaign,sides:f.sides.slice(),roles:f.roles.slice(),opened:f.legacy?null:f.opened,ended:f.ended,entryKind:f.entryKind,sponsor:Number.isInteger(f.sponsor)&&known(f.sponsor)?f.sponsor:null,mine:f.sides.includes(e.id)}));
+ return (G.warLedger?.fronts||[]).filter(f=>warFrontKnown(e,f)).map(f=>({id:f.id,campaign:f.campaign,sides:f.sides.slice(),roles:f.roles.slice(),opened:f.legacy?null:f.opened,ended:f.ended,entryKind:f.entryKind,sponsor:Number.isInteger(f.sponsor)&&known(f.sponsor)?f.sponsor:null,mine:f.sides.includes(e.id),
+  /* SAHA-ENTEGRE.0: kendi açık cephende savaş yorgunluğu (düşman başına tek değer; rakibinki yalnız SIZILMIŞ istihbaratla — warExhaustionForecast) */
+  ...(f.ended===null&&f.sides.includes(e.id)&&typeof warExhaustionForecast==='function'?{exh:warExhaustionForecast(e,G.emps[f.sides.find(id=>id!==e.id)])}:{})}));
 }
 function warSupportGate(joiner,sponsor,it){
  const no=why=>({ok:false,why}),f=(G.warLedger?.fronts||[]).find(x=>x.id===it?.front);

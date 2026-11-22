@@ -44,7 +44,7 @@ function worldAI(cfg){
 }
 function publicGalaxy(settings){
   const result={size:settings.size,aiCount:settings.aiCount};
-  for(const key of ['shape','planetMul','tension'])if(settings[key]!==undefined)result[key]=settings[key];
+  for(const key of ['shape','planetMul','tension','anomalies'])if(settings[key]!==undefined)result[key]=settings[key];   /* SAHA-ENTEGRE.0: anomalies (yalnız normal dışıyken) */
   return {...result,...copyRivals(settings)};
 }
 function galaxyFromWorld(cfg){
@@ -53,6 +53,7 @@ function galaxyFromWorld(cfg){
   const settings=publicGalaxy({...cfg,aiCount:ai});
   if(settings.planetMul===1)delete settings.planetMul;
   if(settings.tension==='dengeli')delete settings.tension;
+  if(settings.anomalies==='normal')delete settings.anomalies;
   return settings;
 }
 function rivalLabel(settings){
@@ -172,7 +173,7 @@ function validatePackage(input,o={}){
   const ss=pkg.session;
   if(!plain(ss)||!onlyKeys(ss,['roomId','worldRevision','hostEmpireId','speed','capacity','settings','players','notes']))return fail('session');
   if(!int(ss.worldRevision,0,2147483647)||!int(ss.hostEmpireId,0,63)||!int(ss.speed,0,16)||!int(ss.capacity,2,8)||typeof ss.roomId!=='string'||ss.roomId.length>40)return fail('session');
-  if(ss.settings!==null&&(!plain(ss.settings)||!onlyKeys(ss.settings,['size','aiCount','shape','aiGuard','planetMul','tension','aiRivals'])||ss.settings.tension!==undefined&&!['sakin','calkantili'].includes(ss.settings.tension)||typeof ss.settings.size!=='string'||!int(ss.settings.aiCount,1,48)||(ss.settings.planetMul!==undefined&&!(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(ss.settings.planetMul)&&ss.settings.planetMul!==1))||ss.settings.aiGuard!==undefined&&ss.settings.aiGuard!==true))return fail('session');   // MP-P0-DESYNC2: aiGuard yalnız açıkken yazılır
+  if(ss.settings!==null&&(!plain(ss.settings)||!onlyKeys(ss.settings,['size','aiCount','shape','aiGuard','planetMul','tension','aiRivals','anomalies'])||ss.settings.tension!==undefined&&!['sakin','calkantili'].includes(ss.settings.tension)||ss.settings.anomalies!==undefined&&!['kapali','seyrek','az','yogun'].includes(ss.settings.anomalies)||typeof ss.settings.size!=='string'||!int(ss.settings.aiCount,1,48)||(ss.settings.planetMul!==undefined&&!(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(ss.settings.planetMul)&&ss.settings.planetMul!==1))||ss.settings.aiGuard!==undefined&&ss.settings.aiGuard!==true))return fail('session');   // MP-P0-DESYNC2: aiGuard yalnız açıkken yazılır
   const worldRange=d.cfg?.aiRivals, sessionRange=ss.settings?.aiRivals;
   if(worldRange!==undefined&&!validRivals(worldRange,worldAI(d.cfg))||
     sessionRange!==undefined&&!validRivals(sessionRange,ss.settings.aiCount))return fail('rival-range');
@@ -2006,12 +2007,12 @@ else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it)
       if(typeof AI_VIEW_CACHE!=='undefined')AI_VIEW_CACHE.delete(e);}
     return n;}
   /* ---------- MP.1 lobi host API'si (ağdan erişilemez) ---------- */
-  const SETTINGS_KEYS=['size','shape','aiCount','seed','planetMul','tension','aiRivals'];
+  const SETTINGS_KEYS=['size','shape','aiCount','seed','planetMul','tension','aiRivals','anomalies'];
   function configure(set){
     if(!L)return {ok:false,why:'no-lobby'};
     if(!['created','waiting','ready'].includes(L.phase))return {ok:false,why:'phase'};
     if(!plain(set)||!onlyKeys(set,SETTINGS_KEYS)||has(set,'aiRivals')&&!validRivals(set.aiRivals,set.aiCount))return {ok:false,why:'bad-settings'};
-    if(!has(SIZES,set.size)||SIZES[set.size].available===false||(set.shape!==undefined&&!has(SHAPES,set.shape))||(set.planetMul!==undefined&&!(PLANET_MULS.includes(set.planetMul)&&set.planetMul!==1))||(set.tension!==undefined&&!['sakin','calkantili'].includes(set.tension))||!int(set.aiCount,1,48)||!int(set.seed,1,2147483647))return {ok:false,why:'bad-settings'};
+    if(!has(SIZES,set.size)||SIZES[set.size].available===false||(set.shape!==undefined&&!has(SHAPES,set.shape))||(set.planetMul!==undefined&&!(PLANET_MULS.includes(set.planetMul)&&set.planetMul!==1))||(set.tension!==undefined&&!['sakin','calkantili'].includes(set.tension))||(set.anomalies!==undefined&&!['kapali','seyrek','az','yogun'].includes(set.anomalies))||!int(set.aiCount,1,48)||!int(set.seed,1,2147483647))return {ok:false,why:'bad-settings'};
     if(set.aiCount+(L.mode==='design'?L.capacity:1)>SIZES[set.size].sys)return {ok:false,why:'galaxy-too-small'};
     if(L.mode==='design'){
       /* MP.7: galaksi OYUN BAŞLARKEN taslaklarla kurulur; burada yalnız ayar doğrulanır. AI + insan ≤ 49 (ID 0–63 için özel taraf payı korunur). */
