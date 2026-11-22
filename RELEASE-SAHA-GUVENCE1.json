@@ -1,0 +1,119 @@
+{
+  "file": "releases/stars-faz96h10p49.zip",
+  "build": "96h10p49",
+  "mpBuild": "MP.8.9b48",
+  "controlCommit": "347ef0d365ab3ffc65af2b8359de5bf64c34b405",
+  "pwaCache": "stars-v96h10p49",
+  "saveVersion": 8,
+  "mpPackVersion": 4,
+  "protocol": 1,
+  "bytes": 950199,
+  "sha256": "25491d763360688340fc9aaf01e670c15d75f151bcf327366d025a09cdc8946c",
+  "crc32": "6D58F714",
+  "manifestSha256": "b0b400c0e253bc2d4062d9507e03c611171caa60ddc14e47052d81c827ce8efb",
+  "crc32VerifiedEntries": 20,
+  "manifestVerifiedRuntimeFiles": 19,
+  "byteIdenticalRepack": true,
+  "entryHashes": {
+    "RELEASE-MANIFEST.json": {
+      "bytes": 2331,
+      "sha256": "b0b400c0e253bc2d4062d9507e03c611171caa60ddc14e47052d81c827ce8efb",
+      "crc32": "3046226E"
+    },
+    "ai.js": {
+      "bytes": 312981,
+      "sha256": "667cf804ac243d09436ca4db78b87b23fe80a801edfd3a8823276744c55d5d37",
+      "crc32": "2B49BD80"
+    },
+    "archive-ui.js": {
+      "bytes": 46691,
+      "sha256": "8ab65137977f46f747caf17799748d7f0972b2d4558c0921cbf893674701601c",
+      "crc32": "9DC368E5"
+    },
+    "audio.js": {
+      "bytes": 20197,
+      "sha256": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "crc32": "8E4EBBB4"
+    },
+    "combat.js": {
+      "bytes": 17493,
+      "sha256": "08971a0bd1b67f6d3dab1a24a0c3dc9d0bcb045c00c29c01735be9fd083be2d6",
+      "crc32": "208C2F6B"
+    },
+    "commerce-ui.js": {
+      "bytes": 11105,
+      "sha256": "cc7fef5ab43176093251916aaafbdd873424da0630ec46fe6d3d5106a690b8d4",
+      "crc32": "1D6711A6"
+    },
+    "commerce.js": {
+      "bytes": 29743,
+      "sha256": "978e4f6b01faed1babeade20070447cbcfaa4e2ea70793a78e50f20fbe66be01",
+      "crc32": "8C20977C"
+    },
+    "construction.js": {
+      "bytes": 12099,
+      "sha256": "920d6122c3d3e65ef2650c94a9a5a804c3d67b65411627e23184f0e1d5d60e08",
+      "crc32": "4563CF0E"
+    },
+    "diplomacy.js": {
+      "bytes": 669820,
+      "sha256": "4d64d02cc6ede8b4ed6e83c2b8c893f2d80fdfdc89778e8af7dbb4e85daab6d9",
+      "crc32": "ACF686E8"
+    },
+    "economic-ledger.js": {
+      "bytes": 17942,
+      "sha256": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
+      "crc32": "A513EE94"
+    },
+    "economy-ui.js": {
+      "bytes": 36378,
+      "sha256": "68025b1bb388188435a51cca2319e92e7eb9ec6517b4e3c8437f335e2916763f",
+      "crc32": "C8FEC05D"
+    },
+    "economy.js": {
+      "bytes": 232201,
+      "sha256": "ca9b6429fdce59e88559b84a7985cb7a610f846f3db7faca6c809c85fab66c76",
+      "crc32": "1F1FCF20"
+    },
+    "inbox.js": {
+      "bytes": 13623,
+      "sha256": "9d1f0688aac18d1b9db00fad41ef66e30080467783dd69cd52160e5d19ee51b7",
+      "crc32": "6236371E"
+    },
+    "index.html": {
+      "bytes": 105751,
+      "sha256": "f80082cc6e9da5f7674408d17b434c79eb727075756376ed6ecbc7c6fa1de559",
+      "crc32": "522597AB"
+    },
+    "main.js": {
+      "bytes": 544792,
+      "sha256": "6117e929871db4196e49061e507fa0e406c9107068859b21dc02d01d8ae39f51",
+      "crc32": "D832FF77"
+    },
+    "manifest.json": {
+      "bytes": 1922,
+      "sha256": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "crc32": "641AE79B"
+    },
+    "map.js": {
+      "bytes": 157142,
+      "sha256": "0175ec4d809cc9470405f589d18b943fd50f39ede706f393a55274d343255583",
+      "crc32": "4DFB2445"
+    },
+    "news.js": {
+      "bytes": 6039,
+      "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "crc32": "A13FF379"
+    },
+    "sw.js": {
+      "bytes": 3284,
+      "sha256": "4bdf320a5c99be6fb1b42b487a3860fa0aa8d97933b55b4021b5306e6892322a",
+      "crc32": "E85EE11A"
+    },
+    "ui.js": {
+      "bytes": 720935,
+      "sha256": "303ee202e4dadeb6a0b587487a52e0ca9a9485f84406a1508a9d3f5ac50ad0e7",
+      "crc32": "E7E2DCD7"
+    }
+  }
+}
