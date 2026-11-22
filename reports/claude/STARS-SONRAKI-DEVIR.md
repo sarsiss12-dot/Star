@@ -28,7 +28,7 @@ Render'da denenecek dal: `claude/stars-saha-guvence1` (p49 / MP.8.9b48). `claude
 
 ## Son başarılı / başarısız testler
 - PASS: `saha_guvence1_{fleet,war,events,equivalence}` 6/0, 10/0, 4/0, 3/0; Chromium SG 5/0, O 11/0, J 5/0, SE 8/0, X 5/0, I 100 sistem 120. ay 4/0, 180. ay 4/0, SP 844×390 3/0, 800×360 3/0; tam Node 242 paket / 6532 / 279 (p48'e göre kötüleşen yok).
-- FAIL: I 500 sistem 120. ay 8 dk ilk koşu 3/1 (I3); tekrar bkz. SONUC.
+- FAIL: I 500 sistem 120. ay 8 dk ilk koşu 3/1 (I3); tekrarlar 3 dk 4/0, 8 dk 4/0, p48 kontrolü 4/0 (yeniden üretilmedi).
 - NOT RUN: fiziksel Android, gerçek uzak internet, canlı Render, karışık sürüm (p47 istemci) ticaret oturumu.
 
 ## Eski FAIL'ler
