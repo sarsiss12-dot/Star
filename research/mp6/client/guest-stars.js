@@ -105,7 +105,7 @@ const VIEW=new Set(['dealSupport','dealSupportPick','coalPick','coalTerms','coal
   'war','ally','allyInvite','pact','dealPact','endAlliance','unpact','embargo','unembargo','gift',   /* MP-DEAL-SYS.0: allyInvite → UI.mpQuickOffer (offer) */
   'quickTreaty','quickTreatyCond',   /* MP-DIPLO5 NF-4: tek dokunuş Saldırmazlık / Ticaret / Geçiş → UI.mpQuickOffer; Şartlı Teklif… masa */
   /* BETA-WAR-GOALS.0 — hedef/tür seçimi ve müzakere taslağı görünümdür; önizleme host'un warQuote'u, son çağrı 'war' / 'offer' */
-  'setwg','wgTarget','wgVtype','wgVwar','dealVassal','dealPromise','dealFedPeace','fedWarOpen','fwTarget','fwGoal','fwPropose',
+  'setwg','wgTarget','wgVtype','wgVwar','wgMore','wgMap','claimDone','claimCancel','dealVassal','dealPromise','dealFedPeace','fedWarOpen','fwTarget','fwGoal','fwPropose',
   /* MP.6.3 — ortak savaş paylaşımı penceresi (taslak/oy/uygula düğmeleri _hook; son çağrılar MP komutuna iner) */
   'shareOpen',
   /* MP.6.3 — federasyon kararları ve bağımsızlık desteği: motor işlevi MP komutuna iner */

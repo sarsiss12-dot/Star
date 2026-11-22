@@ -19,7 +19,7 @@ test('C1 tek başına: görünüm hazırlık açmaz, kaynak/teklif/savaş yok; �
   const v=cmd(h,{kind:'warCoalition',target:1,...fet(h)});assert.equal(v.ok,true);assert.equal(v.extra.prep,null);assert.equal(v.extra.quote,null);
   assert.equal(v.extra.preview.signature,J(h,`warDeclarationPreview(A,T,'fetih',{targets:TS.slice(0,1)}).signature`),'tek doğrulama');
   assert.deepEqual(J(h,'A.res'),res0);assert.equal(J(h,'(G.warLedger.preparations||[]).length'),0);assert.equal(J(h,'!!A.war[1]'),false);assert.equal(h.run('G.day'),day0);
-  const bad=cmd(h,{kind:'warCoalition',target:1,goal:'fetih',targets:[J(h,'T.home')]});assert.equal(bad.extra.preview.ok,false);assert.match(bad.extra.preview.blockers.join(),/Geçersiz savaş hedefi seçimi/);
+  /* SAHA-ENTEGRE.0: başkent artık geçerli hedef; sonda hedef devletin olmayan sistem */const bad=cmd(h,{kind:'warCoalition',target:1,goal:'fetih',targets:[J(h,'G.sys.find(s=>s.owner!==T.id).id')]});assert.equal(bad.extra.preview.ok,false);assert.match(bad.extra.preview.blockers.join(),/Geçersiz savaş hedefi seçimi/);
   const vas=cmd(h,{kind:'warCoalition',target:1,goal:'boyun',vtype:'akademik',war:'none'});assert.equal(vas.extra.preview.ok,true);assert.equal(vas.extra.preview.goal.vtype,'akademik');
 });
 test('C2 karışık koalisyon: kaynaklı kabul, karşı teklif (kabul), ret, engelli aday; kısmi son onay yalnız geçerli kabullerle; bedel bir kez; bekleyen davet kapanır',()=>{

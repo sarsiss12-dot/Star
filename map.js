@@ -1287,6 +1287,9 @@ const View = {
       return;
     }
 
+    /* SAHA-ENTEGRE.0: haritadan fetih hedefi seçimi — dokunuş yalnız seçimi değiştirir */
+    if (this.claimPick){ if (s && typeof UI.claimPickToggle === 'function') UI.claimPickToggle(s); return; }
+
     /* FAZ 50: Panoptikon yeniden hedefleme */
     if (this.panoptFor !== undefined && s){
       const kay = this.panoptFor;
@@ -2411,6 +2414,12 @@ const View = {
           g.fillStyle = '#ff9b3d';
           g.fillText(RANGE_NAMES[s.cr] || '', p.x, p.y - sr - 27);
         }
+      }
+      if (this.claimPick && this.claimPick.cand.has(s.id)){   /* SAHA-ENTEGRE.0: fetih adayı / seçili hedef */
+        const on = this.claimPick.targets.includes(s.id);
+        g.strokeStyle = on ? '#ff9b3d' : 'rgba(255,155,61,.35)'; g.lineWidth = on ? 2.4 : 1;
+        g.beginPath(); g.arc(p.x,p.y,sr+(on?9:6),0,Math.PI*2); g.stroke();
+        if (on){ g.font = 'bold 11px ui-monospace,monospace'; g.textAlign = 'center'; g.fillStyle = '#ff9b3d'; g.fillText('⚑', p.x+sr+8, p.y-sr-4); }
       }
       if (this.selSys === s){
         g.strokeStyle = '#6ff2c8'; g.lineWidth = 1.6;

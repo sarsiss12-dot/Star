@@ -130,7 +130,7 @@ const ITEM_T=['res','peace','nap','pact','ally','intel','spynet','passage','tech
 const WAR_VTYPE=['haracguzar','bekci','akademik'],WAR_VWAR=['none','defense','all'];
 const warItemOk=it=>it.t==='fedPeace'?onlyKeys(it,['t']):it.t==='vassal'?onlyKeys(it,['t','type','war'])&&WAR_VTYPE.includes(it.type)&&WAR_VWAR.includes(it.war):it.t==='landPromise'?onlyKeys(it,['t','sys','front'])&&int(it.sys,0,4095)&&int(it.front,1,2147483647):true;
 const warGoalOpts=c=>Array.isArray(c.targets)?{targets:c.targets.slice()}:typeof c.vtype==='string'?{vtype:c.vtype,war:c.war}:null;
-const warGoalArgs=c=>(c.targets===undefined||Array.isArray(c.targets)&&c.targets.length>=1&&c.targets.length<=5&&c.targets.every(n=>int(n,0,4095)))&&(c.vtype===undefined||WAR_VTYPE.includes(c.vtype))&&(c.war===undefined||c.vtype!==undefined&&WAR_VWAR.includes(c.war))&&!(c.targets!==undefined&&c.vtype!==undefined);
+const warGoalArgs=c=>(c.targets===undefined||Array.isArray(c.targets)&&c.targets.length>=1&&c.targets.length<=256&&c.targets.every(n=>int(n,0,4095)))&&(c.vtype===undefined||WAR_VTYPE.includes(c.vtype))&&(c.war===undefined||c.vtype!==undefined&&WAR_VWAR.includes(c.war))&&!(c.targets!==undefined&&c.vtype!==undefined);
 const RES_K=['min','ene','yiy','ala','tuk','ara','etk'];
 function pkgItem(it){if(!plain(it)||!ITEM_T.includes(it.t)||Object.keys(it).length>8)return 'items';
   for(const [k,v] of Object.entries(it))if(!['number','string','boolean'].includes(typeof v)||typeof v==='number'&&!Number.isFinite(v)||typeof v==='string'&&v.length>40)return 'items';
@@ -1174,7 +1174,7 @@ function createHost(opts){
     return out;
   }
   /* WAR-COALITION.0 yardımcıları: hedef seçenekleri, şart maddeleri, MP teklifi ↔ hazırlık daveti */
-  function coalOptsOk(c){return (c.targets===undefined||Array.isArray(c.targets)&&c.targets.length<=5&&c.targets.every(id=>int(id,0,100000)))&&(c.vtype===undefined||typeof c.vtype==='string'&&has(VASSAL_TYPES,c.vtype))&&(c.war===undefined||['none','defense','all'].includes(c.war));}
+  function coalOptsOk(c){return (c.targets===undefined||Array.isArray(c.targets)&&c.targets.length<=256&&c.targets.every(id=>int(id,0,100000)))&&(c.vtype===undefined||typeof c.vtype==='string'&&has(VASSAL_TYPES,c.vtype))&&(c.war===undefined||['none','defense','all'].includes(c.war));}
   function coalOptsOf(c){return c.goal==='fetih'&&Array.isArray(c.targets)?{targets:c.targets.slice()}:c.goal==='boyun'&&c.vtype?{vtype:c.vtype,war:c.war}:null;}
   function coalTermsOk(l){return Array.isArray(l)&&l.length<=6&&l.every(i=>plain(i)&&(i.t==='passage'&&onlyKeys(i,['t'])||i.t==='res'&&onlyKeys(i,['t','r','v'])&&DIP_RES.includes(i.r)&&int(i.v,1,10000000)));}
   function coalPlanOf(r){const o=dipOffer(r),j=(o.give||[]).concat(o.want||[]).find(i=>i.t==='warJoin'&&i.plan);return j?warPreparation(j.plan):null;}

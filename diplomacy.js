@@ -2539,7 +2539,7 @@ function fedRestoreAgenda(f){
   const o=r.options;if(!o||typeof o!=='object'||Array.isArray(o))return null;
   const opts={};for(const k of ['target','sponsor','applicant'])if(o[k]!==undefined){if(!Number.isInteger(o[k])||!G.emps[o[k]])return null;opts[k]=o[k];}
   for(const k of ['kind','type','field','value','goal','vtype','war'])if(o[k]!==undefined){if(typeof o[k]!=='string'||o[k].length>32)return null;opts[k]=o[k];}if(o.repeal!==undefined)opts.repeal=!!o.repeal;
-  if(o.targetFed!==undefined){if(!Number.isSafeInteger(o.targetFed)||o.targetFed<0)return null;opts.targetFed=o.targetFed;}if(o.targets!==undefined){if(!Array.isArray(o.targets)||o.targets.length>5||o.targets.some(n=>!Number.isSafeInteger(n)||!G.sys[n]))return null;opts.targets=o.targets.slice();}   // BETA-WAR-GOALS.0
+  if(o.targetFed!==undefined){if(!Number.isSafeInteger(o.targetFed)||o.targetFed<0)return null;opts.targetFed=o.targetFed;}if(o.targets!==undefined){if(!Array.isArray(o.targets)||o.targets.length>WAR_FETIH_LIMIT||o.targets.some(n=>!Number.isSafeInteger(n)||!G.sys[n]))return null;opts.targets=o.targets.slice();}   // BETA-WAR-GOALS.0
   if(r.kind==='law'&&!Object.hasOwn(FED_LAWS,r.law)&&!Object.hasOwn(FED_INNER_LAWS,r.law)||r.kind==='motion'&&!Object.hasOwn(FED_MOTIONS,opts.kind)||r.kind==='application'&&(!Number.isInteger(opts.applicant)||!Number.isInteger(opts.target)||!Number.isInteger(opts.sponsor)||opts.applicant!==r.by||opts.target!==opts.applicant)||r.kind==='war'&&!Number.isInteger(opts.target))return null;
   if(r.defenseFront!==undefined&&(!Number.isSafeInteger(r.defenseFront)||r.defenseFront<1||r.kind!=='motion'||opts.kind!=='joinWar'))return null;
   ids.add(r.id);return {...(r.defenseFront?{defenseFront:r.defenseFront}:{}),id:r.id,by:r.by,kind:r.kind,law:r.kind==='law'?r.law:r.kind==='war'?'warPermit':'motion',options:opts,key:fedAgendaKey(r.kind,r.law,opts),created:r.created,expires:r.expires,status:r.status,...(typeof r.why==='string'?{why:r.why.slice(0,240)}:{}),...(Number.isFinite(r.updated)?{updated:r.updated}:{}),...(typeof r.vote==='string'?{vote:r.vote.slice(0,40)}:{}),...(Number.isInteger(r.position)&&r.position>0&&r.position<=12?{position:r.position}:{})};};
@@ -4489,8 +4489,10 @@ function setWarGoal(e, foe, key, opts=null){
   if (!G2) return false;
   const custom = opts ? warGoalOptions(e, foe, key, opts) : null;   // BETA-WAR-GOALS.0
   if (opts && !custom) return false;
-  if ((e.res.etk || 0) < G2.etk && !hasPerk(e,'freeWar')) return false;
-  if (!hasPerk(e,'freeWar')) e.res.etk -= G2.etk;
+  const claim = custom && custom.targets ? warFetihClaimCost(e, foe, custom.targets) : 0;   // SAHA-ENTEGRE.0: talep bedeli (AI: 0)
+  const base = hasPerk(e,'freeWar') ? 0 : G2.etk;
+  if ((e.res.etk || 0) < base + claim) return false;
+  if (base + claim) e.res.etk -= base + claim;
   e.wg = e.wg || {};
   const extra = G2.setup ? G2.setup(e, foe) : {};
   e.wg[foe.id] = Object.assign({t:key, start:G.day}, extra, custom || {});
@@ -10846,6 +10848,19 @@ function oathBreakRecord(a,b,kind){
    Yeni savaş/diplomasi motoru yok: hedef kaydı e.wg, vasallık subjugate/vassalTerms,
    şartlar dealQuote/executeDeal, cepheler warLedger. RNG çekilmez. */
 const WAR_GOAL_MAIN=['fetih','boyun'],WAR_FETIH_MAX=5;
+/* SAHA-ENTEGRE.0 — fetih talebi: 5 hedef ve 12 aday sınırı kalktı. İlk WAR_FETIH_MAX (5) hedef eskisi gibi bedelsiz; sonraki her
+   hedef artan Etki bedeli (10 + 5×sıra + 6×koloni) öder; başkent +60 (isyancının eski egemeni için — foe.sundered===e.id — bedelsiz:
+   "İsyanı Bastır"). AI eski kuralla en çok 3 başkent dışı hedef seçtiğinden bedeli 0 kalır (Save8 / RNG aynı). WAR_FETIH_LIMIT ağ /
+   kayıt güvenlik tavanıdır, oyun sınırı değil. */
+const WAR_FETIH_LIMIT=256;
+function warFetihReclaim(e,foe){return !!(e&&foe&&foe.sundered===e.id);}
+function warFetihClaimCost(e,foe,targets){
+ if(!e||!foe||!Array.isArray(targets))return 0;
+ let c=0;targets.forEach((id,i)=>{const s=G.sys[id];if(!s)return;
+  if(i>=WAR_FETIH_MAX)c+=10+5*(i-WAR_FETIH_MAX)+6*s.planets.filter(p=>p.col&&p.owner===foe.id).length;
+  if(id===foe.home&&!warFetihReclaim(e,foe))c+=60;});
+ return Math.round(c);
+}
 const WAR_VASSAL_WAR={haracguzar:'none',bekci:'defense',akademik:'none'};
 /* Önizleme salt okunur: motor yollarının yazdığı "_" önekli önbellekler (Save8'e giren) çağrıdan sonra aynen geri konur (MP.2 pure() ile aynı kural). */
 function warPure(fn){
@@ -10868,12 +10883,17 @@ function warHumanKnownOwners(e){
  if(!e||e.ai||typeof G==='undefined'||e===G.p||!e.mapOwners||typeof e.mapOwners!=='object'||typeof humanMapKnowledge!=='function')return null;
  return warPure(()=>humanMapKnowledge(e,humanVisionContext(e)).owners);   /* salt okuma: görüş önbellekleri geri konur */
 }
-function warFetihCandidates(e,foe){
+function warFetihCandidates(e,foe,opt){
  if(!e||!foe)return [];
+ /* SAHA-ENTEGRE.0: 12 aday kesimi kalktı (sıra aynı: AI'nın ilk 3 seçimi değişmez). opt.capital: insan seçimi başkenti de içerir
+    (tek sistemli / isyancı devlet hedeflenebilir); AI varsayılanı başkentsiz eski liste. */
+ const cap=!!(opt&&opt.capital);
  const mine=G.sys.filter(s=>s.owner===e.id),near=s=>Math.min(9e9,...mine.map(x=>dist(x,s))),known=warHumanKnownOwners(e);
- return G.sys.filter(s=>s.id!==foe.home&&warGoalSees(e,s,foe,known)).map(s=>({id:s.id,name:s.name,col:s.planets.filter(p=>p.col&&p.owner===foe.id).length,d:near(s)}))
-  .sort((a,b)=>a.d-b.d||a.id-b.id).slice(0,12);
+ return G.sys.filter(s=>(cap||s.id!==foe.home)&&warGoalSees(e,s,foe,known)).map(s=>({id:s.id,name:s.name,col:s.planets.filter(p=>p.col&&p.owner===foe.id).length,d:near(s),capital:s.id===foe.home}))
+  .sort((a,b)=>a.d-b.d||a.id-b.id);
 }
+/* SAHA-ENTEGRE.0: insan seçimi için en çok hedef = bilinen bütün sistemler (başkent dahil). */
+function warFetihLimit(e,foe){return Math.min(WAR_FETIH_LIMIT,warFetihCandidates(e,foe,{capital:true}).length);}
 /* MP-FIELD-FIX.0: seçilebilecek en çok hedef. Başkent hedef olamaz ve hedefte kalır; sahibi bilinmese de (misafirin görüşü dışında) sayılır — host / tek oyunculu /
    AI'da başkentin sahibi zaten hedef olduğundan değer aynıdır (sysCount − 1). */
 function warFetihMax(foe){return foe?Math.min(WAR_FETIH_MAX,Math.max(0,sysCount(foe)+(G.sys[foe.home]?.owner===foe.id?0:1)-1)):0;}
@@ -10886,9 +10906,9 @@ function warVassalGoalTerms(type,war){
 function warGoalOptions(e,foe,key,opts){
  if(!opts||typeof opts!=='object'||Array.isArray(opts)||!WAR_GOAL_MAIN.includes(key))return null;
  if(key==='fetih'){
-  const t=opts.targets;if(!Array.isArray(t)||!t.length||t.length>WAR_FETIH_MAX||new Set(t).size!==t.length)return null;
-  const ok=new Set(warFetihCandidates(e,foe).map(x=>x.id));
-  if(t.some(id=>!Number.isSafeInteger(id)||!ok.has(id))||t.length>sysCount(foe)-1)return null;
+  const t=opts.targets;if(!Array.isArray(t)||!t.length||t.length>WAR_FETIH_LIMIT||new Set(t).size!==t.length)return null;
+  const ok=new Set(warFetihCandidates(e,foe,{capital:true}).map(x=>x.id));   /* SAHA-ENTEGRE.0: başkent dahil bilinen her sistem */
+  if(t.some(id=>!Number.isSafeInteger(id)||!ok.has(id)))return null;
   return {v:2,targets:t.slice()};
  }
  const terms=warVassalGoalTerms(opts.vtype,opts.war);
@@ -11013,8 +11033,12 @@ const WAR_STANCE_TEXT={support:'Destekler',neutral:'Tarafsız',condemn:'Kınar',
 function warPreviewExtend(p,actor,target,key,opts){
  if(!p.target||!actor||!target)return p;
  const custom=opts?warGoalOptions(actor,target,key,opts):null;
- if(opts&&!custom)p.blockers.push(key==='fetih'?'Fetih hedefleri geçersiz: başkent dışı, bilinen, en çok '+WAR_FETIH_MAX+' sistem ve hedefe en az bir sistem kalmalı':'Vasallık türü veya hükümleri geçersiz');
- if(custom?.targets)p.goal={key,targets:custom.targets.map(id=>({id,name:G.sys[id]?.name||'?'})),note:'Barışta hedef sistemler sende kalır; hedef dışı işgaller iade edilir. Başkent hedef olamaz; hedef devlet yok edilmez.'};
+ if(opts&&!custom)p.blockers.push(key==='fetih'?'Fetih hedefleri geçersiz: yalnız hedef devletin bildiğin sistemleri seçilebilir':'Vasallık türü veya hükümleri geçersiz');
+ if(custom?.targets){const claim=warFetihClaimCost(actor,target,custom.targets),capital=custom.targets.includes(target.home),reclaim=warFetihReclaim(actor,target);
+  p.goal={key,targets:custom.targets.map(id=>({id,name:G.sys[id]?.name||'?',capital:id===target.home})),claim,free:WAR_FETIH_MAX,capital,reclaim,
+   note:'Barışta hedef sistemler sende kalır; hedef dışı işgaller iade edilir.'+(capital?(reclaim?' İsyanı Bastır: başkent dahil eski toprakların bedelsiz talep edilir; son sistemi düşerse devlet ortadan kalkar.':' Başkent hedefte (+60 Etki); son sistemi düşerse devlet ortadan kalkar.'):'')+
+    (custom.targets.length>WAR_FETIH_MAX?' İlk '+WAR_FETIH_MAX+' hedef bedelsiz, sonrakiler artan Etki bedeli öder.':'')};
+  if(claim>0){p.claimCost=claim;p.cost+=claim;if((actor.res.etk||0)<p.cost&&!p.blockers.some(b=>/^Yetersiz Etki/.test(b)))p.blockers.push('Yetersiz Etki: '+p.cost+' gerekir (talep bedeli '+claim+')');}}
  if(custom?.vtype){const t=custom.terms;p.goal={key,vtype:custom.vtype,name:VASSAL_TYPES[custom.vtype].n,
   terms:{tax:Object.entries(t.tax).filter(([,v])=>v>0).map(([k,v])=>RES[k].n+' %'+Math.round(v*100)).join(', ')||'yok',science:t.science?'%'+Math.round(t.science*100):'yok',defense:t.defense?'Senyör korur':'Koruma yok',war:{none:'Senyörün savaşlarına katılmaz',defense:'Yalnız savunma savaşlarına katılır',all:'Saldırı savaşlarına da katılır (sözleşme maddesi)'}[t.war],autonomy:t.autonomy==='free'?'Serbest dış politika':'Dış politikada senyör onayı'},
   note:'Hedef dolarsa ya da savaş içinde teslim kabul edilirse bu hükümlerle vasallık kurulur.'};}
@@ -11326,7 +11350,7 @@ function warPrepOptsNorm(e,foe,goal,opts){
 function warPrepSig(p){return JSON.stringify([p.goal,p.opts||null]);}
 function warCommitStale(p,c){return (p.opts!==undefined||c.sig!==undefined)&&c.sig!==warPrepSig(p);}
 function warCoalitionFieldsValid(p){
- if(p.opts!==undefined&&(!p.opts||typeof p.opts!=='object'||(p.goal==='fetih'?!(Array.isArray(p.opts.targets)&&p.opts.targets.length>=1&&p.opts.targets.length<=WAR_FETIH_MAX&&p.opts.targets.every(id=>Number.isSafeInteger(id)&&G.sys[id])):p.goal==='boyun'?!warVassalGoalTerms(p.opts.vtype,p.opts.war):true)))return false;
+ if(p.opts!==undefined&&(!p.opts||typeof p.opts!=='object'||(p.goal==='fetih'?!(Array.isArray(p.opts.targets)&&p.opts.targets.length>=1&&p.opts.targets.length<=WAR_FETIH_LIMIT&&p.opts.targets.every(id=>Number.isSafeInteger(id)&&G.sys[id])):p.goal==='boyun'?!warVassalGoalTerms(p.opts.vtype,p.opts.war):true)))return false;
  if(p.commitments.some(c=>c.sig!==undefined&&(typeof c.sig!=='string'||c.sig.length>2000)))return false;
  if(p.invites===undefined)return true;
  return Array.isArray(p.invites)&&p.invites.length<=16&&p.invites.every(v=>v&&G.emps[v.member]&&v.member!==p.owner&&['pending','accepted','countered','rejected','expired','closed'].includes(v.state)&&Number.isFinite(v.at)&&Number.isFinite(v.expires)&&(v.why===undefined||typeof v.why==='string'&&v.why.length<=300)&&(v.counter===undefined||!!encodeOffer(v.counter))&&(v.terms===undefined||!!encodeOffer(v.terms))&&(v.offer===undefined||v.offer===null||Number.isSafeInteger(v.offer)));
@@ -11463,7 +11487,7 @@ function warCoalitionView(e,targetId,goal,opts){
  }));
 }
 /* Ortak komut uygulayıcı: tek oyunculu arayüz, host (MP1Host.local) ve mp-core aynı işlevi çağırır. Biçim {ok,extra|why}. */
-function warCoalOpts(c){return c.goal==='fetih'?(Array.isArray(c.targets)?{targets:c.targets.slice(0,WAR_FETIH_MAX)}:null):c.goal==='boyun'?{vtype:c.vtype,war:c.war}:null;}
+function warCoalOpts(c){return c.goal==='fetih'?(Array.isArray(c.targets)?{targets:c.targets.slice(0,WAR_FETIH_LIMIT)}:null):c.goal==='boyun'?{vtype:c.vtype,war:c.war}:null;}
 function warCoalitionPending(e,target){return (G.warLedger?.preparations||[]).find(x=>x.owner===e.id&&x.target===target&&warPreparationState(x)==='pending')||null;}
 function warCoalitionCommand(e,c,hooks={}){
  const fail=r=>({ok:false,why:r&&r.why||'İşlem reddedildi'}),wrap=r=>r&&r.ok?{ok:true,extra:r}:fail(r);
