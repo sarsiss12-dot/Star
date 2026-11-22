@@ -1,0 +1,13 @@
+PASS seed 11 48 ay · 8 nokta · Faz B–G yeni yolları dünyaya yazmadı (salt okunur çağrılar dahil)
+BİLGİ seed 11 p47 karşılaştırması (Faz A bilinçli davranış farkı): 48 ay boyunca aynı (bu tohumda temiz işgalde K.tf filo silinmesi tetiklenmedi)
+PASS seed 22 48 ay · 8 nokta · Faz B–G yeni yolları dünyaya yazmadı (salt okunur çağrılar dahil)
+BİLGİ seed 22 p47 karşılaştırması (Faz A bilinçli davranış farkı): 48 ay boyunca aynı (bu tohumda temiz işgalde K.tf filo silinmesi tetiklenmedi)
+PASS seed 404 48 ay · 8 nokta · Faz B–G yeni yolları dünyaya yazmadı (salt okunur çağrılar dahil)
+BİLGİ seed 404 p47 karşılaştırması (Faz A bilinçli davranış farkı): 48 ay boyunca aynı (bu tohumda temiz işgalde K.tf filo silinmesi tetiklenmedi)
+GEÇEN: 3 KALAN: 0
+
+real	0m25.073s
+user	0m49.028s
+sys	0m0.739s
+
+[exited with code 0]

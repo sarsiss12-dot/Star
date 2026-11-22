@@ -1190,6 +1190,8 @@ const View = {
      ve hit-test doğrudan parametreyi kullanıyor. */
   tap(screenPos){
     const sp = screenPos;
+    /* SAHA-ENTEGRE.0: haritadan fetih hedefi seçimi — bölge etiketi, çift dokunuş ve filo satırı dallarından ÖNCE; dokunuş yalnız seçimi değiştirir */
+    if (this.claimPick){ const h0 = this.hit(sp); if (h0.s && typeof UI.claimPickToggle === 'function') UI.claimPickToggle(h0.s); return; }
     // 95D: identity hit boxes share the same collision-resolved screen bounds.
     if(!this.route&&this.rallyForSys===undefined&&this.rallyFor===undefined&&this.panoptFor===undefined&&this.aimFleet===undefined){
       const label=(this._territoryLabels||[]).find(b=>b.kind==='region'&&sp.x>=b.x&&sp.x<=b.x+b.w&&sp.y>=b.y&&sp.y<=b.y+b.h);
@@ -2412,6 +2414,12 @@ const View = {
           g.fillText(RANGE_NAMES[s.cr] || '', p.x, p.y - sr - 27);
         }
       }
+      if (this.claimPick && this.claimPick.cand.has(s.id)){   /* SAHA-ENTEGRE.0: fetih adayı / seçili hedef */
+        const on = this.claimPick.targets.includes(s.id);
+        g.strokeStyle = on ? '#ff9b3d' : 'rgba(255,155,61,.35)'; g.lineWidth = on ? 2.4 : 1;
+        g.beginPath(); g.arc(p.x,p.y,sr+(on?9:6),0,Math.PI*2); g.stroke();
+        if (on){ g.font = 'bold 11px ui-monospace,monospace'; g.textAlign = 'center'; g.fillStyle = '#ff9b3d'; g.fillText('⚑', p.x+sr+8, p.y-sr-4); }
+      }
       if (this.selSys === s){
         g.strokeStyle = '#6ff2c8'; g.lineWidth = 1.6;
         const rr = sr+11 + Math.sin(t/260)*1.8;
@@ -2766,6 +2774,23 @@ const View = {
        Hesap günde bir yapılıp f._logiNet'e yazılıyor; her karede
        yalnız çizim var, pathfinding yok.
        ═══════════════════════════════════════════════════════════ */
+    /* SAHA-ENTEGRE.0 — lojistik açık ama filo seçili değil: ikmal menzili filoya göre hesaplandığından çizgi yoktu (yalnız renk değişiyordu).
+       Kendi ikmal limanları (⚓) gösterilir ve filo seçme ipucu yazılır. Önbellek G dışında (View) — Save8'e girmez. */
+    if (LOGI_ON && !this.politik && !(this.sel && this.sel.ships && this.sel.ships.length && this.sel.sys >= 0)){
+      if (this._logiHintAt !== Math.floor(G.day) || this._logiHintWorld !== G.sys){
+        this._logiHintAt = Math.floor(G.day); this._logiHintWorld = G.sys;
+        this._logiHintPorts = typeof isSupplyNode === 'function' ? G.sys.filter(sy => (G.p.id !== 0 || (sy.seen || []).includes(0)) && isSupplyNode(G.p, sy)).map(sy => sy.id) : [];
+      }
+      g.save(); g.strokeStyle = '#6ff2c8'; g.lineWidth = 1.4; g.fillStyle = 'rgba(111,242,200,.18)';
+      for (const id of this._logiHintPorts || []){
+        const sy = G.sys[id]; if (!sy) continue; const p = this.w2s(sy.x, sy.y);
+        if (p.x < -20 || p.y < -20 || p.x > this.vw + 20 || p.y > this.vh + 20) continue;
+        g.beginPath(); g.moveTo(p.x, p.y - 11); g.lineTo(p.x + 11, p.y); g.lineTo(p.x, p.y + 11); g.lineTo(p.x - 11, p.y); g.closePath(); g.fill(); g.stroke();
+      }
+      g.textAlign = 'center'; g.font = 'bold 12px ui-monospace,monospace'; g.fillStyle = 'rgba(207,227,255,.92)';
+      g.fillText('LOJİSTİK · ◆ ikmal limanı · menzil ve hat çizgileri için bir filo seç', this.vw / 2, 58);
+      g.restore();
+    }
     if (LOGI_ON && this.sel && this.sel.ships &&
         this.sel.ships.length && this.sel.sys >= 0 &&
         typeof fleetSupply === 'function' && !this.politik){

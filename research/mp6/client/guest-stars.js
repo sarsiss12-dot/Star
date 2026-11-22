@@ -95,7 +95,8 @@ const VIEW=new Set(['dealSupport','dealSupportPick','coalPick','coalTerms','coal
   'scienceTab','scienceNode','scienceFocus','scienceFilter','scienceMode','scienceQueue','scienceRoute','scienceMove','scienceRemove','scienceZoom',
   'tech','build','sInfo','bInfo','showEv','minModal','restoreModal','openNote','instNote','instDecide','closem','marketPane','mktSel','mute','save','diagShow','opLogMenu',
   /* MP.6.1 — görünüm / taslak */
-  'news','shipmentsNews','newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord',
+  'news','shipmentsNews','noteStashAll','bigEmblemsToggle','dealHelp','dealHelpPick',   /* SAHA-ENTEGRE.0: büyük armalar yerel görünüm (kapı engelliyordu) */
+ 'newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord',
   'inboxEmpire','inboxReturn','inboxFederation','deal','dealAdd','dealRm','dealPledgeDays','dealDiscard','dealBack','peace','vsOpen','vsCancel','vsCounter','fedBallot',
   'fedVoteYes','fedVoteNo','fedVoteNow','fedFoundType','fedFoundSelect','fedFoundEdit','fedFoundEditStop','fedFoundUpdate','fedFoundStart','fedFoundReply','fedFoundCancel','fedFoundFinish',
   /* MP.6.1 — motor işlevi MP komutuna çevrilen gerçek düğmeler */
@@ -105,7 +106,7 @@ const VIEW=new Set(['dealSupport','dealSupportPick','coalPick','coalTerms','coal
   'war','ally','allyInvite','pact','dealPact','endAlliance','unpact','embargo','unembargo','gift',   /* MP-DEAL-SYS.0: allyInvite → UI.mpQuickOffer (offer) */
   'quickTreaty','quickTreatyCond',   /* MP-DIPLO5 NF-4: tek dokunuş Saldırmazlık / Ticaret / Geçiş → UI.mpQuickOffer; Şartlı Teklif… masa */
   /* BETA-WAR-GOALS.0 — hedef/tür seçimi ve müzakere taslağı görünümdür; önizleme host'un warQuote'u, son çağrı 'war' / 'offer' */
-  'setwg','wgTarget','wgVtype','wgVwar','dealVassal','dealPromise','dealFedPeace','fedWarOpen','fwTarget','fwGoal','fwPropose',
+  'setwg','wgTarget','wgVtype','wgVwar','wgMore','wgMap','claimDone','claimCancel','dealVassal','dealPromise','dealFedPeace','fedWarOpen','fwTarget','fwGoal','fwPropose',
   /* MP.6.3 — ortak savaş paylaşımı penceresi (taslak/oy/uygula düğmeleri _hook; son çağrılar MP komutuna iner) */
   'shareOpen',
   /* MP.6.3 — federasyon kararları ve bağımsızlık desteği: motor işlevi MP komutuna iner */
@@ -422,7 +423,11 @@ function gate(){
   {const SR={};UI.dealSupportReady=o=>!!(o&&SR[o.id]&&SR[o.id].at);   /* MP-DEAL-SYS.0: host yanıtı geldi mi (boş liste = uygun satır yok) */
    UI.dealSupportRows=function(o){if(!S.on||!S.started||!o)return [];const k=o.id,c=SR[k];
      if(!c||Date.now()-c.at>2500){if(!c||!c.busy){const cid=send({kind:'warSupportList',to:real(k)});if(cid){SR[k]={...(c||{}),busy:true,at:c?c.at:0};waits[cid]=res=>{SR[k]={at:Date.now(),busy:false,rows:res.status==='ok'?(res.extra.rows||[]).map(r=>({...r,target:local(r.target)})):[]};if(UI.deal&&UI.deal.to===k)try{UI.drawDeal();}catch{}const wc=typeof WarCenterUI!=='undefined'&&WarCenterUI._supCtx;if(wc&&document.getElementById('warSupportRoot'))try{WarCenterUI.support(wc.front,wc.sponsor);}catch{}};}}}
-     return SR[k]&&SR[k].rows?SR[k].rows:null;};}
+     return SR[k]&&SR[k].rows?SR[k].rows:null;};
+   /* SAHA-ENTEGRE.0: Savaşa Yardım Teklif Et seçenekleri host'tan (dir:'offer'), ayrı önbellek */
+   const HR={};UI.dealHelpRows=function(o){if(!S.on||!S.started||!o)return [];const k=o.id,c=HR[k];
+     if(!c||Date.now()-c.at>2500){if(!c||!c.busy){const cid=send({kind:'warSupportList',to:real(k),dir:'offer'});if(cid){HR[k]={...(c||{}),busy:true,at:c?c.at:0};waits[cid]=res=>{HR[k]={at:Date.now(),busy:false,rows:res.status==='ok'?(res.extra.rows||[]).map(r=>({...r,target:local(r.target)})):[]};if(UI.deal&&UI.deal.to===k)try{UI.drawDeal();}catch{}};}}}
+     return HR[k]&&HR[k].rows?HR[k].rows:null;};}
   {const DL={};const ledgerLocal=x=>({next:0,fronts:(x.fronts||[]).map(f=>({...f,sides:f.sides.map(local),sponsor:Number.isInteger(f.sponsor)?local(f.sponsor):f.sponsor,occupation:(f.occupation||[]).map(o=>({...o,from:local(o.from),to:local(o.to)}))})),
      promises:(x.promises||[]).map(p=>({...p,giver:local(p.giver),taker:local(p.taker),...(Number.isInteger(p.enemy)?{enemy:local(p.enemy)}:{})}))});
    const dh=UI.warDealHtml;UI.warDealHtml=function(d,e,o){if(!S.on||!S.started||!o)return dh.apply(this,arguments);const k=o.id,c=DL[k];

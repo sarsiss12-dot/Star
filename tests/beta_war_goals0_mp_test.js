@@ -12,7 +12,7 @@ test('M1 misafir B Fetih hedefleriyle savaş: warQuote host önizlemesi (meşrui
   const h=world();prep(h);const t=J(h,'warFetihDefault(G.emps[1],G.emps[3])');assert.ok(t.length>=1);
   const q=cmd(h,'B',{kind:'warQuote',target:3,goal:'fetih',targets:t});assert.equal(q.status,'ok',JSON.stringify(q));
   assert.ok(q.extra.legit&&Array.isArray(q.extra.stances),'önizleme meşruiyet ve tutum taşır');assert.deepEqual(q.extra.goal.targets.map(x=>x.id),t);
-  const home=h.run('G.emps[3].home');const bad=cmd(h,'B',{kind:'war',target:3,goal:'fetih',targets:[home]});assert.notEqual(bad.status,'ok','başkent hedef olamaz');
+  /* SAHA-ENTEGRE.0: başkent artık hedeflenebilir (+60 Etki) — geçersiz seçim sondası hedef devletin OLMAYAN sistemi */const home=h.run('G.sys.find(s=>s.owner!==3).id');const bad=cmd(h,'B',{kind:'war',target:3,goal:'fetih',targets:[home]});assert.notEqual(bad.status,'ok','hedef devletin olmayan sistem hedef olamaz');
   assert.notEqual(cmd(h,'B',{kind:'war',target:3,goal:'fetih',targets:t,vtype:'bekci'}).status,'ok','iki seçenek birden yok');
   const w=cmd(h,'B',{kind:'war',target:3,goal:'fetih',targets:t});assert.equal(w.status,'ok',JSON.stringify(w));
   assert.deepEqual(J(h,'G.emps[1].wg[3]'),{...J(h,'G.emps[1].wg[3]'),t:'fetih',v:2,targets:t});

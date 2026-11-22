@@ -80,7 +80,9 @@ test('negative control: the escorted 96H.9 invasions are unchanged (same army co
   const run=base=>{const h=load('fixtures/96h9/seed11-month79-escort.save',base);h.run('var falls=[];const rf=recordFall;recordFall=function(t){falls.push(G.day+":"+t);return rf.apply(this,arguments);};step10(120)');return h;};
   const old=withLegacy(dir=>run(dir).run('JSON.stringify(orders10)')),h=run(root);
   assert.equal(h.run('JSON.stringify(orders10)'),old);
-  assert.deepEqual(json(h,'orders10.filter(x=>x.fleet===237)'),[{day:2400,fleet:237,to:5,ok:true}]);
+  /* SAHA-ENTEGRE.0 / PR #64 (Issue #66): sys5 düştüğü gün (2430) ordu filosu 237 artık silinmez; AI sağ kalan orduya yeni hedef verir.
+     Yolda yeniden emir yok (2400 → 5 tek emir, varışa kadar); 96H.9 ↔ 96H.10 emir eşitliği yukarıda aynen denetlenir. */
+  assert.deepEqual(json(h,'orders10.filter(x=>x.fleet===237)'),[{day:2400,fleet:237,to:5,ok:true},{day:2430,fleet:237,to:41,ok:true}]);
   assert(h.run('falls.includes("2430:temiz")&&G.sys[5].planets.filter(p=>p.col).every(p=>p.owner===3)'));
   const g=load('fixtures/96h9/seed11-month66-siege.save');
   g.run('var falls=[];const rf=recordFall;recordFall=function(t){falls.push(G.day+":"+t);return rf.apply(this,arguments);};step10(360)');

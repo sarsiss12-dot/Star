@@ -6,6 +6,7 @@ const steps = [require('./ai-ikame1-reviewed.json'), require('./ai-ikame0-review
 const sha = source => createHash('sha256').update(source).digest('hex');
 
 exports.stripReviewedPerfSinir0 = (file, source) => {
+  source = require('./saha-entegre0-reviewed.cjs').stripReviewedSahaEntegre0(file, source);   // SAHA-ENTEGRE.0 p48 önce
   for (const pins of steps) {
     const pin = pins[file];
     if (!pin || sha(source) !== pin.afterSha256) continue;

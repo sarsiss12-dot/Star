@@ -192,12 +192,19 @@ const WarCenterUI={
    if(front&&data.report){this.status=data.report;this.detail(data.report);}else if(front){$('warCenterRoot').textContent='Bu tarihsel cephe için yetkili bilgi bulunamadı.';}else{this.index=data.index||[];this.preparations=data.preparations||[];if(this.plan)this.planDetail();else this.list();}
   });},
  refresh(){if(this.confirmPlan||$('modal').classList.contains('hidden')||!$('warCenterRoot')||Date.now()-this.last<1400)return;this.load();},
+ /* SAHA-ENTEGRE.0 — savaş yorgunluğu çubuğu: senin değerin kesin; rakibinki yalnız istihbaratla (yoksa BİLİNMİYOR). %85+ uyarı, %100 kuralı. */
+ exhBar(r){const x=r&&r.exh;if(!x)return '';const own=Math.max(0,Math.min(100,x.own|0)),col=own>=85?'#ff5f6d':own>=60?'#e8b86b':'#6ff2c8';
+  const foe=x.foe===null?'BİLİNMİYOR (SIZILMIŞ istihbarat gerekir)':'%'+x.foe+(x.basis&&x.basis!=='istihbarat'?' · '+x.basis:'');
+  return `<div class="warExh" data-own="${own}"><div class="mini">Savaş yorgunluğun <b>%${own}</b>${x.ownMonths!==null?' · bu hızla ≈ '+x.ownMonths+' ay':''} · rakip: ${esc(foe)}</div>`+
+   `<div class="exhBar"><i style="width:${own}%;background:${col}"></i></div>`+
+   (own>=85?`<div class="mini warnTxt">⚠ Yorgunluk %85'i geçti: %100'e ulaşan taraf için savaş zorunlu barışla kendiliğinden kapanır (doktrin barışı yasaklıyorsa ateşkes kilidiyle).</div>`:'')+
+   `<button class="abtn" data-a="warCenterPeace" data-x="${r.sides.find(id=>id!==0)}">BARIŞ GÖRÜŞMESİ</button></div>`;},
  label(id){return id===0?G.p.name:UI.diploKnown(id)?G.emps[id]?.name||'Bilinmeyen devlet':'Bilinmeyen devlet';},
  list(){const rows=this.index.filter(r=>this.tab==='past'?r.ended!==null:r.ended===null&&(this.tab==='mine'?r.mine:!r.mine));
   const tabs=[['mine','Benim Savaşlarım'],['known','Bilinen Savaşlar'],['past','Geçmiş Savaşlar']].map(([k,n])=>`<button class="abtn ${this.tab===k?'pri':''}" data-a="warCenterTab" data-x="${k}">${n}</button>`).join('');
   let h=`<div class="mhd"><span>⚔ SAVAŞ MERKEZİ</span><button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warCenterRoot"><nav class="act2">${tabs}</nav><p class="mini">Yalnız yetkili olduğun savaş kayıtları. Bilinmeyen güç, kayıp ve tarih uydurulmaz.</p>`;
   if(this.tab==='mine'){const unknown=UI.activeWarsList().filter(x=>!this.index.some(f=>f.ended===null&&f.sides.includes(x.id)));for(const x of unknown)h+=`<section class="box"><b>${esc(x.name)}</b><p>Cephe ayrıntısı bilinmiyor · ${x.months??'?'} ay</p></section>`;}
-  h+=rows.map(r=>`<section class="box"><div class="bt">${r.sides.map(id=>esc(this.label(id))).join(' ↔ ')}</div><div class="mini">Sefer #${r.campaign} · Cephe #${r.id} · ${r.opened===null?'Başlangıç bilinmiyor':'Başlangıç günü '+Math.floor(r.opened)} · ${r.ended===null?'AKTİF':'Bitiş günü '+Math.floor(r.ended)}</div><button class="abtn" data-a="warCenterDetail" data-x="${r.id}">SAVAŞ AYRINTISI</button></section>`).join('')||'<p>Bu bölümde bilinen kayıt yok.</p>';
+  h+=rows.map(r=>`<section class="box"><div class="bt">${r.sides.map(id=>esc(this.label(id))).join(' ↔ ')}</div>${this.exhBar(r)}<div class="mini">Sefer #${r.campaign} · Cephe #${r.id} · ${r.opened===null?'Başlangıç bilinmiyor':'Başlangıç günü '+Math.floor(r.opened)} · ${r.ended===null?'AKTİF':'Bitiş günü '+Math.floor(r.ended)}</div><button class="abtn" data-a="warCenterDetail" data-x="${r.id}">SAVAŞ AYRINTISI</button></section>`).join('')||'<p>Bu bölümde bilinen kayıt yok.</p>';
   if(this.tab==='mine')for(const p of this.preparations)h+=`<section class="box"><b>KOALİSYON HAZIRLIĞI #${p.id}</b><p>${esc(this.label(p.owner))} → ${esc(this.label(p.target))} · ${esc(WAR_GOALS[p.goal]?.n||p.goal)} · ${esc(p.state)}</p><button class="abtn" data-a="warPreparation" data-x="${p.id}">KABULLER / SON ONAY</button></section>`;
   h+='</div><div class="mft"><button class="ch" data-a="diplomaticInbox">TEKLİFLER / GELEN KUTUSU</button><button class="ch" data-a="news">HABERLER</button></div>';
   UI.surfaceRender($('modal'),h,'war-center',true);

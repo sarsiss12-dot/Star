@@ -1328,6 +1328,7 @@ const UI = {
         if(Object.hasOwn(FED_BALLOTS,x)&&x!=='weighted')this.fedBallotChoice=x;
         this.openFed();break;
       }
+      case 'noteStashAll': this.noteStashAll(); break;   /* SAHA-ENTEGRE.0 */
       case 'noteOptions':{const n=G.inbox.find(n=>n.uid===+x);if(!this.noteChoiceData(n))break;if(this._noteOptionsWorld!==G.emps){this._noteOptionsWorld=G.emps;this._noteOptions=new Set();}if(this._noteOptions.has(+x))this._noteOptions.delete(+x);else this._noteOptions.add(+x);this.drawInbox();break;}
       case 'noteChoice':{const [uid,index]=String(x).split(':').map(Number),n=G.inbox.find(n=>n.uid===uid);const r=this.applyEventChoice(n,index);if(!r.ok)say(r.why,'war');break;}
       case 'fedFoundType':this.fedFoundType=x;this.openFed();break;
@@ -1518,6 +1519,8 @@ const UI = {
       case 'dealAdd': this.dealAdd(x); break;
       case 'dealSupport': this._dealSupport=this._dealSupport===+x?null:+x;this.drawDeal();break;   // MP-FIELD-FIX.0
       case 'dealSupportPick': this.dealSupportPick(x);break;
+      case 'dealHelp': this._dealHelp=this._dealHelp===+x?null:+x;this.drawDeal();break;   // SAHA-ENTEGRE.0
+      case 'dealHelpPick': this.dealHelpPick(x);break;
       case 'dealRm': this.dealRm(x); break;
       case 'dealPledgeDays': this.dealPledgeDays(x); break;   /* MP-WARON.0 */
       case 'dealPact': this.dealPact(x); break;
@@ -1610,7 +1613,8 @@ const UI = {
       case 'setwg': {
         const [id,key]=String(x).split(':');this.warGoalPick(+id,key);break;   // BETA-WAR-GOALS.0: önce hedef/tür seçimi
       }
-      case 'wgTarget': case 'wgVtype': case 'wgVwar': case 'wgGo': this.warGoalAct(a,x); break;   // BETA-WAR-GOALS.0
+      case 'wgTarget': case 'wgVtype': case 'wgVwar': case 'wgGo': case 'wgMore': case 'wgMap': this.warGoalAct(a,x); break;
+      case 'claimDone': case 'claimCancel': this.claimPickEnd(a==='claimDone'); break;   /* SAHA-ENTEGRE.0 */   // BETA-WAR-GOALS.0
       case 'dealVassal': case 'dealPromise': case 'dealFedPeace': this.warDealAct(a,x); break;   // BETA-WAR-GOALS.0
       case 'fedWarOpen': case 'fwTarget': case 'fwGoal': case 'fwPropose': this.fedWarAct(a,x); break;   // BETA-WAR-GOALS.0
       case 'runop': {
@@ -5752,6 +5756,7 @@ const UI = {
       <button class="abtn" data-a="dealAdd" data-x="give:lux">❖ Lüks mal</button>
       <button class="abtn" data-a="dealAdd" data-x="give:intel">👁 İstihbarat</button>
       <button class="abtn" data-a="dealAdd" data-x="give:warOn">⚔ Savaş sözü</button>
+      <button class="abtn ${this._dealHelp===o.id?'pri':''}" data-a="dealHelp" data-x="${o.id}">🛡 Savaşa Yardım Teklif Et</button>
       <button class="abtn" data-a="dealAdd" data-x="give:peaceWith">🤲 Barıştırma</button>
       <button class="abtn" data-a="dealAdd" data-x="give:passage">🚪 Geçiş izni</button>
     </div></div>`;
@@ -5776,6 +5781,7 @@ const UI = {
     </div></div></div>`;
 
     h += this.dealSupportHtml(d,e,o);   // MP-FIELD-FIX.0: belirli savaşa destek daveti
+    h += this.dealHelpHtml(d,e,o);   // SAHA-ENTEGRE.0: karşı tarafın savaşına katılmayı öner
     h += this.dealTermsHtml(d,e,o);   /* MP-DEAL-SYS.0: Sistem Devri sonucu, Toprak Vaadi farkı, haraç yükü */
     h += this.warDealHtml(d,e,o);   // BETA-WAR-GOALS.0: savaş şartları
     // --- anlaşma türleri ---
@@ -7729,7 +7735,8 @@ const UI = {
     const info=this.instInfo();   // BETA-EVENT-UX.0: federasyon / Konsey bilgi kartları (Save8 ve G.inbox dışında)
     if (!list.length&&!info.length){this.surfaceReplace(box,'','inbox');box._inboxMarkup96d=null;box.classList.add('hidden');return; }
     box.classList.remove('hidden');
-    const markup = list.map(it =>{const brief=this.diplomaticBrief(it);return `<button class="nCard ${it.cls||''}" data-a="openNote" data-x="${it.uid}">
+    const stash=list.length+info.length>=2?`<button class="nCard nStash" data-a="noteStashAll" aria-label="Bütün bildirimleri kenara al"><span class="nIco">⤓</span><span class="nTxt"><b>TÜMÜNÜ KENARA AL · ${list.length+info.length}</b><i>Karar verilmez, hiçbir şey silinmez · ☰ / Gelen kutusundan aç</i></span></button>`:'';   /* SAHA-ENTEGRE.0 */
+    const markup = stash+list.map(it =>{const brief=this.diplomaticBrief(it);return `<button class="nCard ${it.cls||''}" data-a="openNote" data-x="${it.uid}">
          <span class="nIco">${it.ico||'✉'}</span>
          <span class="nTxt"><b>${esc(brief?.title||it.title)}</b><i>${esc(brief?.sub||it.sub||'')}</i></span>
          <span class="nGo">›</span>
@@ -7917,6 +7924,22 @@ const UI = {
     const out=DiplomaticInbox.resolve(r.id,c==='y','haracguzar',G.emps);
     say(out.ok?(out.pending?'Karar gönderildi — yanıt bekleniyor':'Diplomatik karar kaydedildi'):(out.why||'Karar verilemedi'),out.ok?'win':'war');
     this.noteResume();this.drawInbox();this.topbar();
+  },
+  /* SAHA-ENTEGRE.0 — TÜMÜNÜ KENARA AL: şeritteki bütün kartlar kenara alınır. Hiçbir karar verilmez / onaylanmaz / reddedilmez, ödül
+     uygulanmaz, hiçbir kayıt silinmez: diplomatik kayıt Gelen kutusuna alınır (DiplomaticInbox.capture — teklif bekler), öteki kartlar
+     (olay / anomali kararı, savaş bildirimi dahil) gizlenir ve ☰ listesinden aynı pencereyle açılır. Açık olay penceresi küçültülür.
+     Duraklatan kart kalmayınca önceki hız (noteResume; MP'de host akıllı duraklatma aynı yoldan). */
+  noteStashAll(){
+    const list=G.inbox||[];let hid=0,cap=0;
+    if(this._openNote&&!$('modal').classList.contains('hidden')){try{this.act('minModal');}catch(_){}}
+    for(const it of list.slice()){if(it.hidden)continue;
+      const dip=typeof DiplomaticInbox!=='undefined'&&DiplomaticInbox.supported(it.kind);
+      if(dip&&(DiplomaticInbox.capture(it)||this.noteRecord(it))){const i=list.indexOf(it);if(i>=0)list.splice(i,1);cap++;continue;}
+      it.hidden=true;hid++;if(G.minNote===it.uid){G.minNote=null;}
+    }
+    for(const r of this.instInfo())if(/^i\d+$/.test(String(r.id))&&!r.decision){this.instInfoDismiss(r.id);hid++;}
+    say('Kenara alındı — '+(hid?hid+' kart ☰ listesinde':'')+(hid&&cap?' · ':'')+(cap?cap+' teklif Gelen kutusunda':'')+' (karar verilmedi)','sci');
+    this.noteResume();this.drawInbox();this.topbar();return {hid,cap};
   },
   noteSwipe(uid){
     if(/^i\d+$/.test(String(uid)))return this.instInfoDismiss(uid);
@@ -9444,8 +9467,8 @@ function renderSetup(){
              'togPirate', c.pirates !== false);
     h += tog('🌀 Yıldız Kapıları', 'Hazır ağ vermez. Açıkken devletler kapı inşa edebilir; izinli kapılar hızlı ulaşım ve ikmal sağlar. Kapalıyken yeni inşa ve kullanım yok',
              'togGate', c.gates !== false);
-    h += tog('🎲 Rastgele Olaylar',
-      'Maden kazası, salgın, tesadüfi hikâye zincirleri ve galaktik çalkantılar; diplomasi, casusluk, savaş ve keşif devam eder',
+    h += tog('🎲 Rastgele Hikâye Olayları',
+      'Maden kazası, salgın, tesadüfi hikâye zincirleri ve galaktik çalkantılar; diplomasi, casusluk, savaş ve keşif devam eder. Bilim anomalileri ayrı ayardır (aşağıda)',
       'togRandomEvents', c.randomEvents !== false);
     h+='</div><div class="mini">AI özel köken ihtimali · '+(c.aiOrigins===false?'Kapalı':aiOriginChance(c)+'%')+'</div><div class="grid g2">';
     for(const [chance,label]of [[20,'Düşük'],[35,'Normal'],[60,'Yüksek'],[100,'Her devlet']])h+=`<button class="opt ${aiOriginChance(c)===chance?'on':''}" data-a="aiOriginChance" data-x="${chance}" ${c.aiOrigins===false?'disabled':''}>${label} · %${chance}</button>`;
@@ -9478,6 +9501,7 @@ function renderSetup(){
     h += `</div><div class="mini">Normal yaşanabilir gezegen adaylarının sayısını değiştirir${pm<1?` (${String(pm).replace('.',',')}× ≈ normal adayların %${Math.round(pm*100)}'i kalır, kalanlar ölü dünyaya döner)`:''}. Sistem konumları, hiperhatlar, başkentler ve toplam gezegen sayısı aynı tohumda değişmez${pm>1?' (yalnız fazladan aday gerekirse boş sistemlere eklenir)':''}; başkent dünyaları, Gaia / Makine Dünyası gibi nadir dünyalar, özel yataklar ve tür kuralları korunur.</div></div>`;
 
     h += tensionSetupHtml(c);   // BETA-WAR-GOALS.0
+    h += anomalySetupHtml(c);   // SAHA-ENTEGRE.0
     if(!window.MP7Setup?.active||window.MP7Setup.role==='host')h+=rivalSetupHtml(c);
 
     h += `<div class="sect"><h2>ZORLUK</h2><div class="grid g4">`;
@@ -9542,7 +9566,8 @@ function renderSetup(){
   h += `<div class="sumRow"><span>Konsey</span><b>${COUNCIL_PACE[c.council]?COUNCIL_PACE[c.council].n:'NORMAL'}</b></div>`;
   h += `<div class="sumRow"><span>AI devlet sayısı</span><b>${aiCountFor(c)} AI · ${setupHumanSlots()} insan ile ${aiCountFor(c)+setupHumanSlots()} normal devlet</b></div>`;
   h += `<div class="sumRow"><span>AI kökenleri</span><b>${c.aiOrigins===false?'KAPALI':'AÇIK · %'+aiOriginChance(c)}</b></div>`;
-  h += `<div class="sumRow"><span>Rastgele olaylar</span><b>${c.randomEvents===false?'KAPALI':'AÇIK'}</b></div>`;
+  h += `<div class="sumRow"><span>Rastgele hikâye olayları</span><b>${c.randomEvents===false?'KAPALI':'AÇIK'}</b></div>`;
+  h += `<div class="sumRow"><span>Bilim anomalileri</span><b>${ANOMALY_LEVELS[anomalyLevel(c)].n} · %${Math.round(anomalyRate(c)*100)}</b></div>`;   // SAHA-ENTEGRE.0
   h += `</div>`;
 
   /* BETA-GALAXY.0: rota hatası ve YENİDEN ÜRET düğmesi gezinme satırının ALTINDA — başlat düğmesinin yeri değişmez
@@ -9751,6 +9776,7 @@ function setupClickHandler(e){
   else if(a==='sizeStep'){const steps=availableGalaxySteps(),i=steps.indexOf(SIZES[CFG.size]?.sys),n=steps[i+Number(x)];if(n){CFG.aiCount=aiCountFor(CFG);CFG.size=setupSizeKey(n);}safeRenderSetup();}
   else if (a === 'size'){ if(!SIZES[x]||SIZES[x].available===false)return;CFG.aiCount=aiCountFor(CFG);CFG.size = x; safeRenderSetup(); }
   else if (a === 'shape'){ if(!SHAPES[x])return; CFG.shape = x; safeRenderSetup(); }
+  else if (a === 'anomRate'){ if(!Object.hasOwn(ANOMALY_LEVELS,x))return; if(x==='normal')delete CFG.anomalies; else CFG.anomalies=x; safeRenderSetup(); }   // SAHA-ENTEGRE.0
   else if (a === 'tension'){ if(!Object.hasOwn(TENSION_LEVELS,x))return; if(x==='dengeli')delete CFG.tension; else CFG.tension=x; safeRenderSetup(); }   // BETA-WAR-GOALS.0
   else if (a === 'planetMul'){ const m=Number(x); if(!PLANET_MULS.includes(m))return; if(m===1)delete CFG.planetMul; else CFG.planetMul=m; safeRenderSetup(); }
   else if (a === 'regenGalaxy'){ CFG.seed = (Math.random()*1e9)|0; UI.setupError=''; UI.setupRegen=false; safeRenderSetup(); }
@@ -10124,13 +10150,17 @@ UI.warGoalPick=function(id,key){
   if(key==='fetih'){
     /* MP-FIELD-FIX.0: adaylar oyuncunun bildiği sahiplikten (warFetihCandidates; misafirde aynadaki bilgi, host'ta aynı kural). Açık seçim korunur;
        pencere açıkken geçerliliği değişen hedef düşer ve nedeni yazılır, yeni keşfedilen sistem listeye girer. */
-    const c=warFetihCandidates(e,o),ids=new Set(c.map(x=>x.id)),max=warFetihMax(o);
+    /* SAHA-ENTEGRE.0: 5 hedef / 12 aday sınırı yok; başkent dahil bilinen her sistem; ilk 5 bedelsiz, sonrası Etki bedeli. 500 sistemde
+       liste arama + sayfa (40) ile; HARİTADAN HEDEF SEÇ aynı seçimi (this._wgSel) haritada değiştirir. */
+    const c=warFetihCandidates(e,o,{capital:true}),ids=new Set(c.map(x=>x.id)),max=warFetihLimit(e,o);
     const gone=s.targets.filter(t=>!ids.has(t));if(gone.length){s.targets=s.targets.filter(t=>ids.has(t));s.note=gone.map(t=>G.sys[t]?.name||'?').join(', ')+' artık hedef olamaz (sahipliği değişti ya da bilgin güncellendi).';}
-    if(s.targets.length>max)s.targets=s.targets.slice(0,max);
-    h+=`<div class="lead">Talep edilecek sistemleri seç (${s.targets.length}/${max}). Başkent hedef olamaz; hedefe en az bir sistem kalır.</div>`;
+    const reclaim=warFetihReclaim(e,o),claim=warFetihClaimCost(e,o,s.targets),base=hasPerk(e,'freeWar')?0:WAR_GOALS.fetih.etk;
+    h+=`<div class="lead">Talep edilecek sistemleri seç (${s.targets.length}/${max} bilinen). İlk ${WAR_FETIH_MAX} hedef bedelsiz; sonrası artan Etki bedeli öder. Başkent hedeflenebilir (+60 Etki); son sistemi düşen devlet ortadan kalkar.</div>`;
+    if(reclaim)h+=`<div class="mini wgReclaim">✊ İSYANI BASTIR — ${esc(o.name)} senden koptu: başkenti dahil eski toprakların bedelsiz talep edilir.</div>`;
+    h+=`<div class="mini wgCost" data-claim="${claim}">Savaş hedefi ${base} + talep bedeli ${claim} = <b>${base+claim} Etki</b> · elinde ${Math.floor(e.res.etk||0)}</div>`;
     if(s.note)h+=`<div class="mini warnTxt wgNote">⚠ ${esc(s.note)}</div>`;
-    if(c.length)h+=c.map(x=>`<button class="ch wgT ${s.targets.includes(x.id)?'pri':''}" data-a="wgTarget" data-x="${x.id}"><div class="cht">${s.targets.includes(x.id)?'☑':'☐'} ${esc(x.name)}<span style="float:right;color:#7d90ad">${x.col} koloni</span></div></button>`).join('');
-    else{why=warFetihMax(o)<1?'Bildiğin tek sistemi başkenti: başkent hedef olamaz ve hedefe en az bir sistem kalmalı.':'Bilinen başkent dışı sistemi yok: önce keşif ya da istihbarat.';
+    if(c.length){h+=`<div class="act2"><button class="abtn pri" data-a="wgMap" data-x="${id}">🗺 HARİTADAN HEDEF SEÇ</button></div><input id="wgSearch" class="wgSearch" maxlength="40" placeholder="Sistem ara (${c.length})" aria-label="Hedef sistem ara" value="${esc(s.q||'')}"><div id="wgList">${this.wgListHtml(c,s)}</div>`;}
+    else{why='Bilinen sistemi yok: önce keşif ya da istihbarat.';
       h+=`<div class="mini wgWhy">${esc(why)}</div><button class="ch" data-a="setwg" data-x="${id}:boyun"><div class="cht">👑 Vasallaştırmaya dön</div><div class="chd">Toprak talep etmeden hedefi vasalın yapmayı öner.</div></button>`;}
     if(!why&&!s.targets.length)why='Önizleme için en az bir hedef sistem seç.';
   } else {
@@ -10144,8 +10174,50 @@ UI.warGoalPick=function(id,key){
   h+=`</div><div class="mft">${off?`<div class="mini wgGoWhy">${esc(short)}</div>`:''}<button class="ch wgGo" data-a="wgGo" ${off?'disabled aria-disabled="true"':''}>ÖNİZLEME · GEREKÇE VE KATILIMCILAR</button><button class="ch" data-a="war" data-x="${id}">Geri</button><button class="ch" data-a="closem">Vazgeç</button></div>`;
   /* liveWorld: misafirde açık pencere dünya güncellemesini bekletmez; açıkken aynı pencere yerinde yenilenir (kaydırma ve seçim korunur) */
   const m=$('modal'),box=m.querySelector('.mbox.wgPick');
-  if(box&&!m.classList.contains('hidden')&&this._wgOpen===id+':'+key){this.surfaceRender(box,h,'wg-pick',true);return;}
-  this._wgOpen=id+':'+key;this.openModal(h,'war liveWorld wgPick');
+  if(box&&!m.classList.contains('hidden')&&this._wgOpen===id+':'+key){this.surfaceRender(box,h,'wg-pick',true);this.wgBindSearch();return;}
+  this._wgOpen=id+':'+key;this.openModal(h,'war liveWorld wgPick');this.wgBindSearch();
+};
+/* SAHA-ENTEGRE.0 — fetih hedef listesi: seçilenler önce, sonra arama süzgecinden geçen yakınlık sırası; 40'lık sayfa (500 sistemde yüzlerce düğme yok). */
+UI.wgListHtml=function(c,s){
+  const q=String(s.q||'').toLocaleLowerCase('tr'),sel=new Set(s.targets),lim=s.page||40;
+  const rows=c.filter(x=>sel.has(x.id)).concat(c.filter(x=>!sel.has(x.id)&&(!q||x.name.toLocaleLowerCase('tr').includes(q))));
+  const shown=rows.slice(0,Math.max(lim,sel.size));
+  let h=shown.map(x=>`<button class="ch wgT ${sel.has(x.id)?'pri':''}" data-a="wgTarget" data-x="${x.id}"><div class="cht">${sel.has(x.id)?'☑':'☐'} ${esc(x.name)}${x.capital?' <b class="wgCap">★ Başkent</b>':''}<span style="float:right;color:#7d90ad">${x.col} koloni · ${Math.round(x.d)} ly</span></div></button>`).join('');
+  if(rows.length>shown.length)h+=`<button class="abtn wgMore" data-a="wgMore">Daha fazla göster (${rows.length-shown.length})</button>`;
+  if(!rows.length)h+='<div class="mini">Aramayla eşleşen bilinen sistem yok.</div>';
+  return h;
+};
+UI.wgBindSearch=function(){
+  const inp=$('wgSearch'),s=this._wgSel;if(!inp||!s||inp._wgBound)return;inp._wgBound=true;
+  let t=0;inp.addEventListener('input',()=>{clearTimeout(t);t=setTimeout(()=>{s.q=inp.value||'';s.page=40;const o=G.emps[s.id],l=$('wgList');
+    if(o&&l)l.innerHTML=this.wgListHtml(warFetihCandidates(G.p,o,{capital:true}),s);},180);});
+};
+/* SAHA-ENTEGRE.0 — HARİTADAN HEDEF SEÇ: pencere kapanır, haritada adaylar halkalı, dokunuş seçimi açar / kapatır (View.claimPick, Panoptikon
+   hedeflemesiyle aynı kalıp); alttaki çubukta sayı + Etki bedeli, TAMAM önizleme penceresine (aynı seçimle) döner, İPTAL seçimi eski hâline getirir. */
+UI.claimPickStart=function(id){
+  const s=this._wgSel,o=G.emps[id];if(!s||s.id!==id||!o)return;
+  const cand=new Set(warFetihCandidates(G.p,o,{capital:true}).map(x=>x.id));if(!cand.size)return say('Bilinen hedef sistem yok','war');
+  /* misafirde her ayna kurulumu yeni G.sys / G.emps yaratır: kip dünya kimliğine değil hedef devlete bağlıdır, adaylar her dokunuşta yeniden hesaplanır */
+  View.claimPick={id,cand,targets:s.targets,backup:s.targets.slice()};this.closeModal();this.claimBar();UI.refresh();
+};
+UI.claimPickToggle=function(sys){
+  const c=View.claimPick,o=c&&G.emps[c.id];if(!c||!o||o.dead){this.claimPickEnd(false);return;}
+  c.cand=new Set(warFetihCandidates(G.p,o,{capital:true}).map(x=>x.id));
+  if(!sys||!c.cand.has(sys.id)){if(sys)say(sys.name+' bu savaşın hedefi olamaz (hedef devletin bildiğin sistemi değil)','war');return;}
+  const i=c.targets.indexOf(sys.id);if(i>=0)c.targets.splice(i,1);else c.targets.push(sys.id);
+  if(typeof UI.pulse==='function')UI.pulse(sys);this.claimBar();
+};
+UI.claimBar=function(){
+  let b=$('claimBar');const c=View.claimPick;
+  if(!c){if(b){b.innerHTML='';b.remove();}return;}
+  if(!b){b=document.createElement('div');b.id='claimBar';b.className='claimBar';($('app')||document.body).appendChild(b);}
+  const o=G.emps[c.id],cost=o?warFetihClaimCost(G.p,o,c.targets):0;
+  b.innerHTML=`<span class="cbTxt">🗺 ${esc(o?.name||'?')} · <b>${c.targets.length}</b> hedef · talep bedeli <b>${cost}</b> Etki</span><button class="abtn pri" data-a="claimDone">TAMAM</button><button class="abtn" data-a="claimCancel">İPTAL</button>`;
+};
+UI.claimPickEnd=function(ok){
+  const c=View.claimPick;View.claimPick=null;this.claimBar();if(!c)return;
+  const s=this._wgSel;if(!s||s.id!==c.id)return;if(!ok)s.targets=c.backup;else s.targets=c.targets;
+  if(G.emps[c.id]&&!G.emps[c.id].dead)this.warGoalPick(c.id,'fetih');
 };
 /* MP-FIELD-FIX.0 — müzakere masası: "Savaşa Destek İste" = karşı tarafı BELİRLİ bir savaşa (aktif cephe / bekleyen hazırlık) çağıran warJoin maddesi.
    Genel "Savaş sözü" (warOn) çok oyunculuda insanla müzakerede gönderilemez (MP teklif deposu cepheye bağlı maddeyi taşır); tek oyunculuda aynen. */
@@ -10272,6 +10344,24 @@ UI.warPledgeHtml=function(o){
     <div class="mini">Söz kabulde bağlayıcıdır; savaş kendiliğinden başlamaz. Durum ay başında ve savaş ilanında denetlenir.</div></div>`;
 };
 UI.dealSupportRows=function(o){return typeof warSupportOptions==='function'?warSupportOptions(G.p,o):[];};
+/* SAHA-ENTEGRE.0 — SAVAŞA YARDIM TEKLİF ET: karşı tarafın süren savaşına katılmayı VER listesine koy (warJoin, aynı motor) */
+UI.dealHelpRows=function(o){return typeof warHelpOptions==='function'?warHelpOptions(G.p,o):[];};
+UI.dealHelpHtml=function(d,e,o){
+  if(this._dealHelp!==o.id)return '';const rows=this.dealHelpRows(o);
+  let h=`<div class="box dealHelp"><b>SAVAŞA YARDIM TEKLİF ET · ${esc(o.name)}</b><div class="mini">Seçtiğin savaşa ${esc(o.name)} tarafında katılmayı önerirsin; karşılığını İSTİYORUM listesine ekle (kaynak, teknoloji, geçiş, haraç, aynı cephe için toprak vaadi…). Teklif savaş başlatmaz, ödeme yapmaz; kabulde katılım ve şartlar birlikte uygulanır. Savaş biterse gecikmiş kabul işlenmez.</div>`;
+  if(rows===null)h+='<div class="mini">Host\'tan güncel savaşlar alınıyor…</div>';
+  else if(!rows.length)h+='<div class="mini warnTxt">'+esc(o.name)+' için bildiğin, katılabileceğin süren bir savaş yok. Üçüncü taraf savaşlarını görmek için SIZILMIŞ istihbarat gerekir; müttefikin ya da federasyon ortağının savaşları doğrudan görünür.</div>';
+  else for(const r of rows){const on=d.give.some(i=>i.t==='warJoin'&&i.front===r.front);
+    h+=`<button class="abtn ${on?'pri':''} ${r.ok?'':'dis'}" data-a="dealHelpPick" data-x="front:${r.front}:${r.target}" ${r.ok?'':'disabled'}>${on?'☑':'☐'} ${esc(r.label)}</button>${r.ok?'':`<div class="mini warnTxt">${esc(r.why)}</div>`}`;}
+  return h+'</div>';
+};
+UI.dealHelpPick=function(x){
+  const d=this.deal;if(!d)return;const [k,a,t]=String(x).split(':'),id=+a,target=+t;if(k!=='front'||!Number.isSafeInteger(id)||!Number.isSafeInteger(target))return;
+  const r=(this.dealHelpRows(G.emps[d.to])||[]).find(r=>r.front===id&&r.target===target);if(!r||!r.ok){say(r?.why||'Bu savaşa katılım artık önerilemez','war');this.drawDeal();return;}
+  const i=d.give.findIndex(i=>i.t==='warJoin'&&i.front===id);
+  if(i>=0)d.give.splice(i,1);else{d.give=d.give.filter(i=>i.t!=='warJoin');d.give.push({t:'warJoin',front:id,target});}
+  this.drawDeal();
+};
 UI.dealSupportHtml=function(d,e,o){
   let h='';if(this.dealMpHuman(o))h+='<div class="mini dealWarOnWhy">⚔ <b>Savaş sözü</b> = son tarihe kadar üçüncü bir devletle savaşa girme sözü (kabulde savaş ilan edilmez). Belirli bir savaşa hemen katılım için <b>Savaşa Destek İste</b>.</div>';   /* MP-WARON.0 */
   if(this._dealSupport!==o.id)return h;
@@ -10293,7 +10383,9 @@ UI.dealSupportPick=function(x){
 UI.warGoalPickRefresh=function(){const m=$('modal'),s=this._wgSel;if(!s||m.classList.contains('hidden')||!m.querySelector('.mbox.wgPick')||this._wgOpen!==s.id+':'+s.key)return;this.warGoalPick(s.id,s.key);};
 UI.warGoalAct=function(a,x){
   const s=this._wgSel;if(!s)return;const o=G.emps[s.id];
-  if(a==='wgTarget'){const id=+x,i=s.targets.indexOf(id);if(i>=0)s.targets.splice(i,1);else if(s.targets.length<warFetihMax(o))s.targets.push(id);else say('En çok '+warFetihMax(o)+' hedef sistem','war');}
+  if(a==='wgTarget'){const id=+x,i=s.targets.indexOf(id);if(i>=0)s.targets.splice(i,1);else if(s.targets.length<warFetihLimit(G.p,o))s.targets.push(id);else say('Bilinen bütün sistemler zaten seçili','war');}
+  if(a==='wgMore'){s.page=(s.page||40)+40;}
+  if(a==='wgMap'){this.claimPickStart(s.id);return;}
   if(a==='wgVtype'&&VASSAL_TYPES[x]){s.vtype=x;s.war=WAR_VASSAL_WAR[x];}
   if(a==='wgVwar'&&warVassalGoalTerms(s.vtype,x))s.war=x;
   if(a==='wgGo'){this.warDeclarationPreview(s.id,s.key,s.key==='fetih'?{targets:s.targets.slice()}:{vtype:s.vtype,war:s.war});return;}
@@ -10301,7 +10393,7 @@ UI.warGoalAct=function(a,x){
 };
 UI.warPreviewGoalHtml=function(p){
   let h='';const g=p.goal,L=p.legit;
-  if(g?.targets)h+=`<div class="ph">HEDEF: FETİH</div><div class="mini">${g.targets.map(t=>esc(t.name)).join(' · ')}</div><div class="mini">${esc(g.note)}</div>`;
+  if(g?.targets)h+=`<div class="ph">HEDEF: FETİH · ${g.targets.length} sistem</div><div class="mini">${g.targets.map(t=>esc(t.name)+(t.capital?' ★':'')).join(' · ')}</div><div class="mini">${esc(g.note)}</div>${g.claim?`<div class="mini wgClaimCost">Talep bedeli: <b>${g.claim} Etki</b> (ilk ${g.free} hedef bedelsiz)</div>`:''}`;   /* SAHA-ENTEGRE.0 */
   if(g?.vtype)h+=`<div class="ph">HEDEF: VASALLAŞTIRMA · ${esc(g.name)}</div><div class="mini">Vergi: ${esc(g.terms.tax)} · Bilim payı: ${esc(g.terms.science)}</div><div class="mini">${esc(g.terms.defense)} · ${esc(g.terms.war)} · ${esc(g.terms.autonomy)}</div><div class="mini">${esc(g.note)}</div>`;
   if(L){h+=`<div class="ph">GEREKÇELER VE MEŞRUİYET</div><div class="row"><span>Meşruiyet</span><b>${Math.round(L.score*100)} / gereken ${Math.round(L.need*100)} · ${esc(L.level.toUpperCase())}</b></div>`;
     h+=L.list.length?L.list.map(j=>`<div class="mini">• ${esc(j.n)} · güç ${Math.round(j.strength*100)} · ${j.age?esc(j.age+' ay önce'):'güncel'} · ${esc(j.evidence)}</div>`).join(''):'<div class="mini">Kayıtlı gerekçe yok. Talep ne kadar büyükse o kadar güçlü gerekçe gerekir.</div>';
@@ -10334,7 +10426,7 @@ UI.warDealHtml=function(d,e,o){
     if(sp)h+=`<div class="box"><b>AYRI BARIŞ — yalnız bu cephe (#${sp.front}) kapanır</b>${sp.ends.map(t=>`<div class="mini">Sona eren: ${esc(t)}</div>`).join('')}${sp.broken?'<div class="mini">⚠ Sözleşmeli katılımın sahibi bu düşmanla savaşırken ayrı barış söz bozma sayılabilir.</div>':''}<div class="mini">Öteki cepheler: ${sp.others.map(x=>esc(x.text)+' — '+x.state).join(' · ')||'—'}</div></div>`;}
   const join=d.want.find(i=>i.t==='warJoin'&&i.front);
   if(join){const f=(G.warLedger?.fronts||[]).find(x=>x.id===join.front),enemy=f&&G.emps[f.sides.find(id=>id!==e.id)];
-    if(f&&enemy&&f.sides.includes(e.id)){const c=warFetihCandidates(e,enemy);
+    if(f&&enemy&&f.sides.includes(e.id)){const c=warFetihCandidates(e,enemy).slice(0,24);   /* SAHA-ENTEGRE.0: aday kesimi kalktı; masada en yakın 24 */
       h+='<div class="ph">TOPRAK VAADİ (isteğe bağlı)</div><div class="act2">'+(c.map(x=>`<button class="abtn ${d.give.some(i=>i.t==='landPromise'&&i.sys===x.id)?'pri':''}" data-a="dealPromise" data-x="${x.id}:${f.id}">⚑ ${esc(x.name)}</button>`).join('')||'<span class="mini">Bilinen düşman sistemi yok</span>')+'</div><div class="mini">Vaat, bu cephe kapanınca değerlendirilir: sistem sendeyse devredilir; değilse karşılanamaz sayılır.</div>';}}
   for(const p of (G.warLedger?.promises||[]).filter(p=>(p.giver===e.id&&p.taker===o.id||p.taker===e.id&&p.giver===o.id)).slice(-4)){const st=p.state==='open'?warPromiseState(p):{state:p.state,why:p.why||''};
     h+=`<div class="mini">Vaat ${esc(G.sys[p.sys]?.name||'?')} (${esc(G.emps[p.giver].name)} → ${esc(G.emps[p.taker].name)}): <b>${esc(WAR_PROMISE_TEXT[st.state]||st.state)}</b> · ${esc(st.why)}</div>`;}
@@ -10378,6 +10470,12 @@ UI.fedWarAct=function(a,x){
   if(a==='fwPropose'){const r=proposeFedMotion(G.p,'fedWar',this._fwOpts||{});if(!r||r.ok===false)say(r?.why||'Önerge sunulamadı','war');this._fwSel=null;this.closeModal();this.openFed();return;}
   this.fedWarPick();
 };
+/* SAHA-ENTEGRE.0 — BİLİM ANOMALİLERİ: bilim gemilerinin karar penceresi açan anomali bulma sıklığı (Rastgele Hikâye Olayları'ndan bağımsız). */
+function anomalySetupHtml(c){
+  const k=anomalyLevel(c);let h='<h2 style="margin-top:12px">BİLİM ANOMALİLERİ</h2><div class="grid g3" id="anomRow">';
+  for(const [x,v] of Object.entries(ANOMALY_LEVELS))h+=`<button class="opt ${k===x?'on':''}" data-a="anomRate" data-x="${x}" aria-pressed="${k===x}">${v.n}<small>%${Math.round(v.p*100)}${x==='normal'?' · varsayılan':''}</small></button>`;
+  return h+'</div><p class="mini">Taranan sistemlerde karar isteyen anomali bulunma olasılığı. Kapalıyken bilim gemileri keşfe devam eder; anomali penceresi ve ödülü olmaz. Rastgele Hikâye Olayları ayrı ayardır.</p>';
+}
 function tensionSetupHtml(c){
   const t=tensionOf(c);let h='<h2 style="margin-top:12px">GALAKTİK GERİLİM</h2><div class="grid g3" id="tensionRow">';
   for(const k of Object.keys(TENSION_LEVELS))h+=`<button class="opt ${t===k?'on':''}" data-a="tension" data-x="${k}" aria-pressed="${t===k}">${TENSION_LEVELS[k].n}<small>${k==='dengeli'?'Varsayılan':k==='sakin'?'Daha az entrika':'Daha çok fırsat'}</small></button>`;
@@ -10448,7 +10546,7 @@ const WarCoal={st:null,req:0,last:0,view:null,
   if(st.msg)h+=`<div class="mini warnTxt coalMsg" role="status">${esc(st.msg)}</div>`;
   /* 1 — hedef */
   h+=`<section class="box coalGoal"><div class="row"><b>1 · HEDEF</b><button class="abtn" data-a="setwg" data-x="${st.id}:${st.key}">Hedefi değiştir</button></div>`;
-  if(p.goal?.targets)h+=`<div class="ph">HEDEF: FETİH</div><div class="mini">${p.goal.targets.map(t=>esc(t.name)).join(' · ')}</div><div class="mini">${esc(p.goal.note)}</div>`;
+  if(p.goal?.targets)h+=`<div class="ph">HEDEF: FETİH · ${p.goal.targets.length} sistem</div><div class="mini">${p.goal.targets.map(t=>esc(t.name)+(t.capital?' ★':'')).join(' · ')}</div><div class="mini">${esc(p.goal.note)}</div>${p.goal.claim?`<div class="mini wgClaimCost">Talep bedeli: <b>${p.goal.claim} Etki</b> (ilk ${p.goal.free} hedef bedelsiz) · toplam ${p.cost} Etki</div>`:''}`;   /* SAHA-ENTEGRE.0 */
   else if(p.goal?.vtype)h+=`<div class="ph">HEDEF: VASALLAŞTIRMA · ${esc(p.goal.name)}</div><div class="mini">Vergi: ${esc(p.goal.terms.tax)} · ${esc(p.goal.terms.war)} · ${esc(p.goal.terms.autonomy)}</div><div class="mini">${esc(p.goal.note)}</div>`;
   else h+=`<div class="mini">${esc(WAR_GOALS[v.goal]?.n||v.goal)}</div>`;
   if(prep&&prep.commitments.some(c=>c.stale))h+='<div class="mini warnTxt">Hedef şartları değişti: önceki kabuller güncel koşullarla yeniden onaylanmalı.</div>';

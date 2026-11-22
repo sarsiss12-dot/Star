@@ -1,0 +1,86 @@
+'use strict';
+/* SAHA-ORDU-P0: regression for two real multiplayer field reports.
+   The canonical seed11 month66 siege fixture lands on month 71.
+   Surviving assault transports must persist after the planet flips,
+   rather than being converted wholesale into a permanent garrison.
+   Real Android/Render multiplayer remains a separate field test. */
+const assert=require('assert/strict');
+const fs=require('fs'),path=require('path');
+const {runtime}=require('./helpers/runtime');
+const root=path.resolve(__dirname,'..');
+const save=fs.readFileSync(path.join(__dirname,'fixtures/96h9/seed11-month66-siege.save'),'utf8');
+
+function replay(){
+  const h=runtime({root});
+  h.sb.rawP0=save;
+  assert.equal(h.run('deserialize(rawP0)'),true);
+  h.run(`G.autoSave=false;
+    /* SAHA-ENTEGRE.0: ölçüm invasionTick() öncesi / sonrası. Eski silme captureSystem'den ÖNCE,
+       yeni garnizon yazımı captureSystem'den SONRA olduğundan captureSystem sarmalayıcısı ikisini de kaçırıyordu. */
+    var assaultCapturesP0=[], originalInvasionP0=invasionTick;
+    invasionTick=function(){
+      const S=G.sys[6],planets=S.planets.filter(p=>p.col).map(p=>({p,owner:p.owner}));
+      const snap=G.fleets.filter(f=>f.sys===S.id&&f.ships.length&&isTransport(f)).map(f=>({f,id:f.id,e:f.e,ships:f.ships.length,hulls:f.ships.map(sh=>sh.h)}));
+      const result=originalInvasionP0.apply(this,arguments);
+      for(const x of planets)if(x.p.owner!==x.owner&&x.p.owner>=0){
+        const by=x.p.owner,armies=snap.filter(a=>a.e===by);if(!armies.length)continue;
+        const after=armies.map(a=>{const f=G.fleets.includes(a.f)?a.f:null;return {id:a.id,ships:f?f.ships.length:0,hulls:f?f.ships.map(sh=>sh.h):[]};});
+        assaultCapturesP0.push({day:G.day,sys:S.id,by,before:armies.map(a=>({id:a.id,ships:a.ships,hulls:a.hulls})),after,
+          garrison:x.p.col.garrison,base:garrisonOf(x.p.col,G.emps[by],x.p),
+          journal:(G.fleetJournal||[]).filter(r=>armies.some(a=>a.id===r.fleet)).map(r=>({reason:r.reason,detail:r.detail||''}))});
+      }
+      return result;
+    };
+    for(let m=0;m<6&&!assaultCapturesP0.length;m++){
+      for(let i=0;i<60;i++){
+        const before=Math.floor(G.day/30);
+        G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();
+        if(Math.floor(G.day/30)>before)monthTick();
+      }
+    }`);
+  const captures=JSON.parse(h.run('JSON.stringify(assaultCapturesP0)'));
+  assert(captures.length,'The control fixture did not produce the expected conquest');
+  return {h,captures,save:h.run('serialize()'),rng:h.run('RND_STATE')};
+}
+
+const a=replay(),c=a.captures[0];
+assert(c.before.length>0&&c.before.every(f=>f.ships>0),'A landing army must exist before ownership changes');
+/* Kara savaşının GERÇEK zayiatı fetihle aynı ayda olabilir: yalnız kural silmesini yasakla — hayatta kalan filo var olmalı */
+assert(c.after.every(f=>f.ships>0),'Conquest itself must not delete surviving assault transports: '+JSON.stringify(c));
+assert.equal(Math.round(c.garrison),Math.round(Math.max(10,c.base)),'The colony receives local defence, not 60% of surviving army power');
+assert(!c.journal.some(x=>x.reason==='rule'&&/işgal görevini tamamladı/.test(x.detail)),
+  'A successful assault must not be recorded as a fleet destruction');
+const b=replay();
+assert.deepEqual(b.captures,a.captures,'Same seed and fixture must replay with identical conquest results');
+assert.equal(b.rng,a.rng,'Same replay must consume RNG in the same order');
+assert.equal(b.save,a.save,'Same replay must serialize byte-identically');
+const reloaded=runtime({root});reloaded.sb.saveP0=a.save;
+assert.equal(reloaded.run('deserialize(saveP0)'),true,'Save8 reload must succeed');
+/* First load may refresh derived caches, so test canonical fixed-point after that refresh. */
+const first=reloaded.run('serialize()');
+reloaded.sb.firstP0=first;assert.equal(reloaded.run('deserialize(firstP0)'),true);
+assert.equal(reloaded.run('serialize()'),first,'Second Save8 round-trip must be a fixed point');
+/* Mixed fleets are the reported 15K scenario: even one landing ship made
+   orbitForces classify the WHOLE combat + assault fleet as a transport. */
+{
+  const h=runtime({root});h.sb.mixedP0=save;
+  assert.equal(h.run('deserialize(mixedP0)'),true);
+  const state=JSON.parse(h.run(`JSON.stringify((()=>{
+    const S=G.sys[6],planet=S.planets.find(p=>p.col&&p.owner===0);
+    if(!planet) return {fixture:false};
+    G.emps[1].war[0]=G.emps[0].war[1]=true;
+    planet.col.garrison=0;planet.col.shield=0;
+    const mixed=newFleet(G.emps[1],S.id,[{c:'ord'},{c:'kor'}]);
+    const id=mixed.id,before=mixed.ships.map(sh=>({c:sh.c,h:sh.h}));
+    invasionTick();
+    const after=G.fleets.find(f=>f.id===id);
+    return {fixture:true,owner:planet.owner,before,after:after?.ships.map(sh=>({c:sh.c,h:sh.h}))||null,
+      lost:(G.fleetJournal||[]).filter(r=>r.fleet===id&&r.reason==='rule').length};
+  })())`));
+  assert(state.fixture,'Mixed assault fixture must have a defended planet');
+  assert.equal(state.owner,1,'Mixed assault must capture the enemy planet');
+  assert.deepEqual(state.after,state.before,'Conquest must not delete combat ships within a mixed assault fleet');
+  assert.equal(state.lost,0,'Mixed fleet must not be recorded as destroyed by successful conquest');
+}
+console.log('PASS SAHA-ORDU-P0: retained pure/mixed army, garrison, replay, Save8/RNG');
+console.log('GEÇEN: 1 KALAN: 0');

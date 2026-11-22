@@ -1,0 +1,247 @@
+{
+ "results": [
+  {
+   "name": "SE0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 6591
+  },
+  {
+   "name": "H0 fikstür (host): AI O ↔ AI X savaşta, B ile O müttefik; AI F B'ye savaş açar, B yorgunluğu 88; F'ye 8 bilinen sistem",
+   "status": "PASS",
+   "ms": 413
+  },
+  {
+   "name": "H1 misafir \"Büyük armalar\" düğmesi çalışır (kapı engeli yok)",
+   "status": "PASS",
+   "ms": 1848
+  },
+  {
+   "name": "H2 lojistik: filo seçili değilken ikmal limanları + ipucu (misafir ve host)",
+   "status": "PASS",
+   "ms": 4272
+  },
+  {
+   "name": "H3 misafir Savaş Merkezi: yorgunluk %88 + %85 uyarısı (host değeri), rakip BİLİNMİYOR",
+   "status": "PASS",
+   "ms": 363
+  },
+  {
+   "name": "H4 misafir HARİTADAN HEDEF SEÇ: 6+ sistem gerçek harita dokunuşuyla; host önizlemesi talep bedeli > 0",
+   "status": "PASS",
+   "ms": 5562
+  },
+  {
+   "name": "H5 misafir TÜMÜNÜ KENARA AL: kartlar gizlenir, karar verilmez",
+   "status": "PASS",
+   "ms": 874
+  },
+  {
+   "name": "H6 misafir Savaşa Yardım Teklif Et: müttefik O'nun X savaşına katılım VER + 300 alaşım İSTE → host kaydı",
+   "status": "PASS",
+   "ms": 4072
+  }
+ ],
+ "metrics": {
+  "scen": "SE",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 1,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 398,
+    "buildMs": 414,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 3.5,
+      "p95": 3.5,
+      "max": 3.5
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 16,
+     "dom": 728,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 32.8,
+       "p95": 32.8,
+       "max": 32.8
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1,
+       "p95": 1,
+       "max": 1
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 20,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 11750,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 7
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   }
+  ],
+  "saha": {
+   "fx": {
+    "O": 2,
+    "X": 3,
+    "F": 4,
+    "fsys": 9,
+    "front": 1
+   },
+   "h1": {
+    "b0": false,
+    "on": true,
+    "blocked": ""
+   },
+   "h2B": {
+    "on": true,
+    "ports": 3
+   },
+   "h2H": {
+    "on": true,
+    "ports": 1
+   },
+   "h3": {
+    "ok": true,
+    "pct": true,
+    "warn": true,
+    "unk": true
+   },
+   "h4": {
+    "cands": 8,
+    "picked": 7,
+    "sel": 7,
+    "preview": true,
+    "cost": 25
+   },
+   "h5": {
+    "card": true,
+    "after": 0
+   },
+   "h6": {
+    "give": 1,
+    "before": {
+     "war": false,
+     "ala": 8000
+    },
+    "after": {
+     "war": false,
+     "ala": 8000,
+     "offers": 1
+    },
+    "trace": [
+     {
+      "tx": "m577xo",
+      "step": "draft",
+      "at": 1795326869166,
+      "day": 0,
+      "to": 2,
+      "give": [
+       {
+        "t": "warJoin",
+        "front": 1,
+        "target": 3
+       }
+      ],
+      "want": [
+       {
+        "t": "res"
+       }
+      ]
+     },
+     {
+      "tx": "m577xo",
+      "step": "send",
+      "at": 1795326869166,
+      "day": 0,
+      "cid": "j1_6_3x0im577xo",
+      "kind": "offer"
+     },
+     {
+      "tx": "m577xo",
+      "step": "reply",
+      "at": 1795326869200,
+      "day": 0,
+      "status": "ok",
+      "code": null,
+      "offer": 1,
+      "dup": false
+     },
+     {
+      "tx": "m577xo",
+      "step": "msg",
+      "at": 1795326869202,
+      "day": 0,
+      "ok": true,
+      "msg": "Tharaeth Lejyonu reddetti"
+     }
+    ]
+   }
+  },
+  "errors": []
+ }
+}

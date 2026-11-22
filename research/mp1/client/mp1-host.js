@@ -171,7 +171,7 @@ function makeHost(){
     /* MP.7: tasarım kipi — host'un devleti kendi kurulum ekranındaki CFG, misafirlerinki kendi taslakları; galaksi OYUNU BAŞLAT'ta
        gerçek setupGame(cfg.humans) ile kurulur. MP7Setup yüklenmemişse (eski sayfa) MP.1 devralma kipi. */
     lobby:{design:!!window.MP7Setup&&!window.MP7Legacy,hostDraft:()=>window.MP7Setup?MP7Setup.draft():null,
-      generate(set){const {host:_h,...rest}=set,{aiRivals:_rivals,tension:_tension,...defaults}=CFG;setupGame({...defaults,...rest});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
+      generate(set){const {host:_h,...rest}=set,{aiRivals:_rivals,tension:_tension,anomalies:_anomalies,...defaults}=CFG;setupGame({...defaults,...rest});if(CFG.mizac)applyChosenPersona(G.p,CFG.mizac);G.autoSave=false;return {ok:true};}}});
   API.host.installGuards();
   /* MP.8: son ay adımı süresi (yalnız performance.now ölçümü; argüman, dönüş, RNG, sıra aynı) — tanı satırında */
   if(!API._mtWrap&&typeof window.monthTick==='function'){const mt=window.monthTick;window.monthTick=function(){const t=performance.now();try{return mt.apply(this,arguments);}finally{API.lastMonthMs=Math.round(performance.now()-t);}};API._mtWrap=true;}
@@ -185,7 +185,7 @@ function makeHost(){
 function restoreGalaxyDraft(){
   const settings=API.host.lobby.settings;
   if(!settings)return;
-  for(const key of ['size','aiCount','seed','planetMul','tension']){
+  for(const key of ['size','aiCount','seed','planetMul','tension','anomalies']){   /* SAHA-ENTEGRE.0: anomalies */
     if(settings[key]===undefined)delete CFG[key];
     else CFG[key]=settings[key];
   }
@@ -195,7 +195,7 @@ function restoreGalaxyDraft(){
 }
 function applyHostSetup(){
   const cap=API.host.lobby.capacity,ai=aiCountFor(CFG);
-  const r=API.host.configure({size:CFG.size,aiCount:ai,seed:Math.trunc(+CFG.seed)%2147483646||1,...(CFG.shape?{shape:CFG.shape}:{}),...(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(CFG.planetMul)&&CFG.planetMul!==1?{planetMul:CFG.planetMul}:{}),...(['sakin','calkantili'].includes(CFG.tension)?{tension:CFG.tension}:{}),...(CFG.aiRivals===undefined?{}:{aiRivals:CFG.aiRivals})});
+  const r=API.host.configure({size:CFG.size,aiCount:ai,seed:Math.trunc(+CFG.seed)%2147483646||1,...(CFG.shape?{shape:CFG.shape}:{}),...(typeof PLANET_MULS!=='undefined'&&PLANET_MULS.includes(CFG.planetMul)&&CFG.planetMul!==1?{planetMul:CFG.planetMul}:{}),...(['sakin','calkantili'].includes(CFG.tension)?{tension:CFG.tension}:{}),...(['kapali','seyrek','az','yogun'].includes(CFG.anomalies)?{anomalies:CFG.anomalies}:{}),...(CFG.aiRivals===undefined?{}:{aiRivals:CFG.aiRivals})});
   API.setupNote=r.ok?'':r.why==='too-many-states'?'Bu oturumda en fazla '+(49-cap)+' AI seçilebilir; insanlarla birlikte en fazla 49 normal devlet.':r.why==='galaxy-too-small'?'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.':(START_WHY[r.why]||r.why);
   if(API.screen==='lobby')render();
 }

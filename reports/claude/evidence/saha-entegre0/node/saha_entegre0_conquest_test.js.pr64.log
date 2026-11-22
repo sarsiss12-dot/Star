@@ -1,0 +1,12 @@
+✓ A1 yalnız Taarruz Ordusu (AI saldırgan)
+✓ A2 yalnız savaş gemileri (bombardımanla düşüş, 6. kuşatma ayı)
+✓ A3 Taarruz Ordusu + korvet (karma, saha 15K varyantı)
+✓ A4 Taarruz Ordusu + farklı savaş gemileri
+✓ A5 aynı sistemde iki ayrı oyuncu filosu (ordu + savaş)
+✓ A6 aynı sistemde müttefik filo
+✓ A7 host insan saldırgan (devlet 0 → devlet 1 gezegeni)
+✓ A8 MP misafir saldırgan (ai=false, devlet 0 değil)
+✓ A9 fetih anında başka bir savaş sürüyor
+✓ A10 gerçek kara savaşı zayiatı korunur: savaş gemisine dokunulmaz, yalnız ordu erir
+✓ A11 fetih sonrası garnizon: sıfır değil, aynı ordu iki kez sayılmaz; iki ay sonra taban + yörüngedeki ordu desteği
+GEÇEN: 11 KALAN: 0

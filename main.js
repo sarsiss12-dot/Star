@@ -1472,6 +1472,7 @@ function setupConfigError(cfg){
  if(!SIZES[cfg.size]||SIZES[cfg.size].available===false||(cfg.shape!==undefined&&!SHAPES[cfg.shape]))return 'Geçersiz galaksi boyutu veya şekli.';
  if(cfg.planetMul!==undefined&&!PLANET_MULS.includes(cfg.planetMul))return 'Kolonileştirilebilir gezegen çarpanı geçersiz.';
  if(cfg.tension!==undefined&&!(Object.hasOwn(TENSION_LEVELS,cfg.tension)&&cfg.tension!=='dengeli'))return 'Galaktik gerilim geçersiz.';   // BETA-WAR-GOALS.0
+ if(cfg.anomalies!==undefined&&!(typeof ANOMALY_LEVELS!=='undefined'&&Object.hasOwn(ANOMALY_LEVELS,cfg.anomalies)))return 'Bilim anomalisi sıklığı geçersiz.';   // SAHA-ENTEGRE.0
  const n=aiCountFor(cfg);if(!Number.isInteger(n)||n<1||n>MAX_AI_COUNT)return 'AI devlet sayısı 1–48 arasında bir tam sayı olmalı.';
  if(n+1>SIZES[cfg.size].sys)return 'Seçilen galaksi bu kadar devleti güvenli yerleştirmek için çok küçük. Yıldız sayısını artır veya AI sayısını azalt.';
  const actualAI=n-(Array.isArray(cfg.humans)?cfg.humans.length:0);if(actualAI>SCALE_ACCEPTANCE.maxAI)return 'Bu sürümde uzun kampanyası doğrulanmış üst sınır '+SCALE_ACCEPTANCE.maxAI+' AI. 24/32/48 AI deneysel; seçim sessizce azaltılmaz.';return rivalSetupError(cfg,actualAI);
@@ -2103,6 +2104,11 @@ function genPlanets(rnd, starDef, sysIdx){
   return out;
 }
 
+/* SAHA-ENTEGRE.0 — BİLİM ANOMALİLERİ sıklığı (kurulum). Sistem başına zar AYNEN çekilir, yalnız eşik değişir; 'normal' (%42) kayda
+   yazılmaz → eski / varsayılan oyunlarda Save8 ve RNG aynı. Köken anomalisi (Kalıntı Bekçileri başkenti) bu ayardan bağımsızdır. */
+const ANOMALY_LEVELS={kapali:{n:'Kapalı',p:0},seyrek:{n:'Seyrek',p:.10},az:{n:'Az',p:.20},normal:{n:'Normal',p:.42},yogun:{n:'Yoğun',p:.60}};
+function anomalyLevel(cfg){return cfg&&Object.hasOwn(ANOMALY_LEVELS,cfg.anomalies)?cfg.anomalies:'normal';}
+function anomalyRate(cfg){return ANOMALY_LEVELS[anomalyLevel(cfg)].p;}
 function generateGalaxy(cfg){
   const rnd = mulberry32(cfg.seed);
   G._adlar = {};                     // FAZ 44: isim tekrarını önler
@@ -2184,7 +2190,7 @@ function generateGalaxy(cfg){
       id:i, x:p.x, y:p.y, name:nm, star:sd,
       planets: genPlanets(rnd, sd, i),
       lanes: [], owner:-1, surv:[], seen:[], def:0,
-      queue:[], anom: rnd()<.42,
+      queue:[], anom: rnd()<anomalyRate(cfg),   /* SAHA-ENTEGRE.0: zar aynı, eşik ayardan */
       /* ═══ FAZ 73: UZAY COĞRAFYASI ═══
          pulsar → kalkanlar çalışmaz, saf gövde savaşı
          nebula → hız yarıya iner, sensörler kör olur
@@ -2804,6 +2810,7 @@ function setupGame(cfg){
   if(typeof DiplomaticInbox!=='undefined')G.diplomaticInbox=DiplomaticInbox.empty();
   if(typeof RemoteConstruction!=='undefined')G.construction=RemoteConstruction.empty();
   if(typeof Commerce!=='undefined')G.commerce=Commerce.empty();
+  if(cfg.anomalies==='normal')delete cfg.anomalies;   /* SAHA-ENTEGRE.0: varsayılan kayda yazılmaz (Save8 aynı) */
   G.cfg = cfg;
   G.warLedger = warLedgerEmpty();
   G.settlements = settlementEmpty();
@@ -9062,7 +9069,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p47';
+const BUILD_ID = '96h10p48';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

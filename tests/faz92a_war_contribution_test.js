@@ -131,7 +131,9 @@ test('Real invasion counts only destroyed assault strength before successful dis
    for(const p of sy.planets)if(p!==pl){p.col=null;p.owner=-1;}
    pl.col.shield=0;pl.col.garrison=1;var army=newFleet(P,sy.id,[{c:'ord'},{c:'ord'}]);
    invasionTick();var f=G.warLedger.fronts[0];`);
- eq(h.run('pl.owner'),0);eq(h.run('army.ships.length'),0);
+ eq(h.run('pl.owner'),0);
+ /* SAHA-ENTEGRE.0 / PR #64 (Issue #66): fetihten sağ çıkan Taarruz Ordusu artık silinmez (eski kural: ordu filosu fetihte tüketilirdi — sahada 15K kaybı) */
+ eq(h.run('army.ships.length'),2);
  assert.ok(h.run('f.metrics[0].groundLost>0&&f.metrics[0].groundLost<1'));
  eq(h.run('f.metrics[0].garrisonReduced'),1);eq(h.run('f.metrics[1].groundDestroyed'),h.run('f.metrics[0].groundLost'));
 });

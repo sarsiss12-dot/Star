@@ -1,0 +1,9 @@
+✗ E1 Normal (varsayılan) = eski %42: aynı tohumda Save8 ve RNG ayar yokken ve "normal" seçilince aynı; anomalies kayda yazılmaz — Expected values to be strictly equal:
+✗ E2 Kapalı: hiçbir sistemde normal anomali yok, galaksi (yıldız/gezegen/hat) ve RNG sırası aynı — Expected values to be strictly equal:
+✗ E3 oranlar: Seyrek < Az < Normal < Yoğun (aynı zarlarla), oran tablosu 0/10/20/42/60 — [15,15,15,15]
+✓ E4 Kapalı: bilim gemisi taraması karar penceresi açmaz, ödül vermez; keşif sürer
+✗ E5 kurulum ekranında BİLİM ANOMALİLERİ ve özet satırı; Rastgele Hikâye Olayları ayrı — anomalySetupHtml is not defined
+✗ C1 Savaş Merkezi: kendi savaşında yorgunluk yüzdesi + çubuk; %85+ uyarı; rakip yorgunluğu istihbaratsız BİLİNMİYOR, istihbaratla değer — Cannot read properties of undefined (reading 'exh')
+✗ F1 TÜMÜNÜ KENARA AL: karar verilmez, ödül uygulanmaz, teklif reddedilmez, savaş bildirimi silinmez; ☰ / Gelen kutusundan yeniden açılır — UI.noteStashAll is not a function
+✗ E6 MP lobi: BİLİM ANOMALİLERİ host configure ile kabul / ret; "normal" yazılmaz; Kapalı oyunda normal anomali yok; 500 sistemde Seyrek ≈ %10, Normal ≈ %42 — Expected values to be strictly equal:
+GEÇEN: 1 KALAN: 7

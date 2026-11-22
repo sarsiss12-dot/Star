@@ -1,0 +1,8 @@
+✗ D1 seçenek: alanın (O) bildiğim açık savaşı listelenir, uygun; benim tarafım olmayan savaş — warHelpOptions is not defined
+✓ D2 teklif hazırlamak savaş başlatmaz, ödeme yapmaz; dealQuote geçerli (warJoin VER + 300 alaşım İSTE)
+✓ D3 kabul (executeDeal): E savaşa O tarafında girer, 300 alaşım bir kez gelir; ikinci uygulama reddedilir
+✗ D4 savaş biterse gecikmiş teklif geçersiz; ödeme yok — warHelpOptions is not defined
+✓ D5 toprak vaadi aynı cephe için istenebilir; AI yanıtı (aiRespond) kabul / ret / karşı teklif biçiminde döner, dünyayı değiştirmez
+✗ D6 masa arayüzü: 🛡 Savaşa Yardım Teklif Et → cephe seçilince VER listesinde warJoin; tekrar dokunuş kaldırır — UI.dealHelpHtml is not a function
+✗ D7 bilinmeyen savaş listelenmez (istihbarat yok); müttefikin savaşı ittifakla görünür — warHelpOptions is not defined
+GEÇEN: 3 KALAN: 4
