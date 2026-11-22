@@ -11531,6 +11531,18 @@ function warSupportOptions(e,o){
   rows.push({kind:'plan',plan:p.id,target:p.target,label:'Hazırlık #'+p.id+' · '+en.name+' · '+(WAR_GOALS[p.goal]?.n||p.goal)+' (henüz ilan edilmedi; en geç gün '+Math.floor(p.expires)+')',ok:!!g.ok,why:g.ok?'':String(g.why||'')});}
  return rows.slice(0,16);
 }
+/* SAHA-ENTEGRE.0 — "Savaşa Yardım Teklif Et": warSupportOptions'ın ters yönü. Veren (e) alanın (o) BİLDİĞİ açık cephesine katılmayı
+   önerir; madde aynı warJoin {front,target} ve SEN VERİYORSUN listesine girer. Uygunluk aynı warSupportGate (katılan e, savaşın sahibi o);
+   kabulde aynı executeDeal yolu (katılım + öteki maddeler tek işlem). Gizli savaş listelenmez (warFrontKnown). Salt okuma, RNG yok. */
+function warHelpOptions(e,o){
+ if(!e||!o||e===o||!G.warLedger)return [];const rows=[];
+ const friend=!!(e.ally&&e.ally[o.id])||(typeof findFed==='function'&&!!findFed(e)&&findFed(e)===findFed(o));   /* müttefik / aynı federasyon üyesi kendi savaşını paylaşır */
+ for(const f of G.warLedger.fronts||[]){if(f.ended!==null||!f.sides.includes(o.id)||f.sides.includes(e.id))continue;if(!friend&&typeof warFrontKnown==='function'&&!warFrontKnown(e,f))continue;
+  const t=f.sides.find(id=>id!==o.id),en=G.emps[t];if(!en||en.dead||t===e.id||!e.contact[t])continue;
+  const g=warSupportGate(e,o,{t:'warJoin',front:f.id,target:t});
+  rows.push({kind:'front',front:f.id,target:t,label:'Cephe #'+f.id+' · '+o.name+' ↔ '+en.name+' (savaş sürüyor)',ok:!!g.ok,why:g.ok?'':String(g.why||'')});}
+ return rows.slice(0,16);
+}
 /* END MP-FIELD-FIX.0 */
 /* ═══ MP-DEAL-SYS.0 — Sistem Devri ve Haraç: ortak denetim ve görünüm (tek oyunculu + çok oyunculu aynı kural) ═══
    Motorun mevcut 'sys' (captureSystem 'transfer') ve 'tribute' (giver.tribute, aylık tributeTick, 10 yıl) maddeleri kullanılır; yeni

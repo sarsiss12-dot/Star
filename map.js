@@ -2775,6 +2775,23 @@ const View = {
        Hesap günde bir yapılıp f._logiNet'e yazılıyor; her karede
        yalnız çizim var, pathfinding yok.
        ═══════════════════════════════════════════════════════════ */
+    /* SAHA-ENTEGRE.0 — lojistik açık ama filo seçili değil: ikmal menzili filoya göre hesaplandığından çizgi yoktu (yalnız renk değişiyordu).
+       Kendi ikmal limanları (⚓) gösterilir ve filo seçme ipucu yazılır. Önbellek G dışında (View) — Save8'e girmez. */
+    if (LOGI_ON && !this.politik && !(this.sel && this.sel.ships && this.sel.ships.length && this.sel.sys >= 0)){
+      if (this._logiHintAt !== Math.floor(G.day) || this._logiHintWorld !== G.sys){
+        this._logiHintAt = Math.floor(G.day); this._logiHintWorld = G.sys;
+        this._logiHintPorts = typeof isSupplyNode === 'function' ? G.sys.filter(sy => (G.p.id !== 0 || (sy.seen || []).includes(0)) && isSupplyNode(G.p, sy)).map(sy => sy.id) : [];
+      }
+      g.save(); g.strokeStyle = '#6ff2c8'; g.lineWidth = 1.4; g.fillStyle = 'rgba(111,242,200,.18)';
+      for (const id of this._logiHintPorts || []){
+        const sy = G.sys[id]; if (!sy) continue; const p = this.w2s(sy.x, sy.y);
+        if (p.x < -20 || p.y < -20 || p.x > this.vw + 20 || p.y > this.vh + 20) continue;
+        g.beginPath(); g.moveTo(p.x, p.y - 11); g.lineTo(p.x + 11, p.y); g.lineTo(p.x, p.y + 11); g.lineTo(p.x - 11, p.y); g.closePath(); g.fill(); g.stroke();
+      }
+      g.textAlign = 'center'; g.font = 'bold 12px ui-monospace,monospace'; g.fillStyle = 'rgba(207,227,255,.92)';
+      g.fillText('LOJİSTİK · ◆ ikmal limanı · menzil ve hat çizgileri için bir filo seç', this.vw / 2, 58);
+      g.restore();
+    }
     if (LOGI_ON && this.sel && this.sel.ships &&
         this.sel.ships.length && this.sel.sys >= 0 &&
         typeof fleetSupply === 'function' && !this.politik){

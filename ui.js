@@ -1519,6 +1519,8 @@ const UI = {
       case 'dealAdd': this.dealAdd(x); break;
       case 'dealSupport': this._dealSupport=this._dealSupport===+x?null:+x;this.drawDeal();break;   // MP-FIELD-FIX.0
       case 'dealSupportPick': this.dealSupportPick(x);break;
+      case 'dealHelp': this._dealHelp=this._dealHelp===+x?null:+x;this.drawDeal();break;   // SAHA-ENTEGRE.0
+      case 'dealHelpPick': this.dealHelpPick(x);break;
       case 'dealRm': this.dealRm(x); break;
       case 'dealPledgeDays': this.dealPledgeDays(x); break;   /* MP-WARON.0 */
       case 'dealPact': this.dealPact(x); break;
@@ -5754,6 +5756,7 @@ const UI = {
       <button class="abtn" data-a="dealAdd" data-x="give:lux">❖ Lüks mal</button>
       <button class="abtn" data-a="dealAdd" data-x="give:intel">👁 İstihbarat</button>
       <button class="abtn" data-a="dealAdd" data-x="give:warOn">⚔ Savaş sözü</button>
+      <button class="abtn ${this._dealHelp===o.id?'pri':''}" data-a="dealHelp" data-x="${o.id}">🛡 Savaşa Yardım Teklif Et</button>
       <button class="abtn" data-a="dealAdd" data-x="give:peaceWith">🤲 Barıştırma</button>
       <button class="abtn" data-a="dealAdd" data-x="give:passage">🚪 Geçiş izni</button>
     </div></div>`;
@@ -5778,6 +5781,7 @@ const UI = {
     </div></div></div>`;
 
     h += this.dealSupportHtml(d,e,o);   // MP-FIELD-FIX.0: belirli savaşa destek daveti
+    h += this.dealHelpHtml(d,e,o);   // SAHA-ENTEGRE.0: karşı tarafın savaşına katılmayı öner
     h += this.dealTermsHtml(d,e,o);   /* MP-DEAL-SYS.0: Sistem Devri sonucu, Toprak Vaadi farkı, haraç yükü */
     h += this.warDealHtml(d,e,o);   // BETA-WAR-GOALS.0: savaş şartları
     // --- anlaşma türleri ---
@@ -10338,6 +10342,24 @@ UI.warPledgeHtml=function(o){
     <div class="mini">Söz kabulde bağlayıcıdır; savaş kendiliğinden başlamaz. Durum ay başında ve savaş ilanında denetlenir.</div></div>`;
 };
 UI.dealSupportRows=function(o){return typeof warSupportOptions==='function'?warSupportOptions(G.p,o):[];};
+/* SAHA-ENTEGRE.0 — SAVAŞA YARDIM TEKLİF ET: karşı tarafın süren savaşına katılmayı VER listesine koy (warJoin, aynı motor) */
+UI.dealHelpRows=function(o){return typeof warHelpOptions==='function'?warHelpOptions(G.p,o):[];};
+UI.dealHelpHtml=function(d,e,o){
+  if(this._dealHelp!==o.id)return '';const rows=this.dealHelpRows(o);
+  let h=`<div class="box dealHelp"><b>SAVAŞA YARDIM TEKLİF ET · ${esc(o.name)}</b><div class="mini">Seçtiğin savaşa ${esc(o.name)} tarafında katılmayı önerirsin; karşılığını İSTİYORUM listesine ekle (kaynak, teknoloji, geçiş, haraç, aynı cephe için toprak vaadi…). Teklif savaş başlatmaz, ödeme yapmaz; kabulde katılım ve şartlar birlikte uygulanır. Savaş biterse gecikmiş kabul işlenmez.</div>`;
+  if(rows===null)h+='<div class="mini">Host\'tan güncel savaşlar alınıyor…</div>';
+  else if(!rows.length)h+='<div class="mini warnTxt">'+esc(o.name)+' için bildiğin, katılabileceğin süren bir savaş yok. Üçüncü taraf savaşlarını görmek için SIZILMIŞ istihbarat gerekir; müttefikin ya da federasyon ortağının savaşları doğrudan görünür.</div>';
+  else for(const r of rows){const on=d.give.some(i=>i.t==='warJoin'&&i.front===r.front);
+    h+=`<button class="abtn ${on?'pri':''} ${r.ok?'':'dis'}" data-a="dealHelpPick" data-x="front:${r.front}:${r.target}" ${r.ok?'':'disabled'}>${on?'☑':'☐'} ${esc(r.label)}</button>${r.ok?'':`<div class="mini warnTxt">${esc(r.why)}</div>`}`;}
+  return h+'</div>';
+};
+UI.dealHelpPick=function(x){
+  const d=this.deal;if(!d)return;const [k,a,t]=String(x).split(':'),id=+a,target=+t;if(k!=='front'||!Number.isSafeInteger(id)||!Number.isSafeInteger(target))return;
+  const r=(this.dealHelpRows(G.emps[d.to])||[]).find(r=>r.front===id&&r.target===target);if(!r||!r.ok){say(r?.why||'Bu savaşa katılım artık önerilemez','war');this.drawDeal();return;}
+  const i=d.give.findIndex(i=>i.t==='warJoin'&&i.front===id);
+  if(i>=0)d.give.splice(i,1);else{d.give=d.give.filter(i=>i.t!=='warJoin');d.give.push({t:'warJoin',front:id,target});}
+  this.drawDeal();
+};
 UI.dealSupportHtml=function(d,e,o){
   let h='';if(this.dealMpHuman(o))h+='<div class="mini dealWarOnWhy">⚔ <b>Savaş sözü</b> = son tarihe kadar üçüncü bir devletle savaşa girme sözü (kabulde savaş ilan edilmez). Belirli bir savaşa hemen katılım için <b>Savaşa Destek İste</b>.</div>';   /* MP-WARON.0 */
   if(this._dealSupport!==o.id)return h;
