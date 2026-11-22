@@ -1956,11 +1956,12 @@ function invasionTick(){
 
           /* ── 4. TEMİZ İŞGAL ── */
           if (col.garrison <= 0){
-            const kalanGuc = K.tf.reduce((t, f) => t + groundPower(f), 0);
-            /* Taarruz filoları görevini tamamlar ve dağılır */
-            for (const tf of K.tf){if(tf.ships.length)fleetLost(tf,'rule','Kara ordusu işgal görevini tamamladı');tf.ships.length = 0;}
-            G.fleets = G.fleets.filter(f => f.ships.length);
-
+            /* SAHA-ORDU-P0: Fetih başarılı olduğunda hayatta kalan çıkarma
+               orduları G.fleets'te korunur. Önceki davranış onları bütünüyle
+               silerek gücün %60'ını garnizona çeviriyordu; bu görünür ve
+               yeniden kullanılabilir bir 15K ordunun kaybına yol açıyordu.
+               Kara muharebesindeki GERÇEK zayiat yukarıda zaten uygulandı.
+               İşgal garnizonuna ikinci kez aynı ordunun gücünü yazma. */
             const eskiSahip = pl.owner;
             /* captureSystem nüfusu %30 kırıyor (fetih kaybı). Temiz
                işgalin bütün anlamı bunu ÖNLEMEK — değeri önce
@@ -1972,7 +1973,10 @@ function invasionTick(){
             col.b = binaKoru;
             col.stab = 35;
             col.shield = 0;
-            col.garrison = Math.max(10, Math.round(kalanGuc * .6));
+            /* Yeni garnizon koloninin kendi savunmasından gelir.
+               Hayatta kalan taarruz gemileri ayrıca filoda kalır. */
+            col.garrisonBase = garrisonOf(col,G.emps[+id],pl);
+            col.garrison = Math.max(10,col.garrisonBase);
             col.occupied = (G.memAge || 0);
             pl.recent_conquest = 36;         // FAZ 27: dokunulmazlık
             pl.martial_law = 24;             // FAZ 29: sıkıyönetim
