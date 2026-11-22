@@ -1,0 +1,21 @@
+'use strict';
+const path=require('node:path'),fs=require('node:fs'),assert=require('node:assert/strict');
+const {runtime}=require('../../tests/helpers/runtime');
+const [p47,crisis,out]=process.argv.slice(2);
+const old=require(path.resolve(p47,'tests/helpers/96a-fixture')).cargoWorld();
+old.run('sign();advanceCargo(2);Commerce.cancel(1,G.p);advanceCargo(5)');
+const cad=runtime();cad.sb.old=old.run('serialize()');
+assert(cad.run('deserialize(old)'));
+const before=cad.run('JSON.stringify([G.commerce.convoys,G.emps.map(e=>e.res),RND_STATE])');
+assert.equal(before,old.run('JSON.stringify([G.commerce.convoys,G.emps.map(e=>e.res),RND_STATE])'));
+cad.run('G.day+=30;Commerce.tick(30);var after=JSON.stringify(G.emps.map(e=>e.res));Commerce.tick(30)');
+assert(cad.run('after===JSON.stringify(G.emps.map(e=>e.res))&&G.commerce.convoys.every(v=>v.status==="delivered"&&v.receipt===v.id)'));
+cad.sb.crisis=fs.readFileSync(crisis,'utf8');assert(cad.run('deserialize(crisis)'));
+const probe=JSON.parse(cad.run(`JSON.stringify((()=>{
+ const e=G.emps[2],donor=G.emps.find(o=>o!==e&&o.contact[e.id]&&e.contact[o.id]&&(o.res.yiy||0)>=50&&!o.war[e.id]&&!o.wild&&!o.dead);
+ if(!donor)throw Error('Uygun karşı taraf bulunamadı');
+ const o={from:donor.id,to:e.id,give:[{t:'res',r:'yiy',v:50}],want:[]},g=dealQuote(o),qty=e.res.yiy;
+ return {actor:e.id,donor:donor.id,day:G.day,ports:tradeHubs(e),ok:executeDeal(o),change:e.res.yiy-qty,reasons:g.reasons};
+})())`));
+assert.deepEqual(probe.ports,[]);assert.equal(probe.ok,false);assert.equal(probe.change,0);
+fs.writeFileSync(out,JSON.stringify({p47Loaded:true,unchangedCargoStocksRng:true,receipts:2,repeatCredit:0,probe},null,2)+'\n');

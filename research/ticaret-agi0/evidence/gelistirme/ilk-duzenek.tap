@@ -1,0 +1,15 @@
+✖ tests/ticaret_agi0_test.cjs (4128.959058ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4137.071299
+
+✖ failing tests:
+
+test at tests/ticaret_agi0_test.cjs:1:1
+✖ tests/ticaret_agi0_test.cjs (4128.959058ms)
+  'test failed'

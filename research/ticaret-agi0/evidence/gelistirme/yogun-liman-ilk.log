@@ -1,0 +1,7 @@
+page.evaluate: TypeError: Cannot set properties of undefined (setting '0')
+    at eval (eval at evaluate (:311:30), <anonymous>:4:29)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at run (/workspace/Star-ticaret/research/ticaret-agi0/liman-yuku.cjs:12:24) {
+  log: []
+}

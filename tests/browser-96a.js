@@ -15,7 +15,7 @@ async function open(){const portrait=page.viewportSize().width===360;if(portrait
  await test('cancel actual button prevents new loads while in-flight cargo still delivers',async()=>{await value('sign96();advance96(2)');await open();await page.click('[data-a="commerceCancel"]');eq(await value('G.commerce.contracts[0].status'),'cancelled');await value('UI.closeModal();advance96(20);advance96(80)');eq(await value('G.commerce.convoys.length'),2);eq(await value('G.emps[1].res.min'),112);});
  await test('convoy layer DOM toggle leaves other independent flags unchanged and removes Canvas pixels',async()=>{await value('sign96();advance96(2);advance96(5);window.other=[FED_LINKS_ON,ALLY_LINKS_ON,WAR_LINKS_ON,LOGI_ON];window.pixels96=()=>{var cv=document.createElement("canvas");cv.width=View.vw;cv.height=View.vh;CommerceUI.draw(cv.getContext("2d"));return Array.from(cv.getContext("2d").getImageData(0,0,cv.width,cv.height).data).filter((x,i)=>i%4===3&&x>0).length};');assert.ok(await value('pixels96()')>10);await tool();await page.click('#convoyToggle');eq(await value('pixels96()'),0);eq(await value('JSON.stringify([FED_LINKS_ON,ALLY_LINKS_ON,WAR_LINKS_ON,LOGI_ON])===JSON.stringify(other)'));await page.click('#convoyToggle');assert.ok(await value('pixels96()')>10);});
  await test('actual map tap selects moving convoy and locate button uses same camera',async()=>{await value('sign96();advance96(2);advance96(5);window.cam=View.cam;$("outMap").classList.remove("open");$("sidebar").classList.add("off");View.draw()');const point=await value('CommerceUI.hits[0]');assert.ok(point);await page.mouse.click(point.x,point.y);eq(await value('CommerceUI.selected'),point.id);assert.ok((await page.locator('#modal').innerText()).includes('#'+point.id));await page.locator('[data-a="commerceLocate"][data-x="'+point.id+'"]').click();eq(await value('View.cam===cam'));});
- for(const [width,height]of [[740,360],[360,740],[1280,720]])await test(width+'x'+height+' real trade UI fits, scrolls and returns to actual convoy map',async()=>{
+ for(const [width,height]of [[740,360],[800,360],[844,390],[360,740],[1280,720]])await test(width+'x'+height+' real trade UI fits, scrolls and returns to actual convoy map',async()=>{
   await page.setViewportSize({width,height});await value('sign96();advance96(2)');await open();await page.click('[data-a="commerceConvoys"]');
   const g=await page.locator('#modal .mbox').evaluate(el=>{const r=el.getBoundingClientRect(),b=el.querySelector('.mbd');return {w:r.width,h:r.height,left:r.left,top:r.top,scroll:b.scrollHeight,client:b.clientHeight,overflow:document.documentElement.scrollWidth>innerWidth};});assert.ok(g.w<=width+1&&g.h<=height+1&&!g.overflow,JSON.stringify(g));if(width===740)assert.ok(g.scroll>g.client);await page.locator('#modal .mbd').evaluate(el=>el.scrollTop=300);await page.locator('[data-a="commerceLocate"]').first().click();eq(await page.locator('#modal').evaluate(e=>e.classList.contains('hidden')));await value('View.draw()');const count=await value('CommerceUI.hits.length');assert.ok(count>0);fs.writeFileSync(path.join(out,'layout-'+width+'x'+height+'.json'),JSON.stringify(g,null,2));if(process.env.STARS_SCREENSHOT_DIR)await page.screenshot({path:path.join(process.env.STARS_SCREENSHOT_DIR,'stars96a-'+width+'x'+height+'.png')});
  });
@@ -23,5 +23,25 @@ async function open(){const portrait=page.viewportSize().width===360;if(portrait
  await test('foreign third-party hidden cargo never appears in list, draw or hit targets',async()=>{await value('var c={id:999,e:2,to:3,status:"moving",amount:900,r:"ala",x:135,y:0};G.commerce.convoys.push(c);CommerceUI.open("convoys");View.draw()');assert.ok(!(await page.locator('#modal').innerText()).includes('#999'));eq(await value('CommerceUI.hits.some(h=>h.id===999)'),false);});
  await test('real physical attack updates lost cargo UI without double phantom penalty',async()=>{await value('sign96();advance96(2);var v=G.commerce.convoys[0],e=G.emps[2];e.wild=true;var f=newFleet(e,0,Array.from({length:20},()=>({c:"kor"})));window.before=G.p.res.ene;Commerce.attack(v,f);CommerceUI.open("convoys")');assert.ok((await page.locator('#modal').innerText()).includes('Yağmalandı'));eq(await value('G.p.res.ene'),await value('before'));eq(await value('G.commerce.convoys[0].amount'),0);});
  await test('PWA installs freight modules and reopens offline with persistent v8 cargo',async()=>{await value('sign96();advance96(2);advance96(6)');await page.evaluate(async()=>{await saveGame();await navigator.serviceWorker.register('./sw.js');await navigator.serviceWorker.ready;});await page.reload();await page.waitForFunction(()=>!!navigator.serviceWorker.controller);await context.setOffline(true);await page.reload();await page.waitForFunction(()=>typeof CommerceUI!=='undefined');eq(await page.evaluate(async()=>{const raw=await storeGet('yildiz:save');return JSON.parse(raw).v===8&&JSON.parse(raw).commerce.convoys.length===2}));await context.setOffline(false);});
+ await test('visible port badges follow real planet buildings and map zoom',async()=>{
+  await page.setViewportSize({width:844,height:390});
+  const labels=await page.evaluate(()=>{
+   const s=G.sys[0],pl=s.planets[0];s.name='Liman Deneyi';View.sel=null;View.selSys=s;UI.tab('sistem');
+   const sample=(count,zoom)=>{
+    pl.col.b.liman=count;View.cam={x:s.x,y:s.y,z:zoom};
+    UI.refresh();const planet=document.querySelector('.planetFoldName')?.textContent||'';
+    const rows=[],ctx=View.g,original=ctx.fillText;
+    ctx.fillText=function(text,...args){if(String(text).includes(s.name))rows.push(text);return original.call(this,text,...args);};
+    try{View.draw();}finally{ctx.fillText=original;}
+    return {planet,rows};
+   };
+   const full=sample(2,.85),far=sample(2,.2),gone=sample(0,.85);
+   sample(2,.85);return {full,far,gone};
+  });
+  assert.ok(labels.full.planet.includes('⚓ ×2'));assert.ok(labels.full.rows.some(t=>t.includes('⚓×2')));
+  assert.ok(!labels.far.rows.some(t=>t.includes('⚓')));assert.ok(!labels.gone.planet.includes('⚓'));
+  assert.ok(labels.gone.rows.some(t=>t==='Liman Deneyi'));
+  await page.screenshot({path:path.join(out,'liman-844x390.png')});
+ });
  const report={browser:browser.version(),physicalAndroid:false,viewportEmulation:true,pass:results.filter(x=>x.ok).length,fail:results.filter(x=>!x.ok).length,pageErrors:errors,results};fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify(report,null,2));console.log('BROWSER GEÇEN: '+report.pass+' KALAN: '+report.fail);process.exitCode=report.fail||errors.length?1:0;
 })().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{if(browser)await browser.close();if(server)server.close()});

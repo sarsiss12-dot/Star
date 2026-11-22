@@ -2256,26 +2256,28 @@ const View = {
         g.font = '600 11px ui-monospace,monospace';
         g.textAlign = 'center';
         g.textBaseline = 'top';
-        const labelWidth=g.measureText(s.name).width;
+        const ports=z>.38?s.planets.reduce((n,pl)=>n+((pl.owner===0||pVis(s))?(pl.col?.b?.liman||0):0),0):0;
+        const systemLabel=s.name+(ports?' ⚓'+(ports>1?'×'+ports:''):'');
+        const labelWidth=g.measureText(systemLabel).width;
         const box=this.placeMapLabel(p.x-labelWidth/2-3,p.y+sr+4,labelWidth+6,16);
         if(box){
         const ty=box.y+2,tx=box.x+labelWidth/2+3;
         /* FAZ 75: uzaklaşınca yazının arkasına koyu şerit —
            yıldız kalabalığında okunabilirlik. */
         if (z < .28){
-          const w3 = g.measureText(s.name).width;
+          const w3 = g.measureText(systemLabel).width;
           g.fillStyle = 'rgba(5,8,16,.62)';
           g.fillRect(tx - w3/2 - 3, ty - 1, w3 + 6, 12);
         }
         g.lineWidth = 3;
         g.lineJoin = 'round';
         g.strokeStyle = 'rgba(4,7,14,.92)';
-        g.strokeText(s.name, tx, ty);
+        g.strokeText(systemLabel, tx, ty);
         g.fillStyle = s.owner>=0
           ? ((MAP_MODE === 'diplomasi' || MAP_MODE === 'savas')
               ? diploColor(G.emps[s.owner]) : G.emps[s.owner].col)
           : 'rgba(214,228,246,.95)';
-        g.fillText(s.name, tx, ty);
+        g.fillText(systemLabel, tx, ty);
         g.textBaseline = 'alphabetic';
       }
         } // admitted name label

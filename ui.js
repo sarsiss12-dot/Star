@@ -1826,18 +1826,15 @@ const UI = {
         const o = G.emps[+id], e = G.p;
         const amt = +v;
         if ((e.res[r]||0) < amt){ say('Yetersiz ' + RES[r].n); break; }
-        e.res[r] -= amt;
-        o.res[r] = (o.res[r]||0) + amt;
-        // değer ve ihtiyaç ilişkiyi belirler
-        const base = itemValue(o, {t:'res', r, v:amt}, e);
-        const gain = clamp(Math.round(base * .10 * (1 + e.mods.dipMul)), 3, 45);
-        e.rel[o.id] = clamp(e.rel[o.id] + gain, -100, 100);
-        o.rel[e.id] = clamp(o.rel[e.id] + gain, -100, 100);
-        say(o.name + ' hediyeyi kabul etti (+' + gain + ' ilişki)', 'win');
+        const offer={from:e.id,to:o.id,give:[{t:'res',r,v:amt}],want:[]};
+        const q=dealQuote(offer);
+        if(!q.ok||!executeDeal(offer)){say(q.reasons.join(' · ')||'Hediye gönderilemedi');break;}
+        say(o.name+' için hediye sevkiyatı imzalandı','win');
         this.closeModal();
         this.openDiplo();
         break;
       }
+      case 'revokePortTransit': revokePortTransit(G.p,G.emps[+x]);this.openDiplo();break;
       case 'embargo': {
         const o = G.emps[+x];
         if (typeof setEmbargo === 'function' && setEmbargo(G.p, o, true, 'kararın')){
@@ -2481,7 +2478,7 @@ const UI = {
         const folded=folds.has(s.id+':'+pl.i),owner=territoryOwnerInfo(pl.owner);
         h+=`<button class="planetFoldHeader" data-a="planetFold" data-x="${s.id}:${pl.i}"
           aria-expanded="${!folded}" aria-label="${esc(pl.name)}: ${folded?'ayrıntıları aç':'ayrıntıları küçült'}">
-          <span>${folded?'▸':'▾'}</span><b class="planetFoldName">${esc(pl.name)}</b>
+          <span>${folded?'▸':'▾'}</span><b class="planetFoldName">${esc(pl.name)}${(mine||pVis(s))&&pl.col.b?.liman>0?' ⚓ ×'+pl.col.b.liman:''}</b>
           ${folded?`<span class="planetFoldStats">Nüfus ${Math.floor(pl.col.pop)} · Moral ${Math.round(pl.col.stab)}${pl.col.q&&pl.col.q.length?' · İnşa '+pl.col.q.length:''}</span>`:''}
           ${owner?`<span class="flag" title="${esc(owner.name)}" style="background:${owner.col}"></span>`:''}</button>`;
         if(folded){h+='</div>';continue;}
@@ -3659,6 +3656,8 @@ const UI = {
     if (!atWar&&e.nap&&e.nap[o.id]>G.day) tags.push('🛡 Saldırmazlık · '+Math.ceil((e.nap[o.id]-G.day)/30)+' ay');
     if (!atWar&&e.pact&&e.pact[o.id]) tags.push('🤝 Ticaret paktı');
     if (!atWar&&e.ally&&e.ally[o.id]) tags.push('⚑ İttifak');
+    if(o.portTransit?.[e.id]>G.day)tags.push('⚓ Onun limanları sana açık · '+Math.ceil(o.portTransit[e.id]-G.day)+' gün');
+    if(e.portTransit?.[o.id]>G.day)tags.push('⚓ Senin limanların ona açık · '+Math.ceil(e.portTransit[o.id]-G.day)+' gün');
     if (o.passage&&o.passage[e.id]) tags.push('🚪 Onun sınırı sana açık');
     if (e.passage&&e.passage[o.id]) tags.push('🚪 Senin sınırın ona açık');
     if (e.visionFrom&&e.visionFrom[o.id]) tags.push('👁 Sana sensör paylaşımı');
@@ -5719,6 +5718,13 @@ const UI = {
     const qd = (typeof dealQuote === 'function')
       ? dealQuote({from:0, to:d.to, give:d.give, want:d.want,
                    born:d.born, expires:d.expires}) : null;
+    if(qd?.norm&&militarySettlement(qd.norm))h+='<p class="mini">Siyasi ödeme · Kabul edilen savaş katılımı veya barış tazminatı cephe işlemiyle birlikte ödenir.</p>';
+    if(qd?.norm&&!militarySettlement(qd.norm)&&d.give.concat(d.want).some(it=>it.t==='res'&&Commerce.resources.includes(it.r))){
+      const plan=Commerce.freightPlan(qd.norm);
+      h+='<div class="mini">Tek seferlik kargo · İmza sevkiyatı açar. Mal yüklemede çıkar, varışta teslim edilir.</div>';
+      for(const l of plan.legs||[]){const a=G.emps[l.e],b=G.emps[l.to];
+        h+='<p class="mini">'+esc(l.v+' '+RES[l.r].n+' · '+CommerceUI.routeText(a,b,l.source,l.target,Commerce.route(a,b,l.source,l.target)))+'</p>';}
+    }
     const meCan   = !qd || qd.giveFail.length === 0;
     const themCan = !qd || qd.wantFail.length === 0;
     const deliverable = !!(qd && qd.ok);
@@ -5760,6 +5766,8 @@ const UI = {
       <button class="abtn" data-a="dealAdd" data-x="give:warOn">⚔ Savaş sözü</button>
       <button class="abtn ${this._dealHelp===o.id?'pri':''}" data-a="dealHelp" data-x="${o.id}">🛡 Savaşa Yardım Teklif Et</button>
       <button class="abtn" data-a="dealAdd" data-x="give:peaceWith">🤲 Barıştırma</button>
+      ${G.p.portTransit?.[d.to]>G.day?`<button class="abtn dgr" data-a="revokePortTransit" data-x="${d.to}">Liman iznini geri al</button>`:''}
+      <button class="abtn" data-a="dealAdd" data-x="give:portTransit">⚓ Liman transit izni · 360 gün</button>
       <button class="abtn" data-a="dealAdd" data-x="give:passage">🚪 Geçiş izni</button>
     </div></div>`;
 
@@ -5779,6 +5787,7 @@ const UI = {
       <button class="abtn" data-a="dealAdd" data-x="want:warOn">⚔ Savaş sözü</button>
       <button class="abtn ${this._dealSupport===o.id?'pri':''}" data-a="dealSupport" data-x="${o.id}">⚔ Savaşa Destek İste</button>
       <button class="abtn" data-a="dealAdd" data-x="want:peaceWith">🤲 Barıştırma</button>
+      <button class="abtn" data-a="dealAdd" data-x="want:portTransit">⚓ Liman transit izni · 360 gün</button>
       <button class="abtn" data-a="dealAdd" data-x="want:passage">🚪 Geçiş izni</button>
     </div></div></div>`;
 
@@ -5917,7 +5926,7 @@ const UI = {
       return;
     }
     if (kind === 'intel'){ list.push({t:'intel'}); this.drawDeal(); return; }
-    if (kind === 'passage'){ list.push({t:'passage'}); this.drawDeal(); return; }
+    if (kind === 'passage'||kind==='portTransit'){ list.push({t:kind}); this.drawDeal(); return; }
     if (kind === 'warOn'){
       const cands = G.emps.filter(x=>!x.dead && !x.wild && x.id !== 0 && x.id !== d.to && !x.crisisSide && e.contact[x.id] && (!own||!src.war[x.id]));
       if (!cands.length){ say('Savaş ilan edilecek uygun hedef yok'); return; }

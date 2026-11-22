@@ -111,7 +111,7 @@ const ArchiveUI = {
   decisionContext(r,f){
     let text='Kabul mevcut teklifi uygular; ret bu kaydı sonuçlandırır.';
     if(r.kind==='invite')text='Kabul: '+(f?.name||'Federasyon')+' üyeliği, anayasa yükümlülükleri ve yürürlükteki yasalar. Ret: bu davet kapanır; üyelik kurulmaz. Katılımın ek Etki bedeli yoktur.';
-    if(r.kind==='pact'||r.kind==='peace'||r.kind==='aideal')text='Kabul: aşağıdaki anlaşma hükümleri mevcut işlem motoruyla uygulanır. Ret: kaynak aktarımı veya yeni anlaşma gerçekleşmez. İmza Etkisini gönderen öder; senden istenen kaynaklar kabulde kendi stokundan alınır.';
+    if(r.kind==='pact'||r.kind==='peace'||r.kind==='aideal')text='Kabul: aşağıdaki anlaşma hükümleri mevcut işlem motoruyla uygulanır. Ret: kaynak aktarımı veya yeni anlaşma gerçekleşmez. İmza Etkisini gönderen öder; fiziksel ticaret yükü depodan yüklemede çıkar ve alıcıya varışta yazılır. Savaş katılım bedeli cepheye katılımda ödenir.';
     if(r.kind==='aideal')text+=' İlk geçerli ret, aynı şartlar için 27 ay bekleme ve gönderenin sana ilişkisinde −5 değişim yaratır; aynı karar ikinci kez ceza vermez.';
     if(r.kind==='submit')text='Kabul: seçtiğin türün mevcut vasallık sözleşmesi kurulur; gönderen 90 Etki öder. Ret: sözleşme kurulmaz; gönderenin sana ilişkisi −15 değişir.';
     if(r.kind==='sqOffer')text='Kabul: mevcut statüko barışı uygulanır. Ret: savaş sürer.';

@@ -1,0 +1,35 @@
+✔ 100 sistem, dokuz sıçrama, iki yabancı ara liman ve gerçek teslimat (585.87844ms)
+✔ ilk liman yıkıldı (406.117258ms)
+✔ ikinci liman yıkıldı (325.260874ms)
+✔ dört sıçramalık boşluk (606.261098ms)
+✔ askerî geçiş yeterli değil (459.935749ms)
+✔ abluka (379.911941ms)
+✔ ambargo (311.35317ms)
+✔ izin süresi doldu (427.708174ms)
+✔ liman üçüncü devlete devredildi (510.314056ms)
+✔ federasyon yasası üyelik boyunca aktarmaya izin verir (797.753676ms)
+✔ devralan devletin kendi izni, geri alma ve ayrı gezegen sahipliği (563.603516ms)
+✔ açık alternatif yol ve döngüsüz rota (390.468139ms)
+✔ yüklemeden önce çıkış kaybı iki stoğu da korur (309.172583ms)
+✔ yoldaki kargo çıkış limanının kaybından sonra da alıcıya ulaşır (296.57349ms)
+✔ varış devri meşru alıcının başka limanına tek teslimat yapar (248.23479ms)
+✔ tek takas imza, yükleme, Save8/RNG tekrarı, varış ve makbuz (903.502671ms)
+✔ kapalı rota ya da geri alınan işlem stok, izin ve sözleşme bırakmaz (400.947379ms)
+✔ yük kaybından sonra aynı gün ikinci ödeme ya da geri doğuş yok (364.518882ms)
+✔ tek pakette liman izni ve sevkiyat her sırada atomik imzalanır (312.140119ms)
+✔ ara liman kaybı aynı kargoyu konumu korunarak alternatif hatta geçirir (285.871765ms)
+✔ ara liman hakkı kesildiğinde 180 gün sonunda kargo bir kez kayba yazılır (320.000741ms)
+✔ AI gerçek ihtiyacı açan belirli bir izin için bütçeli teklif verir (287.84963ms)
+✔ kapasitesi yetersiz alternatif limana kargo yönlendirilmez (322.078773ms)
+✔ misafir aynasında kişisel yük görünür, üçüncü taraf hattı ve keşfedilmemiş liman gizli kalır (561.555082ms)
+✔ aynı gün varış ile devir sırasını host belirler, ikinci tick stok yaratmaz (919.599628ms)
+✔ izin iptali ile yükleme aynı gün işlenirken kargo bir defa düşülür (998.305342ms)
+✔ AI misafirin liman hakkını onun adına kabul edemez, izin host gelen kutusunda bekler (293.48197ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12623.233207

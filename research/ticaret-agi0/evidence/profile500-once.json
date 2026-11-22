@@ -1,0 +1,42 @@
+{
+  "route": {
+    "calls": 248,
+    "ms": 3.1613217294216156
+  },
+  "freightPlan": {
+    "calls": 0,
+    "ms": 0
+  },
+  "aiPartnerOffers": {
+    "calls": 64,
+    "ms": 1.5999869406223297
+  },
+  "aiPortInvestment": {
+    "calls": 76,
+    "ms": 10.319412857294083
+  },
+  "aiTransitRequest": {
+    "calls": 76,
+    "ms": 0.7126609981060028
+  },
+  "aiPorts": {
+    "calls": 92,
+    "ms": 5.012799948453903
+  },
+  "aiTerms": {
+    "calls": 0,
+    "ms": 0
+  },
+  "aiOpportunityTick": {
+    "calls": 4,
+    "ms": 18.07963600754738
+  },
+  "aiRouteSignature": {
+    "calls": 4,
+    "ms": 4.6545209884643555
+  },
+  "remainingRoute": {
+    "calls": 0,
+    "ms": 0
+  }
+}

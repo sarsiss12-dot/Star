@@ -128,7 +128,7 @@ function aiWarBudget(e,o){
   }
   const partner=new Set(targets),links=(e.trade?.links||[]).filter(l=>!l.bl),lost=links.filter(l=>partner.has(l.a)||partner.has(l.b)).length;
   const network=(e._incomeDetail?.rows||[]).filter(r=>r.r==='ene'&&r.name==='Ticaret ağı üretim katkısı').reduce((n,r)=>n+r.n,0)*lost/Math.max(1,links.length);
-  const released={};for(const c of G.commerce?.contracts||[])if(!Commerce.closed(c)&&[c.a,c.b].includes(e.id)&&[c.a,c.b].includes(o.id))for(const l of c.legs)if(l.e===e.id)released[l.r]=(released[l.r]||0)+l.v*30/l.every;
+  const released={};for(const c of G.commerce?.contracts||[])if(!c.once&&!Commerce.closed(c)&&[c.a,c.b].includes(e.id)&&[c.a,c.b].includes(o.id))for(const l of c.legs)if(l.e===e.id)released[l.r]=(released[l.r]||0)+l.v*30/l.every;
   const energyNet=plan.rows.ene.net+(released.ene||0)-extraEnergy-network,alloyNet=plan.rows.ala.net+(released.ala||0)-extraAlloy;
   const energyMonths=energyNet<0?plan.rows.ene.stock/-energyNet:null,alloyMonths=alloyNet<0?plan.rows.ala.stock/-alloyNet:null;
   const reason=energyMonths!==null&&energyMonths<1?'expedition-energy':alloyMonths!==null&&alloyMonths<1?'expedition-alloy':'sustainable';
@@ -263,7 +263,7 @@ function aiEconomyPlan(e){
  // change future production/upkeep, and each liability is counted once.
  const budget=aiFedBudget(e,projected),vassal=aiVassalBudget(e,income);Object.assign(projected,budget.net);
  for(const r in vassal)projected[r]=(projected[r]||0)-vassal[r];
- if(typeof Commerce!=='undefined'&&G.commerce)for(const c of G.commerce.contracts)if(!Commerce.closed(c))for(const l of c.legs)if(l.e===e.id)projected[l.r]=(projected[l.r]||0)-l.v*30/l.every;
+ if(typeof Commerce!=='undefined'&&G.commerce)for(const c of G.commerce.contracts)if(!c.once&&!Commerce.closed(c))for(const l of c.legs)if(l.e===e.id)projected[l.r]=(projected[l.r]||0)-l.v*30/l.every;
  const eatsFood=identityEatsFood(e);
  const target={ene:12,min:16,yiy:eatsFood?4:0,ala:8,tuk:4,ara:0,etk:0},floor={ene:120,min:120,yiy:eatsFood?60:0,ala:100,tuk:60,ara:0,etk:0},rows={};
  for(const r of Object.keys(target)){
