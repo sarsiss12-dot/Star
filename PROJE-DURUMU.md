@@ -2,6 +2,10 @@
 
 Son güncelleme: 2026-11-22. Depo `sarsiss12-dot/Star`.
 
+## Ticaret geliştirmesi (yayınsız) — TİCARET-AĞ.1
+
+`claude/stars-ticaret-ag1` (PR #70 üstünde, taslak). Anlık diplomatik kaynak takası p49 gibi korundu; tek seferlik fiziksel kargo açık `cargo` maddesi. Tam Node p49'a göre yalnız manifest kaynaklı 2 paket farkı. 100 sistem tek ay p95 +%9,89 (kapı %5) → sürüm yükseltilmedi. [Sonuç](reports/claude/TICARET-AG1-SONUC.md) · [Devir](reports/claude/TICARET-AG1-DEVIR.md). Oynanabilir aday p49 olarak kalır.
+
 ## Güncel geliştirme adayı — p49 (SAHA-GÜVENCE.1)
 
 `claude/stars-saha-guvence1` (taban `claude/stars-saha-entegre0` @ `347ef0d`, p48 / PR #68). Oyun 96h10p49 / PWA stars-v96h10p49 / MP.8.9b48; Save8 v8, paket 4, protokol 1. ZIP `releases/stars-faz96h10p49.zip` (SHA-256 `25491d763360688340fc9aaf01e670c15d75f151bcf327366d025a09cdc8946c`, CRC32 `6D58F714`). [Sonuç raporu](reports/claude/SAHA-GUVENCE1-SONUC.md) · [Program devri](reports/claude/STARS-SONRAKI-DEVIR.md).

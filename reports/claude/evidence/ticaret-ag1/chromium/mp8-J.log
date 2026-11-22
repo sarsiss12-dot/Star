@@ -1,0 +1,10 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":306,"buildMs":318,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":354,"buildMs":371,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":4.6,"p95":6.5,"max":6.5},"longtask":{"n":0},"heapMB":17,"dom":728,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":25.2,"p95":25.2,"max":25.2},"refresh":{"n":1,"med":1.4,"p95":1.4,"max":1.4},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":14,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":39.1,"p95":39.1,"max":39.1},"refresh":{"n":1,"med":1.7,"p95":1.7,"max":1.7},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":729,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":22,"joinErrors":0}}}
+PASS J0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS J1 kayıt → kapanış → yeni oda → host tek başına: kayıt öncesi bekleyen/gizli olay korunur; tarih ilerler; host ve B için yeni olay/anomali/bilim zinciri üretilir
+PASS J2 misafirler yeni kodla döner (B ana menü ODAYA KATIL, C davet bağlantısı): B'nin kayıt öncesi ve host-tek-başına kararları B'de; host / C olayları B'de değil
+PASS J3 B'nin ilk gemi siparişi gerçek dokunuşla: host kabulü, host tersane kuyruğu ve B'nin tersane ekranı ayrı ölçülür; kaynak bir kez düşer
+PASS J4 yanıt kaybı + AYNI cid ile yeniden gönderim: tek sipariş, tek kaynak kesintisi, yinelenen yanıt; B tersane ekranında tek yeni satır
+GEÇEN: 5 KALAN: 0
+EXIT 0
