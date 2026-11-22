@@ -132,7 +132,16 @@ const ArchiveUI = {
       ${f?`<button class="abtn" data-a="inboxFederation" data-x="${r.id}">Federasyon bölümünü aç · karar saklanır</button>`:''}
       ${r.kind==='submit'?'<div class="mini">Himaye, seçilen vasallık türünün mevcut yükümlülüklerini getirir.</div><select id="inboxVassalType" aria-label="Vasallık türü">'+Object.entries(VASSAL_TYPES).map(([k,v])=>`<option value="${k}">${esc(v.n)} — ${esc(v.d)}</option>`).join('')+'</select>':''}</div>`,
       `${r.status==='pending'&&r.kind!=='fedrequest'?`<button id="inboxYes" data-a="inboxYes" class="ch" ${gate.ok?'':'disabled aria-describedby="inboxReason"'}>${r.kind==='fedvote'?'EVET OYU VER':r.kind==='decision'?'KARARI UYGULA':'KABUL ET'}</button><button id="inboxNo" data-a="inboxNo" class="ch">${r.kind==='fedvote'?'HAYIR OYU VER':'REDDET'}</button>${r.kind==='aideal'?`<button id="inboxCounter" data-a="inboxCounter" class="ch" ${counterOK?'':'disabled aria-describedby="inboxReason"'}>Karşı teklif hazırla</button>`:''}`:''}<button class="ch" data-a="diplomaticInbox">Listeye dön</button>`);
-    const token={};UI._archiveToken=token;const world=G.emps,record=r,resolve=yes=>{if(UI._archiveToken!==token||world!==G.emps||DiplomaticInbox.get(id)!==record)return;const out=DiplomaticInbox.resolve(id,yes,$('inboxVassalType')?.value||'haracguzar',world);say(out.ok?'Diplomatik karar kaydedildi':out.why,out.ok?'win':'war');this.record(id);UI.topbar();};
+    const token={};UI._archiveToken=token;const world=G.emps,record=r,resolve=yes=>{if(UI._archiveToken!==token)return;let rid=id,w=world;
+      if(world!==G.emps||DiplomaticInbox.get(id)!==record){
+        /* TİCARET-AĞ.2: yalnız MİSAFİRDE — ayna yenilenmesi aynı oyunun G.emps'ini ve kayıt nesnesini değiştirir; aynı mantıksal kayıt (key)
+           hâlâ bekliyorsa güncel kayıtla karar verilir (host respond'u yeniden doğrular), değilse sessiz kaybolmaz. Tek oyunculu / host'ta
+           dünya değişimi kayıt yüklemesidir: eski pencere düğmesi etkisiz kalır (p49 kuralı, faz87d / faz91e / faz95b / faz95e testleri). */
+        if(!(typeof MP6Stars!=='undefined'&&MP6Stars.S&&MP6Stars.S.on))return;
+        DiplomaticInbox.sync();const cur=DiplomaticInbox.state().records.find(x=>x.key===record.key);
+        if(!cur||cur.status!=='pending'||!DiplomaticInbox.gate(cur).ok){say('Kayıt güncellendi — kararı yeniden gözden geçir','war');if(cur)this.record(cur.id);return;}
+        rid=cur.id;w=G.emps;}
+      const out=DiplomaticInbox.resolve(rid,yes,$('inboxVassalType')?.value||'haracguzar',w);say(out.ok?'Diplomatik karar kaydedildi':out.why,out.ok?'win':'war');this.record(rid);UI.topbar();};
     if(r.status==='pending'&&r.kind!=='fedrequest'){UI._hook('inboxYes',()=>resolve(true));UI._hook('inboxNo',()=>resolve(false));if(r.kind==='aideal')UI._hook('inboxCounter',()=>{if(UI._archiveToken!==token||world!==G.emps||DiplomaticInbox.get(id)!==record||!DiplomaticInbox.gate(record).ok)return;UI.aiDealOpen(r.note.data);UI._hooks.offCounter();});}
   },
   construction(f){

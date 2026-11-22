@@ -1,0 +1,121 @@
+{
+  "file": "releases/stars-faz96h10p50.zip",
+  "build": "96h10p50",
+  "mpBuild": "MP.8.9b49",
+  "controlCommit": "e4350e5740891f5b39299500d3bd5566e3f46dae",
+  "parentCommit": "b6535234e1b3a8dfbb72bac6988ba4f35ef0dd0d",
+  "pwaCache": "stars-v96h10p50",
+  "saveVersion": 8,
+  "mpPackVersion": 4,
+  "protocol": 1,
+  "bytes": 957929,
+  "sha256": "26a6b5e3bbf577c37fd9433db747323adf005d893622486ac6514d41eb3988f8",
+  "crc32": "8D1FE07F",
+  "manifestSha256": "54a7f8cc2385f8b6bccc7ee083a3c189b11157020a0b7a74c983fbaa250a8c8f",
+  "crc32VerifiedEntries": 20,
+  "manifestVerifiedRuntimeFiles": 19,
+  "byteIdenticalRepack": true,
+  "status": "Otomatik testlerden geçmiş yayın adayı — fiziksel Android / gerçek internet / Render NOT RUN; saha kabulü yok",
+  "entryHashes": {
+    "RELEASE-MANIFEST.json": {
+      "bytes": 2367,
+      "sha256": "54a7f8cc2385f8b6bccc7ee083a3c189b11157020a0b7a74c983fbaa250a8c8f",
+      "crc32": "B8093F35"
+    },
+    "ai.js": {
+      "bytes": 312999,
+      "sha256": "218eeaa65c00e4d70f2b5b6186df0559cdbda06a6360199c5e97484cc673d92d",
+      "crc32": "5637CA69"
+    },
+    "archive-ui.js": {
+      "bytes": 47655,
+      "sha256": "a653ddbe8243cd8494302bd36a0b7981b40974f2998f40884b157d5352bd932f",
+      "crc32": "DB2EFCD5"
+    },
+    "audio.js": {
+      "bytes": 20197,
+      "sha256": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "crc32": "8E4EBBB4"
+    },
+    "combat.js": {
+      "bytes": 17493,
+      "sha256": "08971a0bd1b67f6d3dab1a24a0c3dc9d0bcb045c00c29c01735be9fd083be2d6",
+      "crc32": "208C2F6B"
+    },
+    "commerce-ui.js": {
+      "bytes": 13061,
+      "sha256": "4edbae3d11222ac4ad2c6a5d3d45bc77c01cb6dd1f370beb81cf657fb6eb3ae1",
+      "crc32": "15EB4431"
+    },
+    "commerce.js": {
+      "bytes": 43906,
+      "sha256": "06033bacaa1c4181a3e3e41a0d1380292022f6c178e1f1733fb0da013be61c35",
+      "crc32": "A96FFF51"
+    },
+    "construction.js": {
+      "bytes": 12099,
+      "sha256": "920d6122c3d3e65ef2650c94a9a5a804c3d67b65411627e23184f0e1d5d60e08",
+      "crc32": "4563CF0E"
+    },
+    "diplomacy.js": {
+      "bytes": 672990,
+      "sha256": "a59c3fd823ebe956789c8337045d408fc2e487de11a9b1ca133c267b9a592846",
+      "crc32": "F13E763E"
+    },
+    "economic-ledger.js": {
+      "bytes": 17942,
+      "sha256": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
+      "crc32": "A513EE94"
+    },
+    "economy-ui.js": {
+      "bytes": 36378,
+      "sha256": "68025b1bb388188435a51cca2319e92e7eb9ec6517b4e3c8437f335e2916763f",
+      "crc32": "C8FEC05D"
+    },
+    "economy.js": {
+      "bytes": 232201,
+      "sha256": "ca9b6429fdce59e88559b84a7985cb7a610f846f3db7faca6c809c85fab66c76",
+      "crc32": "1F1FCF20"
+    },
+    "inbox.js": {
+      "bytes": 13623,
+      "sha256": "9d1f0688aac18d1b9db00fad41ef66e30080467783dd69cd52160e5d19ee51b7",
+      "crc32": "6236371E"
+    },
+    "index.html": {
+      "bytes": 105751,
+      "sha256": "f80082cc6e9da5f7674408d17b434c79eb727075756376ed6ecbc7c6fa1de559",
+      "crc32": "522597AB"
+    },
+    "main.js": {
+      "bytes": 545382,
+      "sha256": "21296d244c4152f0fe87718bd7fac6f8d0b8fd471b7277094d20da9eeba87426",
+      "crc32": "64B9D060"
+    },
+    "manifest.json": {
+      "bytes": 1922,
+      "sha256": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "crc32": "641AE79B"
+    },
+    "map.js": {
+      "bytes": 157347,
+      "sha256": "4c814aa209836f5166f5718fede6045faf920f841f3b34681f0cb5209d5d888f",
+      "crc32": "7F3A057A"
+    },
+    "news.js": {
+      "bytes": 6039,
+      "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "crc32": "A13FF379"
+    },
+    "sw.js": {
+      "bytes": 3284,
+      "sha256": "bcaba443fca59a10ac66bb26caa586aa12e2697e9b71793fe299d3e81b3f720e",
+      "crc32": "608734AD"
+    },
+    "ui.js": {
+      "bytes": 723580,
+      "sha256": "80944b938cc10b9e4d55354fd998c105b520da86ccf378a4f173477cb80b967f",
+      "crc32": "164AFE39"
+    }
+  }
+}

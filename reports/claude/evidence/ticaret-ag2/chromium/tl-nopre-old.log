@@ -1,0 +1,15 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":191,"buildMs":235,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":278,"buildMs":307,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":3.5,"p95":6.4,"max":6.4},"longtask":{"n":0},"heapMB":17,"dom":742,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":36.2,"p95":36.2,"max":36.2},"refresh":{"n":1,"med":3.7,"p95":3.7,"max":3.7},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":17,"dom":711,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":36.9,"p95":36.9,"max":36.9},"refresh":{"n":1,"med":3.6,"p95":3.6,"max":3.6},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":719,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS TL0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 11; misafir gerçek STARS arayüzünde
+PASS TL1 B liman izni verir, C reddeder ve hiçbir hak oluşmaz
+  TL2 pre {"nopre":true}
+FAIL TL2 C izin ister, B kabul eder, iki misafir aynı yön ve süreyi görür
+Error: kabul host'a ulaşmadı (tanı): {"pre":{"nopre":true},"d":{"res":[{"v":1,"type":"result","seq":1,"cid":"j1_1_xr6sgr82pw","status":"ok","code":null,"rev":8,"extra":{"fronts":[],"promises":[]},"ms":18},{"v":1,"type":"result","seq":2,"cid":"j1_2_08r3v8fn2m","status":"ok","code":null,"rev":9,"extra":{"offer":1},"ms":45}],"rec":[{"id":1,"mp":2,"status":"pending","kind":"aideal"}],"modal":"GALAKTİK HABER AĞI\n✕\nHaberler · 0\nGelen kutusu · 1\nSevkiyatlar · 0\nGönderilen · 0\nKARAR · Teklif — Yeşil Birlik\n2210.01 · gün 1 · Yeşil Birlik · Diplomatik teklif · Bekliyor\n\nÇok oyunculu teklif · tur 1\n\nKARARIN ETKİSİ\n\nÇok oyunculu teklif. Kabul: hükümler host'ta mevcut işlem motoruyla (dealQuote /","log":["Teklif reddedildi — Yeşil Birlik","Yeni teklif — Yeşil Birlik"]},"hd":{"o":{"id":2,"from":2,"to":1,"give":[],"want":[{"t":"portTransit"}],"born":1.2198760000000004,"expires":541.219876,"round":1,"prev":null,"status":"pending","why":"","by":"human","cost":0},"last":null}}
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-agi0-mp.cjs:49:11
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:68:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-agi0-mp.cjs:38:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:562:18
+NOT RUN TL3 izni veren misafir masadan geri alır
+NOT RUN TL4 karşı teklif, kayıtlı izin ve süre sonu
+GEÇEN: 2 KALAN: 1

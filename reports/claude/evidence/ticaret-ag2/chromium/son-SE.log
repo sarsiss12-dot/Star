@@ -1,0 +1,12 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":527,"buildMs":536,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":3.3,"p95":3.3,"max":3.3},"longtask":{"n":0},"heapMB":16,"dom":757,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":26,"p95":26,"max":26},"refresh":{"n":1,"med":1.8,"p95":1.8,"max":1.8},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":16,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":20,"joinErrors":0}}}
+PASS SE0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS H0 fikstür (host): AI O ↔ AI X savaşta, B ile O müttefik; AI F B'ye savaş açar, B yorgunluğu 88; F'ye 8 bilinen sistem
+PASS H1 misafir "Büyük armalar" düğmesi çalışır (kapı engeli yok)
+PASS H2 lojistik: filo seçili değilken ikmal limanları + ipucu (misafir ve host)
+PASS H3 misafir Savaş Merkezi: yorgunluk %88 + %85 uyarısı (host değeri), rakip BİLİNMİYOR
+PASS H4 misafir HARİTADAN HEDEF SEÇ: 6+ sistem gerçek harita dokunuşuyla; host önizlemesi talep bedeli > 0
+PASS H5 misafir TÜMÜNÜ KENARA AL: kartlar gizlenir, karar verilmez
+PASS H6 misafir Savaşa Yardım Teklif Et: müttefik O'nun X savaşına katılım VER + 300 alaşım İSTE → host kaydı
+GEÇEN: 8 KALAN: 0
+EXIT 0

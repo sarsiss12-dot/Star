@@ -2,6 +2,10 @@
 
 Son güncelleme: 2026-11-22. Depo `sarsiss12-dot/Star`.
 
+## Güncel geliştirme adayı — p50 (TİCARET-AĞ.2)
+
+`claude/stars-ticaret-ag2` (taslak PR). Oyun 96h10p50 / PWA stars-v96h10p50 / MP.8.9b49; Save8 v8, paket 4, protokol 1. ZIP `releases/stars-faz96h10p50.zip` (SHA-256 `26a6b5e3bbf577c37fd9433db747323adf005d893622486ac6514d41eb3988f8`, CRC32 `8D1FE07F`). Zincirleme ticaret limanları, Transit İzni, fiziksel kargo (açık `cargo`), anlık kaynak takası (p49), misafir gelen kutusu KABUL düzeltmesi, AI–AI ticaret sözleşmesinde daraltılmış işlem kopyası. Tam Node p49'a göre yeni FAIL yok; Chromium TL/TA/SG/O/J/SE/X/SP PASS; perf kapısı geçti. Otomatik yayın adayı — fiziksel Android / Render NOT RUN, kullanıcı kabulü yok. [Sonuç](reports/claude/TICARET-AG2-SONUC.md) · [Devir](reports/claude/TICARET-AG2-DEVIR.md).
+
 ## Ticaret geliştirmesi (yayınsız) — TİCARET-AĞ.1
 
 `claude/stars-ticaret-ag1` (PR #70 üstünde, taslak). Anlık diplomatik kaynak takası p49 gibi korundu; tek seferlik fiziksel kargo açık `cargo` maddesi. Tam Node p49'a göre yalnız manifest kaynaklı 2 paket farkı. 100 sistem tek ay p95 +%9,89 (kapı %5) → sürüm yükseltilmedi. [Sonuç](reports/claude/TICARET-AG1-SONUC.md) · [Devir](reports/claude/TICARET-AG1-DEVIR.md). Oynanabilir aday p49 olarak kalır.

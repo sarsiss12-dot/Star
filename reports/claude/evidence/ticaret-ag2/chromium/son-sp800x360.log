@@ -1,0 +1,5 @@
+PASS S1 kurulum: BİLİM ANOMALİLERİ → Kapalı (gerçek dokunuş); oyunda normal anomali yok
+PASS S2 Fetih HARİTADAN HEDEF SEÇ: 7 sistem gerçek harita dokunuşu → TAMAM → önizlemede talep bedeli
+PASS S3 TÜMÜNÜ KENARA AL (gerçek dokunuş): olay kararları gizlenir, kaynak değişmez, ☰ listesinde
+GEÇEN: 3 KALAN: 0
+EXIT 0

@@ -36,8 +36,16 @@ module.exports=async({test,pg,tap,wait,settle,assert,cmd,shot})=>{
   assert.equal(await H.evaluate(([b,c])=>!!G.emps[b].portTransit?.[c],[b,c]),false);
  });
  await test('TL2 C izin ister, B kabul eder, iki misafir aynı yön ve süreyi görür',async()=>{
-  const id=await offer(C,b,'want');await record(B,id);await shot(B,'transit-kabul');await tap(B,'#inboxYes');
-  await wait(H,([b,c])=>G.emps[b].portTransit?.[c]>G.day,[b,c]);
+  const id=await offer(C,b,'want');await record(B,id);await shot(B,'transit-kabul');
+  /* TİCARET-AĞ.2 kök neden: kayıt penceresi açıldıktan hemen sonra KABUL'e dokunulunca misafirin archive-ui resolve kapısı
+     (world!==G.emps || DiplomaticInbox.get(id)!==record) kararı sessizce düşürüyordu — host'a respond hiç gitmiyordu (eski archive-ui ile
+     aynı akış FAIL, evidence/ticaret-ag2/chromium/tl-nopre-old.log). Dokunuş bilerek bekletmesiz yapılır. */
+  const pre={immediate:true};
+  await tap(B,'#inboxYes');
+  try{await wait(H,([b,c])=>G.emps[b].portTransit?.[c]>G.day,[b,c]);}
+  catch(e){const d=await B.evaluate(()=>({res:(MP1Join.results||[]).slice(-3),rec:DiplomaticInbox.state().records.filter(r=>r.mp).slice(-3).map(r=>({id:r.id,mp:r.mp,status:r.status,kind:r.kind})),modal:document.querySelector('#modal')?.innerText?.slice(0,300),log:(G.log||[]).slice(-3).map(l=>l.m)}));
+    const hd=await H.evaluate(id=>({o:MP1Host.host.dip.offers.find(o=>o.id===id),last:(MP1Host.host.stats&&MP1Host.host.stats.lastReject)||null}),id);
+    throw Error('kabul host\'a ulaşmadı (tanı): '+JSON.stringify({pre,d,hd}).slice(0,1400));}
   await settle('transit-kabul');
   const end=await H.evaluate(([b,c])=>G.emps[b].portTransit[c],[b,c]);
   assert.equal(await B.evaluate(c=>G.p.portTransit[c],c),end);
