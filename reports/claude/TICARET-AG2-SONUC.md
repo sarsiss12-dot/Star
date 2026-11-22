@@ -10,7 +10,7 @@ PASS / FAIL / NOT RUN ayrı. Kullanıcı test yapamıyor: kabul otomatik (Node +
 |---|---|
 | Doğrulanan başlangıç | PR #71 `b6535234e1b3a8dfbb72bac6988ba4f35ef0dd0d`, PR #70 `23cc1bb`, p49 `e4350e5` (GitHub ile aynı; ilerleme yok) |
 | Bitiş | `claude/stars-ticaret-ag2` son rapor commit'i (kod / sürüm `ec32cd3`) |
-| PR | bkz. GitHub taslak PR (taslak, taban `claude/stars-ticaret-ag1`) |
+| PR | #72 (taslak, taban `claude/stars-ticaret-ag1`) |
 | Commit'ler | `85234dc` Faz A (TL) · `103c763` Faz B (işlem) · `c0ae0e4` Faz C (misafir-yalnız düzeltme + MP kargo kaydı + Chromium) · `ec32cd3` Faz D (p50 + ZIP) · rapor commit'i |
 
 ## B. TL multiplayer onarımı
