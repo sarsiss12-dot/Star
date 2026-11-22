@@ -1777,6 +1777,13 @@ else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it)
     /* MP-DEAL-SYS.0: haraç eksik ödeme / sona erme bildirimi uzak insan tarafa da (motorun metniyle; tek oyunculu oyuncu yolu aynen) */
     /* MP-WARON.0: savaş sözü bildirimleri uzak insan taraflara (motorun metniyle) */
     if(typeof root.warPledgeNote==='function'&&!root.warPledgeNote.__mp){const f0=root.warPledgeNote,w=function(ids,text,cls){const m=f0.apply(this,arguments);for(const id of ids||[]){const x=G.emps[id];if(x&&RH(x))NOTE(x.id,m,cls||'war');}return m;};w.__mp=true;root.warPledgeNote=w;}
+    /* SAHA-GÜVENCE.1: muharebe sonucu (ZAFER / YENİLGİ, kayıplar) motor yalnız devlet 0'a söylüyordu; uzak insan taraf filosunu sessizce kaybediyordu.
+       Aynı metin o oyuncunun bildirim listesine; eskortsuz silahsız gemi imhası açıkça. Dünyaya yazmaz (NOTE oturumda), RNG yok. */
+    if(typeof root.battleReportFinish==='function'&&!root.battleReportFinish.__mp){const f0=root.battleReportFinish,w=function(r,winner){const out=f0.apply(this,arguments);
+      try{if(r&&Array.isArray(r.loss))for(const i of [0,1]){const id=i?r.b:r.a,x=G.emps[id];if(!x||!RH(x))continue;const sys=G.sys.find(s=>s.battleReport===r);if(!sys)continue;
+        const we=winner===id,ux=typeof root.battleUnarmedLost==='function'?root.battleUnarmedText(root.battleUnarmedLost(sys,id,r)):'';
+        NOTE(id,(winner===null||winner===undefined?'SONUÇSUZ':we?'ZAFER':'YENİLGİ')+' — '+sys.name+' muharebesi · kayıp '+(r.loss[i]||0)+' / düşman '+(r.loss[1-i]||0)+(ux?' · '+ux:''),we?'win':'war');}}catch(err){}
+      return out;};w.__mp=true;root.battleReportFinish=w;}
     for(const nm of ['tributeShortNote','tributeEndNote'])if(typeof root[nm]==='function'&&!root[nm].__mp){const f0=root[nm],w=function(giver,b){const m=f0.apply(this,arguments);
       const taker=nm==='tributeEndNote'?G.emps[b&&b.to]:b;for(const x of [giver,taker])if(x&&RH(x))NOTE(x.id,m,nm==='tributeEndNote'?'sci':'war');return m;};w.__mp=true;root[nm]=w;}
     const neg=aiNegotiate,resp=aiRespond;
