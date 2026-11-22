@@ -1,0 +1,4419 @@
+{
+ "results": [
+  {
+   "name": "I0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 404; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 12210
+  },
+  {
+   "name": "I1 uzun oturum 8 dk (500 sistem / 16 AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası 20 sn'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür",
+   "status": "PASS",
+   "ms": 538869
+  },
+  {
+   "name": "I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)",
+   "status": "PASS",
+   "ms": 2972
+  },
+  {
+   "name": "I3 sensör paylaşımı tek yön: B → C; C, B'nin sensör sistemlerini görür, B C'ninkileri görmez, host'un kendi görüşü değişmez",
+   "status": "PASS",
+   "ms": 1314
+  }
+ ],
+ "metrics": {
+  "scen": "I",
+  "conf": {
+   "size": "ulu",
+   "ai": 9,
+   "seed": 404,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 128,
+    "buildMs": 180,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 236,
+    "buildMs": 273,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 9.1,
+      "p95": 11.3,
+      "max": 11.3
+     },
+     "longtask": {
+      "n": 1,
+      "med": 74,
+      "p95": 74,
+      "max": 74
+     },
+     "heapMB": 18,
+     "dom": 714,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 4,
+       "med": 28.5,
+       "p95": 53.5,
+       "max": 53.5
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.7,
+       "p95": 1.7,
+       "max": 1.7
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 4,
+      "deltas": 3,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 18,
+      "dom": 640,
+      "intervals": 3,
+      "timeouts": 2,
+      "notes": 0,
+      "results": 3,
+      "packets": 36,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 41.9,
+       "p95": 41.9,
+       "max": 41.9
+      },
+      "refresh": {
+       "n": 0
+      },
+      "longtask": {
+       "n": 3,
+       "med": 66,
+       "p95": 92,
+       "max": 92
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 714,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 28,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 1582,
+  "scale0": {
+   "cfg": {
+    "cfg": {
+     "name": "Kızıl Muhafız",
+     "race": "klan",
+     "traits": [],
+     "size": "ulu",
+     "shape": "sarmal",
+     "diff": "normal",
+     "seed": 404,
+     "color": null,
+     "ethics": {
+      "mil": 2,
+      "aut": 0,
+      "mat": 0,
+      "ahl": 0
+     },
+     "civics": [
+      "kale_dok"
+     ],
+     "origin": "standart",
+     "sigil": "simetrik",
+     "monoRes": "min",
+     "look": "humanoid",
+     "portraitVariant": 0,
+     "mizac": "militarist",
+     "crisis": "normal",
+     "ruins": "orta",
+     "council": "normal",
+     "physio": "humanoid",
+     "pirates": true,
+     "gates": true,
+     "crisisPower": "normal",
+     "aiOrigins": true,
+     "aiOriginChance": 35,
+     "randomEvents": true,
+     "aiCount": 11,
+     "ethLocked": true,
+     "humans": [
+      {
+       "name": "Saf Akıl Ağı",
+       "race": "teknokrasi",
+       "mizac": "teknokrasi",
+       "physio": "humanoid",
+       "look": "humanoid",
+       "origin": "standart",
+       "sigil": "simetrik",
+       "ethics": {
+        "mil": -1,
+        "aut": 0,
+        "mat": 2,
+        "ahl": 0
+       },
+       "civics": [
+        "sinyal_avci"
+       ],
+       "traits": [],
+       "monoRes": "min",
+       "portraitVariant": 0,
+       "color": null,
+       "emblem": {
+        "shape": "hex",
+        "symbol": "sun",
+        "pattern": "corners",
+        "secondary": "#ece9d5"
+       }
+      },
+      {
+       "name": "Yeşil Birlik",
+       "race": "lonca",
+       "mizac": "tuccar",
+       "physio": "humanoid",
+       "look": "humanoid",
+       "origin": "standart",
+       "sigil": "simetrik",
+       "ethics": {
+        "mil": 0,
+        "aut": -1,
+        "mat": 1,
+        "ahl": 0
+       },
+       "civics": [
+        "maden_lonca"
+       ],
+       "traits": [],
+       "monoRes": "min",
+       "portraitVariant": 0,
+       "color": null,
+       "emblem": {
+        "shape": "hex",
+        "symbol": "sun",
+        "pattern": "corners",
+        "secondary": "#ece9d5"
+       }
+      }
+     ]
+    },
+    "systems": 100,
+    "humans": 3,
+    "ai": 9,
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   "guestCfg": {
+    "name": "Saf Akıl Ağı",
+    "race": "teknokrasi",
+    "traits": [],
+    "size": "ulu",
+    "shape": "sarmal",
+    "diff": "normal",
+    "seed": 59880313,
+    "color": "#98953e",
+    "ethics": {
+     "mil": -1,
+     "aut": 0,
+     "mat": 2,
+     "ahl": 0
+    },
+    "civics": [
+     "sinyal_avci"
+    ],
+    "origin": "standart",
+    "sigil": "simetrik",
+    "monoRes": "min",
+    "look": "humanoid",
+    "portraitVariant": 0,
+    "mizac": "teknokrasi",
+    "crisis": "normal",
+    "ruins": "orta",
+    "council": "normal",
+    "physio": "humanoid",
+    "pirates": true,
+    "gates": true,
+    "crisisPower": "normal",
+    "aiOrigins": true,
+    "aiOriginChance": 35,
+    "randomEvents": true,
+    "aiCount": 11,
+    "ethLocked": true,
+    "humans": [
+     {
+      "name": "Saf Akıl Ağı",
+      "race": "teknokrasi",
+      "mizac": "teknokrasi",
+      "physio": "humanoid",
+      "look": "humanoid",
+      "origin": "standart",
+      "sigil": "simetrik",
+      "ethics": {
+       "mil": -1,
+       "aut": 0,
+       "mat": 2,
+       "ahl": 0
+      },
+      "civics": [
+       "sinyal_avci"
+      ],
+      "traits": [],
+      "monoRes": "min",
+      "portraitVariant": 0,
+      "color": null,
+      "emblem": {
+       "shape": "hex",
+       "symbol": "sun",
+       "pattern": "corners",
+       "secondary": "#ece9d5"
+      }
+     },
+     {
+      "name": "Yeşil Birlik",
+      "race": "lonca",
+      "mizac": "tuccar",
+      "physio": "humanoid",
+      "look": "humanoid",
+      "origin": "standart",
+      "sigil": "simetrik",
+      "ethics": {
+       "mil": 0,
+       "aut": -1,
+       "mat": 1,
+       "ahl": 0
+      },
+      "civics": [
+       "maden_lonca"
+      ],
+      "traits": [],
+      "monoRes": "min",
+      "portraitVariant": 0,
+      "color": null,
+      "emblem": {
+       "shape": "hex",
+       "symbol": "sun",
+       "pattern": "corners",
+       "secondary": "#ece9d5"
+      }
+     }
+    ]
+   },
+   "actor": 1,
+   "fixture": {
+    "sys": 5,
+    "planet": 0,
+    "fleet": 47
+   },
+   "start": {
+    "day": 1.2530000000000001,
+    "deadline": 61.253
+   },
+   "ack": {
+    "v": 1,
+    "type": "result",
+    "seq": 1,
+    "cid": "j1_1_iipwcqzt5y",
+    "status": "ok",
+    "code": null,
+    "rev": 7,
+    "ms": 64
+   },
+   "state": {
+    "auto": false,
+    "deadline": 61.253,
+    "res": {
+     "min": 5000,
+     "ene": 300,
+     "yiy": 180,
+     "ala": 5000,
+     "ara": 0,
+     "tuk": 150,
+     "etk": 70
+    }
+   },
+   "denied": {
+    "v": 1,
+    "type": "result",
+    "seq": 3,
+    "cid": "j1_3_7ues7xh7rg",
+    "status": "rejected",
+    "code": "not-owner",
+    "rev": 10,
+    "ms": 21
+   },
+   "snapshotSaveBytes": 105458,
+   "disclosure": "Starting resources and a licensed colony ship placed at an otherwise valid colonizable planet are explicit fixtures. Actual WebSocket colonize and real guest touch colAuto use production authorization."
+  },
+  "actualWorld": {
+   "seed": 404,
+   "size": "ulu",
+   "systems": 100,
+   "states": 12
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "fed1soak": {
+   "min": 8,
+   "ff": 180,
+   "samples": [
+    {
+     "t": 0,
+     "who": "B",
+     "hd": 5402.1,
+     "gd": 5401.3,
+     "mrev": 72,
+     "grev": 72,
+     "gapp": 72,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 1,
+     "who": "C",
+     "hd": 5402.2,
+     "gd": 5401.3,
+     "mrev": 70,
+     "grev": 70,
+     "gapp": 70,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 3,
+     "who": "B",
+     "hd": 5406.4,
+     "gd": 5405.6,
+     "mrev": 75,
+     "grev": 75,
+     "gapp": 75,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 3,
+     "who": "C",
+     "hd": 5406.5,
+     "gd": 5405.7,
+     "mrev": 73,
+     "grev": 73,
+     "gapp": 73,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 5,
+     "who": "B",
+     "hd": 5410.5,
+     "gd": 5409.9,
+     "mrev": 78,
+     "grev": 78,
+     "gapp": 78,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 5,
+     "who": "C",
+     "hd": 5410.6,
+     "gd": 5410,
+     "mrev": 76,
+     "grev": 76,
+     "gapp": 76,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 7,
+     "who": "B",
+     "hd": 5414.6,
+     "gd": 5414.1,
+     "mrev": 81,
+     "grev": 81,
+     "gapp": 81,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 7,
+     "who": "C",
+     "hd": 5414.8,
+     "gd": 5414.1,
+     "mrev": 79,
+     "grev": 79,
+     "gapp": 79,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 9,
+     "who": "B",
+     "hd": 5418.9,
+     "gd": 5418.4,
+     "mrev": 84,
+     "grev": 84,
+     "gapp": 84,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 9,
+     "who": "C",
+     "hd": 5419,
+     "gd": 5418.5,
+     "mrev": 82,
+     "grev": 82,
+     "gapp": 82,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 11,
+     "who": "B",
+     "hd": 5423,
+     "gd": 5422.8,
+     "mrev": 87,
+     "grev": 87,
+     "gapp": 87,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 11,
+     "who": "C",
+     "hd": 5423.1,
+     "gd": 5422.8,
+     "mrev": 85,
+     "grev": 85,
+     "gapp": 85,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 13,
+     "who": "B",
+     "hd": 5427.2,
+     "gd": 5427,
+     "mrev": 90,
+     "grev": 90,
+     "gapp": 90,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 13,
+     "who": "C",
+     "hd": 5427.2,
+     "gd": 5425.7,
+     "mrev": 88,
+     "grev": 87,
+     "gapp": 87,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 15,
+     "who": "B",
+     "hd": 5430.3,
+     "gd": 5429.8,
+     "mrev": 92,
+     "grev": 92,
+     "gapp": 92,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 15,
+     "who": "C",
+     "hd": 5430.6,
+     "gd": 5429.8,
+     "mrev": 90,
+     "grev": 90,
+     "gapp": 90,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 17,
+     "who": "B",
+     "hd": 5434.5,
+     "gd": 5433.4,
+     "mrev": 95,
+     "grev": 95,
+     "gapp": 95,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 18,
+     "who": "C",
+     "hd": 5434.6,
+     "gd": 5433.4,
+     "mrev": 93,
+     "grev": 93,
+     "gapp": 93,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 20,
+     "who": "B",
+     "hd": 5438.6,
+     "gd": 5437.5,
+     "mrev": 98,
+     "grev": 98,
+     "gapp": 98,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 20,
+     "who": "C",
+     "hd": 5438.7,
+     "gd": 5437.6,
+     "mrev": 96,
+     "grev": 96,
+     "gapp": 96,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 22,
+     "who": "B",
+     "hd": 5459.1,
+     "gd": 5458.5,
+     "mrev": 102,
+     "grev": 102,
+     "gapp": 102,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 22,
+     "who": "C",
+     "hd": 5459.5,
+     "gd": 5452,
+     "mrev": 100,
+     "grev": 99,
+     "gapp": 99,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 24,
+     "who": "B",
+     "hd": 5478.1,
+     "gd": 5477.8,
+     "mrev": 105,
+     "grev": 105,
+     "gapp": 105,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 24,
+     "who": "C",
+     "hd": 5479,
+     "gd": 5477.8,
+     "mrev": 103,
+     "grev": 103,
+     "gapp": 103,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 26,
+     "who": "B",
+     "hd": 5497.5,
+     "gd": 5490.7,
+     "mrev": 107,
+     "grev": 107,
+     "gapp": 107,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 26,
+     "who": "C",
+     "hd": 5497.9,
+     "gd": 5490.7,
+     "mrev": 105,
+     "grev": 105,
+     "gapp": 105,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 28,
+     "who": "B",
+     "hd": 5517.6,
+     "gd": 5511.6,
+     "mrev": 110,
+     "grev": 110,
+     "gapp": 110,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 28,
+     "who": "C",
+     "hd": 5517.9,
+     "gd": 5512.1,
+     "mrev": 108,
+     "grev": 108,
+     "gapp": 108,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 31,
+     "who": "B",
+     "hd": 5521.1,
+     "gd": 5520.3,
+     "mrev": 113,
+     "grev": 112,
+     "gapp": 112,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 31,
+     "who": "C",
+     "hd": 5521.2,
+     "gd": 5521.1,
+     "mrev": 111,
+     "grev": 111,
+     "gapp": 111,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 33,
+     "who": "B",
+     "hd": 5522.9,
+     "gd": 5522,
+     "mrev": 114,
+     "grev": 114,
+     "gapp": 114,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 33,
+     "who": "C",
+     "hd": 5523,
+     "gd": 5522,
+     "mrev": 112,
+     "grev": 112,
+     "gapp": 112,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 35,
+     "who": "B",
+     "hd": 5524.6,
+     "gd": 5524.2,
+     "mrev": 116,
+     "grev": 116,
+     "gapp": 116,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 35,
+     "who": "C",
+     "hd": 5524.6,
+     "gd": 5524.2,
+     "mrev": 114,
+     "grev": 114,
+     "gapp": 114,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 37,
+     "who": "B",
+     "hd": 5526.2,
+     "gd": 5526,
+     "mrev": 118,
+     "grev": 118,
+     "gapp": 118,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 37,
+     "who": "C",
+     "hd": 5526.2,
+     "gd": 5526,
+     "mrev": 116,
+     "grev": 116,
+     "gapp": 116,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 39,
+     "who": "B",
+     "hd": 5527.9,
+     "gd": 5527.2,
+     "mrev": 119,
+     "grev": 119,
+     "gapp": 119,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 39,
+     "who": "C",
+     "hd": 5527.9,
+     "gd": 5527.2,
+     "mrev": 117,
+     "grev": 117,
+     "gapp": 117,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 41,
+     "who": "B",
+     "hd": 5529.5,
+     "gd": 5529.2,
+     "mrev": 121,
+     "grev": 121,
+     "gapp": 121,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 41,
+     "who": "C",
+     "hd": 5529.5,
+     "gd": 5529.2,
+     "mrev": 119,
+     "grev": 119,
+     "gapp": 119,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 43,
+     "who": "B",
+     "hd": 5531.2,
+     "gd": 5530.2,
+     "mrev": 123,
+     "grev": 123,
+     "gapp": 122,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 43,
+     "who": "C",
+     "hd": 5531.2,
+     "gd": 5530.2,
+     "mrev": 121,
+     "grev": 121,
+     "gapp": 120,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 45,
+     "who": "B",
+     "hd": 5532.8,
+     "gd": 5532.2,
+     "mrev": 124,
+     "grev": 124,
+     "gapp": 124,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 45,
+     "who": "C",
+     "hd": 5532.9,
+     "gd": 5532.2,
+     "mrev": 122,
+     "grev": 122,
+     "gapp": 122,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 47,
+     "who": "B",
+     "hd": 5534.5,
+     "gd": 5534.2,
+     "mrev": 126,
+     "grev": 126,
+     "gapp": 126,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 47,
+     "who": "C",
+     "hd": 5534.5,
+     "gd": 5534.2,
+     "mrev": 124,
+     "grev": 124,
+     "gapp": 124,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 49,
+     "who": "B",
+     "hd": 5536.1,
+     "gd": 5535.2,
+     "mrev": 127,
+     "grev": 127,
+     "gapp": 127,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 49,
+     "who": "C",
+     "hd": 5536.1,
+     "gd": 5535.2,
+     "mrev": 125,
+     "grev": 125,
+     "gapp": 125,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 71,
+     "who": "B",
+     "hd": 5553.2,
+     "gd": 5553,
+     "mrev": 145,
+     "grev": 145,
+     "gapp": 145,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 71,
+     "who": "C",
+     "hd": 5553.2,
+     "gd": 5553,
+     "mrev": 143,
+     "grev": 143,
+     "gapp": 143,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 73,
+     "who": "B",
+     "hd": 5554.8,
+     "gd": 5554,
+     "mrev": 146,
+     "grev": 146,
+     "gapp": 146,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 73,
+     "who": "C",
+     "hd": 5554.9,
+     "gd": 5554,
+     "mrev": 144,
+     "grev": 144,
+     "gapp": 144,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 75,
+     "who": "B",
+     "hd": 5556.5,
+     "gd": 5556,
+     "mrev": 148,
+     "grev": 148,
+     "gapp": 148,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 75,
+     "who": "C",
+     "hd": 5556.5,
+     "gd": 5556,
+     "mrev": 146,
+     "grev": 146,
+     "gapp": 146,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 77,
+     "who": "B",
+     "hd": 5558.2,
+     "gd": 5557.2,
+     "mrev": 149,
+     "grev": 149,
+     "gapp": 149,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 77,
+     "who": "C",
+     "hd": 5558.2,
+     "gd": 5557.2,
+     "mrev": 147,
+     "grev": 147,
+     "gapp": 147,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 79,
+     "who": "B",
+     "hd": 5559.8,
+     "gd": 5559.2,
+     "mrev": 151,
+     "grev": 151,
+     "gapp": 151,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 79,
+     "who": "C",
+     "hd": 5559.8,
+     "gd": 5559.2,
+     "mrev": 149,
+     "grev": 149,
+     "gapp": 149,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 101,
+     "who": "B",
+     "hd": 5577.2,
+     "gd": 5577,
+     "mrev": 169,
+     "grev": 169,
+     "gapp": 169,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 101,
+     "who": "C",
+     "hd": 5577.2,
+     "gd": 5577,
+     "mrev": 167,
+     "grev": 167,
+     "gapp": 167,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 103,
+     "who": "B",
+     "hd": 5578.8,
+     "gd": 5578,
+     "mrev": 170,
+     "grev": 170,
+     "gapp": 170,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 103,
+     "who": "C",
+     "hd": 5578.9,
+     "gd": 5578,
+     "mrev": 168,
+     "grev": 168,
+     "gapp": 168,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 105,
+     "who": "B",
+     "hd": 5580.4,
+     "gd": 5580.1,
+     "mrev": 172,
+     "grev": 172,
+     "gapp": 172,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 105,
+     "who": "C",
+     "hd": 5580.4,
+     "gd": 5580.1,
+     "mrev": 170,
+     "grev": 170,
+     "gapp": 170,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 107,
+     "who": "B",
+     "hd": 5582,
+     "gd": 5581.1,
+     "mrev": 173,
+     "grev": 173,
+     "gapp": 173,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 107,
+     "who": "C",
+     "hd": 5582.1,
+     "gd": 5581.1,
+     "mrev": 171,
+     "grev": 171,
+     "gapp": 171,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 109,
+     "who": "B",
+     "hd": 5583.7,
+     "gd": 5583.1,
+     "mrev": 175,
+     "grev": 175,
+     "gapp": 175,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 109,
+     "who": "C",
+     "hd": 5583.8,
+     "gd": 5583.1,
+     "mrev": 173,
+     "grev": 173,
+     "gapp": 173,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 117,
+     "who": "B",
+     "hd": 5590.2,
+     "gd": 5589.7,
+     "mrev": 178,
+     "grev": 178,
+     "gapp": 177,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 117,
+     "who": "C",
+     "hd": 5590.2,
+     "gd": 5590.1,
+     "mrev": 180,
+     "grev": 180,
+     "gapp": 180,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 119,
+     "who": "B",
+     "hd": 5591.8,
+     "gd": 5591.1,
+     "mrev": 180,
+     "grev": 180,
+     "gapp": 180,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 119,
+     "who": "C",
+     "hd": 5591.8,
+     "gd": 5591.1,
+     "mrev": 181,
+     "grev": 181,
+     "gapp": 181,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 121,
+     "who": "B",
+     "hd": 5593.5,
+     "gd": 5593.1,
+     "mrev": 182,
+     "grev": 182,
+     "gapp": 182,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 121,
+     "who": "C",
+     "hd": 5593.5,
+     "gd": 5593.1,
+     "mrev": 183,
+     "grev": 183,
+     "gapp": 183,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 123,
+     "who": "B",
+     "hd": 5595.1,
+     "gd": 5594.1,
+     "mrev": 184,
+     "grev": 183,
+     "gapp": 183,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 123,
+     "who": "C",
+     "hd": 5595.2,
+     "gd": 5595.1,
+     "mrev": 185,
+     "grev": 185,
+     "gapp": 185,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 125,
+     "who": "B",
+     "hd": 5596.8,
+     "gd": 5596.1,
+     "mrev": 185,
+     "grev": 185,
+     "gapp": 185,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 126,
+     "who": "C",
+     "hd": 5596.8,
+     "gd": 5596.1,
+     "mrev": 186,
+     "grev": 186,
+     "gapp": 186,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 128,
+     "who": "B",
+     "hd": 5598.4,
+     "gd": 5598.1,
+     "mrev": 187,
+     "grev": 187,
+     "gapp": 187,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 128,
+     "who": "C",
+     "hd": 5598.5,
+     "gd": 5598.1,
+     "mrev": 188,
+     "grev": 188,
+     "gapp": 188,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 130,
+     "who": "B",
+     "hd": 5600.1,
+     "gd": 5600.1,
+     "mrev": 189,
+     "grev": 189,
+     "gapp": 189,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 130,
+     "who": "C",
+     "hd": 5600.1,
+     "gd": 5600.1,
+     "mrev": 190,
+     "grev": 190,
+     "gapp": 190,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 132,
+     "who": "B",
+     "hd": 5601.8,
+     "gd": 5601.1,
+     "mrev": 190,
+     "grev": 190,
+     "gapp": 190,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 132,
+     "who": "C",
+     "hd": 5601.8,
+     "gd": 5601.1,
+     "mrev": 191,
+     "grev": 191,
+     "gapp": 191,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 134,
+     "who": "B",
+     "hd": 5603.4,
+     "gd": 5603.1,
+     "mrev": 192,
+     "grev": 192,
+     "gapp": 192,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 134,
+     "who": "C",
+     "hd": 5603.4,
+     "gd": 5603.1,
+     "mrev": 193,
+     "grev": 193,
+     "gapp": 193,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 136,
+     "who": "B",
+     "hd": 5605,
+     "gd": 5604.1,
+     "mrev": 193,
+     "grev": 193,
+     "gapp": 193,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 136,
+     "who": "C",
+     "hd": 5605,
+     "gd": 5604.1,
+     "mrev": 194,
+     "grev": 194,
+     "gapp": 194,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 138,
+     "who": "B",
+     "hd": 5606.7,
+     "gd": 5606.1,
+     "mrev": 195,
+     "grev": 195,
+     "gapp": 195,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 138,
+     "who": "C",
+     "hd": 5606.7,
+     "gd": 5606.1,
+     "mrev": 196,
+     "grev": 196,
+     "gapp": 196,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 140,
+     "who": "B",
+     "hd": 5608.3,
+     "gd": 5608.1,
+     "mrev": 197,
+     "grev": 197,
+     "gapp": 197,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 140,
+     "who": "C",
+     "hd": 5608.3,
+     "gd": 5608.1,
+     "mrev": 198,
+     "grev": 198,
+     "gapp": 198,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 142,
+     "who": "B",
+     "hd": 5610,
+     "gd": 5609.6,
+     "mrev": 199,
+     "grev": 199,
+     "gapp": 199,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 142,
+     "who": "C",
+     "hd": 5610.1,
+     "gd": 5609.6,
+     "mrev": 201,
+     "grev": 200,
+     "gapp": 200,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 144,
+     "who": "B",
+     "hd": 5611.7,
+     "gd": 5611.2,
+     "mrev": 201,
+     "grev": 201,
+     "gapp": 201,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 144,
+     "who": "C",
+     "hd": 5611.7,
+     "gd": 5611.2,
+     "mrev": 202,
+     "grev": 202,
+     "gapp": 202,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 146,
+     "who": "B",
+     "hd": 5613.3,
+     "gd": 5613.1,
+     "mrev": 203,
+     "grev": 203,
+     "gapp": 203,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 146,
+     "who": "C",
+     "hd": 5613.4,
+     "gd": 5613.1,
+     "mrev": 204,
+     "grev": 204,
+     "gapp": 204,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 148,
+     "who": "B",
+     "hd": 5615,
+     "gd": 5614.1,
+     "mrev": 204,
+     "grev": 204,
+     "gapp": 204,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 148,
+     "who": "C",
+     "hd": 5615,
+     "gd": 5614.1,
+     "mrev": 205,
+     "grev": 205,
+     "gapp": 205,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 150,
+     "who": "B",
+     "hd": 5616.6,
+     "gd": 5616.1,
+     "mrev": 206,
+     "grev": 206,
+     "gapp": 206,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 151,
+     "who": "C",
+     "hd": 5616.7,
+     "gd": 5616.1,
+     "mrev": 207,
+     "grev": 207,
+     "gapp": 207,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 153,
+     "who": "B",
+     "hd": 5618.3,
+     "gd": 5618.1,
+     "mrev": 208,
+     "grev": 208,
+     "gapp": 208,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 153,
+     "who": "C",
+     "hd": 5618.3,
+     "gd": 5618.1,
+     "mrev": 209,
+     "grev": 209,
+     "gapp": 209,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 155,
+     "who": "B",
+     "hd": 5620,
+     "gd": 5619.1,
+     "mrev": 209,
+     "grev": 209,
+     "gapp": 209,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 155,
+     "who": "C",
+     "hd": 5620,
+     "gd": 5619.1,
+     "mrev": 210,
+     "grev": 210,
+     "gapp": 210,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 157,
+     "who": "B",
+     "hd": 5621.3,
+     "gd": 5621.1,
+     "mrev": 211,
+     "grev": 211,
+     "gapp": 211,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 157,
+     "who": "C",
+     "hd": 5621.5,
+     "gd": 5621.1,
+     "mrev": 212,
+     "grev": 212,
+     "gapp": 212,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 159,
+     "who": "B",
+     "hd": 5623.1,
+     "gd": 5622,
+     "mrev": 212,
+     "grev": 212,
+     "gapp": 212,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 159,
+     "who": "C",
+     "hd": 5623.1,
+     "gd": 5622,
+     "mrev": 213,
+     "grev": 213,
+     "gapp": 213,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 161,
+     "who": "B",
+     "hd": 5624.6,
+     "gd": 5624.1,
+     "mrev": 214,
+     "grev": 214,
+     "gapp": 214,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 161,
+     "who": "C",
+     "hd": 5624.7,
+     "gd": 5624.1,
+     "mrev": 215,
+     "grev": 215,
+     "gapp": 215,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 163,
+     "who": "B",
+     "hd": 5626.2,
+     "gd": 5626.1,
+     "mrev": 216,
+     "grev": 216,
+     "gapp": 216,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 163,
+     "who": "C",
+     "hd": 5626.3,
+     "gd": 5626.1,
+     "mrev": 217,
+     "grev": 217,
+     "gapp": 217,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 165,
+     "who": "B",
+     "hd": 5627.9,
+     "gd": 5627,
+     "mrev": 217,
+     "grev": 217,
+     "gapp": 217,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 165,
+     "who": "C",
+     "hd": 5627.9,
+     "gd": 5627,
+     "mrev": 218,
+     "grev": 218,
+     "gapp": 218,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 167,
+     "who": "B",
+     "hd": 5629.6,
+     "gd": 5629,
+     "mrev": 219,
+     "grev": 219,
+     "gapp": 219,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 167,
+     "who": "C",
+     "hd": 5629.6,
+     "gd": 5629,
+     "mrev": 220,
+     "grev": 220,
+     "gapp": 220,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 169,
+     "who": "B",
+     "hd": 5631.1,
+     "gd": 5630.2,
+     "mrev": 221,
+     "grev": 221,
+     "gapp": 220,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 170,
+     "who": "C",
+     "hd": 5631.2,
+     "gd": 5631.1,
+     "mrev": 222,
+     "grev": 222,
+     "gapp": 222,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 173,
+     "who": "B",
+     "hd": 5649.4,
+     "gd": 5643.3,
+     "mrev": 224,
+     "grev": 224,
+     "gapp": 224,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 173,
+     "who": "C",
+     "hd": 5650,
+     "gd": 5643.3,
+     "mrev": 225,
+     "grev": 225,
+     "gapp": 225,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 175,
+     "who": "B",
+     "hd": 5670.2,
+     "gd": 5664.7,
+     "mrev": 227,
+     "grev": 227,
+     "gapp": 227,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 175,
+     "who": "C",
+     "hd": 5670.3,
+     "gd": 5670.3,
+     "mrev": 229,
+     "grev": 229,
+     "gapp": 229,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 177,
+     "who": "B",
+     "hd": 5671.5,
+     "gd": 5671.3,
+     "mrev": 230,
+     "grev": 230,
+     "gapp": 230,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 177,
+     "who": "C",
+     "hd": 5671.6,
+     "gd": 5671.3,
+     "mrev": 231,
+     "grev": 231,
+     "gapp": 231,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 179,
+     "who": "B",
+     "hd": 5673.1,
+     "gd": 5672.1,
+     "mrev": 232,
+     "grev": 232,
+     "gapp": 231,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 179,
+     "who": "C",
+     "hd": 5673.2,
+     "gd": 5672.1,
+     "mrev": 233,
+     "grev": 233,
+     "gapp": 232,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 181,
+     "who": "B",
+     "hd": 5674.8,
+     "gd": 5674,
+     "mrev": 233,
+     "grev": 233,
+     "gapp": 233,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 181,
+     "who": "C",
+     "hd": 5674.9,
+     "gd": 5674,
+     "mrev": 234,
+     "grev": 234,
+     "gapp": 234,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 184,
+     "who": "B",
+     "hd": 5676.5,
+     "gd": 5676,
+     "mrev": 235,
+     "grev": 235,
+     "gapp": 235,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 184,
+     "who": "C",
+     "hd": 5676.8,
+     "gd": 5676,
+     "mrev": 236,
+     "grev": 236,
+     "gapp": 236,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 186,
+     "who": "B",
+     "hd": 5678.4,
+     "gd": 5678.2,
+     "mrev": 237,
+     "grev": 237,
+     "gapp": 237,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 186,
+     "who": "C",
+     "hd": 5678.4,
+     "gd": 5678.2,
+     "mrev": 238,
+     "grev": 238,
+     "gapp": 238,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 188,
+     "who": "B",
+     "hd": 5679.9,
+     "gd": 5679.1,
+     "mrev": 238,
+     "grev": 238,
+     "gapp": 238,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 188,
+     "who": "C",
+     "hd": 5680,
+     "gd": 5679.1,
+     "mrev": 239,
+     "grev": 239,
+     "gapp": 239,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 190,
+     "who": "B",
+     "hd": 5681.7,
+     "gd": 5681.1,
+     "mrev": 240,
+     "grev": 240,
+     "gapp": 240,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 190,
+     "who": "C",
+     "hd": 5681.8,
+     "gd": 5681.1,
+     "mrev": 241,
+     "grev": 241,
+     "gapp": 241,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 192,
+     "who": "B",
+     "hd": 5683.5,
+     "gd": 5683,
+     "mrev": 242,
+     "grev": 242,
+     "gapp": 242,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 192,
+     "who": "C",
+     "hd": 5683.5,
+     "gd": 5683,
+     "mrev": 243,
+     "grev": 243,
+     "gapp": 243,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 195,
+     "who": "B",
+     "hd": 5685,
+     "gd": 5684.2,
+     "mrev": 243,
+     "grev": 243,
+     "gapp": 243,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 195,
+     "who": "C",
+     "hd": 5685.1,
+     "gd": 5684.2,
+     "mrev": 244,
+     "grev": 244,
+     "gapp": 244,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 197,
+     "who": "B",
+     "hd": 5686.8,
+     "gd": 5686.1,
+     "mrev": 245,
+     "grev": 245,
+     "gapp": 245,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 197,
+     "who": "C",
+     "hd": 5686.8,
+     "gd": 5686.1,
+     "mrev": 246,
+     "grev": 246,
+     "gapp": 246,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 199,
+     "who": "B",
+     "hd": 5688.5,
+     "gd": 5688.1,
+     "mrev": 247,
+     "grev": 247,
+     "gapp": 247,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 199,
+     "who": "C",
+     "hd": 5688.5,
+     "gd": 5688.1,
+     "mrev": 248,
+     "grev": 248,
+     "gapp": 248,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 201,
+     "who": "B",
+     "hd": 5690.1,
+     "gd": 5690.1,
+     "mrev": 249,
+     "grev": 249,
+     "gapp": 249,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 201,
+     "who": "C",
+     "hd": 5690.2,
+     "gd": 5690.1,
+     "mrev": 250,
+     "grev": 250,
+     "gapp": 250,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 222,
+     "who": "B",
+     "hd": 5705,
+     "gd": 5704,
+     "mrev": 263,
+     "grev": 263,
+     "gapp": 263,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 222,
+     "who": "C",
+     "hd": 5705,
+     "gd": 5705,
+     "mrev": 265,
+     "grev": 265,
+     "gapp": 265,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 224,
+     "who": "B",
+     "hd": 5706.7,
+     "gd": 5706,
+     "mrev": 265,
+     "grev": 265,
+     "gapp": 265,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 224,
+     "who": "C",
+     "hd": 5706.7,
+     "gd": 5706,
+     "mrev": 266,
+     "grev": 266,
+     "gapp": 266,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 226,
+     "who": "B",
+     "hd": 5708.4,
+     "gd": 5708.2,
+     "mrev": 267,
+     "grev": 267,
+     "gapp": 267,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 226,
+     "who": "C",
+     "hd": 5708.4,
+     "gd": 5708.2,
+     "mrev": 268,
+     "grev": 268,
+     "gapp": 268,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 228,
+     "who": "B",
+     "hd": 5710,
+     "gd": 5709.2,
+     "mrev": 268,
+     "grev": 268,
+     "gapp": 268,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 229,
+     "who": "C",
+     "hd": 5710,
+     "gd": 5709.2,
+     "mrev": 269,
+     "grev": 269,
+     "gapp": 269,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 231,
+     "who": "B",
+     "hd": 5711.6,
+     "gd": 5711.2,
+     "mrev": 270,
+     "grev": 270,
+     "gapp": 270,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 231,
+     "who": "C",
+     "hd": 5711.7,
+     "gd": 5711.2,
+     "mrev": 271,
+     "grev": 271,
+     "gapp": 271,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 252,
+     "who": "B",
+     "hd": 5728.2,
+     "gd": 5728.2,
+     "mrev": 287,
+     "grev": 287,
+     "gapp": 287,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 252,
+     "who": "C",
+     "hd": 5728.3,
+     "gd": 5728.2,
+     "mrev": 288,
+     "grev": 288,
+     "gapp": 288,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 254,
+     "who": "B",
+     "hd": 5729.9,
+     "gd": 5729.1,
+     "mrev": 288,
+     "grev": 288,
+     "gapp": 288,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 254,
+     "who": "C",
+     "hd": 5729.9,
+     "gd": 5729.1,
+     "mrev": 289,
+     "grev": 289,
+     "gapp": 289,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 257,
+     "who": "B",
+     "hd": 5731.4,
+     "gd": 5731.1,
+     "mrev": 290,
+     "grev": 290,
+     "gapp": 290,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 257,
+     "who": "C",
+     "hd": 5731.5,
+     "gd": 5731.1,
+     "mrev": 291,
+     "grev": 291,
+     "gapp": 291,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 259,
+     "who": "B",
+     "hd": 5733.1,
+     "gd": 5733.1,
+     "mrev": 292,
+     "grev": 292,
+     "gapp": 292,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 259,
+     "who": "C",
+     "hd": 5733.2,
+     "gd": 5733.1,
+     "mrev": 293,
+     "grev": 293,
+     "gapp": 293,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 261,
+     "who": "B",
+     "hd": 5734.9,
+     "gd": 5734.1,
+     "mrev": 293,
+     "grev": 293,
+     "gapp": 293,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 261,
+     "who": "C",
+     "hd": 5735,
+     "gd": 5734.1,
+     "mrev": 294,
+     "grev": 294,
+     "gapp": 294,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 265,
+     "who": "B",
+     "hd": 5738.3,
+     "gd": 5738,
+     "mrev": 297,
+     "grev": 297,
+     "gapp": 297,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 266,
+     "who": "C",
+     "hd": 5738.3,
+     "gd": 5737.8,
+     "mrev": 297,
+     "grev": 297,
+     "gapp": 296,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 268,
+     "who": "B",
+     "hd": 5740,
+     "gd": 5739,
+     "mrev": 298,
+     "grev": 298,
+     "gapp": 298,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 268,
+     "who": "C",
+     "hd": 5740.1,
+     "gd": 5739,
+     "mrev": 299,
+     "grev": 299,
+     "gapp": 299,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 270,
+     "who": "B",
+     "hd": 5741.7,
+     "gd": 5741.2,
+     "mrev": 300,
+     "grev": 300,
+     "gapp": 300,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 270,
+     "who": "C",
+     "hd": 5741.7,
+     "gd": 5741.2,
+     "mrev": 301,
+     "grev": 301,
+     "gapp": 301,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 272,
+     "who": "B",
+     "hd": 5743.3,
+     "gd": 5743.2,
+     "mrev": 302,
+     "grev": 302,
+     "gapp": 302,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 272,
+     "who": "C",
+     "hd": 5743.4,
+     "gd": 5743.2,
+     "mrev": 303,
+     "grev": 303,
+     "gapp": 303,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 274,
+     "who": "B",
+     "hd": 5745,
+     "gd": 5744.2,
+     "mrev": 303,
+     "grev": 303,
+     "gapp": 303,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 274,
+     "who": "C",
+     "hd": 5745,
+     "gd": 5744.2,
+     "mrev": 304,
+     "grev": 304,
+     "gapp": 304,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 276,
+     "who": "B",
+     "hd": 5746.6,
+     "gd": 5746.1,
+     "mrev": 305,
+     "grev": 305,
+     "gapp": 305,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 276,
+     "who": "C",
+     "hd": 5746.7,
+     "gd": 5746.1,
+     "mrev": 306,
+     "grev": 306,
+     "gapp": 306,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 278,
+     "who": "B",
+     "hd": 5748.2,
+     "gd": 5748,
+     "mrev": 307,
+     "grev": 307,
+     "gapp": 307,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 278,
+     "who": "C",
+     "hd": 5748.3,
+     "gd": 5748,
+     "mrev": 308,
+     "grev": 308,
+     "gapp": 308,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 280,
+     "who": "B",
+     "hd": 5749.6,
+     "gd": 5749.2,
+     "mrev": 308,
+     "grev": 308,
+     "gapp": 308,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 280,
+     "who": "C",
+     "hd": 5749.7,
+     "gd": 5749.2,
+     "mrev": 309,
+     "grev": 309,
+     "gapp": 309,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 283,
+     "who": "B",
+     "hd": 5751.3,
+     "gd": 5751.1,
+     "mrev": 310,
+     "grev": 310,
+     "gapp": 310,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 283,
+     "who": "C",
+     "hd": 5751.5,
+     "gd": 5751.1,
+     "mrev": 311,
+     "grev": 311,
+     "gapp": 311,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 285,
+     "who": "B",
+     "hd": 5753,
+     "gd": 5752.1,
+     "mrev": 311,
+     "grev": 311,
+     "gapp": 311,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 285,
+     "who": "C",
+     "hd": 5753.1,
+     "gd": 5752.1,
+     "mrev": 312,
+     "grev": 312,
+     "gapp": 312,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 287,
+     "who": "B",
+     "hd": 5754.7,
+     "gd": 5754.1,
+     "mrev": 313,
+     "grev": 313,
+     "gapp": 313,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 287,
+     "who": "C",
+     "hd": 5754.7,
+     "gd": 5754.1,
+     "mrev": 314,
+     "grev": 314,
+     "gapp": 314,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 289,
+     "who": "B",
+     "hd": 5756.3,
+     "gd": 5756.1,
+     "mrev": 315,
+     "grev": 315,
+     "gapp": 315,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 289,
+     "who": "C",
+     "hd": 5756.4,
+     "gd": 5756.1,
+     "mrev": 316,
+     "grev": 316,
+     "gapp": 316,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 291,
+     "who": "B",
+     "hd": 5757.7,
+     "gd": 5757.1,
+     "mrev": 316,
+     "grev": 316,
+     "gapp": 316,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 291,
+     "who": "C",
+     "hd": 5757.9,
+     "gd": 5757.1,
+     "mrev": 317,
+     "grev": 317,
+     "gapp": 317,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 293,
+     "who": "B",
+     "hd": 5759.5,
+     "gd": 5759.3,
+     "mrev": 319,
+     "grev": 319,
+     "gapp": 319,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 293,
+     "who": "C",
+     "hd": 5759.5,
+     "gd": 5759.3,
+     "mrev": 320,
+     "grev": 320,
+     "gapp": 320,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 296,
+     "who": "B",
+     "hd": 5760.9,
+     "gd": 5760.1,
+     "mrev": 320,
+     "grev": 320,
+     "gapp": 320,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 296,
+     "who": "C",
+     "hd": 5760.9,
+     "gd": 5760.1,
+     "mrev": 321,
+     "grev": 321,
+     "gapp": 321,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 298,
+     "who": "B",
+     "hd": 5762.6,
+     "gd": 5762.1,
+     "mrev": 322,
+     "grev": 322,
+     "gapp": 322,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 298,
+     "who": "C",
+     "hd": 5762.6,
+     "gd": 5762.1,
+     "mrev": 323,
+     "grev": 323,
+     "gapp": 323,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 300,
+     "who": "B",
+     "hd": 5764.2,
+     "gd": 5764.2,
+     "mrev": 323,
+     "grev": 324,
+     "gapp": 324,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 300,
+     "who": "C",
+     "hd": 5764.4,
+     "gd": 5764.2,
+     "mrev": 325,
+     "grev": 325,
+     "gapp": 325,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 302,
+     "who": "B",
+     "hd": 5765.9,
+     "gd": 5765.2,
+     "mrev": 325,
+     "grev": 325,
+     "gapp": 325,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 302,
+     "who": "C",
+     "hd": 5766,
+     "gd": 5765.2,
+     "mrev": 326,
+     "grev": 326,
+     "gapp": 326,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 304,
+     "who": "B",
+     "hd": 5767.6,
+     "gd": 5767,
+     "mrev": 327,
+     "grev": 327,
+     "gapp": 327,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 305,
+     "who": "C",
+     "hd": 5767.7,
+     "gd": 5767,
+     "mrev": 328,
+     "grev": 328,
+     "gapp": 328,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 307,
+     "who": "B",
+     "hd": 5769.3,
+     "gd": 5769.1,
+     "mrev": 329,
+     "grev": 329,
+     "gapp": 329,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 307,
+     "who": "C",
+     "hd": 5769.3,
+     "gd": 5769.1,
+     "mrev": 330,
+     "grev": 330,
+     "gapp": 330,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 309,
+     "who": "B",
+     "hd": 5770.9,
+     "gd": 5770.1,
+     "mrev": 330,
+     "grev": 330,
+     "gapp": 330,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 309,
+     "who": "C",
+     "hd": 5770.9,
+     "gd": 5770.1,
+     "mrev": 331,
+     "grev": 331,
+     "gapp": 331,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 311,
+     "who": "B",
+     "hd": 5772.6,
+     "gd": 5772.1,
+     "mrev": 332,
+     "grev": 332,
+     "gapp": 332,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 311,
+     "who": "C",
+     "hd": 5772.6,
+     "gd": 5772.1,
+     "mrev": 333,
+     "grev": 333,
+     "gapp": 333,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 313,
+     "who": "B",
+     "hd": 5774.2,
+     "gd": 5774,
+     "mrev": 334,
+     "grev": 334,
+     "gapp": 334,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 313,
+     "who": "C",
+     "hd": 5774.3,
+     "gd": 5774,
+     "mrev": 335,
+     "grev": 335,
+     "gapp": 335,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 315,
+     "who": "B",
+     "hd": 5775.9,
+     "gd": 5775,
+     "mrev": 335,
+     "grev": 335,
+     "gapp": 335,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 315,
+     "who": "C",
+     "hd": 5775.9,
+     "gd": 5775,
+     "mrev": 336,
+     "grev": 336,
+     "gapp": 336,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 317,
+     "who": "B",
+     "hd": 5777.5,
+     "gd": 5777,
+     "mrev": 337,
+     "grev": 337,
+     "gapp": 337,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 317,
+     "who": "C",
+     "hd": 5777.5,
+     "gd": 5777,
+     "mrev": 338,
+     "grev": 338,
+     "gapp": 338,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 319,
+     "who": "B",
+     "hd": 5779.2,
+     "gd": 5779,
+     "mrev": 339,
+     "grev": 339,
+     "gapp": 339,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 319,
+     "who": "C",
+     "hd": 5779.2,
+     "gd": 5779,
+     "mrev": 340,
+     "grev": 340,
+     "gapp": 340,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 321,
+     "who": "B",
+     "hd": 5780.9,
+     "gd": 5780,
+     "mrev": 340,
+     "grev": 340,
+     "gapp": 340,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 321,
+     "who": "C",
+     "hd": 5780.9,
+     "gd": 5780,
+     "mrev": 341,
+     "grev": 341,
+     "gapp": 341,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 324,
+     "who": "B",
+     "hd": 5785.4,
+     "gd": 5784.6,
+     "mrev": 344,
+     "grev": 344,
+     "gapp": 344,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 324,
+     "who": "C",
+     "hd": 5785.5,
+     "gd": 5784.7,
+     "mrev": 345,
+     "grev": 345,
+     "gapp": 345,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 326,
+     "who": "B",
+     "hd": 5789.6,
+     "gd": 5789,
+     "mrev": 347,
+     "grev": 347,
+     "gapp": 347,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 326,
+     "who": "C",
+     "hd": 5789.6,
+     "gd": 5789.1,
+     "mrev": 348,
+     "grev": 348,
+     "gapp": 348,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 328,
+     "who": "B",
+     "hd": 5793.1,
+     "gd": 5791.6,
+     "mrev": 349,
+     "grev": 349,
+     "gapp": 349,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 328,
+     "who": "C",
+     "hd": 5793.1,
+     "gd": 5791.6,
+     "mrev": 351,
+     "grev": 350,
+     "gapp": 350,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 330,
+     "who": "B",
+     "hd": 5797.2,
+     "gd": 5795.9,
+     "mrev": 352,
+     "grev": 352,
+     "gapp": 352,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 330,
+     "who": "C",
+     "hd": 5797.3,
+     "gd": 5796.1,
+     "mrev": 353,
+     "grev": 353,
+     "gapp": 353,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 332,
+     "who": "B",
+     "hd": 5801.4,
+     "gd": 5800.3,
+     "mrev": 355,
+     "grev": 355,
+     "gapp": 355,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 332,
+     "who": "C",
+     "hd": 5801.5,
+     "gd": 5800.3,
+     "mrev": 356,
+     "grev": 356,
+     "gapp": 356,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 334,
+     "who": "B",
+     "hd": 5805.5,
+     "gd": 5804.6,
+     "mrev": 358,
+     "grev": 358,
+     "gapp": 358,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 334,
+     "who": "C",
+     "hd": 5805.6,
+     "gd": 5804.7,
+     "mrev": 359,
+     "grev": 359,
+     "gapp": 359,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 336,
+     "who": "B",
+     "hd": 5809.5,
+     "gd": 5808.7,
+     "mrev": 361,
+     "grev": 361,
+     "gapp": 361,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 336,
+     "who": "C",
+     "hd": 5809.6,
+     "gd": 5808.9,
+     "mrev": 362,
+     "grev": 362,
+     "gapp": 362,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 338,
+     "who": "B",
+     "hd": 5813.6,
+     "gd": 5813,
+     "mrev": 364,
+     "grev": 364,
+     "gapp": 364,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 338,
+     "who": "C",
+     "hd": 5813.7,
+     "gd": 5813.2,
+     "mrev": 365,
+     "grev": 365,
+     "gapp": 365,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 341,
+     "who": "B",
+     "hd": 5817.4,
+     "gd": 5816.9,
+     "mrev": 367,
+     "grev": 367,
+     "gapp": 367,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 341,
+     "who": "C",
+     "hd": 5817.4,
+     "gd": 5817.1,
+     "mrev": 368,
+     "grev": 368,
+     "gapp": 368,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 343,
+     "who": "B",
+     "hd": 5821.1,
+     "gd": 5820.9,
+     "mrev": 370,
+     "grev": 370,
+     "gapp": 370,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 343,
+     "who": "C",
+     "hd": 5821.2,
+     "gd": 5821,
+     "mrev": 371,
+     "grev": 371,
+     "gapp": 371,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 345,
+     "who": "B",
+     "hd": 5825.3,
+     "gd": 5825.3,
+     "mrev": 373,
+     "grev": 373,
+     "gapp": 373,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 345,
+     "who": "C",
+     "hd": 5825.4,
+     "gd": 5824,
+     "mrev": 373,
+     "grev": 373,
+     "gapp": 373,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 347,
+     "who": "B",
+     "hd": 5829.5,
+     "gd": 5828.1,
+     "mrev": 375,
+     "grev": 375,
+     "gapp": 375,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 347,
+     "who": "C",
+     "hd": 5829.5,
+     "gd": 5828.3,
+     "mrev": 376,
+     "grev": 376,
+     "gapp": 376,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 349,
+     "who": "B",
+     "hd": 5833.6,
+     "gd": 5832.4,
+     "mrev": 378,
+     "grev": 378,
+     "gapp": 378,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 349,
+     "who": "C",
+     "hd": 5833.6,
+     "gd": 5832.7,
+     "mrev": 379,
+     "grev": 379,
+     "gapp": 379,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 351,
+     "who": "B",
+     "hd": 5837.8,
+     "gd": 5836.7,
+     "mrev": 381,
+     "grev": 381,
+     "gapp": 381,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 351,
+     "who": "C",
+     "hd": 5837.8,
+     "gd": 5837,
+     "mrev": 382,
+     "grev": 382,
+     "gapp": 382,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 373,
+     "who": "B",
+     "hd": 5880,
+     "gd": 5879.7,
+     "mrev": 412,
+     "grev": 412,
+     "gapp": 412,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 373,
+     "who": "C",
+     "hd": 5880.1,
+     "gd": 5878.6,
+     "mrev": 413,
+     "grev": 413,
+     "gapp": 412,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 375,
+     "who": "B",
+     "hd": 5884.2,
+     "gd": 5883.5,
+     "mrev": 415,
+     "grev": 415,
+     "gapp": 415,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 375,
+     "who": "C",
+     "hd": 5884.3,
+     "gd": 5883,
+     "mrev": 416,
+     "grev": 415,
+     "gapp": 415,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 377,
+     "who": "B",
+     "hd": 5888.4,
+     "gd": 5887.9,
+     "mrev": 418,
+     "grev": 418,
+     "gapp": 418,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 377,
+     "who": "C",
+     "hd": 5888.6,
+     "gd": 5887.3,
+     "mrev": 418,
+     "grev": 418,
+     "gapp": 418,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 379,
+     "who": "B",
+     "hd": 5892.7,
+     "gd": 5892.2,
+     "mrev": 421,
+     "grev": 421,
+     "gapp": 421,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 380,
+     "who": "C",
+     "hd": 5892.8,
+     "gd": 5891.7,
+     "mrev": 421,
+     "grev": 421,
+     "gapp": 421,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 382,
+     "who": "B",
+     "hd": 5896.9,
+     "gd": 5896.5,
+     "mrev": 424,
+     "grev": 424,
+     "gapp": 424,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 382,
+     "who": "C",
+     "hd": 5897,
+     "gd": 5896,
+     "mrev": 424,
+     "grev": 424,
+     "gapp": 424,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 403,
+     "who": "B",
+     "hd": 5938.7,
+     "gd": 5938,
+     "mrev": 453,
+     "grev": 453,
+     "gapp": 453,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 403,
+     "who": "C",
+     "hd": 5938.8,
+     "gd": 5937.3,
+     "mrev": 454,
+     "grev": 453,
+     "gapp": 453,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 405,
+     "who": "B",
+     "hd": 5942.1,
+     "gd": 5941.8,
+     "mrev": 456,
+     "grev": 456,
+     "gapp": 456,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 405,
+     "who": "C",
+     "hd": 5942.2,
+     "gd": 5941.5,
+     "mrev": 456,
+     "grev": 456,
+     "gapp": 456,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 407,
+     "who": "B",
+     "hd": 5946.2,
+     "gd": 5946,
+     "mrev": 459,
+     "grev": 459,
+     "gapp": 459,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 407,
+     "who": "C",
+     "hd": 5946.2,
+     "gd": 5945.5,
+     "mrev": 459,
+     "grev": 459,
+     "gapp": 459,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 409,
+     "who": "B",
+     "hd": 5950.3,
+     "gd": 5948.9,
+     "mrev": 462,
+     "grev": 461,
+     "gapp": 461,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 409,
+     "who": "C",
+     "hd": 5950.4,
+     "gd": 5949.9,
+     "mrev": 462,
+     "grev": 462,
+     "gapp": 462,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 411,
+     "who": "B",
+     "hd": 5954.4,
+     "gd": 5953,
+     "mrev": 464,
+     "grev": 464,
+     "gapp": 464,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 411,
+     "who": "C",
+     "hd": 5954.5,
+     "gd": 5954.1,
+     "mrev": 465,
+     "grev": 465,
+     "gapp": 465,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 420,
+     "who": "B",
+     "hd": 5970.1,
+     "gd": 5969.4,
+     "mrev": 468,
+     "grev": 468,
+     "gapp": 468,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 420,
+     "who": "C",
+     "hd": 5970.2,
+     "gd": 5969.9,
+     "mrev": 476,
+     "grev": 476,
+     "gapp": 476,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 422,
+     "who": "B",
+     "hd": 5973.6,
+     "gd": 5972.3,
+     "mrev": 471,
+     "grev": 471,
+     "gapp": 471,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 422,
+     "who": "C",
+     "hd": 5973.7,
+     "gd": 5971.8,
+     "mrev": 479,
+     "grev": 479,
+     "gapp": 478,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 424,
+     "who": "B",
+     "hd": 5977.5,
+     "gd": 5976.6,
+     "mrev": 474,
+     "grev": 474,
+     "gapp": 474,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 424,
+     "who": "C",
+     "hd": 5977.6,
+     "gd": 5977.2,
+     "mrev": 482,
+     "grev": 482,
+     "gapp": 482,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 426,
+     "who": "B",
+     "hd": 5981.7,
+     "gd": 5980.9,
+     "mrev": 477,
+     "grev": 477,
+     "gapp": 477,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 426,
+     "who": "C",
+     "hd": 5981.7,
+     "gd": 5981.5,
+     "mrev": 485,
+     "grev": 485,
+     "gapp": 485,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 428,
+     "who": "B",
+     "hd": 5985.8,
+     "gd": 5985.3,
+     "mrev": 480,
+     "grev": 480,
+     "gapp": 480,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 428,
+     "who": "C",
+     "hd": 5985.9,
+     "gd": 5984.4,
+     "mrev": 488,
+     "grev": 488,
+     "gapp": 487,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 430,
+     "who": "B",
+     "hd": 5990,
+     "gd": 5989.6,
+     "mrev": 483,
+     "grev": 483,
+     "gapp": 483,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 430,
+     "who": "C",
+     "hd": 5990.1,
+     "gd": 5988.8,
+     "mrev": 490,
+     "grev": 490,
+     "gapp": 490,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 432,
+     "who": "B",
+     "hd": 5994.3,
+     "gd": 5994,
+     "mrev": 486,
+     "grev": 486,
+     "gapp": 486,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 432,
+     "who": "C",
+     "hd": 5994.4,
+     "gd": 5993.1,
+     "mrev": 493,
+     "grev": 493,
+     "gapp": 493,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 434,
+     "who": "B",
+     "hd": 5998.8,
+     "gd": 5998.3,
+     "mrev": 489,
+     "grev": 489,
+     "gapp": 489,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 434,
+     "who": "C",
+     "hd": 5998.8,
+     "gd": 5997.5,
+     "mrev": 496,
+     "grev": 496,
+     "gapp": 496,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 437,
+     "who": "B",
+     "hd": 6002.4,
+     "gd": 6002.4,
+     "mrev": 492,
+     "grev": 492,
+     "gapp": 492,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 437,
+     "who": "C",
+     "hd": 6002.6,
+     "gd": 6001.6,
+     "mrev": 499,
+     "grev": 499,
+     "gapp": 499,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 439,
+     "who": "B",
+     "hd": 6006.7,
+     "gd": 6006.5,
+     "mrev": 495,
+     "grev": 495,
+     "gapp": 495,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 439,
+     "who": "C",
+     "hd": 6006.7,
+     "gd": 6005.9,
+     "mrev": 502,
+     "grev": 502,
+     "gapp": 502,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 441,
+     "who": "B",
+     "hd": 6010.7,
+     "gd": 6010.7,
+     "mrev": 498,
+     "grev": 498,
+     "gapp": 498,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 441,
+     "who": "C",
+     "hd": 6010.7,
+     "gd": 6010.3,
+     "mrev": 505,
+     "grev": 505,
+     "gapp": 505,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 443,
+     "who": "B",
+     "hd": 6014.8,
+     "gd": 6013.4,
+     "mrev": 500,
+     "grev": 500,
+     "gapp": 500,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 443,
+     "who": "C",
+     "hd": 6014.8,
+     "gd": 6014.3,
+     "mrev": 508,
+     "grev": 508,
+     "gapp": 508,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 445,
+     "who": "B",
+     "hd": 6019.1,
+     "gd": 6017.8,
+     "mrev": 503,
+     "grev": 503,
+     "gapp": 503,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 445,
+     "who": "C",
+     "hd": 6019.1,
+     "gd": 6018.5,
+     "mrev": 511,
+     "grev": 511,
+     "gapp": 511,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 447,
+     "who": "B",
+     "hd": 6022.9,
+     "gd": 6021.6,
+     "mrev": 506,
+     "grev": 506,
+     "gapp": 506,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 447,
+     "who": "C",
+     "hd": 6022.9,
+     "gd": 6022.6,
+     "mrev": 514,
+     "grev": 514,
+     "gapp": 514,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 449,
+     "who": "B",
+     "hd": 6027,
+     "gd": 6025.9,
+     "mrev": 509,
+     "grev": 509,
+     "gapp": 509,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 449,
+     "who": "C",
+     "hd": 6027,
+     "gd": 6025.5,
+     "mrev": 516,
+     "grev": 516,
+     "gapp": 516,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 451,
+     "who": "B",
+     "hd": 6030.5,
+     "gd": 6030.1,
+     "mrev": 512,
+     "grev": 512,
+     "gapp": 512,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 451,
+     "who": "C",
+     "hd": 6030.6,
+     "gd": 6029.9,
+     "mrev": 519,
+     "grev": 519,
+     "gapp": 519,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 453,
+     "who": "B",
+     "hd": 6034.8,
+     "gd": 6034.4,
+     "mrev": 515,
+     "grev": 515,
+     "gapp": 515,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 453,
+     "who": "C",
+     "hd": 6034.9,
+     "gd": 6033.7,
+     "mrev": 522,
+     "grev": 522,
+     "gapp": 522,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 455,
+     "who": "B",
+     "hd": 6038.9,
+     "gd": 6038.7,
+     "mrev": 518,
+     "grev": 518,
+     "gapp": 518,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 455,
+     "who": "C",
+     "hd": 6039.1,
+     "gd": 6037.9,
+     "mrev": 525,
+     "grev": 525,
+     "gapp": 525,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 458,
+     "who": "B",
+     "hd": 6043.2,
+     "gd": 6043.1,
+     "mrev": 521,
+     "grev": 521,
+     "gapp": 521,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 458,
+     "who": "C",
+     "hd": 6043.3,
+     "gd": 6042.3,
+     "mrev": 528,
+     "grev": 528,
+     "gapp": 528,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 460,
+     "who": "B",
+     "hd": 6047.4,
+     "gd": 6046.1,
+     "mrev": 523,
+     "grev": 523,
+     "gapp": 523,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 460,
+     "who": "C",
+     "hd": 6047.4,
+     "gd": 6046.6,
+     "mrev": 531,
+     "grev": 531,
+     "gapp": 531,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 462,
+     "who": "B",
+     "hd": 6051.5,
+     "gd": 6050.5,
+     "mrev": 526,
+     "grev": 526,
+     "gapp": 526,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 462,
+     "who": "C",
+     "hd": 6051.5,
+     "gd": 6050.9,
+     "mrev": 534,
+     "grev": 534,
+     "gapp": 534,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 464,
+     "who": "B",
+     "hd": 6055.5,
+     "gd": 6054.7,
+     "mrev": 529,
+     "grev": 529,
+     "gapp": 529,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 464,
+     "who": "C",
+     "hd": 6055.5,
+     "gd": 6055.2,
+     "mrev": 537,
+     "grev": 537,
+     "gapp": 537,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 466,
+     "who": "B",
+     "hd": 6059.6,
+     "gd": 6059.1,
+     "mrev": 532,
+     "grev": 532,
+     "gapp": 532,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 466,
+     "who": "C",
+     "hd": 6059.7,
+     "gd": 6059.6,
+     "mrev": 540,
+     "grev": 540,
+     "gapp": 540,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 468,
+     "who": "B",
+     "hd": 6062.7,
+     "gd": 6061.5,
+     "mrev": 534,
+     "grev": 534,
+     "gapp": 534,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 468,
+     "who": "C",
+     "hd": 6062.7,
+     "gd": 6061.5,
+     "mrev": 542,
+     "grev": 542,
+     "gapp": 542,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 470,
+     "who": "B",
+     "hd": 6066.8,
+     "gd": 6065.8,
+     "mrev": 537,
+     "grev": 537,
+     "gapp": 537,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 470,
+     "who": "C",
+     "hd": 6066.8,
+     "gd": 6065.9,
+     "mrev": 545,
+     "grev": 545,
+     "gapp": 545,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 472,
+     "who": "B",
+     "hd": 6070.9,
+     "gd": 6070.1,
+     "mrev": 540,
+     "grev": 540,
+     "gapp": 540,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 472,
+     "who": "C",
+     "hd": 6071,
+     "gd": 6070.3,
+     "mrev": 548,
+     "grev": 548,
+     "gapp": 548,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 475,
+     "who": "B",
+     "hd": 6090,
+     "gd": 6088.7,
+     "mrev": 544,
+     "grev": 544,
+     "gapp": 544,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 475,
+     "who": "C",
+     "hd": 6090.6,
+     "gd": 6089.5,
+     "mrev": 552,
+     "grev": 552,
+     "gapp": 552,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 477,
+     "who": "B",
+     "hd": 6110.7,
+     "gd": 6107.8,
+     "mrev": 547,
+     "grev": 547,
+     "gapp": 547,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 477,
+     "who": "C",
+     "hd": 6111,
+     "gd": 6108.2,
+     "mrev": 555,
+     "grev": 555,
+     "gapp": 555,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 479,
+     "who": "B",
+     "hd": 6126.6,
+     "gd": 6120.9,
+     "mrev": 549,
+     "grev": 549,
+     "gapp": 549,
+     "mo": 0,
+     "note": ""
+    },
+    {
+     "t": 479,
+     "who": "C",
+     "hd": 6126.9,
+     "gd": 6120.9,
+     "mrev": 557,
+     "grev": 557,
+     "gapp": 557,
+     "mo": 0,
+     "note": ""
+    }
+   ],
+   "stalls": [],
+   "holds": [
+    {
+     "who": "B",
+     "t": 50,
+     "pill": "ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×",
+     "note": "Pencere açık — dünya, kapanınca güncellenir"
+    },
+    {
+     "who": "C",
+     "t": 201,
+     "pill": "ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×",
+     "note": "Pencere açık — dünya, kapanınca güncellenir"
+    },
+    {
+     "who": "B",
+     "t": 352,
+     "pill": "ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸ 2×",
+     "note": "Pencere açık — dünya, kapanınca güncellenir"
+    }
+   ],
+   "events": [
+    {
+     "kind": "speed",
+     "who": "B",
+     "t": 20,
+     "spd": 4,
+     "ok": true,
+     "note": 3
+    },
+    {
+     "kind": "window",
+     "who": "B",
+     "t": 50,
+     "modal": true,
+     "pill": "ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×",
+     "note": "Pencere açık — dünya, kapanınca güncellenir",
+     "catch": {
+      "who": "B",
+      "label": "pencere",
+      "ok": true,
+      "ms": 290,
+      "hostDay": 5552.6
+     }
+    },
+    {
+     "kind": "background",
+     "who": "B",
+     "t": 80,
+     "catch": {
+      "who": "B",
+      "label": "arka plan",
+      "ok": true,
+      "ms": 22,
+      "hostDay": 5576.8
+     }
+    },
+    {
+     "kind": "cut",
+     "who": "B",
+     "t": 110,
+     "catch": {
+      "who": "B",
+      "label": "kopma",
+      "ok": true,
+      "ms": 3382,
+      "hostDay": 5589.8
+     }
+    },
+    {
+     "kind": "order",
+     "who": "B",
+     "t": 141,
+     "move": "ok",
+     "ship": "ok",
+     "shipSeen": true,
+     "reflectMs": 602
+    },
+    {
+     "kind": "speed",
+     "who": "C",
+     "t": 171,
+     "spd": 4,
+     "ok": true,
+     "note": 5
+    },
+    {
+     "kind": "window",
+     "who": "C",
+     "t": 201,
+     "modal": true,
+     "pill": "ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×",
+     "note": "Pencere açık — dünya, kapanınca güncellenir",
+     "catch": {
+      "who": "C",
+      "label": "pencere",
+      "ok": true,
+      "ms": 417,
+      "hostDay": 5704.4
+     }
+    },
+    {
+     "kind": "background",
+     "who": "C",
+     "t": 232,
+     "catch": {
+      "who": "C",
+      "label": "arka plan",
+      "ok": true,
+      "ms": 163,
+      "hostDay": 5727.8
+     }
+    },
+    {
+     "kind": "cut",
+     "who": "C",
+     "t": 262,
+     "catch": {
+      "who": "C",
+      "label": "kopma",
+      "ok": true,
+      "ms": 477,
+      "hostDay": 5737.9
+     }
+    },
+    {
+     "kind": "order",
+     "who": "C",
+     "t": 292,
+     "move": "ok",
+     "ship": "ok",
+     "shipSeen": true,
+     "reflectMs": 261
+    },
+    {
+     "kind": "speed",
+     "who": "B",
+     "t": 322,
+     "spd": 2,
+     "ok": true,
+     "note": 8
+    },
+    {
+     "kind": "window",
+     "who": "B",
+     "t": 352,
+     "modal": true,
+     "pill": "ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸ 2×",
+     "note": "Pencere açık — dünya, kapanınca güncellenir",
+     "catch": {
+      "who": "B",
+      "label": "pencere",
+      "ok": true,
+      "ms": 325,
+      "hostDay": 5878.7
+     }
+    },
+    {
+     "kind": "background",
+     "who": "B",
+     "t": 382,
+     "catch": {
+      "who": "B",
+      "label": "arka plan",
+      "ok": true,
+      "ms": 47,
+      "hostDay": 5937.8
+     }
+    },
+    {
+     "kind": "cut",
+     "who": "B",
+     "t": 413,
+     "catch": {
+      "who": "B",
+      "label": "kopma",
+      "ok": true,
+      "ms": 3545,
+      "hostDay": 5969.5
+     }
+    },
+    {
+     "kind": "order",
+     "who": "B",
+     "t": 443,
+     "move": "ok",
+     "ship": "ok",
+     "shipSeen": true,
+     "reflectMs": 434
+    },
+    {
+     "kind": "speed",
+     "who": "C",
+     "t": 473,
+     "spd": 4,
+     "ok": true,
+     "note": 9
+    }
+   ],
+   "cmds": [
+    {
+     "who": "B",
+     "label": "t+141",
+     "at": 1795348760920,
+     "move": {
+      "status": "ok",
+      "code": null,
+      "rev": 357
+     },
+     "ship": {
+      "status": "ok",
+      "code": null,
+      "rev": 360
+     },
+     "shipSeen": true,
+     "reflectMs": 602
+    },
+    {
+     "who": "C",
+     "label": "t+292",
+     "at": 1795348911950,
+     "move": {
+      "status": "ok",
+      "code": null,
+      "rev": 491
+     },
+     "ship": {
+      "status": "ok",
+      "code": null,
+      "rev": 493
+     },
+     "shipSeen": true,
+     "reflectMs": 261
+    },
+    {
+     "who": "B",
+     "label": "t+443",
+     "at": 1795349063152,
+     "move": {
+      "status": "ok",
+      "code": null,
+      "rev": 753
+     },
+     "ship": {
+      "status": "ok",
+      "code": null,
+      "rev": 756
+     },
+     "shipSeen": true,
+     "reflectMs": 434
+    }
+   ],
+   "catchups": [
+    {
+     "who": "B",
+     "label": "pencere",
+     "ok": true,
+     "ms": 290,
+     "hostDay": 5552.6
+    },
+    {
+     "who": "B",
+     "label": "arka plan",
+     "ok": true,
+     "ms": 22,
+     "hostDay": 5576.8
+    },
+    {
+     "who": "B",
+     "label": "kopma",
+     "ok": true,
+     "ms": 3382,
+     "hostDay": 5589.8
+    },
+    {
+     "who": "C",
+     "label": "pencere",
+     "ok": true,
+     "ms": 417,
+     "hostDay": 5704.4
+    },
+    {
+     "who": "C",
+     "label": "arka plan",
+     "ok": true,
+     "ms": 163,
+     "hostDay": 5727.8
+    },
+    {
+     "who": "C",
+     "label": "kopma",
+     "ok": true,
+     "ms": 477,
+     "hostDay": 5737.9
+    },
+    {
+     "who": "B",
+     "label": "pencere",
+     "ok": true,
+     "ms": 325,
+     "hostDay": 5878.7
+    },
+    {
+     "who": "B",
+     "label": "arka plan",
+     "ok": true,
+     "ms": 47,
+     "hostDay": 5937.8
+    },
+    {
+     "who": "B",
+     "label": "kopma",
+     "ok": true,
+     "ms": 3545,
+     "hostDay": 5969.5
+    }
+   ],
+   "ffSeconds": 57,
+   "maxLagDays": 7.5,
+   "fight": {
+    "fleet": 229,
+    "foe": 3,
+    "sys": 33,
+    "visible": true,
+    "mine": 4
+   },
+   "visual": {
+    "B": {
+     "fleets": 102,
+     "seen": 100,
+     "seenMiss": 0,
+     "seenExtra": 0,
+     "hab": 9,
+     "habDiff": [],
+     "ownDiff": [],
+     "diff": {
+      "route": [],
+      "hp": [],
+      "combat": []
+     }
+    },
+    "C": {
+     "fleets": 102,
+     "seen": 100,
+     "seenMiss": 0,
+     "seenExtra": 0,
+     "hab": 23,
+     "habDiff": [],
+     "ownDiff": [],
+     "diff": {
+      "route": [],
+      "hp": [],
+      "combat": []
+     }
+    }
+   },
+   "sensor": {
+    "deal": {
+     "ok": true,
+     "share": true
+    },
+    "gained": 4,
+    "leakFrom3rd": 0,
+    "cMirrorEqHost": true,
+    "bChanged": false,
+    "bGetsC": 0,
+    "hostBefore": 6,
+    "hostAfter": 6
+   }
+  },
+  "errors": []
+ }
+}

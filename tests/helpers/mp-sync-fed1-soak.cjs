@@ -122,7 +122,7 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
    const sameC=JSON.stringify([...gC].sort((a,b)=>a-b))===JSON.stringify(after.c.slice().sort((a,b)=>a-b));
    I.sensor={deal:r,gained:gained.length,leakFrom3rd:leakFrom3rd.length,cMirrorEqHost:sameC,bChanged:JSON.stringify(after.b.slice().sort())!==JSON.stringify(before.b.slice().sort()),bGetsC:before.c.filter(id=>!before.b.includes(id)&&gB.includes(id)).length,hostBefore:before.h,hostAfter:after.h,pre,activeAfter:await H().evaluate(([b,c])=>sensorShareActive(G.emps[c],G.emps[b]),[E.B,E.C])};
    console.log('  I3 '+JSON.stringify(I.sensor));
-   assert.equal(r.ok,true,'sensör paylaşımı anlaşması uygulandı');assert(gained.length>0,'C yeni sistem gördü');assert.equal(leakFrom3rd.length,0,'C yalnız B\'nin gördüğü sistemleri kazanır');
+   assert.equal(r.ok,true,'sensör paylaşımı anlaşması uygulandı');assert.equal(pre.shareBefore,false,'fikstür: paylaşım anlaşmadan önce kapalı');assert(pre.bNativeNew>0,'fikstür: B\'nin C\'nin henüz görmediği sensör sistemi var '+JSON.stringify(pre));assert(gained.length>0,'C yeni sistem gördü '+JSON.stringify(pre));assert.equal(leakFrom3rd.length,0,'C yalnız B\'nin gördüğü sistemleri kazanır');
    assert.equal(sameC,true,'C misafir görüşü host\'un C için hesapladığıyla aynı');assert.equal(I.sensor.bChanged,false,'B\'nin görüşü değişmez (tek yön)');assert.equal(I.sensor.bGetsC,0,'B, C\'ninkileri görmez');
    assert.equal(after.h,before.h,'host\'un görüşü değişmez');});
 };

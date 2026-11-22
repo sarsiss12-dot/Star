@@ -1,0 +1,21 @@
+set arm seed caps capsArmy armies reuse maxChain falls garr alive ordShips aiSys wars
+120dng p47 11 1 0 0 0 0 {"temiz":1} 40 9 1 49 0
+240cal p47 11 3 0 0 0 0 {"temiz":2,"ayrilik":1,"teslim":4,"yutuldu":1} 77 9 13 86 7.5
+120dng p47 99 0 0 0 0 0 {} 62 9 6 39 1
+240cal p47 99 1 0 0 0 0 {"temiz":1,"teslim":2,"ayrilik":2,"yutuldu":1} 71 11 16 81 5
+120dng p47 404 0 0 0 0 0 {"teslim":5,"ayrilik":1} 49 10 6 49 0
+240cal p47 404 2 0 0 0 0 {"teslim":5,"temiz":2,"ayrilik":2,"yutuldu":4} 65 9 10 88 7.5
+120dng p48 11 1 1 1 0 1 {"temiz":1} 43 9 5 50 0
+240cal p48 11 1 1 1 0 1 {"temiz":1,"teslim":1} 73 9 14 76 8
+120dng p48 99 0 0 0 0 0 {} 62 9 6 39 1
+240cal p48 99 4 3 3 0 1 {"temiz":2,"teslim":3,"uzay":1,"ayrilik":2,"yutuldu":4} 74 11 17 78 6
+120dng p48 404 0 0 0 0 0 {"teslim":5,"ayrilik":1} 49 10 6 49 0
+240cal p48 404 2 1 1 0 1 {"teslim":6,"temiz":1,"ayrilik":2,"yutuldu":1} 68 11 12 88 6
+120dng plc 11 1 1 1 0 1 {"temiz":1} 43 9 5 50 0
+240cal plc 11 1 1 1 0 1 {"temiz":1,"teslim":1} 73 9 14 76 8
+120dng plc 99 0 0 0 0 0 {} 53 9 3 39 0
+240cal plc 99 5 2 2 0 1 {"teslim":1,"temiz":2,"uzay":1} 68 8 9 72 6.5
+120dng plc 404 0 0 0 0 0 {"teslim":5,"ayrilik":1} 49 10 6 49 0
+240cal plc 404 2 1 1 0 1 {"teslim":6,"temiz":1,"ayrilik":2,"yutuldu":1} 68 11 12 88 6
+
+[exited with code 0]

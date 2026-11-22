@@ -1,0 +1,28 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[4,4],"mirrorEq":true,"revMs":128,"buildMs":180,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":236,"buildMs":273,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":9.1,"p95":11.3,"max":11.3},"longtask":{"n":1,"med":74,"p95":74,"max":74},"heapMB":18,"dom":714,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":4,"med":28.5,"p95":53.5,"max":53.5},"refresh":{"n":1,"med":1.7,"p95":1.7,"max":1.7},"longtask":{"n":0},"builds":4,"deltas":3,"resyncs":0,"minGap":600,"heapMB":18,"dom":640,"intervals":3,"timeouts":2,"notes":0,"results":3,"packets":36,"joinErrors":0},"C":{"build":{"n":2,"med":41.9,"p95":41.9,"max":41.9},"refresh":{"n":0},"longtask":{"n":3,"med":66,"p95":92,"max":92},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":16,"dom":714,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":28,"joinErrors":0}}}
+PASS I0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 404; misafir gerçek STARS arayüzünde
+  OLAY {"kind":"speed","who":"B","t":20,"spd":4,"ok":true,"note":3}
+  OLAY {"kind":"window","who":"B","t":50,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"B","label":"pencere","ok":true,"ms":290,"hostDay":5552.6}}
+  OLAY {"kind":"background","who":"B","t":80,"catch":{"who":"B","label":"arka plan","ok":true,"ms":22,"hostDay":5576.8}}
+  OLAY {"kind":"cut","who":"B","t":110,"catch":{"who":"B","label":"kopma","ok":true,"ms":3382,"hostDay":5589.8}}
+  OLAY {"kind":"order","who":"B","t":141,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":602}
+  OLAY {"kind":"speed","who":"C","t":171,"spd":4,"ok":true,"note":5}
+  OLAY {"kind":"window","who":"C","t":201,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"C","label":"pencere","ok":true,"ms":417,"hostDay":5704.4}}
+  OLAY {"kind":"background","who":"C","t":232,"catch":{"who":"C","label":"arka plan","ok":true,"ms":163,"hostDay":5727.8}}
+  OLAY {"kind":"cut","who":"C","t":262,"catch":{"who":"C","label":"kopma","ok":true,"ms":477,"hostDay":5737.9}}
+  OLAY {"kind":"order","who":"C","t":292,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":261}
+  OLAY {"kind":"speed","who":"B","t":322,"spd":2,"ok":true,"note":8}
+  OLAY {"kind":"window","who":"B","t":352,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸ 2×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"B","label":"pencere","ok":true,"ms":325,"hostDay":5878.7}}
+  OLAY {"kind":"background","who":"B","t":382,"catch":{"who":"B","label":"arka plan","ok":true,"ms":47,"hostDay":5937.8}}
+  OLAY {"kind":"cut","who":"B","t":413,"catch":{"who":"B","label":"kopma","ok":true,"ms":3545,"hostDay":5969.5}}
+  OLAY {"kind":"order","who":"B","t":443,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":434}
+  OLAY {"kind":"speed","who":"C","t":473,"spd":4,"ok":true,"note":9}
+  örnek 328 · olay 16 · kapalı-pencere donma 0 · açık-pencere bekleme 3 · en büyük gün farkı 7.5
+PASS I1 uzun oturum 8 dk (500 sistem / 16 AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası 20 sn'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür
+  I2 {"B":{"fleets":102,"seen":100,"seenMiss":0,"seenExtra":0,"hab":9,"habDiff":[],"ownDiff":[],"diff":{"route":[],"hp":[],"combat":[]}},"C":{"fleets":102,"seen":100,"seenMiss":0,"seenExtra":0,"hab":23,"habDiff":[],"ownDiff":[],"diff":{"route":[],"hp":[],"combat":[]}}}
+PASS I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)
+  I3 {"deal":{"ok":true,"share":true},"gained":4,"leakFrom3rd":0,"cMirrorEqHost":true,"bChanged":false,"bGetsC":0,"hostBefore":6,"hostAfter":6}
+PASS I3 sensör paylaşımı tek yön: B → C; C, B'nin sensör sistemlerini görür, B C'ninkileri görmez, host'un kendi görüşü değişmez
+GEÇEN: 4 KALAN: 0
+EXIT 0

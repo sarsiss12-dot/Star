@@ -2,7 +2,12 @@
 
 Son güncelleme: 2026-11-22. Depo `sarsiss12-dot/Star`.
 
-## Güncel geliştirme adayı — p48 (SAHA-ENTEGRE.0)
+## Güncel geliştirme adayı — p49 (SAHA-GÜVENCE.1)
+
+`claude/stars-saha-guvence1` (taban `claude/stars-saha-entegre0` @ `347ef0d`, p48 / PR #68). Oyun 96h10p49 / PWA stars-v96h10p49 / MP.8.9b48; Save8 v8, paket 4, protokol 1. ZIP `releases/stars-faz96h10p49.zip` (SHA-256 `25491d763360688340fc9aaf01e670c15d75f151bcf327366d025a09cdc8946c`, CRC32 `6D58F714`). [Sonuç raporu](reports/claude/SAHA-GUVENCE1-SONUC.md) · [Program devri](reports/claude/STARS-SONRAKI-DEVIR.md).
+Eskortsuz silahsız gemi imhası görünür + misafire muharebe sonucu, toprak vaadi iadesi, İsyanı Bastır bedeli, sistem federasyon oyu kartı; MP uzun oturum (100 / 500 sistem) ve insan–insan Savaşa Yardım uçtan uca otomatik sınandı. Kullanıcı test yapamıyordu: fiziksel Android / uzak internet / Render NOT RUN, kullanıcı kabulü yok. TİCARET-AĞ.0 entegrasyonu ayrı dalda (`claude/stars-ticaret-ag0`), performans kapısı açık, yayınlanmadı.
+
+## Önceki geliştirme adayı — p48 (SAHA-ENTEGRE.0)
 
 `claude/stars-saha-entegre0` (taban `codex/stars-mp-rakip-doktrinler0` @ `8984b51`, p47 + doğrulanmış PR #64). Oyun 96h10p48 / PWA stars-v96h10p48 / MP.8.9b47; Save8 v8, paket 4, protokol 1. ZIP `releases/stars-faz96h10p48.zip` (SHA-256 `fd1d8a3896c700bd4b97d7f36e679ff5a76f541e46099e0418987437939858e3`). [Sonuç raporu](reports/claude/SAHA-ENTEGRE0-SONUC.md) · [Devir](reports/claude/SAHA-ENTEGRE0-DEVIR.md).
 Fetih anında filo kaybı (Issue #66), fetih talebi + haritadan seçim, Savaş Merkezi yorgunluğu, BİLİM ANOMALİLERİ ayarı, TÜMÜNÜ KENARA AL, misafir büyük armalar / seçimsiz lojistik (Issue #65), Savaşa Yardım Teklif Et (Issue #67). Node hedefli + regresyon, Save8/RNG eşdeğerliği, SP ve MP Chromium PASS; fiziksel Android / Render NOT RUN; kullanıcı kabulü yok. p23 ile p47 arasındaki ara sürümler için CLAUDE.md ve `CODEX-SON-RAPOR.md` bağlantıları esastır.
