@@ -109,6 +109,9 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
 
  await test('I3 sensör paylaşımı tek yön: B → C; C, B\'nin sensör sistemlerini görür, B C\'ninkileri görmez, host\'un kendi görüşü değişmez',async()=>{
    const before=await H().evaluate(([b,c])=>({h:[...humanVisionContext(G.p).visible].length,b:[...humanVisionContext(G.emps[b]).visible],c:[...humanVisionContext(G.emps[c]).visible]}),[E.B,E.C]);
+   /* tanı (yalnız ölçüm): B'nin kendi sensör kümesinde C'nin henüz görmediği sistem sayısı; anlaşmadan önce paylaşım zaten açık mıydı */
+   const pre=await H().evaluate(([b,c])=>{const B=G.emps[b],C=G.emps[c],cv=humanVisionContext(C).visible,nb=[...nativeSensorVision(B)];
+     return {bNative:nb.length,bNativeNew:nb.filter(id=>!cv.has(id)).length,shareBefore:!!(C.visionFrom&&C.visionFrom[b]),bCols:G.sys.filter(s=>s.owner===b).length,bFleets:G.fleets.filter(f=>f.e===b&&f.ships.length).length,bDead:!!B.dead,war:!!B.war[c]};},[E.B,E.C]);
    const r=await H().evaluate(([b,c])=>{const B=G.emps[b],C=G.emps[c];B.contact[c]=C.contact[b]=true;G._dealAuth=true;const ok=executeDeal({from:b,to:c,give:[{t:'intel'}],want:[],born:G.day,expires:G.day+30});G._dealAuth=false;MP1Host.host.publish();
      return {ok,share:!!(C.visionFrom&&C.visionFrom[b])};},[E.B,E.C]);
    await settle('i3');
@@ -117,9 +120,9 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
    /* motor kuralı: alan, verenin SENSÖR kaynaklarını alır (filo görüşü / başkasından gelen paylaşım aktarılmaz); doğruluk host'un C için hesapladığı görüşle */
    const gained=after.c.filter(id=>!before.c.includes(id)),leakFrom3rd=gained.filter(id=>!before.b.includes(id));
    const sameC=JSON.stringify([...gC].sort((a,b)=>a-b))===JSON.stringify(after.c.slice().sort((a,b)=>a-b));
-   I.sensor={deal:r,gained:gained.length,leakFrom3rd:leakFrom3rd.length,cMirrorEqHost:sameC,bChanged:JSON.stringify(after.b.slice().sort())!==JSON.stringify(before.b.slice().sort()),bGetsC:before.c.filter(id=>!before.b.includes(id)&&gB.includes(id)).length,hostBefore:before.h,hostAfter:after.h};
+   I.sensor={deal:r,gained:gained.length,leakFrom3rd:leakFrom3rd.length,cMirrorEqHost:sameC,bChanged:JSON.stringify(after.b.slice().sort())!==JSON.stringify(before.b.slice().sort()),bGetsC:before.c.filter(id=>!before.b.includes(id)&&gB.includes(id)).length,hostBefore:before.h,hostAfter:after.h,pre,activeAfter:await H().evaluate(([b,c])=>sensorShareActive(G.emps[c],G.emps[b]),[E.B,E.C])};
    console.log('  I3 '+JSON.stringify(I.sensor));
-   assert.equal(r.ok,true,'sensör paylaşımı anlaşması uygulandı');assert(gained.length>0,'C yeni sistem gördü');assert.equal(leakFrom3rd.length,0,'C yalnız B\'nin gördüğü sistemleri kazanır');
+   assert.equal(r.ok,true,'sensör paylaşımı anlaşması uygulandı');assert.equal(pre.shareBefore,false,'fikstür: paylaşım anlaşmadan önce kapalı');assert(pre.bNativeNew>0,'fikstür: B\'nin C\'nin henüz görmediği sensör sistemi var '+JSON.stringify(pre));assert(gained.length>0,'C yeni sistem gördü '+JSON.stringify(pre));assert.equal(leakFrom3rd.length,0,'C yalnız B\'nin gördüğü sistemleri kazanır');
    assert.equal(sameC,true,'C misafir görüşü host\'un C için hesapladığıyla aynı');assert.equal(I.sensor.bChanged,false,'B\'nin görüşü değişmez (tek yön)');assert.equal(I.sensor.bGetsC,0,'B, C\'ninkileri görmez');
    assert.equal(after.h,before.h,'host\'un görüşü değişmez');});
 };

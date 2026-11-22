@@ -6,6 +6,7 @@ const { createHash } = require('node:crypto');
 const pins = require('./saha-entegre0-reviewed.json');
 const sha = source => createHash('sha256').update(source).digest('hex');
 exports.stripReviewedSahaEntegre0 = (file, source) => {
+  source = require('./saha-guvence1-reviewed.cjs').stripReviewedSahaGuvence1(file, source);   // SAHA-GÜVENCE.1 p49 önce
   const pin = pins[file];
   if (!pin || sha(source) !== pin.afterSha256) return source;
   for (const { before, after } of pin.hunks) {

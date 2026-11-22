@@ -1,5 +1,8 @@
 'use strict';
 /* 95E — references to existing diplomatic actions, never a second engine. */
+/* SAHA-GÜVENCE.1: düzenli temel yasa oyunu (startFedVote) önereni boş bırakır; kayıt geçerli bir kaynak devlet istediği için sistem oyu
+   gelen kutusuna HİÇ girmiyordu (misafirde kart da doğmuyordu — P46 bulgusu). Önerensiz oyda kaynak federasyon başkanıdır. */
+function fedVoteSource(f){const p=f?.vote?.proposer;return Number.isInteger(p)&&G.emps[p]?p:f?.leader;}
 const DiplomaticInbox = {
   historyLimit:256, pendingLimit:512,
   types:{fedagenda:'Federasyon gündem sonucu',fedfound:'Federasyon kuruluş daveti',fedfoundResult:'Federasyon kuruluş sonucu',vassal:'Vasallık sözleşmesi / bağımsızlık',fedrequest:'Federasyon üyelik sonucu',aideal:'Diplomatik teklif',pact:'İstihbarat anlaşması',submit:'Vasallık / himaye talebi',peace:'Barış teklifi',sqOffer:'Statüko barışı',fedvote:'Federasyon oylaması',invite:'Federasyona katılım daveti',decision:'Ortak savaş kararı'},
@@ -11,7 +14,7 @@ const DiplomaticInbox = {
     if(!this.supported(note.kind)||!G.p)return null;
     if(note.kind==='fedagenda')return this.state().records.find(r=>r.key===note.key)||null;
     const st=this.state(),kind=note.kind,data=note.data;
-    const from=kind==='fedfound'||kind==='fedfoundResult'?fedFoundGet(data)?.by:kind==='aideal'||kind==='pact'||kind==='submit'?data?.from:kind==='fedvote'?fedOf(data)?.vote?.proposer:data;
+    const from=kind==='fedfound'||kind==='fedfoundResult'?fedFoundGet(data)?.by:kind==='aideal'||kind==='pact'||kind==='submit'?data?.from:kind==='fedvote'?fedVoteSource(fedOf(data)):data;
     if(!Number.isInteger(from)||!G.emps[from])return null;
     const f=kind==='fedvote'?fedOf(data):null;
     const mpKey=kind==='aideal'&&/^mp71:[1-9]\d*$/.test(note.key||'')?'deal:'+note.key:null;

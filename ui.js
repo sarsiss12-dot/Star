@@ -2383,6 +2383,8 @@ const UI = {
           <div class="row"><span>Rakip</span><b>${foeName}</b></div>
           <div class="row"><span>Kayıplar</span><b>Biz ${br.mine.loss} · Düşman ${br.enemy.loss}</b></div>
           <div class="row"><span>Ricat eden filo</span><b>Biz ${br.mine.retreat} · Düşman ${br.enemy.retreat}</b></div>`;
+        /* SAHA-GÜVENCE.1: eskortsuz silahsız gemi imhası açıkça (filo günlüğünden; host ve misafir aynı) */
+        if (!br.active && typeof battleUnarmedLost==='function'){const ux=battleUnarmedLost(s,0);if(ux.n)h+=`<div class="mini warnTxt battleUnarmed">⚠ ${esc(battleUnarmedText(ux))}. Taarruz Ordusunu silahlı filoyla birlikte gönder.</div>`;}
         if (br.mine.dealt!==null){
           h += `<div class="row"><span>Son tur gerçek gövde hasarı</span>
             <b>Verdik ${fmt(br.mine.dealt)} · Aldık ${fmt(br.enemy.dealt)}</b></div>

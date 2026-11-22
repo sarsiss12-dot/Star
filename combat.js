@@ -348,3 +348,18 @@ function battleReportFinish(r,winner){
   r.winner=winner;
   r.ended=G.day;
 }
+/* SAHA-GÜVENCE.1: muharebe sonunda eskortu (silahlı gemisi) kalmayan tarafın silahsız gemileri (Taarruz Ordusu, koloni, bilim, inşaat)
+   hasar almadan imha edilir (yukarıdaki "silahsız kalanlar imha"). Filo günlüğünden yalnız OKUNUR: kaç silahsız gemi bu kuralla gitti.
+   Dünyaya yazmaz, RNG yok; muharebe raporu ve çok oyunculu bildirim bunu açıkça söyler. */
+function battleUnarmedLost(sys,owner,r){
+  r=r||(sys&&sys.battleReport);if(!sys||!r)return {n:0,classes:{}};
+  const from=Number.isFinite(r.at)?r.at:-Infinity,to=Number.isFinite(r.ended)?r.ended:G.day;let n=0;const classes={};
+  for(const j of G.fleetJournal||[])if(j.owner===owner&&j.sys===sys.id&&j.reason==='combat'&&j.day>=from&&j.day<=to)
+    for(const [c,k] of Object.entries(j.classes||{}))if(SHIPS[c]&&!(SHIPS[c].dmg>0)&&k>0){n+=k;classes[c]=(classes[c]||0)+k;}
+  return {n,classes};
+}
+function battleUnarmedText(x){
+  if(!x||!x.n)return '';
+  const nm=Object.entries(x.classes).map(([c,k])=>(SHIPS[c]?.n||c)+' ×'+k).join(', ');
+  return x.n+' silahsız gemi ('+nm+') eskortu kalmayınca hasar almadan imha edildi';
+}

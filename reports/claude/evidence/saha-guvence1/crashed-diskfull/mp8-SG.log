@@ -1,0 +1,14 @@
+FAIL SG0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+page.evaluate: Target crashed 
+    at room (/home/user/Star/tests/browser-mp8.cjs:178:67)
+    at async /home/user/Star/tests/browser-mp8.cjs:340:5
+    at async test (/home/user/Star/tests/browser-mp8.cjs:66:162)
+    at async /home/user/Star/tests/browser-mp8.cjs:339:3
+FATAL page.evaluate: Target crashed 
+    at module.exports (/home/user/Star/tests/helpers/saha-guvence1-mp.cjs:10:62)
+    at /home/user/Star/tests/browser-mp8.cjs:556:65 {
+  log: [],
+  name: 'Error'
+}
+GEÇEN: 0 KALAN: 2
+EXIT 1

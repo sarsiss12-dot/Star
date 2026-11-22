@@ -1,0 +1,27 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":514,"buildMs":614,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":639,"buildMs":648,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":5.5,"p95":5.5,"max":5.5},"longtask":{"n":4,"med":70,"p95":71,"max":71},"heapMB":20,"dom":745,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":46.7,"p95":46.7,"max":46.7},"refresh":{"n":2,"med":2.9,"p95":2.9,"max":2.9},"longtask":{"n":6,"med":77,"p95":84,"max":84},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":24,"dom":706,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":28,"joinErrors":0},"C":{"build":{"n":2,"med":27.2,"p95":27.2,"max":27.2},"refresh":{"n":2,"med":10.3,"p95":10.3,"max":10.3},"longtask":{"n":1,"med":51,"p95":51,"max":51},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":17,"dom":711,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":24,"joinErrors":0}}}
+PASS I0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 16 AI, s500, seed 404; misafir gerçek STARS arayüzünde
+  OLAY {"kind":"speed","who":"B","t":20,"spd":4,"ok":true,"note":4}
+FAIL I1 uzun oturum 8 dk (500 sistem / 16 AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası 20 sn'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür
+page.evaluate: Target crashed 
+    at hostRev (/home/user/Star/tests/helpers/mp-sync-fed1-soak.cjs:17:23)
+    at /home/user/Star/tests/helpers/mp-sync-fed1-soak.cjs:55:39
+    at async test (/home/user/Star/tests/browser-mp8.cjs:66:162)
+    at async module.exports (/home/user/Star/tests/helpers/mp-sync-fed1-soak.cjs:33:2)
+    at async /home/user/Star/tests/browser-mp8.cjs:558:17
+FAIL I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)
+page.evaluate: Target crashed 
+    at setSpd (/home/user/Star/tests/helpers/mp-sync-fed1-soak.cjs:21:22)
+    at /home/user/Star/tests/helpers/mp-sync-fed1-soak.cjs:89:10
+    at test (/home/user/Star/tests/browser-mp8.cjs:66:168)
+    at module.exports (/home/user/Star/tests/helpers/mp-sync-fed1-soak.cjs:88:8)
+    at async /home/user/Star/tests/browser-mp8.cjs:558:17
+FAIL I3 sensör paylaşımı tek yön: B → C; C, B'nin sensör sistemlerini görür, B C'ninkileri görmez, host'un kendi görüşü değişmez
+page.evaluate: Target crashed 
+    at /home/user/Star/tests/helpers/mp-sync-fed1-soak.cjs:111:27
+    at test (/home/user/Star/tests/browser-mp8.cjs:66:168)
+    at module.exports (/home/user/Star/tests/helpers/mp-sync-fed1-soak.cjs:110:8)
+    at async /home/user/Star/tests/browser-mp8.cjs:558:17
+GEÇEN: 1 KALAN: 3
+EXIT 1
