@@ -1,0 +1,23 @@
+node:assert:204
+  throw err;
+  ^
+
+AssertionError [ERR_ASSERTION]: 30→31. ay, gerçek kayıt ve 60 yarım gün Save8 farkı
+    at check (/workspace/Star-ticaret/research/perf-sinir0/focused.cjs:64:12)
+    at Object.<anonymous> (/workspace/Star-ticaret/research/perf-sinir0/focused.cjs:74:6)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: undefined,
+  expected: undefined,
+  operator: 'fail',
+  diff: 'simple'
+}
+
+Node.js v24.22.1

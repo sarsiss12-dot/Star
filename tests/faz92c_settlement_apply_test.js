@@ -52,6 +52,21 @@ test('Mixed system moves selected colony only, preserving foreign colony, orbit 
  eq(h.run('JSON.stringify(colony.hist)'),h.run('oldHist'));
  eq(h.run('M.colonies.filter(c=>c.s===land[0].id&&c.p===0).length'),1);eq(h.run('P.colonies.filter(c=>c.s===land[0].id&&c.p===0).length'),0);
 });
+test('Onaylı toprak paylaşımı liman hakkını değiştirir, yoldaki yükü yeni malike yazmaz',()=>{
+ const h=fresh(true);
+ h.run(`var dest=land[0],src=G.sys[M.home];dest.planets[0].col.b.liman=1;
+ var mp=src.planets.find(p=>p.owner===M.id&&p.col);mp.col.b.liman=1;
+ if(!src.lanes.includes(dest.id))src.lanes.push(dest.id);
+ if(!dest.lanes.includes(src.id))dest.lanes.push(src.id);
+ P.intel[M.id]=M.intel[P.id]=3;M.res.min=100;P.res.ene=100;G.raids={};
+ var signed=executeDeal({from:M.id,to:P.id,give:[{t:'res',r:'min',v:10}],want:[{t:'res',r:'ene',v:5}]});
+ G.day+=2;Commerce.tick(2);var v=Commerce.state().convoys.find(v=>v.e===M.id);
+ `);
+ eq(h.run('signed'));eq(h.run('!!v'));
+ approve(h);h.run('var balance=M.res.min,id=v.id;');eq(h.run('settlementApply(P,O.id).ok'));
+ eq(h.run('Commerce.port(M,dest.id)'));eq(h.run('Commerce.port(P,dest.id)'),false);
+ h.run('G.day++;Commerce.tick(1)');eq(h.run('v.id===id&&v.to===P.id&&M.res.min===balance'));
+});
 test('Governors remain with former empire; automation stops; capital relocates safely',()=>{
  const h=fresh(true);h.run(`var p=land[0].planets[0];P.leaders=[{id:998,tip:'vali',post:land[0].id+':0'}];p.col.leader=998;p.col.auto=true;P.home=land[0].id;`);approve(h);
  eq(h.run('settlementApply(P,O.id).ok'));eq(h.run('P.leaders.length'),1);assert.equal(h.run('P.leaders[0].post'),undefined);

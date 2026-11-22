@@ -46,6 +46,7 @@ const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'bu
   U:{size:'orta',ai:5,seed:22,months:0,guests:3,every:6},
   /* MP-SYNC-FED.0: misafir eşitleme ve emir zinciri — kopma, donan hat, kayıp ayna / yanıt, arka plan, yeniden katılma, açık pencere, fed oyu — host + B + C */
   O:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
+  TL:{size:'ulu',ai:9,seed:11,months:0,guests:2,every:6},
   RD:{size:'ulu',ai:9,seed:Number(process.env.MP8_RIVAL_SEED||11),months:0,guests:2,every:6},
   J:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
   I:{size:'s500',ai:16,seed:404,months:0,guests:2,every:6},
@@ -556,6 +557,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
   if(SCEN==='SG')await require('./helpers/saha-guvence1-mp.cjs')({test,pg,metrics,sleep,shot,wait,tap,settle});
   if(SCEN==='X')await require('./helpers/reinf-route0-mp.cjs')({test,pg,metrics,sleep,shot,assert,wait,tap,settle,advance});
   if(SCEN==='I')await require('./helpers/mp-sync-fed1-soak.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,settle});
+  if(SCEN==='TL')await require('./helpers/ticaret-agi0-mp.cjs')({test,pg,tap,wait,settle,assert,cmd,shot});
   if(SCEN==='H')await require('./helpers/perf-sinir0-mp.cjs')({test,pg,metrics,out,sleep,assert,lanes,wait,tap,settle,syncCheck});
   if(SCEN==='J')await require('./helpers/mp-sync-fed1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,startRelay,stopRelay,getCode:()=>code,setCode:c=>{code=c;},
     CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance,guestGo,closeAll});

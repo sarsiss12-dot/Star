@@ -1,0 +1,190 @@
+{
+ "results": [
+  {
+   "name": "TL0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 11; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 20580
+  },
+  {
+   "name": "TL1 B liman izni verir, C reddeder ve hiçbir hak oluşmaz",
+   "status": "PASS",
+   "ms": 3321
+  },
+  {
+   "name": "TL2 C izin ister, B kabul eder, iki misafir aynı yön ve süreyi görür",
+   "status": "PASS",
+   "ms": 6034
+  },
+  {
+   "name": "TL3 izni veren misafir masadan geri alır",
+   "status": "PASS",
+   "ms": 2131
+  },
+  {
+   "name": "TL4 karşı teklif, kayıtlı izin ve süre sonu",
+   "status": "PASS",
+   "ms": 7228
+  }
+ ],
+ "metrics": {
+  "scen": "TL",
+  "conf": {
+   "size": "ulu",
+   "ai": 9,
+   "seed": 11,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 1064,
+    "buildMs": 1098,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 1197,
+    "buildMs": 1296,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 21.9,
+      "p95": 42.1,
+      "max": 42.1
+     },
+     "longtask": {
+      "n": 20,
+      "med": 58,
+      "p95": 93,
+      "max": 93
+     },
+     "heapMB": 18,
+     "dom": 739,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 3,
+       "med": 62.2,
+       "p95": 161.5,
+       "max": 161.5
+      },
+      "refresh": {
+       "n": 2,
+       "med": 6,
+       "p95": 6,
+       "max": 6
+      },
+      "longtask": {
+       "n": 12,
+       "med": 55,
+       "p95": 81,
+       "max": 81
+      },
+      "builds": 3,
+      "deltas": 3,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 18,
+      "dom": 708,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 34,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 4,
+       "med": 49.8,
+       "p95": 124.2,
+       "max": 124.2
+      },
+      "refresh": {
+       "n": 2,
+       "med": 6.1,
+       "p95": 6.1,
+       "max": 6.1
+      },
+      "longtask": {
+       "n": 15,
+       "med": 53,
+       "p95": 78,
+       "max": 78
+      },
+      "builds": 4,
+      "deltas": 3,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 716,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 29,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 68439,
+  "actualWorld": {
+   "seed": 11,
+   "size": "ulu",
+   "systems": 100,
+   "states": 12
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "errors": []
+ }
+}

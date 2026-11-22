@@ -41,7 +41,8 @@ const scenario = `
   }
 `;
 
-const save = fs.readFileSync(path.join(inputs, '500-16-11-m30.save'), 'utf8');
+const sharedDay930 = process.env.STARS_FOCUSED_DAY930;
+const save = fs.readFileSync(sharedDay930 || path.join(inputs, '500-16-11-m30.save'), 'utf8');
 const worlds = [control, candidate].map(root => {
   const h = runtime({ root });
   h.sb.inputSave = save;
@@ -69,7 +70,8 @@ function check(label, code, observe = true) {
     ...(state.observation ? { observation:JSON.parse(state.observation) } : {}) });
 }
 
-check('30→31. ay, gerçek kayıt ve 60 yarım gün', 'toNextMonth()', false);
+if(sharedDay930)check('930. gün, her iki motorda aynı kayıt', "if(G.day!==930)throw Error('930. gün kaydı gerekli')", false);
+else check('30→31. ay, gerçek kayıt ve 60 yarım gün', 'toNextMonth()', false);
 check('sıfırdan sınır baskısı', 'setupTransfer()');
 check('aynı gün sahiplik devri', 'var tx = dealTxBegin(); territoryOwnerSet(fixture.source, 2)');
 check('aynı gün işlem geri alma', 'dealTxRollback(tx)');

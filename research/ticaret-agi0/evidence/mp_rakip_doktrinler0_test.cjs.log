@@ -1,0 +1,14 @@
+PASS 9/9, including 0–0 and independent tension
+PASS MP Save8, missing header, disagreement, no redistribution
+PASS p46 Doğal and SP fixed-zero Save8 import
+{
+  "configureMatrix": "9/9, including 0–0 and independent tension",
+  "independentCreation": true,
+  "continue": {
+    "headerAbsentRecovered": true,
+    "reassignments": 0,
+    "conflict": "rival-mismatch",
+    "invalid": "rival-range",
+    "save": "49da145c08977ae6261c6d81d22cd55d2bdd05b3bc6164d4c75916a459cbd93f"
+  }
+}

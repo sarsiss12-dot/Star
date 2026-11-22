@@ -1,0 +1,17 @@
+{
+  "p47Loaded": true,
+  "unchangedCargoStocksRng": true,
+  "receipts": 2,
+  "repeatCredit": 0,
+  "probe": {
+    "actor": 2,
+    "donor": 1,
+    "day": 2880,
+    "ports": [],
+    "ok": false,
+    "change": 0,
+    "reasons": [
+      "Tek seferlik yük için yeterli kapasiteli, açık ve izinli liman hattı yok"
+    ]
+  }
+}

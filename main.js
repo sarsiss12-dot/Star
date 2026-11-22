@@ -5261,6 +5261,12 @@ function captureSystem(sys, byId, cause = 'conquest', onlyPlanet = null){
     if (false){ e.res.min += 140; e.res.ala += 60; }
     e.colonies.push({s:sys.id, p:pl.i});
   }
+  if(oldPlanets.some(p=>p.owner!==byId&&sys.planets[p.i]?.col?.b?.liman>0)&&G.commerce){
+    const affected=new Set();
+    for(const c of G.commerce.contracts)if(!Commerce.closed(c)&&[c.a,c.b].includes(0)&&c.legs.some(l=>l.source===sys.id||l.target===sys.id))affected.add(c.id);
+    for(const v of G.commerce.convoys)if(Commerce.visible(v)&&v.route.slice(v.step).includes(sys.id))affected.add(v.contract);
+    if(affected.size&&(old===0||byId===0||pVis(sys)))say(sys.name+' · Ticaret limanı el değiştirdi. '+affected.size+' sözleşmenin güzergâhı yeniden denetlenecek.','war');
+  }
   sys.def = sysDefense(sys);
   recalcMods(e);
   if (old >= 0 && G.emps[old] && hasCivic(G.emps[old],'leader') && G.emps[old].home === sys.id){
