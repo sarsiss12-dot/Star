@@ -1,6 +1,8 @@
 # Son Codex raporu
 
-[TİCARET-TAMAMLAMA.0 (Claude, p51 / MP.8.9b50 yayın adayı) · Atomik iki yönlü Transit İzni, klavyesiz ticaret miktarı (−100 / +100 / MAKS), MP ticaret regresyonları PASS, tam Node yeni FAIL yok](reports/claude/TICARET-TAMAMLAMA0-SONUC.md)
+[TİCARET-GEÇERLİ-HAT.0 (Claude, p52 / MP.8.9b51 yayın adayı) · AI geçerli alternatif liman çiftini dener (aiPorts / aiAltPorts), Codex kök neden vakası düzeldi, doğal kampanya bayt-bayt aynı, regresyonlar PASS](reports/claude/TICARET-GECERLI-HAT0-SONUC.md)
+
+Önceki: [TİCARET-TAMAMLAMA.0 (Claude, p51 / MP.8.9b50 yayın adayı) · Atomik iki yönlü Transit İzni, klavyesiz ticaret miktarı (−100 / +100 / MAKS), MP ticaret regresyonları PASS, tam Node yeni FAIL yok](reports/claude/TICARET-TAMAMLAMA0-SONUC.md)
 
 Önceki: [TİCARET-AI.1 (Claude, sürüm yok, p50 korunur) · MP kargolu kayıt → yeni oda Chromium 6/6, stratejik liman fırsat alanı ölçüldü (fiilen boş), atomik iki yönlü transit yaması bekletildi, iki aday reddedildi](reports/claude/TICARET-AI1-SONUC.md)
 

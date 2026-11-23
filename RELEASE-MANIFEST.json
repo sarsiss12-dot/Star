@@ -1,11 +1,11 @@
 {
-  "phase": "TICARET-TAMAMLAMA.0",
-  "build": "96h10p51",
+  "phase": "TICARET-GECERLI-HAT.0",
+  "build": "96h10p52",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p51",
-  "parent_commit": "d1784ffcbe45901674076e682658e9f5dec8f8ae",
-  "parent_zip_sha256": "26a6b5e3bbf577c37fd9433db747323adf005d893622486ac6514d41eb3988f8",
+  "pwa_cache": "stars-v96h10p52",
+  "parent_commit": "1b95efb27a265f607bc33a3e131b071fb80d28e6",
+  "parent_zip_sha256": "9c513c0b908cd8b2c877d31c6acbfad980eafd7ad7fca17b88c1f4b2a74bc434",
   "file_count": 19,
   "files": {
     "ai.js": "218eeaa65c00e4d70f2b5b6186df0559cdbda06a6360199c5e97484cc673d92d",
@@ -13,7 +13,7 @@
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "08971a0bd1b67f6d3dab1a24a0c3dc9d0bcb045c00c29c01735be9fd083be2d6",
     "commerce-ui.js": "4edbae3d11222ac4ad2c6a5d3d45bc77c01cb6dd1f370beb81cf657fb6eb3ae1",
-    "commerce.js": "cc90d6f0c41d517510e77ef0c83bbf34b4ca831b58e40f432ee3074568e0fabb",
+    "commerce.js": "6a20973f6cfe51d4bcaaef52863c36c32ba51d4aab7e7e1509a7d79f1e829f15",
     "construction.js": "920d6122c3d3e65ef2650c94a9a5a804c3d67b65411627e23184f0e1d5d60e08",
     "diplomacy.js": "a59c3fd823ebe956789c8337045d408fc2e487de11a9b1ca133c267b9a592846",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
@@ -21,12 +21,12 @@
     "economy.js": "ca9b6429fdce59e88559b84a7985cb7a610f846f3db7faca6c809c85fab66c76",
     "inbox.js": "9d1f0688aac18d1b9db00fad41ef66e30080467783dd69cd52160e5d19ee51b7",
     "index.html": "64f786fd5a1c50cc4b61bad85a4e4b40c8c42d50a7679e2b8f63d174ae60ba47",
-    "main.js": "f0b672c69a77e06b8d980f32068b11e6cd89fe376f63977b53b7765076624b1e",
+    "main.js": "229f6254d8ee411c9975478849b28888092c7916c826fac18f2765d1020b7be6",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "4c814aa209836f5166f5718fede6045faf920f841f3b34681f0cb5209d5d888f",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "4b282e1677561dd0f13adb8b33b9000c197689f42fef094465b5f1455a0b4005",
+    "sw.js": "6baf9b6dcc28c5c0dd72ea003f44d1f7fd533d476ff93338d2038e6747a64788",
     "ui.js": "9e615e473c7fbbe3ca11aef5bae0aeb8f698b51072c5ce5e8611afdcbcfeb614"
   },
-  "description": "TİCARET-TAMAMLAMA.0 (p50 + atomik iki yönlü Transit İzni + klavyesiz ticaret miktarı): AI iki taşıyıcı için ayrı izni tek işlemde alır (kısmi hatada ödeme geri alınır); müzakere masası miktar penceresinde −100 / +100 / MAKS / 25, kaynak sözleşmesinde sıklık ±30 gün ve süre ±3 / ±12 ay adımları. Save8 v8, MP paketi 4, protokol 1."
+  "description": "TİCARET-GEÇERLİ-HAT.0 (p51 + geçerli alternatif liman çifti): AI'nın en yakın liman çiftinin teklifi dönüş rotası / kapasite / şart yüzünden oluşmazsa aynı taramada ileri yönü açık bulunan en çok 3 alternatif çift aiTerms + dealQuote ile denenir; bütçe, izin, diplomasi kapıları aynı. Save8 v8, MP paketi 4, protokol 1."
 }

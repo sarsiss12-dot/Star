@@ -1,0 +1,9 @@
+== 100-9-11-m120
+p51 {"alt":0,"altOk":0,"terms":2,"ports":17,"alts":0,"quote":10}
+. {"alt":0,"altOk":0,"terms":2,"ports":17,"alts":10,"quote":10}
+== 500-16-11-m120
+p51 {"alt":0,"altOk":0,"terms":0,"ports":23,"alts":0,"quote":0}
+. {"alt":0,"altOk":0,"terms":0,"ports":23,"alts":0,"quote":0}
+== 500-16-11-m180
+p51 {"alt":0,"altOk":0,"terms":1,"ports":36,"alts":0,"quote":14}
+. {"alt":0,"altOk":0,"terms":1,"ports":36,"alts":2,"quote":14}

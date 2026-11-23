@@ -1,0 +1,10 @@
+TR exit=0 GEÇEN: 6 KALAN: 0
+TL exit=0 GEÇEN: 5 KALAN: 0
+TA exit=0 GEÇEN: 6 KALAN: 0
+TB exit=0 GEÇEN: 6 KALAN: 0
+SG exit=0 GEÇEN: 5 KALAN: 0
+J exit=0 GEÇEN: 5 KALAN: 0
+X exit=0 GEÇEN: 5 KALAN: 0
+SP exit=0 GEÇEN: 9 KALAN: 0
+transit+gh exit=0 GEÇEN: 13 KALAN: 0
+DONE
