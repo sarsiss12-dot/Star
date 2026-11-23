@@ -1,6 +1,6 @@
 # TİCARET-TESLİM-DEĞERİ.0 — Sonuç raporu
 
-Tarih: 23 Kasım 2026 · Dal `claude/stars-ticaret-teslim-degeri0` · Taban p52 `claude/stars-ticaret-gecerli-hat0` @ `2399075` (PR #76)
+Tarih: 23 Kasım 2026 · Dal `claude/stars-ticaret-teslim-degeri0` (taslak PR #77) · Taban p52 `claude/stars-ticaret-gecerli-hat0` @ `2399075` (PR #76)
 
 ## Karar özeti
 
