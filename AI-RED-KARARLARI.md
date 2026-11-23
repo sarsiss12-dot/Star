@@ -77,3 +77,8 @@ Ortak ders: yerel bir göstergede kazanç (tek seed, tek kaynak, tek devlet) gen
 - `research/ticaret-ai1/ADAY-LIMAN-UFUK4-rejected.patch`: `aiPortInvestment` değer > bedel denetiminde 12 aylık sözleşme değeri ×4. Gerekçe: AI–AI freight sözleşmeleri doğal kampanyada yıllık yenileniyor (ardışık yenileme medyanı 4 yıl). Ama 100 sistem / 9 AI üç tohumda ve 500 / 16 AI tohum 11'de **sıfır** yatırım tetiklendi. Kontrollü D1'de bile ufuk bedeli aşınca aynı kolonide maden (+10 mineral/ay) tercih edildi. Fayda yok.
 - `research/ticaret-ai1/ADAY-TRANSIT-BUTCE-rejected.patch`: ortak 96 rota bütçesi bitince ayda 8 rotalık ayrı transit payı. 500 sistemde erişilen 8 çiftin 8'i `aiTerms`'te elendi (kârlı karşılıklı takas yok); 100 sistemde sonuç iki yönlü transit adayıyla bayt-bayt aynı. Darboğaz bütçe değil ekonomi.
 - Uygulanmayan, BEKLETİLEN: `research/ticaret-ai1/ADAY-IKI-YONLU-TRANSIT-ATOMIK-BEKLETILDI.patch`. TİCARET-AI.0 yamasının işlem sarmalı (dealTxBegin / dealTxRollback) sürümü. Kontrollü vakada doğru ve atomik; doğal kampanyada fayda plasebo bandı içinde.
+
+## TİCARET-TESLİM-DEĞERİ.0 — ihtiyaçtan sözleşmeli ithalatı düşme (REDDEDİLDİ, 23 Kasım 2026)
+
+- `research/ticaret-teslim-degeri0/ADAY-IHTIYAC-GELEN-ITHALAT-rejected.diff`: `Commerce.aiBalance` `need`'den aylık sözleşmeli ithalat (`incoming`) düşülür. Kusur gerçek (sonda: ithalat sözleşmesinden sonra `incoming 8`, `need` aynı). Ama 3 tohum × 240 ayda fayda yok: 11'de kıtlık 6 → 10, koloni 70 → 67 (plasebo bandı içinde, kötü yönde); 99'da kıtlık aynı; 404 bayt-bayt aynı.
+- Gölge değerleme (`golge.cjs`) 4 kampanyada yalnız 1 gerçek kaçırılan zamanında ithalat buldu (rota bütçesi tükenmesi); "≥3 gerçek fırsat" şartı sağlanmadı, ekonomik AI değiştirilmedi.

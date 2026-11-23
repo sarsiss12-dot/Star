@@ -1,0 +1,6 @@
+ticaret_gecerli_hat0: GEÇEN: 13 KALAN: 0
+ticaret_tamamlama0_transit: GEÇEN: 12 KALAN: 0
+ticaret_ag1: GEÇEN: 9 KALAN: 0
+ticaret_ag2_tx: GEÇEN: 6 KALAN: 0
+ticaret_ag2_mp: GEÇEN: 2 KALAN: 0
+faz96a_cargo: GEÇEN: 36 KALAN: 0

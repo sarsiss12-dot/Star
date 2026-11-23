@@ -1,0 +1,2 @@
+{"ok":[false,true],"usPerDecision":[413.9,808],"p95":[696.3,1234.1]}
+{"ok":[false,false],"usPerDecision":[415.3,409.9],"p95":[565.9,460]}

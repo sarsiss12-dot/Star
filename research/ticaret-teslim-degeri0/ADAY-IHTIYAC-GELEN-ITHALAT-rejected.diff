@@ -1,0 +1,4 @@
+313c313
+<    rows[r]={stock,net,reserve,incoming:incoming[r]||0,export:Math.max(0,Math.min(stock-reserve,Math.max(0,net)*.45+Math.max(0,stock-reserve)/12)),need:Math.max(0,-net)+Math.max(0,base[r]*2-stock)/6};
+---
+>    rows[r]={stock,net,reserve,incoming:incoming[r]||0,export:Math.max(0,Math.min(stock-reserve,Math.max(0,net)*.45+Math.max(0,stock-reserve)/12)),need:Math.max(0,-net-(incoming[r]||0))+Math.max(0,base[r]*2-stock)/6};
