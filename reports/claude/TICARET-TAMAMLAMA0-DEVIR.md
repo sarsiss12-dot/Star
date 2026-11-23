@@ -5,7 +5,7 @@ Güncelleme: 23 Kasım 2026
 ## Dallar
 | Dal | Durum |
 |---|---|
-| `claude/stars-ticaret-tamamlama0` | **p51 / MP.8.9b50 yayın adayı** (otomatik testler; saha kabulü yok), taslak PR (taban ai1) |
+| `claude/stars-ticaret-tamamlama0` | **p51 / MP.8.9b50 yayın adayı** (otomatik testler; saha kabulü yok), taslak PR #75 (taban ai1) |
 | `claude/stars-ticaret-ag2` | p50 / MP.8.9b49, önceki güvenli sürüm (PR #72) |
 | `claude/stars-ticaret-ai1`, `-ai0` | araştırma (PR #74, #73) |
 

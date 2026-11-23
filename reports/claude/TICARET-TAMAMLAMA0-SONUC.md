@@ -31,7 +31,7 @@ Yapılmayanlar ve neden:
 | | |
 |---|---|
 | Başlangıç | `edc16011513ad95b00eff6f7ddbaf11b95a923c0` (ai1, PR #74). Uzak dallar doğrulandı: ag2 `d1784ff`, ai0 `d438d6e`, ai1 `edc1601` ilerlememiş; main `4296ad2` değişmedi. |
-| Bitiş | bu raporun commit'i, `claude/stars-ticaret-tamamlama0` (taslak PR, taban `claude/stars-ticaret-ai1`) |
+| Bitiş | `7bbbaa4` + bu bağlantı commit'i, `claude/stars-ticaret-tamamlama0`, taslak PR #75 (taban `claude/stars-ticaret-ai1`) |
 | Commit'ler | `7b8e3a6` Faz A (atomik transit + T1–T12) · `8a389b4` Faz D (klavyesiz miktar + Chromium U1–U3) · p51 sürüm / ZIP · rapor |
 | Kontrol kökü | `git worktree` @ `d1784ff` (p50 sabit kopya) |
 
