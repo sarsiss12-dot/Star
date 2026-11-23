@@ -1,0 +1,141 @@
+{
+ "codes": {
+  "builder:paid-replacement": 18,
+  "builder:budget-or-maintenance": 65,
+  "trade-no-contact": 4282,
+  "invest:santral": 55,
+  "navy:energy-runway": 250,
+  "invest:liman": 47,
+  "invest:fabrika": 19,
+  "navy:science-covered": 705,
+  "builder:assigned": 72,
+  "builder:no-pending-work": 599,
+  "builder:no-safe-funded-target": 526,
+  "navy:alloy-budget-reserve": 806,
+  "builder:covered": 363,
+  "replacement:deferred": 32,
+  "replacement:committed": 83,
+  "trade-no-port": 253,
+  "navy:yard-backlog": 99,
+  "navy:resource-cost": 160,
+  "recovery:demolish": 2,
+  "colony:wait-min": 3,
+  "invest:maden": 54,
+  "invest:ciftlik": 17,
+  "navy:science-renewal-cooldown": 129,
+  "builder:no-usable-yard": 35,
+  "trade-political": 110,
+  "invest:lab": 60,
+  "trade-no-safe-route": 267,
+  "recovery:no-safe-slot": 36,
+  "invest:dokum": 45,
+  "navy:alloy-upkeep": 45,
+  "invest:tersane": 20,
+  "trade-no-supply-demand": 35,
+  "colony:wait-ala": 106,
+  "trade-signed": 27,
+  "trade-agreed": 27,
+  "trade-existing": 274,
+  "trade-review-cancel": 1,
+  "navy:deterrence-target": 53,
+  "trade-route-budget": 60,
+  "trade-route-not-exhausted": 1,
+  "invest:derin_s": 2
+ },
+ "T": {
+  "calls": 312,
+  "etk": 0,
+  "need": 0,
+  "cool": 0,
+  "noOwner": 0,
+  "pairs": 0,
+  "cls": {},
+  "callCls": {},
+  "bEtk": 0,
+  "bRight": 0,
+  "bBlocked": 0,
+  "terms2": 0,
+  "distinctPairs": {}
+ },
+ "P": {
+  "calls": 357,
+  "made": 0,
+  "st": {}
+ },
+ "short": {
+  "rm": 14,
+  "months": 120,
+  "byRes": {
+   "ala": 11,
+   "min": 3
+  },
+  "tuk": 0
+ },
+ "signed": 27,
+ "transitDeals": 0,
+ "month": [
+  {
+   "m": 12,
+   "contracts": 0,
+   "ports": 5,
+   "short": 0
+  },
+  {
+   "m": 24,
+   "contracts": 0,
+   "ports": 10,
+   "short": 0
+  },
+  {
+   "m": 36,
+   "contracts": 1,
+   "ports": 13,
+   "short": 0
+  },
+  {
+   "m": 48,
+   "contracts": 3,
+   "ports": 16,
+   "short": 0
+  },
+  {
+   "m": 60,
+   "contracts": 4,
+   "ports": 20,
+   "short": 9
+  },
+  {
+   "m": 72,
+   "contracts": 4,
+   "ports": 22,
+   "short": 11
+  },
+  {
+   "m": 84,
+   "contracts": 4,
+   "ports": 23,
+   "short": 11
+  },
+  {
+   "m": 96,
+   "contracts": 4,
+   "ports": 25,
+   "short": 14
+  },
+  {
+   "m": 108,
+   "contracts": 4,
+   "ports": 26,
+   "short": 14
+  },
+  {
+   "m": 120,
+   "contracts": 3,
+   "ports": 29,
+   "short": 14
+  }
+ ],
+ "sec": 31,
+ "save": "bd8dfa43af60c165",
+ "rng": 1957387400
+}
