@@ -344,17 +344,31 @@ const Commerce={
   const limit=Math.min(12,pairs.length),near=Math.min(6,limit),tail=pairs.slice(near),offset=(Math.floor(G.day/30)+a.id+b.id)%Math.max(1,tail.length);
   const candidates=pairs.slice(0,near).concat(Array.from({length:limit-near},(_,i)=>tail[(offset+i)%tail.length]));
   const scan={total:pairs.length,tried:0,exhausted:false,limited:false};budget.lastScan=scan;
-  const hazards=this.aiHazards(a);
+  const hazards=this.aiHazards(a),found=[];
   for(const {source,target} of candidates){
    if(budget.routes<=0){scan.exhausted=true;break;}budget.routes--;scan.tried++;
    if(G.sys[source].cr>0||G.sys[target].cr>0)continue;
    const path=this.aiPortRoute(a,b,source,target);if(!path)continue;
    if(path.some(id=>hazards.has(id)))continue;
    const distance=path.slice(1).reduce((n,id,i)=>n+dist(G.sys[path[i]],G.sys[id]),0);
-   if(!best||distance<best.distance)best={source,target,distance};
+   const row={source,target,distance};found.push(row);
+   if(!best||distance<best.distance)best=row;
   }
   scan.limited=scan.tried<scan.total;
+  // TİCARET-GEÇERLİ-HAT.0: aynı taramada ileri yönü açık bulunan diğer liman çiftleri (ek rota araması yok); en yakını teklif kapısında
+  // dönüş rotası / kapasite yüzünden düşerse aiAltPorts bunları sırayla dener. En iyi seçim aynen (ilk en kısa) kalır.
+  if(best)best.alts=found.filter(r=>r!==best).sort((x,y)=>x.distance-y.distance);
   return best;
+ },
+ // TİCARET-GEÇERLİ-HAT.0: en yakın liman çiftinin teklifi (aiTerms / dealQuote) oluşmuyorsa aynı karar anında, aynı bütçeden (aday başı 1 rota birimi)
+ // en çok 3 bilinen alternatif çift denenir. Karar yine aiTerms + dealQuote (rota, izin, kapasite, stok, diplomasi kapıları) ile; teklif kabulü sonra aiNegotiate / UI.aiOffer.
+ aiAltPorts(a,b,A,B,ports,budget){
+  for(const alt of (ports?.alts||[]).slice(0,3)){
+   if(budget.routes<1)return null;budget.routes--;
+   const terms=b.id===0?this.aiPlayerTerms(a,A,alt):this.aiTerms(a,b,A,B,alt);if(!terms)continue;
+   const quote=dealQuote(terms);if(quote.ok){AIDiagnostics.note('trade-alt-port',a,b,ports.target+' → '+alt.target);return {ports:alt,terms,quote};}
+  }
+  return null;
  },
  aiPortInvestment(a,b,A,B,budget){
   if(!B||!a.ai||!b.ai||a.crisis||a.shortage||a.war[b.id]||Object.values(a.war).some(Boolean)||
@@ -553,8 +567,9 @@ const Commerce={
      note('trade-no-port');continue;
     }
     if(b.id!==0&&!this.resources.some(r=>A[r].export>=1&&B[r].need>0||B[r].export>=1&&A[r].need>0)){note('trade-no-supply-demand');continue;}
-    const ports=offers.get(b.id)?.ports||this.aiPorts(a,b,budget);if(!ports){if(!political&&b.ai&&(this.aiTransitRequest(a,b,A,B,budget)||this.aiPortInvestment(a,b,A,B,budget))){created++;break;}note(budget.lastScan?.exhausted?'trade-route-budget':budget.lastScan?.limited?'trade-route-not-exhausted':'trade-no-safe-route',JSON.stringify(budget.lastScan));continue;}
-    const n=offers.get(b.id)?.terms||(b.id===0?this.aiPlayerTerms(a,A,ports):this.aiTerms(a,b,A,B,ports));
+    let ports=offers.get(b.id)?.ports||this.aiPorts(a,b,budget);if(!ports){if(!political&&b.ai&&(this.aiTransitRequest(a,b,A,B,budget)||this.aiPortInvestment(a,b,A,B,budget))){created++;break;}note(budget.lastScan?.exhausted?'trade-route-budget':budget.lastScan?.limited?'trade-route-not-exhausted':'trade-no-safe-route',JSON.stringify(budget.lastScan));continue;}
+    let n=offers.get(b.id)?.terms||(b.id===0?this.aiPlayerTerms(a,A,ports):this.aiTerms(a,b,A,B,ports));
+    if(!n&&!political){const alt=this.aiAltPorts(a,b,A,B,ports,budget);if(alt){ports=alt.ports;n=alt.terms;}}
     const cool=(reason,days=120)=>{(a.aiTalk||(a.aiTalk={}))['commerce:'+b.id]={until:G.day+days,reason};note(reason);};
     if(!n){const scan=b.id===0?null:this._aiTermsScan;cool(b.id===0?'trade-player-no-supply':!scan?.pairs?'trade-no-barter-candidates':!scan.ratios?'trade-no-fair-ratio':!scan.amounts?'trade-volume-below-minimum':'trade-no-positive-value',60);continue;}
     if(political){
@@ -564,7 +579,9 @@ const Commerce={
      else{const result=aiNegotiate(a,b,terms.give,terms.want,true);if(result.uygulandi)created++;cool(result.uygulandi?'trade-pact-agreed':'trade-pact-rejected');}
      break;
     }
-    const quote=dealQuote(n);if(!quote.ok){cool('trade-quote-rejected');note('trade-quote-reason',quote.reasons[0]);continue;}
+    let quote=dealQuote(n);
+    if(!quote.ok){const alt=this.aiAltPorts(a,b,A,B,ports,budget);if(alt){ports=alt.ports;n=alt.terms;quote=alt.quote;}}
+    if(!quote.ok){cool('trade-quote-rejected');note('trade-quote-reason',quote.reasons[0]);continue;}
     if(b.id===0){if(UI.aiOffer(n)){created++;cool('trade-player-pending',180);break;}cool('trade-player-wait',180);continue;}
     const result=aiNegotiate(a,b,n.give,n.want,true);note(result.uygulandi?'trade-signed':'trade-negotiation-rejected',result.why);
     cool(result.uygulandi?'trade-agreed':'trade-retry-wait');if(result.uygulandi){balances.set(a.id,this.aiBalance(a));balances.set(b.id,this.aiBalance(b));created++;break;}

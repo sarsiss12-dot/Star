@@ -1,0 +1,107 @@
+{
+  "choice": {
+    "ports": {
+      "source": 0,
+      "target": 4,
+      "distance": 360,
+      "alts": [
+        {
+          "source": 0,
+          "target": 9,
+          "distance": 1000
+        }
+      ]
+    },
+    "deal": {
+      "from": 2,
+      "to": 1,
+      "give": [
+        {
+          "t": "freight",
+          "r": "min",
+          "v": 16,
+          "source": 0,
+          "target": 4,
+          "every": 30,
+          "months": 12
+        }
+      ],
+      "want": [
+        {
+          "t": "freight",
+          "r": "ene",
+          "v": 14.3,
+          "source": 4,
+          "target": 0,
+          "every": 30,
+          "months": 12
+        }
+      ]
+    },
+    "ok": false,
+    "reasons": [
+      "Limanlar arasında üç sıçrama içinde açık ve izinli bağlantı bulunamadı"
+    ],
+    "reply": "red"
+  },
+  "fallback": {
+    "ports": {
+      "source": 0,
+      "target": 9,
+      "distance": 1000
+    },
+    "deal": {
+      "from": 2,
+      "to": 1,
+      "give": [
+        {
+          "t": "freight",
+          "r": "min",
+          "v": 16,
+          "source": 0,
+          "target": 9,
+          "every": 60,
+          "months": 12
+        }
+      ],
+      "want": [
+        {
+          "t": "freight",
+          "r": "ene",
+          "v": 14.3,
+          "source": 9,
+          "target": 0,
+          "every": 60,
+          "months": 12
+        }
+      ]
+    },
+    "ok": true,
+    "reasons": [],
+    "reply": "kabul"
+  },
+  "initial": [
+    30,
+    30
+  ],
+  "after": [
+    44.3,
+    46
+  ],
+  "rngBefore": -951432214,
+  "rngAfter": -951432214,
+  "convoys": [
+    [
+      1,
+      "delivered",
+      16,
+      1
+    ],
+    [
+      2,
+      "delivered",
+      14.3,
+      2
+    ]
+  ]
+}

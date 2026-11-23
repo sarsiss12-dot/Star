@@ -1,0 +1,38 @@
+[
+  {
+    "pr": 70,
+    "title": "TİCARET-AĞ.0 (KISMEN, yayın yok): Codex TİCARET-AĞI.0 + p49 entegrasyonu by sarsiss12-dot · Pull Request #70 · sarsiss12-dot/Star · GitHub",
+    "state": "DRAFT",
+    "ref": "23cc1bbe7d9e83e26634f0aa589ae61a14d95280"
+  },
+  {
+    "pr": 71,
+    "title": "TİCARET-AĞ.1 (taslak, yayın yok): anlık takas korundu, fiziksel kargo açık seçenek, 40 regresyon kapandı by sarsiss12-dot · Pull Request #71 · sarsiss12-dot/Star · GitHub",
+    "state": "DRAFT",
+    "ref": "b6535234e1b3a8dfbb72bac6988ba4f35ef0dd0d"
+  },
+  {
+    "pr": 72,
+    "title": "TİCARET-AĞ.2 (p50 / MP.8.9b49, taslak): misafir KABUL düzeltmesi (TL 5/5), daraltılmış işlem kopyası, perf kapısı geçti by sarsiss12-dot · Pull Request #72 · sarsiss12-dot/Star · GitHub",
+    "state": "DRAFT",
+    "ref": "d1784ffcbe45901674076e682658e9f5dec8f8ae"
+  },
+  {
+    "pr": 73,
+    "title": "TİCARET-AI.0: MP ara liman kabulü, ticaret AI karar hunisi, iki yönlü transit adayı (sürüm yok, p50 korunur) by sarsiss12-dot · Pull Request #73 · sarsiss12-dot/Star · GitHub",
+    "state": "DRAFT",
+    "ref": "d438d6e3ec7d5175220dc5cea35eb1e37d2dfb1f"
+  },
+  {
+    "pr": 74,
+    "title": "TİCARET-AI.1: stratejik liman kök nedeni, atomik iki yönlü transit yaması, MP kargolu kayıt → yeni oda (sürüm yok, p50 korunur) by sarsiss12-dot · Pull Request #74 · sarsiss12-dot/Star · GitHub",
+    "state": "DRAFT",
+    "ref": "edc16011513ad95b00eff6f7ddbaf11b95a923c0"
+  },
+  {
+    "pr": 75,
+    "title": "TİCARET-TAMAMLAMA.0: p51 yayın adayı — atomik iki yönlü Transit İzni + klavyesiz ticaret miktarı by sarsiss12-dot · Pull Request #75 · sarsiss12-dot/Star · GitHub",
+    "state": "DRAFT",
+    "ref": "1b95efb27a265f607bc33a3e131b071fb80d28e6"
+  }
+]

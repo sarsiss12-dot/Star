@@ -1,0 +1,2041 @@
+{
+  "campaigns": {
+    "11": {
+      "windows": {
+        "0-120": {
+          "samples": 120,
+          "signed": 25,
+          "loads": 270,
+          "delivery": 264,
+          "long": 18,
+          "lost": 0,
+          "quantity": {
+            "ene": 1051.2,
+            "min": 475.7,
+            "yiy": 196,
+            "ala": 1377.5,
+            "tuk": 500.4
+          },
+          "crises": 0,
+          "legsKeepingStockAboveThreeMonths": 0,
+          "outcomes": {
+            "oneOrZero": 93,
+            "positiveBoth": 31,
+            "negativeBoth": 8
+          },
+          "resources": {
+            "ene": {
+              "count": 1080,
+              "stock": [
+                1080,
+                2663.4,
+                2007.99,
+                143.74,
+                17965.49
+              ],
+              "net": [
+                1080,
+                57.0,
+                43.35,
+                -62.08,
+                301.3
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "min": {
+              "count": 1080,
+              "stock": [
+                1080,
+                911.35,
+                177.06,
+                0.08,
+                8708.04
+              ],
+              "net": [
+                1080,
+                103.06,
+                73.05,
+                -5.28,
+                652.09
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "yiy": {
+              "count": 1080,
+              "stock": [
+                1080,
+                1057.06,
+                860.7,
+                180,
+                4282.76
+              ],
+              "net": [
+                1080,
+                15.6,
+                14.0,
+                -8.33,
+                61.95
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "ala": {
+              "count": 1080,
+              "stock": [
+                1080,
+                96.52,
+                66.98,
+                12.04,
+                463.93
+              ],
+              "net": [
+                1080,
+                22.54,
+                18.84,
+                -5.0,
+                122.3
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "tuk": {
+              "count": 1080,
+              "stock": [
+                1080,
+                934.5,
+                791.44,
+                132,
+                3582.19
+              ],
+              "net": [
+                1080,
+                15.36,
+                11.76,
+                -15.1,
+                71.61
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            }
+          }
+        },
+        "120-180": {
+          "samples": 60,
+          "signed": 13,
+          "loads": 118,
+          "delivery": 116,
+          "long": 26,
+          "lost": 0,
+          "quantity": {
+            "ene": 591.7,
+            "min": 95.5,
+            "yiy": 138.6,
+            "ala": 747.8,
+            "tuk": 96
+          },
+          "crises": 0,
+          "legsKeepingStockAboveThreeMonths": 0,
+          "outcomes": {
+            "oneOrZero": 28,
+            "positiveBoth": 27,
+            "negativeBoth": 3
+          },
+          "resources": {
+            "ene": {
+              "count": 540,
+              "stock": [
+                540,
+                11056.2,
+                7986.27,
+                3565.16,
+                52615.01
+              ],
+              "net": [
+                540,
+                179.5,
+                137.81,
+                -115.7,
+                990.21
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "min": {
+              "count": 540,
+              "stock": [
+                540,
+                7089.47,
+                4698.85,
+                5.36,
+                44089.98
+              ],
+              "net": [
+                540,
+                252.4,
+                176.44,
+                -2.57,
+                915.79
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "yiy": {
+              "count": 540,
+              "stock": [
+                540,
+                2892.34,
+                2417.42,
+                180,
+                8524.96
+              ],
+              "net": [
+                540,
+                31.56,
+                17.41,
+                -5.66,
+                206.16
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "ala": {
+              "count": 540,
+              "stock": [
+                540,
+                437.83,
+                130.93,
+                16.65,
+                2473.52
+              ],
+              "net": [
+                540,
+                56.28,
+                39.09,
+                0,
+                192.27
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "tuk": {
+              "count": 540,
+              "stock": [
+                540,
+                2799.27,
+                2695.08,
+                903.04,
+                5269.64
+              ],
+              "net": [
+                540,
+                24.81,
+                19.97,
+                -29.77,
+                76.09
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            }
+          }
+        },
+        "180-240": {
+          "samples": 60,
+          "signed": 20,
+          "loads": 204,
+          "delivery": 210,
+          "long": 26,
+          "lost": 26.5,
+          "quantity": {
+            "ene": 1076.0,
+            "min": 652.8,
+            "yiy": 243.8,
+            "ala": 689.8,
+            "tuk": 367.4
+          },
+          "crises": 0,
+          "legsKeepingStockAboveThreeMonths": 0,
+          "outcomes": {
+            "positiveBoth": 47,
+            "oneOrZero": 57,
+            "negativeBoth": 2
+          },
+          "resources": {
+            "ene": {
+              "count": 572,
+              "stock": [
+                572,
+                20998.26,
+                14578.21,
+                267.28,
+                112826.2
+              ],
+              "net": [
+                572,
+                201.78,
+                114.08,
+                -676.41,
+                1616.56
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "min": {
+              "count": 572,
+              "stock": [
+                572,
+                12635.31,
+                6091.53,
+                2.96,
+                72776.04
+              ],
+              "net": [
+                572,
+                279.21,
+                168.44,
+                -28.26,
+                1098.16
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "yiy": {
+              "count": 572,
+              "stock": [
+                572,
+                4918.96,
+                3418.03,
+                13.08,
+                21364.19
+              ],
+              "net": [
+                572,
+                39.31,
+                18.84,
+                -23.18,
+                220.58
+              ],
+              "reserveStress": 9,
+              "lowRunway": 2,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "ala": {
+              "count": 572,
+              "stock": [
+                572,
+                1086.13,
+                502.02,
+                8.11,
+                4947.05
+              ],
+              "net": [
+                572,
+                63.26,
+                40.94,
+                2.94,
+                309.11
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "tuk": {
+              "count": 572,
+              "stock": [
+                572,
+                4021.3,
+                4195.1,
+                177.42,
+                11742.8
+              ],
+              "net": [
+                572,
+                28.3,
+                16.48,
+                -33.29,
+                173.86
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            }
+          }
+        }
+      },
+      "phases": {
+        "need": [
+          1,
+          214.0,
+          214.0,
+          214.0,
+          214.0
+        ],
+        "reachable": [
+          5,
+          98.8,
+          55.0,
+          33.0,
+          210.0
+        ],
+        "sign": 33.0,
+        "load": 33.06666666666667,
+        "firstReceipt": 35.36666666666667,
+        "firstPositiveBoth": 1403,
+        "positiveByState": {
+          "8": 1403,
+          "6": 1403,
+          "9": 2034,
+          "5": 2034,
+          "2": 2051,
+          "4": 5233.5,
+          "1": 6347.5,
+          "12": 6861.5
+        },
+        "loadToReceiptDays": [
+          590,
+          54.4,
+          48.0,
+          21.5,
+          221.5
+        ],
+        "signatureToLoadDays": [
+          58,
+          2,
+          2.0,
+          2,
+          2
+        ],
+        "knownPactToSignDays": [
+          58,
+          3281.9,
+          2940.0,
+          30,
+          6870
+        ],
+        "firstTransit": null
+      },
+      "notes": {
+        "trade-no-contact": 6046,
+        "trade-no-port": 890,
+        "trade-political": 1043,
+        "trade-no-safe-route": 699,
+        "trade-no-supply-demand": 645,
+        "trade-signed": 58,
+        "trade-agreed": 58,
+        "trade-existing": 611,
+        "trade-review-cancel": 1,
+        "trade-route-budget": 815,
+        "trade-route-not-exhausted": 46,
+        "trade-no-fair-ratio": 8,
+        "trade-cooldown": 7
+      },
+      "political": {
+        "Diplomatik temas kapalı": 886,
+        "Savaş nedeniyle ticaret kapalı": 56,
+        "Ambargo / ticari yaptırım": 101
+      },
+      "cooldown": {
+        "trade-no-fair-ratio": 7
+      },
+      "lastDay": 7200,
+      "actualResDeals": 58,
+      "end": "aaeac6750d3ed30d01c6d74b5c4806f0d5b6f2dadf235eabc88da5b07304cab9",
+      "rng": 154795831
+    },
+    "404": {
+      "windows": {
+        "0-120": {
+          "samples": 120,
+          "signed": 11,
+          "loads": 86,
+          "delivery": 80,
+          "long": 0,
+          "lost": 0,
+          "quantity": {
+            "ene": 346.9,
+            "min": 221.1,
+            "yiy": 0,
+            "ala": 509.2,
+            "tuk": 74.8
+          },
+          "crises": 22,
+          "legsKeepingStockAboveThreeMonths": 0,
+          "outcomes": {
+            "oneOrZero": 30,
+            "positiveBoth": 10
+          },
+          "resources": {
+            "ene": {
+              "count": 1110,
+              "stock": [
+                1110,
+                3205.72,
+                1511.74,
+                131.94,
+                21398.23
+              ],
+              "net": [
+                1110,
+                63.48,
+                45.47,
+                -77.9,
+                315.87
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "min": {
+              "count": 1110,
+              "stock": [
+                1110,
+                492.85,
+                103.25,
+                0.2,
+                7310.59
+              ],
+              "net": [
+                1110,
+                75.43,
+                53.21,
+                -0.78,
+                375.32
+              ],
+              "reserveStress": 5,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "yiy": {
+              "count": 1110,
+              "stock": [
+                1110,
+                1154.45,
+                488.63,
+                0,
+                7306.06
+              ],
+              "net": [
+                1110,
+                17.93,
+                13.92,
+                -15.05,
+                128.99
+              ],
+              "reserveStress": 32,
+              "lowRunway": 29,
+              "crisis": 22,
+              "consumerShortage": 0
+            },
+            "ala": {
+              "count": 1110,
+              "stock": [
+                1110,
+                286.26,
+                94.43,
+                2.47,
+                2094.86
+              ],
+              "net": [
+                1110,
+                23.38,
+                19.61,
+                -5.24,
+                83.56
+              ],
+              "reserveStress": 32,
+              "lowRunway": 2,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "tuk": {
+              "count": 1110,
+              "stock": [
+                1110,
+                684.4,
+                509.15,
+                0,
+                3082.28
+              ],
+              "net": [
+                1110,
+                9.75,
+                6.6,
+                -15.92,
+                77.5
+              ],
+              "reserveStress": 63,
+              "lowRunway": 62,
+              "crisis": 0,
+              "consumerShortage": 59
+            }
+          }
+        },
+        "120-180": {
+          "samples": 55,
+          "signed": 6,
+          "loads": 56,
+          "delivery": 58,
+          "long": 0,
+          "lost": 28.0,
+          "quantity": {
+            "ene": 317.7,
+            "min": 147.7,
+            "yiy": 0,
+            "ala": 243.6,
+            "tuk": 132.1
+          },
+          "crises": 50,
+          "legsKeepingStockAboveThreeMonths": 0,
+          "outcomes": {
+            "positiveBoth": 21,
+            "oneOrZero": 8,
+            "negativeBoth": 1
+          },
+          "resources": {
+            "ene": {
+              "count": 595,
+              "stock": [
+                595,
+                9851.36,
+                6705.76,
+                102.1,
+                36295.3
+              ],
+              "net": [
+                595,
+                150.9,
+                66.58,
+                -110.73,
+                957.34
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "min": {
+              "count": 595,
+              "stock": [
+                595,
+                2066.72,
+                186.79,
+                0.22,
+                14149.32
+              ],
+              "net": [
+                595,
+                118.52,
+                73.04,
+                -2.06,
+                600.39
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "yiy": {
+              "count": 595,
+              "stock": [
+                595,
+                2878.17,
+                180,
+                0,
+                15073.0
+              ],
+              "net": [
+                595,
+                34.72,
+                4.34,
+                -9.16,
+                266.84
+              ],
+              "reserveStress": 54,
+              "lowRunway": 52,
+              "crisis": 50,
+              "consumerShortage": 0
+            },
+            "ala": {
+              "count": 595,
+              "stock": [
+                595,
+                706.18,
+                258.55,
+                13.78,
+                4697.19
+              ],
+              "net": [
+                595,
+                37.58,
+                34.17,
+                -1.96,
+                144.4
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "tuk": {
+              "count": 595,
+              "stock": [
+                595,
+                1563.57,
+                1473.04,
+                0,
+                5262.77
+              ],
+              "net": [
+                595,
+                11.16,
+                9.87,
+                -22.73,
+                93.06
+              ],
+              "reserveStress": 95,
+              "lowRunway": 82,
+              "crisis": 0,
+              "consumerShortage": 76
+            }
+          }
+        },
+        "180-240": {
+          "samples": 0,
+          "signed": 0,
+          "loads": 0,
+          "delivery": 0,
+          "long": 0,
+          "lost": 0,
+          "quantity": {
+            "ene": 0,
+            "min": 0,
+            "yiy": 0,
+            "ala": 0,
+            "tuk": 0
+          },
+          "crises": 0,
+          "legsKeepingStockAboveThreeMonths": 0,
+          "outcomes": {},
+          "resources": {
+            "ene": {
+              "count": 0,
+              "stock": null,
+              "net": null,
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "min": {
+              "count": 0,
+              "stock": null,
+              "net": null,
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "yiy": {
+              "count": 0,
+              "stock": null,
+              "net": null,
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "ala": {
+              "count": 0,
+              "stock": null,
+              "net": null,
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "tuk": {
+              "count": 0,
+              "stock": null,
+              "net": null,
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            }
+          }
+        }
+      },
+      "phases": {
+        "need": [
+          4,
+          97.5,
+          86.5,
+          51.0,
+          166.0
+        ],
+        "reachable": [
+          2,
+          65.5,
+          65.5,
+          25.0,
+          106.0
+        ],
+        "sign": 25.0,
+        "load": 25.066666666666666,
+        "firstReceipt": 27.283333333333335,
+        "firstPositiveBoth": 3195.5,
+        "positiveByState": {
+          "5": 3195.5,
+          "3": 3195.5,
+          "4": 3224,
+          "1": 3224,
+          "9": 3291
+        },
+        "loadToReceiptDays": [
+          138,
+          57.83,
+          53.5,
+          42,
+          139
+        ],
+        "signatureToLoadDays": [
+          17,
+          3.76,
+          2,
+          2,
+          32
+        ],
+        "knownPactToSignDays": [
+          17,
+          2304.71,
+          2340,
+          360,
+          4470
+        ],
+        "firstTransit": null
+      },
+      "notes": {
+        "trade-no-contact": 4656,
+        "trade-no-port": 1188,
+        "trade-political": 1703,
+        "trade-no-safe-route": 641,
+        "trade-signed": 17,
+        "trade-agreed": 17,
+        "trade-existing": 177,
+        "trade-no-fair-ratio": 5,
+        "trade-cooldown": 5,
+        "trade-no-supply-demand": 305,
+        "trade-route-not-exhausted": 150,
+        "trade-route-budget": 282
+      },
+      "political": {
+        "Diplomatik temas kapalı": 933,
+        "Ambargo / ticari yaptırım": 694,
+        "Savaş nedeniyle ticaret kapalı": 76
+      },
+      "cooldown": {
+        "trade-no-fair-ratio": 5
+      },
+      "lastDay": 5250,
+      "actualResDeals": 62,
+      "end": "8288d1848456a12d701b6a850bd93a83d37ed74880edab75c6c5716cc36e4bb4",
+      "rng": 2051753806
+    },
+    "99": {
+      "windows": {
+        "0-120": {
+          "samples": 120,
+          "signed": 0,
+          "loads": 0,
+          "delivery": 0,
+          "long": 0,
+          "lost": 0,
+          "quantity": {
+            "ene": 0,
+            "min": 0,
+            "yiy": 0,
+            "ala": 0,
+            "tuk": 0
+          },
+          "crises": 0,
+          "legsKeepingStockAboveThreeMonths": 0,
+          "outcomes": {},
+          "resources": {
+            "ene": {
+              "count": 1085,
+              "stock": [
+                1085,
+                3720.83,
+                2471.97,
+                218.97,
+                18110.76
+              ],
+              "net": [
+                1085,
+                78.4,
+                71.13,
+                -108.26,
+                415.78
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "min": {
+              "count": 1085,
+              "stock": [
+                1085,
+                1582.73,
+                184.74,
+                0.1,
+                11211.93
+              ],
+              "net": [
+                1085,
+                94.07,
+                88.61,
+                -6.82,
+                327.53
+              ],
+              "reserveStress": 1,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "yiy": {
+              "count": 1085,
+              "stock": [
+                1085,
+                1611.32,
+                984.1,
+                176.93,
+                7089.9
+              ],
+              "net": [
+                1085,
+                25.02,
+                20.03,
+                -3.32,
+                67.03
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "ala": {
+              "count": 1085,
+              "stock": [
+                1085,
+                135.72,
+                87.45,
+                8.43,
+                1464.53
+              ],
+              "net": [
+                1085,
+                22.45,
+                20.82,
+                -5.68,
+                109.42
+              ],
+              "reserveStress": 18,
+              "lowRunway": 1,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "tuk": {
+              "count": 1085,
+              "stock": [
+                1085,
+                873.41,
+                778.85,
+                103.55,
+                2982.19
+              ],
+              "net": [
+                1085,
+                13.35,
+                12.67,
+                -8.4,
+                36.77
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            }
+          }
+        },
+        "120-180": {
+          "samples": 60,
+          "signed": 5,
+          "loads": 32,
+          "delivery": 30,
+          "long": 0,
+          "lost": 29.6,
+          "quantity": {
+            "ene": 16,
+            "min": 13.6,
+            "yiy": 221.1,
+            "ala": 94.6,
+            "tuk": 52.3
+          },
+          "crises": 0,
+          "legsKeepingStockAboveThreeMonths": 0,
+          "outcomes": {
+            "positiveBoth": 11,
+            "oneOrZero": 3,
+            "negativeBoth": 2
+          },
+          "resources": {
+            "ene": {
+              "count": 600,
+              "stock": [
+                600,
+                13552.6,
+                11145.04,
+                287.72,
+                65020.49
+              ],
+              "net": [
+                600,
+                231.27,
+                163.45,
+                -7.03,
+                1416.28
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "min": {
+              "count": 600,
+              "stock": [
+                600,
+                4333.28,
+                3143.56,
+                0,
+                15508.76
+              ],
+              "net": [
+                600,
+                157.31,
+                144.32,
+                -12.09,
+                600.06
+              ],
+              "reserveStress": 8,
+              "lowRunway": 4,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "yiy": {
+              "count": 600,
+              "stock": [
+                600,
+                3802.96,
+                2517.52,
+                92.32,
+                18521.04
+              ],
+              "net": [
+                600,
+                38.47,
+                21.1,
+                -6.98,
+                366.22
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "ala": {
+              "count": 600,
+              "stock": [
+                600,
+                421.85,
+                92.07,
+                0,
+                4927.4
+              ],
+              "net": [
+                600,
+                42.84,
+                34.67,
+                -14.12,
+                115.14
+              ],
+              "reserveStress": 7,
+              "lowRunway": 2,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "tuk": {
+              "count": 600,
+              "stock": [
+                600,
+                2128.06,
+                2018.39,
+                85.54,
+                4510.65
+              ],
+              "net": [
+                600,
+                18.41,
+                14.73,
+                -18.37,
+                78.41
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            }
+          }
+        },
+        "180-240": {
+          "samples": 60,
+          "signed": 12,
+          "loads": 176,
+          "delivery": 173,
+          "long": 0,
+          "lost": 16,
+          "quantity": {
+            "ene": 1067.6,
+            "min": 382.2,
+            "yiy": 188.6,
+            "ala": 507.7,
+            "tuk": 285.0
+          },
+          "crises": 0,
+          "legsKeepingStockAboveThreeMonths": 0,
+          "outcomes": {
+            "oneOrZero": 46,
+            "negativeBoth": 1,
+            "positiveBoth": 40
+          },
+          "resources": {
+            "ene": {
+              "count": 600,
+              "stock": [
+                600,
+                34799.33,
+                28026.56,
+                414.04,
+                161179.15
+              ],
+              "net": [
+                600,
+                567.71,
+                346.85,
+                -12.79,
+                1997.55
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "min": {
+              "count": 600,
+              "stock": [
+                600,
+                5937.34,
+                5046.77,
+                2.28,
+                26242.51
+              ],
+              "net": [
+                600,
+                228.92,
+                161.92,
+                -18.36,
+                890.42
+              ],
+              "reserveStress": 1,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "yiy": {
+              "count": 600,
+              "stock": [
+                600,
+                7011.28,
+                4858.86,
+                106.31,
+                36830.45
+              ],
+              "net": [
+                600,
+                63.72,
+                41.79,
+                -7.59,
+                388.22
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "ala": {
+              "count": 600,
+              "stock": [
+                600,
+                675.45,
+                128.02,
+                0,
+                5425.31
+              ],
+              "net": [
+                600,
+                63.81,
+                56.27,
+                -18.92,
+                246.02
+              ],
+              "reserveStress": 22,
+              "lowRunway": 5,
+              "crisis": 0,
+              "consumerShortage": 0
+            },
+            "tuk": {
+              "count": 600,
+              "stock": [
+                600,
+                3237.63,
+                3197.46,
+                154.26,
+                8239.17
+              ],
+              "net": [
+                600,
+                19.54,
+                13.21,
+                -25.4,
+                124.86
+              ],
+              "reserveStress": 0,
+              "lowRunway": 0,
+              "crisis": 0,
+              "consumerShortage": 0
+            }
+          }
+        }
+      },
+      "phases": {
+        "need": [
+          3,
+          124.33,
+          155.0,
+          39.0,
+          179.0
+        ],
+        "reachable": [
+          6,
+          165.0,
+          179.5,
+          112.0,
+          190.0
+        ],
+        "sign": 139.0,
+        "load": 139.06666666666666,
+        "firstReceipt": 141.38333333333333,
+        "firstPositiveBoth": 4241.5,
+        "positiveByState": {
+          "7": 4241.5,
+          "3": 4241.5,
+          "9": 4723.5,
+          "5": 4723.5,
+          "8": 4937,
+          "4": 5697,
+          "2": 5697,
+          "6": 5727
+        },
+        "loadToReceiptDays": [
+          203,
+          43.91,
+          55,
+          24,
+          94
+        ],
+        "signatureToLoadDays": [
+          17,
+          2,
+          2,
+          2,
+          2
+        ],
+        "knownPactToSignDays": [
+          17,
+          4985.29,
+          5280,
+          1260,
+          6630
+        ],
+        "firstTransit": null
+      },
+      "notes": {
+        "trade-no-contact": 4199,
+        "trade-political": 1387,
+        "trade-no-port": 1012,
+        "trade-no-safe-route": 2207,
+        "trade-no-supply-demand": 1122,
+        "trade-route-budget": 1580,
+        "trade-no-fair-ratio": 28,
+        "trade-cooldown": 46,
+        "trade-signed": 17,
+        "trade-agreed": 17,
+        "trade-existing": 168,
+        "trade-route-not-exhausted": 190,
+        "trade-review-cancel": 2,
+        "trade-quote-rejected": 6,
+        "trade-quote-reason": 6
+      },
+      "political": {
+        "Ambargo / ticari yaptırım": 1387
+      },
+      "cooldown": {
+        "trade-no-fair-ratio": 28,
+        "trade-quote-rejected": 18
+      },
+      "lastDay": 7200,
+      "actualResDeals": 99,
+      "end": "196dcc4d6ad8bd27382dff7fc1cd3dc2d069a3c4edb71e81e987ec5dea1a0390",
+      "rng": 532626838
+    }
+  },
+  "corridors": {
+    "100": {
+      "worlds": 15,
+      "statePairs": 586,
+      "eligibleStatePairs": 178,
+      "geo": {
+        "known": 756,
+        "absent": 354,
+        "open": 287,
+        "gap": 469
+      },
+      "gates": {
+        "contactsAndPolitical": 204,
+        "pact": 196,
+        "outboundPort": 527,
+        "inboundPort": 552,
+        "bothPorts": 499,
+        "pactBothPorts": 170,
+        "atLeastOneExportNeed": 525,
+        "cooldown": 6,
+        "existing": 19
+      },
+      "H0": {
+        "bilateralStatePairs": 18,
+        "pact": 18,
+        "positiveWithNoCooldownNoExisting": 1,
+        "hops": [
+          18,
+          3.06,
+          2.5,
+          1,
+          9
+        ],
+        "days": [
+          18,
+          73.22,
+          57.5,
+          24,
+          203
+        ],
+        "weakSideScore": [
+          18,
+          13.53,
+          9.8,
+          3.51,
+          41.01
+        ],
+        "positiveNew": 0,
+        "lateAtLeastOne": 0,
+        "portsPass": {
+          "available": 177,
+          "safe": 170,
+          "terms": 122,
+          "eligible": 122
+        }
+      },
+      "H1": {
+        "bilateralStatePairs": 47,
+        "pact": 46,
+        "positiveWithNoCooldownNoExisting": 29,
+        "hops": [
+          47,
+          7.28,
+          5,
+          1,
+          22
+        ],
+        "days": [
+          47,
+          174.94,
+          123,
+          24,
+          512
+        ],
+        "weakSideScore": [
+          47,
+          8.59,
+          5.88,
+          0.36,
+          41.01
+        ],
+        "positiveNew": 29,
+        "lateAtLeastOne": 0,
+        "portsPass": {
+          "available": 728,
+          "safe": 728,
+          "terms": 494,
+          "eligible": 384
+        }
+      },
+      "H2": {
+        "bilateralStatePairs": 18,
+        "pact": 18,
+        "positiveWithNoCooldownNoExisting": 1,
+        "hops": [
+          18,
+          3.06,
+          2.5,
+          1,
+          9
+        ],
+        "days": [
+          18,
+          73.22,
+          57.5,
+          24,
+          203
+        ],
+        "weakSideScore": [
+          18,
+          13.53,
+          9.8,
+          3.51,
+          41.01
+        ],
+        "positiveNew": 0,
+        "lateAtLeastOne": 0,
+        "portsPass": {
+          "available": 177,
+          "safe": 170,
+          "terms": 122,
+          "eligible": 122
+        }
+      },
+      "H3": {
+        "bilateralStatePairs": 23,
+        "pact": 22,
+        "positiveWithNoCooldownNoExisting": 5,
+        "hops": [
+          23,
+          3.09,
+          3,
+          1,
+          7
+        ],
+        "days": [
+          23,
+          77.52,
+          71,
+          24,
+          182
+        ],
+        "weakSideScore": [
+          23,
+          11.09,
+          6.17,
+          0.94,
+          41.01
+        ],
+        "positiveNew": 5,
+        "lateAtLeastOne": 0,
+        "portsPass": {
+          "available": 228,
+          "safe": 204,
+          "terms": 154,
+          "eligible": 154
+        }
+      },
+      "H5": {
+        "bilateralStatePairs": 21,
+        "pact": 21,
+        "positiveWithNoCooldownNoExisting": 3,
+        "hops": [
+          21,
+          2.76,
+          2,
+          1,
+          9
+        ],
+        "days": [
+          21,
+          66.29,
+          51,
+          24,
+          203
+        ],
+        "weakSideScore": [
+          21,
+          10.67,
+          9.53,
+          3.51,
+          27.0
+        ],
+        "positiveNew": 3,
+        "lateAtLeastOne": 0,
+        "portsPass": {
+          "available": 177,
+          "safe": 170,
+          "terms": 166,
+          "eligible": 166
+        }
+      },
+      "noFed": {
+        "bilateralStatePairs": 15,
+        "pact": 15,
+        "positiveWithNoCooldownNoExisting": 1,
+        "hops": [
+          15,
+          2.2,
+          2,
+          1,
+          3
+        ],
+        "days": [
+          15,
+          54.33,
+          51,
+          24,
+          83
+        ],
+        "weakSideScore": [
+          15,
+          15.24,
+          10.57,
+          4.58,
+          41.01
+        ],
+        "positiveNew": 0,
+        "lateAtLeastOne": 0,
+        "portsPass": {
+          "available": 120,
+          "safe": 93,
+          "terms": 64,
+          "eligible": 64
+        }
+      },
+      "H6": {
+        "canonicalQuoteAndBothAccept": 12,
+        "portChoiceMisses": [],
+        "quoteFailures": {
+          "Bu sevkiyat zaten imzalandı": 4,
+          "Aylık hat kapasitesi dolu": 2
+        },
+        "cooldownEligible": []
+      }
+    },
+    "500": {
+      "worlds": 1,
+      "statePairs": 120,
+      "eligibleStatePairs": 41,
+      "geo": {
+        "known": 521,
+        "absent": 168,
+        "open": 224,
+        "gap": 297
+      },
+      "gates": {
+        "contactsAndPolitical": 41,
+        "pact": 40,
+        "outboundPort": 120,
+        "inboundPort": 120,
+        "bothPorts": 120,
+        "pactBothPorts": 40,
+        "atLeastOneExportNeed": 91,
+        "cooldown": 0,
+        "existing": 1
+      },
+      "H0": {
+        "bilateralStatePairs": 5,
+        "pact": 5,
+        "positiveWithNoCooldownNoExisting": 4,
+        "hops": [
+          5,
+          1.8,
+          2,
+          1,
+          3
+        ],
+        "days": [
+          5,
+          42,
+          40,
+          22,
+          77
+        ],
+        "weakSideScore": [
+          5,
+          15.74,
+          8.02,
+          3.1,
+          34.86
+        ],
+        "positiveNew": 0,
+        "lateAtLeastOne": 0,
+        "portsPass": {
+          "available": 117,
+          "safe": 96,
+          "terms": 52,
+          "eligible": 52
+        }
+      },
+      "H1": {
+        "bilateralStatePairs": 15,
+        "pact": 15,
+        "positiveWithNoCooldownNoExisting": 14,
+        "hops": [
+          15,
+          13.4,
+          12,
+          1,
+          36
+        ],
+        "days": [
+          15,
+          289.4,
+          250,
+          22,
+          781
+        ],
+        "weakSideScore": [
+          15,
+          9.01,
+          5.25,
+          0.74,
+          34.86
+        ],
+        "positiveNew": 10,
+        "lateAtLeastOne": 0,
+        "portsPass": {
+          "available": 517,
+          "safe": 517,
+          "terms": 309,
+          "eligible": 235
+        }
+      },
+      "H2": {
+        "bilateralStatePairs": 6,
+        "pact": 6,
+        "positiveWithNoCooldownNoExisting": 5,
+        "hops": [
+          6,
+          3.83,
+          2.0,
+          1,
+          14
+        ],
+        "days": [
+          6,
+          83.83,
+          44.0,
+          22,
+          293
+        ],
+        "weakSideScore": [
+          6,
+          13.33,
+          5.58,
+          1.28,
+          34.86
+        ],
+        "positiveNew": 1,
+        "lateAtLeastOne": 0,
+        "portsPass": {
+          "available": 134,
+          "safe": 103,
+          "terms": 56,
+          "eligible": 56
+        }
+      },
+      "H3": {
+        "bilateralStatePairs": 7,
+        "pact": 7,
+        "positiveWithNoCooldownNoExisting": 6,
+        "hops": [
+          7,
+          3,
+          2,
+          1,
+          8
+        ],
+        "days": [
+          7,
+          71.43,
+          48,
+          22,
+          190
+        ],
+        "weakSideScore": [
+          7,
+          14.53,
+          8.02,
+          3.1,
+          34.86
+        ],
+        "positiveNew": 2,
+        "lateAtLeastOne": 0,
+        "portsPass": {
+          "available": 172,
+          "safe": 137,
+          "terms": 88,
+          "eligible": 88
+        }
+      },
+      "H5": {
+        "bilateralStatePairs": 8,
+        "pact": 8,
+        "positiveWithNoCooldownNoExisting": 7,
+        "hops": [
+          8,
+          2.12,
+          2.0,
+          1,
+          3
+        ],
+        "days": [
+          8,
+          51,
+          47.5,
+          22,
+          77
+        ],
+        "weakSideScore": [
+          8,
+          8.54,
+          7.45,
+          3.1,
+          18.24
+        ],
+        "positiveNew": 3,
+        "lateAtLeastOne": 0,
+        "portsPass": {
+          "available": 117,
+          "safe": 96,
+          "terms": 77,
+          "eligible": 77
+        }
+      },
+      "noFed": {
+        "bilateralStatePairs": 5,
+        "pact": 5,
+        "positiveWithNoCooldownNoExisting": 4,
+        "hops": [
+          5,
+          1.8,
+          2,
+          1,
+          3
+        ],
+        "days": [
+          5,
+          42,
+          40,
+          22,
+          77
+        ],
+        "weakSideScore": [
+          5,
+          15.74,
+          8.02,
+          3.1,
+          34.86
+        ],
+        "positiveNew": 0,
+        "lateAtLeastOne": 0,
+        "portsPass": {
+          "available": 78,
+          "safe": 49,
+          "terms": 25,
+          "eligible": 25
+        }
+      },
+      "H6": {
+        "canonicalQuoteAndBothAccept": 5,
+        "portChoiceMisses": [],
+        "quoteFailures": {},
+        "cooldownEligible": []
+      }
+    }
+  },
+  "historical": {
+    "perf": {
+      "100-9-11-m120": {
+        "aa*": {
+          "n": 72,
+          "p95": [
+            221.32499999995343,
+            207.77499999995345
+          ],
+          "p50": [
+            166.14999999990687,
+            161.24999999988358
+          ],
+          "runDeltas": {
+            "aa2": -7.41,
+            "aa1": -10.33,
+            "aa3": -3.24
+          },
+          "equal": true
+        },
+        "run*": {
+          "n": 144,
+          "p95": [
+            223.90999999997433,
+            237.5250000000931
+          ],
+          "p50": [
+            160.95000000018626,
+            164.3499999998603
+          ],
+          "runDeltas": {
+            "run4": 6.31,
+            "run3": 32.6,
+            "run5": -1.97,
+            "run2": 15.57,
+            "run1": -16.93,
+            "run6": 10.6
+          },
+          "equal": true
+        }
+      },
+      "500-16-11-m120": {
+        "aa*": {
+          "n": 72,
+          "p95": [
+            1013.9150000000839,
+            984.2349999997532
+          ],
+          "p50": [
+            899.7000000001863,
+            897.2999999999302
+          ],
+          "runDeltas": {
+            "aa2": -2.28,
+            "aa1": -8.13,
+            "aa3": 0.59
+          },
+          "equal": true
+        },
+        "run*": {
+          "n": 144,
+          "p95": [
+            1031.4349999999686,
+            1033.455000000028
+          ],
+          "p50": [
+            895.9499999998952,
+            897.1499999998487
+          ],
+          "runDeltas": {
+            "run4": -4.47,
+            "run3": 4.67,
+            "run5": -3.24,
+            "run2": 2.54,
+            "run1": -3.06,
+            "run6": -2.14
+          },
+          "equal": true
+        }
+      },
+      "500-16-11-m180": {
+        "aa*": {
+          "n": 72,
+          "p95": [
+            3274.1500000000933,
+            3245.589999999874
+          ],
+          "p50": [
+            3015.5,
+            2930.350000000093
+          ],
+          "runDeltas": {
+            "aa2": 2.86,
+            "aa1": -6.58,
+            "aa3": 2.13
+          },
+          "equal": true
+        },
+        "run*": {
+          "n": 144,
+          "p95": [
+            3165.2650000000895,
+            3121.9300000000394
+          ],
+          "p50": [
+            2872.2000000001863,
+            2855.6500000000815
+          ],
+          "runDeltas": {
+            "run4": 1.63,
+            "run3": 1.3,
+            "run5": 2.38,
+            "run2": -2.6,
+            "run1": -1.49,
+            "run6": 2.49
+          },
+          "equal": true
+        }
+      }
+    },
+    "f2": {
+      "f2-404": {
+        "ports": 1793,
+        "geography": {
+          "bNoIdSource": 252,
+          "structuralGap": 1421
+        },
+        "counts": {
+          "geoNone": 1673,
+          "bothPermits": 120
+        }
+      },
+      "f2-99": {
+        "ports": 1381,
+        "geography": {
+          "bNoIdSource": 211,
+          "structuralGap": 1164
+        },
+        "counts": {
+          "geoNone": 1375,
+          "onePermit": 6
+        }
+      },
+      "f2-11": {
+        "ports": 278,
+        "geography": {
+          "bNoIdSource": 41,
+          "structuralGap": 218,
+          "knowledgeOrRisk": 3
+        },
+        "counts": {
+          "geoNone": 262,
+          "bothPermits": 1,
+          "onePermit": 15
+        }
+      }
+    },
+    "f3": {
+      "f3-500-11": {
+        "calls": 1397,
+        "made": 0,
+        "reason": {
+          "noKnownTarget": 294,
+          "noNeedMatch": 491,
+          "allColsHavePort": 487,
+          "noRouteFromAnyCol": 75,
+          "noAffordableCol": 21,
+          "valueLePrice": 22,
+          "noTerms": 7
+        },
+        "value": [
+          0.03,
+          0.08,
+          0.37
+        ]
+      },
+      "f3-404": {
+        "calls": 690,
+        "made": 0,
+        "reason": {
+          "noAffordableCol": 67,
+          "noKnownTarget": 77,
+          "noRouteFromAnyCol": 61,
+          "valueLePrice": 11,
+          "allColsHavePort": 178,
+          "noTerms": 1,
+          "noNeedMatch": 295
+        },
+        "value": [
+          0.02,
+          0.19,
+          0.33
+        ]
+      },
+      "f3-99": {
+        "calls": 1417,
+        "made": 0,
+        "reason": {
+          "noKnownTarget": 399,
+          "noNeedMatch": 426,
+          "allColsHavePort": 542,
+          "noAffordableCol": 44,
+          "noRouteFromAnyCol": 5,
+          "valueLePrice": 1
+        },
+        "value": [
+          0.02,
+          0.02,
+          0.02
+        ]
+      },
+      "f3-11": {
+        "calls": 357,
+        "made": 0,
+        "reason": {
+          "noKnownTarget": 81,
+          "noNeedMatch": 84,
+          "noAffordableCol": 33,
+          "noRouteFromAnyCol": 21,
+          "allColsHavePort": 133,
+          "valueLePrice": 5
+        },
+        "value": [
+          0.27,
+          0.32,
+          0.49
+        ]
+      }
+    }
+  }
+}
