@@ -195,7 +195,7 @@ Chromium MP: §I.
 ## M. ZIP, sürüm ve GitHub durumu
 
 - p51 **yok**; ZIP üretilmedi. p50 ZIP'i (`releases/stars-faz96h10p50.zip`, SHA-256 `26a6b5e3…`, CRC32 `8D1FE07F`) geçerli.
-- Dal: `claude/stars-ticaret-ai1`, taslak PR (taban `claude/stars-ticaret-ai0`).
+- Dal: `claude/stars-ticaret-ai1`, taslak PR #74 (taban `claude/stars-ticaret-ai0`).
 - main, `claude/stars-ticaret-ag2` ve canlı Render değiştirilmedi.
 
 ## N. Açık riskler

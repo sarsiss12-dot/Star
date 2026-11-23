@@ -5,7 +5,7 @@ Güncelleme: 23 Kasım 2026
 ## Dallar
 | Dal | Durum |
 |---|---|
-| `claude/stars-ticaret-ai1` | p50 çalışma zamanı (değişmedi) + TR testi + liman / transit araştırması; taslak PR (taban ai0), sürüm yok |
+| `claude/stars-ticaret-ai1` | p50 çalışma zamanı (değişmedi) + TR testi + liman / transit araştırması; taslak PR #74 (taban ai0), sürüm yok |
 | `claude/stars-ticaret-ai0` | PR #73, araştırma (sürüm yok) |
 | `claude/stars-ticaret-ag2` | **p50 / MP.8.9b49 — en güvenli sürüm** (PR #72) |
 
