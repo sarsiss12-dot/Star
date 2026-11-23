@@ -15,7 +15,14 @@ Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strat
 - `res` maddesi p49 gibi anlık (PR #70 her `res`i tek seferlik kargoya çeviriyordu → 40 paket kötüleşmişti). Fiziksel tek seferlik kargo açık `{t:'cargo',r,v}`; `freightPlan` once-yük yalnız cargo; masada `dealCargoMode` (Anlık Kaynak Takası / ▣ Fiziksel Kargo ile Gönder). MP: ITEM_T + dipItems cargo, `gift` p49 gibi anlık; misafir `dealQuote` sarmalayıcısı yalnız Commerce rota gerekçesini host'a bırakır (host dipGate gerçek dünyada denetler).
 - Test: `node tests/ticaret_ag1_test.js` (9), `node tests/ticaret_agi0_test.cjs` (28; run-all'a girmez, .cjs), `MP8_SCEN=TA node tests/browser-mp8.cjs` (6). TL 2/3 PR #70'te de. Perf: `node research/ticaret-agi0/ay-maliyeti.cjs <p49 kök> <kayıt dizini> <çıkış>` (Chromium).
 
-## Son teslim — SAHA-GÜVENCE.1 (p49 / MP.8.9b48, 22 Kasım 2026)
+## Son teslim — TİCARET-AI.0 (sürüm yok, p50 korunur; 23 Kasım 2026)
+
+- Ayrıntı: `reports/claude/TICARET-AI0-SONUC.md`, devir `TICARET-AI0-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-ai0/`. Dal `claude/stars-ticaret-ai0` (taban p50 `claude/stars-ticaret-ag2` @ `d1784ff`, PR #72). Çalışma zamanı 19 dosya p50 ile aynı; p51 YOK (fayda kapısı geçmedi).
+- `MP8_SCEN=TB node tests/browser-mp8.cjs` (`tests/helpers/ticaret-ai0-mp.cjs`) 6/6: yalıtılmış zincir h–n1–n2–[C n3]–n4–n5–[B n6], izin → n3 üzerinden tek teslim, yolda izin kaybı (teslim yok), ara liman fethi (rota yok, teklif ret). `identifiedPort` görünürlük ister → gözcü + `updateVision()`.
+- Huni `research/ticaret-ai0/funnel2.cjs` (salt gözlem, `NOCLONE=1` ile Save8/RNG eşitliği): transit aday çiftlerinin %78–%85'i yapısal liman boşluğu (≤3 sıçrama kuralı, aradaki limansız), %10–%15 b a'nın limanını tanımıyor; kusur `aiTransitRequest` izinsiz geri rota ön koşulu (izin taşıyıcı başına) + ortak `budget.routes`. `aiPortInvestment` hiç liman yapmıyor (eksi net eşleşmesi kapısı); limanlar olağan `invest:liman` ile.
+- Aday `research/ticaret-ai0/ADAY-IKI-YONLU-TRANSIT-BEKLETILDI.patch` (uygulanmadı): yakın çift sırası, tüm izinlerle ileri rota ön elemesi, b de aynı AI sahipten izin (önizleme `aiDealWould`). Kontrollü `kontrollu.cjs` K1–K6; kampanya `camp.cjs` (PLACEBO_DAY): 99/404 bayt eşit, 11 bant içinde. Plasebo tek `rnd()` bazı günlerde dünyayı değiştirmez — bandı yalnız etkili plasebolarla kur.
+
+## Önceki teslim — SAHA-GÜVENCE.1 (p49 / MP.8.9b48, 22 Kasım 2026)
 
 - Ayrıntı (taslak PR #69): `reports/claude/SAHA-GUVENCE1-SONUC.md`, program devri `reports/claude/STARS-SONRAKI-DEVIR.md`, kanıt `reports/claude/evidence/saha-guvence1/`. Dal `claude/stars-saha-guvence1` (taban `347ef0d` p48 / PR #68). Save8v8/paket4/protokol1; p49 paket yükleyicisi p41–p48 kabul eder. Kullanıcı test yapamıyordu: bütün kabul otomatik; Android / uzak internet / Render NOT RUN.
 - B2: muharebe sonunda silahlı gemisi kalmayan tarafın silahsız gemileri (`ord` dmg 0) hasarsız imha edilir (kural korundu). `combat.js battleUnarmedLost/battleUnarmedText` (filo günlüğünden salt okunur), muharebe raporunda açıklama, mp-core `battleReportFinish` sarmalayıcısı uzak insana ZAFER / YENİLGİ (motor yalnız devlet 0'a yazıyordu).

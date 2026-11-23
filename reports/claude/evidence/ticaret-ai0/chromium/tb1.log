@@ -1,0 +1,36 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[2,2],"mirrorEq":true,"revMs":223,"buildMs":254,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[2,2],"mirrorEq":true,"revMs":347,"buildMs":390,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":9.1,"p95":12.1,"max":12.1},"longtask":{"n":0},"heapMB":16,"dom":728,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":2,"med":34.2,"p95":34.2,"max":34.2},"refresh":{"n":1,"med":4.7,"p95":4.7,"max":4.7},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":16,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0},"C":{"build":{"n":2,"med":50,"p95":50,"max":50},"refresh":{"n":1,"med":1.9,"p95":1.9,"max":1.9},"longtask":{"n":0},"builds":2,"deltas":1,"resyncs":0,"minGap":600,"heapMB":15,"dom":729,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":23,"joinErrors":0}}}
+PASS TB0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+FAIL B0 fikstür: h—n1—n2—[C n3]—n4—n5—[B n6] zinciri; izin yokken B → host rotası yok
+AssertionError [ERR_ASSERTION]: izinsiz rota yok
+
+true !== false
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-ai0-mp.cjs:34:107
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:69:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-ai0-mp.cjs:22:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:561:18
+PASS B1 C gerçek masadan B'ye Transit İzni verir, B gelen kutusundan KABUL → izin + rota
+FAIL B2 B gerçek masadan ▣ kargo → host KABUL; konvoy C'nin ara limanından (n3) geçer, tek teslim, yolda B aynası konumu host ile aynı
+AssertionError [ERR_ASSERTION]: rota C ara limanından
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-ai0-mp.cjs:57:55
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:69:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-ai0-mp.cjs:51:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:561:18
+FAIL B3 ikinci kargo yolda iken C izni gerçek masadan geri alır → n3'ten aktarma yok, teslim yok, kimseye yazılmaz
+AssertionError [ERR_ASSERTION]: izinsiz teslim yok
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-ai0-mp.cjs:67:11
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:69:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-ai0-mp.cjs:61:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:561:18
+FAIL B4 izin geri verilir, n3 gerçek sahiplik değişimiyle AI X'e geçer → eski izin X adına sayılmaz; teslim yok, X / C yük almaz
+AssertionError [ERR_ASSERTION]: X adına izin yok → rota kapalı
+
+true !== false
+
+    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-ai0-mp.cjs:78:65
+    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:69:162)
+    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/ticaret-ai0-mp.cjs:70:2)
+    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:561:18
+GEÇEN: 2 KALAN: 4

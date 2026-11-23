@@ -1,6 +1,10 @@
 # STARS — Güncel proje durumu
 
-Son güncelleme: 2026-11-22. Depo `sarsiss12-dot/Star`.
+Son güncelleme: 2026-11-23. Depo `sarsiss12-dot/Star`.
+
+## Ticaret AI araştırması (sürüm yok) — TİCARET-AI.0
+
+`claude/stars-ticaret-ai0` (p50 üstünde, taslak PR). Çalışma zamanı p50 ile aynı (verify-release 96h10p50). MP Chromium `MP8_SCEN=TB` 6/6 (ara liman geçişi, izin kaybı, ara liman fethi). Doğal kampanyada AI'nın transit izni istememesinin kökü: aday çiftlerin %78–%85'i yapısal liman boşluğu (hiçbir izin açamaz), %10–%15 bilgi; kusur izinsiz geri rota ön koşulu + rota bütçesi. İki yönlü izin adayı kontrollü vakada doğru, doğal fayda plasebo bandı içinde → yama olarak bekletildi, p51 yok. [Sonuç](reports/claude/TICARET-AI0-SONUC.md), [devir](reports/claude/TICARET-AI0-DEVIR.md).
 
 ## Güncel geliştirme adayı — p50 (TİCARET-AĞ.2)
 
