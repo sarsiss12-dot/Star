@@ -1,6 +1,6 @@
 # TİCARET-GEÇERLİ-HAT.0 — Sonuç raporu
 
-Tarih: 23 Kasım 2026 · Dal `claude/stars-ticaret-gecerli-hat0` · Taban p51 `claude/stars-ticaret-tamamlama0` @ `1b95efb` (PR #75). Araştırma: Codex `codex/stars-ticaret-kok-neden0` @ `2d96b6d` (rapor, `partner.cjs` ve diğer deney araçları bu dala alındı).
+Tarih: 23 Kasım 2026 · Dal `claude/stars-ticaret-gecerli-hat0` (taslak PR #76) · Taban p51 `claude/stars-ticaret-tamamlama0` @ `1b95efb` (PR #75). Araştırma: Codex `codex/stars-ticaret-kok-neden0` @ `2d96b6d` (rapor, `partner.cjs` ve diğer deney araçları bu dala alındı).
 
 ## Özet
 
