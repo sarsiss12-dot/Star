@@ -2,6 +2,10 @@
 
 Son güncelleme: 2026-11-23. Depo `sarsiss12-dot/Star`.
 
+## Güncel geliştirme adayı — p51 (TİCARET-TAMAMLAMA.0)
+
+`claude/stars-ticaret-tamamlama0` (ai1 üstünde, taslak PR). Oyun 96h10p51 / PWA stars-v96h10p51 / MP.8.9b50; Save8 v8, paket 4, protokol 1. ZIP `releases/stars-faz96h10p51.zip` (SHA-256 `9c513c0b908cd8b2c877d31c6acbfad980eafd7ad7fca17b88c1f4b2a74bc434`, CRC32 `D82CE4BE`). Atomik iki yönlü Transit İzni (AI–AI, kısmi hatada geri alma), klavyesiz ticaret miktarı. Tam Node 246 / 6563 / 279 (yeni FAIL yok), MP8 TR/TL/TA/TB/SG/J/X PASS, SP dokunmatik 9/0. 500 sistem p95 +%0,20 / −%1,37; 100 sistem +%6,08 A/A gürültü bandında (−%6,12), deterministik iş eşit. Fiziksel Android / Render NOT RUN. [Sonuç](reports/claude/TICARET-TAMAMLAMA0-SONUC.md), [devir](reports/claude/TICARET-TAMAMLAMA0-DEVIR.md).
+
 ## Ticaret AI araştırması (sürüm yok) — TİCARET-AI.1
 
 `claude/stars-ticaret-ai1` (ai0 üstünde, taslak PR). Çalışma zamanı p50 ile aynı; tam Node 245 / 6551 / 279 (p50 ile aynı). MP `MP8_SCEN=TR` 6/6 (yolda kargo → kayıt → yeni oda → misafirler döner → tek teslim); TL / TA / TB / SG / J / X PASS. Stratejik liman yatırımının fırsat alanı doğal kampanyada fiilen boş (AI kolonileri zaten limanlı, boşluklar sahipsiz / yabancı sistemlerde, 1 yıllık sözleşme değeri liman bedelinin %2–%49'u; mevcut kod iç üretimi doğru tercih ediyor). Atomik iki yönlü transit yaması bekletildi; liman ufku ve ayrı transit bütçesi adayları reddedildi. [Sonuç](reports/claude/TICARET-AI1-SONUC.md), [devir](reports/claude/TICARET-AI1-DEVIR.md).
