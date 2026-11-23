@@ -1,0 +1,26 @@
+diff --git a/commerce.js b/commerce.js
+index ff6b6e1..cbcb3f8 100644
+--- a/commerce.js
++++ b/commerce.js
+@@ -386,7 +386,12 @@ const Commerce={
+   }
+   return false;
+  },
++ // TİCARET-AI.1 (aday): ortak rota bütçesi (96) transit değerlendirmesine gelmeden tükeniyorsa ayda en çok 8 rotalık ayrı transit payı kullanılır.
+  aiTransitRequest(a,b,A,B,budget){
++  if(budget.routes>=2||!(budget.transit>=2))return this.aiTransitRequest0(a,b,A,B,budget);
++  const pool={routes:budget.transit};try{return this.aiTransitRequest0(a,b,A,B,pool);}finally{budget.transit=pool.routes;}
++ },
++ aiTransitRequest0(a,b,A,B,budget){
+   if(!B||!a.ai||!b.ai||a.res.etk<80||!this.resources.some(r=>A[r].need>0&&B[r].export>=1))return false;
+   const key='portTransit:'+b.id;
+   if(a.aiTalk?.[key]?.until>G.day)return false;
+@@ -526,7 +531,7 @@ const Commerce={
+   return quotes;
+  },
+  aiOpportunityTick(){
+-  const st=this.state(),month=Math.floor(G.day/30),budget={routes:96};let created=0;
++  const st=this.state(),month=Math.floor(G.day/30),budget={routes:96,transit:8};let created=0;
+   const normal=e=>e&&!e.dead&&!e.wild&&!e.crisisSide;
+   const balances=new Map(G.emps.filter(e=>normal(e)&&e.ai&&e.id!==0).map(e=>[e.id,this.aiBalance(e)]));
+   for(const a of G.emps){if(!normal(a)||!a.ai||a.id===0||st.aiAt[a.id]===month)continue;st.aiAt[a.id]=month;

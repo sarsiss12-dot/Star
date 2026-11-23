@@ -1,0 +1,276 @@
+{
+ "results": [
+  {
+   "name": "TA0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 9100
+  },
+  {
+   "name": "A0 fikstür (host): limanlar, host ↔ B hiperhat, kapasite, kaynak, temas",
+   "status": "PASS",
+   "ms": 962
+  },
+  {
+   "name": "A1 B (800×360) gerçek masa: 100 mineral + \"Fiziksel Kargo ile Gönder\" → host gelen kutusundan KABUL; dört aşama ayrı",
+   "status": "PASS",
+   "ms": 2784
+  },
+  {
+   "name": "A2 yükleme B'den düşer, varışta host'a bir kez yazılır, B aynası teslimi görür; ikinci teslim / ikinci kabul yok",
+   "status": "PASS",
+   "ms": 809
+  },
+  {
+   "name": "A3 C varsayılan \"Anlık Kaynak Takası\" ile 40 enerji hediye teklifi → host KABUL → anlık; sözleşme / konvoy yok",
+   "status": "PASS",
+   "ms": 2335
+  },
+  {
+   "name": "A4 gizlilik: C aynasında B'nin sözleşmesi / konvoyu yok",
+   "status": "PASS",
+   "ms": 21
+  }
+ ],
+ "metrics": {
+  "scen": "TA",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 221,
+    "buildMs": 247,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 318,
+    "buildMs": 348,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 6.8,
+      "p95": 9.5,
+      "max": 9.5
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 17,
+     "dom": 728,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 25.6,
+       "p95": 25.6,
+       "max": 25.6
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.9,
+       "p95": 1.9,
+       "max": 1.9
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 26,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 27.8,
+       "p95": 27.8,
+       "max": 27.8
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.9,
+       "p95": 2.9,
+       "max": 2.9
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 729,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 2230,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "ag1": {
+   "fx": {
+    "hostHome": 30,
+    "bPort": 0,
+    "route": true
+   },
+   "a1": {
+    "vis": {
+     "w": 183.359375,
+     "h": 44,
+     "in": true,
+     "top": true
+    },
+    "item": [
+     "cargo"
+    ],
+    "offer": 1,
+    "status": "accepted",
+    "contract": {
+     "id": 1,
+     "legs": [
+      [
+       1,
+       0,
+       "min",
+       100
+      ]
+     ]
+    },
+    "hostAfterSign": 3000,
+    "before": {
+     "h": 3000,
+     "b": 3000,
+     "c": 0
+    },
+    "guestSees": true
+   },
+   "a1q": {
+    "ok": true,
+    "reasons": [],
+    "dis": false
+   },
+   "cid": 1,
+   "offer": 1,
+   "before": {
+    "h": 3000,
+    "b": 3000,
+    "c": 0
+   },
+   "a2": {
+    "st": {
+     "done": true,
+     "vs": [
+      [
+       "delivered",
+       100
+      ]
+     ]
+    },
+    "after": {
+     "h": 3100,
+     "b": 2900
+    },
+    "later": {
+     "h": 3100,
+     "b": 2900
+    },
+    "guestDelivered": true,
+    "dup": "rules:closed"
+   },
+   "a3": {
+    "mode": "instant",
+    "before": {
+     "h": 3000,
+     "c": 3000,
+     "k": 1,
+     "v": 1
+    },
+    "after": {
+     "h": 3040,
+     "c": 2960,
+     "k": 1,
+     "v": 1
+    }
+   },
+   "a4": {
+    "k": 0,
+    "v": 0
+   }
+  },
+  "errors": []
+ }
+}

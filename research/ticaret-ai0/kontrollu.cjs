@@ -27,4 +27,10 @@ out.K3_bZatenIzinli=call(world({bRight:true}));
 out.K4_rolesiz=call(world({noRelay:true}));
 out.K5_insanSahip=call(world({owner:0}));
 out.K6_dusukIliski=call(world({rel:-80}));
+/* K7 kısmi işlem: a'nın izni uygulandıktan sonra b'nin izni motor hatasıyla düşer (ikinci portTransit maddesinde enjekte hata). */
+{const h=world();out.K7_kismiHata=J(h,`(()=>{const a=G.emps[2],b=G.emps[3],o=G.emps[4],e0=[a.res.etk,b.res.etk,o.res.etk];let n=0;
+  G._dealFailInject=k=>{if(k==='before:portTransit'&&++n===2)throw Error('enjekte');};
+  const r=Commerce.aiTransitRequest(a,b,Commerce.aiBalance(a),Commerce.aiBalance(b),{routes:96});delete G._dealFailInject;
+  return {r:!!r,hooks:n,aRight:o.portTransit?.[2]>G.day,bRight:o.portTransit?.[3]>G.day,etk:[a.res.etk-e0[0],b.res.etk-e0[1],o.res.etk-e0[2]].map(Math.round),
+   coolA:a.aiTalk?.['portTransit:3']?.until>G.day,coolB:b.aiTalk?.['portTransit:2']?.until>G.day};})()`);}
 console.log(JSON.stringify(out));

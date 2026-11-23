@@ -1,0 +1,14 @@
+diff --git a/commerce.js b/commerce.js
+index ff6b6e1..5de3b0b 100644
+--- a/commerce.js
++++ b/commerce.js
+@@ -376,7 +376,8 @@ const Commerce={
+     if(!n)continue;
+     const value=this.aiValue(a,{from:b.id,to:a.id,give:n.want,want:n.give}).net;
+     const price=Object.entries(cost).reduce((sum,[r,v])=>sum+itemValue(a,{t:'res',r,v},b),0);
+-    if(value<=price)continue;
++    // TİCARET-AI.1 (aday): liman kalıcı yatırım; AI–AI freight sözleşmeleri doğal kampanyada yıllık yenilenir (ölçülen ardışık yenileme medyanı 4 yıl).
++    if(value*4<=price)continue;
+     plan||=aiEconomyPlan(a);if(plan.critical)return false;
+     if(!aiBuildingSustainable(a,s,p,'liman',plan)||this.resources.some(r=>A[r].net<0&&buildingOrderCost(a,p,producer[r])&&aiBuildingDelta(a,s,p,producer[r])[r]>0))continue;
+     if(!queueBuilding(a,s,p,'liman'))continue;

@@ -6,7 +6,7 @@
 // Kopyalar kendi bütçe nesnesiyle, doğrudan Commerce.route (önbelleksiz) ile çalışır. NOCLONE=1 → yalnız sayaçlar (dünya eşitliği denetimi).
 const fs=require('fs'),path=require('path'),crypto=require('crypto');const {runtime}=require(require('path').resolve(__dirname,'../../tests/helpers/runtime'));
 const [root,seed,months,out]=process.argv.slice(2);const NOCLONE=process.env.NOCLONE==='1';const h=runtime({root:path.resolve(root)});
-h.run(`resetSetupNaming();Object.assign(CFG,{seed:${+seed},size:'ulu',aiCount:9});setupGame({...CFG});G.autoSave=false;var NOCLONE=${NOCLONE};
+h.run(`resetSetupNaming();Object.assign(CFG,{seed:${+seed},size:'${process.env.CAMP_SIZE||'ulu'}',aiCount:${+(process.env.CAMP_AI||9)}});setupGame({...CFG});G.autoSave=false;var NOCLONE=${NOCLONE};
 var F={codes:{},T:{calls:0,etk:0,need:0,cool:0,noOwner:0,pairs:0,cls:{},callCls:{},geo:{},hops:{},bEtk:0,bRight:0,bBlocked:0,terms2:0,pairSet:{}},
   P:{calls:0,made:0,st:{}},short:{rm:0,months:0,byRes:{},tuk:0},signed:0,transitDeals:0,month:[]};
 var __n=AIDiagnostics.note;AIDiagnostics.note=function(code){F.codes[code]=(F.codes[code]||0)+1;return __n.apply(this,arguments);};

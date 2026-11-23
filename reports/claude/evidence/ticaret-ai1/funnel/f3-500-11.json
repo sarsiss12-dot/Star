@@ -1,0 +1,389 @@
+{
+ "calls": 1397,
+ "made": 0,
+ "core": 0,
+ "coreNeedOnly": 0,
+ "block": {},
+ "opp": {},
+ "reason": {
+  "noKnownTarget": 294,
+  "noNeedMatch": 491,
+  "allColsHavePort": 487,
+  "noRouteFromAnyCol": 75,
+  "noAffordableCol": 21,
+  "valueLePrice": 22,
+  "noTerms": 7
+ },
+ "mirror": {
+  "noKnownTarget": 207,
+  "noNeedMatch": 511,
+  "noAffordableCol": 657,
+  "noRoute": 19,
+  "value": 3
+ },
+ "rows": [
+  {
+   "d": 1860,
+   "a": 4,
+   "b": 16,
+   "s": 145,
+   "t": 306,
+   "ratio": 0.34,
+   "v": 23,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "netNotNegative"
+   ]
+  },
+  {
+   "d": 1890,
+   "a": 4,
+   "b": 16,
+   "s": 145,
+   "t": 306,
+   "ratio": 0.2,
+   "v": 14,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "netNotNegative",
+    "portQueued"
+   ]
+  },
+  {
+   "d": 1920,
+   "a": 4,
+   "b": 16,
+   "s": 145,
+   "t": 306,
+   "ratio": 0.34,
+   "v": 23,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "netNotNegative",
+    "portQueued"
+   ]
+  },
+  {
+   "d": 1950,
+   "a": 4,
+   "b": 16,
+   "s": 145,
+   "t": 306,
+   "ratio": 0.37,
+   "v": 25,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "netNotNegative",
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 1980,
+   "a": 4,
+   "b": 16,
+   "s": 145,
+   "t": 306,
+   "ratio": 0.37,
+   "v": 25,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "netNotNegative",
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 2010,
+   "a": 4,
+   "b": 16,
+   "s": 145,
+   "t": 306,
+   "ratio": 0.22,
+   "v": 15,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "netNotNegative",
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 2340,
+   "a": 10,
+   "b": 11,
+   "s": 231,
+   "t": 266,
+   "ratio": 0.07,
+   "v": 5,
+   "p": 68,
+   "hops": 3,
+   "bl": []
+  },
+  {
+   "d": 2370,
+   "a": 10,
+   "b": 11,
+   "s": 231,
+   "t": 266,
+   "ratio": 0.07,
+   "v": 5,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 2400,
+   "a": 10,
+   "b": 11,
+   "s": 231,
+   "t": 266,
+   "ratio": 0.07,
+   "v": 5,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 2430,
+   "a": 8,
+   "b": 12,
+   "s": 460,
+   "t": 206,
+   "ratio": 0.06,
+   "v": 4,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "netNotNegative",
+    "portQueued"
+   ]
+  },
+  {
+   "d": 2430,
+   "a": 10,
+   "b": 11,
+   "s": 231,
+   "t": 266,
+   "ratio": 0.08,
+   "v": 5,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 2460,
+   "a": 8,
+   "b": 12,
+   "s": 460,
+   "t": 206,
+   "ratio": 0.07,
+   "v": 4,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "netNotNegative",
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 2490,
+   "a": 8,
+   "b": 12,
+   "s": 460,
+   "t": 206,
+   "ratio": 0.07,
+   "v": 5,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "netNotNegative",
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 2520,
+   "a": 8,
+   "b": 12,
+   "s": 460,
+   "t": 206,
+   "ratio": 0.06,
+   "v": 4,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "netNotNegative",
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 2550,
+   "a": 8,
+   "b": 12,
+   "s": 179,
+   "t": 113,
+   "ratio": 0.03,
+   "v": 2,
+   "p": 68,
+   "hops": 10,
+   "bl": [
+    "netNotNegative",
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 2580,
+   "a": 8,
+   "b": 12,
+   "s": 179,
+   "t": 113,
+   "ratio": 0.03,
+   "v": 2,
+   "p": 68,
+   "hops": 10,
+   "bl": [
+    "netNotNegative",
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 2610,
+   "a": 8,
+   "b": 12,
+   "s": 179,
+   "t": 113,
+   "ratio": 0.09,
+   "v": 6,
+   "p": 68,
+   "hops": 10,
+   "bl": [
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 3360,
+   "a": 4,
+   "b": 16,
+   "s": 357,
+   "t": 306,
+   "ratio": 0.19,
+   "v": 13,
+   "p": 68,
+   "hops": 6,
+   "bl": [
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 3390,
+   "a": 4,
+   "b": 16,
+   "s": 357,
+   "t": 306,
+   "ratio": 0.2,
+   "v": 14,
+   "p": 68,
+   "hops": 6,
+   "bl": [
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 3420,
+   "a": 4,
+   "b": 16,
+   "s": 357,
+   "t": 306,
+   "ratio": 0.2,
+   "v": 14,
+   "p": 68,
+   "hops": 6,
+   "bl": [
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 3570,
+   "a": 8,
+   "b": 12,
+   "s": 267,
+   "t": 113,
+   "ratio": 0.05,
+   "v": 4,
+   "p": 68,
+   "hops": 13,
+   "bl": [
+    "portQueued"
+   ]
+  },
+  {
+   "d": 3600,
+   "a": 8,
+   "b": 12,
+   "s": 267,
+   "t": 113,
+   "ratio": 0.05,
+   "v": 4,
+   "p": 68,
+   "hops": 13,
+   "bl": [
+    "portQueued"
+   ]
+  }
+ ],
+ "rowsB": [
+  {
+   "d": 3570,
+   "a": 8,
+   "b": 7,
+   "s": 267,
+   "ratio": 0.44
+  },
+  {
+   "d": 3600,
+   "a": 16,
+   "b": 4,
+   "s": 307,
+   "ratio": 0.08
+  },
+  {
+   "d": 3600,
+   "a": 8,
+   "b": 7,
+   "s": 267,
+   "ratio": 0.44
+  }
+ ],
+ "save": "78065717c45ab8b2",
+ "rng": -532471182,
+ "oppDistinct": 0,
+ "vrQ": [
+  0.03,
+  0.08,
+  0.37
+ ]
+}
