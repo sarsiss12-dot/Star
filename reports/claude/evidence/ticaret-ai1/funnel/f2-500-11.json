@@ -1,0 +1,177 @@
+{
+ "codes": {
+  "builder:paid-replacement": 43,
+  "builder:budget-or-maintenance": 123,
+  "directive:liman": 4,
+  "trade-no-contact": 14167,
+  "invest:santral": 89,
+  "navy:energy-runway": 585,
+  "invest:liman": 115,
+  "navy:alloy-budget-reserve": 1259,
+  "invest:fabrika": 36,
+  "navy:science-covered": 1511,
+  "replacement:committed": 161,
+  "builder:no-safe-funded-target": 819,
+  "builder:no-pending-work": 870,
+  "builder:assigned": 194,
+  "invest:maden": 145,
+  "colony:wait-min": 62,
+  "builder:covered": 823,
+  "navy:resource-cost": 450,
+  "colony:wait-ene": 148,
+  "invest:ciftlik": 8,
+  "replacement:deferred": 38,
+  "directive:santral": 1,
+  "recovery:demolish": 2,
+  "navy:alloy-upkeep": 40,
+  "colony:wait-ala": 86,
+  "navy:science-renewal-cooldown": 112,
+  "invest:lab": 162,
+  "invest:dokum": 92,
+  "trade-no-safe-route": 685,
+  "invest:tersane": 53,
+  "trade-no-supply-demand": 295,
+  "navy:yard-backlog": 193,
+  "invest:kale": 4,
+  "builder:no-usable-yard": 61,
+  "recovery:no-safe-slot": 122,
+  "trade-political": 376,
+  "directive:maden": 2,
+  "trade-route-budget": 728,
+  "trade-route-not-exhausted": 43,
+  "trade-signed": 2,
+  "trade-agreed": 2,
+  "trade-existing": 22,
+  "navy:deterrence-target": 119,
+  "invest:biyom_b": 7,
+  "invest:sinaps_m": 1
+ },
+ "T": {
+  "calls": 1397,
+  "etk": 23,
+  "need": 474,
+  "cool": 0,
+  "noOwner": 245,
+  "pairs": 4936,
+  "cls": {
+   "geoNone": 4521,
+   "onePermit": 415
+  },
+  "callCls": {
+   "geoNone": 410,
+   "onePermit": 56
+  },
+  "geo": {
+   "structuralGap": 3950,
+   "knowledgeOrRisk": 155,
+   "bNoIdSource": 416
+  },
+  "hops": {
+   "4": 54,
+   "5": 91,
+   "6": 174,
+   "7": 182,
+   "8": 205,
+   "9": 3399
+  },
+  "bEtk": 0,
+  "bRight": 0,
+  "bBlocked": 0,
+  "terms2": 0,
+  "distinctPairs": {
+   "geoNone": 24,
+   "onePermit": 3
+  }
+ },
+ "P": {
+  "calls": 1397,
+  "made": 0,
+  "st": {
+   "noDeficitMatch": 1209,
+   "reach:col-none": 109,
+   "noKnownTarget": 35,
+   "reach:col-ok": 14,
+   "atWar": 1,
+   "portQueued": 28,
+   "valueLePrice": 2,
+   "reach:terms": 1
+  }
+ },
+ "short": {
+  "rm": 16,
+  "months": 120,
+  "byRes": {
+   "min": 12,
+   "ala": 2,
+   "ene": 2
+  },
+  "tuk": 0
+ },
+ "signed": 2,
+ "transitDeals": 0,
+ "month": [
+  {
+   "m": 12,
+   "contracts": 0,
+   "ports": 14,
+   "short": 10
+  },
+  {
+   "m": 24,
+   "contracts": 0,
+   "ports": 27,
+   "short": 12
+  },
+  {
+   "m": 36,
+   "contracts": 0,
+   "ports": 32,
+   "short": 14
+  },
+  {
+   "m": 48,
+   "contracts": 0,
+   "ports": 33,
+   "short": 14
+  },
+  {
+   "m": 60,
+   "contracts": 0,
+   "ports": 36,
+   "short": 14
+  },
+  {
+   "m": 72,
+   "contracts": 1,
+   "ports": 48,
+   "short": 14
+  },
+  {
+   "m": 84,
+   "contracts": 1,
+   "ports": 51,
+   "short": 14
+  },
+  {
+   "m": 96,
+   "contracts": 0,
+   "ports": 54,
+   "short": 14
+  },
+  {
+   "m": 108,
+   "contracts": 0,
+   "ports": 58,
+   "short": 16
+  },
+  {
+   "m": 120,
+   "contracts": 0,
+   "ports": 65,
+   "short": 16
+  }
+ ],
+ "sec": 121,
+ "save": "78065717c45ab8b2",
+ "rng": -532471182
+}

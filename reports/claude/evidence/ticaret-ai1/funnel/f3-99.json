@@ -1,0 +1,44 @@
+{
+ "calls": 1417,
+ "made": 0,
+ "core": 0,
+ "coreNeedOnly": 0,
+ "block": {},
+ "opp": {},
+ "reason": {
+  "noKnownTarget": 399,
+  "noNeedMatch": 426,
+  "allColsHavePort": 542,
+  "noAffordableCol": 44,
+  "noRouteFromAnyCol": 5,
+  "valueLePrice": 1
+ },
+ "mirror": {
+  "noNeedMatch": 307,
+  "noAffordableCol": 737,
+  "noKnownTarget": 362,
+  "noRoute": 11
+ },
+ "rows": [
+  {
+   "d": 2250,
+   "a": 5,
+   "b": 8,
+   "s": 85,
+   "t": 67,
+   "ratio": 0.02,
+   "v": 2,
+   "p": 109,
+   "hops": 3,
+   "bl": []
+  }
+ ],
+ "save": "ff365c4eaaea56a3",
+ "rng": 984946345,
+ "oppDistinct": 0,
+ "vrQ": [
+  0.02,
+  0.02,
+  0.02
+ ]
+}

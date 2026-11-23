@@ -71,3 +71,9 @@ Ortak ders: yerel bir göstergede kazanç (tek seed, tek kaynak, tek devlet) gen
 - **AI Etki biriktirme** (kuruluş ortağı varken 12 ay casusluk / istihbarat paktı harcamasını ertelemek): 11/23/404'te ikinci blok çıkmadı, 404'teki ikinci blok kayboldu (kaotik ayrışma, fayda yok). Kod geri alındı.
 - **Yağmacı tercihli AI'ın genel kuruluşa düşmesi**: `beta_fed_ai0_raider_test`'in korunan kuralını (ittifaksız / ekonomisi kritik Yağmacı AI kuramaz) bozuyordu; geri alındı, Yağmacı yolu aynen.
 - Ölçüm betikleri: `reports/claude/evidence/beta-rival-blocs0/` (`blocs.cjs`, `campaign.sh`).
+
+## TİCARET-AI.1 — liman yatırımı ufku ve ayrı transit rota payı (REDDEDİLDİ, 23 Kasım 2026)
+
+- `research/ticaret-ai1/ADAY-LIMAN-UFUK4-rejected.patch`: `aiPortInvestment` değer > bedel denetiminde 12 aylık sözleşme değeri ×4. Gerekçe: AI–AI freight sözleşmeleri doğal kampanyada yıllık yenileniyor (ardışık yenileme medyanı 4 yıl). Ama 100 sistem / 9 AI üç tohumda ve 500 / 16 AI tohum 11'de **sıfır** yatırım tetiklendi. Kontrollü D1'de bile ufuk bedeli aşınca aynı kolonide maden (+10 mineral/ay) tercih edildi. Fayda yok.
+- `research/ticaret-ai1/ADAY-TRANSIT-BUTCE-rejected.patch`: ortak 96 rota bütçesi bitince ayda 8 rotalık ayrı transit payı. 500 sistemde erişilen 8 çiftin 8'i `aiTerms`'te elendi (kârlı karşılıklı takas yok); 100 sistemde sonuç iki yönlü transit adayıyla bayt-bayt aynı. Darboğaz bütçe değil ekonomi.
+- Uygulanmayan, BEKLETİLEN: `research/ticaret-ai1/ADAY-IKI-YONLU-TRANSIT-ATOMIK-BEKLETILDI.patch`. TİCARET-AI.0 yamasının işlem sarmalı (dealTxBegin / dealTxRollback) sürümü. Kontrollü vakada doğru ve atomik; doğal kampanyada fayda plasebo bandı içinde.

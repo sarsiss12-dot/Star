@@ -1,0 +1,127 @@
+{
+ "calls": 357,
+ "made": 0,
+ "core": 0,
+ "coreNeedOnly": 0,
+ "block": {},
+ "opp": {},
+ "reason": {
+  "noKnownTarget": 81,
+  "noNeedMatch": 84,
+  "noAffordableCol": 33,
+  "noRouteFromAnyCol": 21,
+  "allColsHavePort": 133,
+  "valueLePrice": 5
+ },
+ "mirror": {
+  "noKnownTarget": 78,
+  "noAffordableCol": 116,
+  "noNeedMatch": 138,
+  "noRoute": 22,
+  "value": 3
+ },
+ "rows": [
+  {
+   "d": 810,
+   "a": 6,
+   "b": 8,
+   "s": 85,
+   "t": 50,
+   "ratio": 0.27,
+   "v": 30,
+   "p": 109,
+   "hops": 3,
+   "bl": []
+  },
+  {
+   "d": 870,
+   "a": 6,
+   "b": 8,
+   "s": 85,
+   "t": 50,
+   "ratio": 0.44,
+   "v": 30,
+   "p": 68,
+   "hops": 3,
+   "bl": [
+    "portQueued"
+   ]
+  },
+  {
+   "d": 930,
+   "a": 6,
+   "b": 8,
+   "s": 85,
+   "t": 50,
+   "ratio": 0.28,
+   "v": 31,
+   "p": 109,
+   "hops": 3,
+   "bl": [
+    "portQueued",
+    "bestColBusy"
+   ]
+  },
+  {
+   "d": 3570,
+   "a": 6,
+   "b": 8,
+   "s": 58,
+   "t": 62,
+   "ratio": 0.32,
+   "v": 22,
+   "p": 68,
+   "hops": 2,
+   "bl": [
+    "netNotNegative",
+    "portQueued"
+   ]
+  },
+  {
+   "d": 3600,
+   "a": 6,
+   "b": 8,
+   "s": 58,
+   "t": 62,
+   "ratio": 0.49,
+   "v": 34,
+   "p": 68,
+   "hops": 2,
+   "bl": [
+    "netNotNegative",
+    "portQueued"
+   ]
+  }
+ ],
+ "rowsB": [
+  {
+   "d": 1140,
+   "a": 8,
+   "b": 2,
+   "s": 15,
+   "ratio": 0.06
+  },
+  {
+   "d": 1590,
+   "a": 9,
+   "b": 5,
+   "s": 90,
+   "ratio": 0.48
+  },
+  {
+   "d": 3540,
+   "a": 8,
+   "b": 4,
+   "s": 94,
+   "ratio": 0.13
+  }
+ ],
+ "save": "bd8dfa43af60c165",
+ "rng": 1957387400,
+ "oppDistinct": 0,
+ "vrQ": [
+  0.27,
+  0.32,
+  0.49
+ ]
+}
