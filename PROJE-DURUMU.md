@@ -2,6 +2,10 @@
 
 Son güncelleme: 2026-11-23. Depo `sarsiss12-dot/Star`.
 
+## Ticaret ekonomik araştırması (sürüm yok) — TİCARET-TESLİM-DEĞERİ.0
+
+`claude/stars-ticaret-teslim-degeri0` (p52 üstünde). p52 perf gerilemesi yok (ABBA Node, medyan ±%0,2, A/A içinde). Gölge değerleme: 3 tohum × 240 ay + 500 × 120 ayda tek gerçek kaçırılan zamanında ithalat (rota bütçesi); kıtlıkların kökü yapı (krizdeki devletin limanı / teması yok, ortak ihraç edemiyor, savaş). `aiBalance` sözleşmeli ithalatı saymıyor, değer varış zamanını içermiyor; düzeltme adayı faydasız → reddedildi. [Sonuç](reports/claude/TICARET-TESLIM-DEGERI0-SONUC.md).
+
 ## Güncel geliştirme adayı — p52 (TİCARET-GEÇERLİ-HAT.0)
 
 `claude/stars-ticaret-gecerli-hat0` (p51 üstünde, taslak PR). Oyun 96h10p52 / PWA stars-v96h10p52 / MP.8.9b51; Save8 v8, paket 4, protokol 1. ZIP `releases/stars-faz96h10p52.zip` (SHA-256 `2b9f7068c2ed546cf11de3f2df2177631697f162e4d0c2b9ee0f427e6bce7b96`, CRC32 `09AE6E5D`). AI en yakın liman çiftinin teklifi dönüş rotası / kapasite yüzünden düşerse aynı taramadaki en çok 3 alternatif çifti `aiTerms` + `dealQuote` ile dener (Codex kök neden vakası). Tam Node 247 / 6576 / 279 (yeni FAIL yok), MP8 TR/TL/TA/TB/SG/J/X PASS, SP 9/0. Doğal kampanya p51 ile bayt-bayt aynı. p95 zaman ölçümü A/B +%12,98 / +%9,44 / −%1,46, A/A tek koşular ±%13; deterministik iş aynı. [Sonuç](reports/claude/TICARET-GECERLI-HAT0-SONUC.md).

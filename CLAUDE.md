@@ -15,7 +15,13 @@ Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strat
 - `res` maddesi p49 gibi anlık (PR #70 her `res`i tek seferlik kargoya çeviriyordu → 40 paket kötüleşmişti). Fiziksel tek seferlik kargo açık `{t:'cargo',r,v}`; `freightPlan` once-yük yalnız cargo; masada `dealCargoMode` (Anlık Kaynak Takası / ▣ Fiziksel Kargo ile Gönder). MP: ITEM_T + dipItems cargo, `gift` p49 gibi anlık; misafir `dealQuote` sarmalayıcısı yalnız Commerce rota gerekçesini host'a bırakır (host dipGate gerçek dünyada denetler).
 - Test: `node tests/ticaret_ag1_test.js` (9), `node tests/ticaret_agi0_test.cjs` (28; run-all'a girmez, .cjs), `MP8_SCEN=TA node tests/browser-mp8.cjs` (6). TL 2/3 PR #70'te de. Perf: `node research/ticaret-agi0/ay-maliyeti.cjs <p49 kök> <kayıt dizini> <çıkış>` (Chromium).
 
-## Son teslim — TİCARET-GEÇERLİ-HAT.0 (p52 / MP.8.9b51, 23 Kasım 2026)
+## Son teslim — TİCARET-TESLİM-DEĞERİ.0 (sürüm yok, p52 korunur; 23 Kasım 2026)
+
+- Ayrıntı: `reports/claude/TICARET-TESLIM-DEGERI0-SONUC.md` (17 bölüm + 20 soru), devir `TICARET-TESLIM-DEGERI0-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-teslim-degeri0/`. Dal `claude/stars-ticaret-teslim-degeri0` (taban p52 `2399075`); çalışma zamanı değişmedi.
+- Perf: `research/ticaret-teslim-degeri0/perf-abba.cjs <kökA> <kökB> <kayıt...>` (aynı Node süreci, ABBA, gerçek saat, işlev süresi, örnek başına Save8 eşitliği; N=örnek). Chromium `ay-maliyeti.cjs` p95'i tek başına kapı kararına uygun değil (A/A ±%13). `alt-yuk.cjs` alternatif liman yolu çalışırken karar maliyeti.
+- Gölge: `golge.cjs` (salt okunur; NOCLONE=1 eşitlik; sözleşmeli ithalat net'e eklenir), `cift-iz.cjs`, `ihtiyac-prob.cjs`. Bulgular: aiBalance `need` `incoming`'i yok sayar; freight değeri sefer sayısıyla doğrusal, varış zamanı yok; kriz devletlerinde çoğunlukla kendi Ticaret Limanı / temas yok.
+
+## Önceki teslim — TİCARET-GEÇERLİ-HAT.0 (p52 / MP.8.9b51, 23 Kasım 2026)
 
 - Ayrıntı: `reports/claude/TICARET-GECERLI-HAT0-SONUC.md`, kanıt `reports/claude/evidence/ticaret-gecerli-hat0/`. Dal `claude/stars-ticaret-gecerli-hat0` (taban p51 `1b95efb`). Codex araştırması `research/ticaret-kok-neden0/` + `reports/codex/STARS-TICARET-KOK-NEDEN0.md` bu dala alındı. ZIP `releases/stars-faz96h10p52.zip`, kayıt `RELEASE-TICARET-GECERLI-HAT0.json`; mp-core p52 paket yükleyicisi p41–p51 kabul eder.
 - `commerce.js`: `aiPorts` aynı taramadaki ileri yönü açık diğer çiftleri `best.alts` (yeni rota araması yok); `aiAltPorts` (aday başı 1 bütçe birimi, en çok 3) `aiTerms` / `aiPlayerTerms` + `dealQuote`; `aiOpportunityTick` terim yokken (siyasi değilse) ve `dealQuote` reddinde dener. Test `node tests/ticaret_gecerli_hat0_test.js` (13; p51 9/4, `STARS_ROOT`).
