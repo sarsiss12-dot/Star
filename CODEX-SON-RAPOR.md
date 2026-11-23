@@ -1,6 +1,8 @@
 # Son Codex raporu
 
-[TİCARET-AI.0 (Claude, sürüm yok, p50 korunur) · MP ara liman / izin kaybı / fetih Chromium 6/6, ticaret AI karar hunisi ve kök neden, iki yönlü transit adayı bekletildi (fayda plasebo bandı içinde)](reports/claude/TICARET-AI0-SONUC.md)
+[TİCARET-AI.1 (Claude, sürüm yok, p50 korunur) · MP kargolu kayıt → yeni oda Chromium 6/6, stratejik liman fırsat alanı ölçüldü (fiilen boş), atomik iki yönlü transit yaması bekletildi, iki aday reddedildi](reports/claude/TICARET-AI1-SONUC.md)
+
+Önceki: [TİCARET-AI.0 (Claude, sürüm yok, p50 korunur) · MP ara liman / izin kaybı / fetih Chromium 6/6, ticaret AI karar hunisi ve kök neden, iki yönlü transit adayı bekletildi (fayda plasebo bandı içinde)](reports/claude/TICARET-AI0-SONUC.md)
 
 Önceki: [TİCARET-AĞ.2 (Claude, p50) · Misafir gelen kutusu KABUL düzeltmesi (TL 5/5), AI–AI ticaret sözleşmesinde daraltılmış işlem, perf kapısı geçti, p50 yayın adayı](reports/claude/TICARET-AG2-SONUC.md)
 

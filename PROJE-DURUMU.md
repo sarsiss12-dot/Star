@@ -2,6 +2,10 @@
 
 Son güncelleme: 2026-11-23. Depo `sarsiss12-dot/Star`.
 
+## Ticaret AI araştırması (sürüm yok) — TİCARET-AI.1
+
+`claude/stars-ticaret-ai1` (ai0 üstünde, taslak PR). Çalışma zamanı p50 ile aynı; tam Node 245 / 6551 / 279 (p50 ile aynı). MP `MP8_SCEN=TR` 6/6 (yolda kargo → kayıt → yeni oda → misafirler döner → tek teslim); TL / TA / TB / SG / J / X PASS. Stratejik liman yatırımının fırsat alanı doğal kampanyada fiilen boş (AI kolonileri zaten limanlı, boşluklar sahipsiz / yabancı sistemlerde, 1 yıllık sözleşme değeri liman bedelinin %2–%49'u; mevcut kod iç üretimi doğru tercih ediyor). Atomik iki yönlü transit yaması bekletildi; liman ufku ve ayrı transit bütçesi adayları reddedildi. [Sonuç](reports/claude/TICARET-AI1-SONUC.md), [devir](reports/claude/TICARET-AI1-DEVIR.md).
+
 ## Ticaret AI araştırması (sürüm yok) — TİCARET-AI.0
 
 `claude/stars-ticaret-ai0` (p50 üstünde, taslak PR). Çalışma zamanı p50 ile aynı (verify-release 96h10p50). MP Chromium `MP8_SCEN=TB` 6/6 (ara liman geçişi, izin kaybı, ara liman fethi). Doğal kampanyada AI'nın transit izni istememesinin kökü: aday çiftlerin %78–%85'i yapısal liman boşluğu (hiçbir izin açamaz), %10–%15 bilgi; kusur izinsiz geri rota ön koşulu + rota bütçesi. İki yönlü izin adayı kontrollü vakada doğru, doğal fayda plasebo bandı içinde → yama olarak bekletildi, p51 yok. [Sonuç](reports/claude/TICARET-AI0-SONUC.md), [devir](reports/claude/TICARET-AI0-DEVIR.md).

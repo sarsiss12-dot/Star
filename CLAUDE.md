@@ -15,7 +15,14 @@ Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strat
 - `res` maddesi p49 gibi anlık (PR #70 her `res`i tek seferlik kargoya çeviriyordu → 40 paket kötüleşmişti). Fiziksel tek seferlik kargo açık `{t:'cargo',r,v}`; `freightPlan` once-yük yalnız cargo; masada `dealCargoMode` (Anlık Kaynak Takası / ▣ Fiziksel Kargo ile Gönder). MP: ITEM_T + dipItems cargo, `gift` p49 gibi anlık; misafir `dealQuote` sarmalayıcısı yalnız Commerce rota gerekçesini host'a bırakır (host dipGate gerçek dünyada denetler).
 - Test: `node tests/ticaret_ag1_test.js` (9), `node tests/ticaret_agi0_test.cjs` (28; run-all'a girmez, .cjs), `MP8_SCEN=TA node tests/browser-mp8.cjs` (6). TL 2/3 PR #70'te de. Perf: `node research/ticaret-agi0/ay-maliyeti.cjs <p49 kök> <kayıt dizini> <çıkış>` (Chromium).
 
-## Son teslim — TİCARET-AI.0 (sürüm yok, p50 korunur; 23 Kasım 2026)
+## Son teslim — TİCARET-AI.1 (sürüm yok, p50 korunur; 23 Kasım 2026)
+
+- Ayrıntı: `reports/claude/TICARET-AI1-SONUC.md` (A–O + 15 soru), devir `TICARET-AI1-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-ai1/`. Dal `claude/stars-ticaret-ai1` (taban ai0 `d438d6e`). Çalışma zamanı p50; tam Node 245/6551/279 (p50 ile aynı).
+- `MP8_SCEN=TR` (`tests/helpers/ticaret-ai1-mp.cjs`) 6/6: yolda kargo → `MP1Host.mp4.saveNow` → bağlamlar kapanır → relay yeniden → yeni oda DEVAM ET (`G.commerce` JSON birebir) → B ana menü + C bağlantı → tek teslim. Chromium testleri `STARS_CHROMIUM_PATH=/opt/pw-browsers/chromium` ister (yoksa başlamadan FAIL).
+- `research/ticaret-ai1/funnel3.cjs`: aiPortInvestment ekonomik çekirdeği kapılardan bağımsız (salt gözlem). Kök: kolonilerin %37–48'i zaten limanlı sistemde, boşluklar sahipsiz/yabancı sistemlerde; a'nın kendi ara limanı yeni uç limana denk (stok devlet geneli). Mevcut kod L-D1'de maden (+10/ay) tercih eder.
+- Yamalar: `ADAY-IKI-YONLU-TRANSIT-ATOMIK-BEKLETILDI.patch` (v2; `dealTxBegin`/`dealTxRollback`, K7 kısmi hata), `ADAY-LIMAN-UFUK4-rejected.patch`, `ADAY-TRANSIT-BUTCE-rejected.patch` (500 sistemde erişilen 8 çift `aiTerms`'te elenir). Ayrıntı `AI-RED-KARARLARI.md`. 500 sistem için `CAMP_SIZE=s500 CAMP_AI=16`.
+
+## Önceki teslim — TİCARET-AI.0 (sürüm yok, p50 korunur; 23 Kasım 2026)
 
 - Ayrıntı: `reports/claude/TICARET-AI0-SONUC.md`, devir `TICARET-AI0-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-ai0/`. Dal `claude/stars-ticaret-ai0` (taban p50 `claude/stars-ticaret-ag2` @ `d1784ff`, PR #72). Çalışma zamanı 19 dosya p50 ile aynı; p51 YOK (fayda kapısı geçmedi).
 - `MP8_SCEN=TB node tests/browser-mp8.cjs` (`tests/helpers/ticaret-ai0-mp.cjs`) 6/6: yalıtılmış zincir h–n1–n2–[C n3]–n4–n5–[B n6], izin → n3 üzerinden tek teslim, yolda izin kaybı (teslim yok), ara liman fethi (rota yok, teklif ret). `identifiedPort` görünürlük ister → gözcü + `updateVision()`.
