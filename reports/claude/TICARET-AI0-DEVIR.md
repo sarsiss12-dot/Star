@@ -5,7 +5,7 @@ Güncelleme: 23 Kasım 2026
 ## Dallar
 | Dal | Durum |
 |---|---|
-| `claude/stars-ticaret-ai0` | p50 çalışma zamanı (değişmedi) + MP TB testi + ticaret AI araştırması; taslak PR, sürüm yok |
+| `claude/stars-ticaret-ai0` | p50 çalışma zamanı (değişmedi) + MP TB testi + ticaret AI araştırması; taslak PR #73, sürüm yok |
 | `claude/stars-ticaret-ag2` | p50 / MP.8.9b49 — otomatik testlerden geçmiş en güvenli sürüm (PR #72) |
 | `claude/stars-saha-guvence1` | p49, ticaretsiz geri dönüş (PR #69) |
 

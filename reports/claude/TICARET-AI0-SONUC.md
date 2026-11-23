@@ -19,7 +19,7 @@ Kullanıcı test yapamıyordu. Bütün kabuller otomatiktir. Fiziksel Android, g
 | | |
 |---|---|
 | Başlangıç HEAD | `d1784ffcbe45901674076e682658e9f5dec8f8ae` (p50, `claude/stars-ticaret-ag2`, PR #72) |
-| Bitiş HEAD | bu raporun commit'i, `claude/stars-ticaret-ai0` |
+| Bitiş HEAD | bu raporun commit'i, `claude/stars-ticaret-ai0`, taslak PR #73 |
 | Commit'ler | `d27f044` Faz 0 (MP TB) · `4241d6f` Faz A (huni) · `1904757` Faz B–F (aday yaması, kontrollü vakalar, kampanya) · rapor commit'i |
 | Kontrol kökü | `git worktree` @ `d1784ff`, sabit kopya, bağ değil |
 | Aday kökü | `git archive HEAD` + `git apply research/ticaret-ai0/ADAY-IKI-YONLU-TRANSIT-BEKLETILDI.patch` |
