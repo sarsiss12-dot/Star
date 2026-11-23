@@ -2,7 +2,11 @@
 
 Son güncelleme: 2026-11-23. Depo `sarsiss12-dot/Star`.
 
-## Güncel geliştirme adayı — p51 (TİCARET-TAMAMLAMA.0)
+## Güncel geliştirme adayı — p52 (TİCARET-GEÇERLİ-HAT.0)
+
+`claude/stars-ticaret-gecerli-hat0` (p51 üstünde, taslak PR). Oyun 96h10p52 / PWA stars-v96h10p52 / MP.8.9b51; Save8 v8, paket 4, protokol 1. ZIP `releases/stars-faz96h10p52.zip` (SHA-256 `2b9f7068c2ed546cf11de3f2df2177631697f162e4d0c2b9ee0f427e6bce7b96`, CRC32 `09AE6E5D`). AI en yakın liman çiftinin teklifi dönüş rotası / kapasite yüzünden düşerse aynı taramadaki en çok 3 alternatif çifti `aiTerms` + `dealQuote` ile dener (Codex kök neden vakası). Tam Node 247 / 6576 / 279 (yeni FAIL yok), MP8 TR/TL/TA/TB/SG/J/X PASS, SP 9/0. Doğal kampanya p51 ile bayt-bayt aynı. p95 zaman ölçümü A/B +%12,98 / +%9,44 / −%1,46, A/A tek koşular ±%13; deterministik iş aynı. [Sonuç](reports/claude/TICARET-GECERLI-HAT0-SONUC.md).
+
+## Önceki geliştirme adayı — p51 (TİCARET-TAMAMLAMA.0)
 
 `claude/stars-ticaret-tamamlama0` (ai1 üstünde, taslak PR). Oyun 96h10p51 / PWA stars-v96h10p51 / MP.8.9b50; Save8 v8, paket 4, protokol 1. ZIP `releases/stars-faz96h10p51.zip` (SHA-256 `9c513c0b908cd8b2c877d31c6acbfad980eafd7ad7fca17b88c1f4b2a74bc434`, CRC32 `D82CE4BE`). Atomik iki yönlü Transit İzni (AI–AI, kısmi hatada geri alma), klavyesiz ticaret miktarı. Tam Node 246 / 6563 / 279 (yeni FAIL yok), MP8 TR/TL/TA/TB/SG/J/X PASS, SP dokunmatik 9/0. 500 sistem p95 +%0,20 / −%1,37; 100 sistem +%6,08 A/A gürültü bandında (−%6,12), deterministik iş eşit. Fiziksel Android / Render NOT RUN. [Sonuç](reports/claude/TICARET-TAMAMLAMA0-SONUC.md), [devir](reports/claude/TICARET-TAMAMLAMA0-DEVIR.md).
 

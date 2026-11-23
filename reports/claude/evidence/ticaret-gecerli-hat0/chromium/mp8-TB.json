@@ -1,0 +1,318 @@
+{
+ "results": [
+  {
+   "name": "TB0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 8248
+  },
+  {
+   "name": "B0 fikstür: h—n1—n2—[C n3]—n4—n5—[B n6] zinciri; izin yokken B → host rotası yok",
+   "status": "PASS",
+   "ms": 862
+  },
+  {
+   "name": "B1 C gerçek masadan B'ye Transit İzni verir, B gelen kutusundan KABUL → izin + rota",
+   "status": "PASS",
+   "ms": 1363
+  },
+  {
+   "name": "B2 B gerçek masadan ▣ kargo → host KABUL; konvoy C'nin ara limanından (n3) geçer, tek teslim, yolda B aynası konumu host ile aynı",
+   "status": "PASS",
+   "ms": 4063
+  },
+  {
+   "name": "B3 ikinci kargo yolda iken C izni gerçek masadan geri alır → n3'ten aktarma yok, teslim yok, kimseye yazılmaz",
+   "status": "PASS",
+   "ms": 2513
+  },
+  {
+   "name": "B4 izin geri verilir, n3 gerçek sahiplik değişimiyle AI X'e geçer → eski izin X adına sayılmaz; teslim yok, X / C yük almaz",
+   "status": "PASS",
+   "ms": 21848
+  }
+ ],
+ "metrics": {
+  "scen": "TB",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 284,
+    "buildMs": 312,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 375,
+    "buildMs": 425,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 2.7,
+      "p95": 3.7,
+      "max": 3.7
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 16,
+     "dom": 728,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 25.7,
+       "p95": 25.7,
+       "max": 25.7
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.5,
+       "p95": 1.5,
+       "max": 1.5
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 14,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 26,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 34.2,
+       "p95": 34.2,
+       "max": 34.2
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.6,
+       "p95": 2.6,
+       "max": 2.6
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 14,
+      "dom": 729,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 9109,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "ai0": {
+   "fx": {
+    "h": 30,
+    "n3": 25,
+    "n6": 28,
+    "chain": [
+     30,
+     6,
+     11,
+     25,
+     15,
+     40,
+     28
+    ]
+   },
+   "b0": false,
+   "b1": {
+    "offer": 1,
+    "route": true
+   },
+   "b2": {
+    "cid": 1,
+    "v": {
+     "id": 1,
+     "status": "delivered",
+     "at": 30,
+     "step": 6,
+     "route": [
+      28,
+      40,
+      15,
+      25,
+      11,
+      6,
+      30
+     ],
+     "loaded": 80
+    },
+    "mid": {
+     "host": {
+      "at": 40,
+      "step": 1
+     },
+     "guest": {
+      "at": 40,
+      "step": 1
+     }
+    },
+    "visited": [
+     28,
+     40,
+     15,
+     25,
+     11,
+     6,
+     30
+    ],
+    "s0": {
+     "h": 3000,
+     "b": 3000,
+     "c": 500
+    },
+    "s1": {
+     "h": 3080,
+     "b": 2920
+    },
+    "s2": {
+     "h": 3080
+    }
+   },
+   "b3": {
+    "cid": 2,
+    "v0": {
+     "id": 2,
+     "status": "preparing",
+     "at": 28,
+     "step": 0,
+     "route": [
+      28,
+      40,
+      15,
+      25,
+      11,
+      6,
+      30
+     ],
+     "loaded": 50
+    },
+    "v1": {
+     "id": 2,
+     "status": "destroyed",
+     "at": 28,
+     "step": 0,
+     "route": [
+      28,
+      40,
+      15,
+      25,
+      11,
+      6,
+      30
+     ],
+     "loaded": 50
+    },
+    "s0": {
+     "h": 3080,
+     "c": 3000
+    },
+    "s1": {
+     "h": 3080,
+     "c": 3000
+    }
+   },
+   "b4": {
+    "st": {
+     "x": 3,
+     "owner": 3,
+     "colOwner": 3,
+     "xMin": 500,
+     "cMin": 3000,
+     "route": false
+    },
+    "cid": "ret:page.waitForFunction: Timeout 20000ms exceeded.",
+    "v": null,
+    "s1": {
+     "xMin": 500,
+     "cMin": 3000,
+     "h": 3080
+    },
+    "offerCmd": "ok"
+   }
+  },
+  "errors": []
+ }
+}

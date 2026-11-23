@@ -15,7 +15,13 @@ Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strat
 - `res` maddesi p49 gibi anlık (PR #70 her `res`i tek seferlik kargoya çeviriyordu → 40 paket kötüleşmişti). Fiziksel tek seferlik kargo açık `{t:'cargo',r,v}`; `freightPlan` once-yük yalnız cargo; masada `dealCargoMode` (Anlık Kaynak Takası / ▣ Fiziksel Kargo ile Gönder). MP: ITEM_T + dipItems cargo, `gift` p49 gibi anlık; misafir `dealQuote` sarmalayıcısı yalnız Commerce rota gerekçesini host'a bırakır (host dipGate gerçek dünyada denetler).
 - Test: `node tests/ticaret_ag1_test.js` (9), `node tests/ticaret_agi0_test.cjs` (28; run-all'a girmez, .cjs), `MP8_SCEN=TA node tests/browser-mp8.cjs` (6). TL 2/3 PR #70'te de. Perf: `node research/ticaret-agi0/ay-maliyeti.cjs <p49 kök> <kayıt dizini> <çıkış>` (Chromium).
 
-## Son teslim — TİCARET-TAMAMLAMA.0 (p51 / MP.8.9b50, 23 Kasım 2026)
+## Son teslim — TİCARET-GEÇERLİ-HAT.0 (p52 / MP.8.9b51, 23 Kasım 2026)
+
+- Ayrıntı: `reports/claude/TICARET-GECERLI-HAT0-SONUC.md`, kanıt `reports/claude/evidence/ticaret-gecerli-hat0/`. Dal `claude/stars-ticaret-gecerli-hat0` (taban p51 `1b95efb`). Codex araştırması `research/ticaret-kok-neden0/` + `reports/codex/STARS-TICARET-KOK-NEDEN0.md` bu dala alındı. ZIP `releases/stars-faz96h10p52.zip`, kayıt `RELEASE-TICARET-GECERLI-HAT0.json`; mp-core p52 paket yükleyicisi p41–p51 kabul eder.
+- `commerce.js`: `aiPorts` aynı taramadaki ileri yönü açık diğer çiftleri `best.alts` (yeni rota araması yok); `aiAltPorts` (aday başı 1 bütçe birimi, en çok 3) `aiTerms` / `aiPlayerTerms` + `dealQuote`; `aiOpportunityTick` terim yokken (siyasi değilse) ve `dealQuote` reddinde dener. Test `node tests/ticaret_gecerli_hat0_test.js` (13; p51 9/4, `STARS_ROOT`).
+- Perf aracı tek koşu ±%13 (A/A); `research/ticaret-tamamlama0/ay-cagri-sayimi.cjs` (aiAltPorts / aiTerms / dealQuote sayımı) ve `ay-is-sayimi.cjs` (rota / Save8) deterministik iş eşitliği için. `camp.cjs` alternatif sayacı `alt`.
+
+## Önceki teslim — TİCARET-TAMAMLAMA.0 (p51 / MP.8.9b50, 23 Kasım 2026)
 
 - Ayrıntı: `reports/claude/TICARET-TAMAMLAMA0-SONUC.md` (A–K + 27 soru), devir `TICARET-TAMAMLAMA0-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-tamamlama0/`. Dal `claude/stars-ticaret-tamamlama0` (taban ai1 `edc1601`; çalışma zamanı tabanı p50). ZIP `releases/stars-faz96h10p51.zip`, kayıt `RELEASE-TICARET-TAMAMLAMA0.json`; mp-core p51 paket yükleyicisi p41–p50 kabul eder.
 - `commerce.js aiTransitRequest`: çiftler yakından uzağa, tüm bilinen sahip izinleriyle ileri rota ön elemesi, geri yön izinsizse b de aynı AI sahipten izin (`aiDealWould` önizlemesi), iki izin `dealTxBegin`/`dealTxRollback` tek işlem; insan / misafir sahibe iki yönlü istek yok. Test `node tests/ticaret_tamamlama0_transit_test.js` (12; p50 9/3, `STARS_ROOT`).
