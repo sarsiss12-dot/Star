@@ -1,0 +1,10 @@
+✓ A1 limansız düz kaynak takası anlık; sözleşme / konvoy yok; ikinci yürütme ikinci ödeme üretmez
+✓ A2 ittifak + kaynak ve cepheye katılım + kaynak: kaynak anlık, liman gerekmez
+✓ A3 MP: düz kaynak maddesi dipItems ile anlık kalır; cargo maddesi doğrulamadan geçer, fazla anahtar reddedilir
+✓ A4 hediye (giftDo) p49 gibi anlık + ilişki artışı; sözleşme açılmaz
+✓ K1 fiziksel kargo: imzada alıcıya yazılmaz, yüklemede verenden düşer, varışta tek teslim; yüklenen = teslim + kayıp + yolda
+✓ K2 karma teklif (ittifak + kargo) rota/liman yoksa bütünüyle reddedilir: ittifak kurulmaz, dünya aynı
+✓ K3 aynı kargo teklifi ikinci kez yürütülemez; dealQuote (teklif hazırlığı) dünyayı değiştirmez
+✓ K4 Save8: yoldaki kargo ve kayıt → yükleme sonrası aynı; yükleme ikinci teslim üretmez
+✓ M1 MP host otoritesi: misafirin rotasız fiziksel kargo teklifi host'ta gerekçeyle reddedilir, bekleyen teklif oluşmaz; aynı düz kaynak teklifi kabul edilir
+GEÇEN: 9 KALAN: 0
