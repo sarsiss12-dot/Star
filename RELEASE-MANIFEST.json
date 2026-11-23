@@ -1,11 +1,11 @@
 {
-  "phase": "TICARET-AG.2",
-  "build": "96h10p50",
+  "phase": "TICARET-TAMAMLAMA.0",
+  "build": "96h10p51",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p50",
-  "parent_commit": "e4350e5740891f5b39299500d3bd5566e3f46dae",
-  "parent_zip_sha256": "25491d763360688340fc9aaf01e670c15d75f151bcf327366d025a09cdc8946c",
+  "pwa_cache": "stars-v96h10p51",
+  "parent_commit": "d1784ffcbe45901674076e682658e9f5dec8f8ae",
+  "parent_zip_sha256": "26a6b5e3bbf577c37fd9433db747323adf005d893622486ac6514d41eb3988f8",
   "file_count": 19,
   "files": {
     "ai.js": "218eeaa65c00e4d70f2b5b6186df0559cdbda06a6360199c5e97484cc673d92d",
@@ -13,20 +13,20 @@
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "08971a0bd1b67f6d3dab1a24a0c3dc9d0bcb045c00c29c01735be9fd083be2d6",
     "commerce-ui.js": "4edbae3d11222ac4ad2c6a5d3d45bc77c01cb6dd1f370beb81cf657fb6eb3ae1",
-    "commerce.js": "06033bacaa1c4181a3e3e41a0d1380292022f6c178e1f1733fb0da013be61c35",
+    "commerce.js": "cc90d6f0c41d517510e77ef0c83bbf34b4ca831b58e40f432ee3074568e0fabb",
     "construction.js": "920d6122c3d3e65ef2650c94a9a5a804c3d67b65411627e23184f0e1d5d60e08",
     "diplomacy.js": "a59c3fd823ebe956789c8337045d408fc2e487de11a9b1ca133c267b9a592846",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
     "economy-ui.js": "68025b1bb388188435a51cca2319e92e7eb9ec6517b4e3c8437f335e2916763f",
     "economy.js": "ca9b6429fdce59e88559b84a7985cb7a610f846f3db7faca6c809c85fab66c76",
     "inbox.js": "9d1f0688aac18d1b9db00fad41ef66e30080467783dd69cd52160e5d19ee51b7",
-    "index.html": "f80082cc6e9da5f7674408d17b434c79eb727075756376ed6ecbc7c6fa1de559",
-    "main.js": "21296d244c4152f0fe87718bd7fac6f8d0b8fd471b7277094d20da9eeba87426",
+    "index.html": "64f786fd5a1c50cc4b61bad85a4e4b40c8c42d50a7679e2b8f63d174ae60ba47",
+    "main.js": "f0b672c69a77e06b8d980f32068b11e6cd89fe376f63977b53b7765076624b1e",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "4c814aa209836f5166f5718fede6045faf920f841f3b34681f0cb5209d5d888f",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "bcaba443fca59a10ac66bb26caa586aa12e2697e9b71793fe299d3e81b3f720e",
-    "ui.js": "80944b938cc10b9e4d55354fd998c105b520da86ccf378a4f173477cb80b967f"
+    "sw.js": "4b282e1677561dd0f13adb8b33b9000c197689f42fef094465b5f1455a0b4005",
+    "ui.js": "9e615e473c7fbbe3ca11aef5bae0aeb8f698b51072c5ce5e8611afdcbcfeb614"
   },
-  "description": "TİCARET-AĞ.2 (TİCARET-AĞI.0 + AĞ.1 + AĞ.2): zincirleme ticaret limanları, Ticaret Limanı Transit İzni, fiziksel kargo; düz kaynak maddesi anlık (p49), tek seferlik fiziksel kargo açık 'cargo' maddesi; misafir gelen kutusu kararı yenilenen kayıtta kaybolmaz; AI–AI düzenli ticaret sözleşmesinde daraltılmış işlem kopyası. Save8 v8, MP paketi 4, protokol 1."
+  "description": "TİCARET-TAMAMLAMA.0 (p50 + atomik iki yönlü Transit İzni + klavyesiz ticaret miktarı): AI iki taşıyıcı için ayrı izni tek işlemde alır (kısmi hatada ödeme geri alınır); müzakere masası miktar penceresinde −100 / +100 / MAKS / 25, kaynak sözleşmesinde sıklık ±30 gün ve süre ±3 / ±12 ay adımları. Save8 v8, MP paketi 4, protokol 1."
 }

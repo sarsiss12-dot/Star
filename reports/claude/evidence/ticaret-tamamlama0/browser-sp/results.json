@@ -1,0 +1,152 @@
+{
+ "root": "/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade",
+ "results": [
+  {
+   "name": "800x360 U1 miktar penceresi: yalnız dokunuşla +100 / +10 / −10 / MAKS / 25 → TASLAĞA EKLE; klavye yok, taşma yok",
+   "status": "PASS",
+   "seq": [
+    110,
+    120,
+    110,
+    3000,
+    25
+   ],
+   "ov": {
+    "boxW": 520,
+    "vw": 800,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "800x360 U2 kaynak sözleşmesi formu: +100 miktar, +30 sıklık, +12 süre (klavyesiz); rota önizlemesi; TEKLİF ET / VAZGEÇ görünür, taşma yok",
+   "status": "PASS",
+   "g0": [
+    12,
+    30,
+    12
+   ],
+   "g1": [
+    112,
+    60,
+    24
+   ],
+   "reason": "Hat açık · Ithkrim-95 → Wynaevos · ~26 gün",
+   "ov": {
+    "boxW": 520,
+    "vw": 800,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "800x360 U3 TEKLİF ET (dokunuş) → sözleşme ya da açık ret nedeni; sözleşmede konvoy listesinden KONVOYU BUL haritada seçer",
+   "status": "PASS",
+   "n": 1,
+   "reason": "",
+   "signed": true,
+   "located": {
+    "sel": 1,
+    "modal": false
+   }
+  },
+  {
+   "name": "844x390 U1 miktar penceresi: yalnız dokunuşla +100 / +10 / −10 / MAKS / 25 → TASLAĞA EKLE; klavye yok, taşma yok",
+   "status": "PASS",
+   "seq": [
+    110,
+    120,
+    110,
+    3000,
+    25
+   ],
+   "ov": {
+    "boxW": 520,
+    "vw": 844,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "844x390 U2 kaynak sözleşmesi formu: +100 miktar, +30 sıklık, +12 süre (klavyesiz); rota önizlemesi; TEKLİF ET / VAZGEÇ görünür, taşma yok",
+   "status": "PASS",
+   "g0": [
+    12,
+    30,
+    12
+   ],
+   "g1": [
+    112,
+    60,
+    24
+   ],
+   "reason": "Hat açık · Ithkrim-95 → Wynaevos · ~26 gün",
+   "ov": {
+    "boxW": 520,
+    "vw": 844,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "844x390 U3 TEKLİF ET (dokunuş) → sözleşme ya da açık ret nedeni; sözleşmede konvoy listesinden KONVOYU BUL haritada seçer",
+   "status": "PASS",
+   "n": 1,
+   "reason": "",
+   "signed": true,
+   "located": {
+    "sel": 1,
+    "modal": false
+   }
+  },
+  {
+   "name": "901x411 U1 miktar penceresi: yalnız dokunuşla +100 / +10 / −10 / MAKS / 25 → TASLAĞA EKLE; klavye yok, taşma yok",
+   "status": "PASS",
+   "seq": [
+    110,
+    120,
+    110,
+    3000,
+    25
+   ],
+   "ov": {
+    "boxW": 520,
+    "vw": 901,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "901x411 U2 kaynak sözleşmesi formu: +100 miktar, +30 sıklık, +12 süre (klavyesiz); rota önizlemesi; TEKLİF ET / VAZGEÇ görünür, taşma yok",
+   "status": "PASS",
+   "g0": [
+    12,
+    30,
+    12
+   ],
+   "g1": [
+    112,
+    60,
+    24
+   ],
+   "reason": "Hat açık · Ithkrim-95 → Wynaevos · ~26 gün",
+   "ov": {
+    "boxW": 520,
+    "vw": 901,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "901x411 U3 TEKLİF ET (dokunuş) → sözleşme ya da açık ret nedeni; sözleşmede konvoy listesinden KONVOYU BUL haritada seçer",
+   "status": "PASS",
+   "n": 1,
+   "reason": "",
+   "signed": true,
+   "located": {
+    "sel": 1,
+    "modal": false
+   }
+  }
+ ]
+}

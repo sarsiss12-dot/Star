@@ -5969,22 +5969,23 @@ const UI = {
     if(!src||!RES[r]||!['res','tribute'].includes(kind))return;
     const known=side==='give'||intelOf(player,d.to)>=3;
     const limit=known?Math.floor(kind==='res'?Math.min(DEAL_AMOUNT_LIMIT,src.res[r]||0):dealMonthlyCapacity(src,r)):DEAL_AMOUNT_LIMIT;
-    const presets=[10,50,100,250,500,1000,5000].filter(v=>v<=limit);
+    const presets=[10,25,50,100,250,500,1000,5000].filter(v=>v<=limit);   // TİCARET-TAMAMLAMA.0: 25 eklendi
     const token={};this._amountToken=token;
     const alive=()=>this._amountToken===token&&G.sys===world&&G.p===player&&this.deal===d;
     this.openModal(`<div class="mhd">${kind==='res'?'Tek seferlik teslimat':'Aylık ödeme · 10 yıl'} · ${esc(RES[r].n)}</div>
       <div class="mbd"><div class="mini">${known?'Mevcut üst sınır: '+limit:'Karşı tarafın stoku / geliri bilinmiyor; uygulanabilirlik teklif sunulurken doğrulanır.'}
       ${kind==='tribute'?' Mevcut aylık yükümlülükler hesaba katılır; stok biterse yalnız mevcut kaynak ödenir.':' İmzalama Etkisi ve taslaktaki diğer teslimatlar da son kontrolde hesaba katılır.'}</div>
       <label for="dealAmountInput">${kind==='tribute'?'Her ay':'Bir kez'} verilecek miktar</label>
-      <div class="amountControls"><button class="abtn" data-a="amountDown" aria-label="Miktarı 10 azalt">−10</button>
+      <div class="amountControls"><button class="abtn" data-a="amountDown100" aria-label="Miktarı 100 azalt">−100</button><button class="abtn" data-a="amountDown" aria-label="Miktarı 10 azalt">−10</button>
       <input id="dealAmountInput" type="number" inputmode="numeric" min="1" max="${Math.max(0,limit)}" step="1" value="${presets[0]||1}" aria-label="Kaynak miktarı">
-      <button class="abtn" data-a="amountUp" aria-label="Miktarı 10 artır">+10</button></div>
+      <button class="abtn" data-a="amountUp" aria-label="Miktarı 10 artır">+10</button><button class="abtn" data-a="amountUp100" aria-label="Miktarı 100 artır">+100</button>${known&&limit>=1?'<button class="abtn" data-a="amountMax" aria-label="Üst sınır">MAKS</button>':''}</div>
       <div class="act2">${presets.map(v=>`<button class="abtn" data-a="amountPreset" data-x="${v}">${v.toLocaleString('tr-TR')}</button>`).join('')}</div>
       <div id="dealAmountError" class="mini" role="status"></div></div><div class="mft">
       <button class="ch" data-a="amountApply" ${limit<1?'disabled':''}>TASLAĞA EKLE</button><button class="ch" data-a="closem">VAZGEÇ</button></div>`);
     this._amountToken=token;
     const adjust=delta=>{if(!alive())return;const input=$('dealAmountInput');input.value=String(clamp((Number(input.value)||0)+delta,1,Math.max(1,limit)));};
     this._hook('amountDown',()=>adjust(-10));this._hook('amountUp',()=>adjust(10));
+    this._hook('amountDown100',()=>adjust(-100));this._hook('amountUp100',()=>adjust(100));this._hook('amountMax',()=>{if(alive())$('dealAmountInput').value=String(Math.max(1,limit));});
     this._hook('amountPreset',v=>{if(alive()&&v>0&&v<=limit)$('dealAmountInput').value=String(v);});
     this._hook('amountApply',()=>{
       if(!alive())return;const v=Number($('dealAmountInput').value);
@@ -8046,7 +8047,8 @@ const UI = {
     for(const inp of root.querySelectorAll('input[type="number"]')){
       if(inp.dataset.stepped)continue;inp.dataset.stepped='1';
       if(inp.parentElement&&inp.parentElement.querySelector('button'))continue;   // pencerenin kendi miktar düğmeleri var (ör. anlaşma miktarı ±10 / hazır değerler)
-      const fleet=/^fc-/.test(inp.id||''),pct=/^vs/.test(inp.id||''),steps=fleet?[-50,-10,10,50]:pct?[-5,-1,1,5]:[-100,-10,10,100];
+      const fleet=/^fc-/.test(inp.id||''),pct=/^vs/.test(inp.id||''),every=inp.id==='cargoEvery',months=inp.id==='cargoMonths';   // TİCARET-TAMAMLAMA.0: sefer sıklığı / süre adımları
+      const steps=fleet?[-50,-10,10,50]:pct?[-5,-1,1,5]:every?[-30,30]:months?[-12,-3,3,12]:[-100,-10,10,100];
       const wrap=document.createElement('div');wrap.className='qtySteps';wrap.setAttribute('role','group');wrap.setAttribute('aria-label','Miktar');
       const mk=(t,fn,label)=>{const b=document.createElement('button');b.type='button';b.className='qtyStep';b.textContent=t;b.setAttribute('aria-label',label||t);
         b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();fn();},true);b.addEventListener('mousedown',e=>e.preventDefault());wrap.appendChild(b);};

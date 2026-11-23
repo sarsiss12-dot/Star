@@ -393,11 +393,21 @@ const Commerce={
   const owners=G.emps.filter(o=>o!==a&&o!==b&&!o.dead&&!o.wild&&!o.crisisSide&&a.contact[o.id]&&
     !this.portRight(o,a)&&!a.war[o.id]&&!diploBlocked(a,o)&&!tradeBlocked(a,o)&&
     tradeHubs(o).some(id=>this.identifiedPort(a,G.sys[id],o)));
-  for(const source of tradeHubs(a))for(const target of tradeHubs(b)){
+  // TİCARET-AI.0: Transit İzni taşıyıcı başınadır (portRight(owner,carrier)). Çiftler yakından uzağa (aiPorts ile aynı sıra); bilinen
+  // sahiplerin a'ya verebileceği bütün izinlerle bile ileri rota yoksa (yapısal liman boşluğu) çift tek rota bedeliyle elenir.
+  // Geri yön (b → a) izinsiz açık değilse b de AYNI sahipten kendi Etki'siyle izin alır: yalnız AI sahip, iki teklif de önce sahibin
+  // aiRespond önizlemesinden 'kabul' alırsa; insan / misafir sahibe iki yönlü istek gönderilmez.
+  const pairs=tradeHubs(a).flatMap(source=>tradeHubs(b).map(target=>({source,target,d:dist(G.sys[source],G.sys[target])}))).sort((x,y)=>x.d-y.d||x.source-y.source||x.target-y.target);
+  const reach=new Set(owners.map(o=>o.id+':'+a.id)),guestOf=id=>typeof __mpHumanVoter==='function'&&__mpHumanVoter(id);
+  for(const {source,target} of pairs){
    if(budget.routes<2)return false;
    if(!this.identifiedPort(a,G.sys[target],b))continue;
-   budget.routes--;if(!this.aiPortRoute(b,a,target,source))continue;
+   budget.routes--;if(!this.route(a,b,source,target,{grants:reach,avoidObserved:true}))continue;
+   budget.routes--;const back=this.aiPortRoute(b,a,target,source);
    for(const owner of owners){
+    const bNeeds=!back;
+    if(bNeeds&&(owner.id===0||!owner.ai||guestOf(owner.id)||this.portRight(owner,b)||!b.contact[owner.id]||b.war[owner.id]||owner.war[b.id]||
+       diploBlocked(b,owner)||tradeBlocked(b,owner)||b.res.etk<80||b.aiTalk?.['portTransit:'+a.id]?.until>G.day))continue;
     if(budget.routes<=0)return false;budget.routes--;
     const grants=new Set([owner.id+':'+a.id]);
     const path=this.route(a,b,source,target,{grants,avoidObserved:true});
@@ -410,20 +420,35 @@ const Commerce={
     budget.routes-=3;
     if(this.route(a,b,source,target,{avoidObserved:true,volume:terms.give[0].v})||
        !this.route(a,b,source,target,{grants,avoidObserved:true,volume:terms.give[0].v})||
-       !this.route(b,a,target,source,{avoidObserved:true,volume:terms.want[0].v}))continue;
+       !this.route(b,a,target,source,{grants:bNeeds?new Set([owner.id+':'+b.id]):undefined,avoidObserved:true,volume:terms.want[0].v}))continue;
     const payment=36,offer={from:a.id,to:owner.id,give:[{t:'res',r:'etk',v:payment}],want:[{t:'portTransit'}]};
     if(!dealQuote(offer).ok||a.res.etk-payment<40)continue;
+    const backOffer=bNeeds?{from:b.id,to:owner.id,give:[{t:'res',r:'etk',v:payment}],want:[{t:'portTransit'}]}:null;
+    if(backOffer&&(!dealQuote(backOffer).ok||b.res.etk-payment<40||!this.aiDealWould(a,owner,offer)||!this.aiDealWould(b,owner,backOffer)))continue;
     (a.aiTalk||={})[key]={until:G.day+180,reason:'Transit izni değerlendirildi'};
+    if(backOffer)(b.aiTalk||={})['portTransit:'+a.id]={until:G.day+180,reason:'Transit izni değerlendirildi'};
     if(owner.id===0)return !!UI.aiOffer(offer);
     const guest=typeof __mpHumanVoter==='function'&&__mpHumanVoter(owner.id);
     if(!owner.ai&&!guest)return false;
+    // TİCARET-AI.1: iki yönlü izin tek işlem: b'nin izni alınamazsa a'nın ödemesi ve izni de geri alınır (bekleme süreleri işlemden önce yazıldığı için kalır).
+    const tx=backOffer?dealTxBegin():null;
     const result=aiNegotiate(a,owner,offer.give,offer.want,true);
     const pending=guest&&result.tur>0&&result.karar==='bekle';
     AIDiagnostics.note(result.uygulandi?'trade-transit-granted':pending?'trade-transit-pending':'trade-transit-refused',a,owner,'Kargo ortağı '+b.id+' · '+path.length+' sistem');
+    if(backOffer){let r=null;try{if(result.uygulandi)r=aiNegotiate(b,owner,backOffer.give,backOffer.want,true);}catch(e){r=null;}
+     if(!r?.uygulandi){if(result.uygulandi)dealTxRollback(tx);AIDiagnostics.note('trade-transit-refused',b,owner,'Kargo ortağı '+a.id+' · geri yön; iki yönlü izin geri alındı');return false;}
+     AIDiagnostics.note('trade-transit-granted',b,owner,'Kargo ortağı '+a.id+' · geri yön');}
     return result.uygulandi||pending;
    }
   }
   return false;
+ },
+ // TİCARET-AI.0: aiNegotiate kabul yolunun salt okunur önizlemesi (aiRespond 'kabul' ya da tek tur karşı teklif aiCounterBudget tavanı içinde).
+ aiDealWould(p,t,o){
+  const r=aiRespond(t,o);if(r.v==='kabul')return true;
+  if(r.v!=='karsi'||!Array.isArray(r.add)||!r.add.length||diploBlocked(p,t))return false;
+  const k={from:o.from,to:o.to,give:o.give.concat(r.add),want:o.want.slice()};if(!dealQuote(k).ok)return false;
+  const c=aiCounterBudget(p,t,o,r.add);return !(c.extraValue>c.cap);
  },
  aiValue(e,n){return evalOffer({...e},n);},
  aiTerms(a,b,A,B,ports){

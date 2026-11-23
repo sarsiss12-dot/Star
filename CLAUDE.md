@@ -15,7 +15,14 @@ Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strat
 - `res` maddesi p49 gibi anlık (PR #70 her `res`i tek seferlik kargoya çeviriyordu → 40 paket kötüleşmişti). Fiziksel tek seferlik kargo açık `{t:'cargo',r,v}`; `freightPlan` once-yük yalnız cargo; masada `dealCargoMode` (Anlık Kaynak Takası / ▣ Fiziksel Kargo ile Gönder). MP: ITEM_T + dipItems cargo, `gift` p49 gibi anlık; misafir `dealQuote` sarmalayıcısı yalnız Commerce rota gerekçesini host'a bırakır (host dipGate gerçek dünyada denetler).
 - Test: `node tests/ticaret_ag1_test.js` (9), `node tests/ticaret_agi0_test.cjs` (28; run-all'a girmez, .cjs), `MP8_SCEN=TA node tests/browser-mp8.cjs` (6). TL 2/3 PR #70'te de. Perf: `node research/ticaret-agi0/ay-maliyeti.cjs <p49 kök> <kayıt dizini> <çıkış>` (Chromium).
 
-## Son teslim — TİCARET-AI.1 (sürüm yok, p50 korunur; 23 Kasım 2026)
+## Son teslim — TİCARET-TAMAMLAMA.0 (p51 / MP.8.9b50, 23 Kasım 2026)
+
+- Ayrıntı: `reports/claude/TICARET-TAMAMLAMA0-SONUC.md` (A–K + 27 soru), devir `TICARET-TAMAMLAMA0-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-tamamlama0/`. Dal `claude/stars-ticaret-tamamlama0` (taban ai1 `edc1601`; çalışma zamanı tabanı p50). ZIP `releases/stars-faz96h10p51.zip`, kayıt `RELEASE-TICARET-TAMAMLAMA0.json`; mp-core p51 paket yükleyicisi p41–p50 kabul eder.
+- `commerce.js aiTransitRequest`: çiftler yakından uzağa, tüm bilinen sahip izinleriyle ileri rota ön elemesi, geri yön izinsizse b de aynı AI sahipten izin (`aiDealWould` önizlemesi), iki izin `dealTxBegin`/`dealTxRollback` tek işlem; insan / misafir sahibe iki yönlü istek yok. Test `node tests/ticaret_tamamlama0_transit_test.js` (12; p50 9/3, `STARS_ROOT`).
+- `ui.js dealAmount` −100/+100/MAKS/25, `stepperize` `cargoEvery` ±30 / `cargoMonths` ±3/±12; `index.html .amountControls` flex-wrap. Test `node tests/browser-ticaret-tamamlama0-sp.cjs` (800×360/844×390/901×411, 9; p50 1/2).
+- Perf: `research/ticaret-agi0/ay-maliyeti.cjs <p50 kök> <girdi> <ÇIKIŞ DİZİNİ>` (`export STARS_CHROMIUM_PATH` şart). 100 sistem p95 tek koşu ±%30, A/A ±%6 → kapı kararında A/A + `research/ticaret-tamamlama0/ay-is-sayimi.cjs` (deterministik rota araması / Save8 eşitliği).
+
+## Önceki teslim — TİCARET-AI.1 (sürüm yok, p50 korunur; 23 Kasım 2026)
 
 - Ayrıntı: `reports/claude/TICARET-AI1-SONUC.md` (A–O + 15 soru), devir `TICARET-AI1-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-ai1/`. Dal `claude/stars-ticaret-ai1` (taban ai0 `d438d6e`). Çalışma zamanı p50; tam Node 245/6551/279 (p50 ile aynı).
 - `MP8_SCEN=TR` (`tests/helpers/ticaret-ai1-mp.cjs`) 6/6: yolda kargo → `MP1Host.mp4.saveNow` → bağlamlar kapanır → relay yeniden → yeni oda DEVAM ET (`G.commerce` JSON birebir) → B ana menü + C bağlantı → tek teslim. Chromium testleri `STARS_CHROMIUM_PATH=/opt/pw-browsers/chromium` ister (yoksa başlamadan FAIL).

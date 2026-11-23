@@ -1,0 +1,178 @@
+{
+ "results": [
+  {
+   "name": "SG0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 7101
+  },
+  {
+   "name": "G0 fikstür (host): AI X host'a savaş açar; B host'un müttefiki, X ile savaşta değil; kaynaklar",
+   "status": "PASS",
+   "ms": 330
+  },
+  {
+   "name": "G1 B gerçek masadan \"Savaşa Yardım Teklif Et\" + 300 alaşım İSTE → host gelen kutusundan KABUL → tek ödeme, B savaşta, B aynası görür; ikinci kabul yok",
+   "status": "PASS",
+   "ms": 3933
+  },
+  {
+   "name": "G2 misafirin eskortsuz ordusu muharebede yok olur → misafirin bildirim listesinde YENİLGİ + eskortsuz imha açıklaması",
+   "status": "PASS",
+   "ms": 651
+  },
+  {
+   "name": "G3 sistemin açtığı federasyon oyu: misafirde kart + gelen kutusu; misafir KABUL → host oyu kaydeder",
+   "status": "PASS",
+   "ms": 1234
+  }
+ ],
+ "metrics": {
+  "scen": "SG",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 1,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 386,
+    "buildMs": 418,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 3.5,
+      "p95": 3.5,
+      "max": 3.5
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 15,
+     "dom": 728,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 30.5,
+       "p95": 30.5,
+       "max": 30.5
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.9,
+       "p95": 1.9,
+       "max": 1.9
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 21,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 11480,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 7
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   }
+  ],
+  "sg1": {
+   "fx": {
+    "X": 2,
+    "front": 1
+   },
+   "g1": {
+    "before": {
+     "h": 3000,
+     "b": 3000,
+     "war": false
+    },
+    "after": {
+     "h": 2700,
+     "b": 3300,
+     "war": true,
+     "side": [
+      2,
+      0
+     ]
+    },
+    "after2": {
+     "h": 2700,
+     "b": 3300
+    },
+    "dup": "rules:closed",
+    "guestSeesWar": true
+   },
+   "g2": {
+    "sys": 0,
+    "log": [
+     "Teklif kabul edildi — Kızıl Muhafız",
+     "SAVAŞ BAŞLADI — Tharaeth Lejyonu",
+     "YENİLGİ — Wynaevos muharebesi · kayıp 7 / düşman 0 · 6 silahsız gemi (Taarruz Ordusu ×6) eskortu kalmayınca hasar almadan imha edildi"
+    ],
+    "hostLog": []
+   },
+   "g3": {
+    "id": 801,
+    "ok": true,
+    "proposer": null,
+    "token": "1",
+    "voted": true
+   }
+  },
+  "errors": []
+ }
+}
