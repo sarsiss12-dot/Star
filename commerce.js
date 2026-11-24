@@ -613,6 +613,7 @@ const Commerce={
    const key='portRenew:'+o.id;if(c.aiTalk?.[key]?.until>G.day||c.res.etk-this.transitPay<40||!this.permitUsers(o,c).length)continue;
    const offer={from:c.id,to:o.id,give:[{t:'res',r:'etk',v:this.transitPay}],want:[{t:'portTransit'}]};if(!dealQuote(offer).ok)continue;
    (c.aiTalk||={})[key]={until:G.day+30,reason:'Liman izni yenileme'};
+   if(o.ai&&!(typeof __mpHumanVoter==='function'&&__mpHumanVoter(o.id))&&!this.aiDealWould(c,o,offer)){AIDiagnostics.note('trade-transit-refused',c,o,'Yenileme önizlemesi');continue;}   // boşa ret kaydı yok
    if(o.id===0){const sent=!!UI.aiOffer(offer);AIDiagnostics.note(sent?'trade-transit-pending':'trade-transit-refused',c,o,'Yenileme');continue;}
    const guest=typeof __mpHumanVoter==='function'&&__mpHumanVoter(o.id);if(!o.ai&&!guest)continue;
    const r=aiNegotiate(c,o,offer.give,offer.want,true);

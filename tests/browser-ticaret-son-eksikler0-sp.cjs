@@ -45,6 +45,7 @@ async function test(name,fn){try{const r=await fn();results.push({name,status:'P
     X.res.min=20;X.inc={min:-4,ene:12,yiy:1,ala:1,tuk:1};X.res.ene=600;Y.res.min=600;Y.inc={min:12,ene:-4,yiy:1,ala:1,tuk:1};Y.res.ene=20;
     window.FX.chain=free.map(s=>s.id);window.ASK=()=>{const bud={routes:96};return !!Commerce.aiTransitRequest(X,Y,Commerce.aiBalance(X),Commerce.aiBalance(Y),bud);};
     updateVision();Commerce.state();G.inbox=[];UI.drawInbox();});
+  FXV=await page.evaluate(()=>({D:FX.D,Y:FX.Y}));
   const cardSel=async id=>{const uid=await page.evaluate(id=>(G.inbox||[]).find(n=>n.kind==='transit'&&n.data===id)?.uid,id);if(!uid)throw Error('kart yok');return '#inbox [data-a="openNote"][data-x="'+uid+'"]';};
   await test(view+' V1 talep kartı → dokunuşla Liman izinleri: talep eden, limanlar, taşıyıcılar, bedel, son gün; taşma yok',async()=>{
     const ok=await page.evaluate(()=>ASK());assert.equal(ok,true,'AI talep açtı');await page.evaluate(()=>UI.drawInbox());await tap(await cardSel(1));
@@ -65,6 +66,7 @@ async function test(name,fn){try{const r=await fn();results.push({name,status:'P
     assert.equal(s1.etk[0]-s0.etk[0],72);assert.equal(s1.k,1,'X–Y sözleşmesi');await tap('#modal [data-a="commerce"]');const back=await page.evaluate(()=>!!document.querySelector('#modal .mhd')?.textContent.includes('TİCARET'));
     assert.equal(back,true);return {s1};});
   function FX_D(s){return Object.keys(s.pt).map(Number).find(k=>k!==0);}
+  let FXV=null;const FX_Dn=()=>FXV.D,FX_Yn=()=>FXV.Y;
   await test(view+' V4 yeni talep → REDDET → Reddedildi, izin / ödeme yok',async()=>{
     await page.evaluate(()=>{for(const id of [FX.X,FX.Y]){delete G.emps[0].portTransit[id];delete G.emps[FX.D].portTransit[id];}for(const c of G.commerce.contracts)if([c.a,c.b].includes(FX.X))c.status='cancelled';
       for(const e of [G.emps[FX.X],G.emps[FX.Y]])e.aiTalk={};return ASK();});const s0=await S();const id=s0.tx[s0.tx.length-1].id;await closeAll();await page.evaluate(()=>UI.drawInbox());
@@ -92,6 +94,18 @@ async function test(name,fn){try{const r=await fn();results.push({name,status:'P
     await tap('#modal [data-a="commerceConvoys"]');const t1=await page.evaluate(()=>document.querySelector('#modal .mbd')?.textContent.slice(0,200));await tap('#modal [data-a="commerce"]');
     const t2=await page.evaluate(()=>document.querySelector('#modal .mbd')?.textContent.slice(0,200));const ov=await overflow();await closeAll();
     assert.ok(t1&&t2);assert.equal(ov.hScroll,false);return {ov};});
+  await test(view+' V8 oyuncunun koridor talebi: sözleşme formu "Gereken transit izni" → GEREKEN LİMAN İZİNLERİNİ İSTE (dokunuş) → D\'nin onayı beklenir → onaylanınca iki yön izinleri',async()=>{
+    await closeAll();await page.evaluate(()=>{const Y=G.emps[FX.Y];(G.p.pact||={})[Y.id]=(Y.pact||={})[0]=true;for(const id of [0,FX.Y])delete G.emps[FX.D].portTransit?.[id];G.commerce.contracts.forEach(c=>{if([c.a,c.b].includes(0))c.status='cancelled';});
+      UI.act('commerceNew',String(FX.Y));});await page.waitForTimeout(300);
+    await page.evaluate(()=>{const s=document.getElementById('cargoSource'),t=document.getElementById('cargoTarget');s.value=String(FX.chain[3]);s.dispatchEvent(new Event('change'));t.value=String(FX.chain[9]);t.dispatchEvent(new Event('change'));});
+    await page.waitForFunction(()=>{const b=document.getElementById('cargoTransitAsk');return b&&b.style.display!=='none';},undefined,{timeout:8000});
+    const reason=await page.evaluate(()=>document.getElementById('cargoReason').textContent);assert.match(reason,/Gereken transit izni/);const s0=await S();
+    await tap('#cargoTransitAsk');const tx=await page.evaluate(()=>{const t=G.commerce.transit.at(-1);return {id:t.id,by:t.by,st:t.st,votes:t.votes,legs:t.legs.map(l=>l.o+':'+l.c)};});
+    assert.equal(tx.by,0);assert.equal(tx.st,'pending');assert.deepEqual(Object.keys(tx.votes).map(Number),[FX_Dn()]);assert.deepEqual((await S()).etk,s0.etk,'onaydan önce ödeme yok');
+    const r=await page.evaluate(id=>Commerce.transitVote(G.emps[FX.D],id,true),tx.id);assert.equal(r.st,'committed');
+    const pt=await page.evaluate(()=>Object.keys(G.emps[FX.D].portTransit||{}).filter(k=>G.emps[FX.D].portTransit[k]>G.day).map(Number).sort((a,b)=>a-b));assert.deepEqual(pt,[0,FX_Yn()].sort((a,b)=>a-b));
+    const open=await page.evaluate(()=>!!Commerce.route(G.p,G.emps[FX.Y],FX.chain[3],FX.chain[9])&&!!Commerce.route(G.emps[FX.Y],G.p,FX.chain[9],FX.chain[3]));assert.equal(open,true,'iki yön açık');
+    await closeAll();return {tx,reason};});
   if(errors.length)results.push({name:view+' sayfa hataları',status:'INFO',errors:errors.slice(0,5)});await ctx.close();}
  }finally{await browser.close();srv.close();fs.writeFileSync(path.join(out,'results.json'),JSON.stringify({root,results},null,1));console.log(`GEÇEN: ${pass} KALAN: ${fail}`);process.exitCode=fail?1:0;}
 })();

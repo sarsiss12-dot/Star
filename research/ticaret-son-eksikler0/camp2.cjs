@@ -11,6 +11,7 @@ var __n=AIDiagnostics.note;AIDiagnostics.note=function(code,a,b,why){if(/^trade-
 var __ex=executeDeal;executeDeal=function(o){const r=__ex.apply(this,arguments);if(r&&(o.give||[]).concat(o.want||[]).some(i=>i.t==='freight')){C.signed++;C.deals.push([Math.floor(G.day),o.from,o.to]);for(const i of (o.give||[]).concat(o.want||[]))if(i.t==='freight'){C.used[i.source]=1;C.used[i.target]=1;}}return r;};
 C.trig={first:null,tx:[],renew:0,warn:0,txState:{}};const T=(k)=>{if(C.trig.first===null)C.trig.first={d:Math.floor(G.day),k};};
 if(Commerce.transitOpen){const f=Commerce.transitOpen;Commerce.transitOpen=function(by,a,b){const r=f.apply(this,arguments);C.trig.tx.push({d:Math.floor(G.day),by,a:a&&a.id,b:b&&b.id,ok:!!r.ok,st:r.st||null,why:r.why||null});T('transitOpen');return r;};}
+if(Commerce.aiPermitRenew){const f=Commerce.aiPermitRenew;Commerce.aiPermitRenew=function(c){const k=JSON.stringify(c.aiTalk||{});const r=f.apply(this,arguments);if(JSON.stringify(c.aiTalk||{})!==k){C.trig.renewAsk=(C.trig.renewAsk||0)+1;T('aiPermitRenew');}return r;};}
 if(typeof transitNote==='function'){const f=transitNote;transitNote=function(){C.trig.warn++;T('transitNote');return f.apply(this,arguments);};}
 {const f=executeDeal;executeDeal=function(o){const items=[...(o.give||[]).map(i=>[o.from,o.to,i]),...(o.want||[]).map(i=>[o.to,o.from,i])].filter(x=>x[2].t==='portTransit');
   const renew=items.some(([g,t])=>G.emps[g]?.portTransit?.[t]>G.day);const r=f.apply(this,arguments);if(r&&renew){C.trig.renew++;T('renew');}return r;};}
@@ -30,4 +31,4 @@ const t0=Date.now(),hashes=[];for(let m=1;m<=+months;m++){h.run('__m()');hashes.
 const r=JSON.parse(h.run('(()=>{for(const t of (G.commerce&&G.commerce.transit)||[])C.trig.txState[t.st]=(C.trig.txState[t.st]||0)+1;return JSON.stringify({trig:C.trig,alt:C.alt,codes:C.codes,transit:C.transit,deals:C.deals,signed:C.signed,fin:fin()});})()'));r.hashes=hashes;r.rng=h.run('RND_STATE');r.sec=Math.round((Date.now()-t0)/1000);
 fs.writeFileSync(out,JSON.stringify(r));
 const tot=r.fin.em.reduce((o,e)=>{o.short+=e.short;o.crit+=e.crit;o.col+=e.col;o.dead+=e.dead?1:0;return o;},{short:0,crit:0,col:0,dead:0});
-console.log(path.basename(out),JSON.stringify({first:r.trig.first,tx:r.trig.tx.length,txState:r.trig.txState,renew:r.trig.renew,warn:r.trig.warn,tot,transit:r.transit.length,signed:r.signed,deliv:r.fin.deliv,sec:r.sec,last:hashes.at(-1)}));
+console.log(path.basename(out),JSON.stringify({first:r.trig.first,tx:r.trig.tx.length,txState:r.trig.txState,renew:r.trig.renew,renewAsk:r.trig.renewAsk||0,warn:r.trig.warn,tot,transit:r.transit.length,signed:r.signed,deliv:r.fin.deliv,sec:r.sec,last:hashes.at(-1)}));
