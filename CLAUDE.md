@@ -2,7 +2,14 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — TİCARET-AĞ.2 (p50 / MP.8.9b49, 22 Kasım 2026)
+## Son teslim — TİCARET-FİNAL.0 (p53 / MP.8.9b52, 24 Kasım 2026)
+
+- Ayrıntı: `reports/claude/TICARET-FINAL0-SONUC.md` (24 maddelik envanter + kapanış matrisi + 12 soru), devir `TICARET-FINAL0-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-final0/`. Dal `claude/stars-ticaret-final0` (taban p52 `2399075` + PR #77 `3aa8400`). ZIP `releases/stars-faz96h10p53.zip`, kayıt `RELEASE-TICARET-FINAL0.json`. p53 paket yükleyicisi p41–p52 kabul eder. Ticaret döngüsü kapandı: geliştirme tamam, saha kabulü (Android / Render) NOT RUN.
+- `Commerce.tick` → `tick0` sarmalı: tick ömürlü `_tickMemo` (`memoRelay` / `memoEdge`, sayısal anahtar) `remainingRoute`'ta. Tick içinde liman / izin / savaş / sahiplik / abluka / görünürlük değiştiren kod eklenirse önce `Commerce._tickMemo=null`. Codex koridoru (500 / 499 sıçrama) 64 konvoyda medyan −%62,1, Save8 / RNG aynı (`research/ticaret-final0/yogun-konvoy.cjs`).
+- Bilinen tasarım sınırları: insana iki yönlü / çok duraklı atomik izin yok; izin 360 gün, sözleşmeyle yenilenmez; limansız kriz devleti (404) liman yatırımı yok; rota bütçesi sırası; `aiBalance.need` gelen kargoyu saymaz (aday reddedildi).
+- Test: `tests/browser-ticaret-tamamlama0-sp.cjs` U1–U5 (U4 iptal, U5 masadan Transit İzni; 3 çözünürlük 15/0). Perf kapısı için `research/ticaret-teslim-degeri0/perf-abba.cjs` (ABBA + A/A), Chromium p95 değil.
+
+## Önceki teslim — TİCARET-AĞ.2 (p50 / MP.8.9b49, 22 Kasım 2026)
 
 - Ayrıntı: `reports/claude/TICARET-AG2-SONUC.md`, devir `reports/claude/TICARET-AG2-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-ag2/`. Dal `claude/stars-ticaret-ag2` (PR #71 üstünde). ZIP `releases/stars-faz96h10p50.zip`, kayıt `RELEASE-TICARET-AG2.json`. p50 paket yükleyicisi p41–p49 kabul eder. Otomatik kabul; Android / Render NOT RUN.
 - Misafir gelen kutusu: `archive-ui.js` `resolve` misafirde (`MP6Stars.S.on`) dünya/kayıt yenilenince aynı `key`'li bekleyen kayıtla karar verir (eskiden KABUL sessizce düşüyordu → TL2–TL4). Tek oyunculu / host'ta kayıt yüklemesinden sonra eski düğme etkisiz KALMALI (faz87d/91e/95b/95e_ui_save).
@@ -15,7 +22,7 @@ Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strat
 - `res` maddesi p49 gibi anlık (PR #70 her `res`i tek seferlik kargoya çeviriyordu → 40 paket kötüleşmişti). Fiziksel tek seferlik kargo açık `{t:'cargo',r,v}`; `freightPlan` once-yük yalnız cargo; masada `dealCargoMode` (Anlık Kaynak Takası / ▣ Fiziksel Kargo ile Gönder). MP: ITEM_T + dipItems cargo, `gift` p49 gibi anlık; misafir `dealQuote` sarmalayıcısı yalnız Commerce rota gerekçesini host'a bırakır (host dipGate gerçek dünyada denetler).
 - Test: `node tests/ticaret_ag1_test.js` (9), `node tests/ticaret_agi0_test.cjs` (28; run-all'a girmez, .cjs), `MP8_SCEN=TA node tests/browser-mp8.cjs` (6). TL 2/3 PR #70'te de. Perf: `node research/ticaret-agi0/ay-maliyeti.cjs <p49 kök> <kayıt dizini> <çıkış>` (Chromium).
 
-## Son teslim — TİCARET-TESLİM-DEĞERİ.0 (sürüm yok, p52 korunur; 23 Kasım 2026)
+## Önceki teslim — TİCARET-TESLİM-DEĞERİ.0 (sürüm yok, p52 korunur; 23 Kasım 2026)
 
 - Ayrıntı: `reports/claude/TICARET-TESLIM-DEGERI0-SONUC.md` (17 bölüm + 20 soru), devir `TICARET-TESLIM-DEGERI0-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-teslim-degeri0/`. Dal `claude/stars-ticaret-teslim-degeri0` (taban p52 `2399075`); çalışma zamanı değişmedi.
 - Perf: `research/ticaret-teslim-degeri0/perf-abba.cjs <kökA> <kökB> <kayıt...>` (aynı Node süreci, ABBA, gerçek saat, işlev süresi, örnek başına Save8 eşitliği; N=örnek). Chromium `ay-maliyeti.cjs` p95'i tek başına kapı kararına uygun değil (A/A ±%13). `alt-yuk.cjs` alternatif liman yolu çalışırken karar maliyeti.

@@ -1,12 +1,16 @@
 # STARS — Güncel proje durumu
 
-Son güncelleme: 2026-11-23. Depo `sarsiss12-dot/Star`.
+Son güncelleme: 2026-11-24. Depo `sarsiss12-dot/Star`.
+
+## Güncel geliştirme adayı — p53 (TİCARET-FİNAL.0) · ticaret döngüsü kapandı
+
+`claude/stars-ticaret-final0` (p52 + PR #77 üstünde, taslak PR #78). Oyun 96h10p53 / PWA stars-v96h10p53 / MP.8.9b52; Save8 v8, paket 4, protokol 1. ZIP `releases/stars-faz96h10p53.zip` (SHA-256 `2ea7da603f7480166a49f09ae8a3ad6efdd40469ea9d331998f1e4e470687f72`, CRC32 `85ACACBB`). Yoğun konvoy rota denetimi tick içi önbellek (64 konvoy −%62,1, Save8 / RNG aynı), normal oyunda gerileme yok (ABBA). Düzenli ticaret açıklaması, dokunmatik iptal (U4) ve transit izni (U5). Tam Node 247 / 6576 / 279 (başarısız liste p52 ile aynı). 24 maddelik envanterde HATALI yok; bilinen tasarım sınırları raporda. Fiziksel Android / Render NOT RUN. Ayrıntı `reports/claude/TICARET-FINAL0-SONUC.md`.
 
 ## Ticaret ekonomik araştırması (sürüm yok) — TİCARET-TESLİM-DEĞERİ.0
 
 `claude/stars-ticaret-teslim-degeri0` (p52 üstünde). p52 perf gerilemesi yok (ABBA Node, medyan ±%0,2, A/A içinde). Gölge değerleme: 3 tohum × 240 ay + 500 × 120 ayda tek gerçek kaçırılan zamanında ithalat (rota bütçesi); kıtlıkların kökü yapı (krizdeki devletin limanı / teması yok, ortak ihraç edemiyor, savaş). `aiBalance` sözleşmeli ithalatı saymıyor, değer varış zamanını içermiyor; düzeltme adayı faydasız → reddedildi. [Sonuç](reports/claude/TICARET-TESLIM-DEGERI0-SONUC.md).
 
-## Güncel geliştirme adayı — p52 (TİCARET-GEÇERLİ-HAT.0)
+## Önceki geliştirme adayı — p52 (TİCARET-GEÇERLİ-HAT.0)
 
 `claude/stars-ticaret-gecerli-hat0` (p51 üstünde, taslak PR). Oyun 96h10p52 / PWA stars-v96h10p52 / MP.8.9b51; Save8 v8, paket 4, protokol 1. ZIP `releases/stars-faz96h10p52.zip` (SHA-256 `2b9f7068c2ed546cf11de3f2df2177631697f162e4d0c2b9ee0f427e6bce7b96`, CRC32 `09AE6E5D`). AI en yakın liman çiftinin teklifi dönüş rotası / kapasite yüzünden düşerse aynı taramadaki en çok 3 alternatif çifti `aiTerms` + `dealQuote` ile dener (Codex kök neden vakası). Tam Node 247 / 6576 / 279 (yeni FAIL yok), MP8 TR/TL/TA/TB/SG/J/X PASS, SP 9/0. Doğal kampanya p51 ile bayt-bayt aynı. p95 zaman ölçümü A/B +%12,98 / +%9,44 / −%1,46, A/A tek koşular ±%13; deterministik iş aynı. [Sonuç](reports/claude/TICARET-GECERLI-HAT0-SONUC.md).
 

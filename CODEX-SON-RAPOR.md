@@ -1,6 +1,8 @@
 # Son Codex raporu
 
-[TİCARET-TESLİM-DEĞERİ.0 (Claude, sürüm yok, p52 korunur) · p52 perf belirsizliği ABBA ile kapandı (gerileme yok), gölge ekonomik değerleme: 4 kampanyada 1 gerçek fırsat, ihtiyaç adayı reddedildi](reports/claude/TICARET-TESLIM-DEGERI0-SONUC.md)
+[TİCARET-FİNAL.0 (Claude, p53 / MP.8.9b52 yayın adayı) · ticaret döngüsü kapandı: yoğun konvoy −%62, 24 maddelik envanter, dokunmatik iptal / izin testleri, tam Node yeni FAIL yok](reports/claude/TICARET-FINAL0-SONUC.md)
+
+Önceki: [TİCARET-TESLİM-DEĞERİ.0 (Claude, sürüm yok, p52 korunur) · p52 perf belirsizliği ABBA ile kapandı (gerileme yok), gölge ekonomik değerleme: 4 kampanyada 1 gerçek fırsat, ihtiyaç adayı reddedildi](reports/claude/TICARET-TESLIM-DEGERI0-SONUC.md)
 
 Önceki: [TİCARET-GEÇERLİ-HAT.0 (Claude, p52 / MP.8.9b51 yayın adayı) · AI geçerli alternatif liman çiftini dener (aiPorts / aiAltPorts), Codex kök neden vakası düzeldi, doğal kampanya bayt-bayt aynı, regresyonlar PASS](reports/claude/TICARET-GECERLI-HAT0-SONUC.md)
 
