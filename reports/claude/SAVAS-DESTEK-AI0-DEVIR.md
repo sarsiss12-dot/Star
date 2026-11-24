@@ -6,7 +6,7 @@ Güncelleme: 24 Kasım 2026
 
 | Dal | Durum |
 |---|---|
-| `claude/stars-savas-destek-ai0` | **p55 / MP.8.9b54 — en güncel yayın adayı** (taslak PR) |
+| `claude/stars-savas-destek-ai0` | **p55 / MP.8.9b54 — en güncel yayın adayı** (taslak PR #80) |
 | `claude/stars-ticaret-son-eksikler0` | p54 / MP.8.9b53 (PR #79), geri dönüş |
 
 - Render için `claude/stars-savas-destek-ai0`.

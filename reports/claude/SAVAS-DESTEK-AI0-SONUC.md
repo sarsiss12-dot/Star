@@ -1,6 +1,6 @@
 # SAVAŞ-DESTEK-AI.0 — Sonuç raporu
 
-Tarih: 24 Kasım 2026 · Dal `claude/stars-savas-destek-ai0` · taban `claude/stars-ticaret-son-eksikler0` @ `5aefe56` (p54, PR #79)
+Tarih: 24 Kasım 2026 · Dal `claude/stars-savas-destek-ai0` · taslak PR #80 (https://github.com/sarsiss12-dot/Star/pull/80) · taban `claude/stars-ticaret-son-eksikler0` @ `5aefe56` (p54, PR #79)
 Yayın adayı: **96h10p55 / stars-v96h10p55 / MP.8.9b54** · Save8 v8 (şema değişmedi, yeni alan yok) · MP paket 4 · protokol 1.
 Kullanıcı fiziksel test yapamıyor; bütün kabul otomatik (Node + gerçek Chromium + üretim relay süreci + TLS vekili).
 Fiziksel Android, gerçek uzak internet, LAN ve canlı Render: **NOT RUN**.

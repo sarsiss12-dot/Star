@@ -4,7 +4,7 @@ Son güncelleme: 2026-11-24 (SAVAŞ-DESTEK-AI.0). Depo `sarsiss12-dot/Star`.
 
 ## Güncel geliştirme adayı — p55 (SAVAŞ-DESTEK-AI.0) · daha akıllı savaş desteği
 
-`claude/stars-savas-destek-ai0` (p54 üstünde, taslak PR). Oyun 96h10p55 / PWA stars-v96h10p55 / MP.8.9b54; Save8 v8 (şema değişmedi), paket 4, protokol 1. ZIP `releases/stars-faz96h10p55.zip` (SHA-256 `d3299990d0d555ce7f9901e3553e1ec5952106394e50e9c4b7ac18a8da678e52`, CRC32 `ADAB4DE9`). AI katılım kapısı (kriz / ikinci cephe / bütçe / başkent tehdidi), doktrin çarpanının AI'da gerçekten uygulanması, savunma ↔ saldırı fiyatı, aktif savaşta gerçekçi yardım isteği, Savaş Merkezi'nden toplu destek çağrısı, Arındırıcı kilidi destek kapısında. Kampanyada savaş sayısı artmadı (6/8 yapılandırma p54 ile bayt bayt aynı). Fiziksel Android / Render NOT RUN. Ayrıntı `reports/claude/SAVAS-DESTEK-AI0-SONUC.md`.
+`claude/stars-savas-destek-ai0` (p54 üstünde, taslak PR #80). Oyun 96h10p55 / PWA stars-v96h10p55 / MP.8.9b54; Save8 v8 (şema değişmedi), paket 4, protokol 1. ZIP `releases/stars-faz96h10p55.zip` (SHA-256 `d3299990d0d555ce7f9901e3553e1ec5952106394e50e9c4b7ac18a8da678e52`, CRC32 `ADAB4DE9`). AI katılım kapısı (kriz / ikinci cephe / bütçe / başkent tehdidi), doktrin çarpanının AI'da gerçekten uygulanması, savunma ↔ saldırı fiyatı, aktif savaşta gerçekçi yardım isteği, Savaş Merkezi'nden toplu destek çağrısı, Arındırıcı kilidi destek kapısında. Kampanyada savaş sayısı artmadı (6/8 yapılandırma p54 ile bayt bayt aynı). Fiziksel Android / Render NOT RUN. Ayrıntı `reports/claude/SAVAS-DESTEK-AI0-SONUC.md`.
 
 ## Önceki geliştirme adayı — p54 (TİCARET-SON-EKSİKLER.0) · ticaretin işlevsel eksikleri kapandı
 
