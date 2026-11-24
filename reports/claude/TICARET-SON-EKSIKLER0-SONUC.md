@@ -1,6 +1,6 @@
 # TİCARET-SON-EKSİKLER.0 — Sonuç raporu
 
-Tarih: 24 Kasım 2026 · Dal `claude/stars-ticaret-son-eksikler0` · {{PR}}
+Tarih: 24 Kasım 2026 · Dal `claude/stars-ticaret-son-eksikler0` · taslak PR #79 (https://github.com/sarsiss12-dot/Star/pull/79)
 Yayın adayı: **96h10p54 / stars-v96h10p54 / MP.8.9b53** · Save8 v8 (geriye uyumlu, isteğe bağlı yeni alan) · MP paket 4 · protokol 1.
 Kullanıcı fiziksel test yapamıyor; bütün kabul otomatik (Node + gerçek Chromium + üretim relay süreci + TLS vekili).
 Fiziksel Android, gerçek uzak internet, LAN ve canlı Render: **NOT RUN**.

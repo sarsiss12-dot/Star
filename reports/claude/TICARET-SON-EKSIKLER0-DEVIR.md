@@ -5,7 +5,7 @@ Güncelleme: 24 Kasım 2026
 ## Dallar
 | Dal | Durum |
 |---|---|
-| `claude/stars-ticaret-son-eksikler0` | **p54 / MP.8.9b53 — en güncel yayın adayı** ({{PR}}) |
+| `claude/stars-ticaret-son-eksikler0` | **p54 / MP.8.9b53 — en güncel yayın adayı** (taslak PR #79) |
 | `claude/stars-ticaret-final0` | p53 / MP.8.9b52 (PR #78), geri dönüş |
 
 - Render için `claude/stars-ticaret-son-eksikler0`.

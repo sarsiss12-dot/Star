@@ -4,7 +4,7 @@ Son güncelleme: 2026-11-24. Depo `sarsiss12-dot/Star`.
 
 ## Güncel geliştirme adayı — p54 (TİCARET-SON-EKSİKLER.0) · ticaretin işlevsel eksikleri kapandı
 
-`claude/stars-ticaret-son-eksikler0` (p53 üstünde, taslak PR). Oyun 96h10p54 / PWA stars-v96h10p54 / MP.8.9b53; Save8 v8 (isteğe bağlı yeni alan), paket 4, protokol 1. ZIP `releases/stars-faz96h10p54.zip` (SHA-256 `c5f1b5b468cd68cbcd211089511a0fd1079923448dfb1e4887698be11325f5e5`, CRC32 `7BEC8B66`). İnsan sahipli iki yönlü / iki ayrı insan sahipli çok taraflı transit onayı (atomik, kayıtlı, MP komutlu), izin yenileme ve uyarıları, AI yenileme. Tam Node 250 / 6606 / 279 (FAIL listesi p53 ile aynı), MP8 TZ / TR / TL / TA / TB / SG / J / X ve uzun oturum I (100/9, 500/16) PASS, mobil 24/0, perf p95 ≤ +%2,74. Fiziksel Android / Render NOT RUN. Ayrıntı `reports/claude/TICARET-SON-EKSIKLER0-SONUC.md`.
+`claude/stars-ticaret-son-eksikler0` (p53 üstünde, taslak PR #79). Oyun 96h10p54 / PWA stars-v96h10p54 / MP.8.9b53; Save8 v8 (isteğe bağlı yeni alan), paket 4, protokol 1. ZIP `releases/stars-faz96h10p54.zip` (SHA-256 `c5f1b5b468cd68cbcd211089511a0fd1079923448dfb1e4887698be11325f5e5`, CRC32 `7BEC8B66`). İnsan sahipli iki yönlü / iki ayrı insan sahipli çok taraflı transit onayı (atomik, kayıtlı, MP komutlu), izin yenileme ve uyarıları, AI yenileme. Tam Node 250 / 6606 / 279 (FAIL listesi p53 ile aynı), MP8 TZ / TR / TL / TA / TB / SG / J / X ve uzun oturum I (100/9, 500/16) PASS, mobil 24/0, perf p95 ≤ +%2,74. Fiziksel Android / Render NOT RUN. Ayrıntı `reports/claude/TICARET-SON-EKSIKLER0-SONUC.md`.
 
 ## Önceki geliştirme adayı — p53 (TİCARET-FİNAL.0) · ticaret döngüsü kapandı
 
