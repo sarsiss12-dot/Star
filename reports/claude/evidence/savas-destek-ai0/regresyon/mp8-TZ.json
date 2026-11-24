@@ -1,0 +1,406 @@
+{
+ "results": [
+  {
+   "name": "TZ0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 13444
+  },
+  {
+   "name": "Z0 fikstür: yalıtılmış 10 sistemlik zincir; host + X s0, C s3, B s6, Y s9; izinsiz X → Y ve host → B rotası yok",
+   "status": "PASS",
+   "ms": 1102
+  },
+  {
+   "name": "Z1 AI koridoru iki misafir limanından: iki misafirde kart; B ONAYLA (dokunuş) → host'ta B onayladı, izin / ödeme yok, B'de bekleme",
+   "status": "PASS",
+   "ms": 5157
+  },
+  {
+   "name": "Z2 B hattı kopar → döner: bekleyen talep ve B'nin onayı korunur; aynı onayın tekrarı reddedilir, ödeme yok",
+   "status": "PASS",
+   "ms": 2138
+  },
+  {
+   "name": "Z3 C ONAYLA (dokunuş) → tek işlem: dört izin, sahiplere +72, X–Y sözleşmesi; iki misafir aynası Uygulandı, kart kalkar",
+   "status": "PASS",
+   "ms": 3809
+  },
+  {
+   "name": "Z4 host ↔ B koridoru C limanından: host talep eder, C REDDET (dokunuş) → reddedildi; kısmi izin / ödeme yok, B kartı kalkar",
+   "status": "PASS",
+   "ms": 4083
+  },
+  {
+   "name": "Z5 izin yenileme MP: C → B izni 40 gün; B YENİLEME İSTE → masa (izin + 36 ◈) → C KABUL → bitişten +360; host / B / C aynı bitiş",
+   "status": "PASS",
+   "ms": 4075
+  },
+  {
+   "name": "Z6 kayıt → kapanış → relay yeniden → yeni oda → misafirler döner: transit kayıtları ve X–Y konvoyu birebir; kargo bir kez teslim",
+   "status": "PASS",
+   "ms": 13061
+  }
+ ],
+ "metrics": {
+  "scen": "TZ",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 450,
+    "buildMs": 530,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 650,
+    "buildMs": 855,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 20.1,
+      "p95": 20.1,
+      "max": 20.1
+     },
+     "longtask": {
+      "n": 6,
+      "med": 66,
+      "p95": 70,
+      "max": 70
+     },
+     "heapMB": 17,
+     "dom": 728,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 42.5,
+       "p95": 42.5,
+       "max": 42.5
+      },
+      "refresh": {
+       "n": 0
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 28,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 64.7,
+       "p95": 64.7,
+       "max": 64.7
+      },
+      "refresh": {
+       "n": 0
+      },
+      "longtask": {
+       "n": 3,
+       "med": 62,
+       "p95": 66,
+       "max": 66
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 723,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 25,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 10374,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "tz": {
+   "fx": {
+    "b": 1,
+    "c": 2,
+    "x": 3,
+    "y": 4,
+    "chain": [
+     0,
+     36,
+     3,
+     21,
+     4,
+     1,
+     26,
+     13,
+     33,
+     8
+    ],
+    "xy": false,
+    "hb": false
+   },
+   "e0": {
+    "0": 3000,
+    "1": 3000,
+    "2": 3000,
+    "3": 3000,
+    "4": 3000
+   },
+   "z1": {
+    "host": [
+     {
+      "id": 1,
+      "st": "pending",
+      "votes": {
+       "1": "yes",
+       "2": "pending"
+      }
+     }
+    ],
+    "guestB": {
+     "st": "pending",
+     "votes": {
+      "0": "yes",
+      "2": "pending"
+     },
+     "terms": null,
+     "trade": 1
+    },
+    "guestC": {
+     "st": "pending",
+     "votes": {
+      "0": "pending",
+      "1": "yes"
+     },
+     "terms": null,
+     "trade": 1
+    },
+    "etk": {
+     "0": 3000,
+     "1": 3000,
+     "2": 3000,
+     "3": 3000,
+     "4": 3000
+    },
+    "pt": {
+     "0": [],
+     "1": [],
+     "2": []
+    },
+    "wait": true
+   },
+   "z2": {
+    "g": {
+     "st": "pending",
+     "votes": {
+      "0": "yes",
+      "2": "pending"
+     },
+     "terms": null,
+     "trade": 1
+    },
+    "again": {
+     "status": "local",
+     "code": "host-yok"
+    },
+    "host": [
+     {
+      "id": 1,
+      "st": "pending",
+      "votes": {
+       "1": "yes",
+       "2": "pending"
+      }
+     }
+    ],
+    "etk": {
+     "0": 3000,
+     "1": 3000,
+     "2": 3000,
+     "3": 3000,
+     "4": 3000
+    }
+   },
+   "z3": {
+    "e": {
+     "0": 3000,
+     "1": 3072,
+     "2": 3072,
+     "3": 2928,
+     "4": 2928
+    },
+    "pt": {
+     "0": [],
+     "1": [
+      3,
+      4
+     ],
+     "2": [
+      3,
+      4
+     ]
+    },
+    "k": 1,
+    "gB": {
+     "st": "committed",
+     "votes": {
+      "0": "yes",
+      "2": "yes"
+     },
+     "terms": null,
+     "trade": 1
+    },
+    "gC": {
+     "st": "committed",
+     "votes": {
+      "0": "yes",
+      "1": "yes"
+     },
+     "terms": null,
+     "trade": 1
+    },
+    "cardB": 0,
+    "cardC": 0
+   },
+   "z4": {
+    "id": 2,
+    "e": {
+     "0": 3000,
+     "1": 3072,
+     "2": 3072,
+     "3": 2928,
+     "4": 2928
+    },
+    "pt": {
+     "0": [],
+     "1": [
+      3,
+      4
+     ],
+     "2": [
+      3,
+      4
+     ]
+    },
+    "gB": {
+     "st": "rejected",
+     "votes": {
+      "0": "pending",
+      "2": "no"
+     },
+     "terms": null,
+     "trade": 0
+    },
+    "cardB": 0
+   },
+   "z5": {
+    "end0": 41.3402,
+    "host": 401.3402,
+    "gb": 401.3402,
+    "gc": 401.3402
+   },
+   "cv": 1,
+   "z6": {
+    "gB": {
+     "st": "committed",
+     "votes": {
+      "0": "yes",
+      "2": "yes"
+     },
+     "terms": null,
+     "trade": 1
+    },
+    "rec": {
+     "status": "delivered",
+     "receipt": 1,
+     "id": 1,
+     "delivered": 15,
+     "loaded": 15,
+     "at": 8,
+     "step": 9,
+     "len": 10,
+     "reason": "Varış limanına ulaştı",
+     "day": 208
+    },
+    "rec2": {
+     "status": "delivered",
+     "delivered": 15
+    }
+   }
+  },
+  "errors": []
+ }
+}

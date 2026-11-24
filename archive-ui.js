@@ -190,6 +190,9 @@ const WarCenterUI={
  tab:'mine',front:0,plan:0,confirmPlan:0,preparations:[],status:null,index:[],backNews:null,request:0,last:0,sig:'',
  guest(){return typeof MP6Stars!=='undefined'&&MP6Stars.S?.started;},
  read(front,done){if(this.guest())return MP6Stars.warCenterRead(front,done);done(front?{report:ColonyInfo.read(()=>warNewsReport(G.p,front))}:{index:warCenterIndex(G.p),preparations:warPrepareView(G.p)});return true;},
+ /* SAVAŞ-DESTEK-AI.0: Savaş Merkezi yeniden çizimi openModal'ın .mbox çerçevesinin İÇİNE yazılır (p54'te #modal'ın tamamı değişiyor,
+    çerçeve sınıfı düşüyor, başlık ile içerik ekranın iki yanına dağılıyordu). Çerçeve yoksa eski davranış. */
+ box(){const m=$('modal');return m&&m.querySelector(':scope>.mbox')||m;},
  open(front=0,news=null,plan=0){this.front=+front||0;this.plan=plan;this.confirmPlan=0;this.backNews=news;this.status=null;this.sig='';this.last=0;const req=++this.request;
   UI.openModal('<div class="mhd">⚔ SAVAŞ MERKEZİ<button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warCenterRoot">Host bilgisi hazırlanıyor…</div>','war');
   UI.surfaceReplace($('modal'),$('modal').innerHTML,'war-center-loading');
@@ -216,7 +219,7 @@ const WarCenterUI={
   h+=rows.map(r=>`<section class="box"><div class="bt">${r.sides.map(id=>esc(this.label(id))).join(' ↔ ')}</div>${this.exhBar(r)}<div class="mini">Sefer #${r.campaign} · Cephe #${r.id} · ${r.opened===null?'Başlangıç bilinmiyor':'Başlangıç günü '+Math.floor(r.opened)} · ${r.ended===null?'AKTİF':'Bitiş günü '+Math.floor(r.ended)}</div><button class="abtn" data-a="warCenterDetail" data-x="${r.id}">SAVAŞ AYRINTISI</button></section>`).join('')||'<p>Bu bölümde bilinen kayıt yok.</p>';
   if(this.tab==='mine')for(const p of this.preparations)h+=`<section class="box"><b>KOALİSYON HAZIRLIĞI #${p.id}</b><p>${esc(this.label(p.owner))} → ${esc(this.label(p.target))} · ${esc(WAR_GOALS[p.goal]?.n||p.goal)} · ${esc(p.state)}</p><button class="abtn" data-a="warPreparation" data-x="${p.id}">KABULLER / SON ONAY</button></section>`;
   h+='</div><div class="mft"><button class="ch" data-a="diplomaticInbox">TEKLİFLER / GELEN KUTUSU</button><button class="ch" data-a="news">HABERLER</button></div>';
-  UI.surfaceRender($('modal'),h,'war-center',true);
+  UI.surfaceRender(WarCenterUI.box(),h,'war-center',true);
  },
  detail(r){
   const record=this.backNews||{front:r.id,key:'war-front:'+r.id,title:'Savaş ayrıntısı',empires:r.sides.map(id=>({id,name:this.label(id)}))};
@@ -256,34 +259,58 @@ const WarCenterUI={
   const t={sending:'Gönderiliyor…',pending:'Bekliyor — karar karşı tarafta (Gelen kutusu → Gönderilen)',accepted:'Kabul edildi — cepheye katıldı',countered:'Karşı teklif geldi'+(st.why?': '+st.why:'')+' — Şartlı Teklif… ile müzakere et',
    rejected:'Reddedildi'+(st.why?': '+st.why:''),error:'Gönderilemedi: '+(st.why||'bilinmeyen neden')}[st.state]||'';return {state:st.state,text:t};},
  support(front,sponsor){this.front=front;const enemy=this.status?.sides.find(id=>id!==sponsor);if(!Number.isInteger(enemy))return;this._supCtx={front,sponsor,enemy};
-  const candidates=G.emps.filter(e=>e.id!==sponsor&&e.id!==enemy&&!e.dead&&!e.wild&&!e.crisisSide&&G.p.contact[e.id]&&!e.war[enemy]&&e.contact?.[enemy]!==false);
+  /* SAVAŞ-DESTEK-AI.0: bu ekrandan istenip kabul eden aday savaşa girince listeden düşüyordu (sonuç hiç görünmüyordu): "katıldı" olarak kalır */
+  const joinedHere=e=>!!e.war[enemy]&&this.supState(front,e.id).state==='accepted';
+  const candidates=G.emps.filter(e=>e.id!==sponsor&&e.id!==enemy&&!e.dead&&!e.wild&&!e.crisisSide&&G.p.contact[e.id]&&(!e.war[enemy]||joinedHere(e))&&e.contact?.[enemy]!==false);
   const it={t:'warJoin',front,target:enemy},res=['min','ala','ene'].map(r=>RES[r].ico+' '+Math.floor(G.p.res[r]||0)).join(' · ');
   const lands=typeof warFetihCandidates==='function'?warFetihCandidates(G.p,G.emps[enemy]).length:0;
   /* misafirde temas / savaş bilgisi aynada eksik: uygunluk host'un warSupportList kararından (salt okuma; gelince kartlar yeniden çizilir) */
   const gateOf=e=>{if(this.guest()&&typeof UI.dealSupportRows==='function'){const r=(UI.dealSupportRows(e)||[]).find(x=>x.kind==='front'&&x.front===front);return r?{ok:!!r.ok,why:r.why||''}:UI.dealSupportReady&&UI.dealSupportReady(e)?{ok:false,why:'Bu cepheye katılım için uygun değil (host)'}:{ok:false,why:'Host uygunluğu doğruluyor…',wait:true};}
    return typeof warSupportGate==='function'?warSupportGate(e,G.p,it):{ok:true,why:''};};
-  const card=e=>{const g=gateOf(e),st=this.supState(front,e.id),busy=st.state==='sending'||st.state==='pending';
-   return `<section class="box supCand" data-cand="${e.id}"><div class="bt"><b style="color:${e.col}">${esc(this.label(e.id))}</b> <span class="mini">ilişki ${Math.round(G.p.rel[e.id]||0)}${G.p.ally[e.id]?' · müttefik':''}${e.ai===false?' · oyuncu':''}</span></div>
-    <div class="mini supGate" data-ok="${g.ok?1:g.wait?'w':0}">${g.ok?'✔ Uygun: Cephe #'+front+' · '+esc(this.label(enemy))+' karşısında katılım istenebilir':(g.wait?'… ':'⛔ ')+esc(g.why||'Uygun değil')}</div>
+  /* SAVAŞ-DESTEK-AI.0: aday önceliği müttefik > federasyon ortağı > dost (ilişki ≥40) > ortak düşman (istihbarat ≥2 ile bilinen
+     düşmanlık); uygun adaylar önde. Gerekçe etiketleri yalnız oyuncunun bildiği bilgiden (gizli ekonomi / güç okunmaz). */
+  const myFed=typeof findFed==='function'?findFed(G.p):null,info=e=>{const tags=[],rel=Math.round(G.p.rel[e.id]||0);let tier=0;
+   if(G.p.ally[e.id]){tags.push('müttefik');tier=Math.max(tier,4);}
+   if(myFed&&typeof findFed==='function'&&findFed(e)===myFed){tags.push('federasyon ortağı');tier=Math.max(tier,3);}
+   if(rel>=40){tags.push('dost');tier=Math.max(tier,2);}
+   const foeRel=typeof intelOf==='function'&&intelOf(G.p,e.id)>=2?e.rel?.[enemy]:undefined;if(Number.isFinite(foeRel)&&foeRel<=-25){tags.push('düşmanla arası kötü');tier=Math.max(tier,1);}
+   if(e.ai===false)tags.push('oyuncu');return {tier,rel,tags};};
+  const rows=candidates.map(e=>({e,g:joinedHere(e)?{ok:false,joined:true,why:'Cepheye katıldı'}:gateOf(e),i:info(e)})).sort((a,b)=>(b.g.ok?1:0)-(a.g.ok?1:0)||b.i.tier-a.i.tier||b.i.rel-a.i.rel||a.e.id-b.e.id);
+  const ready=rows.filter(r=>r.g.ok&&['','error'].includes(this.supState(front,r.e.id).state));
+  const card=({e,g,i})=>{const st=this.supState(front,e.id),busy=st.state==='sending'||st.state==='pending';
+   return `<section class="box supCand" data-cand="${e.id}" data-tier="${i.tier}"><div class="bt"><b style="color:${e.col}">${esc(this.label(e.id))}</b> <span class="mini">ilişki ${i.rel}${i.tags.length?' · '+esc(i.tags.join(' · ')):''}</span></div>
+    <div class="mini supGate" data-ok="${g.ok?1:g.wait?'w':g.joined?'j':0}">${g.joined?'✔ Cepheye katıldı':g.ok?'✔ Uygun: Cephe #'+front+' · '+esc(this.label(enemy))+' karşısında katılım istenebilir':(g.wait?'… ':'⛔ ')+esc(g.why||'Uygun değil')}</div>
     <div class="act2"><button class="abtn pri" data-a="warCenterAsk" data-x="${front}:${enemy}:${e.id}" ${g.ok&&!busy?'':'disabled'}>⚔ Destek İste</button>
      <button class="abtn" data-a="warCenterCompose" data-x="${front}:${sponsor}:${e.id}">Şartlı Teklif…</button></div>
     ${st.text?`<div class="mini supState" data-state="${st.state}" role="status">${esc(st.text)}</div>`:''}</section>`;};
   const h=`<div class="mhd">DESTEK DAVETİ · Cephe #${front}<button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warSupportRoot"><p>Yalnız seçtiğin devlete teklif gider; kabul diğer adayları savaşa sokmaz. Katılım ve varsa ödeme kabulde bir kez uygulanır.</p>
-   <p class="mini">Şartlı teklifte verebileceklerin: ${res}${lands?' · toprak vaadine uygun bilinen düşman sistemi: '+lands:' · toprak vaadine uygun bilinen düşman sistemi yok'}</p>${candidates.map(card).join('')||'<p>Temaslı uygun aday yok.</p>'}
+   <p class="mini">Şartlı teklifte verebileceklerin: ${res}${lands?' · toprak vaadine uygun bilinen düşman sistemi: '+lands:' · toprak vaadine uygun bilinen düşman sistemi yok'}</p>
+   ${ready.length>1?`<div class="act2"><button class="abtn pri" id="warSupportAll" data-a="warCenterAskAll" data-x="${front}:${enemy}">⚔ UYGUN ${ready.length} ADAYA DESTEK İSTE</button></div><p class="mini">Her adaya ayrı karşılıksız katılım teklifi gider; her biri kendi kararını verir. Bu cephe için daha önce sorulmuş adaya (bekleyen, kabul, ret, karşı teklif) toplu teklif yeniden gitmez; tek tek Destek İste ya da Şartlı Teklif… kullan.</p>`:''}
+   ${rows.map(card).join('')||'<p>Temaslı uygun aday yok.</p>'}
    <button class="abtn" data-a="warCenterDetail" data-x="${front}">CEPHEYE DÖN</button></div>`;
-  if($('warSupportRoot'))UI.surfaceRender($('modal'),h,'war-support:'+front,true);else UI.openModal(h,'war');
+  if($('warSupportRoot'))UI.surfaceRender(WarCenterUI.box(),h,'war-support:'+front,true);else UI.openModal(h,'war');
  },
  ask(front,enemy,to){const k=front+':'+to,sup=this._sup||(this._sup={}),cur=sup[k];if(cur&&(cur.state==='sending'||cur.state==='pending'))return;
   sup[k]={state:'sending',day:G.day};const ctx=this._supCtx,redraw=()=>{if(ctx&&$('warSupportRoot'))this.support(ctx.front,ctx.sponsor);};redraw();
   this.command({kind:'offer',to,give:[],want:[{t:'warJoin',front,target:enemy}]},r=>{const ai=r&&r.extra&&r.extra.ai;
    sup[k]=!r||!r.ok?{state:'error',why:r&&(r.why||r.code)||'host yanıt vermedi',day:G.day}:{state:ai==='kabul'?'accepted':ai==='red'?'rejected':ai==='karsi'?'countered':'pending',offer:r.extra&&r.extra.offer||null,why:'',day:G.day};redraw();});
  },
+ /* SAVAŞ-DESTEK-AI.0: toplu davet — ekrandaki uygun (gate ok) ve bu cephe için henüz sorulmamış (ya da gönderimi hata veren) her adaya AYRI ask(); her teklif
+    bağımsız karar alır, ask() kendi çift teklif kilidini taşır. Bağlam o an açık destek penceresinin cephesi olmalı. */
+ askAll(front,enemy){const ctx=this._supCtx;if(!ctx||ctx.front!==front||ctx.enemy!==enemy)return 0;const it={t:'warJoin',front,target:enemy};let n=0;
+  const ids=G.emps.filter(e=>e.id!==ctx.sponsor&&e.id!==enemy&&!e.dead&&!e.wild&&!e.crisisSide&&G.p.contact[e.id]&&!e.war[enemy]&&e.contact?.[enemy]!==false).map(e=>e.id);
+  for(const id of ids){const e=G.emps[id],st=this.supState(front,id).state;if(!['','error'].includes(st))continue;
+   let ok;if(this.guest()&&typeof UI.dealSupportRows==='function'){const r=(UI.dealSupportRows(e)||[]).find(x=>x.kind==='front'&&x.front===front);ok=!!(r&&r.ok);}else ok=typeof warSupportGate==='function'?warSupportGate(e,G.p,it).ok:false;
+   if(!ok)continue;this.ask(front,enemy,id);n++;}
+  return n;
+ },
  compose(front,sponsor,joiner){if(sponsor!==0&&joiner!==0)return;const r=this.status||this.index.find(x=>x.id===front),enemy=r?.sides.find(id=>id!==sponsor);if(!Number.isInteger(enemy))return;
   const to=sponsor===0?joiner:sponsor;this.request++;UI.closeModal();UI.openDeal(to);UI.deal.give=sponsor===0?[]:[{t:'warJoin',front,target:enemy}];UI.deal.want=sponsor===0?[{t:'warJoin',front,target:enemy}]:[];
   UI.dealMsg='Cephe #'+front+' · Kaynak ve geçiş şartlarını mevcut masada düzenle. Kabulde ödeme ve katılım birlikte, bir kez uygulanır. Karşı teklif aynı cephe kimliğini korur.';UI.drawDeal();
  },
- act(a,x){if(this.prepAct(a,x))return true;if(!['warCenter','warCenterTab','warCenterDetail','warCenterSupport','warCenterCompose','warCenterPeace','warCenterAsk'].includes(a))return false;
+ act(a,x){if(this.prepAct(a,x))return true;if(!['warCenter','warCenterTab','warCenterDetail','warCenterSupport','warCenterCompose','warCenterPeace','warCenterAsk','warCenterAskAll'].includes(a))return false;
   if(a==='warCenterAsk'){const[f,en,to]=String(x).split(':').map(Number);this.ask(f,en,to);return true;}
+  if(a==='warCenterAskAll'){const[f,en]=String(x).split(':').map(Number);this.askAll(f,en);return true;}
   if(a==='warCenterPeace'){UI.closeModal();UI.selectDiplo(+x,'relation');}
   if(a==='warCenter')this.open();if(a==='warCenterTab'&&['mine','known','past'].includes(x)){this.tab=x;this.list();}
   if(a==='warCenterDetail')this.open(+x);if(a==='warCenterSupport'){const[f,s]=String(x).split(':').map(Number);this.support(f,s);}
@@ -303,7 +330,7 @@ Object.assign(WarCenterUI,{
   let h=`<div class="mhd">KOALİSYON HAZIRLIĞI #${p.id}<button class="riX" data-a="closem">✕</button></div><div class="mbd" id="warCenterRoot"><p>${esc(this.label(p.owner))} → ${esc(this.label(p.target))} · ${esc(WAR_GOALS[p.goal]?.n||p.goal)}</p><p>Durum: ${esc(p.state)} · Son gün ${p.expires}</p><p>Kabul, koşullu taahhüttür. Son savaş onayına kadar ödeme, geçiş izni veya savaş uygulanmaz. Kaynaklar rezerve edilmez; son onayda tekrar denetlenir.</p>`;
   for(const c of p.commitments)h+=`<section class="box"><b>${esc(this.label(c.member))} · ${esc(c.state)}</b><p>Veren: ${c.terms.give.map(x=>esc(dealLabel(x))).join(' · ')||'—'}</p><p>İstenen: ${c.terms.want.map(x=>esc(dealLabel(x))).join(' · ')||'—'}</p>${p.state==='pending'&&c.state==='accepted'?`<button class="abtn" data-a="warPrepareWithdraw" data-x="${p.id}:${c.member}">BU KABULÜ GERİ ÇEK</button>`:''}</section>`;
   if(p.owner===0&&p.state==='pending'){h+=`<button class="abtn" data-a="warPrepareInvite" data-x="${p.id}">KATILIM TEKLİFİ HAZIRLA</button><p>${esc(p.quote?.why||'Host son koşulları denetler')}</p><button class="abtn pri" data-a="warPrepareLaunchAsk" data-x="${p.id}" ${p.quote?.ok?'':'disabled'}>SON SAVAŞ ONAYI</button><button class="abtn" data-a="warPrepareWithdraw" data-x="${p.id}:cancel">HAZIRLIĞI İPTAL ET</button>`;}
-  h+='<button class="abtn" data-a="warCenter">SAVAŞ MERKEZİNE DÖN</button></div>';UI.surfaceRender($('modal'),h,'war-center-plan',true);
+  h+='<button class="abtn" data-a="warCenter">SAVAŞ MERKEZİNE DÖN</button></div>';UI.surfaceRender(WarCenterUI.box(),h,'war-center-plan',true);
  },
  prepAct(a,x){if(!['warPrepare','warPreparation','warPrepareInvite','warPrepareCompose','warPrepareLaunchAsk','warPrepareLaunch','warPrepareWithdraw'].includes(a))return false;
   if(a==='warPrepare'){const[target,goal]=String(x).split(':');const request=++this.request;UI.openModal('<div class="mhd">KOALİSYON HAZIRLIĞI</div><div class="mbd" id="warCenterRoot">Host onayı bekleniyor…</div>','war');this.confirmPlan=-1;this.command({kind:'warPrepare',target:+target,goal},r=>{if(this.request!==request||!$('warCenterRoot'))return;this.confirmPlan=0;if(r.ok)this.open(0,null,r.extra.id);else $('warCenterRoot').textContent=r.why||r.code||'Hazırlık reddedildi';});}

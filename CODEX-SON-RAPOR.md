@@ -1,6 +1,8 @@
 # Son Codex raporu
 
-[TİCARET-SON-EKSİKLER.0 (Claude, p54 / MP.8.9b53 yayın adayı) · insan sahipli çok taraflı transit onayı, izin yenileme, MP TZ 8/0, uzun MP oturumu, tam Node yeni FAIL yok](reports/claude/TICARET-SON-EKSIKLER0-SONUC.md)
+[SAVAŞ-DESTEK-AI.0 (Claude, p55 / MP.8.9b54 yayın adayı) · AI savaş desteği kararı (doktrin düzeltmesi, kriz / ikinci cephe kapıları), aktif savaşta yardım isteği, Savaş Merkezi toplu destek, kampanyada savaş artışı yok](reports/claude/SAVAS-DESTEK-AI0-SONUC.md)
+
+Önceki: [TİCARET-SON-EKSİKLER.0 (Claude, p54 / MP.8.9b53 yayın adayı) · insan sahipli çok taraflı transit onayı, izin yenileme, MP TZ 8/0, uzun MP oturumu, tam Node yeni FAIL yok](reports/claude/TICARET-SON-EKSIKLER0-SONUC.md)
 
 Önceki: [TİCARET-FİNAL.0 (Claude, p53 / MP.8.9b52 yayın adayı) · ticaret döngüsü kapandı: yoğun konvoy −%62, 24 maddelik envanter, dokunmatik iptal / izin testleri, tam Node yeni FAIL yok](reports/claude/TICARET-FINAL0-SONUC.md)
 

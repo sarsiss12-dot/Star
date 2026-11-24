@@ -1,0 +1,7 @@
+PASS Y0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS Y1 Barış + Sistem Devri + Haraç: C gerçek masada (dokunuş) hazırlar, özet sonucu gösterir; B karşı teklif; C karttan kabul; host + B + C aynı yeni sahip ve aynı ödeme takvimi
+PASS Y2 bir ödeme → kaydet → host kapanır → YENİ odada devam → misafirler döner → sonraki ödeme doğru ayda BİR kez
+PASS Y3 teklif beklerken sahiplik değişir → geçersiz + iki tarafa neden; aynı kabul iki kez + yanıt sırasında hat donar/kopar → tek uygulama
+PASS Y4 Federasyon: tek dokunuş İttifak Daveti (misafir → misafir bekliyor → kabul; misafir → AI sonuç satırda; çift dokunuş tek teklif); host masaüstünde misafire; bekleyen federasyon oyu üstte
+PASS Y5 Savaş Merkezi: seçili cepheden destekçi kartı (uygunluk / ret nedeni / kaynak + toprak vaadi şartı) → Destek İste doğru cepheye → kabul; AI adayı sonucu kartta; çift dokunuş tek teklif
+GEÇEN: 6 KALAN: 0

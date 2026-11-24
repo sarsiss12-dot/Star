@@ -1,0 +1,9 @@
+PASS SE0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS H0 fikstür (host): AI O ↔ AI X savaşta, B ile O müttefik; AI F B'ye savaş açar, B yorgunluğu 88; F'ye 8 bilinen sistem
+PASS H1 misafir "Büyük armalar" düğmesi çalışır (kapı engeli yok)
+PASS H2 lojistik: filo seçili değilken ikmal limanları + ipucu (misafir ve host)
+PASS H3 misafir Savaş Merkezi: yorgunluk %88 + %85 uyarısı (host değeri), rakip BİLİNMİYOR
+PASS H4 misafir HARİTADAN HEDEF SEÇ: 6+ sistem gerçek harita dokunuşuyla; host önizlemesi talep bedeli > 0
+PASS H5 misafir TÜMÜNÜ KENARA AL: kartlar gizlenir, karar verilmez
+PASS H6 misafir Savaşa Yardım Teklif Et: müttefik O'nun X savaşına katılım VER + 300 alaşım İSTE → host kaydı
+GEÇEN: 8 KALAN: 0

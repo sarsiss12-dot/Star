@@ -2,7 +2,14 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — TİCARET-SON-EKSİKLER.0 (p54 / MP.8.9b53, 24 Kasım 2026)
+## Son teslim — SAVAŞ-DESTEK-AI.0 (p55 / MP.8.9b54, 24 Kasım 2026)
+
+- Ayrıntı: `reports/claude/SAVAS-DESTEK-AI0-SONUC.md` (24 bölüm, 21 soru), devir `SAVAS-DESTEK-AI0-DEVIR.md`, kanıt `reports/claude/evidence/savas-destek-ai0/`. Dal `claude/stars-savas-destek-ai0` (taban p54 `5aefe56`). ZIP `releases/stars-faz96h10p55.zip`, kayıt `RELEASE-SAVAS-DESTEK-AI0.json`. p55 paket yükleyicisi p41–p54 kabul eder. Save8 şeması değişmedi. Otomatik kabul; Android / internet / Render NOT RUN.
+- AI katılım kararı tek kapı `aiWarJoinGate` (aiRespond warJoin): güç/erişim, ekonomik kriz, ≥2 savaş / yorgunluk, süren savaşın bağladığı güç, `aiWarBudget`, başkent tehdidi. `itemValue` warJoin doktrini `personaKey`'den okur (p54'te `e.mizac` AI'da yoktu → doktrin hiç uygulanmıyordu), savunma ayrı fiyat, sadakat × `aiHonesty`. `warSupportGate` Arındırıcı kilidi (`diploBlocked`).
+- `aiWarHelpAsk`: koalisyon dışı kendi cephesinde zorlanan AI tek adaya warJoin ister (müttefik > fed > dost), gerçek stoktan ödeme; `aiTalk` beklemeleri (30 gün / cephe+aday 180, ret 360). Savaş Merkezi: aday önceliği + etiket, `askAll` toplu destek, kabul eden aday listede kalır, `WarCenterUI.box()` (yeniden çizimi `.mbox` içine yaz; `$('modal')`'a yazarsan çerçeve düşer).
+- Kampanya: 8 yapılandırmanın 6'sı p54 ile bayt bayt aynı, savaş sayısı artmadı. Savaş testi fikstürlerinde AI'yı ekonomik krizde bırakma (Q fikstürü bu yüzden düzeltildi). Test: `savas_destek_ai0_{test,mp_test,equivalence_test}.js`, `browser-savas-destek-ai0-sp.cjs`, `MP8_SCEN=SD`.
+
+## Önceki teslim — TİCARET-SON-EKSİKLER.0 (p54 / MP.8.9b53, 24 Kasım 2026)
 
 - Ayrıntı: `reports/claude/TICARET-SON-EKSIKLER0-SONUC.md` (23 bölüm, M1–M20, 10 soru), devir `TICARET-SON-EKSIKLER0-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-son-eksikler0/`. Dal `claude/stars-ticaret-son-eksikler0` (taban p53 `1dec704`). ZIP `releases/stars-faz96h10p54.zip`, kayıt `RELEASE-TICARET-SON-EKSIKLER0.json`. p54 paket yükleyicisi p41–p53 kabul eder. Otomatik kabul; Android / internet / Render NOT RUN.
 - Çok taraflı transit onayı `G.commerce.transit` (yalnız kullanıldığında; `restore` sıkı doğrular): `transitPlan` (iki yön en küçük izin kümesi), `transitOpen/Vote/Cancel/Commit/Valid/Sweep` (pending → committed / rejected / expired 120 gün / cancelled / invalid), son onayda yeniden doğrulama + `dealTxBegin` içinde `executeDeal` izinleri (+ AI talebinde `aiNegotiate` sözleşmesi), hata → rollback. İnsan yalnız kendi oyu; AI taraf `aiDealWould`. `aiTransitHuman` (aiTransitRequest sonu, yalnız insan aday varken), `transitAsk` (oyuncu talebi). T5 (tamamlama0) bilinçli güncellendi.
