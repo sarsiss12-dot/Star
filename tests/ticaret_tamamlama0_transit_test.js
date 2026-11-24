@@ -6,7 +6,7 @@
    T2 bekleme: aynı ay ikinci çağrı rota / Etki harcamaz
    T3 tek yönlü (b zaten izinli): yalnız a izin alır, b ikinci izin almaz
    T4 aradaki liman yok: hiçbir istek, Etki harcanmaz
-   T5 insan sahip + iki yön: istek yok, gelen kutusu boş (insan adına izin yok)
+   T5 insan sahip + iki yön: çok taraflı onay talebi (SON-EKSİKLER.0); insan adına izin / ödeme yok
    T6 insan sahip + tek yön: teklif insanın gelen kutusuna gider (AI izni kendisi oluşturamaz)
    T7 düşük güven: sahip karşı teklifi teklif edenin tavanını aşar → izin / Etki yok
    T8 kısmi hata (ikinci portTransit maddesinde motor hatası): hiçbir izin ve ödeme kalmaz, bekleme süreleri kalır
@@ -42,7 +42,10 @@ test('T1 iki yönlü koridor: iki izin, her taşıyıcı kendi Etki\'siyle; erte
 test('T2 bekleme: aynı ay ikinci çağrı rota ya da Etki harcamaz',()=>{const h=world();call(h);const r=call(h);assert.equal(r.used,0);assert.deepEqual(r.etk,[0,0,0]);});
 test('T3 tek yönlü (b zaten izinli): yalnız a izin alır; b ikinci izin almaz',()=>{const h=world({bRight:true});const r=call(h);assert.equal(r.aRight,true);assert.deepEqual(r.etk,[-36,0,36]);assert.equal(r.coolB,false,'b için istek yok');});
 test('T4 aradaki liman yok: istek yok, Etki harcanmaz',()=>{const r=call(world({noRelay:true}));assert.equal(r.r,false);assert.deepEqual(r.etk,[0,0,0]);});
-test('T5 insan sahip + iki yön: istek yok, gelen kutusu boş',()=>{const r=call(world({owner:0}));assert.equal(r.r,false);assert.equal(r.inbox,0);assert.deepEqual(r.etk,[0,0,0]);assert.equal(r.aRight||r.bRight,false);});
+/* TİCARET-SON-EKSİKLER.0: p51–p53'te insan sahibe iki yönlü istek HİÇ gönderilmiyordu (bilinen sınırlama). Artık çok taraflı onay talebi açılır;
+   değişmeyen kural: insan adına izin ya da ödeme yazılmaz, karar insanındır. Ayrıntılı vakalar tests/ticaret_son_eksikler0_test.js. */
+test('T5 insan sahip + iki yön: çok taraflı onay talebi açılır; insan onaylamadan izin / ödeme yok',()=>{const h=world({owner:0});const r=call(h);const tx=J(h,'(G.commerce.transit||[]).map(t=>({st:t.st,votes:t.votes,legs:t.legs.length}))');
+  assert.equal(r.r,true,'talep açıldı');assert.deepEqual(tx,[{st:'pending',votes:{0:'pending'},legs:2}]);assert.deepEqual(r.etk,[0,0,0]);assert.equal(r.aRight||r.bRight,false);assert.ok(r.inbox>=1,'oyuncuya transit kartı');});
 test('T6 insan sahip + tek yön: teklif insanın gelen kutusuna gider, izin kendiliğinden oluşmaz',()=>{
   const h=world({owner:0,bRight:true});const r=call(h);const rec=J(h,'(DiplomaticInbox.state?.().records||[]).filter(x=>x.status==="pending").map(x=>x.kind)');
   assert.equal(r.aRight,false,'insan adına izin yok');assert.deepEqual(r.etk,[0,0,0],'ödeme kabulden önce yok');assert.ok(r.inbox>0||rec.length>0,'teklif gelen kutusunda '+JSON.stringify({r,rec}));});

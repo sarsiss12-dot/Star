@@ -7925,7 +7925,7 @@ const NOTE_CODEC = {
 /* Kimliği bir imparatorluğa bağlı, sade sayısal payload'lar */
 const NOTE_EMP_KINDS  = ['peace','cncnew','wardec','sqOffer'];
 /* Serbest sayısal payload (imparatorluk referansı DEĞİL) */
-const NOTE_NUM_KINDS  = ['fedagenda','fedfound','fedfoundResult','crisis','criswarn','fedvote','crisend'];
+const NOTE_NUM_KINDS  = ['fedagenda','fedfound','fedfoundResult','crisis','criswarn','fedvote','crisend','transit'];   // TİCARET-SON-EKSİKLER.0: +transit
 /* Sade dize payload */
 const NOTE_STR_KINDS  = ['cncvote','facdem','faccoup'];
 

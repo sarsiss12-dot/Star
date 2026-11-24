@@ -8102,6 +8102,7 @@ const UI = {
       /* FAZ 85E: sqOffer'ın tüketici case'i YOKTU — bildirim
          kuyruktan siliniyor ama hiçbir karar ekranı açılmıyordu. */
       case 'sqOffer': this.sqOfferOpen(it.data); break;
+      case 'transit': if(typeof CommerceUI!=='undefined')CommerceUI.open('transit',it.data||null); break;   // TİCARET-SON-EKSİKLER.0
     }
   },
 

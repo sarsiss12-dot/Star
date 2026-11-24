@@ -19,8 +19,9 @@ const CommerceUI={selected:null,hits:[],token:null,
  },
  hit(p){if(!Commerce.state().visible)return null;return this.hits.find(h=>Math.hypot(h.x-p.x,h.y-p.y)<16);},
  open(mode='contracts',id=null){
-  const st=Commerce.state(),e=G.p,contracts=st.contracts.filter(c=>c.a===e.id||c.b===e.id),convoys=st.convoys.filter(c=>c.e===e.id||c.to===e.id),stats=Commerce.stats(e.id);let h=`<div class="mhd">TİCARET SÖZLEŞMELERİ <button class="riX" data-a="closem">✕</button></div><div class="mbd"><div class="mini">Genel ticaret anlaşması izin verir. Bu ekrandaki sözleşme gerçek yük taşır. Her iki yön çıkışta birlikte yüklenir, varışları ayrıdır. Bir yön kaybolursa diğer teslimat geri alınmaz.</div><div class="mft"><button class="ch" data-a="commerce">Sözleşmeler (${contracts.length})</button><button class="ch" data-a="commerceConvoys">Konvoylar (${convoys.filter(c=>!Commerce.terminal(c)).length})</button><button class="ch" data-a="commerceNew">Yeni sözleşme</button></div>`;
-  if(mode==='convoys'){
+  const st=Commerce.state(),e=G.p,contracts=st.contracts.filter(c=>c.a===e.id||c.b===e.id),convoys=st.convoys.filter(c=>c.e===e.id||c.to===e.id),stats=Commerce.stats(e.id);let h=`<div class="mhd">TİCARET SÖZLEŞMELERİ <button class="riX" data-a="closem">✕</button></div><div class="mbd"><div class="mini">Genel ticaret anlaşması izin verir. Bu ekrandaki sözleşme gerçek yük taşır. Her iki yön çıkışta birlikte yüklenir, varışları ayrıdır. Bir yön kaybolursa diğer teslimat geri alınmaz.</div><div class="mft"><button class="ch" data-a="commerce">Sözleşmeler (${contracts.length})</button><button class="ch" data-a="commerceConvoys">Konvoylar (${convoys.filter(c=>!Commerce.terminal(c)).length})</button><button class="ch" data-a="commerceNew">Yeni sözleşme</button><button class="ch" data-a="commerceTransit">Liman izinleri (${this.transitPending()})</button></div>`;
+  if(mode==='transit')h+=this.transitHtml(id);
+  else if(mode==='convoys'){
    if(!convoys.length)h+='<div class="mini">Henüz konvoy yok; hayali geçmiş sefer oluşturulmaz.</div>';
    const rows=convoys.filter(c=>!Commerce.terminal(c)).concat(convoys.filter(c=>Commerce.terminal(c)).slice(-40).reverse());if(id){const selected=convoys.find(c=>c.id===+id);if(selected){const i=rows.indexOf(selected);if(i>=0)rows.splice(i,1);rows.unshift(selected);}}
    for(const c of rows){const eta=this.eta(c);h+=`<div class="box"><div class="bt"><button class="abtn" data-a="commerceConvoy" data-x="${c.id}">▱ #${c.id} · ${esc(Commerce.labels[c.status])}</button><b>${c.amount.toFixed(1)} ${RES[c.r].n}</b></div><div class="mini">${esc(G.sys[c.source]?.name||'?')} → ${esc(G.sys[c.target]?.name||'?')} · ${esc(G.emps[c.e]?.name||'?')}</div><div class="mini">Konum: ${esc(G.sys[c.at]?.name||'?')}${c.t>0?' · yolda':''} · ${eta} · ${esc(c.reason)}</div><details><summary>Güzergâh</summary>${esc(this.routeText(G.emps[c.e],G.emps[c.to],c.source,c.target,c.route))}</details><div class="mini">Yüklenen ${c.loaded.toFixed(1)} · Teslim ${c.delivered.toFixed(1)} · Kayıp ${c.lost.toFixed(1)}</div><button class="abtn" data-a="commerceLocate" data-x="${c.id}">Haritada göster</button></div>`;}
@@ -31,6 +32,38 @@ const CommerceUI={selected:null,hits:[],token:null,
   h+=`<div class="ph">GERÇEK TİCARET SONUÇLARI</div><div class="mini">Yüklenen: ${this.amounts(stats.loaded)}<br>Teslim gönderilen: ${this.amounts(stats.sent)}<br>Gerçek alınan: ${this.amounts(stats.received)}<br>Kayıp: ${this.amounts(stats.lost)} (imha: ${this.amounts(stats.destroyed)})</div><div class="mini">Liman/ağ üretim katkısı ayrıdır; teorik sefer geliri yoktur. Kaynak yalnız fiziksel varışta eklenir. Kapalı rota/liman en çok 180 gün beklenir; sonra taşınan yük kayıptır.</div></div><div class="mft"><button class="ch" data-a="closem">Kapat</button></div>`;
   this.modal(h);$('modal').classList.add('commerceHost');const box=$('modal').querySelector('.mbd');if(box)box.style.cssText='max-height:calc(100dvh - 110px);overflow-y:auto;overscroll-behavior:contain';this.token=G.sys;this.buttons();
  },
+ /* TİCARET-SON-EKSİKLER.0: çok taraflı transit talepleri ve liman izinlerinin süresi. Kararlar yalnız oyuncunun kendi payı için. */
+ transitMine(){const me=G.p.id;return Commerce.transitList().filter(t=>t.by===me||Commerce.transitParties(t).includes(me));},
+ transitPending(){const me=G.p.id;return this.transitMine().filter(t=>t.st==='pending'&&t.votes[me]==='pending').length;},
+ transitHtml(focus){
+  const me=G.p.id,nm=id=>esc(G.emps[id]?.name||'Bilinmeyen devlet'),sy=id=>esc(Commerce.known(G.p,G.sys[id])?G.sys[id].name:'Bilinmeyen sistem');
+  let h='<div class="ph">ÇOK TARAFLI TRANSİT TALEPLERİ</div><div class="mini">Her liman sahibi yalnız kendi limanının iznine karar verir. Bütün onaylar gelmeden izin ve ödeme yazılmaz; son onayda koşullar yeniden denetlenir, izinler tek işlemde uygulanır.</div>';
+  const list=this.transitMine().slice().sort((x,y)=>Number(y.st==='pending')-Number(x.st==='pending')||(x.id===+focus?-1:y.id===+focus?1:0)||y.id-x.id).slice(0,12);
+  if(!list.length)h+='<div class="mini">Transit talebi yok.</div>';
+  for(const t of list){
+   const vote=t.votes[me],left=Math.max(0,Math.ceil(t.until-G.day));
+   h+=`<div class="box transitReq" data-tx="${t.id}" data-st="${t.st}"><div class="bt"><b>#${t.id} · ${nm(t.a)} ↔ ${nm(t.b)}</b><span>${esc(Commerce.transitStates[t.st])}</span></div>`;
+   h+=`<div class="mini">Talep eden ${nm(t.by)} · ${sy(t.source)} ⇄ ${sy(t.target)}${t.terms?' · onaylar tamamlanınca düzenli ticaret sözleşmesi de imzalanır':''}${t.st==='pending'?' · son '+left+' gün':''}</div>`;
+   for(const l of t.legs){const who=Commerce.human(G.emps[l.o])?(t.votes[l.o]==='yes'||l.o===t.by?'onayladı':t.votes[l.o]==='no'?'reddetti':'onay bekleniyor'):'AI kararı';
+    h+=`<div class="mini transitLeg" data-o="${l.o}" data-c="${l.c}">⚓ ${nm(l.o)} limanı${l.s!==undefined?' ('+sy(l.s)+')':''} → <b>${nm(l.c)}</b> taşıyıcısı için ${PORT_TRANSIT_DAYS} gün · ${nm(l.c)} öder ${l.pay} ◈${l.o===me?' · <b>sana</b>':''}${l.skip?' · gerekmedi, ödenmedi':''} · ${who}</div>`;}
+   const payers=[...new Set(t.legs.map(l=>l.c))].filter(id=>id!==t.by&&Commerce.human(G.emps[id]));
+   for(const id of payers)h+=`<div class="mini">${nm(id)} ödeme onayı: ${t.votes[id]==='yes'?'verdi':t.votes[id]==='no'?'reddetti':'bekleniyor'}</div>`;
+   if(t.why)h+=`<div class="mini">${esc(t.why)}</div>`;
+   if(t.st==='pending'&&vote==='pending')h+=`<button class="abtn" data-a="transitVote" data-x="${t.id}:1">Onayla</button><button class="abtn dgr" data-a="transitVote" data-x="${t.id}:0">Reddet</button>`;
+   else if(t.st==='pending'&&(vote==='yes'||t.by===me))h+='<div class="mini transitWait">Onayın kayıtlı; diğer tarafların kararı bekleniyor. İşlem henüz uygulanmadı.</div>';
+   if(t.st==='pending'&&t.by===me)h+=`<button class="abtn" data-a="transitCancel" data-x="${t.id}">Vazgeç</button>`;
+   h+='</div>';
+  }
+  h+='<div class="ph">LİMAN TRANSİT İZİNLERİ</div><div class="mini">İzin '+PORT_TRANSIT_DAYS+' gündür. Bitişe '+PORT_TRANSIT_RENEW+' gün kala aynı izin yenilenebilir; yeni süre mevcut bitişten başlar. Süresi biten izinle yoldaki konvoy izinli başka rota arar, bulamazsa en çok 180 gün bekler.</div>';
+  let n=0;
+  for(const o of G.emps){const end=o.portTransit?.[me];if(o.id===me||!(end>G.day))continue;n++;const left=Math.ceil(end-G.day),used=Commerce.permitUsers(o,G.p);
+   h+=`<div class="box permitRow" data-o="${o.id}" data-c="${me}"><div class="bt"><b>⚓ ${nm(o.id)} limanları sana açık</b><span>${left} gün</span></div><div class="mini">Bitiş: gün ${Math.floor(end)}${used.length?' · kullanan sözleşme '+used.map(id=>'#'+id).join(', '):' · aktif sözleşmen bu izni kullanmıyor'}</div>${left<=PORT_TRANSIT_RENEW?`<button class="abtn" data-a="transitRenewAsk" data-x="${o.id}">Yenileme iste</button>`:''}</div>`;}
+  for(const [cid,end] of Object.entries(G.p.portTransit||{})){if(!(end>G.day)||!G.emps[cid])continue;n++;const left=Math.ceil(end-G.day);
+   h+=`<div class="box permitRow" data-o="${me}" data-c="${cid}"><div class="bt"><b>⚓ ${nm(+cid)} için verdiğin izin</b><span>${left} gün</span></div><div class="mini">Bitiş: gün ${Math.floor(end)}</div>${left<=PORT_TRANSIT_RENEW?`<button class="abtn" data-a="transitExtend" data-x="${cid}">Süreyi uzat (teklif)</button>`:''}<button class="abtn dgr" data-a="commerceRevoke" data-x="${cid}">İzni geri al</button></div>`;}
+  if(!n)h+='<div class="mini">Geçerli liman transit izni yok.</div>';
+  return h;
+ },
+ dealWith(o,side){if(!G.emps[o])return;UI.closeModal();UI.openDeal(+o);UI.act('dealAdd',side+':portTransit');},
  amounts(o){return Commerce.resources.filter(k=>o?.[k]>0).map(k=>o[k].toFixed(1)+' '+RES[k].n).join(' · ')||'—';},
  eta(c){if(Commerce.terminal(c))return 'Sefer sonuçlandı';if(c.status==='blocked')return 'Varış belirsiz';let days=Math.max(0,c.depart-G.day);for(let i=c.step;i<c.route.length-1;i++)days+=Math.max(1,dist(G.sys[c.route[i]],G.sys[c.route[i+1]])/Commerce.speed)*(i===c.step?1-c.t:1);return '~'+Math.ceil(days)+' gün';},
  routeText(a,b,source,target,path){
@@ -48,7 +81,7 @@ const CommerceUI={selected:null,hits:[],token:null,
  form(partner){
   const e=G.p,partners=G.emps.filter(o=>o!==e&&!Commerce.pairGate(e,o)&&e.contact[o.id]&&tradeHubs(o).some(s=>Commerce.identifiedPort(e,G.sys[s],o)));const o=partners.find(o=>o.id===+partner)||partners[0];if(!o){this.modal('<div class="mhd">KAYNAK SÖZLEŞMESİ</div><div class="mbd">Ticaret anlaşmalı, bilinen limanlı ortak yok. Önce iki tarafta Ticaret Limanı ve genel ticaret anlaşması gerekir.</div><div class="mft"><button class="ch" data-a="commerce">Geri</button></div>');return;}
   const options=xs=>xs.map(id=>`<option value="${id}">${esc(G.sys[id].name)}</option>`).join(''),res=(selected)=>Commerce.resources.map(k=>`<option value="${k}" ${k===selected?'selected':''}>${RES[k].n}</option>`).join('');
-  this.modal(`<div class="mhd">YENİ KAYNAK SÖZLEŞMESİ</div><div class="mbd"><div class="mini commerceKind">Düzenli fiziksel ticaret: seçilen sıklıkta tekrarlanan gerçek sevkiyat. Her seferde mal verenin limanından yüklenir, yolda kaybolabilir, yalnız varışta alıcıya yazılır. İptal yeni yüklemeyi durdurur; yoldaki kargo kurala göre yoluna devam eder. Anlık kaynak takası için müzakere masasını kullanın.</div><div class="row">Ortak <select id="cargoPartner">${partners.map(x=>`<option value="${x.id}" ${x===o?'selected':''}>${esc(x.name)}</option>`).join('')}</select></div><div class="row">Çıkış limanı <select id="cargoSource">${options(tradeHubs(e))}</select></div><div class="row">Hedef limanı <select id="cargoTarget">${options(tradeHubs(o).filter(id=>Commerce.identifiedPort(e,G.sys[id],o)))}</select></div><div class="row">Gönder <select id="cargoGive">${res('min')}</select><input id="cargoGiveN" type="number" min="1" max="1000" value="12" style="width:65px"></div><div class="row">Karşılık <select id="cargoWant">${res('ene')}</select><input id="cargoWantN" type="number" min="1" max="1000" value="8" style="width:65px"></div><div class="row">Sıklık (gün) <input id="cargoEvery" type="number" min="30" max="180" value="30" style="width:70px"></div><div class="row">Süre (ay) <input id="cargoMonths" type="number" min="3" max="120" value="12" style="width:70px"></div><div class="mini">İki yön aynı anda yüklenir, ayrı varışlarda teslim edilir. İptal yeni yüklemeyi durdurur; yoldaki yük teslimata devam eder. Savaş/liman engelinde 180 gün sonra yük kaybedilir.</div><div id="cargoReason" class="mini"></div></div><div class="mft"><button class="ch" data-a="commercePropose">Teklif et</button><button class="ch" data-a="commerce">Vazgeç</button></div>`);this.token=G.sys;
+  this.modal(`<div class="mhd">YENİ KAYNAK SÖZLEŞMESİ</div><div class="mbd"><div class="mini commerceKind">Düzenli fiziksel ticaret: seçilen sıklıkta tekrarlanan gerçek sevkiyat. Her seferde mal verenin limanından yüklenir, yolda kaybolabilir, yalnız varışta alıcıya yazılır. İptal yeni yüklemeyi durdurur; yoldaki kargo kurala göre yoluna devam eder. Anlık kaynak takası için müzakere masasını kullanın.</div><div class="row">Ortak <select id="cargoPartner">${partners.map(x=>`<option value="${x.id}" ${x===o?'selected':''}>${esc(x.name)}</option>`).join('')}</select></div><div class="row">Çıkış limanı <select id="cargoSource">${options(tradeHubs(e))}</select></div><div class="row">Hedef limanı <select id="cargoTarget">${options(tradeHubs(o).filter(id=>Commerce.identifiedPort(e,G.sys[id],o)))}</select></div><div class="row">Gönder <select id="cargoGive">${res('min')}</select><input id="cargoGiveN" type="number" min="1" max="1000" value="12" style="width:65px"></div><div class="row">Karşılık <select id="cargoWant">${res('ene')}</select><input id="cargoWantN" type="number" min="1" max="1000" value="8" style="width:65px"></div><div class="row">Sıklık (gün) <input id="cargoEvery" type="number" min="30" max="180" value="30" style="width:70px"></div><div class="row">Süre (ay) <input id="cargoMonths" type="number" min="3" max="120" value="12" style="width:70px"></div><div class="mini">İki yön aynı anda yüklenir, ayrı varışlarda teslim edilir. İptal yeni yüklemeyi durdurur; yoldaki yük teslimata devam eder. Savaş/liman engelinde 180 gün sonra yük kaybedilir.</div><div id="cargoReason" class="mini"></div><button class="abtn" id="cargoTransitAsk" data-a="transitAsk" style="display:none">⚓ Gereken liman izinlerini iste (iki yön)</button></div><div class="mft"><button class="ch" data-a="commercePropose">Teklif et</button><button class="ch" data-a="commerce">Vazgeç</button></div>`);this.token=G.sys;
   let seq=0;
   const update=()=>{
    const source=+$('cargoSource').value,target=+$('cargoTarget').value,box=$('cargoReason'),token=++seq;
@@ -58,6 +91,7 @@ const CommerceUI={selected:null,hits:[],token:null,
     const names=row.stops.map(s=>G.sys[s.id].name+(s.owner!==undefined&&s.owner!==e.id?' ('+G.emps[s.owner].name+')':''));
     box.textContent=(row.open?'Hat açık':'Gereken transit izni · '+row.missing.map(id=>G.emps[id].name).join(', '))+
      ' · '+names.join(' → ')+(row.open?' · ~'+row.days+' gün':'');
+    const ask=$('cargoTransitAsk');if(ask)ask.style.display=row.open?'none':'';
    };
    if(!UI.guestCargoPreview?.(o.id,source,target,paint))paint(Commerce.preview(e,o,source,target));
   };
@@ -74,6 +108,13 @@ const commerceAction96=UI.act;UI.act=function(a,x,el){switch(a){
  case 'convoyToggle':Commerce.state().visible=!Commerce.state().visible;CommerceUI.buttons();return;
  case 'commerce':CommerceUI.open();return;case 'commerceConvoys':CommerceUI.open('convoys');return;
  case 'commerceNew':CommerceUI.form(x);return;case 'commercePropose':CommerceUI.propose();return;
+ case 'commerceTransit':CommerceUI.open('transit',x);return;
+ case 'transitVote':{if(CommerceUI.token!==G.sys)return;const [id,yes]=String(x).split(':').map(Number);const r=Commerce.transitVote(G.p,id,yes===1);if(r&&r.why&&!r.pending)say('⚓ '+r.why,r.ok?'sci':'war');if(r!==undefined&&!r?.pending)CommerceUI.open('transit',id);return;}
+ case 'transitCancel':{if(CommerceUI.token!==G.sys)return;const r=Commerce.transitCancel(G.p,+x);if(r?.why)say('⚓ '+r.why,'war');if(!r?.pending)CommerceUI.open('transit');return;}
+ case 'transitAsk':{if(CommerceUI.token!==G.sys)return;const o=G.emps[+$('cargoPartner').value],r=Commerce.transitAsk(G.p,o,+$('cargoSource').value,+$('cargoTarget').value);if(r?.pending)return;if($('cargoReason'))$('cargoReason').textContent=r?.ok?(r.st==='committed'?'Liman izinleri tek işlemde verildi':'Talep #'+r.id+' gönderildi; onaylar bekleniyor'):(r?.why||'Talep gönderilemedi');if(r?.ok)CommerceUI.open('transit',r.id);return;}
+ case 'transitRenewAsk':CommerceUI.dealWith(+x,'want');return;
+ case 'transitExtend':CommerceUI.dealWith(+x,'give');return;
+ case 'commerceRevoke':if(CommerceUI.token===G.sys){revokePortTransit(G.p,G.emps[+x]);CommerceUI.open('transit');}return;
  case 'commerceCancel':if(CommerceUI.token===G.sys){Commerce.cancel(+x,G.p);CommerceUI.open();}return;
  case 'commerceConvoy':CommerceUI.selected=+x;CommerceUI.open('convoys',+x);return;
  case 'commerceLocate':CommerceUI.locate(+x);return;
