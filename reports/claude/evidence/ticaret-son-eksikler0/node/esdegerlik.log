@@ -1,0 +1,5 @@
+PASS seed 11 48 ay · 48 ay boyunca birebir (yeni davranış tetiklenmedi)
+PASS seed 22 48 ay · 48 ay boyunca birebir (yeni davranış tetiklenmedi)
+PASS seed 404 48 ay · 48 ay boyunca birebir (yeni davranış tetiklenmedi)
+PASS p53 Save8 (60 ay, 8 sözleşme, 36 konvoy, 2 izin) adayda açılır, G.commerce birebir; p53 MP paketi build kapısından geçer (ret nedeni integrity)
+GEÇEN: 4 KALAN: 0

@@ -1,0 +1,314 @@
+{
+ "results": [
+  {
+   "name": "TR0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 10984
+  },
+  {
+   "name": "R0 TB fikstürü + C → B Transit İzni (MP komutu); izinle B → host rotası açık",
+   "status": "PASS",
+   "ms": 621
+  },
+  {
+   "name": "R1 B gerçek masadan ▣ kargo → host gelen kutusundan KABUL; konvoy yolda (yüklendi, teslim edilmedi), B'den bir kez düştü",
+   "status": "PASS",
+   "ms": 4036
+  },
+  {
+   "name": "R2 host kaydeder → kapanış → relay yeniden → YENİ oda → DEVAM ET: ticaret durumu (sözleşme / konvoy / makbuz) ve stoklar kayıt öncesiyle birebir",
+   "status": "PASS",
+   "ms": 4899
+  },
+  {
+   "name": "R3 B ana menü ODAYA KATIL + yeni kod, C davet bağlantısı → kendi devletleri; B aynasında konvoy host ile aynı",
+   "status": "PASS",
+   "ms": 7211
+  },
+  {
+   "name": "R4 oyun ilerler: kargo BİR kez teslim (host +80, B yeniden ödemez); 60 gün sonra ikinci teslim yok; B aynasında teslim edildi",
+   "status": "PASS",
+   "ms": 2583
+  }
+ ],
+ "metrics": {
+  "scen": "TR",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 636,
+    "buildMs": 672,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 751,
+    "buildMs": 809,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 11.7,
+      "p95": 11.7,
+      "max": 11.7
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 16,
+     "dom": 728,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 36.4,
+       "p95": 36.4,
+       "max": 36.4
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.2,
+       "p95": 2.2,
+       "max": 2.2
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 28,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 50.4,
+       "p95": 50.4,
+       "max": 50.4
+      },
+      "refresh": {
+       "n": 0
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 729,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 24,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 13580,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "ai1": {
+   "fx": {
+    "h": 30,
+    "n3": 25,
+    "n6": 28
+   },
+   "r0": {
+    "route": true
+   },
+   "cid": 1,
+   "r1": {
+    "s0": {
+     "h": 3000,
+     "b": 3000,
+     "c": 3000
+    },
+    "s1": {
+     "h": 3000,
+     "b": 2920,
+     "c": 3000
+    },
+    "v": {
+     "id": 1,
+     "status": "moving",
+     "at": 40,
+     "step": 1,
+     "loaded": 80,
+     "route": [
+      28,
+      40,
+      15,
+      25,
+      11,
+      6,
+      30
+     ]
+    }
+   },
+   "preSave": {
+    "stock": {
+     "h": 3000,
+     "b": 2920,
+     "c": 3000
+    },
+    "v": {
+     "id": 1,
+     "status": "moving",
+     "at": 40,
+     "step": 1,
+     "loaded": 80,
+     "route": [
+      28,
+      40,
+      15,
+      25,
+      11,
+      6,
+      30
+     ]
+    },
+    "day": 27
+   },
+   "saveId": "s-863d7a00db5ddabf",
+   "code1": "3PMY9",
+   "postLoad": {
+    "stock": {
+     "h": 3000,
+     "b": 2920,
+     "c": 3000
+    },
+    "v": {
+     "id": 1,
+     "status": "moving",
+     "at": 40,
+     "step": 1,
+     "loaded": 80,
+     "route": [
+      28,
+      40,
+      15,
+      25,
+      11,
+      6,
+      30
+     ]
+    },
+    "day": 27
+   },
+   "r3": {
+    "guest": {
+     "at": 40,
+     "step": 1,
+     "status": "moving"
+    },
+    "host": {
+     "at": 40,
+     "step": 1,
+     "status": "moving"
+    }
+   },
+   "r4": {
+    "v": {
+     "id": 1,
+     "status": "delivered",
+     "at": 30,
+     "step": 6,
+     "loaded": 80,
+     "route": [
+      28,
+      40,
+      15,
+      25,
+      11,
+      6,
+      30
+     ]
+    },
+    "s1": {
+     "h": 3080,
+     "b": 2920,
+     "c": 3000
+    },
+    "s2": {
+     "h": 3080,
+     "b": 2920,
+     "c": 3000
+    },
+    "guest": "delivered"
+   }
+  },
+  "relayPidTR": 14049,
+  "errors": []
+ }
+}

@@ -2,7 +2,15 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — TİCARET-FİNAL.0 (p53 / MP.8.9b52, 24 Kasım 2026)
+## Son teslim — TİCARET-SON-EKSİKLER.0 (p54 / MP.8.9b53, 24 Kasım 2026)
+
+- Ayrıntı: `reports/claude/TICARET-SON-EKSIKLER0-SONUC.md` (23 bölüm, M1–M20, 10 soru), devir `TICARET-SON-EKSIKLER0-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-son-eksikler0/`. Dal `claude/stars-ticaret-son-eksikler0` (taban p53 `1dec704`). ZIP `releases/stars-faz96h10p54.zip`, kayıt `RELEASE-TICARET-SON-EKSIKLER0.json`. p54 paket yükleyicisi p41–p53 kabul eder. Otomatik kabul; Android / internet / Render NOT RUN.
+- Çok taraflı transit onayı `G.commerce.transit` (yalnız kullanıldığında; `restore` sıkı doğrular): `transitPlan` (iki yön en küçük izin kümesi), `transitOpen/Vote/Cancel/Commit/Valid/Sweep` (pending → committed / rejected / expired 120 gün / cancelled / invalid), son onayda yeniden doğrulama + `dealTxBegin` içinde `executeDeal` izinleri (+ AI talebinde `aiNegotiate` sözleşmesi), hata → rollback. İnsan yalnız kendi oyu; AI taraf `aiDealWould`. `aiTransitHuman` (aiTransitRequest sonu, yalnız insan aday varken), `transitAsk` (oyuncu talebi). T5 (tamamlama0) bilinçli güncellendi.
+- Yenileme: `PORT_TRANSIT_DAYS=360`, `PORT_TRANSIT_RENEW=60` (son 60 günde aynı madde bitişten +360; `treatyAlreadyActive` / `applyItems`). `permitWarn` 60/30/0 kart (kayıt alanı yok), `aiPermitRenew` (kullanılan hat, önizlemede red → pazarlık yok, 30 gün bekleme). `memoReset` izin değişince.
+- MP: mp-core `transitVote/transitCancel/transitAsk`, `transitNote` sarmalayıcı; mirror taraflara transit (AI şartları gitmez, `trade:1`); guest-stars sarmalayıcı + VIEW eylem listesi (eksikse eylem sessizce engellenir — ilk TZ FAIL kökü) + `mptransit:` kartı.
+- Test: `node tests/ticaret_son_eksikler0_test.js` (23), `_mp_test.js` (7), `STARS_CONTROL_ROOT=<p53> node tests/ticaret_son_eksikler0_equivalence_test.js` (4), `node tests/browser-ticaret-son-eksikler0-sp.cjs` (8×3), `MP8_SCEN=TZ node tests/browser-mp8.cjs` (8). Tam Node 250 / 6606 / 279 (FAIL listesi p53 ile aynı). Perf p95 ≤ +%2,74 (ABBA, sessiz makine).
+
+## Önceki teslim — TİCARET-FİNAL.0 (p53 / MP.8.9b52, 24 Kasım 2026)
 
 - Ayrıntı: `reports/claude/TICARET-FINAL0-SONUC.md` (24 maddelik envanter + kapanış matrisi + 12 soru), devir `TICARET-FINAL0-DEVIR.md`, kanıt `reports/claude/evidence/ticaret-final0/`. Dal `claude/stars-ticaret-final0` (taban p52 `2399075` + PR #77 `3aa8400`). ZIP `releases/stars-faz96h10p53.zip`, kayıt `RELEASE-TICARET-FINAL0.json`. p53 paket yükleyicisi p41–p52 kabul eder. Ticaret döngüsü kapandı: geliştirme tamam, saha kabulü (Android / Render) NOT RUN.
 - `Commerce.tick` → `tick0` sarmalı: tick ömürlü `_tickMemo` (`memoRelay` / `memoEdge`, sayısal anahtar) `remainingRoute`'ta. Tick içinde liman / izin / savaş / sahiplik / abluka / görünürlük değiştiren kod eklenirse önce `Commerce._tickMemo=null`. Codex koridoru (500 / 499 sıçrama) 64 konvoyda medyan −%62,1, Save8 / RNG aynı (`research/ticaret-final0/yogun-konvoy.cjs`).

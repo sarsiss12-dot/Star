@@ -1,0 +1,6 @@
+PASS TA0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS A0 fikstür (host): limanlar, host ↔ B hiperhat, kapasite, kaynak, temas
+PASS A1 B (800×360) gerçek masa: 100 mineral + "Fiziksel Kargo ile Gönder" → host gelen kutusundan KABUL; dört aşama ayrı
+PASS A2 yükleme B'den düşer, varışta host'a bir kez yazılır, B aynası teslimi görür; ikinci teslim / ikinci kabul yok
+PASS A3 C varsayılan "Anlık Kaynak Takası" ile 40 enerji hediye teklifi → host KABUL → anlık; sözleşme / konvoy yok
+PASS A4 gizlilik: C aynasında B'nin sözleşmesi / konvoyu yok
