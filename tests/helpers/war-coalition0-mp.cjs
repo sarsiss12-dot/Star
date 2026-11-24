@@ -21,6 +21,7 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,wait,tap}){
     for(const e of [G.emps[b],X]){const nb=G.sys[e.home].lanes.filter(l=>G.sys[l].owner<0).slice(0,4);for(const l of nb)territoryOwnerSet(G.sys[l],e.id);}
     for(const id of [c,Y.id]){G.emps[b].ally[id]=G.emps[id].ally[b]=true;G.emps[b].rel[id]=G.emps[id].rel[b]=90;}(Y.intel=Y.intel||{})[b]=3;
     for(const r of ['min','ene','ala','yiy','tuk'])G.emps[b].res[r]=4000;remember(X,b,'savasIlan');
+    for(const r of ['min','ene','ala','yiy','tuk'])Y.res[r]=Math.max(Y.res[r]||0,4000);   /* SAVAŞ-DESTEK-AI.0: Y geçerli katılımcı olmalı; tohum 22'de Y enerji krizinde (net −447/ay, 0,67 ay stok) ve p55'te kriz içindeki AI ücretli katılımı reddeder (p54 kusuru S4) */
     const gate=G.sys[X.home].lanes[0];for(let i=0;i<3;i++)newFleet(Y,gate,[{c:'kor'},{c:'kor'},{c:'muh'}]);for(let i=0;i<4;i++)newFleet(G.emps[b],G.emps[b].home,[{c:'kor'},{c:'kor'},{c:'muh'}]);   /* Y'nin hedefe erişimi ve B'nin gücü (AI katılım değerlendirmesi) */
     MP1Host.host.publish();return {X:X.id,Y:Y.id};},[eB,eC]);
   M.fixture={B:eB,C:eC,...fx};await synced(B);await synced(C);
