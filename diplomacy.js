@@ -1167,9 +1167,11 @@ function breakPact(a, b){
    noktası. NAP süre alanı silinmezse UI aynı çifti hem savaşta hem NAP'ta
    gösteriyor, barıştan sonra eski söz yeniden canlanıyor ve yeni teklif
    yanlışlıkla redundant sayılıyordu. */
+/* TİCARET-SON-EKSİKLER.0: liman transit izni süresi ve yenileme penceresi (izin bitmeden son 60 günde aynı madde yenileme sayılır). */
+const PORT_TRANSIT_DAYS=360,PORT_TRANSIT_RENEW=60;
 function revokePortTransit(owner,user){
   if(!owner||!user||!(owner.portTransit?.[user.id]>G.day))return false;
-  delete owner.portTransit[user.id];return true;
+  delete owner.portTransit[user.id];if(typeof Commerce!=='undefined')Commerce.memoReset();return true;
 }
 function endTreatiesForWar(a, b){
   if (!a || !b) return;
@@ -1591,9 +1593,10 @@ function applyItems(giver, taker, items){
         taker.visionFrom[giver.id] = true;
         if (typeof shareVision === 'function') shareVision(giver, taker);
         break;
-      case 'portTransit':
-        (giver.portTransit||={})[taker.id]=G.day+360;
-        break;
+      case 'portTransit':{   /* TİCARET-SON-EKSİKLER.0: geçerli izin bitiş tarihinden uzar (yenileme), bitmiş izin bugünden başlar */
+        const cur=giver.portTransit?.[taker.id];(giver.portTransit||={})[taker.id]=(cur>G.day?cur:G.day)+PORT_TRANSIT_DAYS;
+        if(typeof Commerce!=='undefined')Commerce.memoReset();
+        break;}
       case 'passage':
         // veren taraf kendi sınırını alana açar
         giver.passage = giver.passage || {};
@@ -1898,7 +1901,7 @@ function treatyAlreadyActive(a, b, it){
                            !!a.ally[b.id];
     case 'spynet':  return !!(a.spynet && a.spynet[b.id]);
     case 'intel':   return !!(b.visionFrom && b.visionFrom[a.id]);
-    case 'portTransit': return a.portTransit?.[b.id]>G.day;
+    case 'portTransit': return a.portTransit?.[b.id]>G.day+PORT_TRANSIT_RENEW;   /* TİCARET-SON-EKSİKLER.0: son 60 günde yenilenebilir */
     case 'passage': return !!(a.passage && a.passage[b.id]);
     default:        return false;
   }

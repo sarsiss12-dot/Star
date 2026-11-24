@@ -59,7 +59,7 @@ const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'bu
   /* SAHA-GÜVENCE.1: insan–insan Savaşa Yardım (host gelen kutusundan kabul, tek ödeme), misafire muharebe sonucu, sistemin açtığı federasyon oyu kartı — host + B */
   SG:{size:'orta',ai:5,seed:22,months:0,guests:1,every:6},
   TA:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
-  TB:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},TR:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6}}[SCEN];   /* TİCARET-AI.0 Faz 0: ara liman, izin kaybı, liman fethi */   /* TİCARET-AĞ.1: anlık takas / fiziksel kargo */
+  TB:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},TR:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},TZ:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6}}[SCEN];   /* TİCARET-SON-EKSİKLER.0: çok taraflı transit onayı, yenileme, yeni oda */   /* TİCARET-AI.0 Faz 0: ara liman, izin kaybı, liman fethi */   /* TİCARET-AĞ.1: anlık takas / fiziksel kargo */
 if(!CONF)throw Error('MP8_SCEN A|B|C|R|N|P|E|F|D|G|L|S|W|K|Q|Z');
 if(process.env.FEDAI0_R==='1'||process.env.ER0_R==='1')CONF.ai=8;
 if(process.env.SCALE0_MP){const c=JSON.parse(process.env.SCALE0_MP);Object.assign(CONF,c);}
@@ -562,6 +562,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
   if(SCEN==='TR')await require('./helpers/ticaret-ai1-mp.cjs')({test,pg,metrics,sleep,shot,wait,tap,settle,cmd,origin,open,ctx,startRelay,stopRelay,getCode:()=>code,setCode:c=>{code=c;},CANON,HOSTLIB,GUESTLIB,TIMERS});
   if(SCEN==='X')await require('./helpers/reinf-route0-mp.cjs')({test,pg,metrics,sleep,shot,assert,wait,tap,settle,advance});
   if(SCEN==='I')await require('./helpers/mp-sync-fed1-soak.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,settle});
+  if(SCEN==='TZ')await require('./helpers/ticaret-son-eksikler0-mp.cjs')({test,pg,metrics,sleep,shot,wait,tap,settle,cmd,origin,open,ctx,startRelay,stopRelay,getCode:()=>code,setCode:c=>{code=c;},CANON,HOSTLIB,GUESTLIB,TIMERS,lanes});
   if(SCEN==='TL')await require('./helpers/ticaret-agi0-mp.cjs')({test,pg,tap,wait,settle,assert,cmd,shot});
   if(SCEN==='H')await require('./helpers/perf-sinir0-mp.cjs')({test,pg,metrics,out,sleep,assert,lanes,wait,tap,settle,syncCheck});
   if(SCEN==='J')await require('./helpers/mp-sync-fed1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,startRelay,stopRelay,getCode:()=>code,setCode:c=>{code=c;},

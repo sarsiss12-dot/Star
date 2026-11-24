@@ -1,0 +1,15 @@
+NODE SUITES: 250 GEÇEN: 6606 KALAN: 279
+EQUIV exit=0 GEÇEN: 4 KALAN: 0
+TZ exit=0 GEÇEN: 8 KALAN: 0
+TR exit=0 GEÇEN: 6 KALAN: 0
+TL exit=0 GEÇEN: 5 KALAN: 0
+TA exit=0 GEÇEN: 6 KALAN: 0
+TB exit=0 GEÇEN: 6 KALAN: 0
+SG exit=0 GEÇEN: 5 KALAN: 0
+J exit=0 GEÇEN: 5 KALAN: 0
+X exit=0 GEÇEN: 5 KALAN: 0
+SP-son exit=0 GEÇEN: 24 KALAN: 0
+SP-tam exit=0 GEÇEN: 15 KALAN: 0
+I-100/9 exit=0 GEÇEN: 4 KALAN: 0
+I-500/16 exit=0 GEÇEN: 4 KALAN: 0
+DONE

@@ -1,6 +1,8 @@
 # Son Codex raporu
 
-[TİCARET-FİNAL.0 (Claude, p53 / MP.8.9b52 yayın adayı) · ticaret döngüsü kapandı: yoğun konvoy −%62, 24 maddelik envanter, dokunmatik iptal / izin testleri, tam Node yeni FAIL yok](reports/claude/TICARET-FINAL0-SONUC.md)
+[TİCARET-SON-EKSİKLER.0 (Claude, p54 / MP.8.9b53 yayın adayı) · insan sahipli çok taraflı transit onayı, izin yenileme, MP TZ 8/0, uzun MP oturumu, tam Node yeni FAIL yok](reports/claude/TICARET-SON-EKSIKLER0-SONUC.md)
+
+Önceki: [TİCARET-FİNAL.0 (Claude, p53 / MP.8.9b52 yayın adayı) · ticaret döngüsü kapandı: yoğun konvoy −%62, 24 maddelik envanter, dokunmatik iptal / izin testleri, tam Node yeni FAIL yok](reports/claude/TICARET-FINAL0-SONUC.md)
 
 Önceki: [TİCARET-TESLİM-DEĞERİ.0 (Claude, sürüm yok, p52 korunur) · p52 perf belirsizliği ABBA ile kapandı (gerileme yok), gölge ekonomik değerleme: 4 kampanyada 1 gerçek fırsat, ihtiyaç adayı reddedildi](reports/claude/TICARET-TESLIM-DEGERI0-SONUC.md)
 

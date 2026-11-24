@@ -1,0 +1,5 @@
+PASS TL0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 11; misafir gerçek STARS arayüzünde
+PASS TL1 B liman izni verir, C reddeder ve hiçbir hak oluşmaz
+PASS TL2 C izin ister, B kabul eder, iki misafir aynı yön ve süreyi görür
+PASS TL3 izni veren misafir masadan geri alır
+PASS TL4 karşı teklif, kayıtlı izin ve süre sonu

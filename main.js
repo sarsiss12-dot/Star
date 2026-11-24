@@ -7925,7 +7925,7 @@ const NOTE_CODEC = {
 /* Kimliği bir imparatorluğa bağlı, sade sayısal payload'lar */
 const NOTE_EMP_KINDS  = ['peace','cncnew','wardec','sqOffer'];
 /* Serbest sayısal payload (imparatorluk referansı DEĞİL) */
-const NOTE_NUM_KINDS  = ['fedagenda','fedfound','fedfoundResult','crisis','criswarn','fedvote','crisend'];
+const NOTE_NUM_KINDS  = ['fedagenda','fedfound','fedfoundResult','crisis','criswarn','fedvote','crisend','transit'];   // TİCARET-SON-EKSİKLER.0: +transit
 /* Sade dize payload */
 const NOTE_STR_KINDS  = ['cncvote','facdem','faccoup'];
 
@@ -9075,7 +9075,7 @@ function forceRedraw(sebep){
    Son 40 olay/hata. Üretim ekranını kaplamaz; Ayarlar → 🩺
    Tanılama'dan görülür. runRecovery'den ÖNCE tanımlı olmalı. */
 /* FAZ 86C.4H-R4: çalışan sürüm kimliği — tanı raporunun başında. */
-const BUILD_ID = '96h10p53';
+const BUILD_ID = '96h10p54';
 const DIAG_MAX = 40;
 const DIAG = [];
 function logDiag(tur, mesaj){

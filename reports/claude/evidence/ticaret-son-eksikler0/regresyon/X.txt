@@ -1,0 +1,5 @@
+PASS X0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS X0 fikstür: B ana filosu + bileşim, AI ile savaş, ulaşılabilir AI sistemi (host)
+PASS X1 sipariş sınırdan önce (B gerçek dokunuş FİLO TAKVİYESİ), ana filo düşman sistemine geçer, üretim sonra biter → katılır; B aynasında 7
+PASS X2 ana filo düşman sistemindeyken B gerçek dokunuşla OTOMATİK TAKVİYE: AÇIK → host sipariş verir → teslim; B aynasında 8
+PASS X3 ana filo yok olunca 4 sevkiyat → B Haberler → Sevkiyatlar: tek kart, host ile aynı başlık, TOPLU KURTARMA

@@ -1,0 +1,6 @@
+PASS TR0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS R0 TB fikstürü + C → B Transit İzni (MP komutu); izinle B → host rotası açık
+PASS R1 B gerçek masadan ▣ kargo → host gelen kutusundan KABUL; konvoy yolda (yüklendi, teslim edilmedi), B'den bir kez düştü
+PASS R2 host kaydeder → kapanış → relay yeniden → YENİ oda → DEVAM ET: ticaret durumu (sözleşme / konvoy / makbuz) ve stoklar kayıt öncesiyle birebir
+PASS R3 B ana menü ODAYA KATIL + yeni kod, C davet bağlantısı → kendi devletleri; B aynasında konvoy host ile aynı
+PASS R4 oyun ilerler: kargo BİR kez teslim (host +80, B yeniden ödemez); 60 gün sonra ikinci teslim yok; B aynasında teslim edildi

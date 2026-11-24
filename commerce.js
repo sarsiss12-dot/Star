@@ -239,9 +239,9 @@ const Commerce={
  block(v,why){if(v.blockedSince===null)v.blockedSince=G.day;v.status='blocked';v.reason=why;if(G.day-v.blockedSince>=this.waitLimit)this.finish(v,'destroyed',why+' · 180 gün sonra kargo kaybedildi');},
  // TİCARET-FİNAL.0: aynı Commerce.tick çağrısı içinde (aynı gün, aynı dünya) kalan rota denetimindeki openEdge / relay sonuçları paylaşılır.
  // Tick içinde liman, izin, savaş, sahiplik, abluka (cr) ve görünürlük değişmez (saldırı yalnız stok / G.raids yazar); memo tick sonunda atılır.
- memoRelay(a,s){const m=this._tickMemo;if(!m)return this.relay(a,s);const k=a.id*65536+s.id;let v=m.relay.get(k);if(v===undefined){v=this.relay(a,s);m.relay.set(k,v);}return v;},
- memoEdge(a,b,from,to){const m=this._tickMemo;if(!m)return this.openEdge(a,b,from,to);const k=((a.id*256+b.id)*65536+from)*65536+to;let v=m.edge.get(k);if(v===undefined){v=this.openEdge(a,b,from,to);m.edge.set(k,v);}return v;},
- tick(dt){this._tickMemo={relay:new Map(),edge:new Map()};try{return this.tick0(dt);}finally{this._tickMemo=null;}},
+ memoRelay(a,s){const m=this._tickMemo;if(!m||s.id>65535)return this.relay(a,s);const k=a.id*65536+s.id;let v=m.relay.get(k);if(v===undefined){v=this.relay(a,s);m.relay.set(k,v);}return v;},
+ memoEdge(a,b,from,to){const m=this._tickMemo;if(!m||a.id>255||b.id>255||from>65535||to>65535)return this.openEdge(a,b,from,to);const k=((a.id*256+b.id)*65536+from)*65536+to;let v=m.edge.get(k);if(v===undefined){v=this.openEdge(a,b,from,to);m.edge.set(k,v);}return v;},
+ tick(dt){this._tickMemo={relay:new Map(),edge:new Map()};try{return this.tick0(dt);}finally{this._tickMemo=null;if(G.commerce?.transit)this.transitSweep();this.permitWarn();}},
  tick0(dt){
   const st=this.state();if(!Number.isFinite(dt)||dt<0)return;
   dt=st.clock===null?dt:Math.max(0,Math.min(dt,G.day-st.clock));st.clock=G.day;
@@ -460,7 +460,8 @@ const Commerce={
     return result.uygulandi||pending;
    }
   }
-  return false;
+  // TİCARET-SON-EKSİKLER.0: tek AI sahiple iki yön açılamadıysa insan sahipli ara liman(lar) için çok taraflı onay talebi (yalnız insan aday varken).
+  return this.aiTransitHuman(a,b,A,B,pairs);
  },
  // TİCARET-AI.0: aiNegotiate kabul yolunun salt okunur önizlemesi (aiRespond 'kabul' ya da tek tur karşı teklif aiCounterBudget tavanı içinde).
  aiDealWould(p,t,o){
@@ -468,6 +469,175 @@ const Commerce={
   if(r.v!=='karsi'||!Array.isArray(r.add)||!r.add.length||diploBlocked(p,t))return false;
   const k={from:o.from,to:o.to,give:o.give.concat(r.add),want:o.want.slice()};if(!dealQuote(k).ok)return false;
   const c=aiCounterBudget(p,t,o,r.add);return !(c.extraValue>c.cap);
+ },
+ /* TİCARET-SON-EKSİKLER.0: çok taraflı transit izni koordinatörü. Kapsam yalnız ticaret transit izinleri (portTransit) ve bunların
+    Etki bedelleri; ikinci bir diplomasi / ticaret motoru değildir. Kayıt G.commerce.transit (yalnız kullanıldığında yazılır; eski kayıt
+    ve hiç tetiklenmeyen dünya Save8 baytlarını değiştirmez). Her bacak {o: liman sahibi, c: taşıyıcı, pay: taşıyıcının ödeyeceği Etki}.
+    İnsan taraflar (liman sahibi ya da ödeme yapacak taşıyıcı) yalnız KENDİ kararını verir; AI taraflar mevcut aiRespond / aiDealWould
+    önizlemesiyle açılışta ve uygulamada yeniden değerlendirilir. Bütün onaylar gelmeden hiçbir izin ya da ödeme yazılmaz; son onayda
+    dünya yeniden doğrulanır ve izinler (+ AI talebinde ilgili düzenli sözleşme) mevcut executeDeal / aiNegotiate yoluyla TEK işlemde
+    (dealTxBegin / dealTxRollback) uygulanır. Durumlar: pending → committed | rejected | expired | cancelled | invalid. */
+ transitLife:120,transitPay:36,transitLimit:64,transitPendingLimit:16,
+ transitStates:{pending:'Onay bekliyor',committed:'Uygulandı',rejected:'Reddedildi',expired:'Süresi doldu',cancelled:'Geri çekildi',invalid:'Geçersizleşti'},
+ human(e){return !!e&&(e.ai===false||typeof __mpHumanVoter==='function'&&!!__mpHumanVoter(e.id));},
+ transitList(){return G.commerce?.transit||[];},
+ transitGet(id){return this.transitList().find(t=>t.id===+id)||null;},
+ transitParties(t){return [...new Set([t.a,t.b].concat(t.legs.flatMap(l=>[l.o,l.c])))].sort((x,y)=>x-y);},
+ transitOffer(l){return {from:l.c,to:l.o,give:[{t:'res',r:'etk',v:l.pay}],want:[{t:'portTransit'}]};},
+ transitCands(c,exclude){
+  return G.emps.filter(o=>!exclude.includes(o.id)&&!o.dead&&!o.wild&&!o.crisisSide&&c.contact?.[o.id]&&o.contact?.[c.id]&&!this.portRight(o,c)&&
+   !c.war[o.id]&&!o.war[c.id]&&!diploBlocked(c,o)&&!tradeBlocked(c,o)&&tradeHubs(o).some(id=>this.identifiedPort(c,G.sys[id],o)));
+ },
+ // İki yönlü (a → b ve b → a) rota için gereken en küçük izin kümesi: aday sahiplerin bütün izinleriyle rota yoksa null; varsa her
+ // izin sırayla çıkarılır, iki yön hâlâ açıksa düşer (deterministik, kimlik sırası). İzinsiz açıksa boş liste.
+ transitPlan(a,b,source,target,{volA=0,volB=0,cands=null}={}){
+  const ok=g=>!!this.route(a,b,source,target,{grants:g,volume:volA})&&!!this.route(b,a,target,source,{grants:g,volume:volB});
+  if(ok(undefined))return {legs:[]};
+  const [ca,cb]=cands||[this.transitCands(a,[a.id,b.id]),this.transitCands(b,[a.id,b.id])];
+  const keys=ca.map(o=>o.id+':'+a.id).concat(cb.map(o=>o.id+':'+b.id));if(!keys.length)return null;
+  const g=new Set(keys);if(!ok(g))return null;
+  for(const k of keys){g.delete(k);if(!ok(g))g.add(k);}
+  return {legs:[...g].map(k=>{const [o,c]=k.split(':').map(Number);return {o,c};})};
+ },
+ // Bacağın kullanıldığı liman (taşıyıcının izinli rotasındaki ilk durak); yalnız gösterim.
+ transitVia(t,l){
+  const a=G.emps[t.a],b=G.emps[t.b],g=new Set(t.legs.map(x=>x.o+':'+x.c)),[x,y,s,d]=l.c===t.a?[a,b,t.source,t.target]:[b,a,t.target,t.source];
+  const path=this.route(x,y,s,d,{grants:g});if(!path)return null;
+  const hit=this.stops(x,path,g).slice(1,-1).find(id=>G.sys[id].planets.some(p=>p.owner===l.o&&p.col?.b?.liman>0));return hit===undefined?null:hit;
+ },
+ transitAiWould(e,t){
+  for(const l of t.legs)if(l.o===e.id&&!this.aiDealWould(G.emps[l.c],e,this.transitOffer(l)))return e.name+' liman iznini bu bedelle vermiyor';
+  const pay=t.legs.filter(l=>l.c===e.id).reduce((n,l)=>n+l.pay,0);
+  if(pay>0&&e.res.etk-pay<40)return e.name+' için Etki yetersiz';
+  if(pay>0&&e.id!==t.by&&this.pairGate(G.emps[t.a],G.emps[t.b]))return e.name+' bu ortakla genel ticaret anlaşmasında değil';
+  return null;
+ },
+ // Uygulama anındaki yeniden doğrulama; gerekçe metni ya da null. Eski onay değişen koşulda hak yaratmaz.
+ transitValid(t){
+  const a=G.emps[t.a],b=G.emps[t.b];
+  if(this.transitParties(t).some(id=>{const e=G.emps[id];return !e||e.dead||e.wild||e.crisisSide;}))return 'Taraflardan biri artık geçerli değil';
+  const pg=this.pairGate(a,b,!t.terms);if(pg)return pg;
+  if(!this.port(a,t.source)||!this.port(b,t.target))return 'Çıkış veya varış limanı el değiştirdi';
+  for(const l of t.legs){const o=G.emps[l.o],c=G.emps[l.c];
+   if(o.war[c.id]||c.war[o.id])return o.name+' ile '+c.name+' savaşta';
+   if(!o.contact?.[c.id]||!c.contact?.[o.id]||diploBlocked(o,c))return o.name+' ile '+c.name+' arasında diplomatik temas kapalı';
+   if(tradeBlocked(o,c))return o.name+' ile '+c.name+' arasında ambargo';}
+  const fresh=this.transitPlan(a,b,t.source,t.target,{volA:t.terms?.give?.[0]?.v||0,volB:t.terms?.want?.[0]?.v||0});
+  if(!fresh)return 'Rota artık açılamıyor (liman, sahiplik, abluka ya da üç sıçrama sınırı değişti)';
+  const have=new Set(t.legs.map(l=>l.o+':'+l.c));
+  if(fresh.legs.some(l=>!have.has(l.o+':'+l.c)))return 'Koşullar değişti: onaylanmamış başka bir liman izni gerekiyor';
+  const need=new Set(fresh.legs.map(l=>l.o+':'+l.c)),owed=new Map();
+  for(const l of t.legs)if(need.has(l.o+':'+l.c)){const q=dealQuote(this.transitOffer(l));if(!q.valid)return (q.reasons[0]||'İzin maddesi geçersiz');owed.set(l.c,(owed.get(l.c)||0)+l.pay+(q.cost||0));}
+  for(const [id,n] of owed)if(!(G.emps[id].res.etk>=n))return G.emps[id].name+' için Etki yetersiz ('+n+' ◈ gerekir)';
+  for(const id of this.transitParties(t)){const e=G.emps[id];if(!this.human(e)){const w=this.transitAiWould(e,t);if(w)return w;}}
+  return null;
+ },
+ transitText(t){return t.legs.map(l=>(G.emps[l.o]?.name||'?')+' → '+(G.emps[l.c]?.name||'?')+' ('+l.pay+' ◈)').join(', ');},
+ transitTell(t,text,cls){const ids=this.transitParties(t).filter(id=>this.human(G.emps[id]));if(ids.length&&typeof transitNote==='function')transitNote(ids,text,cls,t.id);},
+ transitOpen(by,a,b,source,target,legs,terms=null){
+  const st=this.state(),list=this.transitList();
+  if(!a||!b||a===b)return {ok:false,why:'Geçersiz ticaret ortağı'};
+  if(!legs.length)return {ok:false,why:'Transit izni gerekmiyor; hat zaten açık'};
+  if(list.some(t=>t.st==='pending'&&(t.a===a.id&&t.b===b.id||t.a===b.id&&t.b===a.id)))return {ok:false,why:'Bu ortakla bekleyen transit talebi var'};
+  if(list.filter(t=>t.st==='pending').length>=this.transitPendingLimit)return {ok:false,why:'Bekleyen transit talebi sınırı dolu'};
+  const t={id:(st.nextTransit||1),by,a:a.id,b:b.id,source,target,legs:legs.map(l=>({o:l.o,c:l.c,pay:this.transitPay})),votes:{},born:G.day,until:G.day+this.transitLife,st:'pending',why:''};
+  if(terms)t.terms={give:JSON.parse(JSON.stringify(terms.give)),want:JSON.parse(JSON.stringify(terms.want))};
+  for(const l of t.legs){const s=this.transitVia(t,l);if(s!==null)l.s=s;}
+  for(const id of this.transitParties(t)){const e=G.emps[id];if(id===by)continue;if(this.human(e))t.votes[id]='pending';else{const w=this.transitAiWould(e,t);if(w)return {ok:false,why:w};}}
+  const v=this.transitValid(t);if(v)return {ok:false,why:v};
+  if(!st.transit){st.transit=[];}st.nextTransit=t.id+1;st.transit.push(t);this.transitTrim();
+  if(!Object.values(t.votes).includes('pending'))return this.transitCommit(t);
+  this.transitTell(t,'⚓ Transit izni talebi #'+t.id+' — '+(G.emps[by]?.name||'?')+': '+this.transitText(t)+' · son gün '+Math.floor(t.until),'sci');
+  return {ok:true,st:'pending',id:t.id};
+ },
+ transitClose(t,st,why){t.st=st;t.why=String(why||'').slice(0,200);t.done=G.day;this.transitTell(t,'⚓ Transit talebi #'+t.id+' '+this.transitStates[st].toLowerCase()+(t.why?' — '+t.why:''),st==='committed'?'win':'war');return t;},
+ transitVote(e,id,yes){
+  const t=this.transitGet(id);if(!e||!t)return {ok:false,why:'Transit talebi bulunamadı'};
+  if(t.st!=='pending')return {ok:false,why:'Talep sonuçlandı: '+this.transitStates[t.st],terminal:true};
+  if(G.day>=t.until){this.transitClose(t,'expired','Onay süresi doldu');return {ok:false,why:'Talebin süresi doldu',terminal:true};}
+  if(t.votes[e.id]!=='pending')return {ok:false,why:t.votes[e.id]?'Bu talepte kararın zaten kayıtlı':'Bu talepte karar yetkin yok'};
+  if(!yes){t.votes[e.id]='no';this.transitClose(t,'rejected',e.name+' reddetti');return {ok:true,st:'rejected'};}
+  const v=this.transitValid(t);if(v){this.transitClose(t,'invalid',v);return {ok:false,why:v,terminal:true};}
+  t.votes[e.id]='yes';
+  if(Object.values(t.votes).includes('pending')){this.transitTell(t,'⚓ Transit talebi #'+t.id+': '+e.name+' onayladı; diğer onaylar bekleniyor','sci');return {ok:true,st:'pending'};}
+  return this.transitCommit(t);
+ },
+ transitCancel(e,id){const t=this.transitGet(id);if(!e||!t||t.st!=='pending'||t.by!==e.id)return {ok:false,why:'Geri çekilebilecek talep yok'};this.transitClose(t,'cancelled',e.name+' talebi geri çekti');return {ok:true,st:'cancelled'};},
+ transitCommit(t){
+  const v=this.transitValid(t);if(v){this.transitClose(t,'invalid',v);return {ok:false,why:v,terminal:true};}
+  const a=G.emps[t.a],b=G.emps[t.b],need=new Set((this.transitPlan(a,b,t.source,t.target,{volA:t.terms?.give?.[0]?.v||0,volB:t.terms?.want?.[0]?.v||0})?.legs||[]).map(l=>l.o+':'+l.c));
+  const tx=dealTxBegin();let why=null;
+  try{
+   for(const l of t.legs){if(!need.has(l.o+':'+l.c)){l.skip=1;continue;}const offer=this.transitOffer(l);if(!executeDeal(offer)){why=dealQuote(offer).reasons?.[0]||'Liman izni uygulanamadı';break;}}
+   if(!why&&t.terms){const r=aiNegotiate(a,b,t.terms.give,t.terms.want,true);if(!r?.uygulandi)why='Ticaret ortağı düzenli sözleşmeyi artık kabul etmiyor';}
+  }catch(err){why='İşlem uygulanamadı';}
+  if(why){dealTxRollback(tx);this.memoReset();this.transitClose(t,'invalid',why);return {ok:false,why,terminal:true};}
+  this.memoReset();this.transitClose(t,'committed',this.transitText(t));
+  return {ok:true,st:'committed'};
+ },
+ transitTrim(){const st=this.state();if(!st.transit)return;const done=st.transit.filter(t=>t.st!=='pending');if(st.transit.length>this.transitLimit){const drop=new Set(done.slice(0,st.transit.length-this.transitLimit).map(t=>t.id));st.transit=st.transit.filter(t=>!drop.has(t.id));}},
+ transitSweep(){for(const t of this.transitList())if(t.st==='pending'){if(G.day>=t.until)this.transitClose(t,'expired','Onay süresi doldu');else if(this.transitParties(t).some(id=>G.emps[id]?.dead))this.transitClose(t,'cancelled','Taraflardan biri yok oldu');}},
+ // İnsan oyuncunun (SP / MP) kendi taşıyıcısı ve ortağı için koridor talebi.
+ transitAsk(e,o,source,target){
+  if(!e||!o||e===o||!this.human(e))return {ok:false,why:'Talep yalnız oyuncu devletten gönderilebilir'};
+  const pg=this.pairGate(e,o,true);if(pg)return {ok:false,why:pg};
+  if(!this.port(e,source)||!this.port(o,target)||!this.identifiedPort(e,G.sys[target],o))return {ok:false,why:'Çıkış veya varış limanı geçerli değil'};
+  const plan=this.transitPlan(e,o,source,target);if(!plan)return {ok:false,why:'Bilinen limanlarla iki yönde üç sıçrama içinde izinli rota bulunamadı'};
+  return this.transitOpen(e.id,e,o,source,target,plan.legs);
+ },
+ // AI: en yakın iki liman çifti için insan sahipli (bir ya da birden çok) ara liman gerektiren iki yönlü koridor talebi.
+ aiTransitHuman(a,b,A,B,pairs){
+  const key='transitTx:'+b.id;
+  if(a.aiTalk?.[key]?.until>G.day||b.res.etk<80||this.transitList().some(t=>t.st==='pending'&&(t.a===a.id||t.b===a.id)))return false;
+  if(!G.emps.some(o=>o!==a&&o!==b&&!o.dead&&this.human(o)&&(a.contact[o.id]||b.contact[o.id])))return false;
+  const ex=[a.id,b.id],ca=this.transitCands(a,ex),cb=this.transitCands(b,ex);
+  if(!ca.concat(cb).some(o=>this.human(o)))return false;
+  for(const {source,target} of pairs.slice(0,2)){
+   if(!this.identifiedPort(a,G.sys[target],b)||!this.identifiedPort(b,G.sys[source],a))continue;
+   const plan=this.transitPlan(a,b,source,target,{cands:[ca,cb]});
+   if(!plan||!plan.legs.length||!plan.legs.some(l=>this.human(G.emps[l.o])))continue;
+   const g=new Set(plan.legs.map(l=>l.o+':'+l.c)),path=this.route(a,b,source,target,{grants:g,avoidObserved:true});if(!path)continue;
+   const distance=path.slice(1).reduce((n,id,i)=>n+dist(G.sys[path[i]],G.sys[id]),0),terms=this.aiTerms(a,b,A,B,{source,target,distance});
+   if(!terms||!this.route(a,b,source,target,{grants:g,avoidObserved:true,volume:terms.give[0].v})||!this.route(b,a,target,source,{grants:g,avoidObserved:true,volume:terms.want[0].v}))continue;
+   (a.aiTalk||={})[key]={until:G.day+180,reason:'Çok taraflı transit talebi'};
+   const r=this.transitOpen(a.id,a,b,source,target,plan.legs,terms);
+   AIDiagnostics.note(r.ok?'trade-transit-human':'trade-transit-refused',a,b,r.why||('talep #'+r.id));
+   return !!r.ok;
+  }
+  return false;
+ },
+ // TİCARET-SON-EKSİKLER.0: AI taşıyıcı, aktif sözleşmesinin kullandığı izin bitmeden (son 60 gün) mevcut teklif yoluyla yenileme ister.
+ // Sahibin kararı değişmez (AI: aiRespond; insan: gelen kutusu / MP bekleyen teklif). 30 gün bekleme; Etki ya da kullanım yoksa istemez.
+ aiPermitRenew(c){
+  for(const o of G.emps){const end=o.portTransit?.[c.id];if(o===c||o.dead||!(end>G.day)||end-G.day>PORT_TRANSIT_RENEW)continue;
+   const key='portRenew:'+o.id;if(c.aiTalk?.[key]?.until>G.day||c.res.etk-this.transitPay<40||!this.permitUsers(o,c).length)continue;
+   const offer={from:c.id,to:o.id,give:[{t:'res',r:'etk',v:this.transitPay}],want:[{t:'portTransit'}]};if(!dealQuote(offer).ok)continue;
+   (c.aiTalk||={})[key]={until:G.day+30,reason:'Liman izni yenileme'};
+   if(o.ai&&!(typeof __mpHumanVoter==='function'&&__mpHumanVoter(o.id))&&!this.aiDealWould(c,o,offer)){AIDiagnostics.note('trade-transit-refused',c,o,'Yenileme önizlemesi');continue;}   // boşa ret kaydı yok
+   if(o.id===0){const sent=!!UI.aiOffer(offer);AIDiagnostics.note(sent?'trade-transit-pending':'trade-transit-refused',c,o,'Yenileme');continue;}
+   const guest=typeof __mpHumanVoter==='function'&&__mpHumanVoter(o.id);if(!o.ai&&!guest)continue;
+   const r=aiNegotiate(c,o,offer.give,offer.want,true);
+   AIDiagnostics.note(r.uygulandi?'trade-transit-renewed':guest&&r.karar==='bekle'?'trade-transit-pending':'trade-transit-refused',c,o,'Yenileme');
+  }
+ },
+ memoReset(){if(this._tickMemo)this._tickMemo={relay:new Map(),edge:new Map()};},
+ // TİCARET-SON-EKSİKLER.0: insan tarafı olan liman izinleri için bitişten 60 / 30 gün önce ve bitişte tek uyarı. Eşik geçişi tick'ler
+ // arasında bir kez yakalanır (kayda alan yazılmaz); kayıt yüklemesi başlangıcı sıfırlar, geçmiş eşikler uydurulmaz.
+ permitWarnAt:[60,30,0],
+ permitUsers(o,c){
+  const out=[];for(const k of this.state().contracts){if(this.closed(k)||![k.a,k.b].includes(c.id))continue;
+   for(const l of k.legs){if(l.e!==c.id)continue;const partner=G.emps[l.to],g=new Set([o.id+':'+c.id]),path=partner&&this.route(c,partner,l.source,l.target,{grants:g});
+    if(path&&this.stops(c,path,g).slice(1,-1).some(id=>G.sys[id].planets.some(p=>p.owner===o.id&&p.col?.b?.liman>0))){out.push(k.id);break;}}}
+  return out;
+ },
+ permitWarn(){
+  const d0=this._warnDay;this._warnDay=G.day;if(d0===undefined||!(G.day>d0))return;
+  for(const o of G.emps){const g=o.portTransit;if(!g||o.dead)continue;
+   for(const [cid,end] of Object.entries(g)){const c=G.emps[cid];if(!c||c.dead||!Number.isFinite(end))continue;const ho=this.human(o),hc=this.human(c);if(!ho&&!hc)continue;
+    const th=this.permitWarnAt.find(n=>end-n>d0&&end-n<=G.day);if(th===undefined)continue;
+    const when=th>0?th+' gün sonra (gün '+Math.floor(end)+') bitiyor':'süresi doldu';
+    if(hc){const used=this.permitUsers(o,c);if(typeof transitNote==='function')transitNote([c.id],'⚓ '+o.name+' liman transit iznin '+when+(used.length?' · etkilenen sözleşme '+used.map(id=>'#'+id).join(', '):'')+(th>0?' · yenilemek için müzakere masasından izni yeniden iste':''),th>0?'sci':'war',0);}
+    if(ho&&typeof transitNote==='function')transitNote([o.id],'⚓ '+c.name+' için verdiğin liman transit izni '+when,'sci',0);}}
  },
  aiValue(e,n){return evalOffer({...e},n);},
  aiTerms(a,b,A,B,ports){
@@ -555,6 +725,7 @@ const Commerce={
      this.cancel(c.id,a);AIDiagnostics.note('trade-review-cancel',a,null,'Loss or outgoing reserve pressure; existing cargo remains physical');
     }
    }
+   this.aiPermitRenew(a);   // TİCARET-SON-EKSİKLER.0
    if(created>=4)break;
    const partners=G.emps.slice().sort((x,y)=>Number(x.id===0)-Number(y.id===0)||x.id-y.id);
    const offers=this.aiPartnerOffers(a,partners,balances,budget);
@@ -599,6 +770,7 @@ const Commerce={
    const g=e.portTransit;
    if(!g||typeof g!=='object'||Array.isArray(g)||Object.entries(g).some(([id,end])=>!/^\d+$/.test(id)||!G.emps[id]||+id===e.id||!Number.isFinite(end)||end<0))throw Error('Bozuk liman transit izni');
   }
+  this._warnDay=undefined;
   if(!raw){G.commerce=this.empty();return;}
   if(raw.v!==1||!raw.stats||typeof raw.stats!=='object'||Array.isArray(raw.stats)||!raw.aiAt||typeof raw.aiAt!=='object'||!Array.isArray(raw.contracts)||!Array.isArray(raw.convoys)||raw.contracts.length>256||raw.convoys.length>this.maxConvoys+this.historyLimit)throw Error('Geçersiz ticaret kaydı');
   const st=JSON.parse(JSON.stringify(raw)),ids=new Set(),cids=new Set(),num=n=>Number.isFinite(n)&&n>=0&&n<=Number.MAX_SAFE_INTEGER;
@@ -608,6 +780,29 @@ const Commerce={
   if(st.clock!==null&&!num(st.clock))throw Error('Bozuk ticaret saati');
   if(st.convoys.some(v=>v.at!==v.route[v.step]||!Array.isArray(v.attackers)||v.attackers.some(id=>!Number.isSafeInteger(id))||this.terminal(v)&&v.receipt!==v.id))throw Error('Bozuk konum / teslimat makbuzu');
   if(!Number.isSafeInteger(st.nextConvoy)||st.nextConvoy<=Math.max(0,...ids)||!Number.isSafeInteger(st.nextContract)||st.nextContract<=Math.max(0,...cids))throw Error('Ticaret kimliği tekrar edebilir');
+  // TİCARET-SON-EKSİKLER.0: çok taraflı transit onay kayıtları (isteğe bağlı alan; yalnız kullanıldığında vardır).
+  if(st.transit!==undefined||st.nextTransit!==undefined){
+   if(!Array.isArray(st.transit)||st.transit.length>this.transitLimit+this.transitPendingLimit||!Number.isSafeInteger(st.nextTransit))throw Error('Bozuk transit onay kaydı');
+   const tids=new Set(),vote=['pending','yes','no'];
+   for(const t of st.transit){
+    const parties=t&&Array.isArray(t.legs)?new Set([t.a,t.b].concat(t.legs.flatMap(l=>[l?.o,l?.c]))):null;
+    if(!parties||!Number.isSafeInteger(t.id)||t.id<1||tids.has(t.id)||!Object.hasOwn(this.transitStates,t.st)||![t.by,t.a,t.b,t.source,t.target].every(Number.isInteger)||!G.emps[t.by]||!G.emps[t.a]||!G.emps[t.b]||t.a===t.b||!G.sys[t.source]||!G.sys[t.target]||
+     !num(t.born)||!num(t.until)||t.until<t.born||!t.legs.length||t.legs.length>16||
+     t.legs.some(l=>!l||!G.emps[l.o]||!G.emps[l.c]||l.o===l.c||!Number.isInteger(l.pay)||l.pay<0||l.pay>1000||l.s!==undefined&&!G.sys[l.s]||l.skip!==undefined&&l.skip!==1)||
+     !t.votes||typeof t.votes!=='object'||Array.isArray(t.votes)||Object.entries(t.votes).some(([id,v])=>!/^\d+$/.test(id)||!parties.has(+id)||+id===t.by||!vote.includes(v))||
+     typeof t.why!=='string'||t.done!==undefined&&!num(t.done)||t.st!=='pending'&&t.done===undefined||
+     t.terms!==undefined&&(!t.terms||!Array.isArray(t.terms.give)||!Array.isArray(t.terms.want)||t.terms.give.concat(t.terms.want).some(i=>!i||i.t!=='freight'))||
+     t.st==='pending'&&Object.values(t.votes).includes('no')||t.st==='committed'&&Object.values(t.votes).some(v=>v!=='yes'))throw Error('Bozuk transit onay kaydı');
+    tids.add(t.id);}
+   if(st.nextTransit<=Math.max(0,...tids))throw Error('Transit kimliği tekrar edebilir');
+  }
   G.commerce=st; // No dispatch, payment, arrival, history synthesis or RNG during loading.
  },
 };
+/* TİCARET-SON-EKSİKLER.0: transit onayı / izin süresi bildirimleri. Tek oyunculuda ve host'ta oyuncunun bildirim kartı (Gelen kutusu
+   kaydı değil; karar TİCARET → Liman izinleri bölümünde); MP host'u bu işlevi sarar ve uzak insan taraflara aynı metni iletir. */
+function transitNote(ids,text,cls,id){
+  if(typeof G!=='undefined'&&G.p&&G.p.ai===false&&Array.isArray(ids)&&ids.includes(G.p.id)&&typeof UI!=='undefined'&&typeof UI.notify==='function')
+    UI.notify({kind:'transit',data:Number.isSafeInteger(+id)?+id:0,key:'transit:'+(+id||0)+':'+String(text).slice(0,80),ico:'⚓',cls:cls||'sci',title:String(text).slice(0,90),sub:String(text).slice(0,300)});
+  return text;
+}
