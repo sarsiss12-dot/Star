@@ -158,8 +158,8 @@ const Commerce={
   let hops=v.hops??v.step,origin=v.legSource??v.source;
   for(let i=v.step;i<v.route.length-1;i++){
    const here=G.sys[v.route[i]],next=v.route[i+1];
-   if((i!==v.step||v.t===0)&&this.relay(a,here)&&routeVolume(a,origin,here.id)>=v.amount){hops=0;origin=here.id;}
-   if(++hops>3||!this.openEdge(a,b,here.id,next)||next===v.target&&routeVolume(a,origin,next)<v.amount)return here;
+   if((i!==v.step||v.t===0)&&this.memoRelay(a,here)&&routeVolume(a,origin,here.id)>=v.amount){hops=0;origin=here.id;}
+   if(++hops>3||!this.memoEdge(a,b,here.id,next)||next===v.target&&routeVolume(a,origin,next)<v.amount)return here;
   }
   return null;
  },
@@ -237,7 +237,12 @@ const Commerce={
  },
  position(v){const a=G.sys[v.route[v.step]],b=G.sys[v.route[v.step+1]];if(!a)return;if(b&&v.status==='moving'){v.x=lerp(a.x,b.x,v.t);v.y=lerp(a.y,b.y,v.t);}else if(v.t===0){v.x=a.x;v.y=a.y;}},
  block(v,why){if(v.blockedSince===null)v.blockedSince=G.day;v.status='blocked';v.reason=why;if(G.day-v.blockedSince>=this.waitLimit)this.finish(v,'destroyed',why+' · 180 gün sonra kargo kaybedildi');},
- tick(dt){
+ // TİCARET-FİNAL.0: aynı Commerce.tick çağrısı içinde (aynı gün, aynı dünya) kalan rota denetimindeki openEdge / relay sonuçları paylaşılır.
+ // Tick içinde liman, izin, savaş, sahiplik, abluka (cr) ve görünürlük değişmez (saldırı yalnız stok / G.raids yazar); memo tick sonunda atılır.
+ memoRelay(a,s){const m=this._tickMemo;if(!m)return this.relay(a,s);const k=a.id*65536+s.id;let v=m.relay.get(k);if(v===undefined){v=this.relay(a,s);m.relay.set(k,v);}return v;},
+ memoEdge(a,b,from,to){const m=this._tickMemo;if(!m)return this.openEdge(a,b,from,to);const k=((a.id*256+b.id)*65536+from)*65536+to;let v=m.edge.get(k);if(v===undefined){v=this.openEdge(a,b,from,to);m.edge.set(k,v);}return v;},
+ tick(dt){this._tickMemo={relay:new Map(),edge:new Map()};try{return this.tick0(dt);}finally{this._tickMemo=null;}},
+ tick0(dt){
   const st=this.state();if(!Number.isFinite(dt)||dt<0)return;
   dt=st.clock===null?dt:Math.max(0,Math.min(dt,G.day-st.clock));st.clock=G.day;
   // Dispatch and route retries run once per simulation day, not once per paint.

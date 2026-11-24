@@ -7,6 +7,7 @@
 const path=require('path'),fs=require('fs'),assert=require('assert/strict');
 const {chromium}=require(require.resolve('playwright',{paths:[path.join(__dirname,'node_modules'),__dirname]}));
 const root=path.resolve(process.env.STARS_ROOT||path.join(__dirname,'..')),out=path.resolve(process.env.STARS_OUTPUT||path.join(__dirname,'../reports/claude/evidence/ticaret-tamamlama0/browser-sp'));fs.mkdirSync(out,{recursive:true});
+const Commerce_closed=st=>['cancelled','expired','blocked'].includes(st);
 const VIEWS=(process.env.SP_VIEWS||'800x360,844x390,901x411').split(',');
 const results=[];let pass=0,fail=0;
 async function test(name,fn){try{const r=await fn();results.push({name,status:'PASS',...(r||{})});pass++;console.log('PASS '+name);}catch(e){results.push({name,status:'FAIL',error:String(e&&e.stack||e).slice(0,1500)});fail++;console.log('FAIL '+name+'\n'+String(e&&e.message||e).slice(0,400));}}
@@ -66,6 +67,23 @@ async function test(name,fn){try{const r=await fn();results.push({name,status:'P
       if(await page.locator('#modal [data-a="commerceLocate"]').count()){await tap('#modal [data-a="commerceLocate"]');located=await page.evaluate(()=>({sel:CommerceUI.selected,modal:!document.getElementById('modal').classList.contains('hidden')}));}}
     assert.ok(signed||r.reason.length>3,'sözleşme ya da açık neden '+JSON.stringify(r));if(signed)assert.ok(located&&located.sel!==null&&!located.modal,'konvoy haritada seçildi '+JSON.stringify(located));
     await closeAll();return {...r,signed,located};});
+  await test(view+' U4 sözleşme listesinden İPTAL (dokunuş) → yeni yükleme yok, yoldaki kargo çift teslim edilmez',async()=>{
+    const st0=await page.evaluate(o=>{const c=Commerce.state().contracts.find(c=>!Commerce.closed(c)&&[c.a,c.b].includes(o));return c?{id:c.id,conv:Commerce.state().convoys.filter(v=>v.contract===c.id).length}:null;},fx.O);
+    if(!st0)return {skip:'sözleşme yok (U3 imzalamadı)'};
+    await closeAll();await page.evaluate(()=>UI.act('commerce'));await page.waitForTimeout(300);
+    const sel='#modal [data-a="commerceCancel"][data-x="'+st0.id+'"]';await tap(sel);
+    const r=await page.evaluate(id=>{const c=Commerce.state().contracts.find(c=>c.id===id);const conv0=Commerce.state().convoys.filter(v=>v.contract===id).length;
+      const recv0=Commerce.state().convoys.filter(v=>v.contract===id&&v.status==='delivered').map(v=>v.id);for(let i=0;i<400;i++){G.day+=1;dailyTick(1);}
+      const conv=Commerce.state().convoys.filter(v=>v.contract===id);return {status:c.status,conv0,conv1:conv.length,receipts:conv.filter(v=>v.status==='delivered').map(v=>[v.id,v.receipt])};},st0.id);
+    await closeAll();
+    assert.ok(Commerce_closed(r.status),'sözleşme kapandı '+r.status);assert.equal(r.conv1,r.conv0,'iptalden sonra yeni sefer yok '+JSON.stringify(r));
+    assert.ok(r.receipts.every(([id,rc])=>id===rc),'her konvoy tek makbuz');return r;});
+  await test(view+' U5 oyuncu AI\'ya müzakere masasından Transit İzni verir (dokunuş) → izin yalnız o devlet için, 360 gün',async()=>{
+    await closeAll();await page.evaluate(o=>{UI.forgetDeal?.(o);UI.openDeal(o);},fx.O);await page.waitForTimeout(250);
+    await tap('[data-a="dealAdd"][data-x="give:portTransit"]');await tap('[data-a="dealSend"]');await page.waitForTimeout(400);
+    const r=await page.evaluate(o=>({until:G.p.portTransit?.[o],day:G.day,others:Object.keys(G.p.portTransit||{}).filter(k=>+k!==o).length}),fx.O);
+    await page.screenshot({path:path.join(out,view+'-u5-transit.png')});await page.evaluate(()=>{try{UI.act('closeDiplo');}catch{}});await closeAll();
+    assert.ok(r.until>r.day+300,'izin verildi '+JSON.stringify(r));assert.equal(r.others,0,'başka devlete izin yok');return r;});
   if(errors.length)results.push({name:view+' sayfa hataları',status:'INFO',errors:errors.slice(0,5)});await ctx.close();}
  }finally{await browser.close();srv.close();fs.writeFileSync(path.join(out,'results.json'),JSON.stringify({root,results},null,1));console.log(`GEÇEN: ${pass} KALAN: ${fail}`);process.exitCode=fail?1:0;}
 })();
