@@ -1,0 +1,191 @@
+{
+ "results": [
+  {
+   "name": "X0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 9063
+  },
+  {
+   "name": "X0 fikstür: B ana filosu + bileşim, AI ile savaş, ulaşılabilir AI sistemi (host)",
+   "status": "PASS",
+   "ms": 1000
+  },
+  {
+   "name": "X1 sipariş sınırdan önce (B gerçek dokunuş FİLO TAKVİYESİ), ana filo düşman sistemine geçer, üretim sonra biter → katılır; B aynasında 7",
+   "status": "PASS",
+   "ms": 3303
+  },
+  {
+   "name": "X2 ana filo düşman sistemindeyken B gerçek dokunuşla OTOMATİK TAKVİYE: AÇIK → host sipariş verir → teslim; B aynasında 8",
+   "status": "PASS",
+   "ms": 3135
+  },
+  {
+   "name": "X3 ana filo yok olunca 4 sevkiyat → B Haberler → Sevkiyatlar: tek kart, host ile aynı başlık, TOPLU KURTARMA",
+   "status": "PASS",
+   "ms": 2136
+  }
+ ],
+ "metrics": {
+  "scen": "X",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 1,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 292,
+    "buildMs": 332,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 7.5,
+      "p95": 7.5,
+      "max": 7.5
+     },
+     "longtask": {
+      "n": 1,
+      "med": 66,
+      "p95": 66,
+      "max": 66
+     },
+     "heapMB": 17,
+     "dom": 728,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 34.1,
+       "p95": 34.1,
+       "max": 34.1
+      },
+      "refresh": {
+       "n": 1,
+       "med": 4,
+       "p95": 4,
+       "max": 4
+      },
+      "longtask": {
+       "n": 1,
+       "med": 54,
+       "p95": 54,
+       "max": 54
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 22,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 8028,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 7
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   }
+  ],
+  "reinf": {
+   "fx": {
+    "fleet": 29,
+    "yard": 5,
+    "target": 44,
+    "ai": 3,
+    "t": true,
+    "name": "Orrrus-77",
+    "path": "20>12>44"
+   },
+   "x1finish": 1,
+   "x1": {
+    "before": 6,
+    "exit": 0,
+    "move": 0,
+    "last": {
+     "ship": 0,
+     "moving": 0,
+     "st": [],
+     "main": 7
+    },
+    "main": 7
+   },
+   "x2reason": "Üretim sürüyor; gemiler otomatik bu filoyu izler",
+   "x2": {
+    "before": 7,
+    "exit": 0,
+    "move": 0,
+    "last": {
+     "ship": 0,
+     "moving": 0,
+     "st": [],
+     "main": 8
+    },
+    "main": 8
+   },
+   "x3": {
+    "groups": 1,
+    "ships": 4
+   },
+   "x3guest": {
+    "n": 1,
+    "head": [
+     "Filo #29 · Hedef kayıp · 4 takviye gemisi"
+    ],
+    "recov": [
+     true
+    ],
+    "tab": "Sevkiyatlar · 4"
+   }
+  },
+  "errors": []
+ }
+}

@@ -1,0 +1,5 @@
+PASS W0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS W1 misafir gerçek SAVAŞ HEDEFİ SEÇ → Fetih → sistem seçimi → host önizlemesi (meşruiyet + tutum) → ONAYLA; host v2 Fetih kaydı, seçilen hedefler
+PASS W2 misafir gerçek müzakere masasında "Teslim iste" (Akademik) → TESLİM ÖNİZLEMESİ → TEKLİFİ SUN; AI motorun aiRespond'u ile karar verir; kabulde vasallık + cephe kapanır; çerçeve tekrarı ikinci teklif üretmez
+PASS W3 misafir gerçek koloni panelinden OTOMATİK İNŞAAT GEMİSİ → host remoteAuto; misafirin İNŞ gemisi atanır; güncel aynada panel görevi gösterir
+GEÇEN: 4 KALAN: 0

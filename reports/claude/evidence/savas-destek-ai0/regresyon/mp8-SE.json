@@ -1,0 +1,250 @@
+{
+ "results": [
+  {
+   "name": "SE0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 7914
+  },
+  {
+   "name": "H0 fikstür (host): AI O ↔ AI X savaşta, B ile O müttefik; AI F B'ye savaş açar, B yorgunluğu 88; F'ye 8 bilinen sistem",
+   "status": "PASS",
+   "ms": 943
+  },
+  {
+   "name": "H1 misafir \"Büyük armalar\" düğmesi çalışır (kapı engeli yok)",
+   "status": "PASS",
+   "ms": 2623
+  },
+  {
+   "name": "H2 lojistik: filo seçili değilken ikmal limanları + ipucu (misafir ve host)",
+   "status": "PASS",
+   "ms": 5596
+  },
+  {
+   "name": "H3 misafir Savaş Merkezi: yorgunluk %88 + %85 uyarısı (host değeri), rakip BİLİNMİYOR",
+   "status": "PASS",
+   "ms": 633
+  },
+  {
+   "name": "H4 misafir HARİTADAN HEDEF SEÇ: 6+ sistem gerçek harita dokunuşuyla; host önizlemesi talep bedeli > 0",
+   "status": "PASS",
+   "ms": 6378
+  },
+  {
+   "name": "H5 misafir TÜMÜNÜ KENARA AL: kartlar gizlenir, karar verilmez",
+   "status": "PASS",
+   "ms": 920
+  },
+  {
+   "name": "H6 misafir Savaşa Yardım Teklif Et: müttefik O'nun X savaşına katılım VER + 300 alaşım İSTE → host kaydı",
+   "status": "PASS",
+   "ms": 4800
+  }
+ ],
+ "metrics": {
+  "scen": "SE",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 1,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 400,
+    "buildMs": 438,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 2,
+      "p95": 2,
+      "max": 2
+     },
+     "longtask": {
+      "n": 1,
+      "med": 64,
+      "p95": 64,
+      "max": 64
+     },
+     "heapMB": 15,
+     "dom": 728,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 79.8,
+       "p95": 79.8,
+       "max": 79.8
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2,
+       "p95": 2,
+       "max": 2
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 14,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 22,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 7412,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 7
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   }
+  ],
+  "saha": {
+   "fx": {
+    "O": 2,
+    "X": 3,
+    "F": 4,
+    "fsys": 9,
+    "front": 1
+   },
+   "h1": {
+    "b0": false,
+    "on": true,
+    "blocked": ""
+   },
+   "h2B": {
+    "on": true,
+    "ports": 3
+   },
+   "h2H": {
+    "on": true,
+    "ports": 1
+   },
+   "h3": {
+    "ok": true,
+    "pct": true,
+    "warn": true,
+    "unk": true
+   },
+   "h4": {
+    "cands": 8,
+    "picked": 7,
+    "sel": 7,
+    "preview": true,
+    "cost": 25
+   },
+   "h5": {
+    "card": true,
+    "after": 0
+   },
+   "h6": {
+    "give": 1,
+    "before": {
+     "war": false,
+     "ala": 8000
+    },
+    "after": {
+     "war": false,
+     "ala": 8000,
+     "offers": 1
+    },
+    "trace": [
+     {
+      "tx": "gk6rwr",
+      "step": "draft",
+      "at": 1795555464795,
+      "day": 1,
+      "to": 2,
+      "give": [
+       {
+        "t": "warJoin",
+        "front": 1,
+        "target": 3
+       }
+      ],
+      "want": [
+       {
+        "t": "res"
+       }
+      ]
+     },
+     {
+      "tx": "gk6rwr",
+      "step": "send",
+      "at": 1795555464795,
+      "day": 1,
+      "cid": "j1_6_vbrfgk6rwr",
+      "kind": "offer"
+     },
+     {
+      "tx": "gk6rwr",
+      "step": "reply",
+      "at": 1795555464826,
+      "day": 1,
+      "status": "ok",
+      "code": null,
+      "offer": 1,
+      "dup": false
+     },
+     {
+      "tx": "gk6rwr",
+      "step": "msg",
+      "at": 1795555464829,
+      "day": 1,
+      "ok": true,
+      "msg": "Tharaeth Lejyonu reddetti"
+     }
+    ]
+   }
+  },
+  "errors": []
+ }
+}

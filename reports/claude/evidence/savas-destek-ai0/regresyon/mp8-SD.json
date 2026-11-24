@@ -1,0 +1,403 @@
+{
+ "results": [
+  {
+   "name": "SD0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 6 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 13401
+  },
+  {
+   "name": "D1 misafir B: Savaş Merkezi → destek adayları sıralı + gerekçeli → toplu destek (çift basış) → her uygun adaya tek teklif; C kabul → aynı sefer; ikinci toplu basış teklif üretmez",
+   "status": "PASS",
+   "ms": 8411
+  },
+  {
+   "name": "D2 AI S zorlanınca müttefiki misafir C'den yardım ister: C kutusunda kart (C adına karar yok), B görmez; C reddeder → savaş / ödeme yok",
+   "status": "PASS",
+   "ms": 3074
+  }
+ ],
+ "metrics": {
+  "scen": "SD",
+  "conf": {
+   "size": "orta",
+   "ai": 6,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 759,
+    "buildMs": 839,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 945,
+    "buildMs": 988,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 3.4,
+      "p95": 3.4,
+      "max": 3.4
+     },
+     "longtask": {
+      "n": 5,
+      "med": 51,
+      "p95": 70,
+      "max": 70
+     },
+     "heapMB": 17,
+     "dom": 730,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 54.9,
+       "p95": 54.9,
+       "max": 54.9
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.7,
+       "p95": 2.7,
+       "max": 2.7
+      },
+      "longtask": {
+       "n": 2,
+       "med": 315,
+       "p95": 315,
+       "max": 315
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 703,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 28,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 58,
+       "p95": 58,
+       "max": 58
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.1,
+       "p95": 2.1,
+       "max": 2.1
+      },
+      "longtask": {
+       "n": 6,
+       "med": 73,
+       "p95": 159,
+       "max": 159
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 725,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 25,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 6126,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 9
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "sda": {
+   "fx": {
+    "T": 3,
+    "A1": 4,
+    "S": 6
+   },
+   "d1": {
+    "F": 1,
+    "cards": [
+     {
+      "id": 2,
+      "tier": 4,
+      "ok": "1",
+      "txt": "Yeşil Birlik\nilişki 85 · müttefik · dost"
+     },
+     {
+      "id": 1,
+      "tier": 0,
+      "ok": "1",
+      "txt": "Kızıl Muhafız\nilişki 20"
+     },
+     {
+      "id": 4,
+      "tier": 0,
+      "ok": "1",
+      "txt": "Rhyvaur Şurası\nilişki 20"
+     },
+     {
+      "id": 6,
+      "tier": 0,
+      "ok": "1",
+      "txt": "Oriar Sendikası\nilişki 20"
+     },
+     {
+      "id": 7,
+      "tier": 0,
+      "ok": "1",
+      "txt": "Vaoni Komünü\nilişki 20"
+     },
+     {
+      "id": 5,
+      "tier": 0,
+      "ok": "0",
+      "txt": "Sylraen Meclisi\nilişki 20"
+     },
+     {
+      "id": 8,
+      "tier": 0,
+      "ok": "0",
+      "txt": "Nivaen Konseyi\nilişki 20"
+     }
+    ],
+    "frame": true,
+    "allOffers": [
+     {
+      "id": 1,
+      "from": 1,
+      "to": 0,
+      "status": "pending",
+      "want": [
+       "warJoin:f1"
+      ],
+      "give": []
+     },
+     {
+      "id": 2,
+      "from": 1,
+      "to": 2,
+      "status": "pending",
+      "want": [
+       "warJoin:f1"
+      ],
+      "give": []
+     },
+     {
+      "id": 3,
+      "from": 1,
+      "to": 4,
+      "status": "countered",
+      "want": [
+       "warJoin:f1"
+      ],
+      "give": []
+     },
+     {
+      "id": 4,
+      "from": 4,
+      "to": 1,
+      "status": "pending",
+      "want": [
+       "res"
+      ],
+      "give": [
+       "warJoin"
+      ]
+     },
+     {
+      "id": 5,
+      "from": 1,
+      "to": 6,
+      "status": "rejected",
+      "want": [
+       "warJoin:f1"
+      ],
+      "give": []
+     },
+     {
+      "id": 6,
+      "from": 1,
+      "to": 7,
+      "status": "rejected",
+      "want": [
+       "warJoin:f1"
+      ],
+      "give": []
+     }
+    ],
+    "offers": [
+     {
+      "id": 1,
+      "from": 1,
+      "to": 0,
+      "status": "pending",
+      "want": [
+       "warJoin:f1"
+      ],
+      "give": []
+     },
+     {
+      "id": 2,
+      "from": 1,
+      "to": 2,
+      "status": "pending",
+      "want": [
+       "warJoin:f1"
+      ],
+      "give": []
+     },
+     {
+      "id": 3,
+      "from": 1,
+      "to": 4,
+      "status": "countered",
+      "want": [
+       "warJoin:f1"
+      ],
+      "give": []
+     },
+     {
+      "id": 5,
+      "from": 1,
+      "to": 6,
+      "status": "rejected",
+      "want": [
+       "warJoin:f1"
+      ],
+      "give": []
+     },
+     {
+      "id": 6,
+      "from": 1,
+      "to": 7,
+      "status": "rejected",
+      "want": [
+       "warJoin:f1"
+      ],
+      "give": []
+     }
+    ],
+    "states": [
+     {
+      "id": 2,
+      "state": "pending",
+      "text": "Bekliyor — karar karşı tarafta (Gelen kutusu → Gönderilen)"
+     },
+     {
+      "id": 1,
+      "state": "pending",
+      "text": "Bekliyor — karar karşı tarafta (Gelen kutusu → Gönderilen)"
+     },
+     {
+      "id": 4,
+      "state": "countered",
+      "text": "Karşı teklif geldi — Şartlı Teklif… ile müzakere et"
+     },
+     {
+      "id": 6,
+      "state": "rejected",
+      "text": "Reddedildi"
+     },
+     {
+      "id": 7,
+      "state": "rejected",
+      "text": "Reddedildi"
+     },
+     {
+      "id": 5,
+      "state": "",
+      "text": ""
+     },
+     {
+      "id": 8,
+      "state": "",
+      "text": ""
+     }
+    ],
+    "accepted": "Kabul edildi — cepheye katıldı"
+   },
+   "d2": {
+    "ok": true,
+    "n0": 6,
+    "res0": "{\"min\":4000,\"ene\":4000,\"yiy\":180,\"ala\":4000,\"ara\":0,\"tuk\":150,\"etk\":4000}",
+    "why": null,
+    "offer": [
+     {
+      "id": 7,
+      "from": 6,
+      "to": 2
+     }
+    ],
+    "status": "rejected"
+   }
+  },
+  "errors": []
+ }
+}

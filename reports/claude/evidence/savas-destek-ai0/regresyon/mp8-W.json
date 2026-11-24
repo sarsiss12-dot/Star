@@ -1,0 +1,178 @@
+{
+ "results": [
+  {
+   "name": "W0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 8888
+  },
+  {
+   "name": "W1 misafir gerçek SAVAŞ HEDEFİ SEÇ → Fetih → sistem seçimi → host önizlemesi (meşruiyet + tutum) → ONAYLA; host v2 Fetih kaydı, seçilen hedefler",
+   "status": "PASS",
+   "ms": 3855
+  },
+  {
+   "name": "W2 misafir gerçek müzakere masasında \"Teslim iste\" (Akademik) → TESLİM ÖNİZLEMESİ → TEKLİFİ SUN; AI motorun aiRespond'u ile karar verir; kabulde vasallık + cephe kapanır; çerçeve tekrarı ikinci teklif üretmez",
+   "status": "PASS",
+   "ms": 4333
+  },
+  {
+   "name": "W3 misafir gerçek koloni panelinden OTOMATİK İNŞAAT GEMİSİ → host remoteAuto; misafirin İNŞ gemisi atanır; güncel aynada panel görevi gösterir",
+   "status": "PASS",
+   "ms": 3370
+  }
+ ],
+ "metrics": {
+  "scen": "W",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 1,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 239,
+    "buildMs": 271,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 1.6,
+      "p95": 2,
+      "max": 2
+     },
+     "longtask": {
+      "n": 1,
+      "med": 60,
+      "p95": 60,
+      "max": 60
+     },
+     "heapMB": 16,
+     "dom": 728,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 53.3,
+       "p95": 53.3,
+       "max": 53.3
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1.7,
+       "p95": 1.7,
+       "max": 1.7
+      },
+      "longtask": {
+       "n": 1,
+       "med": 69,
+       "p95": 69,
+       "max": 69
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 22,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 7100,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 7
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   }
+  ],
+  "warGoals": {
+   "target": 2,
+   "menu": [
+    "fetih",
+    "boyun"
+   ],
+   "preview": "⚔ SAVAŞ İLANI · Tharaeth Lejyonu\n✕\n1 Hedef ✓ · 2 Müttefikler (isteğe bağlı) · 3 Son onay\n1 · HEDEF\nHedefi değiştir\nHEDEF: FETİH · 3 sistem\nAthkrim · Joriarus · Hydmir\nBarışta hedef sistemler sende kalır; hedef dışı işgaller iade edilir.\n2 · MÜTTEFİKLERİ ÇAĞIR · isteğe bağlı\n3 · SON ONAY\nHedef\nTharaeth Lejyonu · Fetih\nKesin destek\n—\nHedefin bilinen destekçileri\nBilinen yok\nSAVAŞ YORGUNLUĞU\nSenin %0 · Tharaeth Lejyonu: bilinmiyor\nRakibin yorgunluğu SIZILMIŞ istihbarat olmadan bilinmez. Taraflardan biri %100'e ulaşınca savaş zorunlu barışla durur; önceki savaşın yorgunluğu barışta ayda 2,5 azalarak taşınır.\nToplam bedel\n◈ 25 Etki\nMeşruiyet\n0 / gereken 39 · gerekçesiz\nGerekçe: kayıtlı gerekçe yok\n⚠ Meşruiyet gerekçesiz (0 / gereken 39): üçüncü taraflar kınayabilir.\nGEREKÇELER VE MEŞRUİYET · TAHMİNİ TUTUMLAR · AYRINTI\nSavaş İlan Et\nVazgeç",
+   "W1": {
+    "goal": {
+     "t": "fetih",
+     "start": 1.2068000000000014,
+     "targets": [
+      35,
+      9,
+      19
+     ],
+     "v": 2
+    },
+    "picked": [
+     35,
+     9,
+     19
+    ]
+   },
+   "W2box": "TESLİM ÖNİZLEMESİ — Tharaeth Lejyonu → Saf Akıl Ağı (Akademik Vasal)\nVergi: yok · Serbest dış politika · Senyör vasalı korur · Senyörün savaşlarına katılmaz\nİşgal edilen sistemler fiilî sahibinde kalır; vasal kendi topraklarını korur.\nKapanan cepheler: Saf Akıl Ağı ↔ Tharaeth Lejyonu\nSüren savaşlar: —\nKatılmaz\nYalnız savunma\nSaldırı da",
+   "W2": {
+    "status": "accepted",
+    "why": "Kabul edildi",
+    "overlord": 1,
+    "war": false,
+    "guestSees": {
+     "overlord": 0,
+     "war": false
+    }
+   },
+   "W3": {
+    "key": "bilim_ist",
+    "fleet": "İnş W3",
+    "state": "queued",
+    "auto": true,
+    "panel": "🔬 Araştırma İstasyonu · Sırada\nGemi: İnş W3 · tahmini varış ~0 gün · Maliyet ◆241 ▰48\nSırada; kaynaklar henüz harcanmadı\nGÖREVİ İPTAL ET"
+   }
+  },
+  "errors": []
+ }
+}

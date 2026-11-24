@@ -1,0 +1,11 @@
+SD GEÇEN: 3 KALAN: 0
+Q GEÇEN: 5 KALAN: 3  (ilk koşu: AI Y tohum 22'de enerji krizinde → p55 kapısı reddetti; fikstür düzeltildi)
+Q GEÇEN: 8 KALAN: 0  (fikstür düzeltmesi sonrası, Q.txt)
+W GEÇEN: 4 KALAN: 0
+SE GEÇEN: 8 KALAN: 0
+SG GEÇEN: 5 KALAN: 0
+X GEÇEN: 5 KALAN: 0
+Y GEÇEN: 6 KALAN: 0
+V GEÇEN: 7 KALAN: 0
+J GEÇEN: 5 KALAN: 0
+TZ GEÇEN: 8 KALAN: 0
