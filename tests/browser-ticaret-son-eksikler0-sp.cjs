@@ -45,7 +45,7 @@ async function test(name,fn){try{const r=await fn();results.push({name,status:'P
     X.res.min=20;X.inc={min:-4,ene:12,yiy:1,ala:1,tuk:1};X.res.ene=600;Y.res.min=600;Y.inc={min:12,ene:-4,yiy:1,ala:1,tuk:1};Y.res.ene=20;
     window.FX.chain=free.map(s=>s.id);window.ASK=()=>{const bud={routes:96};return !!Commerce.aiTransitRequest(X,Y,Commerce.aiBalance(X),Commerce.aiBalance(Y),bud);};
     updateVision();Commerce.state();G.inbox=[];UI.drawInbox();});
-  FXV=await page.evaluate(()=>({D:FX.D,Y:FX.Y}));
+  const FXV=await page.evaluate(()=>({D:FX.D,Y:FX.Y})),FX_Dn=()=>FXV.D,FX_Yn=()=>FXV.Y;
   const cardSel=async id=>{const uid=await page.evaluate(id=>(G.inbox||[]).find(n=>n.kind==='transit'&&n.data===id)?.uid,id);if(!uid)throw Error('kart yok');return '#inbox [data-a="openNote"][data-x="'+uid+'"]';};
   await test(view+' V1 talep kartı → dokunuşla Liman izinleri: talep eden, limanlar, taşıyıcılar, bedel, son gün; taşma yok',async()=>{
     const ok=await page.evaluate(()=>ASK());assert.equal(ok,true,'AI talep açtı');await page.evaluate(()=>UI.drawInbox());await tap(await cardSel(1));
@@ -66,7 +66,6 @@ async function test(name,fn){try{const r=await fn();results.push({name,status:'P
     assert.equal(s1.etk[0]-s0.etk[0],72);assert.equal(s1.k,1,'X–Y sözleşmesi');await tap('#modal [data-a="commerce"]');const back=await page.evaluate(()=>!!document.querySelector('#modal .mhd')?.textContent.includes('TİCARET'));
     assert.equal(back,true);return {s1};});
   function FX_D(s){return Object.keys(s.pt).map(Number).find(k=>k!==0);}
-  let FXV=null;const FX_Dn=()=>FXV.D,FX_Yn=()=>FXV.Y;
   await test(view+' V4 yeni talep → REDDET → Reddedildi, izin / ödeme yok',async()=>{
     await page.evaluate(()=>{for(const id of [FX.X,FX.Y]){delete G.emps[0].portTransit[id];delete G.emps[FX.D].portTransit[id];}for(const c of G.commerce.contracts)if([c.a,c.b].includes(FX.X))c.status='cancelled';
       for(const e of [G.emps[FX.X],G.emps[FX.Y]])e.aiTalk={};return ASK();});const s0=await S();const id=s0.tx[s0.tx.length-1].id;await closeAll();await page.evaluate(()=>UI.drawInbox());

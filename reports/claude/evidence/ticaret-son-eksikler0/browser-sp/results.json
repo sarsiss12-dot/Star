@@ -105,11 +105,11 @@
    "name": "800x360 V6 izin yenileme: 40 gün kala YENİLEME İSTE → masada izin + 36 ◈ → TEKLİF → bitişten +360 (tek bedel)",
    "status": "PASS",
    "r0": {
-    "end": 165.9732,
+    "end": 165.9734,
     "etk": 672
    },
    "r1": {
-    "end": 525.9732,
+    "end": 525.9734,
     "etk": 636,
     "msg": ""
    }
@@ -123,6 +123,23 @@
     "hScroll": false,
     "offscreen": []
    }
+  },
+  {
+   "name": "800x360 V8 oyuncunun koridor talebi: sözleşme formu \"Gereken transit izni\" → GEREKEN LİMAN İZİNLERİNİ İSTE (dokunuş) → D'nin onayı beklenir → onaylanınca iki yön izinleri",
+   "status": "PASS",
+   "tx": {
+    "id": 4,
+    "by": 0,
+    "st": "pending",
+    "votes": {
+     "3": "pending"
+    },
+    "legs": [
+     "3:0",
+     "3:2"
+    ]
+   },
+   "reason": "Gereken transit izni · İxir Tahtı · Kalavos → Rhaaephor-16 (İxir Tahtı) → Orrrus-62"
   },
   {
    "name": "844x390 V1 talep kartı → dokunuşla Liman izinleri: talep eden, limanlar, taşıyıcılar, bedel, son gün; taşma yok",
@@ -228,11 +245,11 @@
    "name": "844x390 V6 izin yenileme: 40 gün kala YENİLEME İSTE → masada izin + 36 ◈ → TEKLİF → bitişten +360 (tek bedel)",
    "status": "PASS",
    "r0": {
-    "end": 166.0066,
+    "end": 165.94,
     "etk": 672
    },
    "r1": {
-    "end": 526.0065999999999,
+    "end": 525.94,
     "etk": 636,
     "msg": ""
    }
@@ -246,6 +263,23 @@
     "hScroll": false,
     "offscreen": []
    }
+  },
+  {
+   "name": "844x390 V8 oyuncunun koridor talebi: sözleşme formu \"Gereken transit izni\" → GEREKEN LİMAN İZİNLERİNİ İSTE (dokunuş) → D'nin onayı beklenir → onaylanınca iki yön izinleri",
+   "status": "PASS",
+   "tx": {
+    "id": 4,
+    "by": 0,
+    "st": "pending",
+    "votes": {
+     "3": "pending"
+    },
+    "legs": [
+     "3:0",
+     "3:2"
+    ]
+   },
+   "reason": "Gereken transit izni · İxir Tahtı · Kalavos → Rhaaephor-16 (İxir Tahtı) → Orrrus-62"
   },
   {
    "name": "901x411 V1 talep kartı → dokunuşla Liman izinleri: talep eden, limanlar, taşıyıcılar, bedel, son gün; taşma yok",
@@ -351,11 +385,11 @@
    "name": "901x411 V6 izin yenileme: 40 gün kala YENİLEME İSTE → masada izin + 36 ◈ → TEKLİF → bitişten +360 (tek bedel)",
    "status": "PASS",
    "r0": {
-    "end": 165.9732,
+    "end": 165.973,
     "etk": 672
    },
    "r1": {
-    "end": 525.9732,
+    "end": 525.973,
     "etk": 636,
     "msg": ""
    }
@@ -369,6 +403,23 @@
     "hScroll": false,
     "offscreen": []
    }
+  },
+  {
+   "name": "901x411 V8 oyuncunun koridor talebi: sözleşme formu \"Gereken transit izni\" → GEREKEN LİMAN İZİNLERİNİ İSTE (dokunuş) → D'nin onayı beklenir → onaylanınca iki yön izinleri",
+   "status": "PASS",
+   "tx": {
+    "id": 4,
+    "by": 0,
+    "st": "pending",
+    "votes": {
+     "3": "pending"
+    },
+    "legs": [
+     "3:0",
+     "3:2"
+    ]
+   },
+   "reason": "Gereken transit izni · İxir Tahtı · Kalavos → Rhaaephor-16 (İxir Tahtı) → Orrrus-62"
   }
  ]
 }
