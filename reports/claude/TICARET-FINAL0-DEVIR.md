@@ -5,7 +5,7 @@ Güncelleme: 24 Kasım 2026
 ## Dallar
 | Dal | Durum |
 |---|---|
-| `claude/stars-ticaret-final0` | **p53 / MP.8.9b52 — en güncel yayın adayı** ({{PR}}) |
+| `claude/stars-ticaret-final0` | **p53 / MP.8.9b52 — en güncel yayın adayı** (taslak PR #78) |
 | `claude/stars-ticaret-teslim-degeri0` | araştırma, çalışma zamanı p52 (PR #77) |
 | `claude/stars-ticaret-gecerli-hat0` | p52 (PR #76), geri dönüş |
 

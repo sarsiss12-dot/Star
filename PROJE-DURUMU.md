@@ -4,7 +4,7 @@ Son güncelleme: 2026-11-24. Depo `sarsiss12-dot/Star`.
 
 ## Güncel geliştirme adayı — p53 (TİCARET-FİNAL.0) · ticaret döngüsü kapandı
 
-`claude/stars-ticaret-final0` (p52 + PR #77 üstünde, taslak PR). Oyun 96h10p53 / PWA stars-v96h10p53 / MP.8.9b52; Save8 v8, paket 4, protokol 1. ZIP `releases/stars-faz96h10p53.zip` (SHA-256 `2ea7da603f7480166a49f09ae8a3ad6efdd40469ea9d331998f1e4e470687f72`, CRC32 `85ACACBB`). Yoğun konvoy rota denetimi tick içi önbellek (64 konvoy −%62,1, Save8 / RNG aynı), normal oyunda gerileme yok (ABBA). Düzenli ticaret açıklaması, dokunmatik iptal (U4) ve transit izni (U5). Tam Node 247 / 6576 / 279 (başarısız liste p52 ile aynı). 24 maddelik envanterde HATALI yok; bilinen tasarım sınırları raporda. Fiziksel Android / Render NOT RUN. Ayrıntı `reports/claude/TICARET-FINAL0-SONUC.md`.
+`claude/stars-ticaret-final0` (p52 + PR #77 üstünde, taslak PR #78). Oyun 96h10p53 / PWA stars-v96h10p53 / MP.8.9b52; Save8 v8, paket 4, protokol 1. ZIP `releases/stars-faz96h10p53.zip` (SHA-256 `2ea7da603f7480166a49f09ae8a3ad6efdd40469ea9d331998f1e4e470687f72`, CRC32 `85ACACBB`). Yoğun konvoy rota denetimi tick içi önbellek (64 konvoy −%62,1, Save8 / RNG aynı), normal oyunda gerileme yok (ABBA). Düzenli ticaret açıklaması, dokunmatik iptal (U4) ve transit izni (U5). Tam Node 247 / 6576 / 279 (başarısız liste p52 ile aynı). 24 maddelik envanterde HATALI yok; bilinen tasarım sınırları raporda. Fiziksel Android / Render NOT RUN. Ayrıntı `reports/claude/TICARET-FINAL0-SONUC.md`.
 
 ## Ticaret ekonomik araştırması (sürüm yok) — TİCARET-TESLİM-DEĞERİ.0
 

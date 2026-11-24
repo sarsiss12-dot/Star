@@ -1,6 +1,7 @@
 # TİCARET-FİNAL.0 — Sonuç raporu
 
 Tarih: 24 Kasım 2026 · Dal `claude/stars-ticaret-final0` · Taban p52 (`2399075`, PR #76) + araştırma dalı `claude/stars-ticaret-teslim-degeri0` (`3aa8400`, PR #77; çalışma zamanı p52 ile aynı).
+Taslak PR: #78 (https://github.com/sarsiss12-dot/Star/pull/78).
 Yayın adayı: **96h10p53 / stars-v96h10p53 / MP.8.9b52** · Save8 v8 · MP paket 4 · protokol 1.
 Kullanıcı fiziksel test yapamıyor; bütün kabul otomatik. Fiziksel Android, gerçek internet, LAN ve canlı Render: **NOT RUN**.
 
