@@ -111,8 +111,8 @@ const commerceAction96=UI.act;UI.act=function(a,x,el){switch(a){
  case 'commerce':CommerceUI.open();return;case 'commerceConvoys':CommerceUI.open('convoys');return;
  case 'commerceNew':CommerceUI.form(x);return;case 'commercePropose':CommerceUI.propose();return;
  case 'commerceTransit':CommerceUI.open('transit',x);return;
- case 'transitVote':{if(CommerceUI.token!==G.sys)return;const [id,yes]=String(x).split(':').map(Number);const r=Commerce.transitVote(G.p,id,yes===1);if(r&&r.why&&!r.pending)say('⚓ '+r.why,r.ok?'sci':'war');if(r!==undefined&&!r?.pending)CommerceUI.open('transit',id);return;}
- case 'transitCancel':{if(CommerceUI.token!==G.sys)return;const r=Commerce.transitCancel(G.p,+x);if(r?.why)say('⚓ '+r.why,'war');if(!r?.pending)CommerceUI.open('transit');return;}
+ case 'transitVote':{const [id,yes]=String(x).split(':').map(Number);const r=Commerce.transitVote(G.p,id,yes===1);if(r&&r.why&&!r.pending)say('⚓ '+r.why,r.ok?'sci':'war');if(r!==undefined&&!r?.pending)CommerceUI.open('transit',id);return;}
+ case 'transitCancel':{const r=Commerce.transitCancel(G.p,+x);if(r?.why)say('⚓ '+r.why,'war');if(!r?.pending)CommerceUI.open('transit');return;}
  case 'transitAsk':{if(CommerceUI.token!==G.sys)return;const o=G.emps[+$('cargoPartner').value],r=Commerce.transitAsk(G.p,o,+$('cargoSource').value,+$('cargoTarget').value);if(r?.pending)return;if($('cargoReason'))$('cargoReason').textContent=r?.ok?(r.st==='committed'?'Liman izinleri tek işlemde verildi':'Talep #'+r.id+' gönderildi; onaylar bekleniyor'):(r?.why||'Talep gönderilemedi');if(r?.ok)CommerceUI.open('transit',r.id);return;}
  case 'transitRenewAsk':CommerceUI.dealWith(+x,'want');return;
  case 'transitExtend':CommerceUI.dealWith(+x,'give');return;

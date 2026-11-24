@@ -96,6 +96,7 @@ const VIEW=new Set(['dealSupport','dealSupportPick','coalPick','coalTerms','coal
   'tech','build','sInfo','bInfo','showEv','minModal','restoreModal','openNote','instNote','instDecide','closem','marketPane','mktSel','mute','save','diagShow','opLogMenu',
   /* MP.6.1 — görünüm / taslak */
   'commerce','commerceConvoys','commerceNew','commercePropose','commerceConvoy','commerceLocate','commercePort','convoyToggle',   /* TİCARET-AĞI.0 (Codex) */
+  'commerceTransit','transitVote','transitCancel','transitAsk','transitRenewAsk','transitExtend','commerceRevoke',   /* TİCARET-SON-EKSİKLER.0: Commerce.transit* / revokePortTransit sarmalayıcıları host komutuna iner */
   'news','shipmentsNews','noteStashAll','bigEmblemsToggle','dealHelp','dealHelpPick','dealCargoMode',   /* SAHA-ENTEGRE.0: büyük armalar yerel görünüm (kapı engelliyordu) */
  'newsContext','newsReturn','diplomaticInbox','newsDetail','newsEmpire','newsLocation','newsPin','newsUnread','newsPinned','newsReadAll','archiveMore','diplomaticRecord',
   'inboxEmpire','inboxReturn','inboxFederation','deal','dealAdd','dealRm','dealPledgeDays','dealDiscard','dealBack','peace','vsOpen','vsCancel','vsCounter','fedBallot',
