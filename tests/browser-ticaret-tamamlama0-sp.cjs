@@ -74,9 +74,9 @@ async function test(name,fn){try{const r=await fn();results.push({name,status:'P
     const sel='#modal [data-a="commerceCancel"][data-x="'+st0.id+'"]';await tap(sel);
     const r=await page.evaluate(id=>{const c=Commerce.state().contracts.find(c=>c.id===id);const conv0=Commerce.state().convoys.filter(v=>v.contract===id).length;
       const recv0=Commerce.state().convoys.filter(v=>v.contract===id&&v.status==='delivered').map(v=>v.id);for(let i=0;i<400;i++){G.day+=1;dailyTick(1);}
-      const conv=Commerce.state().convoys.filter(v=>v.contract===id);return {status:c.status,conv0,conv1:conv.length,receipts:conv.filter(v=>v.status==='delivered').map(v=>[v.id,v.receipt])};},st0.id);
+      const conv=Commerce.state().convoys.filter(v=>v.contract===id);return {contractStatus:c.status,conv0,conv1:conv.length,receipts:conv.filter(v=>v.status==='delivered').map(v=>[v.id,v.receipt])};},st0.id);
     await closeAll();
-    assert.ok(Commerce_closed(r.status),'sözleşme kapandı '+r.status);assert.equal(r.conv1,r.conv0,'iptalden sonra yeni sefer yok '+JSON.stringify(r));
+    assert.ok(Commerce_closed(r.contractStatus),'sözleşme kapandı '+r.contractStatus);assert.equal(r.conv1,r.conv0,'iptalden sonra yeni sefer yok '+JSON.stringify(r));
     assert.ok(r.receipts.every(([id,rc])=>id===rc),'her konvoy tek makbuz');return r;});
   await test(view+' U5 oyuncu AI\'ya müzakere masasından Transit İzni verir (dokunuş) → izin yalnız o devlet için, 360 gün',async()=>{
     await closeAll();await page.evaluate(o=>{UI.forgetDeal?.(o);UI.openDeal(o);},fx.O);await page.waitForTimeout(250);

@@ -52,7 +52,8 @@
   },
   {
    "name": "800x360 U4 sözleşme listesinden İPTAL (dokunuş) → yeni yükleme yok, yoldaki kargo çift teslim edilmez",
-   "status": "cancelled",
+   "status": "PASS",
+   "contractStatus": "cancelled",
    "conv0": 2,
    "conv1": 2,
    "receipts": [
@@ -69,8 +70,8 @@
   {
    "name": "800x360 U5 oyuncu AI'ya müzakere masasından Transit İzni verir (dokunuş) → izin yalnız o devlet için, 360 gün",
    "status": "PASS",
-   "until": 780.9066,
-   "day": 420.9066,
+   "until": 781.0065999999999,
+   "day": 421.0066,
    "others": 0
   },
   {
@@ -124,7 +125,8 @@
   },
   {
    "name": "844x390 U4 sözleşme listesinden İPTAL (dokunuş) → yeni yükleme yok, yoldaki kargo çift teslim edilmez",
-   "status": "cancelled",
+   "status": "PASS",
+   "contractStatus": "cancelled",
    "conv0": 2,
    "conv1": 2,
    "receipts": [
@@ -141,8 +143,8 @@
   {
    "name": "844x390 U5 oyuncu AI'ya müzakere masasından Transit İzni verir (dokunuş) → izin yalnız o devlet için, 360 gün",
    "status": "PASS",
-   "until": 780.94,
-   "day": 420.94,
+   "until": 780.9934000000001,
+   "day": 420.9934,
    "others": 0
   },
   {
@@ -196,7 +198,8 @@
   },
   {
    "name": "901x411 U4 sözleşme listesinden İPTAL (dokunuş) → yeni yükleme yok, yoldaki kargo çift teslim edilmez",
-   "status": "cancelled",
+   "status": "PASS",
+   "contractStatus": "cancelled",
    "conv0": 2,
    "conv1": 2,
    "receipts": [
@@ -213,8 +216,8 @@
   {
    "name": "901x411 U5 oyuncu AI'ya müzakere masasından Transit İzni verir (dokunuş) → izin yalnız o devlet için, 360 gün",
    "status": "PASS",
-   "until": 781.0065999999999,
-   "day": 421.0066,
+   "until": 780.9598,
+   "day": 420.9598,
    "others": 0
   }
  ]
