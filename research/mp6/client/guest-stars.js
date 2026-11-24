@@ -465,6 +465,14 @@ function gate(){
   /* MP.6.2 — ittifakı sonlandır, ticaret anlaşmasını feshet, ambargo: gerçek onay pencereleri → komut */
   wrap('endAlliance',(o,e,other)=>mine(e)&&other?r({kind:'endAlliance',target:real(other.id)}):NOT_MP);
   wrap('breakPact',(o,a,b)=>{if(!mine(a)||!b)return o(a,b);send({kind:'unpact',target:real(b.id)});});
+  /* TİCARET-SON-EKSİKLER.0: çok taraflı transit talebi / onayı / geri çekme → host komutu. Sonuç yalnız host yanıtıyla (iyimser durum yok);
+     ayna gelince TİCARET → Liman izinleri bölümü host'un kaydıyla yeniden çizilir. */
+  if(typeof Commerce!=='undefined')for(const [nm,mk] of [['transitVote',(e,id,yes)=>({kind:'transitVote',id:+id,yes:!!yes})],['transitCancel',(e,id)=>({kind:'transitCancel',id:+id})],
+    ['transitAsk',(e,o,src,port)=>o?{kind:'transitAsk',target:real(o.id),source:+src,port:+port}:null]]){const f0=Commerce[nm];
+    Commerce[nm]=function(e,...a){if(!S.on||S.building)return f0.call(this,e,...a);if(!mine(e))return {ok:false,why:'Yetki yok'};const c=mk(e,...a);if(!c)return {ok:false,why:'Geçersiz talep'};
+      const cid=send(c);if(!cid)return {ok:false,why:'Host bağlı değil; karar gönderilmedi.'};
+      waits[cid]=res=>{toast(res.status==='ok'?'⚓ Host işledi: '+(res.extra&&res.extra.st?Commerce.transitStates[res.extra.st]||res.extra.st:'tamam'):'⚓ Host reddetti: '+why(res),res.status!=='ok');};
+      return {ok:true,pending:true};};}
   UI.guestCargoPreview=(target,source,port,done)=>{
    if(!S.on)return false;
    const cid=send({kind:'cargoPreview',target:real(target),source,port});
@@ -847,6 +855,11 @@ function inboxOffers(){
     G.inboxUid=(G.inboxUid||0)+1;const item={kind:'fedvote',data:f.id,ico:'🏛',cls:'sci',pause:false,uid:G.inboxUid,born:Number.isFinite(f.vote.opened)?f.vote.opened:G.day,
       title:'Federasyon oylaması — '+f.name,sub:typeof UI.fedVoteSub==='function'?UI.fedVoteSub(f):(L?L.n:'Karar')+(f.vote.repeal?' — kaldırma':''),key};
     if(!DiplomaticInbox.capture(item))continue;G.inbox.push(item);changed=true;}
+  /* TİCARET-SON-EKSİKLER.0: oyuncunun oyu beklenen transit talebi için kart (aynadaki host kaydından; karar TİCARET → Liman izinleri) */
+  for(const t of (G.commerce&&G.commerce.transit)||[]){if(t.st!=='pending'||t.votes[0]!=='pending')continue;const key='mptransit:'+t.id;if(G.inbox.some(n=>n.key===key))continue;
+    G.inboxUid=(G.inboxUid||0)+1;G.inbox.push({kind:'transit',data:t.id,ico:'⚓',cls:'sci',pause:false,uid:G.inboxUid,born:Number.isFinite(t.born)?t.born:G.day,
+      title:'⚓ Transit izni talebi #'+t.id,sub:(G.emps[t.by]?G.emps[t.by].name:'?')+': '+Commerce.transitText(t),key});changed=true;}
+  G.inbox=G.inbox.filter(n=>{if(n.kind!=='transit'||!String(n.key||'').startsWith('mptransit:'))return true;const t=((G.commerce&&G.commerce.transit)||[]).find(x=>x.id===n.data);const keep=!!(t&&t.st==='pending'&&t.votes[0]==='pending');if(!keep)changed=true;return keep;});
   /* MP.7.4: kaydırılarak kapatılan kart ayna yenilenince geri gelmez (karar kaydı gelen kutusunda kalır) */
   /* MP-FIELD-FIX.0: diplomatik kayıt (teklif, oy, davet) Gelen kutusunda kaldığı için kartı kalkar; karar bekleyen olay / anomali ise SİLİNMEZ —
      gizlenir ve ☰ durum listesinden aynı karar penceresiyle açılır (eskiden ayna yenilenince karar listeden de kayboluyordu). */

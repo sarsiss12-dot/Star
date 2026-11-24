@@ -784,6 +784,20 @@ function createHost(opts){
       locate:(e,c)=>diploTarget(e,c)?{o:G.emps[c.target]}:{err:'no-target'},
       why:(e,{o})=>e.portTransit?.[o.id]>G.day?null:'no-permission',roots:e=>[e.portTransit],
       apply:(e,{o})=>revokePortTransit(e,o)},
+    /* TİCARET-SON-EKSİKLER.0: çok taraflı transit onayı. Karar veren devlet her zaman oturum koltuğunun devletidir (istemci kimliği
+       gönderemez); talep kimliği yalnız taraf olunan kayıtta geçerlidir. Tekrar edilen cid sonuç önbelleğinden döner; aynı devletin
+       ikinci oyu motorda reddedilir (oy 'pending' değil). Uygulama motorun transitVote / transitCommit yolundadır (tek işlem). */
+    transitVote:{say:'actor',keys:['kind','id','yes'],check:c=>int(c.id,1,2147483647)&&typeof c.yes==='boolean',locate:()=>({}),
+      why(e,at,c){const t=Commerce.transitGet(c.id);if(!t||!(t.by===e.id||Commerce.transitParties(t).includes(e.id)))return 'no-transit';
+        if(t.st!=='pending')return {code:'transit',detail:['Talep sonuçlandı: '+Commerce.transitStates[t.st]]};
+        return t.votes[e.id]==='pending'?null:{code:'transit',detail:[t.votes[e.id]?'Bu talepte kararın zaten kayıtlı':'Bu talepte karar yetkin yok']};},
+      roots:()=>[],apply:(e,at,c)=>Commerce.transitVote(e,c.id,c.yes)},
+    transitCancel:{say:'actor',keys:['kind','id'],check:c=>int(c.id,1,2147483647),locate:()=>({}),
+      why:(e,at,c)=>{const t=Commerce.transitGet(c.id);return t&&t.by===e.id&&t.st==='pending'?null:'no-transit';},
+      roots:()=>[],apply:(e,at,c)=>Commerce.transitCancel(e,c.id)},
+    transitAsk:{say:'actor',keys:['kind','target','source','port'],check:c=>int(c.target,0,63)&&int(c.source,0,4095)&&int(c.port,0,4095),
+      locate:(e,c)=>diploTarget(e,c)?{o:G.emps[c.target]}:{err:'no-target'},why:()=>null,
+      roots:()=>[],apply:(e,{o},c)=>Commerce.transitAsk(e,o,c.source,c.port)},
     embargo:{say:'actor',keys:['kind','target','on'],check:c=>int(c.target,0,63)&&typeof c.on==='boolean',locate:(e,c)=>{const o=diploTarget(e,c);return o?{o}:{err:'no-target'};},
       why(e,at,c){const o=diploTarget(e,c);if(!o)return 'no-target';return !!(e.embargo&&e.embargo[o.id])===c.on?'same':null;},
       roots:()=>[],
@@ -1793,6 +1807,8 @@ else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it)
     const month0=monthTick;monthTick=function(){const r=month0.apply(this,arguments);for(const e of G.emps)if(RH(e)&&!e.dead)remoteDecisionTick(e);return r;};
     /* MP-DEAL-SYS.0: haraç eksik ödeme / sona erme bildirimi uzak insan tarafa da (motorun metniyle; tek oyunculu oyuncu yolu aynen) */
     /* MP-WARON.0: savaş sözü bildirimleri uzak insan taraflara (motorun metniyle) */
+    /* TİCARET-SON-EKSİKLER.0: transit onayı / izin süresi bildirimleri uzak insan taraflara (motorun metniyle; oturumda, dünyaya yazmaz) */
+    if(typeof root.transitNote==='function'&&!root.transitNote.__mp){const f0=root.transitNote,w=function(ids,text,cls){const m=f0.apply(this,arguments);for(const id of ids||[]){const x=G.emps[id];if(x&&RH(x))NOTE(x.id,m,cls||'sci');}return m;};w.__mp=true;root.transitNote=w;}
     if(typeof root.warPledgeNote==='function'&&!root.warPledgeNote.__mp){const f0=root.warPledgeNote,w=function(ids,text,cls){const m=f0.apply(this,arguments);for(const id of ids||[]){const x=G.emps[id];if(x&&RH(x))NOTE(x.id,m,cls||'war');}return m;};w.__mp=true;root.warPledgeNote=w;}
     /* SAHA-GÜVENCE.1: muharebe sonucu (ZAFER / YENİLGİ, kayıplar) motor yalnız devlet 0'a söylüyordu; uzak insan taraf filosunu sessizce kaybediyordu.
        Aynı metin o oyuncunun bildirim listesine; eskortsuz silahsız gemi imhası açıkça. Dünyaya yazmaz (NOTE oturumda), RNG yok. */

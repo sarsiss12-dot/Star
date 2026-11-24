@@ -43,7 +43,7 @@ const CommerceUI={selected:null,hits:[],token:null,
   for(const t of list){
    const vote=t.votes[me],left=Math.max(0,Math.ceil(t.until-G.day));
    h+=`<div class="box transitReq" data-tx="${t.id}" data-st="${t.st}"><div class="bt"><b>#${t.id} · ${nm(t.a)} ↔ ${nm(t.b)}</b><span>${esc(Commerce.transitStates[t.st])}</span></div>`;
-   h+=`<div class="mini">Talep eden ${nm(t.by)} · ${sy(t.source)} ⇄ ${sy(t.target)}${t.terms?' · onaylar tamamlanınca düzenli ticaret sözleşmesi de imzalanır':''}${t.st==='pending'?' · son '+left+' gün':''}</div>`;
+   h+=`<div class="mini">Talep eden ${nm(t.by)} · ${sy(t.source)} ⇄ ${sy(t.target)}${t.terms||t.trade?' · onaylar tamamlanınca düzenli ticaret sözleşmesi de imzalanır':''}${t.st==='pending'?' · son '+left+' gün':''}</div>`;
    for(const l of t.legs){const who=Commerce.human(G.emps[l.o])?(t.votes[l.o]==='yes'||l.o===t.by?'onayladı':t.votes[l.o]==='no'?'reddetti':'onay bekleniyor'):'AI kararı';
     h+=`<div class="mini transitLeg" data-o="${l.o}" data-c="${l.c}">⚓ ${nm(l.o)} limanı${l.s!==undefined?' ('+sy(l.s)+')':''} → <b>${nm(l.c)}</b> taşıyıcısı için ${PORT_TRANSIT_DAYS} gün · ${nm(l.c)} öder ${l.pay} ◈${l.o===me?' · <b>sana</b>':''}${l.skip?' · gerekmedi, ödenmedi':''} · ${who}</div>`;}
    const payers=[...new Set(t.legs.map(l=>l.c))].filter(id=>id!==t.by&&Commerce.human(G.emps[id]));

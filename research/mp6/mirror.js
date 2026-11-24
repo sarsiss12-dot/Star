@@ -172,6 +172,12 @@ function build(meId,o={}){
   commerce.nextContract=Math.max(0,...ids)+1;
   commerce.nextConvoy=Math.max(0,...commerce.convoys.map(v=>v.id))+1;
   if(G.commerce?.stats[meId])commerce.stats[0]=J(G.commerce.stats[meId]);
+  /* TİCARET-SON-EKSİKLER.0: çok taraflı transit talepleri yalnız TARAF olana (talep eden, liman sahibi, taşıyıcı); kimlikler π ile.
+     AI talebinin düzenli sözleşme şartları (iki AI'nın miktarları) gitmez, yalnız "sözleşme de imzalanacak" bilgisi (trade:1). */
+  const tx=(G.commerce?.transit||[]).filter(t=>t.by===meId||Commerce.transitParties(t).includes(meId));
+  if(tx.length){commerce.transit=tx.map(t=>{const x={id:t.id,by:piN(t.by),a:piN(t.a),b:piN(t.b),source:t.source,target:t.target,born:t.born,until:t.until,st:t.st,why:t.why,
+    legs:t.legs.map(l=>({o:piN(l.o),c:piN(l.c),pay:l.pay,...(l.s!==undefined?{s:l.s}:{}),...(l.skip?{skip:1}:{})})),votes:Object.fromEntries(Object.entries(t.votes).map(([k,v])=>[String(piN(+k)),v]))};
+    if(t.done!==undefined)x.done=t.done;if(t.terms)x.trade=1;return x;});commerce.nextTransit=Math.max(...tx.map(t=>t.id))+1;}
   return {v:8,commerce,fleetJournal:(cleanFleetJournal(G.fleetJournal)||[]).filter(r=>r.owner===meId).slice(-32).map(r=>({...r,owner:0,wars:r.wars.map(piN)})),construction,mpVisible:[...visible],cfg,day:G.day,year:G.year,month:G.month,seed:o.cosmeticSeed|0,rs:1,log:J(o.log||[]),news,...(economyHistory?{economyHistory}:{}),W:G.W,H:G.H,
     world:{...(G.fedFounding?.proposals.some(p=>p.members.includes(meId))?{fedFounding:{v:1,next:Math.max(...G.fedFounding.proposals.filter(p=>p.members.includes(meId)).map(p=>p.id))+1,proposals:G.fedFounding.proposals.filter(p=>p.members.includes(meId)).map(p=>({...fedFoundProjectEdits(p,meId,piN),id:p.id,type:p.type,ballot:p.ballot,opened:p.opened,expires:p.expires,status:p.status,...(Number.isFinite(p.finished)?{finished:p.finished}:{}),...(Number.isInteger(p.fid)?{fid:p.fid}:{}),...(p.why?{why:p.by===meId?String(p.why).slice(0,600):'Kurucu veya ortakların kuruluş koşulları değişti'}:{}),by:piN(p.by),members:p.members.map(piN),replies:Object.fromEntries(Object.entries(p.replies).map(([id,r])=>[piN(+id),{...r,terms:r.terms===fedFoundTerms(p)?fedFoundTerms({...p,members:p.members.map(piN)}):'',why:+id===meId||p.by===meId?r.why:'Karar kaydedildi'}]))}))}}:{}),memAge:G.memAge,cncAge:G.cncAge,council,feds,fedUid:G.fedUid,friction:{},rebelAlliance:null,megaWatch:[],sandbox:false},
     sys,emps,fl,nf:G.nextFleet};
