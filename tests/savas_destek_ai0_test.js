@@ -53,6 +53,9 @@ test('E2 güçlü durumdaki AI yardım istemez',()=>{const h=world({cstrong:fals
 test('E3 aynı cephe + aday için 180 gün yeni istek yok; ay içinde ikinci istek yok',()=>{const h=world({xstrong:1});
   const r=J(h,`(()=>{const a=aiWarHelpAsk(S);const b=aiWarHelpAsk(S);G.day+=31;C.war[X.id]=false;X.war[C.id]=false;const k='warHelp:'+F.id+':'+C.id,c=S.aiTalk[k]?.until>G.day;return {a,b,c};})()`);
   assert.equal(r.a,true);assert.equal(r.b,false,'ay içinde ikinci istek yok');assert.equal(r.c,true,'aday bekleme süresi');});
+test('E4 gerekçeli ret alan adaya aynı cephe için bir yıl yeniden sorulmaz (karşı teklif / bekleme 180 gün)',()=>{const h=world({xstrong:1,crisis:1});
+  const r=J(h,`(()=>{const a=aiWarHelpAsk(S);const k='warHelp:'+F.id+':'+C.id,u=S.aiTalk[k]?.until-G.day;const ev=(S.aiStrategy?.history||[]).filter(x=>x.kind==='war-help-ask').slice(-1)[0];return {a,u,res:ev&&ev.detail&&ev.detail.result||ev&&ev.result||null};})()`);
+  assert.equal(r.a,true);assert.ok(r.u>=359,'ret sonrası bekleme '+JSON.stringify(r));});
 test('S14 AI → insan: AI oyuncudan (müttefik) destek isterse istek oyuncunun gelen kutusuna gider, kendiliğinden katılım yok',()=>{
   const h=world({xstrong:1,ally:false});const r=J(h,`(()=>{S.ally[E.id]=E.ally[S.id]=true;S.rel[E.id]=90;for(const o of G.emps)if(o!==E&&o!==S)S.rel[o.id]=0;const ok=aiWarHelpAsk(S);
    const rec=DiplomaticInbox.state().records.filter(x=>x.status==='pending'&&x.kind==='aideal');return {ok,rec:rec.length,war:!!E.war[X.id]};})()`);
@@ -62,6 +65,8 @@ test('S17 zaten taraf olan devlete ikinci ücretli katılım yok (kapı)',()=>{c
 test('S18 Save8: yardım isteği bekleme kayıtları yükleme sonrası korunur; yüklenen dünyada aynı ay ikinci istek yok',()=>{const h=world({xstrong:1});h.run('aiWarHelpAsk(S)');const save=h.run('serialize()');
   const g=runtime({root:ROOT});g.sb.S0=save;assert.equal(g.run('deserialize(S0)'),true);const r=J(g,`(()=>{const S=G.emps.filter(o=>o.ai&&!o.dead&&!o.wild&&!o.crisisSide)[0];return {cool:S.aiTalk?.warHelp?.until>G.day,again:aiWarHelpAsk(S)};})()`);
   assert.equal(r.cool,true);assert.equal(r.again,false);});
+test('S21 dürüstlük: aynı müttefik savunmasında dürüst AI\'nın katılım maliyeti sahtekârdan düşük (sadakat)',()=>{
+  const c=x=>{const h=world();h.run(`C.ethics={...(C.ethics||{}),ahl:${x}};`);return cost(h);};const hon=c(3),dis=c(-3);assert.ok(hon<dis,'dürüst '+hon+' < sahtekâr '+dis);});
 test('S20 doktrinler aynı koşulda farklı maliyet üretir (p54: hepsi aynı)',()=>{const v=['militarist','pasifist','tuccar','yayilmaci'].map(m=>cost(world({miz:m,sponsorAttacks:1})));assert.ok(new Set(v).size>=3,'farklı değerler '+v.join(','));});
 test('B1 Savaş Merkezi destek adayları: uygunlar önde, müttefik > dost; gerekçe etiketleri; toplu davet her uygun adaya bir teklif, ikinci basışta tekrar yok',()=>{
   const h=world({ally:false});const r=J(h,`(()=>{const D=ais[3];warAuthorize(X,E,{n:'t'});declareWar(X,E);warAuthClear();for(const o of G.emps)if(o!==E){E.rel[o.id]=0;}E.ally[C.id]=C.ally[E.id]=true;E.rel[C.id]=80;E.rel[D.id]=55;

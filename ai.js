@@ -5133,6 +5133,8 @@ function aiWarHelpAsk(e){
   const r=(e.res.ala||0)>=400?'ala':'min',v=Math.min(300,Math.floor(Math.max(0,(e.res[r]||0)-200)*.06)),give=v>=20?[{t:'res',r,v}]:[];
   (e.aiTalk||={}).warHelp={until:G.day+30,reason:'Savaş desteği isteği'};e.aiTalk['warHelp:'+f.id+':'+o.id]={until:G.day+180,reason:'Cepheye destek istendi'};
   const res=aiCoalitionSend(e,o,give,[{t:'warJoin',front:f.id,target:enemy.id}]);
+  /* gerekçeli ret (güç / erişim / kriz) aynı cephede kısa sürede değişmez: aynı adaya bir yıl yeniden sorulmaz (kampanyada 180 günlük tekrar istekler ölçüldü) */
+  if(res.karar==='red')e.aiTalk['warHelp:'+f.id+':'+o.id].until=G.day+360;
   aiPlanEvent(e,'war-help-ask',{front:f.id,other:o.id,payment:v>=20?r+':'+v:'yok',result:res.karar,applied:!!res.uygulandi,why:theirs>own*.9?'Bilinen güç dengesi aleyhimize':(m.shipsLost||0)>(m.shipsDestroyed||0)+2?'Cephede kayıplarımız ağır':'Savaş yorgunluğu arttı'});
   return true;
  }
