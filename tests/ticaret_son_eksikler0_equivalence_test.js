@@ -23,4 +23,13 @@ else for(const seed of [11,22,404]){try{const a=run(CTL,seed,48,false).out,{out:
   if(diff>=0)assert.ok(tm!==null&&diff>=tm-1,'seed '+seed+': ayrışma '+(diff+1)+'. ay, tetik '+(trig?trig.k+' gün '+Math.floor(trig.d):'yok'));
   pass++;console.log('PASS seed '+seed+' 48 ay · '+(diff<0?'48 ay boyunca birebir (yeni davranış '+(trig?'tetiklendi ama dünyayı değiştirmedi: '+trig.k:'tetiklenmedi')+')':'tetikten önce birebir; ilk ayrışma '+(diff+1)+'. ay, ilk tetik '+trig.k+' gün '+Math.floor(trig.d)));}
   catch(e){fail++;console.log('FAIL seed '+seed+'\n'+(e&&e.stack||e).slice(0,1500));}}
+/* Eski kayıt: p53'te 60 ay oynanmış (sözleşme / konvoy / izin içeren) Save8 adayda açılır, ticaret durumu birebir; p53 MP paketi p54 yükleyicisinde kabul edilir. */
+if(CTL&&fs.existsSync(path.join(CTL,'commerce.js')))try{const a=runtime({root:CTL});a.run(`resetSetupNaming();Object.assign(CFG,{seed:11,size:'ulu',aiCount:9});setupGame({...CFG});G.autoSave=false;`+STEP);
+  for(let m=0;m<60;m++)a.run('__step()');const save=a.run('serialize()'),info=JSON.parse(a.run('JSON.stringify({c:G.commerce.contracts.length,v:G.commerce.convoys.length,pt:G.emps.reduce((n,e)=>n+Object.keys(e.portTransit||{}).length,0),build:BUILD_ID})'));
+  const b=runtime({root:ROOT});b.sb.S=save;assert.equal(b.run('deserialize(S)'),true,'p53 kaydı açıldı');const after=JSON.parse(b.run('JSON.stringify({c:G.commerce.contracts.length,v:G.commerce.convoys.length,pt:G.emps.reduce((n,e)=>n+Object.keys(e.portTransit||{}).length,0),tx:G.commerce.transit===undefined})'));
+  assert.equal(b.run('JSON.stringify(G.commerce)'),a.run('JSON.stringify(G.commerce)'),'ticaret durumu birebir');assert.equal(after.tx,true,'eski kayda transit alanı eklenmez');
+  b.run(fs.readFileSync(path.join(ROOT,'research/mp0/mp-core.js'),'utf8'));const pk={format:'stars-mp-save',mpVersion:4,build:info.build,createdAt:1,saveId:'s-0123456789abcdef',session:{},diplomacy:{},display:{},save8:save,integrity:''};
+  b.sb.PK=JSON.stringify(pk);const v=JSON.parse(b.run('JSON.stringify(StarsMP.validatePackage(JSON.parse(PK)))'));assert.notEqual(v.why,'build','p53 paketi build nedeniyle reddedilmez: '+JSON.stringify(v));
+  pass++;console.log('PASS p53 Save8 (60 ay, '+info.c+' sözleşme, '+info.v+' konvoy, '+info.pt+' izin) adayda açılır, G.commerce birebir; p53 MP paketi build kapısından geçer ('+(v.ok?'geçerli':'ret nedeni '+v.why)+')');}
+  catch(e){fail++;console.log('FAIL eski kayıt uyumu\n'+(e&&e.stack||e).slice(0,1500));}
 if(CTL)console.log(`GEÇEN: ${pass} KALAN: ${fail}`);if(fail)process.exitCode=1;
