@@ -1706,7 +1706,7 @@ function aiTurn(e){
   if (e.dead) return;
   if (e.crisisSide){ crisisFleetTurn(e); return; }
   if (e.wild){ wildTurn(e); return; }
-  aiObserve(e);aiInternalCrisis(e);aiCivicActions(e);aiUpdateStrategy(e);aiStrategicDiplomacy(e);aiCoalitionDiplomacy(e);
+  aiObserve(e);aiInternalCrisis(e);aiCivicActions(e);aiUpdateStrategy(e);aiStrategicDiplomacy(e);aiWarHelpAsk(e);aiCoalitionDiplomacy(e);
   const race = RACES[e.race];
   const prof = aiProfile(e);
   const my = G.sys.filter(s => s.owner === e.id);
@@ -2330,7 +2330,7 @@ function aiRespond(ai, offer){
      ve AI'nın kendi savaş bütçesinden geçer. p37'de yalnız ilişkiye bakılıyordu: erişimi olmayan hedefe karşı da ödemeyle kabul ediliyordu. */
   {const won=(offer.want||[]).find(x=>x.t==='warOn'&&x.until===undefined);if(won){const g=aiWarOnGate(ai,G.emps[won.target],G.emps[offer.from],offer.give||[]);if(!g.ok)return {v:'red',why:g.why};}}
   const join=(offer.want||[]).find(x=>x.t==='warJoin');
-  if(join){const enemy=G.emps[join.target],sender=G.emps[offer.from];if(!enemy||!warSupportReach(ai,enemy,sender,offer.give)||aiKnownPower(ai,enemy)>Math.max(1,aiKnownPower(ai,ai)+aiKnownPower(ai,sender))*2.5)return {v:'red',why:'Bilinen güç veya askerî erişim desteği karşılamıyor'};}
+  if(join){const g=aiWarJoinGate(ai,G.emps[join.target],G.emps[offer.from],offer.give||[]);if(!g.ok)return {v:'red',why:g.why};}
   const ev = evalOffer(ai, offer);
   /* ═══ FAZ 86C: SERT KİLİT PARA İLE AŞILAMAZ ═══ */
   if (ev.hardLock)
@@ -5099,6 +5099,44 @@ function aiCoalitionSafe(e){
  if(Object.keys(e.war||{}).some(id=>e.war[id]&&!G.emps[id]?.wild)||Math.max(0,...Object.values(e.exh||{}))>45)return false;
  if(aiPendingPoliticalCommitment(e))return false;
  return !aiFedWarBurden(e).short&&!aiEconomyPlan(e).critical;
+}
+/* SAVAŞ-DESTEK-AI.0: AI'dan mevcut cepheye katılım (warJoin) istendiğinde koruyucu kapılar. p54'e kadar yalnız erişim ve 2,5× güç
+   bakılıyordu: ekonomik krizdeki, iki cephede savaşan, sefer bütçesi yetmeyen ya da başkenti tehdit altındaki AI ödemeyle kabul
+   edebiliyordu. Hepsi AI'nın kendi verisi + gözlediği tehdit (aiObservedThreat, aiView); RNG yok. Değer / pazarlık evalOffer'da kalır. */
+function aiWarJoinGate(ai,enemy,sender,give=[]){
+ const no=why=>({ok:false,why});
+ if(!enemy||!sender||!warSupportReach(ai,enemy,sender,give)||aiKnownPower(ai,enemy)>Math.max(1,aiKnownPower(ai,ai)+aiKnownPower(ai,sender))*2.5)return no('Bilinen güç veya askerî erişim desteği karşılamıyor');
+ if(aiEconomyPlan(ai).critical)return no('Ekonomimiz kriz içinde; yeni cepheye giremeyiz');
+ const foes=Object.keys(ai.war||{}).filter(id=>ai.war[id]&&G.emps[id]&&!G.emps[id].wild&&!G.emps[id].crisisSide).map(id=>G.emps[id]);
+ if(foes.length>=2||Math.max(0,...Object.values(ai.exh||{}))>45)return no('Mevcut savaşlarımız ve yorgunluğumuz yeni bir cepheye izin vermiyor');
+ if(foes.length&&aiKnownPower(ai,ai)<foes.reduce((n,o)=>n+aiKnownPower(ai,o),0)*1.2)return no('Süren savaşımız kuvvetimizi bağlıyor; ikinci cepheye ayıracak güç yok');
+ const b=aiWarBudget(ai,enemy);if(!b.ok)return no('Sefer bütçemiz (enerji / alaşım) bu cepheyi taşımıyor');
+ const home=G.sys[ai.home];if(home&&aiObservedThreat(ai,home.id)>Math.max(1,aiKnownPower(ai,ai))*.5)return no('Başkentimiz tehdit altında; kuvvet ayıramayız');
+ return {ok:true};
+}
+/* SAVAŞ-DESTEK-AI.0: AI kendi AÇIK savaşında (koalisyonla açılmamış, kendisinin taraf olduğu kök cephe) zorlanırsa bir devletten
+   cepheye katılım ister. p54'te yalnız koalisyonla açılan cephelerde (warCoalitionTick) ve yalnız müttefike istek vardı; sıradan
+   savunma savaşında AI hiç yardım istemiyordu. Aday: müttefik > federasyon ortağı > yakın dost (ilişki ≥ 40); uygunluk aynı
+   warSupportGate; ödeme gerçek stoktan (alaşım ya da mineral, ≤ %6, ≤ 300, rezerv korunur). Karar karşı tarafın (AI: aiRespond /
+   aiWarJoinGate; insan: gelen kutusu). Bekleme: aynı cephe + aday 180 gün, AI başına ayda bir istek; RNG yok. */
+function aiWarHelpAsk(e){
+ if(!e.ai||e.dead||e.wild||e.crisisSide||isPurifier(e)||isVassal(e)||!G.warLedger||e.aiTalk?.warHelp?.until>G.day)return false;
+ const fronts=(G.warLedger.fronts||[]).filter(f=>f.ended===null&&!f.coalition&&f.parent===null&&f.sides.includes(e.id)&&warLedgerPair(...f.sides));
+ for(const f of fronts){const enemy=G.emps[f.sides.find(id=>id!==e.id)];if(!enemy||enemy.wild||enemy.crisisSide||enemy.dead)continue;
+  const me=f.sides.indexOf(e.id),m=f.metrics?.[me]||{},own=aiKnownPower(e,e),theirs=aiKnownPower(e,enemy);
+  const strained=theirs>own*.9||(m.shipsLost||0)>(m.shipsDestroyed||0)+2||(e.exh?.[enemy.id]||0)>=25;if(!strained)continue;
+  const fed=typeof findFed==='function'?findFed(e):null;
+  const pool=G.emps.filter(o=>o!==e&&o!==enemy&&!o.dead&&!o.wild&&!o.crisisSide&&e.contact[o.id]&&!isPurifier(o)&&!aiKnownWar(e,o,enemy)&&!(e.aiTalk?.['warHelp:'+f.id+':'+o.id]?.until>G.day)&&
+   (e.ally[o.id]||fed&&fed===findFed(o)||(e.rel[o.id]||0)>=40)&&warSupportGate(o,e,{t:'warJoin',front:f.id,target:enemy.id}).ok)
+   .map(o=>({o,score:(e.ally[o.id]?3:0)+(fed&&fed===findFed(o)?2:0)+((e.rel[o.id]||0)>=40?1:0)})).sort((a,b)=>b.score-a.score||aiKnownPower(e,b.o)-aiKnownPower(e,a.o)||a.o.id-b.o.id);
+  if(!pool.length)continue;const o=pool[0].o;
+  const r=(e.res.ala||0)>=400?'ala':'min',v=Math.min(300,Math.floor(Math.max(0,(e.res[r]||0)-200)*.06)),give=v>=20?[{t:'res',r,v}]:[];
+  (e.aiTalk||={}).warHelp={until:G.day+30,reason:'Savaş desteği isteği'};e.aiTalk['warHelp:'+f.id+':'+o.id]={until:G.day+180,reason:'Cepheye destek istendi'};
+  const res=aiCoalitionSend(e,o,give,[{t:'warJoin',front:f.id,target:enemy.id}]);
+  aiPlanEvent(e,'war-help-ask',{front:f.id,other:o.id,payment:v>=20?r+':'+v:'yok',result:res.karar,applied:!!res.uygulandi,why:theirs>own*.9?'Bilinen güç dengesi aleyhimize':(m.shipsLost||0)>(m.shipsDestroyed||0)+2?'Cephede kayıplarımız ağır':'Savaş yorgunluğu arttı'});
+  return true;
+ }
+ return false;
 }
 function aiCoalitionDiplomacy(e){
  const s=e.aiStrategy;if(!e.ai||!s?.objective||e.dead||e.wild||e.crisisSide)return;

@@ -1341,7 +1341,13 @@ function itemValue(e, it, other){
       if(!enemy)return 0;
       if(receiving)return clamp(80+aiKnownPower(e,other)/Math.max(1,aiKnownPower(e,e))*120,80,320);
       const risk=aiKnownPower(e,enemy)/Math.max(1,aiKnownPower(e,e)+aiKnownPower(e,other));
-      return clamp((140+risk*100+(e.exh?.[it.target]||0)+Object.values(e.war||{}).filter(Boolean).length*25)*(e.mizac==='militarist'?.85:e.mizac==='pasifist'?1.3:e.mizac==='tuccar'?1.15:1)*aiWarJoinLegitMul(other,enemy),60,600);   // BETA-WAR-GOALS.0
+      /* SAVAŞ-DESTEK-AI.0: doktrin AI'da _pers alanında (personaKey); e.mizac yalnız oyuncunun kurulum seçimiydi → AI'da çarpan hiç
+         uygulanmıyordu. Savunma desteği (destek isteyen cephede savunan, rol 1) saldırıya katılmaktan ayrı fiyatlanır; müttefiki /
+         federasyon ortağı savunmak sadakat indirimi alır. */
+      const pk=typeof personaKey==='function'?personaKey(e):e.mizac,fr=it.front!==undefined?(G.warLedger?.fronts||[]).find(x=>x.id===it.front):null,defend=!!fr&&fr.roles[fr.sides.indexOf(other.id)]===1;
+      const doc=pk==='militarist'?(defend?.9:.85):pk==='pasifist'?(defend?1:1.6):pk==='tuccar'?1.15:1,fed=typeof findFed==='function'&&findFed(e);
+      const bond=defend&&e.ally?.[other.id]?.75:defend&&fed&&fed===findFed(other)?.8:1;
+      return clamp((140+risk*100+(e.exh?.[it.target]||0)+Object.values(e.war||{}).filter(Boolean).length*25)*doc*bond*aiWarJoinLegitMul(other,enemy),60,600);   // BETA-WAR-GOALS.0
     });
     case 'warOn': {
       const tgt = G.emps[it.target];
