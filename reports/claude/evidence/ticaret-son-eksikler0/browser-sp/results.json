@@ -1,0 +1,374 @@
+{
+ "root": "/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade",
+ "results": [
+  {
+   "name": "800x360 V1 talep kartı → dokunuşla Liman izinleri: talep eden, limanlar, taşıyıcılar, bedel, son gün; taşma yok",
+   "status": "PASS",
+   "box": {
+    "st": "pending",
+    "legs": 4,
+    "buttons": [
+     "transitVote:1:1",
+     "transitVote:1:0"
+    ]
+   },
+   "ov": {
+    "boxW": 520,
+    "vw": 800,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "800x360 V2 ONAYLA → diğer sahibin onayı bekleniyor; izin / ödeme yok, başarı gösterilmez",
+   "status": "PASS",
+   "ui": {
+    "st": "pending",
+    "wait": true,
+    "btn": false
+   },
+   "s1": {
+    "etk": {
+     "0": 600,
+     "1": 600,
+     "2": 600,
+     "3": 600
+    },
+    "tx": [
+     {
+      "id": 1,
+      "st": "pending",
+      "votes": {
+       "0": "yes",
+       "3": "pending"
+      }
+     }
+    ],
+    "pt": {
+     "0": [],
+     "3": []
+    },
+    "k": 0
+   }
+  },
+  {
+   "name": "800x360 V3 ikinci sahip onaylar → Uygulandı, dört izin, X–Y sözleşmesi; sözleşmeler ekranına dönüş",
+   "status": "PASS",
+   "s1": {
+    "etk": {
+     "0": 672,
+     "1": 528,
+     "2": 528,
+     "3": 672
+    },
+    "tx": [
+     {
+      "id": 1,
+      "st": "committed",
+      "votes": {
+       "0": "yes",
+       "3": "yes"
+      }
+     }
+    ],
+    "pt": {
+     "0": [
+      1,
+      2
+     ],
+     "3": [
+      1,
+      2
+     ]
+    },
+    "k": 1
+   }
+  },
+  {
+   "name": "800x360 V4 yeni talep → REDDET → Reddedildi, izin / ödeme yok",
+   "status": "PASS",
+   "id": 2,
+   "st": "rejected"
+  },
+  {
+   "name": "800x360 V5 süresi dolan talebin kartına dokunma → Süresi doldu, karar düğmesi yok, izin / ödeme yok",
+   "status": "PASS",
+   "id": 3,
+   "st": "expired",
+   "late": {
+    "ok": false,
+    "why": "Talep sonuçlandı: Süresi doldu",
+    "terminal": true
+   }
+  },
+  {
+   "name": "800x360 V6 izin yenileme: 40 gün kala YENİLEME İSTE → masada izin + 36 ◈ → TEKLİF → bitişten +360 (tek bedel)",
+   "status": "PASS",
+   "r0": {
+    "end": 165.9732,
+    "etk": 672
+   },
+   "r1": {
+    "end": 525.9732,
+    "etk": 636,
+    "msg": ""
+   }
+  },
+  {
+   "name": "800x360 V7 aktif ticaret hattı: Liman izinleri → Konvoylar / Sözleşmeler ekranına dönüş",
+   "status": "PASS",
+   "ov": {
+    "boxW": 520,
+    "vw": 800,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "844x390 V1 talep kartı → dokunuşla Liman izinleri: talep eden, limanlar, taşıyıcılar, bedel, son gün; taşma yok",
+   "status": "PASS",
+   "box": {
+    "st": "pending",
+    "legs": 4,
+    "buttons": [
+     "transitVote:1:1",
+     "transitVote:1:0"
+    ]
+   },
+   "ov": {
+    "boxW": 520,
+    "vw": 844,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "844x390 V2 ONAYLA → diğer sahibin onayı bekleniyor; izin / ödeme yok, başarı gösterilmez",
+   "status": "PASS",
+   "ui": {
+    "st": "pending",
+    "wait": true,
+    "btn": false
+   },
+   "s1": {
+    "etk": {
+     "0": 600,
+     "1": 600,
+     "2": 600,
+     "3": 600
+    },
+    "tx": [
+     {
+      "id": 1,
+      "st": "pending",
+      "votes": {
+       "0": "yes",
+       "3": "pending"
+      }
+     }
+    ],
+    "pt": {
+     "0": [],
+     "3": []
+    },
+    "k": 0
+   }
+  },
+  {
+   "name": "844x390 V3 ikinci sahip onaylar → Uygulandı, dört izin, X–Y sözleşmesi; sözleşmeler ekranına dönüş",
+   "status": "PASS",
+   "s1": {
+    "etk": {
+     "0": 672,
+     "1": 528,
+     "2": 528,
+     "3": 672
+    },
+    "tx": [
+     {
+      "id": 1,
+      "st": "committed",
+      "votes": {
+       "0": "yes",
+       "3": "yes"
+      }
+     }
+    ],
+    "pt": {
+     "0": [
+      1,
+      2
+     ],
+     "3": [
+      1,
+      2
+     ]
+    },
+    "k": 1
+   }
+  },
+  {
+   "name": "844x390 V4 yeni talep → REDDET → Reddedildi, izin / ödeme yok",
+   "status": "PASS",
+   "id": 2,
+   "st": "rejected"
+  },
+  {
+   "name": "844x390 V5 süresi dolan talebin kartına dokunma → Süresi doldu, karar düğmesi yok, izin / ödeme yok",
+   "status": "PASS",
+   "id": 3,
+   "st": "expired",
+   "late": {
+    "ok": false,
+    "why": "Talep sonuçlandı: Süresi doldu",
+    "terminal": true
+   }
+  },
+  {
+   "name": "844x390 V6 izin yenileme: 40 gün kala YENİLEME İSTE → masada izin + 36 ◈ → TEKLİF → bitişten +360 (tek bedel)",
+   "status": "PASS",
+   "r0": {
+    "end": 166.0066,
+    "etk": 672
+   },
+   "r1": {
+    "end": 526.0065999999999,
+    "etk": 636,
+    "msg": ""
+   }
+  },
+  {
+   "name": "844x390 V7 aktif ticaret hattı: Liman izinleri → Konvoylar / Sözleşmeler ekranına dönüş",
+   "status": "PASS",
+   "ov": {
+    "boxW": 520,
+    "vw": 844,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "901x411 V1 talep kartı → dokunuşla Liman izinleri: talep eden, limanlar, taşıyıcılar, bedel, son gün; taşma yok",
+   "status": "PASS",
+   "box": {
+    "st": "pending",
+    "legs": 4,
+    "buttons": [
+     "transitVote:1:1",
+     "transitVote:1:0"
+    ]
+   },
+   "ov": {
+    "boxW": 520,
+    "vw": 901,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "901x411 V2 ONAYLA → diğer sahibin onayı bekleniyor; izin / ödeme yok, başarı gösterilmez",
+   "status": "PASS",
+   "ui": {
+    "st": "pending",
+    "wait": true,
+    "btn": false
+   },
+   "s1": {
+    "etk": {
+     "0": 600,
+     "1": 600,
+     "2": 600,
+     "3": 600
+    },
+    "tx": [
+     {
+      "id": 1,
+      "st": "pending",
+      "votes": {
+       "0": "yes",
+       "3": "pending"
+      }
+     }
+    ],
+    "pt": {
+     "0": [],
+     "3": []
+    },
+    "k": 0
+   }
+  },
+  {
+   "name": "901x411 V3 ikinci sahip onaylar → Uygulandı, dört izin, X–Y sözleşmesi; sözleşmeler ekranına dönüş",
+   "status": "PASS",
+   "s1": {
+    "etk": {
+     "0": 672,
+     "1": 528,
+     "2": 528,
+     "3": 672
+    },
+    "tx": [
+     {
+      "id": 1,
+      "st": "committed",
+      "votes": {
+       "0": "yes",
+       "3": "yes"
+      }
+     }
+    ],
+    "pt": {
+     "0": [
+      1,
+      2
+     ],
+     "3": [
+      1,
+      2
+     ]
+    },
+    "k": 1
+   }
+  },
+  {
+   "name": "901x411 V4 yeni talep → REDDET → Reddedildi, izin / ödeme yok",
+   "status": "PASS",
+   "id": 2,
+   "st": "rejected"
+  },
+  {
+   "name": "901x411 V5 süresi dolan talebin kartına dokunma → Süresi doldu, karar düğmesi yok, izin / ödeme yok",
+   "status": "PASS",
+   "id": 3,
+   "st": "expired",
+   "late": {
+    "ok": false,
+    "why": "Talep sonuçlandı: Süresi doldu",
+    "terminal": true
+   }
+  },
+  {
+   "name": "901x411 V6 izin yenileme: 40 gün kala YENİLEME İSTE → masada izin + 36 ◈ → TEKLİF → bitişten +360 (tek bedel)",
+   "status": "PASS",
+   "r0": {
+    "end": 165.9732,
+    "etk": 672
+   },
+   "r1": {
+    "end": 525.9732,
+    "etk": 636,
+    "msg": ""
+   }
+  },
+  {
+   "name": "901x411 V7 aktif ticaret hattı: Liman izinleri → Konvoylar / Sözleşmeler ekranına dönüş",
+   "status": "PASS",
+   "ov": {
+    "boxW": 520,
+    "vw": 901,
+    "hScroll": false,
+    "offscreen": []
+   }
+  }
+ ]
+}

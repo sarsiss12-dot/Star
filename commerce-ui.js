@@ -63,7 +63,9 @@ const CommerceUI={selected:null,hits:[],token:null,
   if(!n)h+='<div class="mini">Geçerli liman transit izni yok.</div>';
   return h;
  },
- dealWith(o,side){if(!G.emps[o])return;UI.closeModal();UI.openDeal(+o);UI.act('dealAdd',side+':portTransit');},
+ // Yenileme mevcut müzakere masasıyla: izni isteyen taraf standart transit bedelini (36 ◈) önerir; şartlar masada değiştirilebilir.
+ dealWith(o,side){if(!G.emps[o])return;UI.closeModal();UI.forgetDeal?.(+o);UI.openDeal(+o);if(UI.deal&&UI.deal.to===+o){UI.deal.give=[];UI.deal.want=[];}UI.act('dealAdd',side+':portTransit');
+  if(side==='want'&&UI.deal&&UI.deal.to===+o&&!UI.deal.give.some(i=>i.t==='res'&&i.r==='etk')){UI.deal.give.push({t:'res',r:'etk',v:Commerce.transitPay});UI.drawDeal();}},
  amounts(o){return Commerce.resources.filter(k=>o?.[k]>0).map(k=>o[k].toFixed(1)+' '+RES[k].n).join(' · ')||'—';},
  eta(c){if(Commerce.terminal(c))return 'Sefer sonuçlandı';if(c.status==='blocked')return 'Varış belirsiz';let days=Math.max(0,c.depart-G.day);for(let i=c.step;i<c.route.length-1;i++)days+=Math.max(1,dist(G.sys[c.route[i]],G.sys[c.route[i+1]])/Commerce.speed)*(i===c.step?1-c.t:1);return '~'+Math.ceil(days)+' gün';},
  routeText(a,b,source,target,path){
