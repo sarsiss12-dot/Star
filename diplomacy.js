@@ -10686,6 +10686,7 @@ function warSupportGate(joiner,sponsor,it){
  else if(it?.plan||!f||f.ended!==null||!warLedgerPair(...f.sides)||!f.sides.includes(sponsor.id)||!f.sides.includes(it.target)||it.target===sponsor.id)return no('Kaynak savaş sona erdi veya tarafı değişti');
  const enemy=G.emps[it.target];
  if(!joiner.contact[sponsor.id]||!sponsor.contact[joiner.id]||!joiner.contact[enemy.id]||!sponsor.contact[enemy.id])return no('Katılım için taraflarla temas gerekli');
+ if(typeof diploBlocked==='function'&&(diploBlocked(joiner,sponsor)||diploBlocked(sponsor,joiner)))return no('Doktrin bu devletle her türlü anlaşmayı yasaklıyor');   /* SAVAŞ-DESTEK-AI.0: Arındırıcı kilidi — dealQuote'un aynı yasağı; aday kartı "uygun" görünüp gönderimde düşüyordu */
  if(joiner.war[enemy.id]||enemy.war[joiner.id])return no('Zaten tarafsın; yeni ücretli katılım yok');
  const role=f?f.roles[f.sides.indexOf(sponsor.id)]:0,fs=f?(G.warLedger.fronts||[]).filter(x=>x.campaign===f.campaign&&x.ended===null):[];
  if(joiner.war[sponsor.id]||fs.some(x=>x.sides.some((id,i)=>(id===joiner.id&&x.roles[i]!==role)||(x.roles[i]===role&&joiner.war[id]))))return no('Desteklenen tarafla çakışan savaş var');

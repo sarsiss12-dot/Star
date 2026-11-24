@@ -38,6 +38,7 @@ const CONF={A:{size:'orta',ai:5,seed:11,months:120,guests:1,every:6},B:{size:'bu
   /* MP-FIELD-FIX.0: saha bulguları — katılım yolları, olay şeridi, kayıttan yeni odaya dönüş, Fetih seçimi, masadan savaş desteği — host + 2 misafir + kimliksiz X */
   Z:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
   Y:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
+  SD:{size:'orta',ai:6,seed:22,months:0,guests:2,every:6},   /* SAVAŞ-DESTEK-AI.0 */
   /* MP-WARON.0: Genel Savaş Sözü — host + B + C gerçek arayüz, karşı teklif, kayıt → yeni oda, normal savaş ilanıyla tutma, süre bozumu, hedef elenmesi, Savaş Merkezi taslağı */
   V:{size:'orta',ai:5,seed:22,months:0,guests:2,every:6},
   /* MP-TECHLUX.0: Teknoloji + Lüks Mal + 👁 İstihbarat — host + B + C gerçek arayüz */
@@ -572,6 +573,8 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
   if(SCEN==='T')await require('./helpers/mp-techlux0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},
     CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});
   if(SCEN==='V')await require('./helpers/mp-waron0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},
+    CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});
+  if(SCEN==='SD')await require('./helpers/savas-destek-ai0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},
     CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});
   if(SCEN==='Y')await require('./helpers/mp-deal-sys0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},
     CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});

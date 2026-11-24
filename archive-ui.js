@@ -259,7 +259,9 @@ const WarCenterUI={
   const t={sending:'Gönderiliyor…',pending:'Bekliyor — karar karşı tarafta (Gelen kutusu → Gönderilen)',accepted:'Kabul edildi — cepheye katıldı',countered:'Karşı teklif geldi'+(st.why?': '+st.why:'')+' — Şartlı Teklif… ile müzakere et',
    rejected:'Reddedildi'+(st.why?': '+st.why:''),error:'Gönderilemedi: '+(st.why||'bilinmeyen neden')}[st.state]||'';return {state:st.state,text:t};},
  support(front,sponsor){this.front=front;const enemy=this.status?.sides.find(id=>id!==sponsor);if(!Number.isInteger(enemy))return;this._supCtx={front,sponsor,enemy};
-  const candidates=G.emps.filter(e=>e.id!==sponsor&&e.id!==enemy&&!e.dead&&!e.wild&&!e.crisisSide&&G.p.contact[e.id]&&!e.war[enemy]&&e.contact?.[enemy]!==false);
+  /* SAVAŞ-DESTEK-AI.0: bu ekrandan istenip kabul eden aday savaşa girince listeden düşüyordu (sonuç hiç görünmüyordu): "katıldı" olarak kalır */
+  const joinedHere=e=>!!e.war[enemy]&&this.supState(front,e.id).state==='accepted';
+  const candidates=G.emps.filter(e=>e.id!==sponsor&&e.id!==enemy&&!e.dead&&!e.wild&&!e.crisisSide&&G.p.contact[e.id]&&(!e.war[enemy]||joinedHere(e))&&e.contact?.[enemy]!==false);
   const it={t:'warJoin',front,target:enemy},res=['min','ala','ene'].map(r=>RES[r].ico+' '+Math.floor(G.p.res[r]||0)).join(' · ');
   const lands=typeof warFetihCandidates==='function'?warFetihCandidates(G.p,G.emps[enemy]).length:0;
   /* misafirde temas / savaş bilgisi aynada eksik: uygunluk host'un warSupportList kararından (salt okuma; gelince kartlar yeniden çizilir) */
@@ -273,11 +275,11 @@ const WarCenterUI={
    if(rel>=40){tags.push('dost');tier=Math.max(tier,2);}
    const foeRel=typeof intelOf==='function'&&intelOf(G.p,e.id)>=2?e.rel?.[enemy]:undefined;if(Number.isFinite(foeRel)&&foeRel<=-25){tags.push('düşmanla arası kötü');tier=Math.max(tier,1);}
    if(e.ai===false)tags.push('oyuncu');return {tier,rel,tags};};
-  const rows=candidates.map(e=>({e,g:gateOf(e),i:info(e)})).sort((a,b)=>(b.g.ok?1:0)-(a.g.ok?1:0)||b.i.tier-a.i.tier||b.i.rel-a.i.rel||a.e.id-b.e.id);
+  const rows=candidates.map(e=>({e,g:joinedHere(e)?{ok:false,joined:true,why:'Cepheye katıldı'}:gateOf(e),i:info(e)})).sort((a,b)=>(b.g.ok?1:0)-(a.g.ok?1:0)||b.i.tier-a.i.tier||b.i.rel-a.i.rel||a.e.id-b.e.id);
   const ready=rows.filter(r=>r.g.ok&&['','error'].includes(this.supState(front,r.e.id).state));
   const card=({e,g,i})=>{const st=this.supState(front,e.id),busy=st.state==='sending'||st.state==='pending';
    return `<section class="box supCand" data-cand="${e.id}" data-tier="${i.tier}"><div class="bt"><b style="color:${e.col}">${esc(this.label(e.id))}</b> <span class="mini">ilişki ${i.rel}${i.tags.length?' · '+esc(i.tags.join(' · ')):''}</span></div>
-    <div class="mini supGate" data-ok="${g.ok?1:g.wait?'w':0}">${g.ok?'✔ Uygun: Cephe #'+front+' · '+esc(this.label(enemy))+' karşısında katılım istenebilir':(g.wait?'… ':'⛔ ')+esc(g.why||'Uygun değil')}</div>
+    <div class="mini supGate" data-ok="${g.ok?1:g.wait?'w':g.joined?'j':0}">${g.joined?'✔ Cepheye katıldı':g.ok?'✔ Uygun: Cephe #'+front+' · '+esc(this.label(enemy))+' karşısında katılım istenebilir':(g.wait?'… ':'⛔ ')+esc(g.why||'Uygun değil')}</div>
     <div class="act2"><button class="abtn pri" data-a="warCenterAsk" data-x="${front}:${enemy}:${e.id}" ${g.ok&&!busy?'':'disabled'}>⚔ Destek İste</button>
      <button class="abtn" data-a="warCenterCompose" data-x="${front}:${sponsor}:${e.id}">Şartlı Teklif…</button></div>
     ${st.text?`<div class="mini supState" data-state="${st.state}" role="status">${esc(st.text)}</div>`:''}</section>`;};

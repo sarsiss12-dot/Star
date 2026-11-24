@@ -67,6 +67,15 @@ test('S18 Save8: yardım isteği bekleme kayıtları yükleme sonrası korunur; 
   assert.equal(r.cool,true);assert.equal(r.again,false);});
 test('S21 dürüstlük: aynı müttefik savunmasında dürüst AI\'nın katılım maliyeti sahtekârdan düşük (sadakat)',()=>{
   const c=x=>{const h=world();h.run(`C.ethics={...(C.ethics||{}),ahl:${x}};`);return cost(h);};const hon=c(3),dis=c(-3);assert.ok(hon<dis,'dürüst '+hon+' < sahtekâr '+dis);});
+test('I1 toprak vaadi: aynı düşman sistemi iki farklı katılımcıya vaat edilemez; ikinci teklif geçersiz, ödeme / katılım yok',()=>{const h=world();
+  const r=J(h,`(()=>{const D=ais[3];D.contact[X.id]=true;const sys=G.sys.find(s=>s.owner<0&&!s.planets.some(p=>p.col)&&s.id!==X.home);territoryOwnerSet(sys,X.id);
+   const o1={from:S.id,to:C.id,give:[{t:'landPromise',sys:sys.id,front:F.id}],want:[IT],born:G.day,expires:G.day+60};const q1=dealQuote(o1);const ok1=q1.ok&&executeDeal(o1);
+   const o2={from:S.id,to:D.id,give:[{t:'landPromise',sys:sys.id,front:F.id}],want:[IT],born:G.day,expires:G.day+60};const q2=dealQuote(o2);
+   return {q1:q1.ok,why1:q1.reasons,ok1:!!ok1,q2:q2.ok,why2:(q2.reasons||[]).join(' | '),dwar:!!D.war[X.id],open:(G.warLedger.promises||[]).filter(p=>p.state==='open'&&p.sys===sys.id).length};})()`);
+  assert.equal(r.q1,true,JSON.stringify(r.why1));assert.equal(r.ok1,true);assert.equal(r.q2,false,'ikinci vaat');assert.match(r.why2,/zaten başka bir vaatte/);assert.equal(r.dwar,false);assert.equal(r.open,1);});
+test('S22 Arındırıcı aday: destek kapısı reddeder (dealQuote ile aynı yasak); kart uygun görünmez',()=>{const h=world();
+  const r=J(h,`(()=>{const D=ais[3];D._pers='izolasyonist';D._persAt=G.memAge;const pur=isPurifier(D);const g=warSupportGate(D,S,IT);return {pur,ok:g.ok,why:g.why};})()`);
+  assert.equal(r.pur,true,'fikstür Arındırıcı');assert.equal(r.ok,false);assert.match(r.why,/Doktrin/);});
 test('S20 doktrinler aynı koşulda farklı maliyet üretir (p54: hepsi aynı)',()=>{const v=['militarist','pasifist','tuccar','yayilmaci'].map(m=>cost(world({miz:m,sponsorAttacks:1})));assert.ok(new Set(v).size>=3,'farklı değerler '+v.join(','));});
 test('B1 Savaş Merkezi destek adayları: uygunlar önde, müttefik > dost; gerekçe etiketleri; toplu davet her uygun adaya bir teklif, ikinci basışta tekrar yok',()=>{
   const h=world({ally:false});const r=J(h,`(()=>{const D=ais[3];warAuthorize(X,E,{n:'t'});declareWar(X,E);warAuthClear();for(const o of G.emps)if(o!==E){E.rel[o.id]=0;}E.ally[C.id]=C.ally[E.id]=true;E.rel[C.id]=80;E.rel[D.id]=55;
