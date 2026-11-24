@@ -1,0 +1,209 @@
+{
+ "root": "/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade",
+ "results": [
+  {
+   "name": "800x360 W1 destek adayları sıralı, gerekçeli, taşmasız",
+   "status": "PASS",
+   "cards": [
+    {
+     "id": 2,
+     "tier": 4,
+     "ok": "1",
+     "txt": "Tharaeth Lejyonu ilişki 85 · müttefik · dost"
+    },
+    {
+     "id": 3,
+     "tier": 2,
+     "ok": "1",
+     "txt": "İxir Tahtı ilişki 55 · dost"
+    },
+    {
+     "id": 4,
+     "tier": 0,
+     "ok": "1",
+     "txt": "Rhyvaur Şurası ilişki 0"
+    },
+    {
+     "id": 5,
+     "tier": 0,
+     "ok": "0",
+     "txt": "Sylraen Meclisi ilişki 0"
+    }
+   ],
+   "ov": {
+    "boxW": 520,
+    "vw": 800,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "800x360 W2 toplu destek isteği: her uygun adaya tek teklif, kabul eden mevcut cepheye katılır",
+   "status": "PASS",
+   "st": [
+    {
+     "id": 2,
+     "state": "countered",
+     "text": "Karşı teklif geldi — Şartlı Teklif… ile müzakere et"
+    },
+    {
+     "id": 3,
+     "state": "countered",
+     "text": "Karşı teklif geldi — Şartlı Teklif… ile müzakere et"
+    },
+    {
+     "id": 4,
+     "state": "rejected",
+     "text": "Reddedildi"
+    },
+    {
+     "id": 5,
+     "state": "",
+     "text": ""
+    }
+   ],
+   "joined": []
+  },
+  {
+   "name": "800x360 W3 tekrar yok, oyuncu kaynağı değişmez",
+   "status": "PASS",
+   "bulkVisible": false
+  },
+  {
+   "name": "844x390 W1 destek adayları sıralı, gerekçeli, taşmasız",
+   "status": "PASS",
+   "cards": [
+    {
+     "id": 2,
+     "tier": 4,
+     "ok": "1",
+     "txt": "Tharaeth Lejyonu ilişki 85 · müttefik · dost"
+    },
+    {
+     "id": 3,
+     "tier": 2,
+     "ok": "1",
+     "txt": "İxir Tahtı ilişki 55 · dost"
+    },
+    {
+     "id": 4,
+     "tier": 0,
+     "ok": "1",
+     "txt": "Rhyvaur Şurası ilişki 0"
+    },
+    {
+     "id": 5,
+     "tier": 0,
+     "ok": "0",
+     "txt": "Sylraen Meclisi ilişki 0"
+    }
+   ],
+   "ov": {
+    "boxW": 520,
+    "vw": 844,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "844x390 W2 toplu destek isteği: her uygun adaya tek teklif, kabul eden mevcut cepheye katılır",
+   "status": "PASS",
+   "st": [
+    {
+     "id": 2,
+     "state": "countered",
+     "text": "Karşı teklif geldi — Şartlı Teklif… ile müzakere et"
+    },
+    {
+     "id": 3,
+     "state": "countered",
+     "text": "Karşı teklif geldi — Şartlı Teklif… ile müzakere et"
+    },
+    {
+     "id": 4,
+     "state": "rejected",
+     "text": "Reddedildi"
+    },
+    {
+     "id": 5,
+     "state": "",
+     "text": ""
+    }
+   ],
+   "joined": []
+  },
+  {
+   "name": "844x390 W3 tekrar yok, oyuncu kaynağı değişmez",
+   "status": "PASS",
+   "bulkVisible": false
+  },
+  {
+   "name": "901x411 W1 destek adayları sıralı, gerekçeli, taşmasız",
+   "status": "PASS",
+   "cards": [
+    {
+     "id": 2,
+     "tier": 4,
+     "ok": "1",
+     "txt": "Tharaeth Lejyonu ilişki 85 · müttefik · dost"
+    },
+    {
+     "id": 3,
+     "tier": 2,
+     "ok": "1",
+     "txt": "İxir Tahtı ilişki 55 · dost"
+    },
+    {
+     "id": 4,
+     "tier": 0,
+     "ok": "1",
+     "txt": "Rhyvaur Şurası ilişki 0"
+    },
+    {
+     "id": 5,
+     "tier": 0,
+     "ok": "0",
+     "txt": "Sylraen Meclisi ilişki 0"
+    }
+   ],
+   "ov": {
+    "boxW": 520,
+    "vw": 901,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "901x411 W2 toplu destek isteği: her uygun adaya tek teklif, kabul eden mevcut cepheye katılır",
+   "status": "PASS",
+   "st": [
+    {
+     "id": 2,
+     "state": "countered",
+     "text": "Karşı teklif geldi — Şartlı Teklif… ile müzakere et"
+    },
+    {
+     "id": 3,
+     "state": "countered",
+     "text": "Karşı teklif geldi — Şartlı Teklif… ile müzakere et"
+    },
+    {
+     "id": 4,
+     "state": "rejected",
+     "text": "Reddedildi"
+    },
+    {
+     "id": 5,
+     "state": "",
+     "text": ""
+    }
+   ],
+   "joined": []
+  },
+  {
+   "name": "901x411 W3 tekrar yok, oyuncu kaynağı değişmez",
+   "status": "PASS",
+   "bulkVisible": false
+  }
+ ]
+}

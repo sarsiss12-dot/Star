@@ -63,4 +63,17 @@ test('S18 Save8: yardım isteği bekleme kayıtları yükleme sonrası korunur; 
   const g=runtime({root:ROOT});g.sb.S0=save;assert.equal(g.run('deserialize(S0)'),true);const r=J(g,`(()=>{const S=G.emps.filter(o=>o.ai&&!o.dead&&!o.wild&&!o.crisisSide)[0];return {cool:S.aiTalk?.warHelp?.until>G.day,again:aiWarHelpAsk(S)};})()`);
   assert.equal(r.cool,true);assert.equal(r.again,false);});
 test('S20 doktrinler aynı koşulda farklı maliyet üretir (p54: hepsi aynı)',()=>{const v=['militarist','pasifist','tuccar','yayilmaci'].map(m=>cost(world({miz:m,sponsorAttacks:1})));assert.ok(new Set(v).size>=3,'farklı değerler '+v.join(','));});
+test('B1 Savaş Merkezi destek adayları: uygunlar önde, müttefik > dost; gerekçe etiketleri; toplu davet her uygun adaya bir teklif, ikinci basışta tekrar yok',()=>{
+  const h=world({ally:false});const r=J(h,`(()=>{const D=ais[3];warAuthorize(X,E,{n:'t'});declareWar(X,E);warAuthClear();for(const o of G.emps)if(o!==E){E.rel[o.id]=0;}E.ally[C.id]=C.ally[E.id]=true;E.rel[C.id]=80;E.rel[D.id]=55;
+   const f=warLedgerFind(E.id,X.id);WarCenterUI.status={id:f.id,sides:[E.id,X.id],campaign:f.campaign,ended:null};let H='';const om=UI.openModal,sr=UI.surfaceRender;UI.openModal=x=>{H=x;};UI.surfaceRender=(el,x)=>{H=x;};
+   try{WarCenterUI.support(f.id,E.id);const cards=[...H.matchAll(/data-cand="([0-9]+)" data-tier="([0-9])"[\\s\\S]*?supGate" data-ok="([^"]+)"/g)].map(m=>({id:+m[1],tier:+m[2],ok:m[3]}));
+    const tagC=new RegExp('data-cand="'+C.id+'"[^]*?müttefik').test(H),all=/warCenterAskAll/.test(H);const sent=[];const cmd=WarCenterUI.command;WarCenterUI.command=function(c,done){sent.push(c.to);return cmd.call(this,c,done);};
+    const n1=WarCenterUI.askAll(f.id,X.id),n2=WarCenterUI.askAll(f.id,X.id);WarCenterUI.command=cmd;const okIds=cards.filter(c=>c.ok==='1').map(c=>c.id);
+    return {cards,tagC,all,n1,n2,sent,okIds,C:C.id,D:D.id,uniq:new Set(sent).size===sent.length};}finally{UI.openModal=om;UI.surfaceRender=sr;}})()`);
+  const firstBad=r.cards.findIndex(c=>c.ok!=='1');assert.ok(firstBad<0||r.cards.slice(firstBad).every(c=>c.ok!=='1'),'uygunlar önde '+JSON.stringify(r.cards));
+  const ok=r.cards.filter(c=>c.ok==='1');for(let i=1;i<ok.length;i++)assert.ok(ok[i-1].tier>=ok[i].tier,'öncelik sırası');
+  if(r.okIds.includes(r.C)&&r.okIds.includes(r.D))assert.ok(r.okIds.indexOf(r.C)<r.okIds.indexOf(r.D),'müttefik dosttan önce');
+  assert.ok(r.tagC,'müttefik etiketi');assert.equal(r.n1,r.okIds.length,'her uygun adaya bir teklif');assert.ok(r.uniq,'çift teklif yok');
+  assert.equal(r.n2,0,'ikinci basışta tekrar teklif yok');assert.ok(r.n1>=1,'en az bir uygun aday');
+  if(r.okIds.length>1)assert.ok(r.all,'toplu düğme');console.log('  B1 adaylar '+JSON.stringify(r.cards)+' · gönderilen '+r.n1);});
 console.log('GEÇEN: '+pass+' KALAN: '+fail);process.exitCode=fail?1:0;
