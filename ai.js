@@ -5023,7 +5023,10 @@ function aiFedConcentration(e,f,candidate){
 }
 function aiFedVoteWant(e,f,v){
  const proposer=G.emps[v.proposer],rel=proposer?(e.rel[proposer.id]||0):0;
- let want=.4+rel/300+(fedCohesion(f)-50)/250;
+ /* FED-AI-SİYASET.0: tür reformunda (anayasal, %75) iyi niyet terimi en çok +0,10. Barışta ilişki ve uyum 100'e doyunca bu terim +0,53'e
+    çıkıyor ve doktrine açıkça ters reformlara da "evet" oyu verdiriyordu (ölçüm: yağmacı uyumu 0,20 olan üye yağmacı reformuna evet). */
+ const goodwill=rel/300+(fedCohesion(f)-50)/250;
+ let want=.4+(v.motion==='reform'?Math.min(goodwill,.1):goodwill);
  if(v.motion==='admit')return aiFedAdmissionScore(e,G.emps[v.target],f.type,f).score;
  if(v.motion==='expel')return clamp(.3-(e.rel[v.target]||0)/120-trustOf(e,v.target)/200,.02,.95);
  if(v.motion==='elect'){const target=G.emps[v.target];return clamp(.35+(e.rel[v.target]||0)/160+trustOf(e,v.target)/500+(v.target===e.id?.2:0)+(target?clamp(aiFedKnownMandate(e,target,f).military/Math.max(1,aiFedKnownMandate(e,e,f).military)*.04,0,.12):0),.02,.95);}
@@ -5060,7 +5063,7 @@ function aiFederationPolitics(){
   let f=findFed(e);
   if(!f){
    let invited=false;
-   for(const other of G.feds||[])if(other.invites?.[e.id]){const inv=other.invites[e.id],founder=G.emps[inv.by];if(aiFedWilling(e,founder,other.type,other).ok)acceptFedInvite(e,other.id);else rejectFedInvite(e,other.id);invited=true;break;}
+   for(const other of G.feds||[])if(other.invites?.[e.id]){const inv=other.invites[e.id],founder=G.emps[inv.by];if(!aiFedLeftRecently(e,other)&&aiFedWilling(e,founder,other.type,other).ok)acceptFedInvite(e,other.id);else rejectFedInvite(e,other.id);invited=true;break;}
    if(invited)continue;
    aiRivalBlocChoice(e);   // BETA-RIVAL-BLOCS.0: katıl / bağımsız kal / rakip blok kur aynı değerlendirmede
    continue;
@@ -5069,7 +5072,7 @@ function aiFederationPolitics(){
   if(f.agenda?.items.some(r=>r.by===e.id))continue;
   if(!f.vote&&G.day-f.founded>=720&&fedCohesion(f)<20&&(e.rel[f.leader]||0)<-50){leaveFederation(e);e.aiFedReason={day:G.day,kind:'leave',why:'Uzun süreli uyumsuzluk ve başkana güvensizlik'};continue;}
   if(aiFedStayReview(e,f))continue;   // BETA-RIVAL-BLOCS.0
-  if(f.leader!==e.id)continue;
+  if(f.leader!==e.id){aiFedMemberReform(e,f);continue;}   // FED-AI-SİYASET.0: üye sesi (mevcut reform önergesi ve oylaması)
   const offer=(kind,options)=>{const result=proposeFedMotion(e,kind,options);if(result.ok){e._fedPoliticsAfter=G.day+360;e.aiFedReason={day:G.day,kind,...options,why:'Güven, doktrin, erişim ve mevcut birlik koşulları'};}return result.ok;};
   const hostile=f.members.find(id=>id!==e.id&&(e.rel[id]||0)<-65&&trustOf(e,id)<-40);
   if(hostile!==undefined&&offer('expel',{target:hostile}))continue;
@@ -5077,7 +5080,7 @@ function aiFederationPolitics(){
   if(G.day-f.founded>=720&&preferred!==f.type&&aiFedAffinity(e,preferred)>aiFedAffinity(e,f.type)+.2&&offer('reform',{type:preferred}))continue;
   if(f.type==='yagmaci'&&aiRaiderMilitaryProposal(e,f,offer))continue;
   if(aiFedWarProposal(e,f,offer))continue;   // BETA-WAR-GOALS.0
-  const candidate=G.emps.find(o=>o!==e&&e.contact[o.id]&&(e.rel[o.id]||0)>45&&fedAdmissionGate(f,o,true).ok&&aiFedWilling(o,e,f.type,f).ok);
+  const candidate=G.emps.find(o=>o!==e&&e.contact[o.id]&&(e.rel[o.id]||0)>45&&!(o.ai&&aiFedLeftRecently(o,f))&&fedAdmissionGate(f,o,true).ok&&aiFedWilling(o,e,f.type,f).ok);
   if(candidate&&offer('admit',{target:candidate.id}))continue;
   if(f.type==='askeri'||f.type==='yagmaci'){
    const enemy=G.emps.find(o=>e.war[o.id]&&!o.dead&&!o.wild&&!o.crisisSide&&f.members.some(id=>!G.emps[id].war[o.id]));
@@ -5271,7 +5274,8 @@ function aiFoundWilling(o,e,p){
 }
 /* Bağımsız AI: mevcut bloğa katıl / bağımsız kal / rakip blok kur — aynı değerlendirmede. */
 function aiRivalBlocChoice(e){
- const joinable=G.emps.filter(o=>o!==e&&e.contact[o.id]&&findFed(o)&&canRequestFederation(e,o).ok)
+ /* FED-AI-SİYASET.0: tür uyumsuzluğuyla ayrıldığı birliğe türü değişmedikçe geri başvurmaz */
+ const joinable=G.emps.filter(o=>o!==e&&e.contact[o.id]&&findFed(o)&&!aiFedLeftRecently(e,findFed(o))&&canRequestFederation(e,o).ok)
   .map(o=>({o,a:aiFedWilling(e,o,findFed(o).type,findFed(o))})).filter(x=>x.a.ok)
   .sort((a,b)=>(G.cfg?.aiRivals?b.a.score-a.a.score:0)||(e.rel[b.o.id]||0)-(e.rel[a.o.id]||0)||a.o.id-b.o.id);
  const join=joinable[0]||null;
@@ -5312,14 +5316,37 @@ function aiFoundPending(e){
  return true;
 }
 /* Üye: uzun süren çıkar çatışması + yaşayabilir alternatif → anayasaya uygun ayrılış. Dürüst üye daha uzun sabreder. */
+/* FED-AI-SİYASET.0 — üyenin tür uyumsuzluğu: tercih ettiği türün uyumu federasyonun türünü ≥0,35 geçiyorsa "uyumsuz".
+   Ses: tür reformu mevcut önergeyle (150 Etki, %75 onay, 12 ay geçiş, 120 ay reform beklemesi) yalnız gerçek destek varsa önerilir
+   (üyelerin en az yarısı aynı türü bugünkünden uygun buluyorsa; boşa oylama yok). Çıkış: reform reddedildiyse ya da destek yoksa
+   uyumsuzluk kalma değerlendirmesine çatışma olarak girer (aiFedStayReview; mevcut sabır sayacı ve yaşayabilir alternatif kapısı aynen).
+   p55 ölçümü: barışta ilişki ve birlik uyumu 100'e doyduğundan eski çatışma terimi hiçbir doğal kampanyada pozitif olmadı. RNG yok. */
+function aiFedMismatch(e,f){
+ const pref=aiFedType(e),gap=pref===f.type?0:aiFedAffinity(e,pref)-aiFedAffinity(e,f.type);if(gap<.35)return null;
+ const live=f.members.filter(id=>G.emps[id]&&!G.emps[id].dead),support=live.filter(id=>{const o=G.emps[id];return o===e||aiFedAffinity(o,pref)>aiFedAffinity(o,f.type);}).length;
+ const lv=f.lastVote,ask=e._fedReformAsk,asked=!!(ask&&ask.fed===f.id&&ask.type===pref&&G.day-ask.day<=1440);
+ /* kendi önerisi 4 yıl içinde sonuçlandı ve tür hâlâ aynıysa reddedilmiş sayılır (lastVote araya giren oylamalarla değişir; tekrar öneri yok) */
+ const rejected=!!(lv&&lv.motion==='reform'&&!lv.passed&&lv.type===pref&&G.day-lv.day<=1440)||asked&&!f.vote&&!f.reform&&f.type!==pref&&G.day-ask.day>=30;
+ const blocked=!!f.reform||(f.reformAfter||0)>G.day;
+ return {pref,gap,support,live:live.length,plausible:support*2>=live.length&&!blocked&&!rejected&&!asked,unresolved:rejected||blocked||support*2<live.length};
+}
+function aiFedLeftRecently(e,f){const l=e&&e._fedLeft;return !!(l&&f&&l.fed===f.id&&l.type===f.type);}   /* tür uyumsuzluğuyla ayrıldığı birliğe, türü değişmedikçe geri dönmez (zaman sınırı çalkantı üretiyordu: ayrıl → 4 yıl → katıl → 2 yıl → ayrıl) */
+function aiFedMemberReform(e,f){
+ if(!e.ai||f.leader===e.id||f.vote||G.day-(f.dutyConsent?.[e.id]?.since??f.founded)<720)return false;
+ const m=aiFedMismatch(e,f);if(!m||!m.plausible)return false;
+ const r=proposeFedMotion(e,'reform',{type:m.pref});
+ if(r.ok){e._fedPoliticsAfter=G.day+360;e._fedReformAsk={fed:f.id,type:m.pref,day:G.day};e.aiFedReason={day:G.day,kind:'reform',type:m.pref,why:'Üye önerisi: tercih edilen tür uyumu +'+m.gap.toFixed(2)+' · destek '+m.support+'/'+m.live};}
+ return !!r.ok;
+}
 function aiFedStayReview(e,f){
  if(!e.ai||f.leader===e.id||f.vote||G.day-(f.dutyConsent?.[e.id]?.since??f.founded)<720)return false;
- const conflict=(45-fedCohesion(f))/100+(-(e.rel[f.leader]||0))/150+(.45-aiFedAffinity(e,f.type))+(aiBlocThreat(e).bonus?0:-.05);
+ const m=aiFedMismatch(e,f),doctrine=m&&m.unresolved?m.gap-.35-clamp(trustOf(e,f.leader)/200,0,.25):-1;
+ const conflict=Math.max(doctrine,(45-fedCohesion(f))/100+(-(e.rel[f.leader]||0))/150+(.45-aiFedAffinity(e,f.type))+(aiBlocThreat(e).bonus?0:-.05));
  e._fedStrain=conflict>.15?(e._fedStrain||0)+1:Math.max(0,(e._fedStrain||0)-1);
  if(e._fedStrain<Math.round(12+8*aiHonesty(e)))return false;
  const alt=G.emps.some(o=>o!==e&&!o.dead&&!o.wild&&e.contact[o.id]&&!f.members.includes(o.id)&&(findFed(o)?aiFedWilling(e,o,findFed(o).type,findFed(o)).score>=.55:fedFoundCandidate(e,o).ok&&aiFedAdmissionScore(e,o,aiFedType(e)).score>=.55));
  if(!alt)return false;
- leaveFederation(e);e._fedStrain=0;e.aiFedReason={day:G.day,kind:'leave',why:'Uzun süreli çıkar çatışması ve yaşayabilir alternatif blok (anayasaya uygun ayrılış)'};return true;
+ leaveFederation(e);e._fedStrain=0;if(doctrine>.15)e._fedLeft={fed:f.id,type:f.type,day:G.day};e.aiFedReason={day:G.day,kind:'leave',why:(doctrine>.15?'Çözülemeyen tür uyumsuzluğu (reform reddi / desteksiz)':'Uzun süreli çıkar çatışması')+' ve yaşayabilir alternatif blok (anayasaya uygun ayrılış)'};return true;
 }
 
 /* ═══ BETA-WAR-GOALS.0 — AI meşruiyet terimleri (sınırlı; RNG yok). Askerî katılım bütçe/rota/cephe kapılarında ayrıca değerlendirilir. ═══ */
