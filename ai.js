@@ -2096,7 +2096,10 @@ function aiTurn(e){
       if (pw > 900 && rnd() < .35){
         const prizes = [];
         for (const sy of G.sys){
-          if (!sy.seen.includes(e.id)) continue;
+          /* FED-AI-SİYASET.0: yalnız filonun girdiği (seen) değil, AI'ın meşru bildiği (sensör / istihbarat: aiKnownSystem) yuva ve kalıntılar.
+             Keşif gemileri yuva/kalıntıya girmediği için geçidi tıkayan hedefler hiç "seen" olmuyor, av listesine giremiyordu (p55: 100/9 t11
+             120. ayda AI'ların keşfedilmemiş 61–81 sisteminin tamamı yalnız yuva/kalıntı üstünden erişilebilir). */
+          if (!sy.seen.includes(e.id) && !aiKnownSystem(e, sy)) continue;
           if (sy.nest && sy.nest.hp > 0 && pw > sy.nest.hp * .35) prizes.push(sy);
           else if (sy.ruin && sy.ruin.hp > 0 && pw > sy.ruin.hp * .55) prizes.push(sy);
         }
