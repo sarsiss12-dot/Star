@@ -10,7 +10,8 @@
    F6  ekonomik krizdeki üye pahalı yasaya gerekçeli düşük oy verir (mevcut aiFedVoteAssessment)
    T1  fiziksel varış temas kurar; T2 keşfedilmemiş uzak devletle temas yok
    T3  bilinen (sensör menzilindeki) ama hiç girilmemiş korsan yuvası güçlü AI filosunun av hedefi olur (p55: yalnız "seen")
-   T5  AI'ın bilmediği (görülmemiş, istihbaratta olmayan) yuva av listesine girmez */
+   T5  AI'ın bilmediği (görülmemiş, istihbaratta olmayan) yuva av listesine girmez
+   T6  istihbarat belleğinde olan ama şu an sensörde görünmeyen yuva av hedefi olmaz */
 const assert=require('assert/strict'),path=require('path');const {runtime}=require('./helpers/runtime');
 const ROOT=process.env.STARS_ROOT?path.resolve(process.env.STARS_ROOT):path.resolve(__dirname,'..');
 let pass=0,fail=0;function test(n,fn){try{fn();pass++;console.log('✓ '+n);}catch(e){fail++;console.log('✗ '+n+' — '+String(e&&e.message||e).split('\n')[0]);}}
@@ -79,7 +80,7 @@ function prizeWorld(){const h=runtime({root:ROOT});h.run(`resetSetupNaming();Obj
  var nestSys=G.sys.find(s=>s.nest&&!s.seen.includes(a.id)&&!s.surv.includes(a.id)&&s.lanes.some(l=>!G.sys[l].nest&&!G.sys[l].ruin));
  var big=newFleet(a,a.home,Array.from({length:12},()=>({c:'kru'})),'güç');big.path=[];big.mv=null;
  var run=()=>{const r0=rnd;rnd=()=>0.01;try{aiTurn(a);}finally{rnd=r0;}return {target:big.path.at(-1)??null,nest:nestSys&&nestSys.id};};`);return h;}
-test('T3 sensör menzilindeki (aiKnownSystem) ama hiç girilmemiş korsan yuvası güçlü AI filosunun av hedefi olur',()=>{
+test('T3 sensör menzilindeki (şu an görünür) ama hiç girilmemiş korsan yuvası güçlü AI filosunun av hedefi olur',()=>{
   const h=prizeWorld();const r=J(h,`(()=>{if(!nestSys)return {skip:true};const adj=nestSys.lanes.find(l=>!G.sys[l].nest&&!G.sys[l].ruin);if(adj===undefined)return {skip:true};big.sys=adj;territoryOwnerSet(G.sys[adj],a.id);G.day+=.1;const known=!!aiKnownSystem(a,nestSys),seen=nestSys.seen.includes(a.id),pw=fleetPower(big),hp=nestSys.nest.hp;
    const out=run();return {...out,known,seen,pw,hp};})()`);
   assert.ok(!r.skip,'fikstür yuvası');assert.equal(r.seen,false);assert.equal(r.known,true,'yuva sensörde görünür');
@@ -87,4 +88,9 @@ test('T3 sensör menzilindeki (aiKnownSystem) ama hiç girilmemiş korsan yuvas�
 test('T5 AI’ın bilmediği (görülmemiş, istihbaratta yok) yuva av listesine girmez',()=>{
   const h=prizeWorld();const r=J(h,`(()=>{if(!nestSys)return {skip:true};const known=!!aiKnownSystem(a,nestSys);const out=run();return {...out,known};})()`);
   assert.ok(!r.skip);if(!r.known)assert.notEqual(r.target,r.nest,JSON.stringify(r));});
+test('T6 istihbarat BELLEĞİNDE olan ama şu an sensörde görünmeyen yuva av hedefi olmaz (uzak sefere çekilmez)',()=>{
+  const h=prizeWorld();const r=J(h,`(()=>{if(!nestSys)return {skip:true};AI_VIEW_CACHE.delete(a);const vis=aiView(a).ctx.visible.has(nestSys.id);if(vis)return {skip:'görünür'};
+   a.aiIntel=a.aiIntel||{v:1,systems:{},powers:{}};a.aiIntel.systems[nestSys.id]={owner:-1,defense:sysDefense(nestSys),colonies:0,capital:false,day:G.day-10};AI_VIEW_CACHE.delete(a);
+   const known=!!aiKnownSystem(a,nestSys),visible=aiView(a).ctx.visible.has(nestSys.id);const out=run();return {...out,known,visible};})()`);
+  if(r.skip)return;assert.equal(r.known,true,'bellekte');assert.equal(r.visible,false);assert.notEqual(r.target,r.nest,JSON.stringify(r));});
 console.log('GEÇEN: '+pass+' KALAN: '+fail);process.exitCode=fail?1:0;

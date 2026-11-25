@@ -1,5 +1,5 @@
 // node camp.cjs <kök> <tohum> <ay> <çıkış.json>   [CAMP_SIZE=ulu CAMP_AI=9 · CAMP_TENSION=calkantili · CAMP_RIVALS=<preset> · PLACEBO_DAY=<gün>]
-// FED-AI-SİYASET.0 kampanya ölçümü: federasyon siyaseti + diplomatik temas / keşif + jointOps hunisi. Dünyaya yazmaz, RNG çekmez:
+// FED-AI-SİYASET.0 kampanya ölçümü (contact = yaşayan AI çiftleri; contact0 = yalnız kurucu AI'lar arası — ayrılıkçı yeni devlet herkesle temasla doğar; born = sonradan doğan devlet): federasyon siyaseti + diplomatik temas / keşif + jointOps hunisi. Dünyaya yazmaz, RNG çekmez:
 // sarmalayıcılar sayar; saf tanı hesapları fedFoundRead içinde (alt çizgili önbellekler geri konur) ve her ay RND_STATE / Save8 SHA kaydedilir.
 const fs=require('fs'),path=require('path'),crypto=require('crypto');const {runtime}=require(path.resolve(__dirname,'../../tests/helpers/runtime'));
 const [root,seed,months,out]=process.argv.slice(2);const h=runtime({root:path.resolve(root)});
@@ -46,17 +46,19 @@ if(typeof aiFedMemberReform==='function'){const f=aiFedMemberReform;aiFedMemberR
    if(!ctx){const same=(G.warLedger.fronts||[]).filter(x=>x.campaign===front.campaign&&x.ended===null).flatMap(x=>x.sides.filter((id,j)=>x.roles[j]===front.roles[i]&&id!==sp));
     inc(C.joint.ctxNone,!same.length?'tek-basina':same.some(id=>jointBinding(G.emps[sp],G.emps[id]))?'bagli-ama-cephe-yok':'muttefik-taraf-bagsiz');}}}});
   return f.apply(this,arguments);};}
+C.wild={battles:0,aiWin:0,aiLoss:0};{const f=battleReportFinish;battleReportFinish=function(r,winner){if(!r.done){const ea=G.emps[r.a],eb=G.emps[r.b];const ai=ea&&!ea.wild&&ea.ai?0:eb&&!eb.wild&&eb.ai?1:-1,w=ai===0?eb:ai===1?ea:null;
+ if(ai>=0&&w&&w.wild){C.wild.battles++;if(winner===(ai===0?r.a:r.b))C.wild.aiWin++;C.wild.aiLoss+=r.loss[ai];}}return f.apply(this,arguments);};}
 if(PL!==null){const mt=monthTick;monthTick=function(){if(G.day>=PL&&!globalThis.__pl){globalThis.__pl=true;rnd();}return mt.apply(this,arguments);};}
-C.prize.nests0=(G.nests||[]).length;C.prize.ruins0=(G.ruins||[]).length;
+var FOUND=new Set(G.emps.filter(e=>e.ai&&!e.wild&&!e.crisisSide).map(e=>e.id)),EMP0=G.emps.length;C.prize.nests0=(G.nests||[]).length;C.prize.ruins0=(G.ruins||[]).length;
 function snap(){const ais=G.emps.filter(e=>e.ai&&!e.dead&&!e.wild&&!e.crisisSide);const feds=(G.feds||[]).filter(f=>f.members.length);
  const aiIn=f=>f.members.filter(id=>G.emps[id]&&G.emps[id].ai&&!G.emps[id].dead).length;const sizes=feds.map(aiIn).sort((a,b)=>b-a);
  for(const f of feds){if(C.leaders[f.id]!==undefined&&C.leaders[f.id]!==f.leader)C.leaderChanges++;C.leaders[f.id]=f.leader;}
- let pairs=0,cont=0;for(const a of ais)for(const b of ais)if(a!==b){pairs++;if(a.contact[b.id])cont++;}
+ let pairs=0,cont=0,p0=0,c0=0;for(const a of ais)for(const b of ais)if(a!==b){pairs++;if(a.contact[b.id])cont++;if(FOUND.has(a.id)&&FOUND.has(b.id)){p0++;if(a.contact[b.id])c0++;}}
  return {m:Math.floor(G.day/30),ais:ais.length,feds:feds.map(f=>({id:f.id,t:f.type,n:aiIn(f),age:Math.floor((G.day-f.founded)/30)})),largest:ais.length?+(sizes[0]||0)/ais.length:0,second:ais.length?+(sizes[1]||0)/ais.length:0,
-  indep:ais.filter(e=>!findFed(e)).length,contact:pairs?+(cont/pairs).toFixed(3):0,surv:+(ais.reduce((n,e)=>n+G.sys.filter(s=>s.surv.includes(e.id)).length,0)/Math.max(1,ais.length)/G.sys.length).toFixed(3),
+  indep:ais.filter(e=>!findFed(e)).length,contact:pairs?+(cont/pairs).toFixed(3):0,contact0:p0?+(c0/p0).toFixed(3):0,born:G.emps.slice(EMP0).filter(e=>!e.wild&&!e.crisisSide).length,surv:+(ais.reduce((n,e)=>n+G.sys.filter(s=>s.surv.includes(e.id)).length,0)/Math.max(1,ais.length)/G.sys.length).toFixed(3),
   nests:(G.nests||[]).filter(id=>G.sys[id]&&G.sys[id].nest).length,ruins:(G.ruins||[]).length,wars:(G.warLedger?.fronts||[]).filter(f=>f.ended===null).length,
-  dead:G.emps.filter(e=>e.ai&&e.dead&&!e.wild&&!e.crisisSide).length,cols:ais.reduce((n,e)=>n+e.colonies.length,0)};}
-var __m=()=>{const m=Math.floor(G.day/30);let g=0;while(Math.floor(G.day/30)<=m&&g++<200){G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);if(Math.floor(G.day/30)>m)monthTick();}const s=snap();if(s.m%12===0)C.snap.push(s);else for(const f of (G.feds||[]))C.leaders[f.id]=C.leaders[f.id]??f.leader;};`);
+  dead:G.emps.filter(e=>e.ai&&e.dead&&!e.wild&&!e.crisisSide).length,power:Math.round(ais.reduce((n,e)=>n+totalPower(e),0)),ships:G.fleets.filter(f=>ais.some(e=>e.id===f.e)).reduce((n,f)=>n+f.ships.length,0),wildLoss:C.wild.aiLoss,cols:ais.reduce((n,e)=>n+e.colonies.length,0)};}
+var __m=()=>{const m=Math.floor(G.day/30);let g=0;while(Math.floor(G.day/30)<=m&&g++<200){G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);if(Math.floor(G.day/30)>m)monthTick();}const s=fedFoundRead(snap);if(s.m%12===0)C.snap.push(s);else for(const f of (G.feds||[]))C.leaders[f.id]=C.leaders[f.id]??f.leader;};`);
 const sha=()=>crypto.createHash('sha256').update(h.run('serialize()')).digest('hex').slice(0,16);
 const t0=Date.now(),hashes=[];for(let m=1;m<=+months;m++){h.run('__m()');hashes.push(sha()+':'+h.run('RND_STATE'));}
 const r=JSON.parse(h.run('(()=>{const st=C.stay.conflict.slice().sort((a,b)=>a-b);C.stay.conflictQ=st.length?[st[0],st[Math.floor(st.length*.25)],st[Math.floor(st.length*.5)],st[Math.floor(st.length*.75)],st[st.length-1]]:[];delete C.stay.conflict;return JSON.stringify(C);})()'));

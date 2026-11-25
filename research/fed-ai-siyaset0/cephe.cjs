@@ -10,13 +10,16 @@ h.run(`resetSetupNaming();Object.assign(CFG,{seed:${+seed},size:SIZE,aiCount:AIS
 var D={declare:{},fedAttack:{calls:0,noFed:0,noDuty:0,cutoff:0,duty:0},fedSkip:{},fedJoin:0,vasProtect:{},multi:{campaigns:0,ctx:0,ctxMembers:[]},pairs:[]};
 const inc=(o,k,n=1)=>o[k]=(o[k]||0)+n;
 {const f=declareWar;declareWar=function(a,b,o){if(a&&b&&!a.war?.[b.id]&&!b.wild&&!a.wild)inc(D.declare,(o&&o.kind)||'ilan');return f.apply(this,arguments);};}
-{const f=fedDefend;fedDefend=function(att,vic){D.fedAttack.calls++;const fd=findFed(vic);
-  if(!fd)D.fedAttack.noFed++;else if(!fedDuty(fd,'defense'))D.fedAttack.noDuty++;else{const fr=warLedgerFind(att.id,vic.id);if(fd.defenseFrontCutoff&&(!fr||fr.id<fd.defenseFrontCutoff))D.fedAttack.cutoff++;else{D.fedAttack.duty++;
-   for(const id of fd.members){if(id===vic.id)continue;const m=G.emps[id];let k;
-    if(!m||m.dead)k='olu';else if(m.war[att.id])k='zaten-savasta';else if(m.ally[att.id])k='saldirganin-muttefiki';else if(m.id===att.id)k='saldirgan-uye';
-    else{const g=fedSupportGate(m,att,false);if(!g.ok)k='kapi:'+String(g.why||'?').replace(/[0-9.,]+/g,'#').slice(0,50);
-     else if(m.ai&&typeof aiDefenseShirk==='function'&&fedFoundRead(()=>aiDefenseShirk(m,att,vic,fd)))k='ai-kacinma';else k='katilir';}
-    inc(D.fedSkip,k);}}}}
+{const f=fedDefend;
+ const why=(att,vic,fd,m)=>{if(!m||m.dead)return 'olu';if(m.war[att.id])return 'zaten-savasta';if(m.ally[att.id])return 'saldirganin-muttefiki';if(m.id===att.id)return 'saldirgan-uye';
+  const g=fedSupportGate(m,att,false);if(!g.ok)return 'kapi:'+String(g.why||'?').replace(/[0-9.,]+/g,'#').slice(0,50);
+  if(m.ai&&typeof aiDefenseShirk==='function'&&fedFoundRead(()=>aiDefenseShirk(m,att,vic,fd)))return 'ai-kacinma';return 'katilir';};
+ fedDefend=function(att,vic){D.fedAttack.calls++;const fd=findFed(vic);
+  if(!fd)D.fedAttack.noFed++;
+  else if(!fedDuty(fd,'defense'))D.fedAttack.noDuty++;
+  else{const fr=warLedgerFind(att.id,vic.id);
+   if(fd.defenseFrontCutoff&&(!fr||fr.id<fd.defenseFrontCutoff))D.fedAttack.cutoff++;
+   else{D.fedAttack.duty++;for(const id of fd.members)if(id!==vic.id)inc(D.fedSkip,why(att,vic,fd,G.emps[id]));}}
   const before=G.emps.filter(m=>m.war[att.id]).length;const r=f.apply(this,arguments);D.fedJoin+=G.emps.filter(m=>m.war[att.id]).length-before;return r;};}
 var __m=()=>{const m=Math.floor(G.day/30);let g=0;while(Math.floor(G.day/30)<=m&&g++<200){G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);if(Math.floor(G.day/30)>m)monthTick();}
  fedFoundRead(()=>{const fr=(G.warLedger?.fronts||[]).filter(f=>f.ended===null&&warLedgerPair(...f.sides));const by={};
