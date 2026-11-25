@@ -1,14 +1,14 @@
 {
-  "phase": "SAVAS-DESTEK-AI.0",
-  "build": "96h10p55",
+  "phase": "FED-AI-SIYASET.0",
+  "build": "96h10p56",
   "scope": "github-runtime-only",
   "save_version": 8,
-  "pwa_cache": "stars-v96h10p55",
-  "parent_commit": "5aefe561e790d6b2adc18b7958ec08d3a63fac82",
-  "parent_zip_sha256": "c5f1b5b468cd68cbcd211089511a0fd1079923448dfb1e4887698be11325f5e5",
+  "pwa_cache": "stars-v96h10p56",
+  "parent_commit": "914c00310200bbda97abdcecab56934fccbd7cf3",
+  "parent_zip_sha256": "d3299990d0d555ce7f9901e3553e1ec5952106394e50e9c4b7ac18a8da678e52",
   "file_count": 19,
   "files": {
-    "ai.js": "faec6c3be6dc39f4bf97a2b188c53ffcdbad921faaac5a86712293a17b0b55d5",
+    "ai.js": "2fd965e16eabaf50098302eaefcc3e853d52be52546de2e62d2159428865d911",
     "archive-ui.js": "ef7e3dc5288f8951008905dca273eef7b29fb8c711513bc33fca3bcb7b79766a",
     "audio.js": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
     "combat.js": "08971a0bd1b67f6d3dab1a24a0c3dc9d0bcb045c00c29c01735be9fd083be2d6",
@@ -21,12 +21,12 @@
     "economy.js": "ca9b6429fdce59e88559b84a7985cb7a610f846f3db7faca6c809c85fab66c76",
     "inbox.js": "9d1f0688aac18d1b9db00fad41ef66e30080467783dd69cd52160e5d19ee51b7",
     "index.html": "64f786fd5a1c50cc4b61bad85a4e4b40c8c42d50a7679e2b8f63d174ae60ba47",
-    "main.js": "b8cd616a5dd1a65ba22a843cbfb1ffe0ce6cb2ad21235e4dfacb0a30bdbc9096",
+    "main.js": "cb0fec9685e5c2b988b0f3433edd6ec7a7004ff5f823648178e5535bce71dda5",
     "manifest.json": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
     "map.js": "4c814aa209836f5166f5718fede6045faf920f841f3b34681f0cb5209d5d888f",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
-    "sw.js": "1575d0298b3751f2549990cdb447c31086d4b2c79d58bbe35cc0bd26171fa88c",
+    "sw.js": "c1c0e468f8e780da55ceae26e44f870dbba22692ebd6035c7d0e70514e38cf8c",
     "ui.js": "fbf971a71b9294edcf50d2c95e57ab0f7baee0b0b027561ac49bb7f1c74532d5"
   },
-  "description": "TİCARET-SON-EKSİKLER.0: insan sahipli çok taraflı transit onayı, liman izni yenileme (son 60 gün, bitişten uzar), süre uyarıları, AI yenileme isteği; MP komutları ve ayna."
+  "description": "FED-AI-SİYASET.0: federasyonda AI üye sesi (mevcut reform önergesi) ve anayasal çıkış (çözülemeyen tür uyumsuzluğu, alternatif blok), reform oyunda iyi niyet tavanı, ayrıldığı birliğe dönmeme; barış ödül avı sensörle görülen yuva/kalıntıları da hedefler."
 }
