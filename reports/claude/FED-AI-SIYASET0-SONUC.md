@@ -1,6 +1,6 @@
 # FED-AI-SİYASET.0 — Sonuç raporu
 
-Tarih: 25 Kasım 2026 · Dal `claude/stars-fed-ai-siyaset0` · taban `claude/stars-savas-destek-ai0` @ `914c003` (p55, PR #80)
+Tarih: 25 Kasım 2026 · Dal `claude/stars-fed-ai-siyaset0` · taslak PR #81 (https://github.com/sarsiss12-dot/Star/pull/81) · taban `claude/stars-savas-destek-ai0` @ `914c003` (p55, PR #80)
 Yayın adayı: **96h10p56 / stars-v96h10p56 / MP.8.9b55** · Save8 v8 (şema değişmedi, yeni alan yok) · MP paket 4 · protokol 1.
 Kullanıcı fiziksel test yapamıyor; bütün kabul otomatik (Node + gerçek Chromium + üretim relay süreci + TLS vekili).
 Fiziksel Android, gerçek uzak internet, LAN ve canlı Render: **NOT RUN**.

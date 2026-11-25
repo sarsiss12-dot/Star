@@ -6,7 +6,7 @@ Güncelleme: 25 Kasım 2026
 
 | Dal | Durum |
 |---|---|
-| `claude/stars-fed-ai-siyaset0` | **p56 / MP.8.9b55 — en güncel yayın adayı** (taslak PR, taban `claude/stars-savas-destek-ai0`) |
+| `claude/stars-fed-ai-siyaset0` | **p56 / MP.8.9b55 — en güncel yayın adayı** (taslak PR #81, taban `claude/stars-savas-destek-ai0`) |
 | `claude/stars-savas-destek-ai0` | p55 / MP.8.9b54 (PR #80), geri dönüş |
 
 - Render için `claude/stars-fed-ai-siyaset0`. main ve canlı Render değiştirilmedi.

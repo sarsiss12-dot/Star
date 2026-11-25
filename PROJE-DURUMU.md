@@ -4,7 +4,7 @@ Son güncelleme: 2026-11-25 (FED-AI-SİYASET.0). Depo `sarsiss12-dot/Star`.
 
 ## Güncel geliştirme adayı — p56 (FED-AI-SİYASET.0) · federasyonda ses ve çıkış, keşif geçidi
 
-`claude/stars-fed-ai-siyaset0` (p55 üstünde, taslak PR). Oyun 96h10p56 / PWA stars-v96h10p56 / MP.8.9b55; Save8 v8 (şema değişmedi), paket 4, protokol 1. ZIP `releases/stars-faz96h10p56.zip` (SHA-256 `76afe9a1e1ea7fe7d53e63d26f020c3552c601a97fc361b194e45fc25389018b`, CRC32 `BF4AFEB4`). AI üye tür uyumsuzluğunda önce mevcut reform oyunu önerir, reddedilince ve alternatif varken anayasal yoldan ayrılır; tür uyumsuz birliğe katılmaz; reform oyunda doymuş iyi niyet kırıldı; geçidi tıkayan görünür yuva / kalıntı ödül avına girer. 15 hücrede en büyük blok −0,074 (t≈−2,2), çalkantı yok, koloni / filo / ölüm plasebo bandında. Tam Node 256 / 6.649 / 279 (yeni FAIL yok). Fiziksel Android / Render NOT RUN. Ayrıntı `reports/claude/FED-AI-SIYASET0-SONUC.md`.
+`claude/stars-fed-ai-siyaset0` (p55 üstünde, taslak PR #81). Oyun 96h10p56 / PWA stars-v96h10p56 / MP.8.9b55; Save8 v8 (şema değişmedi), paket 4, protokol 1. ZIP `releases/stars-faz96h10p56.zip` (SHA-256 `76afe9a1e1ea7fe7d53e63d26f020c3552c601a97fc361b194e45fc25389018b`, CRC32 `BF4AFEB4`). AI üye tür uyumsuzluğunda önce mevcut reform oyunu önerir, reddedilince ve alternatif varken anayasal yoldan ayrılır; tür uyumsuz birliğe katılmaz; reform oyunda doymuş iyi niyet kırıldı; geçidi tıkayan görünür yuva / kalıntı ödül avına girer. 15 hücrede en büyük blok −0,074 (t≈−2,2), çalkantı yok, koloni / filo / ölüm plasebo bandında. Tam Node 256 / 6.649 / 279 (yeni FAIL yok). Fiziksel Android / Render NOT RUN. Ayrıntı `reports/claude/FED-AI-SIYASET0-SONUC.md`.
 
 ## Önceki geliştirme adayı — p55 (SAVAŞ-DESTEK-AI.0) · daha akıllı savaş desteği
 
