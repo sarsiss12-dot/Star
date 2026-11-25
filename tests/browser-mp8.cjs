@@ -583,7 +583,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
     CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});
   if(SCEN==='L')await require('./helpers/fed-fleet0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
   if(SCEN==='D')await require('./helpers/mp-p0-desync1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin});
-  if(SCEN==='F')await require('./helpers/event-ux1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,guestGo});
+  if(SCEN==='F')await require('./helpers/event-ux1-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,guestGo,settle});
   if(SCEN==='E')await require('./helpers/event-ux0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors});
   if(SCEN==='P')await require('./helpers/mp-p0-soak.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,origin,guestGo,wait,tap,errors,design:DESIGNS});
 

@@ -7,7 +7,7 @@
    Her aşamada B, C (üye değil) ve host'ta görünür "kuruldu" kartları, kapanmış oy kartları ve yeni kartlar sayılır.
    FİKSTÜR (açıkça): host ile B arasında temas + ittifak, etki; önceki federasyon / kuruluş kayıtları temiz. Yerel Chromium; Render DEĞİL. */
 const fs=require('fs'),path=require('path');
-module.exports=async function({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,guestGo,getCode}){
+module.exports=async function({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,guestGo,getCode,settle}){
   const H=pg.H,M=metrics.ux1={phases:[]};let B=pg.B;const C=pg.C;
   const count=p=>p.evaluate(()=>({kur:G.inbox.filter(n=>!n.hidden&&n.kind==='fedfoundResult').length+[...document.querySelectorAll('#inbox .nInfo')].filter(e=>/kuruldu/i.test(e.textContent)).length,
     dom:[...document.querySelectorAll('#inbox .nCard')].map(e=>e.textContent.replace(/\s+/g,' ').trim().slice(0,70)),
@@ -88,8 +88,68 @@ module.exports=async function({test,pg,metrics,out,sleep,shot,assert,lanes,wait,
     assert.equal(sub,'Üyelik başvurusu — '+cName);assert.equal(sent-sent0,1,'tek fedReply komutu');});
 
   await test('F5 başkan değişimi: host (başkan) federasyondan ayrılır (gerçek leaveFederation) → B ve C\'de tek "Federasyon başkanı değişti" kartı; yeniden bağlanmada tekrar doğmaz',async()=>{
-    await H.evaluate(()=>{G.day+=1;leaveFederation(G.p);MP1Host.host.publish();});
-    for(const p of [B,C]){await synced(p);await p.waitForFunction(()=>[...document.querySelectorAll('#inbox .nInfo')].some(e=>/Federasyon başkanı değişti/.test(e.textContent)),undefined,{timeout:20000});}
+    const timeline=M.f5={start:Date.now(),guests:{}};
+    const before=await settle('f5-uyelik');
+    const former=await H.evaluate(()=>({id:G.feds[0].id,leader:G.feds[0].leader,members:G.feds[0].members.slice()}));
+    assert.equal(former.leader,0);
+    assert([before.B.e,before.C.e].every(id=>former.members.includes(id)));
+    for(const [name,p] of [['B',B],['C',C]]){
+      await wait(p,({fid,rev,e})=>{
+        const S=MP6Stars.S,f=findFed(G.p);
+        // Host empire 0 is represented by the guest's original empire ID in its mirror.
+        return S.appliedRev>=rev&&S.appliedGeneration===S.gen&&f?.id===fid&&f.leader===e&&UI._instInfo?.lead.get(fid)===e;
+      },{fid:former.id,rev:before[name].rev,e:before[name].e});
+      timeline.guests[name]=await p.evaluate(()=>{
+        const matches=()=>[...document.querySelectorAll('#inbox .nInfo')].filter(x=>x.textContent.includes('Federasyon başkanı değişti'));
+        const trace=globalThis.__f5Trace={start:Date.now(),oldRev:MP6Stars.S.appliedRev,card:null,packets:[]};
+        MP1Join.ws.addEventListener('message',event=>{
+          const raw=String(event.data),start=raw.indexOf('{');
+          if(start<0)return;
+          const packet=JSON.parse(raw.slice(start));
+          if(packet.type==='mirror'||packet.type==='mirrorDelta')trace.packets.push({at:Date.now(),rev:packet.rev});
+        });
+        const observer=new MutationObserver(()=>{
+          const card=matches()[0];if(card&&!trace.card)trace.card={at:Date.now(),id:card.dataset.x,text:card.textContent.trim()};
+        });
+        observer.observe(document.getElementById('inbox'),{childList:true,subtree:true,characterData:true,attributes:true});
+        return {start:trace.start,oldRev:trace.oldRev,cards:matches().length};
+      });
+      assert.equal(timeline.guests[name].cards,0,'başkan değişmeden kart yok');
+    }
+    timeline.host=await H.evaluate(({fid,ids})=>{
+      const ws=MP1Host.ws,send=ws.send;
+      const actors=new Map([...MP1Host.host.state.players.values()].filter(p=>ids.includes(p.empireId)).map(p=>[p.conn,p.empireId]));
+      const packets=globalThis.__f5Packets=[];
+      ws.send=function(raw){
+        const newline=raw.indexOf('\n'),e=actors.get(raw.slice(1,newline));
+        if(raw[0]==='T'&&e!==undefined){
+          const packet=JSON.parse(raw.slice(newline+1));
+          if(packet.type==='mirror'||packet.type==='mirrorDelta')packets.push({e,at:Date.now(),rev:packet.rev});
+        }
+        return send.call(this,raw);
+      };
+      G.day+=1;const t=Date.now(),r=leaveFederation(G.p),f=G.feds.find(x=>x.id===fid);
+      const publishAt=Date.now();MP1Host.host.publish();
+      return {ok:r.ok,at:t,publishAt,leader:f?.leader,day:G.day};
+    },{fid:former.id,ids:[before.B.e,before.C.e]});
+    assert(timeline.host.ok&&Number.isInteger(timeline.host.leader)&&timeline.host.leader!==former.leader,'gerçek başkan değişti');
+    try{
+      const mirrors=await settle('f5-baskan');
+      for(const [name,p] of [['B',B],['C',C]]){
+        const e=before[name].e,expected=timeline.host.leader===e?0:timeline.host.leader;
+        timeline.guests[name].query=Date.now();
+        await wait(p,({expected,rev})=>MP6Stars.S.appliedRev>=rev&&MP6Stars.S.appliedGeneration===MP6Stars.S.gen&&findFed(G.p)?.leader===expected,{expected,rev:mirrors[name].rev},20000);
+        await wait(p,()=>[...document.querySelectorAll('#inbox .nInfo')].some(e=>/Federasyon başkanı değişti/.test(e.textContent)),undefined,20000);
+      }
+    }finally{
+      timeline.sent=await H.evaluate(()=>{delete MP1Host.ws.send;return globalThis.__f5Packets;});
+      for(const [name,p] of [['B',B],['C',C]])timeline.guests[name].end=await p.evaluate(()=>({
+        trace:globalThis.__f5Trace,applied:MP6Stars.S.appliedRev,received:MP6Stars.S.rev,
+        appliedAt:MP6Stars.S.sync.applyAt,leader:findFed(G.p)?.leader,lead:[...(UI._instInfo?.lead||[])],
+        cards:[...document.querySelectorAll('#inbox .nInfo')].map(e=>e.textContent)
+      }));
+      console.log('  F5 zaman çizelgesi '+JSON.stringify(timeline));
+    }
     const n=p=>p.evaluate(()=>[...document.querySelectorAll('#inbox .nInfo')].filter(e=>/Federasyon başkanı değişti/.test(e.textContent)).length);
     assert.equal(await n(B),1);assert.equal(await n(C),1);await shot(C,'f5-c-leader-card');
     await lanes.C.down();await sleep(2500);await lanes.C.up();await C.waitForFunction(()=>MP1Join.ws&&MP1Join.ws.readyState===1&&MP1Join.hostOnline&&MP6Stars.S.appliedRev===MP6Stars.S.rev,undefined,{timeout:40000,polling:250});

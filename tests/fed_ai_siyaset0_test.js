@@ -14,7 +14,7 @@
    T6  istihbarat belleğinde olan ama şu an sensörde görünmeyen yuva av hedefi olmaz */
 const assert=require('assert/strict'),path=require('path');const {runtime}=require('./helpers/runtime');
 const ROOT=process.env.STARS_ROOT?path.resolve(process.env.STARS_ROOT):path.resolve(__dirname,'..');
-let pass=0,fail=0;function test(n,fn){try{fn();pass++;console.log('✓ '+n);}catch(e){fail++;console.log('✗ '+n+' — '+String(e&&e.message||e).split('\n')[0]);}}
+let pass=0,fail=0;function test(n,fn){try{fn();pass++;console.log('✓ '+n);}catch(e){fail++;console.log('✗ '+n+' — '+String(e&&(e.stack||e.message)||e));}}
 const J=(h,x)=>JSON.parse(h.run('JSON.stringify('+x+')'));
 function world(O={}){const h=runtime({root:ROOT});h.sb.OPT=JSON.stringify(O);h.run(`resetSetupNaming();Object.assign(CFG,{seed:22,size:'orta',aiCount:5,pirates:true});setupGame({...CFG});G.autoSave=false;
  var OPT=JSON.parse(OPT),ais=G.emps.filter(o=>o.ai&&!o.dead&&!o.wild&&!o.crisisSide&&!isPurifier(o)),L=ais[0],A=ais[1],B=ais[2],C=ais[3],X=ais[4]||null;
@@ -98,4 +98,27 @@ test('T6 istihbarat BELLEĞİNDE olan ama şu an sensörde görünmeyen yuva av 
    a.aiIntel=a.aiIntel||{v:1,systems:{},powers:{}};a.aiIntel.systems[nestSys.id]={owner:-1,defense:sysDefense(nestSys),colonies:0,capital:false,day:G.day-10};AI_VIEW_CACHE.delete(a);
    const known=!!aiKnownSystem(a,nestSys),visible=aiView(a).ctx.visible.has(nestSys.id);const out=run();return {...out,known,visible};})()`);
   if(r.skip)return;assert.equal(r.known,true,'bellekte');assert.equal(r.visible,false);assert.notEqual(r.target,r.nest,JSON.stringify(r));});
+function reloadPolitics(h){
+ const result=J(h,`(()=>{
+  const ids={a:A.id,b:B.id,l:L.id,c:C.id,f:F.id},rng=RND_STATE;
+  const read=()=>({ask:A._fedReformAsk||null,left:A._fedLeft||null,strain:A._fedStrain??null,
+   until:A._fedLeaveUntil??null,etk:A.res.etk,vote:F.vote,lastVote:F.lastVote||null,member:F.members.includes(A.id)});
+  const before=read(),raw=serialize();if(!deserialize(raw))return {loaded:false};
+  A=G.emps[ids.a];B=G.emps[ids.b];L=G.emps[ids.l];C=G.emps[ids.c];F=G.feds.find(f=>f.id===ids.f);
+  return {loaded:true,rng:rng===RND_STATE,before,after:read()};
+ })()`);
+ assert.equal(result.loaded,true);assert.equal(result.rng,true);
+ assert.deepEqual(result.after,result.before);
+ return result.after;
+}
+test('F11 ayrılık Save8’de korunur, aynı tür reddedilir ve tür değişince normal kapı değerlendirilir',()=>{
+ const h=world({});
+ assert.equal(review(h,'A',30).left,true);
+ assert.ok(reloadPolitics(h).left);
+ h.run('G.day+=1800');
+ assert.equal(h.run('aiFedLeftRecently(A,F)&&!aiFedWilling(A,B,F.type,F).ok'),true);
+ h.run('F.type=aiFedType(A)');
+ assert.equal(h.run('aiFedLeftRecently(A,F)||aiFedDoctrineBar(A,F)'),false);
+ assert.doesNotMatch(h.run('aiFedWilling(A,B,F.type,F).why||""'),/doktrinle uyumsuz/);
+});
 console.log('GEÇEN: '+pass+' KALAN: '+fail);process.exitCode=fail?1:0;

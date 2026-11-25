@@ -13,9 +13,9 @@ test('M1 AI üye reform önergesi: oylama insan başkanın oyunu bekler, AI insa
   const m=J(h,'aiFedMismatch(G.emps[2],F)');assert.ok(m&&m.plausible,'fikstür: AI 2 uyumsuz ve destekli '+JSON.stringify(m));
   assert.equal(h.run('aiFedMemberReform(G.emps[2],F)'),true,'AI üye önerge açtı');
   const v=J(h,'F.vote&&{motion:F.vote.motion,type:F.vote.type,votes:F.vote.votes||null}');assert.ok(v&&v.motion==='reform'&&v.type==='yagmaci','açık reform oylaması '+JSON.stringify(v));
-  assert.equal(h.run('!!(F.vote.votes&&F.vote.votes[1]!==undefined)'),false,'insan başkan adına oy yazılmadı');
+  assert.equal(h.run('F.vote.yes.includes(1)||F.vote.no.includes(1)'),false,'insan başkan adına oy yazılmadı');
   const left=h.run('Number.isFinite(F.vote.expires)?F.vote.expires-G.day:999');for(let i=0;i<3;i++)h.run('G.day+='+Math.max(1,Math.floor((left-2)/3))+';aiFederationPolitics();');
-  assert.equal(h.run('!!F.vote&&F.vote.motion==="reform"'),true,'insan oyu gelmeden (süre içinde) oylama kapanmadı');assert.equal(h.run('!!(F.vote.votes&&F.vote.votes[1]!==undefined)'),false);
+  assert.equal(h.run('!!F.vote&&F.vote.motion==="reform"'),true,'insan oyu gelmeden (süre içinde) oylama kapanmadı');assert.equal(h.run('F.vote.yes.includes(1)||F.vote.no.includes(1)'),false);
   const r=cmd(h,'B',{kind:'fedVote',fed:h.run('F.id'),token:h.run('fedVoteToken(F.vote)'),yes:false});assert.equal(r.status,'ok',JSON.stringify(r));
   if(h.run('!!F.vote'))h.run('fedResolveVote(F)');
   assert.equal(h.run('F.type'),'bilimsel','reform reddedildi (%75 yok)');assert.equal(h.run('!!F.reform'),false);
@@ -30,4 +30,19 @@ test('M3 AI üyenin anayasal ayrılışı yalnız kendisini çıkarır: insan ba
   h.run('leaveFederation(G.emps[2]);');
   assert.deepEqual(J(h,'F.members'),[1,3]);assert.equal(h.run('F.leader'),1);assert.equal(h.run('G.feds.includes(F)'),true);assert.deepEqual(J(h,'F.fund'),fund0);
   assert.equal(h.run('findFed(G.emps[1])===F&&findFed(G.emps[3])===F'),true);});
+test('M4 bekleyen reform ve ret, Save8 sonrası aynı oy, Etki ve bekleme ile sürer',()=>{
+ const h=world();h.run(MK+`var F=mk('bilimsel',[1,2,5],1);
+  var fid=F.id;G.emps[2]._fedStrain=4;
+  function politics(){const f=G.feds.find(f=>f.id===fid),a=G.emps[2];return [f.vote,f.lastVote||null,a._fedReformAsk,a._fedStrain,a.res.etk,RND_STATE];}
+  function reload(){const raw=serialize();if(!deserialize(raw))throw Error('Save8');F=G.feds.find(f=>f.id===fid);}
+ `);
+ assert.equal(h.run('aiFedMemberReform(G.emps[2],F)'),true);
+ assert.equal(h.run('F.vote.motion'), 'reform');
+ const before=J(h,'politics()'); h.run('reload()'); assert.deepEqual(J(h,'politics()'),before);
+ assert.equal(h.run('fedVoteCounts(F).waiting.includes(1)'),true);
+ assert.equal(cmd(h,'B',{kind:'fedVote',fed:h.run('fid'),token:h.run('fedVoteToken(F.vote)'),yes:false}).status,'ok');
+ assert.equal(h.run('F.lastVote.passed'),false);
+ const rejected=J(h,'politics()');h.run('reload()');assert.deepEqual(J(h,'politics()'),rejected);
+ assert.equal(h.run('aiFedMismatch(G.emps[2],F).unresolved&&aiFedMemberReform(G.emps[2],F)===false'),true);
+});
 console.log(`GEÇEN: ${pass} KALAN: ${fail}`);if(fail)process.exitCode=1;
