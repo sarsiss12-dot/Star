@@ -2094,13 +2094,13 @@ function aiTurn(e){
       if (f.path.length || f.mv) continue;
       const pw = fleetPower(f);
       if (pw > 900 && rnd() < .35){
-        const prizes = [];
+        const prizes = [], seenNow = aiView(e).ctx.visible;
         for (const sy of G.sys){
           /* FED-AI-SİYASET.0: yalnız filonun girdiği (seen) değil, şu an AI'ın SENSÖRÜYLE GÖRÜLEN yuva ve kalıntılar da. Keşif gemileri
              yuva/kalıntıya girmediği için geçidi tıkayan hedefler hiç "seen" olmuyor, av listesine giremiyordu (p55: 100/9 t11 120. ayda AI'ların
              keşfedilmemiş 61–81 sisteminin tamamı yalnız yuva/kalıntı üstünden erişilebilir). İstihbarat BELLEĞİNDEKİ (artık görünmeyen, uzak)
              hedefler bilerek dışarıda: o varyant 500/16'da filoları uzun seferlere çekti, filo gücü plasebo ortalamasının ~%12 altında kaldı. */
-          if (!sy.seen.includes(e.id) && !aiView(e).ctx.visible.has(sy.id)) continue;
+          if (!sy.seen.includes(e.id) && !seenNow.has(sy.id)) continue;
           if (sy.nest && sy.nest.hp > 0 && pw > sy.nest.hp * .35) prizes.push(sy);
           else if (sy.ruin && sy.ruin.hp > 0 && pw > sy.ruin.hp * .55) prizes.push(sy);
         }
