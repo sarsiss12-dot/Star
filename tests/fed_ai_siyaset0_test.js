@@ -70,6 +70,11 @@ test('F7 tür reformu oyu doktrine göre: aynı türü tercih eden üye evet, ka
 test('F6 ekonomik krizdeki üye pahalı yasaya (ortak donanma) gerekçeli düşük oy verir',()=>{
   const h=world({type:'askeri'});const r=J(h,`(()=>{const v={kind:'inner',law:'ortakDon',proposer:B.id};const a=aiFedVoteAssessment(A,F,v).score;A.res.ene=1;A.res.ala=1;A.inc={...(A.inc||{}),ene:-40,ala:-20};const b=aiFedVoteAssessment(A,F,v);return {a:+a.toFixed(2),b:+b.score.toFixed(2),f:b.factors.map(x=>x.n).join(' | ')};})()`);
   assert.ok(r.b<r.a,JSON.stringify(r));assert.match(r.f,/ekonomik|bütçe/i);});
+test('F9 katılım kapısı: türü doktrinle uyumsuz ve reform desteği olmayan birliğe AI katılmaz (davet / kabul oyu / başvuru aynı aiFedWilling); destek varsa katılabilir',()=>{
+  const h=world({members:['B','C'],leader:'B'});
+  const x=J(h,`(()=>{const bar=aiFedDoctrineBar(A,F),w=aiFedWilling(A,B,F.type,F);return {bar,ok:w.ok,why:w.why,gap:+(aiFedAffinity(A,aiFedType(A))-aiFedAffinity(A,F.type)).toFixed(2)};})()`);
+  assert.ok(x.gap>=.35,'fikstür: A uyumsuz '+JSON.stringify(x));assert.equal(x.bar,true);assert.equal(x.ok,false);assert.match(x.why,/doktrinle uyumsuz/);
+  const y=J(h,`(()=>{F.members.push(L.id);return {bar:aiFedDoctrineBar(A,F)};})()`);assert.equal(y.bar,false,'L de aynı türü tercih ediyor: 2/4 destek → katılabilir (sonra reform önerir)');});
 test('T1 fiziksel varış temas kurar (arrive); T2 keşfedilmemiş uzak devletle temas yok',()=>{
   const h=runtime({root:ROOT});h.run(`resetSetupNaming();Object.assign(CFG,{seed:22,size:'orta',aiCount:5});setupGame({...CFG});G.autoSave=false;`);
   const r=J(h,`(()=>{const ais=G.emps.filter(o=>o.ai&&!o.dead&&!o.wild),a=ais[0],b=ais[1],c=ais[2];const before=!!a.contact[b.id];const f=newFleet(a,a.home,[{c:'kor'}],'t');f.sys=b.home;arrive(f,G.sys[b.home]);

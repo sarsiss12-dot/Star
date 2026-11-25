@@ -671,7 +671,7 @@ function aiStrategicDiplomacy(e){
  if(kind==='pact'&&e.pact?.[o.id]||kind==='ally'&&e.ally[o.id]||kind==='nap'&&(e.ally[o.id]||e.nap?.[o.id]>G.day))return false;
  (e.aiTalk||(e.aiTalk={})).strategy={until:G.day+180,reason:p.reason};
  let applied=false,pending=false;
- if(kind==='federation'){const q=requestFederation(e,o);applied=!!q.ok;}
+ if(kind==='federation'){const fo=findFed(o);if(fo&&!aiFedWilling(e,o,fo.type,fo).ok)return false;const q=requestFederation(e,o);applied=!!q.ok;}   /* FED-AI-SİYASET.0: katılım kapısı */
  else {const terms=aiProposeTerms(e,o,kind);if(!terms)return false;
   if(o.id===0)pending=!!UI.aiOffer({from:e.id,to:o.id,...terms});
   else applied=!!aiNegotiate(e,o,terms.give,terms.want,true).uygulandi;
@@ -4997,6 +4997,10 @@ function aiFedAdmissionScore(e,other,type,f=null){
 }
 function aiFedWilling(e,founder,type,f=null,ballot=null,founders=null,threat=0){
  if(!e||!founder||e.dead||e.wild||e.crisisSide||isPurifier(e)||isVassal(e)||!e.contact[founder.id]||e.war[founder.id]||(e._fedLeaveUntil||0)>G.day)return {ok:false,why:'Siyasi koşullar uygun değil'};
+ /* FED-AI-SİYASET.0: var olan bir birliğe (f.id) katılım — başvuru, davet, kabul oyu sonrası kabul ve "yaşayabilir alternatif" aynı kapıdan geçer.
+    Ayrılık kuralıyla aynı ölçüt: türü doktrinle uyumsuz ve reform desteği olmayan birliğe katılmaz (katıl → 2 yıl → ayrıl çalkantısı); tür
+    uyumsuzluğuyla ayrıldığı birliğe türü değişmedikçe dönmez. Kuruluş (f.id yok) ve insan değişmez. */
+ if(e.ai&&f&&f.id&&(aiFedLeftRecently(e,f)||aiFedDoctrineBar(e,f)))return {ok:false,why:'Birliğin türü doktrinle uyumsuz; reform desteği yok'};
  const rel=e.rel[founder.id]||0;if(rel<15-threat*50||trustOf(e,founder.id)<-35)return {ok:false,why:'Güven veya ilişki yetersiz'};   // BETA-RIVAL-BLOCS.0: ortak tehdit (yalnız kuruluşta, varsayılan 0) eşiği gevşetir
  let eta=Infinity;const home=G.sys[e.home];
  const targets=aiKnownSystems(e,founder.id).sort((a,b)=>dist(home,a)-dist(home,b)||a.id-b.id).slice(0,3);
@@ -5064,7 +5068,7 @@ function aiFederationPolitics(){
   let f=findFed(e);
   if(!f){
    let invited=false;
-   for(const other of G.feds||[])if(other.invites?.[e.id]){const inv=other.invites[e.id],founder=G.emps[inv.by];if(!aiFedLeftRecently(e,other)&&aiFedWilling(e,founder,other.type,other).ok)acceptFedInvite(e,other.id);else rejectFedInvite(e,other.id);invited=true;break;}
+   for(const other of G.feds||[])if(other.invites?.[e.id]){const inv=other.invites[e.id],founder=G.emps[inv.by];if(aiFedWilling(e,founder,other.type,other).ok)acceptFedInvite(e,other.id);else rejectFedInvite(e,other.id);invited=true;break;}
    if(invited)continue;
    aiRivalBlocChoice(e);   // BETA-RIVAL-BLOCS.0: katıl / bağımsız kal / rakip blok kur aynı değerlendirmede
    continue;
@@ -5081,7 +5085,7 @@ function aiFederationPolitics(){
   if(G.day-f.founded>=720&&preferred!==f.type&&aiFedAffinity(e,preferred)>aiFedAffinity(e,f.type)+.2&&offer('reform',{type:preferred}))continue;
   if(f.type==='yagmaci'&&aiRaiderMilitaryProposal(e,f,offer))continue;
   if(aiFedWarProposal(e,f,offer))continue;   // BETA-WAR-GOALS.0
-  const candidate=G.emps.find(o=>o!==e&&e.contact[o.id]&&(e.rel[o.id]||0)>45&&!(o.ai&&aiFedLeftRecently(o,f))&&fedAdmissionGate(f,o,true).ok&&aiFedWilling(o,e,f.type,f).ok);
+  const candidate=G.emps.find(o=>o!==e&&e.contact[o.id]&&(e.rel[o.id]||0)>45&&fedAdmissionGate(f,o,true).ok&&aiFedWilling(o,e,f.type,f).ok);
   if(candidate&&offer('admit',{target:candidate.id}))continue;
   if(f.type==='askeri'||f.type==='yagmaci'){
    const enemy=G.emps.find(o=>e.war[o.id]&&!o.dead&&!o.wild&&!o.crisisSide&&f.members.some(id=>!G.emps[id].war[o.id]));
@@ -5275,8 +5279,7 @@ function aiFoundWilling(o,e,p){
 }
 /* Bağımsız AI: mevcut bloğa katıl / bağımsız kal / rakip blok kur — aynı değerlendirmede. */
 function aiRivalBlocChoice(e){
- /* FED-AI-SİYASET.0: tür uyumsuzluğuyla ayrıldığı birliğe türü değişmedikçe geri başvurmaz */
- const joinable=G.emps.filter(o=>o!==e&&e.contact[o.id]&&findFed(o)&&!aiFedLeftRecently(e,findFed(o))&&canRequestFederation(e,o).ok)
+ const joinable=G.emps.filter(o=>o!==e&&e.contact[o.id]&&findFed(o)&&canRequestFederation(e,o).ok)
   .map(o=>({o,a:aiFedWilling(e,o,findFed(o).type,findFed(o))})).filter(x=>x.a.ok)
   .sort((a,b)=>(G.cfg?.aiRivals?b.a.score-a.a.score:0)||(e.rel[b.o.id]||0)-(e.rel[a.o.id]||0)||a.o.id-b.o.id);
  const join=joinable[0]||null;
@@ -5330,6 +5333,11 @@ function aiFedMismatch(e,f){
  const rejected=!!(lv&&lv.motion==='reform'&&!lv.passed&&lv.type===pref&&G.day-lv.day<=1440)||asked&&!f.vote&&!f.reform&&f.type!==pref&&G.day-ask.day>=30;
  const blocked=!!f.reform||(f.reformAfter||0)>G.day;
  return {pref,gap,support,live:live.length,plausible:support*2>=live.length&&!blocked&&!rejected&&!asked,unresolved:rejected||blocked||support*2<live.length};
+}
+function aiFedDoctrineBar(e,f){
+ const pref=aiFedType(e);if(pref===f.type||aiFedAffinity(e,pref)-aiFedAffinity(e,f.type)<.35)return false;
+ const live=(f.members||[]).filter(id=>id!==e.id&&G.emps[id]&&!G.emps[id].dead),support=1+live.filter(id=>aiFedAffinity(G.emps[id],pref)>aiFedAffinity(G.emps[id],f.type)).length;
+ return support*2<live.length+1;
 }
 function aiFedLeftRecently(e,f){const l=e&&e._fedLeft;return !!(l&&f&&l.fed===f.id&&l.type===f.type);}   /* tür uyumsuzluğuyla ayrıldığı birliğe, türü değişmedikçe geri dönmez (zaman sınırı çalkantı üretiyordu: ayrıl → 4 yıl → katıl → 2 yıl → ayrıl) */
 function aiFedMemberReform(e,f){

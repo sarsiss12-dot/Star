@@ -3,7 +3,7 @@
    Aynı tohumdan yeni oyun, kontrol ve aday aynı gerçek gün adımlarıyla; her ay Save8 SHA-256 + RNG.
    Bu faz BİLEREK iki AI kararını değiştirir: (1) barış ödül avı yalnız filonun girdiği değil, meşru bilinen (aiKnownSystem) yuva / kalıntıyı da hedefler;
    (2) federasyonda üye sesi ve çıkışı (aiFedMismatch → aiFedMemberReform / aiFedStayReview, reform oyunda iyi niyet tavanı, ayrıldığı birliğe dönmeme).
-   Adayda bu yolların İLK tetiği izlenir: filonun hiç girmediği yuva / kalıntıya aiMove, null olmayan aiFedMismatch, reform önergesine AI oyu, ayrılma belleği.
+   Adayda bu yolların İLK tetiği izlenir: filonun hiç girmediği yuva / kalıntıya aiMove, null olmayan aiFedMismatch, reform önergesine AI oyu, ayrılma belleği, tür uyumsuz birliğe katılım engeli (aiFedDoctrineBar).
    Kural: ilk tetikten ÖNCEKİ her ay iki kol birebir; ilk ayrışma ancak tetik ayında ya da sonrasında (BİLGİ). */
 const assert=require('assert/strict'),crypto=require('crypto'),path=require('path'),fs=require('fs'),{runtime}=require('./helpers/runtime');
 const CTL=process.env.STARS_CONTROL_ROOT;let pass=0,fail=0;const ROOT=path.resolve(__dirname,'..');
@@ -13,7 +13,8 @@ const TRIG=`var TRIG=null;const T=k=>{if(TRIG===null)TRIG={d:G.day,k};};
 {const f=aiMove;aiMove=function(e,fl,to){const s=G.sys[to];if(s&&e&&!s.seen.includes(e.id)&&(s.nest&&s.nest.hp>0||s.ruin&&s.ruin.hp>0))T('prize-known');return f.apply(this,arguments);};}
 {const f=aiFedMismatch;aiFedMismatch=function(){const r=f.apply(this,arguments);if(r)T('fed-mismatch');return r;};}
 {const f=aiFedVoteWant;aiFedVoteWant=function(e,fd,v){if(v&&v.motion==='reform')T('reform-vote');return f.apply(this,arguments);};}
-{const f=aiFedLeftRecently;aiFedLeftRecently=function(){const r=f.apply(this,arguments);if(r)T('fed-left');return r;};}`;
+{const f=aiFedLeftRecently;aiFedLeftRecently=function(){const r=f.apply(this,arguments);if(r)T('fed-left');return r;};}
+{const f=aiFedDoctrineBar;aiFedDoctrineBar=function(){const r=f.apply(this,arguments);if(r)T('fed-doctrine-bar');return r;};}`;
 function run(root,seed,size,ais,months,cand){const h=runtime({root});h.run(`resetSetupNaming();Object.assign(CFG,{seed:${seed},size:'${size}',aiCount:${ais}});setupGame({...CFG});G.autoSave=false;`+STEP+(cand?TRIG:'var TRIG=null;'));const out=[];
   for(let m=0;m<months;m++){h.run('__step()');out.push(sha(h.run('serialize()'))+':'+h.run('RND_STATE'));}
   return {out,trig:JSON.parse(h.run('JSON.stringify(TRIG)'))};}
