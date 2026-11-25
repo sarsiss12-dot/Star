@@ -1,6 +1,8 @@
 # Son Codex raporu
 
-[SAVAŞ-DESTEK-AI.0 (Claude, p55 / MP.8.9b54 yayın adayı) · AI savaş desteği kararı (doktrin düzeltmesi, kriz / ikinci cephe kapıları), aktif savaşta yardım isteği, Savaş Merkezi toplu destek, kampanyada savaş artışı yok](reports/claude/SAVAS-DESTEK-AI0-SONUC.md)
+[FED-AI-SİYASET.0 (Claude, p56 / MP.8.9b55 yayın adayı) · federasyonda üye sesi (reform önergesi) ve anayasal çıkış, tek katılım kapısı, görünür yuva/kalıntı ödül avı; en büyük blok −0,074, çalkantı yok, tam Node yeni FAIL yok](reports/claude/FED-AI-SIYASET0-SONUC.md)
+
+Önceki: [SAVAŞ-DESTEK-AI.0 (Claude, p55 / MP.8.9b54 yayın adayı) · AI savaş desteği kararı (doktrin düzeltmesi, kriz / ikinci cephe kapıları), aktif savaşta yardım isteği, Savaş Merkezi toplu destek, kampanyada savaş artışı yok](reports/claude/SAVAS-DESTEK-AI0-SONUC.md)
 
 Önceki: [TİCARET-SON-EKSİKLER.0 (Claude, p54 / MP.8.9b53 yayın adayı) · insan sahipli çok taraflı transit onayı, izin yenileme, MP TZ 8/0, uzun MP oturumu, tam Node yeni FAIL yok](reports/claude/TICARET-SON-EKSIKLER0-SONUC.md)
 

@@ -1,0 +1,6 @@
+PASS I0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 404; misafir gerçek STARS arayüzünde
+PASS I1 uzun oturum 8 dk (500 sistem / 16 AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası 20 sn'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür
+PASS I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)
+  I3 {"deal":{"ok":true,"share":true},"gained":14,"leakFrom3rd":0,"cMirrorEqHost":true,"bChanged":false,"bGetsC":0,"hostBefore":8,"hostAfter":8,"pre":{"bNative":30,"bNativeNew":14,"shareBefore":false,"bCols":2,"bFleets":3,"bDead":false,"war":false},"activeAfter":true}
+PASS I3 sensör paylaşımı tek yön: B → C; C, B'nin sensör sistemlerini görür, B C'ninkileri görmez, host'un kendi görüşü değişmez
+GEÇEN: 4 KALAN: 0

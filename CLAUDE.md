@@ -2,7 +2,15 @@
 
 Tarayıcıda çalışan, harici bağımlılığı olmayan Türkçe 4X uzay strateji oyunu (PWA). Belgeler, commit'ler ve raporlar Türkçedir.
 
-## Son teslim — SAVAŞ-DESTEK-AI.0 (p55 / MP.8.9b54, 24 Kasım 2026)
+## Son teslim — FED-AI-SİYASET.0 (p56 / MP.8.9b55, 25 Kasım 2026)
+
+- Ayrıntı: `reports/claude/FED-AI-SIYASET0-SONUC.md` (24 bölüm, 20 soru), devir `FED-AI-SIYASET0-DEVIR.md`, kanıt `reports/claude/evidence/fed-ai-siyaset0/`. Dal `claude/stars-fed-ai-siyaset0`, taslak PR #81 (taban p55 `914c003`). ZIP `releases/stars-faz96h10p56.zip`, kayıt `RELEASE-FED-AI-SIYASET0.json`. p56 paket yükleyicisi p41–p55 kabul eder. Save8 şeması değişmedi. Otomatik kabul; Android / internet / Render NOT RUN.
+- Yalnız `ai.js`. Federasyon üye sesi + çıkışı: `aiFedMismatch` (tür uyumu farkı ≥0,35, destek, reddedilmiş/kilitli reform), `aiFedMemberReform` (mevcut `proposeFedMotion('reform')`, `_fedReformAsk` 4 yıl), `aiFedStayReview` çözülemeyen uyumsuzluğu çatışmaya katar (p55'te doymuş ilişki yüzünden ayrılış ölü koddu), reform oyunda iyi niyet ≤ +0,1. Tek katılım kapısı `aiFedWilling` → `aiFedLeftRecently` + `aiFedDoctrineBar` (başvuru, davet, kabul oyu sonrası AI kabulü, `aiStrategicDiplomacy`, yaşayabilir alternatif). Yeni AI katılım yolu bu kapıyı çağırmalı.
+- Ödül avı `sy.seen` ya da `aiView(e).ctx.visible` (geçidi tıkayan yuva/kalıntı). İstihbarat belleği varyantı reddedildi (`research/fed-ai-siyaset0/ADAY-ODUL-BELLEK-rejected.patch`).
+- Kampanya ölçümünde AI–AI temasını `contact0` (kurucu AI'lar) ile ölç: ayrılıkçı devlet herkesle temasla doğar. Plasebo tek çekim bazı tohumlarda emilir; birden çok plasebo günü kullan. İlk ABBA ayı p55 kaydında birikmiş reform önergeleri yüzünden şişer (`dealTxBegin`); sürekli durumu bir ay ilerletilmiş kayıtla ölç.
+- Test: `fed_ai_siyaset0_{test,mp_test,equivalence_test}.js`, `MP8_SCEN=FA`. Araçlar `research/fed-ai-siyaset0/*.cjs`.
+
+## Önceki teslim — SAVAŞ-DESTEK-AI.0 (p55 / MP.8.9b54, 24 Kasım 2026)
 
 - Ayrıntı: `reports/claude/SAVAS-DESTEK-AI0-SONUC.md` (24 bölüm, 21 soru), devir `SAVAS-DESTEK-AI0-DEVIR.md`, kanıt `reports/claude/evidence/savas-destek-ai0/`. Dal `claude/stars-savas-destek-ai0` (taban p54 `5aefe56`). ZIP `releases/stars-faz96h10p55.zip`, kayıt `RELEASE-SAVAS-DESTEK-AI0.json`. p55 paket yükleyicisi p41–p54 kabul eder. Save8 şeması değişmedi. Otomatik kabul; Android / internet / Render NOT RUN.
 - AI katılım kararı tek kapı `aiWarJoinGate` (aiRespond warJoin): güç/erişim, ekonomik kriz, ≥2 savaş / yorgunluk, süren savaşın bağladığı güç, `aiWarBudget`, başkent tehdidi. `itemValue` warJoin doktrini `personaKey`'den okur (p54'te `e.mizac` AI'da yoktu → doktrin hiç uygulanmıyordu), savunma ayrı fiyat, sadakat × `aiHonesty`. `warSupportGate` Arındırıcı kilidi (`diploBlocked`).

@@ -1,0 +1,10 @@
+const fs=require('fs'),path=require('path');const {runtime}=require('/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/runtime');
+const [root,seed,months,out]=process.argv.slice(2);const h=runtime({root:path.resolve(root)});h.sb.TEN=process.env.TEN||null;
+h.run(`resetSetupNaming();Object.assign(CFG,{seed:${+seed},size:'ulu',aiCount:9});if(TEN)CFG.tension=TEN;setupGame({...CFG});G.autoSave=false;var Y=[],EV=[];
+{const f=leaveFederation;leaveFederation=function(e){const fd=findFed(e);const r=f.apply(this,arguments);if(fd&&!findFed(e))EV.push({d:Math.floor(G.day),k:'leave',e:e.id,fed:fd.id,type:fd.type,why:e.aiFedReason&&e.aiFedReason.why});return r;};}
+{const f=declareWar;declareWar=function(a,b,o){const w=a&&b&&a.war[b.id];const r=f.apply(this,arguments);if(a&&b&&!w&&a.war[b.id]&&!a.wild&&!b.wild)EV.push({d:Math.floor(G.day),k:'war',a:a.id,b:b.id,kind:o&&o.kind||''});return r;};}
+if(typeof aiFedMemberReform==='function'){const f=aiFedMemberReform;aiFedMemberReform=function(e,fd){const r=f.apply(this,arguments);if(r)EV.push({d:Math.floor(G.day),k:'reform',e:e.id,fed:fd.id,to:e._fedReformAsk&&e._fedReformAsk.type});return r;};}
+{const f=fedPoliticalRecord;fedPoliticalRecord=function(fd,ev,data){if(ev==='join'&&data)EV.push({d:Math.floor(G.day),k:'join',e:data.target,fed:fd.id,type:fd.type});if(ev==='founded')EV.push({d:Math.floor(G.day),k:'found',fed:fd.id,type:fd.type,members:fd.members.slice()});return f.apply(this,arguments);};}
+var __m=()=>{const m=Math.floor(G.day/30);let g=0;while(Math.floor(G.day/30)<=m&&g++<200){G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);if(Math.floor(G.day/30)>m)monthTick();}
+ const mm=Math.floor(G.day/30);if(mm%24===0)Y.push({m:mm,e:fedFoundRead(()=>G.emps.filter(e=>e.ai&&!e.wild&&!e.crisisSide).map(e=>[e.id,e.dead?'X':Math.round(totalPower(e)/1000),e.colonies.length,findFed(e)?findFed(e).id+findFed(e).type[0]:'-',Object.keys(e.war).filter(k=>e.war[k]&&G.emps[k]&&!G.emps[k].wild).length]))});};`);
+for(let m=1;m<=+months;m++)h.run('__m()');fs.writeFileSync(out,h.run('JSON.stringify({Y,EV})'));

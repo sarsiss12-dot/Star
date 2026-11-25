@@ -1,0 +1,1 @@
+SUITES: 256 GEÇEN: 6649 KALAN: 279 (taban p55: 253 / 6632 / 279; 56 FAIL paketi paket başına sayılarla birebir aynı)

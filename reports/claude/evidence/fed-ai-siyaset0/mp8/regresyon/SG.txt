@@ -1,0 +1,6 @@
+PASS SG0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS G0 fikstür (host): AI X host'a savaş açar; B host'un müttefiki, X ile savaşta değil; kaynaklar
+PASS G1 B gerçek masadan "Savaşa Yardım Teklif Et" + 300 alaşım İSTE → host gelen kutusundan KABUL → tek ödeme, B savaşta, B aynası görür; ikinci kabul yok
+PASS G2 misafirin eskortsuz ordusu muharebede yok olur → misafirin bildirim listesinde YENİLGİ + eskortsuz imha açıklaması
+PASS G3 sistemin açtığı federasyon oyu: misafirde kart + gelen kutusu; misafir KABUL → host oyu kaydeder
+GEÇEN: 5 KALAN: 0

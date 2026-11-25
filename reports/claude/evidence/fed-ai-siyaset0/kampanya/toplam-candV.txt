@@ -1,0 +1,9 @@
+cols      hücre 15 aday ort sapma 2.2% (neg hücre 6/15) | plasebo LOO ort -0.1% sd 16.0% | aday sd 13.6% | t≈ 0.54
+power     hücre 15 aday ort sapma -6.9% (neg hücre 9/15) | plasebo LOO ort 1.6% sd 16.3% | aday sd 15.7% | t≈ -1.63
+ships     hücre 15 aday ort sapma 1.7% (neg hücre 7/15) | plasebo LOO ort 1.6% sd 16.1% | aday sd 12.9% | t≈ 0.42
+surv      hücre 15 aday ort sapma 0.028 (neg hücre 5/15) | plasebo LOO ort 0.003 sd 0.127 | aday sd 0.085 | t≈ 0.85
+contact0  hücre 15 aday ort sapma 0.028 (neg hücre 5/15) | plasebo LOO ort 0.003 sd 0.154 | aday sd 0.098 | t≈ 0.70
+largest   hücre 15 aday ort sapma -0.074 (neg hücre 9/15) | plasebo LOO ort 0.004 sd 0.132 | aday sd 0.184 | t≈ -2.15
+indep     hücre 15 aday ort sapma 0.586 (neg hücre 4/15) | plasebo LOO ort -0.121 sd 1.802 | aday sd 1.553 | t≈ 1.26
+dead      hücre 15 aday ort sapma 0.192 (neg hücre 3/15) | plasebo LOO ort -0.118 sd 0.942 | aday sd 0.670 | t≈ 0.79
+ayrılma toplam 24 / 15 kampanya · reform önergesi 41 · aynı AI'ın en çok ayrılışı 3 ["s5-11-m120:0/0","s5-23-m120:0/0","s5-404-m120:1/1","u9-11-m240:1/1","u9-23-m240:1/1","u9-99-m240:4/3","u9-404-m240:2/1","c9-11-m240:1/1","c9-23-m240:2/1","c9-99-m240:5/3","c9-404-m240:2/1","raz-11-m240:1/1","rcok-11-m240:0/0","raz-404-m240:2/2","rcok-404-m240:2/1"]

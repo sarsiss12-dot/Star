@@ -1,0 +1,333 @@
+{
+ "results": [
+  {
+   "name": "J0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 8249
+  },
+  {
+   "name": "J1 kayıt → kapanış → yeni oda → host tek başına: kayıt öncesi bekleyen/gizli olay korunur; tarih ilerler; host ve B için yeni olay/anomali/bilim zinciri üretilir",
+   "status": "PASS",
+   "ms": 7120
+  },
+  {
+   "name": "J2 misafirler yeni kodla döner (B ana menü ODAYA KATIL, C davet bağlantısı): B'nin kayıt öncesi ve host-tek-başına kararları B'de; host / C olayları B'de değil",
+   "status": "PASS",
+   "ms": 5579
+  },
+  {
+   "name": "J3 B'nin ilk gemi siparişi gerçek dokunuşla: host kabulü, host tersane kuyruğu ve B'nin tersane ekranı ayrı ölçülür; kaynak bir kez düşer",
+   "status": "PASS",
+   "ms": 2206
+  },
+  {
+   "name": "J4 yanıt kaybı + AYNI cid ile yeniden gönderim: tek sipariş, tek kaynak kesintisi, yinelenen yanıt; B tersane ekranında tek yeni satır",
+   "status": "PASS",
+   "ms": 4955
+  }
+ ],
+ "metrics": {
+  "scen": "J",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 235,
+    "buildMs": 254,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 301,
+    "buildMs": 336,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 10.3,
+      "p95": 11.4,
+      "max": 11.4
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 17,
+     "dom": 728,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 38.6,
+       "p95": 38.6,
+       "max": 38.6
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.9,
+       "p95": 2.9,
+       "max": 2.9
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 26,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 45.5,
+       "p95": 45.5,
+       "max": 45.5
+      },
+      "refresh": {
+       "n": 1,
+       "med": 5.3,
+       "p95": 5.3,
+       "max": 5.3
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 15,
+      "dom": 729,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 8480,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "fed1": {
+   "code1": "WXZ83",
+   "natural": {
+    "before": {
+     "h": 2,
+     "b": 1,
+     "c": 0
+    },
+    "after": {
+     "h": 2,
+     "b": 2,
+     "c": 0,
+     "day": 31
+    }
+   },
+   "hostAlone": {
+    "saved": {
+     "a": "Bilim Konseyi Talebi",
+     "c": "Göçmen Filosu",
+     "bEv": "Kayıp Sonda",
+     "rb": {
+      "ok": true,
+      "id": 1
+     },
+     "keys": [
+      [
+       "ev:e1",
+       false
+      ],
+      [
+       "ev:e2",
+       true
+      ]
+     ]
+    },
+    "neu": {
+     "ev": "Alaşım Grevi",
+     "an": "Wynaevos",
+     "chain": "Sessiz Gemi",
+     "bEv": "Sessiz Gemi — Güverte",
+     "bAn": "Kristal Mezarlık",
+     "r1": {
+      "ok": true,
+      "id": 3
+     },
+     "r2": {
+      "ok": true,
+      "id": 4
+     },
+     "day": 31
+    },
+    "cards": [
+     "TÜMÜNÜ KENARA AL · 4",
+     "Bilim Konseyi Talebi",
+     "Alaşım Grevi",
+     "Anomali — Wynaevos",
+     "Sessiz Gemi"
+    ]
+   },
+   "rejoin": {
+    "g": {
+     "day": 31,
+     "pending": [
+      "event:e4:",
+      "anomaly:a13:37",
+      "chain:hayalet2a:",
+      "anomaly:a2:5"
+     ],
+     "inbox": [
+      [
+       "Kayıp Sonda",
+       false
+      ],
+      [
+       "Antik Kalıntı Mezarlığı",
+       false
+      ],
+      [
+       "Sessiz Gemi — Güverte",
+       false
+      ],
+      [
+       "Kristal Mezarlık",
+       false
+      ]
+     ]
+    },
+    "cards": [
+     "TÜMÜNÜ KENARA AL · 4",
+     "Kayıp Sonda",
+     "Antik Kalıntı Mezarlığı",
+     "Sessiz Gemi — Güverte",
+     "Kristal Mezarlık"
+    ],
+    "cCards": [],
+    "list": "Savaşlar, olaylar ve durumlar\n⚔ Savaş Merkezi · 0 düşman\n📰 Galaktik Haber Ağı\nVazgeç"
+   },
+   "firstOrder": {
+    "ship": "Koloni Gemisi",
+    "k": "kol",
+    "ack": {
+     "status": "ok",
+     "code": null,
+     "cid": "j1_1_73virbba3l"
+    },
+    "tAckMs": 404,
+    "tHostQueueMs": 428,
+    "tGuestYardMs": 706,
+    "host": [
+     {
+      "left": 39,
+      "tot": 39
+     }
+    ],
+    "paid": {
+     "ala": 60,
+     "min": 265
+    },
+    "cost": {
+     "ala": 60,
+     "min": 265
+    }
+   },
+   "resend": {
+    "lost": true,
+    "again": {
+     "ok": true,
+     "cid": true
+    },
+    "rep": [
+     {
+      "status": "ok",
+      "dup": true
+     }
+    ],
+    "q0": 1,
+    "q1": 2,
+    "y0": 1,
+    "y1": 2,
+    "paid": {
+     "ala": 60,
+     "min": 265
+    },
+    "tHostQueueMs": 231,
+    "tAckMs": 4564,
+    "tGuestYardMs": 4770,
+    "dropped": {
+     "result": "j1_2_mns28bedru"
+    }
+   }
+  },
+  "relayPid2": 8900,
+  "errors": []
+ }
+}

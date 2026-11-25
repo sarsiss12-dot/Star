@@ -671,7 +671,7 @@ function aiStrategicDiplomacy(e){
  if(kind==='pact'&&e.pact?.[o.id]||kind==='ally'&&e.ally[o.id]||kind==='nap'&&(e.ally[o.id]||e.nap?.[o.id]>G.day))return false;
  (e.aiTalk||(e.aiTalk={})).strategy={until:G.day+180,reason:p.reason};
  let applied=false,pending=false;
- if(kind==='federation'){const q=requestFederation(e,o);applied=!!q.ok;}
+ if(kind==='federation'){const fo=findFed(o);if(fo&&!aiFedWilling(e,o,fo.type,fo).ok)return false;const q=requestFederation(e,o);applied=!!q.ok;}   /* FED-AI-SİYASET.0: katılım kapısı */
  else {const terms=aiProposeTerms(e,o,kind);if(!terms)return false;
   if(o.id===0)pending=!!UI.aiOffer({from:e.id,to:o.id,...terms});
   else applied=!!aiNegotiate(e,o,terms.give,terms.want,true).uygulandi;
@@ -2094,9 +2094,13 @@ function aiTurn(e){
       if (f.path.length || f.mv) continue;
       const pw = fleetPower(f);
       if (pw > 900 && rnd() < .35){
-        const prizes = [];
+        const prizes = [], seenNow = aiView(e).ctx.visible;
         for (const sy of G.sys){
-          if (!sy.seen.includes(e.id)) continue;
+          /* FED-AI-SİYASET.0: yalnız filonun girdiği (seen) değil, şu an AI'ın SENSÖRÜYLE GÖRÜLEN yuva ve kalıntılar da. Keşif gemileri
+             yuva/kalıntıya girmediği için geçidi tıkayan hedefler hiç "seen" olmuyor, av listesine giremiyordu (p55: 100/9 t11 120. ayda AI'ların
+             keşfedilmemiş 61–81 sisteminin tamamı yalnız yuva/kalıntı üstünden erişilebilir). İstihbarat BELLEĞİNDEKİ (artık görünmeyen, uzak)
+             hedefler bilerek dışarıda: o varyant 500/16'da filoları uzun seferlere çekti, filo gücü plasebo ortalamasının ~%12 altında kaldı. */
+          if (!sy.seen.includes(e.id) && !seenNow.has(sy.id)) continue;
           if (sy.nest && sy.nest.hp > 0 && pw > sy.nest.hp * .35) prizes.push(sy);
           else if (sy.ruin && sy.ruin.hp > 0 && pw > sy.ruin.hp * .55) prizes.push(sy);
         }
@@ -4993,6 +4997,10 @@ function aiFedAdmissionScore(e,other,type,f=null){
 }
 function aiFedWilling(e,founder,type,f=null,ballot=null,founders=null,threat=0){
  if(!e||!founder||e.dead||e.wild||e.crisisSide||isPurifier(e)||isVassal(e)||!e.contact[founder.id]||e.war[founder.id]||(e._fedLeaveUntil||0)>G.day)return {ok:false,why:'Siyasi koşullar uygun değil'};
+ /* FED-AI-SİYASET.0: var olan bir birliğe (f.id) katılım — başvuru, davet, kabul oyu sonrası kabul ve "yaşayabilir alternatif" aynı kapıdan geçer.
+    Ayrılık kuralıyla aynı ölçüt: türü doktrinle uyumsuz ve reform desteği olmayan birliğe katılmaz (katıl → 2 yıl → ayrıl çalkantısı); tür
+    uyumsuzluğuyla ayrıldığı birliğe türü değişmedikçe dönmez. Kuruluş (f.id yok) ve insan değişmez. */
+ if(e.ai&&f&&f.id&&(aiFedLeftRecently(e,f)||aiFedDoctrineBar(e,f)))return {ok:false,why:'Birliğin türü doktrinle uyumsuz; reform desteği yok'};
  const rel=e.rel[founder.id]||0;if(rel<15-threat*50||trustOf(e,founder.id)<-35)return {ok:false,why:'Güven veya ilişki yetersiz'};   // BETA-RIVAL-BLOCS.0: ortak tehdit (yalnız kuruluşta, varsayılan 0) eşiği gevşetir
  let eta=Infinity;const home=G.sys[e.home];
  const targets=aiKnownSystems(e,founder.id).sort((a,b)=>dist(home,a)-dist(home,b)||a.id-b.id).slice(0,3);
@@ -5020,7 +5028,10 @@ function aiFedConcentration(e,f,candidate){
 }
 function aiFedVoteWant(e,f,v){
  const proposer=G.emps[v.proposer],rel=proposer?(e.rel[proposer.id]||0):0;
- let want=.4+rel/300+(fedCohesion(f)-50)/250;
+ /* FED-AI-SİYASET.0: tür reformunda (anayasal, %75) iyi niyet terimi en çok +0,10. Barışta ilişki ve uyum 100'e doyunca bu terim +0,53'e
+    çıkıyor ve doktrine açıkça ters reformlara da "evet" oyu verdiriyordu (ölçüm: yağmacı uyumu 0,20 olan üye yağmacı reformuna evet). */
+ const goodwill=rel/300+(fedCohesion(f)-50)/250;
+ let want=.4+(v.motion==='reform'?Math.min(goodwill,.1):goodwill);
  if(v.motion==='admit')return aiFedAdmissionScore(e,G.emps[v.target],f.type,f).score;
  if(v.motion==='expel')return clamp(.3-(e.rel[v.target]||0)/120-trustOf(e,v.target)/200,.02,.95);
  if(v.motion==='elect'){const target=G.emps[v.target];return clamp(.35+(e.rel[v.target]||0)/160+trustOf(e,v.target)/500+(v.target===e.id?.2:0)+(target?clamp(aiFedKnownMandate(e,target,f).military/Math.max(1,aiFedKnownMandate(e,e,f).military)*.04,0,.12):0),.02,.95);}
@@ -5066,7 +5077,7 @@ function aiFederationPolitics(){
   if(f.agenda?.items.some(r=>r.by===e.id))continue;
   if(!f.vote&&G.day-f.founded>=720&&fedCohesion(f)<20&&(e.rel[f.leader]||0)<-50){leaveFederation(e);e.aiFedReason={day:G.day,kind:'leave',why:'Uzun süreli uyumsuzluk ve başkana güvensizlik'};continue;}
   if(aiFedStayReview(e,f))continue;   // BETA-RIVAL-BLOCS.0
-  if(f.leader!==e.id)continue;
+  if(f.leader!==e.id){aiFedMemberReform(e,f);continue;}   // FED-AI-SİYASET.0: üye sesi (mevcut reform önergesi ve oylaması)
   const offer=(kind,options)=>{const result=proposeFedMotion(e,kind,options);if(result.ok){e._fedPoliticsAfter=G.day+360;e.aiFedReason={day:G.day,kind,...options,why:'Güven, doktrin, erişim ve mevcut birlik koşulları'};}return result.ok;};
   const hostile=f.members.find(id=>id!==e.id&&(e.rel[id]||0)<-65&&trustOf(e,id)<-40);
   if(hostile!==undefined&&offer('expel',{target:hostile}))continue;
@@ -5309,14 +5320,42 @@ function aiFoundPending(e){
  return true;
 }
 /* Üye: uzun süren çıkar çatışması + yaşayabilir alternatif → anayasaya uygun ayrılış. Dürüst üye daha uzun sabreder. */
+/* FED-AI-SİYASET.0 — üyenin tür uyumsuzluğu: tercih ettiği türün uyumu federasyonun türünü ≥0,35 geçiyorsa "uyumsuz".
+   Ses: tür reformu mevcut önergeyle (150 Etki, %75 onay, 12 ay geçiş, 120 ay reform beklemesi) yalnız gerçek destek varsa önerilir
+   (üyelerin en az yarısı aynı türü bugünkünden uygun buluyorsa; boşa oylama yok). Çıkış: reform reddedildiyse ya da destek yoksa
+   uyumsuzluk kalma değerlendirmesine çatışma olarak girer (aiFedStayReview; mevcut sabır sayacı ve yaşayabilir alternatif kapısı aynen).
+   p55 ölçümü: barışta ilişki ve birlik uyumu 100'e doyduğundan eski çatışma terimi hiçbir doğal kampanyada pozitif olmadı. RNG yok. */
+function aiFedMismatch(e,f){
+ const pref=aiFedType(e),gap=pref===f.type?0:aiFedAffinity(e,pref)-aiFedAffinity(e,f.type);if(gap<.35)return null;
+ const live=f.members.filter(id=>G.emps[id]&&!G.emps[id].dead),support=live.filter(id=>{const o=G.emps[id];return o===e||aiFedAffinity(o,pref)>aiFedAffinity(o,f.type);}).length;
+ const lv=f.lastVote,ask=e._fedReformAsk,asked=!!(ask&&ask.fed===f.id&&ask.type===pref&&G.day-ask.day<=1440);
+ /* kendi önerisi 4 yıl içinde sonuçlandı ve tür hâlâ aynıysa reddedilmiş sayılır (lastVote araya giren oylamalarla değişir; tekrar öneri yok) */
+ const rejected=!!(lv&&lv.motion==='reform'&&!lv.passed&&lv.type===pref&&G.day-lv.day<=1440)||asked&&!f.vote&&!f.reform&&f.type!==pref&&G.day-ask.day>=30;
+ const blocked=!!f.reform||(f.reformAfter||0)>G.day;
+ return {pref,gap,support,live:live.length,plausible:support*2>=live.length&&!blocked&&!rejected&&!asked,unresolved:rejected||blocked||support*2<live.length};
+}
+function aiFedDoctrineBar(e,f){
+ const pref=aiFedType(e);if(pref===f.type||aiFedAffinity(e,pref)-aiFedAffinity(e,f.type)<.35)return false;
+ const live=(f.members||[]).filter(id=>id!==e.id&&G.emps[id]&&!G.emps[id].dead),support=1+live.filter(id=>aiFedAffinity(G.emps[id],pref)>aiFedAffinity(G.emps[id],f.type)).length;
+ return support*2<live.length+1;
+}
+function aiFedLeftRecently(e,f){const l=e&&e._fedLeft;return !!(l&&f&&l.fed===f.id&&l.type===f.type);}   /* tür uyumsuzluğuyla ayrıldığı birliğe, türü değişmedikçe geri dönmez (zaman sınırı çalkantı üretiyordu: ayrıl → 4 yıl → katıl → 2 yıl → ayrıl) */
+function aiFedMemberReform(e,f){
+ if(!e.ai||f.leader===e.id||f.vote||G.day-(f.dutyConsent?.[e.id]?.since??f.founded)<720)return false;
+ const m=aiFedMismatch(e,f);if(!m||!m.plausible)return false;
+ const r=proposeFedMotion(e,'reform',{type:m.pref});
+ if(r.ok){e._fedPoliticsAfter=G.day+360;e._fedReformAsk={fed:f.id,type:m.pref,day:G.day};e.aiFedReason={day:G.day,kind:'reform',type:m.pref,why:'Üye önerisi: tercih edilen tür uyumu +'+m.gap.toFixed(2)+' · destek '+m.support+'/'+m.live};}
+ return !!r.ok;
+}
 function aiFedStayReview(e,f){
  if(!e.ai||f.leader===e.id||f.vote||G.day-(f.dutyConsent?.[e.id]?.since??f.founded)<720)return false;
- const conflict=(45-fedCohesion(f))/100+(-(e.rel[f.leader]||0))/150+(.45-aiFedAffinity(e,f.type))+(aiBlocThreat(e).bonus?0:-.05);
+ const m=aiFedMismatch(e,f),doctrine=m&&m.unresolved?m.gap-.35-clamp(trustOf(e,f.leader)/200,0,.25):-1;
+ const conflict=Math.max(doctrine,(45-fedCohesion(f))/100+(-(e.rel[f.leader]||0))/150+(.45-aiFedAffinity(e,f.type))+(aiBlocThreat(e).bonus?0:-.05));
  e._fedStrain=conflict>.15?(e._fedStrain||0)+1:Math.max(0,(e._fedStrain||0)-1);
  if(e._fedStrain<Math.round(12+8*aiHonesty(e)))return false;
  const alt=G.emps.some(o=>o!==e&&!o.dead&&!o.wild&&e.contact[o.id]&&!f.members.includes(o.id)&&(findFed(o)?aiFedWilling(e,o,findFed(o).type,findFed(o)).score>=.55:fedFoundCandidate(e,o).ok&&aiFedAdmissionScore(e,o,aiFedType(e)).score>=.55));
  if(!alt)return false;
- leaveFederation(e);e._fedStrain=0;e.aiFedReason={day:G.day,kind:'leave',why:'Uzun süreli çıkar çatışması ve yaşayabilir alternatif blok (anayasaya uygun ayrılış)'};return true;
+ leaveFederation(e);e._fedStrain=0;if(doctrine>.15)e._fedLeft={fed:f.id,type:f.type,day:G.day};e.aiFedReason={day:G.day,kind:'leave',why:(doctrine>.15?'Çözülemeyen tür uyumsuzluğu (reform reddi / desteksiz)':'Uzun süreli çıkar çatışması')+' ve yaşayabilir alternatif blok (anayasaya uygun ayrılış)'};return true;
 }
 
 /* ═══ BETA-WAR-GOALS.0 — AI meşruiyet terimleri (sınırlı; RNG yok). Askerî katılım bütçe/rota/cephe kapılarında ayrıca değerlendirilir. ═══ */
