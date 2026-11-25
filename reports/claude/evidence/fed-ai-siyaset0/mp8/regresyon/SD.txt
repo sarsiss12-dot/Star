@@ -1,0 +1,4 @@
+PASS SD0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 6 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS D1 misafir B: Savaş Merkezi → destek adayları sıralı + gerekçeli → toplu destek (çift basış) → her uygun adaya tek teklif; C kabul → aynı sefer; ikinci toplu basış teklif üretmez
+PASS D2 AI S zorlanınca müttefiki misafir C'den yardım ister: C kutusunda kart (C adına karar yok), B görmez; C reddeder → savaş / ödeme yok
+GEÇEN: 3 KALAN: 0

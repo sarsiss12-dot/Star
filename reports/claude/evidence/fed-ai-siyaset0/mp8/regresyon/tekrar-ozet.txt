@@ -1,0 +1,5 @@
+F p55 GEÇEN: 6 KALAN: 0
+F wt-trade GEÇEN: 6 KALAN: 0
+I100 p55 GEÇEN: 4 KALAN: 0
+I100 wt-trade GEÇEN: 3 KALAN: 1
+DONE

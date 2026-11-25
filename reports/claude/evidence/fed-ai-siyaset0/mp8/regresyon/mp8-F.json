@@ -1,0 +1,378 @@
+{
+ "results": [
+  {
+   "name": "F0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 8597
+  },
+  {
+   "name": "F1 gerçek kuruluş: host kuruluş penceresinden B'yi davet eder, B karttan KABUL, host son onay → federasyon; B'de ve host'ta \"kuruldu\" en çok bir kez",
+   "status": "PASS",
+   "ms": 3823
+  },
+  {
+   "name": "F2 B sonuç kartını açıp kapatır; ardından 5 yayın + gün, hat kopması / yeniden bağlanma, sayfa yenileme, host dünyasının kayıttan yeniden yüklenmesi: \"kuruldu\" ve eski davet / oy kartı bir daha doğmaz",
+   "status": "PASS",
+   "ms": 14479
+  },
+  {
+   "name": "F3 aynı federasyonda gerçekten yeni karar: host yasa önerir → B'de tek yeni oy kartı; B karttan EVET; sonuçlanınca B ve host'ta tek \"oylaması sonuçlandı\" kartı; \"kuruldu\" yine yok; kapanmış oy kartı kalmaz",
+   "status": "PASS",
+   "ms": 2202
+  },
+  {
+   "name": "F4 üyelik başvurusu (C, gerçek fedRequest komutu): C'de \"Üyelik başvurun oylamada\" kartı; üye B'nin oy kartı \"Üyelik başvurusu — C\"; oy kabul → C'de KABUL / REDDET davet kartı; C karttan KABUL → host'ta üye; kart kalkar; C'de tek komut",
+   "status": "PASS",
+   "ms": 3735
+  },
+  {
+   "name": "F5 başkan değişimi: host (başkan) federasyondan ayrılır (gerçek leaveFederation) → B ve C'de tek \"Federasyon başkanı değişti\" kartı; yeniden bağlanmada tekrar doğmaz",
+   "status": "FAIL",
+   "error": "page.waitForFunction: Timeout 20000ms exceeded.\n    at /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/event-ux1-mp.cjs:92:51\n    at async test (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:71:162)\n    at async module.exports (/tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/helpers/event-ux1-mp.cjs:90:3)\n    at async /tmp/claude-0/-home-user-Star/30c40a47-ab4d-5adc-bfe4-309db2bf6d6f/scratchpad/wt-trade/tests/browser-mp8.cjs:586:17"
+  }
+ ],
+ "metrics": {
+  "scen": "F",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 223,
+    "buildMs": 260,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     2,
+     2
+    ],
+    "mirrorEq": true,
+    "revMs": 312,
+    "buildMs": 355,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 8.6,
+      "p95": 11.1,
+      "max": 11.1
+     },
+     "longtask": {
+      "n": 0
+     },
+     "heapMB": 16,
+     "dom": 728,
+     "intervals": 2,
+     "timeouts": 2,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 2,
+       "med": 25,
+       "p95": 25,
+       "max": 25
+      },
+      "refresh": {
+       "n": 1,
+       "med": 2.2,
+       "p95": 2.2,
+       "max": 2.2
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 26,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 2,
+       "med": 42.3,
+       "p95": 42.3,
+       "max": 42.3
+      },
+      "refresh": {
+       "n": 1,
+       "med": 7.6,
+       "p95": 7.6,
+       "max": 7.6
+      },
+      "longtask": {
+       "n": 0
+      },
+      "builds": 2,
+      "deltas": 1,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 16,
+      "dom": 729,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 23,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 6066,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "ux1": {
+   "phases": [
+    {
+     "name": "a-kuruldu",
+     "B": {
+      "kur": 1,
+      "dom": [
+       "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2"
+      ],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 1,
+      "dom": [
+       "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2"
+      ],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    },
+    {
+     "name": "b-acildi",
+     "B": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    },
+    {
+     "name": "c-5-yayin",
+     "B": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    },
+    {
+     "name": "d-yeniden-baglanma",
+     "B": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    },
+    {
+     "name": "e-sayfa-yenileme",
+     "B": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    },
+    {
+     "name": "f-host-kayit-yukleme",
+     "B": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    },
+    {
+     "name": "g-yeni-karar",
+     "B": {
+      "kur": 0,
+      "dom": [
+       "🏛 Federasyon oylaması sonuçlandı — Helis Araştırma KonseyiSavunma Pak"
+      ],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 0,
+      "dom": [
+       "🏛 Federasyon oylaması sonuçlandı — Helis Araştırma KonseyiSavunma Pak"
+      ],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    }
+   ],
+   "opened": {
+    "k": "note",
+    "uid": 8
+   },
+   "f4req": {
+    "status": "ok",
+    "code": null
+   },
+   "f4sub": "Üyelik başvurusu — Yeşil Birlik",
+   "f4inv": true,
+   "f4staleApplied": 0,
+   "f4sent": 1
+  },
+  "errors": []
+ }
+}
