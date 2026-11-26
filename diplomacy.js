@@ -2243,7 +2243,7 @@ function giftOnCooldown(a, b){
    Kapsam: aşağıdaki kökler ve bunların eriştiği oyun verisi. DOM, UI,
    fonksiyon gövdeleri ve kataloglar işlem verisi değildir. */
 const DEAL_TX_ROOTS = ['emps','p','sys','fleets','feds','council',
-  'economyHistory','chainQueue','seenChains','fedUid','fedFounding','commerce','news','diplomaticInbox','construction','_95eFaults','fallStats','sabStats','log','inbox','inboxUid','warLedger','settlements','jointOps','_structAt','_structIdx'];
+  'economyHistory','chainQueue','seenChains','fedUid','fedFounding','commerce','news','diplomaticInbox','construction','_95eFaults','fallStats','sabStats','log','inbox','inboxUid','warLedger','settlements','jointOps','fleetJournal','_structAt','_structIdx'];
 const DEAL_TX_AUTH = ['_dealAuth','_warAuth','_warWhy','_sideBuf'];
 let _dealTxActive = false;
 let _warLaunchBuffer=null;
@@ -2318,6 +2318,7 @@ function dealTxBegin(scope){
     if (!scope && d && 'value' in d) values.push(d.value);
   }
   if (scope) values.push(...scope);
+  else values.push(FLEET_RECOVERY_DIRTY); // Bir devrin filo tasfiyesi, teslimat toparlama kümesini de değiştirir.
   for (const key of DEAL_TX_AUTH) auth.set(key,Object.getOwnPropertyDescriptor(G,key));
   return {roots,auth,records:txCaptureGraph(values),rng:RND_STATE};
 }

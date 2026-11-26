@@ -209,18 +209,36 @@ test('A foreign pending buffer is preserved; execute reports busy without applyi
   const check=photograph(h);eq(h.run('executeDeal(offer)'),false);check();
 });
 
-// Real multi-party closures, including loss of the last remaining colony.
-// That system is not the old capital: a prior conquest is performed first.
-test('Colonized system, empire purge and fleet removal are all reached, then rolled back',()=>{
+// The last colony is not the original capital. Test both lazy journal creation
+// and appending to an existing removal history.
+for(const keepHistory of [false,true])test('Colonized system and fleet purge roll back (existing journal='+keepHistory+')',()=>{
   const h=fixture('sys');
   h.run(`for(const id of new Set(A.colonies.map(c=>c.s)))if(id!==sy.id)captureSystem(G.sys[id],C.id);
     if(A.colonies.some(c=>c.s!==sy.id))throw Error('fixture has other colonies');
-    newFleet(A,sy.id,[{c:Object.keys(SHIPS)[0]}],'Rollback fleet');`);
+    var purged=newFleet(A,sy.id,[{c:Object.keys(SHIPS)[0]}],'Rollback fleet');
+    if(${keepHistory}){
+      const merged=newFleet(A,sy.id,[{c:Object.keys(SHIPS)[0]}],'Existing history');
+      if(!mergeFleetInto(A,purged,[merged]).ok)throw Error('fixture merge failed');
+    }else delete G.fleetJournal;
+    (sy.rally||={})[A.id]={fleet:purged.id};
+    FLEET_RECOVERY_DIRTY.clear();FLEET_RECOVERY_DIRTY.add(C.id);
+  `);
+  const save=h.run('serialize()'), dirty=h.run('JSON.stringify([...FLEET_RECOVERY_DIRTY])');
+  const fee=h.run('dealQuote(offer).cost'), budget=h.run('A.res.etk');
   const check=photograph(h);let reached=false;
   h.sb.__purge=t=>{if(t==='after:sys'){
-    reached=h.run('A.dead===true&&!G.fleets.some(f=>f.e===A.id)&&sy.owner===B.id');throw Error(t);}};
-  h.run('G._dealFailInject=__purge');eq(h.run('executeDeal(offer)'),false);eq(reached);check();
+    reached=h.run(`A.dead===true&&!G.fleets.some(f=>f.e===A.id)&&sy.owner===B.id&&
+      FLEET_RECOVERY_DIRTY.has(A.id)&&G.fleetJournal.some(r=>r.fleet===purged.id&&r.reason==='rule')`);
+    h.run('rnd()');throw Error(t);}};
+  h.run('G._dealFailInject=__purge');eq(h.run('executeDeal(offer)'),false);eq(reached);
+  assert.deepEqual({dirty:h.run('JSON.stringify([...FLEET_RECOVERY_DIRTY])')===dirty,
+    save:h.run('serialize()')===save},{dirty:true,save:true});
+  check();
   h.run('delete G._dealFailInject');eq(h.run('executeDeal(offer)'));eq(h.run('A.dead===true'));
+  eq(h.run('A.res.etk'),budget-fee);
+  eq(h.run(`G.fleetJournal.filter(r=>r.fleet===purged.id&&r.reason==='rule').length`),1);
+  const committed=h.run('serialize()');
+  eq(h.run('executeDeal(offer)'),false);eq(h.run('serialize()'),committed);
 });
 test('Independence peace frees vassal and ends proxy war before complete rollback',()=>{
   const h=fixture('peace');h.run(`A.overlord=B.id;A.vassalType='bekci';A.vassalAnger=60;
