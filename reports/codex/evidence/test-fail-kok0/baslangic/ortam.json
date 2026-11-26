@@ -9,5 +9,8 @@
   "dependencies": {
     "@napi-rs/canvas": "0.1.100",
     "playwright-core": "1.62.1"
-  }
+  },
+  "chromium": "Chromium 155.0.8059.79 built on Debian GNU/Linux 13 (trixie)",
+  "cpuset": "0-2",
+  "memoryMax": 8589934592
 }
