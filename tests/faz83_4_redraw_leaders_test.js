@@ -8,6 +8,7 @@
    Çıkış kodu: 0 = hepsi geçti, 1 = en az bir başarısızlık
    ═══════════════════════════════════════════════════════════════════ */
 'use strict';
+const {loadBrowserScripts} = require('./helpers/browser-scripts');
 const fs=require('fs'), path=require('path'), cp=require('child_process'),
       vm=require('vm');
 const KOK = path.resolve(__dirname, '..');
@@ -83,9 +84,7 @@ function harness(){
   sb.navigator={userAgent:'node', standalone:false};
   sb.globalThis=sb;
   vm.createContext(sb);
-  for (const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                   'economy.js','commerce.js','ui.js','commerce-ui.js','economic-ledger.js','economy-ui.js','audio.js'])
-    vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'), sb, {filename:f});
+  loadBrowserScripts(KOK, (source, options) => vm.runInContext(source, sb, options));
   const R=c=>{ try{ return vm.runInContext('(function(){'+c+'})()', sb); }
                catch(e){ return 'HATA: '+e.message; } };
   const flush=()=>{ let tur=0;

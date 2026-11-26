@@ -10,10 +10,16 @@ Yeni ham kontrol, değişmemiş p57 kaynak ağacında Node v24.22.1, Debian 13, 
 
 ## Temsilî ilk hatalar
 
-| Test adı | Eski hata | Kök neden adayı | Düzeltme | Yeni sonuç | Gerçek ürün riski |
+| Test adı | Eski hata | Kök neden | Düzeltme | Yeni sonuç | Gerçek ürün riski |
 |---|---|---|---|---|---|
-| `faz85c_crisis_save_continuity` | 90 PASS / 54 FAIL. 200 aylık zincir `DiplomaticInbox is not defined` ile kesiliyor. | Yerel VM listesinde `inbox.js` yok. Başarısız kuruluma bağlı kayıt zinciri var. | İncelemede | NOT RUN | Kayıt kontrolleri çalıştırılamıyor. |
-| `faz85e_event_inbox_continuity` | 92 PASS / 59 FAIL. Gezinti ve codec senaryoları `DiplomaticInbox` olmadan başlıyor. | Aynı yerel yükleme listesi. | İncelemede | NOT RUN | Bildirim kodlayıcı ve uygulama kontrolleri birincil hatadan etkilenebilir. |
-| `faz86b_deal_engine` | 121 PASS / 22 FAIL. 200 aylık zincir ve teklif arayüzü kesiliyor. | Aynı yerel yükleme listesi. | İncelemede | NOT RUN | Anlaşma kontrolü ile arayüz kaynak hatası henüz ayrılmadı. |
+| `faz85c_crisis_save_continuity` | 90 PASS / 54 FAIL. 200 aylık zincir `DiplomaticInbox is not defined` ile kesiliyor. | Yerel VM listesinde `inbox.js` yok. Başarısız kuruluma bağlı kayıt zinciri var. | HTML betik listesi | 143/1, eski harita kilidi | Kayıt kontrolleri çalıştırılamıyor. |
+| `faz85e_event_inbox_continuity` | 92 PASS / 59 FAIL. Gezinti ve codec senaryoları `DiplomaticInbox` olmadan başlıyor. | Aynı yerel yükleme listesi. | HTML betik listesi | 118/33, kalan karar/codec kontrolleri açık | Bildirim kodlayıcı ve uygulama kontrolleri birincil hatadan etkilenebilir. |
+| `faz86b_deal_engine` | 121 PASS / 22 FAIL. 200 aylık zincir ve teklif arayüzü kesiliyor. | Aynı yerel yükleme listesi. | HTML betik listesi | 129/14, kalan teklif fikstürleri açık | Anlaşma kontrolü ile arayüz kaynak hatası henüz ayrılmadı. |
 
 Güncel `index.html` önce `news.js` ve `inbox.js` sonra `ui.js` yükler. 18 inceleme adayının kendi VM listelerinde hiç `inbox.js` yok. `UI.drawInbox` içindeki gerçek karar kartı yolu modülü çağırıyor. Bu aşamada 18 paketteki bütün FAIL'ler tek nedene yazılmadı. [Başlangıç günlükleri](evidence/test-fail-kok0/dogrudan/)
+
+## 1. Ortak test ortamı
+
+Bu üç eşlemede yalnız VM yükleyicisi değişti. Eski yerel listeler `news.js`, `inbox.js`, `construction.js` ve `archive-ui.js` dosyalarını atlıyordu. Yeni ortak yükleyici, aynı p57 çalışma zamanını `index.html` sırasıyla aynı test VM’sinde çalıştırıyor. Eski DOM fikstürleri, araçlar, kayıt girdileri ve assertion'lar korunuyor. Arşiv kaynak köküyle çalışan karşılaştırmalar kendi yükleyicilerini kullanmaya devam ediyor.
+
+Aynı yeni yükleyicide yalnız HTML’deki `inbox.js` sırası çıkarıldığında başlangıç FAIL sayıları üç testte de geri geldi. 54/59/22 FAIL’e karşı tam tarayıcı sırası 1/33/14 verdi. Üçünde toplam 87 assertion yeniden geçti. Eksik modül sonrasında zincirleme duruşlarla eski arayüz/olay varsayımları birlikte bulundu. Kalan 48 assertion ayrı değerlendirmede. [Pozitif ve negatif günlükler](evidence/test-fail-kok0/dogrudan/)

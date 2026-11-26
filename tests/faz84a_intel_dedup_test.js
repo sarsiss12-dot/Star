@@ -5,6 +5,7 @@
    Çalıştırma: node tests/faz84a_intel_dedup_test.js
    ═══════════════════════════════════════════════════════════════════ */
 'use strict';
+const {loadBrowserScripts} = require('./helpers/browser-scripts');
 const release5=require('./helpers/release-contract');
 const fs=require('fs'), path=require('path'), cp=require('child_process'),
       vm=require('vm'), crypto=require('crypto');
@@ -74,9 +75,7 @@ function harness(){
   sb.navigator={userAgent:'node',standalone:false};
   sb.globalThis=sb;
   vm.createContext(sb);
-  for(const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                  'economy.js','commerce.js','ui.js','commerce-ui.js','economic-ledger.js','economy-ui.js','audio.js'])
-    vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'),sb,{filename:f});
+  loadBrowserScripts(KOK, (source, options) => vm.runInContext(source, sb, options));
   const R=c=>{try{return vm.runInContext('(function(){'+c+'})()',sb);}
               catch(e){return 'HATA: '+e.message;}};
   const flush=()=>{let t=0;while(KUYRUK.length&&t++<20){const k=KUYRUK.splice(0);
