@@ -6,9 +6,9 @@ PR #82 ile `codex/stars-p56-kabul0` uzak HEAD'i `a8c07e18ee3daf544da62244fe31cd2
 
 p55 arşiv 253 paket, 6.632 PASS ve 279 FAIL. p56 arşiv 256 paket, 6.649 PASS ve 279 FAIL. p57 arşiv ham 256 paket, 6.612 PASS ve 280 FAIL. Ayrı tekrarlarla elde edilen p57 teşhis toplamı 6.654 PASS ve 276 FAIL. Bu toplam ayrı deneyleri içerir. [Arşiv paket envanteri](evidence/test-fail-kok0/baslangic/p57-arsiv-envanter.json)
 
-Yeni ham kontrol, değişmemiş p57 kaynak ağacında Node v24.22.1, Debian 13, 2 işçi ve aynı 180 saniye sınırıyla başlatıldı. Canvas ve Chromium sürümleri ortam kaydındadır. [Ortam](evidence/test-fail-kok0/baslangic/ortam.json)
+Yeni ham kontrol, değişmemiş p57 kaynak ağacında Node v24.22.1, Debian 13, 2 işçi ve paket başına 180 saniye sınırıyla tamamlandı. 26 dk 53 sn içinde 256 paket **6.643 PASS / 276 FAIL** verdi. 55 pakette en az bir FAIL, 10 korumalı eşdeğerlik paketinde 0/0 var. Bu sayaçlar önceki teşhis toplamından bağımsızdır. Kapsamı tamamlamayan paketlerin 0/0’ı PASS olarak etiketlenmedi. [Ortam](evidence/test-fail-kok0/baslangic/ortam.json) · [Tam paket envanteri ve hata zincirleri](evidence/test-fail-kok0/baslangic/envanter.json) · [Ham paket günlükleri](evidence/test-fail-kok0/baslangic/paket-gunlukleri.tar.gz)
 
-Oyun davranışı düzeltmesini içeren kaynak `e2da7ec0018a40d63f10e576b69d55db53708981`. Testlerin son kaynak ağacı `b6acca2a7a60db41e24ff8869d9c4777bc0bee92`. İnceleme PR #83 üzerinden yürüyor. [Taslak PR](https://github.com/sarsiss12-dot/Star/pull/83)
+Oyun davranışı düzeltmesini içeren kaynak `e2da7ec0018a40d63f10e576b69d55db53708981`. Tam aday taramasının test kaynağı `5789373ac13e104794c0b4eb812ed2e1b4367850`. İnceleme PR #83 üzerinden yürüyor. [Taslak PR](https://github.com/sarsiss12-dot/Star/pull/83)
 
 ## Temsilî ilk hatalar
 
@@ -18,7 +18,7 @@ Oyun davranışı düzeltmesini içeren kaynak `e2da7ec0018a40d63f10e576b69d55db
 | `faz85e_event_inbox_continuity` | 92 PASS / 59 FAIL. Gezinti ve codec senaryoları `DiplomaticInbox` olmadan başlıyor. | Aynı yerel yükleme listesi. | HTML betik listesi | 118/33, kalan karar/codec kontrolleri açık | Bildirim kodlayıcı ve uygulama kontrolleri birincil hatadan etkilenebilir. |
 | `faz86b_deal_engine` | 121 PASS / 22 FAIL. 200 aylık zincir ve teklif arayüzü kesiliyor. | Aynı yerel yükleme listesi. | HTML betik listesi | 129/14, kalan teklif fikstürleri açık | Anlaşma kontrolü ile arayüz kaynak hatası henüz ayrılmadı. |
 
-Güncel `index.html` önce `news.js` ve `inbox.js` sonra `ui.js` yükler. 18 inceleme adayının kendi VM listelerinde hiç `inbox.js` yok. `UI.drawInbox` içindeki gerçek karar kartı yolu modülü çağırıyor. Bu aşamada 18 paketteki bütün FAIL'ler tek nedene yazılmadı. [Başlangıç günlükleri](evidence/test-fail-kok0/dogrudan/)
+Güncel `index.html` önce `news.js` ve `inbox.js` sonra `ui.js` yükler. 18 inceleme adayının kendi VM listelerinde hiç `inbox.js` yok. `UI.drawInbox` içindeki gerçek karar kartı yolu modülü çağırıyor. Yeni ham kontrolde bu 18 pakette 209 FAIL ve hata zincirlerinde 27 açık `DiplomaticInbox is not defined` satırı var. Arşivde 210 FAIL ve yine 27 açık satır vardı. 209 veya 210 sayısı bu paketlerdeki bütün başarısız assertion’ların toplamı. [Başlangıç günlükleri](evidence/test-fail-kok0/dogrudan/)
 
 ## 1. Ortak test ortamı
 
@@ -47,9 +47,13 @@ Tam geri alma kapsamasına filo defteri ve işaret kümesi alındı. Test, boş 
 
 Güncel harita özeti `a8c07e18` Git nesnesinden üç kesit olarak alındı. Özetlerden biri değişince veya arşiv ile p57 kesitleri karıştırılınca denetim başarısız olur. `index.html` de p56 ve p57 arasında değişmedi. Çalışma ağacından kendiliğinden yeni özet kabul edilmiyor. [Hedefli ham sonuçlar](evidence/test-fail-kok0/dogrudan/aday/)
 
+Başlangıçta 16 harita ve 5 HTML kilidi p57 sürümünü hatalı reddetti. Buna MP.8.9, PERF.2 ve 96H.7.1’deki dört tarihsel kaynak denetimi de eklendi. Bu 25 kaynak kontrolü için döneme uygun karşılaştırma kuruldu. p13/p14’ün beş ham Save8 eşleşmesi ayrı bir davranış eşdeğerliğidir. [Paket başına ilk hata](evidence/test-fail-kok0/baslangic/envanter.json)
+
 ## 4. Zaman aşımı
 
 Test işçisi 180 saniye sınırını koruyor. Önceki çalışmada iki işçiyle zaman aşımına uğrayan üç kampanya ve yeni kontrolde zaman aşımına uğrayan geniş galaksi kurulum matrisi, paket kuyruğu boşalınca birer birer başlıyor. Çıkış kodu, sinyal ve zaman aşımı nedeni ham özette ayrı tutuluyor. Bir saniyelik negatif çalıştırmada kampanya `TIMEOUT`, `SIGKILL`, sıfır PASS ve bir FAIL olarak kaldı. [Negatif çalıştırıcı kontrolü](evidence/test-fail-kok0/dogrudan/zaman-asimi-1s.json)
+
+Yeni ham kontrolde `faz86f`, `faz89b` ve `faz91b` sırasıyla 100,7, 105,3 ve 99,9 saniyede geçti. `faz96g2` 180,1 saniyede durdu. Diferansiyel çalıştırma belirsizliği gidermek için bu dört paketi ayrı ölçüyor. İlk ham koşu dosyalarındaki başarısız süreler olduğu gibi duruyor.
 
 ## 5. Save8, multiplayer ve performans
 
@@ -59,6 +63,6 @@ Gerçek Chromium 155 ve yerel üretim relay ile I100 4/4 PASS. Host ve iki misaf
 
 ## 6. Açık incelemeler
 
-Eski karar arayüzü testleri kapatılmadı. `faz85e` içinde `UI.openNote` tarihsel tüketicinin doğrudan çağrılmasını bekliyor. Güncel yol `DiplomaticInbox.capture` sonrasında `ArchiveUI.record` çağırıyor. Eski çifte barış ve teklif kimliği kontrollerini güncel giriş noktasına taşıyacak bağımsız negatif kontroller henüz tamamlanmadı. `faz86b` içinde eski karşı teklif kartı fikstürü ilk başarısızlıktan sonra saflık kontrollerini de etkiliyor. Bu paketlerdekilerin tümünün altyapı kaynaklı olduğu çıkarımı yapılmadı.
+`faz85e` içinde teklif kimliği deneyi güncel karar kartıyla çalışıyor. Üç gerçek teklif, aynı teklifin mükerrer olarak açılmaması, Save8’den sonra üç ayrı kimlik ve aynı şartlar, birini reddedince diğerinin bozulmaması doğrulandı. Eski karşılaştırma iki eksik alanı eşit sayabiliyordu. Kalan tüketici ve çifte barış testleri eski modal kancalarını bekliyor. Güncel `UI.openNote` önce `DiplomaticInbox.capture`, sonra `ArchiveUI.record` çağırıyor. `faz86b` içinde eski karşı teklif kartı fikstürü ilk başarısızlıktan sonra saflık kontrollerini de etkiliyor. Bu paketlerdekilerin tümünün altyapı kaynaklı olduğu çıkarımı yapılmadı.
 
 `faz95e_news` bir barış haberini bekliyor. Güncel motorun ayrı `war-end:<cephe>` ve `peace:<çift>:<gün>` kayıtları var. Bu iki kaydın kullanıcıya tekrar gibi görünüp görünmediği değerlendirilmedi. Aktif işlerin ve yeni sürüm kararının durumu devir kaydında. [Mevcut kontrol ve tekrar komutları](CODEX-TEST-FAIL-KOK0-DEVIR.md)
