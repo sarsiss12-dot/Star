@@ -9,7 +9,7 @@
    supplyDistance'ın doğrudan geçit denetimi (B) eski gateSupplyNodes listesiyle her filo ve her sistem için aynı sonucu verir. */
 const fs=require('fs'),os=require('os'),path=require('path'),crypto=require('crypto'),assert=require('assert/strict');
 const {runtime}=require('./helpers/runtime'),{harness}=require('./helpers/95e-fixture'),P=require('./helpers/perf2-preservation');
-const originalStrip=P.stripReviewedP2,stripSetup=require('./helpers/beta-setup0-preservation.cjs').stripReviewedSetup0;P.stripReviewedP2=(f,s)=>originalStrip(f,['ai.js','main.js'].includes(f)?stripSetup(f,s):s);
+const {withPinnedRuntime}=require('./helpers/pinned-runtime');
 const {test,end}=harness(),root=path.resolve(__dirname,'..');
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
 const SAVE=fs.readFileSync(path.join(__dirname,'fixtures/perf2/orta6-s404-m60.save'),'utf8');
@@ -17,20 +17,20 @@ const FILES=['main.js','map.js','combat.js','ai.js','diplomacy.js','economy.js',
 const BUILD=/const BUILD_ID = '[^']*';/;
 function controlRoot(){
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'perf2-control-'));
-  for(const f of FILES)fs.writeFileSync(path.join(dir,f),originalStrip(f,fs.readFileSync(path.join(root,f),'utf8')));
+  for(const f of FILES)fs.writeFileSync(path.join(dir,f),P.stripReviewedP2(f,fs.readFileSync(path.join(root,f),'utf8')));
   return dir;
 }
 const STEP=`G.autoSave=false;function __step(){const b=Math.floor(G.day/30);for(let i=0;i<60;i++){G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();if(Math.floor(G.day/30)>b){monthTick();break;}}}`;
 const COUNT=`var __n={};for(const k of ['empireIncome','aiBuildingDelta','aiEconomyPlan','queueBuilding','queueShip','aiMove','executeDeal']){const o=globalThis[k];__n[k]=0;globalThis[k]=function(){__n[k]++;return o.apply(this,arguments);};}`;
 function world(r){const h=runtime({root:r});h.sb.__s=SAVE;assert.equal(h.run('deserialize(__s)'),true);h.run(STEP);return h;}
 
-test('arındırılmış kaynaklar PERF.2 öncesi baytların kendisi: ai.js ve main.js MP.7.5 (96h10p4) özeti',()=>{
-  const ai=fs.readFileSync(path.join(root,'ai.js'),'utf8'),main=fs.readFileSync(path.join(root,'main.js'),'utf8');
+test('arşiv PERF.2 kaynakları arındırılınca MP.7.5 (96h10p4) baytları birebir geri döner',()=>withPinnedRuntime('1034459d2c5f082c3c04397a5b4d991108d8243a',p5=>{
+  const ai=fs.readFileSync(path.join(p5,'ai.js'),'utf8'),main=fs.readFileSync(path.join(p5,'main.js'),'utf8');
   assert.equal(sha(P.stripReviewedP2('ai.js',ai)),'11485356c0e75c39d9dabb2fc06b50bfb425598d3d08a2b767fc691c39ce51c6');
   assert.equal(sha(P.stripReviewedP2('main.js',main).replace(BUILD,"const BUILD_ID = '96h10p4';")),'3b259d32d22877bae16cfbd5e59f2abed0ec829146cf690e0eb460e75f76ba00');
   assert.notEqual(P.stripReviewedP2('ai.js',ai),ai);assert.notEqual(P.stripReviewedP2('main.js',main),main);
   assert.equal(P.stripReviewedP2('economy.js','x'),'x');
-});
+}));
 test('kontrol ve aday aynı geç oyun Save8\'inden 3 ay: her ay Save8 ve RNG birebir; karar çağrıları aynı, gelir hesabı daha az',()=>{
   const dir=controlRoot();try{
     const c=world(dir),a=world(root);c.run(COUNT);a.run(COUNT);
