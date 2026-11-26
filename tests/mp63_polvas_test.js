@@ -36,23 +36,34 @@ const ok=(r,m)=>assert.equal(r&&r.status,'ok',(m||'')+' '+JSON.stringify(r));
 const st=h=>({save:h.run('serialize()'),rng:h.run('RND_STATE')});
 const notes=(h,id)=>J(h,`MP.viewFor(G.emps[${id}]).log.map(n=>n.m)`);
 const vote=h=>J(h,'(()=>{const v=G.feds[0].vote;return v?{motion:v.motion,yes:v.yes.slice(),no:v.no.slice(),elig:v.eligible.slice(),tok:fedVoteToken(v)}:null;})()');
+const founding={kind:'fedFoundStart',type:'bilimsel',ballot:'equal',members:[2,4]};
+function found(h){
+  const start=cmd(h,B,founding);ok(start,'founding proposal');
+  const p=J(h,'G.fedFounding.proposals[0]');
+  assert.equal(J(h,'G.feds.length'),0);
+  for(const id of founding.members)assert.equal(p.replies[id].status,'accepted',p.replies[id].why);
+  ok(cmd(h,B,{kind:'fedFoundFinish',id:p.id}),'founder confirms');
+}
 /* B kurar (motor), A'yı davet eder, A katılır → üyeler [B, 2, 4, A] */
 function fed4(h){
-  ok(cmd(h,B,{kind:'fedFound',type:'bilimsel',ballot:'equal'}),'found');
+  found(h);
   h.run(`for(const b of [3,2,4])G.emps[1].ally[b]=G.emps[b].ally[1]=true;`);
   ok(cmd(h,B,{kind:'fedInvite',target:A}),'invite');ok(cmd(h,B,{kind:'fedVote',fed:J(h,'G.feds[0].id'),token:vote(h).tok,yes:true}),'B votes admit');
   ok(cmd(h,A,{kind:'fedReply',fed:J(h,'G.feds[0].id'),action:'accept'}),'A accepts');return J(h,'G.feds[0].id');
 }
 
-test('C kuruluş (GERÇEK): B, iki bağımsız AI müttefikiyle (2, 4) motorun foundFederation\'ıyla federasyon kurar; başkan B, oy rejimi seçilen; kontrol: gözlem kaydı yoksa motor kendi gerekçesiyle reddeder',()=>{
-  const c=world('for(const e of G.emps)if(e.aiIntel)e.aiIntel.systems={};G.day+=1;');const r=cmd(c,B,{kind:'fedFound',type:'bilimsel',ballot:'equal'});
-  assert.equal(r.code,'rules:fed');assert.match(r.detail.join(' '),/AI müttefik gerekir/,'control: engine condition, not an MP error');
-  const h=world();const q=J(h,`canFoundFed(G.emps[${B}],'bilimsel','equal')`);assert.equal(q.ok,true,JSON.stringify(q.reasons));
-  ok(cmd(h,B,{kind:'fedFound',type:'bilimsel',ballot:'equal'}));const f=J(h,'G.feds[0]');
+test('C kuruluş (GERÇEK): B iki bağımsız AI müttefikinin rızasıyla kurar; eski doğrudan komut rızayı atlayamaz',()=>{
+  const c=world('for(const e of G.emps)if(e.aiIntel)e.aiIntel.systems={};G.day+=1;');ok(cmd(c,B,founding));
+  const blocked=J(c,'G.fedFounding.proposals[0]');
+  assert(founding.members.some(id=>blocked.replies[id].status==='rejected'),JSON.stringify(blocked.replies));
+  assert.notEqual(cmd(c,B,{kind:'fedFoundFinish',id:blocked.id}).status,'ok');assert.equal(J(c,'G.feds.length'),0);
+  const h=world();const direct=cmd(h,B,{kind:'fedFound',type:'bilimsel',ballot:'equal'});
+  assert.equal(direct.code,'rules:fed');assert.match(direct.detail.join(' '),/ortak rızaları/);
+  found(h);const f=J(h,'G.feds[0]');
   assert.deepEqual(f.members.slice().sort(),[2,B,4].sort());assert.equal(f.leader,B);assert.equal(J(h,'fedCharter(G.feds[0]).ballot'),'equal');
 });
 test('C oylama: üye kabulünde uzak insan B\'nin oyu OTOMATİK DEĞİL (AI üyeler kendi değerlendirmesiyle); B kendi oyunu verir; ikinci oy reddedilir; A daveti kendisi kabul eder',()=>{
-  const h=world();ok(cmd(h,B,{kind:'fedFound',type:'bilimsel',ballot:'equal'}));h.run(`for(const b of [3,2,4])G.emps[1].ally[b]=G.emps[b].ally[1]=true;`);
+  const h=world();found(h);h.run(`for(const b of [3,2,4])G.emps[1].ally[b]=G.emps[b].ally[1]=true;`);
   ok(cmd(h,B,{kind:'fedInvite',target:A}));let v=vote(h);assert.equal(v.motion,'admit');assert(!v.yes.includes(B)&&!v.no.includes(B),'remote human B not auto-voted');
   assert.deepEqual(v.yes.slice().sort(),[2,4],'AI members voted on their own assessment');
   ok(cmd(h,B,{kind:'fedVote',fed:J(h,'G.feds[0].id'),token:v.tok,yes:true}));assert.notEqual(cmd(h,B,{kind:'fedVote',fed:J(h,'G.feds[0].id'),token:v.tok,yes:false}).status,'ok','second vote refused');

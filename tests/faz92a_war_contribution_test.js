@@ -64,7 +64,13 @@ test('Separate peace keeps other campaign front active',()=>{
  eq(h.run('warLedgerFind(0,2)'),null);assert.ok(h.run('warLedgerFind(3,0)'));
 });
 test('Empire elimination closes episode without crediting purged fleets as combat kills',()=>{
- const h=fresh();war(h);h.run('T.dead=true;purgeEmpire(T)');eq(h.run('G.warLedger.fronts[0].endReason'),'eliminated');eq(h.run('G.warLedger.fronts[0].metrics[0].shipsDestroyed'),0);
+ const h=fresh();war(h);
+ h.run('newFleet(T,T.home,[{c:"muh"}])');
+ const before=h.run('G.fleets.filter(f=>f.e===2).length');assert.ok(before>0);
+ h.run('T.dead=true;purgeEmpire(T)');eq(h.run('G.fleets.filter(f=>f.e===2).length'),0);
+ eq(h.run('G.warLedger.fronts[0].ended'),h.run('G.day'));
+ eq(h.run('G.warLedger.fronts[0].endReason'),'eliminated|actor:auto');
+ eq(h.run('G.warLedger.fronts[0].metrics[0].shipsDestroyed'),0);
 });
 test('Real battle round uses actual hull damage and loss counts',()=>{
  const h=battle();h.run('var before=B.ships.reduce((n,s)=>n+maxHull(s.c,O)*s.h,0);combatTick(.1);var after=B.ships.reduce((n,s)=>n+maxHull(s.c,O)*s.h,0);var f=warLedgerFind(0,1)');
@@ -144,8 +150,12 @@ test('Mixed ownership planet flip is recorded even if system already belongs to 
  eq(h.run('G.warLedger.fronts[0].metrics[0].systems.length'),0);eq(h.run('G.warLedger.fronts[0].metrics[0].planets.length'),1);
 });
 test('Status quo closes real episode without distributing coalition land',()=>{
- const h=fresh();war(h);h.run('P.exh={2:100};T.exh={0:100}');eq(h.run('statusQuoPeace(P,T).ok'));
- eq(h.run('G.warLedger.fronts[0].endReason'),'status-quo');
+ const h=fresh();war(h);
+ eq(h.run('executeDeal({from:3,to:0,give:[{t:"warOn",target:2}],want:[]})'));
+ eq(h.run('warLedgerFind(3,2).campaign'),h.run('warLedgerFind(0,2).campaign'));
+ h.run('var land=()=>JSON.stringify(G.sys.map(s=>[s.owner,s.planets.map(p=>p.owner)]));var before=land();P.exh={2:100};T.exh={0:100}');
+ eq(h.run('statusQuoPeace(P,T).ok'));eq(h.run('land()'),h.run('before'));
+ eq(h.run('G.warLedger.fronts[0].endReason'),'status-quo|actor:0');
 });
 test('New game resets previous campaign ledger',()=>{
  const h=fresh();war(h);h.run('setupGame({...G.cfg})');eq(h.run('G.warLedger.fronts.length'),0);eq(h.run('G.warLedger.next'),1);

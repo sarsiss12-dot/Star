@@ -86,10 +86,26 @@ test('misafir sayfası (/mp/play): aynı index.html + <base href="/"> + lobi/ayn
   try{const get=p=>new Promise((res,rej)=>http.get({host:'127.0.0.1',port:s.address().port,path:p},r=>{const b=[];r.on('data',d=>b.push(d));r.on('end',()=>res({status:r.statusCode,h:r.headers,body:Buffer.concat(b).toString()}));}).on('error',rej));
     const r=await get('/mp/play?code=ABCD-EFGH');assert.equal(r.status,200);
     const orig=fs.readFileSync(path.join(root,'index.html'),'utf8');
-    assert.equal(r.body,orig.replace('<head>','<head><base href="/">').replace('</body>','<link rel="stylesheet" href="/research/mp1/client/mp1.css"><link rel="stylesheet" href="/research/mp3/client/mp3.css"><link rel="stylesheet" href="/research/mp31/client/mp31.css"><link rel="stylesheet" href="/research/mp6/client/mp6.css"><link rel="stylesheet" href="/research/mp61/client/mp61.css"><link rel="stylesheet" href="/research/mp7/client/mp7.css"><script src="/research/mp1/client/view.js"></script><script src="/research/mp3/client/dip-ui.js"></script><script src="/research/mp31/client/pol-ui.js"></script><script src="/research/mp6/mirror.js"></script><script src="/research/mp61/client/mp61.js"></script><script src="/research/mp6/client/guest-stars.js"></script><script src="/research/mp7/client/mp7-setup.js"></script><script src="/research/mp71/client/mp71-dip.js"></script><script src="/research/mp1/client/join.js"></script></body>'));
+    const version=JSON.parse((await get('/mp/version')).body);
+    const guard=/<script data-release="([a-f0-9]{64})" data-build="([^"]+)">([\s\S]*?)<\/script>/.exec(r.body);
+    assert.ok(guard);assert.equal(guard[1],version.release);assert.equal(guard[2],version.build);
+    assert.equal(guard[3],fs.readFileSync(path.join(root,'research/mp1/client/release-guard.js'),'utf8'));
+    const notice=/<section id="mpReleaseNotice" hidden[^>]*>[\s\S]*?<\/section>/.exec(r.body);
+    assert.ok(notice);assert.match(notice[0],/id="mpReleaseMessage" role="status"/);assert.match(notice[0],/id="mpReleaseRetry"/);
+    const sha=bytes=>crypto.createHash('sha256').update(bytes).digest('base64');
+    const pwaScripts=new Set([...orig.matchAll(/<script src="([^"/]+)"><\/script>/g)].map(m=>m[1]));
+    let guardedScripts=0;
+    const html=r.body.replace(guard[0],'').replace(notice[0],'').replace(/<script src="\/([^"?]+)\?mp-release=([a-f0-9]{64})" integrity="sha256-([^"]+)"><\/script>/g,(_,file,release,integrity)=>{
+      guardedScripts++;
+      assert.equal(release,version.release);assert.equal(integrity,sha(fs.readFileSync(path.join(root,file))));
+      return `<script src="${pwaScripts.has(file)?file:'/'+file}"></script>`;
+    });
+    assert.equal(guardedScripts,pwaScripts.size+9);
+    assert.equal(html,orig.replace('<head>','<head><base href="/">').replace('</body>','<link rel="stylesheet" href="/research/mp1/client/mp1.css"><link rel="stylesheet" href="/research/mp3/client/mp3.css"><link rel="stylesheet" href="/research/mp31/client/mp31.css"><link rel="stylesheet" href="/research/mp6/client/mp6.css"><link rel="stylesheet" href="/research/mp61/client/mp61.css"><link rel="stylesheet" href="/research/mp7/client/mp7.css"><script src="/research/mp1/client/view.js"></script><script src="/research/mp3/client/dip-ui.js"></script><script src="/research/mp31/client/pol-ui.js"></script><script src="/research/mp6/mirror.js"></script><script src="/research/mp61/client/mp61.js"></script><script src="/research/mp6/client/guest-stars.js"></script><script src="/research/mp7/client/mp7-setup.js"></script><script src="/research/mp71/client/mp71-dip.js"></script><script src="/research/mp1/client/join.js"></script></body>'));
     const csp=r.h['content-security-policy'];assert.match(csp,/script-src 'self' 'unsafe-hashes' 'sha256-/);assert(!/script-src[^;]*'unsafe-inline'/.test(csp),'no unsafe-inline scripts');
     const inline=[...orig.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>"'sha256-"+crypto.createHash('sha256').update(m[1]).digest('base64')+"'");
     for(const x of inline)assert(csp.includes(x),'inline script hash');assert(csp.includes("'sha256-"+crypto.createHash('sha256').update('forceFullscreen()').digest('base64')+"'"));
+    assert(csp.includes("'sha256-"+sha(guard[3])+"'"),'release guard script hash');
     for(const p of ['/research/mp6/mirror.js','/research/mp6/client/guest-stars.js','/research/mp6/client/mp6.css','/research/mp61/client/mp61.js','/research/mp61/client/mp61.css','/research/mp7/client/mp7-setup.js','/research/mp7/client/mp7.css'])assert.equal((await get(p)).status,200,p);
     assert.equal((await get('/mp/join?basic=1&code=X')).status,200,'legacy lite client kept only behind explicit ?basic=1');assert.equal((await get('/mp/join?code=X')).status,302,'MP-FIELD-FIX.0: old /mp/join link redirects to the full STARS UI');
   }finally{relay.shutdown('test');}

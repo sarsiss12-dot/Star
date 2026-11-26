@@ -17,7 +17,12 @@ function isMapInfrastructurePreserved(source){
   const prefixEnd=helpers<0?source.indexOf('const View ='):helpers;
   if(prefixEnd<0||start<0||end<=start||fleet<=end)return false;
   const parts=[source.slice(0,prefixEnd),source.slice(start,end),source.slice(fleet)];
-  const expected=['d828073fbddcaedcb411f1a853b20fcfe1e7b63fb9a4872daf8da02403c0ca06', '46c321133ccf37c51079522637bc8e839663ac09cfb3ae696ccc14000f03537b', '3a9500d3af286a299bc8e783174af8d5a61e63c4bc607b44fd593e1ec64f6c65'];
-  return parts.every((part,i)=>createHash('sha256').update(part.trimEnd()).digest('hex')===expected[i]);
+  const expected=[
+    ['d828073fbddcaedcb411f1a853b20fcfe1e7b63fb9a4872daf8da02403c0ca06', '46c321133ccf37c51079522637bc8e839663ac09cfb3ae696ccc14000f03537b', '3a9500d3af286a299bc8e783174af8d5a61e63c4bc607b44fd593e1ec64f6c65'],
+    // Doğrulanmış p57 kaynağı a8c07e18; harita p56'dan beri değişmedi.
+    ['6fcaaebc70b4dc62ca29b3368be963c87e7d6789075117b8c44288afe12109dd', 'f6e9224d8aa99a096491f98038dc88914e512f036d62afcdec226b7c99fa4b6c', '3a9500d3af286a299bc8e783174af8d5a61e63c4bc607b44fd593e1ec64f6c65']
+  ];
+  const hashes=parts.map(part=>createHash('sha256').update(part.trimEnd()).digest('hex'));
+  return expected.some(reference=>reference.every((hash,i)=>hashes[i]===hash));
 }
 module.exports={isMapInfrastructurePreserved};
