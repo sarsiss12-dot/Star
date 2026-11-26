@@ -1,8 +1,43 @@
 'use strict';
-const fs=require('fs'),path=require('path'),os=require('os'),cp=require('child_process'),assert=require('assert/strict'),crypto=require('crypto'),{runtime}=require('./helpers/runtime');
-let temporary=null,control=process.env.STARS_CONTROL_ROOT;if(!control){temporary=fs.mkdtempSync(path.join(os.tmpdir(),'fed0-control-'));control=temporary;for(const f of [...Object.keys(JSON.parse(fs.readFileSync('RELEASE-MANIFEST.json')).files),'research/mp0/mp-core.js']){const dest=path.join(control,f);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,cp.execFileSync('git',['show','4ef02795042528d82a7e59c484ccff3c6c10875f:'+f],{maxBuffer:4*1024*1024}));}}
+const fs=require('fs'),path=require('path'),assert=require('assert/strict'),crypto=require('crypto'),{runtime}=require('./helpers/runtime');
+const {withPinnedRuntime}=require('./helpers/pinned-runtime');
+const before='4ef02795042528d82a7e59c484ccff3c6c10875f',founding='618df01768394c7c262e89dc0de979fdb0564bcb';
 const out=process.env.STARS_OUTPUT||'/tmp/stars-fed0-compat';fs.mkdirSync(out,{recursive:true});const rows=[],sha=s=>crypto.createHash('sha256').update(s).digest('hex');let fail=0;
 const step=`function step(){for(let i=0;i<60;i++){const m=Math.floor(G.day/30);G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();if(Math.floor(G.day/30)>m)monthTick();}}`;
-try{for(const seed of[11,23,42,99,404]){try{const raw=runtime({root:control});raw.run(`setupGame({...CFG,seed:${seed},size:'orta',aiCount:5});G.autoSave=false;`);const s=raw.run('serialize()'),a=runtime({root:control}),b=runtime();for(const h of[a,b]){h.sb.save=s;h.run(`if(!deserialize(save))throw Error('load');${step}`);}const samples=[];for(let month=1;month<=3;month++){a.run('step()');b.run('step()');const av=a.run('serialize()'),bv=b.run('serialize()');assert.equal(bv,av,'raw Save8 seed '+seed+' month '+month);assert.equal(a.run('RND_STATE'),b.run('RND_STATE'));samples.push({month,sha256:sha(av),rng:b.run('RND_STATE')});}rows.push({name:'p13 SP seed '+seed+' 3 ay ham Save8/RNG',status:'PASS',samples});console.log('PASS p13 SP seed '+seed+' 3 ay ham Save8/RNG');}catch(e){fail++;rows.push({name:'seed '+seed,status:'FAIL',error:e.stack});console.error(e.stack);}}
-const old=runtime({root:control});old.run(fs.readFileSync(path.join(control,'research/mp0/mp-core.js'),'utf8'));old.run(`setupGame({...CFG,seed:99,size:'orta',aiCount:5});var h=StarsMP.createHost({roomId:'old',random:k=>'ab'.repeat(k),send(){}});var p=h.snapshot({}).pkg;`);const current=runtime();current.sb.pkg=JSON.parse(old.run('JSON.stringify(p)'));current.run(fs.readFileSync('research/mp0/mp-core.js','utf8'));assert.equal(current.sb.pkg.build,'96h10p13');assert(current.run('StarsMP.validatePackage(pkg).ok'));current.run('pkg.integrity.save8="00"');assert.equal(current.run('StarsMP.validatePackage(pkg).ok'),false);rows.push({name:'gerçek p13 MP paket uyumu / bozuk bütünlük reddi',status:'PASS'});console.log('PASS gerçek p13 paket / bozuk bütünlük reddi');
-}finally{fs.writeFileSync(path.join(out,'compat.json'),JSON.stringify(rows,null,2));if(temporary)fs.rmSync(temporary,{recursive:true,force:true});console.log(`GEÇEN: ${rows.filter(r=>r.status==='PASS').length} KALAN: ${fail}`);if(fail)process.exitCode=1;}
+function test(name,fn){try{rows.push({name,status:'PASS',samples:fn()});console.log('PASS '+name);}catch(e){fail++;rows.push({name,status:'FAIL',error:e.stack});console.error(e.stack);}}
+function replay(control,candidate){
+  for(const seed of [11,23,42,99,404])test(`p13/p14 SP seed ${seed} · 3 ay ham Save8/RNG`,()=>{
+    const a=runtime({root:control}),b=runtime({root:candidate});
+    a.run(`setupGame({...CFG,seed:${seed},size:'orta',aiCount:5});G.autoSave=false;`);
+    const save=a.run('serialize()');
+    for(const h of [a,b]){h.sb.save=save;assert(h.run('deserialize(save)'));h.run(step);}
+    const samples=[];
+    for(let month=1;month<=3;month++){
+      a.run('step()');b.run('step()');const av=a.run('serialize()'),bv=b.run('serialize()');
+      assert(bv===av,`raw Save8 seed ${seed} month ${month}: ${sha(bv)} !== ${sha(av)}`);
+      assert.equal(a.run('RND_STATE'),b.run('RND_STATE'));
+      samples.push({month,sha256:sha(av),rng:b.run('RND_STATE')});
+    }
+    return samples;
+  });
+  test('gerçek p13 MP paketi · güncel yükleme / bozuk bütünlük reddi',()=>{
+    const old=runtime({root:control});old.run(fs.readFileSync(path.join(control,'research/mp0/mp-core.js'),'utf8'));
+    old.run(`setupGame({...CFG,seed:99,size:'orta',aiCount:5});var h=StarsMP.createHost({roomId:'old',random:k=>'ab'.repeat(k),send(){}});var p=h.snapshot({}).pkg;`);
+    const current=runtime();current.sb.pkg=JSON.parse(old.run('JSON.stringify(p)'));current.run(fs.readFileSync(path.join(__dirname,'../research/mp0/mp-core.js'),'utf8'));
+    assert.equal(current.sb.pkg.build,'96h10p13');assert(current.run('StarsMP.validatePackage(pkg).ok'));
+    assert(current.run('StarsMP.loadWorld(StarsMP.validatePackage(pkg).pkg).ok'));
+    const state=`JSON.stringify({day:G.day,seed:G.seed,rng:RND_STATE,emps:G.emps.map(e=>[e.id,e.res,e.colonies,Object.keys(e.war).filter(k=>e.war[k])]),fleets:G.fleets.map(f=>[f.id,f.e,f.ships.map(s=>[s.c,s.h])])})`;
+    assert.equal(current.run(state),old.run(state));
+    current.run('pkg.integrity.save8="00"');assert.equal(current.run('StarsMP.validatePackage(pkg).ok'),false);
+  });
+}
+const control=process.env.STARS_CONTROL_ROOT;
+try{
+  withPinnedRuntime(founding,candidate=>{
+    if(control)replay(control,candidate);
+    else withPinnedRuntime(before,root=>replay(root,candidate),['research/mp0/mp-core.js']);
+  });
+}finally{
+  fs.writeFileSync(path.join(out,'compat.json'),JSON.stringify(rows,null,2));
+  console.log(`GEÇEN: ${rows.filter(r=>r.status==='PASS').length} KALAN: ${fail}`);if(fail)process.exitCode=1;
+}

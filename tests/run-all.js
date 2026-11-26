@@ -9,7 +9,7 @@ const timeout=Math.max(1000,Math.min(300000,Number(process.env.STARS_TEST_TIMEOU
 const logs=process.env.STARS_TEST_LOGS;
 if(logs)fs.mkdirSync(logs,{recursive:true});
 // Uzun kampanyalar aynı CPU kotasını paylaşınca 180 sn sınırına ulaşıyordu.
-const exclusive=new Set(['faz86f_ai_balance_test.js','faz89b_daily_campaign_test.js','faz91b_campaign_observer_test.js']);
+const exclusive=new Set(['faz86f_ai_balance_test.js','faz89b_daily_campaign_test.js','faz91b_campaign_observer_test.js','faz96g2_setup_test.js']);
 const regular=tests.filter(name=>!exclusive.has(name));
 const heavy=tests.filter(name=>exclusive.has(name));
 const runStarted=Date.now();
