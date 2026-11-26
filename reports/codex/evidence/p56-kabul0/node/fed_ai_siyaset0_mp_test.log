@@ -1,0 +1,5 @@
+PASS M1 AI üye reform önergesi: oylama insan başkanın oyunu bekler, AI insan adına oy yazmaz; insan reddi → tür değişmez, önerge tekrarlanmaz
+PASS M2 insan üye uyumsuz birlikte: AI yolu insan adına önerge açmaz, ayrılmaz; 40 ay sonra üyelik aynen
+PASS M3 AI üyenin anayasal ayrılışı yalnız kendisini çıkarır: insan başkan, insan üye, fon ve federasyon sürer
+PASS M4 bekleyen reform ve ret, Save8 sonrası aynı oy, Etki ve bekleme ile sürer
+GEÇEN: 4 KALAN: 0

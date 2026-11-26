@@ -1,0 +1,87 @@
+{
+  "sha256": "76afe9a1e1ea7fe7d53e63d26f020c3552c601a97fc361b194e45fc25389018b",
+  "crc32": "BF4AFEB4",
+  "bytes": 973451,
+  "entries": {
+    "RELEASE-MANIFEST.json": {
+      "sha256": "2adc0b0cd1b098f44ce148be64ac7db33a14d9fce894baf54b0131b13d6936a5",
+      "crc32": "6CDDD2B5"
+    },
+    "ai.js": {
+      "sha256": "2fd965e16eabaf50098302eaefcc3e853d52be52546de2e62d2159428865d911",
+      "crc32": "AD88C24D"
+    },
+    "archive-ui.js": {
+      "sha256": "ef7e3dc5288f8951008905dca273eef7b29fb8c711513bc33fca3bcb7b79766a",
+      "crc32": "30B9D38F"
+    },
+    "audio.js": {
+      "sha256": "6ddf6e388fa404394fee6220c2bfeeb3d1f9601c51a35ccdfe3181a8781942f7",
+      "crc32": "8E4EBBB4"
+    },
+    "combat.js": {
+      "sha256": "08971a0bd1b67f6d3dab1a24a0c3dc9d0bcb045c00c29c01735be9fd083be2d6",
+      "crc32": "208C2F6B"
+    },
+    "commerce-ui.js": {
+      "sha256": "81d29e7ce721bc7ce0fc5700ba77f83e463ad5419d87fd27972d3bfd4800d434",
+      "crc32": "A21AFBDE"
+    },
+    "commerce.js": {
+      "sha256": "681654174a02e74594fc37803a535cbfa9970b2a488f428d965b3d1f5f96615a",
+      "crc32": "46F624DD"
+    },
+    "construction.js": {
+      "sha256": "920d6122c3d3e65ef2650c94a9a5a804c3d67b65411627e23184f0e1d5d60e08",
+      "crc32": "4563CF0E"
+    },
+    "diplomacy.js": {
+      "sha256": "3a5d64d2924e64ce28a168e5f1bc315099613df176a1df6935861123daa1a91a",
+      "crc32": "B4D85477"
+    },
+    "economic-ledger.js": {
+      "sha256": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
+      "crc32": "A513EE94"
+    },
+    "economy-ui.js": {
+      "sha256": "68025b1bb388188435a51cca2319e92e7eb9ec6517b4e3c8437f335e2916763f",
+      "crc32": "C8FEC05D"
+    },
+    "economy.js": {
+      "sha256": "ca9b6429fdce59e88559b84a7985cb7a610f846f3db7faca6c809c85fab66c76",
+      "crc32": "1F1FCF20"
+    },
+    "inbox.js": {
+      "sha256": "9d1f0688aac18d1b9db00fad41ef66e30080467783dd69cd52160e5d19ee51b7",
+      "crc32": "6236371E"
+    },
+    "index.html": {
+      "sha256": "64f786fd5a1c50cc4b61bad85a4e4b40c8c42d50a7679e2b8f63d174ae60ba47",
+      "crc32": "CA745EF9"
+    },
+    "main.js": {
+      "sha256": "cb0fec9685e5c2b988b0f3433edd6ec7a7004ff5f823648178e5535bce71dda5",
+      "crc32": "167445D5"
+    },
+    "manifest.json": {
+      "sha256": "6b8305490e9a55e983388bc5bf7a3ebe7fdb3e8e7a2b7fe3cce3da191b52f310",
+      "crc32": "641AE79B"
+    },
+    "map.js": {
+      "sha256": "4c814aa209836f5166f5718fede6045faf920f841f3b34681f0cb5209d5d888f",
+      "crc32": "7F3A057A"
+    },
+    "news.js": {
+      "sha256": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
+      "crc32": "A13FF379"
+    },
+    "sw.js": {
+      "sha256": "c1c0e468f8e780da55ceae26e44f870dbba22692ebd6035c7d0e70514e38cf8c",
+      "crc32": "EE05F68A"
+    },
+    "ui.js": {
+      "sha256": "fbf971a71b9294edcf50d2c95e57ab0f7baee0b0b027561ac49bb7f1c74532d5",
+      "crc32": "84919B0A"
+    }
+  }
+}

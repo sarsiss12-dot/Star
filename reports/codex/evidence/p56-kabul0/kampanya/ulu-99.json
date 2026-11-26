@@ -1,0 +1,109 @@
+{
+  "size": "ulu",
+  "aiCount": 9,
+  "seed": 99,
+  "checkedMonths": 15,
+  "hashes": [
+    [
+      "328fbe1fc033c48784785ac95f6858e38feecafd03a5a61d27d438b370596355",
+      "328fbe1fc033c48784785ac95f6858e38feecafd03a5a61d27d438b370596355"
+    ],
+    [
+      "7c224d9fe84798204e872c52866a05d3f0dacda7a5b9563c91ef4d65727b5350",
+      "7c224d9fe84798204e872c52866a05d3f0dacda7a5b9563c91ef4d65727b5350"
+    ],
+    [
+      "cc76634d6366eb77a45a26d04f34ad5700e3677dd52470daecf3df423e5034aa",
+      "cc76634d6366eb77a45a26d04f34ad5700e3677dd52470daecf3df423e5034aa"
+    ],
+    [
+      "ed91f5563f69e6e92d7a47425c8e5f6bd279e5bc32f8ae7bd0b9de68ec08a7c6",
+      "ed91f5563f69e6e92d7a47425c8e5f6bd279e5bc32f8ae7bd0b9de68ec08a7c6"
+    ],
+    [
+      "dead589b7c17bd329c256f5d37f894cbd61f3f8b8a6167cd7adb0db0f2752179",
+      "dead589b7c17bd329c256f5d37f894cbd61f3f8b8a6167cd7adb0db0f2752179"
+    ],
+    [
+      "82d1c296092b8f2b6a1d12bc853f787f9ed4da180b15f3ce232a9186d567d2c3",
+      "82d1c296092b8f2b6a1d12bc853f787f9ed4da180b15f3ce232a9186d567d2c3"
+    ],
+    [
+      "94d19ef9fe769346a11851494145a4838377fb290a0bced7fddcc8ab9d301d2b",
+      "94d19ef9fe769346a11851494145a4838377fb290a0bced7fddcc8ab9d301d2b"
+    ],
+    [
+      "c15abe9fcf6c45c11a4f4cdb3be9fab57064a2cf197f5ee85376562a73742ad7",
+      "c15abe9fcf6c45c11a4f4cdb3be9fab57064a2cf197f5ee85376562a73742ad7"
+    ],
+    [
+      "4b380c057bf82aaea0c55eed24f2ca9cc32d2312360ab1cea30b3ba93dcdf902",
+      "4b380c057bf82aaea0c55eed24f2ca9cc32d2312360ab1cea30b3ba93dcdf902"
+    ],
+    [
+      "21f7b0e4f64f133cc59670fd1ea9e2f568f7c7a026b608a8de7c76c95c249c91",
+      "21f7b0e4f64f133cc59670fd1ea9e2f568f7c7a026b608a8de7c76c95c249c91"
+    ],
+    [
+      "356e0a55cb956d221084b977e1d4001ae307f34266a770b22fb332335ad50ae0",
+      "356e0a55cb956d221084b977e1d4001ae307f34266a770b22fb332335ad50ae0"
+    ],
+    [
+      "4e1245a289338cdee7a6fa50516f56f0fd2dd5bb9a05684c904e1febb85cc593",
+      "4e1245a289338cdee7a6fa50516f56f0fd2dd5bb9a05684c904e1febb85cc593"
+    ],
+    [
+      "a00990156bfe307b0dae223e15c8b8b7d0831051349227e413681c88419f57a1",
+      "a00990156bfe307b0dae223e15c8b8b7d0831051349227e413681c88419f57a1"
+    ],
+    [
+      "bc0bde33b8c79750b448c590fd1dc8cef2df612b2c2fdf839bca341afeb19a04",
+      "bc0bde33b8c79750b448c590fd1dc8cef2df612b2c2fdf839bca341afeb19a04"
+    ],
+    [
+      "597e36adf80d9228e0a9f7bb0b12592a637cabb33d6885eb42227a8682f082f3",
+      "3b16002adf6378491c42862adb1cc53f016cedfc07a93e97187b205f863fa3a4"
+    ]
+  ],
+  "first": {
+    "month": 15,
+    "day": 450,
+    "save": [
+      "996310a060206eb791a7d8e885a030a0b7dfb111197b63818d89e5067bf432a9",
+      "65b83701a406a9c403cba0abeef2cdefa481c74236922794ac0b692eea0f1d13"
+    ],
+    "rng": [
+      -1612601724,
+      2114471099
+    ],
+    "sections": [
+      "rs",
+      "events",
+      "news",
+      "economyHistory",
+      "emps",
+      "fl"
+    ],
+    "decisions": [
+      [],
+      [
+        {
+          "kind": "new-visible-prize",
+          "day": 450,
+          "by": 5,
+          "fleet": 16,
+          "from": 95,
+          "to": 71,
+          "route": [
+            36,
+            30,
+            39,
+            71
+          ],
+          "power": 934,
+          "guard": 913
+        }
+      ]
+    ]
+  }
+}

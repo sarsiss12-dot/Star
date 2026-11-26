@@ -1,0 +1,22 @@
+[
+  {
+    "build": "96h10p55",
+    "initialCard": 0,
+    "warm": [
+      "L:1:2:20"
+    ],
+    "cold": [],
+    "coldLeader": 2,
+    "repeat": 0
+  },
+  {
+    "build": "96h10p56",
+    "initialCard": 0,
+    "warm": [
+      "L:1:2:20"
+    ],
+    "cold": [],
+    "coldLeader": 2,
+    "repeat": 0
+  }
+]

@@ -1,0 +1,137 @@
+{
+  "size": "ulu",
+  "aiCount": 9,
+  "seed": 404,
+  "checkedMonths": 19,
+  "hashes": [
+    [
+      "c0a3de02e043c047f36b8b5e8adb5cb221f9080950c496b0d0cdc41079ac6561",
+      "c0a3de02e043c047f36b8b5e8adb5cb221f9080950c496b0d0cdc41079ac6561"
+    ],
+    [
+      "a92a9d31924edc0f95f41fb39f0ee74766f02caf1b1b9a4f11843185cb727ea6",
+      "a92a9d31924edc0f95f41fb39f0ee74766f02caf1b1b9a4f11843185cb727ea6"
+    ],
+    [
+      "fc412aa354b0167073fb6a653cea00649cf374a150e6b41de8afabdae9cb9df0",
+      "fc412aa354b0167073fb6a653cea00649cf374a150e6b41de8afabdae9cb9df0"
+    ],
+    [
+      "663430c917e3f5f0012058bc488ba40e411a0d999b40ac83b877841518aae850",
+      "663430c917e3f5f0012058bc488ba40e411a0d999b40ac83b877841518aae850"
+    ],
+    [
+      "914b6e7168a3ff6d03cbdebbb5fcdf8dcaebda674079886509d8b8089cee524f",
+      "914b6e7168a3ff6d03cbdebbb5fcdf8dcaebda674079886509d8b8089cee524f"
+    ],
+    [
+      "99b9638878bfd3e576e890e215e286ebdfdcde84da665ef3f9fee2c017c34c0d",
+      "99b9638878bfd3e576e890e215e286ebdfdcde84da665ef3f9fee2c017c34c0d"
+    ],
+    [
+      "242ad242a24348e9019c9d1fd0502aca792d13277f98561998a3c778b3795763",
+      "242ad242a24348e9019c9d1fd0502aca792d13277f98561998a3c778b3795763"
+    ],
+    [
+      "f0172738b1edced65fd48a78cfb2b12bafd0ed4a86dc0fad4c068920e80404e2",
+      "f0172738b1edced65fd48a78cfb2b12bafd0ed4a86dc0fad4c068920e80404e2"
+    ],
+    [
+      "f46d4beb56215392905e60b3ef997d1a077a94d58e5e6831c23c1f27fd1dbca6",
+      "f46d4beb56215392905e60b3ef997d1a077a94d58e5e6831c23c1f27fd1dbca6"
+    ],
+    [
+      "6c8789e9c08a8f7dbf6c01f4e1b9753bf7e8ce483260786bc4a381c22926630e",
+      "6c8789e9c08a8f7dbf6c01f4e1b9753bf7e8ce483260786bc4a381c22926630e"
+    ],
+    [
+      "bdfca9952145d58850ad085d8b3a0aa171e817a6b33232baac6841055271bf0f",
+      "bdfca9952145d58850ad085d8b3a0aa171e817a6b33232baac6841055271bf0f"
+    ],
+    [
+      "a24944f2b89671f40ccf14f648a733eb0f8017225c5e0350a6960283f828f999",
+      "a24944f2b89671f40ccf14f648a733eb0f8017225c5e0350a6960283f828f999"
+    ],
+    [
+      "d9e2b55af5be8462568761bc14d9d01e9bed01429e9cae6d1b33fcba5587f343",
+      "d9e2b55af5be8462568761bc14d9d01e9bed01429e9cae6d1b33fcba5587f343"
+    ],
+    [
+      "5456e82cfebff0c0352719fbffaee727b23183fffa0ad558558bee78768740ae",
+      "5456e82cfebff0c0352719fbffaee727b23183fffa0ad558558bee78768740ae"
+    ],
+    [
+      "7e07418b611ab09b61b1ad9b19775d93bf15a7aa500d915dea3bba12f0d7d836",
+      "7e07418b611ab09b61b1ad9b19775d93bf15a7aa500d915dea3bba12f0d7d836"
+    ],
+    [
+      "c418779e607237046f018d5b0dd57342b7a0af97b74fae802a81098a9bf7dd4e",
+      "c418779e607237046f018d5b0dd57342b7a0af97b74fae802a81098a9bf7dd4e"
+    ],
+    [
+      "a11ffc266c5c5ce03c1aa9b317d22d96afb81fd80b820db480a8189acc15c1ee",
+      "a11ffc266c5c5ce03c1aa9b317d22d96afb81fd80b820db480a8189acc15c1ee"
+    ],
+    [
+      "99af88959f395f94d6fcf11bbe57b4846256d83481fbab8630d2f260e92f59bc",
+      "99af88959f395f94d6fcf11bbe57b4846256d83481fbab8630d2f260e92f59bc"
+    ],
+    [
+      "ed2e3a044890ccda5639ea33ead46d0521e93bc5672dc95d9bffeada4b11c41b",
+      "7b516ae02b6e6af872b9e22a52ce9c637dcc2ff9c447041a390297177a4d6149"
+    ]
+  ],
+  "first": {
+    "month": 19,
+    "day": 570,
+    "save": [
+      "cf381be4f8d0fee4f6c82755236ff01f4930572fd577bf33083acd129b89bf07",
+      "40ef872ece78e4db23d321c433a692d0e62a2501ab763bb92b3c2002bf556f3e"
+    ],
+    "rng": [
+      -266505771,
+      -1466235914
+    ],
+    "sections": [
+      "rs",
+      "simulation",
+      "emps",
+      "fl"
+    ],
+    "decisions": [
+      [
+        {
+          "kind": "move",
+          "day": 570,
+          "by": 4,
+          "fleet": 85,
+          "from": 3,
+          "to": 35,
+          "route": [
+            35
+          ],
+          "power": 449,
+          "guard": null
+        }
+      ],
+      [
+        {
+          "kind": "new-visible-prize",
+          "day": 570,
+          "by": 1,
+          "fleet": 4,
+          "from": 33,
+          "to": 68,
+          "route": [
+            92,
+            25,
+            2,
+            68
+          ],
+          "power": 942,
+          "guard": 1216
+        }
+      ]
+    ]
+  }
+}

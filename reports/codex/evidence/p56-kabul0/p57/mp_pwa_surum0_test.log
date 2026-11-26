@@ -1,0 +1,7 @@
+NOT RUN p40/p41 sabit kökleri verilmedi
+PASS aday uç noktası, 25 gerçek bayt özeti ve MP önbellek dışı {"build":"96h10p57","mp":"MP.8.9b56","release":"0fd0493ea401dd2ab56cf802dfa856f7c570da95603e2b39ce598ba6425de2e0","main":"de19793f5b13"}
+PASS önceki içerik kimliği relayden geri çevrilir {"roomClients":0,"hostFrames":0}
+PASS tek eski JS, çevrimdışı uyarı, ardından güncelle ve yeniden katıl {"oldPath":"research/mp1/client/join.js","stampWithOldBytes":null,"roomPreserved":true}
+PASS güncellemeden sonra ilk yeni tersane emri {"hostResult":"ok","reason":null,"guestEmpire":1,"hostQueue":1,"guestRows":1,"newOrders":1,"charge":32,"tAck":181}
+PASS güncel temiz giriş ve tekrar bağlanma {"guestEmpire":1,"rows":1,"automaticShipOrders":0}
+GEÇEN: 5 KALAN: 0

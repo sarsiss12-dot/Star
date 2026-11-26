@@ -1,0 +1,22 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[7,7],"mirrorEq":true,"revMs":488,"buildMs":665,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[6,6],"mirrorEq":true,"revMs":956,"buildMs":1175,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":4,"med":37.8,"p95":43.7,"max":43.7},"longtask":{"n":84,"med":81,"p95":139,"max":180},"heapMB":21,"dom":713,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":6,"med":69.5,"p95":220.8,"max":220.8},"refresh":{"n":1,"med":0.8,"p95":0.8,"max":0.8},"longtask":{"n":23,"med":63,"p95":93,"max":97},"builds":6,"deltas":6,"resyncs":0,"minGap":600,"heapMB":21,"dom":640,"intervals":3,"timeouts":2,"notes":0,"results":3,"packets":52,"joinErrors":0},"C":{"build":{"n":5,"med":27.5,"p95":196.2,"max":196.2},"refresh":{"n":0},"longtask":{"n":27,"med":87,"p95":118,"max":149},"builds":5,"deltas":5,"resyncs":0,"minGap":600,"heapMB":19,"dom":714,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":43,"joinErrors":0}}}
+PASS I0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 404; misafir gerçek STARS arayüzünde
+  OLAY {"kind":"speed","who":"B","t":20,"spd":4,"ok":true,"note":3}
+  OLAY {"kind":"window","who":"B","t":51,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸▸▸ 4×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"B","label":"pencere","ok":true,"ms":597,"hostDay":667}}
+  OLAY {"kind":"background","who":"B","t":81,"catch":{"who":"B","label":"arka plan","ok":true,"ms":957,"hostDay":837.6}}
+  OLAY {"kind":"cut","who":"B","t":112,"catch":{"who":"B","label":"kopma","ok":true,"ms":1793,"hostDay":900.1}}
+  OLAY {"kind":"order","who":"B","t":142,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":693}
+  OLAY {"kind":"speed","who":"C","t":172,"spd":4,"ok":false,"note":3}
+  OLAY {"kind":"window","who":"C","t":203,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸▸▸ 4×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"C","label":"pencere","ok":true,"ms":2326,"hostDay":1333}}
+  OLAY {"kind":"background","who":"C","t":234,"catch":{"who":"C","label":"arka plan","ok":true,"ms":1886,"hostDay":1468.7}}
+  OLAY {"kind":"cut","who":"C","t":264,"catch":{"who":"C","label":"kopma","ok":true,"ms":1563,"hostDay":1547.8}}
+  OLAY {"kind":"order","who":"C","t":294,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":652}
+  OLAY {"kind":"speed","who":"B","t":324,"spd":2,"ok":true,"note":6}
+  OLAY {"kind":"window","who":"B","t":354,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸ 2×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"B","label":"pencere","ok":true,"ms":545,"hostDay":1742.1}}
+  örnek 234 · olay 12 · kapalı-pencere donma 0 · açık-pencere bekleme 3 · en büyük gün farkı 10.3
+PASS I1 uzun oturum 6 dk (ulu / 9 AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası 20 sn'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür
+  I2 {"B":{"fleets":76,"seen":38,"seenMiss":0,"seenExtra":0,"hab":7,"habDiff":[],"ownDiff":[],"diff":{"route":[],"hp":[],"combat":[]}},"C":{"fleets":76,"seen":29,"seenMiss":0,"seenExtra":0,"hab":5,"habDiff":[],"ownDiff":[],"diff":{"route":[],"hp":[],"combat":[]}}}
+PASS I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)
+PASS I3 yalıtılmış sensör olayı: B → C; yeni görüş ve keşif, özel alan, host ve iki ayna, Save8 sonrası
+GEÇEN: 4 KALAN: 0

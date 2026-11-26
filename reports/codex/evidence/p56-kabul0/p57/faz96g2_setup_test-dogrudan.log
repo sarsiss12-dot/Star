@@ -1,0 +1,23 @@
+✓ kucuk unique capitals, exact count and bidirectional connected graph: three shapes / eight seeds / low-default-high density
+✓ orta unique capitals, exact count and bidirectional connected graph: three shapes / eight seeds / low-default-high density
+✓ buyuk unique capitals, exact count and bidirectional connected graph: three shapes / eight seeds / low-default-high density
+✓ devasa unique capitals, exact count and bidirectional connected graph: three shapes / eight seeds / low-default-high density
+✓ ulu unique capitals, exact count and bidirectional connected graph: three shapes / eight seeds / low-default-high density
+✗ invalid densities reject before mutating the existing world — AssertionError [ERR_ASSERTION]: Missing expected exception.
+    at /workspace/Star-p57/tests/faz96g2_setup_test.js:6:207
+    at test (/workspace/Star-p57/tests/helpers/95e-fixture.js:13:60)
+    at Object.<anonymous> (/workspace/Star-p57/tests/faz96g2_setup_test.js:6:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+✓ legacy defaults and explicit equivalent defaults preserve old geography and homes
+✓ count does not change generated star coordinates or chosen player identity
+✓ origin independent RNG, forbidden assignments zero at every chance and disabled stays standard
+✓ empty compatible pool safely falls back to standard
+✓ player Golden Age allowed; old AI Golden Age retained through Save8; new pools cannot advance crisis
+✓ optional aiCount survives Save8 unchanged
+GEÇEN: 11 KALAN: 1

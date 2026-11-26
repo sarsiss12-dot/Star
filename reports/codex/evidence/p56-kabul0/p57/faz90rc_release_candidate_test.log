@@ -1,0 +1,16 @@
+✓ dağıtımın ana çalışma dosyaları mevcut ve boş değil
+✓ index script sırası üretim bağımlılık sırasıyla aynı
+✓ manifest kapsamı, başlangıcı ve landscape modu yerel
+✓ SW kabuğu gerçek yerel dosyaların tamamına karşılık gelir
+✓ eksik kabukta install reddedilir ve skipWaiting çalışmaz
+✓ activate yalnız eski Stars cachelerini siler
+✓ temiz kurulum v8 kayıt üretir ve aynı kaydı açar
+✓ aynı güncel kayıt 10 kez yüklenince kalıcı durum ve RNG aynı
+✓ gerçek eski v8 kayıt 10 kez deterministik yüklenir
+✓ yapısal bozuk kayıt dünyayı değiştirmez: imparatorluk kökü eksik
+✓ yapısal bozuk kayıt dünyayı değiştirmez: sistem kimliği yinelenmiş
+✓ yapısal bozuk kayıt dünyayı değiştirmez: sistem gezegenleri eksik
+✓ yapısal bozuk kayıt dünyayı değiştirmez: filo sahibi geçersiz
+✓ saveGame/loadGame aynı depolama anahtarıyla round-trip yapar
+✓ BUILD ve cache RC adı taşıyor
+GEÇEN: 15 KALAN: 0

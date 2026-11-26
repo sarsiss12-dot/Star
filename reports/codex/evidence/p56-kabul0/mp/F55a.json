@@ -1,0 +1,475 @@
+{
+ "results": [
+  {
+   "name": "F0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 37088
+  },
+  {
+   "name": "F1 gerçek kuruluş: host kuruluş penceresinden B'yi davet eder, B karttan KABUL, host son onay → federasyon; B'de ve host'ta \"kuruldu\" en çok bir kez",
+   "status": "PASS",
+   "ms": 18558
+  },
+  {
+   "name": "F2 B sonuç kartını açıp kapatır; ardından 5 yayın + gün, hat kopması / yeniden bağlanma, sayfa yenileme, host dünyasının kayıttan yeniden yüklenmesi: \"kuruldu\" ve eski davet / oy kartı bir daha doğmaz",
+   "status": "PASS",
+   "ms": 29181
+  },
+  {
+   "name": "F3 aynı federasyonda gerçekten yeni karar: host yasa önerir → B'de tek yeni oy kartı; B karttan EVET; sonuçlanınca B ve host'ta tek \"oylaması sonuçlandı\" kartı; \"kuruldu\" yine yok; kapanmış oy kartı kalmaz",
+   "status": "PASS",
+   "ms": 9618
+  },
+  {
+   "name": "F4 üyelik başvurusu (C, gerçek fedRequest komutu): C'de \"Üyelik başvurun oylamada\" kartı; üye B'nin oy kartı \"Üyelik başvurusu — C\"; oy kabul → C'de KABUL / REDDET davet kartı; C karttan KABUL → host'ta üye; kart kalkar; C'de tek komut",
+   "status": "PASS",
+   "ms": 19791
+  },
+  {
+   "name": "F5 başkan değişimi: host (başkan) federasyondan ayrılır (gerçek leaveFederation) → B ve C'de tek \"Federasyon başkanı değişti\" kartı; yeniden bağlanmada tekrar doğmaz",
+   "status": "PASS",
+   "ms": 14335
+  }
+ ],
+ "metrics": {
+  "scen": "F",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 653,
+    "buildMs": 857,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 1093,
+    "buildMs": 1276,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 8,
+      "p95": 8,
+      "max": 8
+     },
+     "longtask": {
+      "n": 30,
+      "med": 80,
+      "p95": 107,
+      "max": 148
+     },
+     "heapMB": 18,
+     "dom": 727,
+     "intervals": 2,
+     "timeouts": 1,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 4,
+       "med": 23.2,
+       "p95": 155.6,
+       "max": 155.6
+      },
+      "refresh": {
+       "n": 2,
+       "med": 17.5,
+       "p95": 17.5,
+       "max": 17.5
+      },
+      "longtask": {
+       "n": 28,
+       "med": 73,
+       "p95": 107,
+       "max": 121
+      },
+      "builds": 4,
+      "deltas": 3,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 17,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 38,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 3,
+       "med": 67.8,
+       "p95": 199.4,
+       "max": 199.4
+      },
+      "refresh": {
+       "n": 1,
+       "med": 13.5,
+       "p95": 13.5,
+       "max": 13.5
+      },
+      "longtask": {
+       "n": 32,
+       "med": 87,
+       "p95": 108,
+       "max": 179
+      },
+      "builds": 3,
+      "deltas": 3,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 17,
+      "dom": 729,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 32,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 9726,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "ux1": {
+   "phases": [
+    {
+     "name": "a-kuruldu",
+     "B": {
+      "kur": 1,
+      "dom": [
+       "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2"
+      ],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 1,
+      "dom": [
+       "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2"
+      ],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    },
+    {
+     "name": "b-acildi",
+     "B": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    },
+    {
+     "name": "c-5-yayin",
+     "B": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    },
+    {
+     "name": "d-yeniden-baglanma",
+     "B": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    },
+    {
+     "name": "e-sayfa-yenileme",
+     "B": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    },
+    {
+     "name": "f-host-kayit-yukleme",
+     "B": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    },
+    {
+     "name": "g-yeni-karar",
+     "B": {
+      "kur": 0,
+      "dom": [
+       "🏛 Federasyon oylaması sonuçlandı — Helis Araştırma KonseyiSavunma Pak"
+      ],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 1
+     },
+     "C": {
+      "kur": 0,
+      "dom": [],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 0
+     },
+     "H": {
+      "kur": 0,
+      "dom": [
+       "🏛 Federasyon oylaması sonuçlandı — Helis Araştırma KonseyiSavunma Pak"
+      ],
+      "staleVote": 0,
+      "staleFound": 0,
+      "records": 3
+     }
+    }
+   ],
+   "opened": {
+    "k": "note",
+    "uid": 7
+   },
+   "f4req": {
+    "status": "ok",
+    "code": null
+   },
+   "f4sub": "Üyelik başvurusu — Yeşil Birlik",
+   "f4inv": true,
+   "f4staleApplied": 0,
+   "f4sent": 1,
+   "f5": {
+    "start": 1795630049790,
+    "guests": {
+     "B": {
+      "start": 1795630051785,
+      "oldRev": 26,
+      "cards": 0,
+      "query": 1795630054467,
+      "end": {
+       "trace": {
+        "start": 1795630051785,
+        "oldRev": 26,
+        "card": {
+         "at": 1795630052491,
+         "id": "i6",
+         "text": "🏛\n         Federasyon başkanı değişti — Helis Araştırma KonseyiYeni başkan: Saf Akıl Ağı\n         ›"
+        }
+       },
+       "applied": 27,
+       "received": 27,
+       "appliedAt": 1795630052491,
+       "leader": 0,
+       "lead": [
+        [
+         1,
+         0
+        ]
+       ],
+       "cards": [
+        "\n         🏛\n         Federasyona katılımHelis Araştırma Konseyi\n         ›\n       ",
+        "\n         🏛\n         Federasyondan ayrılışHelis Araştırma Konseyi\n         ›\n       ",
+        "\n         🏛\n         Federasyon başkanı değişti — Helis Araştırma KonseyiYeni başkan: Saf Akıl Ağı\n         ›\n       "
+       ]
+      }
+     },
+     "C": {
+      "start": 1795630052072,
+      "oldRev": 18,
+      "cards": 0,
+      "query": 1795630054795,
+      "end": {
+       "trace": {
+        "start": 1795630052072,
+        "oldRev": 18,
+        "card": {
+         "at": 1795630052580,
+         "id": "i8",
+         "text": "🏛\n         Federasyon başkanı değişti — Helis Araştırma KonseyiYeni başkan: Saf Akıl Ağı\n         ›"
+        }
+       },
+       "applied": 19,
+       "received": 19,
+       "appliedAt": 1795630052580,
+       "leader": 1,
+       "lead": [
+        [
+         1,
+         1
+        ]
+       ],
+       "cards": [
+        "\n         🏛\n         Üyelik başvurun kabul edildi — Helis Araştırma KonseyiKabul edildi; devlet federasyona katıldı.\n         ›\n       ",
+        "\n         🏛\n         Federasyondan ayrılışHelis Araştırma Konseyi\n         ›\n       ",
+        "\n         🏛\n         Federasyon başkanı değişti — Helis Araştırma KonseyiYeni başkan: Saf Akıl Ağı\n         ›\n       "
+       ]
+      }
+     }
+    },
+    "host": {
+     "ok": true,
+     "at": 1795630052105,
+     "publishAt": 1795630052122,
+     "leader": 1,
+     "day": 18.76
+    },
+    "sent": [
+     {
+      "e": 1,
+      "rev": 27,
+      "at": 1795630052898
+     },
+     {
+      "e": 2,
+      "rev": 19,
+      "at": 1795630052899
+     }
+    ]
+   }
+  },
+  "errors": []
+ }
+}

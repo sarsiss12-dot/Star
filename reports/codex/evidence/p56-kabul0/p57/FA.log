@@ -1,0 +1,9 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[5,5],"mirrorEq":true,"revMs":927,"buildMs":1106,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[5,5],"mirrorEq":true,"revMs":1435,"buildMs":1956,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":8.8,"p95":8.8,"max":8.8},"longtask":{"n":33,"med":71,"p95":140,"max":273},"heapMB":15,"dom":729,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":3,"med":79.1,"p95":644.7,"max":644.7},"refresh":{"n":2,"med":44.8,"p95":44.8,"max":44.8},"longtask":{"n":24,"med":84,"p95":282,"max":304},"builds":3,"deltas":4,"resyncs":0,"minGap":600,"heapMB":18,"dom":703,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":42,"joinErrors":0},"C":{"build":{"n":3,"med":97.6,"p95":606.4,"max":606.4},"refresh":{"n":2,"med":74.3,"p95":74.3,"max":74.3},"longtask":{"n":28,"med":94,"p95":296,"max":367},"builds":3,"deltas":4,"resyncs":0,"minGap":600,"heapMB":17,"dom":719,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":37,"joinErrors":0}}}
+PASS FA0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 6 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS A0 fikstür (host): B başkanlığında federasyon [B, C, X, Y]; X ve Y aynı farklı türü tercih ediyor
+PASS A1 AI X tür reformu önerir; B ve C kart alır, AI insan adına oy yazmaz; B ve C HAYIR (gerçek kart) → reddedilir, tür aynı
+PASS A2 çözülemeyen uyumsuzluk → X anayasal yoldan ayrılır; yalnız X çıkar, B başkan, C üye, fon aynı; B aynası günceller; X geri dönmez
+PASS A3 gizlilik: misafir aynasında AI iç siyaset alanları (_fedLeft, _fedReformAsk, _fedStrain, aiFedReason) yok
+GEÇEN: 5 KALAN: 0

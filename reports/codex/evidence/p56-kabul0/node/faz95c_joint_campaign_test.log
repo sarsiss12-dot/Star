@@ -1,0 +1,60 @@
+✓ three allies use actual forces and retain ships resources ownership
+✓ home guard remains behind
+✓ different speeds schedule fast departure later
+✓ enemy federation coordinates without player
+✓ owner campaign does not seize reserved fleets
+✓ independent wars never merge retroactively
+✓ insufficient force rejects suicide attack
+✓ closed military border rejects route
+✓ lost rally replans with bounded deadline
+✓ late ally does not block enough gathered force forever
+✓ destroyed supporting fleet removed and plan progresses
+✓ peace cancels before movement
+✓ dissolution stops former federation order
+✓ one departing ally is released
+✓ bilimsel no unauthorised war participation
+✓ ticaret no unauthorised war participation
+✓ player request sends actual ally and never controls own anchor
+✓ follow tracks moving own fleet
+✓ cancel mid-leg preserves ships and current motion
+✓ rejected repeats create no extra state
+✓ duplicate request cannot reserve twice
+✓ Save v8 preserves assigned fleets departure and RNG
+✓ malformed plan rolls load back atomically
+✓ old v8 initializes without invented fleets
+✓ hidden fleet names coordinates and ETA absent
+✓ hidden hostile reinforcement cannot change estimated target
+✓ home threat recalls ally support
+✓ same-day ticks deterministic idempotent and RNG free
+✓ three actual actors fire and contribute in one existing combat tick
+✓ coalition fire weights spend every defender budget once
+✓ unguarded enemy orbit captured by an actually present ally only once
+✓ conquest points never create an automatic settlement transfer
+✓ external allied promise coordinates without federation membership
+✓ explicit support overrides an automatic target only after acceptance
+✓ failed request preserves active automatic orders
+✓ defend request reaches friendly region and stays there
+✓ destroyed follow anchor cancels support
+✓ stale target ownership cancels without firing on a third party
+✓ blocked march clears all old target legs
+✓ insufficient supply causes a real return route without free repairs
+✓ same invalid target backs off rather than reappearing every check
+✓ limited waits end an undersized stranded gathering
+✓ production and template reinforcement remain available to reserved owner
+✓ read-only compact panel exposes all three actual support actions
+✓ UI action executes and displays acceptance and cancellation
+✓ UI rejection gives reason without inventing fleets
+✓ stale UI from a previous world cannot issue a new order
+✓ save rejects duplicate fleet reservations
+✓ cancelled requests do not grow past the save history budget
+✓ unreachable new observer graph has no hidden shortcuts
+✓ supply and gate travel use existing legal geometry
+✓ existing critical movement is never commandeered
+✓ muster routes never send isolated allies through known enemy space
+✓ known hostile intermediate objective is not silently crossed
+✓ active explicit war promise works without federation or alliance
+✓ save and resumed simulation reach identical actual destination and RNG
+✓ follow support considers the explicitly shared player anchor strength
+✓ expanded support section survives panel rerenders
+✓ open diplomatic support panel refreshes by game day without DOM churn
+GEÇEN: 59 KALAN: 0

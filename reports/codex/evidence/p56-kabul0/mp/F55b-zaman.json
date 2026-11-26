@@ -1,0 +1,292 @@
+{
+ "phases": [
+  {
+   "name": "a-kuruldu",
+   "B": {
+    "kur": 1,
+    "dom": [
+     "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 1,
+    "dom": [
+     "🏛 FEDERASYON KURULDU — Helis Araştırma KonseyiBilimsel Federasyon · 2"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "b-acildi",
+   "B": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "c-5-yayin",
+   "B": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "d-yeniden-baglanma",
+   "B": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "e-sayfa-yenileme",
+   "B": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "f-host-kayit-yukleme",
+   "B": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  },
+  {
+   "name": "g-yeni-karar",
+   "B": {
+    "kur": 0,
+    "dom": [
+     "🏛 Federasyon oylaması sonuçlandı — Helis Araştırma KonseyiSavunma Pak"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 1
+   },
+   "C": {
+    "kur": 0,
+    "dom": [],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 0
+   },
+   "H": {
+    "kur": 0,
+    "dom": [
+     "🏛 Federasyon oylaması sonuçlandı — Helis Araştırma KonseyiSavunma Pak"
+    ],
+    "staleVote": 0,
+    "staleFound": 0,
+    "records": 3
+   }
+  }
+ ],
+ "opened": {
+  "k": "note",
+  "uid": 8
+ },
+ "f4req": {
+  "status": "ok",
+  "code": null
+ },
+ "f4sub": "Üyelik başvurusu — Yeşil Birlik",
+ "f4inv": true,
+ "f4staleApplied": 0,
+ "f4sent": 1,
+ "f5": {
+  "start": 1795630564412,
+  "guests": {
+   "B": {
+    "start": 1795630565980,
+    "oldRev": 26,
+    "cards": 0,
+    "query": 1795630568168,
+    "end": {
+     "trace": {
+      "start": 1795630565980,
+      "oldRev": 26,
+      "card": {
+       "at": 1795630566475,
+       "id": "i6",
+       "text": "🏛\n         Federasyon başkanı değişti — Helis Araştırma KonseyiYeni başkan: Saf Akıl Ağı\n         ›"
+      },
+      "packets": [
+       {
+        "at": 1795630566381,
+        "rev": 27
+       }
+      ]
+     },
+     "applied": 27,
+     "received": 27,
+     "appliedAt": 1795630566475,
+     "leader": 0,
+     "lead": [
+      [
+       1,
+       0
+      ]
+     ],
+     "cards": [
+      "\n         🏛\n         Federasyona katılımHelis Araştırma Konseyi\n         ›\n       ",
+      "\n         🏛\n         Federasyondan ayrılışHelis Araştırma Konseyi\n         ›\n       ",
+      "\n         🏛\n         Federasyon başkanı değişti — Helis Araştırma KonseyiYeni başkan: Saf Akıl Ağı\n         ›\n       "
+     ]
+    }
+   },
+   "C": {
+    "start": 1795630566188,
+    "oldRev": 18,
+    "cards": 0,
+    "query": 1795630568366,
+    "end": {
+     "trace": {
+      "start": 1795630566188,
+      "oldRev": 18,
+      "card": {
+       "at": 1795630566593,
+       "id": "i8",
+       "text": "🏛\n         Federasyon başkanı değişti — Helis Araştırma KonseyiYeni başkan: Saf Akıl Ağı\n         ›"
+      },
+      "packets": [
+       {
+        "at": 1795630566487,
+        "rev": 19
+       }
+      ]
+     },
+     "applied": 19,
+     "received": 19,
+     "appliedAt": 1795630566581,
+     "leader": 1,
+     "lead": [
+      [
+       1,
+       1
+      ]
+     ],
+     "cards": [
+      "\n         🏛\n         Üyelik başvurun kabul edildi — Helis Araştırma KonseyiKabul edildi; devlet federasyona katıldı.\n         ›\n       ",
+      "\n         🏛\n         Federasyondan ayrılışHelis Araştırma Konseyi\n         ›\n       ",
+      "\n         🏛\n         Federasyon başkanı değişti — Helis Araştırma KonseyiYeni başkan: Saf Akıl Ağı\n         ›\n       "
+     ]
+    }
+   }
+  },
+  "host": {
+   "ok": true,
+   "at": 1795630566213,
+   "publishAt": 1795630566214,
+   "leader": 1,
+   "day": 20.38000000000001
+  },
+  "sent": [
+   {
+    "e": 1,
+    "at": 1795630566268,
+    "rev": 27
+   },
+   {
+    "e": 2,
+    "at": 1795630566275,
+    "rev": 19
+   }
+  ]
+ }
+}

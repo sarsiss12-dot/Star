@@ -1,0 +1,6 @@
+✓ M1 AI S → misafir B (müttefik): istek B'nin teklif kutusuna gider, B adına karar / katılım yok; aynı ay ikinci istek yok
+✓ M2 B kabul eder: aynı sefere katılım, ödeme bir kez; ikinci kabul (aynı cid / yeni cid) yeni etki üretmez
+✓ M3 misafir B → AI K: AI katılım kapıları host'ta; kriz → ret + gerekçe, savaş / ödeme yok; normal → karar
+✓ M4 host A → misafir B: A'nın savaşına destek isteği B'ye gider, C görmez; B reddederse savaş / ödeme yok
+✓ M5 bekleyen AI → B isteği MP paketiyle yeni host'ta (devam): B aynı koltuğa döner, teklifi görür, kabul bir kez uygular; S'nin beklemesi korunur
+GEÇEN: 5 KALAN: 0

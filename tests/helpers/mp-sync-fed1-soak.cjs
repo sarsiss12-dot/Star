@@ -14,6 +14,13 @@ const MIN=+(process.env.MP8_I_MIN||15),STALL=+(process.env.MP8_I_STALL_S||20)*10
 module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait,settle}=X;
  const H=()=>pg.H,G2=['B','C'];const I=metrics.fed1soak={min:MIN,ff:FF,samples:[],stalls:[],holds:[],events:[],cmds:[],catchups:[]};
  const E={};for(const n of G2)E[n]=await pg[n].evaluate(()=>MP1Join.empireId);
+ // Keep the actual room's initial Save8. The soak can reveal the entire small galaxy.
+ I.initial=await H().evaluate(async()=>{
+   globalThis.__i3InitialSave=serialize();const data=new TextEncoder().encode(globalThis.__i3InitialSave);
+   const digest=await crypto.subtle.digest('SHA-256',data);
+   return {sha256:[...new Uint8Array(digest)].map(n=>n.toString(16).padStart(2,'0')).join(''),
+     rng:RND_STATE,day:G.day,size:G.sys.length,build:BUILD_ID};
+ });
  const hostRev=e=>H().evaluate(e=>{const p=[...MP1Host.host.state.players.values()].find(x=>x.empireId===e);return {day:G.day,spd:G.speed|0,mrev:p&&p.mirrorRev||0,wrev:MP1Host.host.state.worldRevision|0};},e);
  const gdiag=n=>pg[n].evaluate(()=>{const S=MP6Stars.S,m=document.getElementById('modal');const pill=document.getElementById('mp61Pill');
    return {day:G.day,rev:S.rev|0,applied:S.appliedRev|0,note:(S.sync&&S.sync.note)||'',modal:!!(m&&!m.classList.contains('hidden')),pill:pill&&pill.classList.contains('on')?pill.innerText.slice(0,160):'',ws:MP1Join.ws?MP1Join.ws.readyState:-1,resyncs:S.stats.resyncs|0,held:S.stats.held|0};}).catch(e=>({err:String(e&&e.message||e).slice(0,120)}));
@@ -30,7 +37,7 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
    }catch(e){o.err=String(e&&e.message||e).slice(0,160);}I.cmds.push(o);return o;};
  const catchUp=async(n,label,t0)=>{const h=await hostRev(E[n]);const ok=await pg[n].waitForFunction(d=>G.day>=d-1.5,h.day,{timeout:30000,polling:250}).then(()=>true,()=>false);const r={who:n,label,ok,ms:Date.now()-t0,hostDay:Math.round(h.day*10)/10};I.catchups.push(r);return r;};
 
- await test('I1 uzun oturum '+MIN+' dk (500 sistem / 16 AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası '+(STALL/1000)+' sn\'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür',async()=>{
+ await test('I1 uzun oturum '+MIN+' dk ('+metrics.conf.size+' / '+metrics.conf.ai+' AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası '+(STALL/1000)+' sn\'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür',async()=>{
    const t0=Date.now();for(let m=0;m<FF;m++)await H().evaluate(()=>MP1Host.advance(30));I.ffSeconds=Math.round((Date.now()-t0)/1000);await settle('i-ff');
    const MX=await maxSpd();const speeds=[2,4,MX];let si=0;await setSpd(speeds[0]);
    const start=Date.now(),end=start+MIN*60000;const last={};for(const n of G2)last[n]={day:-1,moveAt:Date.now(),hostDayAtMove:0,busyUntil:0};
@@ -88,10 +95,15 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
  await test('I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)',async()=>{
    await setSpd(0);
    /* çatışma fikstürü: B'nin görünür sistemine savaştaki bir AI filosu; host motorunun çatışma bayrağı (combat=2), tam can */
-   I.fight=await H().evaluate(b=>{const e=G.emps[b],vis=humanVisionContext(e).visible;const s=G.sys[e.home];const foe=G.emps.find(o=>o.ai&&!o.dead&&!o.wild&&!e.ally[o.id]);
-     const f=G.fleets.find(f=>f.e===foe.id&&f.ships.length&&isArmed(f));if(!f)return null;e.war[foe.id]=foe.war[e.id]=true;e.contact[foe.id]=foe.contact[e.id]=true;
+   I.fight=await H().evaluate(b=>{const e=G.emps[b],vis=humanVisionContext(e).visible;const s=G.sys[e.home];
+     const opponents=G.emps.filter(o=>o.ai&&!o.dead&&!o.wild&&!o.crisisSide&&!e.ally[o.id]);
+     let f=G.fleets.find(f=>opponents.some(o=>o.id===f.e)&&f.ships.length&&isArmed(f));
+     const injected=!f;
+     if(!f&&opponents.length)f=newFleet(opponents[0],s.id,[{c:'kor'}],'I2 çatışma');
+     if(!f)return null;
+     const foe=G.emps[f.e];e.war[foe.id]=foe.war[e.id]=true;e.contact[foe.id]=foe.contact[e.id]=true;
      f.sys=s.id;f.mv=null;f.path=[];f.x=s.x;f.y=s.y;f.combat=2;for(const sh of f.ships)sh.h=1;const mine=G.fleets.find(x=>x.e===b&&x.ships.length&&x.sys===s.id);if(mine)mine.combat=2;
-     MP1Host.host.publish();return {fleet:f.id,foe:foe.id,sys:s.id,visible:vis.has(s.id),mine:mine&&mine.id};},E.B);
+     MP1Host.host.publish();return {fleet:f.id,foe:foe.id,sys:s.id,visible:vis.has(s.id),mine:mine&&mine.id,injected};},E.B);
    assert(I.fight&&I.fight.visible,'fikstür: B\'nin görünür sisteminde çatışma '+JSON.stringify(I.fight));
    const res={};
    for(const n of G2){await mirrorEq(n);const g=await viewOf(n),h=await truthFor(E[n],g.vis);
@@ -107,22 +119,106 @@ module.exports=async X=>{const {test,pg,metrics,out,sleep,shot,assert,lanes,wait
      assert.equal(r.ownDiff.length,0,n+' görünür sınırlar aynı');assert.equal(r.diff.hp.length,0,n+' can oranları aynı '+JSON.stringify(r.diff.hp).slice(0,300));}
    assert.equal(res.B.diff.combat.length,0,'B haritasında çatışan filolar çatışmada (host combat): '+JSON.stringify(res.B.diff.combat));});
 
- await test('I3 sensör paylaşımı tek yön: B → C; C, B\'nin sensör sistemlerini görür, B C\'ninkileri görmez, host\'un kendi görüşü değişmez',async()=>{
-   const before=await H().evaluate(([b,c])=>({h:[...humanVisionContext(G.p).visible].length,b:[...humanVisionContext(G.emps[b]).visible],c:[...humanVisionContext(G.emps[c]).visible]}),[E.B,E.C]);
-   /* tanı (yalnız ölçüm): B'nin kendi sensör kümesinde C'nin henüz görmediği sistem sayısı; anlaşmadan önce paylaşım zaten açık mıydı */
-   const pre=await H().evaluate(([b,c])=>{const B=G.emps[b],C=G.emps[c],cv=humanVisionContext(C).visible,nb=[...nativeSensorVision(B)];
-     return {bNative:nb.length,bNativeNew:nb.filter(id=>!cv.has(id)).length,shareBefore:!!(C.visionFrom&&C.visionFrom[b]),bCols:G.sys.filter(s=>s.owner===b).length,bFleets:G.fleets.filter(f=>f.e===b&&f.ships.length).length,bDead:!!B.dead,war:!!B.war[c]};},[E.B,E.C]);
-   const r=await H().evaluate(([b,c])=>{const B=G.emps[b],C=G.emps[c];B.contact[c]=C.contact[b]=true;G._dealAuth=true;const ok=executeDeal({from:b,to:c,give:[{t:'intel'}],want:[],born:G.day,expires:G.day+30});G._dealAuth=false;MP1Host.host.publish();
-     return {ok,share:!!(C.visionFrom&&C.visionFrom[b])};},[E.B,E.C]);
-   await settle('i3');
-   const after=await H().evaluate(([b,c])=>({h:[...humanVisionContext(G.p).visible].length,b:[...humanVisionContext(G.emps[b]).visible],c:[...humanVisionContext(G.emps[c]).visible]}),[E.B,E.C]);
-   const gC=await pg.C.evaluate(()=>[...G.vis]),gB=await pg.B.evaluate(()=>[...G.vis]);
-   /* motor kuralı: alan, verenin SENSÖR kaynaklarını alır (filo görüşü / başkasından gelen paylaşım aktarılmaz); doğruluk host'un C için hesapladığı görüşle */
-   const gained=after.c.filter(id=>!before.c.includes(id)),leakFrom3rd=gained.filter(id=>!before.b.includes(id));
-   const sameC=JSON.stringify([...gC].sort((a,b)=>a-b))===JSON.stringify(after.c.slice().sort((a,b)=>a-b));
-   I.sensor={deal:r,gained:gained.length,leakFrom3rd:leakFrom3rd.length,cMirrorEqHost:sameC,bChanged:JSON.stringify(after.b.slice().sort())!==JSON.stringify(before.b.slice().sort()),bGetsC:before.c.filter(id=>!before.b.includes(id)&&gB.includes(id)).length,hostBefore:before.h,hostAfter:after.h,pre,activeAfter:await H().evaluate(([b,c])=>sensorShareActive(G.emps[c],G.emps[b]),[E.B,E.C])};
-   console.log('  I3 '+JSON.stringify(I.sensor));
-   assert.equal(r.ok,true,'sensör paylaşımı anlaşması uygulandı');assert.equal(pre.shareBefore,false,'fikstür: paylaşım anlaşmadan önce kapalı');assert(pre.bNativeNew>0,'fikstür: B\'nin C\'nin henüz görmediği sensör sistemi var '+JSON.stringify(pre));assert(gained.length>0,'C yeni sistem gördü '+JSON.stringify(pre));assert.equal(leakFrom3rd.length,0,'C yalnız B\'nin gördüğü sistemleri kazanır');
-   assert.equal(sameC,true,'C misafir görüşü host\'un C için hesapladığıyla aynı');assert.equal(I.sensor.bChanged,false,'B\'nin görüşü değişmez (tek yön)');assert.equal(I.sensor.bGetsC,0,'B, C\'ninkileri görmez');
-   assert.equal(after.h,before.h,'host\'un görüşü değişmez');});
+ const visibility=()=>H().evaluate(([b,c])=>{
+   const rows=[G.p,G.emps[b],G.emps[c]].map(e=>{const ctx=humanVisionContext(e);
+     return {visible:[...ctx.visible].sort((x,y)=>x-y),known:[...ctx.known].sort((x,y)=>x-y)};});
+   return {rows,native:[...nativeSensorVision(G.emps[b])].sort((x,y)=>x-y),
+     grant:sensorShareActive(G.emps[c],G.emps[b]),reverse:sensorShareActive(G.emps[b],G.emps[c])};
+ },[E.B,E.C]);
+ const applyMirrors=async label=>{
+   const revisions=await settle(label),view={};
+   for(const n of G2){
+     await wait(pg[n],r=>MP6Stars.S.appliedRev===r&&MP6Stars.S.gen===MP6Stars.S.appliedGeneration,revisions[n].rev);
+     view[n]=await pg[n].evaluate(()=>({visible:[...G.vis].sort((x,y)=>x-y),
+       known:G.sys.filter(s=>s.seen.includes(0)).map(s=>s.id),applied:MP6Stars.S.appliedRev}));
+   }
+   return view;
+ };
+
+ await test('I3 yalıtılmış sensör olayı: B → C; yeni görüş ve keşif, özel alan, host ve iki ayna, Save8 sonrası',async()=>{
+   const soak=await visibility();
+   const newAfterSoak=soak.native.filter(id=>!soak.rows[2].visible.includes(id));
+   I.sensor={soak:{native:soak.native.length,new:newAfterSoak.length},stages:[]};
+   const ids=[E.B,E.C];
+   const probe=await H().evaluate(([b,c])=>{
+     if(!deserialize(globalThis.__i3InitialSave))throw Error('I3 başlangıç kaydı açılamadı');
+     G.speed=0;
+     const [B,C]=[G.emps[b],G.emps[c]],ctx=e=>humanVisionContext(e);
+     const cv=ctx(C),hv=ctx(G.p),bv=ctx(B);
+     const remote=G.sys.filter(s=>s.owner<0&&!cv.known.has(s.id)&&!hv.visible.has(s.id)&&!bv.visible.has(s.id));
+     if(remote.length<3)throw Error('I3: ayrı sensör kontrolleri için keşfedilmemiş hedef yok');
+     const reach=(e,s)=>{
+       const seen=new Set([s.id]),queue=[[s,0]];
+       for(const [system,depth] of queue){
+         if(depth>=1+(e.mods.sensor|0)||system.nebulaS)continue;
+         for(const id of system.lanes)if(!seen.has(id)){seen.add(id);queue.push([G.sys[id],depth+1]);}
+       }
+       return seen;
+     };
+     const probes=remote.map(s=>({s,b:reach(B,s),c:reach(C,s)}));
+     let pair;
+     for(const first of probes){
+       for(const second of probes){
+         if(first.b.has(second.s.id)||second.c.has(first.s.id))continue;
+         const hidden=remote.find(s=>!first.b.has(s.id)&&!second.c.has(s.id));
+         if(hidden){pair={fresh:first.s,cOnly:second.s,hidden};break;}
+       }
+       if(pair)break;
+     }
+     if(!pair)throw Error('I3: üç ayrık kontrol için uygun sensör kapsaması yok');
+     const {fresh,cOnly,hidden}=pair;
+     const sent=newFleet(B,fresh.id,[{c:'kor'}],'I3 B');
+     newFleet(C,cOnly.id,[{c:'kor'}],'I3 C');
+     B.contact[c]=C.contact[b]=true;
+     MP1Host.host.publish();
+     return {fresh:fresh.id,hidden:hidden.id,cOnly:cOnly.id,ship:sent.id,day:G.day};
+   },ids);
+   I.sensor.probe=probe;
+   const before=await visibility(),beforeMirrors=await applyMirrors('i3-once');
+   const [host,donor,recipient]=before.rows;
+   assert.equal(before.grant,false);assert.equal(before.reverse,false);
+   assert(donor.visible.includes(probe.fresh)&&before.native.includes(probe.fresh));
+   assert(!recipient.visible.includes(probe.fresh)&&!recipient.known.includes(probe.fresh));
+   assert(!host.visible.includes(probe.fresh)&&!donor.visible.includes(probe.cOnly));
+   assert(recipient.visible.includes(probe.cOnly)&&!recipient.known.includes(probe.hidden));
+   assert(!beforeMirrors.C.known.includes(probe.fresh)&&!beforeMirrors.C.visible.includes(probe.fresh));
+   assert(beforeMirrors.B.visible.includes(probe.fresh));
+   I.sensor.before={host:before,mirrors:beforeMirrors};
+
+   await H().evaluate(([b,noSensor])=>{
+     // Negative control of the test. The pact persists, but the giver's sensor payload is absent.
+     if(noSensor){
+       const original=nativeSensorVision;
+       nativeSensorVision=e=>e.id===b?new Set():original(e);
+     }
+   },[E.B,process.env.MP8_I_NO_SENSOR==='1']);
+   const sent=await cmd1('B',{kind:'offer',to:E.C,give:[{t:'intel'}],want:[]});
+   assert.equal(sent.status,'ok','B gerçek host teklif komutuyla izin sundu: '+JSON.stringify(sent));
+   const offer=await H().evaluate(([b,c])=>MP1Host.host.dip.offers.findLast(o=>o.from===b&&o.to===c&&o.status==='pending')?.id,ids);
+   assert(offer,'bekleyen sensör teklifi');
+   const accepted=await cmd1('C',{kind:'respond',offer,action:'accept'});
+   assert.equal(accepted.status,'ok','C gerçek host komutuyla sensör iznini kabul etti: '+JSON.stringify(accepted));
+
+   const expected=[...new Set([...recipient.visible,...before.native])].sort((x,y)=>x-y);
+   const verify=async label=>{
+     const actual=await visibility(),mirrors=await applyMirrors(label);
+     I.sensor.stages.push({label,actual,mirrors});
+     assert.equal(actual.grant,true);assert.equal(actual.reverse,false);
+     assert.deepEqual(actual.rows[2].visible,expected,"C yalnız B’nin gerçek sensör kümesini kazandı");
+     assert.deepEqual(actual.rows[0],host,'host görünürlük ve keşif kümeleri aynı');
+     assert.deepEqual(actual.rows[1].visible,donor.visible,'B görüşü aynı');
+     assert(mirrors.C.visible.includes(probe.fresh)&&mirrors.C.known.includes(probe.fresh),'yeni sistem C aynasında');
+     assert(!mirrors.C.visible.includes(probe.hidden)&&!mirrors.C.known.includes(probe.hidden),'ilgisiz sistem C aynasına sızmaz');
+     assert(!mirrors.B.visible.includes(probe.cOnly),'C sensörü ters yönde aktarılmaz');
+     assert.deepEqual(mirrors.C.visible,expected);
+     assert.deepEqual(mirrors.B.visible,donor.visible);
+   };
+   await verify('i3-paylasim');
+   const reloaded=await H().evaluate(()=>{
+     const raw=serialize(),rng=RND_STATE,ok=deserialize(raw);
+     G.speed=0;MP1Host.host.publish();return {ok,rngEqual:rng===RND_STATE};
+   });
+   assert.deepEqual(reloaded,{ok:true,rngEqual:true});
+   await verify('i3-kayit-yukle');
+ });
 };

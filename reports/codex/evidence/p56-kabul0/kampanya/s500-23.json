@@ -1,0 +1,92 @@
+{
+  "size": "s500",
+  "aiCount": 16,
+  "seed": 23,
+  "checkedMonths": 14,
+  "hashes": [
+    [
+      "9b71910eaade786e145b8ee304904b95af3aa6c50f2ce4e9465a54f1ff0c05e5",
+      "9b71910eaade786e145b8ee304904b95af3aa6c50f2ce4e9465a54f1ff0c05e5"
+    ],
+    [
+      "cf3c547c926e3d8cd5fd84f30a0abdcdff02f00328be0616e8fb878717bfd1fb",
+      "cf3c547c926e3d8cd5fd84f30a0abdcdff02f00328be0616e8fb878717bfd1fb"
+    ],
+    [
+      "b600a190ce02587786e5c2ce38ee4c01d1ea70406121a50680f9568a6c138109",
+      "b600a190ce02587786e5c2ce38ee4c01d1ea70406121a50680f9568a6c138109"
+    ],
+    [
+      "34bf2e813988b8be32d402e8c633f4cdad1396c19c14b5a1832a7d9506669041",
+      "34bf2e813988b8be32d402e8c633f4cdad1396c19c14b5a1832a7d9506669041"
+    ],
+    [
+      "d1242505b05b73666994006dc20afddd00ebcd86bb07e485762ed3cf285c6ed4",
+      "d1242505b05b73666994006dc20afddd00ebcd86bb07e485762ed3cf285c6ed4"
+    ],
+    [
+      "3a31d8177b6b201953b862a0d2317a1626e2c26516abef1ef5b00578c1f8b53c",
+      "3a31d8177b6b201953b862a0d2317a1626e2c26516abef1ef5b00578c1f8b53c"
+    ],
+    [
+      "ced6bb27cfb95804b9814b2c79fcb785ca51a868a914ef88518717bcb8b91730",
+      "ced6bb27cfb95804b9814b2c79fcb785ca51a868a914ef88518717bcb8b91730"
+    ],
+    [
+      "8328e2844177322d4fd3f2cde90f0fb780f68edbbe60b3cc83f475103ed47127",
+      "8328e2844177322d4fd3f2cde90f0fb780f68edbbe60b3cc83f475103ed47127"
+    ],
+    [
+      "984490f1d9089dd83095edefe00ad3f0b7bb0cfe213689e86e55dbe18ca0a95b",
+      "984490f1d9089dd83095edefe00ad3f0b7bb0cfe213689e86e55dbe18ca0a95b"
+    ],
+    [
+      "f2d2f26b4b8202bedaf0c0251cae6ee7cc887f2e2eb64122a547e177ca628599",
+      "f2d2f26b4b8202bedaf0c0251cae6ee7cc887f2e2eb64122a547e177ca628599"
+    ],
+    [
+      "0c403a29b552485583a48f9a8ea80e11eeb9d8e04953952267e188b92f56fffb",
+      "0c403a29b552485583a48f9a8ea80e11eeb9d8e04953952267e188b92f56fffb"
+    ],
+    [
+      "c5ced0c879e664a8cb87334ff7275452a3c11e72cf8d99539f5ebfdd5ce3a016",
+      "c5ced0c879e664a8cb87334ff7275452a3c11e72cf8d99539f5ebfdd5ce3a016"
+    ],
+    [
+      "710d1e711cb8705cac0a841485e618e6277b104362e96bc56b1b8c166db5d744",
+      "710d1e711cb8705cac0a841485e618e6277b104362e96bc56b1b8c166db5d744"
+    ],
+    [
+      "3acdb63b4c061a1179704641037b80ebd683dde2519dbc6a676eb570473e2242",
+      "2dfdf368e11baf235630e6ddd23bb88c77676520f90e50b092a798bab06c329b"
+    ]
+  ],
+  "first": {
+    "month": 14,
+    "day": 420,
+    "save": [
+      "16ff0fd78da6563e634752bdc8a528e33655945f06f54fc333351c0223c121ad",
+      "258909f7ecc5fe46801c300155c9b20c911fe74a70338c73d7c24f439b395517"
+    ],
+    "rng": [
+      -1864121117,
+      -1864121117
+    ],
+    "sections": [
+      "world",
+      "economyHistory",
+      "emps"
+    ],
+    "decisions": [
+      [],
+      [
+        {
+          "kind": "incompatible-membership",
+          "day": 420,
+          "by": 15,
+          "fed": 1
+        }
+      ]
+    ]
+  }
+}

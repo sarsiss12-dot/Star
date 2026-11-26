@@ -1,0 +1,1292 @@
+{
+  "u9-99": {
+    "claude": {
+      "cand": {
+        "last": {
+          "cols": 81,
+          "power": 222776,
+          "ships": 818,
+          "wildLoss": 368,
+          "nests": 0,
+          "contact0": 1,
+          "surv": 0.926,
+          "wars": 0,
+          "dead": 1
+        },
+        "reforms": 0,
+        "leave": [
+          {
+            "d": 3270,
+            "e": 9,
+            "p": "militarist"
+          },
+          {
+            "d": 5040,
+            "e": 9,
+            "p": "militarist"
+          },
+          {
+            "d": 6810,
+            "e": 9,
+            "p": "militarist"
+          }
+        ],
+        "joint": {
+          "create": {
+            "Ulaşılabilir ikmalli toplanma noktası veya açık askerî rota yok": 3,
+            "Kendi stratejik savunması veya kritik filo görevi öncelikli": 1,
+            "Tahmini savunma için ulaşılabilir ortak kuvvet yetersiz": 1
+          },
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 62,
+          "ctxNone": {
+            "tek-basina": 42
+          }
+        }
+      },
+      "candP": {
+        "last": {
+          "cols": 68,
+          "power": 168772,
+          "ships": 764,
+          "wildLoss": 358,
+          "nests": 0,
+          "contact0": 0.964,
+          "surv": 0.688,
+          "wars": 0,
+          "dead": 1
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 140,
+          "ctxNone": {
+            "tek-basina": 136
+          }
+        }
+      },
+      "candV": {
+        "last": {
+          "cols": 71,
+          "power": 211056,
+          "ships": 857,
+          "wildLoss": 472,
+          "nests": 0,
+          "contact0": 1,
+          "surv": 0.996,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 3,
+        "leave": [
+          {
+            "d": 1830,
+            "e": 9,
+            "p": "militarist"
+          },
+          {
+            "d": 4710,
+            "e": 9,
+            "p": "militarist"
+          },
+          {
+            "d": 5250,
+            "e": 1,
+            "p": "militarist"
+          },
+          {
+            "d": 6840,
+            "e": 9,
+            "p": "militarist"
+          }
+        ],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 0,
+          "ctxNone": {}
+        }
+      },
+      "candW": {
+        "last": {
+          "cols": 58,
+          "power": 187142,
+          "ships": 824,
+          "wildLoss": 472,
+          "nests": 0,
+          "contact0": 1,
+          "surv": 0.974,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 1,
+        "leave": [
+          {
+            "d": 1830,
+            "e": 9,
+            "p": "militarist"
+          }
+        ],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 0,
+          "ctxNone": {}
+        }
+      },
+      "p55": {
+        "last": {
+          "cols": 72,
+          "power": 212339,
+          "ships": 843,
+          "wildLoss": 425,
+          "nests": 0,
+          "contact0": 1,
+          "surv": 0.949,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 20,
+          "ctxNone": {
+            "tek-basina": 20
+          }
+        }
+      },
+      "plasebo1500": {
+        "last": {
+          "cols": 67,
+          "power": 130528,
+          "ships": 533,
+          "wildLoss": 575,
+          "nests": 0,
+          "contact0": 1,
+          "surv": 0.721,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 20,
+          "ctxNone": {
+            "tek-basina": 20
+          }
+        }
+      },
+      "plasebo300": {
+        "last": {
+          "cols": 77,
+          "power": 225444,
+          "ships": 888,
+          "wildLoss": 468,
+          "nests": 0,
+          "contact0": 1,
+          "surv": 0.913,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 24,
+          "ctxNone": {
+            "tek-basina": 24
+          }
+        }
+      },
+      "plasebo900": {
+        "last": {
+          "cols": 77,
+          "power": 225444,
+          "ships": 888,
+          "wildLoss": 468,
+          "nests": 0,
+          "contact0": 1,
+          "surv": 0.913,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 24,
+          "ctxNone": {
+            "tek-basina": 24
+          }
+        }
+      }
+    },
+    "replay": {
+      "firstSaveMonth": 15,
+      "firstRngMonth": 15,
+      "firstPrizes": [
+        {
+          "day": 450,
+          "by": 5,
+          "fleet": 16,
+          "target": 71,
+          "hops": 4,
+          "power": 934
+        },
+        {
+          "day": 660,
+          "by": 1,
+          "fleet": 52,
+          "target": 12,
+          "hops": 6,
+          "power": 1474
+        },
+        {
+          "day": 840,
+          "by": 1,
+          "fleet": 52,
+          "target": 31,
+          "hops": 5,
+          "power": 1197
+        },
+        {
+          "day": 1350,
+          "by": 1,
+          "fleet": 190,
+          "target": 6,
+          "hops": 5,
+          "power": 1735
+        },
+        {
+          "day": 2460,
+          "by": 5,
+          "fleet": 119,
+          "target": 85,
+          "hops": 4,
+          "power": 1953
+        }
+      ],
+      "firstReforms": [
+        {
+          "day": 6600,
+          "by": 9,
+          "fed": 2,
+          "from": "ticaret",
+          "to": "yagmaci",
+          "leader": 7,
+          "members": [
+            7,
+            3,
+            9
+          ],
+          "paid": 150,
+          "pending": false
+        }
+      ],
+      "firstAdmissionRejections": [
+        {
+          "day": 1560,
+          "by": 5,
+          "fed": 2,
+          "type": "ticaret"
+        },
+        {
+          "day": 1590,
+          "by": 5,
+          "fed": 2,
+          "type": "ticaret"
+        },
+        {
+          "day": 1620,
+          "by": 5,
+          "fed": 2,
+          "type": "ticaret"
+        },
+        {
+          "day": 1650,
+          "by": 5,
+          "fed": 2,
+          "type": "ticaret"
+        },
+        {
+          "day": 1680,
+          "by": 5,
+          "fed": 2,
+          "type": "ticaret"
+        }
+      ],
+      "leaves": [
+        {
+          "day": 1830,
+          "by": 9,
+          "fed": 3,
+          "type": "bilimsel"
+        }
+      ],
+      "candidateOnlyWars": [],
+      "controlOnlyWars": [
+        {
+          "daySeen": 3360,
+          "front": [
+            1,
+            1,
+            [
+              2,
+              5
+            ],
+            [
+              0,
+              1
+            ],
+            null,
+            "declaration"
+          ]
+        }
+      ],
+      "totals": [
+        {
+          "day": 7200,
+          "colonies": 72,
+          "power": 212339,
+          "ships": 843,
+          "tech": 189,
+          "science": 4774,
+          "activeShips": 158,
+          "types": {
+            "kor": 506,
+            "muh": 220,
+            "kru": 53,
+            "ins": 16,
+            "bil": 18,
+            "ord": 15,
+            "kol": 10,
+            "esk": 5
+          },
+          "states": 9,
+          "cargo": 108,
+          "fronts": []
+        },
+        {
+          "day": 7200,
+          "colonies": 58,
+          "power": 187142,
+          "ships": 824,
+          "tech": 195,
+          "science": 3378,
+          "activeShips": 120,
+          "types": {
+            "kor": 573,
+            "bil": 18,
+            "ins": 17,
+            "muh": 151,
+            "kru": 34,
+            "kol": 14,
+            "ord": 12,
+            "zir": 3,
+            "esk": 2
+          },
+          "states": 9,
+          "cargo": 223,
+          "fronts": []
+        }
+      ],
+      "crisisMonths": [
+        0,
+        0
+      ],
+      "shortageMonths": [
+        0,
+        0
+      ],
+      "battleReports": [
+        183,
+        133
+      ]
+    }
+  },
+  "u9-404": {
+    "claude": {
+      "cand": {
+        "last": {
+          "cols": 63,
+          "power": 143725,
+          "ships": 669,
+          "wildLoss": 372,
+          "nests": 0,
+          "contact0": 0.806,
+          "surv": 0.603,
+          "wars": 1,
+          "dead": 1
+        },
+        "reforms": 0,
+        "leave": [
+          {
+            "d": 4230,
+            "e": 8,
+            "p": "kriminal"
+          },
+          {
+            "d": 6870,
+            "e": 11,
+            "p": "militarist"
+          }
+        ],
+        "joint": {
+          "create": {
+            "Kendi stratejik savunması veya kritik filo görevi öncelikli": 2,
+            "Hedef veya bilinen askerî rota uygun değil": 2,
+            "ok:defend": 1
+          },
+          "close": {
+            "cancelled": 1
+          },
+          "closeReason": {
+            "Savaş sona erdi veya ortak katılım kapandı": 1
+          },
+          "arrivedFleets": 4,
+          "plans": 1,
+          "captured": 0,
+          "ctxSides": 212,
+          "ctxNone": {
+            "tek-basina": 148
+          }
+        }
+      },
+      "candP": {
+        "last": {
+          "cols": 62,
+          "power": 141082,
+          "ships": 599,
+          "wildLoss": 403,
+          "nests": 0,
+          "contact0": 0.929,
+          "surv": 0.676,
+          "wars": 3,
+          "dead": 1
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {
+            "Kendi stratejik savunması veya kritik filo görevi öncelikli": 3
+          },
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 136,
+          "ctxNone": {
+            "tek-basina": 120
+          }
+        }
+      },
+      "candV": {
+        "last": {
+          "cols": 63,
+          "power": 143725,
+          "ships": 669,
+          "wildLoss": 372,
+          "nests": 0,
+          "contact0": 0.806,
+          "surv": 0.603,
+          "wars": 1,
+          "dead": 1
+        },
+        "reforms": 0,
+        "leave": [
+          {
+            "d": 4230,
+            "e": 8,
+            "p": "kriminal"
+          },
+          {
+            "d": 6870,
+            "e": 11,
+            "p": "militarist"
+          }
+        ],
+        "joint": {
+          "create": {
+            "Kendi stratejik savunması veya kritik filo görevi öncelikli": 2,
+            "Hedef veya bilinen askerî rota uygun değil": 2,
+            "ok:defend": 1
+          },
+          "close": {
+            "cancelled": 1
+          },
+          "closeReason": {
+            "Savaş sona erdi veya ortak katılım kapandı": 1
+          },
+          "arrivedFleets": 4,
+          "plans": 1,
+          "captured": 0,
+          "ctxSides": 212,
+          "ctxNone": {
+            "tek-basina": 148
+          }
+        }
+      },
+      "candW": {
+        "last": {
+          "cols": 48,
+          "power": 111185,
+          "ships": 576,
+          "wildLoss": 398,
+          "nests": 0,
+          "contact0": 0.889,
+          "surv": 0.643,
+          "wars": 3,
+          "dead": 0
+        },
+        "reforms": 1,
+        "leave": [],
+        "joint": {
+          "create": {
+            "Kendi stratejik savunması veya kritik filo görevi öncelikli": 3,
+            "ok:capture": 3,
+            "ok:defend": 1,
+            "Ulaşılabilir ikmalli toplanma noktası veya açık askerî rota yok": 13
+          },
+          "close": {
+            "done": 3,
+            "cancelled": 1
+          },
+          "closeReason": {
+            "Görev tamamlandı": 2,
+            "Savaş sona erdi veya ortak katılım kapandı": 1,
+            "Savunma tamamlandı; yeni hedef değerlendirilecek": 1
+          },
+          "arrivedFleets": 6,
+          "plans": 4,
+          "captured": 1,
+          "ctxSides": 452,
+          "ctxNone": {
+            "tek-basina": 311
+          }
+        }
+      },
+      "p55": {
+        "last": {
+          "cols": 66,
+          "power": 128089,
+          "ships": 551,
+          "wildLoss": 435,
+          "nests": 0,
+          "contact0": 0.917,
+          "surv": 0.766,
+          "wars": 0,
+          "dead": 1
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {
+            "Kendi stratejik savunması veya kritik filo görevi öncelikli": 4,
+            "Yeterli savaş filosu yok": 4
+          },
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 170,
+          "ctxNone": {
+            "tek-basina": 124
+          }
+        }
+      },
+      "plasebo1500": {
+        "last": {
+          "cols": 64,
+          "power": 170034,
+          "ships": 682,
+          "wildLoss": 381,
+          "nests": 0,
+          "contact0": 0.861,
+          "surv": 0.751,
+          "wars": 0,
+          "dead": 2
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 120,
+          "ctxNone": {
+            "tek-basina": 120
+          }
+        }
+      },
+      "plasebo300": {
+        "last": {
+          "cols": 66,
+          "power": 112894,
+          "ships": 445,
+          "wildLoss": 523,
+          "nests": 0,
+          "contact0": 0.917,
+          "surv": 0.67,
+          "wars": 3,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {
+            "Kendi stratejik savunması veya kritik filo görevi öncelikli": 2
+          },
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 88,
+          "ctxNone": {
+            "tek-basina": 70
+          }
+        }
+      },
+      "plasebo900": {
+        "last": {
+          "cols": 58,
+          "power": 148930,
+          "ships": 575,
+          "wildLoss": 586,
+          "nests": 0,
+          "contact0": 0.889,
+          "surv": 0.729,
+          "wars": 1,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {
+            "Tahmini savunma için ulaşılabilir ortak kuvvet yetersiz": 1,
+            "ok:capture": 1,
+            "Kendi stratejik savunması veya kritik filo görevi öncelikli": 2
+          },
+          "close": {
+            "done": 1
+          },
+          "closeReason": {
+            "Görev tamamlandı": 1
+          },
+          "arrivedFleets": 0,
+          "plans": 1,
+          "captured": 1,
+          "ctxSides": 96,
+          "ctxNone": {
+            "tek-basina": 78
+          }
+        }
+      }
+    }
+  },
+  "s5-23": {
+    "claude": {
+      "cand": {
+        "last": {
+          "cols": 79,
+          "power": 68968,
+          "ships": 484,
+          "wildLoss": 527,
+          "nests": 0,
+          "contact0": 0.2,
+          "surv": 0.157,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 2,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 0,
+          "ctxNone": {}
+        }
+      },
+      "candF": {
+        "last": {
+          "cols": 81,
+          "power": 66995,
+          "ships": 502,
+          "wildLoss": 233,
+          "nests": 2,
+          "contact0": 0.2,
+          "surv": 0.146,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 1,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 32,
+          "ctxNone": {
+            "tek-basina": 32
+          }
+        }
+      },
+      "candP": {
+        "last": {
+          "cols": 95,
+          "power": 85196,
+          "ships": 610,
+          "wildLoss": 397,
+          "nests": 0,
+          "contact0": 0.217,
+          "surv": 0.164,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 26,
+          "ctxNone": {
+            "tek-basina": 26
+          }
+        }
+      },
+      "candV": {
+        "last": {
+          "cols": 92,
+          "power": 77205,
+          "ships": 564,
+          "wildLoss": 443,
+          "nests": 0,
+          "contact0": 0.183,
+          "surv": 0.148,
+          "wars": 1,
+          "dead": 0
+        },
+        "reforms": 2,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 30,
+          "ctxNone": {
+            "tek-basina": 30
+          }
+        }
+      },
+      "candW": {
+        "last": {
+          "cols": 99,
+          "power": 69530,
+          "ships": 509,
+          "wildLoss": 469,
+          "nests": 0,
+          "contact0": 0.208,
+          "surv": 0.158,
+          "wars": 1,
+          "dead": 0
+        },
+        "reforms": 2,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 22,
+          "ctxNone": {
+            "tek-basina": 22
+          }
+        }
+      },
+      "p55": {
+        "last": {
+          "cols": 83,
+          "power": 89675,
+          "ships": 637,
+          "wildLoss": 279,
+          "nests": 9,
+          "contact0": 0.217,
+          "surv": 0.129,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 70,
+          "ctxNone": {
+            "tek-basina": 70
+          }
+        }
+      },
+      "plasebo1500": {
+        "last": {
+          "cols": 81,
+          "power": 82349,
+          "ships": 562,
+          "wildLoss": 297,
+          "nests": 8,
+          "contact0": 0.25,
+          "surv": 0.132,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 28,
+          "ctxNone": {
+            "tek-basina": 28
+          }
+        }
+      },
+      "plasebo300": {
+        "last": {
+          "cols": 79,
+          "power": 79930,
+          "ships": 619,
+          "wildLoss": 331,
+          "nests": 5,
+          "contact0": 0.267,
+          "surv": 0.151,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 0,
+          "ctxNone": {}
+        }
+      },
+      "plasebo600": {
+        "last": {
+          "cols": 89,
+          "power": 78697,
+          "ships": 564,
+          "wildLoss": 427,
+          "nests": 1,
+          "contact0": 0.25,
+          "surv": 0.141,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 18,
+          "ctxNone": {
+            "tek-basina": 18
+          }
+        }
+      },
+      "plasebo900": {
+        "last": {
+          "cols": 81,
+          "power": 80173,
+          "ships": 565,
+          "wildLoss": 329,
+          "nests": 6,
+          "contact0": 0.192,
+          "surv": 0.127,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 44,
+          "ctxNone": {
+            "tek-basina": 44
+          }
+        }
+      }
+    }
+  },
+  "s5-404": {
+    "claude": {
+      "cand": {
+        "last": {
+          "cols": 77,
+          "power": 86416,
+          "ships": 523,
+          "wildLoss": 659,
+          "nests": 0,
+          "contact0": 0.2,
+          "surv": 0.17,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 4,
+        "leave": [
+          {
+            "d": 3210,
+            "e": 7,
+            "p": "militarist"
+          }
+        ],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 84,
+          "ctxNone": {
+            "tek-basina": 84
+          }
+        }
+      },
+      "candF": {
+        "last": {
+          "cols": 67,
+          "power": 117362,
+          "ships": 735,
+          "wildLoss": 631,
+          "nests": 6,
+          "contact0": 0.233,
+          "surv": 0.158,
+          "wars": 1,
+          "dead": 0
+        },
+        "reforms": 1,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 154,
+          "ctxNone": {
+            "tek-basina": 154
+          }
+        }
+      },
+      "candP": {
+        "last": {
+          "cols": 71,
+          "power": 81429,
+          "ships": 526,
+          "wildLoss": 703,
+          "nests": 0,
+          "contact0": 0.183,
+          "surv": 0.162,
+          "wars": 1,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 96,
+          "ctxNone": {
+            "tek-basina": 96
+          }
+        }
+      },
+      "candV": {
+        "last": {
+          "cols": 85,
+          "power": 87035,
+          "ships": 586,
+          "wildLoss": 648,
+          "nests": 2,
+          "contact0": 0.233,
+          "surv": 0.161,
+          "wars": 1,
+          "dead": 0
+        },
+        "reforms": 2,
+        "leave": [
+          {
+            "d": 2430,
+            "e": 9,
+            "p": "tuccar"
+          }
+        ],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 12,
+          "ctxNone": {
+            "tek-basina": 12
+          }
+        }
+      },
+      "candW": {
+        "last": {
+          "cols": 73,
+          "power": 85496,
+          "ships": 591,
+          "wildLoss": 678,
+          "nests": 2,
+          "contact0": 0.217,
+          "surv": 0.156,
+          "wars": 1,
+          "dead": 0
+        },
+        "reforms": 2,
+        "leave": [
+          {
+            "d": 2430,
+            "e": 9,
+            "p": "tuccar"
+          }
+        ],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 50,
+          "ctxNone": {
+            "tek-basina": 50
+          }
+        }
+      },
+      "p55": {
+        "last": {
+          "cols": 73,
+          "power": 100301,
+          "ships": 651,
+          "wildLoss": 651,
+          "nests": 4,
+          "contact0": 0.2,
+          "surv": 0.162,
+          "wars": 1,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 154,
+          "ctxNone": {
+            "tek-basina": 154
+          }
+        }
+      },
+      "plasebo1500": {
+        "last": {
+          "cols": 71,
+          "power": 93917,
+          "ships": 601,
+          "wildLoss": 701,
+          "nests": 6,
+          "contact0": 0.217,
+          "surv": 0.167,
+          "wars": 1,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 154,
+          "ctxNone": {
+            "tek-basina": 154
+          }
+        }
+      },
+      "plasebo300": {
+        "last": {
+          "cols": 73,
+          "power": 100301,
+          "ships": 651,
+          "wildLoss": 651,
+          "nests": 4,
+          "contact0": 0.2,
+          "surv": 0.162,
+          "wars": 1,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 154,
+          "ctxNone": {
+            "tek-basina": 154
+          }
+        }
+      },
+      "plasebo600": {
+        "last": {
+          "cols": 75,
+          "power": 103180,
+          "ships": 677,
+          "wildLoss": 467,
+          "nests": 2,
+          "contact0": 0.183,
+          "surv": 0.145,
+          "wars": 0,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 0,
+          "ctxNone": {}
+        }
+      },
+      "plasebo900": {
+        "last": {
+          "cols": 73,
+          "power": 101134,
+          "ships": 684,
+          "wildLoss": 579,
+          "nests": 6,
+          "contact0": 0.217,
+          "surv": 0.154,
+          "wars": 1,
+          "dead": 0
+        },
+        "reforms": 0,
+        "leave": [],
+        "joint": {
+          "create": {},
+          "close": {},
+          "closeReason": {},
+          "arrivedFleets": 0,
+          "plans": 0,
+          "captured": 0,
+          "ctxSides": 104,
+          "ctxNone": {
+            "tek-basina": 104
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,307 @@
+{
+ "results": [
+  {
+   "name": "M0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 4 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 37756
+  },
+  {
+   "name": "M1 fikstür: host / B / C federasyonu, AI C'ye saldırır; B aynasında C'nin savaşı yok, D federasyonda değil",
+   "status": "PASS",
+   "ms": 4016
+  },
+  {
+   "name": "M2 B gerçek dokunuşla \"Savunma desteği talep et\" → host'ta acil savunma oyu; C'ye oy kartı, D'ye değil; ikinci dokunuş ikinci kuyruk / oy üretmez",
+   "status": "PASS",
+   "ms": 10608
+  },
+  {
+   "name": "M3 host paneli aynı satırı \"Oylanıyor\" gösterir; D'nin görünümünde savunma çağrısı yok",
+   "status": "PASS",
+   "ms": 269
+  },
+  {
+   "name": "M4 oy açıkken AI host'a saldırır → C kendi panelinden talep açar → kuyrukta; B panelinde \"Gündem kuyruğunda · sıra 1\"",
+   "status": "PASS",
+   "ms": 10604
+  }
+ ],
+ "metrics": {
+  "scen": "M",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 3,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     5,
+     5
+    ],
+    "mirrorEq": true,
+    "revMs": 586,
+    "buildMs": 834,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     5,
+     5
+    ],
+    "mirrorEq": true,
+    "revMs": 1008,
+    "buildMs": 1117,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "D",
+    "e": 3,
+    "rev": [
+     5,
+     5
+    ],
+    "mirrorEq": true,
+    "revMs": 1528,
+    "buildMs": 1784,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 68.4,
+      "p95": 68.4,
+      "max": 68.4
+     },
+     "longtask": {
+      "n": 40,
+      "med": 87,
+      "p95": 138,
+      "max": 155
+     },
+     "heapMB": 18,
+     "dom": 727,
+     "intervals": 2,
+     "timeouts": 1,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 5,
+       "med": 54.6,
+       "p95": 141.2,
+       "max": 141.2
+      },
+      "refresh": {
+       "n": 3,
+       "med": 1.2,
+       "p95": 4.7,
+       "max": 4.7
+      },
+      "longtask": {
+       "n": 38,
+       "med": 70,
+       "p95": 96,
+       "max": 96
+      },
+      "builds": 5,
+      "deltas": 4,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 18,
+      "dom": 695,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 46,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 4,
+       "med": 61.3,
+       "p95": 283.6,
+       "max": 283.6
+      },
+      "refresh": {
+       "n": 2,
+       "med": 8.4,
+       "p95": 8.4,
+       "max": 8.4
+      },
+      "longtask": {
+       "n": 27,
+       "med": 87,
+       "p95": 109,
+       "max": 121
+      },
+      "builds": 4,
+      "deltas": 4,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 18,
+      "dom": 714,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 41,
+      "joinErrors": 0
+     },
+     "D": {
+      "build": {
+       "n": 4,
+       "med": 65.5,
+       "p95": 163.5,
+       "max": 163.5
+      },
+      "refresh": {
+       "n": 2,
+       "med": 46.1,
+       "p95": 46.1,
+       "max": 46.1
+      },
+      "longtask": {
+       "n": 38,
+       "med": 95,
+       "p95": 157,
+       "max": 160
+      },
+      "builds": 4,
+      "deltas": 4,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 18,
+      "dom": 729,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 35,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 15693,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 9
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   },
+   {
+    "e": 3,
+    "conn": true
+   }
+  ],
+  "nf9": {
+   "fx": {
+    "fid": 1,
+    "members": [
+     0,
+     1,
+     2
+    ],
+    "attacker": 4,
+    "front": 1,
+    "other": 5,
+    "hostIntel": 0
+   },
+   "tabAfterRebuild": {
+    "tab": "military",
+    "shown": true,
+    "hasCalls": true
+   },
+   "bPanel": {
+    "calls": [
+     {
+      "front": 1,
+      "state": "open",
+      "txt": "Yeşil Birlik ← Rhyvaur Şurası · Cephe #1 · Açık\nSavunma desteği talep et",
+      "btn": true
+     }
+    ],
+    "oldBtns": [
+     "joinWar:4:2"
+    ]
+   },
+   "secondTap": {
+    "buttons": 0,
+    "guestVoting": true
+   },
+   "cards": {
+    "C": 1,
+    "D": 0
+   },
+   "hostPanel": [
+    {
+     "front": 1,
+     "state": "voting"
+    }
+   ],
+   "fx2": {
+    "front": 2,
+    "attacker": 6
+   },
+   "bPanel2": {
+    "calls": [
+     {
+      "front": 2,
+      "state": "queued",
+      "txt": "Kızıl Muhafız ← Oriar Sendikası · Cephe #2 · Gündem kuyruğunda · sıra 1\nBu savunma talebi gündem kuyruğunda (sıra 1)",
+      "btn": false
+     },
+     {
+      "front": 1,
+      "state": "voting",
+      "txt": "Yeşil Birlik ← Rhyvaur Şurası · Cephe #1 · Oylanıyor\nBu savunma talebi oylanıyor",
+      "btn": false
+     }
+    ],
+    "oldBtns": []
+   }
+  },
+  "errors": []
+ }
+}

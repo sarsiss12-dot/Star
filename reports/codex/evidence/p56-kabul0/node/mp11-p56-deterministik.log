@@ -1,0 +1,16 @@
+✓ public bind is refused without TLS or trusted proxy, without https origins, or with MP1_DEV; loopback stays a dev default
+✓ behind a trusted proxy: plain HTTP is redirected (308) or refused (403 for WebSocket), HSTS on HTTPS, /healthz always answers
+✓ room creation is limited per IP (10/min by default); guessing and joining limits stay as in MP.1
+✗ platform restart (SIGTERM path): every room closes with reason server-restart and the CLI exits cleanly — AssertionError [ERR_ASSERTION]: The input did not match the regular expression /sigterm-ready=true/. Input:
+
+'sigterm-ready=false\nSTARS MP.1 relay http://127.0.0.1:46609 (yalnız yerel)\n'
+
+    at /workspace/Star-p56/tests/mp11_online_test.js:78:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async /workspace/Star-p56/tests/mp11_online_test.js:144:33
+✓ smoke tool passes against direct TLS (wss) with a certificate
+✓ smoke tool passes through a TLS-terminating reverse proxy (MP1_TRUST_PROXY, X-Forwarded-*), including http→https on the relay port
+✓ Dockerfile copies a complete, secret-free file set: the relay runs from only those files and passes the smoke test
+✓ host in background (Android hidden tab / screen lock): lobby tells guests why the game is paused; MP.0 call without a reason is unchanged
+✓ no secrets in the deployable sources: no private keys, tokens or real hostnames in research/mp1 and deploy files
+GEÇEN: 8 KALAN: 1

@@ -1,0 +1,52 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[6,6],"mirrorEq":true,"revMs":766,"buildMs":1052,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[6,6],"mirrorEq":true,"revMs":1546,"buildMs":1959,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":36.3,"p95":95.6,"max":95.6},"longtask":{"n":97,"med":96,"p95":197,"max":257},"heapMB":18,"dom":713,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":5,"med":81.7,"p95":308.2,"max":308.2},"refresh":{"n":1,"med":1.4,"p95":1.4,"max":1.4},"longtask":{"n":35,"med":77,"p95":193,"max":249},"builds":5,"deltas":5,"resyncs":0,"minGap":600,"heapMB":20,"dom":640,"intervals":3,"timeouts":2,"notes":0,"results":3,"packets":56,"joinErrors":0},"C":{"build":{"n":5,"med":60,"p95":342.9,"max":342.9},"refresh":{"n":0},"longtask":{"n":28,"med":101,"p95":174,"max":226},"builds":5,"deltas":5,"resyncs":0,"minGap":600,"heapMB":21,"dom":714,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":45,"joinErrors":0}}}
+PASS I0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 404; misafir gerçek STARS arayüzünde
+NOT RUN I1 uzun oturum 15 dk (ulu / 9 AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası 20 sn'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür
+NOT RUN I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)
+FAIL I3 yalıtılmış sensör olayı: B → C; yeni görüş ve keşif, özel alan, host ve iki ayna, Save8 sonrası
+AssertionError [ERR_ASSERTION]: C yalnız B’nin gerçek sensör kümesini kazandı
++ actual - expected
+
+  [
+    1,
+-   2,
+-   4,
+-   5,
+-   6,
+-   7,
+-   8,
+    9,
+    16,
+-   22,
+-   25,
+-   28,
+-   31,
+-   33,
+    38,
+-   43,
+    55,
+-   57,
+-   61,
+-   63,
+-   64,
+-   65,
+-   67,
+-   68,
+-   72,
+    75,
+-   82,
+-   85,
+-   88,
+-   91,
+-   92,
+    94,
+    97
+  ]
+
+    at verify (/workspace/Star-p56/tests/helpers/mp-sync-fed1-soak.cjs:207:13)
+    at async /workspace/Star-p56/tests/helpers/mp-sync-fed1-soak.cjs:216:4
+    at async test (/workspace/Star-p56/tests/browser-mp8.cjs:71:162)
+    at async module.exports (/workspace/Star-p56/tests/helpers/mp-sync-fed1-soak.cjs:138:2)
+    at async /workspace/Star-p56/tests/browser-mp8.cjs:566:17
+GEÇEN: 1 KALAN: 1

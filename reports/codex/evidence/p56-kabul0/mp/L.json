@@ -1,0 +1,384 @@
+{
+ "results": [
+  {
+   "name": "L0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 31544
+  },
+  {
+   "name": "L1 misafir başkan B gerçek sistem panelinde FEDERAL SİPARİŞ + gerçek ortak fonu görür; üye olmayan C fonu / defteri / düğmeyi görmez",
+   "status": "PASS",
+   "ms": 2199
+  },
+  {
+   "name": "L2 B gerçek FEDERAL SİPARİŞ düğmesine dokunur → host tersane kuyruğunda TEK federal iş, bedel ortak fondan bir kez; dokunma anında yerel etki yok, kabul host ACK'i + güncel aynada",
+   "status": "PASS",
+   "ms": 4298
+  },
+  {
+   "name": "L3 B'nin hattı kopup bağlanır, AYNI komut çerçevesi yeniden gönderilir → ikinci ödeme / ikinci iş yok; aynı ay yeni komut reddedilir",
+   "status": "PASS",
+   "ms": 9325
+  },
+  {
+   "name": "L4 iş gerçek dailyTick ile tamamlanır → tek federal gemi, B'nin (başkan) federal filosu; ödeme bir kez; B güncel aynada federal filoyu görür",
+   "status": "PASS",
+   "ms": 2543
+  },
+  {
+   "name": "L5 başkanlık host'a geçer (B'nin aynası henüz eski): B'nin gerçek düğme dokunuşu host'ta işlem anında reddedilir; fon ve kuyruk değişmez",
+   "status": "PASS",
+   "ms": 5561
+  }
+ ],
+ "metrics": {
+  "scen": "L",
+  "conf": {
+   "size": "orta",
+   "ai": 5,
+   "seed": 22,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 741,
+    "buildMs": 937,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     4,
+     4
+    ],
+    "mirrorEq": true,
+    "revMs": 1305,
+    "buildMs": 1597,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 2,
+      "med": 15.9,
+      "p95": 15.9,
+      "max": 15.9
+     },
+     "longtask": {
+      "n": 27,
+      "med": 74,
+      "p95": 100,
+      "max": 147
+     },
+     "heapMB": 18,
+     "dom": 727,
+     "intervals": 2,
+     "timeouts": 1,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 4,
+       "med": 54.8,
+       "p95": 143.9,
+       "max": 143.9
+      },
+      "refresh": {
+       "n": 2,
+       "med": 47.3,
+       "p95": 47.3,
+       "max": 47.3
+      },
+      "longtask": {
+       "n": 24,
+       "med": 79,
+       "p95": 160,
+       "max": 192
+      },
+      "builds": 4,
+      "deltas": 3,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 17,
+      "dom": 720,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 36,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 4,
+       "med": 70.4,
+       "p95": 130.6,
+       "max": 130.6
+      },
+      "refresh": {
+       "n": 2,
+       "med": 42.6,
+       "p95": 42.6,
+       "max": 42.6
+      },
+      "longtask": {
+       "n": 29,
+       "med": 86,
+       "p95": 106,
+       "max": 163
+      },
+      "builds": 4,
+      "deltas": 3,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 18,
+      "dom": 729,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 31,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 15042,
+  "actualWorld": {
+   "seed": 22,
+   "size": "orta",
+   "systems": 45,
+   "states": 8
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "fedFleet": {
+   "L1": {
+    "B": {
+     "leader": 0,
+     "fund": {
+      "ala": 3000,
+      "ene": 3000
+     },
+     "view": {
+      "ships": 0,
+      "fleets": 0,
+      "queued": 0,
+      "cap": 8,
+      "upkeep": {
+       "ene": 0,
+       "ala": 0
+      },
+      "monthUsed": false,
+      "reserveMonths": 3,
+      "orders": []
+     },
+     "info": "Ortak fon 3000 alaşım · 3000 enerji · donanma 0/8 gemi (kuyruk 0) · bu ay 1 sipariş hakkı · bakım 0 ene + 0 ala / ay",
+     "disabled": false
+    },
+    "host": {
+     "ala": 3000,
+     "ene": 3000
+    },
+    "C": {
+     "fund": {
+      "ala": 0,
+      "ene": 0
+     },
+     "view": null,
+     "contrib": null,
+     "member": false
+    }
+   },
+   "L2": {
+    "cost": 37,
+    "h0": {
+     "ala": 3000,
+     "ene": 3000
+    },
+    "h1": {
+     "ala": 2963,
+     "ene": 3000
+    },
+    "orders": [
+     {
+      "sys": 5,
+      "cls": "kor",
+      "e": 1,
+      "left": 33,
+      "paid": {
+       "ala": 37
+      }
+     }
+    ],
+    "local0": {
+     "q": 0,
+     "fund": 3000
+    },
+    "localNow": {
+     "q": 0,
+     "fund": 3000
+    },
+    "B": {
+     "q": [
+      {
+       "e": 0,
+       "cls": "kor",
+       "ala": 37
+      }
+     ],
+     "fund": 2963,
+     "row": true,
+     "btn": true
+    },
+    "frame": true
+   },
+   "L3": {
+    "dup": {
+     "v": 1,
+     "type": "result",
+     "seq": 1,
+     "cid": "j1_1_dcf92c1ek0",
+     "status": "ok",
+     "code": null,
+     "rev": 11,
+     "extra": {
+      "cost": {
+       "ala": 37
+      },
+      "days": 33
+     },
+     "dup": 1
+    },
+    "again": {
+     "v": 1,
+     "type": "result",
+     "seq": 2,
+     "cid": "j1_2_3nlr4s6qio",
+     "status": "rejected",
+     "code": "rules:fed",
+     "rev": 14,
+     "detail": [
+      "Bu ay federal sipariş zaten verildi (ayda en çok bir)"
+     ],
+     "ms": 67
+    },
+    "h0": {
+     "ala": 2963,
+     "ene": 3000
+    },
+    "h1": {
+     "ala": 2963,
+     "ene": 3000
+    },
+    "orders": 1,
+    "dupStat": [
+     0,
+     1
+    ]
+   },
+   "L4": {
+    "days": 34,
+    "h0": {
+     "ala": 2963,
+     "ene": 3000
+    },
+    "h1": {
+     "ala": 2963,
+     "ene": 3000
+    },
+    "fleets": [
+     {
+      "id": 28,
+      "e": 1,
+      "n": 1,
+      "c": [
+       "kor"
+      ]
+     }
+    ],
+    "B": [
+     {
+      "e": 0,
+      "n": 1,
+      "c": "kor"
+     }
+    ]
+   },
+   "L5": {
+    "res": {
+     "v": 1,
+     "type": "result",
+     "seq": 3,
+     "cid": "j1_3_u6wnd9ti1n",
+     "status": "rejected",
+     "code": "rules:fed",
+     "rev": 20,
+     "detail": [
+      "Yalnız federasyon başkanı federal sipariş verebilir"
+     ],
+     "ms": 61
+    },
+    "h0": {
+     "ala": 2963,
+     "ene": 3000
+    },
+    "h1": {
+     "ala": 2963,
+     "ene": 3000
+    },
+    "orders": [
+     0,
+     0
+    ],
+    "B": {
+     "leader": 1,
+     "btn": 0
+    },
+    "hostOk": {
+     "save": true,
+     "pkg": true
+    }
+   }
+  },
+  "errors": []
+ }
+}

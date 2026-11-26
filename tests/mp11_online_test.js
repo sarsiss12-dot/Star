@@ -61,9 +61,23 @@ test('platform restart (SIGTERM path): every room closes with reason server-rest
   const g=await connect(`ws://127.0.0.1:${r.port}/mp1/ws?role=client&code=${code}&release=${r.release}`);await g.ctl('welcome');
   r.shutdown();assert.equal((await g.ctl('room-closed')).reason,'server-restart');assert.equal((await g.waitClose()).code,4001);assert.equal((await h.ctl('room-closed')).reason,'server-restart');
   await new Promise(res=>r.server.close(()=>res()));
-  const p=require('child_process').spawn(process.execPath,[path.join(root,'research/mp1/server/relay.js')],{env:{...process.env,MP1_PORT:'0'}});let out='';p.stdout.on('data',d=>out+=d);
-  await new Promise(res=>{const t=setInterval(()=>{if(/relay http/.test(out)){clearInterval(t);res();}},20);});
-  p.kill('SIGTERM');const code2=await new Promise(res=>p.on('exit',c=>res(c)));assert.equal(code2,0);assert.match(out,/yalnız yerel/);assert(!/[A-HJ-NP-Z2-9]{8}/.test(out.replace(/STARS MP\.1 relay[^\n]*/,'')));
+  const temp=fs.mkdtempSync(path.join(os.tmpdir(),'stars-mp-ready-'));
+  try{
+    const probe=path.join(temp,'observe-ready.cjs');
+    fs.writeFileSync(probe,`const log=console.log;
+console.log=function(message,...rest){
+  if(typeof message==='string'&&message.startsWith('STARS MP.1 relay '))
+    log.call(this,'sigterm-ready='+Boolean(process.listenerCount('SIGTERM')));
+  return log.call(this,message,...rest);
+};`);
+    const p=require('child_process').spawn(process.execPath,['--require',probe,path.join(root,'research/mp1/server/relay.js')],{env:{...process.env,MP1_PORT:'0'}});
+    const ended=new Promise(res=>p.once('exit',(code,signal)=>res({code,signal})));
+    let out='';
+    await Promise.race([ended,new Promise(res=>p.stdout.on('data',d=>{out+=d;if(/relay http/.test(out))res();}))]);
+    p.kill('SIGTERM');assert.deepEqual(await ended,{code:0,signal:null});
+    assert.match(out,/sigterm-ready=true/);assert.match(out,/yalnız yerel/);
+    assert(!/[A-HJ-NP-Z2-9]{8}/.test(out.replace(/STARS MP\.1 relay[^\n]*/,'')));
+  }finally{fs.rmSync(temp,{recursive:true,force:true});}
 });
 test('smoke tool passes against direct TLS (wss) with a certificate',async()=>{
   const port=await freePort();
