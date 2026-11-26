@@ -10082,7 +10082,7 @@ Object.assign(UI,{
   }
 });
 const stabilityFleetAct=UI.act;
-UI.act=function(a,x){if(a==='fleetRecovery')return this.fleetRecoveryOpen(x);if(a==='fleetRecoveryDo')return this.fleetRecoveryDo(x);return stabilityFleetAct.call(this,a,x);};
+UI.act=function(a,x,el){if(a==='fleetRecovery')return this.fleetRecoveryOpen(x);if(a==='fleetRecoveryDo')return this.fleetRecoveryDo(x);return stabilityFleetAct.call(this,a,x,el);};
 
 /* BETA-GALAXY.0: fizyoloji etkileri motor alanlarından (PHYSIO + gerçek kullanım yerleri). k: başlık, t: kart kısa metni, long: ayrıntı. */
 function physioEffects(P){
