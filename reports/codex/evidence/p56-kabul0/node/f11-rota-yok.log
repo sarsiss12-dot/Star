@@ -1,0 +1,30 @@
+✓ F3 uyumlu üye (tür uyumu ≥ tercih − 0,35): 24 değerlendirmede ayrılma yok, üye reform önergesi yok
+✓ F4a uyumsuz üye, destek yok, yaşayabilir alternatif var: sabır sayacı dolunca anayasaya uygun ayrılış (gerekçe tür uyumsuzluğu)
+✓ F8 çalkantı yok: tür uyumsuzluğuyla ayrılan üye aynı birliğe (türü değişmedikçe) geri başvurmaz / daveti kabul etmez; 5 yıl sonra da; aynı reformu 4 yıl yeniden önermez
+✓ F4b uyumsuz üye, yaşayabilir alternatif yok (bütün diğerleri aynı federasyonda): sayaç dolsa da ayrılmaz
+  F4c oylama: {"passed":false,"yes":2,"no":2}
+✓ F4c uyumsuz üye ve üyelerin yarısı aynı türü tercih ediyor: üye mevcut oylamayla REFORM önergesi açar (150 Etki), ayrılmaz
+✓ F4d reform reddedilmiş (lastVote): çözülemeyen uyumsuzluk sabır sayacını işletir
+✓ F5 lider (B) üye yolunu kullanmaz; insan üye adına AI reform önergesi / ayrılma yok
+✓ F7 tür reformu oyu doktrine göre: aynı türü tercih eden üye evet, karşı türü tercih eden üye hayır (ilişki 100 iken de)
+✓ F6 ekonomik krizdeki üye pahalı yasaya (ortak donanma) gerekçeli düşük oy verir
+✓ F9 katılım kapısı: türü doktrinle uyumsuz ve reform desteği olmayan birliğe AI katılmaz (davet / kabul oyu / başvuru aynı aiFedWilling); destek varsa katılabilir
+✓ T1 fiziksel varış temas kurar (arrive); T2 keşfedilmemiş uzak devletle temas yok
+✓ T3 sensör menzilindeki (şu an görünür) ama hiç girilmemiş korsan yuvası güçlü AI filosunun av hedefi olur
+✓ T5 AI’ın bilmediği (görülmemiş, istihbaratta yok) yuva av listesine girmez
+✓ T6 istihbarat BELLEĞİNDE olan ama şu an sensörde görünmeyen yuva av hedefi olmaz (uzak sefere çekilmez)
+✗ F11 ayrılık Save8’de korunur, aynı tür reddedilir ve tür değişince normal kapı değerlendirilir — AssertionError [ERR_ASSERTION]: Bilinen yardım/iş birliği rotası yetersiz
+
+false !== true
+
+    at /workspace/Star-p56/tests/fed_ai_siyaset0_test.js:127:9
+    at test (/workspace/Star-p56/tests/fed_ai_siyaset0_test.js:17:43)
+    at Object.<anonymous> (/workspace/Star-p56/tests/fed_ai_siyaset0_test.js:114:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+GEÇEN: 14 KALAN: 1

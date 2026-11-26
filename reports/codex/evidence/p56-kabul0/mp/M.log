@@ -1,0 +1,10 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[5,5],"mirrorEq":true,"revMs":586,"buildMs":834,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[5,5],"mirrorEq":true,"revMs":1008,"buildMs":1117,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"D","e":3,"rev":[5,5],"mirrorEq":true,"revMs":1528,"buildMs":1784,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":68.4,"p95":68.4,"max":68.4},"longtask":{"n":40,"med":87,"p95":138,"max":155},"heapMB":18,"dom":727,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":5,"med":54.6,"p95":141.2,"max":141.2},"refresh":{"n":3,"med":1.2,"p95":4.7,"max":4.7},"longtask":{"n":38,"med":70,"p95":96,"max":96},"builds":5,"deltas":4,"resyncs":0,"minGap":600,"heapMB":18,"dom":695,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":46,"joinErrors":0},"C":{"build":{"n":4,"med":61.3,"p95":283.6,"max":283.6},"refresh":{"n":2,"med":8.4,"p95":8.4,"max":8.4},"longtask":{"n":27,"med":87,"p95":109,"max":121},"builds":4,"deltas":4,"resyncs":0,"minGap":600,"heapMB":18,"dom":714,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":41,"joinErrors":0},"D":{"build":{"n":4,"med":65.5,"p95":163.5,"max":163.5},"refresh":{"n":2,"med":46.1,"p95":46.1,"max":46.1},"longtask":{"n":38,"med":95,"p95":157,"max":160},"builds":4,"deltas":4,"resyncs":0,"minGap":600,"heapMB":18,"dom":729,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":35,"joinErrors":0}}}
+PASS M0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 4 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS M1 fikstür: host / B / C federasyonu, AI C'ye saldırır; B aynasında C'nin savaşı yok, D federasyonda değil
+PASS M2 B gerçek dokunuşla "Savunma desteği talep et" → host'ta acil savunma oyu; C'ye oy kartı, D'ye değil; ikinci dokunuş ikinci kuyruk / oy üretmez
+PASS M3 host paneli aynı satırı "Oylanıyor" gösterir; D'nin görünümünde savunma çağrısı yok
+PASS M4 oy açıkken AI host'a saldırır → C kendi panelinden talep açar → kuyrukta; B panelinde "Gündem kuyruğunda · sıra 1"
+GEÇEN: 5 KALAN: 0

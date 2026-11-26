@@ -1,0 +1,34 @@
+[
+  {
+    "file": "s500-11-m120.save",
+    "input": "5f09581b6d4303b1b10c6d9d037dc72b9c3d4f4653ba8bee59c9a5bcac133138",
+    "before": "7755be7325a3e852733a9db7e2fb6149f3f4b289f097f0c274c182caf94499ae",
+    "after": "6498d7eb3e4985262b66e46e14d33665b12541d32c92562a078ddad9aa137660",
+    "rngBefore": -532471182,
+    "rngAfter": 885142249
+  },
+  {
+    "file": "s500-11-m180.save",
+    "input": "aa43da24d37618806275842cda3bb09bf20219c494e32139b40a383bfd453151",
+    "before": "96d89aff04134131b2c25fcadb2d50344d06537c8c92cba2baf19f63ff2472a7",
+    "after": "04b0e21d1929e1833c6ddce981f973a0e747a47a7b4e35e6e118c3171c8b13e0",
+    "rngBefore": -25067207,
+    "rngAfter": -277501198
+  },
+  {
+    "file": "s500-11-siyasi.save",
+    "input": "ea0bfec22fa453b79ae7bf3318b2a5d3676d74217fd3be6f9eecc4ae9c16cc1e",
+    "before": "7744a9201c5111cb6802ee4d3afcf124775807fce5b3d4b7ba37352c79bfe7d4",
+    "after": "ca1d150730e0e68417d7e6f084168a9d9ced71ead3f80231586cb1832144b2fb",
+    "rngBefore": -532471182,
+    "rngAfter": 1637284013
+  },
+  {
+    "file": "ulu-11-m120.save",
+    "input": "cf3ea900cb1b4326bd9cf41e6584d47aa869377d76dc160535d1efa93dc3b5e4",
+    "before": "b4def7a4a2a8c74f824b1fa0544f4d50ecc315c4dc7d2e855185a3a32837ccd4",
+    "after": "3a3a1090ec2b88c79040adaba563db2e2c407ece41e57afd130ac4d6f8f0ada0",
+    "rngBefore": -499939168,
+    "rngAfter": 2061039509
+  }
+]

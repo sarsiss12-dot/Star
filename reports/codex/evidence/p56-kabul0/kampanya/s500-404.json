@@ -1,0 +1,182 @@
+{
+  "size": "s500",
+  "aiCount": 16,
+  "seed": 404,
+  "checkedMonths": 17,
+  "hashes": [
+    [
+      "d1323318f48d38dadceeb1be7e72f2dbe6a6d2b8f50f21431e251b040431b221",
+      "d1323318f48d38dadceeb1be7e72f2dbe6a6d2b8f50f21431e251b040431b221"
+    ],
+    [
+      "dbeeb079a5fbbb4e163e857fdd645aa593cc437c939e1ac0875abc5f0daa1584",
+      "dbeeb079a5fbbb4e163e857fdd645aa593cc437c939e1ac0875abc5f0daa1584"
+    ],
+    [
+      "13321fc29d472e0b0e57503950e46775a863a6d434061356bd8a01a386243040",
+      "13321fc29d472e0b0e57503950e46775a863a6d434061356bd8a01a386243040"
+    ],
+    [
+      "3ad8bf68c9cb40ef30199cc3879374e88885d99cb8300a7699a3644f0a7d598f",
+      "3ad8bf68c9cb40ef30199cc3879374e88885d99cb8300a7699a3644f0a7d598f"
+    ],
+    [
+      "fe7a6c2bf7608c232fdf4f98241605ee3bf225c392af91e5cd327047bce23485",
+      "fe7a6c2bf7608c232fdf4f98241605ee3bf225c392af91e5cd327047bce23485"
+    ],
+    [
+      "57ff3bb87c6b589c6a5c344ac03ce851cea6977dc68574d56d270fdf111d439e",
+      "57ff3bb87c6b589c6a5c344ac03ce851cea6977dc68574d56d270fdf111d439e"
+    ],
+    [
+      "66e67c6dc2f7b5fdd6272e558aee878da2a0b77d7f1d54fba80f4f79825826cc",
+      "66e67c6dc2f7b5fdd6272e558aee878da2a0b77d7f1d54fba80f4f79825826cc"
+    ],
+    [
+      "9b24d014bc71731100052247f9de468d73c087922961277c5545b96b4cd4324f",
+      "9b24d014bc71731100052247f9de468d73c087922961277c5545b96b4cd4324f"
+    ],
+    [
+      "a59bf0db4c33f47d1db2ec4c69ce88018f1cade468602f6f4c4eabaa3009860e",
+      "a59bf0db4c33f47d1db2ec4c69ce88018f1cade468602f6f4c4eabaa3009860e"
+    ],
+    [
+      "4e09f66ceb90033a2ef13ea3b9955ee2880d84173c1501b5e4fc7d7d43547694",
+      "4e09f66ceb90033a2ef13ea3b9955ee2880d84173c1501b5e4fc7d7d43547694"
+    ],
+    [
+      "9d6fd0bec9ebbc632205b6bd078ddec79abcbb9648fb6c6e0a97a50331120651",
+      "9d6fd0bec9ebbc632205b6bd078ddec79abcbb9648fb6c6e0a97a50331120651"
+    ],
+    [
+      "f4131dc52f0469c299b618b006582ddbfac635a7bec6d433f243bb6a9be48138",
+      "f4131dc52f0469c299b618b006582ddbfac635a7bec6d433f243bb6a9be48138"
+    ],
+    [
+      "736fa5d95c2d84de9a6e1d8013446905ce5d4b7119ffb314f24f8da4d0353d91",
+      "736fa5d95c2d84de9a6e1d8013446905ce5d4b7119ffb314f24f8da4d0353d91"
+    ],
+    [
+      "515a082f49866d24e225d4d181caeb4cff98caf2a3c2808efe89bb6badd9d106",
+      "515a082f49866d24e225d4d181caeb4cff98caf2a3c2808efe89bb6badd9d106"
+    ],
+    [
+      "8f6aa19d4eb3d147c50ee8aa00f6ebab809944b6ec9485da01db8a5ae61ab221",
+      "8f6aa19d4eb3d147c50ee8aa00f6ebab809944b6ec9485da01db8a5ae61ab221"
+    ],
+    [
+      "e9975960397a801bc8233f9c64d770eb862777c9933d6f0143825b9ec531a79f",
+      "e9975960397a801bc8233f9c64d770eb862777c9933d6f0143825b9ec531a79f"
+    ],
+    [
+      "1a903552353daf4261a2f692039b81a94445b4fbe23a3a322dbdd32cbb7838fd",
+      "82fe8c7132720c1684be2cb826a7e08d1b5e0923653dfdeb82decdff2922610f"
+    ]
+  ],
+  "first": {
+    "month": 17,
+    "day": 510,
+    "save": [
+      "5d68102f7eae15a6c5f63e0ad441e6d8ec7b6f640803da79ef3ac32bf30c9426",
+      "3cd8c09cc01f81ffaf8ddd989388822a7a90c92328152a322e336f611d18d613"
+    ],
+    "rng": [
+      -423778659,
+      208057011
+    ],
+    "sections": [
+      "rs",
+      "simulation",
+      "events",
+      "economyHistory",
+      "sys",
+      "emps",
+      "fl"
+    ],
+    "decisions": [
+      [
+        {
+          "kind": "move",
+          "day": 510,
+          "by": 6,
+          "fleet": 243,
+          "from": 1,
+          "to": 145,
+          "route": [
+            155,
+            366,
+            315,
+            142,
+            276,
+            145
+          ],
+          "power": 39,
+          "guard": null
+        }
+      ],
+      [
+        {
+          "kind": "new-visible-prize",
+          "day": 510,
+          "by": 1,
+          "fleet": 4,
+          "from": 472,
+          "to": 498,
+          "route": [
+            361,
+            182,
+            90,
+            498
+          ],
+          "power": 1012,
+          "guard": 997
+        },
+        {
+          "kind": "move",
+          "day": 510,
+          "by": 2,
+          "fleet": 7,
+          "from": 275,
+          "to": 418,
+          "route": [
+            23,
+            418
+          ],
+          "power": 708,
+          "guard": null
+        },
+        {
+          "kind": "move",
+          "day": 510,
+          "by": 6,
+          "fleet": 243,
+          "from": 1,
+          "to": 145,
+          "route": [
+            155,
+            366,
+            315,
+            142,
+            276,
+            145
+          ],
+          "power": 39,
+          "guard": null
+        },
+        {
+          "kind": "move",
+          "day": 510,
+          "by": 14,
+          "fleet": 47,
+          "from": 451,
+          "to": 314,
+          "route": [
+            314
+          ],
+          "power": 866,
+          "guard": null
+        }
+      ]
+    ]
+  }
+}

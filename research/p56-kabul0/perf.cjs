@@ -4,6 +4,10 @@ const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypt
 const [control,candidate,output,...files]=process.argv.slice(2);
 const count=Number(process.env.SAMPLES||8);
 if(!Number.isInteger(count)||count<2||count%2)throw Error('SAMPLES çift sayı olmalı');
+const phase=process.env.PHASE;
+if(phase&&!['migration','steady'].includes(phase))throw Error('PHASE migration veya steady olmalı');
+const warmups=Number(process.env.WARMUP??1);
+if(!Number.isInteger(warmups)||warmups<1)throw Error('WARMUP pozitif tamsayı olmalı');
 const sha=raw=>crypto.createHash('sha256').update(raw).digest('hex');
 const now=()=>Number(process.hrtime.bigint())/1e6;
 const cpu=()=>{const t=process.cpuUsage();return (t.user+t.system)/1000;};
@@ -49,7 +53,7 @@ function stat(a){
 }
 function pair(left,right,raw){
  const engines=[engine(left),engine(right)],arms=[[],[]];
- for(const h of engines)sample(h,raw);
+ for(let n=0;n<warmups;n++)for(const h of engines)sample(h,raw);
  for(let n=0;n<count/2;n++)for(const arm of (n%2?[1,0,0,1]:[0,1,1,0]))arms[arm].push(sample(engines[arm],raw));
  for(const rows of arms)assert(rows.every(x=>x.save===rows[0].save&&x.rngAfter===rows[0].rngAfter),'Aynı kol yeniden oynatmada farklı');
  const delta={};
@@ -57,7 +61,7 @@ function pair(left,right,raw){
   const [a,b]=arms.map(rows=>stat(rows.map(x=>x[k])));
   delta[k]={a,b,percent:Object.fromEntries(Object.keys(a).map(m=>[m,100*(b[m]/a[m]-1)]))};
  }
- return {arms,delta};
+ return {warmups,arms,delta};
 }
 function instrument(root,raw){
  const h=engine(root);h.run('profile()');
@@ -71,6 +75,7 @@ for(const file of files){
  by.sb.input=raw;assert(by.run('deserialize(input)'));by.run('month()');const post=by.run('serialize()');
  const input=[['migration',raw],['steady',post]];
  for(const [label,text] of input){
+  if(phase&&label!==phase)continue;
   const key=path.basename(file)+':'+label;
   const profiles=[instrument(control,text),instrument(candidate,text)];
   if(process.env.PROFILE_ONLY==='1'){results[key]={input:sha(text),profiles};}

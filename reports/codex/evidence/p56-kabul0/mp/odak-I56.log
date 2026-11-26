@@ -1,0 +1,16 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[6,6],"mirrorEq":true,"revMs":699,"buildMs":972,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[5,5],"mirrorEq":true,"revMs":1458,"buildMs":1696,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":55.9,"p95":69.9,"max":69.9},"longtask":{"n":95,"med":111,"p95":180,"max":313},"heapMB":15,"dom":713,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":5,"med":92.6,"p95":416.1,"max":416.1},"refresh":{"n":1,"med":61.8,"p95":61.8,"max":61.8},"longtask":{"n":32,"med":105,"p95":173,"max":180},"builds":5,"deltas":5,"resyncs":0,"minGap":600,"heapMB":22,"dom":640,"intervals":3,"timeouts":2,"notes":0,"results":3,"packets":56,"joinErrors":0},"C":{"build":{"n":4,"med":92,"p95":320.1,"max":320.1},"refresh":{"n":1,"med":1.1,"p95":1.1,"max":1.1},"longtask":{"n":36,"med":99,"p95":175,"max":183},"builds":4,"deltas":4,"resyncs":0,"minGap":600,"heapMB":19,"dom":708,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":46,"joinErrors":0}}}
+PASS I0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 404; misafir gerçek STARS arayüzünde
+NOT RUN I1 uzun oturum 15 dk (ulu / 9 AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası 20 sn'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür
+NOT RUN I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)
+FAIL I3 yalıtılmış sensör olayı: B → C; yeni görüş ve keşif, özel alan, host ve iki ayna, Save8 sonrası
+page.evaluate: Error: I3: ters yön/özel alan kontrolü yok
+    at eval (eval at evaluate (:311:30), <anonymous>:12:42)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /workspace/Star-p56/tests/helpers/mp-sync-fed1-soak.cjs:143:26
+    at async test (/workspace/Star-p56/tests/browser-mp8.cjs:71:162)
+    at async module.exports (/workspace/Star-p56/tests/helpers/mp-sync-fed1-soak.cjs:138:2)
+    at async /workspace/Star-p56/tests/browser-mp8.cjs:566:17
+GEÇEN: 1 KALAN: 1

@@ -1,7 +1,8 @@
 'use strict';
 const {runtime}=require('../../tests/helpers/runtime');
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict');
-const [prev,output]=process.argv.slice(2);
+const {gunzipSync}=require('node:zlib');
+const [prev,output,...checkpoints]=process.argv.slice(2);
 const realm=root=>{
  const h=runtime({root});
  h.run(fs.readFileSync(path.join(root,'research/mp0/mp-core.js'),'utf8'));
@@ -38,4 +39,15 @@ for(let p=41;p<=56;p++){
  })())`));
  assert.equal(entry.ok,true,JSON.stringify(entry));assert.equal(entry.rng,real.rng);range.push(entry);
 }
-fs.writeFileSync(output,JSON.stringify({real,range,note:'One valid Save8 with each historical client build tag and recalculated integrity. Actual p55 room snapshot tested separately.'},null,2)+'\n');
+const archives=checkpoints.map(file=>{
+ const bytes=fs.readFileSync(file),raw=(file.endsWith('.gz')?gunzipSync(bytes):bytes).toString('utf8');
+ const input=JSON.parse(raw);candidate.sb.archive=raw;
+ const result=JSON.parse(candidate.run(`JSON.stringify((()=>{
+  if(!deserialize(archive))return {ok:false};
+  return {ok:true,rng:RND_STATE,day:G.day,seed:G.seed,systems:G.sys.length,version:JSON.parse(serialize()).v};
+ })())`));
+ assert.equal(result.ok,true,file);assert.equal(result.day,input.day,file);
+ assert.equal(result.seed,input.seed,file);assert.equal(result.rng,input.rs,file);assert.equal(result.version,8,file);
+ return {file,sha256:crypto.createHash('sha256').update(raw).digest('hex'),...result};
+});
+fs.writeFileSync(output,JSON.stringify({real,range,archives,note:'One valid Save8 with each historical client build tag and recalculated integrity. Actual p55 room snapshot tested separately.'},null,2)+'\n');

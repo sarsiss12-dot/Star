@@ -1,0 +1,23 @@
+✓ S1 müttefik savunması, güçlü AI, 300 alaşım: kabul (savunma sadakati); ücretsiz istekte karşı teklif
+✓ S2 doktrin: aynı koşulda pasifistin saldırıya katılım maliyeti savunmadan belirgin yüksek; militaristin saldırı maliyeti pasifistten düşük
+✓ S2b pasifist, saldırı savaşına 300 alaşımla katılmaz (karşı teklif / ret), savunmaya kabul eder
+✓ S4 ekonomik kriz: ödemeyle de katılım reddedilir, gerekçe ekonomi
+✓ S5 çok güçlü düşman: ret (güç / erişim)
+✓ S6 erişim yok (silahlı filo yok): ret
+✓ S10 ikinci cephe: süren savaşı kuvvetini bağlayan AI yeni cepheye katılmaz
+✓ S12 savaş bitti: bekleyen katılım teklifi geçersiz, ödeme / savaş yok
+✓ S13 insan → AI: oyuncunun savunma savaşına destek isteği AI kapılarından geçer (kriz → ret, normal → karar)
+✓ E1 AI kendi savunma savaşında zorlanınca müttefikten destek ister; kabulde müttefik cepheye katılır, ödeme bir kez
+✓ E2 güçlü durumdaki AI yardım istemez
+✓ E3 aynı cephe + aday için 180 gün yeni istek yok; ay içinde ikinci istek yok
+✓ E4 gerekçeli ret alan adaya aynı cephe için bir yıl yeniden sorulmaz (karşı teklif / bekleme 180 gün)
+✓ S14 AI → insan: AI oyuncudan (müttefik) destek isterse istek oyuncunun gelen kutusuna gider, kendiliğinden katılım yok
+✓ S17 zaten taraf olan devlete ikinci ücretli katılım yok (kapı)
+✓ S18 Save8: yardım isteği bekleme kayıtları yükleme sonrası korunur; yüklenen dünyada aynı ay ikinci istek yok
+✓ S21 dürüstlük: aynı müttefik savunmasında dürüst AI'nın katılım maliyeti sahtekârdan düşük (sadakat)
+✓ I1 toprak vaadi: aynı düşman sistemi iki farklı katılımcıya vaat edilemez; ikinci teklif geçersiz, ödeme / katılım yok
+✓ S22 Arındırıcı aday: destek kapısı reddeder (dealQuote ile aynı yasak); kart uygun görünmez
+✓ S20 doktrinler aynı koşulda farklı maliyet üretir (p54: hepsi aynı)
+  B1 adaylar [{"id":3,"tier":4,"ok":"1"},{"id":4,"tier":2,"ok":"1"},{"id":5,"tier":0,"ok":"0"}] · gönderilen 2
+✓ B1 Savaş Merkezi destek adayları: uygunlar önde, müttefik > dost; gerekçe etiketleri; toplu davet her uygun adaya bir teklif, ikinci basışta tekrar yok
+GEÇEN: 21 KALAN: 0

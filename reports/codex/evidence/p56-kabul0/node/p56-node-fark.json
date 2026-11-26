@@ -1,0 +1,194 @@
+{
+  "claude": {
+    "suites": 256,
+    "pass": 6649,
+    "fail": 279
+  },
+  "replay": {
+    "suites": 256,
+    "pass": 6589,
+    "fail": 284
+  },
+  "changes": [
+    {
+      "suite": "faz86c_3_ai_negotiation_test.js",
+      "claude": [
+        86,
+        4,
+        1
+      ],
+      "replay": [
+        85,
+        5,
+        1
+      ],
+      "outerSignal": null,
+      "durationMs": 28695
+    },
+    {
+      "suite": "faz86f_ai_balance_test.js",
+      "claude": [
+        25,
+        0,
+        0
+      ],
+      "replay": [
+        0,
+        1,
+        1
+      ],
+      "outerSignal": "SIGKILL",
+      "durationMs": 180143
+    },
+    {
+      "suite": "faz89b_daily_campaign_test.js",
+      "claude": [
+        11,
+        0,
+        0
+      ],
+      "replay": [
+        0,
+        1,
+        1
+      ],
+      "outerSignal": "SIGKILL",
+      "durationMs": 180081
+    },
+    {
+      "suite": "faz91b_campaign_observer_test.js",
+      "claude": [
+        5,
+        0,
+        0
+      ],
+      "replay": [
+        0,
+        1,
+        1
+      ],
+      "outerSignal": "SIGKILL",
+      "durationMs": 180057
+    },
+    {
+      "suite": "faz93d1_navy_campaign_test.js",
+      "claude": [
+        8,
+        0,
+        0
+      ],
+      "replay": [
+        0,
+        1,
+        1
+      ],
+      "outerSignal": "SIGKILL",
+      "durationMs": 180058
+    },
+    {
+      "suite": "faz95d_identity_test.js",
+      "claude": [
+        20,
+        3,
+        1
+      ],
+      "replay": [
+        23,
+        0,
+        0
+      ],
+      "outerSignal": null,
+      "durationMs": 23226
+    },
+    {
+      "suite": "faz96g2_setup_test.js",
+      "claude": [
+        11,
+        1,
+        1
+      ],
+      "replay": [
+        0,
+        1,
+        1
+      ],
+      "outerSignal": "SIGKILL",
+      "durationMs": 180071
+    },
+    {
+      "suite": "fed_ai_siyaset0_mp_test.js",
+      "claude": [
+        3,
+        0,
+        0
+      ],
+      "replay": [
+        4,
+        0,
+        0
+      ],
+      "outerSignal": null,
+      "durationMs": 5338
+    },
+    {
+      "suite": "fed_ai_siyaset0_test.js",
+      "claude": [
+        14,
+        0,
+        0
+      ],
+      "replay": [
+        15,
+        0,
+        0
+      ],
+      "outerSignal": null,
+      "durationMs": 19764
+    },
+    {
+      "suite": "mp1_actor_vision_test.js",
+      "claude": [
+        2,
+        0,
+        0
+      ],
+      "replay": [
+        0,
+        1,
+        1
+      ],
+      "outerSignal": "SIGKILL",
+      "durationMs": 180101
+    },
+    {
+      "suite": "mp11_online_test.js",
+      "claude": [
+        9,
+        0,
+        0
+      ],
+      "replay": [
+        8,
+        1,
+        1
+      ],
+      "outerSignal": null,
+      "durationMs": 5115
+    },
+    {
+      "suite": "mp73_council_equiv_test.js",
+      "claude": [
+        1,
+        0,
+        0
+      ],
+      "replay": [
+        0,
+        1,
+        1
+      ],
+      "outerSignal": "SIGKILL",
+      "durationMs": 180069
+    }
+  ]
+}

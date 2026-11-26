@@ -1,0 +1,93 @@
+{
+  "real": {
+    "ok": true,
+    "build": "96h10p55",
+    "protocol": 1,
+    "package": 4,
+    "rng": 950206257
+  },
+  "range": [
+    {
+      "build": "96h10p41",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p42",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p43",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p44",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p45",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p46",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p47",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p48",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p49",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p50",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p51",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p52",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p53",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p54",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p55",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p56",
+      "ok": true,
+      "rng": 950206257
+    }
+  ],
+  "archives": [],
+  "note": "One valid Save8 with each historical client build tag and recalculated integrity. Actual p55 room snapshot tested separately."
+}

@@ -1,0 +1,8 @@
+✓ P1 AI koridoru iki ayrı insan limanından geçer: talep iki misafire ayrı oy; ayna yalnız taraflara, AI şart miktarları gitmez
+✓ P2 B oyu: aynı cid önbellekten, farklı cid ikinci oy reddedilir; geri çekme / sahte devlet reddedilir; onaydan sonra hâlâ izin yok
+✓ P3 C onaylar → iki sahibin dört izni, her sahibe +72, taşıyıcılardan −72, tek X–Y sözleşmesi
+✓ P4 C reddeder → talep reddedildi, kısmi izin / ödeme yok (B önceden onaylamıştı)
+✓ P5 B onayından sonra MP paketi → yeni host: aynı onay durumu; C'nin onayı yeni host'ta bir kez uygular, eski host'ta oy yok
+✓ P6 host A ↔ misafir B koridoru C limanından: B ödeme onayı + C liman onayı; sırayla, son onayda tek işlem
+✓ P7 misafir aynası (bekleyen + sonuçlanmış talep) misafir çalışma zamanında motorun deserialize doğrulamasından geçer
+GEÇEN: 7 KALAN: 0

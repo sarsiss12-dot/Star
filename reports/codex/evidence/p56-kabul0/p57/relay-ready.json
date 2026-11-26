@@ -1,0 +1,164 @@
+[
+  {
+    "root": "Star-p55",
+    "barrier": false,
+    "sent": true,
+    "code": 0,
+    "signal": null,
+    "listeners": -1,
+    "error": ""
+  },
+  {
+    "root": "Star-p55",
+    "barrier": false,
+    "sent": true,
+    "code": null,
+    "signal": "SIGTERM",
+    "listeners": -1,
+    "error": ""
+  },
+  {
+    "root": "Star-p55",
+    "barrier": false,
+    "sent": true,
+    "code": null,
+    "signal": "SIGTERM",
+    "listeners": -1,
+    "error": ""
+  },
+  {
+    "root": "Star-p55",
+    "barrier": false,
+    "sent": true,
+    "code": 0,
+    "signal": null,
+    "listeners": -1,
+    "error": ""
+  },
+  {
+    "root": "Star-p55",
+    "barrier": true,
+    "sent": true,
+    "code": null,
+    "signal": "SIGTERM",
+    "listeners": 0,
+    "error": ""
+  },
+  {
+    "root": "Star-p55",
+    "barrier": true,
+    "sent": true,
+    "code": null,
+    "signal": "SIGTERM",
+    "listeners": 0,
+    "error": ""
+  },
+  {
+    "root": "Star-p56",
+    "barrier": false,
+    "sent": true,
+    "code": null,
+    "signal": "SIGTERM",
+    "listeners": -1,
+    "error": ""
+  },
+  {
+    "root": "Star-p56",
+    "barrier": false,
+    "sent": true,
+    "code": 0,
+    "signal": null,
+    "listeners": -1,
+    "error": ""
+  },
+  {
+    "root": "Star-p56",
+    "barrier": false,
+    "sent": true,
+    "code": 0,
+    "signal": null,
+    "listeners": -1,
+    "error": ""
+  },
+  {
+    "root": "Star-p56",
+    "barrier": false,
+    "sent": true,
+    "code": 0,
+    "signal": null,
+    "listeners": -1,
+    "error": ""
+  },
+  {
+    "root": "Star-p56",
+    "barrier": true,
+    "sent": true,
+    "code": null,
+    "signal": "SIGTERM",
+    "listeners": 0,
+    "error": ""
+  },
+  {
+    "root": "Star-p56",
+    "barrier": true,
+    "sent": true,
+    "code": null,
+    "signal": "SIGTERM",
+    "listeners": 0,
+    "error": ""
+  },
+  {
+    "root": "Star-p57",
+    "barrier": false,
+    "sent": true,
+    "code": 0,
+    "signal": null,
+    "listeners": -1,
+    "error": ""
+  },
+  {
+    "root": "Star-p57",
+    "barrier": false,
+    "sent": true,
+    "code": 0,
+    "signal": null,
+    "listeners": -1,
+    "error": ""
+  },
+  {
+    "root": "Star-p57",
+    "barrier": false,
+    "sent": true,
+    "code": 0,
+    "signal": null,
+    "listeners": -1,
+    "error": ""
+  },
+  {
+    "root": "Star-p57",
+    "barrier": false,
+    "sent": true,
+    "code": 0,
+    "signal": null,
+    "listeners": -1,
+    "error": ""
+  },
+  {
+    "root": "Star-p57",
+    "barrier": true,
+    "sent": true,
+    "code": 0,
+    "signal": null,
+    "listeners": 1,
+    "error": ""
+  },
+  {
+    "root": "Star-p57",
+    "barrier": true,
+    "sent": true,
+    "code": 0,
+    "signal": null,
+    "listeners": 1,
+    "error": ""
+  }
+]

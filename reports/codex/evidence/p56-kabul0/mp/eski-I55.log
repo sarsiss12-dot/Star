@@ -1,0 +1,31 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[7,7],"mirrorEq":true,"revMs":588,"buildMs":729,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[6,6],"mirrorEq":true,"revMs":916,"buildMs":1080,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":42,"p95":42.9,"max":42.9},"longtask":{"n":80,"med":86,"p95":116,"max":153},"heapMB":16,"dom":713,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":6,"med":36.3,"p95":222.7,"max":222.7},"refresh":{"n":1,"med":1.1,"p95":1.1,"max":1.1},"longtask":{"n":20,"med":71,"p95":95,"max":95},"builds":6,"deltas":6,"resyncs":0,"minGap":600,"heapMB":22,"dom":640,"intervals":3,"timeouts":2,"notes":0,"results":3,"packets":52,"joinErrors":0},"C":{"build":{"n":5,"med":79.2,"p95":219.7,"max":219.7},"refresh":{"n":1,"med":1,"p95":1,"max":1},"longtask":{"n":25,"med":78,"p95":91,"max":94},"builds":5,"deltas":5,"resyncs":0,"minGap":600,"heapMB":20,"dom":714,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":42,"joinErrors":0}}}
+PASS I0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 404; misafir gerçek STARS arayüzünde
+  OLAY {"kind":"speed","who":"B","t":21,"spd":4,"ok":true,"note":4}
+  OLAY {"kind":"window","who":"B","t":51,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"B","label":"pencere","ok":true,"ms":391,"hostDay":415.9}}
+  OLAY {"kind":"background","who":"B","t":81,"catch":{"who":"B","label":"arka plan","ok":true,"ms":231,"hostDay":430.5}}
+  OLAY {"kind":"cut","who":"B","t":111,"catch":{"who":"B","label":"kopma","ok":true,"ms":813,"hostDay":437.7}}
+  OLAY {"kind":"order","who":"B","t":142,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":600}
+  OLAY {"kind":"speed","who":"C","t":172,"spd":4,"ok":true,"note":5}
+  OLAY {"kind":"window","who":"C","t":202,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸▸▸ 4×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"C","label":"pencere","ok":true,"ms":486,"hostDay":690.1}}
+  OLAY {"kind":"background","who":"C","t":232,"catch":{"who":"C","label":"arka plan","ok":true,"ms":260,"hostDay":756.7}}
+  OLAY {"kind":"cut","who":"C","t":262,"catch":{"who":"C","label":"kopma","ok":true,"ms":1370,"hostDay":762.7}}
+  OLAY {"kind":"order","who":"C","t":292,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":332}
+  OLAY {"kind":"speed","who":"B","t":323,"spd":2,"ok":true,"note":8}
+  OLAY {"kind":"window","who":"B","t":353,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸ 2×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"B","label":"pencere","ok":true,"ms":604,"hostDay":848.2}}
+  OLAY {"kind":"background","who":"B","t":384,"catch":{"who":"B","label":"arka plan","ok":true,"ms":261,"hostDay":875.8}}
+  OLAY {"kind":"cut","who":"B","t":414,"catch":{"who":"B","label":"kopma","ok":true,"ms":954,"hostDay":881.3}}
+  OLAY {"kind":"order","who":"B","t":444,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":383}
+  OLAY {"kind":"speed","who":"C","t":475,"spd":4,"ok":true,"note":10}
+  örnek 312 · olay 16 · kapalı-pencere donma 0 · açık-pencere bekleme 3 · en büyük gün farkı 7.4
+PASS I1 uzun oturum 8 dk (500 sistem / 16 AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası 20 sn'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür
+FAIL I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)
+AssertionError [ERR_ASSERTION]: fikstür: B'nin görünür sisteminde çatışma null
+    at /workspace/Star-p55/tests/helpers/mp-sync-fed1-soak.cjs:95:4
+    at async test (/workspace/Star-p55/tests/browser-mp8.cjs:70:162)
+    at async module.exports (/workspace/Star-p55/tests/helpers/mp-sync-fed1-soak.cjs:88:2)
+    at async /workspace/Star-p55/tests/browser-mp8.cjs:565:17
+  I3 {"deal":{"ok":true,"share":true},"gained":19,"leakFrom3rd":0,"cMirrorEqHost":true,"bChanged":false,"bGetsC":0,"hostBefore":8,"hostAfter":8,"pre":{"bNative":27,"bNativeNew":19,"shareBefore":false,"bCols":2,"bFleets":3,"bDead":false,"war":false},"activeAfter":true}
+PASS I3 sensör paylaşımı tek yön: B → C; C, B'nin sensör sistemlerini görür, B C'ninkileri görmez, host'un kendi görüşü değişmez
+GEÇEN: 3 KALAN: 1

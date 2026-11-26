@@ -1,0 +1,132 @@
+{
+  "ulu-11-m120.save:migration": {
+    "input": "cf3ea900cb1b4326bd9cf41e6584d47aa869377d76dc160535d1efa93dc3b5e4",
+    "profiles": [
+      {
+        "ms": 2477.8715109999757,
+        "cpuMs": 655.2240000000002,
+        "rngBefore": -499939168,
+        "rngAfter": 2061039509,
+        "save": "6a6a2e16454dc4d42756896fe19b58343946c765161765c5959acf88b1b19a3b",
+        "totals": {
+          "jointTick": {
+            "n": 60,
+            "ms": 0.26753200066741556
+          },
+          "dealTxBegin": {
+            "n": 1,
+            "ms": 266.08677100006025
+          },
+          "aiFedStayReview": {
+            "n": 6,
+            "ms": 1.8019589999457821
+          }
+        },
+        "reforms": []
+      },
+      {
+        "ms": 4145.209981000051,
+        "cpuMs": 892.9260000000004,
+        "rngBefore": -499939168,
+        "rngAfter": 2061039509,
+        "save": "3a3a1090ec2b88c79040adaba563db2e2c407ece41e57afd130ac4d6f8f0ada0",
+        "totals": {
+          "jointTick": {
+            "n": 60,
+            "ms": 0.37250600033439696
+          },
+          "dealTxBegin": {
+            "n": 2,
+            "ms": 676.0017690000823
+          },
+          "aiFedMismatch": {
+            "n": 8,
+            "ms": 0.5634020001161844
+          },
+          "aiFedStayReview": {
+            "n": 6,
+            "ms": 0.27788000006694347
+          },
+          "aiFedMemberReform": {
+            "n": 4,
+            "ms": 329.0766569999978
+          },
+          "proposeFedMotion": {
+            "n": 1,
+            "ms": 328.64492899994366
+          }
+        },
+        "reforms": [
+          {
+            "by": 9,
+            "at": 3630,
+            "fed": 2,
+            "type": "yagmaci",
+            "copies": [
+              327.99223700002767
+            ],
+            "ms": 328.64492899994366,
+            "ok": true
+          }
+        ]
+      }
+    ]
+  },
+  "ulu-11-m120.save:steady": {
+    "input": "3a3a1090ec2b88c79040adaba563db2e2c407ece41e57afd130ac4d6f8f0ada0",
+    "profiles": [
+      {
+        "ms": 2543.161134999944,
+        "cpuMs": 668.2380000000003,
+        "rngBefore": 2061039509,
+        "rngAfter": -944196750,
+        "save": "e9ca73b8a2bd43bd25fa030f651898cd417be4a49596ca87521d0966d65fa1dc",
+        "totals": {
+          "jointTick": {
+            "n": 60,
+            "ms": 0.3131440005963668
+          },
+          "aiFedStayReview": {
+            "n": 5,
+            "ms": 0.05067399994004518
+          },
+          "dealTxBegin": {
+            "n": 1,
+            "ms": 261.5270109999692
+          }
+        },
+        "reforms": []
+      },
+      {
+        "ms": 2607.030132999993,
+        "cpuMs": 612.8099999999995,
+        "rngBefore": 2061039509,
+        "rngAfter": -944196750,
+        "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797",
+        "totals": {
+          "jointTick": {
+            "n": 60,
+            "ms": 44.830048999981955
+          },
+          "aiFedMismatch": {
+            "n": 6,
+            "ms": 0.09565100003965199
+          },
+          "aiFedStayReview": {
+            "n": 5,
+            "ms": 0.11024199984967709
+          },
+          "aiFedMemberReform": {
+            "n": 3,
+            "ms": 0.046419000136666
+          },
+          "dealTxBegin": {
+            "n": 1,
+            "ms": 222.7879200000316
+          }
+        },
+        "reforms": []
+      }
+    ]
+  }
+}

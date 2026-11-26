@@ -1,0 +1,114 @@
+{
+  "real": {
+    "ok": true,
+    "build": "96h10p55",
+    "protocol": 1,
+    "package": 4,
+    "rng": 950206257
+  },
+  "range": [
+    {
+      "build": "96h10p41",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p42",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p43",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p44",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p45",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p46",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p47",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p48",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p49",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p50",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p51",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p52",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p53",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p54",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p55",
+      "ok": true,
+      "rng": 950206257
+    },
+    {
+      "build": "96h10p56",
+      "ok": true,
+      "rng": 950206257
+    }
+  ],
+  "archives": [
+    {
+      "file": "reports/codex/evidence/perf-sinir0/500-16-11-m120.save.gz",
+      "sha256": "30b15d102f8faccf2307a8fbcaceca5117b6b380504e5802877ddbfb54965164",
+      "ok": true,
+      "rng": -1823116925,
+      "day": 3600,
+      "seed": 11,
+      "systems": 500,
+      "version": 8
+    },
+    {
+      "file": "reports/codex/evidence/ai-ikame1/chromium/500-16-11-m180.save.gz",
+      "sha256": "bad8c32428e8a77007e7f226b69db81d369179f39b3d9f35c9e7ee69ba5a874e",
+      "ok": true,
+      "rng": -1930894635,
+      "day": 5400,
+      "seed": 11,
+      "systems": 500,
+      "version": 8
+    }
+  ],
+  "note": "One valid Save8 with each historical client build tag and recalculated integrity. Actual p55 room snapshot tested separately."
+}

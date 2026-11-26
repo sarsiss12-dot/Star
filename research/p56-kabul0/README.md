@@ -1,10 +1,11 @@
 # CODEX-P56-KABUL.0 araştırma araçları
 
-Araçlar p55 `914c00310200bbda97abdcecab56934fccbd7cf3` ile p56 `c187a12dee1c799f55453d4a21510efece934900` için aynı Node VM yükleyicisini kullanır. Düzenekler oyun dosyalarını değiştirmeden gerçek motor çağrılarını yürütür. `P55` ve `P56` sabit git ağaçlarıdır, `K` sonuç dizinidir.
+Araçlar p55 `914c00310200bbda97abdcecab56934fccbd7cf3`, p56 `c187a12dee1c799f55453d4a21510efece934900` ve p57 `78668a4dff9373c1b81d0fd3073b64bb9e55a663` için aynı Node VM yükleyicisini kullanır. Düzenekler oyun dosyalarını değiştirmeden gerçek motor çağrılarını yürütür. `P55`, `P56` ve `P57` sabit git ağaçlarıdır. `K` sonuç dizinidir.
 
 ```sh
 P55=/absolute/path/to/p55
 P56=/absolute/path/to/p56
+P57=/absolute/path/to/p57
 K=/tmp/p56-kabul
 mkdir -p "$K"/{kayit,iz,ilk,perf}
 
@@ -13,6 +14,7 @@ CHECKPOINTS="$K/kayit" node research/p56-kabul0/replay.cjs "$P55" s500 16 11 180
 node research/fed-ai-siyaset0/stres-kayit.cjs "$P55" "$K/kayit/s500-11-m120.save" "$K/kayit/s500-11-siyasi.save"
 
 SAMPLES=4 node research/p56-kabul0/perf.cjs "$P55" "$P56" "$K/perf/ornek.json" "$K/kayit/ulu-11-m120.save"
+PHASE=steady SAMPLES=24 WARMUP=16 node research/p56-kabul0/perf.cjs "$P55" "$P57" "$K/perf/100-isinmis.json" "$K/kayit/ulu-11-m120.save"
 
 for row in 'ulu 9 99' 'ulu 9 404' 's500 16 23' 's500 16 404'; do
   read -r size ai seed <<<"$row"

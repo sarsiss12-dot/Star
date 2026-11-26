@@ -1,0 +1,456 @@
+{
+ "results": [
+  {
+   "name": "I0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 404; misafir gerçek STARS arayüzünde",
+   "status": "PASS",
+   "ms": 54047
+  },
+  {
+   "name": "I3 yalıtılmış sensör olayı: B → C; yeni görüş ve keşif, özel alan, host ve iki ayna, Save8 sonrası",
+   "status": "FAIL",
+   "error": "page.evaluate: Error: I3: ters yön/özel alan kontrolü yok\n    at eval (eval at evaluate (:311:30), <anonymous>:12:42)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /workspace/Star-p56/tests/helpers/mp-sync-fed1-soak.cjs:143:26\n    at async test (/workspace/Star-p56/tests/browser-mp8.cjs:71:162)\n    at async module.exports (/workspace/Star-p56/tests/helpers/mp-sync-fed1-soak.cjs:138:2)\n    at async /workspace/Star-p56/tests/browser-mp8.cjs:566:17"
+  }
+ ],
+ "metrics": {
+  "scen": "I",
+  "conf": {
+   "size": "ulu",
+   "ai": 9,
+   "seed": 404,
+   "months": 0,
+   "guests": 2,
+   "every": 6
+  },
+  "sync": [
+   {
+    "label": "m0",
+    "who": "B",
+    "e": 1,
+    "rev": [
+     7,
+     7
+    ],
+    "mirrorEq": true,
+    "revMs": 699,
+    "buildMs": 907,
+    "diff": [],
+    "leak": []
+   },
+   {
+    "label": "m0",
+    "who": "C",
+    "e": 2,
+    "rev": [
+     6,
+     6
+    ],
+    "mirrorEq": true,
+    "revMs": 1134,
+    "buildMs": 1329,
+    "diff": [],
+    "leak": []
+   }
+  ],
+  "cmds": [],
+  "perf": [
+   {
+    "label": "m0",
+    "month": 0,
+    "host": {
+     "monthTick": {
+      "n": 0
+     },
+     "publish": {
+      "n": 3,
+      "med": 25.3,
+      "p95": 29.6,
+      "max": 29.6
+     },
+     "longtask": {
+      "n": 88,
+      "med": 101,
+      "p95": 165,
+      "max": 288
+     },
+     "heapMB": 18,
+     "dom": 713,
+     "intervals": 2,
+     "timeouts": 1,
+     "offers": 0,
+     "notes": 0,
+     "inbox": 0,
+     "log": 1,
+     "news": 0
+    },
+    "guests": {
+     "B": {
+      "build": {
+       "n": 6,
+       "med": 116.6,
+       "p95": 301.1,
+       "max": 301.1
+      },
+      "refresh": {
+       "n": 1,
+       "med": 1,
+       "p95": 1,
+       "max": 1
+      },
+      "longtask": {
+       "n": 37,
+       "med": 74,
+       "p95": 105,
+       "max": 107
+      },
+      "builds": 6,
+      "deltas": 6,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 13,
+      "dom": 640,
+      "intervals": 3,
+      "timeouts": 2,
+      "notes": 0,
+      "results": 3,
+      "packets": 56,
+      "joinErrors": 0
+     },
+     "C": {
+      "build": {
+       "n": 5,
+       "med": 41.7,
+       "p95": 225.9,
+       "max": 225.9
+      },
+      "refresh": {
+       "n": 2,
+       "med": 7.2,
+       "p95": 7.2,
+       "max": 7.2
+      },
+      "longtask": {
+       "n": 35,
+       "med": 88,
+       "p95": 114,
+       "max": 119
+      },
+      "builds": 5,
+      "deltas": 5,
+      "resyncs": 0,
+      "minGap": 600,
+      "heapMB": 21,
+      "dom": 714,
+      "intervals": 3,
+      "timeouts": 1,
+      "notes": 0,
+      "results": 0,
+      "packets": 46,
+      "joinErrors": 0
+     }
+    }
+   }
+  ],
+  "notes": [],
+  "net": {},
+  "resume": {},
+  "relayPid1": 8443,
+  "scale0": {
+   "cfg": {
+    "cfg": {
+     "name": "Kızıl Muhafız",
+     "race": "klan",
+     "traits": [],
+     "size": "ulu",
+     "shape": "sarmal",
+     "diff": "normal",
+     "seed": 404,
+     "color": null,
+     "ethics": {
+      "mil": 2,
+      "aut": 0,
+      "mat": 0,
+      "ahl": 0
+     },
+     "civics": [
+      "kale_dok"
+     ],
+     "origin": "standart",
+     "sigil": "simetrik",
+     "monoRes": "min",
+     "look": "humanoid",
+     "portraitVariant": 0,
+     "mizac": "militarist",
+     "crisis": "normal",
+     "ruins": "orta",
+     "council": "normal",
+     "physio": "humanoid",
+     "pirates": true,
+     "gates": true,
+     "crisisPower": "normal",
+     "aiOrigins": true,
+     "aiOriginChance": 35,
+     "randomEvents": true,
+     "aiCount": 11,
+     "ethLocked": true,
+     "humans": [
+      {
+       "name": "Saf Akıl Ağı",
+       "race": "teknokrasi",
+       "mizac": "teknokrasi",
+       "physio": "humanoid",
+       "look": "humanoid",
+       "origin": "standart",
+       "sigil": "simetrik",
+       "ethics": {
+        "mil": -1,
+        "aut": 0,
+        "mat": 2,
+        "ahl": 0
+       },
+       "civics": [
+        "sinyal_avci"
+       ],
+       "traits": [],
+       "monoRes": "min",
+       "portraitVariant": 0,
+       "color": null,
+       "emblem": {
+        "shape": "hex",
+        "symbol": "sun",
+        "pattern": "corners",
+        "secondary": "#ece9d5"
+       }
+      },
+      {
+       "name": "Yeşil Birlik",
+       "race": "lonca",
+       "mizac": "tuccar",
+       "physio": "humanoid",
+       "look": "humanoid",
+       "origin": "standart",
+       "sigil": "simetrik",
+       "ethics": {
+        "mil": 0,
+        "aut": -1,
+        "mat": 1,
+        "ahl": 0
+       },
+       "civics": [
+        "maden_lonca"
+       ],
+       "traits": [],
+       "monoRes": "min",
+       "portraitVariant": 0,
+       "color": null,
+       "emblem": {
+        "shape": "hex",
+        "symbol": "sun",
+        "pattern": "corners",
+        "secondary": "#ece9d5"
+       }
+      }
+     ]
+    },
+    "systems": 100,
+    "humans": 3,
+    "ai": 9,
+    "ids": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   "guestCfg": {
+    "name": "Saf Akıl Ağı",
+    "race": "teknokrasi",
+    "traits": [],
+    "size": "ulu",
+    "shape": "sarmal",
+    "diff": "normal",
+    "seed": 97837506,
+    "color": "#98953e",
+    "ethics": {
+     "mil": -1,
+     "aut": 0,
+     "mat": 2,
+     "ahl": 0
+    },
+    "civics": [
+     "sinyal_avci"
+    ],
+    "origin": "standart",
+    "sigil": "simetrik",
+    "monoRes": "min",
+    "look": "humanoid",
+    "portraitVariant": 0,
+    "mizac": "teknokrasi",
+    "crisis": "normal",
+    "ruins": "orta",
+    "council": "normal",
+    "physio": "humanoid",
+    "pirates": true,
+    "gates": true,
+    "crisisPower": "normal",
+    "aiOrigins": true,
+    "aiOriginChance": 35,
+    "randomEvents": true,
+    "aiCount": 11,
+    "ethLocked": true,
+    "humans": [
+     {
+      "name": "Saf Akıl Ağı",
+      "race": "teknokrasi",
+      "mizac": "teknokrasi",
+      "physio": "humanoid",
+      "look": "humanoid",
+      "origin": "standart",
+      "sigil": "simetrik",
+      "ethics": {
+       "mil": -1,
+       "aut": 0,
+       "mat": 2,
+       "ahl": 0
+      },
+      "civics": [
+       "sinyal_avci"
+      ],
+      "traits": [],
+      "monoRes": "min",
+      "portraitVariant": 0,
+      "color": null,
+      "emblem": {
+       "shape": "hex",
+       "symbol": "sun",
+       "pattern": "corners",
+       "secondary": "#ece9d5"
+      }
+     },
+     {
+      "name": "Yeşil Birlik",
+      "race": "lonca",
+      "mizac": "tuccar",
+      "physio": "humanoid",
+      "look": "humanoid",
+      "origin": "standart",
+      "sigil": "simetrik",
+      "ethics": {
+       "mil": 0,
+       "aut": -1,
+       "mat": 1,
+       "ahl": 0
+      },
+      "civics": [
+       "maden_lonca"
+      ],
+      "traits": [],
+      "monoRes": "min",
+      "portraitVariant": 0,
+      "color": null,
+      "emblem": {
+       "shape": "hex",
+       "symbol": "sun",
+       "pattern": "corners",
+       "secondary": "#ece9d5"
+      }
+     }
+    ]
+   },
+   "actor": 1,
+   "fixture": {
+    "sys": 5,
+    "planet": 0,
+    "fleet": 47
+   },
+   "start": {
+    "day": 3.120000000000002,
+    "deadline": 63.120000000000005
+   },
+   "ack": {
+    "v": 1,
+    "type": "result",
+    "seq": 1,
+    "cid": "j1_1_q08vdrhhxu",
+    "status": "ok",
+    "code": null,
+    "rev": 9,
+    "ms": 177
+   },
+   "state": {
+    "auto": false,
+    "deadline": 63.120000000000005,
+    "res": {
+     "min": 5000,
+     "ene": 300,
+     "yiy": 180,
+     "ala": 5000,
+     "ara": 0,
+     "tuk": 150,
+     "etk": 70
+    }
+   },
+   "denied": {
+    "v": 1,
+    "type": "result",
+    "seq": 3,
+    "cid": "j1_3_bccxumifjn",
+    "status": "rejected",
+    "code": "not-owner",
+    "rev": 12,
+    "ms": 112
+   },
+   "snapshotSaveBytes": 105390,
+   "disclosure": "Starting resources and a licensed colony ship placed at an otherwise valid colonizable planet are explicit fixtures. Actual WebSocket colonize and real guest touch colAuto use production authorization."
+  },
+  "actualWorld": {
+   "seed": 404,
+   "size": "ulu",
+   "systems": 100,
+   "states": 12
+  },
+  "seats": [
+   {
+    "e": 1,
+    "conn": true
+   },
+   {
+    "e": 2,
+    "conn": true
+   }
+  ],
+  "fed1soak": {
+   "min": 15,
+   "ff": 12,
+   "samples": [],
+   "stalls": [],
+   "holds": [],
+   "events": [],
+   "cmds": [],
+   "catchups": [],
+   "initial": {
+    "sha256": "459f43a162fe3ab635feac53937943a11267d6e3212fa084d396db1ccec602ca",
+    "rng": 1958112936,
+    "day": 3.120000000000002,
+    "size": 100,
+    "build": "96h10p55"
+   },
+   "sensor": {
+    "soak": {
+     "native": 27,
+     "new": 24
+    },
+    "stages": []
+   }
+  },
+  "errors": []
+ }
+}

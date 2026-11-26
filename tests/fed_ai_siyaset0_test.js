@@ -89,15 +89,18 @@ test('T3 sensör menzilindeki (şu an görünür) ama hiç girilmemiş korsan yu
   const h=prizeWorld();const r=J(h,`(()=>{if(!nestSys)return {skip:true};const adj=nestSys.lanes.find(l=>!G.sys[l].nest&&!G.sys[l].ruin);if(adj===undefined)return {skip:true};big.sys=adj;territoryOwnerSet(G.sys[adj],a.id);G.day+=.1;const known=!!aiKnownSystem(a,nestSys),seen=nestSys.seen.includes(a.id),pw=fleetPower(big),hp=nestSys.nest.hp;
    const out=run();return {...out,known,seen,pw,hp};})()`);
   assert.ok(!r.skip,'fikstür yuvası');assert.equal(r.seen,false);assert.equal(r.known,true,'yuva sensörde görünür');
-  if(r.pw>900&&r.pw>r.hp*.35)assert.equal(r.target,r.nest,JSON.stringify(r));});
+  assert.ok(r.pw>900&&r.pw>r.hp*.35,'güçlü filo ön koşulu');
+  assert.equal(r.target,r.nest,JSON.stringify(r));});
 test('T5 AI’ın bilmediği (görülmemiş, istihbaratta yok) yuva av listesine girmez',()=>{
-  const h=prizeWorld();const r=J(h,`(()=>{if(!nestSys)return {skip:true};const known=!!aiKnownSystem(a,nestSys);const out=run();return {...out,known};})()`);
-  assert.ok(!r.skip);if(!r.known)assert.notEqual(r.target,r.nest,JSON.stringify(r));});
+  const h=prizeWorld();const r=J(h,`(()=>{nestSys=G.sys.find(s=>s.nest&&!aiKnownSystem(a,s));
+   if(!nestSys)return null;return run();})()`);
+  assert.ok(r,'bilinmeyen yuva ön koşulu');assert.notEqual(r.target,r.nest,JSON.stringify(r));});
 test('T6 istihbarat BELLEĞİNDE olan ama şu an sensörde görünmeyen yuva av hedefi olmaz (uzak sefere çekilmez)',()=>{
-  const h=prizeWorld();const r=J(h,`(()=>{if(!nestSys)return {skip:true};AI_VIEW_CACHE.delete(a);const vis=aiView(a).ctx.visible.has(nestSys.id);if(vis)return {skip:'görünür'};
+  const h=prizeWorld();const r=J(h,`(()=>{const view=aiView(a);
+   nestSys=G.sys.find(s=>s.nest&&!s.seen.includes(a.id)&&!view.ctx.visible.has(s.id));if(!nestSys)return null;
    a.aiIntel=a.aiIntel||{v:1,systems:{},powers:{}};a.aiIntel.systems[nestSys.id]={owner:-1,defense:sysDefense(nestSys),colonies:0,capital:false,day:G.day-10};AI_VIEW_CACHE.delete(a);
    const known=!!aiKnownSystem(a,nestSys),visible=aiView(a).ctx.visible.has(nestSys.id);const out=run();return {...out,known,visible};})()`);
-  if(r.skip)return;assert.equal(r.known,true,'bellekte');assert.equal(r.visible,false);assert.notEqual(r.target,r.nest,JSON.stringify(r));});
+  assert.ok(r,'sensör dışı yuva ön koşulu');assert.equal(r.known,true,'bellekte');assert.equal(r.visible,false);assert.notEqual(r.target,r.nest,JSON.stringify(r));});
 function reloadPolitics(h){
  const result=J(h,`(()=>{
   const ids={a:A.id,b:B.id,l:L.id,c:C.id,f:F.id},rng=RND_STATE;
@@ -115,10 +118,24 @@ test('F11 ayrılık Save8’de korunur, aynı tür reddedilir ve tür değişinc
  const h=world({});
  assert.equal(review(h,'A',30).left,true);
  assert.ok(reloadPolitics(h).left);
- h.run('G.day+=1800');
+ h.run(`G.day+=1800;
+  for(const o of G.emps)if(o!==A&&!F.members.includes(o.id))A.contact[o.id]=false;
+  const neighbor=G.sys[A.home].lanes.map(id=>G.sys[id]).find(s=>s.owner<0);
+  if(!neighbor)throw Error('Bağlanabilir komşu sistem yok');
+  territoryOwnerSet(neighbor,B.id);
+  (B.passage||={})[A.id]=true;
+  newFleet(A,neighbor.id,[{c:'bil'}],'F11 karar rotası');`);
  assert.equal(h.run('aiFedLeftRecently(A,F)&&!aiFedWilling(A,B,F.type,F).ok'),true);
+ const before=h.run('A.res.etk');
+ h.run('aiRivalBlocChoice(A)');
+ assert.equal(h.run('Object.values(F.admissionResults||{}).some(r=>r.target===A.id)'),false);
+ assert.equal(h.run('A.res.etk'),before);
  h.run('F.type=aiFedType(A)');
  assert.equal(h.run('aiFedLeftRecently(A,F)||aiFedDoctrineBar(A,F)'),false);
- assert.doesNotMatch(h.run('aiFedWilling(A,B,F.type,F).why||""'),/doktrinle uyumsuz/);
+ const eligible=J(h,'aiFedWilling(A,B,F.type,F)');
+ assert.equal(eligible.ok,true,eligible.why);
+ const applied=J(h,`(()=>{const gate=canRequestFederation(A,B),chosen=aiRivalBlocChoice(A);
+  return {ok:gate.ok,why:gate.why,chosen,kind:A.aiFedReason?.kind,paid:${before}-A.res.etk};})()`);
+ assert.deepEqual(applied,{ok:true,chosen:true,kind:'apply',paid:60});
 });
 console.log('GEÇEN: '+pass+' KALAN: '+fail);process.exitCode=fail?1:0;

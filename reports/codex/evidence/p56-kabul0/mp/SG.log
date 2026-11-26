@@ -1,0 +1,8 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[3,3],"mirrorEq":true,"revMs":996,"buildMs":1100,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":14.3,"p95":14.3,"max":14.3},"longtask":{"n":14,"med":66,"p95":169,"max":169},"heapMB":17,"dom":728,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":3,"med":35.5,"p95":244.7,"max":244.7},"refresh":{"n":1,"med":5.6,"p95":5.6,"max":5.6},"longtask":{"n":14,"med":77,"p95":139,"max":139},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":17,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":27,"joinErrors":0}}}
+PASS SG0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS G0 fikstür (host): AI X host'a savaş açar; B host'un müttefiki, X ile savaşta değil; kaynaklar
+PASS G1 B gerçek masadan "Savaşa Yardım Teklif Et" + 300 alaşım İSTE → host gelen kutusundan KABUL → tek ödeme, B savaşta, B aynası görür; ikinci kabul yok
+PASS G2 misafirin eskortsuz ordusu muharebede yok olur → misafirin bildirim listesinde YENİLGİ + eskortsuz imha açıklaması
+PASS G3 sistemin açtığı federasyon oyu: misafirde kart + gelen kutusu; misafir KABUL → host oyu kaydeder
+GEÇEN: 5 KALAN: 0

@@ -1,0 +1,15 @@
+✓ enerji ve yiyecek açığı aynı ayda iki stoğu da sıfırlar
+✓ art arda çift kıtlık yiyecek borcu biriktirmez
+✓ yalnız yiyecek açığı kendi krizini korur
+✓ yükleme/saf ekonomi stokları onarma bahanesiyle değiştirmez
+✓ kayıplı gerçek tur raporunda payda tur başındaki gemilerdir
+✓ rapor paneli turun başlangıcını açıkça belirtir
+✓ eski tutarsız rapor yüklenirken yalnız son tur ayrıntısı düşer
+✓ yeni rapor v8 kaydet yüklede aynı kalır
+CAMPAIGN {"seed":11,"months":120,"steps":7200,"surveys":389,"arrivals":2600,"battles":468,"negotiations":77,"ops":13,"first":{},"stopped":null,"initialContacts":0,"contacts":27,"elapsedDays":3600,"calendarMonths":120,"fleets":55,"alive":8,"situations":0,"rng":1178012581,"ms":249658}
+✓ gerçek günlük kampanya seed 11
+CAMPAIGN {"seed":99,"months":120,"steps":7200,"surveys":333,"arrivals":2584,"battles":280,"negotiations":56,"ops":28,"first":{},"stopped":null,"initialContacts":0,"contacts":27,"elapsedDays":3600,"calendarMonths":120,"fleets":55,"alive":8,"situations":0,"rng":-392628147,"ms":338550}
+✓ gerçek günlük kampanya seed 99
+CAMPAIGN {"seed":404,"months":120,"steps":7200,"surveys":212,"arrivals":2359,"battles":318,"negotiations":51,"ops":33,"first":{},"stopped":null,"initialContacts":0,"contacts":27,"elapsedDays":3600,"calendarMonths":120,"fleets":46,"alive":9,"situations":0,"rng":-619917128,"ms":422932}
+✓ gerçek günlük kampanya seed 404
+GEÇEN: 11 KALAN: 0
