@@ -8,7 +8,7 @@ p55 arşiv 253 paket, 6.632 PASS ve 279 FAIL. p56 arşiv 256 paket, 6.649 PASS v
 
 Yeni ham kontrol, değişmemiş p57 kaynak ağacında Node v24.22.1, Debian 13, 2 işçi ve paket başına 180 saniye sınırıyla tamamlandı. 26 dk 53 sn içinde 256 paket **6.643 PASS / 276 FAIL** verdi. 55 pakette en az bir FAIL, 10 korumalı eşdeğerlik paketinde 0/0 var. Bu sayaçlar önceki teşhis toplamından bağımsızdır. Kapsamı tamamlamayan paketlerin 0/0’ı PASS olarak etiketlenmedi. [Ortam](evidence/test-fail-kok0/baslangic/ortam.json) · [Tam paket envanteri ve hata zincirleri](evidence/test-fail-kok0/baslangic/envanter.json) · [Ham paket günlükleri](evidence/test-fail-kok0/baslangic/paket-gunlukleri.tar.gz)
 
-Oyun davranışı düzeltmesini içeren kaynak `e2da7ec0018a40d63f10e576b69d55db53708981`. Tam aday taramasının test kaynağı `5789373ac13e104794c0b4eb812ed2e1b4367850`. İnceleme PR #83 üzerinden yürüyor. [Taslak PR](https://github.com/sarsiss12-dot/Star/pull/83)
+İşlem geri alma düzeltmesi `e2da7ec0018a40d63f10e576b69d55db53708981`. Her iki ürün düzeltmesini ve tam aday taramasının girdilerini içeren kaynak `e3c57d18debf8e2627740b2f102f538decc31dd2`. İnceleme PR #83 üzerinden yürüyor. [Taslak PR](https://github.com/sarsiss12-dot/Star/pull/83)
 
 ## Temsilî ilk hatalar
 
@@ -32,11 +32,18 @@ Bir koloninin devri devletin son kolonisini kaldırınca `captureSystem` filo ta
 
 Tam geri alma kapsamasına filo defteri ve işaret kümesi alındı. Test, boş ve dolu filo defteriyle gerçek tasfiyeden sonra hata üretti. Üç eski çalıştırmada her iki senaryoda da Save8 ve işaret kümesi farklı kaldı. Düzeltmeden sonra dünya grafiği, Save8 ve RNG tıpatıp geri döndü. Başarılı yeniden gönderimde Etki bir kez kesildi, bir makbuz oluştu ve mükerrer emir dünyayı değiştirmedi. [p55, p56, p57 ve adayın ham günlükleri](evidence/test-fail-kok0/islem/)
 
+### Tamamlanmış muharebe raporunu kapatma
+
+`faz96f_map_panel_native_canvas` ekran komutuna yasal rapor kimliğini verdi. `UI.act` içindeki `stabilityFleetAct` sarmalayıcısı düğme öğesini üçüncü argümandan düşürüyordu. `dismissBattleReport` kimliği denetleyemediği için tamamlanmış muharebe raporunu gizlemiyordu. Hata p55, p56 ve p57’de 17/2 ile tekrarlandı. Öğeyi gerçek işleyiciye ileten tek satırdan sonra 19/0. Eski kimlik ve etkin rapor reddi, aynı filo ve muharebe verisi ve gizleme tercihinin Save8’den sonra kalması geçti. Bu ikinci bağımsız ürün kusurudur. [Motor düzeltmesi](https://github.com/sarsiss12-dot/Star/commit/e3c57d18debf8e2627740b2f102f538decc31dd2) · [Ham kontroller](evidence/test-fail-kok0/muharebe/)
+
+İkinci sorun bulunduğunda ilk aday taraması durduruldu. Çıktısı ara tarama olarak saklandı. Tek bir sonuç üretmek için iki adayın sayaçları birleştirilmedi.
+
 ## 3. Güncel davranış ve arşiv kaynakları
 
 | Test adı | Eski hata | Kök neden | Düzeltme | Yeni sonuç | Gerçek ürün riski |
 |---|---|---|---|---|---|
 | `faz86c_6_transaction_acceptance` | Başarısız işlem `fleetJournal` değiştiriyordu. | Kalıcı defter ve toparlama kümesi işlem dışında. | İki yazım yeri tam geri alma kapsamında. | 530/0. Güçlendirilmiş kontrol p55, p56 ve p57’de 528/2. | Doğrulandı ve düzeltildi. |
+| `faz96f_map_panel_native_canvas` | Gizleme ve gizleme tercihinin kayıt sonrası korunması 17/2. | Filo kurtarma sarmalayıcısı düğme kimliğini işlemciye iletmiyor. | Üçüncü argüman iletiliyor, kimlik denetimi sürüyor. | 19/0. Eski kimlik ve etkin rapor negatif denetimleri geçti. | Doğrulandı ve düzeltildi. |
 | `faz92a_war_contribution` | Bitiş gerekçesi ve statüko denetiminde iki FAIL. | Kapalı cephe gerekçesi artık eyleyen devleti de içeriyor. | Kesin gerekçe, tasfiye edilen gerçek filo, sıfır muharebe kredisi ve gerçek koalisyonla değişmeyen mülkiyet. | 34/0 | Bu iki vakada savaş motoru kusuru görülmedi. |
 | `mp63_polvas` ve `beta_fed_found0_mp` | İnsan kuruluşu yedi kontrolde ilerlemiyordu. | Tek adımlı kuruluş komutu insan rızasını atlayamıyor. | AI rızaları ve insanın son onayıyla gerçek kuruluş. Eski komut ve AI reddi ayrı negatif kontrol. | 11/0 ve 11/0 | Rıza, ayrı insan oyları, ikinci oy reddi ve vasal karar yetkisi geçti. |
 | `faz91e_federation_laws`, `faz95b_federation_reform` | İkinci önerinin daima reddedilmesi ve adayın önce tüm ittifakları kurması bekleniyordu. | Gündem kuyruğu var. Oylamalı üyelik ve doğrudan kabul farklı kurallara tabi. | Aynı oy açık kalıyor, yeni öneri ücretsiz kuyruğa giriyor, aynısı reddediliyor. Üyelik oyu doğrudan üyelik kurmuyor. | 31/0 ve 68/0 | Sınanan oy ve ödeme davranışında kusur görülmedi. |

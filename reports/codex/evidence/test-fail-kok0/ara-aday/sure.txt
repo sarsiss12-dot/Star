@@ -1,0 +1,5 @@
+Terminated
+
+real	6m35.196s
+user	6m33.182s
+sys	0m23.714s
