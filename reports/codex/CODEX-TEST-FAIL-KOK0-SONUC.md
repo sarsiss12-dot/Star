@@ -80,14 +80,37 @@ Yalnız işlem düzeltmesinin bulunduğu önceki ölçümde de 100/9 CPU p95 +%1
 
 Filo kaydı var olan satırları değiştirmeden yeni satır ekliyor ve sınır dolunca en eskisini çıkarıyor. Aday, tam grafikte dizinin kendi yapısını koruyup geçmiş satırların içini ikinci kez kopyalamıyor. Gerçek aynı-gün devirde 256. satır sınırına ulaşıldığı ve eski satır budandığı negatif kontrolde açıkça doğrulandı. Geri alma eski satırı aynı nesne ve sırayla getiriyor. [Kaynak](https://github.com/sarsiss12-dot/Star/commit/0ffd7e93)
 
+### Tam kopyası azaltılan aday
+
+| Save8 | p57 CPU p95 | Aday CPU p95 | ABBA p95 | A/A p95 | ABBA medyan |
+|---|---:|---:|---:|---:|---:|
+| 100/9, 120. ay | 362,18 ms | 372,55 ms | +%2,86 | +%26,03 | −%2,73 |
+| 500/16, 120. ay | 1.915,67 ms | 1.982,91 ms | +%3,51 | +%5,01 | −%1,91 |
+| 500/16, 180. ay | 6.605,21 ms | 6.378,25 ms | −%3,44 | +%1,29 | −%2,04 |
+
+100/9’da tam işlem grafiği boyutu p57 → ilk düzeltme → son düzeltme sırasıyla 14.606 → 15.376 → 14.608 nesne. Tam ayın Save8 ve RNG değerleri üç girdide aynı. 500/16 CPU ölçümleri %5 eşiğinin içinde. 100/9 ABBA farkı da eşik içinde, ancak A/A saçılımı nedeniyle daha uzun tekrar gerekli. Sürekli durum ölçümü bir aylık ön yürütmeden sonra alındı. 120. ay 500/16 duvar saati p95 farkı +%5,35, 180. ayda −%4,73. [100/9 ham örnekler](evidence/test-fail-kok0/performans/odak100.json) · [500/16 ham örnekler](evidence/test-fail-kok0/performans/odak500.json)
+
 ## İlk tam adayın ham taraması
 
 256 pakette 6.865 PASS ve 66 FAIL, süre 34 dk 29 sn, zaman aşımı sıfır. Başlangıçtaki 55 başarısız paketin 40’ı kapandı. Açık 17 paketten ikisi yeni manifest farkına işaret etti. `mp1_relay` bir ve `mp11_online` üç FAIL ile düzeltme öncesi özetleri yakaladı. Dört farkın nedeni `diplomacy.js` ve `ui.js` için eski SHA-256 değerleriydi. Taslak manifest gerçek kaynak özetlerine alındı. Doğrudan tekrar 14/0 ve 9/0. İlk tam taramanın 66 FAIL’i ham kanıtta aynen duruyor. [Tam tarama](evidence/test-fail-kok0/ilk-tam-aday/ham-ozet.json) · [Paket farkı](evidence/test-fail-kok0/ilk-tam-aday/paket-farki.json) · [Manifest düzeltmesi](https://github.com/sarsiss12-dot/Star/commit/84fa11f6)
 
 `DiplomaticInbox` görülen 18 paketin toplamı 209’dan 42 FAIL’e indi. İsmi bulunamayan modüle ait hata satırı 27’den sıfıra düştü. Kalan 42 assertion arasında önceki arayüz ve kaynak kilidi beklentileri var. Küme paketleri başka kök nedenler de içerebilir. [Başlangıç ve aday envanteri](evidence/test-fail-kok0/ilk-tam-aday/paket-farki.json)
 
+Taslak manifest 19 dosyanın SHA-256 değerleriyle eşleşti. p57 kontrolüne göre çalışma zamanı farkı yalnız `diplomacy.js` ve `ui.js`. Sürüm, PWA önbellek adı, Save8 v8, MP paket 4 ve protokol 1 aynı. [Manifest denetimi](evidence/test-fail-kok0/dogrudan/son-odak/manifest.json)
+
 ## 6. Açık incelemeler
 
 `faz85e` içinde teklif kimliği deneyi güncel karar kartıyla çalışıyor. Üç gerçek teklif, aynı teklifin mükerrer olarak açılmaması, Save8’den sonra üç ayrı kimlik ve aynı şartlar, birini reddedince diğerinin bozulmaması doğrulandı. Eski karşılaştırma iki eksik alanı eşit sayabiliyordu. Kalan tüketici ve çifte barış testleri eski modal kancalarını bekliyor. Güncel `UI.openNote` önce `DiplomaticInbox.capture`, sonra `ArchiveUI.record` çağırıyor. Güncel statüko kararında bekleyen kayıt yeniden açıldı, aynı düğme iki kez çağrıldığında barış bir kez uygulandı, reddedilen ve süresi dolmuş karar uygulanmadı. Ret ülke sahipliğini, stokları ve RNG’yi korudu. `faz86b` içinde eski karşı teklif kartı fikstürü ilk başarısızlıktan sonra saflık kontrollerini de etkiliyor. Bu paketlerde başka doğrulama borcu var. [Güncel statüko deneyi](evidence/test-fail-kok0/dogrudan/statuko-guncel-karar.json)
 
 `faz95e_news` bir barış haberini bekliyor. Güncel motorun ayrı `war-end:<cephe>` ve `peace:<çift>:<gün>` kayıtları var. Bu iki kaydın kullanıcıya tekrar gibi görünüp görünmediği değerlendirilmedi. Aktif işlerin ve yeni sürüm kararının durumu devir kaydında. [Mevcut kontrol ve tekrar komutları](CODEX-TEST-FAIL-KOK0-DEVIR.md)
+
+`faz86a` önce bilinen bir devletin adını temas listesinden okuduğu için yanlış alarm üretiyordu. Güncel test aynı kişiyi temas listesinde gördü, isnat edilmeyen saldırının dosyasında adını bulmadı ve teması kaldırınca adın ekrandan kaybolduğunu doğruladı. Kimlik numarası kontrolü duruyor. Doğrudan 127/0. [Ham günlük](evidence/test-fail-kok0/dogrudan/son-odak/faz86a_intel_command_center.log.gz)
+
+| Açık küme | İlk tam adayın bulgusu | Ürün riski |
+|---|---|---|
+| `faz85e`, `faz86b` | Eski kart ve modal kancaları, eski bildirim üst sınırı ve aynı fikstürde zincirlenen saflık kontrolleri. Güncel statüko ve teklif kimliği ile gerçek işlem matrisi ayrı geçti. | Başarısız her assertion tek başına değerlendirilene kadar kanıt eksik. |
+| `faz95c1_diplomacy`, `faz96e_federation` | Eski doğrudan insan kuruluşu ve üyelik ön ittifakı varsayımları. Üye rızalı kuruluş, bekleyen gündem ve açık oy güncel testlerde geçti. | Bu iddialarda yeni ürün kusuru tekrar üretilmedi. |
+| `faz96c2`, `faz96h10`, `faz96h31`, `faz96h9`, `faz96h8` | İlgili satırlarda eski çalışma zamanı bayt sabitlemeleri. `faz96h8` ayrıca doğal filo sonucu beklentisi içeriyor. | Sabitlemeler arşiv kökleriyle doğrulanmalı. Tarihsel doğal sonuç nedensel karşılaştırma gerektirir. |
+| `faz96f3` | 2370. gündeki tek tarihsel AI sökümünün mutlaka tekrar etmesi bekleniyor. | Sökümün farklılaşma nedeni bu fazda yalıtılmadı. |
+| `beta_fed_found0_events`, `faz86e`, `faz95e_news` | Anomali metni, mobil tema şablonu ve iki ayrı barış kaydı beklentileri. | Açıklama, tema ve kullanıcıya gösterilen olay kanıtları eksik. |
+| `faz86c_3_ai_negotiation` | Entegre koşuda tek işlem için tarihsel 20 ms sınırı aşıldı. | Sınır korunuyor. Tek işlem karşılaştırması ve Save8 tabanlı tam ay ABBA ayrı değerlendirilir. |
