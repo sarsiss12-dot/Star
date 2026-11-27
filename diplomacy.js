@@ -2320,7 +2320,9 @@ function dealTxBegin(scope){
   if (scope) values.push(...scope);
   else values.push(FLEET_RECOVERY_DIRTY); // Bir devrin filo tasfiyesi, teslimat toparlama kümesini de değiştirir.
   for (const key of DEAL_TX_AUTH) auth.set(key,Object.getOwnPropertyDescriptor(G,key));
-  return {roots,auth,records:txCaptureGraph(values),rng:RND_STATE};
+  // Filo kaydı yalnız yeni satır ekler ve en eskileri budar. Dizi geri alınır, mevcut satırlar yerinde kalır.
+  const journal=scope?null:roots.get('fleetJournal')?.value;
+  return {roots,auth,records:txCaptureGraph(values,journal?.length?new Set(journal):null),rng:RND_STATE};
 }
 function dealTxRollback(tx){
   txRestoreGraph(tx.records);

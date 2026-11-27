@@ -210,7 +210,7 @@ test('A foreign pending buffer is preserved; execute reports busy without applyi
 });
 
 // The last colony is not the original capital. Test both lazy journal creation
-// and appending to an existing removal history.
+// and appending to a full removal history that must prune older entries.
 for(const keepHistory of [false,true])test('Colonized system and fleet purge roll back (existing journal='+keepHistory+')',()=>{
   const h=fixture('sys');
   h.run(`for(const id of new Set(A.colonies.map(c=>c.s)))if(id!==sy.id)captureSystem(G.sys[id],C.id);
@@ -219,6 +219,8 @@ for(const keepHistory of [false,true])test('Colonized system and fleet purge rol
     if(${keepHistory}){
       const merged=newFleet(A,sy.id,[{c:Object.keys(SHIPS)[0]}],'Existing history');
       if(!mergeFleetInto(A,purged,[merged]).ok)throw Error('fixture merge failed');
+      while(G.fleetJournal.length<256)fleetRemovalRecord(merged,'merge',purged.id);
+      var firstJournal=G.fleetJournal[0];
     }else delete G.fleetJournal;
     (sy.rally||={})[A.id]={fleet:purged.id};
     FLEET_RECOVERY_DIRTY.clear();FLEET_RECOVERY_DIRTY.add(C.id);
@@ -228,7 +230,8 @@ for(const keepHistory of [false,true])test('Colonized system and fleet purge rol
   const check=photograph(h);let reached=false;
   h.sb.__purge=t=>{if(t==='after:sys'){
     reached=h.run(`A.dead===true&&!G.fleets.some(f=>f.e===A.id)&&sy.owner===B.id&&
-      FLEET_RECOVERY_DIRTY.has(A.id)&&G.fleetJournal.some(r=>r.fleet===purged.id&&r.reason==='rule')`);
+      FLEET_RECOVERY_DIRTY.has(A.id)&&G.fleetJournal.some(r=>r.fleet===purged.id&&r.reason==='rule')&&
+      (!${keepHistory}||G.fleetJournal.length===256&&!G.fleetJournal.includes(firstJournal))`);
     h.run('rnd()');throw Error(t);}};
   h.run('G._dealFailInject=__purge');eq(h.run('executeDeal(offer)'),false);eq(reached);
   assert.deepEqual({dirty:h.run('JSON.stringify([...FLEET_RECOVERY_DIRTY])')===dirty,
