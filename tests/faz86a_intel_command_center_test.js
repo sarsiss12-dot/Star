@@ -503,6 +503,10 @@ console.log('\nE. MAĞDUR GERİ BİLDİRİMİ');
     "p.hitLog = (p.hitLog||[]).filter(function(w){ return !w.known; }).slice(-1);",
     "UI.intelView='files'; UI.spyTarget=null;",
     "var dosHtml=String(UI.p_intel()||'');",
+    "var mainAt=dosHtml.indexOf('<main>'), filesHtml=dosHtml.slice(mainAt);",
+    "var listed=mainAt>=0&&dosHtml.slice(0,mainAt).includes(esc(failAdi));",
+    "p.contact[a.id]=false;",
+    "var unknownHtml=String(UI.p_intel()||'');",
     "var sonKayit=(p.hitLog||[])[p.hitLog.length-1]||{};",
     "return JSON.stringify({",
     "  yakalandi:!!r1.caught, kayitVar:(p.hitLog||[]).length>0,",
@@ -511,7 +515,8 @@ console.log('\nE. MAĞDUR GERİ BİLDİRİMİ');
     "  mesajOrnek:(temizMesaj[0]||mesajlar[mesajlar.length-1]||'').slice(0,70),",
     "  eskiBelirsizMesaj:mesajlar.some(function(m){",
     "    return m.indexOf('Bir şeyler ters gidiyor')>=0; }),",
-    "  failAdiSizdi:dosHtml.indexOf(failAdi)>=0,",
+    "  listed:listed,",
+    "  failAdiSizdi:filesHtml.includes(esc(failAdi))||unknownHtml.includes(esc(failAdi)),",
     "  failBilinmiyorGoruntu:dosHtml.indexOf('FAİL BİLİNMİYOR')>=0,",
     "  failIdSizdi:new RegExp('\"by\"\\\\s*:\\\\s*'+a.id).test(dosHtml)});"].join('\n'));
   let d={}; try{d=JSON.parse(r);}catch(e){}
@@ -520,7 +525,8 @@ console.log('\nE. MAĞDUR GERİ BİLDİRİMİ');
      d.gozlemMesaji===true, d.mesajOrnek);
   ok('eski belirsiz "Bir şeyler ters gidiyor" mesajı kaldırıldı',
      d.eskiBelirsizMesaj===false);
-  ok('DOSYALAR görünümünde fail ADI sızmıyor', d.failAdiSizdi===false);
+  ok('Temas listesindeki ad, DOSYALAR bölümünde fail olarak görünmüyor',
+     d.listed===true && d.failAdiSizdi===false);
   ok('DOSYALAR görünümünde fail ID sızmıyor', d.failIdSizdi===false);
   ok('bilinmeyen fail açıkça "FAİL BİLİNMİYOR" gösteriliyor',
      d.failBilinmiyorGoruntu===true);
