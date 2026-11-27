@@ -181,6 +181,17 @@ test('Malformed quote getter cannot escape; next normal deal still works',()=>{
   eq(h.run(`executeDeal({get from(){throw Error('malformed')}})`),false);check();
   eq(h.run('executeDeal(offer)'));
 });
+for(const [label,source] of Object.entries({
+  'null offer':'null',
+  'non-array give':`{...offer,give:'bozuk'}`,
+  'non-array want with a valid give':`{...offer,want:'bozuk'}`,
+  'null item':`{...offer,give:[null,...offer.give]}`,
+}))test('Malformed deal is rejected as a whole: '+label,()=>{
+  const h=fixture('res'),check=photograph(h),save=h.run('serialize()');
+  eq(h.run(`dealQuote(${source}).ok`),false);check();
+  eq(h.run(`executeDeal(${source})`),false);check();eq(h.run('serialize()'),save);
+  eq(h.run('_dealTxActive'),false);eq(h.run('executeDeal(offer)'));
+});
 test('Log-write failure rolls back agreement before audio/UI publication',()=>{
   const h=fixture('spynet');let published=0;h.sb.__pub=()=>published++;
   h.run(`UI.alert=__pub;AUDIO.forLog=__pub;Object.freeze(G.log);`);

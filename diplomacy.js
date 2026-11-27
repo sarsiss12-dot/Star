@@ -1755,6 +1755,9 @@ function normalizeDeal(offer){
   if (!offer || typeof offer !== 'object'){
     errors.push('Teklif nesnesi yok'); return bitir();
   }
+  if ((offer.give!=null&&!Array.isArray(offer.give)) || (offer.want!=null&&!Array.isArray(offer.want))){
+    errors.push('Teklif maddeleri liste olmalı'); return bitir();
+  }
   /* ── TARAF DOĞRULAMASI ── */
   const fa = Number(offer.from), fb = Number(offer.to);
   if (!isFinite(fa) || !isFinite(fb) || !Number.isInteger(fa) || !Number.isInteger(fb)){
@@ -2390,19 +2393,19 @@ function dealPostcondition(giver, taker, it){
    Sonrasında UI/audio ayrı ayrı korunur; bu etkiler tersinir değildir. */
 function executeDeal(offer, inboxKey=null){
   // İç içe işlem desteklenmiyor; dış işlemin tamponunu yayımlayamaz.
-  if (_dealTxActive) return false;
-  const archived=typeof DiplomaticInbox!=='undefined'?(inboxKey===null?DiplomaticInbox.findDeal(offer):DiplomaticInbox.state().records.find(r=>r.key===inboxKey)):null;
-  if(archived&&(archived.status!=='pending'||G.day>=archived.expires))return false;
-  if((offer.give||[]).concat(offer.want||[]).some(x=>x.t==='warJoin'&&x.plan!==undefined))return warPrepareAccept(offer,archived);
+  if (_dealTxActive || !offer || typeof offer!=='object') return false;
   _dealTxActive = true;
   let tx = null;
   const buf = [];
   try {
     if (G._sideBuf) return false; // başka bir tamponun sahipliğini alma
+    const archived=typeof DiplomaticInbox!=='undefined'?(inboxKey===null?DiplomaticInbox.findDeal(offer):DiplomaticInbox.state().records.find(r=>r.key===inboxKey)):null;
+    if(archived&&(archived.status!=='pending'||G.day>=archived.expires))return false;
     const q = dealQuote(offer);
     if (!q.ok) return false;
     const n = q.norm, a = G.emps[n.from], b = G.emps[n.to];
     if (!a || !b) return false;
+    if(n.give.concat(n.want).some(x=>x.t==='warJoin'&&x.plan!==undefined))return warPrepareAccept(n,archived);
     tx = dealTxBegin(archived?null:dealTxScope(n));
     G._sideBuf = buf;
     G._dealAuth = true;
@@ -10724,8 +10727,8 @@ function warPrepareCreate(e,target,goal,opts=null){
  const p={id:Math.max(0,...rows.map(x=>x.id))+1,owner:e.id,target,goal,opened:G.day,expires:G.day+180,state:'pending',commitments:[],...(norm?{opts:norm}:{})};
  if(!G.warLedger)G.warLedger=warLedgerEmpty();G.warLedger.preparations=rows.filter(x=>warPreparationState(x)==='pending').concat(rows.filter(x=>warPreparationState(x)!=='pending').slice(-47),p);return {ok:true,id:p.id};
 }
-function warPrepareAccept(offer,archived){
- if(G._sideBuf)return false;const q=dealQuote(offer);if(!q.ok)return false;const n=encodeOffer(q.norm),joins=n.give.concat(n.want).filter(x=>x.t==='warJoin'),j=joins[0],p=j&&warPreparation(j.plan);
+function warPrepareAccept(norm,archived){
+ if(G._sideBuf)return false;const n=encodeOffer(norm),joins=n.give.concat(n.want).filter(x=>x.t==='warJoin'),j=joins[0],p=j&&warPreparation(j.plan);
  if(joins.length!==1||!p||n.give.concat(n.want).some(x=>!['res','passage','warJoin'].includes(x.t)))return false;
  const member=n.give.includes(j)?n.from:n.to; // encodeOffer allocates lists, j is an exact member of them
  if(p.owner===(member)||![n.from,n.to].includes(p.owner)||p.commitments.some(c=>c.member===member&&c.state!=='withdrawn'&&!warCommitStale(p,c))||p.commitments.filter(c=>c.member!==member).length>=8)return false;
