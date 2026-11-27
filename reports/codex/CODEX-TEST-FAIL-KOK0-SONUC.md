@@ -66,10 +66,28 @@ Yeni ham kontrolde `faz86f`, `faz89b` ve `faz91b` sırasıyla 100,7, 105,3 ve 99
 
 p57 ile aday aynı 100 sistem 120. ay ve 500 sistem 120/180. ay kayıtlarından bir ay oynatıldı. Başlangıç ve bitiş Save8 özetleri ile RNG değerleri üç girdide de eşleşti. Geri alma anında görülen Save8 ayrışması düzeltme testinde ayrıca ölçüldü. [Eşdeğerlik ham JSON](evidence/test-fail-kok0/performans/save-rng.json)
 
-Gerçek Chromium 155 ve yerel üretim relay ile I100 4/4 PASS. Host ve iki misafirde uzun oturum, filo ve görünür alan eşitliği, yeni sensör paylaşımı ve Save8 sonrası devam geçti. Fiziksel Android, internet/LAN ve canlı Render **NOT RUN**. [I100 ham günlük](evidence/test-fail-kok0/mp/I100/I100.log.gz)
+İki düzeltmeyi taşıyan ilk tam adayda Chromium 155 ve yerel üretim relay sonuçları I100 4/4, I500 4/4, F 6/6, J 5/5, SG 5/5, TR 6/6 ve FA 5/5. I koşularında host ve iki misafirle altışar dakika, filo ve görünür alan eşitliği, yeni sensör paylaşımı, bağlantı dönüşü ve Save8 sonrası devam geçti. Yatay 844×390 Chromium oturumunda aynı raporun gerçek düğmesine dokununca p57 raporu açık bıraktı. Aday raporu gizledi ve Save8’den sonra gizli tuttu. Filo, muharebe sonucu ve RNG eşitti. Fiziksel Android, internet/LAN ve canlı Render **NOT RUN**. [Relay günlükleri](evidence/test-fail-kok0/ilk-tam-aday/mp/) · [Dokunma kanıtı](evidence/test-fail-kok0/muharebe/chromium.json)
+
+### İlk tam adayın performansı
+
+| Save8 | p57 CPU p95 | İlk tam aday CPU p95 | ABBA farkı | A/A farkı | Durum |
+|---|---:|---:|---:|---:|---|
+| 100/9, 120. ay | 397,16 ms | 470,46 ms | +%18,45 | +%3,82 | FAIL |
+| 500/16, 120. ay | 1.959,82 ms | 1.919,11 ms | −%2,08 | −%0,45 | PASS |
+| 500/16, 180. ay | 6.762,87 ms | 6.517,12 ms | −%3,63 | −%11,30 | Gürültü yüksek, doğrulanmış gerileme yok |
+
+Yalnız işlem düzeltmesinin bulunduğu önceki ölçümde de 100/9 CPU p95 +%18,05’ti. Tam işlem mikro ölçümünde iki 256 satırlık defter de kontrolle aynı Save8 ve RNG’de kaldı. Bu defter tam grafiğe 770 kayıt ekliyordu. İlk tam aday normal ayda aynı işlem sayısı, RNG ve Save8 üretti. [İlk ABBA ve A/A](evidence/test-fail-kok0/performans/ilk-olcum-iki-duzeltme.json) · [İşlem mikro ölçümleri](evidence/test-fail-kok0/performans/)
+
+Filo kaydı var olan satırları değiştirmeden yeni satır ekliyor ve sınır dolunca en eskisini çıkarıyor. Aday, tam grafikte dizinin kendi yapısını koruyup geçmiş satırların içini ikinci kez kopyalamıyor. Gerçek aynı-gün devirde 256. satır sınırına ulaşıldığı ve eski satır budandığı negatif kontrolde açıkça doğrulandı. Geri alma eski satırı aynı nesne ve sırayla getiriyor. [Kaynak](https://github.com/sarsiss12-dot/Star/commit/0ffd7e93)
+
+## İlk tam adayın ham taraması
+
+256 pakette 6.865 PASS ve 66 FAIL, süre 34 dk 29 sn, zaman aşımı sıfır. Başlangıçtaki 55 başarısız paketin 40’ı kapandı. Açık 17 paketten ikisi yeni manifest farkına işaret etti. `mp1_relay` bir ve `mp11_online` üç FAIL ile düzeltme öncesi özetleri yakaladı. Dört farkın nedeni `diplomacy.js` ve `ui.js` için eski SHA-256 değerleriydi. Taslak manifest gerçek kaynak özetlerine alındı. Doğrudan tekrar 14/0 ve 9/0. İlk tam taramanın 66 FAIL’i ham kanıtta aynen duruyor. [Tam tarama](evidence/test-fail-kok0/ilk-tam-aday/ham-ozet.json) · [Paket farkı](evidence/test-fail-kok0/ilk-tam-aday/paket-farki.json) · [Manifest düzeltmesi](https://github.com/sarsiss12-dot/Star/commit/84fa11f6)
+
+`DiplomaticInbox` görülen 18 paketin toplamı 209’dan 42 FAIL’e indi. İsmi bulunamayan modüle ait hata satırı 27’den sıfıra düştü. Kalan 42 assertion arasında önceki arayüz ve kaynak kilidi beklentileri var. Küme paketleri başka kök nedenler de içerebilir. [Başlangıç ve aday envanteri](evidence/test-fail-kok0/ilk-tam-aday/paket-farki.json)
 
 ## 6. Açık incelemeler
 
-`faz85e` içinde teklif kimliği deneyi güncel karar kartıyla çalışıyor. Üç gerçek teklif, aynı teklifin mükerrer olarak açılmaması, Save8’den sonra üç ayrı kimlik ve aynı şartlar, birini reddedince diğerinin bozulmaması doğrulandı. Eski karşılaştırma iki eksik alanı eşit sayabiliyordu. Kalan tüketici ve çifte barış testleri eski modal kancalarını bekliyor. Güncel `UI.openNote` önce `DiplomaticInbox.capture`, sonra `ArchiveUI.record` çağırıyor. `faz86b` içinde eski karşı teklif kartı fikstürü ilk başarısızlıktan sonra saflık kontrollerini de etkiliyor. Bu paketlerdekilerin tümünün altyapı kaynaklı olduğu çıkarımı yapılmadı.
+`faz85e` içinde teklif kimliği deneyi güncel karar kartıyla çalışıyor. Üç gerçek teklif, aynı teklifin mükerrer olarak açılmaması, Save8’den sonra üç ayrı kimlik ve aynı şartlar, birini reddedince diğerinin bozulmaması doğrulandı. Eski karşılaştırma iki eksik alanı eşit sayabiliyordu. Kalan tüketici ve çifte barış testleri eski modal kancalarını bekliyor. Güncel `UI.openNote` önce `DiplomaticInbox.capture`, sonra `ArchiveUI.record` çağırıyor. Güncel statüko kararında bekleyen kayıt yeniden açıldı, aynı düğme iki kez çağrıldığında barış bir kez uygulandı, reddedilen ve süresi dolmuş karar uygulanmadı. Ret ülke sahipliğini, stokları ve RNG’yi korudu. `faz86b` içinde eski karşı teklif kartı fikstürü ilk başarısızlıktan sonra saflık kontrollerini de etkiliyor. Bu paketlerde başka doğrulama borcu var. [Güncel statüko deneyi](evidence/test-fail-kok0/dogrudan/statuko-guncel-karar.json)
 
 `faz95e_news` bir barış haberini bekliyor. Güncel motorun ayrı `war-end:<cephe>` ve `peace:<çift>:<gün>` kayıtları var. Bu iki kaydın kullanıcıya tekrar gibi görünüp görünmediği değerlendirilmedi. Aktif işlerin ve yeni sürüm kararının durumu devir kaydında. [Mevcut kontrol ve tekrar komutları](CODEX-TEST-FAIL-KOK0-DEVIR.md)
