@@ -99,13 +99,25 @@ Filo kaydı var olan satırları değiştirmeden yeni satır ekliyor ve sınır 
 
 100/9’da tam işlem grafiği boyutu p57 → ilk düzeltme → son düzeltme sırasıyla 14.606 → 15.376 → 14.608 nesne. Tam ayın Save8 ve RNG değerleri üç girdide aynı. 500/16 CPU ölçümleri %5 eşiğinin içinde. 100/9 ABBA farkı da eşik içinde, ancak A/A saçılımı nedeniyle daha uzun tekrar gerekli. Sürekli durum ölçümü bir aylık ön yürütmeden sonra alındı. 120. ay 500/16 duvar saati p95 farkı +%5,35, 180. ayda −%4,73. [100/9 ham örnekler](evidence/test-fail-kok0/performans/odak100.json) · [500/16 ham örnekler](evidence/test-fail-kok0/performans/odak500.json)
 
+### Nihai adayın performansı
+
+| Save8 | p57 CPU p95 | Aday CPU p95 | ABBA p95 | ABBA medyan | A/A p95 | Duvar saati p95 |
+|---|---:|---:|---:|---:|---:|---:|
+| 100/9, 120. ay | 357,03 ms | 347,57 ms | −%2,65 | +%2,06 | −%22,09 | −%4,65 |
+| 500/16, 120. ay | 1.870,09 ms | 1.921,84 ms | +%2,77 | −%2,90 | +%6,45 | +%4,17 |
+| 500/16, 180. ay | 6.735,29 ms | 6.301,00 ms | −%6,45 | −%2,79 | −%4,08 | −%3,46 |
+
+Node ve Chromium işleri bittikten sonra ölçüm alındı. 100 sistemde kol başına 32, 500 sistemde kol başına sekiz ölçüm var. Üç ABBA karşılaştırmasının bütün örneklerinde iki kolun Save8 ve RNG çıktısı eşleşti. `dealTxBegin` çağrı sayıları da sırasıyla 1/1, 0/0 ve 4/4. Ölçülen değerler CPU p95 için %5 sınırının içinde. A/A sapması nedeniyle yüzde farklar kesin hız kazancı olarak yorumlanmadı. [Nihai 100 sistem](evidence/test-fail-kok0/performans/nihai100.json) · [Nihai 500 sistem](evidence/test-fail-kok0/performans/nihai500.json)
+
+Entegre koşuda `faz86c_3` tek işlem başına 26,8 ms gördü. Aynı test ve aynı artık eksiksiz VM yükleyicisiyle doğrudan arka arkaya tekrar p57’de 5,26 ms, adayda 5,60 ms ve iki kolda 90/0 verdi. 20 ms beklentisi aynı. Entegre ham tarama 47 FAIL olarak duruyor. [p57 doğrudan tekrar](evidence/test-fail-kok0/dogrudan/son-odak/ai-muzakere-p57.log.gz) · [Aday doğrudan tekrar](evidence/test-fail-kok0/dogrudan/son-odak/ai-muzakere-aday.log.gz)
+
 ## İlk tam adayın ham taraması
 
 256 pakette 6.865 PASS ve 66 FAIL, süre 34 dk 29 sn, zaman aşımı sıfır. Başlangıçtaki 55 başarısız paketin 40’ı kapandı. Açık 17 paketten ikisi yeni manifest farkına işaret etti. `mp1_relay` bir ve `mp11_online` üç FAIL ile düzeltme öncesi özetleri yakaladı. Dört farkın nedeni `diplomacy.js` ve `ui.js` için eski SHA-256 değerleriydi. Taslak manifest gerçek kaynak özetlerine alındı. Doğrudan tekrar 14/0 ve 9/0. İlk tam taramanın 66 FAIL’i ham kanıtta aynen duruyor. [Tam tarama](evidence/test-fail-kok0/ilk-tam-aday/ham-ozet.json) · [Paket farkı](evidence/test-fail-kok0/ilk-tam-aday/paket-farki.json) · [Manifest düzeltmesi](https://github.com/sarsiss12-dot/Star/commit/84fa11f6)
 
 `DiplomaticInbox` görülen 18 paketin toplamı 209’dan 42 FAIL’e indi. İsmi bulunamayan modüle ait hata satırı 27’den sıfıra düştü. Kalan 42 assertion arasında önceki arayüz ve kaynak kilidi beklentileri var. Küme paketleri başka kök nedenler de içerebilir. [Başlangıç ve aday envanteri](evidence/test-fail-kok0/ilk-tam-aday/paket-farki.json)
 
-Taslak manifest 19 dosyanın SHA-256 değerleriyle eşleşti. p57 kontrolüne göre çalışma zamanı farkı yalnız `diplomacy.js` ve `ui.js`. Sürüm, PWA önbellek adı, Save8 v8, MP paket 4 ve protokol 1 aynı. [Manifest denetimi](evidence/test-fail-kok0/dogrudan/son-odak/manifest.json)
+Taslak manifest 19 dosyanın SHA-256 değerleriyle eşleşti. p57 kontrolüne göre çalışma zamanı farkı yalnız `diplomacy.js` ve `ui.js`. Sürüm, PWA önbellek adı, Save8 v8, MP paket 4 ve protokol 1 aynı. [Nihai manifest denetimi](evidence/test-fail-kok0/ucuncu-kusur/manifest.json)
 
 ## Nihai tam Node taraması
 
@@ -139,3 +151,10 @@ Seri ağır paketler aynı 180 sn sınırıyla geçti. AI denge 49,9 sn, günlü
 | `faz96f3` | 2370. gündeki tek tarihsel AI sökümünün mutlaka tekrar etmesi bekleniyor. | Sökümün farklılaşma nedeni bu fazda yalıtılmadı. |
 | `beta_fed_found0_events`, `faz86e`, `faz95e_news` | Anomali metni, mobil tema şablonu ve iki ayrı barış kaydı beklentileri. | Açıklama, tema ve kullanıcıya gösterilen olay kanıtları eksik. |
 | `faz86c_3_ai_negotiation` | Entegre koşuda tek işlem için tarihsel 20 ms sınırı aşıldı. | Sınır korunuyor. Tek işlem karşılaştırması ve Save8 tabanlı tam ay ABBA ayrı değerlendirilir. |
+
+## Yayın ve C2 kararı
+
+- **Üç bağımsız ürün kusuru doğrulandı ve giderildi.** Filo defteri geri alımı, muharebe raporunun kapatma tercihi ve bozuk teklifin kısmi uygulanması. 279 tarihsel FAIL’in tamamı için bağımsız ürün kusuru sayısı belirlenmiş değil. Son 47 FAIL içinde doğrulanmış yeni bir ürün gerilemesi yok. Açık assertion’ların ürün riski tamamı için ölçülemedi.
+- **Save8 bütünlüğü ve yetki.** Başarısız devirde p57’ye yanlış kalıcı filo kaydı yazılıyordu. Muharebe raporu tercihi kayda hiç ulaşmıyordu. Düzeltilen akışlar, eski kayıt yükleme, RNG, tek ödeme, misafir görünürlüğü ve host yetkisi geçti. Sınanan savaş sonu ve statüko senaryolarında mülkiyet, muharebe kredisi veya barış uygulaması kusuru görülmedi. Güncel federasyon kuruluşu, açık rıza, oy ve tek ücret senaryoları geçti.
+- **Yayın.** Dağıtım kimliği `96h10p57 / MP.8.9b56`. Üç düzeltme taslak dalda. Açık tarihsel kontroller ve ölçüm saçılımı nedeniyle p58 paketi hazırlanmadı. Taslak manifest doğrulandı. Fiziksel Android, internet/LAN ve canlı Render **NOT RUN**.
+- **Geliştirme tabanı.** Kanonik p57, karşılaştırma ve geri dönüş noktası. CODEX-C2, üç düzeltmeyi içeren `320bb9c853f058384922a8b97a9fbc3ce6959c27` üzerinden ayrı dalda başlayabilir. 13 paketin ham tabanı bu raporda. Yerel geliştirme kabulü tamam, dağıtım kararı ayrı. [Taslak PR](https://github.com/sarsiss12-dot/Star/pull/83) · [Devir](CODEX-TEST-FAIL-KOK0-DEVIR.md)

@@ -31,9 +31,9 @@ MP8_SCEN=FA node tests/browser-mp8.cjs
 
 `KONTROL` ve `ADAY` çalışma ağacının mutlak dizinleri. Performans girdileri önceki p57 kabulünün `reports/codex/evidence/p56-kabul0/perf/girdi/` içindeki `.save.gz` dosyaları. `gzip -cd` ile geçici dizine açıp `node research/p56-kabul0/build-parity.cjs KONTROL ADAY GİRDİ…` ve `PHASE=steady SAMPLES=16 WARMUP=8 node research/p56-kabul0/perf.cjs KONTROL ADAY ÇIKTI_JSON GİRDİ…` ile karşılaştır. ABBA ve A/A ham CPU ve duvar saatini ayrı kaydeder. Son performans koşusu Node ve Chromium bittiğinde yalnız başına başlar.
 
-## Açık işler
+## Devralınacak durum
 
-- Yeni tam tarama ve bağımsız suretleri ile paket farklarını tam kanıta ekle. Üç temsilî yükleyici deneyini, ham tarama sayaçlarına katma.
+- Tam p57 kontrolü 6.643/276, son kaynak 6.888/47. 256 paket seçimi aynı. 13 başarısız paket, 10 tarihsel NOT RUN ve sıfır zaman aşımı. Ham taramaya bağımsız tekrarları katma. [Paket farkı](evidence/test-fail-kok0/nihai/paket-farki.json)
 - Küme etkisinden kalan `faz85e` kontrollerini güncel giriş noktalarına taşıyacak negatif senaryoları hazırla. Eski tam kaynak eşitliği kontrollerinin arşiv köklerini doğrula. `faz86b` güncellendi ve 143/0 geçti.
-- Adayın yayın kararını CPU A/A, ABBA ve yerel relay sonuçlarıyla ver. Geçmemiş kapılar varken yayın paketi oluşturma. Fiziksel Android, internet/LAN ve canlı Render için saha kabulü ayrı kalır.
-- Diplomatik keşif ve temas çalışması C2 bu fazın kapsamı dışında.
+- Yerel Chromium 35/35. Sürekli simülasyonda CPU p95 ABBA farkı 100/120, 500/120 ve 500/180 için sırasıyla −%2,65, +%2,77 ve −%6,45. A/A özellikle 100 sistemde geniş aralık verdi. p58 yayımlanmadı. Fiziksel Android, internet/LAN ve canlı Render saha kabulü ayrı kalır.
+- C2 için test edilmiş geliştirme kaynak commit’i `320bb9c853f058384922a8b97a9fbc3ce6959c27`. Yayımdaki eski p57 karşılaştırma ve geri dönüş kaynağı. C2 kapsamında ilk yeni karar ayrışmasını ayrı kaydet ve bu fazdaki normal Save8/RNG girdilerini tekrar kullan.
