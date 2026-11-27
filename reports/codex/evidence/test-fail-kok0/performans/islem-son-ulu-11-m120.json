@@ -1,0 +1,157 @@
+{
+  "file": "ulu-11-m120.save",
+  "rng": [
+    -499939168,
+    -499939168
+  ],
+  "journal": [
+    256,
+    256
+  ],
+  "timings": [
+    [
+      {
+        "cpuMs": 38.037,
+        "records": 14606
+      },
+      {
+        "cpuMs": 37.938,
+        "records": 14606
+      },
+      {
+        "cpuMs": 38.241,
+        "records": 14606
+      },
+      {
+        "cpuMs": 77.058,
+        "records": 14606
+      },
+      {
+        "cpuMs": 125.294,
+        "records": 14606
+      },
+      {
+        "cpuMs": 49.764,
+        "records": 14606
+      },
+      {
+        "cpuMs": 41.736,
+        "records": 14606
+      },
+      {
+        "cpuMs": 66.276,
+        "records": 14606
+      },
+      {
+        "cpuMs": 64.147,
+        "records": 14606
+      },
+      {
+        "cpuMs": 48.764,
+        "records": 14606
+      },
+      {
+        "cpuMs": 84.425,
+        "records": 14606
+      },
+      {
+        "cpuMs": 41.985,
+        "records": 14606
+      },
+      {
+        "cpuMs": 81.957,
+        "records": 14606
+      },
+      {
+        "cpuMs": 63.809,
+        "records": 14606
+      },
+      {
+        "cpuMs": 64.676,
+        "records": 14606
+      },
+      {
+        "cpuMs": 38.32,
+        "records": 14606
+      }
+    ],
+    [
+      {
+        "cpuMs": 63.804,
+        "records": 14608
+      },
+      {
+        "cpuMs": 39.376,
+        "records": 14608
+      },
+      {
+        "cpuMs": 66.047,
+        "records": 14608
+      },
+      {
+        "cpuMs": 39.232,
+        "records": 14608
+      },
+      {
+        "cpuMs": 59.753,
+        "records": 14608
+      },
+      {
+        "cpuMs": 38.099,
+        "records": 14608
+      },
+      {
+        "cpuMs": 38.398,
+        "records": 14608
+      },
+      {
+        "cpuMs": 39.981,
+        "records": 14608
+      },
+      {
+        "cpuMs": 42.628,
+        "records": 14608
+      },
+      {
+        "cpuMs": 47.759,
+        "records": 14608
+      },
+      {
+        "cpuMs": 38.817,
+        "records": 14608
+      },
+      {
+        "cpuMs": 45.01,
+        "records": 14608
+      },
+      {
+        "cpuMs": 41.391,
+        "records": 14608
+      },
+      {
+        "cpuMs": 97.601,
+        "records": 14608
+      },
+      {
+        "cpuMs": 51.687,
+        "records": 14608
+      },
+      {
+        "cpuMs": 75.84,
+        "records": 14608
+      }
+    ]
+  ],
+  "totals": [
+    {
+      "mean": 60.151687499999994,
+      "median": 56.786500000000004,
+      "p95": 94.64224999999999
+    },
+    {
+      "mean": 51.5889375,
+      "median": 43.819,
+      "p95": 81.28025
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "phase": "CODEX-P56-KABUL.0",
+  "phase": "CODEX-TEST-FAIL-KÖK.0 (taslak)",
   "build": "96h10p57",
   "scope": "github-runtime-only",
   "save_version": 8,
@@ -15,7 +15,7 @@
     "commerce-ui.js": "81d29e7ce721bc7ce0fc5700ba77f83e463ad5419d87fd27972d3bfd4800d434",
     "commerce.js": "681654174a02e74594fc37803a535cbfa9970b2a488f428d965b3d1f5f96615a",
     "construction.js": "920d6122c3d3e65ef2650c94a9a5a804c3d67b65411627e23184f0e1d5d60e08",
-    "diplomacy.js": "3a5d64d2924e64ce28a168e5f1bc315099613df176a1df6935861123daa1a91a",
+    "diplomacy.js": "62e658cf889d9f4e71775955b95714b32c7f7e202ded023a54ea200cc9688470",
     "economic-ledger.js": "309837d46e3d533f17d0ecb76a5c531474662cb57e05802ca52ffa904d5c5c3c",
     "economy-ui.js": "68025b1bb388188435a51cca2319e92e7eb9ec6517b4e3c8437f335e2916763f",
     "economy.js": "ca9b6429fdce59e88559b84a7985cb7a610f846f3db7faca6c809c85fab66c76",
@@ -26,7 +26,7 @@
     "map.js": "4c814aa209836f5166f5718fede6045faf920f841f3b34681f0cb5209d5d888f",
     "news.js": "a1c1bc37f18b69979bc1a7c27ab80597579d13af0ad833a8897a8c0acb474646",
     "sw.js": "c07b5e6fe5b4de3b30109b60f0347a2ece3e87835b6285e66572b3076fabc8ec",
-    "ui.js": "fbf971a71b9294edcf50d2c95e57ab0f7baee0b0b027561ac49bb7f1c74532d5"
+    "ui.js": "39db50c860ee99ed15c99e966e3155fc86d08185628084d3b9cad9bd76aba4b5"
   },
-  "description": "Relay başlangıç bildirimi, SIGTERM ve SIGINT işleyicileri kurulduktan sonra yayımlanır."
+  "description": "p57 tabanından türetilen geliştirme kaynağının dosya özetleri. ZIP yayın kaydı PR #82 ağacındadır."
 }

@@ -1,0 +1,12 @@
+{
+  "p57Head": "a8c07e18ee3daf544da62244fe31cd2aaa3ee574",
+  "manifestCommit": "041413e204b3bd93088cb33f189dbeb643aeb430",
+  "phase": "CODEX-TEST-FAIL-KÖK.0 (taslak)",
+  "build": "96h10p57",
+  "matches": 19,
+  "manifestSha256": "315e68c936ef9e2e81f572a19e6f83e7af3bc5278f088fd309613ac857659c89",
+  "p57DraftChanges": {
+    "diplomacy.js": "62e658cf889d9f4e71775955b95714b32c7f7e202ded023a54ea200cc9688470",
+    "ui.js": "39db50c860ee99ed15c99e966e3155fc86d08185628084d3b9cad9bd76aba4b5"
+  }
+}

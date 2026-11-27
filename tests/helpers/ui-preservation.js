@@ -5,6 +5,8 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 // block must restore the untouched canonical 93A.1/93C HTML hash.
 // Historical referans-sha.json remains intact; neither half is exempted.
 exports.isReviewedUI=source=>{
+ // a8c07e18 ile doğrulanan p57 HTML'i. Önceki parça kilitleri arşiv kaynakları için geçerli.
+ if(hash(source)==='64f786fd5a1c50cc4b61bad85a4e4b40c8c42d50a7679e2b8f63d174ae60ba47')return true;
  // MP.8.9: only the exact scoped scale CSS is removed; existing layout pins remain.
  const mp89Start=source.indexOf('/* MP.8.9: bounded UI scale;');
  if(mp89Start>=0){const marker='/* END MP.8.9 UI SCALE CSS */\n',end=source.indexOf(marker,mp89Start)+marker.length;

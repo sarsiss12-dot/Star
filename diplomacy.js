@@ -1755,6 +1755,9 @@ function normalizeDeal(offer){
   if (!offer || typeof offer !== 'object'){
     errors.push('Teklif nesnesi yok'); return bitir();
   }
+  if ((offer.give!=null&&!Array.isArray(offer.give)) || (offer.want!=null&&!Array.isArray(offer.want))){
+    errors.push('Teklif maddeleri liste olmalı'); return bitir();
+  }
   /* ── TARAF DOĞRULAMASI ── */
   const fa = Number(offer.from), fb = Number(offer.to);
   if (!isFinite(fa) || !isFinite(fb) || !Number.isInteger(fa) || !Number.isInteger(fb)){
@@ -2243,7 +2246,7 @@ function giftOnCooldown(a, b){
    Kapsam: aşağıdaki kökler ve bunların eriştiği oyun verisi. DOM, UI,
    fonksiyon gövdeleri ve kataloglar işlem verisi değildir. */
 const DEAL_TX_ROOTS = ['emps','p','sys','fleets','feds','council',
-  'economyHistory','chainQueue','seenChains','fedUid','fedFounding','commerce','news','diplomaticInbox','construction','_95eFaults','fallStats','sabStats','log','inbox','inboxUid','warLedger','settlements','jointOps','_structAt','_structIdx'];
+  'economyHistory','chainQueue','seenChains','fedUid','fedFounding','commerce','news','diplomaticInbox','construction','_95eFaults','fallStats','sabStats','log','inbox','inboxUid','warLedger','settlements','jointOps','fleetJournal','_structAt','_structIdx'];
 const DEAL_TX_AUTH = ['_dealAuth','_warAuth','_warWhy','_sideBuf'];
 let _dealTxActive = false;
 let _warLaunchBuffer=null;
@@ -2318,8 +2321,11 @@ function dealTxBegin(scope){
     if (!scope && d && 'value' in d) values.push(d.value);
   }
   if (scope) values.push(...scope);
+  else values.push(FLEET_RECOVERY_DIRTY); // Bir devrin filo tasfiyesi, teslimat toparlama kümesini de değiştirir.
   for (const key of DEAL_TX_AUTH) auth.set(key,Object.getOwnPropertyDescriptor(G,key));
-  return {roots,auth,records:txCaptureGraph(values),rng:RND_STATE};
+  // Filo kaydı yalnız yeni satır ekler ve en eskileri budar. Dizi geri alınır, mevcut satırlar yerinde kalır.
+  const journal=scope?null:roots.get('fleetJournal')?.value;
+  return {roots,auth,records:txCaptureGraph(values,journal?.length?new Set(journal):null),rng:RND_STATE};
 }
 function dealTxRollback(tx){
   txRestoreGraph(tx.records);
@@ -2387,19 +2393,19 @@ function dealPostcondition(giver, taker, it){
    Sonrasında UI/audio ayrı ayrı korunur; bu etkiler tersinir değildir. */
 function executeDeal(offer, inboxKey=null){
   // İç içe işlem desteklenmiyor; dış işlemin tamponunu yayımlayamaz.
-  if (_dealTxActive) return false;
-  const archived=typeof DiplomaticInbox!=='undefined'?(inboxKey===null?DiplomaticInbox.findDeal(offer):DiplomaticInbox.state().records.find(r=>r.key===inboxKey)):null;
-  if(archived&&(archived.status!=='pending'||G.day>=archived.expires))return false;
-  if((offer.give||[]).concat(offer.want||[]).some(x=>x.t==='warJoin'&&x.plan!==undefined))return warPrepareAccept(offer,archived);
+  if (_dealTxActive || !offer || typeof offer!=='object') return false;
   _dealTxActive = true;
   let tx = null;
   const buf = [];
   try {
     if (G._sideBuf) return false; // başka bir tamponun sahipliğini alma
+    const archived=typeof DiplomaticInbox!=='undefined'?(inboxKey===null?DiplomaticInbox.findDeal(offer):DiplomaticInbox.state().records.find(r=>r.key===inboxKey)):null;
+    if(archived&&(archived.status!=='pending'||G.day>=archived.expires))return false;
     const q = dealQuote(offer);
     if (!q.ok) return false;
     const n = q.norm, a = G.emps[n.from], b = G.emps[n.to];
     if (!a || !b) return false;
+    if(n.give.concat(n.want).some(x=>x.t==='warJoin'&&x.plan!==undefined))return warPrepareAccept(n,archived);
     tx = dealTxBegin(archived?null:dealTxScope(n));
     G._sideBuf = buf;
     G._dealAuth = true;
@@ -10721,8 +10727,8 @@ function warPrepareCreate(e,target,goal,opts=null){
  const p={id:Math.max(0,...rows.map(x=>x.id))+1,owner:e.id,target,goal,opened:G.day,expires:G.day+180,state:'pending',commitments:[],...(norm?{opts:norm}:{})};
  if(!G.warLedger)G.warLedger=warLedgerEmpty();G.warLedger.preparations=rows.filter(x=>warPreparationState(x)==='pending').concat(rows.filter(x=>warPreparationState(x)!=='pending').slice(-47),p);return {ok:true,id:p.id};
 }
-function warPrepareAccept(offer,archived){
- if(G._sideBuf)return false;const q=dealQuote(offer);if(!q.ok)return false;const n=encodeOffer(q.norm),joins=n.give.concat(n.want).filter(x=>x.t==='warJoin'),j=joins[0],p=j&&warPreparation(j.plan);
+function warPrepareAccept(norm,archived){
+ if(G._sideBuf)return false;const n=encodeOffer(norm),joins=n.give.concat(n.want).filter(x=>x.t==='warJoin'),j=joins[0],p=j&&warPreparation(j.plan);
  if(joins.length!==1||!p||n.give.concat(n.want).some(x=>!['res','passage','warJoin'].includes(x.t)))return false;
  const member=n.give.includes(j)?n.from:n.to; // encodeOffer allocates lists, j is an exact member of them
  if(p.owner===(member)||![n.from,n.to].includes(p.owner)||p.commitments.some(c=>c.member===member&&c.state!=='withdrawn'&&!warCommitStale(p,c))||p.commitments.filter(c=>c.member!==member).length>=8)return false;

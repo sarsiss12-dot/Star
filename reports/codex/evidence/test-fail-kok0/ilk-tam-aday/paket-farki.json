@@ -1,0 +1,4654 @@
+{
+  "totals": {
+    "suites": 256,
+    "pass": 6643,
+    "fail": 276
+  },
+  "packages": {
+    "beta_fed_fleet0_compat_test.js": {
+      "pass": 3,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 1457,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_fed_fleet0_mp_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2345,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_fed_fleet0_test.js": {
+      "pass": 11,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3806,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_fed_found0_compat_test.js": {
+      "pass": 1,
+      "fail": 5,
+      "exit": 1,
+      "durationMs": 3727,
+      "signal": null,
+      "timeout": false,
+      "firstError": "AssertionError [ERR_ASSERTION]: raw Save8 seed 11 month 1",
+      "errors": [
+        "AssertionError [ERR_ASSERTION]: raw Save8 seed 11 month 1",
+        "AssertionError [ERR_ASSERTION]: raw Save8 seed 23 month 1",
+        "AssertionError [ERR_ASSERTION]: raw Save8 seed 42 month 1",
+        "AssertionError [ERR_ASSERTION]: raw Save8 seed 99 month 1",
+        "AssertionError [ERR_ASSERTION]: raw Save8 seed 404 month 1"
+      ],
+      "inboxReference": false
+    },
+    "beta_fed_found0_core_test.js": {
+      "pass": 10,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 4201,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_fed_found0_events_test.js": {
+      "pass": 10,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 4454,
+      "signal": null,
+      "timeout": false,
+      "firstError": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:",
+      "errors": [
+        "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+      ],
+      "inboxReference": false
+    },
+    "beta_fed_found0_mp_test.js": {
+      "pass": 11,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 4166,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_galaxy0_fedfleet_test.js": {
+      "pass": 6,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 1645,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_galaxy0_test.js": {
+      "pass": 9,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 30262,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_p01_ballot_test.js": {
+      "pass": 3,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 579,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_p01_compat_test.js": {
+      "pass": 4,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 723,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_p01_embargo_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 944,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_p01_mirror_test.js": {
+      "pass": 2,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 720,
+      "signal": null,
+      "timeout": false,
+      "firstError": "FAIL misafir kamu savaş kimliği ve kendi gözlem özetini alır; host katkı ve filo verisi aktarılmaz AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+      "errors": [
+        "FAIL misafir kamu savaş kimliği ve kendi gözlem özetini alır; host katkı ve filo verisi aktarılmaz AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:"
+      ],
+      "inboxReference": false
+    },
+    "beta_p01_news_test.js": {
+      "pass": 4,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 810,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_p01_war_end_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 1208,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_p02_news_return_test.js": {
+      "pass": 3,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 751,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_p02_news_test.js": {
+      "pass": 8,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 1436,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_rival_blocs0_build_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 1910,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_rival_blocs0_mp_test.js": {
+      "pass": 3,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 888,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_rival_blocs0_setup_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 16013,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_rival_blocs0_test.js": {
+      "pass": 10,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 6234,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_war_goals0_mp_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 1640,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "beta_war_goals0_test.js": {
+      "pass": 13,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 4372,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz83_2_brand_test.js": {
+      "pass": 70,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 643,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+      "errors": [
+        "✗ map altyapısı sabit; hedef seçimi 93A referansında"
+      ],
+      "inboxReference": false
+    },
+    "faz83_3_render_recovery_test.js": {
+      "pass": 58,
+      "fail": 4,
+      "exit": 1,
+      "durationMs": 3295,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ serialize kurtarma öncesi/sonrası anlamsal olarak aynı — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ serialize kurtarma öncesi/sonrası anlamsal olarak aynı — HATA: DiplomaticInbox is not defined",
+        "✗ ralli korundu",
+        "✗ loopBuild korundu",
+        "✗ UI.tab hâlâ function"
+      ],
+      "inboxReference": true
+    },
+    "faz83_4_redraw_leaders_test.js": {
+      "pass": 69,
+      "fail": 10,
+      "exit": 1,
+      "durationMs": 5725,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ HAM serialize birebir eşit — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ HAM serialize birebir eşit — HATA: DiplomaticInbox is not defined",
+        "✗ leaders alanı öncesinde yoktu",
+        "✗ kurtarma leaders alanı OLUŞTURMADI",
+        "✗ ralli korundu",
+        "✗ loopBuild korundu",
+        "✗ gün/yıl/ay korundu",
+        "✗ filolar korundu — undefined filo",
+        "✗ 120 ay + harita + sekme + kayıt — 120ay:DiplomaticInbox is not defined",
+        "✗ UI.tab hâlâ function",
+        "✗ ralli/loopBuild korundu"
+      ],
+      "inboxReference": true
+    },
+    "faz84a_intel_dedup_test.js": {
+      "pass": 83,
+      "fail": 5,
+      "exit": 1,
+      "durationMs": 3448,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "✗ 120 ay + kaydet/yükle — 120ay:DiplomaticInbox is not defined",
+        "✗ UI.tab hâlâ function",
+        "✗ leaderPool saf kaldı",
+        "✗ situation pasif kaldı"
+      ],
+      "inboxReference": true
+    },
+    "faz84b_vassal_state_dedup_test.js": {
+      "pass": 125,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 3304,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined"
+      ],
+      "inboxReference": true
+    },
+    "faz84c_state_visibility_gate_test.js": {
+      "pass": 121,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 3129,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined"
+      ],
+      "inboxReference": true
+    },
+    "faz85a_political_save_integrity_test.js": {
+      "pass": 175,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 7762,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi"
+      ],
+      "inboxReference": true
+    },
+    "faz85b_load_idempotency_test.js": {
+      "pass": 134,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 20335,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi"
+      ],
+      "inboxReference": true
+    },
+    "faz85c_crisis_save_continuity_test.js": {
+      "pass": 90,
+      "fail": 54,
+      "exit": 1,
+      "durationMs": 8939,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi",
+        "✗ kriz gerçekten aktifti (kurulum geçerli)",
+        "✗ 5 yükleme sonrası crisis nesnesi BİREBİR aynı — {}",
+        "✗ stage korundu (2) — undefined",
+        "✗ timer korundu (7) — undefined",
+        "✗ kills korundu (5) — undefined",
+        "✗ need korundu (120) — undefined",
+        "✗ contrib korundu",
+        "✗ warned korundu (true)",
+        "✗ over korundu (false)",
+        "✗ crisisActive() yükleme sonrası TRUE",
+        "✗ crisisId doğru crisisSide devletine bağlı — id=undefined undefined",
+        "✗ kriz filoları/gemileri/sistemleri/emirleri korundu — undefined filo · undefined gemi",
+        "✗ tek tik sayacı YALNIZ BİR kez ilerletti — undefined → undefined",
+        "✗ over=true korundu",
+        "✗ stage=3 korundu — undefined",
+        "✗ yükleme krizi YENİDEN BAŞLATMADI",
+        "✗ yeni kriz filosu DOĞMADI — undefined",
+        "✗ guardian korundu",
+        "✗ crisisScore korundu (380) — undefined",
+        "✗ crisisId hâlâ gerçek crisisSide devletine bağlı — id=undefined",
+        "✗ OYUN A aktif krizle yüklendi — id=undefined",
+        "✗ OYUN B: G.crisis A'dan SIZMADI",
+        "✗ OYUN B: crisisId A'dan SIZMADI (undefined)",
+        "✗ OYUN B: crisisActive false",
+        "✗ OYUN B: kriz devleti yok — undefined",
+        "✗ yeni oyunda eski crisisId SİLİNDİ",
+        "✗ yeni oyunda kriz devleti henüz yok — undefined",
+        "✗ yeni oyunda bekleyen kriz kuruldu (stage 0)",
+        "✗ ensureCrisisEmpire GERÇEK yeni devlet oluşturdu — undefined #undefined",
+        "✗ mevcut hiçbir devletin adı/rengi/etiği/savaşı kriz devletine dönmedi",
+        "✗ gerçek crisisSide adayından deterministik onarım yapıldı",
+        "✗ normal devlet kriz tarafına DÖNÜŞTÜRÜLMEDİ",
+        "✗ aralık dışı crisisId de onarıldı",
+        "✗ aday YOKKEN normal devlet ELE GEÇİRİLMEDİ — crisisId undefined",
+        "✗ taraf bulunamayan aktif kriz güvenle devre dışı bırakıldı",
+        "✗ v4 aktif kriz: crisisId GERÇEK crisisSide devletine bağlandı — id=undefined",
+        "✗ kriz filoları ÖKSÜZ kalmadı — undefined → undefined",
+        "✗ kriz aktif olarak sürdürüldü — stage=undefined",
+        "✗ kurtarılamayan alanlara dürüst varsayılan verildi",
+        "✗ göç DETERMİNİSTİK ve RNG sabit",
+        "✗ kurtarılamayan bilgi açıkça raporlandı",
+        "✗ crisisSide var + filo yok → ÇÖZÜLMÜŞ kabul edildi — over=undefined",
+        "✗ kriz YENİDEN BAŞLATILMADI (galaksi 2. kez cezalandırılmadı) — kriz filo=undefined",
+        "✗ crisisId yine de gerçek devlete bağlı (öksüz değil) — id=undefined",
+        "✗ göç DETERMİNİSTİK",
+        "✗ çözülmüş varsayımı açıkça raporlandı",
+        "✗ 85B: 6 yüklemede kalkan TAM 4 kaldı",
+        "✗ 85B: economyTick(false) hâlâ normal ilerliyor — undefined → undefined",
+        "✗ 85A: memAge/cncAge korundu — undefined/undefined",
+        "✗ 85A: Konsey + hazine korundu",
+        "✗ 85A: fedUid / sandbox / rebelAlliance korundu",
+        "✗ 85C: kriz aynı yüklemelerde de korundu"
+      ],
+      "inboxReference": true
+    },
+    "faz85d_campaign_save_continuity_test.js": {
+      "pass": 156,
+      "fail": 31,
+      "exit": 1,
+      "durationMs": 25254,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi",
+        "✗ crisisId=0 (OYUNCU): sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #undefined",
+        "✗ crisisId=0 (OYUNCU): oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI",
+        "✗ crisisId=0 (OYUNCU): AI devletinin kimliği BOZULMADI",
+        "✗ crisisId=0 (OYUNCU): savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id undefined",
+        "✗ crisisId=normal AI: sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #undefined",
+        "✗ crisisId=normal AI: oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI",
+        "✗ crisisId=normal AI: AI devletinin kimliği BOZULMADI",
+        "✗ crisisId=normal AI: savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id undefined",
+        "✗ crisisId=aralık dışı: sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #undefined",
+        "✗ crisisId=aralık dışı: oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI",
+        "✗ crisisId=aralık dışı: AI devletinin kimliği BOZULMADI",
+        "✗ crisisId=aralık dışı: savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id undefined",
+        "✗ crisisId=null: sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #undefined",
+        "✗ crisisId=null: oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI",
+        "✗ crisisId=null: AI devletinin kimliği BOZULMADI",
+        "✗ crisisId=null: savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id undefined",
+        "✗ crisisId=geçerli crisisSide: MEVCUT devlet aynen döndü — döndü #undefined",
+        "✗ geçerli kimlikte İKİNCİ kriz devleti üretilmedi",
+        "✗ yükleme KAYNAKLARI değiştirmedi",
+        "✗ yükleme İLİŞKİLERİ değiştirmedi",
+        "✗ yükleme FİLO/GEMİ sayısını değiştirmedi",
+        "✗ yükleme SİSTEM SAHİPLİĞİNİ değiştirmedi",
+        "✗ yükleme NÜFUSU değiştirmedi",
+        "✗ yükleme BİLDİRİM/EVENT üretmedi — undefined",
+        "✗ 85B: 6 yüklemede kalkan TAM 4 kaldı",
+        "✗ 85B: economyTick(false) hâlâ normal ilerliyor — undefined → undefined",
+        "✗ 85A: memAge/cncAge/fedUid/sandbox/Konsey korundu",
+        "✗ 85C: aktif kriz korundu ve doğru devlete bağlı",
+        "✗ 85D: kampanya durumu aynı yüklemelerde korundu"
+      ],
+      "inboxReference": true
+    },
+    "faz85e_event_inbox_continuity_test.js": {
+      "pass": 92,
+      "fail": 59,
+      "exit": 1,
+      "durationMs": 12407,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi",
+        "✗ kind \"sqOffer\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"pact\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"submit\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"cncnew\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"cncvote\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"aideal\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"fedvote\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"chain\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"event\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"anomaly\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"peace\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"facdem\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"faccoup\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"criswarn\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"crisis\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"crisend\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"wardec\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ kind \"border\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+        "✗ event yüklemeden sonra katalog nesnesine bağlı",
+        "✗ seçilen event fonksiyonu TAM BİR KEZ çalıştı — undefined çağrı",
+        "✗ anomaly ID + sistem ID üzerinden yeniden kuruldu",
+        "✗ seçilen anomaly seçeneği TAM BİR KEZ çalıştı — undefined çağrı",
+        "✗ üç FARKLI teklif ayrı ayrı kuyrukta (birebir aynısı tekrarlanmadı) — undefined teklif",
+        "✗ aynı devletten şartları farklı iki teklif AYRI kaldı",
+        "✗ İLK teklif açılabildi (eskiden \"geçerliliğini yitirdi\" diyordu)",
+        "✗ bir teklifi reddetmek DİĞERİNİ değiştirmedi",
+        "✗ ikinci teklif KENDİ şartlarıyla açıldı",
+        "✗ tekil UI.pendingOffer artık doğruluğun kaynağı değil",
+        "✗ sqOffer tıklanınca GERÇEK modal açıldı (eskiden hiçbir şey olmuyordu)",
+        "✗ modal teklifi yapan devleti gösteriyor",
+        "✗ modal statüko sonucunu ve donma uyarısını gösteriyor",
+        "✗ Kabul / Reddet / Daha sonra düğmeleri var",
+        "✗ kabul statusQuoPeace'i TAM BİR KEZ çağırdı — undefined",
+        "✗ çift dokunuş İKİNCİ barış üretmedi — ilk undefined → ikinci undefined",
+        "✗ savaş gerçekten bitti",
+        "✗ RET statusQuoPeace çağırmadı — undefined",
+        "✗ RET sahiplik veya kaynak değiştirmedi",
+        "✗ RET yeni ceza uydurmadı (ilişki değişmedi)",
+        "✗ RET sonrası savaş sürüyor",
+        "✗ mevcut AI cooldown davranışı korundu",
+        "✗ eskimiş sqOffer \"geçersiz\" ekranı gösterdi",
+        "✗ eskimiş teklif statusQuoPeace ÇAĞIRMADI — undefined",
+        "✗ açılınca bildirim kutudan çıktı",
+        "✗ DAHA SONRA bildirimi TAM BİR KOPYA olarak geri koydu — kopya=undefined toplam=undefined",
+        "✗ 10 ardışık yükleme inbox'ı ÇOĞALTMADI ve sırasını değiştirmedi",
+        "✗ inboxUid en büyük UID'den küçükse güvenle yükseltildi — 1 → undefined",
+        "✗ sonraki bildirimin UID'si mevcutlarla ÇAKIŞMIYOR — yeni uid=undefined",
+        "✗ seenChains kaydet/yükle sonrası korundu (zehri ezdi)",
+        "✗ başlamış zincir 300 denemede YENİDEN SEÇİLMEDİ",
+        "✗ setupGame seenChains'i temizledi",
+        "✗ setupGame inbox ve inboxUid'i temizledi",
+        "✗ setupGame _openNote / pendingOffer temizledi",
+        "✗ bildirim açılınca kutudan çıktı ve _openNote'a alındı",
+        "✗ serialize AÇIK bildirimi runtime state'i DEĞİŞTİRMEDEN yakaladı",
+        "✗ yüklemede açık bildirim inbox'a TEK KOPYA döndü — undefined",
+        "✗ yükleme bildirimi OTOMATİK AÇMADI",
+        "✗ ham minRaw modal HTML'i kayda GİRMEDİ"
+      ],
+      "inboxReference": true
+    },
+    "faz85f_spatial_simulation_continuity_test.js": {
+      "pass": 166,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 28165,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi"
+      ],
+      "inboxReference": true
+    },
+    "faz86a_intel_command_center_test.js": {
+      "pass": 125,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 5642,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "✗ DOSYALAR görünümünde fail ADI sızmıyor"
+      ],
+      "inboxReference": true
+    },
+    "faz86b_deal_engine_test.js": {
+      "pass": 121,
+      "fail": 22,
+      "exit": 1,
+      "durationMs": 7250,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "✗ süresi dolmamış teklif açılabiliyor — undefined ay kaldı",
+        "✗ süresi DOLAN teklif uygulanmıyor ve nedeni söyleniyor",
+        "✗ süresi dolan teklif kaynak değiştirmedi",
+        "✗ born var expires yok → deterministik born+540 göçü",
+        "✗ ikisi de yoksa süresiz sayılıyor (geriye uyum)",
+        "✗ aiOffer teklife born + expires damgası ekledi",
+        "✗ yükleme oyun zamanını ilerletmedi",
+        "✗ teklif ekranı YÖN metni gösteriyor",
+        "✗ teklif ekranı kalan süre ve imzalama maliyetini gösteriyor",
+        "✗ karşı teklif AYRI kartta; orijinal teklif korundu",
+        "✗ oyuncunun düzenleme listesi ayrı nesne",
+        "✗ \"Düzenlemeye dön\" orijinal kartı koruyor",
+        "✗ reddetmek kaynak ve Etki değiştirmedi",
+        "✗ ret sonrası karşı teklif kartı temizlendi",
+        "✗ 200 normalize/validate/quote çağrısı kaynakları değiştirmedi",
+        "✗ 200 çağrı ilişki/antlaşma/log değiştirmedi",
+        "✗ 200 çağrı RNG tüketmedi",
+        "✗ normalizeDeal GİRİŞ nesnesini değiştirmedi",
+        "✗ executeDeal dış/bozuk çağrılarda guard'ları uyguladı — ,,,",
+        "✗ bozuk çağrılar kaynak değiştirmedi",
+        "✗ 240 aylık simülasyon hatasız — DiplomaticInbox is not defined"
+      ],
+      "inboxReference": true
+    },
+    "faz86c_1_quote_effective_plan_test.js": {
+      "pass": 101,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 4095,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined"
+      ],
+      "inboxReference": true
+    },
+    "faz86c_2_transaction_test.js": {
+      "pass": 110,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 6204,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+      "errors": [
+        "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined"
+      ],
+      "inboxReference": true
+    },
+    "faz86c_3_ai_negotiation_test.js": {
+      "pass": 86,
+      "fail": 4,
+      "exit": 1,
+      "durationMs": 6481,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+      "errors": [
+        "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "✗ seed 11: 360 ay HATASIZ — DiplomaticInbox is not defined",
+        "✗ seed 99: 360 ay HATASIZ — DiplomaticInbox is not defined",
+        "✗ seed 404: 360 ay HATASIZ — DiplomaticInbox is not defined"
+      ],
+      "inboxReference": true
+    },
+    "faz86c_4_reciprocal_offers_test.js": {
+      "pass": 93,
+      "fail": 5,
+      "exit": 1,
+      "durationMs": 5542,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+      "errors": [
+        "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "✗ seed 11: 360 ay HATASIZ — DiplomaticInbox is not defined",
+        "✗ seed 99: 360 ay HATASIZ — DiplomaticInbox is not defined",
+        "✗ seed 404: 360 ay HATASIZ — DiplomaticInbox is not defined",
+        "✗ 3 seed toplamında GERÇEK karşı teklif üretildi"
+      ],
+      "inboxReference": true
+    },
+    "faz86c_4h_map_input_test.js": {
+      "pass": 81,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 3349,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+      "errors": [
+        "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "✗ 93D bilim CSS ve değişmeyen 93C HTML"
+      ],
+      "inboxReference": false
+    },
+    "faz86c_4h_r1_exact_regression_test.js": {
+      "pass": 110,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 3369,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+      "errors": [
+        "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "✗ 93D bilim CSS ve değişmeyen 93C HTML",
+        "✓ ReferenceError YOK — üretim yolu hatasız — ok"
+      ],
+      "inboxReference": false
+    },
+    "faz86c_4h_r2_surface_camera_layers_test.js": {
+      "pass": 83,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 6141,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+      "errors": [
+        "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "✗ 93D bilim CSS ve değişmeyen 93C HTML"
+      ],
+      "inboxReference": false
+    },
+    "faz86c_4h_r3_surface_lifecycle_test.js": {
+      "pass": 95,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 4248,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+      "errors": [
+        "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "✗ 93D bilim CSS ve değişmeyen 93C HTML"
+      ],
+      "inboxReference": false
+    },
+    "faz86c_4h_r4_diagnosis_test.js": {
+      "pass": 91,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 3425,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+      "errors": [
+        "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "✗ 93D bilim CSS ve değişmeyen 93C HTML"
+      ],
+      "inboxReference": false
+    },
+    "faz86c_4h_r4_targeted_diag_test.js": {
+      "pass": 93,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 3679,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+      "errors": [
+        "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "✗ 93D bilim CSS ve değişmeyen 93C HTML"
+      ],
+      "inboxReference": false
+    },
+    "faz86c_5_1_ui_portraits_native_canvas_test.js": {
+      "pass": 48,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3727,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz86c_5_diagnostics_test.js": {
+      "pass": 38,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2973,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz86c_5_native_canvas_test.js": {
+      "pass": 66,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5473,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz86c_6_transaction_acceptance_test.js": {
+      "pass": 528,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 24837,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ Colonized system, empire purge and fleet removal are all reached, then rolled back: G.fleetJournal.value changed",
+      "errors": [
+        "✗ Colonized system, empire purge and fleet removal are all reached, then rolled back: G.fleetJournal.value changed"
+      ],
+      "inboxReference": false
+    },
+    "faz86c_strict_deal_ai_test.js": {
+      "pass": 144,
+      "fail": 3,
+      "exit": 1,
+      "durationMs": 5030,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ seed 11: 360 ay HATASIZ — DiplomaticInbox is not defined",
+      "errors": [
+        "✗ seed 11: 360 ay HATASIZ — DiplomaticInbox is not defined",
+        "✗ seed 99: 360 ay HATASIZ — DiplomaticInbox is not defined",
+        "✗ seed 404: 360 ay HATASIZ — DiplomaticInbox is not defined"
+      ],
+      "inboxReference": true
+    },
+    "faz86d_envoy_missions_test.js": {
+      "pass": 58,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 11631,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz86e_diplomacy_center_test.js": {
+      "pass": 44,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 8525,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ Mobil CSS kontrolleri kapsamlıdır; tema değişkenleri tanımlıdır (yerleşim testi değil) — AssertionError [ERR_ASSERTION]: --ui-scale",
+      "errors": [
+        "✗ Mobil CSS kontrolleri kapsamlıdır; tema değişkenleri tanımlıdır (yerleşim testi değil) — AssertionError [ERR_ASSERTION]: --ui-scale"
+      ],
+      "inboxReference": false
+    },
+    "faz86f_ai_balance_test.js": {
+      "pass": 25,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 100721,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz86g_integration_handoff_test.js": {
+      "pass": 16,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3019,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz87a_espionage_feedback_test.js": {
+      "pass": 36,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7005,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz87b_ai_operation_selection_test.js": {
+      "pass": 26,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5498,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz87c_1_intrigue_outcomes_test.js": {
+      "pass": 45,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7878,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz87c_special_operation_outcomes_test.js": {
+      "pass": 39,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7380,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz87d_offer_repetition_test.js": {
+      "pass": 24,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7840,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz88a_1_ship_dispatch_test.js": {
+      "pass": 30,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 12964,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz88a_fleet_routes_test.js": {
+      "pass": 38,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 11183,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz88b_combat_feedback_test.js": {
+      "pass": 24,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7390,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz89a_memory_factions_test.js": {
+      "pass": 24,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5830,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz89b_daily_campaign_test.js": {
+      "pass": 11,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 105276,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz90rc_1_save_boundary_test.js": {
+      "pass": 19,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 8775,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz90rc_2_load_feedback_test.js": {
+      "pass": 14,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3033,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz90rc_3_load_transaction_test.js": {
+      "pass": 48,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 23984,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz90rc_release_candidate_test.js": {
+      "pass": 15,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7656,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz91a_special_presentation_test.js": {
+      "pass": 37,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 16880,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz91b_campaign_observer_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 99907,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz91b_faction_share_test.js": {
+      "pass": 8,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2235,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz91c_ai_candidates_test.js": {
+      "pass": 6,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2514,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz91c_pirate_combat_test.js": {
+      "pass": 21,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 6372,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz91d_1_fleet_names_native_canvas_test.js": {
+      "pass": 30,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3392,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz91d_territory_native_canvas_test.js": {
+      "pass": 39,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 4413,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ Historical source lock still detects changes to tap, recovery and fleet drawing — Expected values to be strictly equal:",
+      "errors": [
+        "✗ Historical source lock still detects changes to tap, recovery and fleet drawing — Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz91e_1_federation_policy_test.js": {
+      "pass": 31,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 21360,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz91e_federation_laws_test.js": {
+      "pass": 30,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 10401,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ Player proposal pays once and still requires explicit player vote — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "errors": [
+        "✗ Player proposal pays once and still requires explicit player vote — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz92a_war_contribution_test.js": {
+      "pass": 32,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 10514,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ Empire elimination closes episode without crediting purged fleets as combat kills — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "errors": [
+        "✗ Empire elimination closes episode without crediting purged fleets as combat kills — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "✗ Status quo closes real episode without distributing coalition land — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz92b_settlement_proposal_test.js": {
+      "pass": 33,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 14685,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz92b1_ship_lock_test.js": {
+      "pass": 19,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5791,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz92c_settlement_apply_test.js": {
+      "pass": 29,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 13777,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz92d_settlement_agenda_test.js": {
+      "pass": 14,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7396,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz93a_logistics_targets_test.js": {
+      "pass": 15,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5313,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz93a1_production_panels_test.js": {
+      "pass": 21,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 8694,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz93b_pending_shipments_test.js": {
+      "pass": 32,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 9482,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz93c_fleet_composition_test.js": {
+      "pass": 47,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 14428,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz93d_research_planner_test.js": {
+      "pass": 33,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 11529,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz93d_science_ui_test.js": {
+      "pass": 19,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 6830,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ preservation guard rejects edits to both original UI and new science CSS — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "errors": [
+        "✗ preservation guard rejects edits to both original UI and new science CSS — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz93d1_navy_campaign_test.js": {
+      "pass": 8,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 87355,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz93d1_navy_production_test.js": {
+      "pass": 17,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5449,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz93e_specialization_test.js": {
+      "pass": 34,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 9194,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz93e1_doctrine_test.js": {
+      "pass": 32,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 10764,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz94a_camera_test.js": {
+      "pass": 27,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 6895,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz94b_exploration_test.js": {
+      "pass": 37,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 10973,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz94c_camera_trade_test.js": {
+      "pass": 32,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7633,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz94d_mobile_diplomacy_war_test.js": {
+      "pass": 28,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 4670,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz94d1_war_visibility_test.js": {
+      "pass": 34,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7362,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz95a_strategic_ai_test.js": {
+      "pass": 51,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 9345,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz95b_federation_reform_test.js": {
+      "pass": 66,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 16164,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ admission quotes are pure and require the constitutional alliance rule — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "errors": [
+        "✗ admission quotes are pure and require the constitutional alliance rule — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "✗ one open agenda, insufficient influence and invalid motion do not mutate or consume RNG — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz95c_joint_campaign_test.js": {
+      "pass": 59,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 12474,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz95c1_diplomacy_test.js": {
+      "pass": 25,
+      "fail": 7,
+      "exit": 1,
+      "durationMs": 6071,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ askeri founding: live validator permits real paid founding and no automatic offense — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "errors": [
+        "✗ askeri founding: live validator permits real paid founding and no automatic offense — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "✗ askeri candidate exclusion and all founder blockers are visible — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:",
+        "✗ bilimsel founding: live validator permits real paid founding and no automatic offense — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "✗ bilimsel candidate exclusion and all founder blockers are visible — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:",
+        "✗ ticaret founding: live validator permits real paid founding and no automatic offense — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "✗ ticaret candidate exclusion and all founder blockers are visible — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:",
+        "✗ exact influence succeeds; failure then refreshed balance has no cached founder lock — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz95c1_logistics_test.js": {
+      "pass": 24,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 4953,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz95c1_storage_test.js": {
+      "pass": 15,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3067,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz95c1_ui_test.js": {
+      "pass": 28,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 5511,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ CSS preservation guard rejects modifications to new mobile rules as well as historical UI — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "errors": [
+        "✗ CSS preservation guard rejects modifications to new mobile rules as well as historical UI — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz95d_identity_test.js": {
+      "pass": 23,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5801,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz95d_map_test.js": {
+      "pass": 23,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 4523,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz95d_war_preview_test.js": {
+      "pass": 19,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3894,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz95e_construction_test.js": {
+      "pass": 21,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 4171,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz95e_inbox_test.js": {
+      "pass": 20,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 4196,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz95e_news_test.js": {
+      "pass": 19,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 4013,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ real war ledger edge and peace engine generate one readable event each — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "errors": [
+        "✗ real war ledger edge and peace engine generate one readable event each — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz95e_ui_save_test.js": {
+      "pass": 16,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 3102,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ reviewed mobile CSS is additive and rejects mutations — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "errors": [
+        "✗ reviewed mobile CSS is additive and rejects mutations — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz95e1_random_event_switch_test.js": {
+      "pass": 8,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 1853,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz95e2_regression_test.js": {
+      "pass": 8,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2419,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz95e3_layers_test.js": {
+      "pass": 10,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 1869,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz95e3_sensor_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 1828,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96a_cargo_test.js": {
+      "pass": 36,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 10678,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96a_integrity_test.js": {
+      "pass": 12,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2914,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96b_accounting_test.js": {
+      "pass": 9,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 1811,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96b_economy_test.js": {
+      "pass": 21,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 8681,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96c_diagnostics_test.js": {
+      "pass": 4,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5575,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96c_planning_test.js": {
+      "pass": 22,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 8093,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96c_trade_test.js": {
+      "pass": 10,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3840,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96c1_cache_test.js": {
+      "pass": 10,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3475,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96c1_navy_test.js": {
+      "pass": 12,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 4834,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96c1_war_test.js": {
+      "pass": 11,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3731,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96c2_rebuild_test.js": {
+      "pass": 23,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 7065,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ ledger and construction remain unchanged; cargo receipt memory is audited in 96F — AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+      "errors": [
+        "✗ ledger and construction remain unchanged; cargo receipt memory is audited in 96F — AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz96c3_ui_test.js": {
+      "pass": 24,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7533,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96d_audio_test.js": {
+      "pass": 6,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 398,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96d_origins_test.js": {
+      "pass": 15,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5365,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96d_portraits_native_canvas_test.js": {
+      "pass": 8,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2612,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96e_federation_test.js": {
+      "pass": 28,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 10566,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ admission rejects allies and preserves world — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "errors": [
+        "✗ admission rejects allies and preserves world — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz96e_origins_test.js": {
+      "pass": 27,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 21236,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96e1_actions_test.js": {
+      "pass": 17,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3075,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96e1_identity_test.js": {
+      "pass": 22,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 11225,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96e1_mechanics_test.js": {
+      "pass": 64,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 12712,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96f_map_panel_native_canvas_test.js": {
+      "pass": 17,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 4164,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ the existing report X hides only the completed battle, preserving results and fleets — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "errors": [
+        "✗ the existing report X hides only the completed battle, preserving results and fleets — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "✗ dismissed report persists after v8 load and a new battle obtains a fresh key — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz96f_memory_test.js": {
+      "pass": 21,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 4637,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96f_strategy_test.js": {
+      "pass": 29,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 11023,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96f1_budget_trade_test.js": {
+      "pass": 17,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5241,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96f3_demolition_test.js": {
+      "pass": 8,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 2967,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ actual day2370 AI queues safe demolition, actual completion keeps mineral production — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "errors": [
+        "✗ actual day2370 AI queues safe demolition, actual completion keeps mineral production — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz96f3_physiology_test.js": {
+      "pass": 17,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 4899,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96f3_purchase_test.js": {
+      "pass": 11,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2308,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96f4_colony_test.js": {
+      "pass": 12,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3011,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96f4_trade_test.js": {
+      "pass": 9,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2375,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96f5_robustness_test.js": {
+      "pass": 2,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 707,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96g_politics_test.js": {
+      "pass": 34,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 16620,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96g1_contract_test.js": {
+      "pass": 25,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 11990,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96g2_setup_test.js": {
+      "pass": 0,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 180069,
+      "signal": "SIGKILL",
+      "timeout": true,
+      "firstError": "SIGKILL",
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96gd1_federation_budget_test.js": {
+      "pass": 19,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 11869,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96gd2_war_memory_test.js": {
+      "pass": 18,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 20243,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96h0_building_safety_test.js": {
+      "pass": 9,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 6063,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ the reviewed compact layout stays pinned and rejects loss of counter spacing or touch size — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:",
+      "errors": [
+        "✗ the reviewed compact layout stays pinned and rejects loss of counter spacing or touch size — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+      ],
+      "inboxReference": false
+    },
+    "faz96h10_army_safety_test.js": {
+      "pass": 9,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 21703,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ invasion, combat and diplomacy rules keep their 96H.9 bytes — AssertionError [ERR_ASSERTION]: economy.js",
+      "errors": [
+        "✗ invasion, combat and diplomacy rules keep their 96H.9 bytes — AssertionError [ERR_ASSERTION]: economy.js",
+        "✗ only the reviewed 96H.10 army-safety blocks differ from 96H.9 ai.js — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz96h3_vassal_budget_test.js": {
+      "pass": 16,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 8921,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96h31_compact_construction_test.js": {
+      "pass": 13,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 13310,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ H3 simulation bytes are preserved except the separately tested H5 market guard AssertionError [ERR_ASSERTION]: ai.js",
+      "errors": [
+        "✗ H3 simulation bytes are preserved except the separately tested H5 market guard AssertionError [ERR_ASSERTION]: ai.js",
+        "✗ review guard rejects compact height and hit-shape regressions AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+      ],
+      "inboxReference": false
+    },
+    "faz96h5_doctrine_engine_test.js": {
+      "pass": 43,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 32852,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96h52_politics_test.js": {
+      "pass": 27,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 18960,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96h61_alliance_test.js": {
+      "pass": 13,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 85002,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "faz96h71_closed_joint_save_test.js": {
+      "pass": 8,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 10453,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ 96H.6.1 source rejects its own save after federation dissolution (bug reproduced) — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "errors": [
+        "✗ 96H.6.1 source rejects its own save after federation dissolution (bug reproduced) — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "✗ only the reviewed guard and 96H.8 campaign change differ from 96H.6.1 ai.js — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz96h8_campaign_cost_test.js": {
+      "pass": 10,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 35104,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ natural 24 months from seed11 month 40: actor3 keeps its navy instead of the 12-ship wartime disband — AssertionError [ERR_ASSERTION]: {\"dis\":[],\"ships\":28}",
+      "errors": [
+        "✗ natural 24 months from seed11 month 40: actor3 keeps its navy instead of the 12-ship wartime disband — AssertionError [ERR_ASSERTION]: {\"dis\":[],\"ships\":28}",
+        "✗ only the reviewed 96H.8 campaign blocks differ from 96H.7.1 ai.js — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "faz96h9_invasion_test.js": {
+      "pass": 9,
+      "fail": 2,
+      "exit": 1,
+      "durationMs": 27753,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ invasion, combat and diplomacy rules keep their 96H.8 bytes — AssertionError [ERR_ASSERTION]: economy.js",
+      "errors": [
+        "✗ invasion, combat and diplomacy rules keep their 96H.8 bytes — AssertionError [ERR_ASSERTION]: economy.js",
+        "✗ only the reviewed 96H.9 invasion blocks differ from 96H.8 ai.js — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+      ],
+      "inboxReference": false
+    },
+    "fed_ai_siyaset0_equivalence_test.js": {
+      "pass": 0,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 120,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "fed_ai_siyaset0_mp_test.js": {
+      "pass": 4,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3484,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "fed_ai_siyaset0_test.js": {
+      "pass": 15,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 10379,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "field_war_siege0_test.js": {
+      "pass": 20,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 55508,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_deal_sys0_equivalence_test.js": {
+      "pass": 0,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 107,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_deal_sys0_sp_test.js": {
+      "pass": 4,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2847,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_deal_sys0_test.js": {
+      "pass": 9,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7356,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_diplo5_ai_support_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3514,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_diplo5_lux_mp_test.js": {
+      "pass": 3,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5616,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_diplo5_lux_test.js": {
+      "pass": 10,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7865,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_diplo5_peacewith_test.js": {
+      "pass": 13,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 8411,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_diplo5_quick_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2820,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_diplo5_spynet_test.js": {
+      "pass": 10,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7195,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_emir_guvence0_test.js": {
+      "pass": 13,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 13201,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_field_fix0_test.js": {
+      "pass": 3,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2680,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_p0_desync1_test.js": {
+      "pass": 4,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 12737,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_p0_guard_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 8744,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_p0_sync_test.js": {
+      "pass": 6,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7417,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_pwa_surum0_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5654,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_sync_fed0_agenda_test.js": {
+      "pass": 6,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 9520,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_sync_fed0_peacewith_test.js": {
+      "pass": 6,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 10589,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_sync_fed0_resume_test.js": {
+      "pass": 1,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 1865,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_sync_fed1_defcall_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 9387,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_sync_fed1_equivalence_test.js": {
+      "pass": 0,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 142,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_techlux0_equivalence_test.js": {
+      "pass": 0,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 188,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_techlux0_intel_test.js": {
+      "pass": 3,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3413,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_techlux0_sp_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3940,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_techlux0_test.js": {
+      "pass": 11,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5744,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_waron0_equivalence_test.js": {
+      "pass": 0,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 200,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_waron0_sp_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3790,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_waron0_test.js": {
+      "pass": 9,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 9915,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp_waron1_deadline_test.js": {
+      "pass": 8,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7153,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp0_core_test.js": {
+      "pass": 11,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 24404,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp1_actor_vision_b_test.js": {
+      "pass": 2,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 94773,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp1_actor_vision_test.js": {
+      "pass": 2,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 123015,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp1_lobby_core_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 15414,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp1_relay_test.js": {
+      "pass": 14,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 6330,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp11_online_test.js": {
+      "pass": 9,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7097,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp2_core_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 26137,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp3_core_test.js": {
+      "pass": 11,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 44414,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp31_core_test.js": {
+      "pass": 15,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 30171,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp4_core_test.js": {
+      "pass": 14,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 38825,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp5_relay_security_test.js": {
+      "pass": 13,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5875,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp6_mirror_test.js": {
+      "pass": 7,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 26284,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ misafir sayfası (/mp/play): aynı index.html + <base href=\"/\"> + lobi/ayna betikleri; runtime baytları değişmez; CSP katı (yalnız index'in kendi satır içi betiği ve tam ekran işleyicisi özetle) — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+      "errors": [
+        "✗ misafir sayfası (/mp/play): aynı index.html + <base href=\"/\"> + lobi/ayna betikleri; runtime baytları değişmez; CSP katı (yalnız index'in kendi satır içi betiği ve tam ekran işleyicisi özetle) — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "+   \"      if(!check.ok||!/^application\\\\/json\\\\b/i.test(check.headers.get('content-type')||''))throw Error('version');\\n\" +",
+        "+   \"      if(!/^[0-9a-f]{64}$/.test(version.release))throw Error('release');\\n\" +"
+      ],
+      "inboxReference": false
+    },
+    "mp61_core_test.js": {
+      "pass": 9,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 19803,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp62_core_test.js": {
+      "pass": 13,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 23096,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp63_pause_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3089,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp63_polvas_test.js": {
+      "pass": 4,
+      "fail": 7,
+      "exit": 1,
+      "durationMs": 10476,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ C kuruluş (GERÇEK): B, iki bağımsız AI müttefikiyle (2, 4) motorun foundFederation'ıyla federasyon kurar; başkan B, oy rejimi seçilen; kontrol: gözlem kaydı yoksa motor kendi gerekçesiyle reddeder — AssertionError [ERR_ASSERTION]: control: engine condition, not an MP error",
+      "errors": [
+        "✗ C kuruluş (GERÇEK): B, iki bağımsız AI müttefikiyle (2, 4) motorun foundFederation'ıyla federasyon kurar; başkan B, oy rejimi seçilen; kontrol: gözlem kaydı yoksa motor kendi gerekçesiyle reddeder — AssertionError [ERR_ASSERTION]: control: engine condition, not an MP error",
+        "✗ C oylama: üye kabulünde uzak insan B'nin oyu OTOMATİK DEĞİL (AI üyeler kendi değerlendirmesiyle); B kendi oyunu verir; ikinci oy reddedilir; A daveti kendisi kabul eder — AssertionError [ERR_ASSERTION]:  {\"v\":1,\"type\":\"result\",\"seq\":1,\"cid\":\"m63pcB00001\",\"status\":\"rejected\",\"code\":\"rules:fed\",\"rev\":2,\"detail\":[\"Açık kuruluş daveti, ortak rızaları ve son onay gerekli\"]}",
+        "✗ C anayasa / oy rejimi: A önerir (karma); oylama kuralı federasyonun (≥%75) — B HAYIR derken 3/4 ile kabul; oybirliğine çevrilmez; rejim değişir — AssertionError [ERR_ASSERTION]: found {\"v\":1,\"type\":\"result\",\"seq\":1,\"cid\":\"m63pcB00001\",\"status\":\"rejected\",\"code\":\"rules:fed\",\"rev\":2,\"detail\":[\"Açık kuruluş daveti, ortak rızaları ve son onay gerekli\"]}",
+        "✗ C reform ve başkan seçimi: B tür reformu önerir (motor: 12 ay geçiş kaydı); A kendini başkanlığa önerir; insanlar kendi oyunu verir — AssertionError [ERR_ASSERTION]: found {\"v\":1,\"type\":\"result\",\"seq\":1,\"cid\":\"m63pcB00001\",\"status\":\"rejected\",\"code\":\"rules:fed\",\"rev\":2,\"detail\":[\"Açık kuruluş daveti, ortak rızaları ve son onay gerekli\"]}",
+        "✗ C ihraç: A, AI 4'ün ihracını önerir; hedef oy veremez; sonuç federasyonun kuralıyla; ihraç edilen üye çıkar — AssertionError [ERR_ASSERTION]: found {\"v\":1,\"type\":\"result\",\"seq\":1,\"cid\":\"m63pcB00001\",\"status\":\"rejected\",\"code\":\"rules:fed\",\"rev\":2,\"detail\":[\"Açık kuruluş daveti, ortak rızaları ve son onay gerekli\"]}",
+        "✗ C ortak savaş: üye 2 savaştayken B \"mevcut savaşa katılma\" önerir; kabul → hazır karar; uygulamayı yalnız önerici/başkan yapar (A reddedilir); B uygular → motor sonucu — AssertionError [ERR_ASSERTION]: found {\"v\":1,\"type\":\"result\",\"seq\":1,\"cid\":\"m63pcB00001\",\"status\":\"rejected\",\"code\":\"rules:fed\",\"rev\":2,\"detail\":[\"Açık kuruluş daveti, ortak rızaları ve son onay gerekli\"]}",
+        "✗ C acil hibe: yalnız başkan (B) kendi kaynağından; A reddedilir (motor gerekçesi); B'ye kendi bildirimi — AssertionError [ERR_ASSERTION]: found {\"v\":1,\"type\":\"result\",\"seq\":1,\"cid\":\"m63pcB00001\",\"status\":\"rejected\",\"code\":\"rules:fed\",\"rev\":2,\"detail\":[\"Açık kuruluş daveti, ortak rızaları ve son onay gerekli\"]}"
+      ],
+      "inboxReference": false
+    },
+    "mp63_settle_test.js": {
+      "pass": 9,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 16155,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp63_sq_test.js": {
+      "pass": 4,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 9401,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp64_market_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 6383,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp64_news_test.js": {
+      "pass": 4,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7138,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp64_ops_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7698,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp64_spy_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 12150,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp7_lobby_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7572,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp7_ws_frames_test.js": {
+      "pass": 6,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 373,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp71_bridge_test.js": {
+      "pass": 9,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 49531,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp72_gameplay_test.js": {
+      "pass": 12,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 38316,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp73_council_equiv_test.js": {
+      "pass": 1,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 164993,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp73_council_test.js": {
+      "pass": 14,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 49121,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp74_lobby_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5086,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp74_notice_test.js": {
+      "pass": 6,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 4514,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp75_war_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3500,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp84_notice_identity_test.js": {
+      "pass": 4,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 4345,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ gizlenen karar Save8 olay codecinde korunur fakat hidden taşınmaz; menü erişimi sürer — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:",
+      "errors": [
+        "✗ gizlenen karar Save8 olay codecinde korunur fakat hidden taşınmaz; menü erişimi sürer — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+      ],
+      "inboxReference": false
+    },
+    "mp86_nebula_cache_test.js": {
+      "pass": 3,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 8983,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp88_host_hash_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 16566,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "mp89_ui_integrity_test.js": {
+      "pass": 0,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 407,
+      "signal": null,
+      "timeout": false,
+      "firstError": "AssertionError [ERR_ASSERTION]: ui.js unreviewed REINF-ROUTE.0 source",
+      "errors": [
+        "AssertionError [ERR_ASSERTION]: ui.js unreviewed REINF-ROUTE.0 source"
+      ],
+      "inboxReference": false
+    },
+    "perf1_equivalence_test.js": {
+      "pass": 4,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5983,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "perf2_equivalence_test.js": {
+      "pass": 4,
+      "fail": 1,
+      "exit": 1,
+      "durationMs": 14589,
+      "signal": null,
+      "timeout": false,
+      "firstError": "✗ arındırılmış kaynaklar PERF.2 öncesi baytların kendisi: ai.js ve main.js MP.7.5 (96h10p4) özeti — AssertionError [ERR_ASSERTION]: ai.js unreviewed MP-DIPLO5 source",
+      "errors": [
+        "✗ arındırılmış kaynaklar PERF.2 öncesi baytların kendisi: ai.js ve main.js MP.7.5 (96h10p4) özeti — AssertionError [ERR_ASSERTION]: ai.js unreviewed MP-DIPLO5 source"
+      ],
+      "inboxReference": false
+    },
+    "reinf_route0_cards_test.js": {
+      "pass": 4,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2224,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "reinf_route0_equivalence_test.js": {
+      "pass": 0,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 96,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "reinf_route0_test.js": {
+      "pass": 12,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7045,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "saha_entegre0_claims_test.js": {
+      "pass": 8,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 5380,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "saha_entegre0_conquest_test.js": {
+      "pass": 11,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 17720,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "saha_entegre0_equivalence_test.js": {
+      "pass": 0,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 177,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "saha_entegre0_events_test.js": {
+      "pass": 8,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 20966,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "saha_entegre0_warhelp_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3498,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "saha_guvence1_equivalence_test.js": {
+      "pass": 0,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 155,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "saha_guvence1_events_test.js": {
+      "pass": 4,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 9114,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "saha_guvence1_fleet_test.js": {
+      "pass": 6,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 8212,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "saha_guvence1_war_test.js": {
+      "pass": 10,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 8320,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "savas_destek_ai0_equivalence_test.js": {
+      "pass": 0,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 274,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "savas_destek_ai0_mp_test.js": {
+      "pass": 5,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 4928,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "savas_destek_ai0_test.js": {
+      "pass": 21,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 17198,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "ticaret_ag1_test.js": {
+      "pass": 9,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7985,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "ticaret_ag2_mp_test.js": {
+      "pass": 2,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 2165,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "ticaret_ag2_tx_test.js": {
+      "pass": 6,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 15927,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "ticaret_gecerli_hat0_test.js": {
+      "pass": 13,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 7961,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "ticaret_son_eksikler0_equivalence_test.js": {
+      "pass": 0,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 143,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "ticaret_son_eksikler0_mp_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 6780,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "ticaret_son_eksikler0_test.js": {
+      "pass": 23,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 23461,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "ticaret_tamamlama0_transit_test.js": {
+      "pass": 12,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 10069,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "war_coalition0_mp_test.js": {
+      "pass": 3,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 3091,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    },
+    "war_coalition0_test.js": {
+      "pass": 7,
+      "fail": 0,
+      "exit": 0,
+      "durationMs": 9816,
+      "signal": null,
+      "timeout": false,
+      "firstError": null,
+      "errors": [],
+      "inboxReference": false
+    }
+  },
+  "inboxCandidate": {
+    "packages": 18,
+    "failInPackages": 209,
+    "messages": 27
+  },
+  "after": {
+    "suites": 256,
+    "pass": 6865,
+    "fail": 66
+  },
+  "changes": {
+    "beta_fed_found0_compat_test.js": {
+      "before": {
+        "pass": 1,
+        "fail": 5,
+        "exit": 1,
+        "durationMs": 3727,
+        "signal": null,
+        "timeout": false,
+        "firstError": "AssertionError [ERR_ASSERTION]: raw Save8 seed 11 month 1",
+        "errors": [
+          "AssertionError [ERR_ASSERTION]: raw Save8 seed 11 month 1",
+          "AssertionError [ERR_ASSERTION]: raw Save8 seed 23 month 1",
+          "AssertionError [ERR_ASSERTION]: raw Save8 seed 42 month 1",
+          "AssertionError [ERR_ASSERTION]: raw Save8 seed 99 month 1",
+          "AssertionError [ERR_ASSERTION]: raw Save8 seed 404 month 1"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 6,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 13965,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "beta_p01_mirror_test.js": {
+      "before": {
+        "pass": 2,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 720,
+        "signal": null,
+        "timeout": false,
+        "firstError": "FAIL misafir kamu savaş kimliği ve kendi gözlem özetini alır; host katkı ve filo verisi aktarılmaz AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:",
+        "errors": [
+          "FAIL misafir kamu savaş kimliği ve kendi gözlem özetini alır; host katkı ve filo verisi aktarılmaz AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 3,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 2937,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz83_2_brand_test.js": {
+      "before": {
+        "pass": 70,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 643,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "errors": [
+          "✗ map altyapısı sabit; hedef seçimi 93A referansında"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 71,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 2099,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz83_3_render_recovery_test.js": {
+      "before": {
+        "pass": 58,
+        "fail": 4,
+        "exit": 1,
+        "durationMs": 3295,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ serialize kurtarma öncesi/sonrası anlamsal olarak aynı — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ serialize kurtarma öncesi/sonrası anlamsal olarak aynı — HATA: DiplomaticInbox is not defined",
+          "✗ ralli korundu",
+          "✗ loopBuild korundu",
+          "✗ UI.tab hâlâ function"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 62,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 13103,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz83_4_redraw_leaders_test.js": {
+      "before": {
+        "pass": 69,
+        "fail": 10,
+        "exit": 1,
+        "durationMs": 5725,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ HAM serialize birebir eşit — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ HAM serialize birebir eşit — HATA: DiplomaticInbox is not defined",
+          "✗ leaders alanı öncesinde yoktu",
+          "✗ kurtarma leaders alanı OLUŞTURMADI",
+          "✗ ralli korundu",
+          "✗ loopBuild korundu",
+          "✗ gün/yıl/ay korundu",
+          "✗ filolar korundu — undefined filo",
+          "✗ 120 ay + harita + sekme + kayıt — 120ay:DiplomaticInbox is not defined",
+          "✗ UI.tab hâlâ function",
+          "✗ ralli/loopBuild korundu"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 79,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 51144,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz84a_intel_dedup_test.js": {
+      "before": {
+        "pass": 83,
+        "fail": 5,
+        "exit": 1,
+        "durationMs": 3448,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+          "✗ 120 ay + kaydet/yükle — 120ay:DiplomaticInbox is not defined",
+          "✗ UI.tab hâlâ function",
+          "✗ leaderPool saf kaldı",
+          "✗ situation pasif kaldı"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 88,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 55410,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz84b_vassal_state_dedup_test.js": {
+      "before": {
+        "pass": 125,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 3304,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 126,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 35250,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz84c_state_visibility_gate_test.js": {
+      "before": {
+        "pass": 121,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 3129,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 122,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 31360,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz85a_political_save_integrity_test.js": {
+      "before": {
+        "pass": 175,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 7762,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+          "✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 177,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 46086,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz85b_load_idempotency_test.js": {
+      "before": {
+        "pass": 134,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 20335,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+          "✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 136,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 57684,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz85c_crisis_save_continuity_test.js": {
+      "before": {
+        "pass": 90,
+        "fail": 54,
+        "exit": 1,
+        "durationMs": 8939,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+          "✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi",
+          "✗ kriz gerçekten aktifti (kurulum geçerli)",
+          "✗ 5 yükleme sonrası crisis nesnesi BİREBİR aynı — {}",
+          "✗ stage korundu (2) — undefined",
+          "✗ timer korundu (7) — undefined",
+          "✗ kills korundu (5) — undefined",
+          "✗ need korundu (120) — undefined",
+          "✗ contrib korundu",
+          "✗ warned korundu (true)",
+          "✗ over korundu (false)",
+          "✗ crisisActive() yükleme sonrası TRUE",
+          "✗ crisisId doğru crisisSide devletine bağlı — id=undefined undefined",
+          "✗ kriz filoları/gemileri/sistemleri/emirleri korundu — undefined filo · undefined gemi",
+          "✗ tek tik sayacı YALNIZ BİR kez ilerletti — undefined → undefined",
+          "✗ over=true korundu",
+          "✗ stage=3 korundu — undefined",
+          "✗ yükleme krizi YENİDEN BAŞLATMADI",
+          "✗ yeni kriz filosu DOĞMADI — undefined",
+          "✗ guardian korundu",
+          "✗ crisisScore korundu (380) — undefined",
+          "✗ crisisId hâlâ gerçek crisisSide devletine bağlı — id=undefined",
+          "✗ OYUN A aktif krizle yüklendi — id=undefined",
+          "✗ OYUN B: G.crisis A'dan SIZMADI",
+          "✗ OYUN B: crisisId A'dan SIZMADI (undefined)",
+          "✗ OYUN B: crisisActive false",
+          "✗ OYUN B: kriz devleti yok — undefined",
+          "✗ yeni oyunda eski crisisId SİLİNDİ",
+          "✗ yeni oyunda kriz devleti henüz yok — undefined",
+          "✗ yeni oyunda bekleyen kriz kuruldu (stage 0)",
+          "✗ ensureCrisisEmpire GERÇEK yeni devlet oluşturdu — undefined #undefined",
+          "✗ mevcut hiçbir devletin adı/rengi/etiği/savaşı kriz devletine dönmedi",
+          "✗ gerçek crisisSide adayından deterministik onarım yapıldı",
+          "✗ normal devlet kriz tarafına DÖNÜŞTÜRÜLMEDİ",
+          "✗ aralık dışı crisisId de onarıldı",
+          "✗ aday YOKKEN normal devlet ELE GEÇİRİLMEDİ — crisisId undefined",
+          "✗ taraf bulunamayan aktif kriz güvenle devre dışı bırakıldı",
+          "✗ v4 aktif kriz: crisisId GERÇEK crisisSide devletine bağlandı — id=undefined",
+          "✗ kriz filoları ÖKSÜZ kalmadı — undefined → undefined",
+          "✗ kriz aktif olarak sürdürüldü — stage=undefined",
+          "✗ kurtarılamayan alanlara dürüst varsayılan verildi",
+          "✗ göç DETERMİNİSTİK ve RNG sabit",
+          "✗ kurtarılamayan bilgi açıkça raporlandı",
+          "✗ crisisSide var + filo yok → ÇÖZÜLMÜŞ kabul edildi — over=undefined",
+          "✗ kriz YENİDEN BAŞLATILMADI (galaksi 2. kez cezalandırılmadı) — kriz filo=undefined",
+          "✗ crisisId yine de gerçek devlete bağlı (öksüz değil) — id=undefined",
+          "✗ göç DETERMİNİSTİK",
+          "✗ çözülmüş varsayımı açıkça raporlandı",
+          "✗ 85B: 6 yüklemede kalkan TAM 4 kaldı",
+          "✗ 85B: economyTick(false) hâlâ normal ilerliyor — undefined → undefined",
+          "✗ 85A: memAge/cncAge korundu — undefined/undefined",
+          "✗ 85A: Konsey + hazine korundu",
+          "✗ 85A: fedUid / sandbox / rebelAlliance korundu",
+          "✗ 85C: kriz aynı yüklemelerde de korundu"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 144,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 47087,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz85d_campaign_save_continuity_test.js": {
+      "before": {
+        "pass": 156,
+        "fail": 31,
+        "exit": 1,
+        "durationMs": 25254,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+          "✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi",
+          "✗ crisisId=0 (OYUNCU): sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #undefined",
+          "✗ crisisId=0 (OYUNCU): oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI",
+          "✗ crisisId=0 (OYUNCU): AI devletinin kimliği BOZULMADI",
+          "✗ crisisId=0 (OYUNCU): savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id undefined",
+          "✗ crisisId=normal AI: sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #undefined",
+          "✗ crisisId=normal AI: oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI",
+          "✗ crisisId=normal AI: AI devletinin kimliği BOZULMADI",
+          "✗ crisisId=normal AI: savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id undefined",
+          "✗ crisisId=aralık dışı: sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #undefined",
+          "✗ crisisId=aralık dışı: oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI",
+          "✗ crisisId=aralık dışı: AI devletinin kimliği BOZULMADI",
+          "✗ crisisId=aralık dışı: savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id undefined",
+          "✗ crisisId=null: sıradan devlet DÖNDÜRÜLMEDİ, gerçek kriz devleti üretildi — döndü #undefined",
+          "✗ crisisId=null: oyuncunun ad/renk/etik/crisisSide değeri BOZULMADI",
+          "✗ crisisId=null: AI devletinin kimliği BOZULMADI",
+          "✗ crisisId=null: savaş haritasında YABANCI anahtar değişmedi — değişen: [-] · yeni kriz id undefined",
+          "✗ crisisId=geçerli crisisSide: MEVCUT devlet aynen döndü — döndü #undefined",
+          "✗ geçerli kimlikte İKİNCİ kriz devleti üretilmedi",
+          "✗ yükleme KAYNAKLARI değiştirmedi",
+          "✗ yükleme İLİŞKİLERİ değiştirmedi",
+          "✗ yükleme FİLO/GEMİ sayısını değiştirmedi",
+          "✗ yükleme SİSTEM SAHİPLİĞİNİ değiştirmedi",
+          "✗ yükleme NÜFUSU değiştirmedi",
+          "✗ yükleme BİLDİRİM/EVENT üretmedi — undefined",
+          "✗ 85B: 6 yüklemede kalkan TAM 4 kaldı",
+          "✗ 85B: economyTick(false) hâlâ normal ilerliyor — undefined → undefined",
+          "✗ 85A: memAge/cncAge/fedUid/sandbox/Konsey korundu",
+          "✗ 85C: aktif kriz korundu ve doğru devlete bağlı",
+          "✗ 85D: kampanya durumu aynı yüklemelerde korundu"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 187,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 84191,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz85e_event_inbox_continuity_test.js": {
+      "before": {
+        "pass": 92,
+        "fail": 59,
+        "exit": 1,
+        "durationMs": 12407,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+          "✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi",
+          "✗ kind \"sqOffer\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"pact\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"submit\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"cncnew\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"cncvote\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"aideal\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"fedvote\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"chain\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"event\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"anomaly\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"peace\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"facdem\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"faccoup\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"criswarn\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"crisis\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"crisend\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"wardec\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ kind \"border\": codec var ve tüketici rotası çalışıyor — codec=undefined tüketici=YOK",
+          "✗ event yüklemeden sonra katalog nesnesine bağlı",
+          "✗ seçilen event fonksiyonu TAM BİR KEZ çalıştı — undefined çağrı",
+          "✗ anomaly ID + sistem ID üzerinden yeniden kuruldu",
+          "✗ seçilen anomaly seçeneği TAM BİR KEZ çalıştı — undefined çağrı",
+          "✗ üç FARKLI teklif ayrı ayrı kuyrukta (birebir aynısı tekrarlanmadı) — undefined teklif",
+          "✗ aynı devletten şartları farklı iki teklif AYRI kaldı",
+          "✗ İLK teklif açılabildi (eskiden \"geçerliliğini yitirdi\" diyordu)",
+          "✗ bir teklifi reddetmek DİĞERİNİ değiştirmedi",
+          "✗ ikinci teklif KENDİ şartlarıyla açıldı",
+          "✗ tekil UI.pendingOffer artık doğruluğun kaynağı değil",
+          "✗ sqOffer tıklanınca GERÇEK modal açıldı (eskiden hiçbir şey olmuyordu)",
+          "✗ modal teklifi yapan devleti gösteriyor",
+          "✗ modal statüko sonucunu ve donma uyarısını gösteriyor",
+          "✗ Kabul / Reddet / Daha sonra düğmeleri var",
+          "✗ kabul statusQuoPeace'i TAM BİR KEZ çağırdı — undefined",
+          "✗ çift dokunuş İKİNCİ barış üretmedi — ilk undefined → ikinci undefined",
+          "✗ savaş gerçekten bitti",
+          "✗ RET statusQuoPeace çağırmadı — undefined",
+          "✗ RET sahiplik veya kaynak değiştirmedi",
+          "✗ RET yeni ceza uydurmadı (ilişki değişmedi)",
+          "✗ RET sonrası savaş sürüyor",
+          "✗ mevcut AI cooldown davranışı korundu",
+          "✗ eskimiş sqOffer \"geçersiz\" ekranı gösterdi",
+          "✗ eskimiş teklif statusQuoPeace ÇAĞIRMADI — undefined",
+          "✗ açılınca bildirim kutudan çıktı",
+          "✗ DAHA SONRA bildirimi TAM BİR KOPYA olarak geri koydu — kopya=undefined toplam=undefined",
+          "✗ 10 ardışık yükleme inbox'ı ÇOĞALTMADI ve sırasını değiştirmedi",
+          "✗ inboxUid en büyük UID'den küçükse güvenle yükseltildi — 1 → undefined",
+          "✗ sonraki bildirimin UID'si mevcutlarla ÇAKIŞMIYOR — yeni uid=undefined",
+          "✗ seenChains kaydet/yükle sonrası korundu (zehri ezdi)",
+          "✗ başlamış zincir 300 denemede YENİDEN SEÇİLMEDİ",
+          "✗ setupGame seenChains'i temizledi",
+          "✗ setupGame inbox ve inboxUid'i temizledi",
+          "✗ setupGame _openNote / pendingOffer temizledi",
+          "✗ bildirim açılınca kutudan çıktı ve _openNote'a alındı",
+          "✗ serialize AÇIK bildirimi runtime state'i DEĞİŞTİRMEDEN yakaladı",
+          "✗ yüklemede açık bildirim inbox'a TEK KOPYA döndü — undefined",
+          "✗ yükleme bildirimi OTOMATİK AÇMADI",
+          "✗ ham minRaw modal HTML'i kayda GİRMEDİ"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 125,
+        "fail": 26,
+        "exit": 1,
+        "durationMs": 43201,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ kind \"sqOffer\": codec var ve tüketici rotası çalışıyor — codec=true tüketici=YOK",
+        "errors": [
+          "✗ kind \"sqOffer\": codec var ve tüketici rotası çalışıyor — codec=true tüketici=YOK",
+          "✗ kind \"pact\": codec var ve tüketici rotası çalışıyor — codec=true tüketici=YOK",
+          "✗ kind \"submit\": codec var ve tüketici rotası çalışıyor — codec=true tüketici=YOK",
+          "✗ kind \"cncvote\": codec var ve tüketici rotası çalışıyor — codec=true tüketici=YOK",
+          "✗ kind \"aideal\": codec var ve tüketici rotası çalışıyor — codec=true tüketici=YOK",
+          "✗ kind \"fedvote\": codec var ve tüketici rotası çalışıyor — codec=true tüketici=YOK",
+          "✗ kind \"peace\": codec var ve tüketici rotası çalışıyor — codec=true tüketici=YOK",
+          "✗ sqOffer tıklanınca GERÇEK modal açıldı (eskiden hiçbir şey olmuyordu)",
+          "✗ modal teklifi yapan devleti gösteriyor",
+          "✗ modal statüko sonucunu ve donma uyarısını gösteriyor",
+          "✗ Kabul / Reddet / Daha sonra düğmeleri var",
+          "✗ kabul statusQuoPeace'i TAM BİR KEZ çağırdı — undefined",
+          "✗ çift dokunuş İKİNCİ barış üretmedi — ilk undefined → ikinci undefined",
+          "✗ savaş gerçekten bitti",
+          "✗ RET statusQuoPeace çağırmadı — undefined",
+          "✗ RET sahiplik veya kaynak değiştirmedi",
+          "✗ RET yeni ceza uydurmadı (ilişki değişmedi)",
+          "✗ RET sonrası savaş sürüyor",
+          "✗ mevcut AI cooldown davranışı korundu",
+          "✗ eskimiş sqOffer \"geçersiz\" ekranı gösterdi",
+          "✗ eskimiş teklif statusQuoPeace ÇAĞIRMADI — undefined",
+          "✗ açılınca bildirim kutudan çıktı",
+          "✗ DAHA SONRA bildirimi TAM BİR KOPYA olarak geri koydu — kopya=undefined toplam=undefined",
+          "✗ bildirim açılınca kutudan çıktı ve _openNote'a alındı",
+          "✗ serialize AÇIK bildirimi runtime state'i DEĞİŞTİRMEDEN yakaladı",
+          "✗ yüklemede açık bildirim inbox'a TEK KOPYA döndü — 0"
+        ],
+        "inboxReference": false
+      }
+    },
+    "faz85f_spatial_simulation_continuity_test.js": {
+      "before": {
+        "pass": 166,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 28165,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+          "✗ map kaynak kilidi: 91C altyapısı + 93A hedef seçimi"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 168,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 96504,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz86a_intel_command_center_test.js": {
+      "before": {
+        "pass": 125,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 5642,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+          "✗ DOSYALAR görünümünde fail ADI sızmıyor"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 126,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 29930,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ DOSYALAR görünümünde fail ADI sızmıyor",
+        "errors": [
+          "✗ DOSYALAR görünümünde fail ADI sızmıyor"
+        ],
+        "inboxReference": false
+      }
+    },
+    "faz86b_deal_engine_test.js": {
+      "before": {
+        "pass": 121,
+        "fail": 22,
+        "exit": 1,
+        "durationMs": 7250,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+          "✗ süresi dolmamış teklif açılabiliyor — undefined ay kaldı",
+          "✗ süresi DOLAN teklif uygulanmıyor ve nedeni söyleniyor",
+          "✗ süresi dolan teklif kaynak değiştirmedi",
+          "✗ born var expires yok → deterministik born+540 göçü",
+          "✗ ikisi de yoksa süresiz sayılıyor (geriye uyum)",
+          "✗ aiOffer teklife born + expires damgası ekledi",
+          "✗ yükleme oyun zamanını ilerletmedi",
+          "✗ teklif ekranı YÖN metni gösteriyor",
+          "✗ teklif ekranı kalan süre ve imzalama maliyetini gösteriyor",
+          "✗ karşı teklif AYRI kartta; orijinal teklif korundu",
+          "✗ oyuncunun düzenleme listesi ayrı nesne",
+          "✗ \"Düzenlemeye dön\" orijinal kartı koruyor",
+          "✗ reddetmek kaynak ve Etki değiştirmedi",
+          "✗ ret sonrası karşı teklif kartı temizlendi",
+          "✗ 200 normalize/validate/quote çağrısı kaynakları değiştirmedi",
+          "✗ 200 çağrı ilişki/antlaşma/log değiştirmedi",
+          "✗ 200 çağrı RNG tüketmedi",
+          "✗ normalizeDeal GİRİŞ nesnesini değiştirmedi",
+          "✗ executeDeal dış/bozuk çağrılarda guard'ları uyguladı — ,,,",
+          "✗ bozuk çağrılar kaynak değiştirmedi",
+          "✗ 240 aylık simülasyon hatasız — DiplomaticInbox is not defined"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 129,
+        "fail": 14,
+        "exit": 1,
+        "durationMs": 59410,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ teklif ekranı YÖN metni gösteriyor",
+        "errors": [
+          "✗ teklif ekranı YÖN metni gösteriyor",
+          "✗ teklif ekranı kalan süre ve imzalama maliyetini gösteriyor",
+          "✗ karşı teklif AYRI kartta; orijinal teklif korundu",
+          "✗ oyuncunun düzenleme listesi ayrı nesne",
+          "✗ \"Düzenlemeye dön\" orijinal kartı koruyor",
+          "✗ reddetmek kaynak ve Etki değiştirmedi",
+          "✗ ret sonrası karşı teklif kartı temizlendi",
+          "✗ 200 normalize/validate/quote çağrısı kaynakları değiştirmedi",
+          "✗ 200 çağrı ilişki/antlaşma/log değiştirmedi",
+          "✗ 200 çağrı RNG tüketmedi",
+          "✗ normalizeDeal GİRİŞ nesnesini değiştirmedi",
+          "✗ executeDeal dış/bozuk çağrılarda guard'ları uyguladı — ,,,",
+          "✗ bozuk çağrılar kaynak değiştirmedi",
+          "✗ inbox 6 sınırında — 12"
+        ],
+        "inboxReference": false
+      }
+    },
+    "faz86c_1_quote_effective_plan_test.js": {
+      "before": {
+        "pass": 101,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 4095,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 102,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 35681,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz86c_2_transaction_test.js": {
+      "before": {
+        "pass": 110,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 6204,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined",
+        "errors": [
+          "✗ 200 ayda situation tetiklenmedi — HATA: DiplomaticInbox is not defined"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 111,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 44280,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz86c_3_ai_negotiation_test.js": {
+      "before": {
+        "pass": 86,
+        "fail": 4,
+        "exit": 1,
+        "durationMs": 6481,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "errors": [
+          "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+          "✗ seed 11: 360 ay HATASIZ — DiplomaticInbox is not defined",
+          "✗ seed 99: 360 ay HATASIZ — DiplomaticInbox is not defined",
+          "✗ seed 404: 360 ay HATASIZ — DiplomaticInbox is not defined"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 89,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 151860,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ tek transaction makul sürede (< 20 ms) — 28.59 ms",
+        "errors": [
+          "✗ tek transaction makul sürede (< 20 ms) — 28.59 ms"
+        ],
+        "inboxReference": false
+      }
+    },
+    "faz86c_4_reciprocal_offers_test.js": {
+      "before": {
+        "pass": 93,
+        "fail": 5,
+        "exit": 1,
+        "durationMs": 5542,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "errors": [
+          "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+          "✗ seed 11: 360 ay HATASIZ — DiplomaticInbox is not defined",
+          "✗ seed 99: 360 ay HATASIZ — DiplomaticInbox is not defined",
+          "✗ seed 404: 360 ay HATASIZ — DiplomaticInbox is not defined",
+          "✗ 3 seed toplamında GERÇEK karşı teklif üretildi"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 98,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 160898,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz86c_4h_map_input_test.js": {
+      "before": {
+        "pass": 81,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 3349,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "errors": [
+          "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+          "✗ 93D bilim CSS ve değişmeyen 93C HTML"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 83,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 6953,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz86c_4h_r1_exact_regression_test.js": {
+      "before": {
+        "pass": 110,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 3369,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "errors": [
+          "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+          "✗ 93D bilim CSS ve değişmeyen 93C HTML",
+          "✓ ReferenceError YOK — üretim yolu hatasız — ok"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 112,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 8895,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz86c_4h_r2_surface_camera_layers_test.js": {
+      "before": {
+        "pass": 83,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 6141,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "errors": [
+          "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+          "✗ 93D bilim CSS ve değişmeyen 93C HTML"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 85,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 14699,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz86c_4h_r3_surface_lifecycle_test.js": {
+      "before": {
+        "pass": 95,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 4248,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "errors": [
+          "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+          "✗ 93D bilim CSS ve değişmeyen 93C HTML"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 97,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 10121,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz86c_4h_r4_diagnosis_test.js": {
+      "before": {
+        "pass": 91,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 3425,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "errors": [
+          "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+          "✗ 93D bilim CSS ve değişmeyen 93C HTML"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 93,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 9022,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz86c_4h_r4_targeted_diag_test.js": {
+      "before": {
+        "pass": 93,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 3679,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+        "errors": [
+          "✗ map altyapısı sabit; hedef seçimi 93A referansında",
+          "✗ 93D bilim CSS ve değişmeyen 93C HTML"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 95,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 8219,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz86c_6_transaction_acceptance_test.js": {
+      "before": {
+        "pass": 528,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 24837,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ Colonized system, empire purge and fleet removal are all reached, then rolled back: G.fleetJournal.value changed",
+        "errors": [
+          "✗ Colonized system, empire purge and fleet removal are all reached, then rolled back: G.fleetJournal.value changed"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 530,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 70190,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz86c_strict_deal_ai_test.js": {
+      "before": {
+        "pass": 144,
+        "fail": 3,
+        "exit": 1,
+        "durationMs": 5030,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ seed 11: 360 ay HATASIZ — DiplomaticInbox is not defined",
+        "errors": [
+          "✗ seed 11: 360 ay HATASIZ — DiplomaticInbox is not defined",
+          "✗ seed 99: 360 ay HATASIZ — DiplomaticInbox is not defined",
+          "✗ seed 404: 360 ay HATASIZ — DiplomaticInbox is not defined"
+        ],
+        "inboxReference": true
+      },
+      "after": {
+        "pass": 147,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 123143,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz91d_territory_native_canvas_test.js": {
+      "before": {
+        "pass": 39,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 4413,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ Historical source lock still detects changes to tap, recovery and fleet drawing — Expected values to be strictly equal:",
+        "errors": [
+          "✗ Historical source lock still detects changes to tap, recovery and fleet drawing — Expected values to be strictly equal:"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 40,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 8493,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz91e_federation_laws_test.js": {
+      "before": {
+        "pass": 30,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 10401,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ Player proposal pays once and still requires explicit player vote — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "errors": [
+          "✗ Player proposal pays once and still requires explicit player vote — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 31,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 16789,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz92a_war_contribution_test.js": {
+      "before": {
+        "pass": 32,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 10514,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ Empire elimination closes episode without crediting purged fleets as combat kills — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "errors": [
+          "✗ Empire elimination closes episode without crediting purged fleets as combat kills — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+          "✗ Status quo closes real episode without distributing coalition land — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 34,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 20803,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz93d_science_ui_test.js": {
+      "before": {
+        "pass": 19,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 6830,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ preservation guard rejects edits to both original UI and new science CSS — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "errors": [
+          "✗ preservation guard rejects edits to both original UI and new science CSS — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 20,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 5420,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz95b_federation_reform_test.js": {
+      "before": {
+        "pass": 66,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 16164,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ admission quotes are pure and require the constitutional alliance rule — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "errors": [
+          "✗ admission quotes are pure and require the constitutional alliance rule — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+          "✗ one open agenda, insufficient influence and invalid motion do not mutate or consume RNG — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 68,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 23001,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz95c1_ui_test.js": {
+      "before": {
+        "pass": 28,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 5511,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ CSS preservation guard rejects modifications to new mobile rules as well as historical UI — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "errors": [
+          "✗ CSS preservation guard rejects modifications to new mobile rules as well as historical UI — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 29,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 7923,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz95e_ui_save_test.js": {
+      "before": {
+        "pass": 16,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 3102,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ reviewed mobile CSS is additive and rejects mutations — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "errors": [
+          "✗ reviewed mobile CSS is additive and rejects mutations — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 17,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 5249,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz96f_map_panel_native_canvas_test.js": {
+      "before": {
+        "pass": 17,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 4164,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ the existing report X hides only the completed battle, preserving results and fleets — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "errors": [
+          "✗ the existing report X hides only the completed battle, preserving results and fleets — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+          "✗ dismissed report persists after v8 load and a new battle obtains a fresh key — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 19,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 7896,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz96g2_setup_test.js": {
+      "before": {
+        "pass": 0,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 180069,
+        "signal": "SIGKILL",
+        "timeout": true,
+        "firstError": "SIGKILL",
+        "errors": [],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 12,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 62786,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz96h0_building_safety_test.js": {
+      "before": {
+        "pass": 9,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 6063,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ the reviewed compact layout stays pinned and rejects loss of counter spacing or touch size — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:",
+        "errors": [
+          "✗ the reviewed compact layout stays pinned and rejects loss of counter spacing or touch size — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 10,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 2966,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "faz96h31_compact_construction_test.js": {
+      "before": {
+        "pass": 13,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 13310,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ H3 simulation bytes are preserved except the separately tested H5 market guard AssertionError [ERR_ASSERTION]: ai.js",
+        "errors": [
+          "✗ H3 simulation bytes are preserved except the separately tested H5 market guard AssertionError [ERR_ASSERTION]: ai.js",
+          "✗ review guard rejects compact height and hit-shape regressions AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 14,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 7528,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ H3 simulation bytes are preserved except the separately tested H5 market guard AssertionError [ERR_ASSERTION]: ai.js",
+        "errors": [
+          "✗ H3 simulation bytes are preserved except the separately tested H5 market guard AssertionError [ERR_ASSERTION]: ai.js"
+        ],
+        "inboxReference": false
+      }
+    },
+    "faz96h71_closed_joint_save_test.js": {
+      "before": {
+        "pass": 8,
+        "fail": 2,
+        "exit": 1,
+        "durationMs": 10453,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ 96H.6.1 source rejects its own save after federation dissolution (bug reproduced) — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "errors": [
+          "✗ 96H.6.1 source rejects its own save after federation dissolution (bug reproduced) — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+          "✗ only the reviewed guard and 96H.8 campaign change differ from 96H.6.1 ai.js — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 10,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 6493,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "mp11_online_test.js": {
+      "before": {
+        "pass": 9,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 7097,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 6,
+        "fail": 3,
+        "exit": 1,
+        "durationMs": 2367,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ smoke tool passes against direct TLS (wss) with a certificate — AssertionError [ERR_ASSERTION]: PASS sağlık uç noktası /healthz",
+        "errors": [
+          "✗ smoke tool passes against direct TLS (wss) with a certificate — AssertionError [ERR_ASSERTION]: PASS sağlık uç noktası /healthz",
+          "✗ smoke tool passes through a TLS-terminating reverse proxy (MP1_TRUST_PROXY, X-Forwarded-*), including http→https on the relay port — AssertionError [ERR_ASSERTION]: PASS sağlık uç noktası /healthz",
+          "✗ Dockerfile copies a complete, secret-free file set: the relay runs from only those files and passes the smoke test — AssertionError [ERR_ASSERTION]: PASS sağlık uç noktası /healthz"
+        ],
+        "inboxReference": false
+      }
+    },
+    "mp1_relay_test.js": {
+      "before": {
+        "pass": 14,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 6330,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 13,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 3679,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ static: injected game page, exact runtime bytes, join page CSP, allowlist only, security headers, 405, stats hidden unless dev — AssertionError [ERR_ASSERTION]: diplomacy.js",
+        "errors": [
+          "✗ static: injected game page, exact runtime bytes, join page CSP, allowlist only, security headers, 405, stats hidden unless dev — AssertionError [ERR_ASSERTION]: diplomacy.js"
+        ],
+        "inboxReference": false
+      }
+    },
+    "mp63_polvas_test.js": {
+      "before": {
+        "pass": 4,
+        "fail": 7,
+        "exit": 1,
+        "durationMs": 10476,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ C kuruluş (GERÇEK): B, iki bağımsız AI müttefikiyle (2, 4) motorun foundFederation'ıyla federasyon kurar; başkan B, oy rejimi seçilen; kontrol: gözlem kaydı yoksa motor kendi gerekçesiyle reddeder — AssertionError [ERR_ASSERTION]: control: engine condition, not an MP error",
+        "errors": [
+          "✗ C kuruluş (GERÇEK): B, iki bağımsız AI müttefikiyle (2, 4) motorun foundFederation'ıyla federasyon kurar; başkan B, oy rejimi seçilen; kontrol: gözlem kaydı yoksa motor kendi gerekçesiyle reddeder — AssertionError [ERR_ASSERTION]: control: engine condition, not an MP error",
+          "✗ C oylama: üye kabulünde uzak insan B'nin oyu OTOMATİK DEĞİL (AI üyeler kendi değerlendirmesiyle); B kendi oyunu verir; ikinci oy reddedilir; A daveti kendisi kabul eder — AssertionError [ERR_ASSERTION]:  {\"v\":1,\"type\":\"result\",\"seq\":1,\"cid\":\"m63pcB00001\",\"status\":\"rejected\",\"code\":\"rules:fed\",\"rev\":2,\"detail\":[\"Açık kuruluş daveti, ortak rızaları ve son onay gerekli\"]}",
+          "✗ C anayasa / oy rejimi: A önerir (karma); oylama kuralı federasyonun (≥%75) — B HAYIR derken 3/4 ile kabul; oybirliğine çevrilmez; rejim değişir — AssertionError [ERR_ASSERTION]: found {\"v\":1,\"type\":\"result\",\"seq\":1,\"cid\":\"m63pcB00001\",\"status\":\"rejected\",\"code\":\"rules:fed\",\"rev\":2,\"detail\":[\"Açık kuruluş daveti, ortak rızaları ve son onay gerekli\"]}",
+          "✗ C reform ve başkan seçimi: B tür reformu önerir (motor: 12 ay geçiş kaydı); A kendini başkanlığa önerir; insanlar kendi oyunu verir — AssertionError [ERR_ASSERTION]: found {\"v\":1,\"type\":\"result\",\"seq\":1,\"cid\":\"m63pcB00001\",\"status\":\"rejected\",\"code\":\"rules:fed\",\"rev\":2,\"detail\":[\"Açık kuruluş daveti, ortak rızaları ve son onay gerekli\"]}",
+          "✗ C ihraç: A, AI 4'ün ihracını önerir; hedef oy veremez; sonuç federasyonun kuralıyla; ihraç edilen üye çıkar — AssertionError [ERR_ASSERTION]: found {\"v\":1,\"type\":\"result\",\"seq\":1,\"cid\":\"m63pcB00001\",\"status\":\"rejected\",\"code\":\"rules:fed\",\"rev\":2,\"detail\":[\"Açık kuruluş daveti, ortak rızaları ve son onay gerekli\"]}",
+          "✗ C ortak savaş: üye 2 savaştayken B \"mevcut savaşa katılma\" önerir; kabul → hazır karar; uygulamayı yalnız önerici/başkan yapar (A reddedilir); B uygular → motor sonucu — AssertionError [ERR_ASSERTION]: found {\"v\":1,\"type\":\"result\",\"seq\":1,\"cid\":\"m63pcB00001\",\"status\":\"rejected\",\"code\":\"rules:fed\",\"rev\":2,\"detail\":[\"Açık kuruluş daveti, ortak rızaları ve son onay gerekli\"]}",
+          "✗ C acil hibe: yalnız başkan (B) kendi kaynağından; A reddedilir (motor gerekçesi); B'ye kendi bildirimi — AssertionError [ERR_ASSERTION]: found {\"v\":1,\"type\":\"result\",\"seq\":1,\"cid\":\"m63pcB00001\",\"status\":\"rejected\",\"code\":\"rules:fed\",\"rev\":2,\"detail\":[\"Açık kuruluş daveti, ortak rızaları ve son onay gerekli\"]}"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 11,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 5363,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "mp6_mirror_test.js": {
+      "before": {
+        "pass": 7,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 26284,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ misafir sayfası (/mp/play): aynı index.html + <base href=\"/\"> + lobi/ayna betikleri; runtime baytları değişmez; CSP katı (yalnız index'in kendi satır içi betiği ve tam ekran işleyicisi özetle) — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+        "errors": [
+          "✗ misafir sayfası (/mp/play): aynı index.html + <base href=\"/\"> + lobi/ayna betikleri; runtime baytları değişmez; CSP katı (yalnız index'in kendi satır içi betiği ve tam ekran işleyicisi özetle) — AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+          "+   \"      if(!check.ok||!/^application\\\\/json\\\\b/i.test(check.headers.get('content-type')||''))throw Error('version');\\n\" +",
+          "+   \"      if(!/^[0-9a-f]{64}$/.test(version.release))throw Error('release');\\n\" +"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 8,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 9748,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "mp84_notice_identity_test.js": {
+      "before": {
+        "pass": 4,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 4345,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ gizlenen karar Save8 olay codecinde korunur fakat hidden taşınmaz; menü erişimi sürer — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:",
+        "errors": [
+          "✗ gizlenen karar Save8 olay codecinde korunur fakat hidden taşınmaz; menü erişimi sürer — AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 5,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 2348,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "mp89_ui_integrity_test.js": {
+      "before": {
+        "pass": 0,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 407,
+        "signal": null,
+        "timeout": false,
+        "firstError": "AssertionError [ERR_ASSERTION]: ui.js unreviewed REINF-ROUTE.0 source",
+        "errors": [
+          "AssertionError [ERR_ASSERTION]: ui.js unreviewed REINF-ROUTE.0 source"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 1,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 398,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    },
+    "perf2_equivalence_test.js": {
+      "before": {
+        "pass": 4,
+        "fail": 1,
+        "exit": 1,
+        "durationMs": 14589,
+        "signal": null,
+        "timeout": false,
+        "firstError": "✗ arındırılmış kaynaklar PERF.2 öncesi baytların kendisi: ai.js ve main.js MP.7.5 (96h10p4) özeti — AssertionError [ERR_ASSERTION]: ai.js unreviewed MP-DIPLO5 source",
+        "errors": [
+          "✗ arındırılmış kaynaklar PERF.2 öncesi baytların kendisi: ai.js ve main.js MP.7.5 (96h10p4) özeti — AssertionError [ERR_ASSERTION]: ai.js unreviewed MP-DIPLO5 source"
+        ],
+        "inboxReference": false
+      },
+      "after": {
+        "pass": 5,
+        "fail": 0,
+        "exit": 0,
+        "durationMs": 4428,
+        "signal": null,
+        "timeout": false,
+        "firstError": null,
+        "errors": [],
+        "inboxReference": false
+      }
+    }
+  }
+}

@@ -4,11 +4,12 @@ const assert=require('assert/strict'),fs=require('fs'),path=require('path'),cryp
 const {world,harness}=require('./helpers/95e-fixture');const {test,end}=harness();
 const J=(h,s)=>JSON.parse(h.run('JSON.stringify('+s+')'));
 const note=`G.inbox=[];G.inboxUid=0;UI.notify({kind:'event',data:EVENTS[0],key:'mp84:event',title:'Denetim',pause:true});var n=G.inbox[0];`;
-test('gizlenen karar Save8 olay codecinde korunur fakat hidden taşınmaz; menü erişimi sürer',()=>{
+test('gizlenen karar Save8 ile gizli kalır ve menüden hâlâ açılabilir',()=>{
  const h=world();h.run(note);h.run('UI.noteSwipe(n.uid)');assert.equal(J(h,'n.hidden'),true);
  assert(J(h,'UI.topStatusItems().items.some(i=>i.x===String(n.uid))'));
- const events=J(h,'serializeEventsWorld()');assert.equal(events.inbox.length,1);assert(!Object.hasOwn(events.inbox[0],'hidden'));
- h.sb.__save=h.run('serialize()');assert(h.run('deserialize(__save)'));assert.equal(J(h,'!!G.inbox[0].hidden'),false);
+ const events=J(h,'serializeEventsWorld()');assert.equal(events.inbox.length,1);assert.equal(events.inbox[0].hidden,true);
+ h.sb.__save=h.run('serialize()');assert(h.run('deserialize(__save)'));assert.equal(J(h,'G.inbox[0].hidden'),true);
+ assert.equal(J(h,'G.inbox[0].uid'),events.inbox[0].uid);
  assert(J(h,'UI.topStatusItems().items.some(i=>i.x===String(G.inbox[0].uid))'));
 });
 test('farklı kayıtlar aynı seed/uid/key/born/payload taşıyabilir; olay fingerprinti kayıt kimliği değildir',()=>{

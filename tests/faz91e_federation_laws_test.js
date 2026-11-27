@@ -29,7 +29,10 @@ check('Player proposal pays once and still requires explicit player vote',()=>{
   const h=fresh();assert.equal(open(h).pending,true);assert.equal(h.run('G.p.res.etk'),890);
   assert.equal(h.run('F.vote.yes.includes(0)||F.vote.no.includes(0)'),false);
   assert.equal(h.run('!!F.laws.bilimAgi'),false);
-  const before=h.run('serialize()'),rng=h.run('RND_STATE');assert.equal(open(h,'serbest').ok,false);
+  const first=h.run('fedVoteToken(F.vote)'),rng=h.run('RND_STATE');
+  assert.equal(open(h,'serbest').queued,true);assert.equal(h.run('F.agenda.items.length'),1);
+  assert.equal(h.run('fedVoteToken(F.vote)'),first);assert.equal(h.run('G.p.res.etk'),890);
+  const before=h.run('serialize()');assert.equal(open(h,'serbest').ok,false);
   assert.equal(h.run('startFedVote(F).ok'),false);assert.equal(h.run('serialize()'),before);assert.equal(h.run('RND_STATE'),rng);
 });
 check('AI proposal also waits for real player consent',()=>{

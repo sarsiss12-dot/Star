@@ -1,0 +1,18 @@
+{
+  "p57": {
+    "key": "[0,1,155.67336000000412,155.67336000000412]",
+    "hidden": false,
+    "retained": false,
+    "unchangedResult": true,
+    "unchangedFleets": true,
+    "unchangedRng": true
+  },
+  "fixed": {
+    "key": "[0,1,155.67336000000412,155.67336000000412]",
+    "hidden": true,
+    "retained": true,
+    "unchangedResult": true,
+    "unchangedFleets": true,
+    "unchangedRng": true
+  }
+}

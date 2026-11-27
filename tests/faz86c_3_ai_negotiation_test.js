@@ -2,13 +2,14 @@
 /* ═══════════════════════════════════════════════════════════════════
    STARS — FAZ 86C.3: AI ↔ AI KARŞILIKLI MÜZAKERE
    normalizeDeal · dealValidity · dealQuote · executeDeal · teklif ömrü
-   Çalıştırma: node tests/faz86b_deal_engine_test.js
+   Çalıştırma: node tests/faz86c_3_ai_negotiation_test.js
    ═══════════════════════════════════════════════════════════════════ */
 'use strict';
+const {loadBrowserScripts} = require('./helpers/browser-scripts');
 const release5=require('./helpers/release-contract');
 const fs=require('fs'), path=require('path'), cp=require('child_process'),
       vm=require('vm'), crypto=require('crypto');
-const KOK=path.resolve(__dirname,'..');
+const KOK=process.env.STARS_SOURCE_ROOT||path.resolve(__dirname,'..');
 let gecen=0, kalan=0; const basarisiz=[];
 function ok(ad,sart,detay){
   if(sart){gecen++;console.log('  ✓ '+ad+(detay?' — '+detay:''));}
@@ -74,9 +75,7 @@ function harness(){
   sb.navigator={userAgent:'node',standalone:false};
   sb.globalThis=sb;
   vm.createContext(sb);
-  for(const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                  'economy.js','commerce.js','ui.js','commerce-ui.js','economic-ledger.js','economy-ui.js','audio.js'])
-    vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'),sb,{filename:f});
+  loadBrowserScripts(KOK, (source, options) => vm.runInContext(source, sb, options));
   const R=c=>{try{return vm.runInContext('(function(){'+c+'})()',sb);}
               catch(e){return 'HATA: '+e.message;}};
   return {sb,R};

@@ -1,5 +1,7 @@
 # Son Codex raporu
 
+[CODEX-TEST-FAIL-KÖK.0 · p57 test envanteri, üç oyun kusuru ve karşılaştırmalı kabul](reports/codex/CODEX-TEST-FAIL-KOK0-SONUC.md)
+
 [CODEX-P56-KABUL.0 · p57 / MP.8.9b56 yayın adayı, relay kapanış yarışı, I100/I3 ve F5, Save8/RNG ve performans](reports/codex/CODEX-P56-KABUL0-SONUC.md)
 
 Önceki: [FED-AI-SİYASET.0 (Claude, p56 / MP.8.9b55 yayın adayı) · federasyonda üye sesi (reform önergesi) ve anayasal çıkış, tek katılım kapısı, görünür yuva/kalıntı ödül avı; en büyük blok −0,074, çalkantı yok, tam Node yeni FAIL yok](reports/claude/FED-AI-SIYASET0-SONUC.md)

@@ -1,0 +1,839 @@
+{
+  "ulu-11-m120.save:steady": {
+    "input": "3a3a1090ec2b88c79040adaba563db2e2c407ece41e57afd130ac4d6f8f0ada0",
+    "profiles": [
+      {
+        "ms": 529.4422870000126,
+        "cpuMs": 585.6039999999998,
+        "rngBefore": 2061039509,
+        "rngAfter": -944196750,
+        "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797",
+        "totals": {
+          "jointTick": {
+            "n": 60,
+            "ms": 28.360935000149766,
+            "cpuMs": 0.36900000000196087
+          },
+          "aiFedMismatch": {
+            "n": 6,
+            "ms": 0.18405799998436123,
+            "cpuMs": 0.18500000000040018
+          },
+          "aiFedStayReview": {
+            "n": 5,
+            "ms": 0.21210000003338791,
+            "cpuMs": 0.20199999999931606
+          },
+          "aiFedMemberReform": {
+            "n": 3,
+            "ms": 0.09382300000288524,
+            "cpuMs": 0.09599999999954889
+          },
+          "dealTxBegin": {
+            "n": 1,
+            "ms": 69.22640899999533,
+            "cpuMs": 48.47700000000032
+          }
+        },
+        "reforms": []
+      },
+      {
+        "ms": 436.7816429999948,
+        "cpuMs": 474.02900000000045,
+        "rngBefore": 2061039509,
+        "rngAfter": -944196750,
+        "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797",
+        "totals": {
+          "jointTick": {
+            "n": 60,
+            "ms": 16.998792999860598,
+            "cpuMs": 2.2830000000008113
+          },
+          "aiFedMismatch": {
+            "n": 6,
+            "ms": 0.12507899999036454,
+            "cpuMs": 0.1269999999999527
+          },
+          "aiFedStayReview": {
+            "n": 5,
+            "ms": 0.12301499999011867,
+            "cpuMs": 0.11600000000089494
+          },
+          "aiFedMemberReform": {
+            "n": 3,
+            "ms": 0.07477300000027753,
+            "cpuMs": 0.07599999999956708
+          },
+          "dealTxBegin": {
+            "n": 1,
+            "ms": 69.70272000000114,
+            "cpuMs": 48.9369999999999
+          }
+        },
+        "reforms": []
+      }
+    ],
+    "ab": {
+      "warmups": 12,
+      "arms": [
+        [
+          {
+            "ms": 341.33328199997777,
+            "cpuMs": 300.9480000000003,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 347.54522700002417,
+            "cpuMs": 326.72899999999936,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 469.87581299999147,
+            "cpuMs": 364.82800000000134,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 313.9448150000244,
+            "cpuMs": 301.4300000000003,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 349.4416740000015,
+            "cpuMs": 344.0640000000021,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 272.77464099999634,
+            "cpuMs": 347.17399999999907,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 258.2338190000155,
+            "cpuMs": 315.8050000000003,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 251.44183200001135,
+            "cpuMs": 291.3739999999998,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 276.537891999993,
+            "cpuMs": 341.78499999999985,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 263.28117299999576,
+            "cpuMs": 306.3119999999981,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 266.23514899998554,
+            "cpuMs": 296.3339999999989,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 267.74040400001104,
+            "cpuMs": 320.72399999999834,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 261.3581359999953,
+            "cpuMs": 318.54499999999825,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 264.2974140000006,
+            "cpuMs": 295.2610000000059,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 254.39872900000773,
+            "cpuMs": 276.0859999999957,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 266.22033299997565,
+            "cpuMs": 293.96800000000076,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 268.53837000002386,
+            "cpuMs": 343.18300000000454,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 276.52439100001357,
+            "cpuMs": 322.997000000003,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 267.8237289999961,
+            "cpuMs": 324.53399999999965,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 264.11288400000194,
+            "cpuMs": 306.08400000000256,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 258.39807799999835,
+            "cpuMs": 287.5550000000003,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 262.1839420000033,
+            "cpuMs": 284.8110000000015,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 308.9060410000093,
+            "cpuMs": 411.04499999999825,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 269.5399139999936,
+            "cpuMs": 315.1180000000022,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          }
+        ],
+        [
+          {
+            "ms": 376.48942599998554,
+            "cpuMs": 333.5069999999978,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 333.24987800000235,
+            "cpuMs": 331.2189999999973,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 316.8474730000016,
+            "cpuMs": 288.2549999999974,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 356.35905299999285,
+            "cpuMs": 345.40300000000207,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 282.7006950000068,
+            "cpuMs": 307.8780000000006,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 273.7909470000013,
+            "cpuMs": 321.4310000000005,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 260.7470590000157,
+            "cpuMs": 305.8090000000011,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 300.5717590000131,
+            "cpuMs": 454.5720000000001,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 258.83548300000257,
+            "cpuMs": 302.3899999999994,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 256.55669900000794,
+            "cpuMs": 293.119999999999,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 249.75059099998907,
+            "cpuMs": 274.8209999999999,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 257.8295020000078,
+            "cpuMs": 295.57600000000093,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 288.30140600001323,
+            "cpuMs": 369.2079999999987,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 265.9625919999962,
+            "cpuMs": 292.92199999999866,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 271.70478999998886,
+            "cpuMs": 314.5639999999985,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 277.2905899999896,
+            "cpuMs": 344.9150000000009,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 253.98126699999557,
+            "cpuMs": 290.4560000000056,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 250.02956900000572,
+            "cpuMs": 280.6620000000039,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 274.1145350000006,
+            "cpuMs": 327.872000000003,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 263.2682570000179,
+            "cpuMs": 312.41100000000006,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 250.05947400000878,
+            "cpuMs": 282.76200000000244,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 260.79386900001555,
+            "cpuMs": 297.8050000000003,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 273.75062000000617,
+            "cpuMs": 303.72899999999936,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 288.2168440000096,
+            "cpuMs": 373.13500000000204,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          }
+        ]
+      ],
+      "delta": {
+        "ms": {
+          "a": {
+            "mean": 287.52865341666865,
+            "median": 267.78206650000357,
+            "p95": 349.15720695000493
+          },
+          "b": {
+            "mean": 280.8834324166698,
+            "median": 272.7277049999975,
+            "p95": 352.8926767499942
+          },
+          "percent": {
+            "mean": -2.3111508787157398,
+            "median": 1.846889362172388,
+            "p95": 1.0698532711439057
+          }
+        },
+        "cpuMs": {
+          "a": {
+            "mean": 318.1955833333338,
+            "median": 315.46150000000125,
+            "p95": 362.17990000000094
+          },
+          "b": {
+            "mean": 318.51758333333373,
+            "median": 306.84350000000086,
+            "p95": 372.54595000000154
+          },
+          "percent": {
+            "mean": 0.10119562208461552,
+            "median": -2.7318706086163824,
+            "p95": 2.862127357150568
+          }
+        }
+      }
+    },
+    "aa": {
+      "warmups": 12,
+      "arms": [
+        [
+          {
+            "ms": 251.94001699998626,
+            "cpuMs": 282.6990000000005,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 260.2199369999871,
+            "cpuMs": 305.91599999999744,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 272.4127049999952,
+            "cpuMs": 301.7719999999972,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 272.566003999993,
+            "cpuMs": 305.3989999999976,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 277.1352869999828,
+            "cpuMs": 345.5989999999947,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 263.40892899999744,
+            "cpuMs": 298.4409999999989,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 269.822668000008,
+            "cpuMs": 307.34300000000076,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 271.76831300000777,
+            "cpuMs": 317.8339999999953,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 300.34516799999983,
+            "cpuMs": 331.05800000000454,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 267.6096790000156,
+            "cpuMs": 299.7769999999873,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 261.10396100001526,
+            "cpuMs": 305.8070000000007,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 260.07003599999007,
+            "cpuMs": 300.1420000000071,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 269.42422800001805,
+            "cpuMs": 332.9349999999977,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 263.98876599999494,
+            "cpuMs": 294.88799999999173,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 244.83245700001135,
+            "cpuMs": 270.0040000000008,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 251.79546999998274,
+            "cpuMs": 307.974000000002,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 257.635414999997,
+            "cpuMs": 288.28899999998976,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 276.93986800001585,
+            "cpuMs": 327.46199999999953,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 271.9462740000163,
+            "cpuMs": 319.55199999999604,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 294.10828199997195,
+            "cpuMs": 328.7030000000086,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 255.14906200001133,
+            "cpuMs": 296.2649999999994,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 271.85102599998936,
+            "cpuMs": 329.3570000000036,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 286.5917269999918,
+            "cpuMs": 316.622000000003,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 307.6429160000116,
+            "cpuMs": 343.91599999999744,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          }
+        ],
+        [
+          {
+            "ms": 260.986235999997,
+            "cpuMs": 304.5369999999966,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 291.8622049999831,
+            "cpuMs": 445.7849999999962,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 259.7216630000039,
+            "cpuMs": 287.1100000000006,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 282.99889300001087,
+            "cpuMs": 318.0859999999957,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 267.076040999993,
+            "cpuMs": 301.5679999999993,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 260.4542070000025,
+            "cpuMs": 298.5460000000021,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 256.578171000001,
+            "cpuMs": 296.65200000000186,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 270.15585199999623,
+            "cpuMs": 305.91999999999825,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 292.14998299998115,
+            "cpuMs": 339.77399999999034,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 267.6530199999979,
+            "cpuMs": 293.903999999995,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 261.77394499999355,
+            "cpuMs": 294.26200000000244,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 275.6281359999848,
+            "cpuMs": 319.30599999999686,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 254.59063800002332,
+            "cpuMs": 301.71100000001024,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 248.50251900000148,
+            "cpuMs": 270.34100000000035,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 249.7110260000045,
+            "cpuMs": 274.9759999999951,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 280.3988609999942,
+            "cpuMs": 349.72699999999895,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 266.1603509999986,
+            "cpuMs": 300.52500000000873,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 284.731105999992,
+            "cpuMs": 329.09100000000035,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 268.2189359999902,
+            "cpuMs": 298.20299999999406,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 268.115238999977,
+            "cpuMs": 299.6399999999994,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 305.16387200000463,
+            "cpuMs": 448.2740000000049,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 275.0096490000142,
+            "cpuMs": 315.9340000000084,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 268.66157600001316,
+            "cpuMs": 308.2859999999928,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          },
+          {
+            "ms": 281.4778950000182,
+            "cpuMs": 318.87600000000384,
+            "rngBefore": 2061039509,
+            "rngAfter": -944196750,
+            "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797"
+          }
+        ]
+      ],
+      "delta": {
+        "ms": {
+          "a": {
+            "mean": 270.01284145833296,
+            "median": 269.623448000013,
+            "p95": 299.4096350999956
+          },
+          "b": {
+            "mean": 270.7408341666657,
+            "median": 268.1670874999836,
+            "p95": 292.10681629998146
+          },
+          "percent": {
+            "mean": 0.26961410590728985,
+            "median": -0.5401460855249285,
+            "p95": -2.439072743125048
+          }
+        },
+        "cpuMs": {
+          "a": {
+            "mean": 310.7397499999988,
+            "median": 306.6294999999991,
+            "p95": 342.2688499999974
+          },
+          "b": {
+            "mean": 317.543083333333,
+            "median": 303.12400000000343,
+            "p95": 431.37629999999643
+          },
+          "percent": {
+            "mean": 2.189399113996271,
+            "median": -1.1432363813643764,
+            "p95": 26.034344054388736
+          }
+        }
+      }
+    }
+  }
+}

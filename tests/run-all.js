@@ -8,36 +8,45 @@ const concurrency=Math.max(1,Math.min(4,Number(process.env.STARS_TEST_WORKERS)||
 const timeout=Math.max(1000,Math.min(300000,Number(process.env.STARS_TEST_TIMEOUT_MS)||180000));
 const logs=process.env.STARS_TEST_LOGS;
 if(logs)fs.mkdirSync(logs,{recursive:true});
-let next=0;
+// Uzun kampanyalar aynı CPU kotasını paylaşınca 180 sn sınırına ulaşıyordu.
+const exclusive=new Set(['faz86f_ai_balance_test.js','faz89b_daily_campaign_test.js','faz91b_campaign_observer_test.js','faz96g2_setup_test.js']);
+const regular=tests.filter(name=>!exclusive.has(name));
+const heavy=tests.filter(name=>exclusive.has(name));
+const runStarted=Date.now();
 const results=[];
-async function worker(){
-  while(next<tests.length){
-    const name=tests[next++];
+async function runSuite(name){
     const result=await new Promise(resolve=>{
       const child=spawn(process.execPath,[path.join(__dirname,name)],{
         cwd:path.resolve(__dirname,'..'),env:process.env,stdio:['ignore','pipe','pipe']
       });
-      let text='',settled=false;const started=Date.now();
+      let text='',settled=false,timedOut=false;const started=Date.now();
       child.stdout.on('data',b=>text+=b);child.stderr.on('data',b=>text+=b);
-      const timer=setTimeout(()=>child.kill('SIGKILL'),timeout);
-      function finish(exit,error){
+      const timer=setTimeout(()=>{timedOut=child.kill('SIGKILL');},timeout);
+      function finish(code,signal=null,error=null){
         if(settled)return;settled=true;clearTimeout(timer);
         const m=text.match(/GEÇEN:\s*(\d+)\s+KALAN:\s*(\d+)/);
+        const exit=code??1;
         if(logs)fs.writeFileSync(path.join(logs,name+'.log'),text);
-        resolve({name,exit,durationMs:Date.now()-started,pass:m?+m[1]:0,fail:m?+m[2]:1,...(error?{error}:{}),
-          details:exit===0?'':text.split('\n').filter(s=>s.includes('✗')||s.includes('Error')).join('\n')});
+        const pass=m?+m[1]:0,fail=m?+m[2]:1;
+        const status=timedOut?'TIMEOUT':exit||fail?'FAIL':pass>0?'PASS':'NOT RUN';
+        resolve({name,status,exit,exitCode:code,signal,timedOut,durationMs:Date.now()-started,pass,fail,...(error?{error}:{}),
+          details:status==='PASS'?'':text.split('\n').filter(s=>s.includes('✗')||s.includes('Error')).join('\n')});
       }
-      child.on('error',e=>finish(1,e.message));child.on('close',(code,signal)=>finish(code??1,signal));
+      child.on('error',e=>finish(null,null,e.message));child.on('close',(code,signal)=>finish(code,signal));
     });
     results.push(result);
-    console.log(`${result.name}: ${result.pass}/${result.fail} (exit ${result.exit})`);
+    console.log(`${result.name}: ${result.pass}/${result.fail} (exit ${result.exit}) ${result.status}`);
     if(result.details)console.error(result.details);
-  }
 }
 (async()=>{
-  await Promise.all(Array.from({length:Math.min(concurrency,tests.length)},worker));
+  const queue=regular.values();
+  await Promise.all(Array.from({length:Math.min(concurrency,regular.length)},async()=>{
+    for(const name of queue)await runSuite(name);
+  }));
+  for(const name of heavy)await runSuite(name);
   results.sort((a,b)=>a.name.localeCompare(b.name));
   const summary={suites:results.length,skipped:all.filter(n=>!tests.includes(n)),
+    concurrency,timeoutMs:timeout,durationMs:Date.now()-runStarted,exclusive:heavy,
     pass:results.reduce((s,r)=>s+r.pass,0),fail:results.reduce((s,r)=>s+r.fail,0),
     ok:results.every(r=>r.exit===0&&r.fail===0),results};
   if(logs)fs.writeFileSync(path.join(logs,'summary.json'),JSON.stringify(summary,null,2));

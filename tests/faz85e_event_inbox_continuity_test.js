@@ -5,6 +5,7 @@
    Çalıştırma: node tests/faz85e_event_inbox_continuity_test.js
    ═══════════════════════════════════════════════════════════════════ */
 'use strict';
+const {loadBrowserScripts} = require('./helpers/browser-scripts');
 const release5=require('./helpers/release-contract');
 const fs=require('fs'), path=require('path'), cp=require('child_process'),
       vm=require('vm'), crypto=require('crypto');
@@ -75,9 +76,7 @@ function harness(){
   sb.navigator={userAgent:'node',standalone:false};
   sb.globalThis=sb;
   vm.createContext(sb);
-  for(const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                  'economy.js','commerce.js','ui.js','commerce-ui.js','economic-ledger.js','economy-ui.js','audio.js'])
-    vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'),sb,{filename:f});
+  loadBrowserScripts(KOK, (source, options) => vm.runInContext(source, sb, options));
   const R=c=>{try{return vm.runInContext('(function(){'+c+'})()',sb);}
               catch(e){return 'HATA: '+e.message;}};
   return {sb,R};
@@ -398,62 +397,43 @@ console.log('\nD. YENİDEN KURULAN REFERANSLARLA SEÇENEK ÇALIŞTIRMA');
 console.log('\nE. AI TEKLİF KİMLİĞİ');
 {
   const H=harness(); H.R(KUR);
-  const r=H.R([
-    "G.inbox=[]; G.inboxUid=0;",
-    "var A=G.emps[1], B=G.emps[2];",
-    "UI.aiOffer({from:A.id,to:0,give:[{t:'res',r:'ene',v:100}],",
-    "  want:[{t:'res',r:'min',v:50}]});",
-    "UI.aiOffer({from:B.id,to:0,give:[{t:'res',r:'ala',v:9}],",
-    // Initial player research stock is zero; offer identity is tested with deliverable minerals.
-    "  want:[{t:'res',r:'min',v:7}]});",
-    "/* AYNI devletten ŞARTLARI FARKLI ikinci teklif */",
-    "UI.aiOffer({from:A.id,to:0,give:[{t:'res',r:'yiy',v:33}],",
-    "  want:[{t:'res',r:'etk',v:11}]});",
-    "/* BİREBİR AYNI teklif tekrar — tekrarlanmamalı */",
-    "UI.aiOffer({from:A.id,to:0,give:[{t:'res',r:'ene',v:100}],",
-    "  want:[{t:'res',r:'min',v:50}]});",
-    "var teklifler=G.inbox.filter(function(x){return x.kind==='aideal';});",
-    "var k=serialize();",
-    "G.inbox=[]; G.inboxUid=0;",
-    "deserialize(k);",
-    "var y=G.inbox.filter(function(x){return x.kind==='aideal';});",
-    "function ozet(t){ return t.map(function(x){ return x.data.from+':'+",
-    "  x.data.give.map(function(g){return g.r+g.v;}).join('')+'>'+",
-    "  x.data.want.map(function(g){return g.r+g.v;}).join(''); }); }",
-    "/* İlkini aç ve KABUL et */",
-    "var ilk=y[0], ikinci=y[1];",
-    "var ikinciOnce=JSON.stringify(ikinci.data);",
-    "UI.openNote(ilk.uid);",
-    "var modal1=document.getElementById('modal').innerHTML;",
-    "UI._hooks['offNo'](0);",
-    "var kalan=G.inbox.filter(function(x){return x.kind==='aideal';});",
-    "var ikinciSonra=JSON.stringify(",
-    "  kalan.filter(function(x){return x.uid===ikinci.uid;})[0].data);",
-    "/* İkinciyi aç: KENDİ şartlarını göstermeli */",
-    "UI.openNote(ikinci.uid);",
-    "var modal2=document.getElementById('modal').innerHTML;",
-    "return JSON.stringify({once:ozet(teklifler), sonra:ozet(y),",
-    "  sayiOnce:teklifler.length, sayiSonra:y.length,",
-    "  modal1Ala:modal1.indexOf('100')>=0, modal1Bos:modal1.length===0,",
-    "  modal2Var:modal2.length>0, modal2Kendi:modal2.indexOf('9')>=0,",
-    "  ikinciDegismedi:ikinciOnce===ikinciSonra,",
-    "  pendingOffer:(UI.pendingOffer===undefined||UI.pendingOffer===null)});"].join('\n'));
-  let d={}; try{d=JSON.parse(r);}catch(e){}
+  const r=H.R(`
+    G.inbox=[];G.inboxUid=0;G.diplomaticInbox=DiplomaticInbox.empty();
+    for(const e of [G.p,G.emps[1],G.emps[2]])for(const k of ['ene','min','ala','yiy','etk'])e.res[k]=1000;
+    const offer=(from,res,qty,price)=>({from,to:0,give:[{t:'res',r:res,v:qty}],want:[{t:'res',r:'min',v:price}]});
+    const first=offer(1,'ene',100,50),second=offer(2,'ala',9,7),third=offer(1,'yiy',33,11);
+    UI.aiOffer(first);UI.aiOffer(second);UI.aiOffer(third);
+    const repeated=UI.aiOffer(first);
+    const rows=()=>DiplomaticInbox.state().records.filter(x=>x.kind==='aideal'&&x.status==='pending');
+    const describe=rs=>rs.map(x=>[x.id,x.from,x.note.data.give,x.note.data.want]);
+    const before=describe(rows()),raw=serialize();
+    if(!deserialize(raw))throw Error('Yükleme başarısız');
+    const after=describe(rows());
+    const a=rows().find(x=>x.from===1&&x.note.data.give[0].r==='ene');
+    const b=rows().find(x=>x.from===2);
+    if(!a||!b)throw Error('Karar kimliği bulunamadı');
+    const next=JSON.stringify(b);
+    ArchiveUI.act('diplomaticRecord',String(a.id));
+    const modal1=document.getElementById('modal').innerHTML;
+    UI._hooks.inboxNo();
+    const isolated=DiplomaticInbox.get(a.id).status==='rejected'&&JSON.stringify(DiplomaticInbox.get(b.id))===next;
+    ArchiveUI.act('diplomaticRecord',String(b.id));
+    const modal2=document.getElementById('modal').innerHTML;
+    return JSON.stringify({before,after,repeated,modal1,modal2,isolated,pendingOffer:UI.pendingOffer==null});
+  `);
+  let d={};try{d=JSON.parse(r);}catch(e){console.log('   Karar fikstürü: '+r);}
   ok('üç FARKLI teklif ayrı ayrı kuyrukta (birebir aynısı tekrarlanmadı)',
-     d.sayiOnce===3, String(d.sayiOnce)+' teklif');
+     d.before?.length===3 && d.repeated===false);
   ok('aynı devletten şartları farklı iki teklif AYRI kaldı',
-     Array.isArray(d.once) && d.once.filter(x=>x.startsWith('1:')).length===2,
-     (d.once||[]).join(' · '));
+     d.before?.filter(row=>row[1]===1).map(row=>row[2][0].r).sort().join(',')==='ene,yiy');
   ok('teklifler yüklemeden sonra KENDİ give/want içeriğini koruyor',
-     JSON.stringify(d.once)===JSON.stringify(d.sonra),
-     (d.sonra||[]).join(' · '));
-  ok('İLK teklif açılabildi (eskiden "geçerliliğini yitirdi" diyordu)',
-     d.modal1Bos===false && d.modal1Ala===true);
-  ok('bir teklifi reddetmek DİĞERİNİ değiştirmedi', d.ikinciDegismedi===true);
+     d.before?.length===3 && d.after?.length===3 && JSON.stringify(d.before)===JSON.stringify(d.after));
+  ok('İLK teklif KARAR kartıyla açılır',
+     d.modal1?.includes('SANA VERİYOR') && d.modal1.includes('100'));
+  ok('bir teklifi reddetmek DİĞERİNİ değiştirmedi',d.isolated===true);
   ok('ikinci teklif KENDİ şartlarıyla açıldı',
-     d.modal2Var===true && d.modal2Kendi===true);
-  ok('tekil UI.pendingOffer artık doğruluğun kaynağı değil',
-     d.pendingOffer===true);
+     d.modal2?.includes('SANA VERİYOR') && d.modal2.includes('9'));
+  ok('tekil UI.pendingOffer artık doğruluğun kaynağı değil',d.pendingOffer===true);
 }
 
 /* ═══ F. sqOffer KARAR EKRANI ═══ */

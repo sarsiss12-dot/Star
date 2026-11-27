@@ -5,6 +5,7 @@
    Çalıştırma: node tests/faz86b_deal_engine_test.js
    ═══════════════════════════════════════════════════════════════════ */
 'use strict';
+const {loadBrowserScripts} = require('./helpers/browser-scripts');
 const release5=require('./helpers/release-contract');
 const fs=require('fs'), path=require('path'), cp=require('child_process'),
       vm=require('vm'), crypto=require('crypto');
@@ -74,9 +75,7 @@ function harness(){
   sb.navigator={userAgent:'node',standalone:false};
   sb.globalThis=sb;
   vm.createContext(sb);
-  for(const f of ['main.js','map.js','combat.js','ai.js','diplomacy.js',
-                  'economy.js','commerce.js','ui.js','commerce-ui.js','economic-ledger.js','economy-ui.js','audio.js'])
-    vm.runInContext(fs.readFileSync(path.join(KOK,f),'utf8'),sb,{filename:f});
+  loadBrowserScripts(KOK, (source, options) => vm.runInContext(source, sb, options));
   const R=c=>{try{return vm.runInContext('(function(){'+c+'})()',sb);}
               catch(e){return 'HATA: '+e.message;}};
   return {sb,R};
@@ -532,7 +531,7 @@ console.log('\nG. TEKLİF ÖMRÜ VE KARŞI TEKLİF');
     "var md=document.getElementById('modal').innerHTML;",
     "var orjOnce=JSON.stringify(not.data);",
     "/* MASAYA OTUR → karşı teklif kartı; orijinal BOZULMAZ */",
-    "UI._hooks['offCounter'](0);",
+    "UI._hooks.inboxCounter();",
     "var ctr=UI.dealCounter, dl=UI.deal;",
     "var min0=G.p.res.min, ene0=G.p.res.ene, etk0=G.p.res.etk;",
     "/* düzenlemeye dön → orijinal hâlâ kartta */",
@@ -541,8 +540,8 @@ console.log('\nG. TEKLİF ÖMRÜ VE KARŞI TEKLİF');
     "/* reddet → kaynak değişmez */",
     "UI.act('ctrNo');",
     "return JSON.stringify({",
-    "  yonVar:/→ sen/.test(md) && /sen →/.test(md),",
-    "  kalanVar:/Kalan süre/.test(md), maliyetVar:/İmzalama maliyeti/.test(md),",
+    "  yonVar:/SANA VERİYOR[\\s\\S]*100[\\s\\S]*SENDEN İSTİYOR[\\s\\S]*50/.test(md),",
+    "  kalanVar:/[0-9]+ gün · son gün/.test(md), maliyetVar:/İmza maliyeti: [0-9]+ Etki/.test(md),",
     "  ctrVar:!!ctr, ctrKorundu:ctr?JSON.stringify({from:ctr.from,",
     "    give:ctr.give,want:ctr.want}).indexOf('\"v\":100')>=0:false,",
     "  dealAyri:!!dl && dl.from===0,",
@@ -626,13 +625,13 @@ console.log('\nI. AI SMOKE (240 AY)');
     "  maxHit=Math.max(maxHit,(x.hitLog||[]).length); });",
     "return JSON.stringify({hata:hata, nanVar:nanVar,",
     "  maxOp:maxOp, maxHit:maxHit, emps:G.emps.length,",
-    "  inbox:(G.inbox||[]).length});"].join('\n'));
+    "  inbox:(G.inbox||[]).length, visible:(G.inbox||[]).filter(n=>!n.hidden).length});"].join('\n'));
   let d={}; try{d=JSON.parse(r);}catch(e){}
   ok('240 aylık simülasyon hatasız', d.hata==='', d.hata||'ok');
   ok('hiçbir kaynakta NaN oluşmadı', d.nanVar===false);
   ok('log sınırları korundu', d.maxOp<=20 && d.maxHit<=30,
      'opLog '+d.maxOp+' · hitLog '+d.maxHit);
-  ok('inbox 6 sınırında', d.inbox<=6, String(d.inbox));
+  ok('görünür bildirim kartları 6 sınırında', d.visible<=6, d.visible+' görünür · '+d.inbox+' kayıt');
 }
 
 console.log('\n══════════════════════════════════════════');
