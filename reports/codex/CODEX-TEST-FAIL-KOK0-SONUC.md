@@ -107,6 +107,20 @@ Filo kaydı var olan satırları değiştirmeden yeni satır ekliyor ve sınır 
 
 Taslak manifest 19 dosyanın SHA-256 değerleriyle eşleşti. p57 kontrolüne göre çalışma zamanı farkı yalnız `diplomacy.js` ve `ui.js`. Sürüm, PWA önbellek adı, Save8 v8, MP paket 4 ve protokol 1 aynı. [Manifest denetimi](evidence/test-fail-kok0/dogrudan/son-odak/manifest.json)
 
+## Nihai tam Node taraması
+
+| Aynı paket seçimi | Paket | PASS | FAIL | Başarısız paket | Zaman aşımı |
+|---|---:|---:|---:|---:|---:|
+| Doğrulanmış p57 ham başlangıç | 256 | 6.643 | 276 | 55 | 1 |
+| İlk tam aday | 256 | 6.865 | 66 | 17 | 0 |
+| Son kaynak `320bb9c8` | 256 | 6.888 | 47 | 13 | 0 |
+
+Son tarama 27 dk 54 sn sürdü. 233 paket PASS, 13 FAIL, 10 eşdeğerlik paketi sabit arşiv kökü verilmediği için NOT RUN. Ham taramanın çıkış kodu 1. 42 başarısız paket kapandı. Hiçbir paketin FAIL sayısı artmadı. `faz86c_3` içindeki 20 ms kontrolü, önceki bağımlılık hatası kalkınca hata başlıklarında görülen tek yeni satır. Pozitif, negatif ve doğrudan tekrarların sayaçları ham toplama eklenmedi. [Nihai ham özet](evidence/test-fail-kok0/nihai/ham-ozet.json) · [İlk hata ve paket farkı](evidence/test-fail-kok0/nihai/paket-farki.json) · [Assertion başlıkları](evidence/test-fail-kok0/nihai/assertion-farki.json) · [Paket günlükleri](evidence/test-fail-kok0/nihai/paket-gunlukleri.tar.gz)
+
+`DiplomaticInbox` kümesindeki 18 pakette 209 → 27 FAIL. 27 açık modül hatası satırı tamamen kalktı. Kalan assertion’lar 26 eski gelen kutusu beklentisi ve 1 işlem süresi kontrolü. Bu sayı yalnız bu 18 paketin kalanlarını gösterir. [Başlangıç ve son paket farkı](evidence/test-fail-kok0/nihai/paket-farki.json)
+
+Seri ağır paketler aynı 180 sn sınırıyla geçti. AI denge 49,9 sn, günlük kampanya 55,5 sn, kampanya gözlemcisi 48,5 sn ve galaksi kurulum matrisi 62,2 sn. `mp1_relay` 14/0, `mp11_online` 9/0, `mp_pwa_surum0` 5/0. [Nihai ham özet](evidence/test-fail-kok0/nihai/ham-ozet.json)
+
 ## 6. Açık incelemeler
 
 `faz85e` içinde teklif kimliği deneyi güncel karar kartıyla çalışıyor. Üç gerçek teklif, aynı teklifin mükerrer olarak açılmaması, Save8’den sonra üç ayrı kimlik ve aynı şartlar, birini reddedince diğerinin bozulmaması doğrulandı. Eski karşılaştırma iki eksik alanı eşit sayabiliyordu. Kalan tüketici ve çifte barış testleri eski modal kancalarını bekliyor. Güncel `UI.openNote` önce `DiplomaticInbox.capture`, sonra `ArchiveUI.record` çağırıyor. Bekleyen statüko kararı kayıttan sonra yeniden açıldı. Aynı düğme iki kez çağrıldığında barış bir kez uygulandı. Ret ve süre aşımı barışı yürürlüğe sokmadı. Ret ülke sahipliğini, stokları ve RNG’yi korudu. [Güncel statüko deneyi](evidence/test-fail-kok0/dogrudan/statuko-guncel-karar.json)
