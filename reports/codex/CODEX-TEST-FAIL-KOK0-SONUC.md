@@ -75,6 +75,8 @@ p57 ile aday aynı 100 sistem 120. ay ve 500 sistem 120/180. ay kayıtlarından 
 
 İki düzeltmeyi taşıyan ilk tam adayda Chromium 155 ve yerel üretim relay sonuçları I100 4/4, I500 4/4, F 6/6, J 5/5, SG 5/5, TR 6/6 ve FA 5/5. I koşularında host ve iki misafirle altışar dakika, filo ve görünür alan eşitliği, yeni sensör paylaşımı, bağlantı dönüşü ve Save8 sonrası devam geçti. Yatay 844×390 Chromium oturumunda aynı raporun gerçek düğmesine dokununca p57 raporu açık bıraktı. Aday raporu gizledi ve Save8’den sonra gizli tuttu. Filo, muharebe sonucu ve RNG eşitti. Fiziksel Android, internet/LAN ve canlı Render **NOT RUN**. [Relay günlükleri](evidence/test-fail-kok0/ilk-tam-aday/mp/) · [Dokunma kanıtı](evidence/test-fail-kok0/muharebe/chromium.json)
 
+Üç düzeltmeli son kaynakta aynı yedi Chromium senaryosu **35/35 PASS**. Üç kampanya kaydının doğrudan bayt ve RNG denetimi de tekrarlandı. Kaynakta kalıcı kayıt şeması veya MP komut protokolü değişmedi. [Nihai MP günlükleri](evidence/test-fail-kok0/nihai/mp/) · [Nihai Save8/RNG kanıtı](evidence/test-fail-kok0/performans/save-rng-nihai.json)
+
 ### İlk tam adayın performansı
 
 | Save8 | p57 CPU p95 | İlk tam aday CPU p95 | ABBA farkı | A/A farkı | Durum |

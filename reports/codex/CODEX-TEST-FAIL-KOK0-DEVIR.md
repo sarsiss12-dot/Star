@@ -1,6 +1,6 @@
 # STARS · CODEX-TEST-FAIL-KÖK.0 devri
 
-Dal `codex/stars-test-fail-kok0`, taslak PR #83. Başlangıç commit’i `a8c07e18ee3daf544da62244fe31cd2aaa3ee574`. Son tam Node girdisi `320bb9c8`; çalışma zamanı ve taslak manifest son commit’i `041413e2`. [Sonuç raporu](CODEX-TEST-FAIL-KOK0-SONUC.md) · [Taslak PR](https://github.com/sarsiss12-dot/Star/pull/83)
+Dal `codex/stars-test-fail-kok0`, taslak PR #83. Başlangıç commit’i `a8c07e18ee3daf544da62244fe31cd2aaa3ee574`. Son tam Node girdisi `320bb9c8`. Çalışma zamanı ve taslak manifestin son commit’i `041413e2`. [Sonuç raporu](CODEX-TEST-FAIL-KOK0-SONUC.md) · [Taslak PR](https://github.com/sarsiss12-dot/Star/pull/83)
 
 ## Çalıştırma
 
@@ -34,6 +34,6 @@ MP8_SCEN=FA node tests/browser-mp8.cjs
 ## Açık işler
 
 - Yeni tam tarama ve bağımsız suretleri ile paket farklarını tam kanıta ekle. Üç temsilî yükleyici deneyini, ham tarama sayaçlarına katma.
-- Küme etkisinden kalan `faz85e`, `faz86b` ve eski tam kaynak eşitliği kontrollerini güncel giriş noktalarına taşıyacak negatif senaryoları hazırla. p57’ye ait bekleyen ve eski kayıt eşdeğerliğini ayrı ölç.
+- Küme etkisinden kalan `faz85e` kontrollerini güncel giriş noktalarına taşıyacak negatif senaryoları hazırla. Eski tam kaynak eşitliği kontrollerinin arşiv köklerini doğrula. `faz86b` güncellendi ve 143/0 geçti.
 - Adayın yayın kararını CPU A/A, ABBA ve yerel relay sonuçlarıyla ver. Geçmemiş kapılar varken yayın paketi oluşturma. Fiziksel Android, internet/LAN ve canlı Render için saha kabulü ayrı kalır.
 - Diplomatik keşif ve temas çalışması C2 bu fazın kapsamı dışında.
