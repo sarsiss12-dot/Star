@@ -8,7 +8,7 @@ p55 arşiv 253 paket, 6.632 PASS ve 279 FAIL. p56 arşiv 256 paket, 6.649 PASS v
 
 Yeni ham kontrol, değişmemiş p57 kaynak ağacında Node v24.22.1, Debian 13, 2 işçi ve paket başına 180 saniye sınırıyla tamamlandı. 26 dk 53 sn içinde 256 paket **6.643 PASS / 276 FAIL** verdi. 55 pakette en az bir FAIL, 10 korumalı eşdeğerlik paketinde 0/0 var. Bu sayaçlar önceki teşhis toplamından bağımsızdır. Kapsamı tamamlamayan paketlerin 0/0’ı PASS olarak etiketlenmedi. [Ortam](evidence/test-fail-kok0/baslangic/ortam.json) · [Tam paket envanteri ve hata zincirleri](evidence/test-fail-kok0/baslangic/envanter.json) · [Ham paket günlükleri](evidence/test-fail-kok0/baslangic/paket-gunlukleri.tar.gz)
 
-İşlem geri alma düzeltmesi `e2da7ec0018a40d63f10e576b69d55db53708981`. Her iki ürün düzeltmesini ve tam aday taramasının girdilerini içeren kaynak `e3c57d18debf8e2627740b2f102f538decc31dd2`. İnceleme PR #83 üzerinden yürüyor. [Taslak PR](https://github.com/sarsiss12-dot/Star/pull/83)
+İşlem geri alma düzeltmesi `e2da7ec0018a40d63f10e576b69d55db53708981`. İlk tam aday `e3c57d18debf8e2627740b2f102f538decc31dd2`. Üç ürün düzeltmesiyle son tam tarama kaynağı `320bb9c8`. İnceleme PR #83 üzerinden yürüyor. [Taslak PR](https://github.com/sarsiss12-dot/Star/pull/83)
 
 ## Temsilî ilk hatalar
 
@@ -38,11 +38,18 @@ Tam geri alma kapsamasına filo defteri ve işaret kümesi alındı. Test, boş 
 
 İkinci sorun bulunduğunda ilk aday taraması durduruldu. Çıktısı ara tarama olarak saklandı. Tek bir sonuç üretmek için iki adayın sayaçları birleştirilmedi.
 
+### Bozuk teklifte kısmi kaynak aktarımı
+
+`faz86b_deal_engine` bozuk teklif testinde ardışık denemeler ilk istisnada kesiliyordu. Dört ayrı girdiyle yeniden denendi. `null` teklif, metin `give` ve `null` madde p57’de `TypeError` üretti. Asıl ekonomik kusur, kabul edilebilir `give` listesi ve metin `want` birlikte geldiğinde ortaya çıktı. p57 karşılık listesini boş saydı, teklifi geçerli gösterdi, işlemi uyguladı ve gönderenin stokundan 1 mineral düştü. Save8 değişti. İki ayrı sonuç aynı teklif doğrulama sınırının eksikliğiyle ilişkili.
+
+Kanonik teklif normalleştirmesi geçersiz liste biçimini bütün teklif için reddediyor. `executeDeal`, arşiv sorgusunu hata sınırı içinde yapıyor ve koşullu savaş desteği yoluna yalnız geçerli teklif özetinden ulaşıyor. Dört denemede de hem teklif özeti hem uygulama reddedildi. Save8, RNG ve stok eşit kaldı. Eski kayıtta boş liste yerine eksik veya `null` alan kullanılabiliyor. 534/0 işlem matrisi, 143/0 pazarlık paketi, 7/0 koalisyon ve 3/0 MP koalisyon doğrudan geçti. [Ürün düzeltmesi](https://github.com/sarsiss12-dot/Star/commit/623b3942) · [Aynı kayıtla dört giriş](evidence/test-fail-kok0/ucuncu-kusur/teklif-bicimi.json)
+
 ## 3. Güncel davranış ve arşiv kaynakları
 
 | Test adı | Eski hata | Kök neden | Düzeltme | Yeni sonuç | Gerçek ürün riski |
 |---|---|---|---|---|---|
 | `faz86c_6_transaction_acceptance` | Başarısız işlem `fleetJournal` değiştiriyordu. | Kalıcı defter ve toparlama kümesi işlem dışında. | İki yazım yeri tam geri alma kapsamında. | 530/0. Güçlendirilmiş kontrol p55, p56 ve p57’de 528/2. | Doğrulandı ve düzeltildi. |
+| `faz86b_deal_engine` ve `faz86c_6_transaction_acceptance` | Bozuk liste işlem sırasında hata veya tek taraflı ödeme. | Normalleştirici metin listeyi boş sayıyor, bazı alanlar hata sınırının dışında kullanılıyor. | Teklif bütünüyle doğrulanıyor, koşullu dal doğrulamadan sonra çalışıyor. | Son hedefli koşular 143/0 ve 534/0. | Kısmi mineral aktarımı doğrulandı ve düzeltildi. |
 | `faz96f_map_panel_native_canvas` | Gizleme ve gizleme tercihinin kayıt sonrası korunması 17/2. | Filo kurtarma sarmalayıcısı düğme kimliğini işlemciye iletmiyor. | Üçüncü argüman iletiliyor, kimlik denetimi sürüyor. | 19/0. Eski kimlik ve etkin rapor negatif denetimleri geçti. | Doğrulandı ve düzeltildi. |
 | `faz92a_war_contribution` | Bitiş gerekçesi ve statüko denetiminde iki FAIL. | Kapalı cephe gerekçesi artık eyleyen devleti de içeriyor. | Kesin gerekçe, tasfiye edilen gerçek filo, sıfır muharebe kredisi ve gerçek koalisyonla değişmeyen mülkiyet. | 34/0 | Bu iki vakada savaş motoru kusuru görülmedi. |
 | `mp63_polvas` ve `beta_fed_found0_mp` | İnsan kuruluşu yedi kontrolde ilerlemiyordu. | Tek adımlı kuruluş komutu insan rızasını atlayamıyor. | AI rızaları ve insanın son onayıyla gerçek kuruluş. Eski komut ve AI reddi ayrı negatif kontrol. | 11/0 ve 11/0 | Rıza, ayrı insan oyları, ikinci oy reddi ve vasal karar yetkisi geçti. |
@@ -100,7 +107,9 @@ Taslak manifest 19 dosyanın SHA-256 değerleriyle eşleşti. p57 kontrolüne g�
 
 ## 6. Açık incelemeler
 
-`faz85e` içinde teklif kimliği deneyi güncel karar kartıyla çalışıyor. Üç gerçek teklif, aynı teklifin mükerrer olarak açılmaması, Save8’den sonra üç ayrı kimlik ve aynı şartlar, birini reddedince diğerinin bozulmaması doğrulandı. Eski karşılaştırma iki eksik alanı eşit sayabiliyordu. Kalan tüketici ve çifte barış testleri eski modal kancalarını bekliyor. Güncel `UI.openNote` önce `DiplomaticInbox.capture`, sonra `ArchiveUI.record` çağırıyor. Güncel statüko kararında bekleyen kayıt yeniden açıldı, aynı düğme iki kez çağrıldığında barış bir kez uygulandı, reddedilen ve süresi dolmuş karar uygulanmadı. Ret ülke sahipliğini, stokları ve RNG’yi korudu. `faz86b` içinde eski karşı teklif kartı fikstürü ilk başarısızlıktan sonra saflık kontrollerini de etkiliyor. Bu paketlerde başka doğrulama borcu var. [Güncel statüko deneyi](evidence/test-fail-kok0/dogrudan/statuko-guncel-karar.json)
+`faz85e` içinde teklif kimliği deneyi güncel karar kartıyla çalışıyor. Üç gerçek teklif, aynı teklifin mükerrer olarak açılmaması, Save8’den sonra üç ayrı kimlik ve aynı şartlar, birini reddedince diğerinin bozulmaması doğrulandı. Eski karşılaştırma iki eksik alanı eşit sayabiliyordu. Kalan tüketici ve çifte barış testleri eski modal kancalarını bekliyor. Güncel `UI.openNote` önce `DiplomaticInbox.capture`, sonra `ArchiveUI.record` çağırıyor. Bekleyen statüko kararı kayıttan sonra yeniden açıldı. Aynı düğme iki kez çağrıldığında barış bir kez uygulandı. Ret ve süre aşımı barışı yürürlüğe sokmadı. Ret ülke sahipliğini, stokları ve RNG’yi korudu. [Güncel statüko deneyi](evidence/test-fail-kok0/dogrudan/statuko-guncel-karar.json)
+
+`faz86b` artık karşı teklifi güncel karar kartından açıyor. Kaynak yönü ve miktarı, teklifin son günü, Etki bedeli, ayrı düzenleme nesnesi ve ret sırasında stok eşitliği doğrulandı. Altı görünür bildirim sınırı aynı. Bir sahnede altı kart görünürdü ve toplam 12 kayıt vardı. Gizlenmiş karar kayıtlarının da bu sınıra dâhil edilmesi yanlış alarm veriyordu. [Pazarlık ham günlüğü](evidence/test-fail-kok0/ucuncu-kusur/faz86b-guncel-kart.log.gz)
 
 `faz95e_news` bir barış haberini bekliyor. Güncel motorun ayrı `war-end:<cephe>` ve `peace:<çift>:<gün>` kayıtları var. Bu iki kaydın kullanıcıya tekrar gibi görünüp görünmediği değerlendirilmedi. Aktif işlerin ve yeni sürüm kararının durumu devir kaydında. [Mevcut kontrol ve tekrar komutları](CODEX-TEST-FAIL-KOK0-DEVIR.md)
 
@@ -108,7 +117,7 @@ Taslak manifest 19 dosyanın SHA-256 değerleriyle eşleşti. p57 kontrolüne g�
 
 | Açık küme | İlk tam adayın bulgusu | Ürün riski |
 |---|---|---|
-| `faz85e`, `faz86b` | Eski kart ve modal kancaları, eski bildirim üst sınırı ve aynı fikstürde zincirlenen saflık kontrolleri. Güncel statüko ve teklif kimliği ile gerçek işlem matrisi ayrı geçti. | Başarısız her assertion tek başına değerlendirilene kadar kanıt eksik. |
+| `faz85e` | Eski kart ve modal kancaları. Güncel statüko ve teklif kimliğiyle gerçek işlem matrisi ayrı geçti. | Başarısız her assertion tek başına değerlendirilene kadar kanıt eksik. |
 | `faz95c1_diplomacy`, `faz96e_federation` | Eski doğrudan insan kuruluşu ve üyelik ön ittifakı varsayımları. Üye rızalı kuruluş, bekleyen gündem ve açık oy güncel testlerde geçti. | Bu iddialarda yeni ürün kusuru tekrar üretilmedi. |
 | `faz96c2`, `faz96h10`, `faz96h31`, `faz96h9`, `faz96h8` | İlgili satırlarda eski çalışma zamanı bayt sabitlemeleri. `faz96h8` ayrıca doğal filo sonucu beklentisi içeriyor. | Sabitlemeler arşiv kökleriyle doğrulanmalı. Tarihsel doğal sonuç nedensel karşılaştırma gerektirir. |
 | `faz96f3` | 2370. gündeki tek tarihsel AI sökümünün mutlaka tekrar etmesi bekleniyor. | Sökümün farklılaşma nedeni bu fazda yalıtılmadı. |

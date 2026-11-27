@@ -1,0 +1,62 @@
+{
+  "before": {
+    "nullOffer": {
+      "quote": false,
+      "result": "TypeError: Cannot read properties of null (reading 'give')",
+      "saveEqual": true,
+      "rngEqual": true,
+      "minerals": 0
+    },
+    "wrongGive": {
+      "quote": false,
+      "result": "TypeError: (offer.give || []).concat(...).some is not a function",
+      "saveEqual": true,
+      "rngEqual": true,
+      "minerals": 0
+    },
+    "wrongWant": {
+      "quote": true,
+      "result": true,
+      "saveEqual": false,
+      "rngEqual": true,
+      "minerals": -1
+    },
+    "nullItem": {
+      "quote": false,
+      "result": "TypeError: Cannot read properties of null (reading 't')",
+      "saveEqual": true,
+      "rngEqual": true,
+      "minerals": 0
+    }
+  },
+  "after": {
+    "nullOffer": {
+      "quote": false,
+      "result": false,
+      "saveEqual": true,
+      "rngEqual": true,
+      "minerals": 0
+    },
+    "wrongGive": {
+      "quote": false,
+      "result": false,
+      "saveEqual": true,
+      "rngEqual": true,
+      "minerals": 0
+    },
+    "wrongWant": {
+      "quote": false,
+      "result": false,
+      "saveEqual": true,
+      "rngEqual": true,
+      "minerals": 0
+    },
+    "nullItem": {
+      "quote": false,
+      "result": false,
+      "saveEqual": true,
+      "rngEqual": true,
+      "minerals": 0
+    }
+  }
+}
