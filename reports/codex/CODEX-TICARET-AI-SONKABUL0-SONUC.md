@@ -39,7 +39,7 @@ Düz kaynak maddesi (`res`) imzada devreder. Açık fiziksel seçenek (`cargo`) 
 
 ## 5. Ekonomik fırsat hunisi
 
-Altı kayıtta temas yokluğu `trade-no-contact` en sık kapıydı. Tekrar sayımları ayrı devlet/ay kararlarıdır. Liman eksikliği ve erişim, stokta ihracat fazlası olsa bile iki yönlü teklifin kurulamamasına yol açıyor.
+Altı kayıtta temas yokluğu 55.498 olayla en sık kapıydı. Onu 5.158 güvenli rota eksikliği, 4.480 siyasi engel, 3.614 rota bütçesi, 2.807 arz-talep eşleşmemesi, 2.664 liman eksikliği, 1.141 mevcut sözleşme, 89 bekleme süresi ve 87 karşılıklı fiyat yokluğu izledi. Tekrar sayımları ayrı devlet/ay kararlarıdır. Olay sayısı ekonomik fırsat sayısı olarak yorumlanmadı. [Tam dağılım ve fiziksel hareket](evidence/ticaret-ai-sonkabul0/kampanya/teslim-etiketleri.json)
 
 Üç küçük galakside 27 yeni risk döneminin en iyi sonucu 5 geç varış, 6 rotasız, 6 bilinmeyen liman, 5 limansız, 3 temassız ve 2 ihracatsız. Aynı çiftte mevcut sözleşme, paylaşım hakkı, risk ve rezerv maliyeti gerçek motorda geçerli kaldı. Ay sonu karşılaştırmaları, karar anındaki kotalı taramayı birebir geri kurmaz. Diplomatik karşı oy için RNG çekilmedi. [Gözlem aracı](../../research/ticaret-ai-sonkabul0/firsat-gozlemi.js) · [Ham kampanyalar](evidence/ticaret-ai-sonkabul0/kampanya/)
 
@@ -90,6 +90,7 @@ Küçük dünyalarda ay kapanışında 11'de 4, 99'da 20 ve 404'te 443 kaynak-de
 | TA / TB / TR / TL / TZ | 31/0 | Fiziksel gönderi, anlık seçenek, ele geçirilmiş ve iptal edilmiş aktarma, kayıt-yeni oda, iki misafir onayı, karşı teklif, ret ve yenileme |
 | SG / J / X | 15/0 | Tek ödeme, kayıp yanıt, fed oyu, ayna ve takviye |
 | I 500/16, 15 dk | 4/0 | İki ayrı misafir profili, 572 örnek, 30 olay, 0 kapalı pencere donması, sensör ve kayıt doğrulaması |
+| I 100/9, 8 dk | 4/0 | 332 örnek, 16 olay, 0 kapalı pencere donması, en büyük 7,7 oyun günü farkı, yeniden katılım ve kayıt eşitliği |
 
 Yerel üretim relay ve TLS vekili kullanıldı. TZ ikinci onay öncesi bağlantı kopması sonrası kısmi kararın korunduğunu ve mükerrer onayın ödeme uygulamadığını gösterdi. TR relay yeniden başlatma ve yeni oda sonrası yoldaki teslimatı bir kez doğruladı. TA üçüncü tarafın sözleşme ve konvoyu görmediğini doğruladı. TB B'nin konvoy konumu ve gerçek ara liman geçişini host ile eşledi. [Chromium günlükleri](evidence/ticaret-ai-sonkabul0/multiplayer/)
 
@@ -119,7 +120,7 @@ Kaynaklar eşit. Farklar hız kazanımı sayılmadı. 100 sistem A/A gürültüs
 
 ## 19. Eski kayıt uyumluluğu
 
-Mevcut Save8 v8, MP paket 4 ve protokol 1 aynı. Eski ticaret sözleşmesi ve konvoy fixtürleri yükleme sırasında ödeme veya teslimat uygulamadı. Yeni oda akışında transit kayıtları ve yoldaki kargo eşitliği doğrudan Chromium'da doğrulandı. [TR günlüğü](evidence/ticaret-ai-sonkabul0/multiplayer/TR.log) · [Cargo Node](evidence/ticaret-ai-sonkabul0/node/faz96a_cargo.log)
+Mevcut Save8 v8, MP paket 4 ve protokol 1 aynı. Kanonik p53 kaynağı `1dec7046fa843203e94fb74ab2733e7e04bf3738` üzerinden üretilen eski Save8 ve MP4 paketi, p57’de izin, stok, rota ve iki konvoyu aynı durumda açtı. Kayıt açılırken ödeme veya teslimat uygulanmadı. Her iki girişte 12 mineral ve 8 enerji tekil makbuzlarla aynı RNG sonucunda teslim edildi. [p53 Save8 ve gerçek MP4 kanıtı](evidence/ticaret-ai-sonkabul0/kayit/p53-uyum.json) Yeni oda akışında transit kayıtları ve yoldaki kargo eşitliği doğrudan Chromium'da doğrulandı. [TR günlüğü](evidence/ticaret-ai-sonkabul0/multiplayer/TR.log) · [Cargo Node](evidence/ticaret-ai-sonkabul0/node/faz96a_cargo.log)
 
 ## 20. ZIP ve yayın
 
