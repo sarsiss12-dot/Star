@@ -63,7 +63,7 @@
       if(sensorShareActive(a,b))grants.push([b.id,a.id,!!a.visionFrom?.[b.id],!!a.shareVis?.[b.id]]);
     }
     const empires=alive.filter(ai).map(e=>({id:e.id,contacts:alive.filter(o=>o!==e&&e.contact[o.id]).length,
-      pacts:alive.filter(o=>o!==e&&e.pact[o.id]&&o.pact[e.id]).length,
+      pacts:alive.filter(o=>o!==e&&e.pact?.[o.id]&&o.pact?.[e.id]).length,
       sciences:G.fleets.filter(f=>f.e===e.id&&scienceExplorer(f)).length,
       wars:alive.filter(o=>o!==e&&e.war[o.id]).length,
       open:Commerce.state().contracts.filter(k=>!Commerce.closed(k)&&[k.a,k.b].includes(e.id)).length}));
