@@ -33,7 +33,44 @@
       "stock": 1000,
       "otherStock": 1000
     },
-    "trade": null
+    "trade": null,
+    "save": "dabd9b3b204da5de5c2a35e80f0b7c2e8ad7800b075fc25fe726b570da0fd3a1"
+  },
+  "baseline:repeat": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    },
+    "trade": null,
+    "save": "dabd9b3b204da5de5c2a35e80f0b7c2e8ad7800b075fc25fe726b570da0fd3a1"
   },
   "baseline:none": {
     "before": {
@@ -68,7 +105,8 @@
       "stock": 1000,
       "otherStock": 1000
     },
-    "trade": null
+    "trade": null,
+    "save": "c583fa5c53fa2a17c279045d36f5210d199bad6524a1b3fd3aeea89f2fcf8bc0"
   },
   "baseline:war": {
     "before": {
@@ -103,7 +141,8 @@
       "stock": 1000,
       "otherStock": 1000
     },
-    "trade": null
+    "trade": null,
+    "save": "3c3cfeff2d9db296391332c9122cb26e2259148dbe45f54b1b4d4844403083d0"
   },
   "baseline:blocked": {
     "before": {
@@ -138,7 +177,8 @@
       "stock": 1000,
       "otherStock": 1000
     },
-    "trade": null
+    "trade": null,
+    "save": "352c4df9047e90e7a8acf471bbea421611abfe00f30bbd625b1b35b36d8f8246"
   },
   "baseline:shareVis": {
     "before": {
@@ -173,7 +213,8 @@
       "stock": 1000,
       "otherStock": 1000
     },
-    "trade": null
+    "trade": null,
+    "save": "505e825f4c6b0e3da40abd5acb00d3bebb23326a96fcca050361f60f0a13bf22"
   },
   "baseline:trade": {
     "before": {
@@ -1173,7 +1214,8 @@
         }
       },
       "gate": "Diplomatik temas kapalı"
-    }
+    },
+    "save": "5387dac6ce10a6ed4397f99349fcad3d702ff92e77552fb918b21ad5896707f6"
   },
   "candidate:shared": {
     "before": {
@@ -1204,7 +1246,40 @@
       "stock": 1000,
       "otherStock": 1000
     },
-    "trade": null
+    "trade": null,
+    "save": "19cc8f8098e69e38c956143b8239c00633557c3f996770138a1676891a9522a1"
+  },
+  "candidate:repeat": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 4,
+        "path": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ],
+    "after": {
+      "day": 124,
+      "contact": true,
+      "reciprocal": true,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 4,
+      "stock": 1000,
+      "otherStock": 1000
+    },
+    "trade": null,
+    "save": "19cc8f8098e69e38c956143b8239c00633557c3f996770138a1676891a9522a1"
   },
   "candidate:none": {
     "before": {
@@ -1239,7 +1314,8 @@
       "stock": 1000,
       "otherStock": 1000
     },
-    "trade": null
+    "trade": null,
+    "save": "671093252943de068ed4de7ef00cabcbd10cb258a3306d3151765813a3d45d6c"
   },
   "candidate:war": {
     "before": {
@@ -1274,7 +1350,8 @@
       "stock": 1000,
       "otherStock": 1000
     },
-    "trade": null
+    "trade": null,
+    "save": "4effe7aa8bf674480410df8ed894956324ace7aab611b2132eefa0e714e30aa0"
   },
   "candidate:blocked": {
     "before": {
@@ -1309,7 +1386,8 @@
       "stock": 1000,
       "otherStock": 1000
     },
-    "trade": null
+    "trade": null,
+    "save": "43f9b3dc8bdb96b32b2d360224eec0d301fe72b469bd1bad43c00496d78cb412"
   },
   "candidate:shareVis": {
     "before": {
@@ -1340,7 +1418,8 @@
       "stock": 1000,
       "otherStock": 1000
     },
-    "trade": null
+    "trade": null,
+    "save": "9251c57afb9e1bfe9bba9731e8b6cd48aff4e225f80e42bba862d0ad44bd28c6"
   },
   "candidate:trade": {
     "before": {
@@ -2493,6 +2572,7 @@
         }
       },
       "gate": null
-    }
+    },
+    "save": "f4f2ba4d371cb8f9a391dc0baf7923ca2737ffc4f2853a20cf70ddebf797daa3"
   }
 }

@@ -35,7 +35,7 @@ const raw=h.run('serialize()');
 const options={baseline,candidate};
 const list={};
 for(const [arm,root] of Object.entries(options)){
- for(const condition of ['shared','none','war','blocked','shareVis','trade']){
+ for(const condition of ['shared','repeat','none','war','blocked','shareVis','trade']){
   const w=runtime({root});
   w.sb.raw=raw;w.sb.mode=condition;
   assert(w.run('deserialize(raw)'),arm);
@@ -87,13 +87,16 @@ for(const [arm,root] of Object.entries(options)){
     trade={pactDay,sign,booked,diagnostics,notes:AIDiagnostics.report(),stocks:{a:a.res,c:c.res},gate:Commerce.pairGate(a,c)};
   }
   `);
-  list[arm+':'+condition]=JSON.parse(w.run('JSON.stringify({before,orders,after,trade})'));
+  const observed=JSON.parse(w.run('JSON.stringify({before,orders,after,trade})'));
+  observed.save=createHash('sha256').update(w.run('serialize()')).digest('hex');
+  list[arm+':'+condition]=observed;
  }
 }
 const first=key=>list[key].orders[0]?.target;
 console.log(JSON.stringify({save:createHash('sha256').update(raw).digest('hex'),...list},null,2));
 if(process.env.STARS_EXPECT_CONTACT==='1'){
  assert.notEqual(first('baseline:shared'),4);
+ assert.deepEqual(list['candidate:repeat'],list['candidate:shared']);
  for(const condition of ['shared','shareVis']){
   const trial=list['candidate:'+condition];
   assert.equal(trial.before.contact,false);

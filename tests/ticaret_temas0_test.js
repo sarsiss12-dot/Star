@@ -36,6 +36,23 @@ test('Eski kaydın kaynağı belirsiz haritası sahibinde kalır, sonraki alıc�
   assert(h.run('pSeen(G.sys[16])'));
 });
 
+test('Paylaşılmış liman için karşılıklı temas ve güncel görüş gerekir',()=>{
+  const h=sensorWorld();
+  h.run(`var a=G.emps[1],b=G.emps[2],c=G.emps[3],port=G.sys[10];
+    port.owner=c.id;port.planets[0].owner=c.id;
+    port.planets[0].col=JSON.parse(JSON.stringify(template));port.planets[0].col.b.liman=1;
+    hidden.sys=port.id;a.visionFrom[b.id]=true;
+    a.contact[c.id]=c.contact[a.id]=false;
+    visionTick();`);
+  assert(h.run('port.seen.includes(a.id)'));
+  assert.equal(h.run('Commerce.identifiedPort(a,port,c)'),false);
+  h.run('a.contact[c.id]=c.contact[a.id]=true;');
+  assert(h.run('Commerce.identifiedPort(a,port,c)'));
+  h.run('delete a.visionFrom[b.id];');
+  assert(h.run('port.seen.includes(a.id)'));
+  assert.equal(h.run('Commerce.identifiedPort(a,port,c)'),false);
+});
+
 test('AI uzak insanın sensörünü imzadan önce kullanamaz ve masraf doğmaz',()=>{
   const h=world();
   h.run(`for(const e of G.emps){e.contact={};e.ally={};e.visionFrom={};e.shareVis={};e.spynet={};e._pactCd=0;}
