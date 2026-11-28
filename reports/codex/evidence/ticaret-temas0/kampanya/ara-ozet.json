@@ -1,0 +1,765 @@
+[
+  {
+    "size": "s500",
+    "seed": 11,
+    "commonMonths": 120,
+    "rngFirstDivergence": 660,
+    "controlMonth": 120,
+    "candidateMonth": 120,
+    "controlEnd": null,
+    "candidateEnd": null,
+    "control": {
+      "source": "ec0fa3b72c65b2a2a7cd1f8143da6e99fbd4cb28",
+      "months": 120,
+      "endReason": null,
+      "founderPairs": 42,
+      "physicalContacts": {
+        "bilim-fiziksel": 38,
+        "diger-fiziksel": 4
+      },
+      "sharedTargets": 0,
+      "sharedContacts": [],
+      "mappedSystems": 3453,
+      "sharedPairs": 17,
+      "activeDirections": 34,
+      "tradePactsSigned": 34,
+      "activeTradePactsPerAI": 4.25,
+      "contactsPerAI": 5.3125,
+      "signatures": 0,
+      "loads": 0,
+      "deliveries": 0,
+      "losses": 0,
+      "firstDelivery": null,
+      "throughNewSharedContact": [],
+      "valueProxy": 0,
+      "distinctPartners": 0,
+      "cargoByResource": {},
+      "shortageResourceMonths": {
+        "min": 4,
+        "ene": 4
+      },
+      "colonies": 76,
+      "largestFederationShare": 0.11764705882352941,
+      "federations": [
+        [
+          "ticaret",
+          2,
+          true
+        ],
+        [
+          "bilimsel",
+          2,
+          true
+        ],
+        [
+          "ticaret",
+          2,
+          true
+        ],
+        [
+          "ticaret",
+          2,
+          true
+        ]
+      ],
+      "warDegree": 4,
+      "scienceLosses": 20,
+      "funnel": {
+        "trade-no-contact": 13724,
+        "trade-political": 567,
+        "trade-no-safe-route": 697,
+        "trade-no-port": 114,
+        "trade-no-supply-demand": 220,
+        "trade-route-budget": 954,
+        "trade-route-not-exhausted": 42,
+        "trade-no-fair-ratio": 1,
+        "trade-cooldown": 1
+      },
+      "rng": 2072463910,
+      "save": "379a61ccea50db0c072994cc0b3a122874c5ff1b878fb40a79292b655cf3029a"
+    },
+    "candidate": {
+      "source": "78e710d638c2c62f9f753a99ea7c389665a1b500",
+      "months": 120,
+      "endReason": null,
+      "founderPairs": 56,
+      "physicalContacts": {
+        "bilim-fiziksel": 36,
+        "diger-fiziksel": 6,
+        "paylasimli-fiziksel": 1
+      },
+      "sharedTargets": 2,
+      "sharedContacts": [
+        {
+          "day": 3212,
+          "a": 13,
+          "b": 12,
+          "system": 233,
+          "fleet": 920,
+          "method": "paylasimli-fiziksel"
+        }
+      ],
+      "mappedSystems": 2046,
+      "sharedPairs": 14,
+      "activeDirections": 28,
+      "tradePactsSigned": 36,
+      "activeTradePactsPerAI": 4.5,
+      "contactsPerAI": 7.1875,
+      "signatures": 1,
+      "loads": 2,
+      "deliveries": 0,
+      "losses": 0,
+      "firstDelivery": null,
+      "throughNewSharedContact": [],
+      "valueProxy": 0,
+      "distinctPartners": 0,
+      "cargoByResource": {},
+      "shortageResourceMonths": {
+        "min": 4,
+        "ene": 4
+      },
+      "colonies": 72,
+      "largestFederationShare": 0.17647058823529413,
+      "federations": [
+        [
+          "ticaret",
+          2,
+          true
+        ],
+        [
+          "bilimsel",
+          3,
+          true
+        ],
+        [
+          "ticaret",
+          2,
+          true
+        ],
+        [
+          "ticaret",
+          2,
+          true
+        ]
+      ],
+      "warDegree": 2,
+      "scienceLosses": 30,
+      "funnel": {
+        "trade-no-contact": 13625,
+        "trade-political": 547,
+        "trade-no-safe-route": 723,
+        "trade-no-port": 203,
+        "trade-no-supply-demand": 305,
+        "trade-route-budget": 853,
+        "trade-route-not-exhausted": 47,
+        "trade-signed": 1,
+        "trade-agreed": 1,
+        "trade-existing": 2
+      },
+      "rng": -542463573,
+      "save": "de9e9777152ec4625c3eb8573f8db56e4f232c32999aa6eec85ba777440f8cf4"
+    }
+  },
+  {
+    "size": "s500",
+    "seed": 23,
+    "commonMonths": 30,
+    "rngFirstDivergence": 810,
+    "controlMonth": 120,
+    "candidateMonth": 30,
+    "controlEnd": null,
+    "candidateEnd": null,
+    "control": {
+      "source": "ec0fa3b72c65b2a2a7cd1f8143da6e99fbd4cb28",
+      "months": 30,
+      "endReason": null,
+      "founderPairs": 10,
+      "physicalContacts": {
+        "bilim-fiziksel": 10
+      },
+      "sharedTargets": 0,
+      "sharedContacts": [],
+      "mappedSystems": 384,
+      "sharedPairs": 4,
+      "activeDirections": 8,
+      "tradePactsSigned": 9,
+      "activeTradePactsPerAI": 1.125,
+      "contactsPerAI": 1.25,
+      "signatures": 0,
+      "loads": 0,
+      "deliveries": 0,
+      "losses": 0,
+      "firstDelivery": null,
+      "throughNewSharedContact": [],
+      "valueProxy": 0,
+      "distinctPartners": 0,
+      "cargoByResource": {},
+      "shortageResourceMonths": {
+        "min": 4,
+        "ene": 15
+      },
+      "colonies": 38,
+      "largestFederationShare": 0.11764705882352941,
+      "federations": [
+        [
+          "bilimsel",
+          2,
+          false
+        ],
+        [
+          "bilimsel",
+          2,
+          false
+        ]
+      ],
+      "warDegree": 0,
+      "scienceLosses": 11,
+      "funnel": {
+        "trade-no-contact": 3964,
+        "trade-no-port": 25,
+        "trade-no-safe-route": 85,
+        "trade-no-supply-demand": 6
+      },
+      "rng": 1471400197,
+      "save": "a60c08e76f0726534a1a8cee9bacfe2dc129011734739227ffe6f625e0749263"
+    },
+    "candidate": {
+      "source": "aefbc43e5b65c79781b19c9c50692a7c8c49ef3d",
+      "months": 30,
+      "endReason": null,
+      "founderPairs": 11,
+      "physicalContacts": {
+        "bilim-fiziksel": 10,
+        "paylasimli-fiziksel": 1
+      },
+      "sharedTargets": 2,
+      "sharedContacts": [
+        {
+          "day": 612,
+          "a": 1,
+          "b": 16,
+          "system": 358,
+          "fleet": 5,
+          "method": "paylasimli-fiziksel"
+        }
+      ],
+      "mappedSystems": 276,
+      "sharedPairs": 4,
+      "activeDirections": 8,
+      "tradePactsSigned": 11,
+      "activeTradePactsPerAI": 1.375,
+      "contactsPerAI": 1.375,
+      "signatures": 0,
+      "loads": 0,
+      "deliveries": 0,
+      "losses": 0,
+      "firstDelivery": null,
+      "throughNewSharedContact": [],
+      "valueProxy": 0,
+      "distinctPartners": 0,
+      "cargoByResource": {},
+      "shortageResourceMonths": {
+        "min": 4,
+        "ene": 15
+      },
+      "colonies": 38,
+      "largestFederationShare": 0.11764705882352941,
+      "federations": [
+        [
+          "bilimsel",
+          2,
+          true
+        ],
+        [
+          "bilimsel",
+          2,
+          false
+        ]
+      ],
+      "warDegree": 0,
+      "scienceLosses": 11,
+      "funnel": {
+        "trade-no-contact": 3960,
+        "trade-no-port": 25,
+        "trade-no-safe-route": 92,
+        "trade-no-supply-demand": 3
+      },
+      "rng": -205308819,
+      "save": "c7d9251a8eaeb28947d1b12b333389a1a0a848027560b1df4e16fa3dbb4d2c84"
+    }
+  },
+  {
+    "size": "ulu",
+    "seed": 11,
+    "commonMonths": 240,
+    "rngFirstDivergence": 780,
+    "controlMonth": 240,
+    "candidateMonth": 240,
+    "controlEnd": null,
+    "candidateEnd": null,
+    "control": {
+      "source": "ec0fa3b72c65b2a2a7cd1f8143da6e99fbd4cb28",
+      "months": 240,
+      "endReason": null,
+      "founderPairs": 28,
+      "physicalContacts": {
+        "bilim-fiziksel": 19,
+        "diger-fiziksel": 2
+      },
+      "sharedTargets": 0,
+      "sharedContacts": [],
+      "mappedSystems": 562,
+      "sharedPairs": 12,
+      "activeDirections": 24,
+      "tradePactsSigned": 22,
+      "activeTradePactsPerAI": 4.25,
+      "contactsPerAI": 7.875,
+      "signatures": 69,
+      "loads": 746,
+      "deliveries": 740,
+      "losses": 2,
+      "firstDelivery": 1061,
+      "throughNewSharedContact": [],
+      "valueProxy": 490.2456000000001,
+      "distinctPartners": 9,
+      "cargoByResource": {
+        "min": 1537.0000000000011,
+        "ala": 4011.5000000000045,
+        "tuk": 941.0,
+        "ene": 3990.399999999999,
+        "yiy": 47.7
+      },
+      "shortageResourceMonths": {
+        "min": 4
+      },
+      "colonies": 66,
+      "largestFederationShare": 0.4444444444444444,
+      "federations": [
+        [
+          "bilimsel",
+          2,
+          true
+        ],
+        [
+          "ticaret",
+          4,
+          true
+        ]
+      ],
+      "warDegree": 2,
+      "scienceLosses": 53,
+      "funnel": {
+        "trade-no-contact": 5729,
+        "trade-no-port": 714,
+        "trade-political": 1024,
+        "trade-no-safe-route": 630,
+        "trade-signed": 69,
+        "trade-agreed": 69,
+        "trade-existing": 704,
+        "trade-no-supply-demand": 496,
+        "trade-route-not-exhausted": 54,
+        "trade-route-budget": 149,
+        "trade-transit-refused": 5,
+        "trade-no-fair-ratio": 32,
+        "trade-cooldown": 37,
+        "trade-review-cancel": 1,
+        "trade-quote-rejected": 1,
+        "trade-quote-reason": 1,
+        "trade-pact-agreed": 1
+      },
+      "rng": 1261850337,
+      "save": "80eccfaf1fbaa1936648a58d30803ae641ecb2b52a254605491c83827d2ca5f0"
+    },
+    "candidate": {
+      "source": "5df6423c63bcb22a56ef92ed15f0e0078f64658d",
+      "months": 240,
+      "endReason": null,
+      "founderPairs": 28,
+      "physicalContacts": {
+        "bilim-fiziksel": 31,
+        "diger-fiziksel": 1,
+        "paylasimli-fiziksel": 1
+      },
+      "sharedTargets": 2,
+      "sharedContacts": [
+        {
+          "day": 5706.5,
+          "a": 4,
+          "b": 1,
+          "system": 27,
+          "fleet": 635,
+          "method": "paylasimli-fiziksel"
+        }
+      ],
+      "mappedSystems": 659,
+      "sharedPairs": 17,
+      "activeDirections": 26,
+      "tradePactsSigned": 34,
+      "activeTradePactsPerAI": 6.222222222222222,
+      "contactsPerAI": 9.0,
+      "signatures": 58,
+      "loads": 562,
+      "deliveries": 556,
+      "losses": 6,
+      "firstDelivery": 983,
+      "throughNewSharedContact": [],
+      "valueProxy": 505.0960000000001,
+      "distinctPartners": 9,
+      "cargoByResource": {
+        "ene": 2977.3999999999996,
+        "ala": 2279.7000000000016,
+        "min": 1006.8999999999996,
+        "tuk": 834.0999999999995,
+        "yiy": 910.9999999999995
+      },
+      "shortageResourceMonths": {
+        "ala": 20
+      },
+      "colonies": 67,
+      "largestFederationShare": 0.5,
+      "federations": [
+        [
+          "bilimsel",
+          5,
+          true
+        ],
+        [
+          "ticaret",
+          2,
+          true
+        ]
+      ],
+      "warDegree": 8,
+      "scienceLosses": 48,
+      "funnel": {
+        "trade-no-contact": 5378,
+        "trade-no-port": 1114,
+        "trade-political": 1158,
+        "trade-no-safe-route": 896,
+        "trade-signed": 58,
+        "trade-agreed": 58,
+        "trade-existing": 574,
+        "trade-review-cancel": 4,
+        "trade-no-supply-demand": 601,
+        "trade-transit-granted": 2,
+        "trade-transit-refused": 4,
+        "trade-route-budget": 1023,
+        "trade-no-fair-ratio": 9,
+        "trade-quote-rejected": 14,
+        "trade-quote-reason": 14,
+        "trade-cooldown": 49,
+        "trade-route-not-exhausted": 10,
+        "trade-pact-agreed": 1
+      },
+      "rng": -2048664736,
+      "save": "07bf79a346dcb9ba4e2369a8041b27ec85248a280b8bc22b889fd2937728ae97"
+    }
+  },
+  {
+    "size": "ulu",
+    "seed": 404,
+    "commonMonths": 180,
+    "rngFirstDivergence": 540,
+    "controlMonth": 183,
+    "candidateMonth": 180,
+    "controlEnd": "Son kolonin de düştü. Hanedanın sona erdi.",
+    "candidateEnd": "Son kolonin de düştü. Hanedanın sona erdi.",
+    "control": {
+      "source": "ec0fa3b72c65b2a2a7cd1f8143da6e99fbd4cb28",
+      "months": 180,
+      "endReason": null,
+      "founderPairs": 26,
+      "physicalContacts": {
+        "bilim-fiziksel": 24
+      },
+      "sharedTargets": 0,
+      "sharedContacts": [],
+      "mappedSystems": 745,
+      "sharedPairs": 16,
+      "activeDirections": 28,
+      "tradePactsSigned": 37,
+      "activeTradePactsPerAI": 5.6,
+      "contactsPerAI": 9.4,
+      "signatures": 19,
+      "loads": 292,
+      "deliveries": 291,
+      "losses": 1,
+      "firstDelivery": 878.5,
+      "throughNewSharedContact": [],
+      "valueProxy": 203.5242,
+      "distinctPartners": 4,
+      "cargoByResource": {
+        "ala": 1083.8999999999992,
+        "tuk": 658.6000000000004,
+        "min": 609.6999999999996,
+        "ene": 1751.3000000000031
+      },
+      "shortageResourceMonths": {
+        "min": 62,
+        "ala": 17,
+        "tuk": 213,
+        "yiy": 134,
+        "ene": 4
+      },
+      "colonies": 63,
+      "largestFederationShare": 0.18181818181818182,
+      "federations": [
+        [
+          "bilimsel",
+          2,
+          true
+        ],
+        [
+          "ticaret",
+          2,
+          true
+        ]
+      ],
+      "warDegree": 0,
+      "scienceLosses": 29,
+      "funnel": {
+        "trade-no-contact": 4183,
+        "trade-no-port": 1197,
+        "trade-political": 1303,
+        "trade-no-safe-route": 789,
+        "trade-no-fair-ratio": 34,
+        "trade-cooldown": 32,
+        "trade-signed": 19,
+        "trade-agreed": 19,
+        "trade-existing": 194,
+        "trade-no-supply-demand": 243,
+        "trade-route-not-exhausted": 191,
+        "trade-route-budget": 511,
+        "trade-pact-agreed": 1
+      },
+      "rng": 9414228,
+      "save": "0affcb83b70ca23f10ef8c6f515ce7e4b669ed7a674e0800490d45a239429686"
+    },
+    "candidate": {
+      "source": "aefbc43e5b65c79781b19c9c50692a7c8c49ef3d",
+      "months": 180,
+      "endReason": "Son kolonin de düştü. Hanedanın sona erdi.",
+      "founderPairs": 32,
+      "physicalContacts": {
+        "bilim-fiziksel": 26,
+        "diger-fiziksel": 3
+      },
+      "sharedTargets": 3,
+      "sharedContacts": [],
+      "mappedSystems": 701,
+      "sharedPairs": 15,
+      "activeDirections": 28,
+      "tradePactsSigned": 37,
+      "activeTradePactsPerAI": 4.181818181818182,
+      "contactsPerAI": 10.0,
+      "signatures": 30,
+      "loads": 402,
+      "deliveries": 393,
+      "losses": 3,
+      "firstDelivery": 1011,
+      "throughNewSharedContact": [],
+      "valueProxy": 330.3910000000001,
+      "distinctPartners": 8,
+      "cargoByResource": {
+        "min": 535.6,
+        "ala": 1713.7,
+        "ene": 2087.8000000000047,
+        "tuk": 796.5999999999998,
+        "yiy": 224.60000000000002
+      },
+      "shortageResourceMonths": {
+        "min": 79,
+        "ala": 27,
+        "tuk": 171,
+        "yiy": 86,
+        "ene": 62
+      },
+      "colonies": 42,
+      "largestFederationShare": 0.3333333333333333,
+      "federations": [
+        [
+          "ticaret",
+          4,
+          true
+        ],
+        [
+          "ticaret",
+          2,
+          true
+        ]
+      ],
+      "warDegree": 0,
+      "scienceLosses": 30,
+      "funnel": {
+        "trade-no-contact": 4574,
+        "trade-no-port": 1083,
+        "trade-political": 1651,
+        "trade-no-safe-route": 667,
+        "trade-signed": 30,
+        "trade-agreed": 30,
+        "trade-existing": 299,
+        "trade-no-fair-ratio": 35,
+        "trade-cooldown": 38,
+        "trade-no-supply-demand": 205,
+        "trade-route-budget": 849,
+        "trade-route-not-exhausted": 177,
+        "trade-pact-agreed": 3
+      },
+      "rng": 2097659535,
+      "save": "f9617955d028c9c46dd919f44becaf2b22640bd482c0b7054934e5426c5e91f3"
+    }
+  },
+  {
+    "size": "ulu",
+    "seed": 99,
+    "commonMonths": 198,
+    "rngFirstDivergence": 540,
+    "controlMonth": 198,
+    "candidateMonth": 198,
+    "controlEnd": "Son kolonin de düştü. Hanedanın sona erdi.",
+    "candidateEnd": "Son kolonin de düştü. Hanedanın sona erdi.",
+    "control": {
+      "source": "ec0fa3b72c65b2a2a7cd1f8143da6e99fbd4cb28",
+      "months": 198,
+      "endReason": "Son kolonin de düştü. Hanedanın sona erdi.",
+      "founderPairs": 28,
+      "physicalContacts": {
+        "diger-fiziksel": 1,
+        "bilim-fiziksel": 27
+      },
+      "sharedTargets": 0,
+      "sharedContacts": [],
+      "mappedSystems": 511,
+      "sharedPairs": 17,
+      "activeDirections": 30,
+      "tradePactsSigned": 32,
+      "activeTradePactsPerAI": 5.0,
+      "contactsPerAI": 7.625,
+      "signatures": 15,
+      "loads": 146,
+      "deliveries": 143,
+      "losses": 1,
+      "firstDelivery": 1947.5,
+      "throughNewSharedContact": [],
+      "valueProxy": 176.25160000000005,
+      "distinctPartners": 3,
+      "cargoByResource": {
+        "min": 261.6,
+        "tuk": 375.4000000000001,
+        "ala": 333.49999999999994,
+        "yiy": 429.49999999999994,
+        "ene": 568.6
+      },
+      "shortageResourceMonths": {
+        "ala": 20
+      },
+      "colonies": 40,
+      "largestFederationShare": 0.4444444444444444,
+      "federations": [
+        [
+          "ticaret",
+          4,
+          true
+        ],
+        [
+          "bilimsel",
+          2,
+          true
+        ]
+      ],
+      "warDegree": 0,
+      "scienceLosses": 18,
+      "funnel": {
+        "trade-no-contact": 3999,
+        "trade-political": 663,
+        "trade-no-port": 528,
+        "trade-no-safe-route": 1485,
+        "trade-no-supply-demand": 983,
+        "trade-no-fair-ratio": 18,
+        "trade-cooldown": 17,
+        "trade-route-budget": 356,
+        "trade-signed": 15,
+        "trade-agreed": 15,
+        "trade-existing": 148,
+        "trade-route-not-exhausted": 37
+      },
+      "rng": -1605561576,
+      "save": null
+    },
+    "candidate": {
+      "source": "aefbc43e5b65c79781b19c9c50692a7c8c49ef3d",
+      "months": 198,
+      "endReason": "Son kolonin de düştü. Hanedanın sona erdi.",
+      "founderPairs": 29,
+      "physicalContacts": {
+        "diger-fiziksel": 3,
+        "bilim-fiziksel": 25
+      },
+      "sharedTargets": 0,
+      "sharedContacts": [],
+      "mappedSystems": 468,
+      "sharedPairs": 20,
+      "activeDirections": 40,
+      "tradePactsSigned": 29,
+      "activeTradePactsPerAI": 4.888888888888889,
+      "contactsPerAI": 6.777777777777778,
+      "signatures": 15,
+      "loads": 142,
+      "deliveries": 136,
+      "losses": 2,
+      "firstDelivery": 2951.5,
+      "throughNewSharedContact": [],
+      "valueProxy": 180.29480000000004,
+      "distinctPartners": 4,
+      "cargoByResource": {
+        "tuk": 288.19999999999993,
+        "ala": 593.5999999999996,
+        "yiy": 252.80000000000007,
+        "ene": 462.19999999999993,
+        "min": 260.30000000000007
+      },
+      "shortageResourceMonths": {
+        "ala": 15
+      },
+      "colonies": 64,
+      "largestFederationShare": 0.2,
+      "federations": [
+        [
+          "ticaret",
+          2,
+          true
+        ],
+        [
+          "ticaret",
+          2,
+          true
+        ],
+        [
+          "bilimsel",
+          2,
+          true
+        ]
+      ],
+      "warDegree": 0,
+      "scienceLosses": 13,
+      "funnel": {
+        "trade-no-contact": 4360,
+        "trade-political": 402,
+        "trade-no-port": 515,
+        "trade-no-safe-route": 1514,
+        "trade-no-supply-demand": 678,
+        "trade-route-budget": 1073,
+        "trade-no-fair-ratio": 9,
+        "trade-cooldown": 24,
+        "trade-signed": 15,
+        "trade-agreed": 15,
+        "trade-existing": 155,
+        "trade-route-not-exhausted": 77,
+        "trade-quote-rejected": 5,
+        "trade-quote-reason": 5
+      },
+      "rng": -1763093116,
+      "save": null
+    }
+  }
+]

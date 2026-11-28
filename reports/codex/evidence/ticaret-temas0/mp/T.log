@@ -1,0 +1,14 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[4,4],"mirrorEq":true,"revMs":737,"buildMs":813,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[4,4],"mirrorEq":true,"revMs":912,"buildMs":1011,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":15.8,"p95":15.8,"max":15.8},"longtask":{"n":18,"med":69,"p95":104,"max":104},"heapMB":17,"dom":728,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":4,"med":37.5,"p95":136.7,"max":136.7},"refresh":{"n":2,"med":1.2,"p95":1.2,"max":1.2},"longtask":{"n":15,"med":62,"p95":92,"max":92},"builds":4,"deltas":3,"resyncs":0,"minGap":600,"heapMB":16,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":34,"joinErrors":0},"C":{"build":{"n":4,"med":57.8,"p95":120.9,"max":120.9},"refresh":{"n":2,"med":3.8,"p95":3.8,"max":3.8},"longtask":{"n":19,"med":61,"p95":67,"max":67},"builds":4,"deltas":3,"resyncs":0,"minGap":600,"heapMB":18,"dom":729,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":29,"joinErrors":0}}}
+PASS T0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS CT1 AI sensör teklifi misafirin gerçek onayını bekler
+PASS CT2 Misafir kabulü iki yönü ve yalnız yetkili görüşü açar
+PASS T1 C gerçek masada teknoloji verir + B'den lüks ister (host listesi, İZLENİYOR); özet; B karşı teklif; C kabul → B'de teknoloji, C'de erişim kaydı
+PASS T2 istihbaratı yetmeyen B: "İstiyorum" teknoloji / lüks pasif + görünür neden; host listesi dönmez
+PASS T3 birleşik teklif (teknoloji + kaynak) beklerken veren teknolojiyi kaybeder → geçersiz (iki tarafta neden), kabul işlenmez, hiçbir madde uygulanmaz
+PASS T4 C'nin lüks teklifini B iki kez kabul eder + hat donar / kopar → tek erişim kaydı, tek ödeme
+PASS T5 👁 İstihbarat: C gerçek masada B'den görüş ister → B kabul → B filosu yeni sisteme → C haritasında görünür; host ve B haritasında değil (paylaşım yönü)
+PASS T6 kaydet → host kapanır → YENİ oda → misafirler döner → teknoloji, erişim kayıtları ve sensör paylaşımı aynı
+PASS T7 insan → AI: C gerçek masada AI'ya teknoloji verir; sonuç motorun aiRespond kararı; kabulde AI'da teknoloji
+GEÇEN: 10 KALAN: 0

@@ -1,0 +1,10 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[4,4],"mirrorEq":true,"revMs":730,"buildMs":819,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[4,4],"mirrorEq":true,"revMs":959,"buildMs":1108,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":9.1,"p95":9.1,"max":9.1},"longtask":{"n":24,"med":62,"p95":87,"max":135},"heapMB":17,"dom":728,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":4,"med":10.4,"p95":52.7,"max":52.7},"refresh":{"n":2,"med":5.3,"p95":5.3,"max":5.3},"longtask":{"n":21,"med":63,"p95":87,"max":109},"builds":4,"deltas":3,"resyncs":0,"minGap":600,"heapMB":17,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":35,"joinErrors":0},"C":{"build":{"n":4,"med":23.3,"p95":152.1,"max":152.1},"refresh":{"n":3,"med":1.2,"p95":6,"max":6},"longtask":{"n":20,"med":72,"p95":161,"max":161},"builds":4,"deltas":3,"resyncs":0,"minGap":600,"heapMB":18,"dom":729,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":30,"joinErrors":0}}}
+PASS TR0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS R0 TB fikstürü + C → B Transit İzni (MP komutu); izinle B → host rotası açık
+PASS R1 B gerçek masadan ▣ kargo → host gelen kutusundan KABUL; konvoy yolda (yüklendi, teslim edilmedi), B'den bir kez düştü
+PASS R2 host kaydeder → kapanış → relay yeniden → YENİ oda → DEVAM ET: ticaret durumu (sözleşme / konvoy / makbuz) ve stoklar kayıt öncesiyle birebir
+PASS R3 B ana menü ODAYA KATIL + yeni kod, C davet bağlantısı → kendi devletleri; B aynasında konvoy host ile aynı
+PASS R4 oyun ilerler: kargo BİR kez teslim (host +80, B yeniden ödemez); 60 gün sonra ikinci teslim yok; B aynasında teslim edildi
+GEÇEN: 6 KALAN: 0
