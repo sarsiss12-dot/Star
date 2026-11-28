@@ -89,7 +89,8 @@ function fixture(kind,want=false){
     if(__kind==='warOn')item.target=C.id;
     // Guarantee a real sight mutation in addition to the visionFrom flag.
     if(__kind==='intel'){sy=G.sys.find(s=>s.seen.includes(A.id));
-      sy.seen=sy.seen.filter(id=>id!==B.id);sy.vis=[A.id];}
+      sy.seen=sy.seen.filter(id=>id!==B.id);sy.vis=[A.id];
+      if(typeof rememberNativeChart==='function')rememberNativeChart(sy,A.id);}
     var offer=__want?{from:B.id,to:A.id,give:[],want:[item]}:
                     {from:A.id,to:B.id,give:[item],want:[]};
     var givenMin=A.res.min,takenMin=B.res.min;

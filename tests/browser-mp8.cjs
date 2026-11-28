@@ -572,6 +572,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
     CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance,guestGo,closeAll});
   if(SCEN==='O')await require('./helpers/mp-sync-fed0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});
   if(SCEN==='U')await require('./helpers/mp-diplo5-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});
+  if(SCEN==='T'&&process.env.MP8_TEMAS0==='1')await require('./helpers/ticaret-temas0-mp.cjs')({test,pg,metrics,wait,tap,settle,cmd});
   if(SCEN==='T')await require('./helpers/mp-techlux0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},
     CANON,HOSTLIB,GUESTLIB,TIMERS,settle,cmd,advance});
   if(SCEN==='V')await require('./helpers/mp-waron0-mp.cjs')({test,pg,metrics,out,sleep,shot,assert,lanes,wait,tap,errors,origin,open,ctx,getCode:()=>code,setCode:c=>{code=c;},

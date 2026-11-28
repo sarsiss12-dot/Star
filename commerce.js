@@ -30,8 +30,16 @@ const Commerce={
   return !!(f?.laws?.ticaret&&f.members.includes(owner.id));
  },
  identifiedPort(viewer,s,owner){
-  return viewer===owner||!!owner&&this.known(viewer,s)&&(intelOf(viewer,owner.id)>=2||
-   (viewer===G.p?pVis(s):aiView(viewer).ctx.visible.has(s.id)));
+  if(viewer===owner)return true;
+  if(!owner||!this.known(viewer,s))return false;
+  if(intelOf(viewer,owner.id)>=2)return true;
+  if(viewer===G.p)return pVis(s);
+  if(aiView(viewer).ctx.visible.has(s.id))return true;
+  if(!viewer.contact?.[owner.id]||!owner.contact?.[viewer.id])return false;
+  const scope=this._aiPortSensors;
+  if(!scope)return !!sharedSensorCoverage(viewer)?.has(s.id);
+  if(!scope.actors.has(viewer.id))scope.actors.set(viewer.id,sharedSensorCoverage(viewer,scope.providers));
+  return !!scope.actors.get(viewer.id)?.has(s.id);
  },
  relay(a,s,grants){
   return !(s.cr>0)&&s.planets.some(p=>p.col?.b?.liman>0&&this.identifiedPort(a,s,G.emps[p.owner])&&this.portRight(G.emps[p.owner],a,grants));
@@ -690,10 +698,13 @@ const Commerce={
   return this.aiValue(a,{from:0,to:a.id,give:n.want,want:n.give}).net>0?n:null;
  },
  aiTick(){
-  const signature=this.aiRouteSignature(),old=this._aiRouteMemo;
-  if(!old||old.world!==G.sys||old.signature!==signature)this._aiRouteMemo={world:G.sys,signature,paths:new Map()};
-  this._aiRouteScope=this._aiRouteMemo;this._aiHazardScope=new Map();
-  try{return this.aiOpportunityTick();}finally{this._aiRouteScope=null;this._aiHazardScope=null;}
+  this._aiPortSensors={actors:new Map(),providers:new Map()};
+  try{
+   const signature=this.aiRouteSignature(),old=this._aiRouteMemo;
+   if(!old||old.world!==G.sys||old.signature!==signature)this._aiRouteMemo={world:G.sys,signature,paths:new Map()};
+   this._aiRouteScope=this._aiRouteMemo;this._aiHazardScope=new Map();
+   return this.aiOpportunityTick();
+  }finally{this._aiRouteScope=null;this._aiHazardScope=null;this._aiPortSensors=null;}
  },
  aiPartnerOffers(a,partners,balances,budget){
   const A=balances.get(a.id),quotes=new Map();

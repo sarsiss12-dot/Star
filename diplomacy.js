@@ -667,7 +667,7 @@ function settlementApply(e,id){
         c.auto=false;c.autoAfter=undefined;delete c._dirWarn;
         if(!s.surv.includes(to.id))s.surv.push(to.id);
       }
-      if(!s.seen.includes(to.id))s.seen.push(to.id);
+      rememberNativeChart(s,to.id);
       touched.add(s);inject('after:'+r.key);
     }
     inject('after:items');
@@ -9257,6 +9257,7 @@ function canShareVision(e, o){
 function offerShareVision(e, o){
   const chk = canShareVision(e, o);
   if (!chk.ok) return chk;
+  if(!o.ai)return {ok:false,why:'İnsan oyuncunun açık sensör onayı gerekli'};
   e.res.etk -= SHAREVIS_COST;
   /* Kabul: ilişki + güven + dürüstlük */
   let p = .35 + clamp((o.rel[e.id] || 0) / 120, -.3, .45);
@@ -9360,12 +9361,13 @@ function billRejected(e, key){
    ve gördüğü alan alıcının haritasına kopyalanır. Tek geçiş,
    ayda bir çalışır.
    ═══════════════════════════════════════════════════════════════════ */
-function shareVision(giver, taker){
+function shareVision(giver, taker, sensors){
   if (!giver || !taker || giver.dead || taker.dead || giver.war?.[taker.id] || taker.war?.[giver.id]) return 0;
-  const live=nativeSensorVision(giver);
+  if(sensors&&!sensors.has(giver.id))sensors.set(giver.id,nativeSensorVision(giver));
+  const live=sensors?sensors.get(giver.id):nativeSensorVision(giver);
   let yeni = 0;
   for (const sy of G.sys){
-    if ((sy.seen.includes(giver.id)||live.has(sy.id)) && !sy.seen.includes(taker.id)){
+    if ((nativeChartKnown(sy,giver.id)||live.has(sy.id)) && !sy.seen.includes(taker.id)){
       sy.seen.push(taker.id);yeni++;
     }
   }
@@ -9374,15 +9376,18 @@ function shareVision(giver, taker){
 }
 
 function visionTick(){
-  for(const sub of G.emps){const c=vassalContractOf(sub);if(c?.terms.sensors){const lord=overlordOf(sub);shareVision(lord,sub);shareVision(sub,lord);}}
+  const sensors=new Map();
+  for(const sub of G.emps){const c=vassalContractOf(sub);if(c?.terms.sensors){const lord=overlordOf(sub);shareVision(lord,sub,sensors);shareVision(sub,lord,sensors);}}
   for (const e of G.emps){
-    if (e.dead || e.wild || e.crisisSide || !e.visionFrom) continue;
-    for (const gid in e.visionFrom){
+    if (e.dead || e.wild || e.crisisSide) continue;
+    for (const gid of new Set([...Object.keys(e.visionFrom||{}),...Object.keys(e.shareVis||{})])){
       const g = G.emps[gid];
-      if (!g || g.dead){ delete e.visionFrom[gid]; continue; }
-      /* Savaş çıkarsa paylaşım biter — kimse düşmanına göz vermez */
-      if (!e.visionFrom[gid] || e.war[g.id] || g.war[e.id]){ delete e.visionFrom[gid]; continue; }
-      shareVision(g, e);
+      if(!g||g.dead||e.war[g.id]||g.war[e.id]){
+        if(e.visionFrom)delete e.visionFrom[gid];
+        if(e.shareVis)delete e.shareVis[gid];
+        continue;
+      }
+      if(e.visionFrom?.[gid]||e.shareVis?.[gid])shareVision(g,e,sensors);
     }
   }
 }

@@ -156,7 +156,7 @@ check('Far zoom never labels entirely unseen empires',()=>{
   assert.ok(!far.texts.includes('GÖRÜNMEZ_DEVLET'));
 });
 check('Shared discovery shows location without granting third-party diplomatic identity',()=>{
-  const shared=make();shared.run('G.sys[7].seen=[1];G.sys[8].seen=[1];G.p.shareVis={1:true}');shared.draw();
+  const shared=make();shared.run('G.sys[7].seen=[1];G.sys[8].seen=[1];if(typeof rememberNativeChart==="function")for(const id of [7,8])rememberNativeChart(G.sys[id],1);G.p.shareVis={1:true}');shared.draw();
   assert.ok(labels(shared).some(l=>l.owner===4&&l.name==='Bilinmeyen devlet'));
   shared.run('G.p.shareVis={}');shared.draw();assert.ok(!labels(shared).some(l=>l.owner===4));
 });

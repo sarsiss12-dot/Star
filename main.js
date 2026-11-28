@@ -3100,7 +3100,7 @@ function setupGame(cfg){
     if (hasCivic(e,'fortress')){ hw.col.b.kale = (hw.col.b.kale||0) + 1; s.def = sysDefense(s); }
 
     // komşu sistemleri gör
-    s.lanes.forEach(l => { if(!G.sys[l].seen.includes(e.id)) G.sys[l].seen.push(e.id); });
+    for(const l of s.lanes)rememberNativeChart(G.sys[l],e.id);
 
     // başlangıç filoları
     const guardShips = (e.origin === 'gocebe')
@@ -4273,7 +4273,7 @@ function updateVision(){
   }
   G.vis = seen;
   refreshSharedVision();
-  for (const id of seen) if (!G.sys[id].seen.includes(0)) G.sys[id].seen.push(0);
+  for (const id of seen) rememberNativeChart(G.sys[id],0);
   observePlayerHabitats();
 }
 /* 95E.3: treaty directions stay separate; cached native sensors never relay
@@ -4294,6 +4294,26 @@ function nativeSensorVision(e){
     if(d<range&&!s.nebulaS)for(const n of s.lanes)q.push([n,d+1]);
   }
   return visible;
+}
+function sharedSensorCoverage(e, cache){
+  if(!e.visionFrom&&!e.shareVis)return null;
+  let shared=null;
+  for(const id of new Set([...Object.keys(e.visionFrom||{}),...Object.keys(e.shareVis||{})])){
+    const giver=G.emps[id];if(!sensorShareActive(e,giver))continue;
+    let view=cache?.get(giver.id);
+    if(!view){view=nativeSensorVision(giver);cache?.set(giver.id,view);}
+    shared||=new Set();
+    for(const sid of view)shared.add(sid);
+  }
+  return shared;
+}
+// A recipient may retain the chart, but may only pass on systems it mapped itself.
+function nativeChartKnown(s,id){
+  return s.surv.includes(id)||!!s.nativeChart?.includes(id);
+}
+function rememberNativeChart(s,id){
+  if(!s.seen.includes(id))s.seen.push(id);
+  if(!nativeChartKnown(s,id))(s.nativeChart||=[]).push(id);
 }
 function refreshSharedVision(){
   const p=G.p,providers=new Set([...Object.keys(p?.visionFrom||{}),...Object.keys(p?.shareVis||{})]);
@@ -4329,7 +4349,7 @@ function drawHabitatMarker(g,x,y,r,mask){
 function pSeen(s){
   if (s.seen.includes(0)) return true;
   const sv = G.p && G.p.shareVis;
-  if (sv) for (const id in sv) if (sv[id] && sensorShareActive(G.p,G.emps[id]) && s.seen.includes(+id)) return true;
+  if (sv) for (const id in sv) if (sv[id] && sensorShareActive(G.p,G.emps[id]) && nativeChartKnown(s,+id)) return true;
   return false;
 }
 function pVis(s){
@@ -4420,7 +4440,7 @@ function doSurvey(f, sys){
 function stepFleets(dt){
   let sharedSensorsMoved=false;
   const shipmentBudget={left:8,fleets:new Map(G.fleets.map(f=>[f.id,f]))};
-  const safeThreats=new Map(),exploreChecks=new Map();
+  const safeThreats=new Map(),exploreChecks=new Map(),exploreSensors=new Map();
   for (let i=G.fleets.length-1;i>=0;i--){
     const f = G.fleets[i];
     if (!f.ships.length){ if(!(G.fleetJournal||[]).some(r=>r.fleet===f.id))fleetLost(f,'empty-cleanup'); if(sensorShareActive(G.p,G.emps[f.e]))sharedSensorsMoved=true;G.fleets.splice(i,1); continue; }
@@ -4446,7 +4466,7 @@ function stepFleets(dt){
           holdShipment(f,'blocked','Bilinen düşman tehdidi — güvenli rota yok');continue;}
       }
       if(explorationEnabled(f)){
-        if(!exploreChecks.has(f.e))exploreChecks.set(f.e,explorationContext(eMove));
+        if(!exploreChecks.has(f.e))exploreChecks.set(f.e,explorationContext(eMove,exploreSensors));
         const reason=explorationBlock(eMove,f,nxt,exploreChecks.get(f.e),f.sys);
         if(reason){holdExploration(f,reason);continue;}
       }
@@ -4556,7 +4576,7 @@ function cancelExploration(f){
   delete f.explore;
   if(fleetHasRole(f,'bilim'))f.auto=false;
 }
-function explorationContext(e){
+function explorationContext(e, sensorCache){
   const claims=borderClaimRows();
   const known=new Set(),visible=new Set(),blocked=reinforcementThreats(e,claims),pirates=new Set();
   // Aynı sensör menzili; görülmeyen düşman filoları veya yuvalar okunmaz.
@@ -4570,6 +4590,11 @@ function explorationContext(e){
     if(!s || depth.has(id)&&depth.get(id)<=d)continue;
     depth.set(id,d);visible.add(id);
     if(d<range&&!s.nebulaS)for(const n of s.lanes)q.push([n,d+1]);
+  }
+  const shared=sensorCache&&e.ai?sharedSensorCoverage(e,sensorCache):null;
+  if(shared)for(const sid of shared){
+    if(visible.has(sid))shared.delete(sid);
+    else visible.add(sid);
   }
   for(const s of G.sys){
     if((e.id===0?pSeen(s):s.seen.includes(e.id)) || visible.has(s.id) || e.id===0&&pVis(s))known.add(s.id);
@@ -4585,15 +4610,16 @@ function explorationContext(e){
   const frontier=new Set(known);
   for(const id of known)for(const n of G.sys[id].lanes)frontier.add(n);
   const gates=[...known].filter(id=>hasUsableGate(e,G.sys[id]));
-  return {known,visible,frontier,blocked,pirates,gates,supply:new Map(),supplyNodes:new Map()};
+  return {known,visible,shared,frontier,blocked,pirates,gates,supply:new Map(),supplyNodes:new Map()};
 }
 /* One observer contract for remote humans; native providers never relay third-party vision. */
-function humanVisionContext(e){
+function humanVisionContext(e, rememberNative=false){
   const ctx=explorationContext(e);
+  if(rememberNative&&!hasCivic(e,'panopt'))for(const id of ctx.visible)rememberNativeChart(G.sys[id],e.id);
   for(const id of new Set([...Object.keys(e.visionFrom||{}),...Object.keys(e.shareVis||{})])){
     const giver=G.emps[id];if(!sensorShareActive(e,giver))continue;
     for(const sid of nativeSensorVision(giver)){ctx.visible.add(sid);ctx.known.add(sid);}
-    if(e.shareVis?.[id])for(const sys of G.sys)if(sys.seen.includes(+id))ctx.known.add(sys.id);
+    if(e.shareVis?.[id])for(const sys of G.sys)if(nativeChartKnown(sys,+id))ctx.known.add(sys.id);
   }
   return ctx;
 }
@@ -4649,7 +4675,7 @@ function explorationPath(graph,to){
   return p;
 }
 function explorationRoute(e,f,sys){
-  return explorationPath(explorationGraph(e,f,explorationContext(e)),sys.id);
+  return explorationPath(explorationGraph(e,f,explorationContext(e,new Map())),sys.id);
 }
 function explorationReservations(e){
   const taken=new Map();
@@ -4673,7 +4699,7 @@ function explorationWaitKey(e,ctx){
   return [...ctx.known].join(',')+'/'+[...ctx.blocked].join(',')+'/'+G.sys.filter(s=>s.surv.includes(e.id)).map(s=>s.id).join(',')+'/'+owned+'/'+Object.keys(e.techs||{}).length+'/'+Object.keys(e.ally||{}).filter(k=>e.ally[k]).join(',');
 }
 function autoExploreTick(onlyEmpire){
-  const contexts=new Map(),reservations=new Map();
+  const contexts=new Map(),reservations=new Map(),sensors=new Map();
   const fleets=G.fleets.filter(explorationEnabled).sort((a,b)=>a.id-b.id);
   for(const f of fleets){
     if(onlyEmpire!==undefined&&f.e!==onlyEmpire)continue;
@@ -4681,7 +4707,7 @@ function autoExploreTick(onlyEmpire){
     const state=f.explore;
     if(state&&Number.isFinite(state.next)&&state.next>G.day&&state.next<=G.day+5)continue;
     const e=empOf(f);
-    if(!contexts.has(e.id))contexts.set(e.id,explorationContext(e));
+    if(!contexts.has(e.id))contexts.set(e.id,explorationContext(e,sensors));
     if(!reservations.has(e.id))reservations.set(e.id,explorationReservations(e));
     const ctx=contexts.get(e.id),taken=reservations.get(e.id);
     const waitKey=state&&state.target===null&&!Number.isInteger(state.home)?explorationWaitKey(e,ctx):null;
@@ -4709,16 +4735,25 @@ function autoExploreTick(onlyEmpire){
     if(valid&&(f.mv||G.day<(state.review||0))){state.next=G.day+.5;continue;}
     if(Number.isInteger(target)&&taken.get(target)===f.id)taken.delete(target);
     const graph=explorationGraph(e,f,ctx);
-    let best=null;
+    let best=null,contact=null;
     for(const id of ctx.frontier){
       const s=G.sys[id];
       if(s.surv.includes(e.id)||taken.has(id)||explorationBlock(e,f,id,ctx)||!Number.isFinite(graph.cost[id]))continue;
       const nearby=s.lanes.filter(n=>ctx.known.has(n)&&!G.sys[n].surv.includes(e.id)&&!taken.has(n)).length;
       const score=graph.cost[id]/(1+Math.min(3,nearby)*.06);
       if(!best||score<best.score||score===best.score&&id<best.id)best={id,score};
+      if(ctx.shared?.has(id)&&s.owner>=0&&!e.contact[s.owner]){
+        const other=G.emps[s.owner];
+        if(other&&!other.dead&&!other.wild&&!other.crisisSide&&s.planets.some(p=>p.owner===other.id&&p.col)&&
+           (!contact||score<contact.score||score===contact.score&&id<contact.id))contact={id,score};
+      }
     }
+    // Consider a short diplomatic detour only after the existing route, threat and supply checks.
+    if(contact&&contact.score<=90&&contact.score<=best.score+24)best=contact;
     if(valid&&best&&best.id!==target&&best.score>=graph.cost[target]*.7)best={id:target,score:graph.cost[target]};
     if(best){
+      if(best===contact&&f.explore?.target!==best.id&&typeof AIDiagnostics!=='undefined')
+        AIDiagnostics.note('scout-shared-target',e,G.emps[G.sys[best.id].owner],f.id+':'+best.id);
       f.path=(f.mv?[f.mv.to]:[]).concat(explorationPath(graph,best.id));
       f.explore={target:best.id,status:'travel',next:G.day+.5,review:G.day+12};
       f.auto=true;taken.set(best.id,f.id);delete f.stalled;delete f._stallSaid;
@@ -4760,7 +4795,7 @@ function restoreExploration(){
 
 function arrive(f, sys){
   const e = empOf(f);
-  if (!sys.seen.includes(e.id)) sys.seen.push(e.id);
+  rememberNativeChart(sys,e.id);
   // ilk temas
   for (const o of G.emps){
     if (o.id === e.id || o.dead) continue;
@@ -4811,7 +4846,7 @@ function arrive(f, sys){
      ayrıca artıyor (anomChance). */
   if(explorationEnabled(f)){
     const owner=explorationReservations(e).get(sys.id);
-    if(owner!==undefined&&owner!==f.id || explorationBlock(e,f,sys.id,explorationContext(e)))return;
+    if(owner!==undefined&&owner!==f.id || explorationBlock(e,f,sys.id,explorationContext(e,new Map())))return;
   }
   if (fleetHasRole(f,'bilim') && !sys.surv.includes(e.id))
     f.surv = Math.round(SCAN_BASE * (hasCivic(e,'scan') ? (1 - SCAN_HUNTER) : 1));
@@ -8474,7 +8509,7 @@ function serialize(){
        oluyordu — sınır/hakimiyet çizimi de bunlara dayandığı için
        harita yarım görünüyordu. */
     sys: G.sys.map(s=>({i:s.id, x:s.x, y:s.y, n:s.name, st:STARS.indexOf(s.star),
-      p:s.planets, l:s.lanes, o:s.owner, sv:s.surv, se:s.seen, q:s.queue,
+      p:s.planets, l:s.lanes, o:s.owner, sv:s.surv, se:s.seen, nc:s.nativeChart?.length?s.nativeChart:undefined, q:s.queue,
       an:s.anom, ak:s.anomK, d:s.def, sr:s.shareRev,
       b:s.built, w:s.work, ry:s.rally, lb:s.loopBuild,
       pu:s.pulsar, nb:s.nebulaS, wd:s.wander, wf:s.wanderFrom,
@@ -8658,6 +8693,7 @@ function applySaveData(d){
   G.sys = d.sys.map(s=>({
     id:s.i, x:s.x, y:s.y, name:s.n, star:STARS[s.st]||STARS[0], planets:s.p,
     lanes:s.l, owner:s.o, surv:s.sv, seen:s.se, queue:s.q, anom:s.an,
+    ...(Array.isArray(s.nc)?{nativeChart:[...new Set(s.nc.filter(id=>Number.isInteger(id)&&id>=0&&id<d.emps.length&&s.se.includes(id)))]}:{}),
     anomK:s.ak || 'sinyal', def:s.d||0, shareRev:s.sr,
     /* FAZ 77E: geri yüklenen alanlar */
     built:s.b, work:s.w, rally:s.ry, loopBuild:s.lb,

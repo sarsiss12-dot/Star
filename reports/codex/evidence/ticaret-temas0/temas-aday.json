@@ -1,0 +1,325 @@
+{
+  "save": "295d69aff6c9f4c3b1cbbd329601efa9b9cae62afd352597976cd4642236e546",
+  "baseline:shared": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    }
+  },
+  "baseline:none": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": false
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    }
+  },
+  "baseline:war": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": false
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    }
+  },
+  "baseline:blocked": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    }
+  },
+  "baseline:shareVis": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    }
+  },
+  "candidate:shared": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 4,
+        "path": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ],
+    "after": {
+      "day": 124,
+      "contact": true,
+      "reciprocal": true,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 4,
+      "stock": 1000,
+      "otherStock": 1000
+    }
+  },
+  "candidate:none": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": false
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    }
+  },
+  "candidate:war": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": false
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    }
+  },
+  "candidate:blocked": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    }
+  },
+  "candidate:shareVis": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 4,
+        "path": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ],
+    "after": {
+      "day": 124,
+      "contact": true,
+      "reciprocal": true,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 4,
+      "stock": 1000,
+      "otherStock": 1000
+    }
+  }
+}
