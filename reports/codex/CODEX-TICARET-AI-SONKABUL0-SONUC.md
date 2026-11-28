@@ -1,5 +1,7 @@
 # CODEX-TİCARET-AI-SONKABUL.0
 
+**TAMAM. 96h10p57 / MP.8.9b56 ticaret için doğrulanmış taban olarak kaldı.** Altı doğal kampanyada 1.239 fiziksel teslimat var. 27 kritik risk başlangıcında zamanında ve iki taraf için pozitif yeni teklif bulunmadı. Gözlemle doğrulanan oyun değişikliği olmadığı için p58 yayın adayı açılmadı. Ürün kodu yerine tekrar üretilebilir ekonomi, Save8 ve multiplayer kabul kapsamı genişletildi.
+
 ## 1. Kanonik başlangıç
 
 Başlangıç dalı ve PR #83 aynı uzak HEAD'i gösterdi, `e4ae69fb03fe603770d7206d95e2d1d321142751`. `320bb9c853f058384922a8b97a9fbc3ce6959c27` ile karşılaştırıldığında oynanabilir JavaScript, giriş HTML'i ve sürüm manifesti aynı. Çalışma `codex/stars-ticaret-ai-sonkabul0` dalında ve [taslak PR #84](https://github.com/sarsiss12-dot/Star/pull/84) üzerinde. Koşulan kimlik **96h10p57 / MP.8.9b56**, Save8 v8, MP paket 4, protokol 1.
@@ -100,13 +102,14 @@ Altı gözlemli koşu kontrolle ay ay aynı durum, yükleme, imza ve makbuz dizi
 |---|---:|---|
 | TA / TB / TR / TL / TZ | 31/0 | Fiziksel gönderi, anlık seçenek, ele geçirilmiş ve iptal edilmiş aktarma, kayıt-yeni oda, iki misafir onayı, karşı teklif, ret ve yenileme |
 | TZ genişletilmiş | 9/0 | B kısmi onayından sonra MP4, relay yeniden başlatma ve yeni oda. B ve C bekleyen oyları korudu. C dokununca dört hak ve tek sözleşme uygulandı |
+| Bekleyen izin yenilemesi | 3/0 | Yenileme maddesi ve teklif kimliği kayıttan yeni odaya korundu, yükleme kendi başına izin/Etki uygulamadı, C düğmeyle onaylayınca bitişten +360 |
 | TA genişletilmiş | 9/0 | Host → B, B → C, insan ↔ AI, gerçek kabul düğmeleri, yetkisiz C kabulünde ret ve sıfır stok hareketi |
 | SG / J / X | 15/0 | Tek ödeme, kayıp yanıt, fed oyu, ayna ve takviye |
 | I 500/16, 15 dk | 4/0 | İki ayrı misafir profili, 572 örnek, 30 olay, 0 kapalı pencere donması, sensör ve kayıt doğrulaması |
 | I 100/9, 8 dk | 4/0 | 332 örnek, 16 olay, 0 kapalı pencere donması, en büyük 7,7 oyun günü farkı, yeniden katılım ve kayıt eşitliği |
 | Fiziksel yük ve filo, 100/9 + 500/16 | 3/0 + 3/0 | Aynı ilerlemede gerçek filo emri ve yük, tam 12 enerji kesintisi ve teslimatı, tek makbuz, misafir aynası ve üçüncü tarafa gizlilik |
 
-Yerel üretim relay ve TLS vekili kullanıldı. TZ ikinci onay öncesi bağlantı kopması sonrası kısmi kararın korunduğunu ve mükerrer onayın ödeme uygulamadığını gösterdi. TR relay yeniden başlatma ve yeni oda sonrası yoldaki teslimatı bir kez doğruladı. TA üçüncü tarafın sözleşme ve konvoyu görmediğini doğruladı. Birleşik filo/kargo denemesinin ilk koşusu host gelen kutusunda misafir kayıt seçicisini aradı. İkinci koşu toplam stok değişimini kargo saydı ve aradaki ay gelirini de ölçtü. İki ham FAIL saklandı. Son koşu host'un gerçek gelen kutusunu kullandı ve stok hareketini her yükleme/teslimat çağrısının giriş ve çıkışında ayrı doğruladı. TB B'nin konvoy konumu ve gerçek ara liman geçişini host ile eşledi. [Chromium günlükleri](evidence/ticaret-ai-sonkabul0/multiplayer/)
+Yerel üretim relay ve TLS vekili kullanıldı. TZ ikinci onay öncesi bağlantı kopması sonrası kısmi kararın korunduğunu ve mükerrer onayın ödeme uygulamadığını gösterdi. TR relay yeniden başlatma ve yeni oda sonrası yoldaki teslimatı bir kez doğruladı. TA üçüncü tarafın sözleşme ve konvoyu görmediğini doğruladı. Birleşik filo/kargo denemesinin ilk koşusu host gelen kutusunda misafir kayıt seçicisini aradı. İkinci koşu toplam stok değişimini kargo saydı ve aradaki ay gelirini de ölçtü. Her iki başarısız yaklaşımın iki ölçekteki ham günlükleri saklandı. Ayrı yenileme kaydı ilk denemede başka testten gelen izin sözlüğünü varsaydı. İzole fikstür kendi sözlüğünü hazırladığında aynı teklif ve ekonomik denetimler geçti. Son koşu host'un gerçek gelen kutusunu kullandı ve stok hareketini her yükleme/teslimat çağrısının giriş ve çıkışında ayrı doğruladı. TB B'nin konvoy konumu ve gerçek ara liman geçişini host ile eşledi. [Chromium günlükleri](evidence/ticaret-ai-sonkabul0/multiplayer/)
 
 ## 15. Mobil arayüz
 
