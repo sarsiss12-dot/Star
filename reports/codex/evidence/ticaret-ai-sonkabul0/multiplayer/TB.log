@@ -1,0 +1,10 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[4,4],"mirrorEq":true,"revMs":577,"buildMs":807,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[4,4],"mirrorEq":true,"revMs":1166,"buildMs":1308,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":19.6,"p95":43.3,"max":43.3},"longtask":{"n":27,"med":79,"p95":100,"max":100},"heapMB":18,"dom":721,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":4,"med":29.7,"p95":185.6,"max":185.6},"refresh":{"n":2,"med":7.6,"p95":7.6,"max":7.6},"longtask":{"n":25,"med":68,"p95":93,"max":98},"builds":4,"deltas":3,"resyncs":0,"minGap":600,"heapMB":18,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":38,"joinErrors":0},"C":{"build":{"n":3,"med":23.1,"p95":206.9,"max":206.9},"refresh":{"n":2,"med":11.8,"p95":11.8,"max":11.8},"longtask":{"n":26,"med":85,"p95":107,"max":144},"builds":3,"deltas":3,"resyncs":0,"minGap":600,"heapMB":17,"dom":729,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":32,"joinErrors":0}}}
+PASS TB0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS B0 fikstür: h—n1—n2—[C n3]—n4—n5—[B n6] zinciri; izin yokken B → host rotası yok
+PASS B1 C gerçek masadan B'ye Transit İzni verir, B gelen kutusundan KABUL → izin + rota
+PASS B2 B gerçek masadan ▣ kargo → host KABUL; konvoy C'nin ara limanından (n3) geçer, tek teslim, yolda B aynası konumu host ile aynı
+PASS B3 ikinci kargo yolda iken C izni gerçek masadan geri alır → n3'ten aktarma yok, teslim yok, kimseye yazılmaz
+PASS B4 izin geri verilir, n3 gerçek sahiplik değişimiyle AI X'e geçer → eski izin X adına sayılmaz; teslim yok, X / C yük almaz
+GEÇEN: 6 KALAN: 0

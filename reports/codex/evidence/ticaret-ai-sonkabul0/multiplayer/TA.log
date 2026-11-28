@@ -1,0 +1,11 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[5,5],"mirrorEq":true,"revMs":519,"buildMs":676,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[5,5],"mirrorEq":true,"revMs":1067,"buildMs":1390,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":37.7,"p95":37.7,"max":37.7},"longtask":{"n":34,"med":87,"p95":133,"max":154},"heapMB":15,"dom":727,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":4,"med":27.8,"p95":298,"max":298},"refresh":{"n":3,"med":1.7,"p95":15.6,"max":15.6},"longtask":{"n":28,"med":77,"p95":112,"max":123},"builds":4,"deltas":4,"resyncs":0,"minGap":600,"heapMB":19,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":43,"joinErrors":0},"C":{"build":{"n":4,"med":104.5,"p95":221.8,"max":221.8},"refresh":{"n":2,"med":5,"p95":5,"max":5},"longtask":{"n":32,"med":91,"p95":159,"max":169},"builds":4,"deltas":4,"resyncs":0,"minGap":600,"heapMB":18,"dom":729,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":35,"joinErrors":0}}}
+PASS TA0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS A0 fikstür (host): limanlar, host ↔ B hiperhat, kapasite, kaynak, temas
+  A1q {"ok":true,"reasons":[],"dis":false}
+PASS A1 B (800×360) gerçek masa: 100 mineral + "Fiziksel Kargo ile Gönder" → host gelen kutusundan KABUL; dört aşama ayrı
+PASS A2 yükleme B'den düşer, varışta host'a bir kez yazılır, B aynası teslimi görür; ikinci teslim / ikinci kabul yok
+PASS A3 C varsayılan "Anlık Kaynak Takası" ile 40 enerji hediye teklifi → host KABUL → anlık; sözleşme / konvoy yok
+PASS A4 gizlilik: C aynasında B'nin sözleşmesi / konvoyu yok
+GEÇEN: 6 KALAN: 0

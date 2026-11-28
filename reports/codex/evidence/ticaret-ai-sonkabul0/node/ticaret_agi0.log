@@ -1,0 +1,36 @@
+✔ TİCARET-AĞ.1 düz kaynak takası anlık: liman izni / rota olmadan kabulde iki stok anında değişir, konvoy ve sözleşme açılmaz (687.836571ms)
+✔ 100 sistem, dokuz sıçrama, iki yabancı ara liman ve gerçek teslimat (530.417648ms)
+✔ ilk liman yıkıldı (620.75333ms)
+✔ ikinci liman yıkıldı (687.916913ms)
+✔ dört sıçramalık boşluk (667.568689ms)
+✔ askerî geçiş yeterli değil (781.746768ms)
+✔ abluka (511.893663ms)
+✔ ambargo (504.189619ms)
+✔ izin süresi doldu (506.674829ms)
+✔ liman üçüncü devlete devredildi (516.362649ms)
+✔ federasyon yasası üyelik boyunca aktarmaya izin verir (386.509781ms)
+✔ devralan devletin kendi izni, geri alma ve ayrı gezegen sahipliği (475.463849ms)
+✔ açık alternatif yol ve döngüsüz rota (260.101759ms)
+✔ yüklemeden önce çıkış kaybı iki stoğu da korur (463.530623ms)
+✔ yoldaki kargo çıkış limanının kaybından sonra da alıcıya ulaşır (315.308873ms)
+✔ varış devri meşru alıcının başka limanına tek teslimat yapar (368.855209ms)
+✔ tek takas imza, yükleme, Save8/RNG tekrarı, varış ve makbuz (893.483498ms)
+✔ kapalı rota ya da geri alınan işlem stok, izin ve sözleşme bırakmaz (339.681907ms)
+✔ yük kaybından sonra aynı gün ikinci ödeme ya da geri doğuş yok (477.09928ms)
+✔ tek pakette liman izni ve sevkiyat her sırada atomik imzalanır (483.558973ms)
+✔ ara liman kaybı aynı kargoyu konumu korunarak alternatif hatta geçirir (796.828089ms)
+✔ ara liman hakkı kesildiğinde 180 gün sonunda kargo bir kez kayba yazılır (1003.252986ms)
+✔ AI gerçek ihtiyacı açan belirli bir izin için bütçeli teklif verir (928.167417ms)
+✔ kapasitesi yetersiz alternatif limana kargo yönlendirilmez (804.323353ms)
+✔ misafir aynasında kişisel yük görünür, üçüncü taraf hattı ve keşfedilmemiş liman gizli kalır (917.990076ms)
+✔ aynı gün varış ile devir sırasını host belirler, ikinci tick stok yaratmaz (1081.809435ms)
+✔ izin iptali ile yükleme aynı gün işlenirken kargo bir defa düşülür (705.581933ms)
+✔ AI misafirin liman hakkını onun adına kabul edemez, izin host gelen kutusunda bekler (487.611719ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17234.282066

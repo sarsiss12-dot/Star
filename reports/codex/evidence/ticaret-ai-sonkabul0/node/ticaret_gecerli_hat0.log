@@ -1,0 +1,14 @@
+✓ G1 ilk çift (4) dönüş izni yüzünden geçersiz, ikinci (9) geçerli → 9 ile tek sözleşme; iki yük birer kez teslim
+✓ G2 ilk çift zaten geçerli (ortak da izinli) → alternatif denenmez, 4 ile sözleşme
+✓ G3 iki çift de geçersiz → 1–2 sözleşmesi yok, eski ret (bekleme trade-quote-rejected)
+✓ G4 alternatif liman ortakça bilinmiyor → sözleşme yok
+✓ G5 savaş → siyasi kapı, sözleşme yok
+✓ G6 ambargo → sözleşme yok
+✓ G7 başlatanın bütün stoku yok → 1–2 sözleşmesi yok
+✓ G8 alternatif rotanın kapasitesi düşük → yük yol kapasitesini aşmaz
+✓ G9 ortak alternatif teklifi reddeder (aiRespond red) → zorla kabul yok, sözleşme yok, bekleme yazılır
+✓ G10 aynı ay ikinci tur ve ertesi gün → ikinci sözleşme yok
+✓ G11 Save8 kaydı → yükle → karar: kayıtsız dünyayla aynı sonuç
+✓ G12 oyuncu–AI: alternatif çiftle teklif oyuncunun gelen kutusuna; kabulsüz sözleşme / stok değişimi yok
+✓ G13 bütçe: alternatif denemesi ortak bütçeden düşer, en çok 3 aday
+GEÇEN: 13 KALAN: 0

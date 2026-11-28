@@ -1,0 +1,9 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[5,5],"mirrorEq":true,"revMs":628,"buildMs":913,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[5,5],"mirrorEq":true,"revMs":1184,"buildMs":1410,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":74.8,"p95":74.8,"max":74.8},"longtask":{"n":31,"med":92,"p95":115,"max":143},"heapMB":22,"dom":741,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":3,"med":68.1,"p95":310.1,"max":310.1},"refresh":{"n":2,"med":15.3,"p95":15.3,"max":15.3},"longtask":{"n":34,"med":85,"p95":108,"max":113},"builds":3,"deltas":4,"resyncs":0,"minGap":600,"heapMB":19,"dom":711,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":41,"joinErrors":0},"C":{"build":{"n":4,"med":34.6,"p95":202,"max":202},"refresh":{"n":2,"med":12.8,"p95":12.8,"max":12.8},"longtask":{"n":32,"med":99,"p95":146,"max":248},"builds":4,"deltas":4,"resyncs":0,"minGap":600,"heapMB":19,"dom":719,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":36,"joinErrors":0}}}
+PASS TL0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 11; misafir gerçek STARS arayüzünde
+PASS TL1 B liman izni verir, C reddeder ve hiçbir hak oluşmaz
+PASS TL2 C izin ister, B kabul eder, iki misafir aynı yön ve süreyi görür
+PASS TL3 izni veren misafir masadan geri alır
+PASS TL4 karşı teklif, kayıtlı izin ve süre sonu
+GEÇEN: 5 KALAN: 0

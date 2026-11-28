@@ -1,0 +1,20 @@
+✓ unknown or unsurveyed system never reveals suitability
+✓ survey alone in an old save cannot reveal hidden current worlds
+✓ visible surveyed vacant world creates a hollow-diamond knowledge flag
+✓ visible colony and vacant world can coexist as distinct shape flags
+✓ hidden colonization or destruction cannot update the last observed marker
+✓ re-observation removes a world that is no longer suitable
+✓ shared seen information without an own survey does not reveal habitat
+✓ reading marker knowledge is pure and never scans hidden current planet data
+✓ habitat knowledge persists in Save v8; malformed optional keys do not inject state
+✓ real native Canvas differentiates hollow diamond and filled square pixels
+✓ real View.draw shows the marker at zoom 0.12 independently of name labels
+✓ real View.draw shows the marker at zoom 0.18 independently of name labels
+✓ real View.draw shows the marker at zoom 0.35 independently of name labels
+✓ real View.draw shows the marker at zoom 0.7 independently of name labels
+✓ political overview remains uncluttered below the marker LOD threshold
+✓ the existing report X hides only the completed battle, preserving results and fleets
+✓ dismissed report persists after v8 load and a new battle obtains a fresh key
+✓ stale X token cannot hide another battle or an active report
+✓ legacy save without dismissal preferences remains valid
+GEÇEN: 19 KALAN: 0

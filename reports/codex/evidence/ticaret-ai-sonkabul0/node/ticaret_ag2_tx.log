@@ -1,0 +1,7 @@
+✓ X1 yazma kümesi (freight): değişen her nesne daraltılmış kapsamda, kök ilkel alan değişmez
+✓ X1 yazma kümesi (transit): değişen her nesne daraltılmış kapsamda, kök ilkel alan değişmez
+✓ X1 yazma kümesi (mixed): değişen her nesne daraltılmış kapsamda, kök ilkel alan değişmez
+✓ X2 geri alma: her hata kancasında (10 kanca × 3 biçim) işlem false, Save8 bayt-bayt ve RNG aynı
+✓ X3 başarı eşdeğerliği: daraltılmış ve tam işlem aynı Save8 / RNG; ikinci yürütme ikinci sözleşme üretmez
+✓ X4 kapsam seçimi: insan taraf, res maddesi ve G.commerce yokken tam işlem
+GEÇEN: 6 KALAN: 0
