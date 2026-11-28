@@ -1805,7 +1805,7 @@ else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it)
     const cur=()=>root.__mpCur,RH=e=>cur().remoteHuman(e),NOTE=(id,m,c)=>cur().note(id,m,c),ATH=(...a)=>cur().aiToHuman(...a),ST={get blockedAI(){return cur().stats.blockedAI;},set blockedAI(v){cur().stats.blockedAI=v;}};
     const vision0=updateVision;
     updateVision=function(){const result=vision0.apply(this,arguments);for(const e of G.emps)if(RH(e)){
-      const ctx=humanVisionContext(e),k=humanMapKnowledge(e,ctx);for(const id of ctx.known)if(!G.sys[id].seen.includes(e.id))G.sys[id].seen.push(e.id);
+      const ctx=humanVisionContext(e,true),k=humanMapKnowledge(e,ctx);for(const id of ctx.known)if(!G.sys[id].seen.includes(e.id))G.sys[id].seen.push(e.id);
       e.mapHabitats=k.habitats;e.mapOwners=k.owners;
     }return result;};
     const month0=monthTick;monthTick=function(){const r=month0.apply(this,arguments);for(const e of G.emps)if(RH(e)&&!e.dead)remoteDecisionTick(e);return r;};
@@ -2048,7 +2048,11 @@ else if(r.give.concat(r.want).some(it=>it.t!=='res'&&treatyAlreadyActive(a,b,it)
      devletleri; tek oyunculu oyunda ve insan yoksa hiçbir şey yazmaz. RNG yok. */
   function observeHumans(){let n=0;
     for(const e of G.emps){if(!remoteHuman(e)||e.dead)continue;
-      for(const id of actorVision(e)){const s=G.sys[id];if(s&&!s.seen.includes(e.id)){s.seen.push(e.id);n++;}}
+      const panopt=hasCivic(e,'panopt');
+      for(const id of actorVision(e)){const s=G.sys[id];if(!s)continue;
+        if(!s.seen.includes(e.id))n++;
+        if(!panopt)rememberNativeChart(s,e.id);else if(!s.seen.includes(e.id))s.seen.push(e.id);
+      }
       if(typeof AI_VIEW_CACHE!=='undefined')AI_VIEW_CACHE.delete(e);}
     return n;}
   /* ---------- MP.1 lobi host API'si (ağdan erişilemez) ---------- */

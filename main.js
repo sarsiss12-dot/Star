@@ -3100,7 +3100,7 @@ function setupGame(cfg){
     if (hasCivic(e,'fortress')){ hw.col.b.kale = (hw.col.b.kale||0) + 1; s.def = sysDefense(s); }
 
     // komşu sistemleri gör
-    s.lanes.forEach(l => { if(!G.sys[l].seen.includes(e.id)) G.sys[l].seen.push(e.id); });
+    for(const l of s.lanes)rememberNativeChart(G.sys[l],e.id);
 
     // başlangıç filoları
     const guardShips = (e.origin === 'gocebe')
@@ -4273,7 +4273,7 @@ function updateVision(){
   }
   G.vis = seen;
   refreshSharedVision();
-  for (const id of seen) if (!G.sys[id].seen.includes(0)) G.sys[id].seen.push(0);
+  for (const id of seen) rememberNativeChart(G.sys[id],0);
   observePlayerHabitats();
 }
 /* 95E.3: treaty directions stay separate; cached native sensors never relay
@@ -4294,6 +4294,26 @@ function nativeSensorVision(e){
     if(d<range&&!s.nebulaS)for(const n of s.lanes)q.push([n,d+1]);
   }
   return visible;
+}
+function sharedSensorCoverage(e, cache){
+  if(!e.visionFrom&&!e.shareVis)return null;
+  let shared=null;
+  for(const id of new Set([...Object.keys(e.visionFrom||{}),...Object.keys(e.shareVis||{})])){
+    const giver=G.emps[id];if(!sensorShareActive(e,giver))continue;
+    let view=cache?.get(giver.id);
+    if(!view){view=nativeSensorVision(giver);cache?.set(giver.id,view);}
+    shared||=new Set();
+    for(const sid of view)shared.add(sid);
+  }
+  return shared;
+}
+// A recipient may retain the chart, but may only pass on systems it mapped itself.
+function nativeChartKnown(s,id){
+  return s.surv.includes(id)||!!s.nativeChart?.includes(id);
+}
+function rememberNativeChart(s,id){
+  if(!s.seen.includes(id))s.seen.push(id);
+  if(!nativeChartKnown(s,id))(s.nativeChart||=[]).push(id);
 }
 function refreshSharedVision(){
   const p=G.p,providers=new Set([...Object.keys(p?.visionFrom||{}),...Object.keys(p?.shareVis||{})]);
@@ -4329,7 +4349,7 @@ function drawHabitatMarker(g,x,y,r,mask){
 function pSeen(s){
   if (s.seen.includes(0)) return true;
   const sv = G.p && G.p.shareVis;
-  if (sv) for (const id in sv) if (sv[id] && sensorShareActive(G.p,G.emps[id]) && s.seen.includes(+id)) return true;
+  if (sv) for (const id in sv) if (sv[id] && sensorShareActive(G.p,G.emps[id]) && nativeChartKnown(s,+id)) return true;
   return false;
 }
 function pVis(s){
@@ -4571,14 +4591,10 @@ function explorationContext(e, sensorCache){
     depth.set(id,d);visible.add(id);
     if(d<range&&!s.nebulaS)for(const n of s.lanes)q.push([n,d+1]);
   }
-  let shared;
-  if(sensorCache&&e.ai){
-    for(const id of new Set([...Object.keys(e.visionFrom||{}),...Object.keys(e.shareVis||{})])){
-      const giver=G.emps[id];if(!sensorShareActive(e,giver))continue;
-      if(!sensorCache.has(giver.id))sensorCache.set(giver.id,nativeSensorVision(giver));
-      shared||=new Set();
-      for(const sid of sensorCache.get(giver.id)){if(!visible.has(sid))shared.add(sid);visible.add(sid);}
-    }
+  const shared=sensorCache&&e.ai?sharedSensorCoverage(e,sensorCache):null;
+  if(shared)for(const sid of shared){
+    if(visible.has(sid))shared.delete(sid);
+    else visible.add(sid);
   }
   for(const s of G.sys){
     if((e.id===0?pSeen(s):s.seen.includes(e.id)) || visible.has(s.id) || e.id===0&&pVis(s))known.add(s.id);
@@ -4597,12 +4613,13 @@ function explorationContext(e, sensorCache){
   return {known,visible,shared,frontier,blocked,pirates,gates,supply:new Map(),supplyNodes:new Map()};
 }
 /* One observer contract for remote humans; native providers never relay third-party vision. */
-function humanVisionContext(e){
+function humanVisionContext(e, rememberNative=false){
   const ctx=explorationContext(e);
+  if(rememberNative&&!hasCivic(e,'panopt'))for(const id of ctx.visible)rememberNativeChart(G.sys[id],e.id);
   for(const id of new Set([...Object.keys(e.visionFrom||{}),...Object.keys(e.shareVis||{})])){
     const giver=G.emps[id];if(!sensorShareActive(e,giver))continue;
     for(const sid of nativeSensorVision(giver)){ctx.visible.add(sid);ctx.known.add(sid);}
-    if(e.shareVis?.[id])for(const sys of G.sys)if(sys.seen.includes(+id))ctx.known.add(sys.id);
+    if(e.shareVis?.[id])for(const sys of G.sys)if(nativeChartKnown(sys,+id))ctx.known.add(sys.id);
   }
   return ctx;
 }
@@ -4735,6 +4752,8 @@ function autoExploreTick(onlyEmpire){
     if(contact&&contact.score<=90&&contact.score<=best.score+24)best=contact;
     if(valid&&best&&best.id!==target&&best.score>=graph.cost[target]*.7)best={id:target,score:graph.cost[target]};
     if(best){
+      if(best===contact&&f.explore?.target!==best.id&&typeof AIDiagnostics!=='undefined')
+        AIDiagnostics.note('scout-shared-target',e,G.emps[G.sys[best.id].owner],f.id+':'+best.id);
       f.path=(f.mv?[f.mv.to]:[]).concat(explorationPath(graph,best.id));
       f.explore={target:best.id,status:'travel',next:G.day+.5,review:G.day+12};
       f.auto=true;taken.set(best.id,f.id);delete f.stalled;delete f._stallSaid;
@@ -4776,7 +4795,7 @@ function restoreExploration(){
 
 function arrive(f, sys){
   const e = empOf(f);
-  if (!sys.seen.includes(e.id)) sys.seen.push(e.id);
+  rememberNativeChart(sys,e.id);
   // ilk temas
   for (const o of G.emps){
     if (o.id === e.id || o.dead) continue;
@@ -8490,7 +8509,7 @@ function serialize(){
        oluyordu — sınır/hakimiyet çizimi de bunlara dayandığı için
        harita yarım görünüyordu. */
     sys: G.sys.map(s=>({i:s.id, x:s.x, y:s.y, n:s.name, st:STARS.indexOf(s.star),
-      p:s.planets, l:s.lanes, o:s.owner, sv:s.surv, se:s.seen, q:s.queue,
+      p:s.planets, l:s.lanes, o:s.owner, sv:s.surv, se:s.seen, nc:s.nativeChart?.length?s.nativeChart:undefined, q:s.queue,
       an:s.anom, ak:s.anomK, d:s.def, sr:s.shareRev,
       b:s.built, w:s.work, ry:s.rally, lb:s.loopBuild,
       pu:s.pulsar, nb:s.nebulaS, wd:s.wander, wf:s.wanderFrom,
@@ -8674,6 +8693,7 @@ function applySaveData(d){
   G.sys = d.sys.map(s=>({
     id:s.i, x:s.x, y:s.y, name:s.n, star:STARS[s.st]||STARS[0], planets:s.p,
     lanes:s.l, owner:s.o, surv:s.sv, seen:s.se, queue:s.q, anom:s.an,
+    ...(Array.isArray(s.nc)?{nativeChart:[...new Set(s.nc.filter(id=>Number.isInteger(id)&&id>=0&&id<d.emps.length&&s.se.includes(id)))]}:{}),
     anomK:s.ak || 'sinyal', def:s.d||0, shareRev:s.sr,
     /* FAZ 77E: geri yüklenen alanlar */
     built:s.b, work:s.w, rally:s.ry, loopBuild:s.lb,

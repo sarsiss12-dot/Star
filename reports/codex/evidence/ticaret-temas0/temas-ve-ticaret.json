@@ -1,0 +1,2498 @@
+{
+  "save": "295d69aff6c9f4c3b1cbbd329601efa9b9cae62afd352597976cd4642236e546",
+  "baseline:shared": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    },
+    "trade": null
+  },
+  "baseline:none": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": false,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    },
+    "trade": null
+  },
+  "baseline:war": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": false,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    },
+    "trade": null
+  },
+  "baseline:blocked": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    },
+    "trade": null
+  },
+  "baseline:shareVis": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    },
+    "trade": null
+  },
+  "baseline:trade": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 62,
+      "otherStock": 850
+    },
+    "trade": {
+      "pactDay": null,
+      "sign": null,
+      "booked": [],
+      "diagnostics": {
+        "ports": null,
+        "offer": null,
+        "seen": [
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            1,
+            3
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "rel": [
+          65,
+          65
+        ],
+        "allowsPact": true,
+        "permit": {
+          "1": 480,
+          "3": 480
+        }
+      },
+      "notes": {
+        "counts": {
+          "trade-no-safe-route": 4,
+          "trade-no-contact": 152
+        },
+        "samples": [
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 2,
+            "code": "trade-no-safe-route",
+            "detail": "{\"total\":1,\"tried\":1,\"exhausted\":false,\"limited\":false}"
+          },
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 3,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 4,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 3,
+            "code": "trade-no-safe-route",
+            "detail": "{\"total\":1,\"tried\":1,\"exhausted\":false,\"limited\":false}"
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 4,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 4,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 7,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 7,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 7,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 7,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 7,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 7,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 8,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 8,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 8,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 8,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 8,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 9,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 9,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 9,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 9,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 10,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 10,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 10,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 11,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 11,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 12,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 2,
+            "code": "trade-no-safe-route",
+            "detail": "{\"total\":1,\"tried\":1,\"exhausted\":false,\"limited\":false}"
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 3,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 4,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 3,
+            "code": "trade-no-safe-route",
+            "detail": "{\"total\":1,\"tried\":1,\"exhausted\":false,\"limited\":false}"
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 4,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 4,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          }
+        ]
+      },
+      "stocks": {
+        "a": {
+          "min": 62,
+          "ene": 850,
+          "yiy": 1000,
+          "ala": 1000,
+          "ara": 1000,
+          "tuk": 1000,
+          "etk": 1000
+        },
+        "c": {
+          "min": 850,
+          "ene": 90,
+          "yiy": 1000,
+          "ala": 1000,
+          "ara": 1000,
+          "tuk": 1000,
+          "etk": 1000
+        }
+      },
+      "gate": "Diplomatik temas kapalı"
+    }
+  },
+  "candidate:shared": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 4,
+        "path": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ],
+    "after": {
+      "day": 124,
+      "contact": true,
+      "reciprocal": true,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 4,
+      "stock": 1000,
+      "otherStock": 1000
+    },
+    "trade": null
+  },
+  "candidate:none": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": false,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    },
+    "trade": null
+  },
+  "candidate:war": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": false,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    },
+    "trade": null
+  },
+  "candidate:blocked": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 1,
+        "path": [
+          1
+        ]
+      },
+      {
+        "day": 150,
+        "target": 2,
+        "path": [
+          2
+        ]
+      }
+    ],
+    "after": {
+      "day": 170,
+      "contact": false,
+      "reciprocal": false,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 2,
+      "stock": 1000,
+      "otherStock": 1000
+    },
+    "trade": null
+  },
+  "candidate:shareVis": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 4,
+        "path": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ],
+    "after": {
+      "day": 124,
+      "contact": true,
+      "reciprocal": true,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 4,
+      "stock": 1000,
+      "otherStock": 1000
+    },
+    "trade": null
+  },
+  "candidate:trade": {
+    "before": {
+      "day": 120,
+      "contact": false,
+      "human": true,
+      "trade": "Diplomatik temas kapalı"
+    },
+    "orders": [
+      {
+        "day": 120,
+        "target": 4,
+        "path": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ],
+    "after": {
+      "day": 124,
+      "contact": true,
+      "reciprocal": true,
+      "rng": -951432214,
+      "owner": 3,
+      "system": 4,
+      "stock": 62,
+      "otherStock": 850
+    },
+    "trade": {
+      "pactDay": 180,
+      "sign": {
+        "id": 1,
+        "day": 330,
+        "legs": [
+          {
+            "t": "freight",
+            "source": 0,
+            "target": 4,
+            "every": 30,
+            "months": 12,
+            "r": "ene",
+            "v": 14.5,
+            "e": 1,
+            "to": 3
+          },
+          {
+            "t": "freight",
+            "source": 4,
+            "target": 0,
+            "every": 30,
+            "months": 12,
+            "r": "min",
+            "v": 15.9,
+            "e": 3,
+            "to": 1
+          }
+        ],
+        "stockAtSign": {
+          "a": {
+            "min": 102,
+            "ene": 850,
+            "yiy": 1000,
+            "ala": 1000,
+            "ara": 1000,
+            "tuk": 1000,
+            "etk": 960
+          },
+          "c": {
+            "min": 810,
+            "ene": 90,
+            "yiy": 1000,
+            "ala": 1000,
+            "ara": 1000,
+            "tuk": 1000,
+            "etk": 1000
+          }
+        }
+      },
+      "booked": [
+        {
+          "id": 1,
+          "receipt": 1,
+          "status": "delivered",
+          "started": 332,
+          "finished": 346,
+          "from": 1,
+          "to": 3,
+          "r": "ene",
+          "loaded": 14.5,
+          "paid": 14.5,
+          "route": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "id": 2,
+          "receipt": 2,
+          "status": "delivered",
+          "started": 332,
+          "finished": 346,
+          "from": 3,
+          "to": 1,
+          "r": "min",
+          "loaded": 15.9,
+          "paid": 15.9,
+          "route": [
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "id": 3,
+          "receipt": 3,
+          "status": "delivered",
+          "started": 362,
+          "finished": 376,
+          "from": 1,
+          "to": 3,
+          "r": "ene",
+          "loaded": 14.5,
+          "paid": 14.5,
+          "route": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "id": 4,
+          "receipt": 4,
+          "status": "delivered",
+          "started": 362,
+          "finished": 376,
+          "from": 3,
+          "to": 1,
+          "r": "min",
+          "loaded": 15.9,
+          "paid": 15.9,
+          "route": [
+            4,
+            3,
+            2,
+            1,
+            0
+          ]
+        }
+      ],
+      "diagnostics": {
+        "ports": {
+          "source": 0,
+          "target": 4,
+          "distance": 208,
+          "alts": []
+        },
+        "offer": {
+          "from": 1,
+          "to": 3,
+          "give": [
+            {
+              "t": "freight",
+              "r": "ene",
+              "v": 14.5,
+              "source": 0,
+              "target": 4,
+              "every": 30,
+              "months": 12
+            }
+          ],
+          "want": [
+            {
+              "t": "freight",
+              "r": "min",
+              "v": 15.9,
+              "source": 4,
+              "target": 0,
+              "every": 30,
+              "months": 12
+            }
+          ]
+        },
+        "seen": [
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            1,
+            3
+          ],
+          [
+            3,
+            1
+          ]
+        ],
+        "rel": [
+          65,
+          65
+        ],
+        "allowsPact": true,
+        "permit": {
+          "1": 480,
+          "3": 480
+        }
+      },
+      "notes": {
+        "counts": {
+          "trade-no-safe-route": 4,
+          "trade-pact-agreed": 1,
+          "trade-no-contact": 130,
+          "trade-signed": 1,
+          "trade-agreed": 1
+        },
+        "samples": [
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 2,
+            "code": "trade-no-safe-route",
+            "detail": "{\"total\":1,\"tried\":1,\"exhausted\":false,\"limited\":false}"
+          },
+          {
+            "day": 180,
+            "actor": 1,
+            "partner": 3,
+            "code": "trade-pact-agreed",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 3,
+            "code": "trade-no-safe-route",
+            "detail": "{\"total\":1,\"tried\":1,\"exhausted\":false,\"limited\":false}"
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 4,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 2,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 4,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 3,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 4,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 5,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 6,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 7,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 7,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 7,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 7,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 7,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 7,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 8,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 8,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 8,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 8,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 8,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 9,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 9,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 9,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 9,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 10,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 10,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 10,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 11,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 11,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 180,
+            "actor": 12,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 2,
+            "code": "trade-no-safe-route",
+            "detail": "{\"total\":1,\"tried\":1,\"exhausted\":false,\"limited\":false}"
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 3,
+            "code": "trade-signed",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 1,
+            "partner": 3,
+            "code": "trade-agreed",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 3,
+            "code": "trade-no-safe-route",
+            "detail": "{\"total\":1,\"tried\":1,\"exhausted\":false,\"limited\":false}"
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 4,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 2,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 4,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 3,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 5,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 4,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 6,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 5,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 6,
+            "partner": 7,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 6,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 6,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 6,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 6,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 6,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 6,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 7,
+            "partner": 8,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 7,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 7,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 7,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 7,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 7,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 8,
+            "partner": 9,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 8,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 8,
+            "partner": 11,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 8,
+            "partner": 12,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 8,
+            "partner": 0,
+            "code": "trade-no-contact",
+            "detail": ""
+          },
+          {
+            "day": 330,
+            "actor": 9,
+            "partner": 10,
+            "code": "trade-no-contact",
+            "detail": ""
+          }
+        ]
+      },
+      "stocks": {
+        "a": {
+          "min": 133.8,
+          "ene": 821,
+          "yiy": 1000,
+          "ala": 1000,
+          "ara": 1000,
+          "tuk": 1000,
+          "etk": 960
+        },
+        "c": {
+          "min": 778.2,
+          "ene": 119,
+          "yiy": 1000,
+          "ala": 1000,
+          "ara": 1000,
+          "tuk": 1000,
+          "etk": 1000
+        }
+      },
+      "gate": null
+    }
+  }
+}

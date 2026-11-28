@@ -4649,6 +4649,8 @@ function aiIntelPactTick(){
               cls:'sci', pause:false, title:'Casusluk Ağı Paktı',
               sub:e.name + ' istihbarat ağlarını seninle birleştirmek istiyor',
               key:'pact:' + e.id});
+        } else if(!o.ai){
+          aiNegotiate(e,o,[{t:'spynet'}],[],true);
         } else {
           /* AI–AI: doğrudan kurulur */
           e.spynet = e.spynet || {}; o.spynet = o.spynet || {};
@@ -4668,6 +4670,8 @@ function aiIntelPactTick(){
               cls:'sci', pause:false, title:'Sensör Anlaşması',
               sub:e.name + ' harita görüşünü paylaşmak istiyor',
               key:'pact:' + e.id});
+        } else if(!o.ai){
+          aiNegotiate(e,o,[{t:'intel'}],[{t:'intel'}],true);
         } else {
           e.visionFrom = e.visionFrom || {}; o.visionFrom = o.visionFrom || {};
           e.visionFrom[o.id] = true; o.visionFrom[e.id] = true;

@@ -35,7 +35,7 @@ const raw=h.run('serialize()');
 const options={baseline,candidate};
 const list={};
 for(const [arm,root] of Object.entries(options)){
- for(const condition of ['shared','none','war','blocked','shareVis']){
+ for(const condition of ['shared','none','war','blocked','shareVis','trade']){
   const w=runtime({root});
   w.sb.raw=raw;w.sb.mode=condition;
   assert(w.run('deserialize(raw)'),arm);
@@ -45,7 +45,20 @@ for(const [arm,root] of Object.entries(options)){
   if(mode==='shareVis'){a.visionFrom={};a.shareVis={2:true};b.shareVis={1:true};}
   if(mode==='war'){a.war[2]=b.war[1]=true;}
   if(mode==='blocked'){G.sys[2].lanes=[1];G.sys[3].lanes=[4];}
-  var before={day:G.day,contact:!!a.contact[3],human:humanVisionContext(a).visible.has(4)};
+  if(mode==='trade'){
+    c.visionFrom[b.id]=true;
+    newFleet(b,1,[{c:'bil'}],'Ticari koridor gözlemi');
+    for(const e of [a,c]){
+      const grant={from:b.id,to:e.id,give:[{t:'portTransit'}],want:[]};
+      if(!executeDeal(grant))throw Error(dealQuote(grant).reasons.join(', '));
+    }
+    for(const r of Commerce.resources)b.res[r]=0;
+    a.res.ene=850;a.res.min=62;c.res.ene=90;c.res.min=850;
+    a.inc={ene:30,min:-8};c.inc={ene:-8,min:30};
+  }
+  var before={day:G.day,contact:!!a.contact[3],human:humanVisionContext(a).visible.has(4),
+    trade:Commerce.pairGate(a,c)};
+
   var orders=[],last;
   for(let i=0;i<100;i++){
    autoExploreTick(1);
@@ -55,8 +68,26 @@ for(const [arm,root] of Object.entries(options)){
   }
   var after={day:G.day,contact:!!a.contact[3],reciprocal:!!c.contact[1],rng:RND_STATE,
     owner:G.sys[4].owner,system:f.sys,stock:a.res.min,otherStock:c.res.min};
+  var trade=null;
+  if(mode==='trade'){
+    G.day=180;visionTick();AIDiagnostics.enabled=true;
+    const ports=Commerce.aiPorts(a,c,{routes:96});
+    const offer=ports?Commerce.aiTerms(a,c,Commerce.aiBalance(a),Commerce.aiBalance(c),ports):null;
+    const diagnostics={ports,offer,seen:G.sys.slice(0,5).map(s=>s.seen),rel:[a.rel[c.id],c.rel[a.id]],
+      allowsPact:canPact(a,c),permit:b.portTransit};
+    Commerce.aiTick();
+    const pactDay=a.pact[c.id]?G.day:null;
+    G.day=330;Commerce.aiTick();
+    const contract=G.commerce.contracts.find(k=>[k.a,k.b].includes(a.id)&&[k.a,k.b].includes(c.id));
+    const sign=contract?{id:contract.id,day:contract.born,legs:contract.legs,stockAtSign:{a:{...a.res},c:{...c.res}}}:null;
+    for(let i=0;i<100;i++){G.day+=.5;Commerce.tick(.5);}
+    const booked=G.commerce.convoys.filter(v=>v.contract===contract?.id).map(v=>({id:v.id,receipt:v.receipt,
+      status:v.status,started:v.started,finished:v.finished,from:v.e,to:v.to,r:v.r,loaded:v.loaded,
+      paid:v.delivered,route:v.route}));
+    trade={pactDay,sign,booked,diagnostics,notes:AIDiagnostics.report(),stocks:{a:a.res,c:c.res},gate:Commerce.pairGate(a,c)};
+  }
   `);
-  list[arm+':'+condition]=JSON.parse(w.run('JSON.stringify({before,orders,after})'));
+  list[arm+':'+condition]=JSON.parse(w.run('JSON.stringify({before,orders,after,trade})'));
  }
 }
 const first=key=>list[key].orders[0]?.target;
@@ -73,4 +104,18 @@ if(process.env.STARS_EXPECT_CONTACT==='1'){
  }
  for(const condition of ['none','war','blocked'])assert.notEqual(first('candidate:'+condition),4);
  assert.equal(list['candidate:blocked'].after.contact,false);
+ const trade=list['candidate:trade'].trade;
+ assert.equal(list['baseline:trade'].trade.sign,null);
+ assert(trade.pactDay&&trade.sign);
+ assert.equal(trade.booked.length,4);
+ assert.equal(new Set(trade.booked.map(v=>v.receipt)).size,4);
+ assert.equal(trade.stocks.a.ene,821);
+ assert.equal(trade.stocks.c.ene,119);
+ assert(Math.abs(trade.stocks.a.min-trade.sign.stockAtSign.a.min-31.8)<1e-6);
+ assert(Math.abs(trade.sign.stockAtSign.c.min-trade.stocks.c.min-31.8)<1e-6);
+ for(const v of trade.booked){
+  assert.equal(v.status,'delivered');
+  assert.equal(v.receipt,v.id);
+  assert.equal(v.paid,v.loaded);
+ }
 }
