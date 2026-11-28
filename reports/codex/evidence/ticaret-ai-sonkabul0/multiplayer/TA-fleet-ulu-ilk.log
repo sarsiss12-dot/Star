@@ -1,0 +1,21 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[5,5],"mirrorEq":true,"revMs":284,"buildMs":329,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[4,4],"mirrorEq":true,"revMs":427,"buildMs":515,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":4,"med":10.2,"p95":41.1,"max":41.1},"longtask":{"n":37,"med":56,"p95":80,"max":104},"heapMB":18,"dom":734,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":5,"med":48.4,"p95":149.3,"max":149.3},"refresh":{"n":0},"longtask":{"n":9,"med":55,"p95":60,"max":60},"builds":5,"deltas":4,"resyncs":0,"minGap":600,"heapMB":19,"dom":656,"intervals":3,"timeouts":2,"notes":0,"results":3,"packets":41,"joinErrors":0},"C":{"build":{"n":4,"med":23,"p95":40.2,"max":40.2},"refresh":{"n":1,"med":2.5,"p95":2.5,"max":2.5},"longtask":{"n":5,"med":51,"p95":56,"max":56},"builds":4,"deltas":3,"resyncs":0,"minGap":600,"heapMB":18,"dom":716,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":33,"joinErrors":0}}}
+PASS TA0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 22; misafir gerçek STARS arayüzünde
+PASS A0 fikstür (host): limanlar, host ↔ B hiperhat, kapasite, kaynak, temas
+NOT RUN A1 B (800×360) gerçek masa: 100 mineral + "Fiziksel Kargo ile Gönder" → host gelen kutusundan KABUL; dört aşama ayrı
+NOT RUN A2 yükleme B'den düşer, varışta host'a bir kez yazılır, B aynası teslimi görür; ikinci teslim / ikinci kabul yok
+NOT RUN A3 C varsayılan "Anlık Kaynak Takası" ile 40 enerji hediye teklifi → host KABUL → anlık; sözleşme / konvoy yok
+NOT RUN A4 gizlilik: C aynasında B'nin sözleşmesi / konvoyu yok
+NOT RUN A5 host → B kaynak teklifi, B karttan kabul, tek aktarım
+NOT RUN A6 B → C kaynak teklifi, C karttan kabul, tek aktarım
+NOT RUN A7 insan ↔ AI, AI kaynağı karttan kabul edilince aktarılır
+FAIL A8 yük, filo emri ve ayna aynı galaksi ilerlemesinde
+page.waitForFunction: Timeout 30000ms exceeded.
+    at wait (/workspace/Star-ticaret-sonkabul/tests/browser-mp8.cjs:76:40)
+    at accept (/workspace/Star-ticaret-sonkabul/tests/helpers/ticaret-ai-sonkabul0-mp.cjs:29:11)
+    at /workspace/Star-ticaret-sonkabul/tests/helpers/ticaret-ai-sonkabul0-mp.cjs:86:11
+    at async test (/workspace/Star-ticaret-sonkabul/tests/browser-mp8.cjs:71:162)
+    at async module.exports (/workspace/Star-ticaret-sonkabul/tests/helpers/ticaret-ai-sonkabul0-mp.cjs:82:40)
+    at async /workspace/Star-ticaret-sonkabul/tests/browser-mp8.cjs:563:53
+GEÇEN: 2 KALAN: 1

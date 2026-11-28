@@ -1,0 +1,92 @@
+[
+  {
+    "file": "daily-s500-11.json",
+    "totalMonths": 120,
+    "rng": 2072463910,
+    "sha256": "379a61ccea50db0c072994cc0b3a122874c5ff1b878fb40a79292b655cf3029a",
+    "equal": {
+      "start": true,
+      "end": true,
+      "months": true,
+      "notes": true,
+      "deals": true,
+      "receipts": true,
+      "loads": true
+    }
+  },
+  {
+    "file": "daily-s500-23.json",
+    "totalMonths": 120,
+    "rng": -706398075,
+    "sha256": "6db0f4492b195d6d1c4b48dad7299e59483402685ab53742d40278e664539b15",
+    "equal": {
+      "start": true,
+      "end": true,
+      "months": true,
+      "notes": true,
+      "deals": true,
+      "receipts": true,
+      "loads": true
+    }
+  },
+  {
+    "file": "daily-s500-404.json",
+    "totalMonths": 120,
+    "rng": -2024346121,
+    "sha256": "319247f09c5e99254c13b54a6b22ffcf1ba28982ed1eff4f45d100d82beefbf2",
+    "equal": {
+      "start": true,
+      "end": true,
+      "months": true,
+      "notes": true,
+      "deals": true,
+      "receipts": true,
+      "loads": true
+    }
+  },
+  {
+    "file": "daily-ulu-11.json",
+    "totalMonths": 240,
+    "rng": 1261850337,
+    "sha256": "80eccfaf1fbaa1936648a58d30803ae641ecb2b52a254605491c83827d2ca5f0",
+    "equal": {
+      "start": true,
+      "end": true,
+      "months": true,
+      "notes": true,
+      "deals": true,
+      "receipts": true,
+      "loads": true
+    }
+  },
+  {
+    "file": "daily-ulu-404.json",
+    "totalMonths": 183,
+    "rng": -1340996584,
+    "sha256": "8641052176f564796d707ed95c023168ea17848675368e32006583e3aa073842",
+    "equal": {
+      "start": true,
+      "end": true,
+      "months": true,
+      "notes": true,
+      "deals": true,
+      "receipts": true,
+      "loads": true
+    }
+  },
+  {
+    "file": "daily-ulu-99.json",
+    "totalMonths": 198,
+    "rng": -1605561576,
+    "sha256": "976fc4130aa1d6dbbe5e0a5e29b5d912540ab2b4078fd319d09a9186d61281a0",
+    "equal": {
+      "start": true,
+      "end": true,
+      "months": true,
+      "notes": true,
+      "deals": true,
+      "receipts": true,
+      "loads": true
+    }
+  }
+]

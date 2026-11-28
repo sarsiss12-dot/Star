@@ -1,0 +1,14 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[4,4],"mirrorEq":true,"revMs":217,"buildMs":306,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[3,3],"mirrorEq":true,"revMs":363,"buildMs":447,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":6.4,"p95":25.8,"max":25.8},"longtask":{"n":13,"med":60,"p95":81,"max":81},"heapMB":20,"dom":735,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":4,"med":43.4,"p95":51.5,"max":51.5},"refresh":{"n":1,"med":9.7,"p95":9.7,"max":9.7},"longtask":{"n":7,"med":54,"p95":82,"max":82},"builds":4,"deltas":3,"resyncs":0,"minGap":600,"heapMB":21,"dom":656,"intervals":3,"timeouts":2,"notes":0,"results":3,"packets":38,"joinErrors":0},"C":{"build":{"n":3,"med":8,"p95":69,"max":69},"refresh":{"n":0},"longtask":{"n":5,"med":55,"p95":58,"max":58},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":17,"dom":716,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":30,"joinErrors":0}}}
+PASS TA0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 22; misafir gerçek STARS arayüzünde
+PASS A0 fikstür (host): limanlar, host ↔ B hiperhat, kapasite, kaynak, temas
+NOT RUN A1 B (800×360) gerçek masa: 100 mineral + "Fiziksel Kargo ile Gönder" → host gelen kutusundan KABUL; dört aşama ayrı
+NOT RUN A2 yükleme B'den düşer, varışta host'a bir kez yazılır, B aynası teslimi görür; ikinci teslim / ikinci kabul yok
+NOT RUN A3 C varsayılan "Anlık Kaynak Takası" ile 40 enerji hediye teklifi → host KABUL → anlık; sözleşme / konvoy yok
+NOT RUN A4 gizlilik: C aynasında B'nin sözleşmesi / konvoyu yok
+NOT RUN A5 host → B kaynak teklifi, B karttan kabul, tek aktarım
+NOT RUN A6 B → C kaynak teklifi, C karttan kabul, tek aktarım
+NOT RUN A7 insan ↔ AI, AI kaynağı karttan kabul edilince aktarılır
+PASS A8 yük, filo emri ve ayna aynı galaksi ilerlemesinde
+GEÇEN: 3 KALAN: 0

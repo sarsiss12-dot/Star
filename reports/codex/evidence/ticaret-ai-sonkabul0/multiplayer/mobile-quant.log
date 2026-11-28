@@ -1,0 +1,16 @@
+PASS 800x360 U1 miktar penceresi: yalnız dokunuşla +100 / +10 / −10 / MAKS / 25 → TASLAĞA EKLE; klavye yok, taşma yok
+PASS 800x360 U2 kaynak sözleşmesi formu: +100 miktar, +30 sıklık, +12 süre (klavyesiz); rota önizlemesi; TEKLİF ET / VAZGEÇ görünür, taşma yok
+PASS 800x360 U3 TEKLİF ET (dokunuş) → sözleşme ya da açık ret nedeni; sözleşmede konvoy listesinden KONVOYU BUL haritada seçer
+PASS 800x360 U4 sözleşme listesinden İPTAL (dokunuş) → yeni yükleme yok, yoldaki kargo çift teslim edilmez
+PASS 800x360 U5 oyuncu AI'ya müzakere masasından Transit İzni verir (dokunuş) → izin yalnız o devlet için, 360 gün
+PASS 844x390 U1 miktar penceresi: yalnız dokunuşla +100 / +10 / −10 / MAKS / 25 → TASLAĞA EKLE; klavye yok, taşma yok
+PASS 844x390 U2 kaynak sözleşmesi formu: +100 miktar, +30 sıklık, +12 süre (klavyesiz); rota önizlemesi; TEKLİF ET / VAZGEÇ görünür, taşma yok
+PASS 844x390 U3 TEKLİF ET (dokunuş) → sözleşme ya da açık ret nedeni; sözleşmede konvoy listesinden KONVOYU BUL haritada seçer
+PASS 844x390 U4 sözleşme listesinden İPTAL (dokunuş) → yeni yükleme yok, yoldaki kargo çift teslim edilmez
+PASS 844x390 U5 oyuncu AI'ya müzakere masasından Transit İzni verir (dokunuş) → izin yalnız o devlet için, 360 gün
+PASS 901x411 U1 miktar penceresi: yalnız dokunuşla +100 / +10 / −10 / MAKS / 25 → TASLAĞA EKLE; klavye yok, taşma yok
+PASS 901x411 U2 kaynak sözleşmesi formu: +100 miktar, +30 sıklık, +12 süre (klavyesiz); rota önizlemesi; TEKLİF ET / VAZGEÇ görünür, taşma yok
+PASS 901x411 U3 TEKLİF ET (dokunuş) → sözleşme ya da açık ret nedeni; sözleşmede konvoy listesinden KONVOYU BUL haritada seçer
+PASS 901x411 U4 sözleşme listesinden İPTAL (dokunuş) → yeni yükleme yok, yoldaki kargo çift teslim edilmez
+PASS 901x411 U5 oyuncu AI'ya müzakere masasından Transit İzni verir (dokunuş) → izin yalnız o devlet için, 360 gün
+GEÇEN: 15 KALAN: 0

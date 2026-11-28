@@ -73,6 +73,16 @@ def summarize(data):
         row['final'] = final.get(e)
         row['transitInfluencePaid'] = payments[e]
         row['eliminated'] = e not in final
+    daily = data.get('dailyEconomy')
+    series = [e for month in daily['growth'] for e in month['empires']] if daily else []
+    daily_summary = {
+        'resourceDays': daily['resourceDays'],
+        'lastState': daily['growth'][-1],
+        'meanOpenPerLivingAI': sum(e['open'] for e in series) / len(series),
+        'portOrders': daily['portOrders'],
+        'firstActivePorts': daily['firstActivePorts'],
+        'endReason': data['endReason'],
+    } if series else {}
     return {
         'seed': data['seed'], 'size': data['size'], 'ai': data['aiCount'], 'months': len(rows),
         'save': data['end'], 'rng': rows[-1]['rng'], 'receiptCounts': receipts,
@@ -81,7 +91,7 @@ def summarize(data):
         'lastOpen': rows[-1]['open'], 'signed': len(contracts), 'crisisReceipts': crisis_receipts,
         'firstFreightDay': min((x['day'] for x in contracts.values()), default=None),
         'firstDeliveryDay': min((x['day'] for x in data['receipts'] if x['status'] == 'delivered'), default=None),
-        'funnel': notes, 'empires': {e: flat(row) for e, row in sorted(empires.items())},
+        'funnel': notes, **daily_summary, 'empires': {e: flat(row) for e, row in sorted(empires.items())},
     }
 
 

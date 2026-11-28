@@ -1,0 +1,224 @@
+{
+ "root": "/workspace/Star-ticaret-sonkabul",
+ "results": [
+  {
+   "name": "800x360 U1 miktar penceresi: yalnız dokunuşla +100 / +10 / −10 / MAKS / 25 → TASLAĞA EKLE; klavye yok, taşma yok",
+   "status": "PASS",
+   "seq": [
+    110,
+    120,
+    110,
+    3000,
+    25
+   ],
+   "ov": {
+    "boxW": 520,
+    "vw": 800,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "800x360 U2 kaynak sözleşmesi formu: +100 miktar, +30 sıklık, +12 süre (klavyesiz); rota önizlemesi; TEKLİF ET / VAZGEÇ görünür, taşma yok",
+   "status": "PASS",
+   "g0": [
+    12,
+    30,
+    12
+   ],
+   "g1": [
+    112,
+    60,
+    24
+   ],
+   "reason": "Hat açık · Ithkrim-95 → Wynaevos · ~26 gün",
+   "ov": {
+    "boxW": 520,
+    "vw": 800,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "800x360 U3 TEKLİF ET (dokunuş) → sözleşme ya da açık ret nedeni; sözleşmede konvoy listesinden KONVOYU BUL haritada seçer",
+   "status": "PASS",
+   "n": 1,
+   "reason": "",
+   "signed": true,
+   "located": {
+    "sel": 1,
+    "modal": false
+   }
+  },
+  {
+   "name": "800x360 U4 sözleşme listesinden İPTAL (dokunuş) → yeni yükleme yok, yoldaki kargo çift teslim edilmez",
+   "status": "PASS",
+   "contractStatus": "cancelled",
+   "conv0": 2,
+   "conv1": 2,
+   "receipts": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "800x360 U5 oyuncu AI'ya müzakere masasından Transit İzni verir (dokunuş) → izin yalnız o devlet için, 360 gün",
+   "status": "PASS",
+   "until": 780.9068,
+   "day": 420.9068,
+   "others": 0
+  },
+  {
+   "name": "844x390 U1 miktar penceresi: yalnız dokunuşla +100 / +10 / −10 / MAKS / 25 → TASLAĞA EKLE; klavye yok, taşma yok",
+   "status": "PASS",
+   "seq": [
+    110,
+    120,
+    110,
+    3000,
+    25
+   ],
+   "ov": {
+    "boxW": 520,
+    "vw": 844,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "844x390 U2 kaynak sözleşmesi formu: +100 miktar, +30 sıklık, +12 süre (klavyesiz); rota önizlemesi; TEKLİF ET / VAZGEÇ görünür, taşma yok",
+   "status": "PASS",
+   "g0": [
+    12,
+    30,
+    12
+   ],
+   "g1": [
+    112,
+    60,
+    24
+   ],
+   "reason": "Hat açık · Ithkrim-95 → Wynaevos · ~26 gün",
+   "ov": {
+    "boxW": 520,
+    "vw": 844,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "844x390 U3 TEKLİF ET (dokunuş) → sözleşme ya da açık ret nedeni; sözleşmede konvoy listesinden KONVOYU BUL haritada seçer",
+   "status": "PASS",
+   "n": 1,
+   "reason": "",
+   "signed": true,
+   "located": {
+    "sel": 1,
+    "modal": false
+   }
+  },
+  {
+   "name": "844x390 U4 sözleşme listesinden İPTAL (dokunuş) → yeni yükleme yok, yoldaki kargo çift teslim edilmez",
+   "status": "PASS",
+   "contractStatus": "cancelled",
+   "conv0": 2,
+   "conv1": 2,
+   "receipts": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "844x390 U5 oyuncu AI'ya müzakere masasından Transit İzni verir (dokunuş) → izin yalnız o devlet için, 360 gün",
+   "status": "PASS",
+   "until": 780.6468,
+   "day": 420.6468,
+   "others": 0
+  },
+  {
+   "name": "901x411 U1 miktar penceresi: yalnız dokunuşla +100 / +10 / −10 / MAKS / 25 → TASLAĞA EKLE; klavye yok, taşma yok",
+   "status": "PASS",
+   "seq": [
+    110,
+    120,
+    110,
+    3000,
+    25
+   ],
+   "ov": {
+    "boxW": 520,
+    "vw": 901,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "901x411 U2 kaynak sözleşmesi formu: +100 miktar, +30 sıklık, +12 süre (klavyesiz); rota önizlemesi; TEKLİF ET / VAZGEÇ görünür, taşma yok",
+   "status": "PASS",
+   "g0": [
+    12,
+    30,
+    12
+   ],
+   "g1": [
+    112,
+    60,
+    24
+   ],
+   "reason": "Hat açık · Ithkrim-95 → Wynaevos · ~26 gün",
+   "ov": {
+    "boxW": 520,
+    "vw": 901,
+    "hScroll": false,
+    "offscreen": []
+   }
+  },
+  {
+   "name": "901x411 U3 TEKLİF ET (dokunuş) → sözleşme ya da açık ret nedeni; sözleşmede konvoy listesinden KONVOYU BUL haritada seçer",
+   "status": "PASS",
+   "n": 1,
+   "reason": "",
+   "signed": true,
+   "located": {
+    "sel": 1,
+    "modal": false
+   }
+  },
+  {
+   "name": "901x411 U4 sözleşme listesinden İPTAL (dokunuş) → yeni yükleme yok, yoldaki kargo çift teslim edilmez",
+   "status": "PASS",
+   "contractStatus": "cancelled",
+   "conv0": 2,
+   "conv1": 2,
+   "receipts": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     2
+    ]
+   ]
+  },
+  {
+   "name": "901x411 U5 oyuncu AI'ya müzakere masasından Transit İzni verir (dokunuş) → izin yalnız o devlet için, 360 gün",
+   "status": "PASS",
+   "until": 780.8933999999999,
+   "day": 420.8934,
+   "others": 0
+  }
+ ]
+}

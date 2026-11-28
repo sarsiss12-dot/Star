@@ -35,7 +35,7 @@ Düz kaynak maddesi (`res`) imzada devreder. Açık fiziksel seçenek (`cargo`) 
 | 500 / 16 | 23 | 120 | 1.142 | 8 | 53 | 1 | 0,73 | 2 | 0,24 |
 | 500 / 16 | 404 | 120 | 2.881,5 | 1 | 6 | 0 | 0,10 | 0 | 0,13 |
 
-¹ En az bir ay yaşayan normal AI devletleri paydadadır. Sonradan ortaya çıkan AI devletleri dahildir. Açık sözleşme, kampanya sonuna kadar ay kapanışındaki açık sözleşmelerin dünya ortalamasıdır. Tohum 99 ve 404'te 100 sistem koşusu oyun sonuna ulaştı. Doğal 198/183 ay sonuçları daha uzun dönem için genellenemez. Son teslim makbuzu toplamı, motorun 256 kayıtlık geçmiş penceresi yerine olay anında sayıldı. [Devlet bazında sonuçlar](evidence/ticaret-ai-sonkabul0/kampanya/ozet.json)
+¹ En az bir ay yaşayan normal AI devletleri paydadadır. Sonradan ortaya çıkan AI devletleri dahildir. Açık sözleşme, kampanya sonuna kadar ay kapanışındaki açık sözleşmelerin dünya ortalamasıdır. Tohum 99 ve 404'te 100 sistem koşuları oyuncunun son kolonisinin kaybıyla bitti. Doğal 198/183 ay sonuçları daha uzun dönem için genellenemez. Son teslim makbuzu toplamı, motorun 256 kayıtlık geçmiş penceresi yerine olay anında sayıldı. 377 AI–AI anlaşması en az bir fiziksel kaynak türü içeren anlık maddeye sahipti. Bunların 10’unda kaynak iki yönde de verildi. [Devlet bazında sonuçlar](evidence/ticaret-ai-sonkabul0/kampanya/ozet.json)
 
 ## 5. Ekonomik fırsat hunisi
 
@@ -49,7 +49,7 @@ Altı kayıtta temas yokluğu 55.498 olayla en sık kapıydı. Onu 5.158 güvenl
 
 Kontrollü aynı sözleşme üç kolda aynı nominal ithalatı (ayda 12) ve aynı değerlemeyi (131,328) verdi. Rezerv penceresi 195 günken fiziksel varış kısa hatta 30, uzun hatta 229 gündü. Kapanan ilk bağlantı yükü teslim etmeden 12 mineral kaybettirdi. Her kol kayıt yüklenince aynı makbuzu ve RNG'yi üretti. Bu deney mevcut puanın vade duyarlılığına ilişkin sınırı gösteriyor.
 
-Kampanyada yüklenmiş ithalatla çakışan tek acil gözlem 404, gün 5.160, devlet 5 mineral. 7,3 mineral için kalan tahmini 16,35 gün, stok 18,03 iken 60 rezervi zaten aşılmıştı. Tahmin gerçek 5.176,5 varışından 0,15 oyun günü önceydi. Rezervin zamanında karşılanan kısmı sıfır. 150. ay Save8 döngüsü aynı kararı yeniden üretti. Gün 5.163'te bina yıkım iadesi 74 mineral ekleyerek stoğu 92,03'e çıkardı. Varış stoğu 99,33 oldu. Yalnız o teslimatın stok etkisinin çıkarıldığı yalıtılmış kolda aynı RNG ile stok 92,03 ve 60 tabanının üstündeydi. Bu vakada rezervi onaran karar yüzeydeki ithalat eşleşmesi yerine daha önceki yıkım iadesiydi. [Aynı kayıttan karar ve stok izi](evidence/ticaret-ai-sonkabul0/kampanya/404-kriz-tekrar.json) [Kontrollü deney](evidence/ticaret-ai-sonkabul0/teslim-penceresi.json) · [404 izi](evidence/ticaret-ai-sonkabul0/kampanya/gozlem-ulu-404.json.gz)
+Kampanyada yüklenmiş ithalatla çakışan tek acil gözlem 404, gün 5.160, devlet 5 mineral. 7,3 mineral için kalan tahmini 16,35 gün, stok 18,03 iken 60 rezervi zaten aşılmıştı. Tahmin gerçek 5.176,5 varışından 0,15 oyun günü önceydi. Rezervin zamanında karşılanan kısmı sıfır. İade ile teslimat arasında 13,5 oyun günü vardı. 150. ay Save8 döngüsü aynı kararı yeniden üretti. Gün 5.163'te bina yıkım iadesi 74 mineral ekleyerek stoğu 92,03'e çıkardı. Varış stoğu 99,33 oldu. Yalnız o teslimatın stok etkisinin çıkarıldığı yalıtılmış kolda aynı RNG ile stok 92,03 ve 60 tabanının üstündeydi. Bu vakada rezervi onaran karar yüzeydeki ithalat eşleşmesi yerine daha önceki yıkım iadesiydi. [Aynı kayıttan karar ve stok izi](evidence/ticaret-ai-sonkabul0/kampanya/404-kriz-tekrar.json) [Kontrollü deney](evidence/ticaret-ai-sonkabul0/teslim-penceresi.json) · [404 izi](evidence/ticaret-ai-sonkabul0/kampanya/gozlem-ulu-404.json.gz)
 
 ## 7. Stratejik liman yatırımı
 
@@ -81,23 +81,36 @@ Mineral, enerji, alaşım, yiyecek ve tüketim malları kendi birimlerinde takip
 
 ## 13. Devlet başına kampanya sonucu
 
-Küçük dünyalarda ay kapanışında 11'de 4, 99'da 20 ve 404'te 443 kaynak-devlet-ay rezerv baskısı kaydedildi. Büyük dünyalarda 11'de 8, 23'te 93 ve 404'te 7. Bir devlet aynı ayda birden çok kaynakta eksik olabilir. Bina, teknoloji, stok ve gönderilen/alınan miktarlar devlet bazındaki ozet.json içindedir. Saldo karşılaştırması aynı p57 gözleminde değişmediği için yeni ticaret kararına atfedilebilir koloni, askerî güç, bilim veya federasyon etkisi ölçülmedi.
+| Sistem | Tohum | Rezerv altı kaynak-devlet-günü | Sıfır stok kaynak-devlet-günü | Yaşayan AI başına açık sözleşme | Olağan liman siparişi |
+|---|---:|---:|---:|---:|---:|
+| 100 | 11 | 120 | 0 | 0,789 | 125 |
+| 100 | 99 | 600 | 0 | 0,190 | 65 |
+| 100 | 404 | 13.103 | 10.634 | 0,258 | 112 |
+| 500 | 11 | 244 | 0 | 0,000 | 106 |
+| 500 | 23 | 2.717 | 1.590 | 0,090 | 107 |
+| 500 | 404 | 185,5 | 0 | 0,013 | 85 |
+
+Günler yarım günlük simülasyon adımlarıyla ölçüldü. Bir devlet aynı gün birden çok kaynakta eksik olabilir. Küçük 404'ün sıfır stok günleri özellikle tüketim malı (6.150) ve yiyecekte (3.630) birikti. Büyük 23'te 1.590 sıfır stok günü enerjideydi. Açık sözleşme her ay yaşayan normal AI sayısıyla ağırlıklandırıldı. Olağan liman siparişleri ayrıdır. `aiPortInvestment` yolundan yeni koridor yatırımı işareti çıkmadı. Sistem düzeyinde ilk liman gözlemi ile yapım bitiş makbuzu ayrı tutuldu.
+
+Altı gözlemli koşu kontrolle ay ay aynı durum, yükleme, imza ve makbuz dizisini ve son Save8/RNG'yi verdi. Karşılaştırma saf p57'de ticaret stratejisini değiştirmediğinden koloni, filo gücü, bilim ve federasyon payında yeni karara atfedilen etki oluşmadı. Bu ölçütlerin devlet bazında değerleri ve ticaret hafızası kayıtlı. [Günlük özet](evidence/ticaret-ai-sonkabul0/kampanya/gunluk-ozet.json) · [Altı koşu eşdeğerliği](evidence/ticaret-ai-sonkabul0/kampanya/gunluk-esdegerlik.json) · [Federasyon ve güç kontrol noktaları](evidence/ticaret-ai-sonkabul0/kampanya/kontrol-noktalari.json)
 
 ## 14. Multiplayer
 
 | Gerçek Chromium | Sonuç | Kontrol |
 |---|---:|---|
 | TA / TB / TR / TL / TZ | 31/0 | Fiziksel gönderi, anlık seçenek, ele geçirilmiş ve iptal edilmiş aktarma, kayıt-yeni oda, iki misafir onayı, karşı teklif, ret ve yenileme |
+| TZ genişletilmiş | 9/0 | B kısmi onayından sonra MP4, relay yeniden başlatma ve yeni oda. B ve C bekleyen oyları korudu. C dokununca dört hak ve tek sözleşme uygulandı |
 | TA genişletilmiş | 9/0 | Host → B, B → C, insan ↔ AI, gerçek kabul düğmeleri, yetkisiz C kabulünde ret ve sıfır stok hareketi |
 | SG / J / X | 15/0 | Tek ödeme, kayıp yanıt, fed oyu, ayna ve takviye |
 | I 500/16, 15 dk | 4/0 | İki ayrı misafir profili, 572 örnek, 30 olay, 0 kapalı pencere donması, sensör ve kayıt doğrulaması |
 | I 100/9, 8 dk | 4/0 | 332 örnek, 16 olay, 0 kapalı pencere donması, en büyük 7,7 oyun günü farkı, yeniden katılım ve kayıt eşitliği |
+| Fiziksel yük ve filo, 100/9 + 500/16 | 3/0 + 3/0 | Aynı ilerlemede gerçek filo emri ve yük, tam 12 enerji kesintisi ve teslimatı, tek makbuz, misafir aynası ve üçüncü tarafa gizlilik |
 
-Yerel üretim relay ve TLS vekili kullanıldı. TZ ikinci onay öncesi bağlantı kopması sonrası kısmi kararın korunduğunu ve mükerrer onayın ödeme uygulamadığını gösterdi. TR relay yeniden başlatma ve yeni oda sonrası yoldaki teslimatı bir kez doğruladı. TA üçüncü tarafın sözleşme ve konvoyu görmediğini doğruladı. TB B'nin konvoy konumu ve gerçek ara liman geçişini host ile eşledi. [Chromium günlükleri](evidence/ticaret-ai-sonkabul0/multiplayer/)
+Yerel üretim relay ve TLS vekili kullanıldı. TZ ikinci onay öncesi bağlantı kopması sonrası kısmi kararın korunduğunu ve mükerrer onayın ödeme uygulamadığını gösterdi. TR relay yeniden başlatma ve yeni oda sonrası yoldaki teslimatı bir kez doğruladı. TA üçüncü tarafın sözleşme ve konvoyu görmediğini doğruladı. Birleşik filo/kargo denemesinin ilk koşusu host gelen kutusunda misafir kayıt seçicisini aradı. İkinci koşu toplam stok değişimini kargo saydı ve aradaki ay gelirini de ölçtü. İki ham FAIL saklandı. Son koşu host'un gerçek gelen kutusunu kullandı ve stok hareketini her yükleme/teslimat çağrısının giriş ve çıkışında ayrı doğruladı. TB B'nin konvoy konumu ve gerçek ara liman geçişini host ile eşledi. [Chromium günlükleri](evidence/ticaret-ai-sonkabul0/multiplayer/)
 
 ## 15. Mobil arayüz
 
-Gerçek Chromium dokunmatik benzetimi 800×360, 844×390 ve 901×411 yatay boyutlarda transit kartı, onay beklemesi, ret, izin süresi, yenileme ve konvoy listesi 24/0. Fiziksel Android NOT RUN. [Ekran ve sonuç verileri](evidence/ticaret-ai-sonkabul0/multiplayer/mobil-transit.json)
+Gerçek Chromium dokunmatik benzetimi 800×360, 844×390 ve 901×411 yatay boyutlarda transit kartı, onay beklemesi, ret, izin süresi, yenileme ve konvoy listesi 24/0. İkinci mobil koşu miktar düğmeleri, MAX, hazır değer, rota önizlemesi, sözleşme, iptal ve konvoy seçimi için 15/0. 39 dokunmatik Chromium senaryosu geçti. Fiziksel Android NOT RUN. [Transit](evidence/ticaret-ai-sonkabul0/multiplayer/mobil-transit.json) · [Miktar, sözleşme ve konvoy](evidence/ticaret-ai-sonkabul0/multiplayer/mobil-miktar.json)
 
 ## 16. Save8 ve RNG
 
@@ -105,11 +118,11 @@ Gerçek Chromium dokunmatik benzetimi 800×360, 844×390 ve 901×411 yatay boyut
 
 ## 17. Tam Node
 
-Tek bütünleşik ham koşu 256 paket, **6.880 PASS / 48 FAIL**. #83'ün 6.888/47 taramasıyla paket sayacı farkı yalnız `faz93d1_navy_campaign_test.js`. Ağır kampanya 180 saniye kuralına takıldı. `faz86c_3_ai_negotiation_test.js` tarihsel süre kontrolü yüklü koşuda 27,47 ms. Test beklentileri ve süre sınırı aynen kullanıldı. Ham toplam değiştirilmeden doğrudan tekrar sonuçları ayrı tutulur. Kalan tarihsel FAIL'lerin arasında p57 ticaret akışında doğrulanmış yeni deterministik kusur yok. [Paket farkı](evidence/ticaret-ai-sonkabul0/node/paket-farki.json) · [Ham Node özeti](evidence/ticaret-ai-sonkabul0/node/ham-ozet.json)
+Tek bütünleşik ham koşu 256 paket, **6.880 PASS / 48 FAIL**. #83'ün 6.888/47 taramasıyla paket sayacı farkı yalnız `faz93d1_navy_campaign_test.js`. Ağır kampanya 180 saniye kuralına takıldı. `faz86c_3_ai_negotiation_test.js` tarihsel süre kontrolü yüklü koşuda 27,47 ms. Test beklentileri ve süre sınırı aynen kullanıldı. Sessiz doğrudan tekrar donanma 8/0, müzakere 90/0 ve aynı işlem süresi 6,21 ms. Ham 6.880/48 toplamı değiştirilmedi. Arşiv kökü gerektiren 10 paket bütünleşik koşuda NOT RUN. [Donanma tekrarı](evidence/ticaret-ai-sonkabul0/node/faz93d1-quiet.log.gz) · [Müzakere tekrarı](evidence/ticaret-ai-sonkabul0/node/faz86c_3-quiet.log.gz) Kalan tarihsel FAIL'lerin arasında p57 ticaret akışında doğrulanmış yeni deterministik kusur yok. [Paket farkı](evidence/ticaret-ai-sonkabul0/node/paket-farki.json) · [Ham Node özeti](evidence/ticaret-ai-sonkabul0/node/ham-ozet.json)
 
 ## 18. Performans
 
-ABBA ve A/A aynı kayıtlar ve eşit p57 çalışma zamanı ile koşuldu. Geçiş yükünü dışarıda tutmak için her girdi ölçülmeden önce bir ay aynı p57 altında ilerletildi. 12 örnek/kol, iki ısınma ve dengeli örnek sırası kullanıldı.
+Node ABBA ve A/A aynı kayıtlar ve eşit p57 çalışma zamanı ile koşuldu. Geçiş yükünü dışarıda tutmak için her girdi ölçülmeden önce bir ay aynı p57 altında ilerletildi. 12 örnek/kol, iki ısınma ve dengeli örnek sırası kullanıldı.
 
 | Girdi | CPU medyan A/B ms | CPU p95 A/B ms | A/B p95 | A/A p95 | Duvar p95 A/B farkı |
 |---|---:|---:|---:|---:|---:|
@@ -117,7 +130,7 @@ ABBA ve A/A aynı kayıtlar ve eşit p57 çalışma zamanı ile koşuldu. Geçi�
 | 500/16 m120 | 1.733,6 / 1.717,8 | 1.885,5 / 1.872,0 | −%0,72 | −%2,22 | −%0,24 |
 | 500/16 m180 | 5.772,1 / 5.755,7 | 6.242,8 / 6.161,3 | −%1,30 | −%0,11 | +%1,85 |
 
-Kaynaklar eşit. Farklar hız kazanımı sayılmadı. 100 sistem A/A gürültüsü küçük yüzde farklarının yorumunu sınırlıyor. Kollar arası Save8 ve RNG eşit. 500/m180 ayrı sayaç koşusunda 79 rota çağrısı 2,85 CPU ms, 28 liman incelemesi 0,12 ms, 15 bilanço 0,21 ms, bir fırsat turu 8,12 ms, 60 konvoy tiki 5,86 ms. Dört genel `dealTxBegin` 473,43 CPU ms sürdü. Bunların tümü ticarete atfedilemez. Profil süreleri iç içe olduğundan toplanmaz. [Ham ABBA/A/A ve yöntem sayaçları](evidence/ticaret-ai-sonkabul0/performans/abba.json)
+Kaynaklar eşit. Farklar hız kazanımı sayılmadı. 100 sistem A/A gürültüsü küçük yüzde farklarının yorumunu sınırlıyor. Kollar arası Save8 ve RNG eşit. 500/m180 ayrı sayaç koşusunda 79 rota çağrısı 2,85 CPU ms, 28 liman incelemesi 0,12 ms, 15 bilanço 0,21 ms, bir fırsat turu 8,12 ms, 60 konvoy tiki 5,86 ms. Dört genel `dealTxBegin` 473,43 CPU ms sürdü. Bunların tümü ticarete atfedilemez. Profil süreleri iç içe olduğundan toplanmaz. 0/1/8/32/64 konvoylu 500 sistem yükünde sonuç Save8/RNG eşit. 64 konvoyda 60 yarım gün medyanı 267,76/299,86 ms. Dört örnek/kol ile aynı kaynakta gözlenen süre farkı yeni bir çalışma zamanı maliyeti olarak yorumlanmadı. [Yoğun konvoy](evidence/ticaret-ai-sonkabul0/performans/yogun-konvoy.json) · [Ham ABBA/A/A ve yöntem sayaçları](evidence/ticaret-ai-sonkabul0/performans/abba.json)
 
 ## 19. Eski kayıt uyumluluğu
 

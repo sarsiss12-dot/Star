@@ -27,12 +27,6 @@ function tradeCheckpoint(){
  return {day:G.day,systems:G.sys.length,normalStates:normals.length,empires,feds,
   largestFederationShare:Math.max(0,...feds.map(f=>f.members.length))/normals.length,rng:RND_STATE};
 }
-function campaignTail(){
- G.autoSave=false;
- const m=Math.floor(G.day/30);
- do{G.day+=.5;dailyTick(.5);structTick(.5);colonyBuildTick(.5);autoExploreTick();}while(Math.floor(G.day/30)===m);
- monthTick();
-}
 `);
 
 const rows = [];
@@ -40,11 +34,6 @@ for (const file of inputs) {
   h.sb.input = fs.readFileSync(file,'utf8');
   assert(h.run('deserialize(input)'),file);
   const row = {file:path.basename(file),source:hash(h.sb.input),...JSON.parse(h.run('JSON.stringify(tradeCheckpoint())'))};
-  if (process.env.STARS_TAIL==='1') {
-    h.run('for(let n=0;n<60&&!G.over;n++)campaignTail()');
-    row.tail = {...JSON.parse(h.run('JSON.stringify({day:G.day,over:G.over?.txt||null,winner:G.over?.e?.id??null})')),
-      save:hash(h.run('serialize()')),rng:h.run('RND_STATE')};
-  }
   rows.push(row);
 }
 console.log(JSON.stringify(rows,null,2));
