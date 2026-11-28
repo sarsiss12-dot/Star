@@ -1,0 +1,13 @@
+✓ T1 iki yönlü koridor: iki izin, her taşıyıcı kendi Etki'siyle; ertesi ay a–b freight sözleşmesi
+✓ T2 bekleme: aynı ay ikinci çağrı rota ya da Etki harcamaz
+✓ T3 tek yönlü (b zaten izinli): yalnız a izin alır; b ikinci izin almaz
+✓ T4 aradaki liman yok: istek yok, Etki harcanmaz
+✓ T5 insan sahip + iki yön: çok taraflı onay talebi açılır; insan onaylamadan izin / ödeme yok
+✓ T6 insan sahip + tek yön: teklif insanın gelen kutusuna gider, izin kendiliğinden oluşmaz
+✓ T7 düşük güven: pahalı karşı teklif → izin ve Etki yok
+✓ T8 kısmi hata: ikinci izin motor hatasıyla düşerse hiçbir izin / ödeme kalmaz, bekleme süreleri kalır
+✓ T9 izin taşıyıcı başına: a'nın izni b'ye geçmez
+✓ T10 izin süresi ve erken geri alma: süre bitince ve revokePortTransit ile rota kapanır
+✓ T11 federasyon ticaret yasası: üye sahibin limanı izinsiz açık; ayrılınca kapanır; hakkı olan için izin istenmez
+✓ T12 alternatif rota: yolda izin geri alınır, ikinci izinli ara liman varsa konvoy yeniden plan yapar ve tek kez teslim eder
+GEÇEN: 12 KALAN: 0

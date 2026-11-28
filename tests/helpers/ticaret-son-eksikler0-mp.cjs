@@ -23,6 +23,22 @@ module.exports=async X=>{const {test,pg,metrics,sleep,shot,wait,tap,settle,cmd,o
  const openCard=async(p,id)=>{await closeAll(p);await wait(p,id=>(G.inbox||[]).some(n=>n.key==='mptransit:'+id),id,20000);await p.evaluate(()=>UI.drawInbox());const uid=await card(p,id);await hit(p,'#inbox [data-a="openNote"][data-x="'+uid+'"]');
    await wait(p,id=>!!document.querySelector('#modal .transitReq[data-tx="'+id+'"]'),id,10000);};
 
+ const restart=async (before,label)=>{
+   await H().evaluate(()=>MP1Host.mp4.saveNow('manual'));await wait(H(),()=>MP1Host.lastSave&&MP1Host.lastSave.ok);
+   for(const n of Object.keys(ctx))await ctx[n].close().catch(()=>{});await stopRelay();await startRelay();
+   const h=await open('H');await h.addInitScript(TIMERS);await h.goto(origin.H+'/');await wait(h,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn'));
+   await tap(h,'#mp1Btn');await wait(h,()=>MP1Host.screen==='menu');await tap(h,'[data-m="saves"][data-mode="resume"]');await wait(h,()=>document.querySelector('#mp1 [data-save]'));
+   await tap(h,'#mp1 [data-save] [data-m="resume"]');await wait(h,()=>document.getElementById('mp1Sheet'));await tap(h,'#mp1Sheet [data-m="sheetOk"]');
+   await wait(h,()=>MP1Host.lobby&&MP1Host.lobby.phase==='resume');const code1=await h.evaluate(()=>MP1Host.code);assert.notEqual(code1,getCode());setCode(code1);await h.evaluate(CANON);await h.evaluate(HOSTLIB);
+   await tap(h,'[data-m="resumeGo"]');await wait(h,()=>document.getElementById('mp1Sheet'));await tap(h,'#mp1Sheet [data-m="sheetOk"]');await wait(h,()=>MP1Host.started&&MP1Host.host.lobby.phase==='ingame');
+   await h.evaluate(()=>MP1Host.host.local({kind:'speed',value:0}));await closeAll(h);const post=await H().evaluate(()=>JSON.stringify(G.commerce));assert.equal(post,before,'G.commerce (transit dahil) birebir');
+   const code=getCode();const b=await open('B');await b.addInitScript(TIMERS);await b.goto(origin.B+'/mp/play?code='+code);await wait(b,()=>window.MP1Join&&document.getElementById('jName'));if(await b.evaluate(()=>!MP1Join.ws))await tap(b,'[data-j="go"]');await ready(b,EB);
+   const c=await open('C');await c.addInitScript(TIMERS);await c.goto(origin.C+'/mp/play?code='+code);await wait(c,()=>window.MP1Join&&document.getElementById('jName'));if(await c.evaluate(()=>!MP1Join.ws))await tap(c,'[data-j="go"]');await ready(c,EC);
+   for(const p of [b,c])await p.evaluate(CANON+GUESTLIB);await settle(label);
+   await H().evaluate(f=>{window.TZ=f;},M.fx);
+   return {b,c};
+ };
+
  await test('Z0 fikstür: yalıtılmış 10 sistemlik zincir; host + X s0, C s3, B s6, Y s9; izinsiz X → Y ve host → B rotası yok',async()=>{
    M.fx=await H().evaluate(([b,c])=>{MP1Host.host.local({kind:'speed',value:0});const ais=G.emps.filter(o=>o.ai&&!o.dead&&!o.wild&&![0,b,c].includes(o.id)),Xe=ais[0],Ye=ais[1];
      const E=[G.p,G.emps[b],G.emps[c],Xe,Ye];for(const x of E)for(const y of E)if(x!==y){x.contact[y.id]=true;x.war[y.id]=false;x.rel[y.id]=80;(x.intel||={})[y.id]=3;(x.mem||={})[y.id]=[{v:80,d:G.day,k:'t'}];if(x.embargo)delete x.embargo[y.id];if(x.portTransit)delete x.portTransit[y.id];if(x.nap)delete x.nap[y.id];}
@@ -56,6 +72,19 @@ module.exports=async X=>{const {test,pg,metrics,sleep,shot,wait,tap,settle,cmd,o
    const g=await guestTx(B(),1);const again=await cmd('B',{kind:'transitVote',id:1,yes:true});M.z2={g,again,host:await HT(),etk:await etk()};
    assert.equal(g.st,'pending');assert.equal(g.votes['0'],'yes','onay korundu');assert.notEqual(again.status,'ok','ikinci onay reddedildi '+JSON.stringify(again));assert.deepEqual(M.z2.etk,M.e0);});
 
+ if(process.env.MP8_TRADE_FINAL==='1')await test('Z2b B onayından sonra Save8 ve relay yeniden başlatma: kısmi oy iki aynada korunur, ödeme yok',async()=>{
+   const before=await H().evaluate(()=>JSON.stringify(G.commerce));
+   const {b,c}=await restart(before,'z2b');
+   const gb=await guestTx(b,1),gc=await guestTx(c,1);
+   assert.equal(gb.st,'pending');
+   assert.equal(gb.votes['0'],'yes');
+   assert.equal(gc.st,'pending');
+   assert.equal(gc.votes['0'],'pending');
+   assert.deepEqual(await etk(),M.e0);
+   assert.equal(Object.values(await permits()).flat().length,0);
+   M.z2b={gb,gc,etk:await etk()};
+ });
+
  await test('Z3 C ONAYLA (dokunuş) → tek işlem: dört izin, sahiplere +72, X–Y sözleşmesi; iki misafir aynası Uygulandı, kart kalkar',async()=>{
    await openCard(C(),1);await hit(C(),'#modal [data-a="transitVote"][data-x="1:1"]');await H().waitForFunction(()=>G.commerce.transit[0].st==='committed',undefined,{timeout:20000});await settle('z3');
    const e=await etk(),pt=await permits(),f=M.fx,k=await H().evaluate(f=>G.commerce.contracts.filter(c=>!Commerce.closed(c)&&[c.a,c.b].includes(f.x)&&[c.a,c.b].includes(f.y)).length,f);
@@ -71,32 +100,36 @@ module.exports=async X=>{const {test,pg,metrics,sleep,shot,wait,tap,settle,cmd,o
    assert.deepEqual(M.z4.e,e0);assert.deepEqual(M.z4.pt,p0);assert.equal(M.z4.gB.st,'rejected');assert.equal(M.z4.cardB,0);});
 
  await test('Z5 izin yenileme MP: C → B izni 40 gün; B YENİLEME İSTE → masa (izin + 36 ◈) → C KABUL → bitişten +360; host / B / C aynı bitiş',async()=>{
-   const end0=await H().evaluate(f=>{G.emps[f.c].portTransit[f.b]=G.day+40;MP1Host.host.publish();return G.emps[f.c].portTransit[f.b];},M.fx);await settle('z5a');
+   const end0=await H().evaluate(f=>{(G.emps[f.c].portTransit||={})[f.b]=G.day+40;MP1Host.host.publish();return G.emps[f.c].portTransit[f.b];},M.fx);await settle('z5a');
    await closeAll(B());await B().evaluate(()=>UI.act('commerceTransit'));await sleep(300);const lc=await B().evaluate(c=>{const me=MP1Join.empireId;return c===me?0:c===0?me:c;},EC);
    await hit(B(),'#modal .permitRow[data-o="'+lc+'"] [data-a="transitRenewAsk"]');const draft=await B().evaluate(()=>({give:UI.deal?.give,want:UI.deal?.want}));
    assert.deepEqual(draft.want,[{t:'portTransit'}]);assert.deepEqual(draft.give,[{t:'res',r:'etk',v:36}]);await tap(B(),'[data-a="dealSend"]');
    const id=await H().waitForFunction(([b,c])=>{const o=MP1Host.host.dip.offers.find(o=>o.from===b&&o.to===c&&o.status==='pending'&&o.want.some(i=>i.t==='portTransit'));return o?o.id:0;},[EB,EC],{timeout:20000,polling:200}).then(h=>h.jsonValue());
-   await cmd('C',{kind:'respond',offer:id,action:'accept'});await H().waitForFunction(([b,c,e])=>G.emps[c].portTransit[b]>e+300,[EB,EC,end0],{timeout:20000});await settle('z5b');
+   let resumed=false;
+   if(process.env.MP8_TRADE_RENEW_SAVE==='1'){
+     const pending=()=>H().evaluate(id=>JSON.stringify(MP1Host.host.dip.offers.find(o=>o.id===id)),id);
+     const offerBefore=await pending(),effectBefore=await etk();
+     await restart(await H().evaluate(()=>JSON.stringify(G.commerce)),'z5-kayit');
+     assert.equal(await pending(),offerBefore,'Yenileme teklifi ve kimliği kayıt sonrası aynı');
+     assert.deepEqual(await etk(),effectBefore,'Yükleme kendi kendine Etki harcamadı');
+     assert.equal(await H().evaluate(f=>G.emps[f.c].portTransit[f.b],M.fx),end0);
+     resumed=true;
+   }
+   await wait(C(),id=>{
+     MP71Dip.tick();
+     return DiplomaticInbox.state().records.some(r=>r.mp===id&&r.status==='pending');
+   },id);
+   await C().evaluate(id=>ArchiveUI.record(DiplomaticInbox.state().records.find(r=>r.mp===id).id),id);
+   await hit(C(),'#inboxYes');await H().waitForFunction(([b,c,e])=>G.emps[c].portTransit[b]>e+300,[EB,EC,end0],{timeout:20000});await settle('z5b');
    const host=await H().evaluate(f=>G.emps[f.c].portTransit[f.b],M.fx);
    const gb=await B().evaluate(c=>{const me=MP1Join.empireId,l=c===me?0:c===0?me:c;return G.emps[l].portTransit?.[0];},EC);
    const gc=await C().evaluate(b=>{const me=MP1Join.empireId,l=b===me?0:b===0?me:b;return G.p.portTransit?.[l];},EB);
-   M.z5={end0,host,gb,gc};assert.ok(Math.abs(host-end0-360)<1e-6,'bitişten +360');assert.ok(Math.abs(gb-host)<1e-6,'B aynası aynı bitiş');assert.ok(Math.abs(gc-host)<1e-6,'C aynası aynı bitiş');});
+   M.z5={end0,host,gb,gc,resumed};assert.ok(Math.abs(host-end0-360)<1e-6,'bitişten +360');assert.ok(Math.abs(gb-host)<1e-6,'B aynası aynı bitiş');assert.ok(Math.abs(gc-host)<1e-6,'C aynası aynı bitiş');});
 
  await test('Z6 kayıt → kapanış → relay yeniden → yeni oda → misafirler döner: transit kayıtları ve X–Y konvoyu birebir; kargo bir kez teslim',async()=>{
    let v=null;for(let i=0;i<30;i++){await days(2);v=await H().evaluate(f=>G.commerce.convoys.find(v=>v.e===f.x&&v.status!=='delivered'&&v.step>0)||null,M.fx);if(v)break;}
    assert.ok(v,'X–Y konvoyu yolda');M.cv=v.id;await closeAll(H());const pre=await H().evaluate(()=>JSON.stringify(G.commerce));const preRec=await H().evaluate(f=>({y:G.emps[f.y].res.min,x:G.emps[f.x].res.ene}),M.fx);
-   await H().evaluate(()=>MP1Host.mp4.saveNow('manual'));await wait(H(),()=>MP1Host.lastSave&&MP1Host.lastSave.ok);
-   for(const n of Object.keys(ctx))await ctx[n].close().catch(()=>{});await stopRelay();await startRelay();
-   const h=await open('H');await h.addInitScript(TIMERS);await h.goto(origin.H+'/');await wait(h,()=>typeof setupGame==='function'&&document.getElementById('mp1Btn'));
-   await tap(h,'#mp1Btn');await wait(h,()=>MP1Host.screen==='menu');await tap(h,'[data-m="saves"][data-mode="resume"]');await wait(h,()=>document.querySelector('#mp1 [data-save]'));
-   await tap(h,'#mp1 [data-save] [data-m="resume"]');await wait(h,()=>document.getElementById('mp1Sheet'));await tap(h,'#mp1Sheet [data-m="sheetOk"]');
-   await wait(h,()=>MP1Host.lobby&&MP1Host.lobby.phase==='resume');const code1=await h.evaluate(()=>MP1Host.code);assert.notEqual(code1,getCode());setCode(code1);await h.evaluate(CANON);await h.evaluate(HOSTLIB);
-   await tap(h,'[data-m="resumeGo"]');await wait(h,()=>document.getElementById('mp1Sheet'));await tap(h,'#mp1Sheet [data-m="sheetOk"]');await wait(h,()=>MP1Host.started&&MP1Host.host.lobby.phase==='ingame');
-   await h.evaluate(()=>MP1Host.host.local({kind:'speed',value:0}));await closeAll(h);const post=await H().evaluate(()=>JSON.stringify(G.commerce));assert.equal(post,pre,'G.commerce (transit dahil) birebir');
-   const code=getCode();const b=await open('B');await b.addInitScript(TIMERS);await b.goto(origin.B+'/mp/play?code='+code);await wait(b,()=>window.MP1Join&&document.getElementById('jName'));if(await b.evaluate(()=>!MP1Join.ws))await tap(b,'[data-j="go"]');await ready(b,EB);
-   const c=await open('C');await c.addInitScript(TIMERS);await c.goto(origin.C+'/mp/play?code='+code);await wait(c,()=>window.MP1Join&&document.getElementById('jName'));if(await c.evaluate(()=>!MP1Join.ws))await tap(c,'[data-j="go"]');await ready(c,EC);
-   for(const p of [b,c])await p.evaluate(CANON+GUESTLIB);await settle('z6');const gB=await guestTx(b,1);
-   await H().evaluate(()=>{window.TZ=window.TZ||{};});await H().evaluate(f=>{window.TZ=f;},M.fx);
+   const {b}=await restart(pre,'z6');const gB=await guestTx(b,1);
    let st=null;for(let i=0;i<120;i++){await days(3);st=await H().evaluate(id=>G.commerce.convoys.find(v=>v.id===id)?.status,M.cv);if(['delivered','destroyed','raided'].includes(st))break;}
    const rec=await H().evaluate(id=>{const v=G.commerce.convoys.find(v=>v.id===id);return {status:v.status,receipt:v.receipt,id:v.id,delivered:v.delivered,loaded:v.loaded,at:v.at,step:v.step,len:v.route.length,reason:v.reason,day:Math.floor(G.day)};},M.cv);
    await days(40);const rec2=await H().evaluate(id=>{const v=G.commerce.convoys.find(v=>v.id===id);return {status:v.status,delivered:v.delivered};},M.cv);

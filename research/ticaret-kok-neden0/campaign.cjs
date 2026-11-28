@@ -3,7 +3,7 @@ const {runtime}=require('../../tests/helpers/runtime');
 const {createHash}=require('node:crypto');
 const fs=require('node:fs'),path=require('node:path');
 const [seed,months,out,root='.',size='ulu',aiCount='9']=process.argv.slice(2);
-const h=runtime({root:path.resolve(root)});
+const h=runtime({root:path.resolve(root),processGlobal:process.env.STARS_FAST_CAMPAIGN==='1'});
 h.sb.untouched=process.env.STARS_BARE==='1';
 h.sb.config={seed:Number(seed),size,aiCount:Number(aiCount)};
 h.run(`
@@ -61,11 +61,26 @@ function advance(){
  T.months.push({day:G.day,rng:RND_STATE,states:observe(),feds:(G.feds||[]).map(f=>[f.type,f.members.length,!!f.laws?.ticaret]),
   open:Commerce.state().contracts.filter(c=>!Commerce.closed(c)).length});
 }`);
+if(process.env.STARS_OBSERVER){
+ const observer=fs.readFileSync(process.env.STARS_OBSERVER,'utf8');
+ let probe;
+ h.sb.probeAudit=(save,spec)=>{
+  if(!probe){
+   probe=runtime({root:path.resolve(root)});
+   probe.sb.config=h.sb.config;
+   probe.run('resetSetupNaming();setupGame({...CFG,...config}); var T={}, observe=()=>[], ai=e=>e.ai&&!e.wild&&!e.crisisSide&&!e.dead;');
+   probe.run(observer,{filename:process.env.STARS_OBSERVER});
+  }
+  probe.sb.probeSave=save;probe.sb.probeSpec=spec;
+  return probe.run("if(!deserialize(probeSave))throw Error('Gözlem kaydı açılamadı');JSON.stringify(evaluateAudit(JSON.parse(probeSpec)));");
+ };
+ h.run(observer,{filename:process.env.STARS_OBSERVER});
+}
 const hash=()=>createHash('sha256').update(h.run('serialize()')).digest('hex');
 const start=hash();
 const rootHash=process.env.STARS_SOURCE||null;
 function flush(){
- const data={source:rootHash,...h.sb.config,start,end:hash(),...JSON.parse(h.run('JSON.stringify(T)'))};
+ const data={source:rootHash,...h.sb.config,start,end:hash(),endReason:h.run('G.over?.txt||null'),...JSON.parse(h.run('JSON.stringify(T)'))};
  fs.writeFileSync(out,JSON.stringify(data)+'\n');return data;
 }
 for(let m=1;m<=Number(months)&&!h.run('G.over');m++){

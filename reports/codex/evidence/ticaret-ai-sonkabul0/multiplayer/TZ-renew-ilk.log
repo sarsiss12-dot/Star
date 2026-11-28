@@ -1,0 +1,20 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[3,3],"mirrorEq":true,"revMs":877,"buildMs":972,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[3,3],"mirrorEq":true,"revMs":1098,"buildMs":1208,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":43.7,"p95":43.7,"max":43.7},"longtask":{"n":14,"med":54,"p95":61,"max":61},"heapMB":16,"dom":728,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":3,"med":51.9,"p95":100.8,"max":100.8},"refresh":{"n":2,"med":5.8,"p95":5.8,"max":5.8},"longtask":{"n":10,"med":55,"p95":68,"max":68},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":16,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":30,"joinErrors":0},"C":{"build":{"n":3,"med":15.8,"p95":128.8,"max":128.8},"refresh":{"n":2,"med":6.5,"p95":6.5,"max":6.5},"longtask":{"n":16,"med":55,"p95":67,"max":67},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":18,"dom":729,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":27,"joinErrors":0}}}
+PASS TZ0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS Z0 fikstür: yalıtılmış 10 sistemlik zincir; host + X s0, C s3, B s6, Y s9; izinsiz X → Y ve host → B rotası yok
+NOT RUN Z1 AI koridoru iki misafir limanından: iki misafirde kart; B ONAYLA (dokunuş) → host'ta B onayladı, izin / ödeme yok, B'de bekleme
+NOT RUN Z2 B hattı kopar → döner: bekleyen talep ve B'nin onayı korunur; aynı onayın tekrarı reddedilir, ödeme yok
+NOT RUN Z3 C ONAYLA (dokunuş) → tek işlem: dört izin, sahiplere +72, X–Y sözleşmesi; iki misafir aynası Uygulandı, kart kalkar
+NOT RUN Z4 host ↔ B koridoru C limanından: host talep eder, C REDDET (dokunuş) → reddedildi; kısmi izin / ödeme yok, B kartı kalkar
+FAIL Z5 izin yenileme MP: C → B izni 40 gün; B YENİLEME İSTE → masa (izin + 36 ◈) → C KABUL → bitişten +360; host / B / C aynı bitiş
+page.evaluate: TypeError: Cannot set properties of undefined (setting '1')
+    at eval (eval at evaluate (:311:30), <anonymous>:1:33)
+    at UtilityScript.evaluate (<anonymous>:313:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at /workspace/Star-ticaret-sonkabul/tests/helpers/ticaret-son-eksikler0-mp.cjs:103:25
+    at test (/workspace/Star-ticaret-sonkabul/tests/browser-mp8.cjs:71:168)
+    at module.exports (/workspace/Star-ticaret-sonkabul/tests/helpers/ticaret-son-eksikler0-mp.cjs:102:8)
+    at async /workspace/Star-ticaret-sonkabul/tests/browser-mp8.cjs:568:18
+NOT RUN Z6 kayıt → kapanış → relay yeniden → yeni oda → misafirler döner: transit kayıtları ve X–Y konvoyu birebir; kargo bir kez teslim
+GEÇEN: 2 KALAN: 1

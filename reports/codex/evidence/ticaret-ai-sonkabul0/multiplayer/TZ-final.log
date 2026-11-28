@@ -1,0 +1,13 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[3,3],"mirrorEq":true,"revMs":486,"buildMs":560,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[3,3],"mirrorEq":true,"revMs":655,"buildMs":755,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":6,"p95":6,"max":6},"longtask":{"n":1,"med":50,"p95":50,"max":50},"heapMB":17,"dom":722,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":3,"med":16.3,"p95":60.9,"max":60.9},"refresh":{"n":1,"med":7,"p95":7,"max":7},"longtask":{"n":9,"med":55,"p95":61,"max":61},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":16,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":30,"joinErrors":0},"C":{"build":{"n":3,"med":17,"p95":40.6,"max":40.6},"refresh":{"n":1,"med":1.2,"p95":1.2,"max":1.2},"longtask":{"n":11,"med":57,"p95":94,"max":94},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":16,"dom":729,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":26,"joinErrors":0}}}
+PASS TZ0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS Z0 fikstür: yalıtılmış 10 sistemlik zincir; host + X s0, C s3, B s6, Y s9; izinsiz X → Y ve host → B rotası yok
+PASS Z1 AI koridoru iki misafir limanından: iki misafirde kart; B ONAYLA (dokunuş) → host'ta B onayladı, izin / ödeme yok, B'de bekleme
+PASS Z2 B hattı kopar → döner: bekleyen talep ve B'nin onayı korunur; aynı onayın tekrarı reddedilir, ödeme yok
+PASS Z2b B onayından sonra Save8 ve relay yeniden başlatma: kısmi oy iki aynada korunur, ödeme yok
+PASS Z3 C ONAYLA (dokunuş) → tek işlem: dört izin, sahiplere +72, X–Y sözleşmesi; iki misafir aynası Uygulandı, kart kalkar
+PASS Z4 host ↔ B koridoru C limanından: host talep eder, C REDDET (dokunuş) → reddedildi; kısmi izin / ödeme yok, B kartı kalkar
+PASS Z5 izin yenileme MP: C → B izni 40 gün; B YENİLEME İSTE → masa (izin + 36 ◈) → C KABUL → bitişten +360; host / B / C aynı bitiş
+PASS Z6 kayıt → kapanış → relay yeniden → yeni oda → misafirler döner: transit kayıtları ve X–Y konvoyu birebir; kargo bir kez teslim
+GEÇEN: 9 KALAN: 0

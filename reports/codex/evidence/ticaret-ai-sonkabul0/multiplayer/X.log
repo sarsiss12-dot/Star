@@ -1,0 +1,8 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[3,3],"mirrorEq":true,"revMs":830,"buildMs":857,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":5,"p95":5,"max":5},"longtask":{"n":13,"med":67,"p95":81,"max":81},"heapMB":18,"dom":728,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":3,"med":56.4,"p95":143,"max":143},"refresh":{"n":1,"med":3.6,"p95":3.6,"max":3.6},"longtask":{"n":8,"med":63,"p95":80,"max":80},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":19,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":27,"joinErrors":0}}}
+PASS X0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 2 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS X0 fikstür: B ana filosu + bileşim, AI ile savaş, ulaşılabilir AI sistemi (host)
+PASS X1 sipariş sınırdan önce (B gerçek dokunuş FİLO TAKVİYESİ), ana filo düşman sistemine geçer, üretim sonra biter → katılır; B aynasında 7
+PASS X2 ana filo düşman sistemindeyken B gerçek dokunuşla OTOMATİK TAKVİYE: AÇIK → host sipariş verir → teslim; B aynasında 8
+PASS X3 ana filo yok olunca 4 sevkiyat → B Haberler → Sevkiyatlar: tek kart, host ile aynı başlık, TOPLU KURTARMA
+GEÇEN: 5 KALAN: 0

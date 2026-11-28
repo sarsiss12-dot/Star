@@ -1,0 +1,12 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[3,3],"mirrorEq":true,"revMs":536,"buildMs":639,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[3,3],"mirrorEq":true,"revMs":808,"buildMs":927,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":2,"med":5.9,"p95":5.9,"max":5.9},"longtask":{"n":10,"med":57,"p95":89,"max":89},"heapMB":18,"dom":728,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":3,"med":40.5,"p95":41.7,"max":41.7},"refresh":{"n":1,"med":14.4,"p95":14.4,"max":14.4},"longtask":{"n":9,"med":61,"p95":77,"max":77},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":16,"dom":720,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":29,"joinErrors":0},"C":{"build":{"n":3,"med":18.4,"p95":63.7,"max":63.7},"refresh":{"n":1,"med":8.7,"p95":8.7,"max":8.7},"longtask":{"n":10,"med":55,"p95":81,"max":81},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":15,"dom":729,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":25,"joinErrors":0}}}
+PASS TZ0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 5 AI, orta, seed 22; misafir gerçek STARS arayüzünde
+PASS Z0 fikstür: yalıtılmış 10 sistemlik zincir; host + X s0, C s3, B s6, Y s9; izinsiz X → Y ve host → B rotası yok
+NOT RUN Z1 AI koridoru iki misafir limanından: iki misafirde kart; B ONAYLA (dokunuş) → host'ta B onayladı, izin / ödeme yok, B'de bekleme
+NOT RUN Z2 B hattı kopar → döner: bekleyen talep ve B'nin onayı korunur; aynı onayın tekrarı reddedilir, ödeme yok
+NOT RUN Z3 C ONAYLA (dokunuş) → tek işlem: dört izin, sahiplere +72, X–Y sözleşmesi; iki misafir aynası Uygulandı, kart kalkar
+NOT RUN Z4 host ↔ B koridoru C limanından: host talep eder, C REDDET (dokunuş) → reddedildi; kısmi izin / ödeme yok, B kartı kalkar
+PASS Z5 izin yenileme MP: C → B izni 40 gün; B YENİLEME İSTE → masa (izin + 36 ◈) → C KABUL → bitişten +360; host / B / C aynı bitiş
+NOT RUN Z6 kayıt → kapanış → relay yeniden → yeni oda → misafirler döner: transit kayıtları ve X–Y konvoyu birebir; kargo bir kez teslim
+GEÇEN: 3 KALAN: 0

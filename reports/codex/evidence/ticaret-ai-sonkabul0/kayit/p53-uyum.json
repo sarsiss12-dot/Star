@@ -1,0 +1,177 @@
+{
+  "build": "96h10p53",
+  "mpVersion": 4,
+  "saveSha256": "78335e1d96080da3a22bb040d74ea771b5275543976976fc036ee5020c3695a3",
+  "pkgSha256": "93b1f0b14dc97de88b125f88845ca2b8bbe1ce7a2909d89720ebe30b843a30c8",
+  "before": {
+    "day": 124,
+    "rng": -951432214,
+    "res": [
+      {
+        "min": 88,
+        "ene": 100,
+        "yiy": 100,
+        "ala": 100,
+        "ara": 100,
+        "tuk": 100,
+        "etk": 100
+      },
+      {
+        "min": 100,
+        "ene": 92,
+        "yiy": 100,
+        "ala": 100,
+        "ara": 100,
+        "tuk": 100,
+        "etk": 100
+      }
+    ],
+    "permit": {
+      "1": 420
+    },
+    "contracts": [
+      {
+        "id": 1,
+        "a": 0,
+        "b": 1,
+        "signature": "[0,1,[{\"t\":\"freight\",\"source\":0,\"target\":3,\"every\":30,\"months\":12,\"r\":\"min\",\"v\":12}],[{\"t\":\"freight\",\"source\":3,\"target\":0,\"every\":30,\"months\":12,\"r\":\"ene\",\"v\":8}]]",
+        "legs": [
+          {
+            "t": "freight",
+            "source": 0,
+            "target": 3,
+            "every": 30,
+            "months": 12,
+            "r": "min",
+            "v": 12,
+            "e": 0,
+            "to": 1
+          },
+          {
+            "t": "freight",
+            "source": 3,
+            "target": 0,
+            "every": 30,
+            "months": 12,
+            "r": "ene",
+            "v": 8,
+            "e": 1,
+            "to": 0
+          }
+        ],
+        "born": 120,
+        "until": 480,
+        "next": 152,
+        "cycle": 1,
+        "status": "active",
+        "reason": "İki yön ayrı teslim edilir; kayıp karşı seferi geri almaz",
+        "delivered": {},
+        "lost": {},
+        "lastDelivery": null
+      }
+    ],
+    "receipts": [
+      [
+        1,
+        "moving",
+        12,
+        0,
+        null
+      ],
+      [
+        2,
+        "moving",
+        8,
+        0,
+        null
+      ]
+    ]
+  },
+  "after": {
+    "day": 149,
+    "rng": -951432214,
+    "res": [
+      {
+        "min": 88,
+        "ene": 108,
+        "yiy": 100,
+        "ala": 100,
+        "ara": 100,
+        "tuk": 100,
+        "etk": 100
+      },
+      {
+        "min": 112,
+        "ene": 92,
+        "yiy": 100,
+        "ala": 100,
+        "ara": 100,
+        "tuk": 100,
+        "etk": 100
+      }
+    ],
+    "permit": {
+      "1": 420
+    },
+    "contracts": [
+      {
+        "id": 1,
+        "a": 0,
+        "b": 1,
+        "signature": "[0,1,[{\"t\":\"freight\",\"source\":0,\"target\":3,\"every\":30,\"months\":12,\"r\":\"min\",\"v\":12}],[{\"t\":\"freight\",\"source\":3,\"target\":0,\"every\":30,\"months\":12,\"r\":\"ene\",\"v\":8}]]",
+        "legs": [
+          {
+            "t": "freight",
+            "source": 0,
+            "target": 3,
+            "every": 30,
+            "months": 12,
+            "r": "min",
+            "v": 12,
+            "e": 0,
+            "to": 1
+          },
+          {
+            "t": "freight",
+            "source": 3,
+            "target": 0,
+            "every": 30,
+            "months": 12,
+            "r": "ene",
+            "v": 8,
+            "e": 1,
+            "to": 0
+          }
+        ],
+        "born": 120,
+        "until": 480,
+        "next": 152,
+        "cycle": 1,
+        "status": "active",
+        "reason": "İki yön ayrı teslim edilir; kayıp karşı seferi geri almaz",
+        "delivered": {
+          "min": 12,
+          "ene": 8
+        },
+        "lost": {},
+        "lastDelivery": 139.5
+      }
+    ],
+    "receipts": [
+      [
+        1,
+        "delivered",
+        0,
+        12,
+        1
+      ],
+      [
+        2,
+        "delivered",
+        0,
+        8,
+        2
+      ]
+    ]
+  }
+}

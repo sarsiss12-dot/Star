@@ -13,7 +13,7 @@ const now=()=>Number(process.hrtime.bigint())/1e6;
 const cpu=()=>{const t=process.cpuUsage();return (t.user+t.system)/1000;};
 function engine(root){
  const h=runtime({root:path.resolve(root)});
- h.sb.realClock=now;h.sb.cpuClock=cpu;
+ h.sb.realClock=now;h.sb.cpuClock=cpu;h.sb.tradeProfile=process.env.STARS_PROFILE_TRADE==='1';
  h.run(`
  var totals={},reforms=[],reform=null;
  function month(){
@@ -22,6 +22,21 @@ function engine(root){
   monthTick();
  }
  function profile(){
+  if(tradeProfile){
+   for(const [target,names] of [[Commerce,['tick','aiOpportunityTick','aiPortInvestment','aiBalance','route']],[globalThis,['dealQuote','dealTxBegin']]]){
+    for(const name of names){
+     const original=target[name];
+     target[name]=function(...args){
+      const wall=realClock(),cpu=cpuClock();
+      try{return original.apply(this,args);}finally{
+       const row=(totals[(target===Commerce?'Commerce.':'')+name]||={n:0,ms:0,cpuMs:0});
+       row.n++;row.ms+=realClock()-wall;row.cpuMs+=cpuClock()-cpu;
+      }
+     };
+    }
+   }
+   return;
+  }
   for(const name of ['aiFedMismatch','aiFedStayReview','aiFedMemberReform','proposeFedMotion','dealTxBegin','jointTick']){
    const f=globalThis[name];if(typeof f!=='function')continue;
    globalThis[name]=function(...args){

@@ -1,0 +1,24 @@
+✓ M1 tek insan limanı: AI iki taşıyıcı için talep açar; onaydan önce izin/ödeme yok; onayla iki izin + düzenli sözleşme tek işlemde
+✓ M2 iki insan limanı: ilk onay var, ikinci bekliyor → hiçbir izin / ödeme yok, durum bekliyor
+✓ M3 ikinci sahip reddeder → talep reddedildi, kısmi izin ya da ödeme yok
+✓ M4 ilk onaydan sonra ikinci oyuncu ayrıldı (artık uzak insan değil): talep başarıya dönmez, süre bitince expired, ödeme yok
+✓ M5 tekrar edilen onay paketi: aynı karar ikinci kez uygulanmaz, ödeme bir kez
+✓ M6 onaydan sonra ara liman fethedildi: eski sahibin onayı kullanılmaz, talep geçersiz, ödeme yok
+✓ M7 onay sırasında savaş başladı: talep geçersiz, izin yok
+✓ M8 yetersiz Etki: son onayda taşıyıcının Etki'si yetmiyor → geçersiz, kısmi ödeme yok
+✓ M9 iki ayrı insan limanı: iki sahip de kendi izinlerini onaylar → dört izin, her sahibe +72, tek sözleşme
+✓ M10 bekleyen işlemle Save8: kayıt/yükleme aynı durum, sonra son onay bir kez uygular
+✓ M11 tamamlanmış işlemle Save8: yüklemede yeniden uygulanmaz, ödeme / izin aynı
+✓ M12 yenileme uyarısı: oyuncunun kullandığı izin için 60 / 30 / 0 günde birer kart, tekrar yok
+✓ M13 geçerli iznin yenilenmesi: son 60 günde bitişten 360 gün uzar; daha erken aynı madde yürürlükte sayılır
+✓ M14 süresi bitmiş izin yeniden verilir: bugünden 360 gün
+✓ M15 yenileme reddi: insan sahip gelen kutusunda reddeder → izin uzamaz, ödeme yok
+✓ M16 yoldaki konvoy ve izin bitişi (yenileme yok): izinsiz ara limandan geçilmez, bekleme sonrası kayıp; muhasebe tutarlı, çift teslim yok
+✓ M17 izin yoldayken yenilenir: konvoy devam eder ve tek kez teslim edilir; bedel bir kez
+✓ H1 oyuncunun koridor talebi, AI sahip: iki yön izinleri tek işlemde verilir (kendi ve ortağın Etki'siyle)
+✓ H2 oyuncunun koridor talebi, insan sahip (uzak insan): sahip onaylayana dek bekler; VAZGEÇ ile kapanır, ödeme yok
+✓ A1 AI yenileme: aktif sözleşmenin kullandığı izin son 60 günde bir kez, tek bedelle yenilenir; bekleme süresinde ikinci istek yok
+✓ A2 AI yenileme: izni kullanan aktif sözleşme yoksa ya da Etki yetersizse yenileme istenmez
+✓ K1 rota memo anahtarları: en büyük devlet (63) ve sistem (999) kimliklerinde çakışma yok, aralık dışı memo atlanır
+✓ K2 bozuk transit onay kaydı reddedilir (oy değeri / sahipsiz oy / kimlik sayacı)
+GEÇEN: 23 KALAN: 0

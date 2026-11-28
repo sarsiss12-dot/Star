@@ -1,0 +1,30 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[5,5],"mirrorEq":true,"revMs":219,"buildMs":323,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[4,4],"mirrorEq":true,"revMs":486,"buildMs":573,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":4,"med":42.1,"p95":54.2,"max":54.2},"longtask":{"n":36,"med":62,"p95":89,"max":91},"heapMB":23,"dom":705,"intervals":2,"timeouts":1,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":5,"med":31.8,"p95":155.4,"max":155.4},"refresh":{"n":1,"med":3.1,"p95":3.1,"max":3.1},"longtask":{"n":11,"med":56,"p95":76,"max":76},"builds":5,"deltas":4,"resyncs":0,"minGap":600,"heapMB":19,"dom":640,"intervals":3,"timeouts":2,"notes":0,"results":3,"packets":40,"joinErrors":0},"C":{"build":{"n":4,"med":94.3,"p95":134.1,"max":134.1},"refresh":{"n":0},"longtask":{"n":15,"med":72,"p95":96,"max":96},"builds":4,"deltas":3,"resyncs":0,"minGap":600,"heapMB":20,"dom":695,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":33,"joinErrors":0}}}
+PASS TA0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 16 AI, s500, seed 22; misafir gerçek STARS arayüzünde
+PASS A0 fikstür (host): limanlar, host ↔ B hiperhat, kapasite, kaynak, temas
+NOT RUN A1 B (800×360) gerçek masa: 100 mineral + "Fiziksel Kargo ile Gönder" → host gelen kutusundan KABUL; dört aşama ayrı
+NOT RUN A2 yükleme B'den düşer, varışta host'a bir kez yazılır, B aynası teslimi görür; ikinci teslim / ikinci kabul yok
+NOT RUN A3 C varsayılan "Anlık Kaynak Takası" ile 40 enerji hediye teklifi → host KABUL → anlık; sözleşme / konvoy yok
+NOT RUN A4 gizlilik: C aynasında B'nin sözleşmesi / konvoyu yok
+NOT RUN A5 host → B kaynak teklifi, B karttan kabul, tek aktarım
+NOT RUN A6 B → C kaynak teklifi, C karttan kabul, tek aktarım
+NOT RUN A7 insan ↔ AI, AI kaynağı karttan kabul edilince aktarılır
+FAIL A8 yük, filo emri ve ayna aynı galaksi ilerlemesinde
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
++   3012.3600927884613,
++   3056.049
+-   2988,
+-   3012
+  ]
+
+    at /workspace/Star-ticaret-sonkabul/tests/helpers/ticaret-ai-sonkabul0-mp.cjs:116:12
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:541:9)
+    at async test (/workspace/Star-ticaret-sonkabul/tests/browser-mp8.cjs:71:162)
+    at async module.exports (/workspace/Star-ticaret-sonkabul/tests/helpers/ticaret-ai-sonkabul0-mp.cjs:89:40)
+    at async /workspace/Star-ticaret-sonkabul/tests/browser-mp8.cjs:563:53
+GEÇEN: 2 KALAN: 1

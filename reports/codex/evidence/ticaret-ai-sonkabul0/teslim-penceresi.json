@@ -1,0 +1,137 @@
+{
+  "close": {
+    "spacing": 156,
+    "blocked": false,
+    "deadline": 195,
+    "offerDay": 120,
+    "value": 131.32800000000003,
+    "before": {
+      "stock": 125,
+      "net": -10,
+      "reserve": 120,
+      "incoming": 0,
+      "export": 0.4166666666666667,
+      "need": 10
+    },
+    "signed": {
+      "stock": 125,
+      "net": -10,
+      "reserve": 120,
+      "incoming": 12,
+      "export": 0.4166666666666667,
+      "need": 10
+    },
+    "afterLoad": 125,
+    "loaded": 12,
+    "rng": -951432214,
+    "restoredRng": -951432214,
+    "result": {
+      "status": "delivered",
+      "receipt": 1,
+      "finished": 150,
+      "delivered": 12,
+      "lost": 0,
+      "stock": 221,
+      "rng": -951432214
+    },
+    "restored": {
+      "status": "delivered",
+      "receipt": 1,
+      "finished": 150,
+      "delivered": 12,
+      "lost": 0,
+      "stock": 221,
+      "rng": -951432214
+    }
+  },
+  "far": {
+    "spacing": 1350,
+    "blocked": false,
+    "deadline": 195,
+    "offerDay": 120,
+    "value": 131.32800000000003,
+    "before": {
+      "stock": 125,
+      "net": -10,
+      "reserve": 120,
+      "incoming": 0,
+      "export": 0.4166666666666667,
+      "need": 10
+    },
+    "signed": {
+      "stock": 125,
+      "net": -10,
+      "reserve": 120,
+      "incoming": 12,
+      "export": 0.4166666666666667,
+      "need": 10
+    },
+    "afterLoad": 125,
+    "loaded": 12,
+    "rng": -951432214,
+    "restoredRng": -951432214,
+    "result": {
+      "status": "delivered",
+      "receipt": 1,
+      "finished": 349,
+      "delivered": 12,
+      "lost": 0,
+      "stock": 137,
+      "rng": -951432214
+    },
+    "restored": {
+      "status": "delivered",
+      "receipt": 1,
+      "finished": 349,
+      "delivered": 12,
+      "lost": 0,
+      "stock": 137,
+      "rng": -951432214
+    }
+  },
+  "interrupted": {
+    "spacing": 156,
+    "blocked": true,
+    "deadline": 195,
+    "offerDay": 120,
+    "value": 131.32800000000003,
+    "before": {
+      "stock": 125,
+      "net": -10,
+      "reserve": 120,
+      "incoming": 0,
+      "export": 0.4166666666666667,
+      "need": 10
+    },
+    "signed": {
+      "stock": 125,
+      "net": -10,
+      "reserve": 120,
+      "incoming": 12,
+      "export": 0.4166666666666667,
+      "need": 10
+    },
+    "afterLoad": 125,
+    "loaded": 12,
+    "rng": -951432214,
+    "restoredRng": -951432214,
+    "result": {
+      "status": "destroyed",
+      "receipt": 1,
+      "finished": 304,
+      "delivered": 0,
+      "lost": 12,
+      "stock": 125,
+      "rng": -951432214
+    },
+    "restored": {
+      "status": "destroyed",
+      "receipt": 1,
+      "finished": 304,
+      "delivered": 0,
+      "lost": 12,
+      "stock": 125,
+      "rng": -951432214
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "ulu-11-m120.save:steady": [
+    {
+      "condition": "ab",
+      "samples": 24,
+      "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797",
+      "rngBefore": 2061039509,
+      "rngAfter": -944196750
+    },
+    {
+      "condition": "aa",
+      "samples": 24,
+      "save": "f0c0ce1ff2fcd594aa6a6869faacbc719f7c1ee5894aed9dba0a68e83e7cc797",
+      "rngBefore": 2061039509,
+      "rngAfter": -944196750
+    }
+  ],
+  "s500-11-m120.save:steady": [
+    {
+      "condition": "ab",
+      "samples": 24,
+      "save": "5fd7d8674605a9aa9d735456e227c953610430e8e7db969f6f6a96c853044b12",
+      "rngBefore": 885142249,
+      "rngAfter": 1633038510
+    },
+    {
+      "condition": "aa",
+      "samples": 24,
+      "save": "5fd7d8674605a9aa9d735456e227c953610430e8e7db969f6f6a96c853044b12",
+      "rngBefore": 885142249,
+      "rngAfter": 1633038510
+    }
+  ],
+  "s500-11-m180.save:steady": [
+    {
+      "condition": "ab",
+      "samples": 24,
+      "save": "7c099da5503406135ed64c8d237d41404971b3104b3b2f3de61b76f09c776071",
+      "rngBefore": -277501198,
+      "rngAfter": -1907251029
+    },
+    {
+      "condition": "aa",
+      "samples": 24,
+      "save": "7c099da5503406135ed64c8d237d41404971b3104b3b2f3de61b76f09c776071",
+      "rngBefore": -277501198,
+      "rngAfter": -1907251029
+    }
+  ]
+}

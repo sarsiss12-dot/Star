@@ -1,5 +1,7 @@
 # Son Codex raporu
 
+[CODEX-TİCARET-AI-SONKABUL.0 · p57 ticaret ekonomisi, teslimat zamanı ve multiplayer kabulü](reports/codex/CODEX-TICARET-AI-SONKABUL0-SONUC.md)
+
 [CODEX-TEST-FAIL-KÖK.0 · p57 test envanteri, üç oyun kusuru ve karşılaştırmalı kabul](reports/codex/CODEX-TEST-FAIL-KOK0-SONUC.md)
 
 [CODEX-P56-KABUL.0 · p57 / MP.8.9b56 yayın adayı, relay kapanış yarışı, I100/I3 ve F5, Save8/RNG ve performans](reports/codex/CODEX-P56-KABUL0-SONUC.md)

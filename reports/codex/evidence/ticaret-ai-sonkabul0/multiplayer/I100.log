@@ -1,0 +1,26 @@
+SYNC {"label":"m0","who":"B","e":1,"rev":[4,4],"mirrorEq":true,"revMs":243,"buildMs":333,"diff":[],"leak":[]}
+SYNC {"label":"m0","who":"C","e":2,"rev":[3,3],"mirrorEq":true,"revMs":424,"buildMs":497,"diff":[],"leak":[]}
+PERF {"label":"m0","month":0,"host":{"monthTick":{"n":0},"publish":{"n":3,"med":7.4,"p95":8.4,"max":8.4},"longtask":{"n":13,"med":56,"p95":69,"max":69},"heapMB":17,"dom":714,"intervals":2,"timeouts":2,"offers":0,"notes":0,"inbox":0,"log":1,"news":0},"guests":{"B":{"build":{"n":4,"med":13.1,"p95":40.4,"max":40.4},"refresh":{"n":1,"med":3.9,"p95":3.9,"max":3.9},"longtask":{"n":4,"med":54,"p95":66,"max":66},"builds":4,"deltas":3,"resyncs":0,"minGap":600,"heapMB":19,"dom":640,"intervals":3,"timeouts":2,"notes":0,"results":3,"packets":37,"joinErrors":0},"C":{"build":{"n":3,"med":27.8,"p95":92,"max":92},"refresh":{"n":0},"longtask":{"n":4,"med":56,"p95":58,"max":58},"builds":3,"deltas":2,"resyncs":0,"minGap":600,"heapMB":17,"dom":714,"intervals":3,"timeouts":1,"notes":0,"results":0,"packets":30,"joinErrors":0}}}
+PASS I0 kurulum: üretim relay süreci + TLS vekili + oyuncu başına hat; MP.7 tasarım lobisi; 3 insan + 9 AI, ulu, seed 404; misafir gerçek STARS arayüzünde
+  OLAY {"kind":"speed","who":"B","t":20,"spd":4,"ok":true,"note":3}
+  OLAY {"kind":"window","who":"B","t":51,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸▸▸ 4×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"B","label":"pencere","ok":true,"ms":335,"hostDay":758.8}}
+  OLAY {"kind":"background","who":"B","t":81,"catch":{"who":"B","label":"arka plan","ok":true,"ms":107,"hostDay":782.2}}
+  OLAY {"kind":"cut","who":"B","t":111,"catch":{"who":"B","label":"kopma","ok":true,"ms":367,"hostDay":792.7}}
+  OLAY {"kind":"order","who":"B","t":142,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":695}
+  OLAY {"kind":"speed","who":"C","t":172,"spd":4,"ok":true,"note":5}
+  OLAY {"kind":"window","who":"C","t":202,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸▸▸▸ 4×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"C","label":"pencere","ok":true,"ms":211,"hostDay":1178.5}}
+  OLAY {"kind":"background","who":"C","t":232,"catch":{"who":"C","label":"arka plan","ok":true,"ms":98,"hostDay":1201.4}}
+  OLAY {"kind":"cut","who":"C","t":262,"catch":{"who":"C","label":"kopma","ok":true,"ms":617,"hostDay":1211.8}}
+  OLAY {"kind":"order","who":"C","t":293,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":810}
+  OLAY {"kind":"speed","who":"B","t":323,"spd":2,"ok":true,"note":8}
+  OLAY {"kind":"window","who":"B","t":353,"modal":true,"pill":"ÇOK OYUNCULU · Pencere açık — dünya, kapanınca güncellenir · ▸ 1×","note":"Pencere açık — dünya, kapanınca güncellenir","catch":{"who":"B","label":"pencere","ok":true,"ms":377,"hostDay":1313.9}}
+  OLAY {"kind":"background","who":"B","t":383,"catch":{"who":"B","label":"arka plan","ok":true,"ms":63,"hostDay":1337}}
+  OLAY {"kind":"cut","who":"B","t":413,"catch":{"who":"B","label":"kopma","ok":true,"ms":651,"hostDay":1347.8}}
+  OLAY {"kind":"order","who":"B","t":444,"move":"ok","ship":"ok","shipSeen":true,"reflectMs":720}
+  OLAY {"kind":"speed","who":"C","t":474,"spd":4,"ok":true,"note":10}
+  örnek 332 · olay 16 · kapalı-pencere donma 0 · açık-pencere bekleme 3 · en büyük gün farkı 7.7
+PASS I1 uzun oturum 8 dk (ulu / 9 AI / host + 2 misafir): hız değişimi, açık pencere → kapatma, arka plan → dönüş, kısa kopma, emirler; pencere KAPALIYKEN misafir dünyası 20 sn'den uzun durmaz; açık pencere bekletmesinin nedeni pencere üstünde görünür
+  I2 {"B":{"fleets":70,"seen":38,"seenMiss":0,"seenExtra":0,"hab":7,"habDiff":[],"ownDiff":[],"diff":{"route":[],"hp":[],"combat":[]}},"C":{"fleets":70,"seen":43,"seenMiss":0,"seenExtra":0,"hab":8,"habDiff":[],"ownDiff":[],"diff":{"route":[],"hp":[],"combat":[]}}}
+PASS I2 görsel tutarlılık: rota, keşfedilen sistemler, bilinen kolonileştirilebilir işaretler, görünür sınırlar ve can oranı host ile aynı; çatışan yabancı filo misafir haritasında da çatışmada (halka + can çubuğu)
+PASS I3 yalıtılmış sensör olayı: B → C; yeni görüş ve keşif, özel alan, host ve iki ayna, Save8 sonrası
+GEÇEN: 4 KALAN: 0
