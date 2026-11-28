@@ -4420,7 +4420,7 @@ function doSurvey(f, sys){
 function stepFleets(dt){
   let sharedSensorsMoved=false;
   const shipmentBudget={left:8,fleets:new Map(G.fleets.map(f=>[f.id,f]))};
-  const safeThreats=new Map(),exploreChecks=new Map();
+  const safeThreats=new Map(),exploreChecks=new Map(),exploreSensors=new Map();
   for (let i=G.fleets.length-1;i>=0;i--){
     const f = G.fleets[i];
     if (!f.ships.length){ if(!(G.fleetJournal||[]).some(r=>r.fleet===f.id))fleetLost(f,'empty-cleanup'); if(sensorShareActive(G.p,G.emps[f.e]))sharedSensorsMoved=true;G.fleets.splice(i,1); continue; }
@@ -4446,7 +4446,7 @@ function stepFleets(dt){
           holdShipment(f,'blocked','Bilinen düşman tehdidi — güvenli rota yok');continue;}
       }
       if(explorationEnabled(f)){
-        if(!exploreChecks.has(f.e))exploreChecks.set(f.e,explorationContext(eMove));
+        if(!exploreChecks.has(f.e))exploreChecks.set(f.e,explorationContext(eMove,exploreSensors));
         const reason=explorationBlock(eMove,f,nxt,exploreChecks.get(f.e),f.sys);
         if(reason){holdExploration(f,reason);continue;}
       }
@@ -4556,7 +4556,7 @@ function cancelExploration(f){
   delete f.explore;
   if(fleetHasRole(f,'bilim'))f.auto=false;
 }
-function explorationContext(e){
+function explorationContext(e, sensorCache){
   const claims=borderClaimRows();
   const known=new Set(),visible=new Set(),blocked=reinforcementThreats(e,claims),pirates=new Set();
   // Aynı sensör menzili; görülmeyen düşman filoları veya yuvalar okunmaz.
@@ -4570,6 +4570,15 @@ function explorationContext(e){
     if(!s || depth.has(id)&&depth.get(id)<=d)continue;
     depth.set(id,d);visible.add(id);
     if(d<range&&!s.nebulaS)for(const n of s.lanes)q.push([n,d+1]);
+  }
+  let shared;
+  if(sensorCache&&e.ai){
+    for(const id of new Set([...Object.keys(e.visionFrom||{}),...Object.keys(e.shareVis||{})])){
+      const giver=G.emps[id];if(!sensorShareActive(e,giver))continue;
+      if(!sensorCache.has(giver.id))sensorCache.set(giver.id,nativeSensorVision(giver));
+      shared||=new Set();
+      for(const sid of sensorCache.get(giver.id)){if(!visible.has(sid))shared.add(sid);visible.add(sid);}
+    }
   }
   for(const s of G.sys){
     if((e.id===0?pSeen(s):s.seen.includes(e.id)) || visible.has(s.id) || e.id===0&&pVis(s))known.add(s.id);
@@ -4585,7 +4594,7 @@ function explorationContext(e){
   const frontier=new Set(known);
   for(const id of known)for(const n of G.sys[id].lanes)frontier.add(n);
   const gates=[...known].filter(id=>hasUsableGate(e,G.sys[id]));
-  return {known,visible,frontier,blocked,pirates,gates,supply:new Map(),supplyNodes:new Map()};
+  return {known,visible,shared,frontier,blocked,pirates,gates,supply:new Map(),supplyNodes:new Map()};
 }
 /* One observer contract for remote humans; native providers never relay third-party vision. */
 function humanVisionContext(e){
@@ -4649,7 +4658,7 @@ function explorationPath(graph,to){
   return p;
 }
 function explorationRoute(e,f,sys){
-  return explorationPath(explorationGraph(e,f,explorationContext(e)),sys.id);
+  return explorationPath(explorationGraph(e,f,explorationContext(e,new Map())),sys.id);
 }
 function explorationReservations(e){
   const taken=new Map();
@@ -4673,7 +4682,7 @@ function explorationWaitKey(e,ctx){
   return [...ctx.known].join(',')+'/'+[...ctx.blocked].join(',')+'/'+G.sys.filter(s=>s.surv.includes(e.id)).map(s=>s.id).join(',')+'/'+owned+'/'+Object.keys(e.techs||{}).length+'/'+Object.keys(e.ally||{}).filter(k=>e.ally[k]).join(',');
 }
 function autoExploreTick(onlyEmpire){
-  const contexts=new Map(),reservations=new Map();
+  const contexts=new Map(),reservations=new Map(),sensors=new Map();
   const fleets=G.fleets.filter(explorationEnabled).sort((a,b)=>a.id-b.id);
   for(const f of fleets){
     if(onlyEmpire!==undefined&&f.e!==onlyEmpire)continue;
@@ -4681,7 +4690,7 @@ function autoExploreTick(onlyEmpire){
     const state=f.explore;
     if(state&&Number.isFinite(state.next)&&state.next>G.day&&state.next<=G.day+5)continue;
     const e=empOf(f);
-    if(!contexts.has(e.id))contexts.set(e.id,explorationContext(e));
+    if(!contexts.has(e.id))contexts.set(e.id,explorationContext(e,sensors));
     if(!reservations.has(e.id))reservations.set(e.id,explorationReservations(e));
     const ctx=contexts.get(e.id),taken=reservations.get(e.id);
     const waitKey=state&&state.target===null&&!Number.isInteger(state.home)?explorationWaitKey(e,ctx):null;
@@ -4709,14 +4718,21 @@ function autoExploreTick(onlyEmpire){
     if(valid&&(f.mv||G.day<(state.review||0))){state.next=G.day+.5;continue;}
     if(Number.isInteger(target)&&taken.get(target)===f.id)taken.delete(target);
     const graph=explorationGraph(e,f,ctx);
-    let best=null;
+    let best=null,contact=null;
     for(const id of ctx.frontier){
       const s=G.sys[id];
       if(s.surv.includes(e.id)||taken.has(id)||explorationBlock(e,f,id,ctx)||!Number.isFinite(graph.cost[id]))continue;
       const nearby=s.lanes.filter(n=>ctx.known.has(n)&&!G.sys[n].surv.includes(e.id)&&!taken.has(n)).length;
       const score=graph.cost[id]/(1+Math.min(3,nearby)*.06);
       if(!best||score<best.score||score===best.score&&id<best.id)best={id,score};
+      if(ctx.shared?.has(id)&&s.owner>=0&&!e.contact[s.owner]){
+        const other=G.emps[s.owner];
+        if(other&&!other.dead&&!other.wild&&!other.crisisSide&&s.planets.some(p=>p.owner===other.id&&p.col)&&
+           (!contact||score<contact.score||score===contact.score&&id<contact.id))contact={id,score};
+      }
     }
+    // Consider a short diplomatic detour only after the existing route, threat and supply checks.
+    if(contact&&contact.score<=90&&contact.score<=best.score+24)best=contact;
     if(valid&&best&&best.id!==target&&best.score>=graph.cost[target]*.7)best={id:target,score:graph.cost[target]};
     if(best){
       f.path=(f.mv?[f.mv.to]:[]).concat(explorationPath(graph,best.id));
@@ -4811,7 +4827,7 @@ function arrive(f, sys){
      ayrıca artıyor (anomChance). */
   if(explorationEnabled(f)){
     const owner=explorationReservations(e).get(sys.id);
-    if(owner!==undefined&&owner!==f.id || explorationBlock(e,f,sys.id,explorationContext(e)))return;
+    if(owner!==undefined&&owner!==f.id || explorationBlock(e,f,sys.id,explorationContext(e,new Map())))return;
   }
   if (fleetHasRole(f,'bilim') && !sys.surv.includes(e.id))
     f.surv = Math.round(SCAN_BASE * (hasCivic(e,'scan') ? (1 - SCAN_HUNTER) : 1));
