@@ -560,6 +560,7 @@ async function campaign(fromMonth,toMonth){let round=Math.floor(fromMonth/CONF.e
   if(SCEN==='SE')await require('./helpers/saha-entegre0-mp.cjs')({test,pg,metrics,sleep,shot,assert,wait,tap,settle,advance});
   if(SCEN==='SG')await require('./helpers/saha-guvence1-mp.cjs')({test,pg,metrics,sleep,shot,wait,tap,settle});
   if(SCEN==='TA')await require('./helpers/ticaret-ag1-mp.cjs')({test,pg,metrics,sleep,shot,wait,tap,settle});
+  if(SCEN==='TA'&&process.env.MP8_TRADE_FINAL==='1')await require('./helpers/ticaret-ai-sonkabul0-mp.cjs')({test,pg,metrics,wait,tap,settle,cmd});
   if(SCEN==='TB')await require('./helpers/ticaret-ai0-mp.cjs')({test,pg,metrics,sleep,shot,wait,tap,settle,cmd});
   if(SCEN==='TR')await require('./helpers/ticaret-ai1-mp.cjs')({test,pg,metrics,sleep,shot,wait,tap,settle,cmd,origin,open,ctx,startRelay,stopRelay,getCode:()=>code,setCode:c=>{code=c;},CANON,HOSTLIB,GUESTLIB,TIMERS});
   if(SCEN==='X')await require('./helpers/reinf-route0-mp.cjs')({test,pg,metrics,sleep,shot,assert,wait,tap,settle,advance});

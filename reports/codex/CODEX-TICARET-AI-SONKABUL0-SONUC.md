@@ -49,7 +49,7 @@ Altı kayıtta temas yokluğu 55.498 olayla en sık kapıydı. Onu 5.158 güvenl
 
 Kontrollü aynı sözleşme üç kolda aynı nominal ithalatı (ayda 12) ve aynı değerlemeyi (131,328) verdi. Rezerv penceresi 195 günken fiziksel varış kısa hatta 30, uzun hatta 229 gündü. Kapanan ilk bağlantı yükü teslim etmeden 12 mineral kaybettirdi. Her kol kayıt yüklenince aynı makbuzu ve RNG'yi üretti. Bu deney mevcut puanın vade duyarlılığına ilişkin sınırı gösteriyor.
 
-Kampanyada yüklenmiş ithalatla çakışan tek acil gözlem 404, gün 5.160, devlet 5 mineral. 7,3 mineral için kalan tahmini 16,35 gün, stok 18,03 iken 60 rezervi zaten aşılmıştı. Zamanında kesinleşmiş yük miktarı sıfır. Bu tek olay, önceki reddedilen nominal ithalat çıkarma kuralını üretime almak için temel vermiyor. [Kontrollü deney](evidence/ticaret-ai-sonkabul0/teslim-penceresi.json) · [404 izi](evidence/ticaret-ai-sonkabul0/kampanya/gozlem-ulu-404.json.gz)
+Kampanyada yüklenmiş ithalatla çakışan tek acil gözlem 404, gün 5.160, devlet 5 mineral. 7,3 mineral için kalan tahmini 16,35 gün, stok 18,03 iken 60 rezervi zaten aşılmıştı. Tahmin gerçek 5.176,5 varışından 0,15 oyun günü önceydi. Rezervin zamanında karşılanan kısmı sıfır. 150. ay Save8 döngüsü aynı kararı yeniden üretti. Gün 5.163'te bina yıkım iadesi 74 mineral ekleyerek stoğu 92,03'e çıkardı. Varış stoğu 99,33 oldu. Yalnız o teslimatın stok etkisinin çıkarıldığı yalıtılmış kolda aynı RNG ile stok 92,03 ve 60 tabanının üstündeydi. Bu vakada rezervi onaran karar yüzeydeki ithalat eşleşmesi yerine daha önceki yıkım iadesiydi. [Aynı kayıttan karar ve stok izi](evidence/ticaret-ai-sonkabul0/kampanya/404-kriz-tekrar.json) [Kontrollü deney](evidence/ticaret-ai-sonkabul0/teslim-penceresi.json) · [404 izi](evidence/ticaret-ai-sonkabul0/kampanya/gozlem-ulu-404.json.gz)
 
 ## 7. Stratejik liman yatırımı
 
@@ -88,6 +88,7 @@ Küçük dünyalarda ay kapanışında 11'de 4, 99'da 20 ve 404'te 443 kaynak-de
 | Gerçek Chromium | Sonuç | Kontrol |
 |---|---:|---|
 | TA / TB / TR / TL / TZ | 31/0 | Fiziksel gönderi, anlık seçenek, ele geçirilmiş ve iptal edilmiş aktarma, kayıt-yeni oda, iki misafir onayı, karşı teklif, ret ve yenileme |
+| TA genişletilmiş | 9/0 | Host → B, B → C, insan ↔ AI, gerçek kabul düğmeleri, yetkisiz C kabulünde ret ve sıfır stok hareketi |
 | SG / J / X | 15/0 | Tek ödeme, kayıp yanıt, fed oyu, ayna ve takviye |
 | I 500/16, 15 dk | 4/0 | İki ayrı misafir profili, 572 örnek, 30 olay, 0 kapalı pencere donması, sensör ve kayıt doğrulaması |
 | I 100/9, 8 dk | 4/0 | 332 örnek, 16 olay, 0 kapalı pencere donması, en büyük 7,7 oyun günü farkı, yeniden katılım ve kayıt eşitliği |
@@ -100,7 +101,7 @@ Gerçek Chromium dokunmatik benzetimi 800×360, 844×390 ve 901×411 yatay boyut
 
 ## 16. Save8 ve RNG
 
-100/9 ay 120 ve 500/16 ay 120/180 aynı kayıtları iki kökte açıldı ve bir ay yürütüldü. Öncesi, sonrası Save8 SHA-256 ve RNG aynıydı. Bekleyen kısmi transit, tamamlanmış transit, yoldaki yük ve yeniden kabul olumsuz testleri geçti. Geçersiz teklif şekli olumsuz kontrolü eski karşılaştırma kökünde tek taraflı kaynak etkisini yeniden üretti, p57 düzeltmesinde kaynak değişmedi. `faz86c_6_transaction_acceptance` 534/0 ve filo defteri geri alma kapsaması sürdü. [Save8/RNG](evidence/ticaret-ai-sonkabul0/kayit/save-rng.json) · [Olumsuz kontrol](evidence/ticaret-ai-sonkabul0/kayit/deal-shape.json)
+100/9 ay 120 ve 500/16 ay 120/180 aynı kayıtları iki kökte açıldı ve bir ay yürütüldü. Öncesi, sonrası Save8 SHA-256 ve RNG aynıydı. Bekleyen kısmi transit, tamamlanmış transit, yoldaki yük ve yeniden kabul olumsuz testleri geçti. Geçersiz teklif şekli olumsuz kontrolü eski karşılaştırma kökünde tek taraflı kaynak etkisini yeniden üretti, p57 düzeltmesinde kaynak değişmedi. `faz86c_6_transaction_acceptance` 534/0 ve filo defteri geri alma kapsaması sürdü. Muharebe raporunun gerçek Chromium kapatma düğmesi p57 düzeltmesinde çalıştı. Önceki kökte rapor kapanmadı. Oyun sonucu, filo ve RNG eşit kaldı. [Muharebe olumsuz kontrolü](evidence/ticaret-ai-sonkabul0/kayit/battle-report.json) [Save8/RNG](evidence/ticaret-ai-sonkabul0/kayit/save-rng.json) · [Olumsuz kontrol](evidence/ticaret-ai-sonkabul0/kayit/deal-shape.json)
 
 ## 17. Tam Node
 

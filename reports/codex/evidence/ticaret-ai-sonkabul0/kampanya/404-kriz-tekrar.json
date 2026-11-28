@@ -1,0 +1,137 @@
+{
+  "saveSha256": "4f71e5caa572c17cdccd2a2410cf2375beddeeb30f3f78a2cff440f5ce133e0f",
+  "expected": {
+    "day": 5176.5,
+    "id": 273,
+    "status": "delivered",
+    "contract": 18,
+    "cycle": 1,
+    "from": 3,
+    "to": 5,
+    "r": "min",
+    "loaded": 7.3,
+    "delivered": 7.3,
+    "lost": 0,
+    "before": 92.02787676968907,
+    "inc": -1.4673623328334977,
+    "hops": 2,
+    "valueSource": 2.774,
+    "valueReceiver": 6.657600000000001
+  },
+  "control": {
+    "changes": [
+      {
+        "day": 5160,
+        "before": 19.49523910252258,
+        "after": 18.02787676968908,
+        "delta": -1.467362332833499,
+        "source": [
+          "at economyTick (economy.js:536:35)",
+          "at EconomyLedger.observe.sy.system (economic-ledger.js:59:521)",
+          "at Object.observe (economic-ledger.js:25:14)",
+          "at obj.<computed> (economic-ledger.js:59:494)"
+        ]
+      },
+      {
+        "day": 5163,
+        "before": 18.02787676968908,
+        "after": 92.02787676968907,
+        "delta": 74,
+        "source": [
+          "at colonyBuildTick (economy.js:1184:52)",
+          "at EconomyLedger.observe.sy.system (economic-ledger.js:59:521)",
+          "at Object.observe (economic-ledger.js:25:14)",
+          "at obj.<computed> (economic-ledger.js:59:494)"
+        ]
+      },
+      {
+        "day": 5176.5,
+        "before": 92.02787676968907,
+        "after": 99.32787676968907,
+        "delta": 7.299999999999997,
+        "source": [
+          "at Object.finish (commerce.js:211:15)",
+          "at EconomyLedger.observe.v.convoy (economic-ledger.js:141:257)",
+          "at Object.observe (economic-ledger.js:25:14)",
+          "at Commerce.<computed> (economic-ledger.js:141:230)"
+        ]
+      }
+    ],
+    "trace": {
+      "day": 5176.5,
+      "status": "delivered",
+      "receipt": 273,
+      "delivered": 7.3,
+      "before": 92.02787676968907
+    },
+    "finish": {
+      "day": 5176.5,
+      "rng": 1592999678,
+      "stock": 99.32787676968907
+    }
+  },
+  "withoutCredit": {
+    "changes": [
+      {
+        "day": 5160,
+        "before": 19.49523910252258,
+        "after": 18.02787676968908,
+        "delta": -1.467362332833499,
+        "source": [
+          "at economyTick (economy.js:536:35)",
+          "at EconomyLedger.observe.sy.system (economic-ledger.js:59:521)",
+          "at Object.observe (economic-ledger.js:25:14)",
+          "at obj.<computed> (economic-ledger.js:59:494)"
+        ]
+      },
+      {
+        "day": 5163,
+        "before": 18.02787676968908,
+        "after": 92.02787676968907,
+        "delta": 74,
+        "source": [
+          "at colonyBuildTick (economy.js:1184:52)",
+          "at EconomyLedger.observe.sy.system (economic-ledger.js:59:521)",
+          "at Object.observe (economic-ledger.js:25:14)",
+          "at obj.<computed> (economic-ledger.js:59:494)"
+        ]
+      },
+      {
+        "day": 5176.5,
+        "before": 92.02787676968907,
+        "after": 99.32787676968907,
+        "delta": 7.299999999999997,
+        "source": [
+          "at Object.finish (commerce.js:211:15)",
+          "at EconomyLedger.observe.v.convoy (economic-ledger.js:141:257)",
+          "at Object.observe (economic-ledger.js:25:14)",
+          "at Commerce.<computed> (economic-ledger.js:141:230)"
+        ]
+      },
+      {
+        "day": 5176.5,
+        "before": 99.32787676968907,
+        "after": 92.02787676968907,
+        "delta": -7.299999999999997,
+        "source": [
+          "at Commerce.finish (evalmachine.<anonymous>:9:56)",
+          "at Object.tick0 (commerce.js:305:30)",
+          "at Object.tick (commerce.js:244:75)",
+          "at dailyTick (main.js:4838:45)"
+        ]
+      }
+    ],
+    "trace": {
+      "day": 5176.5,
+      "status": "delivered",
+      "receipt": 273,
+      "delivered": 7.3,
+      "before": 92.02787676968907
+    },
+    "finish": {
+      "day": 5176.5,
+      "rng": 1592999678,
+      "stock": 92.02787676968907
+    }
+  }
+}
