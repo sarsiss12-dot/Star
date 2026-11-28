@@ -1,0 +1,195 @@
+{
+  "p57-s500-11.json": {
+    "counts": {
+      "trade-no-contact": 13724,
+      "trade-political": 567,
+      "trade-no-safe-route": 697,
+      "trade-no-port": 114,
+      "trade-no-supply-demand": 220,
+      "trade-route-budget": 954,
+      "trade-route-not-exhausted": 42,
+      "trade-no-fair-ratio": 1,
+      "trade-cooldown": 1
+    },
+    "delivered": {},
+    "settledValue": 0,
+    "netPhysicalSupplySettled": {},
+    "deficitBeforeReceipt": [
+      0,
+      0,
+      0
+    ]
+  },
+  "p57-s500-23.json": {
+    "counts": {
+      "trade-no-contact": 13724,
+      "trade-no-port": 54,
+      "trade-no-safe-route": 763,
+      "trade-no-supply-demand": 584,
+      "trade-signed": 8,
+      "trade-agreed": 8,
+      "trade-existing": 79,
+      "trade-political": 525,
+      "trade-route-budget": 876,
+      "trade-route-not-exhausted": 50
+    },
+    "delivered": {
+      "ala": 309.6,
+      "min": 250.80000000000007,
+      "ene": 174.90000000000003
+    },
+    "settledValue": 63.17120000000003,
+    "netPhysicalSupplySettled": {
+      "ala": 0.0,
+      "min": -12.2,
+      "ene": 0.0
+    },
+    "deficitBeforeReceipt": [
+      0,
+      0,
+      0
+    ]
+  },
+  "p57-s500-404.json": {
+    "counts": {
+      "trade-no-contact": 14127,
+      "trade-no-port": 22,
+      "trade-no-safe-route": 781,
+      "trade-no-supply-demand": 263,
+      "trade-political": 359,
+      "trade-route-budget": 740,
+      "trade-signed": 1,
+      "trade-agreed": 1,
+      "trade-existing": 11,
+      "trade-no-fair-ratio": 2,
+      "trade-cooldown": 2,
+      "trade-route-not-exhausted": 1
+    },
+    "delivered": {
+      "yiy": 48,
+      "tuk": 37.5
+    },
+    "settledValue": 8.512000000000002,
+    "netPhysicalSupplySettled": {
+      "yiy": 0,
+      "tuk": 0.0
+    },
+    "deficitBeforeReceipt": [
+      2,
+      0,
+      0
+    ]
+  },
+  "p57-ulu-11.json": {
+    "counts": {
+      "trade-no-contact": 5729,
+      "trade-no-port": 714,
+      "trade-political": 1024,
+      "trade-no-safe-route": 630,
+      "trade-signed": 69,
+      "trade-agreed": 69,
+      "trade-existing": 704,
+      "trade-no-supply-demand": 496,
+      "trade-route-not-exhausted": 54,
+      "trade-route-budget": 149,
+      "trade-transit-refused": 5,
+      "trade-no-fair-ratio": 32,
+      "trade-cooldown": 37,
+      "trade-review-cancel": 1,
+      "trade-quote-rejected": 1,
+      "trade-quote-reason": 1,
+      "trade-pact-agreed": 1
+    },
+    "delivered": {
+      "min": 1537.0000000000011,
+      "ala": 4011.5000000000045,
+      "tuk": 941.0,
+      "ene": 3990.399999999999,
+      "yiy": 47.7
+    },
+    "settledValue": 490.2456000000001,
+    "netPhysicalSupplySettled": {
+      "min": 0.0,
+      "ala": -16.0,
+      "tuk": 0.0,
+      "ene": -14.7,
+      "yiy": 0.0
+    },
+    "deficitBeforeReceipt": [
+      36,
+      0,
+      0
+    ]
+  },
+  "p57-ulu-404.json": {
+    "counts": {
+      "trade-no-contact": 4195,
+      "trade-no-port": 1232,
+      "trade-political": 1342,
+      "trade-no-safe-route": 802,
+      "trade-no-fair-ratio": 34,
+      "trade-cooldown": 32,
+      "trade-signed": 20,
+      "trade-agreed": 20,
+      "trade-existing": 199,
+      "trade-no-supply-demand": 261,
+      "trade-route-not-exhausted": 204,
+      "trade-route-budget": 539,
+      "trade-pact-agreed": 1
+    },
+    "delivered": {
+      "ala": 1119.8999999999992,
+      "tuk": 706.0000000000002,
+      "min": 609.6999999999996,
+      "ene": 1751.3000000000031
+    },
+    "settledValue": 196.4866,
+    "netPhysicalSupplySettled": {
+      "ala": 0.0,
+      "tuk": 0.0,
+      "min": 0.0,
+      "ene": -15.8
+    },
+    "deficitBeforeReceipt": [
+      31,
+      0,
+      0
+    ]
+  },
+  "p57-ulu-99.json": {
+    "counts": {
+      "trade-no-contact": 3999,
+      "trade-political": 663,
+      "trade-no-port": 528,
+      "trade-no-safe-route": 1485,
+      "trade-no-supply-demand": 983,
+      "trade-no-fair-ratio": 18,
+      "trade-cooldown": 17,
+      "trade-route-budget": 356,
+      "trade-signed": 15,
+      "trade-agreed": 15,
+      "trade-existing": 148,
+      "trade-route-not-exhausted": 37
+    },
+    "delivered": {
+      "min": 261.6,
+      "tuk": 375.4000000000001,
+      "ala": 333.49999999999994,
+      "yiy": 429.49999999999994,
+      "ene": 568.6
+    },
+    "settledValue": 176.25160000000005,
+    "netPhysicalSupplySettled": {
+      "min": 0.0,
+      "tuk": 0.0,
+      "ala": -8.3,
+      "yiy": 0.0,
+      "ene": 0.0
+    },
+    "deficitBeforeReceipt": [
+      9,
+      0,
+      0
+    ]
+  }
+}
